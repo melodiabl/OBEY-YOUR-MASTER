@@ -5,7 +5,7 @@ const UserSchema = new Schema({
   money: { type: Number, default: 0 },
   workCooldown: { type: Number, default: 0 },
   dailyCooldown: { type: Number, default: 0 },
-  collection: { type: Array, default: [] }
+  inventory: { type: Array, default: [] }
 });
 
 module.exports = model('User', UserSchema);

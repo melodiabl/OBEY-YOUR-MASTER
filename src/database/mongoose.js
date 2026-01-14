@@ -1,3 +1,5 @@
+const dns = require('dns')
+dns.setServers(['8.8.8.8', '8.8.4.4'])
 const { connect } = require('mongoose')
 const GuildSchema = require('./schemas/GuildSchema')
 const UserSchema = require('./schemas/UserSchema')
