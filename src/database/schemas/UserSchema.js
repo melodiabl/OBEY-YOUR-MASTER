@@ -5,6 +5,8 @@ const UserSchema = new Schema({
   money: { type: Number, default: 0 },
   workCooldown: { type: Number, default: 0 },
   dailyCooldown: { type: Number, default: 0 },
+    bank: { type: Number, default: 0 },
+  partner: { type: String, default: null },
   inventory: { type: Array, default: [] }
 });
 
