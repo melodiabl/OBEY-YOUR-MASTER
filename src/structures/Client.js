@@ -8,7 +8,7 @@ const {
 } = require('discord.js')
 const GuildDB = require('../database/schemas/Guild.db')
 const { abbreviateNumber } = require('../helpers/helpers')
-// const Database = require('../database/mongoose')
+const Database = require('../database/mongoose')
 const BotUtils = require('./Utils')
 module.exports = class extends Client {
   constructor (
@@ -64,6 +64,7 @@ module.exports = class extends Client {
     })
 
     this.dbGuild = new GuildDB()
+    this.db = new Database()
 
     this.commands = new Collection()
     this.slashCommands = new Collection()
@@ -79,7 +80,7 @@ module.exports = class extends Client {
     await this.loadHandlers()
     await this.loadCommands()
     await this.loadSlashCommands()
-    // await this.db.connect()
+    await this.db.connect()
 
     this.login(process.env.BOT_TOKEN)
   }

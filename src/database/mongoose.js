@@ -1,5 +1,6 @@
 const { connect } = require('mongoose')
 const GuildSchema = require('./schemas/GuildSchema')
+const UserSchema = require('./schemas/UserSchema')
 module.exports = class Database {
   connect () {
     console.log('Conectando a la base de datos'.yellow)
@@ -25,5 +26,17 @@ module.exports = class Database {
       await guildData.save().catch((e) => console.log(e))
     }
     return guildData
+  }
+
+  async getUserData (userID) {
+    let userData = await UserSchema.findOne({ userID })
+
+    if (!userData) {
+      userData = new UserSchema({
+        userID
+      })
+      await userData.save().catch((e) => console.log(e))
+    }
+    return userData
   }
 }

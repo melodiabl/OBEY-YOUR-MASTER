@@ -42,7 +42,7 @@ module.exports = {
             .addFields([
               { name: `✅ ${opcion} Recargados`, value: '> *Okay!*' }
             ])
-            .setColor(process.env.COLOR)
+            .setColor(process.env.COLOR || '#FF0000')
         ]
       })
     } catch (e) {

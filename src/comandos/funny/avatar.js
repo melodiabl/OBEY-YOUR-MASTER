@@ -8,7 +8,7 @@ module.exports = {
     const AvatarEmbed = new EmbedBuilder()
       .setTitle(`Avatar de ${usuario.user.username}`)
       .setImage(usuario.user.displayAvatarURL({ size: 1024, dynamic: true }))
-      .setColor(process.env.COLOR)
+      .setColor(process.env.COLOR || '#FF0000')
 
     message.reply({ embeds: [AvatarEmbed] })
   }
