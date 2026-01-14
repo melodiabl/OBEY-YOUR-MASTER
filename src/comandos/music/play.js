@@ -1,0 +1,33 @@
+const ytdl = require('ytdl-core');
+const yt = require('yt-search');
+const musicManager = require('../../music/musicManager');
+
+module.exports = {
+  DESCRIPTION: 'Reproduce música en tu canal de voz. Acepta URL o términos de búsqueda.',
+  ALIASES: ['p'],
+  BOT_PERMISSIONS: ['Connect', 'Speak'],
+  PERMISSIONS: [],
+  async execute(client, message, args, prefix) {
+    const voiceChannel = message.member.voice?.channel;
+    if (!voiceChannel) {
+      return message.reply('❌ Debes unirte a un canal de voz para reproducir música.');
+    }
+    const query = args.join(' ');
+    if (!query) {
+      return message.reply('Debes proporcionar un enlace o búsqueda.');
+    }
+    let song;
+    if (ytdl.validateURL(query)) {
+      const info = await ytdl.getInfo(query);
+      song = { url: query, title: info.videoDetails.title };
+    } else {
+      const result = await yt.search(query);
+      const video = result.videos[0];
+      if (!video) {
+        return message.reply('No encontré resultados.');
+      }
+      song = { url: video.url, title: video.title };
+    }
+    await musicManager.addSong(message.guild, song, voiceChannel, message.channel);
+  },
+};
