@@ -1,174 +1,131 @@
-const { 
-  joinVoiceChannel, 
-  createAudioPlayer, 
-  createAudioResource, 
-  AudioPlayerStatus, 
-  StreamType,
-  VoiceConnectionStatus,
-  entersState
-} = require('@discordjs/voice');
-const play = require('play-dl');
-const yts = require('yt-search');
+const { Manager } = require('magmastream');
+const { EmbedBuilder } = require('discord.js');
 
-// Mapa para mantener las colas por servidor
-const queues = new Map();
+let manager;
 
-async function addSong(guild, song, voiceChannel, textChannel) {
-  let queue = queues.get(guild.id);
-
-  if (!queue) {
-    queue = {
-      textChannel,
-      voiceChannel,
-      connection: null,
-      player: createAudioPlayer(),
-      songs: [],
-      playing: true
-    };
-    queues.set(guild.id, queue);
-    queue.songs.push(song);
-
-    try {
-      const connection = joinVoiceChannel({
-        channelId: voiceChannel.id,
-        guildId: guild.id,
-        adapterCreator: guild.voiceAdapterCreator,
-      });
-
-      queue.connection = connection;
-
-      try {
-        await entersState(connection, VoiceConnectionStatus.Ready, 30_000);
-      } catch (error) {
-        connection.destroy();
-        queues.delete(guild.id);
-        return textChannel.send('❌ No se pudo conectar al canal de voz.');
+/**
+ * Inicializa el gestor de Lavalink.
+ * @param {import('discord.js').Client} client El cliente de Discord.
+ */
+function initLavalink(client) {
+  manager = new Manager({
+    nodes: [
+      {
+        host: 'lava.link', // Nodo público gratuito
+        port: 80,
+        password: 'youshallnotpass',
+        secure: false,
+      },
+      {
+        host: 'lavalink.lexis.host',
+        port: 443,
+        password: 'lexishostlavalink',
+        secure: true,
       }
+    ],
+    send(id, payload) {
+      const guild = client.guilds.cache.get(id);
+      if (guild) guild.shard.send(payload);
+    },
+  });
 
-      connection.subscribe(queue.player);
-      
-      setupPlayerEvents(guild.id);
-      playSong(guild.id);
+  // Eventos de Lavalink
+  manager.on('nodeConnect', (node) => console.log(`✅ Lavalink: Nodo "${node.options.host}" conectado.`.green));
+  manager.on('nodeError', (node, error) => console.log(`❌ Lavalink: Nodo "${node.options.host}" error: ${error.message}`.red));
 
-    } catch (error) {
-      console.error('Error al iniciar la música:', error);
-      queues.delete(guild.id);
-      textChannel.send('❌ Hubo un error al intentar unirse al canal.');
-    }
-  } else {
-    queue.songs.push(song);
-    return textChannel.send(`✅ **${song.title}** añadida a la cola.`);
-  }
-}
-
-function setupPlayerEvents(guildId) {
-  const queue = queues.get(guildId);
-  if (!queue) return;
-
-  queue.player.on(AudioPlayerStatus.Idle, () => {
-    queue.songs.shift();
-    if (queue.songs.length > 0) {
-      playSong(guildId);
-    } else {
-      setTimeout(() => {
-        const currentQueue = queues.get(guildId);
-        if (currentQueue && currentQueue.songs.length === 0) {
-          if (currentQueue.connection) currentQueue.connection.destroy();
-          queues.delete(guildId);
-        }
-      }, 30_000);
+  manager.on('trackStart', (player, track) => {
+    const channel = client.channels.cache.get(player.textChannel);
+    if (channel) {
+      channel.send(`▶️ Reproduciendo ahora: **${track.title}**`);
     }
   });
 
-  queue.player.on('error', error => {
-    console.error(`Error en el reproductor:`, error);
-    queue.songs.shift();
-    playSong(guildId);
+  manager.on('queueEnd', (player) => {
+    const channel = client.channels.cache.get(player.textChannel);
+    if (channel) {
+      channel.send('🎵 La cola ha terminado.');
+    }
+    player.destroy();
   });
+
+  client.manager = manager;
+  return manager;
 }
 
 /**
- * Reproducción usando play-dl con configuración de bypass.
+ * Función para añadir y reproducir canciones con Lavalink.
  */
-async function playSong(guildId) {
-  const queue = queues.get(guildId);
-  if (!queue || queue.songs.length === 0) return;
+async function addSong(guild, query, voiceChannel, textChannel, member) {
+  if (!manager) return textChannel.send('❌ El sistema de música no está listo.');
 
-  const song = queue.songs[0];
+  const player = manager.create({
+    guild: guild.id,
+    voiceChannel: voiceChannel.id,
+    textChannel: textChannel.id,
+    selfDeafen: true,
+  });
+
+  if (player.state !== 'CONNECTED') player.connect();
 
   try {
-    console.log(`[Music] Intentando reproducir: ${song.title}`);
+    const res = await manager.search(query, member);
 
-    // Intentamos obtener el stream con play-dl
-    // Usamos configuraciones que ayudan a evitar la detección de bots
-    let stream = await play.stream(song.url, {
-        discordPlayerCompatibility: true,
-        quality: 1
-    });
-
-    const resource = createAudioResource(stream.stream, {
-      inputType: stream.type,
-      inlineVolume: true
-    });
-
-    if (resource.volume) resource.volume.setVolume(0.5);
-    
-    queue.player.play(resource);
-    queue.textChannel.send(`▶️ Reproduciendo: **${song.title}**`);
-
-  } catch (error) {
-    console.error('[Music] Error:', error.message);
-    
-    // Si falla por el error de "Sign in", intentamos buscar una alternativa
-    if (error.message.includes('confirm you’re not a bot') || error.message.includes('403')) {
-        try {
-            console.log(`[Music] Intentando buscar alternativa para: ${song.title}`);
-            const r = await yts(`${song.title} audio`);
-            const video = r.videos.find(v => v.url !== song.url);
-            if (video) {
-                song.url = video.url;
-                song.title = video.title;
-                return playSong(guildId);
-            }
-        } catch (e) {}
-        
-        queue.textChannel.send(`❌ YouTube bloqueó la reproducción de **${song.title}**. Intenta con otra canción.`);
-    } else {
-        queue.textChannel.send(`❌ Error al reproducir **${song.title}**.`);
+    if (res.loadType === 'LOAD_FAILED') {
+      if (!player.queue.current) player.destroy();
+      throw res.exception;
     }
 
-    queue.songs.shift();
-    playSong(guildId);
+    switch (res.loadType) {
+      case 'NO_MATCHES':
+        if (!player.queue.current) player.destroy();
+        return textChannel.send('❌ No se encontraron resultados.');
+
+      case 'TRACK_LOADED':
+        player.queue.add(res.tracks[0]);
+        if (!player.playing && !player.paused && !player.queue.size) player.play();
+        return textChannel.send(`✅ Añadido a la cola: **${res.tracks[0].title}**`);
+
+      case 'PLAYLIST_LOADED':
+        player.queue.add(res.tracks);
+        if (!player.playing && !player.paused && player.queue.totalSize === res.tracks.length) player.play();
+        return textChannel.send(`✅ Añadida la playlist **${res.playlist.name}** con **${res.tracks.length}** canciones.`);
+
+      case 'SEARCH_RESULT':
+        player.queue.add(res.tracks[0]);
+        if (!player.playing && !player.paused && !player.queue.size) player.play();
+        return textChannel.send(`✅ Añadido a la cola: **${res.tracks[0].title}**`);
+    }
+  } catch (err) {
+    console.error('Error en Lavalink search:', err);
+    return textChannel.send('❌ Hubo un error al buscar la canción.');
   }
 }
 
 function skip(guildId) {
-  const queue = queues.get(guildId);
-  if (queue && queue.player) {
-    queue.player.stop();
+  const player = manager.players.get(guildId);
+  if (player) {
+    player.stop();
     return true;
   }
   return false;
 }
 
 function stop(guildId) {
-  const queue = queues.get(guildId);
-  if (queue) {
-    queue.songs = [];
-    if (queue.player) queue.player.stop();
-    if (queue.connection) queue.connection.destroy();
-    queues.delete(guildId);
+  const player = manager.players.get(guildId);
+  if (player) {
+    player.destroy();
     return true;
   }
   return false;
 }
 
 function getQueue(guildId) {
-  const queue = queues.get(guildId);
-  return queue ? queue.songs : [];
+  const player = manager.players.get(guildId);
+  return player ? player.queue : [];
 }
 
 module.exports = {
+  initLavalink,
   addSong,
   skip,
   stop,

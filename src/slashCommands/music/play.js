@@ -1,11 +1,10 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { addSong } = require('../../music/musicManager');
-const yts = require('yt-search');
 
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('play')
-    .setDescription('Reproduce música en tu canal de voz')
+    .setDescription('Reproduce música en tu canal de voz (YouTube, Spotify, etc.)')
     .addStringOption(option =>
       option.setName('query')
         .setDescription('Enlace o nombre de la canción')
@@ -27,26 +26,12 @@ module.exports = {
     await interaction.deferReply();
 
     try {
-      // Usamos yt-search para obtener la información de forma estable sin cookies
-      const r = await yts(query);
-      const video = r.videos[0];
-
-      if (!video) {
-        return interaction.editReply({ content: '❌ No se encontró la canción.' });
-      }
-
-      const song = { 
-        title: video.title, 
-        url: video.url,
-        duration: video.timestamp,
-        thumbnail: video.thumbnail
-      };
-
-      await addSong(interaction.guild, song, voiceChannel, interaction.channel);
-      await interaction.editReply(`🎵 Buscando y añadiendo: **${song.title}**`);
+      // Usamos el nuevo sistema de Lavalink
+      await addSong(interaction.guild, query, voiceChannel, interaction.channel, interaction.user);
+      await interaction.editReply(`🎵 Procesando búsqueda: **${query}**`);
     } catch (error) {
-      console.error(error);
-      await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción.' });
+      console.error('Error en slash command play:', error);
+      await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción con Lavalink.' });
     }
   },
 };

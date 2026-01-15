@@ -10,6 +10,7 @@ const GuildDB = require('../database/schemas/Guild.db')
 const { abbreviateNumber } = require('../helpers/helpers')
 const Database = require('../database/mongoose')
 const BotUtils = require('./Utils')
+const { initLavalink } = require('../music/musicManager')
 module.exports = class extends Client {
   constructor (
     options = {
@@ -71,6 +72,7 @@ module.exports = class extends Client {
     this.slashArray = []
 
     this.utils = new BotUtils(this)
+    this.manager = initLavalink(this)
 
     this.start()
   }
@@ -191,6 +193,11 @@ module.exports = class extends Client {
             .pop()
             .split('.')[0]
           this.on(NOMBRE_EVENTO, EVENTO.bind(null, this))
+          
+          // Especial para Lavalink: actualizar estados de voz
+          if (NOMBRE_EVENTO === 'raw') {
+            this.on('raw', (d) => this.manager.updateVoiceState(d));
+          }
         } catch (e) {
           console.log(`ERROR AL CARGAR EL EVENTO ${rutaArchivo}`.bgRed)
           console.log(e)
