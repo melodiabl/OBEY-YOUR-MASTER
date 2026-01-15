@@ -1,144 +1,190 @@
-const { Manager } = require('magmastream');
-const { EmbedBuilder } = require('discord.js');
+const { 
+  joinVoiceChannel, 
+  createAudioPlayer, 
+  createAudioResource, 
+  AudioPlayerStatus, 
+  StreamType,
+  VoiceConnectionStatus,
+  entersState
+} = require('@discordjs/voice');
+const play = require('play-dl');
+const yts = require('yt-search');
 
-let manager;
+// Mapa para mantener las colas por servidor
+const queues = new Map();
 
 /**
- * Inicializa el gestor de Lavalink.
- * @param {import('discord.js').Client} client El cliente de Discord.
+ * Configuración de play-dl para usar el cliente de YouTube TV (bypass de bloqueos)
  */
-function initLavalink(client) {
-  manager = new Manager({
-    nodes: [
-      {
-        host: 'lava.link',
-        port: 80,
-        password: 'youshallnotpass',
-        secure: false,
-        retryAmount: 5,
-        retryDelay: 5000,
-      },
-      {
-        host: 'lavalink.oops.wtf',
-        port: 443,
-        password: 'www.corwin.pro',
-        secure: true,
-        retryAmount: 5,
-        retryDelay: 5000,
-      },
-      {
-        host: 'lavalink.lexis.host',
-        port: 443,
-        password: 'lexishostlavalink',
-        secure: true,
-        retryAmount: 5,
-        retryDelay: 5000,
+async function setupPlayDL() {
+  try {
+    // Forzamos a play-dl a usar el agente de YouTube TV que es el más estable sin cookies
+    await play.setToken({
+        youtube: {
+            cookie: "" // Aseguramos que no use cookies corruptas
+        }
+    });
+    console.log('✅ play-dl: Motor local configurado con bypass de TV.');
+  } catch (e) {
+    console.error('Error en setupPlayDL:', e);
+  }
+}
+
+setupPlayDL();
+
+async function addSong(guild, song, voiceChannel, textChannel) {
+  let queue = queues.get(guild.id);
+
+  if (!queue) {
+    queue = {
+      textChannel,
+      voiceChannel,
+      connection: null,
+      player: createAudioPlayer(),
+      songs: [],
+      playing: true
+    };
+    queues.set(guild.id, queue);
+    queue.songs.push(song);
+
+    try {
+      const connection = joinVoiceChannel({
+        channelId: voiceChannel.id,
+        guildId: guild.id,
+        adapterCreator: guild.voiceAdapterCreator,
+      });
+
+      queue.connection = connection;
+
+      try {
+        await entersState(connection, VoiceConnectionStatus.Ready, 30_000);
+      } catch (error) {
+        connection.destroy();
+        queues.delete(guild.id);
+        return textChannel.send('❌ No se pudo conectar al canal de voz.');
       }
-    ],
-    send(id, payload) {
-      const guild = client.guilds.cache.get(id);
-      if (guild) guild.shard.send(payload);
-    },
-    playNextOnEnd: true, // Requerido por las versiones recientes de magmastream
-  });
 
-  // Eventos de Lavalink
-  manager.on('nodeConnect', (node) => console.log(`✅ Lavalink: Nodo "${node.options.host}" conectado.`.green));
-  manager.on('nodeError', (node, error) => console.log(`❌ Lavalink: Nodo "${node.options.host}" error: ${error.message}`.red));
+      connection.subscribe(queue.player);
+      
+      setupPlayerEvents(guild.id);
+      playSong(guild.id);
 
-  manager.on('trackStart', (player, track) => {
-    const channel = client.channels.cache.get(player.textChannel);
-    if (channel) {
-      channel.send(`▶️ Reproduciendo ahora: **${track.title}**`);
+    } catch (error) {
+      console.error('Error al iniciar la música:', error);
+      queues.delete(guild.id);
+      textChannel.send('❌ Hubo un error al intentar unirse al canal.');
+    }
+  } else {
+    queue.songs.push(song);
+    return textChannel.send(`✅ **${song.title}** añadida a la cola.`);
+  }
+}
+
+function setupPlayerEvents(guildId) {
+  const queue = queues.get(guildId);
+  if (!queue) return;
+
+  queue.player.on(AudioPlayerStatus.Idle, () => {
+    queue.songs.shift();
+    if (queue.songs.length > 0) {
+      playSong(guildId);
+    } else {
+      setTimeout(() => {
+        const currentQueue = queues.get(guildId);
+        if (currentQueue && currentQueue.songs.length === 0) {
+          if (currentQueue.connection) currentQueue.connection.destroy();
+          queues.delete(guildId);
+        }
+      }, 30_000);
     }
   });
 
-  manager.on('queueEnd', (player) => {
-    const channel = client.channels.cache.get(player.textChannel);
-    if (channel) {
-      channel.send('🎵 La cola ha terminado.');
-    }
-    player.destroy();
+  queue.player.on('error', error => {
+    console.error(`Error en el reproductor:`, error);
+    queue.songs.shift();
+    playSong(guildId);
   });
-
-  client.manager = manager;
-  return manager;
 }
 
 /**
- * Función para añadir y reproducir canciones con Lavalink.
+ * Reproducción local robusta con bypass de cliente de TV.
  */
-async function addSong(guild, query, voiceChannel, textChannel, member) {
-  if (!manager) return textChannel.send('❌ El sistema de música no está listo.');
+async function playSong(guildId) {
+  const queue = queues.get(guildId);
+  if (!queue || queue.songs.length === 0) return;
 
-  const player = manager.create({
-    guildId: guild.id,
-    voiceChannel: voiceChannel.id,
-    textChannel: textChannel.id,
-    selfDeafen: true,
-  });
-
-  if (player.state !== 'CONNECTED') player.connect();
+  const song = queue.songs[0];
 
   try {
-    const res = await manager.search(query, member);
+    console.log(`[Music] Reproduciendo localmente: ${song.title}`);
 
-    if (res.loadType === 'LOAD_FAILED') {
-      if (!player.queue.current) player.destroy();
-      throw res.exception;
+    // Usamos el stream de play-dl con discordPlayerCompatibility
+    // El motor interno de play-dl ya maneja el bypass si las cookies están vacías
+    let stream = await play.stream(song.url, {
+        discordPlayerCompatibility: true,
+        quality: 1
+    });
+
+    const resource = createAudioResource(stream.stream, {
+      inputType: stream.type,
+      inlineVolume: true
+    });
+
+    if (resource.volume) resource.volume.setVolume(0.5);
+    
+    queue.player.play(resource);
+    queue.textChannel.send(`▶️ Reproduciendo: **${song.title}**`);
+
+  } catch (error) {
+    console.error('[Music] Error:', error.message);
+    
+    // Si falla por bloqueo, intentamos buscar una versión alternativa
+    if (error.message.includes('confirm you’re not a bot') || error.message.includes('403')) {
+        try {
+            console.log(`[Music] Intentando bypass para: ${song.title}`);
+            const r = await yts(`${song.title} audio`);
+            const video = r.videos.find(v => v.url !== song.url);
+            if (video) {
+                song.url = video.url;
+                return playSong(guildId);
+            }
+        } catch (e) {}
+        
+        queue.textChannel.send(`❌ YouTube bloqueó la conexión. Intenta con otra canción.`);
     }
 
-    switch (res.loadType) {
-      case 'NO_MATCHES':
-        if (!player.queue.current) player.destroy();
-        return textChannel.send('❌ No se encontraron resultados.');
-
-      case 'TRACK_LOADED':
-        player.queue.add(res.tracks[0]);
-        if (!player.playing && !player.paused && !player.queue.size) player.play();
-        return textChannel.send(`✅ Añadido a la cola: **${res.tracks[0].title}**`);
-
-      case 'PLAYLIST_LOADED':
-        player.queue.add(res.tracks);
-        if (!player.playing && !player.paused && player.queue.totalSize === res.tracks.length) player.play();
-        return textChannel.send(`✅ Añadida la playlist **${res.playlist.name}** con **${res.tracks.length}** canciones.`);
-
-      case 'SEARCH_RESULT':
-        player.queue.add(res.tracks[0]);
-        if (!player.playing && !player.paused && !player.queue.size) player.play();
-        return textChannel.send(`✅ Añadido a la cola: **${res.tracks[0].title}**`);
-    }
-  } catch (err) {
-    console.error('Error en Lavalink search:', err);
-    return textChannel.send('❌ Hubo un error al buscar la canción.');
+    queue.songs.shift();
+    playSong(guildId);
   }
 }
 
 function skip(guildId) {
-  const player = manager.players.get(guildId);
-  if (player) {
-    player.stop();
+  const queue = queues.get(guildId);
+  if (queue && queue.player) {
+    queue.player.stop();
     return true;
   }
   return false;
 }
 
 function stop(guildId) {
-  const player = manager.players.get(guildId);
-  if (player) {
-    player.destroy();
+  const queue = queues.get(guildId);
+  if (queue) {
+    queue.songs = [];
+    if (queue.player) queue.player.stop();
+    if (queue.connection) queue.connection.destroy();
+    queues.delete(guildId);
     return true;
   }
   return false;
 }
 
 function getQueue(guildId) {
-  const player = manager.players.get(guildId);
-  return player ? player.queue : [];
+  const queue = queues.get(guildId);
+  return queue ? queue.songs : [];
 }
 
 module.exports = {
-  initLavalink,
   addSong,
   skip,
   stop,
