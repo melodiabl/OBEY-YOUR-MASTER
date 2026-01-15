@@ -20,8 +20,21 @@ module.exports = async (client, message) => {
   }
   await userData.save();
 
-  const prefix = GUILD_DATA.prefix || process.env.PREFIX;
-  if (!message.content.startsWith(prefix)) return
+  // Lógica de Múltiples Prefijos
+  // 1. Obtener prefijos del .env (separados por espacio)
+  // 2. Incluir el prefijo de la DB si existe
+  // 3. Incluir la mención del bot como prefijo
+  const envPrefixes = process.env.PREFIX ? process.env.PREFIX.split(' ') : ['!'];
+  const dbPrefix = GUILD_DATA.prefix;
+  const mentionPrefix = `<@!${client.user.id}> `;
+  const mentionPrefixAlt = `<@${client.user.id}> `;
+  
+  const allPrefixes = [...new Set([...envPrefixes, dbPrefix, mentionPrefix, mentionPrefixAlt])].filter(p => p);
+
+  // Encontrar cuál de los prefijos se usó
+  const prefix = allPrefixes.find(p => message.content.startsWith(p));
+  
+  if (!prefix) return
 
   const ARGS = message.content.slice(prefix.length).trim().split(/ +/)
   const CMD = ARGS?.shift()?.toLowerCase()
