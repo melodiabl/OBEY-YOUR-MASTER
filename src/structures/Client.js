@@ -72,6 +72,7 @@ module.exports = class extends Client {
     this.slashArray = []
 
     this.utils = new BotUtils(this)
+    // Inicializamos la estructura, pero la conexión real se hará en el evento ready
     this.manager = initLavalink(this)
 
     this.start()

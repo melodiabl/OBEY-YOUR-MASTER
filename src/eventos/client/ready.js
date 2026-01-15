@@ -1,7 +1,14 @@
 const { ActivityType, PresenceUpdateStatus } = require('discord.js')
+const { startLavalink } = require('../../music/musicManager')
 
 module.exports = async client => {
   console.log(`Conectado como ${client.user.tag}`.rainbow)
+  
+  // Inicializar Lavalink después de que el bot esté conectado
+  if (client.manager) {
+    startLavalink(client.user.id);
+  }
+  
   setInterval(() => pickPresence(client), 60 * 1000)
   if (client?.application?.commands) {
     client.application.commands.set(client.slashArray)

@@ -23,7 +23,8 @@ function initLavalink(client) {
       const guild = client.guilds.cache.get(id);
       if (guild) guild.shard.send(payload);
     },
-    playNextOnEnd: true,
+    autoPlay: true,
+    destroyPlayerOrder: ['voice', 'player'],
   });
 
   // Eventos de Lavalink
@@ -51,6 +52,17 @@ function initLavalink(client) {
 
   client.manager = manager;
   return manager;
+}
+
+/**
+ * Inicializa el manager de Lavalink después de que el bot esté listo.
+ * @param {string} clientId El ID del cliente de Discord.
+ */
+function startLavalink(clientId) {
+  if (manager) {
+    manager.init(clientId);
+    console.log('🎵 Manager de Lavalink inicializado correctamente'.green);
+  }
 }
 
 /**
@@ -135,6 +147,7 @@ function getQueue(guildId) {
 
 module.exports = {
   initLavalink,
+  startLavalink,
   addSong,
   skip,
   stop,
