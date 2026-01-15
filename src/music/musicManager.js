@@ -1,81 +1,133 @@
-const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, StreamType } = require('@discordjs/voice');
+const { 
+  joinVoiceChannel, 
+  createAudioPlayer, 
+  createAudioResource, 
+  AudioPlayerStatus, 
+  StreamType,
+  VoiceConnectionStatus,
+  entersState
+} = require('@discordjs/voice');
 const ytdl = require('@distube/ytdl-core');
 const ffmpeg = require('ffmpeg-static');
 
-// Maintain a queue for each guild
+// Mapa para mantener las colas por servidor
 const queues = new Map();
 
 async function addSong(guild, song, voiceChannel, textChannel) {
   let queue = queues.get(guild.id);
+
   if (!queue) {
-    queue = { songs: [], player: null, connection: null };
+    queue = {
+      textChannel,
+      voiceChannel,
+      connection: null,
+      player: createAudioPlayer(),
+      songs: [],
+      playing: true
+    };
     queues.set(guild.id, queue);
-  }
-  queue.songs.push({ ...song, voiceChannel, textChannel });
-  if (!queue.player) {
-    playNextSong(guild.id);
-    await textChannel.send(`▶️ Reproduciendo: **${song.title}**\n${song.url}`);
+    queue.songs.push(song);
+
+    try {
+      const connection = joinVoiceChannel({
+        channelId: voiceChannel.id,
+        guildId: guild.id,
+        adapterCreator: guild.voiceAdapterCreator,
+      });
+
+      queue.connection = connection;
+
+      // Esperar a que la conexión esté lista antes de reproducir
+      try {
+        await entersState(connection, VoiceConnectionStatus.Ready, 30_000);
+      } catch (error) {
+        connection.destroy();
+        queues.delete(guild.id);
+        return textChannel.send('❌ No se pudo conectar al canal de voz en 30 segundos.');
+      }
+
+      connection.subscribe(queue.player);
+      
+      setupPlayerEvents(guild.id);
+      play(guild.id);
+
+    } catch (error) {
+      console.error('Error al iniciar la música:', error);
+      queues.delete(guild.id);
+      textChannel.send('❌ Hubo un error al intentar unirse al canal.');
+    }
   } else {
-    await textChannel.send(`✅ **${song.title}** se ha añadido a la lista.`);
+    queue.songs.push(song);
+    return textChannel.send(`✅ **${song.title}** se ha añadido a la lista.`);
   }
 }
 
-function playNextSong(guildId) {
+function setupPlayerEvents(guildId) {
   const queue = queues.get(guildId);
-  if (!queue || queue.songs.length === 0) {
-    if (queue?.connection) queue.connection.destroy();
-    queues.delete(guildId);
-    return;
-  }
+  if (!queue) return;
 
-  const { url, voiceChannel, textChannel } = queue.songs.shift();
-
-  const connection = joinVoiceChannel({
-    channelId: voiceChannel.id,
-    guildId: voiceChannel.guild.id,
-    adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+  queue.player.on(AudioPlayerStatus.Idle, () => {
+    queue.songs.shift();
+    if (queue.songs.length > 0) {
+      play(guildId);
+    } else {
+      // Esperar un poco antes de desconectar por si añaden más canciones
+      setTimeout(() => {
+        const currentQueue = queues.get(guildId);
+        if (currentQueue && currentQueue.songs.length === 0) {
+          if (currentQueue.connection) currentQueue.connection.destroy();
+          queues.delete(guildId);
+        }
+      }, 30_000);
+    }
   });
-  queue.connection = connection;
+
+  queue.player.on('error', error => {
+    console.error(`Error en el reproductor del servidor ${guildId}:`, error);
+    queue.songs.shift();
+    play(guildId);
+  });
+}
+
+async function play(guildId) {
+  const queue = queues.get(guildId);
+  if (!queue || queue.songs.length === 0) return;
+
+  const song = queue.songs[0];
 
   try {
-    const stream = ytdl(url, { 
-      filter: 'audioonly', 
+    const stream = ytdl(song.url, {
+      filter: 'audioonly',
       highWaterMark: 1 << 25,
-      quality: 'highestaudio'
+      quality: 'highestaudio',
+      liveBuffer: 40000,
     });
 
-    const resource = createAudioResource(stream, { 
+    const resource = createAudioResource(stream, {
       inputType: StreamType.Arbitrary,
-      inlineVolume: true 
+      inlineVolume: true
     });
 
     if (resource.volume) resource.volume.setVolume(0.5);
     
-    const player = createAudioPlayer();
-    queue.player = player;
-    player.play(resource);
-    connection.subscribe(player);
+    queue.player.play(resource);
+    queue.textChannel.send(`▶️ Reproduciendo ahora: **${song.title}**`);
 
-    player.on('error', error => {
-      console.error('Error en el reproductor:', error);
-      playNextSong(guildId);
-    });
-
-    player.on(AudioPlayerStatus.Idle, () => {
-      playNextSong(guildId);
-    });
   } catch (error) {
-    console.error('Error al crear el recurso de audio:', error);
-    textChannel.send('❌ Hubo un error al intentar reproducir la canción.');
-    playNextSong(guildId);
+    console.error('Error al reproducir la canción:', error);
+    queue.textChannel.send(`❌ Error al reproducir **${song.title}**, saltando a la siguiente...`);
+    queue.songs.shift();
+    play(guildId);
   }
 }
 
 function skip(guildId) {
   const queue = queues.get(guildId);
-  if (queue?.player) {
+  if (queue && queue.player) {
     queue.player.stop();
+    return true;
   }
+  return false;
 }
 
 function stop(guildId) {
@@ -85,7 +137,9 @@ function stop(guildId) {
     if (queue.player) queue.player.stop();
     if (queue.connection) queue.connection.destroy();
     queues.delete(guildId);
+    return true;
   }
+  return false;
 }
 
 function getQueue(guildId) {

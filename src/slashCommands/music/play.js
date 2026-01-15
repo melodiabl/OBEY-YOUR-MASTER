@@ -20,6 +20,12 @@ module.exports = {
       return interaction.reply({ content: '❌ Debes estar en un canal de voz.', ephemeral: true });
     }
 
+    // Permisos del bot
+    const permissions = voiceChannel.permissionsFor(interaction.client.user);
+    if (!permissions.has('Connect') || !permissions.has('Speak')) {
+      return interaction.reply({ content: '❌ No tengo permisos para unirme o hablar en ese canal de voz.', ephemeral: true });
+    }
+
     await interaction.deferReply();
 
     try {
@@ -37,7 +43,7 @@ module.exports = {
       }
 
       await addSong(interaction.guild, song, voiceChannel, interaction.channel);
-      await interaction.editReply(`🎵 Canción añadida a la cola: **${song.title}**`);
+      await interaction.editReply(`🎵 Buscando y añadiendo: **${song.title}**`);
     } catch (error) {
       console.error(error);
       await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción.' });
