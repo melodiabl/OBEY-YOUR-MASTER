@@ -115,6 +115,12 @@ async function playSong(guildId) {
 
   const song = queue.songs[0];
 
+  if (!song || !song.url) {
+    console.error('[Music] Error: Objeto de canción inválido o sin URL');
+    queue.songs.shift();
+    return playSong(guildId);
+  }
+
   try {
     console.log(`[Music] Reproduciendo localmente: ${song.title}`);
 
