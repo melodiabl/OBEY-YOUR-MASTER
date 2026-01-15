@@ -89,8 +89,9 @@ async function addSong(guild, query, voiceChannel, textChannel, member) {
   if (!kazagumo) return null;
 
   // Verificar si hay nodos disponibles
-  const availableNodes = kazagumo.shoukaku.nodes.filter(n => n.state === 1);
-  if (availableNodes.size === 0) {
+  // En Shoukaku v4, nodes es un Map, no un Array. Usamos Array.from() para filtrar.
+  const availableNodes = Array.from(kazagumo.shoukaku.nodes.values()).filter(n => n.state === 1);
+  if (availableNodes.length === 0) {
     textChannel.send('❌ No hay servidores de música externos disponibles en este momento. Intentando reconectar...');
     return null;
   }
