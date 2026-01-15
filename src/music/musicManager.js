@@ -17,8 +17,15 @@ function initLavalink(client) {
     smoothVolume: true,
   });
 
-  // Cargar extractores oficiales
-  player.extractors.loadMulti(DefaultExtractors);
+  // Cargar extractores oficiales, pero bloqueando SoundCloud
+  player.extractors.loadMulti(DefaultExtractors).then(() => {
+    // Desactivar específicamente el extractor de SoundCloud si se cargó
+    const scExtractor = player.extractors.get('soundcloud');
+    if (scExtractor) {
+      player.extractors.unregister(scExtractor);
+      console.log('🚫 Extractor de SoundCloud desactivado por calidad'.yellow);
+    }
+  });
 
   // --- EVENTOS DE LA COLA (GUILD QUEUE) ---
 
@@ -74,10 +81,16 @@ function initLavalink(client) {
 async function addSong(guild, query, voiceChannel, textChannel, member) {
   if (!player) return;
 
-  // Realizar la búsqueda
+  // Realizar la búsqueda priorizando YouTube y Spotify
+  // Si no es un link, forzamos búsqueda en YouTube para mejor calidad
+  let strategy = QueryType.AUTO;
+  if (!query.startsWith('http')) {
+    strategy = QueryType.YOUTUBE_SEARCH;
+  }
+
   const searchResult = await player.search(query, {
     requestedBy: member,
-    searchEngine: QueryType.AUTO // Detecta automáticamente si es YT, Spotify, etc.
+    searchEngine: strategy
   });
 
   if (!searchResult || !searchResult.tracks.length) {
