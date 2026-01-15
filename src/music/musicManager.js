@@ -4,27 +4,45 @@ const { Connectors } = require('shoukaku');
 let kazagumo;
 
 /**
- * Inicializa Kazagumo con una lista de nodos externos y públicos.
+ * Inicializa Kazagumo con una lista masiva de nodos externos verificados.
  */
 function initLavalink(client) {
-  // Lista de nodos públicos estables (v3 y v4)
   const Nodes = [
+    // Nodos verificados de lavalink-list (v3 y v4)
     {
-      name: 'Serenetia v4 (Global)',
-      url: 'lavalinkv4.serenetia.com:443',
-      auth: 'https://dsc.gg/ajidevserver',
+      name: 'Lavalink.Glaceon.app',
+      url: 'lavalink.glaceon.app:443',
+      auth: 'youshallnotpass',
       secure: true
     },
     {
-      name: 'Jirayu (Asia/Global)',
+      name: 'Lavalink.Jirayu.net',
       url: 'lavalink.jirayu.net:443',
       auth: 'youshallnotpass',
       secure: true
     },
     {
-      name: 'Rive (Global)',
+      name: 'Lavalink.Rive.wtf',
       url: 'lavalink.rive.wtf:443',
       auth: 'youshallnotpass',
+      secure: true
+    },
+    {
+      name: 'Lavalink.Serenetia.com',
+      url: 'lavalink.serenetia.com:443',
+      auth: 'https://dsc.gg/ajidevserver',
+      secure: true
+    },
+    {
+      name: 'Lavalink.Pericsq.ro',
+      url: 'lavalink-v2.pericsq.ro:443',
+      auth: 'wweasycodero',
+      secure: true
+    },
+    {
+      name: 'Lavalink.Milohost.my.id',
+      url: 'lava-v3.millohost.my.id:443',
+      auth: 'https://discord.gg/mjS5J2K3ep',
       secure: true
     }
   ];
@@ -40,13 +58,13 @@ function initLavalink(client) {
 
   // --- EVENTOS DE KAZAGUMO ---
 
-  kazagumo.shoukaku.on('ready', (name) => console.log(`✅ [Lavalink] Nodo externo "${name}" conectado.`.green));
+  kazagumo.shoukaku.on('ready', (name) => console.log(`✅ [Lavalink] Nodo "${name}" conectado y listo.`.green));
   kazagumo.shoukaku.on('error', (name, error) => {
     console.error(`❌ [Lavalink] Error en nodo "${name}":`.red, error.message || error);
   });
   
   kazagumo.shoukaku.on('close', (name, code, reason) => {
-    console.warn(`⚠️ [Lavalink] Conexión cerrada en "${name}". Reintentando...`.yellow);
+    console.warn(`⚠️ [Lavalink] Conexión cerrada en "${name}". Reintentando con otro nodo...`.yellow);
   });
 
   kazagumo.on('playerStart', (player, track) => {
@@ -73,7 +91,7 @@ async function addSong(guild, query, voiceChannel, textChannel, member) {
   // Verificar si hay nodos disponibles
   const availableNodes = kazagumo.shoukaku.nodes.filter(n => n.state === 1);
   if (availableNodes.size === 0) {
-    textChannel.send('❌ No hay servidores de música externos disponibles en este momento. Reintentando conexión...');
+    textChannel.send('❌ No hay servidores de música externos disponibles en este momento. Intentando reconectar...');
     return null;
   }
 
