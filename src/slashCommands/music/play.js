@@ -28,10 +28,19 @@ module.exports = {
     try {
       // Usamos el nuevo sistema de Discord Player
       await interaction.editReply(`🎵 Buscando: **${query}**...`);
-      await addSong(interaction.guild, query, voiceChannel, interaction.channel, interaction.user);
+      const track = await addSong(interaction.guild, query, voiceChannel, interaction.channel, interaction.user);
+      
+      if (track) {
+        await interaction.editReply(`🎵 Encontrado: **${track.title}**`);
+      }
     } catch (error) {
       console.error('Error en slash command play:', error);
-      await interaction.editReply({ content: '❌ Hubo un error al intentar reproducir la canción con Discord Player.' });
+      // Si el error ya fue manejado en addSong y enviado al canal, solo editamos la respuesta original
+      if (!interaction.replied && !interaction.deferred) {
+        await interaction.reply({ content: '❌ Error al procesar la música.', ephemeral: true });
+      } else {
+        await interaction.editReply({ content: '❌ Hubo un error al intentar reproducir la canción.' });
+      }
     }
   },
 };
