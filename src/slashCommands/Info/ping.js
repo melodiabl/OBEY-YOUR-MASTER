@@ -1,9 +1,9 @@
-const { SlashCommandBuilder } = require('discord.js')
-
+const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
-  CMD: new SlashCommandBuilder().setDescription('Mira el ping del bot'),
-  OWNER: true,
-  execute (client, interaction, prefix, GUILD_DATA) {
-    return interaction.reply(`\`${client.ws.ping}ms\``)
-  }
-}
+  CMD: new SlashCommandBuilder()
+    .setName('ping')
+    .setDescription('Muestra el ping del bot'),
+  async execute(interaction, client) {
+    await interaction.reply(`🏓 ${client.ws.ping}ms`);
+  },
+};
