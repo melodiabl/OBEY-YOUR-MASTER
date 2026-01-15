@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js')
 module.exports = {
   CMD: new SlashCommandBuilder()
+    .setName('say')
     .setDescription('Hacer que el bot diga algo')
     .addStringOption(option =>
       option.setName('texto')
