@@ -194,8 +194,6 @@ module.exports = class extends Client {
             .pop()
             .split('.')[0]
           this.on(NOMBRE_EVENTO, EVENTO.bind(null, this))
-          
-          // Discord Player no requiere el evento raw para estados de voz manuales
         } catch (e) {
           console.log(`ERROR AL CARGAR EL EVENTO ${rutaArchivo}`.bgRed)
           console.log(e)
