@@ -1,4 +1,4 @@
-const ytdl = require('ytdl-core');
+const ytdl = require('@distube/ytdl-core');
 const yt = require('yt-search');
 const musicManager = require('../../music/musicManager');
 
@@ -16,18 +16,23 @@ module.exports = {
     if (!query) {
       return message.reply('Debes proporcionar un enlace o búsqueda.');
     }
-    let song;
-    if (ytdl.validateURL(query)) {
-      const info = await ytdl.getInfo(query);
-      song = { url: query, title: info.videoDetails.title };
-    } else {
-      const result = await yt.search(query);
-      const video = result.videos[0];
-      if (!video) {
-        return message.reply('No encontré resultados.');
+    try {
+      let song;
+      if (ytdl.validateURL(query)) {
+        const info = await ytdl.getBasicInfo(query);
+        song = { url: query, title: info.videoDetails.title };
+      } else {
+        const result = await yt.search(query);
+        const video = result.videos[0];
+        if (!video) {
+          return message.reply('No encontré resultados.');
+        }
+        song = { url: video.url, title: video.title };
       }
-      song = { url: video.url, title: video.title };
+      await musicManager.addSong(message.guild, song, voiceChannel, message.channel);
+    } catch (error) {
+      console.error(error);
+      message.reply('❌ Hubo un error al intentar procesar la canción.');
     }
-    await musicManager.addSong(message.guild, song, voiceChannel, message.channel);
   },
 };
