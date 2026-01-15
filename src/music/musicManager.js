@@ -8,19 +8,20 @@ const {
   entersState
 } = require('@discordjs/voice');
 const ytdl = require('@distube/ytdl-core');
-const playdl = require('play-dl'); // Mantenemos para búsquedas y validación rápida
+const playdl = require('play-dl');
 const fs = require('fs');
 const path = require('path');
 
 // Mapa para mantener las colas por servidor
 const queues = new Map();
 
-// Función para limpiar y formatear cookies para ytdl-core
+// Función para obtener cookies en el formato que ytdl-core espera
 function getCookies() {
   const cookiesPath = path.join(process.cwd(), 'cookies.json');
   if (fs.existsSync(cookiesPath)) {
     try {
-      return JSON.parse(fs.readFileSync(cookiesPath, 'utf8'));
+      const raw = fs.readFileSync(cookiesPath, 'utf8');
+      return JSON.parse(raw);
     } catch (e) {
       console.error('Error al leer cookies.json:', e);
     }
@@ -116,15 +117,22 @@ async function play(guildId) {
   }
 
   try {
-    console.log(`Intentando reproducir con ytdl-core: ${song.title} - URL: ${song.url}`);
+    console.log(`Intentando reproducir con ytdl-core optimizado: ${song.title}`);
     
     const cookies = getCookies();
+    
+    // Configuración de stream optimizada para evitar bloqueos
     const stream = ytdl(song.url, {
       filter: 'audioonly',
+      quality: 'highestaudio',
       highWaterMark: 1 << 25,
+      agent: cookies ? ytdl.createAgent(cookies) : undefined,
       requestOptions: {
         headers: {
-          cookie: cookies ? cookies.map(c => `${c.name}=${c.value}`).join('; ') : ''
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': '*/*',
+          'Accept-Language': 'en-US,en;q=0.9',
+          'Connection': 'keep-alive'
         }
       }
     });
@@ -152,7 +160,7 @@ async function play(guildId) {
       }
     } catch (e) {}
 
-    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. Intentando con la siguiente...`);
+    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube podría estar bloqueando la conexión.`);
     queue.songs.shift();
     play(guildId);
   }
