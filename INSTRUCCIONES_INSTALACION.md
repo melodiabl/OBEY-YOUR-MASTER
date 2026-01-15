@@ -49,9 +49,9 @@ YouTube bloquea a los bots de música. Para solucionarlo, ahora el bot soporta e
 
 1. Instala la extensión **"EditThisCookie"** o **"Get cookies.txt LOCALLY"** en tu navegador (Chrome/Edge).
 2. Ve a [YouTube](https://www.youtube.com) e inicia sesión con tu cuenta.
-3. Abre la extensión y exporta las cookies en formato **JSON**.
+3. Abre la extensión y exporta las cookies. El bot ahora soporta tanto el formato **JSON** como el formato **Netscape** (el que empieza con `# Netscape`).
 4. Crea un archivo llamado `cookies.json` en la carpeta raíz de tu bot (`C:\Users\kangu\OBEY-YOUR-MASTER\cookies.json`).
-5. Pega el contenido JSON que copiaste en ese archivo.
+5. Pega el contenido que copiaste (ya sea JSON o el texto de Netscape) en ese archivo. El bot detectará el formato automáticamente.
 6. Reinicia el bot.
 
 **Nota:** No compartas tu archivo `cookies.json` con nadie, ya que contiene el acceso a tu cuenta de YouTube. El archivo está incluido en el `.gitignore` para que no se suba a GitHub por error.

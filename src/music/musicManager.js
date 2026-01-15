@@ -15,6 +15,32 @@ const path = require('path');
 // Mapa para mantener las colas por servidor
 const queues = new Map();
 
+// Función para parsear cookies de Netscape a JSON
+function parseNetscapeCookies(content) {
+  const cookies = [];
+  const lines = content.split('\n');
+  for (let line of lines) {
+    line = line.trim();
+    if (!line || line.startsWith('#')) continue;
+    const parts = line.split(/\s+/);
+    if (parts.length < 7) continue;
+    cookies.push({
+      domain: parts[0],
+      expirationDate: parts[4] === '0' ? null : parseInt(parts[4]),
+      hostOnly: parts[1] === 'FALSE',
+      httpOnly: false,
+      name: parts[5],
+      path: parts[2],
+      sameSite: 'unspecified',
+      secure: parts[3] === 'TRUE',
+      session: parts[4] === '0',
+      storeId: '0',
+      value: parts[6]
+    });
+  }
+  return cookies;
+}
+
 // Función para obtener opciones de ytdl con cookies si existen
 function getYTOptions() {
   const options = {
@@ -29,18 +55,39 @@ function getYTOptions() {
     }
   };
 
-  // Intentar cargar cookies desde un archivo cookies.json en la raíz del proyecto
   const cookiesPath = path.join(process.cwd(), 'cookies.json');
+  const cookiesTxtPath = path.join(process.cwd(), 'cookies.txt');
+  
+  let cookiesData = null;
+  let finalCookies = null;
+
+  // Intentar cargar desde cookies.json o cookies.txt
   if (fs.existsSync(cookiesPath)) {
+    cookiesData = fs.readFileSync(cookiesPath, 'utf8');
+  } else if (fs.existsSync(cookiesTxtPath)) {
+    cookiesData = fs.readFileSync(cookiesTxtPath, 'utf8');
+  }
+
+  if (cookiesData) {
     try {
-      const cookies = JSON.parse(fs.readFileSync(cookiesPath, 'utf8'));
-      options.agent = ytdl.createAgent(cookies);
-      console.log('✅ Cookies de YouTube cargadas correctamente.');
+      if (cookiesData.trim().startsWith('[') || cookiesData.trim().startsWith('{')) {
+        // Es JSON
+        finalCookies = JSON.parse(cookiesData);
+        console.log('✅ Cookies de YouTube cargadas (Formato JSON).');
+      } else if (cookiesData.includes('Netscape') || cookiesData.includes('.youtube.com')) {
+        // Es Netscape
+        finalCookies = parseNetscapeCookies(cookiesData);
+        console.log('✅ Cookies de YouTube cargadas (Formato Netscape).');
+      }
+      
+      if (finalCookies) {
+        options.agent = ytdl.createAgent(finalCookies);
+      }
     } catch (err) {
-      console.error('❌ Error al cargar las cookies de YouTube:', err);
+      console.error('❌ Error al procesar las cookies de YouTube:', err.message);
     }
   } else {
-    console.warn('⚠️ No se encontró cookies.json. El bot podría ser bloqueado por YouTube.');
+    console.warn('⚠️ No se encontró cookies.json o cookies.txt. El bot podría ser bloqueado por YouTube.');
   }
 
   return options;
@@ -116,7 +163,7 @@ function setupPlayerEvents(guildId) {
   queue.player.on('error', error => {
     console.error(`Error en el reproductor del servidor ${guildId}:`, error);
     if (error.message.includes('Sign in to confirm you’re not a bot')) {
-      queue.textChannel.send('❌ YouTube ha bloqueado la petición. Por favor, configura las cookies en `cookies.json`.');
+      queue.textChannel.send('❌ YouTube ha bloqueado la petición. Por favor, revisa tus cookies en `cookies.json`.');
     }
     queue.songs.shift();
     play(guildId);
@@ -145,7 +192,7 @@ async function play(guildId) {
   } catch (error) {
     console.error('Error al reproducir la canción:', error);
     if (error.message.includes('Sign in to confirm you’re not a bot')) {
-      queue.textChannel.send('❌ Bloqueo de YouTube detectado. Se requieren cookies para continuar.');
+      queue.textChannel.send('❌ Bloqueo de YouTube detectado. Se requieren cookies válidas para continuar.');
     } else {
       queue.textChannel.send(`❌ Error al reproducir **${song.title}**, saltando a la siguiente...`);
     }
