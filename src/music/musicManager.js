@@ -12,14 +12,12 @@ function initLavalink(client) {
       quality: 'highestaudio',
       highWaterMark: 1 << 25,
     },
-    // Configuración de red y estabilidad
     connectionTimeout: 30000,
     smoothVolume: true,
   });
 
   // Cargar extractores oficiales, pero bloqueando SoundCloud
   player.extractors.loadMulti(DefaultExtractors).then(() => {
-    // Desactivar específicamente el extractor de SoundCloud si se cargó
     const scExtractor = player.extractors.get('soundcloud');
     if (scExtractor) {
       player.extractors.unregister(scExtractor);
@@ -27,7 +25,7 @@ function initLavalink(client) {
     }
   });
 
-  // --- EVENTOS DE LA COLA (GUILD QUEUE) ---
+  // --- EVENTOS DE LA COLA ---
 
   player.events.on('playerStart', (queue, track) => {
     queue.metadata.channel.send(`▶️ **Reproduciendo:** [${track.title}](${track.url}) - \`${track.duration}\``);
@@ -53,8 +51,6 @@ function initLavalink(client) {
     queue.metadata.channel.send('🎵 La cola ha terminado.');
   });
 
-  // --- MANEJO DE ERRORES (DOCUMENTACIÓN OFICIAL) ---
-
   player.events.on('error', (queue, error) => {
     console.error(`[Error General] ${error.message}`);
     queue.metadata.channel.send(`❌ Error en la cola: ${error.message}`);
@@ -63,11 +59,6 @@ function initLavalink(client) {
   player.events.on('playerError', (queue, error) => {
     console.error(`[Error de Audio] ${error.message}`);
     queue.metadata.channel.send(`❌ Error de reproducción: ${error.message}`);
-  });
-
-  // Evento de depuración (opcional, útil para logs)
-  player.on('debug', (message) => {
-    if (process.env.DEBUG_MODE === 'true') console.log(`[Player Debug] ${message}`);
   });
 
   client.player = player;
@@ -81,23 +72,24 @@ function initLavalink(client) {
 async function addSong(guild, query, voiceChannel, textChannel, member) {
   if (!player) return;
 
-  // Realizar la búsqueda priorizando YouTube y Spotify
-  // Si no es un link, forzamos búsqueda en YouTube para mejor calidad
+  // Determinar estrategia de búsqueda
   let strategy = QueryType.AUTO;
   if (!query.startsWith('http')) {
     strategy = QueryType.YOUTUBE_SEARCH;
   }
 
-  const searchResult = await player.search(query, {
-    requestedBy: member,
-    searchEngine: strategy
-  });
-
-  if (!searchResult || !searchResult.tracks.length) {
-    return textChannel.send(`❌ No se encontraron resultados para: \`${query}\``);
-  }
-
   try {
+    // Realizar la búsqueda
+    const searchResult = await player.search(query, {
+      requestedBy: member,
+      searchEngine: strategy
+    }).catch(() => null);
+
+    if (!searchResult || !searchResult.tracks.length) {
+      return textChannel.send(`❌ No se encontraron resultados para: \`${query}\``);
+    }
+
+    // Ejecutar reproducción
     const { track } = await player.play(voiceChannel, searchResult, {
       nodeOptions: {
         metadata: {
@@ -116,8 +108,9 @@ async function addSong(guild, query, voiceChannel, textChannel, member) {
 
     return track;
   } catch (e) {
-    console.error(e);
-    return textChannel.send(`❌ Error al intentar conectar: ${e.message}`);
+    console.error('Error en addSong:', e);
+    textChannel.send(`❌ Error al intentar reproducir: ${e.message}`);
+    return null;
   }
 }
 

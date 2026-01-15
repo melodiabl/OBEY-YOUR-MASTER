@@ -32,6 +32,9 @@ module.exports = {
       
       if (track) {
         await interaction.editReply(`🎵 Encontrado: **${track.title}**`);
+      } else {
+        // Si no hay track, el error ya fue enviado al canal por addSong
+        await interaction.deleteReply().catch(() => null);
       }
     } catch (error) {
       console.error('Error en slash command play:', error);
