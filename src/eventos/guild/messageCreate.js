@@ -4,6 +4,24 @@ module.exports = async (client, message) => {
 
 
 
+  // Sistema de Niveles (XP)
+  const UserSchema = require('../../database/schemas/UserSchema');
+  let userData = await UserSchema.findOne({ userID: message.author.id });
+  if (!userData) {
+    userData = new UserSchema({ userID: message.author.id });
+  }
+
+  const xpGain = Math.floor(Math.random() * 10) + 5;
+  userData.xp += xpGain;
+
+  const nextLevelXP = userData.level * userData.level * 100;
+  if (userData.xp >= nextLevelXP) {
+    userData.level++;
+    userData.xp = 0;
+    message.reply(`🎉 ¡Felicidades ${message.author}! Has subido al **Nivel ${userData.level}**.`);
+  }
+  await userData.save();
+
   if (!message.content.startsWith(GUILD_DATA.prefix)) return
 
   const ARGS = message.content.slice(GUILD_DATA.prefix.length).trim().split(/ +/)

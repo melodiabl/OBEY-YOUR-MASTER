@@ -8,7 +8,15 @@ const UserSchema = new Schema({
     bank: { type: Number, default: 0 },
   partner: { type: String, default: null },
   inventory: { type: Array, default: [] },
-  warns: { type: Array, default: [] }
+  warns: { type: Array, default: [] },
+  xp: { type: Number, default: 0 },
+  level: { type: Number, default: 1 },
+  pet: {
+    name: { type: String, default: null },
+    type: { type: String, default: null },
+    health: { type: Number, default: 100 },
+    lastFed: { type: Date, default: Date.now }
+  }
 });
 
 module.exports = model('User', UserSchema);
