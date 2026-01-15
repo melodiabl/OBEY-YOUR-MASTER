@@ -4,9 +4,11 @@ const { startLavalink } = require('../../music/musicManager')
 module.exports = async client => {
   console.log(`Conectado como ${client.user.tag}`.rainbow)
   
-  // Inicializar Lavalink después de que el bot esté conectado
+  // Inicializar Lavalink después de un pequeño delay para asegurar que el ID esté propagado
   if (client.manager) {
-    startLavalink(client.user.id);
+    setTimeout(() => {
+      startLavalink(client.user.id);
+    }, 2000);
   }
   
   setInterval(() => pickPresence(client), 60 * 1000)

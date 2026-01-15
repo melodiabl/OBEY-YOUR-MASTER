@@ -27,6 +27,11 @@ function initLavalink(client) {
     destroyPlayerOrder: ['voice', 'player'],
   });
 
+  // IMPORTANTE: Desactivar la conexión automática de los nodos al crearlos
+  manager.nodes.forEach(node => {
+    node.options.retryAmount = 0; // Evitar reintentos infinitos antes de estar listos
+  });
+
   // Eventos de Lavalink
   manager.on('nodeConnect', (node) => console.log(`✅ Lavalink Local: Conectado exitosamente en ${node.options.host}:${node.options.port}`.green));
   manager.on('nodeError', (node, error) => {
@@ -59,9 +64,14 @@ function initLavalink(client) {
  * @param {string} clientId El ID del cliente de Discord.
  */
 function startLavalink(clientId) {
+  if (!clientId) return console.log('❌ No se puede inicializar Lavalink: ID de cliente no definido'.red);
   if (manager) {
+    // Re-configurar nodos para permitir reintentos ahora que tenemos el ID
+    manager.nodes.forEach(node => {
+      node.options.retryAmount = 30;
+    });
     manager.init(clientId);
-    console.log('🎵 Manager de Lavalink inicializado correctamente'.green);
+    console.log(`🎵 Manager de Lavalink inicializado para el bot: ${clientId}`.green);
   }
 }
 
