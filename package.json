@@ -25,6 +25,7 @@
     "canvas": "^3.2.1",
     "colors": "^1.4.0",
     "cron": "^2.2.0",
+    "discord-giveaways": "^6.0.1",
     "discord.js": "^14.7.1",
     "dotenv": "^16.6.1",
     "fetch": "^1.1.0",
