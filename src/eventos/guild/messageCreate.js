@@ -2,31 +2,7 @@ module.exports = async (client, message) => {
   if (!message.guild || !message.channel || message.author.bot) return
   const GUILD_DATA = client.dbGuild.getGuildData(message.guild.id)
 
-  // Sistema de Chatbot con IA
-  const GuildSchema = require('../../database/schemas/GuildSchema');
-  const guildConfig = await GuildSchema.findOne({ guildID: message.guild.id });
-  
-  if (guildConfig && guildConfig.aiChannel === message.channel.id) {
-    if (process.env.OPENAI_API_KEY) {
-      const { OpenAI } = require('openai');
-      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-      
-      try {
-        await message.channel.sendTyping();
-        const response = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: "Eres OBEY YOUR MASTER, un bot de Discord útil y amigable. Responde de forma concisa en español." },
-            { role: "user", content: message.content }
-          ],
-          max_tokens: 300,
-        });
-        return message.reply(response.choices[0].message.content);
-      } catch (err) {
-        console.error('Error en Chatbot IA:', err);
-      }
-    }
-  }
+
 
   if (!message.content.startsWith(GUILD_DATA.prefix)) return
 
