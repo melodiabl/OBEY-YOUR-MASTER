@@ -17,6 +17,14 @@ const GuildSchema = new Schema({
   autoRole: {
     type: String,
     default: null
+  },
+  suggestionChannel: {
+    type: String,
+    default: null
+  },
+  logsChannel: {
+    type: String,
+    default: null
   }
 })
 
