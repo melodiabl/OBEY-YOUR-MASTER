@@ -11,12 +11,12 @@ function initLavalink(client) {
   manager = new Manager({
     nodes: [
       {
-        host: 'localhost', // Conexión local
+        host: '127.0.0.1', // Usamos IP directa para evitar problemas de resolución de localhost
         port: 2333,
         password: 'youshallnotpass',
         secure: false,
-        retryAmount: 10,
-        retryDelay: 5000,
+        retryAmount: 30, // Más reintentos
+        retryDelay: 2000, // Reintentos más frecuentes
       }
     ],
     send(id, payload) {
@@ -27,8 +27,12 @@ function initLavalink(client) {
   });
 
   // Eventos de Lavalink
-  manager.on('nodeConnect', (node) => console.log(`✅ Lavalink Local: Conectado en ${node.options.host}:${node.options.port}`.green));
-  manager.on('nodeError', (node, error) => console.log(`❌ Lavalink Local Error: ${error.message}`.red));
+  manager.on('nodeConnect', (node) => console.log(`✅ Lavalink Local: Conectado exitosamente en ${node.options.host}:${node.options.port}`.green));
+  manager.on('nodeError', (node, error) => {
+    console.log(`❌ Lavalink Local Error en ${node.options.host}: ${error.message}`.red);
+    console.log(`💡 Asegúrate de que el comando "java -jar Lavalink.jar" esté corriendo en otra terminal.`.yellow);
+  });
+  manager.on('nodeRaw', (node, payload) => console.log(`DEBUG Lavalink: Recibido paquete del nodo`.gray));
 
   manager.on('trackStart', (player, track) => {
     const channel = client.channels.cache.get(player.textChannel);
@@ -54,6 +58,14 @@ function initLavalink(client) {
  */
 async function addSong(guild, query, voiceChannel, textChannel, member) {
   if (!manager) return textChannel.send('❌ El sistema de música no está listo.');
+
+  // Intentar reconectar nodos si no hay ninguno disponible
+  const availableNodes = manager.nodes.filter(n => n.connected);
+  if (availableNodes.size === 0) {
+    console.log('⚠️ No hay nodos conectados. Intentando reconectar...'.yellow);
+    manager.nodes.forEach(node => node.connect());
+    return textChannel.send('⏳ Conectando con el servidor de música local... Intenta de nuevo en 5 segundos.');
+  }
 
   const player = manager.create({
     guildId: guild.id,
