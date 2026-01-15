@@ -9,6 +9,10 @@ const GuildSchema = new Schema({
   language: {
     type: String,
     default: process.env.LANGUAGE
+  },
+  aiChannel: {
+    type: String,
+    default: null
   }
 })
 

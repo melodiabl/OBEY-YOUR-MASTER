@@ -7,7 +7,8 @@ const UserSchema = new Schema({
   dailyCooldown: { type: Number, default: 0 },
     bank: { type: Number, default: 0 },
   partner: { type: String, default: null },
-  inventory: { type: Array, default: [] }
+  inventory: { type: Array, default: [] },
+  warns: { type: Array, default: [] }
 });
 
 module.exports = model('User', UserSchema);
