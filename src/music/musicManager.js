@@ -7,31 +7,13 @@ const {
   VoiceConnectionStatus,
   entersState
 } = require('@discordjs/voice');
-const play = require('play-dl');
+const ytdl = require('@distube/ytdl-core');
+const yts = require('yt-search');
+const fs = require('fs');
+const path = require('path');
 
 // Mapa para mantener las colas por servidor
 const queues = new Map();
-
-/**
- * Configuración de play-dl SIN COOKIES.
- * Optimizamos para usar agentes libres y evitar bloqueos por IP.
- */
-async function setupPlayDL() {
-  try {
-    // Forzamos a play-dl a no buscar archivos de cookies locales
-    // y a usar un agente de navegador estándar.
-    await play.setToken({
-        youtube: {
-            cookie: "" // Vacío para asegurar que no use cookies previas
-        }
-    });
-    console.log('✅ play-dl: Configurado en modo sin cookies.');
-  } catch (e) {
-    console.error('Error en setupPlayDL:', e);
-  }
-}
-
-setupPlayDL();
 
 async function addSong(guild, song, voiceChannel, textChannel) {
   let queue = queues.get(guild.id);
@@ -108,7 +90,7 @@ function setupPlayerEvents(guildId) {
 }
 
 /**
- * Reproducción optimizada para funcionar sin cookies.
+ * Reproducción usando ytdl-core con cliente de Android para evitar bloqueos.
  */
 async function playSong(guildId) {
   const queue = queues.get(guildId);
@@ -117,18 +99,26 @@ async function playSong(guildId) {
   const song = queue.songs[0];
 
   try {
-    console.log(`[play-dl] Reproduciendo (Sin Cookies): ${song.title}`);
+    console.log(`[Music] Reproduciendo: ${song.title}`);
 
-    // Usamos un stream con configuraciones que suelen saltarse el bloqueo de bot
-    // sin necesidad de estar logueado.
-    let stream = await play.stream(song.url, {
-        discordPlayerCompatibility: true,
-        quality: 0, // Calidad automática/baja para mayor compatibilidad sin cookies
-        language: 'es-ES'
+    // Usamos ytdl-core con una configuración que simula el cliente de Android
+    // Este método es actualmente el más efectivo para evitar el bloqueo de "bot"
+    const stream = ytdl(song.url, {
+      filter: 'audioonly',
+      quality: 'highestaudio',
+      highWaterMark: 1 << 25,
+      requestOptions: {
+        headers: {
+          // User-Agent de Android para saltarse restricciones de escritorio
+          'User-Agent': 'com.google.android.youtube/19.29.37 (Linux; U; Android 11; en_US; Pixel 4 XL; Build/RP1A.200720.009) gzip',
+          'X-YouTube-Client-Name': '3',
+          'X-YouTube-Client-Version': '19.29.37'
+        }
+      }
     });
 
-    const resource = createAudioResource(stream.stream, {
-      inputType: stream.type,
+    const resource = createAudioResource(stream, {
+      inputType: StreamType.Arbitrary,
       inlineVolume: true
     });
 
@@ -138,29 +128,22 @@ async function playSong(guildId) {
     queue.textChannel.send(`▶️ Reproduciendo: **${song.title}**`);
 
   } catch (error) {
-    console.error('[play-dl] Error:', error.message);
+    console.error('[Music] Error:', error.message);
     
-    // Si falla por bloqueo, intentamos buscar la versión de YouTube Music
-    // que suele estar menos protegida.
-    if (error.message.includes('confirm you’re not a bot') || error.message.includes('403')) {
-        try {
-            console.log(`[play-dl] Intentando bypass vía YouTube Music para: ${song.title}`);
-            const search = await play.search(song.title, { 
-                limit: 1,
-                source: { youtube: 'music' } 
-            });
-            
-            if (search.length > 0 && search[0].url !== song.url) {
-                song.url = search[0].url;
-                return playSong(guildId);
-            }
-        } catch (e) {
-            console.error('Bypass fallido:', e.message);
+    // Si falla, intentamos una búsqueda rápida con yt-search para ver si la URL ha cambiado
+    try {
+        console.log(`[Music] Reintentando búsqueda para: ${song.title}`);
+        const r = await yts(song.title);
+        const video = r.videos[0];
+        if (video && video.url !== song.url) {
+            song.url = video.url;
+            return playSong(guildId);
         }
-        
-        queue.textChannel.send(`❌ YouTube bloqueó la conexión. Intenta con otra canción o busca por nombre.`);
+    } catch (e) {
+        console.error('Reintento fallido:', e.message);
     }
 
+    queue.textChannel.send(`❌ No se pudo reproducir **${song.title}**. YouTube está bloqueando la conexión.`);
     queue.songs.shift();
     playSong(guildId);
   }

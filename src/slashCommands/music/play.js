@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { addSong } = require('../../music/musicManager');
-const playdl = require('play-dl');
+const yts = require('yt-search');
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -27,24 +27,20 @@ module.exports = {
     await interaction.deferReply();
 
     try {
-      let song;
-      const validation = await playdl.validate(query);
+      // Usamos yt-search para obtener la información de forma estable sin cookies
+      const r = await yts(query);
+      const video = r.videos[0];
 
-      if (validation === 'video') {
-        const info = await playdl.video_info(query);
-        song = { title: info.video_details.title, url: query };
-      } else {
-        const searchResult = await playdl.search(query, { limit: 1 });
-        if (!searchResult || searchResult.length === 0) {
-          return interaction.editReply({ content: '❌ No se encontró la canción.' });
-        }
-        const video = searchResult[0];
-        song = { title: video.title, url: video.url };
+      if (!video) {
+        return interaction.editReply({ content: '❌ No se encontró la canción.' });
       }
 
-      if (!song.url) {
-        return interaction.editReply({ content: '❌ No se pudo obtener una URL válida.' });
-      }
+      const song = { 
+        title: video.title, 
+        url: video.url,
+        duration: video.timestamp,
+        thumbnail: video.thumbnail
+      };
 
       await addSong(interaction.guild, song, voiceChannel, interaction.channel);
       await interaction.editReply(`🎵 Buscando y añadiendo: **${song.title}**`);

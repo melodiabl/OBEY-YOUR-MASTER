@@ -1,4 +1,4 @@
-const playdl = require('play-dl');
+const yts = require('yt-search');
 const musicManager = require('../../music/musicManager');
 
 module.exports = {
@@ -17,23 +17,21 @@ module.exports = {
     }
     try {
       let song;
-      const validation = await playdl.validate(query);
       
-      if (validation === 'video') {
-        const info = await playdl.video_info(query);
-        song = { url: query, title: info.video_details.title };
-      } else {
-        const result = await playdl.search(query, { limit: 1 });
-        const video = result[0];
-        if (!video) {
-          return message.reply('No encontré resultados.');
-        }
-        song = { url: video.url, title: video.title };
+      // Usamos yt-search para obtener la información de forma estable sin cookies
+      const r = await yts(query);
+      const video = r.videos[0];
+
+      if (!video) {
+        return message.reply('❌ No encontré resultados para tu búsqueda.');
       }
-      
-      if (!song.url) {
-        return message.reply('❌ No se pudo obtener una URL válida para esta canción.');
-      }
+
+      song = { 
+        url: video.url, 
+        title: video.title,
+        duration: video.timestamp,
+        thumbnail: video.thumbnail
+      };
 
       await musicManager.addSong(message.guild, song, voiceChannel, message.channel);
     } catch (error) {
