@@ -48,9 +48,15 @@ function getYTOptions() {
     highWaterMark: 1 << 25,
     quality: 'highestaudio',
     liveBuffer: 40000,
+    dlChunkSize: 0, // Desactivar chunking para evitar problemas de formato
     requestOptions: {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'Accept': '*/*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Origin': 'https://www.youtube.com',
+        'Referer': 'https://www.youtube.com/',
+        'Sec-Fetch-Mode': 'navigate'
       }
     }
   };
@@ -61,7 +67,6 @@ function getYTOptions() {
   let cookiesData = null;
   let finalCookies = null;
 
-  // Intentar cargar desde cookies.json o cookies.txt
   if (fs.existsSync(cookiesPath)) {
     cookiesData = fs.readFileSync(cookiesPath, 'utf8');
   } else if (fs.existsSync(cookiesTxtPath)) {
@@ -71,13 +76,9 @@ function getYTOptions() {
   if (cookiesData) {
     try {
       if (cookiesData.trim().startsWith('[') || cookiesData.trim().startsWith('{')) {
-        // Es JSON
         finalCookies = JSON.parse(cookiesData);
-        console.log('✅ Cookies de YouTube cargadas (Formato JSON).');
       } else if (cookiesData.includes('Netscape') || cookiesData.includes('.youtube.com')) {
-        // Es Netscape
         finalCookies = parseNetscapeCookies(cookiesData);
-        console.log('✅ Cookies de YouTube cargadas (Formato Netscape).');
       }
       
       if (finalCookies) {
@@ -86,8 +87,6 @@ function getYTOptions() {
     } catch (err) {
       console.error('❌ Error al procesar las cookies de YouTube:', err.message);
     }
-  } else {
-    console.warn('⚠️ No se encontró cookies.json o cookies.txt. El bot podría ser bloqueado por YouTube.');
   }
 
   return options;
@@ -162,9 +161,6 @@ function setupPlayerEvents(guildId) {
 
   queue.player.on('error', error => {
     console.error(`Error en el reproductor del servidor ${guildId}:`, error);
-    if (error.message.includes('Sign in to confirm you’re not a bot')) {
-      queue.textChannel.send('❌ YouTube ha bloqueado la petición. Por favor, revisa tus cookies en `cookies.json`.');
-    }
     queue.songs.shift();
     play(guildId);
   });
@@ -177,6 +173,7 @@ async function play(guildId) {
   const song = queue.songs[0];
 
   try {
+    // Usar ytdl para obtener el stream con las opciones optimizadas
     const stream = ytdl(song.url, getYTOptions());
 
     const resource = createAudioResource(stream, {
@@ -191,11 +188,7 @@ async function play(guildId) {
 
   } catch (error) {
     console.error('Error al reproducir la canción:', error);
-    if (error.message.includes('Sign in to confirm you’re not a bot')) {
-      queue.textChannel.send('❌ Bloqueo de YouTube detectado. Se requieren cookies válidas para continuar.');
-    } else {
-      queue.textChannel.send(`❌ Error al reproducir **${song.title}**, saltando a la siguiente...`);
-    }
+    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. Intentando saltar...`);
     queue.songs.shift();
     play(guildId);
   }
