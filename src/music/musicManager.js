@@ -27,6 +27,7 @@ function initLavalink(client) {
       const guild = client.guilds.cache.get(id);
       if (guild) guild.shard.send(payload);
     },
+    playNextOnEnd: true, // Requerido por las versiones recientes de magmastream
   });
 
   // Eventos de Lavalink
