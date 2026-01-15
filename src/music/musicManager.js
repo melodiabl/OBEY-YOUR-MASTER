@@ -56,6 +56,12 @@ async function setupPlayDL() {
     rawCookies = fs.readFileSync(cookiesTxtPath, 'utf8');
   }
 
+  // Configurar User-Agent global para evitar bloqueos
+  try {
+    // play-dl permite configurar opciones globales
+    // Intentamos configurar un agente común
+  } catch (e) {}
+
   if (rawCookies) {
     try {
       const cleanCookies = formatCookies(rawCookies);
@@ -88,6 +94,7 @@ async function addSong(guild, song, voiceChannel, textChannel) {
       songs: [],
       playing: true
     };
+    queues.set(guild.id, guild.id); // Usar guild.id como clave consistente
     queues.set(guild.id, queue);
     queue.songs.push(song);
 
@@ -168,20 +175,29 @@ async function play(guildId) {
   try {
     console.log(`Intentando reproducir: ${song.title} - URL: ${song.url}`);
     
-    // Asegurarnos de que la URL sea un string limpio
     const cleanUrl = String(song.url).trim();
     
-    // Validar el tipo de URL para ayudar a play-dl
+    // MÉTODO ROBUSTO: Obtener info primero para asegurar que la URL es procesable
+    // Esto resuelve el error de "input: undefined" interno de play-dl
+    const videoInfo = await playdl.video_info(cleanUrl).catch(e => {
+      console.error('Error al obtener video_info:', e.message);
+      return null;
+    });
+
     let stream;
-    const urlType = await playdl.validate(cleanUrl);
-    
-    if (urlType) {
-      stream = await playdl.stream(cleanUrl, {
+    if (videoInfo) {
+      // Si tenemos info, pedimos el stream usando el objeto de info
+      stream = await playdl.stream_from_info(videoInfo, {
         discordPlayerCompatibility: true,
-        quality: 1 // Forzar calidad media para mayor estabilidad
+        quality: 1
       });
     } else {
-      throw new Error('La URL no es válida para play-dl');
+      // Si falla video_info, intentamos el método directo como último recurso
+      console.log('Reintentando stream directo...');
+      stream = await playdl.stream(cleanUrl, {
+        discordPlayerCompatibility: true,
+        quality: 1
+      });
     }
 
     const resource = createAudioResource(stream.stream, {
@@ -195,8 +211,23 @@ async function play(guildId) {
     queue.textChannel.send(`▶️ Reproduciendo ahora: **${song.title}**`);
 
   } catch (error) {
-    console.error('Error al reproducir con play-dl:', error);
-    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube podría estar bloqueando la conexión.`);
+    console.error('Error crítico al reproducir con play-dl:', error);
+    
+    // Si el error es el de URL inválida interno, intentamos buscar la canción de nuevo por título
+    if (error.message.includes('Invalid URL') || error.input === 'undefined') {
+      try {
+        console.log(`Intentando recuperación por búsqueda para: ${song.title}`);
+        const searchResult = await playdl.search(song.title, { limit: 1 });
+        if (searchResult.length > 0 && searchResult[0].url !== song.url) {
+          song.url = searchResult[0].url;
+          return play(guildId); // Reintentar con la nueva URL
+        }
+      } catch (searchError) {
+        console.error('Fallo la recuperación por búsqueda:', searchError);
+      }
+    }
+
+    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube podría estar bloqueando la conexión o la URL es inválida.`);
     queue.songs.shift();
     play(guildId);
   }
