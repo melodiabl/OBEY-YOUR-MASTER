@@ -167,9 +167,22 @@ async function play(guildId) {
 
   try {
     console.log(`Intentando reproducir: ${song.title} - URL: ${song.url}`);
-    const stream = await playdl.stream(song.url, {
-      discordPlayerCompatibility: true
-    });
+    
+    // Asegurarnos de que la URL sea un string limpio
+    const cleanUrl = String(song.url).trim();
+    
+    // Validar el tipo de URL para ayudar a play-dl
+    let stream;
+    const urlType = await playdl.validate(cleanUrl);
+    
+    if (urlType) {
+      stream = await playdl.stream(cleanUrl, {
+        discordPlayerCompatibility: true,
+        quality: 1 // Forzar calidad media para mayor estabilidad
+      });
+    } else {
+      throw new Error('La URL no es válida para play-dl');
+    }
 
     const resource = createAudioResource(stream.stream, {
       inputType: stream.type,
