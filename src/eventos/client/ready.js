@@ -4,12 +4,7 @@ const { startLavalink } = require('../../music/musicManager')
 module.exports = async client => {
   console.log(`Conectado como ${client.user.tag}`.rainbow)
   
-  // Inicializar Lavalink después de un pequeño delay para asegurar que el ID esté propagado
-  if (client.manager) {
-    setTimeout(() => {
-      startLavalink(client.user.id);
-    }, 2000);
-  }
+  // Discord Player ya está inicializado en el constructor del cliente
   
   setInterval(() => pickPresence(client), 60 * 1000)
   if (client?.application?.commands) {

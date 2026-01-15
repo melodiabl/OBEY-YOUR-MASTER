@@ -72,8 +72,8 @@ module.exports = class extends Client {
     this.slashArray = []
 
     this.utils = new BotUtils(this)
-    // Inicializamos la estructura, pero la conexión real se hará en el evento ready
-    this.manager = initLavalink(this)
+    // Inicializamos Discord Player
+    this.player = initLavalink(this)
 
     this.start()
   }
@@ -195,10 +195,7 @@ module.exports = class extends Client {
             .split('.')[0]
           this.on(NOMBRE_EVENTO, EVENTO.bind(null, this))
           
-          // Especial para Lavalink: actualizar estados de voz
-          if (NOMBRE_EVENTO === 'raw') {
-            this.on('raw', (d) => this.manager.updateVoiceState(d));
-          }
+          // Discord Player no requiere el evento raw para estados de voz manuales
         } catch (e) {
           console.log(`ERROR AL CARGAR EL EVENTO ${rutaArchivo}`.bgRed)
           console.log(e)

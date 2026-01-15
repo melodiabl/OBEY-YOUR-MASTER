@@ -26,12 +26,12 @@ module.exports = {
     await interaction.deferReply();
 
     try {
-      // Usamos el nuevo sistema de Lavalink Local
+      // Usamos el nuevo sistema de Discord Player
+      await interaction.editReply(`🎵 Buscando: **${query}**...`);
       await addSong(interaction.guild, query, voiceChannel, interaction.channel, interaction.user);
-      await interaction.editReply(`🎵 Procesando búsqueda: **${query}**`);
     } catch (error) {
       console.error('Error en slash command play:', error);
-      await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción con Lavalink Local.' });
+      await interaction.editReply({ content: '❌ Hubo un error al intentar reproducir la canción con Discord Player.' });
     }
   },
 };
