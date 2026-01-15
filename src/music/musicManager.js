@@ -7,13 +7,38 @@ const {
   VoiceConnectionStatus,
   entersState
 } = require('@discordjs/voice');
-const ytStream = require('yt-stream');
-const playdl = require('play-dl');
+const play = require('play-dl');
 const fs = require('fs');
 const path = require('path');
 
 // Mapa para mantener las colas por servidor
 const queues = new Map();
+
+/**
+ * Configuración inicial de play-dl siguiendo el estándar oficial.
+ * Se encarga de cargar cookies y configurar el comportamiento de la librería.
+ */
+async function setupPlayDL() {
+  const cookiesPath = path.join(process.cwd(), 'cookies.json');
+  
+  if (fs.existsSync(cookiesPath)) {
+    try {
+      // play-dl recomienda usar setToken para las cookies de YouTube
+      // El formato esperado en cookies.json debe ser el exportado por extensiones como "EditThisCookie"
+      await play.setToken({
+        youtube: {
+          cookie: fs.readFileSync(cookiesPath, 'utf8')
+        }
+      });
+      console.log('✅ play-dl: Cookies configuradas correctamente.');
+    } catch (err) {
+      console.error('❌ play-dl: Error al configurar tokens:', err.message);
+    }
+  }
+}
+
+// Ejecutar configuración al cargar el módulo
+setupPlayDL();
 
 async function addSong(guild, song, voiceChannel, textChannel) {
   let queue = queues.get(guild.id);
@@ -50,7 +75,7 @@ async function addSong(guild, song, voiceChannel, textChannel) {
       connection.subscribe(queue.player);
       
       setupPlayerEvents(guild.id);
-      play(guild.id);
+      playSong(guild.id);
 
     } catch (error) {
       console.error('Error al iniciar la música:', error);
@@ -70,7 +95,7 @@ function setupPlayerEvents(guildId) {
   queue.player.on(AudioPlayerStatus.Idle, () => {
     queue.songs.shift();
     if (queue.songs.length > 0) {
-      play(guildId);
+      playSong(guildId);
     } else {
       setTimeout(() => {
         const currentQueue = queues.get(guildId);
@@ -85,33 +110,29 @@ function setupPlayerEvents(guildId) {
   queue.player.on('error', error => {
     console.error(`Error en el reproductor del servidor ${guildId}:`, error);
     queue.songs.shift();
-    play(guildId);
+    playSong(guildId);
   });
 }
 
-async function play(guildId) {
+/**
+ * Función principal de reproducción siguiendo el flujo oficial de play-dl.
+ */
+async function playSong(guildId) {
   const queue = queues.get(guildId);
   if (!queue || queue.songs.length === 0) return;
 
   const song = queue.songs[0];
 
-  if (!song || !song.url) {
-    queue.textChannel.send(`❌ Error: La canción no tiene una URL válida.`);
-    queue.songs.shift();
-    play(guildId);
-    return;
-  }
-
   try {
-    console.log(`Intentando reproducir con yt-stream: ${song.title}`);
-    
-    // yt-stream obtiene el stream de una forma diferente que suele evitar bloqueos
-    const stream = await ytStream.stream(song.url, {
-      quality: 'high',
-      type: 'audio',
-      highWaterMark: 1048576 * 32 // 32MB buffer
+    console.log(`[play-dl] Intentando reproducir: ${song.title}`);
+
+    // 1. Obtener información del video (necesario para stream_from_info o validación interna)
+    // play-dl maneja internamente la rotación de agentes si está configurado
+    let stream = await play.stream(song.url, {
+        discordPlayerCompatibility: true
     });
 
+    // 2. Crear el recurso de audio usando el stream y el tipo proporcionado por play-dl
     const resource = createAudioResource(stream.stream, {
       inputType: stream.type,
       inlineVolume: true
@@ -123,21 +144,17 @@ async function play(guildId) {
     queue.textChannel.send(`▶️ Reproduciendo ahora: **${song.title}**`);
 
   } catch (error) {
-    console.error('Error crítico al reproducir con yt-stream:', error);
+    console.error('[play-dl] Error en la reproducción:', error);
     
-    // Intento de recuperación por búsqueda si falla la URL
-    try {
-      console.log(`Intentando recuperación por búsqueda para: ${song.title}`);
-      const searchResult = await playdl.search(song.title, { limit: 1 });
-      if (searchResult.length > 0 && searchResult[0].url !== song.url) {
-        song.url = searchResult[0].url;
-        return play(guildId);
-      }
-    } catch (e) {}
+    // Manejo específico para errores de validación o URL
+    if (error.message.includes('copyright') || error.message.includes('confirm you’re not a bot')) {
+        queue.textChannel.send(`❌ YouTube ha bloqueado la reproducción de **${song.title}** por restricciones de seguridad o copyright.`);
+    } else {
+        queue.textChannel.send(`❌ Error al reproducir **${song.title}**. Intentando con la siguiente...`);
+    }
 
-    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube sigue bloqueando la conexión.`);
     queue.songs.shift();
-    play(guildId);
+    playSong(guildId);
   }
 }
 
