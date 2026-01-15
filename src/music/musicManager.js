@@ -11,16 +11,28 @@ function initLavalink(client) {
   manager = new Manager({
     nodes: [
       {
-        host: 'lava.link', // Nodo público gratuito
+        host: 'lava.link',
         port: 80,
         password: 'youshallnotpass',
         secure: false,
+        retryAmount: 5,
+        retryDelay: 5000,
+      },
+      {
+        host: 'lavalink.oops.wtf',
+        port: 443,
+        password: 'www.corwin.pro',
+        secure: true,
+        retryAmount: 5,
+        retryDelay: 5000,
       },
       {
         host: 'lavalink.lexis.host',
         port: 443,
         password: 'lexishostlavalink',
         secure: true,
+        retryAmount: 5,
+        retryDelay: 5000,
       }
     ],
     send(id, payload) {
