@@ -15,8 +15,8 @@ function initLavalink(client) {
     }
   });
 
-  // Cargar extractores por defecto
-  player.extractors.loadDefault();
+  // Cargar extractores por defecto (usando el nuevo método loadMulti)
+  player.extractors.loadMulti(DefaultExtractors);
 
   // Eventos del Player
   player.events.on('playerStart', (queue, track) => {
