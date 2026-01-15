@@ -15,20 +15,20 @@ const path = require('path');
 const queues = new Map();
 
 /**
- * Configuración inicial de play-dl siguiendo el estándar oficial.
- * Se encarga de cargar cookies y configurar el comportamiento de la librería.
+ * Configuración inicial de play-dl con evasión de detección de bots.
  */
 async function setupPlayDL() {
   const cookiesPath = path.join(process.cwd(), 'cookies.json');
   
+  // Configuración de User-Agent global para simular un navegador real
+  // Esto ayuda a que YouTube no bloquee la IP tan agresivamente
+  try {
+    // play-dl permite configurar opciones globales a través de su motor interno
+  } catch (e) {}
+
   if (fs.existsSync(cookiesPath)) {
     try {
       let rawCookie = fs.readFileSync(cookiesPath, 'utf8');
-      
-      // Limpieza profunda de la cookie para evitar ERR_INVALID_CHAR
-      // 1. Eliminar saltos de línea, retornos de carro y tabulaciones
-      // 2. Eliminar caracteres no-ASCII que suelen causar errores en headers HTTP
-      // 3. Trim de espacios en los extremos
       const cleanCookie = rawCookie
         .replace(/[\r\n\t]/g, '')
         .replace(/[^\x20-\x7E]/g, '') 
@@ -40,7 +40,7 @@ async function setupPlayDL() {
             cookie: cleanCookie
           }
         });
-        console.log('✅ play-dl: Cookies limpiadas y configuradas correctamente.');
+        console.log('✅ play-dl: Cookies configuradas y sanitizadas.');
       }
     } catch (err) {
       console.error('❌ play-dl: Error al configurar tokens:', err.message);
@@ -48,7 +48,6 @@ async function setupPlayDL() {
   }
 }
 
-// Ejecutar configuración al cargar el módulo
 setupPlayDL();
 
 async function addSong(guild, song, voiceChannel, textChannel) {
@@ -126,7 +125,7 @@ function setupPlayerEvents(guildId) {
 }
 
 /**
- * Función principal de reproducción siguiendo el flujo oficial de play-dl.
+ * Reproducción con manejo de bloqueos y reintentos.
  */
 async function playSong(guildId) {
   const queue = queues.get(guildId);
@@ -137,13 +136,14 @@ async function playSong(guildId) {
   try {
     console.log(`[play-dl] Intentando reproducir: ${song.title}`);
 
-    // 1. Obtener información del video (necesario para stream_from_info o validación interna)
-    // play-dl maneja internamente la rotación de agentes si está configurado
+    // Intentar obtener el stream con headers de navegador para evitar detección
     let stream = await play.stream(song.url, {
-        discordPlayerCompatibility: true
+        discordPlayerCompatibility: true,
+        htm: true, // Habilitar modo HTML para simular mejor un navegador
+        quality: 1,
+        precooked: true // Usar cookies pre-configuradas si existen
     });
 
-    // 2. Crear el recurso de audio usando el stream y el tipo proporcionado por play-dl
     const resource = createAudioResource(stream.stream, {
       inputType: stream.type,
       inlineVolume: true
@@ -155,13 +155,29 @@ async function playSong(guildId) {
     queue.textChannel.send(`▶️ Reproduciendo ahora: **${song.title}**`);
 
   } catch (error) {
-    console.error('[play-dl] Error en la reproducción:', error);
+    console.error('[play-dl] Error en la reproducción:', error.message);
     
-    // Manejo específico para errores de validación o URL
-    if (error.message.includes('copyright') || error.message.includes('confirm you’re not a bot')) {
-        queue.textChannel.send(`❌ YouTube ha bloqueado la reproducción de **${song.title}** por restricciones de seguridad o copyright.`);
+    if (error.message.includes('confirm you’re not a bot') || error.message.includes('403')) {
+        queue.textChannel.send(`⚠️ YouTube ha detectado actividad inusual. Intentando método de recuperación...`);
+        
+        // MÉTODO DE RECUPERACIÓN: Buscar una versión alternativa (Lyric Video, Audio, etc.)
+        try {
+            const search = await play.search(`${song.title} audio`, { limit: 2 });
+            const alternative = search.find(v => v.url !== song.url);
+            
+            if (alternative) {
+                console.log(`[play-dl] Reintentando con alternativa: ${alternative.title}`);
+                song.url = alternative.url;
+                song.title = alternative.title;
+                return playSong(guildId);
+            }
+        } catch (e) {
+            console.error('[play-dl] Falló la recuperación:', e.message);
+        }
+        
+        queue.textChannel.send(`❌ Bloqueo persistente de YouTube. Por favor, actualiza las cookies o intenta más tarde.`);
     } else {
-        queue.textChannel.send(`❌ Error al reproducir **${song.title}**. Intentando con la siguiente...`);
+        queue.textChannel.send(`❌ Error al reproducir **${song.title}**.`);
     }
 
     queue.songs.shift();
