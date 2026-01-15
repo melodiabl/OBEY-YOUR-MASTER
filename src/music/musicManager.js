@@ -7,7 +7,7 @@ const {
   VoiceConnectionStatus,
   entersState
 } = require('@discordjs/voice');
-const { youtube } = require('youtube-ext');
+const YouTube = require('youtube-ext').default; // Corregida la importación para youtube-ext
 const yts = require('yt-search');
 
 // Mapa para mantener las colas por servidor
@@ -88,7 +88,7 @@ function setupPlayerEvents(guildId) {
 }
 
 /**
- * Reproducción usando youtube-ext para máxima estabilidad.
+ * Reproducción usando youtube-ext con importación corregida.
  */
 async function playSong(guildId) {
   const queue = queues.get(guildId);
@@ -99,8 +99,13 @@ async function playSong(guildId) {
   try {
     console.log(`[Music] Reproduciendo con youtube-ext: ${song.title}`);
 
-    // youtube-ext es más estable porque usa la API interna de YouTube
-    const stream = await youtube.getStream(song.url);
+    // Validar que YouTube esté cargado correctamente
+    if (!YouTube) {
+        throw new Error('La librería youtube-ext no se cargó correctamente.');
+    }
+
+    // Obtener el stream usando la instancia de youtube-ext
+    const stream = await YouTube.getStream(song.url);
 
     const resource = createAudioResource(stream, {
       inputType: StreamType.Arbitrary,
