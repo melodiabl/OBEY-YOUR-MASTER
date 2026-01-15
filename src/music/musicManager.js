@@ -4,15 +4,30 @@ const { Connectors } = require('shoukaku');
 let kazagumo;
 
 /**
- * Inicializa Kazagumo con Shoukaku.
+ * Inicializa Kazagumo con una lista de nodos externos y públicos.
  */
 function initLavalink(client) {
-  const Nodes = [{
-    name: 'Local Node',
-    url: '127.0.0.1:2333',
-    auth: 'youshallnotpass',
-    secure: false
-  }];
+  // Lista de nodos públicos estables (v3 y v4)
+  const Nodes = [
+    {
+      name: 'Serenetia v4 (Global)',
+      url: 'lavalinkv4.serenetia.com:443',
+      auth: 'https://dsc.gg/ajidevserver',
+      secure: true
+    },
+    {
+      name: 'Jirayu (Asia/Global)',
+      url: 'lavalink.jirayu.net:443',
+      auth: 'youshallnotpass',
+      secure: true
+    },
+    {
+      name: 'Rive (Global)',
+      url: 'lavalink.rive.wtf:443',
+      auth: 'youshallnotpass',
+      secure: true
+    }
+  ];
 
   kazagumo = new Kazagumo({
     defaultSearchEngine: 'youtube',
@@ -25,13 +40,13 @@ function initLavalink(client) {
 
   // --- EVENTOS DE KAZAGUMO ---
 
-  kazagumo.shoukaku.on('ready', (name) => console.log(`✅ [Kazagumo] Nodo ${name} conectado correctamente.`.green));
+  kazagumo.shoukaku.on('ready', (name) => console.log(`✅ [Lavalink] Nodo externo "${name}" conectado.`.green));
   kazagumo.shoukaku.on('error', (name, error) => {
-    console.error(`❌ [Kazagumo] Error en nodo ${name}:`.red, error.message || error);
+    console.error(`❌ [Lavalink] Error en nodo "${name}":`.red, error.message || error);
   });
   
   kazagumo.shoukaku.on('close', (name, code, reason) => {
-    console.warn(`⚠️ [Kazagumo] Conexión cerrada en nodo ${name}. Código: ${code}, Razón: ${reason}`.yellow);
+    console.warn(`⚠️ [Lavalink] Conexión cerrada en "${name}". Reintentando...`.yellow);
   });
 
   kazagumo.on('playerStart', (player, track) => {
@@ -55,10 +70,10 @@ function initLavalink(client) {
 async function addSong(guild, query, voiceChannel, textChannel, member) {
   if (!kazagumo) return null;
 
-  // Verificar si hay nodos disponibles antes de intentar crear el player
-  const availableNodes = kazagumo.shoukaku.nodes.filter(n => n.state === 1); // 1 = CONNECTED
+  // Verificar si hay nodos disponibles
+  const availableNodes = kazagumo.shoukaku.nodes.filter(n => n.state === 1);
   if (availableNodes.size === 0) {
-    textChannel.send('❌ No hay servidores de música (Lavalink) conectados. Asegúrate de que Lavalink esté encendido.');
+    textChannel.send('❌ No hay servidores de música externos disponibles en este momento. Reintentando conexión...');
     return null;
   }
 
