@@ -60,7 +60,7 @@ async function addSong(guild, query, voiceChannel, textChannel, member) {
   if (!manager) return textChannel.send('❌ El sistema de música no está listo.');
 
   const player = manager.create({
-    guild: guild.id,
+    guildId: guild.id,
     voiceChannel: voiceChannel.id,
     textChannel: textChannel.id,
     selfDeafen: true,
