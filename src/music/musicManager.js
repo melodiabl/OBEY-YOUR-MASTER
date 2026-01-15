@@ -26,7 +26,13 @@ function initLavalink(client) {
   // --- EVENTOS DE KAZAGUMO ---
 
   kazagumo.shoukaku.on('ready', (name) => console.log(`✅ [Kazagumo] Nodo ${name} conectado correctamente.`.green));
-  kazagumo.shoukaku.on('error', (name, error) => console.error(`❌ [Kazagumo] Error en nodo ${name}:`, error));
+  kazagumo.shoukaku.on('error', (name, error) => {
+    console.error(`❌ [Kazagumo] Error en nodo ${name}:`.red, error.message || error);
+  });
+  
+  kazagumo.shoukaku.on('close', (name, code, reason) => {
+    console.warn(`⚠️ [Kazagumo] Conexión cerrada en nodo ${name}. Código: ${code}, Razón: ${reason}`.yellow);
+  });
 
   kazagumo.on('playerStart', (player, track) => {
     const channel = client.channels.cache.get(player.textId);
@@ -49,33 +55,46 @@ function initLavalink(client) {
 async function addSong(guild, query, voiceChannel, textChannel, member) {
   if (!kazagumo) return null;
 
-  let player = kazagumo.players.get(guild.id);
-  if (!player) {
-    player = await kazagumo.createPlayer({
-      guildId: guild.id,
-      voiceId: voiceChannel.id,
-      textId: textChannel.id,
-      deaf: true
-    });
-  }
-
-  const result = await kazagumo.search(query, { requester: member });
-
-  if (!result.tracks.length) {
-    textChannel.send(`❌ No se encontraron resultados para: \`${query}\``);
+  // Verificar si hay nodos disponibles antes de intentar crear el player
+  const availableNodes = kazagumo.shoukaku.nodes.filter(n => n.state === 1); // 1 = CONNECTED
+  if (availableNodes.size === 0) {
+    textChannel.send('❌ No hay servidores de música (Lavalink) conectados. Asegúrate de que Lavalink esté encendido.');
     return null;
   }
 
-  if (result.type === 'PLAYLIST') {
-    for (const track of result.tracks) player.queue.add(track);
-    textChannel.send(`✅ Playlist añadida: **${result.playlistName}** (${result.tracks.length} canciones)`);
-  } else {
-    player.queue.add(result.tracks[0]);
-    textChannel.send(`✅ Añadido a la cola: **${result.tracks[0].title}**`);
-  }
+  try {
+    let player = kazagumo.players.get(guild.id);
+    if (!player) {
+      player = await kazagumo.createPlayer({
+        guildId: guild.id,
+        voiceId: voiceChannel.id,
+        textId: textChannel.id,
+        deaf: true
+      });
+    }
 
-  if (!player.playing && !player.paused) player.play();
-  return result.tracks[0];
+    const result = await kazagumo.search(query, { requester: member });
+
+    if (!result.tracks.length) {
+      textChannel.send(`❌ No se encontraron resultados para: \`${query}\``);
+      return null;
+    }
+
+    if (result.type === 'PLAYLIST') {
+      for (const track of result.tracks) player.queue.add(track);
+      textChannel.send(`✅ Playlist añadida: **${result.playlistName}** (${result.tracks.length} canciones)`);
+    } else {
+      player.queue.add(result.tracks[0]);
+      textChannel.send(`✅ Añadido a la cola: **${result.tracks[0].title}**`);
+    }
+
+    if (!player.playing && !player.paused) player.play();
+    return result.tracks[0];
+  } catch (e) {
+    console.error('❌ [Kazagumo Play Error]', e);
+    textChannel.send(`❌ Error al intentar reproducir: ${e.message}`);
+    return null;
+  }
 }
 
 module.exports = {
