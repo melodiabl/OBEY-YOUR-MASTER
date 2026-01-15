@@ -13,7 +13,7 @@ module.exports = {
         .setDescription('Cantidad a transferir')
         .setRequired(true)
     ),
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     const target = interaction.options.getUser('usuario');
     const amount = interaction.options.getInteger('cantidad');
     const senderData = await client.db.getUserData(interaction.user.id);

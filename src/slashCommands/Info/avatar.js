@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('Usuario cuyo avatar quieres ver')
         .setRequired(false)
     ),
-  async execute(interaction) {
+  async execute(client, interaction) {
     const user = interaction.options.getUser('usuario') || interaction.user;
     await interaction.reply({ content: user.displayAvatarURL({ dynamic: true }), ephermal: false });
   },

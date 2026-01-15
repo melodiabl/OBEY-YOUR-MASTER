@@ -3,7 +3,7 @@ module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('daily')
     .setDescription('Reclama tu recompensa diaria'),
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     const userData = await client.db.getUserData(interaction.user.id);
     const cooldown = userData.dailyCooldown || 0;
     const now = Date.now();

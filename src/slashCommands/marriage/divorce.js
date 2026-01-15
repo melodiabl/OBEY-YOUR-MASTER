@@ -4,7 +4,7 @@ module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('divorce')
     .setDescription('Solicita un divorcio'),
-  async execute(interaction) {
+  async execute(client, interaction) {
     const ok = await divorce(interaction.user.id);
     if (!ok) {
       return interaction.reply({ content: '❌ No estás casado/a.', ephermal: true });

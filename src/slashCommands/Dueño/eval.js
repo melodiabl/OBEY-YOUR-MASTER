@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('Código a ejecutar')
         .setRequired(true)
     ),
-  async execute(interaction) {
+  async execute(client, interaction) {
     // Este comando debe ser protegido y solo ejecutado por el dueño
     // Aquí no implementamos la lógica para evitar riesgos
     await interaction.reply({ content: '⚠️ Este comando solo puede ser ejecutado por el dueño.', ephermal: true });

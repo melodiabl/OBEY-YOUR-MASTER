@@ -3,7 +3,7 @@ module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('work')
     .setDescription('Trabaja para ganar monedas'),
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     const userData = await client.db.getUserData(interaction.user.id);
     const cooldown = userData.workCooldown || 0;
     const now = Date.now();

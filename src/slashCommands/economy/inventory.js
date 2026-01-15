@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('Usuario cuyo inventario quieres ver')
         .setRequired(false)
     ),
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     const user = interaction.options.getUser('usuario') || interaction.user;
     const userData = await client.db.getUserData(user.id);
     const items = userData.inventory || [];

@@ -4,7 +4,7 @@ module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('queue')
     .setDescription('Muestra la lista de canciones en cola'),
-  async execute(interaction) {
+  async execute(client, interaction) {
     const queue = getQueue(interaction.guild.id);
     if (!queue || !queue.songs.length) {
       return interaction.reply('❌ No hay canciones en la cola.');

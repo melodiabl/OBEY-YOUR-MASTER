@@ -3,7 +3,7 @@ module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('gacha')
     .setDescription('Gira la ruleta para obtener un ítem al azar'),
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     const userData = await client.db.getUserData(interaction.user.id);
     const cost = 100;
     if ((userData.money || 0) < cost) {

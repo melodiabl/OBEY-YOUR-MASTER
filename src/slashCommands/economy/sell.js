@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('Nombre del ítem a vender')
         .setRequired(true)
     ),
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     const itemName = interaction.options.getString('item');
     const items = {
       pan: 50,

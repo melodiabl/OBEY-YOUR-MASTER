@@ -4,7 +4,7 @@ module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('accept')
     .setDescription('Acepta una propuesta de matrimonio pendiente'),
-  async execute(interaction) {
+  async execute(client, interaction) {
     const result = await acceptMarriage(interaction.user.id);
     if (!result.ok) {
       return interaction.reply({ content: '❌ No tienes propuestas pendientes.', ephermal: true });

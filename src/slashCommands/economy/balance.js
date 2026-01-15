@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('Ver el saldo de otro usuario')
         .setRequired(false)
     ),
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     const user = interaction.options.getUser('usuario') || interaction.user;
     const userData = await client.db.getUserData(user.id);
     await interaction.reply({

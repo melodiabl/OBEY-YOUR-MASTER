@@ -3,7 +3,7 @@ module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('shop')
     .setDescription('Muestra la tienda de ítems disponibles'),
-  async execute(interaction) {
+  async execute(client, interaction) {
     const items = [
       { name: 'Pan', price: 50 },
       { name: 'Hacha', price: 100 },

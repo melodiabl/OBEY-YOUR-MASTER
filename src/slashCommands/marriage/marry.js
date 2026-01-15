@@ -9,7 +9,7 @@ module.exports = {
         .setDescription('Usuario al que quieres proponer matrimonio')
         .setRequired(true)
     ),
-  async execute(interaction) {
+  async execute(client, interaction) {
     const user = interaction.options.getUser('usuario');
     const result = await proposeMarriage(interaction.user.id, user.id);
     if (!result.ok) {

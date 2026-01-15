@@ -11,7 +11,7 @@ module.exports = {
         .setDescription('Enlace o nombre de la canción')
         .setRequired(true)
     ),
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     const query = interaction.options.getString('query');
     const voiceChannel = interaction.member.voice?.channel;
     if (!voiceChannel) {
