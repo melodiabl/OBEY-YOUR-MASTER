@@ -28,12 +28,10 @@ module.exports = {
 
     try {
       let song;
-      // play-dl maneja la validación y búsqueda de forma integrada
-      if (playdl.yt_validate(query) === 'video') {
+      const validation = await playdl.validate(query);
+
+      if (validation === 'video') {
         const info = await playdl.video_info(query);
-        if (!info || !info.video_details) {
-          return interaction.editReply({ content: '❌ No se pudo obtener información del video.' });
-        }
         song = { title: info.video_details.title, url: query };
       } else {
         const searchResult = await playdl.search(query, { limit: 1 });
@@ -41,21 +39,18 @@ module.exports = {
           return interaction.editReply({ content: '❌ No se encontró la canción.' });
         }
         const video = searchResult[0];
-        
-        // Validar que el video tenga URL antes de crear el objeto song
-        if (!video || !video.url) {
-          console.error('Error: Video sin URL válida:', video);
-          return interaction.editReply({ content: '❌ No se pudo obtener la URL del video.' });
-        }
-        
         song = { title: video.title, url: video.url };
+      }
+
+      if (!song.url) {
+        return interaction.editReply({ content: '❌ No se pudo obtener una URL válida.' });
       }
 
       await addSong(interaction.guild, song, voiceChannel, interaction.channel);
       await interaction.editReply(`🎵 Buscando y añadiendo: **${song.title}**`);
     } catch (error) {
       console.error(error);
-      await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción con play-dl.' });
+      await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción.' });
     }
   },
 };

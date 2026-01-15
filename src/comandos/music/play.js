@@ -17,11 +17,10 @@ module.exports = {
     }
     try {
       let song;
-      if (playdl.yt_validate(query) === 'video') {
+      const validation = await playdl.validate(query);
+      
+      if (validation === 'video') {
         const info = await playdl.video_info(query);
-        if (!info || !info.video_details) {
-          return message.reply('❌ No se pudo obtener información del video.');
-        }
         song = { url: query, title: info.video_details.title };
       } else {
         const result = await playdl.search(query, { limit: 1 });
@@ -29,19 +28,17 @@ module.exports = {
         if (!video) {
           return message.reply('No encontré resultados.');
         }
-        
-        // Validar que el video tenga URL antes de crear el objeto song
-        if (!video.url) {
-          console.error('Error: Video sin URL válida:', video);
-          return message.reply('❌ No se pudo obtener la URL del video.');
-        }
-        
         song = { url: video.url, title: video.title };
       }
+      
+      if (!song.url) {
+        return message.reply('❌ No se pudo obtener una URL válida para esta canción.');
+      }
+
       await musicManager.addSong(message.guild, song, voiceChannel, message.channel);
     } catch (error) {
       console.error(error);
-      message.reply('❌ Hubo un error al intentar procesar la canción con play-dl.');
+      message.reply('❌ Hubo un error al intentar procesar la canción.');
     }
   },
 };

@@ -18,6 +18,7 @@
   "dependencies": {
     "@discordjs/opus": "^0.10.0",
     "@discordjs/voice": "^0.18.0",
+    "@distube/ytdl-core": "^4.16.12",
     "@kreisler/js-jsondb": "^2.0.0",
     "@vitalets/google-translate-api": "^9.2.1",
     "canvacord": "^6.0.4",
