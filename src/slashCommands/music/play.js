@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { addSong } = require('../../music/musicManager');
-const ytdl = require('@distube/ytdl-core');
-const ytSearch = require('yt-search');
+const playdl = require('play-dl');
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -20,7 +19,6 @@ module.exports = {
       return interaction.reply({ content: '❌ Debes estar en un canal de voz.', ephemeral: true });
     }
 
-    // Permisos del bot
     const permissions = voiceChannel.permissionsFor(interaction.client.user);
     if (!permissions.has('Connect') || !permissions.has('Speak')) {
       return interaction.reply({ content: '❌ No tengo permisos para unirme o hablar en ese canal de voz.', ephemeral: true });
@@ -30,15 +28,16 @@ module.exports = {
 
     try {
       let song;
-      if (ytdl.validateURL(query)) {
-        const info = await ytdl.getBasicInfo(query);
-        song = { title: info.videoDetails.title, url: query };
+      // play-dl maneja la validación y búsqueda de forma integrada
+      if (playdl.yt_validate(query) === 'video') {
+        const info = await playdl.video_info(query);
+        song = { title: info.video_details.title, url: query };
       } else {
-        const searchResult = await ytSearch(query);
-        if (!searchResult || !searchResult.videos || !searchResult.videos.length) {
+        const searchResult = await playdl.search(query, { limit: 1 });
+        if (!searchResult || searchResult.length === 0) {
           return interaction.editReply({ content: '❌ No se encontró la canción.' });
         }
-        const video = searchResult.videos[0];
+        const video = searchResult[0];
         song = { title: video.title, url: video.url };
       }
 
@@ -46,7 +45,7 @@ module.exports = {
       await interaction.editReply(`🎵 Buscando y añadiendo: **${song.title}**`);
     } catch (error) {
       console.error(error);
-      await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción.' });
+      await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción con play-dl.' });
     }
   },
 };

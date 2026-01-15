@@ -7,90 +7,33 @@ const {
   VoiceConnectionStatus,
   entersState
 } = require('@discordjs/voice');
-const ytdl = require('@distube/ytdl-core');
-const ffmpeg = require('ffmpeg-static');
+const playdl = require('play-dl');
 const fs = require('fs');
 const path = require('path');
 
 // Mapa para mantener las colas por servidor
 const queues = new Map();
 
-// Función para parsear cookies de Netscape a JSON
-function parseNetscapeCookies(content) {
-  const cookies = [];
-  const lines = content.split('\n');
-  for (let line of lines) {
-    line = line.trim();
-    if (!line || line.startsWith('#')) continue;
-    const parts = line.split(/\s+/);
-    if (parts.length < 7) continue;
-    cookies.push({
-      domain: parts[0],
-      expirationDate: parts[4] === '0' ? null : parseInt(parts[4]),
-      hostOnly: parts[1] === 'FALSE',
-      httpOnly: false,
-      name: parts[5],
-      path: parts[2],
-      sameSite: 'unspecified',
-      secure: parts[3] === 'TRUE',
-      session: parts[4] === '0',
-      storeId: '0',
-      value: parts[6]
-    });
-  }
-  return cookies;
-}
-
-// Función para obtener opciones de ytdl con cookies si existen
-function getYTOptions() {
-  const options = {
-    filter: 'audioonly',
-    highWaterMark: 1 << 25,
-    quality: 'highestaudio',
-    liveBuffer: 40000,
-    dlChunkSize: 0, // Desactivar chunking para evitar problemas de formato
-    requestOptions: {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-        'Accept': '*/*',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Origin': 'https://www.youtube.com',
-        'Referer': 'https://www.youtube.com/',
-        'Sec-Fetch-Mode': 'navigate'
-      }
-    }
-  };
-
+// Configuración inicial de play-dl
+async function setupPlayDL() {
   const cookiesPath = path.join(process.cwd(), 'cookies.json');
-  const cookiesTxtPath = path.join(process.cwd(), 'cookies.txt');
-  
-  let cookiesData = null;
-  let finalCookies = null;
-
   if (fs.existsSync(cookiesPath)) {
-    cookiesData = fs.readFileSync(cookiesPath, 'utf8');
-  } else if (fs.existsSync(cookiesTxtPath)) {
-    cookiesData = fs.readFileSync(cookiesTxtPath, 'utf8');
-  }
-
-  if (cookiesData) {
     try {
-      if (cookiesData.trim().startsWith('[') || cookiesData.trim().startsWith('{')) {
-        finalCookies = JSON.parse(cookiesData);
-      } else if (cookiesData.includes('Netscape') || cookiesData.includes('.youtube.com')) {
-        finalCookies = parseNetscapeCookies(cookiesData);
-      }
-      
-      if (finalCookies) {
-        options.agent = ytdl.createAgent(finalCookies);
-      }
+      // play-dl maneja las cookies automáticamente si se configuran así
+      await playdl.setToken({
+        youtube: {
+          cookie: fs.readFileSync(cookiesPath, 'utf8')
+        }
+      });
+      console.log('✅ play-dl: Cookies de YouTube cargadas correctamente.');
     } catch (err) {
-      console.error('❌ Error al procesar las cookies de YouTube:', err.message);
+      console.error('❌ play-dl: Error al cargar las cookies:', err.message);
     }
   }
-
-  return options;
 }
+
+// Ejecutar configuración
+setupPlayDL();
 
 async function addSong(guild, song, voiceChannel, textChannel) {
   let queue = queues.get(guild.id);
@@ -173,11 +116,13 @@ async function play(guildId) {
   const song = queue.songs[0];
 
   try {
-    // Usar ytdl para obtener el stream con las opciones optimizadas
-    const stream = ytdl(song.url, getYTOptions());
+    // play-dl obtiene el stream de forma mucho más estable
+    const stream = await playdl.stream(song.url, {
+      discordPlayerCompatibility: true
+    });
 
-    const resource = createAudioResource(stream, {
-      inputType: StreamType.Arbitrary,
+    const resource = createAudioResource(stream.stream, {
+      inputType: stream.type,
       inlineVolume: true
     });
 
@@ -187,8 +132,8 @@ async function play(guildId) {
     queue.textChannel.send(`▶️ Reproduciendo ahora: **${song.title}**`);
 
   } catch (error) {
-    console.error('Error al reproducir la canción:', error);
-    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. Intentando saltar...`);
+    console.error('Error al reproducir con play-dl:', error);
+    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube podría estar bloqueando la conexión.`);
     queue.songs.shift();
     play(guildId);
   }

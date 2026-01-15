@@ -1,5 +1,4 @@
-const ytdl = require('@distube/ytdl-core');
-const yt = require('yt-search');
+const playdl = require('play-dl');
 const musicManager = require('../../music/musicManager');
 
 module.exports = {
@@ -18,12 +17,12 @@ module.exports = {
     }
     try {
       let song;
-      if (ytdl.validateURL(query)) {
-        const info = await ytdl.getBasicInfo(query);
-        song = { url: query, title: info.videoDetails.title };
+      if (playdl.yt_validate(query) === 'video') {
+        const info = await playdl.video_info(query);
+        song = { url: query, title: info.video_details.title };
       } else {
-        const result = await yt.search(query);
-        const video = result.videos[0];
+        const result = await playdl.search(query, { limit: 1 });
+        const video = result[0];
         if (!video) {
           return message.reply('No encontré resultados.');
         }
@@ -32,7 +31,7 @@ module.exports = {
       await musicManager.addSong(message.guild, song, voiceChannel, message.channel);
     } catch (error) {
       console.error(error);
-      message.reply('❌ Hubo un error al intentar procesar la canción.');
+      message.reply('❌ Hubo un error al intentar procesar la canción con play-dl.');
     }
   },
 };
