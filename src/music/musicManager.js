@@ -14,20 +14,61 @@ const path = require('path');
 // Mapa para mantener las colas por servidor
 const queues = new Map();
 
+// Función para limpiar y formatear cookies para play-dl
+function formatCookies(rawContent) {
+  if (!rawContent) return null;
+  
+  // Si es JSON, lo convertimos a string de cookies
+  if (rawContent.trim().startsWith('[') || rawContent.trim().startsWith('{')) {
+    try {
+      const json = JSON.parse(rawContent);
+      return json.map(c => `${c.name}=${c.value}`).join('; ');
+    } catch (e) {
+      console.error('Error parseando JSON de cookies:', e);
+    }
+  }
+
+  // Si es formato Netscape o texto plano, limpiamos líneas y comentarios
+  return rawContent
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line && !line.startsWith('#'))
+    .map(line => {
+      const parts = line.split(/\s+/);
+      if (parts.length >= 7) {
+        return `${parts[5]}=${parts[6]}`;
+      }
+      return line; // Si ya parece una cookie key=value
+    })
+    .join('; ')
+    .replace(/[\n\r\t]/g, ''); // Eliminar cualquier carácter de control invisible
+}
+
 // Configuración inicial de play-dl
 async function setupPlayDL() {
   const cookiesPath = path.join(process.cwd(), 'cookies.json');
+  const cookiesTxtPath = path.join(process.cwd(), 'cookies.txt');
+  let rawCookies = null;
+
   if (fs.existsSync(cookiesPath)) {
+    rawCookies = fs.readFileSync(cookiesPath, 'utf8');
+  } else if (fs.existsSync(cookiesTxtPath)) {
+    rawCookies = fs.readFileSync(cookiesTxtPath, 'utf8');
+  }
+
+  if (rawCookies) {
     try {
-      // play-dl maneja las cookies automáticamente si se configuran así
-      await playdl.setToken({
-        youtube: {
-          cookie: fs.readFileSync(cookiesPath, 'utf8')
-        }
-      });
-      console.log('✅ play-dl: Cookies de YouTube cargadas correctamente.');
+      const cleanCookies = formatCookies(rawCookies);
+      if (cleanCookies) {
+        await playdl.setToken({
+          youtube: {
+            cookie: cleanCookies
+          }
+        });
+        console.log('✅ play-dl: Cookies de YouTube cargadas y limpiadas correctamente.');
+      }
     } catch (err) {
-      console.error('❌ play-dl: Error al cargar las cookies:', err.message);
+      console.error('❌ play-dl: Error al configurar las cookies:', err.message);
     }
   }
 }
@@ -116,7 +157,6 @@ async function play(guildId) {
   const song = queue.songs[0];
 
   try {
-    // play-dl obtiene el stream de forma mucho más estable
     const stream = await playdl.stream(song.url, {
       discordPlayerCompatibility: true
     });
