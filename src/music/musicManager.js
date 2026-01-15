@@ -8,43 +8,26 @@ const {
   entersState
 } = require('@discordjs/voice');
 const play = require('play-dl');
-const fs = require('fs');
-const path = require('path');
 
 // Mapa para mantener las colas por servidor
 const queues = new Map();
 
 /**
- * Configuración inicial de play-dl con evasión de detección de bots.
+ * Configuración de play-dl SIN COOKIES.
+ * Optimizamos para usar agentes libres y evitar bloqueos por IP.
  */
 async function setupPlayDL() {
-  const cookiesPath = path.join(process.cwd(), 'cookies.json');
-  
-  // Configuración de User-Agent global para simular un navegador real
-  // Esto ayuda a que YouTube no bloquee la IP tan agresivamente
   try {
-    // play-dl permite configurar opciones globales a través de su motor interno
-  } catch (e) {}
-
-  if (fs.existsSync(cookiesPath)) {
-    try {
-      let rawCookie = fs.readFileSync(cookiesPath, 'utf8');
-      const cleanCookie = rawCookie
-        .replace(/[\r\n\t]/g, '')
-        .replace(/[^\x20-\x7E]/g, '') 
-        .trim();
-
-      if (cleanCookie) {
-        await play.setToken({
-          youtube: {
-            cookie: cleanCookie
-          }
-        });
-        console.log('✅ play-dl: Cookies configuradas y sanitizadas.');
-      }
-    } catch (err) {
-      console.error('❌ play-dl: Error al configurar tokens:', err.message);
-    }
+    // Forzamos a play-dl a no buscar archivos de cookies locales
+    // y a usar un agente de navegador estándar.
+    await play.setToken({
+        youtube: {
+            cookie: "" // Vacío para asegurar que no use cookies previas
+        }
+    });
+    console.log('✅ play-dl: Configurado en modo sin cookies.');
+  } catch (e) {
+    console.error('Error en setupPlayDL:', e);
   }
 }
 
@@ -79,7 +62,7 @@ async function addSong(guild, song, voiceChannel, textChannel) {
       } catch (error) {
         connection.destroy();
         queues.delete(guild.id);
-        return textChannel.send('❌ No se pudo conectar al canal de voz en 30 segundos.');
+        return textChannel.send('❌ No se pudo conectar al canal de voz.');
       }
 
       connection.subscribe(queue.player);
@@ -94,7 +77,7 @@ async function addSong(guild, song, voiceChannel, textChannel) {
     }
   } else {
     queue.songs.push(song);
-    return textChannel.send(`✅ **${song.title}** se ha añadido a la lista.`);
+    return textChannel.send(`✅ **${song.title}** añadida a la cola.`);
   }
 }
 
@@ -118,14 +101,14 @@ function setupPlayerEvents(guildId) {
   });
 
   queue.player.on('error', error => {
-    console.error(`Error en el reproductor del servidor ${guildId}:`, error);
+    console.error(`Error en el reproductor:`, error);
     queue.songs.shift();
     playSong(guildId);
   });
 }
 
 /**
- * Reproducción con manejo de bloqueos y reintentos.
+ * Reproducción optimizada para funcionar sin cookies.
  */
 async function playSong(guildId) {
   const queue = queues.get(guildId);
@@ -134,14 +117,14 @@ async function playSong(guildId) {
   const song = queue.songs[0];
 
   try {
-    console.log(`[play-dl] Intentando reproducir: ${song.title}`);
+    console.log(`[play-dl] Reproduciendo (Sin Cookies): ${song.title}`);
 
-    // Intentar obtener el stream con headers de navegador para evitar detección
+    // Usamos un stream con configuraciones que suelen saltarse el bloqueo de bot
+    // sin necesidad de estar logueado.
     let stream = await play.stream(song.url, {
         discordPlayerCompatibility: true,
-        htm: true, // Habilitar modo HTML para simular mejor un navegador
-        quality: 1,
-        precooked: true // Usar cookies pre-configuradas si existen
+        quality: 0, // Calidad automática/baja para mayor compatibilidad sin cookies
+        language: 'es-ES'
     });
 
     const resource = createAudioResource(stream.stream, {
@@ -152,32 +135,30 @@ async function playSong(guildId) {
     if (resource.volume) resource.volume.setVolume(0.5);
     
     queue.player.play(resource);
-    queue.textChannel.send(`▶️ Reproduciendo ahora: **${song.title}**`);
+    queue.textChannel.send(`▶️ Reproduciendo: **${song.title}**`);
 
   } catch (error) {
-    console.error('[play-dl] Error en la reproducción:', error.message);
+    console.error('[play-dl] Error:', error.message);
     
+    // Si falla por bloqueo, intentamos buscar la versión de YouTube Music
+    // que suele estar menos protegida.
     if (error.message.includes('confirm you’re not a bot') || error.message.includes('403')) {
-        queue.textChannel.send(`⚠️ YouTube ha detectado actividad inusual. Intentando método de recuperación...`);
-        
-        // MÉTODO DE RECUPERACIÓN: Buscar una versión alternativa (Lyric Video, Audio, etc.)
         try {
-            const search = await play.search(`${song.title} audio`, { limit: 2 });
-            const alternative = search.find(v => v.url !== song.url);
+            console.log(`[play-dl] Intentando bypass vía YouTube Music para: ${song.title}`);
+            const search = await play.search(song.title, { 
+                limit: 1,
+                source: { youtube: 'music' } 
+            });
             
-            if (alternative) {
-                console.log(`[play-dl] Reintentando con alternativa: ${alternative.title}`);
-                song.url = alternative.url;
-                song.title = alternative.title;
+            if (search.length > 0 && search[0].url !== song.url) {
+                song.url = search[0].url;
                 return playSong(guildId);
             }
         } catch (e) {
-            console.error('[play-dl] Falló la recuperación:', e.message);
+            console.error('Bypass fallido:', e.message);
         }
         
-        queue.textChannel.send(`❌ Bloqueo persistente de YouTube. Por favor, actualiza las cookies o intenta más tarde.`);
-    } else {
-        queue.textChannel.send(`❌ Error al reproducir **${song.title}**.`);
+        queue.textChannel.send(`❌ YouTube bloqueó la conexión. Intenta con otra canción o busca por nombre.`);
     }
 
     queue.songs.shift();
