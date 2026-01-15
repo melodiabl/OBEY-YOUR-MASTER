@@ -7,7 +7,7 @@ const {
   VoiceConnectionStatus,
   entersState
 } = require('@discordjs/voice');
-const YouTube = require('youtube-ext').default; // Corregida la importación para youtube-ext
+const play = require('play-dl');
 const yts = require('yt-search');
 
 // Mapa para mantener las colas por servidor
@@ -88,7 +88,7 @@ function setupPlayerEvents(guildId) {
 }
 
 /**
- * Reproducción usando youtube-ext con importación corregida.
+ * Reproducción usando play-dl con configuración de bypass.
  */
 async function playSong(guildId) {
   const queue = queues.get(guildId);
@@ -97,18 +97,17 @@ async function playSong(guildId) {
   const song = queue.songs[0];
 
   try {
-    console.log(`[Music] Reproduciendo con youtube-ext: ${song.title}`);
+    console.log(`[Music] Intentando reproducir: ${song.title}`);
 
-    // Validar que YouTube esté cargado correctamente
-    if (!YouTube) {
-        throw new Error('La librería youtube-ext no se cargó correctamente.');
-    }
+    // Intentamos obtener el stream con play-dl
+    // Usamos configuraciones que ayudan a evitar la detección de bots
+    let stream = await play.stream(song.url, {
+        discordPlayerCompatibility: true,
+        quality: 1
+    });
 
-    // Obtener el stream usando la instancia de youtube-ext
-    const stream = await YouTube.getStream(song.url);
-
-    const resource = createAudioResource(stream, {
-      inputType: StreamType.Arbitrary,
+    const resource = createAudioResource(stream.stream, {
+      inputType: stream.type,
       inlineVolume: true
     });
 
@@ -118,19 +117,26 @@ async function playSong(guildId) {
     queue.textChannel.send(`▶️ Reproduciendo: **${song.title}**`);
 
   } catch (error) {
-    console.error('[Music] Error crítico:', error.message);
+    console.error('[Music] Error:', error.message);
     
-    // Reintento con búsqueda si falla la URL
-    try {
-        const r = await yts(song.title);
-        const video = r.videos[0];
-        if (video && video.url !== song.url) {
-            song.url = video.url;
-            return playSong(guildId);
-        }
-    } catch (e) {}
+    // Si falla por el error de "Sign in", intentamos buscar una alternativa
+    if (error.message.includes('confirm you’re not a bot') || error.message.includes('403')) {
+        try {
+            console.log(`[Music] Intentando buscar alternativa para: ${song.title}`);
+            const r = await yts(`${song.title} audio`);
+            const video = r.videos.find(v => v.url !== song.url);
+            if (video) {
+                song.url = video.url;
+                song.title = video.title;
+                return playSong(guildId);
+            }
+        } catch (e) {}
+        
+        queue.textChannel.send(`❌ YouTube bloqueó la reproducción de **${song.title}**. Intenta con otra canción.`);
+    } else {
+        queue.textChannel.send(`❌ Error al reproducir **${song.title}**.`);
+    }
 
-    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube ha bloqueado el acceso.`);
     queue.songs.shift();
     playSong(guildId);
   }
