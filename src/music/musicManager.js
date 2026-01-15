@@ -23,14 +23,25 @@ async function setupPlayDL() {
   
   if (fs.existsSync(cookiesPath)) {
     try {
-      // play-dl recomienda usar setToken para las cookies de YouTube
-      // El formato esperado en cookies.json debe ser el exportado por extensiones como "EditThisCookie"
-      await play.setToken({
-        youtube: {
-          cookie: fs.readFileSync(cookiesPath, 'utf8')
-        }
-      });
-      console.log('✅ play-dl: Cookies configuradas correctamente.');
+      let rawCookie = fs.readFileSync(cookiesPath, 'utf8');
+      
+      // Limpieza profunda de la cookie para evitar ERR_INVALID_CHAR
+      // 1. Eliminar saltos de línea, retornos de carro y tabulaciones
+      // 2. Eliminar caracteres no-ASCII que suelen causar errores en headers HTTP
+      // 3. Trim de espacios en los extremos
+      const cleanCookie = rawCookie
+        .replace(/[\r\n\t]/g, '')
+        .replace(/[^\x20-\x7E]/g, '') 
+        .trim();
+
+      if (cleanCookie) {
+        await play.setToken({
+          youtube: {
+            cookie: cleanCookie
+          }
+        });
+        console.log('✅ play-dl: Cookies limpiadas y configuradas correctamente.');
+      }
     } catch (err) {
       console.error('❌ play-dl: Error al configurar tokens:', err.message);
     }
