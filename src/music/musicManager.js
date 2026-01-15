@@ -24,6 +24,7 @@ function initLavalink(client) {
       if (guild) guild.shard.send(payload);
     },
     autoPlay: true,
+    playNextOnEnd: true,
     destroyPlayerOrder: ['voice', 'player'],
   });
 
