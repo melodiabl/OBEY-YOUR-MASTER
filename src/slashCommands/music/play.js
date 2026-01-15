@@ -26,15 +26,14 @@ module.exports = {
     await interaction.deferReply();
 
     try {
-      // Usamos el nuevo sistema de Discord Player
-      await interaction.editReply(`🎵 Buscando: **${query}**...`);
+      await interaction.editReply(`🔍 Buscando: **${query}**...`);
+      
       const track = await addSong(interaction.guild, query, voiceChannel, interaction.channel, interaction.user);
       
-      if (track) {
-        await interaction.editReply(`🎵 Encontrado: **${track.title}**`);
+      if (track && track.title) {
+        await interaction.editReply(`🎵 Encontrado y reproduciendo: **${track.title}**`);
       } else {
-        // Si no hay track, el error ya fue enviado al canal por addSong
-        await interaction.deleteReply().catch(() => null);
+        await interaction.editReply(`❌ No se encontraron resultados válidos para: **${query}**`);
       }
     } catch (error) {
       console.error('Error en slash command play:', error);
