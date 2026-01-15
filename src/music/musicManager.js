@@ -7,10 +7,8 @@ const {
   VoiceConnectionStatus,
   entersState
 } = require('@discordjs/voice');
-const ytdl = require('@distube/ytdl-core');
+const { youtube } = require('youtube-ext');
 const yts = require('yt-search');
-const fs = require('fs');
-const path = require('path');
 
 // Mapa para mantener las colas por servidor
 const queues = new Map();
@@ -90,7 +88,7 @@ function setupPlayerEvents(guildId) {
 }
 
 /**
- * Reproducción usando ytdl-core con cliente de Android para evitar bloqueos.
+ * Reproducción usando youtube-ext para máxima estabilidad.
  */
 async function playSong(guildId) {
   const queue = queues.get(guildId);
@@ -99,23 +97,10 @@ async function playSong(guildId) {
   const song = queue.songs[0];
 
   try {
-    console.log(`[Music] Reproduciendo: ${song.title}`);
+    console.log(`[Music] Reproduciendo con youtube-ext: ${song.title}`);
 
-    // Usamos ytdl-core con una configuración que simula el cliente de Android
-    // Este método es actualmente el más efectivo para evitar el bloqueo de "bot"
-    const stream = ytdl(song.url, {
-      filter: 'audioonly',
-      quality: 'highestaudio',
-      highWaterMark: 1 << 25,
-      requestOptions: {
-        headers: {
-          // User-Agent de Android para saltarse restricciones de escritorio
-          'User-Agent': 'com.google.android.youtube/19.29.37 (Linux; U; Android 11; en_US; Pixel 4 XL; Build/RP1A.200720.009) gzip',
-          'X-YouTube-Client-Name': '3',
-          'X-YouTube-Client-Version': '19.29.37'
-        }
-      }
-    });
+    // youtube-ext es más estable porque usa la API interna de YouTube
+    const stream = await youtube.getStream(song.url);
 
     const resource = createAudioResource(stream, {
       inputType: StreamType.Arbitrary,
@@ -128,22 +113,19 @@ async function playSong(guildId) {
     queue.textChannel.send(`▶️ Reproduciendo: **${song.title}**`);
 
   } catch (error) {
-    console.error('[Music] Error:', error.message);
+    console.error('[Music] Error crítico:', error.message);
     
-    // Si falla, intentamos una búsqueda rápida con yt-search para ver si la URL ha cambiado
+    // Reintento con búsqueda si falla la URL
     try {
-        console.log(`[Music] Reintentando búsqueda para: ${song.title}`);
         const r = await yts(song.title);
         const video = r.videos[0];
         if (video && video.url !== song.url) {
             song.url = video.url;
             return playSong(guildId);
         }
-    } catch (e) {
-        console.error('Reintento fallido:', e.message);
-    }
+    } catch (e) {}
 
-    queue.textChannel.send(`❌ No se pudo reproducir **${song.title}**. YouTube está bloqueando la conexión.`);
+    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube ha bloqueado el acceso.`);
     queue.songs.shift();
     playSong(guildId);
   }
