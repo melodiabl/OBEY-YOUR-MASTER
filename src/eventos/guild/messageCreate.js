@@ -2,8 +2,6 @@ module.exports = async (client, message) => {
   if (!message.guild || !message.channel || message.author.bot) return
   const GUILD_DATA = client.dbGuild.getGuildData(message.guild.id)
 
-
-
   // Sistema de Niveles (XP)
   const UserSchema = require('../../database/schemas/UserSchema');
   let userData = await UserSchema.findOne({ userID: message.author.id });
@@ -22,9 +20,10 @@ module.exports = async (client, message) => {
   }
   await userData.save();
 
-  if (!message.content.startsWith(GUILD_DATA.prefix)) return
+  const prefix = GUILD_DATA.prefix || process.env.PREFIX;
+  if (!message.content.startsWith(prefix)) return
 
-  const ARGS = message.content.slice(GUILD_DATA.prefix.length).trim().split(/ +/)
+  const ARGS = message.content.slice(prefix.length).trim().split(/ +/)
   const CMD = ARGS?.shift()?.toLowerCase()
 
   const COMANDO = client.commands.get(CMD) || client.commands.find(c => c.ALIASES && c.ALIASES.includes(CMD))
@@ -44,7 +43,7 @@ module.exports = async (client, message) => {
 
     try {
       // ejecutar el comando
-      COMANDO.execute(client, message, ARGS, GUILD_DATA.prefix, GUILD_DATA)
+      COMANDO.execute(client, message, ARGS, prefix, GUILD_DATA)
     } catch (e) {
       message.reply(`**Ha ocurrido un error al ejecutar el comando \`${COMANDO.NAME}\`**\n*Mira la consola para más detalle.*`)
       console.log(e)
