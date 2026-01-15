@@ -37,7 +37,8 @@
     "openai": "^6.16.0",
     "play-dl": "^1.9.7",
     "weather-js": "^2.0.0",
-    "yt-search": "^2.13.1"
+    "yt-search": "^2.13.1",
+    "yt-stream": "^1.7.4"
   },
   "devDependencies": {
     "standard": "^17.0.0"

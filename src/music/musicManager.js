@@ -7,27 +7,13 @@ const {
   VoiceConnectionStatus,
   entersState
 } = require('@discordjs/voice');
-const ytdl = require('@distube/ytdl-core');
+const ytStream = require('yt-stream');
 const playdl = require('play-dl');
 const fs = require('fs');
 const path = require('path');
 
 // Mapa para mantener las colas por servidor
 const queues = new Map();
-
-// Función para obtener cookies en el formato que ytdl-core espera
-function getCookies() {
-  const cookiesPath = path.join(process.cwd(), 'cookies.json');
-  if (fs.existsSync(cookiesPath)) {
-    try {
-      const raw = fs.readFileSync(cookiesPath, 'utf8');
-      return JSON.parse(raw);
-    } catch (e) {
-      console.error('Error al leer cookies.json:', e);
-    }
-  }
-  return null;
-}
 
 async function addSong(guild, song, voiceChannel, textChannel) {
   let queue = queues.get(guild.id);
@@ -117,28 +103,17 @@ async function play(guildId) {
   }
 
   try {
-    console.log(`Intentando reproducir con ytdl-core optimizado: ${song.title}`);
+    console.log(`Intentando reproducir con yt-stream: ${song.title}`);
     
-    const cookies = getCookies();
-    
-    // Configuración de stream optimizada para evitar bloqueos
-    const stream = ytdl(song.url, {
-      filter: 'audioonly',
-      quality: 'highestaudio',
-      highWaterMark: 1 << 25,
-      agent: cookies ? ytdl.createAgent(cookies) : undefined,
-      requestOptions: {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept': '*/*',
-          'Accept-Language': 'en-US,en;q=0.9',
-          'Connection': 'keep-alive'
-        }
-      }
+    // yt-stream obtiene el stream de una forma diferente que suele evitar bloqueos
+    const stream = await ytStream.stream(song.url, {
+      quality: 'high',
+      type: 'audio',
+      highWaterMark: 1048576 * 32 // 32MB buffer
     });
 
-    const resource = createAudioResource(stream, {
-      inputType: StreamType.Arbitrary,
+    const resource = createAudioResource(stream.stream, {
+      inputType: stream.type,
       inlineVolume: true
     });
 
@@ -148,7 +123,7 @@ async function play(guildId) {
     queue.textChannel.send(`▶️ Reproduciendo ahora: **${song.title}**`);
 
   } catch (error) {
-    console.error('Error crítico al reproducir con ytdl-core:', error);
+    console.error('Error crítico al reproducir con yt-stream:', error);
     
     // Intento de recuperación por búsqueda si falla la URL
     try {
@@ -160,7 +135,7 @@ async function play(guildId) {
       }
     } catch (e) {}
 
-    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube podría estar bloqueando la conexión.`);
+    queue.textChannel.send(`❌ Error al reproducir **${song.title}**. YouTube sigue bloqueando la conexión.`);
     queue.songs.shift();
     play(guildId);
   }
