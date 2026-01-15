@@ -30,10 +30,10 @@ module.exports = {
       
       const track = await addSong(interaction.guild, query, voiceChannel, interaction.channel, interaction.user);
       
-      if (track && track.title) {
-        await interaction.editReply(`🎵 Encontrado y reproduciendo: **${track.title}**`);
+      if (track) {
+        await interaction.editReply(`🎵 Procesado correctamente.`);
       } else {
-        await interaction.editReply(`❌ No se encontraron resultados válidos para: **${query}**`);
+        await interaction.editReply(`❌ No se pudo procesar la búsqueda.`);
       }
     } catch (error) {
       console.error('Error en slash command play:', error);

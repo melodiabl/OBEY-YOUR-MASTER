@@ -72,8 +72,8 @@ module.exports = class extends Client {
     this.slashArray = []
 
     this.utils = new BotUtils(this)
-    // Inicializamos Discord Player
-    this.player = initLavalink(this)
+    // Inicializamos Kazagumo (Lavalink)
+    this.manager = initLavalink(this)
 
     this.start()
   }
