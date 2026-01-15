@@ -156,7 +156,17 @@ async function play(guildId) {
 
   const song = queue.songs[0];
 
+  // Validar que la canción tenga una URL válida
+  if (!song || !song.url) {
+    console.error('Error: Canción sin URL válida:', song);
+    queue.textChannel.send(`❌ Error: La canción **${song?.title || 'desconocida'}** no tiene una URL válida.`);
+    queue.songs.shift();
+    play(guildId);
+    return;
+  }
+
   try {
+    console.log(`Intentando reproducir: ${song.title} - URL: ${song.url}`);
     const stream = await playdl.stream(song.url, {
       discordPlayerCompatibility: true
     });
