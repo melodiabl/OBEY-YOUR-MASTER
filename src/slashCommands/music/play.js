@@ -1,7 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { addSong } = require('../../music/musicManager');
-const ytdl = require('ytdl-core');
+const ytdl = require('@distube/ytdl-core');
 const ytSearch = require('yt-search');
+
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('play')
@@ -14,21 +15,32 @@ module.exports = {
   async execute(client, interaction) {
     const query = interaction.options.getString('query');
     const voiceChannel = interaction.member.voice?.channel;
+    
     if (!voiceChannel) {
-      return interaction.reply({ content: '❌ Debes estar en un canal de voz.', ephermal: true });
+      return interaction.reply({ content: '❌ Debes estar en un canal de voz.', ephemeral: true });
     }
-    let song;
-    if (ytdl.validateURL(query)) {
-      song = { title: query, url: query };
-    } else {
-      const searchResult = await ytSearch(query);
-      if (!searchResult || !searchResult.videos || !searchResult.videos.length) {
-        return interaction.reply({ content: '❌ No se encontró la canción.', ephermal: true });
+
+    await interaction.deferReply();
+
+    try {
+      let song;
+      if (ytdl.validateURL(query)) {
+        const info = await ytdl.getBasicInfo(query);
+        song = { title: info.videoDetails.title, url: query };
+      } else {
+        const searchResult = await ytSearch(query);
+        if (!searchResult || !searchResult.videos || !searchResult.videos.length) {
+          return interaction.editReply({ content: '❌ No se encontró la canción.' });
+        }
+        const video = searchResult.videos[0];
+        song = { title: video.title, url: video.url };
       }
-      const video = searchResult.videos[0];
-      song = { title: video.title, url: video.url };
+
+      await addSong(interaction.guild, song, voiceChannel, interaction.channel);
+      await interaction.editReply(`🎵 Canción añadida a la cola: **${song.title}**`);
+    } catch (error) {
+      console.error(error);
+      await interaction.editReply({ content: '❌ Hubo un error al intentar procesar la canción.' });
     }
-    await addSong(interaction.guild.id, song, voiceChannel, interaction.channel, client);
-    await interaction.reply(`🎵 Canción añadida a la cola: **${song.title}**`);
   },
 };

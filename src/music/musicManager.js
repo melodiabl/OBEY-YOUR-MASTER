@@ -1,5 +1,6 @@
-const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
-const ytdl = require('ytdl-core');
+const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, StreamType } = require('@discordjs/voice');
+const ytdl = require('@distube/ytdl-core');
+const ffmpeg = require('ffmpeg-static');
 
 // Maintain a queue for each guild
 const queues = new Map();
@@ -36,21 +37,38 @@ function playNextSong(guildId) {
   });
   queue.connection = connection;
 
-  const stream = ytdl(url, { filter: 'audioonly', highWaterMark: 1 << 25 });
-  const resource = createAudioResource(stream, { inlineVolume: true });
-  if (resource.volume) resource.volume.setVolume(0.5);
-  const player = createAudioPlayer();
-  queue.player = player;
-  player.play(resource);
-  connection.subscribe(player);
+  try {
+    const stream = ytdl(url, { 
+      filter: 'audioonly', 
+      highWaterMark: 1 << 25,
+      quality: 'highestaudio'
+    });
 
-  player.on('error', error => {
-    console.error(error);
+    const resource = createAudioResource(stream, { 
+      inputType: StreamType.Arbitrary,
+      inlineVolume: true 
+    });
+
+    if (resource.volume) resource.volume.setVolume(0.5);
+    
+    const player = createAudioPlayer();
+    queue.player = player;
+    player.play(resource);
+    connection.subscribe(player);
+
+    player.on('error', error => {
+      console.error('Error en el reproductor:', error);
+      playNextSong(guildId);
+    });
+
+    player.on(AudioPlayerStatus.Idle, () => {
+      playNextSong(guildId);
+    });
+  } catch (error) {
+    console.error('Error al crear el recurso de audio:', error);
+    textChannel.send('❌ Hubo un error al intentar reproducir la canción.');
     playNextSong(guildId);
-  });
-  player.on(AudioPlayerStatus.Idle, () => {
-    playNextSong(guildId);
-  });
+  }
 }
 
 function skip(guildId) {
