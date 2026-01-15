@@ -38,3 +38,20 @@ npm install @distube/ytdl-core ffmpeg-static canvacord canvas weather-js ms disc
 
 ## 🎵 Nota sobre el Sistema de Música:
 He actualizado el sistema para usar `@distube/ytdl-core` y `ffmpeg-static`. Esto soluciona el error `410 Gone` de YouTube y elimina la necesidad de instalar FFmpeg manualmente en tu Windows.
+
+---
+
+## 🍪 Cómo solucionar el error "Sign in to confirm you’re not a bot"
+
+YouTube bloquea a los bots de música. Para solucionarlo, ahora el bot soporta el uso de **cookies**.
+
+### Pasos para obtener tus cookies:
+
+1. Instala la extensión **"EditThisCookie"** o **"Get cookies.txt LOCALLY"** en tu navegador (Chrome/Edge).
+2. Ve a [YouTube](https://www.youtube.com) e inicia sesión con tu cuenta.
+3. Abre la extensión y exporta las cookies en formato **JSON**.
+4. Crea un archivo llamado `cookies.json` en la carpeta raíz de tu bot (`C:\Users\kangu\OBEY-YOUR-MASTER\cookies.json`).
+5. Pega el contenido JSON que copiaste en ese archivo.
+6. Reinicia el bot.
+
+**Nota:** No compartas tu archivo `cookies.json` con nadie, ya que contiene el acceso a tu cuenta de YouTube. El archivo está incluido en el `.gitignore` para que no se suba a GitHub por error.

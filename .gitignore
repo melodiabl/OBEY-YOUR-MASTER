@@ -31,3 +31,4 @@ src/tmp/**
 *.test.mjs
 *.test.js
 .env
+cookies.json
