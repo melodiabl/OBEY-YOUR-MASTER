@@ -13,6 +13,10 @@ const GuildSchema = new Schema({
   aiChannel: {
     type: String,
     default: null
+  },
+  autoRole: {
+    type: String,
+    default: null
   }
 })
 

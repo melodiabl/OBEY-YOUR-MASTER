@@ -1,7 +1,18 @@
 const { EmbedBuilder } = require('discord.js')
 
+const GuildSchema = require('../../database/schemas/GuildSchema');
+
 module.exports = async (client, member) => {
   const { user } = member
+  
+  // Sistema de Auto-Rol
+  const guildData = await GuildSchema.findOne({ guildID: member.guild.id });
+  if (guildData && guildData.autoRole) {
+    const role = member.guild.roles.cache.get(guildData.autoRole);
+    if (role) {
+      member.roles.add(role).catch(err => console.log(`Error al dar auto-rol: ${err}`));
+    }
+  }
   const channel = member.guild.channels.cache.get('1063562744210669629') // AQUÍ VA LA ID DE TU CANAL DE BIENVENIDAS
 
   channel.send({
