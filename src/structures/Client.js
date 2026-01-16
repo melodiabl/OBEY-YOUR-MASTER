@@ -126,10 +126,37 @@ module.exports = class extends Client {
 
     this.slashArray = []
 
-    const RUTA_ARCHIVOS = await this.utils.loadFiles('/src/slashCommands')
+    let RUTA_ARCHIVOS = await this.utils.loadFiles('/src/slashCommands')
+
+    if (disabledNames.size || disabledDirs.size) {
+      const before = RUTA_ARCHIVOS.length
+      RUTA_ARCHIVOS = RUTA_ARCHIVOS.filter((rutaArchivo) => {
+        const name = basenameLower(rutaArchivo)
+        if (disabledNames.has(name)) return false
+
+        if (disabledDirs.size) {
+          const parts = String(rutaArchivo).replace(/\\/g, '/').split('/').map(s => s.toLowerCase())
+          if (parts.some(p => disabledDirs.has(p))) return false
+        }
+
+        return true
+      })
+      const removed = before - RUTA_ARCHIVOS.length
+      if (removed > 0) {
+        console.log(`(/) ${removed} slash commands deshabilitados por env (DISABLE_SLASH_NAMES/DISABLE_SLASH_DIRS)`.yellow)
+      }
+    }
+
+    // Orden estable: ayuda a que el límite sea determinista si llegas a 100.
+    RUTA_ARCHIVOS = RUTA_ARCHIVOS.slice().sort((a, b) => String(a).localeCompare(String(b), 'en', { sensitivity: 'base' }))
 
     if (RUTA_ARCHIVOS.length) {
+      const skipped = []
       RUTA_ARCHIVOS.forEach((rutaArchivo) => {
+        if (this.slashArray.length >= maxSlash) {
+          skipped.push(basenameLower(rutaArchivo))
+          return
+        }
         try {
           const COMANDO = require(rutaArchivo)
           const NOMBRE_COMANDO = rutaArchivo
@@ -148,6 +175,11 @@ module.exports = class extends Client {
           console.log(e)
         }
       })
+
+      if (skipped.length) {
+        console.log(`(/) Límite Discord: publicados solo ${maxSlash} comandos. Omitidos: ${skipped.length}`.yellow)
+        console.log(`(/) Omitidos: ${skipped.slice(0, 40).join(', ')}${skipped.length > 40 ? '...' : ''}`.yellow)
+      }
     }
 
     console.log(`(/) ${this.slashCommands.size} Comandos cargados`.green)
