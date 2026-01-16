@@ -9,6 +9,8 @@ const TicketSchema = new Schema(
     status: { type: String, default: 'OPEN', index: true }, // OPEN | CLOSED
     claimedBy: { type: String, default: null, index: true },
     topic: { type: String, default: null },
+    priority: { type: String, default: 'med', index: true }, // low | med | high
+    notes: { type: Array, default: [] }, // [{ authorID, text, createdAt }]
     closedAt: { type: Date, default: null }
   },
   { timestamps: true }
@@ -17,4 +19,3 @@ const TicketSchema = new Schema(
 TicketSchema.index({ guildID: 1, ticketNumber: 1 }, { unique: true })
 
 module.exports = model('Ticket', TicketSchema)
-

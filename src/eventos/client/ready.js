@@ -2,15 +2,20 @@ const { ActivityType, PresenceUpdateStatus } = require('discord.js')
 
 module.exports = async client => {
   console.log(`Conectado como ${client.user.tag}`.rainbow)
-  
-  // Discord Player ya está inicializado en el constructor del cliente
-  
+
+  // Scheduler de sorteos (giveaways) con persistencia
+  try {
+    const { startGiveawayScheduler } = require('../../systems/giveaways/giveawayScheduler')
+    startGiveawayScheduler(client)
+  } catch (e) {}
+
   setInterval(() => pickPresence(client), 60 * 1000)
   if (client?.application?.commands) {
     client.application.commands.set(client.slashArray)
     console.log(`(/) ${client.slashCommands.size} Comandos Publicados!`.green)
   }
 }
+
 async function pickPresence (client) {
   const options = [
     {
@@ -40,6 +45,7 @@ async function pickPresence (client) {
     status: options[option].status
   })
 }
+
 /* const twitchAlert = () => {
   setInterval(async function () {
     const user = 'USERNAME'
@@ -75,16 +81,17 @@ async function pickPresence (client) {
           titulo: `${title.body}`
         })
 
-        await client.channels.cache.get('id de un canl').send({ content: `🔴 @everyone ${user} está en directo. __**¡Corre a verlo!**__ 🔴\n\nhttps://www.twitch.tv/${user}`, embeds: [TwitchEmbed] })
+        await client.channels.cache.get('id de un canl').send({ content: `пY"О @everyone ${user} estгґ en directo. __**ІґCorre a verlo!**__ пY"О\n\nhttps://www.twitch.tv/${user}`, embeds: [TwitchEmbed] })
 
         return await newdata.save()
       }
 
       if (data.titulo === `${title.body}`) return
 
-      await client.channels.cache.get('id del mismo canal').send({ content: `🔴 @everyone ${user} está en directo. __**¡Corre a verlo!**__ 🔴\n\nhttps://www.twitch.tv/${user}`, embeds: [TwitchEmbed] })
+      await client.channels.cache.get('id del mismo canal').send({ content: `пY"О @everyone ${user} estгґ en directo. __**ІґCorre a verlo!**__ пY"О\n\nhttps://www.twitch.tv/${user}`, embeds: [TwitchEmbed] })
 
       await twitch.findOneAndUpdate({ user }, { titulo: title.body })
     }
   }, 120000)
 } */
+

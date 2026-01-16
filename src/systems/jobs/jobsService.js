@@ -8,9 +8,7 @@ function getJob (jobId) {
 
 async function getProfile ({ guildID, userID }) {
   let doc = await JobProfileSchema.findOne({ guildID, userID })
-  if (!doc) {
-    doc = await new JobProfileSchema({ guildID, userID }).save()
-  }
+  if (!doc) doc = await new JobProfileSchema({ guildID, userID }).save()
   return doc
 }
 
@@ -25,22 +23,37 @@ async function setJob ({ guildID, userID, jobId }) {
   return profile
 }
 
+async function quitJob ({ guildID, userID }) {
+  const profile = await getProfile({ guildID, userID })
+  profile.jobId = null
+  await profile.save()
+  return profile
+}
+
 function nextLevelXp (level) {
   const l = Number(level || 1)
   return l * l * 50
+}
+
+function cooldownRemainingMs ({ profile, job, now = Date.now() }) {
+  const last = Number(profile?.lastWorkAt || 0)
+  const cd = Number(job?.cooldownMs || 0)
+  if (!cd) return 0
+  const rem = cd - (now - last)
+  return rem > 0 ? rem : 0
 }
 
 async function doWork ({ client, guildID, userID }) {
   const profile = await getProfile({ guildID, userID })
   if (!profile.jobId) throw new Error('No tienes un trabajo asignado. Usa `/jobs set`.')
   const job = getJob(profile.jobId)
-  if (!job) throw new Error('Tu trabajo ya no existe. Reasígnalo.')
+  if (!job) throw new Error('Tu trabajo ya no existe. Reasignalo.')
 
   const now = Date.now()
-  const cd = Number(job.cooldownMs || 0)
-  if (cd > 0 && now - Number(profile.lastWorkAt || 0) < cd) {
-    const remaining = Math.ceil((cd - (now - Number(profile.lastWorkAt || 0))) / 60000)
-    throw new Error(`Debes esperar ${remaining} min para volver a trabajar.`)
+  const remaining = cooldownRemainingMs({ profile, job, now })
+  if (remaining > 0) {
+    const minutes = Math.ceil(remaining / 60000)
+    throw new Error(`Debes esperar ${minutes} min para volver a trabajar.`)
   }
 
   const level = Number(profile.jobLevel || 1)
@@ -72,12 +85,19 @@ async function doWork ({ client, guildID, userID }) {
   return { profile, job, amount, xpGain, leveledUp }
 }
 
+async function topJobs ({ guildID, limit = 10 }) {
+  return JobProfileSchema.find({ guildID, jobId: { $ne: null } }).sort({ jobLevel: -1, jobXp: -1 }).limit(limit)
+}
+
 module.exports = {
   jobsCatalog,
   getJob,
   getProfile,
   setJob,
+  quitJob,
   doWork,
-  nextLevelXp
+  topJobs,
+  nextLevelXp,
+  cooldownRemainingMs
 }
 

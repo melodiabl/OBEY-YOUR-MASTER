@@ -1,16 +1,20 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js')
+
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('eval')
-    .setDescription('Ejecuta código de forma remota (Solo para el dueño)')
+    .setDescription('Ejecuta código remoto (solo OWNER)')
     .addStringOption(option =>
-      option.setName('code')
+      option
+        .setName('code')
         .setDescription('Código a ejecutar')
         .setRequired(true)
     ),
-  async execute(client, interaction) {
-    // Este comando debe ser protegido y solo ejecutado por el dueño
-    // Aquí no implementamos la lógica para evitar riesgos
-    await interaction.reply({ content: '⚠️ Este comando solo puede ser ejecutado por el dueño.', ephermal: true });
-  },
-};
+  // Protección real: el middleware valida OWNER_IDS.
+  OWNER: true,
+  async execute (client, interaction) {
+    // Seguridad: eval remoto deshabilitado por defecto.
+    // Si lo habilitas, hacelo con whitelist estricta y logs.
+    await interaction.reply({ content: 'Eval remoto deshabilitado por seguridad.', ephemeral: true })
+  }
+}

@@ -27,12 +27,45 @@ async function logCase ({ guildID, type, targetID, moderatorID, reason, meta }) 
 
 async function warnUser ({ guildID, targetID, moderatorID, reason }) {
   const warnData = { moderator: moderatorID, reason: reason || 'Sin razón.', date: new Date() }
-  await UserSchema.findOneAndUpdate(
+  const updated = await UserSchema.findOneAndUpdate(
     { userID: targetID },
     { $setOnInsert: { userID: targetID }, $push: { warns: warnData } },
-    { upsert: true }
+    { upsert: true, new: true }
   )
-  return logCase({ guildID, type: 'warn', targetID, moderatorID, reason })
+  const modCase = await logCase({ guildID, type: 'warn', targetID, moderatorID, reason })
+  return { case: modCase, warnsCount: updated?.warns?.length || 0 }
+}
+
+async function unwarnUser ({ guildID, targetID, moderatorID, index }) {
+  const user = await UserSchema.findOne({ userID: targetID })
+  const warns = Array.isArray(user?.warns) ? user.warns : []
+  if (!warns.length) throw new Error('Ese usuario no tiene warns.')
+
+  let removed = null
+  if (index !== null && index !== undefined) {
+    const i = Number(index)
+    if (!Number.isFinite(i) || i < 1 || i > warns.length) throw new Error(`Índice inválido. Rango: 1-${warns.length}`)
+    removed = warns.splice(i - 1, 1)[0]
+  } else {
+    removed = warns.pop()
+  }
+
+  await UserSchema.updateOne(
+    { userID: targetID },
+    { $set: { warns } }
+  )
+
+  const reason = removed?.reason || 'Sin razón.'
+  await logCase({
+    guildID,
+    type: 'unwarn',
+    targetID,
+    moderatorID,
+    reason,
+    meta: { index: index ?? null }
+  })
+
+  return { remaining: warns.length, removed }
 }
 
 async function timeoutUser ({ guildID, targetID, moderatorID, reason, durationMs }) {
@@ -58,6 +91,7 @@ async function getUserHistory ({ guildID, targetID, limit = 10 }) {
 
 module.exports = {
   warnUser,
+  unwarnUser,
   timeoutUser,
   logAction,
   getUserHistory

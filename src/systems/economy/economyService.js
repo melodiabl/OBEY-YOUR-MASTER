@@ -19,6 +19,32 @@ async function logTx ({ guildID, type, amount, actorID = null, fromUserID = null
   } catch (e) {}
 }
 
+async function tryDebitWallet ({ client, guildID, actorID, userID, amount, type = 'wallet_debit', meta = {} }) {
+  const a = Number(amount)
+  if (!Number.isFinite(a) || a <= 0) throw new Error('Cantidad invýlida.')
+  await ensureUser(client, userID)
+
+  const debit = await UserSchema.findOneAndUpdate(
+    { userID, money: { $gte: a } },
+    { $inc: { money: -a } },
+    { new: true }
+  )
+  if (!debit) throw new Error('Saldo insuficiente.')
+
+  await logTx({ guildID, type, amount: a, actorID, fromUserID: userID, toUserID: userID, meta })
+  return debit
+}
+
+async function creditWallet ({ client, guildID, actorID, userID, amount, type = 'wallet_credit', meta = {} }) {
+  const a = Number(amount)
+  if (!Number.isFinite(a) || a <= 0) throw new Error('Cantidad invýlida.')
+  await ensureUser(client, userID)
+
+  await UserSchema.updateOne({ userID }, { $inc: { money: a } })
+  await logTx({ guildID, type, amount: a, actorID, fromUserID: userID, toUserID: userID, meta })
+  return true
+}
+
 async function getBalances (client, userID) {
   const user = await ensureUser(client, userID)
   return { money: Number(user.money || 0), bank: Number(user.bank || 0) }
@@ -110,5 +136,7 @@ module.exports = {
   withdraw,
   adminSet,
   fine,
-  reward
+  reward,
+  tryDebitWallet,
+  creditWallet
 }

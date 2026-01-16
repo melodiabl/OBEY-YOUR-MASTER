@@ -12,8 +12,8 @@ function formatBytes (b) {
 }
 
 module.exports = createSystemSlashCommand({
-  name: 'status',
-  description: 'Diagnóstico y estado del bot',
+  name: 'bot',
+  description: 'Estado, diagnóstico y healthchecks',
   moduleKey: 'admin',
   defaultCooldownMs: 2_000,
   subcommands: [
@@ -49,4 +49,3 @@ module.exports = createSystemSlashCommand({
     }
   ]
 })
-

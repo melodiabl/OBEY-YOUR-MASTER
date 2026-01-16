@@ -55,6 +55,8 @@ function createSystemSlashCommand ({
   subcommands = [],
   // [{ name, description, subcommands: [...] }]
   groups = [],
+  // (client, interaction) => interaction.respond([...])
+  autocomplete = null,
   defaultAuth = { role: null, perms: [] },
   defaultCooldownMs = 0
 } = {}) {
@@ -102,7 +104,7 @@ function createSystemSlashCommand ({
       g.setName(gName).setDescription(gDesc)
       for (const [scName, sc] of gMap.entries()) {
         g.addSubcommand((sub) => {
-          sub.setName(scName).setDescription(sc.description || scDesc)
+          sub.setName(scName).setDescription(sc.description)
           applyOptions(sub, sc.options)
           return sub
         })
@@ -114,6 +116,7 @@ function createSystemSlashCommand ({
   return {
     MODULE: moduleKey,
     CMD: builder,
+    autocomplete,
     async execute (client, interaction) {
       const groupName = interaction.options.getSubcommandGroup(false)
       const subcommandName = interaction.options.getSubcommand()

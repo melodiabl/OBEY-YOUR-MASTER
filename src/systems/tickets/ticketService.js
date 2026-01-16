@@ -57,6 +57,10 @@ async function findOpenTicketByUser ({ guildID, userID }) {
   return TicketSchema.findOne({ guildID, createdBy: userID, status: 'OPEN' })
 }
 
+async function getTicketByChannel ({ guildID, channelID }) {
+  return TicketSchema.findOne({ guildID, channelID })
+}
+
 async function openTicket ({ client, guild, opener, topic }) {
   const guildData = await client.db.getGuildData(guild.id)
   const existing = await findOpenTicketByUser({ guildID: guild.id, userID: opener.id })
@@ -84,7 +88,9 @@ async function openTicket ({ client, guild, opener, topic }) {
     channelID: channel.id,
     createdBy: opener.id,
     status: 'OPEN',
-    topic: topic || null
+    topic: topic || null,
+    priority: 'med',
+    notes: []
   })
   await doc.save()
 
@@ -113,7 +119,57 @@ async function claimTicket ({ guildID, channelID, userID }) {
   return ticket
 }
 
-async function addUserToTicket ({ guild, channel, userID }) {
+async function unclaimTicket ({ guildID, channelID, userID }) {
+  const ticket = await TicketSchema.findOne({ guildID, channelID, status: 'OPEN' })
+  if (!ticket) throw new Error('Este canal no corresponde a un ticket abierto.')
+  if (!ticket.claimedBy) throw new Error('Este ticket no está claimado.')
+  if (ticket.claimedBy !== userID) throw new Error('Solo quien lo claimó puede unclaimarlo.')
+  ticket.claimedBy = null
+  await ticket.save()
+  return ticket
+}
+
+async function transferTicket ({ guildID, channelID, fromUserID, toUserID }) {
+  const ticket = await TicketSchema.findOne({ guildID, channelID, status: 'OPEN' })
+  if (!ticket) throw new Error('Este canal no corresponde a un ticket abierto.')
+  if (!ticket.claimedBy) throw new Error('Este ticket no está claimado.')
+  if (ticket.claimedBy !== fromUserID) throw new Error('Solo quien lo claimó puede transferirlo.')
+  ticket.claimedBy = toUserID
+  await ticket.save()
+  return ticket
+}
+
+async function setTicketPriority ({ guildID, channelID, priority }) {
+  const p = String(priority || '').toLowerCase()
+  if (!['low', 'med', 'high'].includes(p)) throw new Error('Prioridad inválida: low|med|high.')
+  const ticket = await getTicketByChannel({ guildID, channelID })
+  if (!ticket) throw new Error('Este canal no corresponde a un ticket.')
+  ticket.priority = p
+  await ticket.save()
+  return ticket
+}
+
+async function addTicketNote ({ guildID, channelID, authorID, text }) {
+  const t = String(text || '').trim()
+  if (!t) throw new Error('Nota vacía.')
+  if (t.length > 800) throw new Error('Nota demasiado larga (máx 800).')
+  const ticket = await getTicketByChannel({ guildID, channelID })
+  if (!ticket) throw new Error('Este canal no corresponde a un ticket.')
+  ticket.notes = Array.isArray(ticket.notes) ? ticket.notes : []
+  ticket.notes.push({ authorID, text: t, createdAt: new Date() })
+  await ticket.save()
+  return ticket
+}
+
+async function listTicketNotes ({ guildID, channelID, limit = 10 }) {
+  const ticket = await getTicketByChannel({ guildID, channelID })
+  if (!ticket) throw new Error('Este canal no corresponde a un ticket.')
+  const notes = Array.isArray(ticket.notes) ? ticket.notes : []
+  const lim = Math.max(1, Math.min(50, Number(limit) || 10))
+  return notes.slice(-lim).reverse()
+}
+
+async function addUserToTicket ({ channel, userID }) {
   await channel.permissionOverwrites.edit(userID, {
     ViewChannel: true,
     SendMessages: true,
@@ -133,7 +189,13 @@ module.exports = {
   openTicket,
   closeTicket,
   claimTicket,
+  unclaimTicket,
+  transferTicket,
+  setTicketPriority,
+  addTicketNote,
+  listTicketNotes,
   addUserToTicket,
-  removeUserFromTicket
+  removeUserFromTicket,
+  getTicketByChannel
 }
 

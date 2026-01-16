@@ -96,12 +96,22 @@ async function sellItem ({ client, guildID, userID, itemId, qty = 1 }) {
   return { item, qty: q, total }
 }
 
+async function giveItem ({ fromUserID, toUserID, itemId, qty = 1 }) {
+  if (fromUserID === toUserID) throw new Error('No puedes darte items a ti mismo.')
+  const item = await getItem(itemId)
+  if (!item) throw new Error('Item inválido.')
+  const q = Math.max(1, Number(qty) || 1)
+  await removeFromInventory({ userID: fromUserID, itemId, qty: q })
+  await addToInventory({ userID: toUserID, itemId, qty: q })
+  return { item, qty: q }
+}
+
 module.exports = {
   listShop,
   getItem,
   buyItem,
   sellItem,
   addToInventory,
-  removeFromInventory
+  removeFromInventory,
+  giveItem
 }
-

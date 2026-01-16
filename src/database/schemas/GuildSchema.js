@@ -31,12 +31,26 @@ const GuildSchema = new Schema({
     default: null
   },
 
+  // Levels / XP (config básica; el awarding se aplica en messageCreate).
+  levelsEnabled: { type: Boolean, default: true },
+  levelsAnnounceChannel: { type: String, default: null },
+  // Map: level -> roleId
+  levelsRoleRewards: { type: Map, of: String, default: () => new Map() },
+
+  // Reputación (config básica)
+  repCooldownMs: { type: Number, default: 6 * 60 * 60 * 1000 },
+  repDailyLimit: { type: Number, default: 5 },
+
   // Tickets
   ticketsCategory: {
     type: String,
     default: null
   },
   ticketsSupportRole: {
+    type: String,
+    default: null
+  },
+  ticketsPanelChannel: {
     type: String,
     default: null
   },

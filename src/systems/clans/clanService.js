@@ -33,6 +33,8 @@ async function createClan ({ client, guildID, ownerID, name, tag }) {
     ownerID,
     memberIDs: [ownerID],
     bank: 0,
+    motto: null,
+    bannerUrl: null,
     invites: []
   }).save()
 
@@ -46,10 +48,19 @@ async function getClanByUser ({ client, guildID, userID }) {
   return ClanSchema.findOne({ _id: clanId, guildID })
 }
 
-async function inviteToClan ({ client, guildID, inviterID, targetID }) {
-  const clan = await getClanByUser({ client, guildID, userID: inviterID })
+async function requireClanByUser ({ client, guildID, userID }) {
+  const clan = await getClanByUser({ client, guildID, userID })
   if (!clan) throw new Error('No estás en un clan.')
-  if (clan.ownerID !== inviterID) throw new Error('Solo el dueño del clan puede invitar (base).')
+  return clan
+}
+
+function isOwner (clan, userID) {
+  return String(clan.ownerID) === String(userID)
+}
+
+async function inviteToClan ({ client, guildID, inviterID, targetID }) {
+  const clan = await requireClanByUser({ client, guildID, userID: inviterID })
+  if (!isOwner(clan, inviterID)) throw new Error('Solo el dueño del clan puede invitar.')
 
   const targetClanId = await getUserClanId({ client, guildID, userID: targetID })
   if (targetClanId) throw new Error('Ese usuario ya está en un clan.')
@@ -77,10 +88,17 @@ async function acceptInvite ({ client, guildID, userID }) {
   return clan
 }
 
+async function declineInvite ({ client, guildID, userID }) {
+  const clan = await ClanSchema.findOne({ guildID, invites: { $elemMatch: { userID } } })
+  if (!clan) throw new Error('No tienes invitaciones pendientes.')
+  clan.invites = (clan.invites || []).filter(i => i?.userID !== userID)
+  await clan.save()
+  return clan
+}
+
 async function leaveClan ({ client, guildID, userID }) {
-  const clan = await getClanByUser({ client, guildID, userID })
-  if (!clan) throw new Error('No estás en un clan.')
-  if (clan.ownerID === userID) throw new Error('El dueño no puede salir. Transfiere la propiedad o disuelve el clan (futuro).')
+  const clan = await requireClanByUser({ client, guildID, userID })
+  if (isOwner(clan, userID)) throw new Error('El dueño no puede salir. Transfiere la propiedad o elimina el clan.')
 
   clan.memberIDs = (clan.memberIDs || []).filter(id => id !== userID)
   await clan.save()
@@ -88,13 +106,55 @@ async function leaveClan ({ client, guildID, userID }) {
   return clan
 }
 
+async function disbandClan ({ client, guildID, ownerID }) {
+  const clan = await requireClanByUser({ client, guildID, userID: ownerID })
+  if (!isOwner(clan, ownerID)) throw new Error('Solo el dueño puede eliminar el clan.')
+
+  const members = Array.isArray(clan.memberIDs) ? clan.memberIDs.slice() : []
+  await ClanSchema.deleteOne({ _id: clan.id, guildID })
+  for (const uid of members) {
+    await setUserClanId({ client, guildID, userID: uid, clanId: null }).catch(() => {})
+  }
+  return true
+}
+
+async function kickMember ({ client, guildID, ownerID, memberID }) {
+  const clan = await requireClanByUser({ client, guildID, userID: ownerID })
+  if (!isOwner(clan, ownerID)) throw new Error('Solo el dueño puede expulsar miembros.')
+  if (memberID === ownerID) throw new Error('No puedes expulsarte a ti mismo.')
+  if (!clan.memberIDs.includes(memberID)) throw new Error('Ese usuario no es miembro del clan.')
+  clan.memberIDs = (clan.memberIDs || []).filter(id => id !== memberID)
+  await clan.save()
+  await setUserClanId({ client, guildID, userID: memberID, clanId: null })
+  return clan
+}
+
+async function setMotto ({ client, guildID, userID, motto }) {
+  const clan = await requireClanByUser({ client, guildID, userID })
+  if (!isOwner(clan, userID)) throw new Error('Solo el dueño puede cambiar el motto.')
+  const m = String(motto || '').trim()
+  if (m.length > 120) throw new Error('Motto demasiado largo (máx 120).')
+  clan.motto = m || null
+  await clan.save()
+  return clan
+}
+
+async function setBanner ({ client, guildID, userID, url }) {
+  const clan = await requireClanByUser({ client, guildID, userID })
+  if (!isOwner(clan, userID)) throw new Error('Solo el dueño puede cambiar el banner.')
+  const u = String(url || '').trim()
+  if (u && !/^https?:\/\//i.test(u)) throw new Error('URL inválida (debe empezar con http/https).')
+  if (u.length > 400) throw new Error('URL demasiado larga.')
+  clan.bannerUrl = u || null
+  await clan.save()
+  return clan
+}
+
 async function clanDeposit ({ client, guildID, userID, amount }) {
   const a = Number(amount)
   if (!Number.isFinite(a) || a <= 0) throw new Error('Cantidad inválida.')
-  const clan = await getClanByUser({ client, guildID, userID })
-  if (!clan) throw new Error('No estás en un clan.')
+  const clan = await requireClanByUser({ client, guildID, userID })
 
-  // Debitar wallet del usuario (atómico).
   const debit = await UserSchema.findOneAndUpdate(
     { userID, money: { $gte: a } },
     { $inc: { money: -a } },
@@ -107,12 +167,35 @@ async function clanDeposit ({ client, guildID, userID, amount }) {
   return clan
 }
 
+async function clanWithdraw ({ client, guildID, userID, amount }) {
+  const a = Number(amount)
+  if (!Number.isFinite(a) || a <= 0) throw new Error('Cantidad inválida.')
+  const clan = await requireClanByUser({ client, guildID, userID })
+  if (!isOwner(clan, userID)) throw new Error('Solo el dueño puede retirar del banco del clan.')
+  if (Number(clan.bank || 0) < a) throw new Error('Banco del clan insuficiente.')
+
+  clan.bank = Number(clan.bank || 0) - a
+  await clan.save()
+  await UserSchema.updateOne({ userID }, { $inc: { money: a } })
+  return clan
+}
+
+async function topClans ({ guildID, limit = 10 }) {
+  return ClanSchema.find({ guildID }).sort({ bank: -1 }).limit(limit)
+}
+
 module.exports = {
   createClan,
   getClanByUser,
   inviteToClan,
   acceptInvite,
+  declineInvite,
   leaveClan,
-  clanDeposit
+  disbandClan,
+  kickMember,
+  setMotto,
+  setBanner,
+  clanDeposit,
+  clanWithdraw,
+  topClans
 }
-

@@ -87,8 +87,20 @@ async function endGiveaway ({ client, guild, giveawayDoc }) {
   return { winners }
 }
 
-module.exports = {
-  startGiveaway,
-  endGiveaway
+async function rerollGiveaway ({ guild, giveawayDoc }) {
+  const channel = guild.channels.cache.get(giveawayDoc.channelID)
+  if (!channel) throw new Error('Canal no encontrado.')
+  const { winners, url } = await pickWinners({ channel, messageID: giveawayDoc.messageID, winnerCount: giveawayDoc.winnerCount })
+  if (!winners.length) {
+    await channel.send(`⚠️ No hay participantes para reroll de **${giveawayDoc.prize}**.\n${url}`).catch(() => {})
+    return { winners: [] }
+  }
+  await channel.send(`🔁 Reroll ganadores: ${winners.join(', ')}\nPremio: **${giveawayDoc.prize}**\n${url}`).catch(() => {})
+  return { winners }
 }
 
+module.exports = {
+  startGiveaway,
+  endGiveaway,
+  rerollGiveaway
+}

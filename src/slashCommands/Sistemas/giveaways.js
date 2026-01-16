@@ -3,7 +3,7 @@ const { createSystemSlashCommand } = require('../../core/commands/createSystemSl
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 const GiveawaySchema = require('../../database/schemas/GiveawaySchema')
-const { startGiveaway, endGiveaway } = require('../../systems/giveaways/giveawayService')
+const { startGiveaway, endGiveaway, rerollGiveaway } = require('../../systems/giveaways/giveawayService')
 
 module.exports = createSystemSlashCommand({
   name: 'giveaways',
@@ -74,7 +74,24 @@ module.exports = createSystemSlashCommand({
         const lines = rows.map(g => `- \`${g.messageID}\` **${g.prize}** (ends <t:${Math.floor(new Date(g.endsAt).getTime() / 1000)}:R>)`)
         return interaction.reply({ content: `**Sorteos activos**\n${lines.join('\n')}`, ephemeral: true })
       }
+    },
+    {
+      name: 'reroll',
+      description: 'Reroll de ganadores (por messageId)',
+      options: [
+        {
+          apply: (sc) =>
+            sc.addStringOption(o => o.setName('message_id').setDescription('ID del mensaje del sorteo').setRequired(true))
+        }
+      ],
+      auth: { role: INTERNAL_ROLES.ADMIN, perms: [PERMS.LOGS_MANAGE] },
+      handler: async (client, interaction) => {
+        const messageID = interaction.options.getString('message_id', true)
+        const doc = await GiveawaySchema.findOne({ guildID: interaction.guild.id, messageID })
+        if (!doc) return interaction.reply({ content: 'No encontré un sorteo con ese message_id.', ephemeral: true })
+        const res = await rerollGiveaway({ guild: interaction.guild, giveawayDoc: doc })
+        return interaction.reply({ content: `✅ Reroll ejecutado. Nuevos ganadores: **${res.winners.length}**`, ephemeral: true })
+      }
     }
   ]
 })
-

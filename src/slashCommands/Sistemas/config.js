@@ -183,7 +183,7 @@ module.exports = createSystemSlashCommand({
 
     const g = await client.db.getGuildData(interaction.guild.id)
     const modules = normalizeMap(g.modules)
-    const keys = [...new Set([...modules.keys(), 'auth', 'admin', 'moderation', 'logs', 'config', 'economy', 'levels', 'jobs', 'fun', 'music', 'tickets', 'security', 'quests', 'clans'])]
+    const keys = [...new Set([...modules.keys(), 'auth', 'admin', 'moderation', 'logs', 'config', 'economy', 'levels', 'jobs', 'fun', 'music', 'tickets', 'security', 'quests', 'clans', 'games', 'items', 'reputation', 'stats', 'util', 'pets'])]
     const q = String(focused.value || '').toLowerCase()
     const out = keys
       .filter(k => k.toLowerCase().includes(q))
