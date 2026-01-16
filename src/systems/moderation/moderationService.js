@@ -1,0 +1,64 @@
+const GuildSchema = require('../../database/schemas/GuildSchema')
+const ModerationCaseSchema = require('../../database/schemas/ModerationCaseSchema')
+const UserSchema = require('../../database/schemas/UserSchema')
+
+async function nextCaseNumber (guildID) {
+  const doc = await GuildSchema.findOneAndUpdate(
+    { guildID },
+    { $inc: { modCaseCounter: 1 } },
+    { upsert: true, new: true, setDefaultsOnInsert: true }
+  )
+  return doc.modCaseCounter
+}
+
+async function logCase ({ guildID, type, targetID, moderatorID, reason, meta }) {
+  const caseNumber = await nextCaseNumber(guildID)
+  const doc = await new ModerationCaseSchema({
+    guildID,
+    caseNumber,
+    type,
+    targetID,
+    moderatorID,
+    reason: reason || null,
+    meta: meta || {}
+  }).save()
+  return doc
+}
+
+async function warnUser ({ guildID, targetID, moderatorID, reason }) {
+  const warnData = { moderator: moderatorID, reason: reason || 'Sin razón.', date: new Date() }
+  await UserSchema.findOneAndUpdate(
+    { userID: targetID },
+    { $setOnInsert: { userID: targetID }, $push: { warns: warnData } },
+    { upsert: true }
+  )
+  return logCase({ guildID, type: 'warn', targetID, moderatorID, reason })
+}
+
+async function timeoutUser ({ guildID, targetID, moderatorID, reason, durationMs }) {
+  return logCase({
+    guildID,
+    type: 'timeout',
+    targetID,
+    moderatorID,
+    reason,
+    meta: { durationMs: Number(durationMs) || 0 }
+  })
+}
+
+async function logAction ({ guildID, type, targetID, moderatorID, reason, meta }) {
+  return logCase({ guildID, type, targetID, moderatorID, reason, meta })
+}
+
+async function getUserHistory ({ guildID, targetID, limit = 10 }) {
+  const rows = await ModerationCaseSchema.find({ guildID, targetID }).sort({ createdAt: -1 }).limit(limit)
+  const warnsDoc = await UserSchema.findOne({ userID: targetID })
+  return { cases: rows, warnsCount: warnsDoc?.warns?.length || 0 }
+}
+
+module.exports = {
+  warnUser,
+  timeoutUser,
+  logAction,
+  getUserHistory
+}

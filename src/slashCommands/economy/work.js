@@ -16,6 +16,12 @@ module.exports = {
     userData.money = (userData.money || 0) + amount;
     userData.workCooldown = now;
     await userData.save();
+
+    // Sistema de Quests (base): progreso por /work
+    try {
+      const { incWork } = require('../../systems/quests/questService');
+      await incWork({ guildID: interaction.guild.id, userID: interaction.user.id, n: 1 });
+    } catch (e) {}
     await interaction.reply(`🛠️ Has trabajado y ganado **${amount} monedas**. Tienes ahora **${userData.money}** monedas.`);
   },
 };

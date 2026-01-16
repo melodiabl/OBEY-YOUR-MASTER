@@ -20,6 +20,12 @@ module.exports = async (client, message) => {
   }
   await userData.save();
 
+  // Sistema de Quests (base): progreso por mensajes diarios
+  try {
+    const { queueMessage } = require('../../systems/quests/questService');
+    queueMessage({ guildID: message.guild.id, userID: message.author.id, n: 1 });
+  } catch (e) {}
+
   // Lógica de Múltiples Prefijos
   // 1. Obtener prefijos del .env (separados por espacio)
   // 2. Incluir el prefijo de la DB si existe

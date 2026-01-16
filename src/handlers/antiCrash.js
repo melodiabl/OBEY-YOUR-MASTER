@@ -1,5 +1,7 @@
 module.exports = (client) => {
-  process.removeAllListeners()
+  // No borrar todos los listeners del process: rompe integraciones y puede dejar procesos colgados.
+  if (global.__ANTI_CRASH_HANDLER_INSTALLED__) return
+  global.__ANTI_CRASH_HANDLER_INSTALLED__ = true
 
   process.on('unhandledRejection', (reason, p) => {
     console.log(' [ANTICRASH] - unhandledRejection'.grey)

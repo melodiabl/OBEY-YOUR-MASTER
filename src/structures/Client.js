@@ -10,7 +10,7 @@ const GuildDB = require('../database/schemas/Guild.db')
 const { abbreviateNumber } = require('../helpers/helpers')
 const Database = require('../database/mongoose')
 const BotUtils = require('./Utils')
-const { initLavalink } = require('../music/musicManager')
+const { initPlayer } = require('../music/player')
 module.exports = class extends Client {
   constructor (
     options = {
@@ -64,6 +64,8 @@ module.exports = class extends Client {
       ...options
     })
 
+    this._eventListeners = new Map()
+
     this.dbGuild = new GuildDB()
     this.db = new Database()
 
@@ -72,8 +74,6 @@ module.exports = class extends Client {
     this.slashArray = []
 
     this.utils = new BotUtils(this)
-    // Inicializamos Kazagumo (Lavalink)
-    this.manager = initLavalink(this)
 
     this.start()
   }
@@ -83,6 +83,7 @@ module.exports = class extends Client {
     await this.loadHandlers()
     await this.loadCommands()
     await this.loadSlashCommands()
+    await initPlayer(this)
     await this.db.connect()
 
     this.login(process.env.BOT_TOKEN)
@@ -181,7 +182,12 @@ module.exports = class extends Client {
 
     const RUTA_ARCHIVOS = await this.utils.loadFiles('/src/eventos')
 
-    this.removeAllListeners()
+    // No usar removeAllListeners(): rompe listeners de librerías externas
+    // (y puede afectar eventos raw/voice necesarios para voz/musica).
+    for (const [eventName, listener] of this._eventListeners.entries()) {
+      this.removeListener(eventName, listener)
+    }
+    this._eventListeners.clear()
 
     if (RUTA_ARCHIVOS.length) {
       RUTA_ARCHIVOS.forEach((rutaArchivo) => {
@@ -193,7 +199,9 @@ module.exports = class extends Client {
             .split('/')
             .pop()
             .split('.')[0]
-          this.on(NOMBRE_EVENTO, EVENTO.bind(null, this))
+          const listener = EVENTO.bind(null, this)
+          this.on(NOMBRE_EVENTO, listener)
+          this._eventListeners.set(NOMBRE_EVENTO, listener)
         } catch (e) {
           console.log(`ERROR AL CARGAR EL EVENTO ${rutaArchivo}`.bgRed)
           console.log(e)

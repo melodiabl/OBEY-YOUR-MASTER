@@ -1,5 +1,4 @@
 const { ActivityType, PresenceUpdateStatus } = require('discord.js')
-const { startLavalink } = require('../../music/musicManager')
 
 module.exports = async client => {
   console.log(`Conectado como ${client.user.tag}`.rainbow)

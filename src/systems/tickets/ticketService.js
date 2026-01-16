@@ -1,0 +1,139 @@
+const { ChannelType, PermissionsBitField } = require('discord.js')
+const GuildSchema = require('../../database/schemas/GuildSchema')
+const TicketSchema = require('../../database/schemas/TicketSchema')
+
+async function nextTicketNumber (guildID) {
+  const doc = await GuildSchema.findOneAndUpdate(
+    { guildID },
+    { $inc: { ticketCounter: 1 } },
+    { upsert: true, new: true, setDefaultsOnInsert: true }
+  )
+  return doc.ticketCounter
+}
+
+function buildOverwrites ({ guild, openerId, supportRoleId, botUserId }) {
+  const overwrites = [
+    {
+      id: guild.roles.everyone.id,
+      deny: [PermissionsBitField.Flags.ViewChannel]
+    },
+    {
+      id: openerId,
+      allow: [
+        PermissionsBitField.Flags.ViewChannel,
+        PermissionsBitField.Flags.SendMessages,
+        PermissionsBitField.Flags.ReadMessageHistory,
+        PermissionsBitField.Flags.AttachFiles,
+        PermissionsBitField.Flags.EmbedLinks
+      ]
+    },
+    {
+      id: botUserId,
+      allow: [
+        PermissionsBitField.Flags.ViewChannel,
+        PermissionsBitField.Flags.SendMessages,
+        PermissionsBitField.Flags.ManageChannels,
+        PermissionsBitField.Flags.ReadMessageHistory
+      ]
+    }
+  ]
+
+  if (supportRoleId) {
+    overwrites.push({
+      id: supportRoleId,
+      allow: [
+        PermissionsBitField.Flags.ViewChannel,
+        PermissionsBitField.Flags.SendMessages,
+        PermissionsBitField.Flags.ReadMessageHistory,
+        PermissionsBitField.Flags.ManageMessages
+      ]
+    })
+  }
+
+  return overwrites
+}
+
+async function findOpenTicketByUser ({ guildID, userID }) {
+  return TicketSchema.findOne({ guildID, createdBy: userID, status: 'OPEN' })
+}
+
+async function openTicket ({ client, guild, opener, topic }) {
+  const guildData = await client.db.getGuildData(guild.id)
+  const existing = await findOpenTicketByUser({ guildID: guild.id, userID: opener.id })
+  if (existing) throw new Error(`Ya tienes un ticket abierto: <#${existing.channelID}>`)
+
+  const ticketNumber = await nextTicketNumber(guild.id)
+  const name = `ticket-${ticketNumber}`
+
+  const channel = await guild.channels.create({
+    name,
+    type: ChannelType.GuildText,
+    parent: guildData.ticketsCategory || undefined,
+    topic: `Ticket #${ticketNumber} | Owner: ${opener.id}${topic ? ` | ${topic}` : ''}`,
+    permissionOverwrites: buildOverwrites({
+      guild,
+      openerId: opener.id,
+      supportRoleId: guildData.ticketsSupportRole,
+      botUserId: client.user.id
+    })
+  })
+
+  const doc = new TicketSchema({
+    guildID: guild.id,
+    ticketNumber,
+    channelID: channel.id,
+    createdBy: opener.id,
+    status: 'OPEN',
+    topic: topic || null
+  })
+  await doc.save()
+
+  return { ticketNumber, channel }
+}
+
+async function closeTicket ({ guildID, channelID, closedBy }) {
+  const ticket = await TicketSchema.findOne({ guildID, channelID, status: 'OPEN' })
+  if (!ticket) throw new Error('Este canal no corresponde a un ticket abierto.')
+
+  ticket.status = 'CLOSED'
+  ticket.closedAt = new Date()
+  if (!ticket.claimedBy) ticket.claimedBy = closedBy
+  await ticket.save()
+
+  return ticket
+}
+
+async function claimTicket ({ guildID, channelID, userID }) {
+  const ticket = await TicketSchema.findOne({ guildID, channelID, status: 'OPEN' })
+  if (!ticket) throw new Error('Este canal no corresponde a un ticket abierto.')
+  if (ticket.claimedBy && ticket.claimedBy !== userID) throw new Error('Este ticket ya está claimado por otra persona.')
+
+  ticket.claimedBy = userID
+  await ticket.save()
+  return ticket
+}
+
+async function addUserToTicket ({ guild, channel, userID }) {
+  await channel.permissionOverwrites.edit(userID, {
+    ViewChannel: true,
+    SendMessages: true,
+    ReadMessageHistory: true,
+    AttachFiles: true,
+    EmbedLinks: true
+  })
+  return true
+}
+
+async function removeUserFromTicket ({ channel, userID }) {
+  await channel.permissionOverwrites.delete(userID)
+  return true
+}
+
+module.exports = {
+  openTicket,
+  closeTicket,
+  claimTicket,
+  addUserToTicket,
+  removeUserFromTicket
+}
+
