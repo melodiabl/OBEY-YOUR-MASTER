@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { creditWallet } = require('../../systems/economy/economyService')
+const { creditWallet } = require('../../systems').economy
 const { ensureMap } = require('../../utils/interactionUtils')
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 
@@ -37,4 +37,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Monthly reclamado: **+${amount}**.`, ephemeral: true })
   }
 }
-

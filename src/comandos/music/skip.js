@@ -1,4 +1,4 @@
-const { getPlayer } = require('../../music/player')
+const { getMusic } = require('../../music')
 
 module.exports = {
   DESCRIPTION: 'Salta la cancion actual',
@@ -6,12 +6,18 @@ module.exports = {
   BOT_PERMISSIONS: ['Connect', 'Speak'],
   PERMISSIONS: [],
   async execute (client, message) {
-    const player = getPlayer(client)
-    const queue = player?.nodes?.get(message.guild.id)
-    if (!queue || !queue.node.isPlaying()) return message.reply('No hay musica reproduciendose.')
+    try {
+      const voiceChannel = message.member?.voice?.channel
+      if (!voiceChannel) return message.reply('Debes estar en un canal de voz.')
 
-    const ok = queue.node.skip()
-    if (!ok) return message.reply('No se pudo saltar la cancion.')
-    return message.reply('Cancion saltada.')
+      const music = getMusic(client)
+      if (!music) return message.reply('El sistema de musica no esta inicializado.')
+
+      const res = await music.skip({ guildId: message.guild.id, voiceChannelId: voiceChannel.id })
+      if (res.ended) return message.reply('Cancion saltada. La cola termino.')
+      return message.reply(`Cancion saltada. Ahora: **${res.skippedTo.title}**`)
+    } catch (e) {
+      return message.reply(e?.message || String(e || 'Error desconocido.'))
+    }
   }
 }

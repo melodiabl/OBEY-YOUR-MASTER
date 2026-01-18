@@ -3,8 +3,8 @@ const { getMusic } = require('../../music')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
-    .setName('skip')
-    .setDescription('Salta la cancion actual'),
+    .setName('clearqueue')
+    .setDescription('Limpia la cola de canciones (mantiene la actual)'),
   async execute (client, interaction) {
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
@@ -15,9 +15,9 @@ module.exports = {
       const music = getMusic(client)
       if (!music) return interaction.reply({ content: 'El sistema de musica no esta inicializado.', ephemeral: true })
 
-      const res = await music.skip({ guildId: interaction.guild.id, voiceChannelId: voiceChannel.id })
-      if (res.ended) return interaction.reply('Cancion saltada. La cola termino.')
-      return interaction.reply(`Cancion saltada. Ahora: **${res.skippedTo.title}**`)
+      const { cleared, state } = await music.clearQueue({ guildId: interaction.guild.id, voiceChannelId: voiceChannel.id })
+      const suffix = state.currentTrack ? ' (la actual se mantiene)' : ''
+      return interaction.reply(`Cola limpiada: **${cleared}** canciones eliminadas${suffix}.`)
     } catch (e) {
       return interaction.reply({ content: e?.message || String(e || 'Error desconocido.'), ephemeral: true })
     }

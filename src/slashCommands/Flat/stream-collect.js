@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { streamCollect } = require('../../systems/economy/ecoActionsService')
+const { streamCollect } = require('../../systems').economy
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const { replyError } = require('../../utils/interactionUtils')
 
@@ -19,4 +19,3 @@ module.exports = {
     }
   }
 }
-

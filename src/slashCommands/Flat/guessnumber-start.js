@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { startGuessNumber } = require('../../systems/games/casinoService')
+const { startGuessNumber } = require('../../systems').games
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const { replyError } = require('../../utils/interactionUtils')
 
@@ -28,4 +28,3 @@ module.exports = {
     }
   }
 }
-

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { giveRep } = require('../../systems/reputation/reputationService')
+const { giveRep } = require('../../systems').reputation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const { replyError } = require('../../utils/interactionUtils')
 
@@ -34,4 +34,3 @@ module.exports = {
     }
   }
 }
-

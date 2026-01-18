@@ -4,13 +4,13 @@ module.exports = async (client, message) => {
 
   // Sistema de Niveles (XP) - escalable (cooldown + config por guild)
   try {
-    const { handleMessageXp } = require('../../systems/levels/levelsService')
+    const { handleMessageXp } = require('../../systems').levels
     await handleMessageXp({ client, message })
   } catch (e) {}
 
   // Sistema de Quests (base): progreso por mensajes diarios
   try {
-    const { queueMessage } = require('../../systems/quests/questService')
+    const { queueMessage } = require('../../systems').quests
     queueMessage({ guildID: message.guild.id, userID: message.author.id, n: 1 })
   } catch (e) {}
 
@@ -63,4 +63,3 @@ module.exports = async (client, message) => {
     }
   }
 }
-

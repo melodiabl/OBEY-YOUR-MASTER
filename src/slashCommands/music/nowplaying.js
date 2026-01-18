@@ -3,8 +3,8 @@ const { getMusic } = require('../../music')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
-    .setName('skip')
-    .setDescription('Salta la cancion actual'),
+    .setName('nowplaying')
+    .setDescription('Muestra la cancion actual'),
   async execute (client, interaction) {
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
@@ -15,9 +15,13 @@ module.exports = {
       const music = getMusic(client)
       if (!music) return interaction.reply({ content: 'El sistema de musica no esta inicializado.', ephemeral: true })
 
-      const res = await music.skip({ guildId: interaction.guild.id, voiceChannelId: voiceChannel.id })
-      if (res.ended) return interaction.reply('Cancion saltada. La cola termino.')
-      return interaction.reply(`Cancion saltada. Ahora: **${res.skippedTo.title}**`)
+      const state = await music.nowPlaying({ guildId: interaction.guild.id, voiceChannelId: voiceChannel.id })
+      const current = state.currentTrack
+      if (!current) return interaction.reply({ content: 'No hay musica reproduciendose.', ephemeral: true })
+
+      const status = state.isPaused ? 'Pausado' : (state.isPlaying ? 'Reproduciendo' : 'Detenido')
+      const by = current.requestedBy?.tag ? ` (pedido por ${current.requestedBy.tag})` : ''
+      return interaction.reply(`${status}: **${current.title}**${by}`)
     } catch (e) {
       return interaction.reply({ content: e?.message || String(e || 'Error desconocido.'), ephemeral: true })
     }

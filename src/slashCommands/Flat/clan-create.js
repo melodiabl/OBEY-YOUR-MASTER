@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { createClan } = require('../../systems/clans/clanService')
+const { createClan } = require('../../systems').clans
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const { replyError } = require('../../utils/interactionUtils')
 
@@ -37,4 +37,3 @@ module.exports = {
     }
   }
 }
-

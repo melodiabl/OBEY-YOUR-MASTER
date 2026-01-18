@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
-const { getUserHistory } = require('../../systems/moderation/moderationService')
+const { getUserHistory } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 
@@ -49,4 +49,3 @@ module.exports = {
     return interaction.reply({ embeds: [embed], ephemeral: true })
   }
 }
-

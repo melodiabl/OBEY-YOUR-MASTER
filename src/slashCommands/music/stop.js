@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { getPlayer } = require('../../music/player')
+const { getMusic } = require('../../music')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -11,18 +11,14 @@ module.exports = {
       return interaction.reply({ content: 'Debes estar en un canal de voz.', ephemeral: true })
     }
 
-    const player = getPlayer(client)
-    const queue = player?.nodes?.get(interaction.guild.id)
-    if (!queue) return interaction.reply({ content: 'No hay musica reproduciendose.', ephemeral: true })
-    if (queue.channel && voiceChannel.id !== queue.channel.id) {
-      return interaction.reply({ content: 'Debes estar en el mismo canal de voz que el bot.', ephemeral: true })
-    }
-
     try {
-      queue.delete()
+      const music = getMusic(client)
+      if (!music) return interaction.reply({ content: 'El sistema de musica no esta inicializado.', ephemeral: true })
+
+      await music.stop({ guildId: interaction.guild.id, voiceChannelId: voiceChannel.id })
       return interaction.reply('Musica detenida y cola borrada.')
-    } catch {
-      return interaction.reply({ content: 'No se pudo detener la musica.', ephemeral: true })
+    } catch (e) {
+      return interaction.reply({ content: e?.message || String(e || 'Error desconocido.'), ephemeral: true })
     }
   }
 }

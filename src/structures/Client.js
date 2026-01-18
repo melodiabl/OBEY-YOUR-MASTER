@@ -10,7 +10,7 @@ const GuildDB = require('../database/schemas/Guild.db')
 const { abbreviateNumber } = require('../helpers/helpers')
 const Database = require('../database/mongoose')
 const BotUtils = require('./Utils')
-const { initPlayer } = require('../music/player')
+const { initMusic } = require('../music')
 module.exports = class extends Client {
   constructor (
     options = {
@@ -83,7 +83,7 @@ module.exports = class extends Client {
     await this.loadHandlers()
     await this.loadCommands()
     await this.loadSlashCommands()
-    await initPlayer(this)
+    await initMusic(this)
     await this.db.connect()
 
     this.login(process.env.BOT_TOKEN)

@@ -5,7 +5,7 @@ module.exports = async client => {
 
   // Scheduler de sorteos (giveaways) con persistencia
   try {
-    const { startGiveawayScheduler } = require('../../systems/giveaways/giveawayScheduler')
+    const { startGiveawayScheduler } = require('../../systems').giveaways
     startGiveawayScheduler(client)
   } catch (e) {}
 
@@ -94,4 +94,3 @@ async function pickPresence (client) {
     }
   }, 120000)
 } */
-

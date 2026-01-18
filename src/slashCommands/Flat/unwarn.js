@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { unwarnUser } = require('../../systems/moderation/moderationService')
+const { unwarnUser } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 
@@ -43,4 +43,3 @@ module.exports = {
     })
   }
 }
-

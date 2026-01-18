@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { renamePet } = require('../../systems/pets/petService')
+const { renamePet } = require('../../systems').pets
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const { replyError } = require('../../utils/interactionUtils')
 
@@ -26,4 +26,3 @@ module.exports = {
     }
   }
 }
-

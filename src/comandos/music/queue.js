@@ -1,4 +1,4 @@
-const { getPlayer } = require('../../music/player')
+const { getMusic } = require('../../music')
 
 module.exports = {
   DESCRIPTION: 'Muestra la cola de reproduccion',
@@ -6,22 +6,29 @@ module.exports = {
   BOT_PERMISSIONS: ['Connect', 'Speak'],
   PERMISSIONS: [],
   async execute (client, message) {
-    const player = getPlayer(client)
-    const queue = player?.nodes?.get(message.guild.id)
-    if (!queue) return message.reply('No hay cola activa.')
+    try {
+      const voiceChannel = message.member?.voice?.channel
+      if (!voiceChannel) return message.reply('Debes estar en un canal de voz.')
 
-    const current = queue.currentTrack
-    const upcoming = queue.tracks.toArray().slice(0, 10)
+      const music = getMusic(client)
+      if (!music) return message.reply('El sistema de musica no esta inicializado.')
 
-    if (!current && upcoming.length === 0) return message.reply('No hay canciones en la cola.')
+      const state = await music.getQueue({ guildId: message.guild.id, voiceChannelId: voiceChannel.id })
+      const current = state.currentTrack
+      const upcoming = state.queue.slice(0, 10)
 
-    let text = '**Cola:**\n'
-    if (current) text += `Ahora: **${current.title}**\n`
-    if (upcoming.length) {
-      text += '\n**Siguientes:**\n'
-      text += upcoming.map((t, i) => `${i + 1}. ${t.title}`).join('\n')
+      if (!current && upcoming.length === 0) return message.reply('No hay canciones en la cola.')
+
+      let text = '**Cola:**\n'
+      if (current) text += `Ahora: **${current.title}**\n`
+      if (upcoming.length) {
+        text += '\n**Siguientes:**\n'
+        text += upcoming.map((t, i) => `${i + 1}. ${t.title}`).join('\n')
+      }
+
+      return message.reply(text)
+    } catch (e) {
+      return message.reply(e?.message || String(e || 'Error desconocido.'))
     }
-
-    return message.reply(text)
   }
 }

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js')
 const UserSchema = require('../../database/schemas/UserSchema')
-const { logAction } = require('../../systems/moderation/moderationService')
+const { logAction } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 
@@ -50,4 +50,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Warns eliminados: **${removed}**. Caso #${modCase.caseNumber}.`, ephemeral: true })
   }
 }
-

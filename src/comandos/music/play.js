@@ -1,15 +1,5 @@
-const { getPlayer } = require('../../music/player')
-const { QueryType } = require('discord-player')
+const { getMusic } = require('../../music')
 const { isSoundCloudUrl, getMemberVoiceChannel, botHasVoicePerms } = require('../../utils/voiceChecks')
-
-function isUrl (q) {
-  return /^https?:\/\//i.test(String(q || '').trim())
-}
-
-function isSpotifyUrl (q) {
-  const s = String(q || '').toLowerCase()
-  return s.includes('open.spotify.com') || s.includes('spotify.link') || s.startsWith('spotify:')
-}
 
 module.exports = {
   DESCRIPTION: 'Reproduce musica en tu canal de voz (YouTube / Spotify).',
@@ -31,44 +21,21 @@ module.exports = {
       return message.reply('SoundCloud no esta soportado. Usa YouTube o Spotify.')
     }
 
-    const player = getPlayer(client)
-    if (!player) return message.reply('El reproductor de musica no esta inicializado.')
+    const music = getMusic(client)
+    if (!music) return message.reply('El sistema de musica no esta inicializado.')
 
     try {
-      const nodeOptions = {
-        metadata: { channel: message.channel },
-        leaveOnEmpty: false,
-        leaveOnEnd: false,
-        leaveOnStop: false,
-        selfDeaf: true
-      }
-
-      const qIsUrl = isUrl(query)
-      const searchEngine = qIsUrl ? undefined : QueryType.YOUTUBE_SEARCH
-
-      const res = await player.play(voiceChannel, query, {
+      const res = await music.play({
+        guildId: message.guild.id,
+        voiceChannelId: voiceChannel.id,
+        textChannelId: message.channel.id,
         requestedBy: message.author,
-        searchEngine,
-        nodeOptions
+        query
       })
 
-      const playlistTitle = res?.searchResult?.playlist?.title
-      if (playlistTitle) {
-        return message.reply(`Playlist agregada: **${playlistTitle}** (${res.searchResult.tracks.length} pistas)`)
-      }
-
+      if (res.started) return message.reply(`Ahora: **${res.track.title}**`)
       return message.reply(`Agregado a la cola: **${res.track.title}**`)
     } catch (e) {
-      const msg = String(e?.message || e || '').toLowerCase()
-      if (msg.includes('no available extractor')) {
-        if (isSpotifyUrl(query)) {
-          return message.reply('No hay extractor de Spotify disponible o falta configurar credenciales. Usa un enlace de YouTube o configura `SPOTIFY_CLIENT_ID`/`SPOTIFY_CLIENT_SECRET`.')
-        }
-        return message.reply('Ese enlace no esta soportado. Usa YouTube o Spotify.')
-      }
-      if (msg.includes('no results') || msg.includes('no result') || msg.includes('not found')) {
-        return message.reply(`No se encontraron resultados para: \`${query}\``)
-      }
       return message.reply(`No pude reproducir: ${e?.message || e}`)
     }
   }

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { logAction } = require('../../systems/moderation/moderationService')
+const { logAction } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 
@@ -42,4 +42,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Timeout removido de <@${target.id}>. Caso #${modCase.caseNumber}.`, ephemeral: true })
   }
 }
-

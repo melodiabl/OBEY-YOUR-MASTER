@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { listTicketNotes } = require('../../systems/tickets/ticketService')
+const { listTicketNotes } = require('../../systems').tickets
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 const { replyError } = require('../../utils/interactionUtils')
@@ -35,4 +35,3 @@ module.exports = {
     }
   }
 }
-

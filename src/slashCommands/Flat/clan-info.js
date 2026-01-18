@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
-const { getClanByUser } = require('../../systems/clans/clanService')
+const { getClanByUser } = require('../../systems').clans
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 
 module.exports = {
@@ -35,4 +35,3 @@ module.exports = {
     return interaction.reply({ embeds: [embed], ephemeral: true })
   }
 }
-

@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js')
-const { warnUser } = require('../../systems/moderation/moderationService')
-const { handleWarnThresholdKick } = require('../../systems/moderation/warnThresholdService')
+const { warnUser, handleWarnThresholdKick } = require('../../systems').moderation
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -71,4 +70,3 @@ module.exports = {
     }
   }
 }
-
