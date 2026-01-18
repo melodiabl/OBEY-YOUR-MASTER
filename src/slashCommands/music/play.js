@@ -37,6 +37,7 @@ module.exports = {
 
       const res = await music.play({
         guildId: interaction.guild.id,
+        guild: interaction.guild,
         voiceChannelId: voiceChannel.id,
         textChannelId: interaction.channelId,
         requestedBy: interaction.user,

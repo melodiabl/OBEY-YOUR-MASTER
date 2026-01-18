@@ -27,6 +27,7 @@ module.exports = {
     try {
       const res = await music.play({
         guildId: message.guild.id,
+        guild: message.guild,
         voiceChannelId: voiceChannel.id,
         textChannelId: message.channel.id,
         requestedBy: message.author,

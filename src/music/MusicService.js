@@ -1,4 +1,11 @@
 const crypto = require('node:crypto')
+const { Readable } = require('node:stream')
+
+let voice = null
+try {
+  // eslint-disable-next-line n/no-missing-require
+  voice = require('@discordjs/voice')
+} catch {}
 
 const MUSIC_ERROR_CODES = {
   BAD_REQUEST: 'BAD_REQUEST',
@@ -234,6 +241,104 @@ class MusicService {
       idleTtlMs: options.idleTtlMs ?? 30 * 60 * 1000
     })
     this._queues = new QueueManager()
+    this._voice = new Map() // guildId -> { connection, player, stream }
+  }
+
+  _ensureVoiceLib () {
+    if (!voice) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'Voz no disponible: instala @discordjs/voice.')
+  }
+
+  _getGuildVoice (guildId) {
+    return this._voice.get(String(guildId)) || null
+  }
+
+  _createSilencePcmStream () {
+    // 48kHz stereo s16le, 20ms frames => 960 samples/frame/channel => 3840 bytes/frame.
+    const frame = Buffer.alloc(960 * 2 * 2)
+    const stream = new Readable({ read () {} })
+
+    const timer = setInterval(() => {
+      try {
+        stream.push(frame)
+      } catch {}
+    }, 20)
+    timer.unref?.()
+
+    const cleanup = () => {
+      try { clearInterval(timer) } catch {}
+    }
+    stream.on('close', cleanup)
+    stream.on('end', cleanup)
+    stream.on('error', cleanup)
+
+    return stream
+  }
+
+  async _connectToVoice ({ guild, voiceChannelId }) {
+    this._ensureVoiceLib()
+
+    if (!guild?.id || !guild?.voiceAdapterCreator) {
+      throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'guild requerido para conectar a voz.')
+    }
+
+    const guildId = String(guild.id)
+    const existing = this._getGuildVoice(guildId)
+    if (existing?.connection && existing?.player) return existing
+
+    const connection = voice.joinVoiceChannel({
+      channelId: voiceChannelId,
+      guildId,
+      adapterCreator: guild.voiceAdapterCreator,
+      selfDeaf: true
+    })
+
+    try {
+      await voice.entersState(connection, voice.VoiceConnectionStatus.Ready, 20_000)
+    } catch (e) {
+      try { connection.destroy() } catch {}
+      throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'No pude conectar al canal de voz.')
+    }
+
+    const player = voice.createAudioPlayer({
+      behaviors: {
+        noSubscriber: voice.NoSubscriberBehavior.Pause
+      }
+    })
+
+    connection.subscribe(player)
+
+    const holder = { connection, player, stream: null }
+    this._voice.set(guildId, holder)
+    return holder
+  }
+
+  _stopVoice (guildId) {
+    const id = String(guildId)
+    const holder = this._voice.get(id)
+    if (!holder) return
+
+    try { holder.player?.stop?.(true) } catch {}
+    try { holder.stream?.destroy?.() } catch {}
+    try { holder.connection?.destroy?.() } catch {}
+    this._voice.delete(id)
+  }
+
+  _playSilence (guildId) {
+    this._ensureVoiceLib()
+    const holder = this._getGuildVoice(guildId)
+    if (!holder?.player) return false
+
+    try { holder.stream?.destroy?.() } catch {}
+    const stream = this._createSilencePcmStream()
+
+    const resource = voice.createAudioResource(stream, {
+      inputType: voice.StreamType.Raw,
+      inlineVolume: false
+    })
+
+    holder.stream = stream
+    holder.player.play(resource)
+    return true
   }
 
   getState (guildId) {
@@ -245,7 +350,7 @@ class MusicService {
     return this._store.snapshot(state)
   }
 
-  async play ({ guildId, voiceChannelId, textChannelId, requestedBy, query }) {
+  async play ({ guildId, guild = null, voiceChannelId, textChannelId, requestedBy, query }) {
     if (!guildId) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'guildId requerido.')
     if (!voiceChannelId) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'voiceChannelId requerido.')
     const q = String(query || '').trim()
@@ -265,6 +370,11 @@ class MusicService {
       const res = this._queues.enqueue(state, track)
       this._store.touch(state)
 
+      if (res.started) {
+        await this._connectToVoice({ guild, voiceChannelId })
+        this._playSilence(guildId)
+      }
+
       return { ...res, state: this._store.snapshot(state) }
     })
   }
@@ -274,6 +384,11 @@ class MusicService {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
       this._queues.pause(state)
+      try {
+        this._ensureVoiceLib()
+        const holder = this._getGuildVoice(guildId)
+        holder?.player?.pause?.(true)
+      } catch {}
       this._store.touch(state)
       return this._store.snapshot(state)
     })
@@ -284,6 +399,11 @@ class MusicService {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
       this._queues.resume(state)
+      try {
+        this._ensureVoiceLib()
+        const holder = this._getGuildVoice(guildId)
+        holder?.player?.unpause?.()
+      } catch {}
       this._store.touch(state)
       return this._store.snapshot(state)
     })
@@ -294,6 +414,7 @@ class MusicService {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
       this._queues.stop(state)
+      this._stopVoice(guildId)
       this._store.touch(state)
       this._store.maybeScheduleDispose(state)
       return this._store.snapshot(state)
@@ -305,6 +426,16 @@ class MusicService {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
       const res = this._queues.skip(state)
+      if (res.ended) this._stopVoice(guildId)
+      else {
+        this._playSilence(guildId)
+        if (state.isPaused) {
+          try {
+            const holder = this._getGuildVoice(guildId)
+            holder?.player?.pause?.(true)
+          } catch {}
+        }
+      }
       this._store.touch(state)
       this._store.maybeScheduleDispose(state)
       return { ...res, state: this._store.snapshot(state) }
