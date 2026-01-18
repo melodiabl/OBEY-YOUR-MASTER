@@ -14,4 +14,3 @@ const EconomyTransactionSchema = new Schema(
 )
 
 module.exports = model('EconomyTransaction', EconomyTransactionSchema)
-

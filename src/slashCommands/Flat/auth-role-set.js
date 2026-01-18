@@ -47,4 +47,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Rol interno de <@${target.id}> -> **${role}**.`, ephemeral: true })
   }
 }
-

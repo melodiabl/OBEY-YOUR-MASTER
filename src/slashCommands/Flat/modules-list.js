@@ -41,4 +41,3 @@ module.exports = {
     return interaction.reply({ content: lines.join('\n'), ephemeral: true })
   }
 }
-

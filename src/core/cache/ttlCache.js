@@ -32,4 +32,3 @@ module.exports = class TTLCache {
     this._map.delete(key)
   }
 }
-

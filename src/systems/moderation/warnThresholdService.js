@@ -36,4 +36,3 @@ async function handleWarnThresholdKick ({
 }
 
 module.exports = { handleWarnThresholdKick }
-

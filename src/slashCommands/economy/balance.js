@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js')
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('balance')
@@ -8,15 +8,15 @@ module.exports = {
         .setDescription('Ver el saldo de otro usuario')
         .setRequired(false)
     ),
-  async execute(client, interaction) {
-    const user = interaction.options.getUser('usuario') || interaction.user;
-    const userData = await client.db.getUserData(user.id);
+  async execute (client, interaction) {
+    const user = interaction.options.getUser('usuario') || interaction.user
+    const userData = await client.db.getUserData(user.id)
     await interaction.reply({
       content:
         `💰 **Saldo de ${user.username}**\n` +
         `🪙 Dinero en mano: **${userData.money || 0}**\n` +
         `🏦 Banco: **${userData.bank || 0}**`,
-      ephermal: false,
-    });
-  },
-};
+      ephermal: false
+    })
+  }
+}

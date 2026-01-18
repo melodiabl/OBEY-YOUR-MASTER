@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js')
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('inventory')
@@ -8,13 +8,13 @@ module.exports = {
         .setDescription('Usuario cuyo inventario quieres ver')
         .setRequired(false)
     ),
-  async execute(client, interaction) {
-    const user = interaction.options.getUser('usuario') || interaction.user;
-    const userData = await client.db.getUserData(user.id);
-    const items = userData.inventory || [];
+  async execute (client, interaction) {
+    const user = interaction.options.getUser('usuario') || interaction.user
+    const userData = await client.db.getUserData(user.id)
+    const items = userData.inventory || []
     if (!items.length) {
-      return interaction.reply(`${user.username} no tiene ítems en su inventario.`);
+      return interaction.reply(`${user.username} no tiene ítems en su inventario.`)
     }
-    await interaction.reply(`🎒 Inventario de ${user.username}:\n- ${items.join('\n- ')}`);
-  },
-};
+    await interaction.reply(`🎒 Inventario de ${user.username}:\n- ${items.join('\n- ')}`)
+  }
+}

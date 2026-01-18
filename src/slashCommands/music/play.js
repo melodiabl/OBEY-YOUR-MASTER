@@ -1,6 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
 const { botHasVoicePerms, isSoundCloudUrl } = require('../../utils/voiceChecks')
+const { formatDuration } = require('../../utils/timeFormat')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -12,28 +13,27 @@ module.exports = {
         .setDescription('Enlace o busqueda')
         .setRequired(true)
     ),
+  DEFER: true,
   async execute (client, interaction) {
     const query = interaction.options.getString('query', true).trim()
     if (isSoundCloudUrl(query)) {
-      return interaction.reply({ content: 'SoundCloud no esta soportado en este bot. Usa YouTube o Spotify.', ephemeral: true })
+      return interaction.editReply({ content: '❌ SoundCloud no esta soportado. Usa YouTube o Spotify.' })
     }
 
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
-      return interaction.reply({ content: 'Debes estar en un canal de voz.', ephemeral: true })
+      return interaction.editReply({ content: '❌ Debes estar en un canal de voz.' })
     }
 
     const me = interaction.guild.members.me || interaction.guild.members.cache.get(client.user.id)
     const { ok: canJoin } = botHasVoicePerms(voiceChannel, me)
     if (!canJoin) {
-      return interaction.reply({ content: 'No tengo permisos para unirme o hablar en ese canal de voz.', ephemeral: true })
+      return interaction.editReply({ content: '❌ No tengo permisos para unirme o hablar en ese canal de voz.' })
     }
-
-    await interaction.deferReply()
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply('El sistema de musica no esta inicializado.')
+      if (!music) return interaction.editReply('❌ El sistema de musica no esta inicializado.')
 
       const res = await music.play({
         guildId: interaction.guild.id,
@@ -44,13 +44,32 @@ module.exports = {
         query
       })
 
-      if (res.started) {
-        return interaction.editReply(`Ahora: **${res.track.title}**`)
+      if (res.isPlaylist) {
+        const embed = new EmbedBuilder()
+          .setTitle('🎶 Lista de reproducción agregada')
+          .setDescription(`Se han agregado **${res.trackCount}** canciones de la lista **${res.playlistName || 'Desconocida'}**`)
+          .setColor('#5865F2')
+          .setTimestamp()
+        return interaction.editReply({ embeds: [embed] })
       }
 
-      return interaction.editReply(`Agregado a la cola: **${res.track.title}**`)
+      const { track } = res
+      const embed = new EmbedBuilder()
+        .setTitle(res.started ? '🎶 Reproduciendo ahora' : '➕ Agregado a la cola')
+        .setDescription(`[${track.title}](${track.uri})`)
+        .addFields(
+          { name: '👤 Autor', value: `\`${track.author}\``, inline: true },
+          { name: '⏳ Duración', value: `\`${formatDuration(track.duration)}\``, inline: true },
+          { name: '👤 Pedido por', value: `<@${track.requestedBy.id}>`, inline: true }
+        )
+        .setColor(res.started ? '#00FF00' : '#FFFF00')
+        .setTimestamp()
+
+      if (track.thumbnail) embed.setThumbnail(track.thumbnail)
+
+      return interaction.editReply({ embeds: [embed] })
     } catch (e) {
-      return interaction.editReply(`No pude procesar tu solicitud: ${e?.message || e}`)
+      return interaction.editReply(`❌ No pude procesar tu solicitud: ${e?.message || e}`)
     }
   }
 }

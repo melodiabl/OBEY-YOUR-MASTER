@@ -42,4 +42,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Quitado <@&${discordRole.id}> del mapeo de **${internalRole}**.`, ephemeral: true })
   }
 }
-

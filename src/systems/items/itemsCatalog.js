@@ -3,4 +3,3 @@ module.exports = Object.freeze([
   { itemId: 'ticket_boost', name: 'Ticket Boost', description: 'Mejora temporal (placeholder)', type: 'consumable', buyPrice: 500, sellPrice: 250 },
   { itemId: 'badge_founder', name: 'Insignia Founder', description: 'Item permanente (cosmético)', type: 'permanent', buyPrice: 2500, sellPrice: 500 }
 ])
-

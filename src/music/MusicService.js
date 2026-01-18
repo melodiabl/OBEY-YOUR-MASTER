@@ -1,11 +1,4 @@
 const crypto = require('node:crypto')
-const { Readable } = require('node:stream')
-
-let voice = null
-try {
-  // eslint-disable-next-line n/no-missing-require
-  voice = require('@discordjs/voice')
-} catch {}
 
 const MUSIC_ERROR_CODES = {
   BAD_REQUEST: 'BAD_REQUEST',
@@ -13,7 +6,8 @@ const MUSIC_ERROR_CODES = {
   WRONG_VOICE_CHANNEL: 'WRONG_VOICE_CHANNEL',
   NOT_PLAYING: 'NOT_PLAYING',
   NOT_PAUSED: 'NOT_PAUSED',
-  ALREADY_PAUSED: 'ALREADY_PAUSED'
+  ALREADY_PAUSED: 'ALREADY_PAUSED',
+  NO_RESULTS: 'NO_RESULTS'
 }
 
 class MusicError extends Error {
@@ -21,20 +15,6 @@ class MusicError extends Error {
     super(message)
     this.name = 'MusicError'
     this.code = code
-  }
-}
-
-class AudioProvider {
-  constructor () {
-    if (new.target === AudioProvider) throw new Error('AudioProvider es una interfaz.')
-  }
-
-  async resolve () {
-    throw new Error('Not implemented')
-  }
-
-  async getStream () {
-    throw new Error('Not implemented')
   }
 }
 
@@ -48,6 +28,8 @@ class PlayerState {
 
     this.currentTrack = null
     this.queue = []
+    this.loop = 'none' // none | track | queue
+    this.volume = 100
 
     this.createdAt = Date.now()
     this.updatedAt = Date.now()
@@ -89,7 +71,6 @@ class QueueManager {
   pause (state) {
     if (!state.currentTrack) throw new MusicError(MUSIC_ERROR_CODES.NO_ACTIVE_QUEUE, 'No hay música reproduciéndose.')
     if (state.isPaused) throw new MusicError(MUSIC_ERROR_CODES.ALREADY_PAUSED, 'La música ya está pausada.')
-    if (!state.isPlaying) throw new MusicError(MUSIC_ERROR_CODES.NOT_PLAYING, 'No hay música reproduciéndose.')
     state.status = 'PAUSED'
   }
 
@@ -100,19 +81,27 @@ class QueueManager {
   }
 
   stop (state) {
-    if (!state.currentTrack && state.queue.length === 0) {
-      throw new MusicError(MUSIC_ERROR_CODES.NO_ACTIVE_QUEUE, 'No hay música reproduciéndose.')
-    }
     state.currentTrack = null
     state.queue = []
     state.status = 'STOPPED'
     state.voiceChannelId = null
   }
 
-  skip (state) {
+  skip (state, force = false) {
     if (!state.currentTrack) throw new MusicError(MUSIC_ERROR_CODES.NO_ACTIVE_QUEUE, 'No hay música reproduciéndose.')
 
     const wasPaused = state.isPaused
+    const current = state.currentTrack
+
+    if (state.loop === 'track' && !force) {
+      // Si es loop de track y no es forzado (evento end), simplemente retornamos el mismo track
+      return { skippedTo: current, ended: false }
+    }
+
+    if (state.loop === 'queue') {
+      state.queue.push(current)
+    }
+
     const next = state.queue.shift() || null
     if (!next) {
       state.currentTrack = null
@@ -126,13 +115,18 @@ class QueueManager {
     return { skippedTo: next, ended: false }
   }
 
+  shuffle (state) {
+    if (state.queue.length < 2) return state.queue.length
+    for (let i = state.queue.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [state.queue[i], state.queue[j]] = [state.queue[j], state.queue[i]]
+    }
+    return state.queue.length
+  }
+
   clearUpcoming (state) {
     const cleared = state.queue.length
     state.queue = []
-    if (!state.currentTrack) {
-      state.status = 'STOPPED'
-      state.voiceChannelId = null
-    }
     return cleared
   }
 }
@@ -147,18 +141,6 @@ function normalizeRequestedBy (requestedBy) {
   const id = requestedBy.id || requestedBy.userId || null
   const tag = requestedBy.tag || requestedBy.username || null
   return { id: id ? String(id) : null, tag: tag ? String(tag) : null }
-}
-
-function makeTrackFromQuery ({ guildId, query, requestedBy }) {
-  const q = String(query || '').trim()
-  return {
-    id: makeId(),
-    guildId: String(guildId),
-    title: q,
-    query: q,
-    requestedBy: normalizeRequestedBy(requestedBy),
-    addedAt: Date.now()
-  }
 }
 
 class PlayerStateStore {
@@ -194,6 +176,8 @@ class PlayerStateStore {
       textChannelId: state.textChannelId,
       currentTrack: state.currentTrack,
       queue: state.queue.slice(),
+      loop: state.loop,
+      volume: state.volume,
       updatedAt: state.updatedAt
     }
   }
@@ -212,9 +196,6 @@ class PlayerStateStore {
 
   maybeScheduleDispose (state) {
     if (!state.isStopped) return
-    if (state.currentTrack) return
-    if (state.queue.length) return
-
     const guildId = state.guildId
     const existing = this._idleTimers.get(guildId)
     if (existing) clearTimeout(existing)
@@ -222,11 +203,7 @@ class PlayerStateStore {
     const t = setTimeout(() => {
       try {
         const s = this._states.get(guildId)
-        if (!s) return
-        if (!s.isStopped) return
-        if (s.currentTrack) return
-        if (s.queue.length) return
-        this._states.delete(guildId)
+        if (s && s.isStopped) this._states.delete(guildId)
       } catch {}
       this._idleTimers.delete(guildId)
     }, this._idleTtlMs)
@@ -236,146 +213,124 @@ class PlayerStateStore {
 }
 
 class MusicService {
-  constructor (options = {}) {
+  constructor (shoukaku, options = {}) {
+    this.shoukaku = shoukaku
     this._store = new PlayerStateStore({
-      idleTtlMs: options.idleTtlMs ?? 30 * 60 * 1000
+      idleTtlMs: options.idleTtlMs ?? 5 * 60 * 1000
     })
     this._queues = new QueueManager()
-    this._voice = new Map() // guildId -> { connection, player, stream }
   }
 
-  _ensureVoiceLib () {
-    if (!voice) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'Voz no disponible: instala @discordjs/voice.')
-  }
+  async _getOrCreatePlayer (guildId, voiceChannelId) {
+    let player = this.shoukaku.players.get(guildId)
+    if (player) return player
 
-  _getGuildVoice (guildId) {
-    return this._voice.get(String(guildId)) || null
-  }
+    const node = this.shoukaku.options.nodeResolver(this.shoukaku.nodes)
+    if (!node) throw new Error('No hay nodos de Lavalink disponibles.')
 
-  _createSilencePcmStream () {
-    // 48kHz stereo s16le, 20ms frames => 960 samples/frame/channel => 3840 bytes/frame.
-    const frame = Buffer.alloc(960 * 2 * 2)
-    const stream = new Readable({ read () {} })
-
-    const timer = setInterval(() => {
-      try {
-        stream.push(frame)
-      } catch {}
-    }, 20)
-    timer.unref?.()
-
-    const cleanup = () => {
-      try { clearInterval(timer) } catch {}
-    }
-    stream.on('close', cleanup)
-    stream.on('end', cleanup)
-    stream.on('error', cleanup)
-
-    return stream
-  }
-
-  async _connectToVoice ({ guild, voiceChannelId }) {
-    this._ensureVoiceLib()
-
-    if (!guild?.id || !guild?.voiceAdapterCreator) {
-      throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'guild requerido para conectar a voz.')
-    }
-
-    const guildId = String(guild.id)
-    const existing = this._getGuildVoice(guildId)
-    if (existing?.connection && existing?.player) return existing
-
-    const connection = voice.joinVoiceChannel({
-      channelId: voiceChannelId,
+    player = await this.shoukaku.joinVoiceChannel({
       guildId,
-      adapterCreator: guild.voiceAdapterCreator,
-      selfDeaf: true
+      channelId: voiceChannelId,
+      shardId: 0 // Ajustar si usas sharding
     })
 
-    try {
-      await voice.entersState(connection, voice.VoiceConnectionStatus.Ready, 20_000)
-    } catch (e) {
-      try { connection.destroy() } catch {}
-      throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'No pude conectar al canal de voz.')
-    }
+    player.on('start', () => {
+      const state = this._store.getOrCreate(guildId)
+      state.status = 'PLAYING'
+    })
 
-    const player = voice.createAudioPlayer({
-      behaviors: {
-        noSubscriber: voice.NoSubscriberBehavior.Pause
+    player.on('end', async (data) => {
+      if (data.reason === 'REPLACED') return
+      try {
+        await this.skip({ guildId, voiceChannelId })
+      } catch (e) {
+        console.error(`[Music] Error automatically skipping track (${guildId}):`, e)
       }
     })
 
-    connection.subscribe(player)
-
-    const holder = { connection, player, stream: null }
-    this._voice.set(guildId, holder)
-    return holder
-  }
-
-  _stopVoice (guildId) {
-    const id = String(guildId)
-    const holder = this._voice.get(id)
-    if (!holder) return
-
-    try { holder.player?.stop?.(true) } catch {}
-    try { holder.stream?.destroy?.() } catch {}
-    try { holder.connection?.destroy?.() } catch {}
-    this._voice.delete(id)
-  }
-
-  _playSilence (guildId) {
-    this._ensureVoiceLib()
-    const holder = this._getGuildVoice(guildId)
-    if (!holder?.player) return false
-
-    try { holder.stream?.destroy?.() } catch {}
-    const stream = this._createSilencePcmStream()
-
-    const resource = voice.createAudioResource(stream, {
-      inputType: voice.StreamType.Raw,
-      inlineVolume: false
+    player.on('error', (error) => {
+      console.error(`Player Error (${guildId}):`, error)
     })
 
-    holder.stream = stream
-    holder.player.play(resource)
-    return true
+    return player
   }
 
-  getState (guildId) {
-    return this._store.getOrCreate(guildId)
-  }
-
-  snapshot (guildId) {
-    const state = this._store.getOrCreate(guildId)
-    return this._store.snapshot(state)
-  }
-
-  async play ({ guildId, guild = null, voiceChannelId, textChannelId, requestedBy, query }) {
+  async play ({ guildId, voiceChannelId, textChannelId, requestedBy, query }) {
     if (!guildId) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'guildId requerido.')
     if (!voiceChannelId) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'voiceChannelId requerido.')
-    const q = String(query || '').trim()
-    if (!q) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'Debes proporcionar una búsqueda o enlace.')
+
+    console.log(`[Music] Intentando resolver: ${query}`)
+    console.log(`[Music] Nodos disponibles: ${this.shoukaku.nodes.size}`)
+
+    const node = this.shoukaku.options.nodeResolver(this.shoukaku.nodes)
+    if (!node) throw new Error('Lavalink no está conectado o no hay nodos disponibles.')
+
+    const result = await node.rest.resolve(query.startsWith('http') ? query : `ytsearch:${query}`)
+    
+    // Normalizar respuesta de Lavalink v3/v4
+    let tracks = []
+    let isPlaylist = false
+    let playlistName = null
+
+    if (result) {
+      if (result.loadType === 'TRACK_LOADED' || result.loadType === 'track') {
+        tracks = result.tracks || [result.data]
+      } else if (result.loadType === 'PLAYLIST_LOADED' || result.loadType === 'playlist') {
+        isPlaylist = true
+        tracks = result.tracks || result.data.tracks
+        playlistName = result.playlistInfo?.name || result.data.info?.name
+      } else if (result.loadType === 'SEARCH_RESULT' || result.loadType === 'search') {
+        tracks = result.tracks || result.data
+      }
+    }
+
+    console.log(`[Music] LoadType: ${result?.loadType}, Tracks Encontrados: ${tracks?.length || 0}`)
+
+    if (!tracks || !tracks.length) {
+      throw new MusicError(MUSIC_ERROR_CODES.NO_RESULTS, 'No se encontraron resultados.')
+    }
+
+    const tracksToEnqueue = isPlaylist ? tracks : [tracks[0]]
 
     return await this._store.withGuildLock(guildId, async () => {
       const state = this._store.getOrCreate(guildId)
-
-      if (state.voiceChannelId && state.voiceChannelId !== voiceChannelId && !state.isStopped) {
-        throw new MusicError(MUSIC_ERROR_CODES.WRONG_VOICE_CHANNEL, 'Ya hay música “activa” en otro canal de voz de este servidor.')
-      }
-
       state.voiceChannelId = voiceChannelId
-      state.textChannelId = textChannelId || state.textChannelId || null
+      state.textChannelId = textChannelId || state.textChannelId
 
-      const track = makeTrackFromQuery({ guildId, query: q, requestedBy })
-      const res = this._queues.enqueue(state, track)
-      this._store.touch(state)
+      let firstRes = null
+      for (const lavalinkTrack of tracksToEnqueue) {
+        const info = lavalinkTrack.info
+        const thumbnail = info.artworkUrl || (info.uri.includes('youtube.com') || info.uri.includes('youtu.be') ? `https://img.youtube.com/vi/${info.identifier}/maxresdefault.jpg` : null)
 
-      if (res.started) {
-        await this._connectToVoice({ guild, voiceChannelId })
-        this._playSilence(guildId)
+        const track = {
+          id: makeId(),
+          title: info.title,
+          author: info.author,
+          uri: info.uri,
+          thumbnail,
+          duration: info.length,
+          lavalinkTrack: lavalinkTrack.encoded,
+          requestedBy: normalizeRequestedBy(requestedBy)
+        }
+
+        const res = this._queues.enqueue(state, track)
+        if (!firstRes) firstRes = res
       }
 
-      return { ...res, state: this._store.snapshot(state) }
+      const player = await this._getOrCreatePlayer(guildId, voiceChannelId)
+
+      if (firstRes.started) {
+        await player.playTrack({ track: { encoded: firstRes.track.lavalinkTrack } })
+      }
+
+      this._store.touch(state)
+      return {
+        ...firstRes,
+        isPlaylist,
+        playlistName,
+        trackCount: tracksToEnqueue.length,
+        state: this._store.snapshot(state)
+      }
     })
   }
 
@@ -384,11 +339,10 @@ class MusicService {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
       this._queues.pause(state)
-      try {
-        this._ensureVoiceLib()
-        const holder = this._getGuildVoice(guildId)
-        holder?.player?.pause?.(true)
-      } catch {}
+
+      const player = this.shoukaku.players.get(guildId)
+      if (player) await player.setPaused(true)
+
       this._store.touch(state)
       return this._store.snapshot(state)
     })
@@ -399,11 +353,10 @@ class MusicService {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
       this._queues.resume(state)
-      try {
-        this._ensureVoiceLib()
-        const holder = this._getGuildVoice(guildId)
-        holder?.player?.unpause?.()
-      } catch {}
+
+      const player = this.shoukaku.players.get(guildId)
+      if (player) await player.setPaused(false)
+
       this._store.touch(state)
       return this._store.snapshot(state)
     })
@@ -414,32 +367,49 @@ class MusicService {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
       this._queues.stop(state)
-      this._stopVoice(guildId)
+
+      const player = this.shoukaku.players.get(guildId)
+      if (player) {
+        await player.stopTrack()
+        await this.shoukaku.leaveVoiceChannel(guildId)
+      }
+
       this._store.touch(state)
       this._store.maybeScheduleDispose(state)
       return this._store.snapshot(state)
     })
   }
 
-  async skip ({ guildId, voiceChannelId }) {
+  async skip ({ guildId, voiceChannelId, force = false }) {
     return await this._store.withGuildLock(guildId, async () => {
       const state = this._store.getOrCreate(guildId)
-      this._queues.assertSameVoice(state, voiceChannelId)
-      const res = this._queues.skip(state)
-      if (res.ended) this._stopVoice(guildId)
-      else {
-        this._playSilence(guildId)
-        if (state.isPaused) {
-          try {
-            const holder = this._getGuildVoice(guildId)
-            holder?.player?.pause?.(true)
-          } catch {}
+      if (force) this._queues.assertSameVoice(state, voiceChannelId)
+      const res = this._queues.skip(state, force)
+
+      const player = this.shoukaku.players.get(guildId)
+      if (res.ended) {
+        if (player) {
+          await player.stopTrack()
+          await this.shoukaku.leaveVoiceChannel(guildId)
         }
+      } else if (player) {
+        await player.playTrack({ track: { encoded: state.currentTrack.lavalinkTrack } })
       }
+
       this._store.touch(state)
       this._store.maybeScheduleDispose(state)
       return { ...res, state: this._store.snapshot(state) }
     })
+  }
+
+  async getQueue (guildId) {
+    const state = this._store.getOrCreate(guildId)
+    return this._store.snapshot(state)
+  }
+
+  async nowPlaying ({ guildId }) {
+    const state = this._store.getOrCreate(guildId)
+    return this._store.snapshot(state)
   }
 
   async clearQueue ({ guildId, voiceChannelId }) {
@@ -448,24 +418,62 @@ class MusicService {
       this._queues.assertSameVoice(state, voiceChannelId)
       const cleared = this._queues.clearUpcoming(state)
       this._store.touch(state)
-      this._store.maybeScheduleDispose(state)
       return { cleared, state: this._store.snapshot(state) }
     })
   }
 
-  async getQueue ({ guildId, voiceChannelId }) {
+  async setVolume ({ guildId, voiceChannelId, volume }) {
     return await this._store.withGuildLock(guildId, async () => {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
+
+      const vol = Math.max(0, Math.min(1000, volume))
+      state.volume = vol
+
+      const player = this.shoukaku.players.get(guildId)
+      if (player) await player.setVolume(vol)
+
       this._store.touch(state)
       return this._store.snapshot(state)
     })
   }
 
-  async nowPlaying ({ guildId, voiceChannelId }) {
+  async setLoop ({ guildId, voiceChannelId, mode }) {
     return await this._store.withGuildLock(guildId, async () => {
       const state = this._store.getOrCreate(guildId)
       this._queues.assertSameVoice(state, voiceChannelId)
+
+      if (!['none', 'track', 'queue'].includes(mode)) {
+        throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'Modo de loop inválido.')
+      }
+
+      state.loop = mode
+      this._store.touch(state)
+      return this._store.snapshot(state)
+    })
+  }
+
+  async shuffle ({ guildId, voiceChannelId }) {
+    return await this._store.withGuildLock(guildId, async () => {
+      const state = this._store.getOrCreate(guildId)
+      this._queues.assertSameVoice(state, voiceChannelId)
+
+      const count = this._queues.shuffle(state)
+      this._store.touch(state)
+      return { count, state: this._store.snapshot(state) }
+    })
+  }
+
+  async seek ({ guildId, voiceChannelId, position }) {
+    return await this._store.withGuildLock(guildId, async () => {
+      const state = this._store.getOrCreate(guildId)
+      this._queues.assertSameVoice(state, voiceChannelId)
+
+      if (!state.currentTrack) throw new MusicError(MUSIC_ERROR_CODES.NO_ACTIVE_QUEUE, 'No hay música reproduciéndose.')
+
+      const player = this.shoukaku.players.get(guildId)
+      if (player) await player.seekTo(position)
+
       this._store.touch(state)
       return this._store.snapshot(state)
     })
@@ -476,7 +484,6 @@ module.exports = {
   MusicService,
   QueueManager,
   PlayerState,
-  AudioProvider,
   PlayerStateStore,
   MusicError,
   MUSIC_ERROR_CODES

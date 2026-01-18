@@ -17,4 +17,3 @@ const GiveawaySchema = new Schema(
 GiveawaySchema.index({ guildID: 1, messageID: 1 }, { unique: true })
 
 module.exports = model('Giveaway', GiveawaySchema)
-

@@ -42,4 +42,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Mapeado <@&${discordRole.id}> -> **${internalRole}**.`, ephemeral: true })
   }
 }
-

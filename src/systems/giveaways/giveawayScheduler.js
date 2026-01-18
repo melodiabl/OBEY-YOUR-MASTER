@@ -20,4 +20,3 @@ function startGiveawayScheduler (client) {
 }
 
 module.exports = { startGiveawayScheduler }
-

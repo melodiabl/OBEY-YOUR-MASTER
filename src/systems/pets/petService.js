@@ -172,4 +172,3 @@ module.exports = {
   renamePet,
   healPet
 }
-

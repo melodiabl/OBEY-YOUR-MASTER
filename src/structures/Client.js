@@ -49,11 +49,8 @@ module.exports = class extends Client {
       presence: {
         activities: [
           {
-            name:
-              `${abbreviateNumber(
-                new GuildDB().getGuildAllData().length
-              )} servers` ?? process.env.STATUS,
-            type: ActivityType[process.env.STATUS_TYPE] ?? ActivityType.Playing
+            name: process.env.STATUS || 'OBEY YOUR MASTER',
+            type: ActivityType[process.env.STATUS_TYPE] ?? ActivityType.Listening
           }
         ],
         status: PresenceUpdateStatus.Online
@@ -83,10 +80,18 @@ module.exports = class extends Client {
     await this.loadHandlers()
     await this.loadCommands()
     await this.loadSlashCommands()
-    await initMusic(this)
+    this.initMusicSystem()
     await this.db.connect()
 
     this.login(process.env.BOT_TOKEN)
+  }
+
+  async initMusicSystem () {
+    try {
+      await initMusic(this)
+    } catch (e) {
+      console.error('[Music] Error inicializando el sistema de música:'.red, e)
+    }
   }
 
   async loadCommands () {

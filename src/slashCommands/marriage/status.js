@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js')
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('status')
@@ -8,13 +8,13 @@ module.exports = {
         .setDescription('Usuario cuyo estado quieres ver')
         .setRequired(false)
     ),
-  async execute(client, interaction) {
-    const user = interaction.options.getUser('usuario') || interaction.user;
-    const userData = await client.db.getUserData(user.id);
-    const partnerId = userData.partner;
+  async execute (client, interaction) {
+    const user = interaction.options.getUser('usuario') || interaction.user
+    const userData = await client.db.getUserData(user.id)
+    const partnerId = userData.partner
     if (!partnerId) {
-      return interaction.reply(`${user.username} está soltero/a.`);
+      return interaction.reply(`${user.username} está soltero/a.`)
     }
-    await interaction.reply(`${user.username} está casado con <@${partnerId}>.`);
-  },
-};
+    await interaction.reply(`${user.username} está casado con <@${partnerId}>.`)
+  }
+}

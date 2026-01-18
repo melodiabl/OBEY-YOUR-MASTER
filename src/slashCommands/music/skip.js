@@ -5,21 +5,26 @@ module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('skip')
     .setDescription('Salta la cancion actual'),
+  DEFER: true,
   async execute (client, interaction) {
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
-      return interaction.reply({ content: 'Debes estar en un canal de voz.', ephemeral: true })
+      return interaction.editReply({ content: 'Debes estar en un canal de voz.' })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.reply({ content: 'El sistema de musica no esta inicializado.', ephemeral: true })
+      if (!music) return interaction.editReply('El sistema de musica no esta inicializado.')
 
-      const res = await music.skip({ guildId: interaction.guild.id, voiceChannelId: voiceChannel.id })
-      if (res.ended) return interaction.reply('Cancion saltada. La cola termino.')
-      return interaction.reply(`Cancion saltada. Ahora: **${res.skippedTo.title}**`)
+      const res = await music.skip({
+        guildId: interaction.guild.id,
+        voiceChannelId: voiceChannel.id,
+        force: true
+      })
+      if (res.ended) return interaction.editReply('⏭️ Cancion saltada. La cola termino.')
+      return interaction.editReply(`⏭️ Cancion saltada. Ahora: **${res.skippedTo.title}**`)
     } catch (e) {
-      return interaction.reply({ content: e?.message || String(e || 'Error desconocido.'), ephemeral: true })
+      return interaction.editReply(e?.message || String(e || 'Error desconocido.'))
     }
   }
 }

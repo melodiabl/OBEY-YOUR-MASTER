@@ -58,4 +58,3 @@ module.exports = {
     return interaction.reply({ embeds: [embed], ephemeral: true })
   }
 }
-

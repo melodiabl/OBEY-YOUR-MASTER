@@ -15,4 +15,3 @@ const JobProfileSchema = new Schema(
 JobProfileSchema.index({ guildID: 1, userID: 1 }, { unique: true })
 
 module.exports = model('JobProfile', JobProfileSchema)
-

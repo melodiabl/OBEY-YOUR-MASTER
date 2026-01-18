@@ -1,0 +1,88 @@
+server: # REST and WS server
+  port: 2333
+  address: 0.0.0.0
+lavalink:
+  plugins:
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.16.0"
+      repository: "https://maven.lavalink.dev/releases"
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.3.0"
+      repository: "https://maven.lavalink.dev/releases"
+  server:
+    password: "youshallnotpass"
+    sources:
+      youtube: false
+      bandcamp: true
+      soundcloud: true
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+    lavasrc:
+      providers:
+        - "ytsearch:\"%ISRC%\""
+        - "ytsearch:%QUERY%"
+      sources:
+        spotify: true
+        applemusic: false
+        deezer: false
+        yandexmusic: false
+        floweryts: false
+        youtube: true
+      spotify:
+        clientId: ""
+        clientSecret: ""
+        countryCode: "US"
+        playlistLoadLimit: 6
+        albumLoadLimit: 6
+    filters: # Enablable filters
+      volume: true
+      equalizer: true
+      karaoke: true
+      timescale: true
+      tremolo: true
+      vibrato: true
+      distortion: true
+      rotation: true
+      channelMix: true
+      lowPass: true
+    bufferDurationMs: 400 # The duration of the NAS buffer. Higher values fare better against longer GC pauses. Minimum of 40ms.
+    frameBufferDurationMs: 5000 # How many milliseconds of audio to keep buffered
+    opusEncodingQuality: 10 # Quality of the Opus encoder. 0-10, where 10 is the best quality but also the most CPU intensive.
+    resamplingQuality: LOW # Quality of the resampling process. LOW, MEDIUM or HIGH.
+    trackStuckThresholdMs: 10000 # The threshold for how long a track can be stuck. A track is stuck if it does not send any audio frames.
+    useSeekGhosting: true # Seek ghosting is the effect where the audio fades out and in when seeking.
+    youtubePlaylistLoadLimit: 6 # Number of pages at 100 each
+    playerUpdateInterval: 5 # How often to send player updates to clients (in seconds)
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: true
+    gc-warnings: true
+
+metrics:
+  prometheus:
+    enabled: false
+    endpoint: /metrics
+
+sentry:
+  dsn: ""
+  environment: ""
+
+logging:
+  file:
+    path: ./logs/
+
+  level:
+    root: INFO
+    lavalink: INFO
+
+  request:
+    enabled: true
+    includeClientInfo: true
+    includeHeaders: false
+    includeQueryString: true
+    includePayload: true
+    maxPayloadLength: 10000
+
+  logback:
+    rollingpolicy:
+      max-file-size: 1GB
+      max-history: 30

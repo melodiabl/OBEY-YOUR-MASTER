@@ -27,4 +27,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Mensajes borrados: **${deleted.size}**.`, ephemeral: true })
   }
 }
-

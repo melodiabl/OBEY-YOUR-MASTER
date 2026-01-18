@@ -31,4 +31,3 @@ async function getAnimal (type) {
 }
 
 module.exports = { getAnimal }
-

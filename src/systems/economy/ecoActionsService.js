@@ -211,4 +211,3 @@ module.exports = {
   randInt,
   getBalances
 }
-

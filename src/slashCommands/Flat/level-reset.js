@@ -27,4 +27,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Nivel de <@${target.id}> reseteado.`, ephemeral: true })
   }
 }
-

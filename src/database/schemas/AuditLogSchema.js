@@ -12,4 +12,3 @@ const AuditLogSchema = new Schema({
 })
 
 module.exports = model('AuditLog', AuditLogSchema)
-

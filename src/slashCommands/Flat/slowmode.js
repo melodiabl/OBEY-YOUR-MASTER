@@ -26,4 +26,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Slowmode actualizado a **${seconds}s**.`, ephemeral: true })
   }
 }
-

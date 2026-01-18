@@ -4,6 +4,10 @@ const { connect } = require('mongoose')
 const GuildSchema = require('./schemas/GuildSchema')
 const UserSchema = require('./schemas/UserSchema')
 module.exports = class Database {
+  constructor () {
+    this._guildCache = new Map()
+  }
+
   connect () {
     console.log('Conectando a la base de datos'.yellow)
 
@@ -19,6 +23,8 @@ module.exports = class Database {
   }
 
   async getGuildData (guildID) {
+    if (this._guildCache.has(guildID)) return this._guildCache.get(guildID)
+
     let guildData = await GuildSchema.findOne({ guildID })
 
     if (!guildData) {
@@ -27,6 +33,11 @@ module.exports = class Database {
       })
       await guildData.save().catch((e) => console.log(e))
     }
+
+    this._guildCache.set(guildID, guildData)
+    // Cache de 30 segundos
+    setTimeout(() => this._guildCache.delete(guildID), 30_000)
+
     return guildData
   }
 

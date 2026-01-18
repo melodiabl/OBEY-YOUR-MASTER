@@ -16,4 +16,3 @@ const RpsStatsSchema = new Schema(
 RpsStatsSchema.index({ guildID: 1, userID: 1 }, { unique: true })
 
 module.exports = model('RpsStats', RpsStatsSchema)
-

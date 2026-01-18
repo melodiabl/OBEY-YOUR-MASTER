@@ -27,4 +27,3 @@ const QuestProgressSchema = new Schema(
 QuestProgressSchema.index({ guildID: 1, userID: 1, dateKey: 1 }, { unique: true })
 
 module.exports = model('QuestProgress', QuestProgressSchema)
-

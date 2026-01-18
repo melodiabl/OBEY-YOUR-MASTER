@@ -20,4 +20,3 @@ const MemberAuthSchema = new Schema(
 MemberAuthSchema.index({ guildID: 1, userID: 1 }, { unique: true })
 
 module.exports = model('MemberAuth', MemberAuthSchema)
-

@@ -10,6 +10,13 @@ function globalCooldownKey (guildId, userId) {
 }
 
 module.exports = async (client, interaction) => {
+  const reply = async (payload) => {
+    if (interaction.deferred || interaction.replied) {
+      return await interaction.editReply(payload).catch(() => {})
+    }
+    return await interaction.reply(payload).catch(() => {})
+  }
+
   try {
     if (!interaction.guild || !interaction.channel) return
     // Autocomplete: enrutar al comando si lo soporta.
@@ -33,16 +40,20 @@ module.exports = async (client, interaction) => {
     const COMANDO = client.slashCommands.get(interaction.commandName)
     if (!COMANDO) return
 
+    if (COMANDO.DEFER) {
+      await interaction.deferReply({ ephemeral: COMANDO.EPHEMERAL || false }).catch(() => {})
+    }
+
     // Cooldown global por servidor (anti-abuso base).
+    const guildMongo = await client.db.getGuildData(interaction.guild.id)
     try {
-      const guildMongo = await client.db.getGuildData(interaction.guild.id)
       const ms = Number(guildMongo?.globalCooldownMs || 0)
       if (ms > 0) {
         const key = globalCooldownKey(interaction.guild.id, interaction.user.id)
         const until = globalCooldownCache.get(key)
         if (until && until > Date.now()) {
           const remaining = Math.ceil((until - Date.now()) / 1000)
-          return interaction.reply({ content: `⏳ Espera **${remaining}s** antes de usar más comandos.`, ephemeral: true })
+          return reply({ content: `⏳ Espera **${remaining}s** antes de usar más comandos.`, ephemeral: true })
         }
         globalCooldownCache.set(key, Date.now() + ms, ms)
       }
@@ -51,7 +62,7 @@ module.exports = async (client, interaction) => {
     // OWNER (existente)
     if (COMANDO.OWNER) {
       if (!String(process.env.OWNER_IDS || '').split(' ').includes(interaction.user.id)) {
-        return interaction.reply({
+        return reply({
           content: `❌ **Solo los dueños de este bot pueden ejecutar este comando!**\n**Dueños del bot:** ${String(process.env.OWNER_IDS || '').split(' ').filter(Boolean).map(id => `<@${id}>`).join(' ')}`,
           ephemeral: true
         })
@@ -61,7 +72,7 @@ module.exports = async (client, interaction) => {
     // Permisos nativos Discord (existente)
     if (COMANDO.BOT_PERMISSIONS) {
       if (!interaction.guild.members.me.permissions.has(COMANDO.BOT_PERMISSIONS)) {
-        return interaction.reply({
+        return reply({
           content: `❌ **No tengo suficientes permisos para ejecutar este comando!**\nNecesito los siguientes permisos ${COMANDO.BOT_PERMISSIONS.map(p => `\`${p}\``).join(', ')}`,
           ephemeral: true
         })
@@ -70,7 +81,7 @@ module.exports = async (client, interaction) => {
 
     if (COMANDO.PERMISSIONS) {
       if (!interaction.member.permissions.has(COMANDO.PERMISSIONS)) {
-        return interaction.reply({
+        return reply({
           content: `❌ **No tienes suficientes permisos para ejecutar este comando!**\nNecesitas los siguientes permisos ${COMANDO.PERMISSIONS.map(p => `\`${p}\``).join(', ')}`,
           ephemeral: true
         })
@@ -93,7 +104,7 @@ module.exports = async (client, interaction) => {
       })
 
       if (!authz.ok) {
-        return interaction.reply({ content: `❌ ${authz.reason}`, ephemeral: true })
+        return reply({ content: `❌ ${authz.reason}`, ephemeral: true })
       }
     }
 
@@ -106,12 +117,11 @@ module.exports = async (client, interaction) => {
         if (alwaysAllowedCommands.has(interaction.commandName)) {
           // no-op
         } else {
-        const guildMongo = await client.db.getGuildData(interaction.guild.id)
-        const modules = guildMongo?.modules
-        const isOff = modules?.get ? modules.get(COMANDO.MODULE) === false : modules?.[COMANDO.MODULE] === false
-        if (isOff) {
-          return interaction.reply({ content: `❌ El módulo \`${COMANDO.MODULE}\` está deshabilitado en este servidor.`, ephemeral: true })
-        }
+          const modules = guildMongo?.modules
+          const isOff = modules?.get ? modules.get(COMANDO.MODULE) === false : modules?.[COMANDO.MODULE] === false
+          if (isOff) {
+            return reply({ content: `❌ El módulo \`${COMANDO.MODULE}\` está deshabilitado en este servidor.`, ephemeral: true })
+          }
         }
       } catch (e) {}
     }

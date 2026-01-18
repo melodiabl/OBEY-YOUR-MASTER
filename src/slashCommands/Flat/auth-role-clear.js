@@ -29,4 +29,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Override eliminado para <@${target.id}>.`, ephemeral: true })
   }
 }
-

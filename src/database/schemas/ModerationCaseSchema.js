@@ -16,4 +16,3 @@ const ModerationCaseSchema = new Schema(
 ModerationCaseSchema.index({ guildID: 1, caseNumber: 1 }, { unique: true })
 
 module.exports = model('ModerationCase', ModerationCaseSchema)
-

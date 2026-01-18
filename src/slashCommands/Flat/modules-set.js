@@ -58,4 +58,3 @@ module.exports = {
     return interaction.reply({ content: `✅ Modulo \`${moduleKey}\` -> **${enabled ? 'habilitado' : 'deshabilitado'}**.`, ephemeral: true })
   }
 }
-

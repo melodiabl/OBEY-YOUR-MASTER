@@ -22,4 +22,3 @@ module.exports = Object.freeze([
     cooldownMs: 2 * 60 * 60 * 1000
   }
 ])
-

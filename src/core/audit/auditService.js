@@ -75,4 +75,3 @@ async function audit ({ client, guild, payload }) {
 module.exports = {
   audit
 }
-

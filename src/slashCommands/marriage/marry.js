@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { proposeMarriage } = require('../../utils/marriageManager');
+const { SlashCommandBuilder } = require('discord.js')
+const { proposeMarriage } = require('../../utils/marriageManager')
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('marry')
@@ -9,12 +9,12 @@ module.exports = {
         .setDescription('Usuario al que quieres proponer matrimonio')
         .setRequired(true)
     ),
-  async execute(client, interaction) {
-    const user = interaction.options.getUser('usuario');
-    const result = await proposeMarriage(interaction.user.id, user.id);
+  async execute (client, interaction) {
+    const user = interaction.options.getUser('usuario')
+    const result = await proposeMarriage(interaction.user.id, user.id)
     if (!result.ok) {
-      return interaction.reply({ content: '❌ No se pudo proponer matrimonio. Verifica si ambos están solteros.', ephermal: true });
+      return interaction.reply({ content: '❌ No se pudo proponer matrimonio. Verifica si ambos están solteros.', ephermal: true })
     }
-    await interaction.reply(`💍 ${interaction.user} ha propuesto matrimonio a ${user}!`);
-  },
-};
+    await interaction.reply(`💍 ${interaction.user} ha propuesto matrimonio a ${user}!`)
+  }
+}

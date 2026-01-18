@@ -60,4 +60,3 @@ module.exports = async (client, createdChannel) => {
     // Nunca crashear por logs.
   }
 }
-
