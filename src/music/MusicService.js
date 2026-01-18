@@ -221,6 +221,39 @@ class MusicService {
     this._queues = new QueueManager()
   }
 
+  _normalizeResolveIdentifier (query) {
+    const q = String(query || '').trim()
+    if (!q) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'query requerido.')
+
+    if (/^https?:\/\//i.test(q)) return q
+
+    // Permitir identificadores/search-prefixes de Lavalink/LavaSrc tal cual.
+    // Ej: ytsearch:, ytmsearch:, scsearch:, spsearch:, amsearch:, dzsearch:, etc.
+    if (/^[a-z]+search:/i.test(q)) return q
+
+    // URIs (ej: spotify:track:..., spotify:album:..., etc.)
+    if (/^[a-z]+:/i.test(q)) return q
+
+    return `ytsearch:${q}`
+  }
+
+  _getCollectionTypeFromQuery (query) {
+    const q = String(query || '').toLowerCase()
+    if (q.includes('open.spotify.com/album') || q.startsWith('spotify:album:')) return 'album'
+    if (q.includes('open.spotify.com/playlist') || q.startsWith('spotify:playlist:')) return 'playlist'
+    if (q.startsWith('spsearch:album:')) return 'album'
+    if (q.includes('youtube.com/playlist') || q.includes('list=')) return 'playlist'
+    return null
+  }
+
+  async _applyPlayerVolume (player, volume) {
+    if (!player) return
+    const vol = Math.max(0, Math.min(1000, Number(volume)))
+    if (typeof player.setGlobalVolume === 'function') return await player.setGlobalVolume(vol)
+    if (typeof player.setVolume === 'function') return await player.setVolume(vol)
+    if (typeof player.update === 'function') return await player.update({ volume: vol })
+  }
+
   async _getOrCreatePlayer (guildId, voiceChannelId) {
     let player = this.shoukaku.players.get(guildId)
     if (player) return player
@@ -234,6 +267,11 @@ class MusicService {
       shardId: 0 // Ajustar si usas sharding
     })
 
+    try {
+      const state = this._store.getOrCreate(guildId)
+      await this._applyPlayerVolume(player, state.volume)
+    } catch {}
+
     player.on('start', () => {
       const state = this._store.getOrCreate(guildId)
       state.status = 'PLAYING'
@@ -242,7 +280,8 @@ class MusicService {
     player.on('end', async (data) => {
       if (data.reason === 'REPLACED') return
       try {
-        await this.skip({ guildId, voiceChannelId })
+        const state = this._store.getOrCreate(guildId)
+        await this.skip({ guildId, voiceChannelId: state.voiceChannelId || voiceChannelId })
       } catch (e) {
         console.error(`[Music] Error automatically skipping track (${guildId}):`, e)
       }
@@ -265,8 +304,10 @@ class MusicService {
     const node = this.shoukaku.options.nodeResolver(this.shoukaku.nodes)
     if (!node) throw new Error('Lavalink no está conectado o no hay nodos disponibles.')
 
-    const result = await node.rest.resolve(query.startsWith('http') ? query : `ytsearch:${query}`)
-    
+    const identifier = this._normalizeResolveIdentifier(query)
+    const collectionType = this._getCollectionTypeFromQuery(query)
+    const result = await node.rest.resolve(identifier)
+
     // Normalizar respuesta de Lavalink v3/v4
     let tracks = []
     let isPlaylist = false
@@ -274,13 +315,13 @@ class MusicService {
 
     if (result) {
       if (result.loadType === 'TRACK_LOADED' || result.loadType === 'track') {
-        tracks = result.tracks || [result.data]
+        tracks = result.tracks || (result.data ? [result.data] : [])
       } else if (result.loadType === 'PLAYLIST_LOADED' || result.loadType === 'playlist') {
         isPlaylist = true
-        tracks = result.tracks || result.data.tracks
-        playlistName = result.playlistInfo?.name || result.data.info?.name
+        tracks = result.tracks || result.data?.tracks || []
+        playlistName = result.playlistInfo?.name || result.data?.info?.name || null
       } else if (result.loadType === 'SEARCH_RESULT' || result.loadType === 'search') {
-        tracks = result.tracks || result.data
+        tracks = result.tracks || result.data || []
       }
     }
 
@@ -294,22 +335,27 @@ class MusicService {
 
     return await this._store.withGuildLock(guildId, async () => {
       const state = this._store.getOrCreate(guildId)
+      this._queues.assertSameVoice(state, voiceChannelId)
       state.voiceChannelId = voiceChannelId
       state.textChannelId = textChannelId || state.textChannelId
 
       let firstRes = null
       for (const lavalinkTrack of tracksToEnqueue) {
-        const info = lavalinkTrack.info
-        const thumbnail = info.artworkUrl || (info.uri.includes('youtube.com') || info.uri.includes('youtu.be') ? `https://img.youtube.com/vi/${info.identifier}/maxresdefault.jpg` : null)
+        const encoded = lavalinkTrack.encoded || lavalinkTrack.track
+        const info = lavalinkTrack.info || {}
+        const uri = info.uri || info.url || null
+        const uriStr = typeof uri === 'string' ? uri : ''
+        const isYoutube = info.sourceName === 'youtube' || uriStr.includes('youtube.com') || uriStr.includes('youtu.be')
+        const thumbnail = info.artworkUrl || (isYoutube && info.identifier ? `https://img.youtube.com/vi/${info.identifier}/maxresdefault.jpg` : null)
 
         const track = {
           id: makeId(),
-          title: info.title,
-          author: info.author,
-          uri: info.uri,
+          title: info.title || 'Sin titulo',
+          author: info.author || 'Desconocido',
+          uri: uriStr || identifier,
           thumbnail,
-          duration: info.length,
-          lavalinkTrack: lavalinkTrack.encoded,
+          duration: info.length ?? info.duration ?? 0,
+          lavalinkTrack: encoded,
           requestedBy: normalizeRequestedBy(requestedBy)
         }
 
@@ -320,6 +366,7 @@ class MusicService {
       const player = await this._getOrCreatePlayer(guildId, voiceChannelId)
 
       if (firstRes.started) {
+        await this._applyPlayerVolume(player, state.volume)
         await player.playTrack({ track: { encoded: firstRes.track.lavalinkTrack } })
       }
 
@@ -328,6 +375,7 @@ class MusicService {
         ...firstRes,
         isPlaylist,
         playlistName,
+        collectionType: isPlaylist ? (collectionType || 'playlist') : null,
         trackCount: tracksToEnqueue.length,
         state: this._store.snapshot(state)
       }
@@ -402,7 +450,7 @@ class MusicService {
     })
   }
 
-  async getQueue (guildId) {
+  async getQueue ({ guildId } = {}) {
     const state = this._store.getOrCreate(guildId)
     return this._store.snapshot(state)
   }
@@ -431,7 +479,7 @@ class MusicService {
       state.volume = vol
 
       const player = this.shoukaku.players.get(guildId)
-      if (player) await player.setVolume(vol)
+      await this._applyPlayerVolume(player, vol)
 
       this._store.touch(state)
       return this._store.snapshot(state)
