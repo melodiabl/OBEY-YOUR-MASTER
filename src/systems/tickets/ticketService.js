@@ -97,7 +97,7 @@ async function openTicket ({ client, guild, opener, topic }) {
   return { ticketNumber, channel }
 }
 
-async function closeTicket ({ guildID, channelID, closedBy }) {
+async function closeTicket ({ guildID, channelID, closedBy, channel = null, deleteChannel = true, deleteDelayMs = 2500 }) {
   const ticket = await TicketSchema.findOne({ guildID, channelID, status: 'OPEN' })
   if (!ticket) throw new Error('Este canal no corresponde a un ticket abierto.')
 
@@ -105,6 +105,14 @@ async function closeTicket ({ guildID, channelID, closedBy }) {
   ticket.closedAt = new Date()
   if (!ticket.claimedBy) ticket.claimedBy = closedBy
   await ticket.save()
+
+  if (deleteChannel && channel && String(channel.id) === String(channelID) && typeof channel.delete === 'function') {
+    const ms = Math.max(0, Number(deleteDelayMs) || 0)
+    const t = setTimeout(() => {
+      channel.delete(`Ticket #${ticket.ticketNumber} cerrado`).catch(() => {})
+    }, ms)
+    t.unref?.()
+  }
 
   return ticket
 }
@@ -198,4 +206,3 @@ module.exports = {
   removeUserFromTicket,
   getTicketByChannel
 }
-

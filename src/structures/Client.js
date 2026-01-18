@@ -145,7 +145,9 @@ module.exports = class extends Client {
 
           if (NOMBRE_COMANDO) this.slashCommands.set(NOMBRE_COMANDO, COMANDO)
 
-          this.slashArray.push(COMANDO.CMD.toJSON())
+          // Permite comandos "legacy"/migrados: se pueden ejecutar si existen en Discord,
+          // pero no se registran (no cuentan para el límite de 100 global).
+          if (COMANDO.REGISTER !== false) this.slashArray.push(COMANDO.CMD.toJSON())
         } catch (e) {
           console.log(`(/) ERROR AL CARGAR EL COMANDO ${rutaArchivo}`.bgRed)
           console.log(e)
@@ -154,11 +156,6 @@ module.exports = class extends Client {
     }
 
     console.log(`(/) ${this.slashCommands.size} Comandos cargados`.green)
-
-    if (this?.application?.commands) {
-      this.application.commands.set(this.slashArray)
-      console.log(`(/) ${this.slashCommands.size} Comandos Publicados!`.green)
-    }
   }
 
   async loadHandlers () {

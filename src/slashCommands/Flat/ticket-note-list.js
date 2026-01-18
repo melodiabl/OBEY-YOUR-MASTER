@@ -5,6 +5,7 @@ const PERMS = require('../../core/auth/permissionKeys')
 const { replyError } = require('../../utils/interactionUtils')
 
 module.exports = {
+  REGISTER: false,
   MODULE: 'tickets',
   INTERNAL_ROLE: INTERNAL_ROLES.MOD,
   INTERNAL_PERMS: [PERMS.TICKETS_MANAGE],

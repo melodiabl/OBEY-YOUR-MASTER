@@ -1,4 +1,5 @@
 const { ActivityType, PresenceUpdateStatus } = require('discord.js')
+const { registerSlashCommands } = require('../../core/commands/registerSlashCommands')
 
 module.exports = async client => {
   console.log(`Conectado como ${client.user.tag}`.rainbow)
@@ -10,9 +11,17 @@ module.exports = async client => {
   } catch (e) {}
 
   setInterval(() => pickPresence(client), 60 * 1000)
-  if (client?.application?.commands) {
-    client.application.commands.set(client.slashArray)
-    console.log(`(/) ${client.slashCommands.size} Comandos Publicados!`.green)
+  try {
+    const r = await registerSlashCommands(client, { paceMs: 0 })
+    if (r?.counts?.dropped > 0) {
+      console.log(`(/) Publicados: global=${r.counts.global}, guildOverflow=${r.counts.overflow}. Ignorados=${r.counts.dropped} (límite Discord: 200 total por guild).`.yellow)
+    } else if (r?.counts?.overflow > 0) {
+      console.log(`(/) Publicados: global=${r.counts.global}, guildOverflow=${r.counts.overflow}.`.green)
+    } else {
+      console.log(`(/) ${client.slashCommands.size} Comandos Publicados!`.green)
+    }
+  } catch (e) {
+    console.log(`(/) Error publicando comandos: ${e?.message || e}`.bgRed)
   }
 }
 
