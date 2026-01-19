@@ -4,6 +4,7 @@ const { botHasVoicePerms, isSoundCloudUrl } = require('../../utils/voiceChecks')
 const { formatDuration } = require('../../utils/timeFormat')
 
 module.exports = {
+  REGISTER: false,
   CMD: new SlashCommandBuilder()
     .setName('play')
     .setDescription('Reproduce musica en tu canal de voz (YouTube / Spotify)')

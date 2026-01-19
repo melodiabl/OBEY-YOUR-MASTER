@@ -4,7 +4,13 @@ const { botHasVoicePerms, isSoundCloudUrl } = require('../../utils/voiceChecks')
 
 function isSpotifyPlaylist (input) {
   const q = String(input || '').trim().toLowerCase()
-  return q.includes('open.spotify.com/playlist') || q.startsWith('spotify:playlist:')
+  if (q.startsWith('spotify:playlist:')) return true
+  if (q.includes('open.spotify.com/playlist/')) return true
+  if (q.includes('open.spotify.com/intl-') && q.includes('/playlist/')) return true
+  return q.startsWith('https://spotify.link/') ||
+    q.startsWith('http://spotify.link/') ||
+    q.startsWith('https://spotify.app.link/') ||
+    q.startsWith('http://spotify.app.link/')
 }
 
 function isYoutubePlaylist (input) {
@@ -15,7 +21,38 @@ function isYoutubePlaylist (input) {
   return false
 }
 
+function normalizeMediaQuery (input) {
+  const raw = String(input || '').trim()
+  if (!raw) return raw
+
+  const spotifyUri = raw.match(/\bspotify:(album|playlist|track):[a-z0-9]+\b/i)
+  if (spotifyUri) return spotifyUri[0]
+
+  const url = raw.match(/https?:\/\/\S+/i)
+  if (url) {
+    const cleaned = url[0].replace(/[)\]>,.;]+$/g, '')
+    try {
+      const u = new URL(cleaned)
+      if (u.hostname === 'open.spotify.com') {
+        const seg = u.pathname.split('/').filter(Boolean)
+        if (seg[0]?.startsWith('intl-') && ['album', 'playlist', 'track'].includes(seg[1]) && seg[2]) {
+          u.pathname = `/${seg[1]}/${seg[2]}`
+          return u.toString()
+        }
+        if (seg[0] === 'embed' && ['album', 'playlist', 'track'].includes(seg[1]) && seg[2]) {
+          u.pathname = `/${seg[1]}/${seg[2]}`
+          return u.toString()
+        }
+      }
+    } catch {}
+    return cleaned
+  }
+
+  return raw
+}
+
 module.exports = {
+  REGISTER: false,
   CMD: new SlashCommandBuilder()
     .setName('playlist')
     .setDescription('Reproduce una playlist (YouTube / Spotify)')
@@ -27,7 +64,7 @@ module.exports = {
     ),
   DEFER: true,
   async execute (client, interaction) {
-    const query = interaction.options.getString('url', true).trim()
+    const query = normalizeMediaQuery(interaction.options.getString('url', true))
 
     if (isSoundCloudUrl(query)) {
       return interaction.editReply({ content: 'SoundCloud no está soportado. Usa YouTube o Spotify.' })
@@ -35,7 +72,7 @@ module.exports = {
 
     if (!isSpotifyPlaylist(query) && !isYoutubePlaylist(query)) {
       return interaction.editReply({
-        content: 'Debes usar un link/URI de playlist (YouTube `...list=...` o Spotify `https://open.spotify.com/playlist/...` / `spotify:playlist:...`).'
+        content: 'Debes usar un link/URI de playlist (YouTube `...list=...` o Spotify `open.spotify.com/playlist/...`, `spotify:playlist:...` o `spotify.link/...`).'
       })
     }
 

@@ -3,7 +3,13 @@ const { isSoundCloudUrl, getMemberVoiceChannel, botHasVoicePerms } = require('..
 
 function isSpotifyPlaylist (input) {
   const q = String(input || '').trim().toLowerCase()
-  return q.includes('open.spotify.com/playlist') || q.startsWith('spotify:playlist:')
+  if (q.startsWith('spotify:playlist:')) return true
+  if (q.includes('open.spotify.com/playlist/')) return true
+  if (q.includes('open.spotify.com/intl-') && q.includes('/playlist/')) return true
+  return q.startsWith('https://spotify.link/') ||
+    q.startsWith('http://spotify.link/') ||
+    q.startsWith('https://spotify.app.link/') ||
+    q.startsWith('http://spotify.app.link/')
 }
 
 function isYoutubePlaylist (input) {
@@ -12,6 +18,36 @@ function isYoutubePlaylist (input) {
   if (q.includes('youtube.com/watch') && q.includes('list=')) return true
   if (q.includes('youtu.be/') && q.includes('list=')) return true
   return false
+}
+
+function normalizeMediaQuery (input) {
+  const raw = String(input || '').trim()
+  if (!raw) return raw
+
+  const spotifyUri = raw.match(/\bspotify:(album|playlist|track):[a-z0-9]+\b/i)
+  if (spotifyUri) return spotifyUri[0]
+
+  const url = raw.match(/https?:\/\/\S+/i)
+  if (url) {
+    const cleaned = url[0].replace(/[)\]>,.;]+$/g, '')
+    try {
+      const u = new URL(cleaned)
+      if (u.hostname === 'open.spotify.com') {
+        const seg = u.pathname.split('/').filter(Boolean)
+        if (seg[0]?.startsWith('intl-') && ['album', 'playlist', 'track'].includes(seg[1]) && seg[2]) {
+          u.pathname = `/${seg[1]}/${seg[2]}`
+          return u.toString()
+        }
+        if (seg[0] === 'embed' && ['album', 'playlist', 'track'].includes(seg[1]) && seg[2]) {
+          u.pathname = `/${seg[1]}/${seg[2]}`
+          return u.toString()
+        }
+      }
+    } catch {}
+    return cleaned
+  }
+
+  return raw
 }
 
 module.exports = {
@@ -27,7 +63,7 @@ module.exports = {
     const { ok: canJoin } = botHasVoicePerms(voiceChannel, me)
     if (!canJoin) return message.reply('No tengo permisos para unirme o hablar en ese canal de voz.')
 
-    const query = args.join(' ').trim()
+    const query = normalizeMediaQuery(args.join(' '))
     if (!query) return message.reply('Debes proporcionar un link/URI de playlist.')
 
     if (isSoundCloudUrl(query)) return message.reply('SoundCloud no está soportado. Usa YouTube o Spotify.')

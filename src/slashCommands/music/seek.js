@@ -14,6 +14,7 @@ function parseTimeToMs (timeStr) {
 }
 
 module.exports = {
+  REGISTER: false,
   CMD: new SlashCommandBuilder()
     .setName('seek')
     .setDescription('Salta a un punto específico de la canción')

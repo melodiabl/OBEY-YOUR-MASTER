@@ -3,6 +3,7 @@ const { getMusic } = require('../../music')
 const { formatDuration } = require('../../utils/timeFormat')
 
 module.exports = {
+  REGISTER: false,
   CMD: new SlashCommandBuilder()
     .setName('queue')
     .setDescription('Muestra la cola de canciones'),
@@ -20,7 +21,7 @@ module.exports = {
       const state = await music.getQueue({ guildId: interaction.guild.id })
       const current = state.currentTrack
       const upcoming = state.queue
-      
+
       if (!current && upcoming.length === 0) {
         return interaction.editReply('❌ No hay canciones en la cola.')
       }

@@ -12,13 +12,11 @@ module.exports = async client => {
 
   setInterval(() => pickPresence(client), 60 * 1000)
   try {
-    const r = await registerSlashCommands(client, { paceMs: 0 })
+    const r = await registerSlashCommands(client)
     if (r?.counts?.dropped > 0) {
-      console.log(`(/) Publicados: global=${r.counts.global}, guildOverflow=${r.counts.overflow}. Ignorados=${r.counts.dropped} (límite Discord: 200 total por guild).`.yellow)
-    } else if (r?.counts?.overflow > 0) {
-      console.log(`(/) Publicados: global=${r.counts.global}, guildOverflow=${r.counts.overflow}.`.green)
+      console.log(`(/) Publicados: global=${r.counts.global}. Ignorados=${r.counts.dropped} (límite Discord: 100 comandos globales).`.yellow)
     } else {
-      console.log(`(/) ${client.slashCommands.size} Comandos Publicados!`.green)
+      console.log(`(/) Publicados: global=${r.counts.global}.`.green)
     }
   } catch (e) {
     console.log(`(/) Error publicando comandos: ${e?.message || e}`.bgRed)

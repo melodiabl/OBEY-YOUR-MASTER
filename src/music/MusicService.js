@@ -221,29 +221,36 @@ class MusicService {
     this._queues = new QueueManager()
   }
 
-  _normalizeResolveIdentifier (query) {
+  /**
+   * @private
+   * Resuelve la consulta del usuario a un identificador que Lavalink puede entender.
+   * Versión simplificada para soportar únicamente YouTube.
+   * @param {string} query
+   * @returns {{identifier: string, collectionType: 'playlist'|null}}
+   */
+  _resolveQueryToIdentifier (query) {
     const q = String(query || '').trim()
-    if (!q) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'query requerido.')
+    if (!q) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'La consulta no puede estar vacía.')
 
-    if (/^https?:\/\//i.test(q)) return q
+    const urlRegex = /^https?:\/\//
 
-    // Permitir identificadores/search-prefixes de Lavalink/LavaSrc tal cual.
-    // Ej: ytsearch:, ytmsearch:, scsearch:, spsearch:, amsearch:, dzsearch:, etc.
-    if (/^[a-z]+search:/i.test(q)) return q
+    // Si es una URL, la usamos directamente (asumiendo que es de YouTube/YouTube Music)
+    if (urlRegex.test(q)) {
+      console.log(`[Music] Detectada URL directa. Usando tal cual: ${q}`)
+      const isPlaylist = q.includes('list=') || q.includes('youtube.com/playlist/')
+      return { identifier: q, collectionType: isPlaylist ? 'playlist' : null }
+    }
 
-    // URIs (ej: spotify:track:..., spotify:album:..., etc.)
-    if (/^[a-z]+:/i.test(q)) return q
-
-    return `ytsearch:${q}`
+    // Si no es una URL, es una búsqueda de texto en YouTube.
+    const identifier = `ytsearch:${q}`
+    console.log(`[Music] Detectada búsqueda de texto. Identificador para Lavalink: "${identifier}"`)
+    return { identifier, collectionType: null }
   }
 
-  _getCollectionTypeFromQuery (query) {
-    const q = String(query || '').toLowerCase()
-    if (q.includes('open.spotify.com/album') || q.startsWith('spotify:album:')) return 'album'
-    if (q.includes('open.spotify.com/playlist') || q.startsWith('spotify:playlist:')) return 'playlist'
-    if (q.startsWith('spsearch:album:')) return 'album'
-    if (q.includes('youtube.com/playlist') || q.includes('list=')) return 'playlist'
-    return null
+  _getCollectionTypeFromIdentifier (identifier) {
+    const q = String(identifier || '').toLowerCase()
+    if (q.includes('list=') || q.includes('youtube.com/playlist/')) return 'playlist'
+    return null // Ya no hay álbumes de otras fuentes
   }
 
   async _applyPlayerVolume (player, volume) {
@@ -298,40 +305,44 @@ class MusicService {
     if (!guildId) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'guildId requerido.')
     if (!voiceChannelId) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'voiceChannelId requerido.')
 
-    console.log(`[Music] Intentando resolver: ${query}`)
-    console.log(`[Music] Nodos disponibles: ${this.shoukaku.nodes.size}`)
-
     const node = this.shoukaku.options.nodeResolver(this.shoukaku.nodes)
     if (!node) throw new Error('Lavalink no está conectado o no hay nodos disponibles.')
 
-    const identifier = this._normalizeResolveIdentifier(query)
-    const collectionType = this._getCollectionTypeFromQuery(query)
+    // LÓGICA CENTRAL REFACTORIZADA
+    const { identifier, collectionType } = this._resolveQueryToIdentifier(query)
+    console.log(`[Music] Petición a Lavalink con identificador: "${identifier}"`)
     const result = await node.rest.resolve(identifier)
 
-    // Normalizar respuesta de Lavalink v3/v4
+    // Normalizar respuesta de Lavalink
     let tracks = []
-    let isPlaylist = false
-    let playlistName = null
-
-    if (result) {
-      if (result.loadType === 'TRACK_LOADED' || result.loadType === 'track') {
-        tracks = result.tracks || (result.data ? [result.data] : [])
-      } else if (result.loadType === 'PLAYLIST_LOADED' || result.loadType === 'playlist') {
-        isPlaylist = true
-        tracks = result.tracks || result.data?.tracks || []
-        playlistName = result.playlistInfo?.name || result.data?.info?.name || null
-      } else if (result.loadType === 'SEARCH_RESULT' || result.loadType === 'search') {
-        tracks = result.tracks || result.data || []
-      }
+    let loadType = result?.loadType || 'UNKNOWN'
+    // Soporte para Lavalink v3 (loadType en minúscula) y v4 (loadType en mayúscula)
+    if (['TRACK_LOADED', 'track'].includes(loadType)) {
+      tracks = result.tracks || (result.data ? [result.data] : [])
+    } else if (['PLAYLIST_LOADED', 'playlist'].includes(loadType)) {
+      tracks = result.tracks || result.data?.tracks || []
+    } else if (['SEARCH_RESULT', 'search'].includes(loadType)) {
+      tracks = result.tracks || result.data || []
     }
 
-    console.log(`[Music] LoadType: ${result?.loadType}, Tracks Encontrados: ${tracks?.length || 0}`)
+    console.log(`[Music] Respuesta de Lavalink. LoadType: "${loadType}", Tracks Encontrados: ${tracks?.length || 0}`)
+
+    if (['LOAD_FAILED', 'load_failed', 'error'].includes(loadType)) {
+      const error = result?.data || result?.exception
+      const message = error?.message || 'Error desconocido.'
+      const cause = error?.cause || 'Sin causa especificada.'
+      console.error(`[Music] Lavalink LOAD_FAILED. Identificador: "${identifier}". Motivo: ${message}`, error)
+      const hint = identifier.startsWith('sp') ? ' (Asegúrate de que tus credenciales de Spotify son correctas y Lavalink se reinició)' : ''
+      throw new MusicError(MUSIC_ERROR_CODES.NO_RESULTS, `No se pudo cargar la pista.${hint} | Causa: ${cause}`)
+    }
 
     if (!tracks || !tracks.length) {
-      throw new MusicError(MUSIC_ERROR_CODES.NO_RESULTS, 'No se encontraron resultados.')
+      throw new MusicError(MUSIC_ERROR_CODES.NO_RESULTS, 'No se encontraron resultados para tu búsqueda.')
     }
 
+    const isPlaylist = ['PLAYLIST_LOADED', 'playlist'].includes(loadType)
     const tracksToEnqueue = isPlaylist ? tracks : [tracks[0]]
+    const playlistName = isPlaylist ? (result.data?.info?.name || null) : null
 
     return await this._store.withGuildLock(guildId, async () => {
       const state = this._store.getOrCreate(guildId)
@@ -341,18 +352,17 @@ class MusicService {
 
       let firstRes = null
       for (const lavalinkTrack of tracksToEnqueue) {
+        // Normalizar track para v3/v4
         const encoded = lavalinkTrack.encoded || lavalinkTrack.track
         const info = lavalinkTrack.info || {}
         const uri = info.uri || info.url || null
-        const uriStr = typeof uri === 'string' ? uri : ''
-        const isYoutube = info.sourceName === 'youtube' || uriStr.includes('youtube.com') || uriStr.includes('youtu.be')
-        const thumbnail = info.artworkUrl || (isYoutube && info.identifier ? `https://img.youtube.com/vi/${info.identifier}/maxresdefault.jpg` : null)
+        const thumbnail = info.artworkUrl || (info.sourceName === 'youtube' ? `https://img.youtube.com/vi/${info.identifier}/mqdefault.jpg` : null)
 
         const track = {
           id: makeId(),
           title: info.title || 'Sin titulo',
           author: info.author || 'Desconocido',
-          uri: uriStr || identifier,
+          uri: uri || identifier,
           thumbnail,
           duration: info.length ?? info.duration ?? 0,
           lavalinkTrack: encoded,
@@ -375,7 +385,7 @@ class MusicService {
         ...firstRes,
         isPlaylist,
         playlistName,
-        collectionType: isPlaylist ? (collectionType || 'playlist') : null,
+        collectionType: isPlaylist ? (collectionType || this._getCollectionTypeFromIdentifier(identifier)) : null,
         trackCount: tracksToEnqueue.length,
         state: this._store.snapshot(state)
       }

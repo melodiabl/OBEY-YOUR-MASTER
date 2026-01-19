@@ -12,6 +12,7 @@ function createProgressBar (current, total, size = 15) {
 }
 
 module.exports = {
+  REGISTER: false,
   CMD: new SlashCommandBuilder()
     .setName('nowplaying')
     .setDescription('Muestra la cancion actual'),
@@ -34,7 +35,7 @@ module.exports = {
       const position = player ? player.position : 0
 
       const status = state.isPaused ? '⏸️ Pausado' : '🎶 Reproduciendo'
-      
+
       const embed = new EmbedBuilder()
         .setTitle(status)
         .setDescription(`[${current.title}](${current.uri})`)

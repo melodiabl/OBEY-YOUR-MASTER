@@ -2,16 +2,14 @@ function sleep (ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-function splitForDiscordLimits (slashArray) {
+function splitForGlobalLimit (slashArray) {
   const all = Array.isArray(slashArray) ? slashArray.filter(Boolean) : []
   const GLOBAL_MAX = 100
-  const GUILD_MAX = 100
 
   const global = all.slice(0, GLOBAL_MAX)
-  const overflow = all.slice(GLOBAL_MAX, GLOBAL_MAX + GUILD_MAX)
-  const dropped = all.slice(GLOBAL_MAX + GUILD_MAX)
+  const dropped = all.slice(GLOBAL_MAX)
 
-  return { all, global, overflow, dropped }
+  return { all, global, dropped }
 }
 
 function getDeprecatedCommandNames (client) {
@@ -45,25 +43,8 @@ async function deleteCommandsByName (commandManager, names) {
   return { deleted }
 }
 
-async function upsertGuildCommands (guild, commandJsons) {
-  if (!guild?.commands?.fetch || !guild?.commands?.create) return
-  if (!commandJsons.length) return
-
-  const existing = await guild.commands.fetch().catch(() => null)
-  for (const cmd of commandJsons) {
-    const name = cmd?.name
-    if (!name) continue
-    const current = existing?.find?.(c => c?.name === name) || null
-    if (current) {
-      await guild.commands.edit(current.id, cmd).catch(() => {})
-    } else {
-      await guild.commands.create(cmd).catch(() => {})
-    }
-  }
-}
-
-async function registerSlashCommands (client, { paceMs = 0, cleanupDeprecated = true, cleanupPaceMs = 200 } = {}) {
-  const { all, global, overflow, dropped } = splitForDiscordLimits(client?.slashArray)
+async function registerSlashCommands (client, { cleanupDeprecated = true, cleanupPaceMs = 200 } = {}) {
+  const { all, global, dropped } = splitForGlobalLimit(client?.slashArray)
   const app = client?.application
 
   if (!app?.commands?.set) return { ok: false, reason: 'no_application' }
@@ -75,7 +56,6 @@ async function registerSlashCommands (client, { paceMs = 0, cleanupDeprecated = 
     counts: {
       total: all.length,
       global: global.length,
-      overflow: overflow.length,
       dropped: dropped.length
     },
     cleanup: { deprecatedDeletedGlobal: 0, deprecatedDeletedGuild: 0 }
@@ -99,29 +79,9 @@ async function registerSlashCommands (client, { paceMs = 0, cleanupDeprecated = 
     res.cleanup.deprecatedDeletedGlobal += g.deleted
   }
 
-  if (overflow.length) {
-    const guilds = Array.from(client.guilds.cache.values())
-    for (const guild of guilds) {
-      await upsertGuildCommands(guild, overflow)
-      if (paceMs > 0) await sleep(paceMs)
-    }
-  }
-
   return res
 }
 
-async function registerOverflowForGuild (client, guild) {
-  const { overflow } = splitForDiscordLimits(client?.slashArray)
-  await upsertGuildCommands(guild, overflow)
-  const deprecatedNames = getDeprecatedCommandNames(client)
-  if (deprecatedNames.length && String(process.env.GUILD_COMMAND_CLEANUP_DISABLED || '').trim() !== '1') {
-    await deleteCommandsByName(guild.commands, deprecatedNames)
-  }
-  return { ok: true, overflow: overflow.length }
-}
-
 module.exports = {
-  registerSlashCommands,
-  registerOverflowForGuild,
-  splitForDiscordLimits
+  registerSlashCommands
 }

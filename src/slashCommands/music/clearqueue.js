@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
 
 module.exports = {
+  REGISTER: false,
   CMD: new SlashCommandBuilder()
     .setName('clearqueue')
     .setDescription('Limpia la cola de canciones (mantiene la actual)'),
