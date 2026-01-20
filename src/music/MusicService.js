@@ -290,6 +290,7 @@ class MusicService {
       if (data.reason === 'REPLACED') return
       try {
         const state = this._store.getOrCreate(guildId)
+        if (!state.currentTrack) return
         await this.skip({ guildId, voiceChannelId: state.voiceChannelId || voiceChannelId })
       } catch (e) {
         console.error(`[Music] Error automatically skipping track (${guildId}):`, e)
