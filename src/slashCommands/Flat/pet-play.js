@@ -1,7 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { playWithPet } = require('../../systems').pets
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
-const { replyError } = require('../../utils/interactionUtils')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
 
 module.exports = {
   MODULE: 'pets',
@@ -13,9 +14,20 @@ module.exports = {
   async execute (client, interaction) {
     try {
       const pet = await playWithPet({ client, userID: interaction.user.id })
-      return interaction.reply({ content: `✅ Jugaste con **${pet.name}**. Felicidad: **${pet.happiness}** | Nivel: **${pet.level}**.`, ephemeral: true })
+
+      const embed = new EmbedBuilder()
+        .setTitle('🥎 ¡Hora de Jugar!')
+        .setDescription(`Has jugado con ${Format.bold(pet.name)}. ¡Se divirtió mucho!`)
+        .setColor('Orange')
+        .addFields(
+          { name: 'Felicidad', value: Format.progressBar(pet.happiness, 100), inline: true },
+          { name: 'Nivel', value: Format.inlineCode(pet.level.toString()), inline: true }
+        )
+        .setTimestamp()
+
+      return interaction.reply({ embeds: [embed] })
     } catch (e) {
-      return replyError(interaction, e?.message || String(e))
+      return interaction.reply({ content: `${Emojis.error} ${e.message}`, ephemeral: true })
     }
   }
 }

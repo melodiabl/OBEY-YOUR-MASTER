@@ -88,7 +88,9 @@ class QueueManager {
   }
 
   skip (state, force = false) {
-    if (!state.currentTrack) throw new MusicError(MUSIC_ERROR_CODES.NO_ACTIVE_QUEUE, 'No hay música reproduciéndose.')
+    if (!state.currentTrack) {
+      return { skippedTo: null, ended: true }
+    }
 
     const wasPaused = state.isPaused
     const current = state.currentTrack

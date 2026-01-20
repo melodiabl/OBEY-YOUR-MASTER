@@ -3,251 +3,83 @@ const {
   ChannelType
 } = require('discord.js')
 const moment = require('moment')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+
 module.exports = {
-  DESCRIPTION: 'Muestra información sobre el servidor en el que se ejecuta el bot.',
-  ALIASES: ['sv'],
+  DESCRIPTION: 'Muestra información detallada sobre el servidor.',
+  ALIASES: ['sv', 'server'],
   BOT_PERMISSIONS: ['ViewChannel'],
-  async execute (client, interaction) {
+  async execute (client, message, args) {
     try {
-      const member = interaction.member
+      const { guild } = message
+      const owner = await guild.fetchOwner()
 
-      let Emojis = ''
-      let EmojisAnimated = ''
-      let EmojiCount = 0
-      let Animated = 0
-      let OverallEmojis = 0
+      // Conteo de emojis
+      const emojis = guild.emojis.cache
+      const animatedEmojis = emojis.filter(e => e.animated).size
+      const staticEmojis = emojis.size - animatedEmojis
 
-      function Emoji (id) {
-        return client.emojis.cache.get(id).toString()
-      }
+      // Conteo de miembros
+      const totalMembers = guild.memberCount
+      const bots = guild.members.cache.filter(m => m.user.bot).size
+      const humans = totalMembers - bots
 
-      interaction.guild.emojis.cache.forEach((emoji) => {
-        OverallEmojis++
-        if (emoji.animated) {
-          Animated++
-          EmojisAnimated += Emoji(emoji.id)
-        } else {
-          EmojiCount++
-          Emojis += Emoji(emoji.id)
-        }
-      })
-
-      const humans = interaction.guild.members.cache.filter(
-        (m) => !m.user.bot
-      ).size
-      const bots = interaction.guild.members.cache.filter(
-        (m) => m.user.bot
-      ).size
-
-      const getChannelTypeSize = (type) =>
-        interaction.guild.channels.cache.filter((channel) =>
-          type.includes(channel.type)
-        ).size
-      const totalChannels = getChannelTypeSize([
-        ChannelType.GuildText,
-        ChannelType.GuildNews,
-        ChannelType.GuildVoice,
-        ChannelType.GuildStageVoice,
-        ChannelType.GuildForum,
-        ChannelType.GuildPublicThread,
-        ChannelType.GuildPrivateThread,
-        ChannelType.GuildNewsThread,
-        ChannelType.GuildCategory
-      ])
+      // Conteo de canales
+      const channels = guild.channels.cache
+      const textChannels = channels.filter(c => [ChannelType.GuildText, ChannelType.GuildAnnouncement, ChannelType.GuildForum].includes(c.type)).size
+      const voiceChannels = channels.filter(c => [ChannelType.GuildVoice, ChannelType.GuildStageVoice].includes(c.type)).size
+      const categories = channels.filter(c => c.type === ChannelType.GuildCategory).size
 
       const embed = new EmbedBuilder()
-        .setAuthor({
-          name: 'Información de ' + interaction.guild.name,
-          iconURL: interaction.guild.iconURL({ dynamic: true })
-        })
-        .setThumbnail(interaction.guild.iconURL())
-        .setColor('Red')
-        .setDescription(
-          `Descripción: **${
-            interaction.guild.description || 'No Tiene'
-          }**\nLenguaje: **${
-            new Intl.DisplayNames(['es'], { type: 'language' }).of(
-              interaction.guild.preferredLocale
-            ) || 'No Tiene'
-          }**\nURL Personalizada: **${
-            interaction.guild.vanityURLCode || 'No Tiene'
-          }**`
-        )
+        .setTitle(`${Emojis.info} Información de ${guild.name}`)
+        .setThumbnail(guild.iconURL({ dynamic: true, size: 1024 }))
+        .setColor('Blurple')
+        .setDescription(guild.description ? Format.quote(guild.description) : null)
         .addFields(
           {
-            name: '👑 | Dueño:',
-            value: `\`\`\`${member.user.tag}\`\`\``,
+            name: `${Emojis.owner} Propietario`,
+            value: `${owner.user.tag}\n${Format.subtext(owner.id)}`,
             inline: true
           },
           {
-            name: '📅 | Creado el:',
-            value: `\`\`\`${moment(interaction.guild.createdTimestamp).format(
-              'D/M/Y'
-            )}\n${moment(interaction.guild.createdTimestamp).format(
-              'hh:mm:ss'
-            )}\`\`\``,
+            name: `${Emojis.calendar} Creado el`,
+            value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:R>`,
             inline: true
           },
           {
-            name: '🔢 | ID:',
-            value: `\`\`\`${interaction.guild.id}\`\`\``,
-            inline: true
-          },
-
-          {
-            name: '👁‍🗨 | Canales:',
-            value: `\`\`\`${totalChannels}\`\`\``,
+            name: `${Emojis.id} Server ID`,
+            value: Format.inlineCode(guild.id),
             inline: true
           },
           {
-            name: '💬 | Canales-Texto:',
-            value: `\`\`\`${getChannelTypeSize([
-              ChannelType.GuildText,
-              ChannelType.GuildForum,
-              ChannelType.GuildNews
-            ])}\`\`\``,
+            name: `${Emojis.channel} Canales (${channels.size})`,
+            value: `${Emojis.dot} ${Format.bold('Texto:')} ${textChannels}\n${Emojis.dot} ${Format.bold('Voz:')} ${voiceChannels}\n${Emojis.dot} ${Format.bold('Categorías:')} ${categories}`,
             inline: true
           },
           {
-            name: '🔈 | Canales-Voz:',
-            value: `\`\`\`${getChannelTypeSize([
-              ChannelType.GuildVoice,
-              ChannelType.GuildStageVoice
-            ])}\`\`\``,
-            inline: true
-          },
-
-          {
-            name: '🧵 | Hilos:',
-            value: `\`\`\`${getChannelTypeSize([
-              ChannelType.GuildPublicThread,
-              ChannelType.GuildPrivateThread,
-              ChannelType.GuildNewsThread
-            ])}\`\`\``,
+            name: `${Emojis.member} Miembros (${totalMembers})`,
+            value: `${Emojis.dot} ${Format.bold('Humanos:')} ${humans}\n${Emojis.dot} ${Format.bold('Bots:')} ${bots}`,
             inline: true
           },
           {
-            name: '➗ | Categorias:',
-            value: `\`\`\`${getChannelTypeSize([
-              ChannelType.GuildCategory
-            ])}\`\`\``,
+            name: `${Emojis.boost} Mejoras`,
+            value: `${Emojis.dot} ${Format.bold('Nivel:')} ${guild.premiumTier}\n${Emojis.dot} ${Format.bold('Boosts:')} ${guild.premiumSubscriptionCount}`,
             inline: true
           },
           {
-            name: '👮 | Roles:',
-            value: `\`\`\`${interaction.guild.roles.cache.size}\`\`\``,
-            inline: true
-          },
-
-          {
-            name: '📜 | Reglamento:',
-            value: `\`\`\`${
-              interaction.guild.rulesChannel
-                ? interaction.guild.rulesChannel
-                : 'Ninguno'
-            }\`\`\``,
-            inline: true
-          },
-          {
-            name: '😴 | AFK:',
-            value: `\`\`\`${
-              interaction.guild.afkChannel
-                ? interaction.guild.afkChannel
-                : 'Ninguno'
-            }\`\`\``,
-            inline: true
-          },
-          {
-            name: '📱 | Publicaciones:',
-            value: `\`\`\`${
-              interaction.guild.communityChannel
-                ? interaction.guild.communityChannel
-                : 'Ninguno'
-            }\`\`\``,
-            inline: true
-          },
-
-          {
-            name: '😀 | Usuarios:',
-            value: `\`\`\`${interaction.guild.memberCount}\`\`\``,
-            inline: true
-          },
-          {
-            name: '👤 | Humanos:',
-            value: `\`\`\`${humans}\`\`\``,
-            inline: true
-          },
-          { name: '🤖 | Bots:', value: `\`\`\`${bots}\`\`\``, inline: true },
-
-          {
-            name: '🐵 | Emojis Totales:',
-            value: `\`\`\`${interaction.guild.emojis.cache.size}\`\`\``,
-            inline: true
-          },
-          {
-            name: '🐸 | Estáticos:',
-            value: `\`\`\`${EmojiCount}\`\`\``,
-            inline: true
-          },
-          {
-            name: '🐻 | Animados:',
-            value: `\`\`\`${Animated}\`\`\``,
-            inline: true
-          },
-
-          {
-            name: '🔝 | Mejoras:',
-            value: `\`\`\`${interaction.guild.premiumSubscriptionCount.toString()}\`\`\``,
-            inline: true
-          },
-          {
-            name: '📄 | Nivel-Mejoras:',
-            value: `\`\`\`${interaction.guild.premiumTier}\`\`\``,
-            inline: true
-          },
-          {
-            name: '📗 | Verificación:',
-            value: `\`\`\`${interaction.guild.verificationLevel}\`\`\``,
+            name: `${Emojis.stats} Otros`,
+            value: `${Emojis.dot} ${Format.bold('Roles:')} ${guild.roles.cache.size}\n${Emojis.dot} ${Format.bold('Emojis:')} ${emojis.size} (${animatedEmojis} anim.)\n${Emojis.dot} ${Format.bold('Verificación:')} ${guild.verificationLevel}`,
             inline: true
           }
         )
+        .setFooter({ text: `Solicitado por ${message.author.tag}`, iconURL: message.author.displayAvatarURL() })
         .setTimestamp()
 
-      const embedEmojis = new EmbedBuilder()
-        .setColor('Red')
-        .setTitle(
-          `🐸 | Todos los Emojis de ${interaction.guild.name} | Cantidad Total de Emojis: [${OverallEmojis}] | 🐵`
-        )
-        .setDescription(
-          `**Emojis __ANIMADOS__:** [${Animated}]\n${EmojisAnimated}\n\n**Emojis __ESTÁTICOS__:** [${EmojiCount}]\n${Emojis}`
-        )
-        .setTimestamp()
-
-      if (embedEmojis > 2000) {
-        return interaction.AnimatedReply(
-          interaction,
-          ':x:',
-          '¡El embed de emojis no se ha podido enviar porque tienes muchos emojis en tu servidor!'
-        )
-      }
-
-      const embedRoles = new EmbedBuilder()
-        .setColor('Red')
-        .setTitle(`👮‍♂️ | Todos los Roles de ${interaction.guild.name} | 👮‍♂️`)
-        .setDescription(
-          `${interaction.guild.roles.cache
-            .map((roles) => `\`${roles.name}\``)
-            .join(', ')}`
-        )
-        .setTimestamp()
-
-      interaction.reply({
-        embeds: [embed, embedEmojis, embedRoles],
-        ephemeral: false
-      })
+      message.reply({ embeds: [embed] })
     } catch (err) {
-      console.log(err)
+      console.error(err)
+      message.reply({ content: `${Emojis.error} Ocurrió un error al obtener la información del servidor.` })
     }
   }
-
 }

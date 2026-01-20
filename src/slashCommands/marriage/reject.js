@@ -1,14 +1,27 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { rejectMarriage } = require('../../utils/marriageManager')
+const Emojis = require('../../utils/emojis')
+
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('reject')
     .setDescription('Rechaza una propuesta de matrimonio pendiente'),
   async execute (client, interaction) {
-    const ok = await rejectMarriage(interaction.user.id)
+    const ok = rejectMarriage(interaction.user.id)
+
     if (!ok) {
-      return interaction.reply({ content: '❌ No tienes propuestas pendientes.', ephermal: true })
+      return interaction.reply({
+        content: `${Emojis.error} No tienes propuestas de matrimonio pendientes.`,
+        ephemeral: true
+      })
     }
-    await interaction.reply('❌ Has rechazado la propuesta de matrimonio.')
+
+    const embed = new EmbedBuilder()
+      .setTitle('❌ Propuesta Rechazada')
+      .setDescription('Has rechazado la propuesta de matrimonio.')
+      .setColor('Red')
+      .setTimestamp()
+
+    await interaction.reply({ embeds: [embed] })
   }
 }

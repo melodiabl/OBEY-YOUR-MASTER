@@ -1,8 +1,10 @@
 const { SlashCommandBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
 
 module.exports = {
-  REGISTER: false,
+  REGISTER: true,
   CMD: new SlashCommandBuilder()
     .setName('loop')
     .setDescription('Configura el modo de repetición')
@@ -23,12 +25,12 @@ module.exports = {
     const voiceChannel = interaction.member.voice?.channel
 
     if (!voiceChannel) {
-      return interaction.editReply({ content: 'Debes estar en un canal de voz.' })
+      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply('El sistema de musica no esta inicializado.')
+      if (!music) return interaction.editReply(`${Emojis.error} El sistema de musica no esta inicializado.`)
 
       await music.setLoop({
         guildId: interaction.guild.id,
@@ -37,14 +39,14 @@ module.exports = {
       })
 
       const modeLabels = {
-        none: 'Desactivado ➡️',
+        none: `Desactivado ${Emojis.arrow}`,
         track: 'Canción Actual 🔂',
         queue: 'Cola Completa 🔁'
       }
 
-      return interaction.editReply(`🔁 Modo de repetición establecido en: **${modeLabels[mode]}**`)
+      return interaction.editReply(`${Emojis.success} Modo de repetición establecido en: ${Format.bold(modeLabels[mode])}`)
     } catch (e) {
-      return interaction.editReply(`Error: ${e?.message || e}`)
+      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
     }
   }
 }

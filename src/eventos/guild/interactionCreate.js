@@ -19,6 +19,27 @@ module.exports = async (client, interaction) => {
 
   try {
     if (!interaction.guild || !interaction.channel) return
+
+    // Manejo de Menús de Selección
+    if (interaction.isStringSelectMenu?.()) {
+      if (interaction.customId === 'help_menu') {
+        const category = interaction.values[0]
+        const commands = client.slashCommands.filter(c => c.CATEGORY === category)
+
+        const { EmbedBuilder } = require('discord.js')
+        const Emojis = require('../../utils/emojis')
+        const Format = require('../../utils/formatter')
+
+        const embed = new EmbedBuilder()
+          .setTitle(`${Emojis.info} Comandos de ${category}`)
+          .setDescription(commands.map(c => `**/${c.CMD.name}**: ${c.CMD.description}`).join('\n') || 'No hay comandos en esta categoría.')
+          .setColor('Blurple')
+          .setTimestamp()
+
+        return await interaction.update({ embeds: [embed] })
+      }
+    }
+
     // Autocomplete: enrutar al comando si lo soporta.
     if (interaction.isAutocomplete?.()) {
       const cmd = client.slashCommands.get(interaction.commandName)

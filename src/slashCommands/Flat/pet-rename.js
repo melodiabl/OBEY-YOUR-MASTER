@@ -1,7 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { renamePet } = require('../../systems').pets
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
-const { replyError } = require('../../utils/interactionUtils')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
 
 module.exports = {
   MODULE: 'pets',
@@ -20,9 +21,16 @@ module.exports = {
     const name = interaction.options.getString('nombre', true)
     try {
       const pet = await renamePet({ client, userID: interaction.user.id, name })
-      return interaction.reply({ content: `✅ Mascota renombrada a **${pet.name}**.`, ephemeral: true })
+
+      const embed = new EmbedBuilder()
+        .setTitle('🏷️ Mascota Renombrada')
+        .setDescription(`Ahora tu mascota se llama ${Format.bold(pet.name)}.`)
+        .setColor('Random')
+        .setTimestamp()
+
+      return interaction.reply({ embeds: [embed] })
     } catch (e) {
-      return replyError(interaction, e?.message || String(e))
+      return interaction.reply({ content: `${Emojis.error} ${e.message}`, ephemeral: true })
     }
   }
 }

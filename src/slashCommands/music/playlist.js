@@ -1,6 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
 const { botHasVoicePerms, isSoundCloudUrl } = require('../../utils/voiceChecks')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
 
 function isSpotifyPlaylist (input) {
   const q = String(input || '').trim().toLowerCase()
@@ -52,7 +54,7 @@ function normalizeMediaQuery (input) {
 }
 
 module.exports = {
-  REGISTER: false,
+  REGISTER: true,
   CMD: new SlashCommandBuilder()
     .setName('playlist')
     .setDescription('Reproduce una playlist (YouTube / Spotify)')
@@ -67,29 +69,29 @@ module.exports = {
     const query = normalizeMediaQuery(interaction.options.getString('url', true))
 
     if (isSoundCloudUrl(query)) {
-      return interaction.editReply({ content: 'SoundCloud no está soportado. Usa YouTube o Spotify.' })
+      return interaction.editReply({ content: `${Emojis.error} SoundCloud no está soportado. Usa YouTube o Spotify.` })
     }
 
     if (!isSpotifyPlaylist(query) && !isYoutubePlaylist(query)) {
       return interaction.editReply({
-        content: 'Debes usar un link/URI de playlist (YouTube `...list=...` o Spotify `open.spotify.com/playlist/...`, `spotify:playlist:...` o `spotify.link/...`).'
+        content: `${Emojis.error} Debes usar un link/URI de playlist (YouTube \`...list=...\` o Spotify \`open.spotify.com/playlist/...\`, \`spotify:playlist:...\` o \`spotify.link/...\`).`
       })
     }
 
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
-      return interaction.editReply({ content: 'Debes estar en un canal de voz.' })
+      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
     }
 
     const me = interaction.guild.members.me || interaction.guild.members.cache.get(client.user.id)
     const { ok: canJoin } = botHasVoicePerms(voiceChannel, me)
     if (!canJoin) {
-      return interaction.editReply({ content: 'No tengo permisos para unirme o hablar en ese canal de voz.' })
+      return interaction.editReply({ content: `${Emojis.error} No tengo permisos para unirme o hablar en ese canal de voz.` })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply('El sistema de música no está inicializado.')
+      if (!music) return interaction.editReply(`${Emojis.error} El sistema de música no está inicializado.`)
 
       const res = await music.play({
         guildId: interaction.guild.id,
@@ -101,16 +103,16 @@ module.exports = {
 
       if (res.isPlaylist) {
         const embed = new EmbedBuilder()
-          .setTitle('📑 Playlist agregada')
-          .setDescription(`Se han agregado **${res.trackCount}** canciones de la playlist **${res.playlistName || 'Desconocida'}**`)
+          .setTitle(Format.title('📑', 'Playlist agregada'))
+          .setDescription(`Se han agregado ${Format.bold(res.trackCount)} canciones de la playlist ${Format.inlineCode(res.playlistName || 'Desconocida')}`)
           .setColor('#5865F2')
           .setTimestamp()
         return interaction.editReply({ embeds: [embed] })
       }
 
-      return interaction.editReply(`Reproduciendo: **${res.track.title}**`)
+      return interaction.editReply(`${Emojis.success} Reproduciendo: ${Format.bold(res.track.title)}`)
     } catch (e) {
-      return interaction.editReply(`Error: ${e?.message || e}`)
+      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
     }
   }
 }

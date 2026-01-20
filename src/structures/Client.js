@@ -104,13 +104,11 @@ module.exports = class extends Client {
       RUTA_ARCHIVOS.forEach((rutaArchivo) => {
         try {
           const COMANDO = require(rutaArchivo)
-          const NOMBRE_COMANDO = rutaArchivo
-            .split('\\')
-            .pop()
-            .split('/')
-            .pop()
-            .split('.')[0]
+          const partes = rutaArchivo.split(/[\\/]/)
+          const CATEGORIA = partes[partes.length - 2]
+          const NOMBRE_COMANDO = partes.pop().split('.')[0]
           COMANDO.NAME = NOMBRE_COMANDO
+          COMANDO.CATEGORY = CATEGORIA
 
           if (NOMBRE_COMANDO) this.commands.set(NOMBRE_COMANDO, COMANDO)
         } catch (e) {
@@ -140,13 +138,11 @@ module.exports = class extends Client {
       RUTA_ARCHIVOS.forEach((rutaArchivo) => {
         try {
           const COMANDO = require(rutaArchivo)
-          const NOMBRE_COMANDO = rutaArchivo
-            .split('\\')
-            .pop()
-            .split('/')
-            .pop()
-            .split('.')[0]
+          const partes = rutaArchivo.split(/[\\/]/)
+          const CATEGORIA = partes[partes.length - 2]
+          const NOMBRE_COMANDO = partes.pop().split('.')[0]
           COMANDO.CMD.name = NOMBRE_COMANDO
+          COMANDO.CATEGORY = CATEGORIA
 
           if (NOMBRE_COMANDO) this.slashCommands.set(NOMBRE_COMANDO, COMANDO)
 

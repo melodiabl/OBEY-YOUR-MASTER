@@ -1,4 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('status')
@@ -12,9 +15,21 @@ module.exports = {
     const user = interaction.options.getUser('usuario') || interaction.user
     const userData = await client.db.getUserData(user.id)
     const partnerId = userData.partner
+
+    const embed = new EmbedBuilder()
+      .setTitle(`👰 Estado Civil de ${user.username}`)
+      .setThumbnail(user.displayAvatarURL())
+      .setTimestamp()
+
     if (!partnerId) {
-      return interaction.reply(`${user.username} está soltero/a.`)
+      embed.setColor('Grey')
+      embed.setDescription(`${user} se encuentra ${Format.bold('soltero/a')} en este momento.`)
+    } else {
+      embed.setColor('LuminousVividPink')
+      embed.setDescription(`${user} está ${Format.bold('casado/a')} con <@${partnerId}>.`)
+      embed.addFields({ name: 'Compañero/a', value: `${Emojis.crown} <@${partnerId}>` })
     }
-    await interaction.reply(`${user.username} está casado con <@${partnerId}>.`)
+
+    await interaction.reply({ embeds: [embed] })
   }
 }

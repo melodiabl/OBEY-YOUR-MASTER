@@ -1,5 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
-const UserSchema = require('../../database/schemas/UserSchema')
+const { adoptPet, PET_TYPES } = require('../../systems').pets
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -14,38 +16,29 @@ module.exports = {
         .setDescription('Tipo de mascota')
         .setRequired(true)
         .addChoices(
-          { name: '🐶 Perro', value: 'perro' },
-          { name: '🐱 Gato', value: 'gato' },
-          { name: '🐉 Dragón', value: 'dragon' },
-          { name: '🐹 Hamster', value: 'hamster' }
+          ...PET_TYPES.map(t => ({ name: t.charAt(0).toUpperCase() + t.slice(1), value: t }))
         )),
 
   async execute (client, interaction) {
     const name = interaction.options.getString('nombre')
     const type = interaction.options.getString('tipo')
 
-    let userData = await UserSchema.findOne({ userID: interaction.user.id })
-    if (!userData) userData = new UserSchema({ userID: interaction.user.id })
+    try {
+      const pet = await adoptPet({ client, userID: interaction.user.id, type, name })
 
-    if (userData.pet && userData.pet.name) {
-      return interaction.reply({ content: `Ya tienes una mascota llamada **${userData.pet.name}**. ¡Cuídala bien!`, ephemeral: true })
+      const embed = new EmbedBuilder()
+        .setTitle(`${Emojis.pet} ¡Nueva Mascota Adoptada!`)
+        .setDescription(`Has adoptado a ${Format.bold(pet.name)}, un hermoso ${Format.bold(pet.type)}.`)
+        .setColor('Green')
+        .addFields(
+          { name: 'Salud', value: Format.progressBar(pet.health, 100), inline: true },
+          { name: 'Felicidad', value: Format.progressBar(pet.happiness, 100), inline: true }
+        )
+        .setTimestamp()
+
+      await interaction.reply({ embeds: [embed] })
+    } catch (e) {
+      return interaction.reply({ content: `${Emojis.error} ${e.message}`, ephemeral: true })
     }
-
-    userData.pet = {
-      name,
-      type,
-      health: 100,
-      lastFed: new Date()
-    }
-
-    await userData.save()
-
-    const embed = new EmbedBuilder()
-      .setTitle('🐾 ¡Nueva Mascota Adoptada!')
-      .setDescription(`Has adoptado a **${name}**, un hermoso **${type}**.`)
-      .setColor('Random')
-      .setTimestamp()
-
-    await interaction.reply({ embeds: [embed] })
   }
 }

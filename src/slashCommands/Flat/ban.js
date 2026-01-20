@@ -1,7 +1,9 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { logAction } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
 
 module.exports = {
   MODULE: 'moderation',
@@ -36,18 +38,34 @@ module.exports = {
     const deleteDays = interaction.options.getInteger('borrar_dias') ?? 0
     const reason = interaction.options.getString('razon') || 'Sin razon.'
 
-    const deleteMessageSeconds = Math.max(0, Math.min(7, Number(deleteDays))) * 24 * 60 * 60
-    await interaction.guild.members.ban(target.id, { reason, deleteMessageSeconds }).catch((e) => { throw e })
+    try {
+      const deleteMessageSeconds = Math.max(0, Math.min(7, Number(deleteDays))) * 24 * 60 * 60
+      await interaction.guild.members.ban(target.id, { reason, deleteMessageSeconds })
 
-    const modCase = await logAction({
-      guildID: interaction.guild.id,
-      type: 'ban',
-      targetID: target.id,
-      moderatorID: interaction.user.id,
-      reason,
-      meta: { deleteDays }
-    })
+      const modCase = await logAction({
+        guildID: interaction.guild.id,
+        type: 'ban',
+        targetID: target.id,
+        moderatorID: interaction.user.id,
+        reason,
+        meta: { deleteDays }
+      })
 
-    return interaction.reply({ content: `✅ Ban aplicado a <@${target.id}>. Caso #${modCase.caseNumber}.`, ephemeral: false })
+      const embed = new EmbedBuilder()
+        .setTitle(`${Emojis.moderation} Ban Aplicado`)
+        .setColor('Red')
+        .setThumbnail(target.displayAvatarURL())
+        .addFields(
+          { name: `${Emojis.member} Usuario`, value: `${target.tag} (${Format.inlineCode(target.id)})`, inline: true },
+          { name: `${Emojis.owner} Moderador`, value: `${interaction.user.tag}`, inline: true },
+          { name: `${Emojis.id} Caso`, value: Format.inlineCode(`#${modCase.caseNumber}`), inline: true },
+          { name: `${Emojis.quote} Razón`, value: Format.quote(reason) }
+        )
+        .setTimestamp()
+
+      return interaction.reply({ embeds: [embed] })
+    } catch (e) {
+      return interaction.reply({ content: `${Emojis.error} Error al banear: ${Format.inlineCode(e.message)}`, ephemeral: true })
+    }
   }
 }

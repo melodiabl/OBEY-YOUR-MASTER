@@ -39,21 +39,21 @@ const abbreviateNumber = (number) => {
   return number.toString()
 }
 const respuestas = [
-  'Si',
-  'No',
-  'Posiblemente',
-  'Seguro que no',
-  'Obviamente',
-  'Es cierto',
-  'Definitivamente',
-  'Lo mas probable',
-  'No tengo una respuesta para eso..',
-  'No podria confirmartelo',
-  'No cuentes con ello',
-  'Es muy dudoso',
-  'Creeria que si',
-  'Diria que no',
-  'Los astros aun no se alinean'
+  '✅ **Sí**, definitivamente.',
+  '❌ **No**, ni lo pienses.',
+  '🤔 **Posiblemente**, quién sabe...',
+  '🚫 **Seguro que no**, olvida eso.',
+  '✨ **Obviamente**, es un hecho.',
+  '💎 **Es cierto**, créelo.',
+  '🛡️ **Definitivamente**, puedes confiar.',
+  '📈 **Lo más probable**, las señales apuntan allí.',
+  '🤐 **No tengo una respuesta** para eso ahora mismo.',
+  '🤷 **No podría confirmártelo**, es un misterio.',
+  '📉 **No cuentes con ello**, lo veo difícil.',
+  '🌫️ **Es muy dudoso**, todo está borroso.',
+  '💫 **Creería que sí**, el destino dice eso.',
+  '🛑 **Diría que no**, mejor detente.',
+  '🌌 **Los astros aún no se alinean**, intenta luego.'
 ]
 const randomAnswer = () =>
   respuestas[Math.floor(Math.random() * respuestas.length)]
