@@ -24,23 +24,39 @@ module.exports = {
       }, { ephemeral: true })
     }
 
-    const nextLevelXP = userData.level * userData.level * 100
+    const level = Number(userData.level || 1)
+    const xp = Number(userData.xp || 0)
+    const nextLevelXP = level * level * 100
+
+    let rankPos = 1
+    let totalUsers = null
+    try {
+      const higher = await UserSchema.countDocuments({
+        $or: [
+          { level: { $gt: level } },
+          { level, xp: { $gt: xp } }
+        ]
+      })
+      rankPos = Number(higher || 0) + 1
+      totalUsers = await UserSchema.countDocuments({})
+    } catch (e) {}
 
     const rank = new canvacord.Rank()
       .setAvatar(user.displayAvatarURL({ extension: 'png' }))
-      .setCurrentXP(userData.xp)
+      .setCurrentXP(xp)
       .setRequiredXP(nextLevelXP)
       .setStatus('online')
       .setProgressBar('#FFFFFF', 'COLOR')
       .setUsername(user.username)
       .setDiscriminator(user.discriminator || '0000')
-      .setLevel(userData.level)
-      .setRank(1, 'RANK', false)
+      .setLevel(level)
+      .setRank(rankPos, 'RANK', false)
 
     const data = await rank.build()
     const attachment = new AttachmentBuilder(data, { name: 'rank.png' })
 
     const ui = await getGuildUiConfig(client, interaction.guild.id)
+    const pct = totalUsers ? Math.max(1, Math.min(100, Math.round((1 - ((rankPos - 1) / totalUsers)) * 100))) : null
     const e = embed({
       ui,
       system: 'levels',
@@ -49,11 +65,13 @@ module.exports = {
       description: [
         headerLine(Emojis.level, 'Progreso'),
         `${Emojis.member} Usuario: **${user.tag || user.username}**`,
-        `${Emojis.stats} Nivel: ${Format.inlineCode(userData.level)}`,
-        `${Emojis.stats} XP: ${Format.inlineCode(`${userData.xp} / ${nextLevelXP}`)}`
+        `${Emojis.stats} Nivel: ${Format.inlineCode(level)}`,
+        `${Emojis.stats} XP: ${Format.inlineCode(`${xp} / ${nextLevelXP}`)}`,
+        `${Emojis.dot} Barra: ${Format.progressBar(Math.min(xp, nextLevelXP), nextLevelXP || 1, 15)}`,
+        `${Emojis.dot} Posición: ${Format.inlineCode('#' + rankPos)}${pct ? ` (${Format.bold(`Top ${pct}%`)})` : ''}`
       ].join('\n'),
       image: 'attachment://rank.png',
-      signature: 'Sigue subiendo'
+      signature: 'Sigue subiendo (premium)'
     })
 
     await interaction.reply({ embeds: [e], files: [attachment] })

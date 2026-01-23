@@ -1,16 +1,26 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
 const { botHasVoicePerms, isSoundCloudUrl } = require('../../utils/voiceChecks')
-const { formatDuration } = require('../../utils/timeFormat')
-const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
 const { replyError } = require('../../core/ui/interactionKit')
+const { startSearchPick } = require('../../music/musicInteractions')
+const { buildPlayResultEmbed } = require('../../music/musicUi')
+const { buildMusicControls } = require('../../music/musicComponents')
+
+function isUrlLike (input) {
+  return /^https?:\/\//i.test(String(input || '').trim())
+}
+
+function isDirectQuery (input) {
+  const q = String(input || '').trim()
+  return isUrlLike(q) || /^spotify:/i.test(q)
+}
 
 module.exports = {
   REGISTER: true,
   CMD: new SlashCommandBuilder()
     .setName('play')
-    .setDescription('Reproduce música en tu canal de voz (YouTube / Spotify)')
+    .setDescription('Reproduce música en tu canal de voz (búsqueda / links)')
     .addStringOption(option =>
       option
         .setName('query')
@@ -20,6 +30,7 @@ module.exports = {
   DEFER: true,
   async execute (client, interaction) {
     const query = interaction.options.getString('query', true).trim()
+
     if (isSoundCloudUrl(query)) {
       return replyError(client, interaction, { system: 'music', reason: 'SoundCloud no está soportado. Usa YouTube o Spotify.' })
     }
@@ -37,7 +48,16 @@ module.exports = {
 
     try {
       const music = getMusic(client)
-      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de música no está inicializado.' })
+      if (!music) {
+        return replyError(client, interaction, { system: 'music', reason: 'El sistema de música no está inicializado.' })
+      }
+
+      if (!isDirectQuery(query) && query.length >= 2) {
+        const pickPayload = await startSearchPick({ client, interaction, query }).catch(() => null)
+        if (pickPayload) {
+          return interaction.editReply(pickPayload).catch(() => {})
+        }
+      }
 
       const res = await music.play({
         guildId: interaction.guild.id,
@@ -48,30 +68,9 @@ module.exports = {
         query
       })
 
-      if (res.isPlaylist) {
-        const embed = new EmbedBuilder()
-          .setTitle(`${Emojis.music} Lista de reproducción agregada`)
-          .setDescription(`Se han agregado ${Format.bold(res.trackCount)} canciones de la lista ${Format.inlineCode(res.playlistName || 'Desconocida')}`)
-          .setColor('Blurple')
-          .setTimestamp()
-        return interaction.editReply({ embeds: [embed] })
-      }
-
-      const { track } = res
-      const embed = new EmbedBuilder()
-        .setTitle(res.started ? `${Emojis.success} Reproduciendo ahora` : `${Emojis.music} Agregado a la cola`)
-        .setDescription(Format.h3(`[${track.title}](${track.uri})`))
-        .addFields(
-          { name: `${Emojis.owner} Autor`, value: Format.inlineCode(track.author), inline: true },
-          { name: `${Emojis.loading} Duración`, value: Format.inlineCode(formatDuration(track.duration)), inline: true },
-          { name: `${Emojis.member} Pedido por`, value: `<@${track.requestedBy.id}>`, inline: true }
-        )
-        .setColor(res.started ? 'Green' : 'Yellow')
-        .setTimestamp()
-
-      if (track.thumbnail) embed.setThumbnail(track.thumbnail)
-
-      return interaction.editReply({ embeds: [embed] })
+      const e = await buildPlayResultEmbed({ client, guildId: interaction.guild.id, res, voiceChannelId: voiceChannel.id })
+      const controls = buildMusicControls({ ownerId: interaction.user.id, state: res.state })
+      return interaction.editReply({ embeds: [e], components: controls }).catch(() => {})
     } catch (e) {
       return replyError(client, interaction, {
         system: 'music',
@@ -81,3 +80,4 @@ module.exports = {
     }
   }
 }
+

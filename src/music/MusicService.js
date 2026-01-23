@@ -223,6 +223,66 @@ class MusicService {
     this._queues = new QueueManager()
   }
 
+  async search ({ query, limit = 5 }) {
+    const q = String(query || '').trim()
+    if (!q) throw new MusicError(MUSIC_ERROR_CODES.BAD_REQUEST, 'La consulta no puede estar vacÃ­a.')
+
+    const node = this.shoukaku.options.nodeResolver(this.shoukaku.nodes)
+    if (!node) throw new Error('Lavalink no estÃ¡ conectado o no hay nodos disponibles.')
+
+    const { identifier, collectionType } = this._resolveQueryToIdentifier(q)
+    const result = await node.rest.resolve(identifier)
+
+    let tracks = []
+    let loadType = result?.loadType || 'UNKNOWN'
+    // Soporte para Lavalink v3/v4
+    if (['TRACK_LOADED', 'track'].includes(loadType)) {
+      tracks = result.tracks || (result.data ? [result.data] : [])
+    } else if (['PLAYLIST_LOADED', 'playlist'].includes(loadType)) {
+      tracks = result.tracks || result.data?.tracks || []
+    } else if (['SEARCH_RESULT', 'search'].includes(loadType)) {
+      tracks = result.tracks || result.data || []
+    }
+
+    if (['LOAD_FAILED', 'load_failed', 'error'].includes(loadType)) {
+      const error = result?.data || result?.exception
+      const message = error?.message || 'Error desconocido.'
+      const cause = error?.cause || 'Sin causa especificada.'
+      throw new MusicError(MUSIC_ERROR_CODES.NO_RESULTS, `No se pudo cargar la pista. | Causa: ${cause} (${message})`)
+    }
+
+    if (!tracks || !tracks.length) {
+      throw new MusicError(MUSIC_ERROR_CODES.NO_RESULTS, 'No se encontraron resultados para tu bÃºsqueda.')
+    }
+
+    const isPlaylist = ['PLAYLIST_LOADED', 'playlist'].includes(loadType)
+    const playlistName = isPlaylist ? (result.data?.info?.name || null) : null
+    const lim = Math.max(1, Math.min(25, Number(limit) || 5))
+
+    const mapped = tracks.slice(0, lim).map((lavalinkTrack) => {
+      const info = lavalinkTrack.info || {}
+      const uri = info.uri || info.url || null
+      const thumbnail = info.artworkUrl || (info.sourceName === 'youtube' ? `https://img.youtube.com/vi/${info.identifier}/mqdefault.jpg` : null)
+      return {
+        title: info.title || 'Sin titulo',
+        author: info.author || 'Desconocido',
+        uri: uri || identifier,
+        thumbnail,
+        duration: info.length ?? info.duration ?? 0
+      }
+    })
+
+    return {
+      identifier,
+      collectionType: isPlaylist ? (collectionType || this._getCollectionTypeFromIdentifier(identifier)) : null,
+      loadType,
+      isPlaylist,
+      playlistName,
+      trackCount: tracks.length,
+      tracks: mapped
+    }
+  }
+
   /**
    * @private
    * Resuelve la consulta del usuario a un identificador que Lavalink puede entender.

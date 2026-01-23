@@ -2,7 +2,9 @@ const { getMusic } = require('../../music')
 const { isSoundCloudUrl, getMemberVoiceChannel, botHasVoicePerms } = require('../../utils/voiceChecks')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
-const { replyOk, replyError, replyWarn } = require('../../core/ui/messageKit')
+const { replySafe, replyError, replyWarn } = require('../../core/ui/messageKit')
+const { buildPlayResultEmbed } = require('../../music/musicUi')
+const { buildMusicControls } = require('../../music/musicComponents')
 
 module.exports = {
   DESCRIPTION: 'Reproduce música en tu canal de voz (YouTube / Spotify).',
@@ -65,16 +67,9 @@ module.exports = {
         query
       })
 
-      const title = res?.track?.title || 'Track'
-      return replyOk(client, message, {
-        system: 'music',
-        title: res.started ? `${Emojis.play} Reproduciendo` : `${Emojis.music} En cola`,
-        lines: [
-          `${Emojis.dot} **Canal:** ${voiceChannel}`,
-          `${Emojis.dot} **Track:** ${Format.bold(title)}`
-        ],
-        signature: 'Música en marcha'
-      })
+      const e = await buildPlayResultEmbed({ client, guildId: message.guild.id, res, voiceChannelId: voiceChannel.id })
+      const controls = buildMusicControls({ ownerId: message.author.id, state: res.state })
+      return replySafe(message, { embeds: [e], components: controls })
     } catch (e) {
       return replyError(client, message, {
         system: 'music',

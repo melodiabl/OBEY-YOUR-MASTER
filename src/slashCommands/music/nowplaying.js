@@ -1,57 +1,35 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
-const { formatDuration } = require('../../utils/timeFormat')
-const Emojis = require('../../utils/emojis')
-const Format = require('../../utils/formatter')
 const { replyError, replyWarn } = require('../../core/ui/interactionKit')
+const { buildNowPlayingEmbed } = require('../../music/musicUi')
+const { buildMusicControls } = require('../../music/musicComponents')
 
 module.exports = {
   REGISTER: true,
   CMD: new SlashCommandBuilder()
     .setName('nowplaying')
-    .setDescription('Muestra la canción que se está reproduciendo actualmente'),
+    .setDescription('Muestra la canción actual + controles'),
   DEFER: true,
   async execute (client, interaction) {
-    const voiceChannel = interaction.member.voice?.channel
-    if (!voiceChannel) {
-      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
-    }
+    const music = getMusic(client)
+    if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de música no está inicializado.' })
 
-    try {
-      const music = getMusic(client)
-      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de música no está inicializado.' })
+    const state = await music.nowPlaying({ guildId: interaction.guild.id }).catch(() => null)
+    if (!state) return replyError(client, interaction, { system: 'music', reason: 'No pude obtener el estado de música.' })
 
-      const state = await music.nowPlaying({ guildId: interaction.guild.id })
-      const current = state.currentTrack
-      if (!current) return replyWarn(client, interaction, { system: 'music', title: 'Sin reproducción', lines: ['No hay música reproduciéndose en este momento.'] })
-
-      const player = music.shoukaku.players.get(interaction.guild.id)
-      const position = player ? player.position : 0
-
-      const statusEmoji = state.isPaused ? Emojis.idle : Emojis.online
-      const statusText = state.isPaused ? 'Pausado' : 'Reproduciendo'
-
-      const embed = new EmbedBuilder()
-        .setTitle(`${statusEmoji} ${statusText}`)
-        .setDescription(Format.h3(`[${current.title}](${current.uri})`))
-        .addFields(
-          { name: `${Emojis.owner} Autor`, value: Format.inlineCode(current.author), inline: true },
-          { name: `${Emojis.member} Pedido por`, value: `<@${current.requestedBy.id}>`, inline: true },
-          { name: `${Emojis.loading} Tiempo`, value: Format.inlineCode(`${formatDuration(position)} / ${formatDuration(current.duration)}`), inline: false },
-          { name: `${Emojis.stats} Progreso`, value: Format.progressBar(position, current.duration, 15), inline: false }
-        )
-        .setColor('Blurple')
-        .setTimestamp()
-
-      if (current.thumbnail) embed.setThumbnail(current.thumbnail)
-
-      return interaction.editReply({ embeds: [embed] })
-    } catch (e) {
-      return replyError(client, interaction, {
+    if (!state.currentTrack) {
+      return replyWarn(client, interaction, {
         system: 'music',
-        reason: 'No pude obtener el now playing.',
-        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+        title: 'Sin reproducción',
+        lines: ['No hay música reproduciéndose en este momento.']
       })
     }
+
+    const player = music.shoukaku.players.get(interaction.guild.id)
+    const position = player ? player.position : 0
+
+    const e = await buildNowPlayingEmbed({ client, guildId: interaction.guild.id, state, positionMs: position })
+    const controls = buildMusicControls({ ownerId: interaction.user.id, state })
+    return interaction.editReply({ embeds: [e], components: controls }).catch(() => {})
   }
 }

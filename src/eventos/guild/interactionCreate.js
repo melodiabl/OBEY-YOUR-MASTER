@@ -6,6 +6,8 @@ const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
 const { getGuildUiConfig, errorEmbed, embed } = require('../../core/ui/uiKit')
 const { handlePanelInteraction } = require('../../core/ui/panels/panelKit')
+const { handleMusicInteraction } = require('../../music/musicInteractions')
+const { buildHelpCategoryEmbed } = require('../../core/ui/help/helpCatalog')
 
 const globalCooldownCache = new TTLCache({ defaultTtlMs: 5_000, maxSize: 200_000 })
 const commandCooldownCache = new TTLCache({ defaultTtlMs: 10_000, maxSize: 500_000 })
@@ -62,26 +64,18 @@ module.exports = async (client, interaction) => {
       if (handled) return
     } catch (e) {}
 
+    // Música (botones / menú de búsqueda)
+    try {
+      const handled = await handleMusicInteraction(client, interaction)
+      if (handled) return
+    } catch (e) {}
+
     // Menú help
     if (interaction.isStringSelectMenu?.()) {
       if (interaction.customId === 'help_menu') {
         const ui = await getGuildUiConfig(client, interaction.guild.id)
-        const category = interaction.values[0]
-        const commands = client.slashCommands.filter(c => c.CATEGORY === category)
-        const list = commands.map(c => `${Emojis.dot} ${Format.bold('/' + c.CMD.name)} *${c.CMD.description}*`).join('\n') || '*Sin comandos en esta categoría.*'
-
-        const e = embed({
-          ui,
-          system: 'info',
-          kind: 'info',
-          title: `${Emojis.info} Ayuda`,
-          description: [
-            `${Emojis.category} **Categoría:** ${Format.inlineCode(category)}`,
-            Format.softDivider(20),
-            list
-          ].join('\n')
-        })
-
+        const key = interaction.values[0]
+        const e = buildHelpCategoryEmbed({ ui, client, key })
         return await interaction.update({ embeds: [e] }).catch(() => {})
       }
     }

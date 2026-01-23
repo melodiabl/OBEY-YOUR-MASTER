@@ -14,9 +14,8 @@ function requireOneOf (paths, { stub, label } = {}) {
       // eslint-disable-next-line import/no-dynamic-require
       return require(p)
     } catch (e) {
-      const msg = String(e?.message || '')
-      const notFoundThis = e?.code === 'MODULE_NOT_FOUND' && msg.includes(`Cannot find module '${p}'`)
-      if (notFoundThis) continue
+      // Este helper se usa SOLO para módulos opcionales; si algo falta, preferimos degradar con stub antes que crashear.
+      if (e?.code === 'MODULE_NOT_FOUND') continue
       throw e
     }
   }
