@@ -109,6 +109,7 @@ async function autoStartLavalink (client, options = {}) {
   const outPath = path.resolve('logs', 'lavalink.out.log')
   const errPath = path.resolve('logs', 'lavalink.err.log')
 
+  let spawnError = null
   const child = spawn(javaBin, args, {
     cwd: process.cwd(),
     env,
@@ -116,11 +117,15 @@ async function autoStartLavalink (client, options = {}) {
     stdio: ['ignore', 'pipe', 'pipe']
   })
 
+  // Importante: si no existe `java` (ENOENT), Node emite `error` en el child.
+  // Sin listener, eso termina en uncaughtException.
+  child.once('error', (err) => { spawnError = err })
+
   try {
     const out = fs.createWriteStream(outPath, { flags: 'a' })
     const err = fs.createWriteStream(errPath, { flags: 'a' })
-    child.stdout.pipe(out)
-    child.stderr.pipe(err)
+    if (child.stdout) child.stdout.pipe(out)
+    if (child.stderr) child.stderr.pipe(err)
   } catch (e) {}
 
   if (client) client.lavalinkProcess = child
@@ -139,10 +144,37 @@ async function autoStartLavalink (client, options = {}) {
   const maxWaitMs = Math.max(1000, Number(process.env.LAVALINK_STARTUP_TIMEOUT_MS || 10_000))
   const startedAt = Date.now()
   while (Date.now() - startedAt < maxWaitMs) {
+    if (spawnError) {
+      const code = spawnError.code || spawnError.errno
+      const isMissingJava = String(code).toUpperCase() === 'ENOENT'
+      if (client && client.lavalinkProcess === child) client.lavalinkProcess = null
+      return {
+        ok: false,
+        started: false,
+        reason: isMissingJava ? 'missing_java' : 'spawn_failed',
+        javaBin,
+        code,
+        error: spawnError.message
+      }
+    }
     if (await canConnect({ host, port, timeoutMs: 400 })) {
       return { ok: true, started: true, host, port, jarPath, configPath, pid: child.pid }
     }
     await wait(250)
+  }
+
+  if (spawnError) {
+    const code = spawnError.code || spawnError.errno
+    const isMissingJava = String(code).toUpperCase() === 'ENOENT'
+    if (client && client.lavalinkProcess === child) client.lavalinkProcess = null
+    return {
+      ok: false,
+      started: false,
+      reason: isMissingJava ? 'missing_java' : 'spawn_failed',
+      javaBin,
+      code,
+      error: spawnError.message
+    }
   }
 
   return { ok: true, started: true, host, port, jarPath, configPath, pid: child.pid, warning: 'timeout_waiting_port' }
