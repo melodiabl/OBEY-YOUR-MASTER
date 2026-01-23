@@ -128,7 +128,9 @@ module.exports = class extends Client {
   }
 
   async loadCommands () {
-    console.log(`(${process.env.PREFIX.split(' ').join(', ')}) Cargando comandos`.yellow)
+    const rawPrefix = String(process.env.PREFIX || '!').trim()
+    const envPrefixes = rawPrefix ? rawPrefix.split(/\s+/g) : ['!']
+    console.log(`(${envPrefixes.join(', ')}) Cargando comandos`.yellow)
     await this.commands.clear()
 
     const RUTA_ARCHIVOS = await this.utils.loadFiles('/src/comandos')
@@ -152,7 +154,7 @@ module.exports = class extends Client {
     }
 
     console.log(
-      `(${process.env.PREFIX.split(' ').join(', ')}) ${this.commands.size} Comandos cargados`.green
+      `(${envPrefixes.join(', ')}) ${this.commands.size} Comandos cargados`.green
     )
   }
 
