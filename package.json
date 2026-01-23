@@ -2,8 +2,9 @@
   "name": "v14_handler",
   "version": "1.0.0",
   "description": "El mejor handler en v14, compatible con slash y message commands, desarrollado por dewstouh#1088.",
-  "main": "./src/index.js",
+  "main": "./index.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,6 +14,9 @@
     "dewstouh",
     "bot-del-canal"
   ],
+  "engines": {
+    "node": ">=16.11.0"
+  },
   "author": "dewstouh#1088",
   "license": "MIT",
   "dependencies": {
