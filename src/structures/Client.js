@@ -120,7 +120,13 @@ module.exports = class extends Client {
         console.log(`[Lavalink] Autostart: ${res.ok ? 'ok' : 'fail'} host=${res.host || 'n/a'} port=${res.port || 'n/a'}`.cyan)
       }
       if (res?.ok === false) {
-        console.log(`[Lavalink] Autostart falló: ${res.reason || 'unknown'} (${res.jarPath || ''})`.yellow)
+        const details = []
+        if (res.javaBin) details.push(`java=${res.javaBin}`)
+        if (res.code) details.push(`code=${res.code}`)
+        if (res.jarPath) details.push(`jar=${res.jarPath}`)
+        if (res.error) details.push(`error=${res.error}`)
+        const extra = details.length ? ` (${details.join(' ')})` : ''
+        console.log(`[Lavalink] Autostart falló: ${res.reason || 'unknown'}${extra}`.yellow)
       }
     } catch (e) {
       console.log(`[Lavalink] Autostart error: ${e?.message || e}`.yellow)
