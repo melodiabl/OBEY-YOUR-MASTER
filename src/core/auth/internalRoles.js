@@ -1,5 +1,6 @@
 const INTERNAL_ROLES = Object.freeze({
   OWNER: 'OWNER',
+  CREATOR: 'CREATOR',
   ADMIN: 'ADMIN',
   MOD: 'MOD',
   USER: 'USER'
@@ -8,6 +9,7 @@ const INTERNAL_ROLES = Object.freeze({
 // Orden de mayor a menor privilegio.
 const INTERNAL_ROLE_ORDER = Object.freeze([
   INTERNAL_ROLES.OWNER,
+  INTERNAL_ROLES.CREATOR,
   INTERNAL_ROLES.ADMIN,
   INTERNAL_ROLES.MOD,
   INTERNAL_ROLES.USER

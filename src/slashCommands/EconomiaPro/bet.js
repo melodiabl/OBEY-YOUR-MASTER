@@ -2,6 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const UserSchema = require('../../database/schemas/UserSchema')
 
 module.exports = {
+  REGISTER: false,
   CMD: new SlashCommandBuilder()
     .setName('bet')
     .setDescription('Apuesta una cantidad de dinero')

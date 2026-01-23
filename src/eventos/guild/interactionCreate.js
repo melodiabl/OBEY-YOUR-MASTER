@@ -1,46 +1,85 @@
+const TTLCache = require('../../core/cache/ttlCache')
 const { resolveInternalIdentity } = require('../../core/auth/resolveInternalIdentity')
 const { authorizeInternal } = require('../../core/auth/authorize')
 const { audit } = require('../../core/audit/auditService')
-const TTLCache = require('../../core/cache/ttlCache')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { getGuildUiConfig, errorEmbed, embed } = require('../../core/ui/uiKit')
 
 const globalCooldownCache = new TTLCache({ defaultTtlMs: 5_000, maxSize: 200_000 })
+const commandCooldownCache = new TTLCache({ defaultTtlMs: 10_000, maxSize: 500_000 })
 
-function globalCooldownKey (guildId, userId) {
-  return `${guildId}:${userId}`
+function key (guildId, userId, suffix) {
+  return `${guildId}:${userId}:${suffix}`
+}
+
+function normalizeOverridesMap (v) {
+  if (!v) return null
+  if (typeof v.get === 'function') return v
+  if (typeof v === 'object') return new Map(Object.entries(v))
+  return null
+}
+
+function pickOverride (map, { commandName, groupName, subcommandName }) {
+  if (!map) return null
+  const candidates = []
+  if (groupName && subcommandName) candidates.push(`${commandName} ${groupName}.${subcommandName}`)
+  if (subcommandName) candidates.push(`${commandName} ${subcommandName}`)
+  candidates.push(`${commandName}`)
+
+  for (const c of candidates) {
+    const v = map.get ? map.get(c) : null
+    if (v) return { key: c, value: v }
+  }
+  return null
+}
+
+function getOverrideField (overrideValue, k) {
+  if (!overrideValue) return undefined
+  if (typeof overrideValue.get === 'function') return overrideValue.get(k)
+  return overrideValue[k]
+}
+
+async function replySafe (interaction, payload) {
+  try {
+    if (interaction.deferred || interaction.replied) return await interaction.editReply(payload)
+    return await interaction.reply(payload)
+  } catch (e) {
+    try {
+      if (interaction.deferred || interaction.replied) return await interaction.followUp(payload)
+    } catch (_) {}
+  }
 }
 
 module.exports = async (client, interaction) => {
-  const reply = async (payload) => {
-    if (interaction.deferred || interaction.replied) {
-      return await interaction.editReply(payload).catch(() => {})
-    }
-    return await interaction.reply(payload).catch(() => {})
-  }
-
   try {
     if (!interaction.guild || !interaction.channel) return
 
-    // Manejo de Menús de Selección
+    // Menú help
     if (interaction.isStringSelectMenu?.()) {
       if (interaction.customId === 'help_menu') {
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
         const category = interaction.values[0]
         const commands = client.slashCommands.filter(c => c.CATEGORY === category)
+        const list = commands.map(c => `${Emojis.dot} ${Format.bold('/' + c.CMD.name)} *${c.CMD.description}*`).join('\n') || '*Sin comandos en esta categoría.*'
 
-        const { EmbedBuilder } = require('discord.js')
-        const Emojis = require('../../utils/emojis')
-        const Format = require('../../utils/formatter')
+        const e = embed({
+          ui,
+          system: 'info',
+          kind: 'info',
+          title: `${Emojis.info} Ayuda`,
+          description: [
+            `${Emojis.category} **Categoría:** ${Format.inlineCode(category)}`,
+            Format.softDivider(20),
+            list
+          ].join('\n')
+        })
 
-        const embed = new EmbedBuilder()
-          .setTitle(`${Emojis.info} Comandos de ${category}`)
-          .setDescription(commands.map(c => `**/${c.CMD.name}**: ${c.CMD.description}`).join('\n') || 'No hay comandos en esta categoría.')
-          .setColor('Blurple')
-          .setTimestamp()
-
-        return await interaction.update({ embeds: [embed] })
+        return await interaction.update({ embeds: [e] }).catch(() => {})
       }
     }
 
-    // Autocomplete: enrutar al comando si lo soporta.
+    // Autocomplete
     if (interaction.isAutocomplete?.()) {
       const cmd = client.slashCommands.get(interaction.commandName)
       if (cmd?.autocomplete) {
@@ -55,96 +94,172 @@ module.exports = async (client, interaction) => {
 
     if (!interaction.isChatInputCommand?.()) return
 
-    // Compat: algunos comandos todavía usan GUILD_DATA del JsonDB.
+    // Compat (JsonDB)
     const GUILD_DATA = client.dbGuild.getGuildData(interaction.guild.id)
 
     const COMANDO = client.slashCommands.get(interaction.commandName)
     if (!COMANDO) return
 
-    if (COMANDO.DEFER) {
-      await interaction.deferReply({ ephemeral: COMANDO.EPHEMERAL || false }).catch(() => {})
+    const guildMongo = await client.db.getGuildData(interaction.guild.id)
+    const ui = await getGuildUiConfig(client, interaction.guild.id)
+
+    const groupName = interaction.options.getSubcommandGroup(false)
+    const subcommandName = interaction.options.getSubcommand(false)
+
+    // Override por comando/subcomando (servidor)
+    const overrides = normalizeOverridesMap(guildMongo?.commandOverrides)
+    const picked = pickOverride(overrides, { commandName: interaction.commandName, groupName, subcommandName })
+    const ov = picked?.value || null
+
+    // Modo mantenimiento
+    if (guildMongo?.maintenanceEnabled) {
+      const allow = new Set(['help', 'auth', 'config', 'modules', 'maintenance'])
+      if (!allow.has(interaction.commandName)) {
+        const msg = String(guildMongo?.maintenanceMessage || 'El bot está en mantenimiento. Intenta más tarde.')
+        const e = errorEmbed({ ui, system: 'security', title: 'Mantenimiento', reason: msg, hint: `Comando: ${Format.inlineCode('/' + interaction.commandName)}` })
+        return replySafe(interaction, { embeds: [e], ephemeral: true })
+      }
     }
 
-    // Cooldown global por servidor (anti-abuso base).
-    const guildMongo = await client.db.getGuildData(interaction.guild.id)
+    // Visibilidad (solo afecta defer y errores del middleware)
+    const overrideVisibility = String(getOverrideField(ov, 'visibility') || '').trim().toLowerCase()
+    const defaultEphemeral = overrideVisibility === 'ephemeral'
+      ? true
+      : overrideVisibility === 'public'
+        ? false
+        : Boolean(COMANDO.EPHEMERAL || false)
+
+    if (COMANDO.DEFER) {
+      await interaction.deferReply({ ephemeral: defaultEphemeral }).catch(() => {})
+    }
+
+    // Cooldown global por servidor (anti-abuso base)
     try {
       const ms = Number(guildMongo?.globalCooldownMs || 0)
       if (ms > 0) {
-        const key = globalCooldownKey(interaction.guild.id, interaction.user.id)
-        const until = globalCooldownCache.get(key)
+        const until = globalCooldownCache.get(key(interaction.guild.id, interaction.user.id, 'global'))
         if (until && until > Date.now()) {
           const remaining = Math.ceil((until - Date.now()) / 1000)
-          return reply({ content: `⏳ Espera **${remaining}s** antes de usar más comandos.`, ephemeral: true })
+          return replySafe(interaction, {
+            embeds: [errorEmbed({ ui, system: 'security', title: 'Demasiado rápido', reason: `Espera ${remaining}s antes de usar más comandos.`, hint: 'Esto protege al servidor contra abuso.' })],
+            ephemeral: true
+          })
         }
-        globalCooldownCache.set(key, Date.now() + ms, ms)
+        globalCooldownCache.set(key(interaction.guild.id, interaction.user.id, 'global'), Date.now() + ms, ms)
       }
     } catch (e) {}
 
-    // OWNER (existente)
+    // OWNER (bot)
     if (COMANDO.OWNER) {
-      if (!String(process.env.OWNER_IDS || '').split(' ').includes(interaction.user.id)) {
-        return reply({
-          content: `❌ **Solo los dueños de este bot pueden ejecutar este comando!**\n**Dueños del bot:** ${String(process.env.OWNER_IDS || '').split(' ').filter(Boolean).map(id => `<@${id}>`).join(' ')}`,
-          ephemeral: true
+      const owners = String(process.env.OWNER_IDS || '').split(/\s+/).filter(Boolean)
+      if (!owners.includes(interaction.user.id)) {
+        const e = errorEmbed({
+          ui,
+          system: 'security',
+          title: 'Acceso restringido',
+          reason: 'Solo el equipo del bot puede ejecutar este comando.',
+          hint: owners.length ? `Owners: ${owners.map(id => `<@${id}>`).join(' ')}` : null
         })
+        return replySafe(interaction, { embeds: [e], ephemeral: true })
       }
     }
 
-    // Permisos nativos Discord (existente)
+    // Permisos nativos Discord
     if (COMANDO.BOT_PERMISSIONS) {
       if (!interaction.guild.members.me.permissions.has(COMANDO.BOT_PERMISSIONS)) {
-        return reply({
-          content: `❌ **No tengo suficientes permisos para ejecutar este comando!**\nNecesito los siguientes permisos ${COMANDO.BOT_PERMISSIONS.map(p => `\`${p}\``).join(', ')}`,
-          ephemeral: true
+        const e = errorEmbed({
+          ui,
+          system: 'security',
+          title: 'Permisos faltantes',
+          reason: 'No tengo permisos suficientes para ejecutar esto.',
+          hint: `Necesito: ${COMANDO.BOT_PERMISSIONS.map(p => Format.inlineCode(p)).join(', ')}`
         })
+        return replySafe(interaction, { embeds: [e], ephemeral: true })
       }
     }
 
     if (COMANDO.PERMISSIONS) {
       if (!interaction.member.permissions.has(COMANDO.PERMISSIONS)) {
-        return reply({
-          content: `❌ **No tienes suficientes permisos para ejecutar este comando!**\nNecesitas los siguientes permisos ${COMANDO.PERMISSIONS.map(p => `\`${p}\``).join(', ')}`,
-          ephemeral: true
+        const e = errorEmbed({
+          ui,
+          system: 'security',
+          title: 'Permisos requeridos',
+          reason: 'No tienes permisos suficientes para ejecutar esto.',
+          hint: `Necesitas: ${COMANDO.PERMISSIONS.map(p => Format.inlineCode(p)).join(', ')}`
         })
+        return replySafe(interaction, { embeds: [e], ephemeral: true })
       }
     }
 
-    // Validación interna (opcional): rol/permisos propios del bot.
-    // Se activa solo si el comando exporta INTERNAL_ROLE y/o INTERNAL_PERMS.
-    if (COMANDO.INTERNAL_ROLE || COMANDO.INTERNAL_PERMS) {
+    // Módulos por servidor (si el comando lo declara)
+    if (COMANDO.MODULE) {
+      try {
+        const alwaysAllowed = new Set(['modules', 'auth', 'security', 'config', 'help', 'maintenance', 'overrides', 'plugins'])
+        if (!alwaysAllowed.has(interaction.commandName)) {
+          const modules = guildMongo?.modules
+          const isOff = modules?.get ? modules.get(COMANDO.MODULE) === false : modules?.[COMANDO.MODULE] === false
+          if (isOff) {
+            const e = errorEmbed({
+              ui,
+              system: 'config',
+              title: 'Módulo deshabilitado',
+              reason: `El módulo ${Format.inlineCode(COMANDO.MODULE)} está deshabilitado en este servidor.`,
+              hint: `Admin: usa ${Format.inlineCode('/modules set')} para activarlo.`
+            })
+            return replySafe(interaction, { embeds: [e], ephemeral: true })
+          }
+        }
+      } catch (e) {}
+    }
+
+    // Overrides por comando (enabled / cooldown / auth)
+    if (ov) {
+      const enabled = getOverrideField(ov, 'enabled')
+      if (enabled === false) {
+        const e = errorEmbed({ ui, system: 'config', title: 'Comando deshabilitado', reason: 'Este comando fue deshabilitado por configuración del servidor.' })
+        return replySafe(interaction, { embeds: [e], ephemeral: true })
+      }
+
+      const cooldownMs = Number(getOverrideField(ov, 'cooldownMs') || 0)
+      if (cooldownMs > 0) {
+        const cdKey = key(interaction.guild.id, interaction.user.id, `cmd:${picked?.key || interaction.commandName}`)
+        const until = commandCooldownCache.get(cdKey)
+        if (until && until > Date.now()) {
+          const remaining = Math.ceil((until - Date.now()) / 1000)
+          const e = errorEmbed({ ui, system: 'security', title: 'Cooldown', reason: `Espera ${remaining}s para volver a usar este comando.` })
+          return replySafe(interaction, { embeds: [e], ephemeral: true })
+        }
+        commandCooldownCache.set(cdKey, Date.now() + cooldownMs, cooldownMs)
+      }
+    }
+
+    // Autorización interna (comando + override)
+    if (COMANDO.INTERNAL_ROLE || COMANDO.INTERNAL_PERMS || getOverrideField(ov, 'role') || getOverrideField(ov, 'perms')) {
       const identity = await resolveInternalIdentity({
         guildId: interaction.guild.id,
         userId: interaction.user.id,
         member: interaction.member
       })
 
+      const requiredRole = getOverrideField(ov, 'role') || COMANDO.INTERNAL_ROLE
+      const requiredPerms = getOverrideField(ov, 'perms') || COMANDO.INTERNAL_PERMS
+
       const authz = authorizeInternal({
         identity,
-        requiredRole: COMANDO.INTERNAL_ROLE,
-        requiredPerms: COMANDO.INTERNAL_PERMS
+        requiredRole,
+        requiredPerms
       })
 
       if (!authz.ok) {
-        return reply({ content: `❌ ${authz.reason}`, ephemeral: true })
+        const e = errorEmbed({
+          ui,
+          system: 'security',
+          title: 'Acceso denegado',
+          reason: authz.reason,
+          hint: `${Emojis.dot} Requerido: ${Format.inlineCode(requiredRole || '—')}`
+        })
+        return replySafe(interaction, { embeds: [e], ephemeral: true })
       }
-    }
-
-    // Módulos por servidor (opcional). Si no hay MODULE, no bloquea.
-    if (COMANDO.MODULE) {
-      try {
-        // Evita auto-bloqueo: comandos críticos siempre deben poder ejecutarse.
-        // (si deshabilitas "config" o "security", necesitas poder re-habilitarlo).
-        const alwaysAllowedCommands = new Set(['modules', 'auth', 'security', 'config'])
-        if (alwaysAllowedCommands.has(interaction.commandName)) {
-          // no-op
-        } else {
-          const modules = guildMongo?.modules
-          const isOff = modules?.get ? modules.get(COMANDO.MODULE) === false : modules?.[COMANDO.MODULE] === false
-          if (isOff) {
-            return reply({ content: `❌ El módulo \`${COMANDO.MODULE}\` está deshabilitado en este servidor.`, ephemeral: true })
-          }
-        }
-      } catch (e) {}
     }
 
     const startedAt = Date.now()
@@ -167,15 +282,14 @@ module.exports = async (client, interaction) => {
       })
     } catch (e) {
       const msg = e?.message || String(e || 'Error desconocido')
-
-      // Respuesta segura al usuario.
-      try {
-        if (interaction.deferred || interaction.replied) {
-          await interaction.followUp({ content: `❌ Error al ejecutar \`/${interaction.commandName}\`: ${msg}`, ephemeral: true })
-        } else {
-          await interaction.reply({ content: `❌ Error al ejecutar \`/${interaction.commandName}\`: ${msg}`, ephemeral: true })
-        }
-      } catch (_) {}
+      const err = errorEmbed({
+        ui,
+        system: 'security',
+        title: 'Error ejecutando comando',
+        reason: msg,
+        hint: `Comando: ${Format.inlineCode('/' + interaction.commandName)}`
+      })
+      await replySafe(interaction, { embeds: [err], ephemeral: true })
 
       await audit({
         client,

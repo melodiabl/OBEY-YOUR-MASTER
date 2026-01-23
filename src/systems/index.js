@@ -69,5 +69,17 @@ module.exports = {
       ...require('./fun/funImages'),
       ...require('./fun/textTransforms')
     }))
+  },
+  get logs () {
+    return cached('logs', () => require('./logs/logService'))
+  },
+  get welcome () {
+    return cached('welcome', () => require('./welcome/welcomeService'))
+  },
+  get afk () {
+    return cached('afk', () => require('./afk/afkService'))
+  },
+  get suggestions () {
+    return cached('suggestions', () => require('./suggestions/suggestionService'))
   }
 }

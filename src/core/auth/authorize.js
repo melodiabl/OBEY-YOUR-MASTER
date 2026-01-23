@@ -5,6 +5,7 @@ const PERMS = require('./permissionKeys')
 // Puedes ajustar esto a futuro sin tocar los comandos.
 const ROLE_DEFAULT_GRANTS = Object.freeze({
   OWNER: ['*'],
+  CREATOR: ['*'],
   ADMIN: [
     PERMS.AUTH_MANAGE,
     PERMS.CONFIG_MANAGE,

@@ -18,27 +18,31 @@ module.exports = {
     const totalRam = (os.totalmem() / 1024 / 1024 / 1024).toFixed(2)
     
     const embed = new EmbedBuilder()
-      .setTitle(`${Emojis.system} Estadísticas de OBEY YOUR MASTER`)
-      .setColor('DarkBlue')
+      .setTitle(`${Emojis.system} ${Format.toBold('ESTADÍSTICAS TÉCNICAS')}`)
+      .setColor('#2b2d31')
       .setThumbnail(client.user.displayAvatarURL())
       .addFields(
         {
-          name: `${Emojis.stats} Sistema`,
+          name: `${Emojis.stats} ${Format.toBold('SISTEMA')}`,
           value: [
-            `${Emojis.dot} ${Format.bold('OS:')} ${os.platform()} ${os.arch()}`,
-            `${Emojis.dot} ${Format.bold('CPU:')} ${os.cpus()[0].model}`,
-            `${Emojis.dot} ${Format.bold('RAM:')} ${ram}MB / ${totalRam}GB`
+            `${Emojis.dot} ${Format.toBold('OS:')} ${os.platform()} ${os.arch()}`,
+            `${Emojis.dot} ${Format.toBold('CPU:')} ${os.cpus()[0].model.split('@')[0]}`,
+            `${Emojis.dot} ${Format.toBold('RAM:')} ${ram}MB / ${totalRam}GB`
           ].join('\n'),
-          inline: false
+          inline: true
         },
         {
-          name: `${Emojis.utility} Bot`,
+          name: `${Emojis.utility} ${Format.toBold('BOT')}`,
           value: [
-            `${Emojis.dot} ${Format.bold('Uptime:')} ${days}d ${hours}h ${minutes}m ${seconds}s`,
-            `${Emojis.dot} ${Format.bold('Discord.js:')} v${version}`,
-            `${Emojis.dot} ${Format.bold('Node.js:')} ${process.version}`,
-            `${Emojis.dot} ${Format.bold('Ping:')} ${client.ws.ping}ms`
+            `${Emojis.dot} ${Format.toBold('Discord.js:')} v${version}`,
+            `${Emojis.dot} ${Format.toBold('Node.js:')} ${process.version}`,
+            `${Emojis.dot} ${Format.toBold('Ping:')} ${client.ws.ping}ms`
           ].join('\n'),
+          inline: true
+        },
+        {
+          name: `${Emojis.calendar} ${Format.toBold('UPTIME')}`,
+          value: `${Format.toBold(`${days}`)}d ${Format.toBold(`${hours}`)}h ${Format.toBold(`${minutes}`)}m ${Format.toBold(`${seconds}`)}s`,
           inline: false
         }
       )

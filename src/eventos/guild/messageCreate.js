@@ -1,6 +1,10 @@
 module.exports = async (client, message) => {
   if (!message.guild || !message.channel || message.author.bot) return
+  const systems = require('../../systems')
   const GUILD_DATA = client.dbGuild.getGuildData(message.guild.id)
+
+  // Sistema AFK
+  await systems.afk.checkAfk(message)
 
   // Sistema de Niveles (XP) - escalable (cooldown + config por guild)
   try {

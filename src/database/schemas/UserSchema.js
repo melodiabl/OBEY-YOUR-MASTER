@@ -49,6 +49,11 @@ const UserSchema = new Schema({
     lastFed: { type: Date, default: Date.now },
     lastPlayedAt: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now }
+  },
+  afk: {
+    status: { type: Boolean, default: false },
+    reason: { type: String, default: 'AFK' },
+    since: { type: Number, default: 0 }
   }
 })
 

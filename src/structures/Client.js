@@ -7,18 +7,19 @@ const {
   PresenceUpdateStatus
 } = require('discord.js')
 const GuildDB = require('../database/schemas/Guild.db')
-const { abbreviateNumber } = require('../helpers/helpers')
 const Database = require('../database/mongoose')
 const BotUtils = require('./Utils')
 const { initMusic } = require('../music')
+const { loadPlugins: loadPluginsFromDisk } = require('../core/plugins/pluginLoader')
+
 module.exports = class extends Client {
   constructor (
     options = {
       intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildBans,
-        GatewayIntentBits.GuildEmojisAndStickers,
+        GatewayIntentBits.GuildModeration,
+        GatewayIntentBits.GuildExpressions,
         GatewayIntentBits.GuildIntegrations,
         GatewayIntentBits.GuildWebhooks,
         GatewayIntentBits.GuildInvites,
@@ -57,9 +58,7 @@ module.exports = class extends Client {
       }
     }
   ) {
-    super({
-      ...options
-    })
+    super({ ...options })
 
     this._eventListeners = new Map()
 
@@ -70,12 +69,16 @@ module.exports = class extends Client {
     this.slashCommands = new Collection()
     this.slashArray = []
 
+    this.plugins = new Collection()
+    this.pluginMeta = { lastLoad: null, lastResult: null }
+
     this.utils = new BotUtils(this)
 
     this.start()
   }
 
   async start () {
+    await this.loadPlugins()
     await this.loadEvents()
     await this.loadHandlers()
     await this.loadCommands()
@@ -84,6 +87,21 @@ module.exports = class extends Client {
     await this.db.connect()
 
     this.login(process.env.BOT_TOKEN)
+  }
+
+  async loadPlugins () {
+    try {
+      const res = await loadPluginsFromDisk(this)
+      this.pluginMeta.lastLoad = new Date()
+      this.pluginMeta.lastResult = res
+      this.plugins.clear()
+      for (const p of res.plugins) this.plugins.set(p.name, p)
+      if (res.loaded || res.failed) {
+        console.log(`(plugins) Cargados=${res.loaded} Fallidos=${res.failed} Dir=${res.dir}`.cyan)
+      }
+    } catch (e) {
+      console.log(`(plugins) Error cargando plugins: ${e?.message || e}`.bgRed)
+    }
   }
 
   async initMusicSystem () {
@@ -132,7 +150,14 @@ module.exports = class extends Client {
     let RUTA_ARCHIVOS = await this.utils.loadFiles('/src/slashCommands')
 
     // Orden estable: evita cambios de orden al registrar.
-    RUTA_ARCHIVOS = RUTA_ARCHIVOS.slice().sort((a, b) => String(a).localeCompare(String(b), 'en', { sensitivity: 'base' }))
+    // Priorizamos la carpeta 'music' para asegurar que no se queden fuera por el límite de 100 comandos globales.
+    RUTA_ARCHIVOS = RUTA_ARCHIVOS.slice().sort((a, b) => {
+      const aIsMusic = a.includes('/music/') || a.includes('\\music\\')
+      const bIsMusic = b.includes('/music/') || b.includes('\\music\\')
+      if (aIsMusic && !bIsMusic) return -1
+      if (!aIsMusic && bIsMusic) return 1
+      return String(a).localeCompare(String(b), 'en', { sensitivity: 'base' })
+    })
 
     if (RUTA_ARCHIVOS.length) {
       RUTA_ARCHIVOS.forEach((rutaArchivo) => {
@@ -146,7 +171,7 @@ module.exports = class extends Client {
 
           if (NOMBRE_COMANDO) this.slashCommands.set(NOMBRE_COMANDO, COMANDO)
 
-          // Permite comandos "legacy"/migrados: se pueden ejecutar si existen en Discord,
+          // Permite comandos legacy/migrados: se pueden ejecutar si existen en Discord,
           // pero no se registran (no cuentan para el límite de 100 global).
           if (COMANDO.REGISTER !== false) this.slashArray.push(COMANDO.CMD.toJSON())
         } catch (e) {
@@ -183,8 +208,7 @@ module.exports = class extends Client {
 
     const RUTA_ARCHIVOS = await this.utils.loadFiles('/src/eventos')
 
-    // No usar removeAllListeners(): rompe listeners de librerías externas
-    // (y puede afectar eventos raw/voice necesarios para voz/musica).
+    // No usar removeAllListeners(): rompe listeners de librerías externas.
     for (const [eventName, listener] of this._eventListeners.entries()) {
       this.removeListener(eventName, listener)
     }

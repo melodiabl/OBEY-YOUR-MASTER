@@ -11,6 +11,12 @@ function getOwnerIds () {
   return raw.split(/\s+/).filter(Boolean)
 }
 
+function getCreatorIds () {
+  const raw = String(process.env.CREATOR_IDS || '').trim()
+  if (!raw) return []
+  return raw.split(/\s+/).filter(Boolean)
+}
+
 function getCacheKey (guildId, userId) {
   return `${guildId}:${userId}`
 }
@@ -32,6 +38,7 @@ function pickRoleFromDiscordRoles ({ member, mappings }) {
   const memberRoleIds = new Set(member.roles?.cache?.map(r => r.id) || [])
   for (const role of INTERNAL_ROLE_ORDER) {
     if (role === INTERNAL_ROLES.OWNER) continue
+    if (role === INTERNAL_ROLES.CREATOR) continue
     const mappedIds = Array.isArray(mappings?.[role]) ? mappings[role] : []
     if (mappedIds.some(id => memberRoleIds.has(id))) return role
   }
@@ -45,6 +52,13 @@ async function resolveInternalIdentity ({ guildId, userId, member }) {
   // OWNER global por .env (independiente de Discord).
   if (getOwnerIds().includes(userId)) {
     const identity = { role: INTERNAL_ROLES.OWNER, grants: [], denies: [] }
+    roleCache.set(getCacheKey(guildId, userId), identity)
+    return identity
+  }
+
+  // CREATOR global por .env (staff/creadores del bot).
+  if (getCreatorIds().includes(userId)) {
+    const identity = { role: INTERNAL_ROLES.CREATOR, grants: [], denies: [] }
     roleCache.set(getCacheKey(guildId, userId), identity)
     return identity
   }

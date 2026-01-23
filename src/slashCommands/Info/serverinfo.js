@@ -50,22 +50,22 @@ module.exports = {
           },
           {
             name: `${Emojis.channel} Canales (${channels.size})`,
-            value: `${Emojis.dot} ${Format.bold('Texto:')} ${textChannels}\n${Emojis.dot} ${Format.bold('Voz:')} ${voiceChannels}\n${Emojis.dot} ${Format.bold('Categorías:')} ${categories}`,
+            value: `${Emojis.dot} ${Format.toBold('Texto:')} ${textChannels}\n${Emojis.dot} ${Format.toBold('Voz:')} ${voiceChannels}\n${Emojis.dot} ${Format.toBold('Categorías:')} ${categories}`,
             inline: true
           },
           {
             name: `${Emojis.member} Miembros (${totalMembers})`,
-            value: `${Emojis.dot} ${Format.bold('Humanos:')} ${humans}\n${Emojis.dot} ${Format.bold('Bots:')} ${bots}`,
+            value: `${Emojis.dot} ${Format.toBold('Humanos:')} ${humans}\n${Emojis.dot} ${Format.toBold('Bots:')} ${bots}`,
             inline: true
           },
           {
             name: `${Emojis.boost} Mejoras`,
-            value: `${Emojis.dot} ${Format.bold('Nivel:')} ${guild.premiumTier}\n${Emojis.dot} ${Format.bold('Boosts:')} ${guild.premiumSubscriptionCount}`,
+            value: `${Emojis.dot} ${Format.toBold('Nivel:')} ${guild.premiumTier}\n${Emojis.dot} ${Format.toBold('Boosts:')} ${guild.premiumSubscriptionCount}`,
             inline: true
           },
           {
             name: `${Emojis.stats} Otros`,
-            value: `${Emojis.dot} ${Format.bold('Roles:')} ${guild.roles.cache.size}\n${Emojis.dot} ${Format.bold('Emojis:')} ${emojis.size} (${animatedEmojis} anim.)\n${Emojis.dot} ${Format.bold('Verificación:')} ${guild.verificationLevel}`,
+            value: `${Emojis.dot} ${Format.toBold('Roles:')} ${guild.roles.cache.size}\n${Emojis.dot} ${Format.toBold('Emojis:')} ${emojis.size} (${animatedEmojis} anim.)\n${Emojis.dot} ${Format.toBold('Verificación:')} ${guild.verificationLevel}`,
             inline: true
           }
         )

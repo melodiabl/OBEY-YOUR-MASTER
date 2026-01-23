@@ -1,39 +1,55 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js')
+const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { getGuildUiConfig, headerLine, embed } = require('../../core/ui/uiKit')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('help')
-    .setDescription('Muestra la lista de comandos disponibles'),
+    .setDescription('Panel de ayuda visual y comandos'),
+
   async execute (client, interaction) {
+    const ui = await getGuildUiConfig(client, interaction.guild.id)
+
     const categories = [
-      { label: 'Información', value: 'Info', emoji: Emojis.info, description: 'Comandos de información general' },
-      { label: 'Economía', value: 'economy', emoji: Emojis.economy, description: 'Sistema de economía y juegos' },
-      { label: 'Música', value: 'music', emoji: Emojis.music, description: 'Reproducción de música' },
-      { label: 'Moderación', value: 'Moderacion', emoji: Emojis.moderation, description: 'Comandos de moderación' },
-      { label: 'Diversión', value: 'funny', emoji: Emojis.fun, description: 'Comandos de entretenimiento' },
-      { label: 'Mascotas', value: 'Mascotas', emoji: Emojis.pet, description: 'Sistema de mascotas' },
-      { label: 'Matrimonio', value: 'marriage', emoji: Emojis.clan, description: 'Comandos de matrimonio' },
-      { label: 'Utilidad', value: 'Utilidad', emoji: Emojis.utility, description: 'Comandos de utilidad' },
-      { label: 'Configuración', value: 'Config', emoji: Emojis.system, description: 'Configuración del servidor' }
+      { label: 'Información', value: 'Info', emoji: Emojis.info, description: 'Comandos generales' },
+      { label: 'Moderación', value: 'Moderacion', emoji: Emojis.moderation, description: 'Acciones y sanciones' },
+      { label: 'Música', value: 'music', emoji: Emojis.music, description: 'Reproducción y cola' },
+      { label: 'Economía', value: 'economy', emoji: Emojis.economy, description: 'Balance, tienda e ítems' },
+      { label: 'Diversión', value: 'funny', emoji: Emojis.fun, description: 'Juegos y entretenimiento' },
+      { label: 'Tickets', value: 'Sistemas', emoji: Emojis.ticket, description: 'Soporte y tickets' },
+      { label: 'Utilidad', value: 'Utilidad', emoji: Emojis.utility, description: 'Comandos útiles' },
+      { label: 'Configuración', value: 'Config', emoji: Emojis.system, description: 'Ajustes del servidor' }
     ]
 
-    const embed = new EmbedBuilder()
-      .setTitle(`${Emojis.crown} OBEY YOUR MASTER - Panel de Ayuda`)
-      .setDescription(`${Format.h3('¡Bienvenido!')}\nSelecciona una categoría en el menú de abajo para ver los comandos disponibles.`)
-      .setColor('Gold')
-      .addFields(
-        { name: `${Emojis.stats} Estadísticas Rápidas`, value: `${Emojis.dot} Comandos: ${client.slashCommands.size}\n${Emojis.dot} Usuarios: ${client.users.cache.size}`, inline: true },
-        { name: `${Emojis.system} Prefijo`, value: Format.inlineCode('/ (Slash)'), inline: true }
-      )
-      .setImage('https://i.imgur.com/example.png') // Opcional
-      .setFooter({ text: 'Usa el menú desplegable para navegar' })
-      .setTimestamp()
+    const helpEmbed = embed({
+      ui,
+      system: 'info',
+      kind: 'info',
+      title: `${Emojis.crown} OBEY YOUR MASTER`,
+      description: [
+        headerLine(Emojis.info, 'Panel de ayuda'),
+        `${Emojis.dot} Navega por categoría con el menú.`,
+        `${Emojis.dot} Tip: muchos comandos tienen *subcomandos* (ej: ${Format.inlineCode('/auth role set')}).`
+      ].join('\n'),
+      fields: [
+        {
+          name: `${Emojis.stats} Resumen`,
+          value: `${Emojis.dot} Comandos cargados: ${Format.inlineCode(client.slashCommands.size)}\n${Emojis.dot} Usuarios en caché: ${Format.inlineCode(client.users.cache.size)}`,
+          inline: true
+        },
+        {
+          name: `${Emojis.system} Formato`,
+          value: `${Emojis.dot} Slash: ${Format.inlineCode('/')}\n${Emojis.dot} Ayuda: ${Format.inlineCode('/help')}`,
+          inline: true
+        }
+      ],
+      footer: 'UX premium: respuestas claras, jerarquía visual y errores amigables'
+    })
 
     const menu = new StringSelectMenuBuilder()
       .setCustomId('help_menu')
-      .setPlaceholder('Selecciona una categoría...')
+      .setPlaceholder('Selecciona una categoría…')
       .addOptions(categories.map(cat => ({
         label: cat.label,
         value: cat.value,
@@ -42,7 +58,6 @@ module.exports = {
       })))
 
     const row = new ActionRowBuilder().addComponents(menu)
-
-    await interaction.reply({ embeds: [embed], components: [row] })
+    return interaction.reply({ embeds: [helpEmbed], components: [row], ephemeral: true })
   }
 }

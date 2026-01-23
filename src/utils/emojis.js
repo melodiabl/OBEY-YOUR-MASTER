@@ -1,21 +1,32 @@
 module.exports = {
-  // Categorías
+  // Sistemas / categorías
   system: '⚙️',
-  economy: '🪙',
-  fun: '🎈',
-  music: '🎵',
   moderation: '🛡️',
+  security: '🧯',
+  music: '🎵',
+  economy: '🪙',
+  inventory: '📦',
+  games: '🎮',
+  fun: '🎈',
+  level: '📈',
+  reputation: '✨',
+  ai: '🤖',
+  ticket: '🎫',
+  logs: '🧾',
+  announcements: '📣',
+  notifications: '🔔',
+  polls: '🗳️',
+  events: '📅',
+  learning: '🧠',
   utility: '🛠️',
   info: 'ℹ️',
   stats: '📊',
-  level: '🌟',
   clan: '🤝',
   pet: '🐾',
-  ticket: '🎫',
   quest: '📜',
   giveaway: '🎉',
 
-  // Status
+  // Estado
   success: '✅',
   error: '❌',
   warn: '⚠️',
@@ -25,15 +36,16 @@ module.exports = {
   idle: '🟡',
   dnd: '⛔',
 
-  // Interface
+  // Interfaz
   arrow: '➡️',
   back: '⬅️',
   dot: '•',
   bullet: '◦',
+  quote: '📝',
   diamond: '🔹',
   star: '⭐',
   crown: '👑',
-  owner: '👤',
+  owner: '👑',
   id: '🆔',
   calendar: '📅',
   channel: '💬',
@@ -48,14 +60,28 @@ module.exports = {
   verified: '✔️',
   lock: '🔒',
   unlock: '🔓',
+  confirm: '✅',
+  cancel: '❌',
+  export: '📤',
+  theme: '🎨',
 
-  // Economy specific
+  // Economy
   money: '💵',
   bank: '🏦',
   shop: '🛒',
   work: '💼',
-  inventory: '🎒',
   gacha: '🎰',
   bet: '🎲',
-  rob: '🥷'
+  rob: '🥷',
+
+  // Música
+  play: '▶️',
+  pause: '⏸️',
+  skip: '⏭️',
+  stop: '⏹️',
+  loop: '🔁',
+  shuffle: '🔀',
+  volume: '🔊',
+  lyrics: '📄',
+  search: '🔎'
 }

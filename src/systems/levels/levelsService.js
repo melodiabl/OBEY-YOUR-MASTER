@@ -69,7 +69,9 @@ async function handleMessageXp ({ client, message }) {
     const announceChannelId = g?.levelsAnnounceChannel || null
     const channel = announceChannelId ? message.guild.channels.cache.get(announceChannelId) : message.channel
     if (channel?.send) {
-      await channel.send(`📈 ¡Felicidades <@${userID}>! Subiste a **nivel ${newLevel}**.`).catch(() => {})
+      const emojis = require('../../utils/emojis')
+      const formatter = require('../../utils/formatter')
+      await channel.send(`${emojis.level} ¡Felicidades <@${userID}>! Has subido al ${formatter.toBold(`NIVEL ${newLevel}`)}.`).catch(() => {})
     }
   } catch (_) {}
 
