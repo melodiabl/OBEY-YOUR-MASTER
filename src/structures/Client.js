@@ -9,7 +9,7 @@ const {
 const GuildDB = require('../database/schemas/Guild.db')
 const Database = require('../database/mongoose')
 const BotUtils = require('./Utils')
-const { initMusic } = require('../music')
+const { initMusic, autoStartLavalink } = require('../music')
 const { loadPlugins: loadPluginsFromDisk } = require('../core/plugins/pluginLoader')
 
 module.exports = class extends Client {
@@ -83,6 +83,7 @@ module.exports = class extends Client {
     await this.loadHandlers()
     await this.loadCommands()
     await this.loadSlashCommands()
+    await this.autoStartLavalink()
     this.initMusicSystem()
     await this.db.connect()
 
@@ -109,6 +110,20 @@ module.exports = class extends Client {
       await initMusic(this)
     } catch (e) {
       console.error('[Music] Error inicializando el sistema de música:'.red, e)
+    }
+  }
+
+  async autoStartLavalink () {
+    try {
+      const res = await autoStartLavalink(this)
+      if (res?.started) {
+        console.log(`[Lavalink] Autostart: ${res.ok ? 'ok' : 'fail'} host=${res.host || 'n/a'} port=${res.port || 'n/a'}`.cyan)
+      }
+      if (res?.ok === false) {
+        console.log(`[Lavalink] Autostart falló: ${res.reason || 'unknown'} (${res.jarPath || ''})`.yellow)
+      }
+    } catch (e) {
+      console.log(`[Lavalink] Autostart error: ${e?.message || e}`.yellow)
     }
   }
 

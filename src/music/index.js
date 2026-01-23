@@ -1,7 +1,15 @@
 const { Shoukaku, Connectors } = require('shoukaku')
 const { MusicService } = require('./MusicService')
+const { autoStartLavalink } = require('./lavalinkAutoStart')
 
 let musicInstance = null
+
+function normalizeConnectHost (host) {
+  const h = String(host || '').trim()
+  if (!h) return '127.0.0.1'
+  if (h === '0.0.0.0') return '127.0.0.1'
+  return h
+}
 
 async function initMusic (client) {
   console.log('[Music] Inicializando sistema...'.blue)
@@ -17,10 +25,14 @@ async function initMusic (client) {
     await new Promise(resolve => client.once('ready', resolve))
   }
 
+  const host = normalizeConnectHost(process.env.LAVALINK_CONNECT_HOST || process.env.LAVALINK_HOST)
+  const port = String(process.env.LAVALINK_PORT || '2333')
+  const password = String(process.env.LAVALINK_PASSWORD || 'youshallnotpass')
+
   const Nodes = [{
     name: 'Main Node',
-    url: `${process.env.LAVALINK_HOST}:${process.env.LAVALINK_PORT}`,
-    auth: process.env.LAVALINK_PASSWORD,
+    url: `${host}:${port}`,
+    auth: password,
     secure: process.env.LAVALINK_SECURE === 'true'
   }]
 
@@ -49,5 +61,6 @@ function getMusic (client) {
 module.exports = {
   initMusic,
   getMusic,
-  MusicService
+  MusicService,
+  autoStartLavalink
 }
