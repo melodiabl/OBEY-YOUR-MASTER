@@ -1,7 +1,9 @@
-const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 const { warnUser, handleWarnThresholdKick } = require('../../systems').moderation
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError, replyOk, replyWarn } = require('../../core/ui/interactionKit')
+const { getGuildUiConfig, warnEmbed, okEmbed } = require('../../core/ui/uiKit')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -23,7 +25,13 @@ module.exports = {
     const target = interaction.options.getUser('usuario')
     const reason = interaction.options.getString('razon') || 'No se proporcionó una razón.'
 
-    if (target.bot) return interaction.reply({ content: `${Emojis.error} No puedes advertir a un bot.`, ephemeral: true })
+    if (target.bot) {
+      return replyWarn(client, interaction, {
+        system: 'moderation',
+        title: 'Acción inválida',
+        lines: ['No puedes advertir a un bot.']
+      }, { ephemeral: true })
+    }
 
     try {
       const res = await warnUser({
@@ -33,19 +41,18 @@ module.exports = {
         reason
       })
 
-      const embed = new EmbedBuilder()
-        .setTitle(`${Emojis.warn} Usuario Advertido`)
-        .setColor('Yellow')
-        .setThumbnail(target.displayAvatarURL())
-        .addFields(
+      await replyOk(client, interaction, {
+        system: 'moderation',
+        title: 'Warn aplicado',
+        thumbnail: target.displayAvatarURL(),
+        fields: [
           { name: `${Emojis.member} Usuario`, value: `${target.tag} (${Format.inlineCode(target.id)})`, inline: true },
           { name: `${Emojis.owner} Moderador`, value: `${interaction.user.tag}`, inline: true },
-          { name: `${Emojis.stats} Advertencias Totales`, value: Format.inlineCode(res.warnsCount.toString()), inline: true },
+          { name: `${Emojis.stats} Total`, value: Format.inlineCode(res.warnsCount.toString()), inline: true },
           { name: `${Emojis.quote} Razón`, value: Format.quote(reason) }
-        )
-        .setTimestamp()
-
-      await interaction.reply({ embeds: [embed] })
+        ],
+        signature: 'Moderación activa'
+      })
 
       // Política: 3 warns => kick (base).
       const policy = await handleWarnThresholdKick({
@@ -58,21 +65,54 @@ module.exports = {
       })
 
       if (policy.triggered && !policy.kicked && policy.reason) {
-        await interaction.followUp({ content: `${Emojis.warn} Alcanzó 3 warns, pero no pude kickear: ${Format.inlineCode(policy.reason)}`, ephemeral: true })
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
+        const e = warnEmbed({
+          ui,
+          system: 'moderation',
+          title: 'Auto-kick bloqueado',
+          lines: [
+            'El usuario llegó a **3** warns, pero no pude kickearlo.',
+            `Detalle: ${Format.inlineCode(policy.reason)}`
+          ]
+        })
+        await interaction.followUp({ embeds: [e], ephemeral: true })
       }
       if (policy.kicked) {
-        await interaction.followUp({ content: `${Emojis.success} Auto-kick aplicado a <@${target.id}> por llegar a **3** warns.`, ephemeral: false })
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
+        const e = okEmbed({
+          ui,
+          system: 'moderation',
+          title: 'Auto-kick aplicado',
+          lines: [
+            `Usuario: **${target.tag}** (${Format.inlineCode(target.id)})`,
+            'Motivo: alcanzó **3** warns.'
+          ]
+        })
+        await interaction.followUp({ embeds: [e], ephemeral: false })
       }
 
       try {
-        await target.send({
-          content: `${Emojis.warn} Has sido advertido en **${interaction.guild.name}**.\n${Emojis.quote} **Razón:** ${reason}\n${Emojis.stats} **Total:** ${res.warnsCount}`
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
+        const dm = warnEmbed({
+          ui,
+          system: 'moderation',
+          title: 'Recibiste un warn',
+          lines: [
+            `Servidor: **${interaction.guild.name}**`,
+            `${Emojis.quote} Razón: ${reason}`,
+            `${Emojis.stats} Total: ${res.warnsCount}`
+          ],
+          signature: 'Cuida tu conducta'
         })
+        await target.send({ embeds: [dm] })
       } catch (err) {
         // Ignorar si no se puede enviar DM
       }
     } catch (e) {
-      return interaction.reply({ content: `${Emojis.error} Error al advertir: ${Format.inlineCode(e.message)}`, ephemeral: true })
+      return replyError(client, interaction, {
+        system: 'moderation',
+        reason: `Error al advertir: ${Format.inlineCode(e.message)}`
+      }, { ephemeral: true })
     }
   }
 }

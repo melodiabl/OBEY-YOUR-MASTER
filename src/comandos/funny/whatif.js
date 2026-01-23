@@ -1,33 +1,39 @@
-const { EmbedBuilder } = require('discord.js')
 const { randomAnswer } = require('../../helpers/helpers')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyEmbed, replyError } = require('../../core/ui/messageKit')
+const { headerLine } = require('../../core/ui/uiKit')
 
 module.exports = {
   DESCRIPTION: 'Hazle una pregunta hipotética al bot.',
   ALIASES: ['wi', 'pregunta'],
   async execute (client, message, args) {
-    const texto = args.join(' ')
-    if (!texto) {
-      return message.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setTitle(`${Emojis.error} Falta la pregunta`)
-            .setDescription(Format.quote('Debes introducir un texto para que pueda predecir el futuro.'))
-            .setColor('Red')
-        ]
+    const question = String(args.join(' ') || '').trim()
+    if (!question) {
+      return replyError(client, message, {
+        system: 'fun',
+        title: 'Falta la pregunta',
+        reason: 'Necesito un texto para “predecir el futuro”.',
+        hint: `Ejemplo: ${Format.inlineCode('whatif si mañana llueve?')}`
       })
     }
 
-    const embed = new EmbedBuilder()
-      .setAuthor({ name: `Pregunta de ${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
-      .setTitle(`🤔 ¿Qué pasaría si...?`)
-      .setDescription(`${Format.bold('Pregunta:')}\n${Format.quote(texto)}\n\n${Format.bold('Respuesta:')}\n${randomAnswer()}`)
-      .setThumbnail('https://emojipedia-us.s3.amazonaws.com/source/skype/289/pool-8-ball_1f3b1.png')
-      .setColor('Blurple')
-      .setFooter({ text: 'Predicción del Maestro' })
-      .setTimestamp()
+    const answer = randomAnswer()
+    const avatar = message.author.displayAvatarURL({ size: 256 })
 
-    await message.reply({ embeds: [embed] })
+    return replyEmbed(client, message, {
+      system: 'fun',
+      kind: 'info',
+      title: `${Emojis.fun} ¿Qué pasaría si…?`,
+      description: [
+        headerLine(Emojis.star, 'Predicción'),
+        `${Emojis.quote} ${Format.italic(question.length > 600 ? question.slice(0, 599) + '…' : question)}`,
+        Format.softDivider(20),
+        `${Emojis.dot} **Respuesta:** ${Format.bold(answer)}`
+      ].join('\n'),
+      thumbnail: avatar,
+      signature: 'Predicción del Maestro'
+    })
   }
 }
+

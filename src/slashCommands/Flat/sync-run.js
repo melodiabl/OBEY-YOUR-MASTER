@@ -3,6 +3,7 @@ const UserSchema = require('../../database/schemas/UserSchema')
 const MemberAuthSchema = require('../../database/schemas/MemberAuthSchema')
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
+const { replyError, replyOk, replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   INTERNAL_ROLE: INTERNAL_ROLES.ADMIN,
@@ -34,12 +35,22 @@ module.exports = {
         { $setOnInsert: { guildID: interaction.guild.id, userID: interaction.user.id } },
         { upsert: true }
       )
-      return interaction.editReply('✅ Sync self completado (guild + user + auth).')
+      return replyOk(client, interaction, {
+        system: 'infra',
+        title: 'Sync completado',
+        lines: ['Alcance: `self` (guild + user + auth).']
+      }, { ephemeral: true })
     }
 
     if (mode === 'guild_cached') {
       const ids = interaction.guild.members.cache.map(m => m.user.id)
-      if (!ids.length) return interaction.editReply('❌ No hay miembros en cache para sincronizar.')
+      if (!ids.length) {
+        return replyWarn(client, interaction, {
+          system: 'infra',
+          title: 'Nada para sincronizar',
+          lines: ['No hay miembros en cache para sincronizar.']
+        }, { ephemeral: true })
+      }
 
       const ops = ids.map(id => ({
         updateOne: {
@@ -55,9 +66,17 @@ module.exports = {
         await UserSchema.bulkWrite(chunk, { ordered: false })
       }
 
-      return interaction.editReply(`✅ Sync guild_cached completado. Miembros procesados: **${ids.length}**.`)
+      return replyOk(client, interaction, {
+        system: 'infra',
+        title: 'Sync completado',
+        lines: ['Alcance: `guild_cached`', `Miembros procesados: **${ids.length}**`]
+      }, { ephemeral: true })
     }
 
-    return interaction.editReply('❌ Modo invalido.')
+    return replyError(client, interaction, {
+      system: 'infra',
+      reason: 'Modo inválido.',
+      hint: 'Usa `self` o `guild_cached`.'
+    }, { ephemeral: true })
   }
 }

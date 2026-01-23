@@ -1,9 +1,10 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const { logAction } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError, replyOk } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'moderation',
@@ -31,7 +32,7 @@ module.exports = {
     const member = await interaction.guild.members.fetch(target.id).catch(() => null)
 
     if (!member) {
-      return interaction.reply({ content: `${Emojis.error} No pude obtener al miembro.`, ephemeral: true })
+      return replyError(client, interaction, { system: 'moderation', reason: 'No pude obtener al miembro.' }, { ephemeral: true })
     }
 
     try {
@@ -45,21 +46,22 @@ module.exports = {
         reason
       })
 
-      const embed = new EmbedBuilder()
-        .setTitle(`${Emojis.moderation} Kick Aplicado`)
-        .setColor('Orange')
-        .setThumbnail(target.displayAvatarURL())
-        .addFields(
+      return replyOk(client, interaction, {
+        system: 'moderation',
+        title: 'Kick aplicado',
+        thumbnail: target.displayAvatarURL(),
+        fields: [
           { name: `${Emojis.member} Usuario`, value: `${target.tag} (${Format.inlineCode(target.id)})`, inline: true },
           { name: `${Emojis.owner} Moderador`, value: `${interaction.user.tag}`, inline: true },
           { name: `${Emojis.id} Caso`, value: Format.inlineCode(`#${modCase.caseNumber}`), inline: true },
           { name: `${Emojis.quote} Razón`, value: Format.quote(reason) }
-        )
-        .setTimestamp()
-
-      return interaction.reply({ embeds: [embed] })
+        ]
+      })
     } catch (e) {
-      return interaction.reply({ content: `${Emojis.error} Error al expulsar: ${Format.inlineCode(e.message)}`, ephemeral: true })
+      return replyError(client, interaction, {
+        system: 'moderation',
+        reason: `Error al expulsar: ${Format.inlineCode(e.message)}`
+      }, { ephemeral: true })
     }
   }
 }

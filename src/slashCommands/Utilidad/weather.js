@@ -1,5 +1,18 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const weather = require('weather-js')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { getGuildUiConfig, embed, errorEmbed, headerLine } = require('../../core/ui/uiKit')
+
+function fetchWeather (city) {
+  return new Promise((resolve, reject) => {
+    weather.find({ search: city, degreeType: 'C' }, function (err, result) {
+      if (err) return reject(err)
+      if (!result || !result.length) return resolve(null)
+      return resolve(result[0])
+    })
+  })
+}
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -8,34 +21,50 @@ module.exports = {
     .addStringOption(option =>
       option.setName('ciudad')
         .setDescription('Nombre de la ciudad')
-        .setRequired(true)),
+        .setRequired(true)
+        .setMaxLength(80)
+    ),
 
   async execute (client, interaction) {
-    const city = interaction.options.getString('ciudad')
+    const city = interaction.options.getString('ciudad', true)
+    await interaction.deferReply({ ephemeral: true })
 
-    weather.find({ search: city, degreeType: 'C' }, function (err, result) {
-      if (err || !result || result.length === 0) {
-        return interaction.reply({ content: 'No se pudo encontrar el clima para esa ubicación.', ephemeral: true })
-      }
+    const ui = await getGuildUiConfig(client, interaction.guild.id)
+    const data = await fetchWeather(city).catch(() => null)
 
-      const current = result[0].current
-      const location = result[0].location
+    if (!data?.current || !data?.location) {
+      const err = errorEmbed({
+        ui,
+        system: 'utility',
+        title: 'No encontré esa ubicación',
+        reason: 'No se pudo encontrar el clima para esa ubicación.',
+        hint: `Prueba con: ${Format.inlineCode('Ciudad, País')}`
+      })
+      return interaction.editReply({ embeds: [err] })
+    }
 
-      const embed = new EmbedBuilder()
-        .setTitle(`Clima en ${current.observationpoint}`)
-        .setDescription(`**${current.skytext}**`)
-        .setThumbnail(current.imageUrl)
-        .setColor('Aqua')
-        .addFields(
-          { name: 'Temperatura', value: `${current.temperature}°C`, inline: true },
-          { name: 'Sensación Térmica', value: `${current.feelslike}°C`, inline: true },
-          { name: 'Viento', value: current.winddisplay, inline: true },
-          { name: 'Humedad', value: `${current.humidity}%`, inline: true },
-          { name: 'Zona Horaria', value: `UTC${location.timezone}`, inline: true }
-        )
-        .setTimestamp()
+    const current = data.current
+    const location = data.location
 
-      interaction.reply({ embeds: [embed] })
+    const e = embed({
+      ui,
+      system: 'utility',
+      kind: 'info',
+      title: `${Emojis.info} Clima`,
+      description: [
+        headerLine(Emojis.utility, String(current.observationpoint || city)),
+        `${Emojis.dot} **Estado:** ${Format.bold(String(current.skytext || 'N/A'))}`,
+        `${Emojis.dot} **Temperatura:** ${Format.inlineCode(`${current.temperature}°C`)}`,
+        `${Emojis.dot} **Sensación:** ${Format.inlineCode(`${current.feelslike}°C`)}`,
+        `${Emojis.dot} **Viento:** ${Format.inlineCode(String(current.winddisplay || 'N/A'))}`,
+        `${Emojis.dot} **Humedad:** ${Format.inlineCode(String(current.humidity || 'N/A') + '%')}`,
+        `${Emojis.dot} **Zona horaria:** ${Format.inlineCode(`UTC${location.timezone}`)}`
+      ].join('\n'),
+      thumbnail: current.imageUrl || undefined,
+      signature: 'Clima en tiempo real'
     })
+
+    return interaction.editReply({ embeds: [e] })
   }
 }
+

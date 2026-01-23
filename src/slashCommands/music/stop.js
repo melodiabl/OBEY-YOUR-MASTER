@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
-const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError, replyOk } = require('../../core/ui/interactionKit')
 
 module.exports = {
   REGISTER: true,
@@ -12,17 +12,21 @@ module.exports = {
   async execute (client, interaction) {
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
-      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply(`${Emojis.error} El sistema de musica no esta inicializado.`)
+      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de musica no esta inicializado.' })
 
       await music.stop({ guildId: interaction.guild.id, voiceChannelId: voiceChannel.id })
-      return interaction.editReply(`${Emojis.offline} Musica detenida y cola borrada.`)
+      return replyOk(client, interaction, { system: 'music', title: 'Detenido', lines: ['Música detenida y cola borrada.'] })
     } catch (e) {
-      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'No pude detener la música.',
+        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+      })
     }
   }
 }

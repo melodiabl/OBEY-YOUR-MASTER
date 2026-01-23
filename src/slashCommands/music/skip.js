@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
-const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError, replyOk } = require('../../core/ui/interactionKit')
 
 module.exports = {
   REGISTER: true,
@@ -12,22 +12,28 @@ module.exports = {
   async execute (client, interaction) {
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
-      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply(`${Emojis.error} El sistema de musica no esta inicializado.`)
+      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de musica no esta inicializado.' })
 
       const res = await music.skip({
         guildId: interaction.guild.id,
         voiceChannelId: voiceChannel.id,
         force: true
       })
-      if (res.ended) return interaction.editReply(`${Emojis.success} Cancion saltada. La cola termino.`)
-      return interaction.editReply(`${Emojis.success} Cancion saltada. Ahora: ${Format.bold(res.skippedTo.title)}`)
+      if (res.ended) {
+        return replyOk(client, interaction, { system: 'music', title: 'Skip', lines: ['Canción saltada. La cola terminó.'] })
+      }
+      return replyOk(client, interaction, { system: 'music', title: 'Skip', lines: [`Ahora: ${Format.bold(res.skippedTo.title)}`] })
     } catch (e) {
-      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'No pude saltar la canción.',
+        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+      })
     }
   }
 }

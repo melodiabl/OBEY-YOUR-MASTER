@@ -1,23 +1,23 @@
-const formatter = require('../../utils/formatter')
-const emojis = require('../../utils/emojis')
 const UserSchema = require('../../database/schemas/UserSchema')
+const Format = require('../../utils/formatter')
+const { replyInfo, replyOk } = require('../../core/ui/messageKit')
 
 class AfkService {
-  async setAfk(userID, reason = 'AFK') {
+  async setAfk (userID, reason = 'AFK') {
     await UserSchema.findOneAndUpdate(
       { userID },
-      { 
-        $set: { 
-          'afk.status': true, 
-          'afk.reason': reason, 
-          'afk.since': Date.now() 
-        } 
+      {
+        $set: {
+          'afk.status': true,
+          'afk.reason': reason,
+          'afk.since': Date.now()
+        }
       },
       { upsert: true }
     )
   }
 
-  async removeAfk(userID) {
+  async removeAfk (userID) {
     const user = await UserSchema.findOne({ userID })
     if (user?.afk?.status) {
       await UserSchema.findOneAndUpdate(
@@ -29,11 +29,17 @@ class AfkService {
     return false
   }
 
-  async checkAfk(message) {
+  async checkAfk (message) {
     // Si el autor estaba AFK, quitarlo
     const wasAfk = await this.removeAfk(message.author.id)
     if (wasAfk) {
-      message.reply(`${emojis.success} ${formatter.toBold('BIENVENIDO DE NUEVO')}, he quitado tu estado AFK.`).then(m => setTimeout(() => m.delete().catch(() => {}), 5000))
+      const sent = await replyOk(message.client, message, {
+        system: 'notifications',
+        title: 'Bienvenido de nuevo',
+        lines: ['Quité tu estado AFK.'],
+        signature: 'Listo'
+      })
+      if (sent) setTimeout(() => sent.delete().catch(() => {}), 5000)
     }
 
     // Si alguien menciona a un usuario AFK, avisar
@@ -42,10 +48,16 @@ class AfkService {
         if (user.bot) continue
         const userData = await UserSchema.findOne({ userID: id })
         if (userData?.afk?.status) {
-          message.reply({
-            content: `${emojis.warn} ${formatter.toBold(user.tag)} está AFK: ${formatter.italic(userData.afk.reason)} (<t:${Math.floor(userData.afk.since / 1000)}:R>)`,
-            allowedMentions: { repliedUser: false }
+          const sent = await replyInfo(message.client, message, {
+            system: 'notifications',
+            title: 'AFK',
+            lines: [
+              `${Format.bold(user.tag)} está AFK.`,
+              `${Format.quote(userData.afk.reason)}`,
+              `Desde: <t:${Math.floor(userData.afk.since / 1000)}:R>`
+            ]
           })
+          if (sent) setTimeout(() => sent.delete().catch(() => {}), 10_000)
         }
       }
     }

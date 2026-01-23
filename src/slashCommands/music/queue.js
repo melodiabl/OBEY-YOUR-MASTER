@@ -3,6 +3,7 @@ const { getMusic } = require('../../music')
 const { formatDuration } = require('../../utils/timeFormat')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError, replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   REGISTER: true,
@@ -13,19 +14,19 @@ module.exports = {
   async execute (client, interaction) {
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
-      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply(`${Emojis.error} El sistema de música no está inicializado.`)
+      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de música no está inicializado.' })
 
       const state = await music.getQueue({ guildId: interaction.guild.id })
       const current = state.currentTrack
       const upcoming = state.queue
 
       if (!current && upcoming.length === 0) {
-        return interaction.editReply(`${Emojis.error} No hay canciones en la cola.`)
+        return replyWarn(client, interaction, { system: 'music', title: 'Cola vacía', lines: ['No hay canciones en la cola.'] })
       }
 
       const loopEmoji = { none: Emojis.arrow, track: '🔂', queue: '🔁' }
@@ -61,7 +62,11 @@ module.exports = {
 
       return interaction.editReply({ embeds: [embed] })
     } catch (e) {
-      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'No pude obtener la cola.',
+        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+      })
     }
   }
 }

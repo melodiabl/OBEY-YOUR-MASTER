@@ -1,27 +1,29 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyOk, replyWarn } = require('../../core/ui/interactionKit')
+const { money } = require('./_catalog')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('daily')
-    .setDescription('Reclama tu recompensa diaria'),
+    .setDescription('Reclama tu recompensa diaria (cooldown)'),
+
   async execute (client, interaction) {
     const userData = await client.db.getUserData(interaction.user.id)
     const now = Date.now()
     const cooldownTime = 24 * 60 * 60 * 1000
 
     if (userData.dailyCooldown && userData.dailyCooldown > now) {
-      const diff = userData.dailyCooldown - now
-      const hours = Math.ceil(diff / (1000 * 60 * 60))
-      return interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor('Red')
-            .setDescription(`${Emojis.error} Debes esperar ${Format.bold(hours + ' horas')} para volver a reclamar tu recompensa diaria.`)
-        ],
-        ephemeral: true
-      })
+      const ts = Math.floor(userData.dailyCooldown / 1000)
+      return replyWarn(client, interaction, {
+        system: 'economy',
+        title: 'Recompensa en cooldown',
+        lines: [
+          `${Emojis.dot} Disponible: <t:${ts}:R>`,
+          `${Emojis.dot} Tip: usa ${Format.inlineCode('/work')} para farmear.`
+        ]
+      }, { ephemeral: true })
     }
 
     const amount = Math.floor(Math.random() * 201) + 100
@@ -29,14 +31,15 @@ module.exports = {
     userData.dailyCooldown = now + cooldownTime
     await userData.save()
 
-    const embed = new EmbedBuilder()
-      .setTitle(`${Emojis.giveaway} Recompensa Diaria`)
-      .setDescription(`🎁 ¡Has reclamado tu recompensa diaria y obtenido ${Emojis.money} ${Format.bold(amount.toLocaleString())} monedas!`)
-      .addFields({ name: 'Cartera Total', value: `${Emojis.dot} ${Format.inlineCode(userData.money.toLocaleString())}` })
-      .setColor('Gold')
-      .setFooter({ text: `Solicitado por ${interaction.user.tag}` })
-      .setTimestamp()
-
-    await interaction.reply({ embeds: [embed] })
+    return replyOk(client, interaction, {
+      system: 'economy',
+      title: `${Emojis.giveaway} Recompensa diaria`,
+      lines: [
+        `${Emojis.dot} Ganaste: ${Emojis.money} ${Format.inlineCode(money(amount))}`,
+        `${Emojis.dot} Efectivo: ${Format.inlineCode(money(userData.money || 0))}`
+      ],
+      signature: 'Nos vemos mañana'
+    }, { ephemeral: true })
   }
 }
+

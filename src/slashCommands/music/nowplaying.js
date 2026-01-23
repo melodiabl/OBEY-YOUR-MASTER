@@ -3,6 +3,7 @@ const { getMusic } = require('../../music')
 const { formatDuration } = require('../../utils/timeFormat')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError, replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   REGISTER: true,
@@ -13,16 +14,16 @@ module.exports = {
   async execute (client, interaction) {
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
-      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply(`${Emojis.error} El sistema de música no está inicializado.`)
+      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de música no está inicializado.' })
 
       const state = await music.nowPlaying({ guildId: interaction.guild.id })
       const current = state.currentTrack
-      if (!current) return interaction.editReply(`${Emojis.error} No hay música reproduciéndose en este momento.`)
+      if (!current) return replyWarn(client, interaction, { system: 'music', title: 'Sin reproducción', lines: ['No hay música reproduciéndose en este momento.'] })
 
       const player = music.shoukaku.players.get(interaction.guild.id)
       const position = player ? player.position : 0
@@ -46,7 +47,11 @@ module.exports = {
 
       return interaction.editReply({ embeds: [embed] })
     } catch (e) {
-      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'No pude obtener el now playing.',
+        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+      })
     }
   }
 }

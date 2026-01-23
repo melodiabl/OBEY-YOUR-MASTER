@@ -1,18 +1,28 @@
+const { ActivityType, PresenceUpdateStatus } = require('discord.js')
 const { abbreviateNumber } = require('../../helpers/helpers')
 const GuildDB = require('../../database/schemas/Guild.db')
-const { ActivityType, PresenceUpdateStatus } = require('discord.js')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { replyOk } = require('../../core/ui/messageKit')
+
 module.exports = {
-  DESCRIPTION: 'Actualiza la Presencia del bot',
-  execute (client, message, args, prefix, GUILD_DATA) {
+  DESCRIPTION: 'Actualiza la presencia del bot (owner)',
+  OWNER: true,
+  async execute (client, message) {
+    const servers = abbreviateNumber(new GuildDB().getGuildAllData().length)
     client.user.setPresence({
-      activities: [
-        {
-          name: `${abbreviateNumber(new GuildDB().getGuildAllData().length)} servers`,
-          type: ActivityType.Watching
-        }
-      ],
+      activities: [{ name: `${servers} servers • /panel`, type: ActivityType.Watching }],
       status: PresenceUpdateStatus.Online
     })
-    return message.reply('`Presencia actualizada`')
+
+    return replyOk(client, message, {
+      system: 'info',
+      title: `${Emojis.success} Presencia actualizada`,
+      lines: [
+        `${Emojis.dot} Actividad: ${Format.inlineCode('Watching')}`,
+        `${Emojis.dot} Texto: ${Format.inlineCode(`${servers} servers • /panel`)}`
+      ]
+    })
   }
 }
+

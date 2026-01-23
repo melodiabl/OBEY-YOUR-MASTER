@@ -2,6 +2,9 @@ const { SlashCommandBuilder } = require('discord.js')
 const { creditWallet } = require('../../systems').economy
 const { ensureMap } = require('../../utils/interactionUtils')
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { replyOk, replyWarn } = require('../../core/ui/interactionKit')
 
 function randInt (min, max) {
   const lo = Math.min(min, max)
@@ -23,8 +26,15 @@ module.exports = {
     const cd = 30 * 24 * 60 * 60 * 1000
     const rem = cd - (Date.now() - last)
     if (rem > 0) {
-      const days = Math.ceil(rem / (24 * 60 * 60 * 1000))
-      return interaction.reply({ content: `❌ Aun tienes cooldown: **${days}d**.`, ephemeral: true })
+      const ts = Math.floor((last + cd) / 1000)
+      return replyWarn(client, interaction, {
+        system: 'economy',
+        title: 'Cooldown mensual',
+        lines: [
+          `${Emojis.dot} Disponible: <t:${ts}:R>`,
+          `${Emojis.dot} Tip: usa ${Format.inlineCode('/weekly')} mientras tanto.`
+        ]
+      }, { ephemeral: true })
     }
 
     const amount = randInt(10000, 20000)
@@ -34,6 +44,11 @@ module.exports = {
     await user.save()
 
     await creditWallet({ client, guildID: interaction.guild.id, actorID: interaction.user.id, userID: interaction.user.id, amount, type: 'monthly', meta: {} })
-    return interaction.reply({ content: `✅ Monthly reclamado: **+${amount}**.`, ephemeral: true })
+    return replyOk(client, interaction, {
+      system: 'economy',
+      title: `${Emojis.success} Recompensa mensual`,
+      lines: [`${Emojis.dot} Ganaste: ${Emojis.money} ${Format.inlineCode(amount)}`],
+      signature: 'Vuelve el próximo mes'
+    }, { ephemeral: true })
   }
 }

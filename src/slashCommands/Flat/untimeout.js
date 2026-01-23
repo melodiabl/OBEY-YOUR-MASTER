@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js')
 const { logAction } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
+const { replyError, replyOk } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'moderation',
@@ -27,18 +28,34 @@ module.exports = {
     const target = interaction.options.getUser('usuario', true)
     const reason = interaction.options.getString('razon') || 'Sin razon.'
     const member = await interaction.guild.members.fetch(target.id).catch(() => null)
-    if (!member) return interaction.reply({ content: 'No pude obtener al miembro.', ephemeral: true })
+    if (!member) return replyError(client, interaction, { system: 'moderation', reason: 'No pude obtener al miembro.' }, { ephemeral: true })
 
-    await member.timeout(null, reason).catch((e) => { throw e })
+    try {
+      await member.timeout(null, reason)
 
-    const modCase = await logAction({
-      guildID: interaction.guild.id,
-      type: 'untimeout',
-      targetID: target.id,
-      moderatorID: interaction.user.id,
-      reason
-    })
+      const modCase = await logAction({
+        guildID: interaction.guild.id,
+        type: 'untimeout',
+        targetID: target.id,
+        moderatorID: interaction.user.id,
+        reason
+      })
 
-    return interaction.reply({ content: `✅ Timeout removido de <@${target.id}>. Caso #${modCase.caseNumber}.`, ephemeral: true })
+      return replyOk(client, interaction, {
+        system: 'moderation',
+        title: 'Timeout removido',
+        lines: [
+          `Usuario: **${target.tag || target.username}** (\`${target.id}\`)`,
+          `Caso: \`#${modCase.caseNumber}\``
+        ],
+        signature: reason ? `Razon: ${reason}` : undefined
+      }, { ephemeral: true })
+    } catch (e) {
+      return replyError(client, interaction, {
+        system: 'moderation',
+        reason: 'No pude remover el timeout.',
+        hint: e?.message ? `Detalle: ${e.message}` : undefined
+      }, { ephemeral: true })
+    }
   }
 }

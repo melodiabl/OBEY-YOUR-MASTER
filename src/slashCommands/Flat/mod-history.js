@@ -2,6 +2,9 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { getUserHistory } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'moderation',
@@ -31,7 +34,15 @@ module.exports = {
     const data = await getUserHistory({ guildID: interaction.guild.id, targetID: target.id, limit })
 
     if (!data.cases.length) {
-      return interaction.reply({ content: `No hay casos para <@${target.id}>. Warns actuales: **${data.warnsCount}**.`, ephemeral: true })
+      return replyWarn(client, interaction, {
+        system: 'moderation',
+        title: 'Sin casos',
+        lines: [
+          `${Emojis.dot} Usuario: <@${target.id}>`,
+          `${Emojis.dot} Warns actuales: ${Format.inlineCode(data.warnsCount)}`
+        ],
+        signature: 'Historial limpio'
+      }, { ephemeral: true })
     }
 
     const lines = data.cases.map(c => {

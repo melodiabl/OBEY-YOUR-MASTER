@@ -3,6 +3,7 @@ const UserSchema = require('../../database/schemas/UserSchema')
 const { logAction } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
+const { replyOk, replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'moderation',
@@ -27,7 +28,13 @@ module.exports = {
   async execute (client, interaction) {
     const target = interaction.options.getUser('usuario', true)
     const reason = interaction.options.getString('razon') || 'Sin razon.'
-    if (target.bot) return interaction.reply({ content: 'Los bots no tienen warns.', ephemeral: true })
+    if (target.bot) {
+      return replyWarn(client, interaction, {
+        system: 'moderation',
+        title: 'Accion invalida',
+        lines: ['Los bots no tienen warns.']
+      }, { ephemeral: true })
+    }
 
     const doc = await UserSchema.findOne({ userID: target.id })
     const removed = Array.isArray(doc?.warns) ? doc.warns.length : 0
@@ -47,6 +54,15 @@ module.exports = {
       meta: { removed }
     })
 
-    return interaction.reply({ content: `✅ Warns eliminados: **${removed}**. Caso #${modCase.caseNumber}.`, ephemeral: true })
+    return replyOk(client, interaction, {
+      system: 'moderation',
+      title: 'Warns limpiados',
+      lines: [
+        `Usuario: **${target.tag || target.username}** (\`${target.id}\`)`,
+        `Warns eliminados: **${removed}**`,
+        `Caso: \`#${modCase.caseNumber}\``
+      ],
+      signature: reason ? `Razon: ${reason}` : undefined
+    }, { ephemeral: true })
   }
 }

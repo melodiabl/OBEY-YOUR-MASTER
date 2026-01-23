@@ -1,64 +1,63 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyOk, replyError } = require('../../core/ui/interactionKit')
+const { CATALOG, money } = require('./_catalog')
+
+function itemChoices () {
+  return Object.entries(CATALOG).map(([key, it]) => ({ name: `${it.name} (${Math.floor(it.price / 2)})`, value: key }))
+}
 
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('sell')
-    .setDescription('Vende un ítem de tu inventario')
+    .setDescription('Vende un ítem del inventario (50%)')
     .addStringOption(option =>
       option.setName('item')
-        .setDescription('Nombre del ítem a vender')
+        .setDescription('Ítem a vender')
         .setRequired(true)
-        .addChoices(
-          { name: 'Pan', value: 'Pan' },
-          { name: 'Hacha', value: 'Hacha' },
-          { name: 'Caña', value: 'Caña' },
-          { name: 'Elixir', value: 'Elixir' },
-          { name: 'Escudo', value: 'Escudo' }
-        )
+        .addChoices(...itemChoices())
     ),
-  async execute (client, interaction) {
-    const itemName = interaction.options.getString('item')
-    const items = {
-      pan: 50,
-      hacha: 100,
-      caña: 150,
-      elixir: 200,
-      escudo: 250
-    }
-    const price = items[itemName.toLowerCase()]
 
-    if (!price) {
-      return interaction.reply({ content: `${Emojis.error} Ítem no válido.`, ephemeral: true })
+  async execute (client, interaction) {
+    const key = interaction.options.getString('item', true)
+    const item = CATALOG[key]
+    if (!item) {
+      return replyError(client, interaction, {
+        system: 'economy',
+        title: 'Ítem inválido',
+        reason: 'Ese ítem no se puede vender.'
+      }, { ephemeral: true })
     }
 
     const userData = await client.db.getUserData(interaction.user.id)
-    userData.inventory = userData.inventory || []
-
-    // Buscar el item (case insensitive)
-    const index = userData.inventory.findIndex(i => i.toLowerCase() === itemName.toLowerCase())
-
-    if (index === -1) {
-      return interaction.reply({
-        content: `${Emojis.error} No tienes ${Format.bold(itemName)} en tu inventario.`,
-        ephemeral: true
-      })
+    const inv = Array.isArray(userData.inventory) ? userData.inventory : []
+    const idx = inv.findIndex(x => String(x).toLowerCase() === String(item.name).toLowerCase())
+    if (idx < 0) {
+      return replyError(client, interaction, {
+        system: 'economy',
+        title: 'No lo tienes',
+        reason: 'Ese ítem no está en tu inventario.',
+        hint: `Tip: compra con ${Format.inlineCode('/buy')}.`
+      }, { ephemeral: true })
     }
 
-    const sellPrice = Math.floor(price / 2)
-    userData.inventory.splice(index, 1)
-    userData.money = (userData.money || 0) + sellPrice
+    inv.splice(idx, 1)
+    const gain = Math.floor(item.price / 2)
+    userData.inventory = inv
+    userData.money = (userData.money || 0) + gain
     await userData.save()
 
-    const embed = new EmbedBuilder()
-      .setTitle(`${Emojis.money} Venta Exitosa`)
-      .setDescription(`Has vendido ${Format.bold(itemName)} por ${Emojis.money} ${Format.inlineCode(sellPrice.toString())}`)
-      .setColor('Orange')
-      .addFields({ name: 'Saldo Actual', value: `${Emojis.money} ${Format.inlineCode(userData.money.toString())}` })
-      .setFooter({ text: 'Recibes el 50% del valor de compra' })
-      .setTimestamp()
-
-    await interaction.reply({ embeds: [embed] })
+    return replyOk(client, interaction, {
+      system: 'economy',
+      title: `${Emojis.success} Venta realizada`,
+      lines: [
+        `${Emojis.dot} Ítem: ${item.emoji} ${Format.bold(item.name)}`,
+        `${Emojis.dot} Ganancia: ${Emojis.money} ${Format.inlineCode(money(gain))}`,
+        `${Emojis.dot} Efectivo: ${Format.inlineCode(money(userData.money || 0))}`
+      ],
+      signature: 'Sigue farmeando'
+    }, { ephemeral: true })
   }
 }
+

@@ -4,6 +4,7 @@ const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'moderation',
@@ -65,7 +66,12 @@ module.exports = {
 
       return interaction.reply({ embeds: [embed] })
     } catch (e) {
-      return interaction.reply({ content: `${Emojis.error} Error al banear: ${Format.inlineCode(e.message)}`, ephemeral: true })
+      return replyError(client, interaction, {
+        system: 'moderation',
+        title: 'Error al banear',
+        reason: e?.message || 'Error desconocido.',
+        hint: `${Emojis.dot} Revisa jerarquía de roles y permisos.`
+      }, { ephemeral: true })
     }
   }
 }

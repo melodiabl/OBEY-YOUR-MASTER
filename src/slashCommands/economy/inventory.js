@@ -1,40 +1,35 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { headerLine } = require('../../core/ui/uiKit')
+const { replyEmbed } = require('../../core/ui/interactionKit')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setName('inventory')
-    .setDescription('Muestra el inventario de un usuario')
-    .addUserOption(option =>
-      option.setName('usuario')
-        .setDescription('Usuario cuyo inventario quieres ver')
-        .setRequired(false)
-    ),
+    .setDescription('Muestra tu inventario'),
+
   async execute (client, interaction) {
-    const user = interaction.options.getUser('usuario') || interaction.user
-    const userData = await client.db.getUserData(user.id)
-    const items = userData.inventory || []
+    const userData = await client.db.getUserData(interaction.user.id)
+    const items = Array.isArray(userData.inventory) ? userData.inventory : []
+    const shown = items.slice(0, 25)
+    const lines = shown.length
+      ? shown.map((it, i) => `${Emojis.dot} ${Format.bold(`#${i + 1}`)} ${Format.inlineCode(String(it))}`)
+      : [`${Emojis.dot} ${Format.italic('Vacío')}`]
 
-    const embed = new EmbedBuilder()
-      .setTitle(`${Emojis.inventory} Inventario de ${user.username}`)
-      .setColor('Blue')
-      .setThumbnail(user.displayAvatarURL())
-      .setTimestamp()
-
-    if (!items.length) {
-      embed.setDescription(`${Emojis.error} Este usuario no tiene ítems en su inventario.`)
-    } else {
-      // Agrupar items si se repiten
-      const counts = {}
-      items.forEach(item => { counts[item] = (counts[item] || 0) + 1 })
-
-      const itemList = Object.entries(counts).map(([name, count]) =>
-        `${Emojis.dot} **${name}** x${count}`
-      ).join('\n')
-
-      embed.setDescription(itemList)
-    }
-
-    await interaction.reply({ embeds: [embed] })
+    return replyEmbed(client, interaction, {
+      system: 'inventory',
+      kind: 'info',
+      title: `${Emojis.inventory} Inventario`,
+      description: [
+        headerLine(Emojis.inventory, interaction.user.username),
+        `${Emojis.dot} Items: ${Format.inlineCode(items.length)}`,
+        Format.softDivider(20),
+        lines.join('\n'),
+        items.length > 25 ? Format.subtext(`Y ${items.length - 25} más…`) : null
+      ].filter(Boolean).join('\n'),
+      signature: 'Colección viva'
+    }, { ephemeral: true })
   }
 }
+

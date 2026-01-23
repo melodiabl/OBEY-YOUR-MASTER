@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
-const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError, replyOk, replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   REGISTER: true,
@@ -13,12 +13,12 @@ module.exports = {
     const voiceChannel = interaction.member.voice?.channel
 
     if (!voiceChannel) {
-      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply(`${Emojis.error} El sistema de musica no esta inicializado.`)
+      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de musica no esta inicializado.' })
 
       const { count } = await music.shuffle({
         guildId: interaction.guild.id,
@@ -26,12 +26,16 @@ module.exports = {
       })
 
       if (count < 2) {
-        return interaction.editReply(`${Emojis.error} No hay suficientes canciones en la cola para mezclar.`)
+        return replyWarn(client, interaction, { system: 'music', title: 'Nada para mezclar', lines: ['No hay suficientes canciones en la cola para mezclar.'] })
       }
 
-      return interaction.editReply(`${Emojis.success} Se han mezclado ${Format.bold(count)} canciones.`)
+      return replyOk(client, interaction, { system: 'music', title: 'Mezclado', lines: [`Se han mezclado ${Format.bold(count)} canciones.`] })
     } catch (e) {
-      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'No pude mezclar la cola.',
+        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+      })
     }
   }
 }

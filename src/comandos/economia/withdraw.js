@@ -1,20 +1,53 @@
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { replyOk, replyError } = require('../../core/ui/messageKit')
+
+function money (n) {
+  try {
+    return Number(n || 0).toLocaleString('es-ES')
+  } catch (e) {
+    return String(n || 0)
+  }
+}
+
 module.exports = {
   DESCRIPTION: 'Retira monedas de tu banco',
   ALIASES: ['wd'],
-  BOT_PERMISSIONS: [],
-  PERMISSIONS: [],
   async execute (client, message, args) {
-    const amount = parseInt(args[0], 10)
+    const amount = Number.parseInt(args[0], 10)
     if (!amount || amount <= 0) {
-      return message.reply('Debes especificar una cantidad válida.')
+      return replyError(client, message, {
+        system: 'economy',
+        title: 'Cantidad inválida',
+        reason: 'Debes especificar una cantidad válida.',
+        hint: `Ejemplo: ${Format.inlineCode('withdraw 200')}`
+      })
     }
+
     const userData = await client.db.getUserData(message.author.id)
     if ((userData.bank || 0) < amount) {
-      return message.reply('No tienes suficiente dinero en el banco.')
+      return replyError(client, message, {
+        system: 'economy',
+        title: 'Fondos insuficientes',
+        reason: 'No tienes suficiente dinero en el banco.',
+        hint: `Banco: ${Format.inlineCode(money(userData.bank || 0))}`
+      })
     }
+
     userData.bank -= amount
     userData.money = (userData.money || 0) + amount
     await userData.save()
-    message.reply(`Has retirado ${amount} monedas de tu banco.`)
+
+    return replyOk(client, message, {
+      system: 'economy',
+      title: `${Emojis.success} Retiro realizado`,
+      lines: [
+        `${Emojis.dot} Monto: ${Emojis.money} ${Format.inlineCode(money(amount))}`,
+        `${Emojis.dot} Banco: ${Format.inlineCode(money(userData.bank || 0))}`,
+        `${Emojis.dot} Efectivo: ${Format.inlineCode(money(userData.money || 0))}`
+      ],
+      signature: 'Liquidez lista'
+    })
   }
 }
+

@@ -1,7 +1,9 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const { proposeMarriage } = require('../../utils/marriageManager')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { headerLine } = require('../../core/ui/uiKit')
+const { replyEmbed, replyError } = require('../../core/ui/interactionKit')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -12,28 +14,42 @@ module.exports = {
         .setDescription('Usuario al que quieres proponer matrimonio')
         .setRequired(true)
     ),
+
   async execute (client, interaction) {
-    const user = interaction.options.getUser('usuario')
+    const user = interaction.options.getUser('usuario', true)
 
-    if (user.bot) return interaction.reply({ content: `${Emojis.error} No puedes casarte con un bot.`, ephemeral: true })
-
-    const result = await proposeMarriage(interaction.user.id, user.id, client.db)
-
-    if (!result.ok) {
-      return interaction.reply({
-        content: `${Emojis.error} ${result.message || 'No se pudo proponer matrimonio.'}`,
-        ephemeral: true
-      })
+    if (user.bot) {
+      return replyError(client, interaction, {
+        system: 'fun',
+        title: 'Destino inválido',
+        reason: 'No puedes casarte con un bot.'
+      }, { ephemeral: true })
     }
 
-    const embed = new EmbedBuilder()
-      .setTitle(Format.title('💍', 'Propuesta de Matrimonio'))
-      .setDescription(`${interaction.user} le ha propuesto matrimonio a ${user}!`)
-      .setColor('LuminousVividPink')
-      .addFields({ name: 'Estado', value: `${Emojis.loading} Esperando respuesta...` })
-      .setFooter({ text: 'Usa /accept para aceptar la propuesta' })
-      .setTimestamp()
+    const result = await proposeMarriage(interaction.user.id, user.id, client.db)
+    if (!result.ok) {
+      return replyError(client, interaction, {
+        system: 'fun',
+        title: 'No se pudo proponer',
+        reason: result.message || 'No se pudo proponer matrimonio.'
+      }, { ephemeral: true })
+    }
 
-    await interaction.reply({ content: `${user}`, embeds: [embed] })
+    return replyEmbed(client, interaction, {
+      system: 'fun',
+      kind: 'info',
+      title: `${Emojis.reputation} Propuesta de matrimonio`,
+      description: [
+        headerLine(Emojis.star, '¿Aceptas?'),
+        `${Emojis.dot} ${interaction.user} le propuso matrimonio a ${user}.`,
+        Format.softDivider(20),
+        `${Emojis.confirm} Aceptar: ${Format.inlineCode('/accept')}`,
+        `${Emojis.cancel} Rechazar: ${Format.inlineCode('/reject')}`,
+        '',
+        `${Emojis.loading} ${Format.italic('Esperando respuesta…')}`
+      ].join('\n'),
+      signature: '𓆩♡𓆪 Romance system 𓆩♡𓆪'
+    }, { ephemeral: false })
   }
 }
+

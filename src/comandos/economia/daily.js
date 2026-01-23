@@ -1,6 +1,14 @@
-const { EmbedBuilder } = require('discord.js')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyOk, replyError, replyWarn } = require('../../core/ui/messageKit')
+
+function money (n) {
+  try {
+    return Number(n || 0).toLocaleString('es-ES')
+  } catch (e) {
+    return String(n || 0)
+  }
+}
 
 module.exports = {
   DESCRIPTION: 'Reclama tu recompensa diaria',
@@ -11,13 +19,13 @@ module.exports = {
     const cooldownTime = 24 * 60 * 60 * 1000
 
     if (userData.dailyCooldown && userData.dailyCooldown > now) {
-      const diff = userData.dailyCooldown - now
-      const hours = Math.ceil(diff / (1000 * 60 * 60))
-      return message.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor('Red')
-            .setDescription(`${Emojis.error} Vuelve en ${Format.bold(hours + ' horas')} para reclamar tu recompensa diaria.`)
+      const ts = Math.floor(userData.dailyCooldown / 1000)
+      return replyWarn(client, message, {
+        system: 'economy',
+        title: 'Recompensa en cooldown',
+        lines: [
+          `${Emojis.dot} Disponible: <t:${ts}:R>`,
+          `${Emojis.dot} Tip: usa ${Format.inlineCode('work')} para farmear.`
         ]
       })
     }
@@ -27,13 +35,15 @@ module.exports = {
     userData.dailyCooldown = now + cooldownTime
     await userData.save()
 
-    const embed = new EmbedBuilder()
-      .setTitle(`${Emojis.giveaway} Recompensa Diaria`)
-      .setDescription(`¡Felicidades! Has reclamado tu recompensa diaria y obtenido ${Emojis.money} ${Format.bold(amount.toLocaleString())} monedas.`)
-      .addFields({ name: 'Cartera Total', value: `${Emojis.dot} ${Format.inlineCode(userData.money.toLocaleString())}` })
-      .setColor('Gold')
-      .setTimestamp()
-
-    message.reply({ embeds: [embed] })
+    return replyOk(client, message, {
+      system: 'economy',
+      title: `${Emojis.giveaway} Recompensa diaria`,
+      lines: [
+        `${Emojis.dot} Ganaste: ${Emojis.money} ${Format.inlineCode(money(amount))}`,
+        `${Emojis.dot} Efectivo: ${Format.inlineCode(money(userData.money || 0))}`
+      ],
+      signature: 'Nos vemos mañana'
+    })
   }
 }
+

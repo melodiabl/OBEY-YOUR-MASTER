@@ -4,6 +4,7 @@ const { botHasVoicePerms, isSoundCloudUrl } = require('../../utils/voiceChecks')
 const { formatDuration } = require('../../utils/timeFormat')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError } = require('../../core/ui/interactionKit')
 
 module.exports = {
   REGISTER: true,
@@ -20,23 +21,23 @@ module.exports = {
   async execute (client, interaction) {
     const query = interaction.options.getString('query', true).trim()
     if (isSoundCloudUrl(query)) {
-      return interaction.editReply({ content: `${Emojis.error} SoundCloud no está soportado. Usa YouTube o Spotify.` })
+      return replyError(client, interaction, { system: 'music', reason: 'SoundCloud no está soportado. Usa YouTube o Spotify.' })
     }
 
     const voiceChannel = interaction.member.voice?.channel
     if (!voiceChannel) {
-      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
     }
 
     const me = interaction.guild.members.me || interaction.guild.members.cache.get(client.user.id)
     const { ok: canJoin } = botHasVoicePerms(voiceChannel, me)
     if (!canJoin) {
-      return interaction.editReply({ content: `${Emojis.error} No tengo permisos para unirme o hablar en ese canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'No tengo permisos para unirme o hablar en ese canal de voz.' })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply(`${Emojis.error} El sistema de música no está inicializado.`)
+      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de música no está inicializado.' })
 
       const res = await music.play({
         guildId: interaction.guild.id,
@@ -72,7 +73,11 @@ module.exports = {
 
       return interaction.editReply({ embeds: [embed] })
     } catch (e) {
-      return interaction.editReply(`${Emojis.error} No pude procesar tu solicitud: ${Format.inlineCode(e?.message || e)}`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'No pude procesar tu solicitud.',
+        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+      })
     }
   }
 }

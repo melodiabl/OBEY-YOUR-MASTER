@@ -2,6 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { adoptPet, feedPet, playWithPet, healPet, renamePet, PET_TYPES } = require('../../systems').pets
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError } = require('../../core/ui/interactionKit')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -107,7 +108,10 @@ module.exports = {
         return interaction.reply({ embeds: [embed] })
       }
     } catch (e) {
-      return interaction.reply({ content: `${Emojis.error} ${e.message}`, ephemeral: true })
+      return replyError(client, interaction, {
+        system: 'games',
+        reason: e?.message || 'Ocurrió un error.'
+      }, { ephemeral: true })
     }
   }
 }

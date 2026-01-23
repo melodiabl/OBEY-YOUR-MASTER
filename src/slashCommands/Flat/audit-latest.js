@@ -2,6 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const AuditLogSchema = require('../../database/schemas/AuditLogSchema')
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
+const { replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'logs',
@@ -41,7 +42,13 @@ module.exports = {
     if (action) query.action = action
 
     const rows = await AuditLogSchema.find(query).sort({ createdAt: -1 }).limit(limit)
-    if (!rows.length) return interaction.reply({ content: 'No hay registros con esos filtros.', ephemeral: true })
+    if (!rows.length) {
+      return replyWarn(client, interaction, {
+        system: 'logs',
+        title: 'Sin registros',
+        lines: ['No hay registros con esos filtros.']
+      }, { ephemeral: true })
+    }
 
     const embed = new EmbedBuilder()
       .setTitle('Auditoria (ultimos eventos)')

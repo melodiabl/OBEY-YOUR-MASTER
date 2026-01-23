@@ -2,6 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError } = require('../../core/ui/interactionKit')
 
 module.exports = {
   REGISTER: true,
@@ -22,12 +23,12 @@ module.exports = {
     const voiceChannel = interaction.member.voice?.channel
 
     if (!voiceChannel) {
-      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply(`${Emojis.error} El sistema de música no está inicializado.`)
+      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de música no está inicializado.' })
 
       await music.setVolume({
         guildId: interaction.guild.id,
@@ -44,7 +45,11 @@ module.exports = {
 
       return interaction.editReply({ embeds: [embed] })
     } catch (e) {
-      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'No pude actualizar el volumen.',
+        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+      })
     }
   }
 }

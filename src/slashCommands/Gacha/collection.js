@@ -1,5 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
-const UserSchema = require('../../database/schemas/UserSchema')
+const { SlashCommandBuilder } = require('discord.js')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { headerLine } = require('../../core/ui/uiKit')
+const { replyEmbed, replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -7,29 +10,45 @@ module.exports = {
     .setDescription('Muestra tu colección de objetos del Gacha'),
 
   async execute (client, interaction) {
-    const userData = await UserSchema.findOne({ userID: interaction.user.id })
+    const userData = await client.db.getUserData(interaction.user.id)
+    const inv = Array.isArray(userData?.inventory) ? userData.inventory : []
 
-    if (!userData || !userData.inventory || userData.inventory.length === 0) {
-      return interaction.reply({ content: '📭 Tu colección está vacía. ¡Usa `/pull` para empezar!', ephemeral: true })
+    const gachaItems = inv
+      .map(it => (typeof it === 'string' ? it : it?.name))
+      .filter(Boolean)
+
+    if (!gachaItems.length) {
+      return replyWarn(client, interaction, {
+        system: 'economy',
+        title: 'Colección vacía',
+        lines: [
+          `${Emojis.dot} Tu colección está vacía.`,
+          `${Emojis.dot} Empieza con ${Format.inlineCode('/pull')}.`
+        ],
+        signature: 'Primera tirada'
+      }, { ephemeral: true })
     }
 
-    // Agrupar items por nombre
-    const counts = {}
-    userData.inventory.forEach(item => {
-      const name = typeof item === 'string' ? item : item.name
-      counts[name] = (counts[name] || 0) + 1
-    })
+    const counts = new Map()
+    for (const name of gachaItems) counts.set(name, (counts.get(name) || 0) + 1)
 
-    const description = Object.entries(counts)
-      .map(([name, count]) => `• **${name}** x${count}`)
-      .join('\n')
+    const rows = Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 25)
+      .map(([name, count]) => `${Emojis.dot} ${Format.bold(name)} ${Format.inlineCode('x' + count)}`)
 
-    const embed = new EmbedBuilder()
-      .setTitle(`🎒 Colección de ${interaction.user.username}`)
-      .setDescription(description)
-      .setColor('Blue')
-      .setTimestamp()
-
-    await interaction.reply({ embeds: [embed] })
+    return replyEmbed(client, interaction, {
+      system: 'economy',
+      kind: 'info',
+      title: `${Emojis.inventory} Colección`,
+      description: [
+        headerLine(Emojis.inventory, interaction.user.username),
+        `${Emojis.dot} Objetos: ${Format.inlineCode(gachaItems.length)}`,
+        Format.softDivider(20),
+        rows.join('\n')
+      ].join('\n'),
+      signature: 'Colección viva'
+    }, { ephemeral: true })
   }
 }
+

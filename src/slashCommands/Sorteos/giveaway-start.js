@@ -1,5 +1,8 @@
-const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 const ms = require('ms')
+const { replyError, replyOk } = require('../../core/ui/interactionKit')
+const { startGiveaway } = require('../../systems').giveaways
+const Format = require('../../utils/formatter')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -18,50 +21,61 @@ module.exports = {
     const channel = interaction.options.getChannel('canal') || interaction.channel
 
     const msDuration = ms(duration)
-    if (!msDuration) return interaction.reply({ content: '❌ Duración inválida.', ephemeral: true })
+    if (!msDuration || msDuration < 10_000) {
+      return replyError(client, interaction, {
+        system: 'events',
+        reason: 'Duración inválida.',
+        hint: 'Ejemplos: 10m, 1h, 1d.'
+      }, { ephemeral: true })
+    }
 
-    // Nota: Aquí se asume que client.giveawaysManager está configurado en index.js
-    // Si no lo está, usaremos una implementación manual simple con embeds y reacciones/botones
+    if (!channel?.isTextBased?.()) {
+      return replyError(client, interaction, {
+        system: 'events',
+        reason: 'Canal inválido.',
+        hint: 'Selecciona un canal de texto.'
+      }, { ephemeral: true })
+    }
 
-    const endTimestamp = Date.now() + msDuration
+    const me = interaction.guild.members.me || interaction.guild.members.cache.get(client.user.id)
+    const perms = channel.permissionsFor?.(me)
+    if (!perms?.has(PermissionFlagsBits.SendMessages) || !perms?.has(PermissionFlagsBits.EmbedLinks)) {
+      return replyError(client, interaction, {
+        system: 'events',
+        reason: 'No tengo permisos para publicar el sorteo en ese canal.',
+        hint: 'Necesito `SendMessages` y `EmbedLinks`.'
+      }, { ephemeral: true })
+    }
 
-    const embed = new EmbedBuilder()
-      .setTitle('🎉 ¡NUEVO SORTEO! 🎉')
-      .setDescription(`¡Participa para ganar **${prize}**!\n\n**Finaliza:** <t:${Math.floor(endTimestamp / 1000)}:R>\n**Anfitrión:** ${interaction.user}\n**Ganadores:** ${winnerCount}`)
-      .setColor('LuminousVividPink')
-      .setFooter({ text: 'Reacciona con 🎉 para participar' })
-      .setTimestamp()
+    try {
+      const { doc, message } = await startGiveaway({
+        client,
+        guildID: interaction.guild.id,
+        channel,
+        createdBy: interaction.user.id,
+        prize,
+        winnerCount,
+        msDuration
+      })
 
-    const message = await channel.send({ embeds: [embed] })
-    await message.react('🎉')
-
-    await interaction.reply({ content: `✅ Sorteo iniciado en ${channel}`, ephemeral: true })
-
-    // Lógica simple de finalización (para una implementación real se recomienda discord-giveaways)
-    setTimeout(async () => {
-      const updatedMessage = await channel.messages.fetch(message.id)
-      const reaction = updatedMessage.reactions.cache.get('🎉')
-      const users = await reaction.users.fetch()
-      const participants = users.filter(u => !u.bot).map(u => u)
-
-      if (participants.length === 0) {
-        return channel.send(`😔 No hubo suficientes participantes para el sorteo de **${prize}**.`)
-      }
-
-      const winners = []
-      for (let i = 0; i < Math.min(winnerCount, participants.length); i++) {
-        const winner = participants[Math.floor(Math.random() * participants.length)]
-        if (!winners.includes(winner)) winners.push(winner)
-      }
-
-      channel.send(`🎊 ¡Felicidades ${winners.join(', ')}! Han ganado **${prize}**.\nEnlace al sorteo: ${message.url}`)
-
-      const endEmbed = EmbedBuilder.from(embed)
-        .setTitle('🎊 SORTEO FINALIZADO 🎊')
-        .setDescription(`**Premio:** ${prize}\n**Ganadores:** ${winners.join(', ')}\n**Anfitrión:** ${interaction.user}`)
-        .setFooter({ text: 'Sorteo terminado' })
-
-      await message.edit({ embeds: [endEmbed] })
-    }, msDuration)
+      return replyOk(client, interaction, {
+        system: 'events',
+        title: 'Sorteo iniciado',
+        lines: [
+          `Canal: ${channel}`,
+          `Premio: **${prize}**`,
+          `Ganadores: ${Format.inlineCode(winnerCount)}`,
+          `Finaliza: <t:${Math.floor(new Date(doc.endsAt).getTime() / 1000)}:R>`,
+          message?.url ? `Link: ${message.url}` : null
+        ].filter(Boolean),
+        signature: 'Se cierra automaticamente'
+      }, { ephemeral: true })
+    } catch (e) {
+      return replyError(client, interaction, {
+        system: 'events',
+        reason: 'No pude iniciar el sorteo.',
+        hint: e?.message ? `Detalle: ${e.message}` : undefined
+      }, { ephemeral: true })
+    }
   }
 }

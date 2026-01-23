@@ -1,5 +1,8 @@
 const { getMusic } = require('../../music')
 const { isSoundCloudUrl, getMemberVoiceChannel, botHasVoicePerms } = require('../../utils/voiceChecks')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { replyOk, replyError, replyWarn } = require('../../core/ui/messageKit')
 
 function isSpotifyAlbum (input) {
   const q = String(input || '').trim().toLowerCase()
@@ -48,8 +51,7 @@ function normalizeMediaQuery (input) {
 
 async function playAlbum (music, payload) {
   const q = String(payload.query || '').trim()
-
-  if (isSpotifyAlbum(q)) return await music.play(payload)
+  if (isSpotifyAlbum(q)) return music.play(payload)
 
   try {
     return await music.play({ ...payload, query: `spsearch:album:${q}` })
@@ -66,25 +68,51 @@ module.exports = {
   DESCRIPTION: 'Reproduce un álbum (Spotify).',
   ALIASES: ['alb'],
   BOT_PERMISSIONS: ['Connect', 'Speak'],
-  PERMISSIONS: [],
   async execute (client, message, args) {
     const voiceChannel = getMemberVoiceChannel(message.member)
-    if (!voiceChannel) return message.reply('Debes unirte a un canal de voz para reproducir música.')
+    if (!voiceChannel) {
+      return replyWarn(client, message, {
+        system: 'music',
+        title: 'Conéctate a un canal de voz',
+        lines: [`${Emojis.dot} Debes unirte a un canal de voz para reproducir música.`]
+      })
+    }
 
     const me = message.guild.members.me || message.guild.members.cache.get(client.user.id)
     const { ok: canJoin } = botHasVoicePerms(voiceChannel, me)
-    if (!canJoin) return message.reply('No tengo permisos para unirme o hablar en ese canal de voz.')
+    if (!canJoin) {
+      return replyError(client, message, {
+        system: 'music',
+        title: 'Sin permisos de voz',
+        reason: 'No tengo permisos para unirme o hablar en ese canal de voz.'
+      })
+    }
 
     const query = normalizeMediaQuery(args.join(' '))
-    if (!query) return message.reply('Debes proporcionar un link/URI de álbum de Spotify o texto para buscar.')
+    if (!query) {
+      return replyError(client, message, {
+        system: 'music',
+        title: 'Falta el álbum',
+        reason: 'Debes proporcionar un link/URI de álbum de Spotify o texto para buscar.',
+        hint: `${Emojis.dot} Ej: ${Format.inlineCode('album https://open.spotify.com/album/...')}`
+      })
+    }
 
-    if (isSoundCloudUrl(query)) return message.reply('SoundCloud no está soportado. Usa Spotify.')
+    if (isSoundCloudUrl(query)) {
+      return replyError(client, message, { system: 'music', title: 'No soportado', reason: 'SoundCloud no está soportado. Usa Spotify.' })
+    }
     if (isUrlLike(query) && !isSpotifyAlbum(query)) {
-      return message.reply('Usa un álbum de Spotify (ej: https://open.spotify.com/album/... o spotify:album:...).')
+      return replyError(client, message, {
+        system: 'music',
+        title: 'Link inválido',
+        reason: 'Usa un álbum de Spotify (open.spotify.com/album/... o spotify:album:...).'
+      })
     }
 
     const music = getMusic(client)
-    if (!music) return message.reply('El sistema de música no está inicializado.')
+    if (!music) {
+      return replyError(client, message, { system: 'music', title: 'Sistema apagado', reason: 'El sistema de música no está inicializado.' })
+    }
 
     try {
       const res = await playAlbum(music, {
@@ -95,10 +123,30 @@ module.exports = {
         query
       })
 
-      if (res.isPlaylist) return message.reply(`Álbum agregado: **${res.playlistName || 'Desconocido'}** (**${res.trackCount}** canciones).`)
-      return message.reply(`Ahora: **${res.track.title}**`)
+      if (res.isPlaylist) {
+        return replyOk(client, message, {
+          system: 'music',
+          title: `${Emojis.music} Álbum agregado`,
+          lines: [
+            `${Emojis.dot} Nombre: ${Format.bold(res.playlistName || 'Desconocido')}`,
+            `${Emojis.dot} Tracks: ${Format.inlineCode(res.trackCount)}`
+          ],
+          signature: 'A la cola'
+        })
+      }
+
+      return replyOk(client, message, {
+        system: 'music',
+        title: `${Emojis.play} Reproduciendo`,
+        lines: [`${Emojis.dot} Track: ${Format.bold(res.track.title)}`]
+      })
     } catch (e) {
-      return message.reply(`No pude reproducir el álbum: ${e?.message || e}`)
+      return replyError(client, message, {
+        system: 'music',
+        title: 'No pude reproducir el álbum',
+        reason: e?.message || String(e || 'Error desconocido.')
+      })
     }
   }
 }
+

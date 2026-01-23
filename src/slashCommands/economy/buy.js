@@ -1,6 +1,12 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyOk, replyError } = require('../../core/ui/interactionKit')
+const { CATALOG, money } = require('./_catalog')
+
+function itemChoices () {
+  return Object.entries(CATALOG).map(([key, it]) => ({ name: `${it.name} (${it.price})`, value: key }))
+}
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -8,51 +14,48 @@ module.exports = {
     .setDescription('Compra un ítem de la tienda')
     .addStringOption(option =>
       option.setName('item')
-        .setDescription('Nombre del ítem a comprar')
+        .setDescription('Ítem a comprar')
         .setRequired(true)
-        .addChoices(
-          { name: 'Pan (50)', value: 'Pan' },
-          { name: 'Hacha (100)', value: 'Hacha' },
-          { name: 'Caña (150)', value: 'Caña' },
-          { name: 'Elixir (200)', value: 'Elixir' },
-          { name: 'Escudo (250)', value: 'Escudo' }
-        )
+        .addChoices(...itemChoices())
     ),
-  async execute (client, interaction) {
-    const itemName = interaction.options.getString('item')
-    const items = {
-      pan: 50,
-      hacha: 100,
-      caña: 150,
-      elixir: 200,
-      escudo: 250
-    }
-    const price = items[itemName.toLowerCase()]
 
-    if (!price) {
-      return interaction.reply({ content: `${Emojis.error} Ítem no válido.`, ephemeral: true })
+  async execute (client, interaction) {
+    const key = interaction.options.getString('item', true)
+    const item = CATALOG[key]
+    if (!item) {
+      return replyError(client, interaction, {
+        system: 'economy',
+        title: 'Ítem inválido',
+        reason: 'Ese ítem no existe.',
+        hint: `Usa ${Format.inlineCode('/shop')} para ver el catálogo.`
+      }, { ephemeral: true })
     }
 
     const userData = await client.db.getUserData(interaction.user.id)
-    if ((userData.money || 0) < price) {
-      return interaction.reply({
-        content: `${Emojis.error} No tienes suficiente dinero. Te faltan ${Emojis.money} ${Format.inlineCode((price - userData.money).toString())}`,
-        ephemeral: true
-      })
+    if ((userData.money || 0) < item.price) {
+      return replyError(client, interaction, {
+        system: 'economy',
+        title: 'Fondos insuficientes',
+        reason: `Te faltan ${money(item.price - (userData.money || 0))} monedas.`,
+        hint: `Tip: usa ${Format.inlineCode('/work')} o ${Format.inlineCode('/daily')}.`
+      }, { ephemeral: true })
     }
 
-    userData.money -= price
-    userData.inventory = userData.inventory || []
-    userData.inventory.push(itemName)
+    userData.money -= item.price
+    if (!Array.isArray(userData.inventory)) userData.inventory = []
+    userData.inventory.push(item.name)
     await userData.save()
 
-    const embed = new EmbedBuilder()
-      .setTitle(`${Emojis.success} Compra Exitosa`)
-      .setDescription(`Has adquirido ${Format.bold(itemName)} por ${Emojis.money} ${Format.inlineCode(price.toString())}`)
-      .setColor('Green')
-      .addFields({ name: 'Saldo Actual', value: `${Emojis.money} ${Format.inlineCode(userData.money.toString())}` })
-      .setTimestamp()
-
-    await interaction.reply({ embeds: [embed] })
+    return replyOk(client, interaction, {
+      system: 'economy',
+      title: `${Emojis.success} Compra realizada`,
+      lines: [
+        `${Emojis.dot} Ítem: ${item.emoji} ${Format.bold(item.name)}`,
+        `${Emojis.dot} Precio: ${Emojis.money} ${Format.inlineCode(money(item.price))}`,
+        `${Emojis.dot} Efectivo: ${Format.inlineCode(money(userData.money || 0))}`
+      ],
+      signature: 'Buen trade'
+    }, { ephemeral: true })
   }
 }
+

@@ -1,6 +1,9 @@
 const TTLCache = require('../../core/cache/ttlCache')
 const UserSchema = require('../../database/schemas/UserSchema')
 const GuildSchema = require('../../database/schemas/GuildSchema')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { getGuildUiConfig, embed, headerLine } = require('../../core/ui/uiKit')
 
 // Anti-spam: solo da XP cada N ms por usuario/guild.
 const xpCooldownCache = new TTLCache({ defaultTtlMs: 20_000, maxSize: 300_000 })
@@ -69,9 +72,21 @@ async function handleMessageXp ({ client, message }) {
     const announceChannelId = g?.levelsAnnounceChannel || null
     const channel = announceChannelId ? message.guild.channels.cache.get(announceChannelId) : message.channel
     if (channel?.send) {
-      const emojis = require('../../utils/emojis')
-      const formatter = require('../../utils/formatter')
-      await channel.send(`${emojis.level} ¡Felicidades <@${userID}>! Has subido al ${formatter.toBold(`NIVEL ${newLevel}`)}.`).catch(() => {})
+      const ui = await getGuildUiConfig(client, guildID)
+      const e = embed({
+        ui,
+        system: 'levels',
+        kind: 'success',
+        title: `${Emojis.level} ¡Level up!`,
+        description: [
+          headerLine(Emojis.level, `Nivel ${newLevel}`),
+          `${Emojis.dot} ${Format.bold('Felicitaciones')} <@${userID}>`,
+          `${Emojis.dot} Ganancia: ${Format.inlineCode('+' + gain + ' XP')}`,
+          roleId ? `${Emojis.dot} Recompensa: <@&${roleId}>` : null
+        ].filter(Boolean).join('\n'),
+        signature: 'Sigue participando'
+      })
+      await channel.send({ embeds: [e] }).catch(() => {})
     }
   } catch (_) {}
 

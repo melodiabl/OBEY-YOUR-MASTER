@@ -1,33 +1,35 @@
-const { EmbedBuilder } = require('discord.js')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { replyOk, replyError } = require('../../core/ui/messageKit')
+
 module.exports = {
-  DESCRIPTION: 'Recarga los archivos del bot.',
+  DESCRIPTION: 'Recarga módulos del bot (owner).',
   OWNER: true,
-  async execute (client, message, args, prefix, GUILD_DATA) {
-    let opcion = 'Comandos, Eventos y Handlers'
+  async execute (client, message, args) {
+    let scope = 'Comandos, Eventos y Handlers'
 
     try {
-      switch (args[0]?.toLowerCase()) {
+      const mode = String(args?.[0] || '').trim().toLowerCase()
+      switch (mode) {
         case 'comands':
         case 'comandos':
-          opcion = 'Comandos'
+          scope = 'Comandos (prefix)'
           await client.loadCommands()
           break
         case 'slash':
         case 'slashcommands':
-          opcion = 'Comandos Slash'
+          scope = 'Comandos Slash'
           await client.loadSlashCommands()
           break
         case 'eventos':
         case 'events':
-          opcion = 'Eventos'
+          scope = 'Eventos'
           await client.loadEvents()
           break
-
         case 'handlers':
-          opcion = 'Handlers'
+          scope = 'Handlers'
           await client.loadHandlers()
           break
-
         default:
           await client.loadEvents()
           await client.loadHandlers()
@@ -36,18 +38,25 @@ module.exports = {
           break
       }
 
-      message.reply({
-        embeds: [
-          new EmbedBuilder()
-            .addFields([
-              { name: `✅ ${opcion} Recargados`, value: '> *Okay!*' }
-            ])
-            .setColor(process.env.COLOR || '#FF0000')
-        ]
+      return replyOk(client, message, {
+        system: 'infra',
+        title: `${Emojis.success} Recarga completa`,
+        lines: [
+          `${Emojis.dot} **Scope:** ${Format.inlineCode(scope)}`,
+          `${Emojis.dot} Slash: ${Format.inlineCode(client.slashCommands.size)}`,
+          `${Emojis.dot} Prefix: ${Format.inlineCode(client.commands.size)}`
+        ],
+        signature: 'Hot reload listo'
       })
     } catch (e) {
-      message.reply('**Ha ocurrido un error a al recargar el bot!**\n*Mira la consola para más detalles.*')
       console.log(e)
+      return replyError(client, message, {
+        system: 'infra',
+        title: 'Falló la recarga',
+        reason: e?.message || 'Error desconocido.',
+        hint: `${Emojis.dot} Revisa la consola del host.`
+      })
     }
   }
 }
+

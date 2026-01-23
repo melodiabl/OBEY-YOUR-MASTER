@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js')
 const systems = require('../../systems')
-const emojis = require('../../utils/emojis')
-const formatter = require('../../utils/formatter')
+const Format = require('../../utils/formatter')
+const { replyOk } = require('../../core/ui/interactionKit')
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -16,9 +16,14 @@ module.exports = {
     const reason = interaction.options.getString('razon') || 'AFK'
     await systems.afk.setAfk(interaction.user.id, reason)
 
-    await interaction.reply({
-      content: `${emojis.success} ${formatter.toBold('ESTADO AFK ESTABLECIDO')}\n${emojis.dot} ${formatter.toBold('Razón:')} ${formatter.italic(reason)}`,
-      ephemeral: false
+    return replyOk(client, interaction, {
+      system: 'notifications',
+      title: 'AFK activado',
+      lines: [
+        `Razón: ${Format.quote(reason)}`,
+        'Cuando hables de nuevo, se desactivará automáticamente.'
+      ],
+      signature: 'Modo AFK'
     })
   }
 }

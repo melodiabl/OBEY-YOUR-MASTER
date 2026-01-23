@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js')
 const { unwarnUser } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
+const { replyOk, replyWarn } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'moderation',
@@ -27,7 +28,13 @@ module.exports = {
   async execute (client, interaction) {
     const target = interaction.options.getUser('usuario', true)
     const index = interaction.options.getInteger('indice')
-    if (target.bot) return interaction.reply({ content: 'Los bots no tienen warns.', ephemeral: true })
+    if (target.bot) {
+      return replyWarn(client, interaction, {
+        system: 'moderation',
+        title: 'Accion invalida',
+        lines: ['Los bots no tienen warns.']
+      }, { ephemeral: true })
+    }
 
     const res = await unwarnUser({
       guildID: interaction.guild.id,
@@ -37,9 +44,13 @@ module.exports = {
     })
 
     const extra = index ? ` (indice ${index})` : ' (ultimo)'
-    return interaction.reply({
-      content: `✅ Warn removido de <@${target.id}>${extra}. Warns restantes: **${res.remaining}**.`,
-      ephemeral: true
-    })
+    return replyOk(client, interaction, {
+      system: 'moderation',
+      title: 'Warn removido',
+      lines: [
+        `Usuario: **${target.tag || target.username}** (\`${target.id}\`)${extra}`,
+        `Warns restantes: **${res.remaining}**`
+      ]
+    }, { ephemeral: true })
   }
 }

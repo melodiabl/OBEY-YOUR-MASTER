@@ -1,7 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js')
 const { buyProtect } = require('../../systems').economy
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
-const { replyError } = require('../../utils/interactionUtils')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { replyOk, replyError } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'economy',
@@ -23,9 +25,22 @@ module.exports = {
     const price = Math.ceil(500 * (hours / 24))
     try {
       const res = await buyProtect({ client, guildID: interaction.guild.id, userID: interaction.user.id, hours, price })
-      return interaction.reply({ content: `✅ Proteccion activa hasta <t:${Math.floor(res.until / 1000)}:R>. Costo: **${price}**.`, ephemeral: true })
+      return replyOk(client, interaction, {
+        system: 'economy',
+        title: `${Emojis.success} Protección activa`,
+        lines: [
+          `${Emojis.dot} Hasta: <t:${Math.floor(res.until / 1000)}:R>`,
+          `${Emojis.dot} Costo: ${Emojis.money} ${Format.inlineCode(price)}`,
+          `${Emojis.dot} Duración: ${Format.inlineCode(hours + 'h')}`
+        ],
+        signature: 'Anti-robos listo'
+      }, { ephemeral: true })
     } catch (e) {
-      return replyError(interaction, e?.message || String(e))
+      return replyError(client, interaction, {
+        system: 'economy',
+        title: 'No pude activar protección',
+        reason: e?.message || String(e || 'Error desconocido.')
+      }, { ephemeral: true })
     }
   }
 }

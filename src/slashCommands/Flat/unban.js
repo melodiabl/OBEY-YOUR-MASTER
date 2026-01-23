@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js')
 const { logAction } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
+const { replyError, replyOk } = require('../../core/ui/interactionKit')
 
 module.exports = {
   MODULE: 'moderation',
@@ -27,14 +28,32 @@ module.exports = {
     const target = interaction.options.getUser('usuario', true)
     const reason = interaction.options.getString('razon') || 'Sin razon.'
 
-    await interaction.guild.members.unban(target.id, reason).catch((e) => { throw e })
-    const modCase = await logAction({
-      guildID: interaction.guild.id,
-      type: 'unban',
-      targetID: target.id,
-      moderatorID: interaction.user.id,
-      reason
-    })
-    return interaction.reply({ content: `✅ Unban aplicado a <@${target.id}>. Caso #${modCase.caseNumber}.`, ephemeral: true })
+    try {
+      await interaction.guild.members.unban(target.id, reason)
+
+      const modCase = await logAction({
+        guildID: interaction.guild.id,
+        type: 'unban',
+        targetID: target.id,
+        moderatorID: interaction.user.id,
+        reason
+      })
+
+      return replyOk(client, interaction, {
+        system: 'moderation',
+        title: 'Unban aplicado',
+        lines: [
+          `Usuario: **${target.tag || target.username}** (\`${target.id}\`)`,
+          `Caso: \`#${modCase.caseNumber}\``
+        ],
+        signature: reason ? `Razon: ${reason}` : undefined
+      }, { ephemeral: true })
+    } catch (e) {
+      return replyError(client, interaction, {
+        system: 'moderation',
+        reason: 'No pude aplicar el unban.',
+        hint: e?.message ? `Detalle: ${e.message}` : undefined
+      }, { ephemeral: true })
+    }
   }
 }

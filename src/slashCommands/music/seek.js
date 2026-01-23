@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js')
 const { getMusic } = require('../../music')
-const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { replyError, replyOk, replyWarn } = require('../../core/ui/interactionKit')
 
 function parseTimeToMs (timeStr) {
   if (!timeStr) return null
@@ -32,25 +32,32 @@ module.exports = {
     const voiceChannel = interaction.member.voice?.channel
 
     if (!voiceChannel) {
-      return interaction.editReply({ content: `${Emojis.error} Debes estar en un canal de voz.` })
+      return replyError(client, interaction, { system: 'music', reason: 'Debes estar en un canal de voz.' })
     }
 
     const ms = parseTimeToMs(timeStr)
     if (isNaN(ms) || ms === null) {
-      return interaction.editReply(`${Emojis.error} Formato de tiempo inválido. Usa segundos (90) o formato 1:30.`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'Formato de tiempo inválido.',
+        hint: 'Usa segundos (90) o formato 1:30.'
+      })
     }
 
     try {
       const music = getMusic(client)
-      if (!music) return interaction.editReply(`${Emojis.error} El sistema de musica no esta inicializado.`)
+      if (!music) return replyError(client, interaction, { system: 'music', reason: 'El sistema de musica no esta inicializado.' })
 
       const state = await music.nowPlaying({ guildId: interaction.guild.id })
       if (!state.currentTrack) {
-        return interaction.editReply(`${Emojis.error} No hay ninguna canción reproduciéndose.`)
+        return replyWarn(client, interaction, { system: 'music', title: 'Sin reproducción', lines: ['No hay ninguna canción reproduciéndose.'] })
       }
 
       if (ms > state.currentTrack.duration) {
-        return interaction.editReply(`${Emojis.error} El tiempo especificado excede la duración de la canción.`)
+        return replyError(client, interaction, {
+          system: 'music',
+          reason: 'El tiempo especificado excede la duración de la canción.'
+        })
       }
 
       await music.seek({
@@ -59,9 +66,13 @@ module.exports = {
         position: ms
       })
 
-      return interaction.editReply(`${Emojis.success} Saltado a ${Format.bold(timeStr)}`)
+      return replyOk(client, interaction, { system: 'music', title: 'Seek', lines: [`Saltado a ${Format.bold(timeStr)}`] })
     } catch (e) {
-      return interaction.editReply(`${Emojis.error} Error: ${Format.inlineCode(e?.message || e)}`)
+      return replyError(client, interaction, {
+        system: 'music',
+        reason: 'No pude hacer seek.',
+        hint: `Detalle: ${Format.inlineCode(e?.message || e)}`
+      })
     }
   }
 }
