@@ -120,7 +120,12 @@ async function maybeHandleAiChannel ({ client, message, prefixes }) {
 module.exports = async (client, message) => {
   if (!message.guild || !message.channel || message.author.bot) return
 
-  const GUILD_DATA = client.dbGuild.getGuildData(message.guild.id)
+  let GUILD_DATA = null
+  try {
+    GUILD_DATA = await client.db.getGuildData(message.guild.id)
+  } catch (e) {
+    GUILD_DATA = client.dbGuild.getGuildData(message.guild.id)
+  }
 
   // Sistema AFK
   try {
