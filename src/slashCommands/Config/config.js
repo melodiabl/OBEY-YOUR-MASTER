@@ -3,7 +3,7 @@ const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
 const PERMS = require('../../core/auth/permissionKeys')
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
-const { getGuildUiConfig, invalidateGuildUiConfig, headerLine, embed } = require('../../core/ui/uiKit')
+const { getGuildUiConfig, invalidateGuildUiConfig, headerLine, embed, errorEmbed } = require('../../core/ui/uiKit')
 
 function normalizeTheme (v) {
   const t = String(v || '').trim().toLowerCase()
@@ -112,7 +112,10 @@ module.exports = {
 
       if (sub === 'prefix') {
         const prefix = String(interaction.options.getString('prefijo', true)).trim()
-        if (!prefix) return interaction.reply({ content: `${Emojis.error} Prefijo inválido.`, ephemeral: true })
+        if (!prefix) {
+          const e = errorEmbed({ ui, system: 'config', title: 'Prefijo inválido', reason: 'El prefijo visual está vacío.' })
+          return interaction.reply({ embeds: [e], ephemeral: true })
+        }
         guildData.visualPrefix = prefix.slice(0, 3)
         await guildData.save()
         invalidateGuildUiConfig(guildId)
@@ -134,15 +137,25 @@ module.exports = {
       if (sub === 'emoji-set') {
         const key = String(interaction.options.getString('clave', true)).trim()
         const value = String(interaction.options.getString('emoji', true)).trim()
-        if (!key) return interaction.reply({ content: `${Emojis.error} Clave inválida.`, ephemeral: true })
-        if (!value) return interaction.reply({ content: `${Emojis.error} Emoji inválido.`, ephemeral: true })
+        if (!key) {
+          const e = errorEmbed({ ui, system: 'config', title: 'Clave inválida', reason: 'La clave está vacía.' })
+          return interaction.reply({ embeds: [e], ephemeral: true })
+        }
+        if (!value) {
+          const e = errorEmbed({ ui, system: 'config', title: 'Emoji inválido', reason: 'El emoji está vacío.' })
+          return interaction.reply({ embeds: [e], ephemeral: true })
+        }
 
         const keys = new Set(knownEmojiKeys())
         if (!keys.has(key)) {
-          return interaction.reply({
-            content: `${Emojis.error} Clave desconocida: ${Format.inlineCode(key)}\n${Emojis.dot} Usa ${Format.inlineCode('/config ui emoji-list')} para ver claves.`,
-            ephemeral: true
+          const e = errorEmbed({
+            ui,
+            system: 'config',
+            title: 'Clave desconocida',
+            reason: `No existe: ${Format.inlineCode(key)}`,
+            hint: `Usa ${Format.inlineCode('/config ui emoji-list')} para ver claves disponibles.`
           })
+          return interaction.reply({ embeds: [e], ephemeral: true })
         }
 
         const map = ensureMap(guildData.emojiOverrides)

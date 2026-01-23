@@ -3,7 +3,7 @@ const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
-const { getGuildUiConfig, headerLine, embed } = require('../../core/ui/uiKit')
+const { getGuildUiConfig, headerLine, embed, errorEmbed } = require('../../core/ui/uiKit')
 
 function ensureMap (v) {
   if (!v) return new Map()
@@ -57,7 +57,10 @@ module.exports = createSystemSlashCommand({
 
         const moduleKey = String(interaction.options.getString('modulo', true)).trim().toLowerCase()
         const active = Boolean(interaction.options.getBoolean('activo', true))
-        if (!moduleKey) return interaction.reply({ content: `${Emojis.error} Módulo inválido.`, ephemeral: true })
+        if (!moduleKey) {
+          const err = errorEmbed({ ui, system: 'config', title: 'Módulo inválido', reason: 'La clave del módulo está vacía.' })
+          return interaction.reply({ embeds: [err], ephemeral: true })
+        }
 
         const modules = ensureMap(guildData.modules)
         modules.set(moduleKey, active)

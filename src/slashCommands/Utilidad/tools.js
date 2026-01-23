@@ -2,7 +2,7 @@ const crypto = require('node:crypto')
 const { createSystemSlashCommand } = require('../../core/commands/createSystemSlashCommand')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
-const { getGuildUiConfig, headerLine, embed } = require('../../core/ui/uiKit')
+const { getGuildUiConfig, headerLine, embed, errorEmbed } = require('../../core/ui/uiKit')
 
 function secondsToHms (sec) {
   const s = Math.max(0, Math.floor(Number(sec) || 0))
@@ -257,7 +257,16 @@ module.exports = createSystemSlashCommand({
         const ui = await getGuildUiConfig(client, interaction.guild.id)
         const user = interaction.options.getUser('usuario') || interaction.user
         const member = await interaction.guild.members.fetch(user.id).catch(() => null)
-        if (!member) return interaction.reply({ content: `${Emojis.error} No pude obtener el miembro.`, ephemeral: true })
+        if (!member) {
+          const e = errorEmbed({
+            ui,
+            system: 'security',
+            title: 'No pude obtener el miembro',
+            reason: 'Discord no devolvió el miembro (puede ser por intents/permisos o caché).',
+            hint: 'Probá con otro usuario o reintenta en unos segundos.'
+          })
+          return interaction.reply({ embeds: [e], ephemeral: true })
+        }
 
         const keys = [
           'Administrator',
@@ -306,7 +315,14 @@ module.exports = createSystemSlashCommand({
           })
           return interaction.reply({ embeds: [e], ephemeral: true })
         } catch (e) {
-          return interaction.reply({ content: `${Emojis.error} ${e.message}`, ephemeral: true })
+          const err = errorEmbed({
+            ui,
+            system: 'utility',
+            title: 'Snowflake inválida',
+            reason: e?.message || 'No se pudo convertir.',
+            hint: 'Pegá un ID de Discord (17–20 dígitos).'
+          })
+          return interaction.reply({ embeds: [err], ephemeral: true })
         }
       }
     },
@@ -435,7 +451,14 @@ module.exports = createSystemSlashCommand({
           })
           return interaction.reply({ embeds: [e] })
         } catch (e) {
-          return interaction.reply({ content: `${Emojis.error} ${e.message}`, ephemeral: true })
+          const err = errorEmbed({
+            ui,
+            system: 'games',
+            title: 'Dados inválidos',
+            reason: e?.message || 'Formato inválido.',
+            hint: `Ejemplo: ${Format.inlineCode('2d6')} / ${Format.inlineCode('1d20')}`
+          })
+          return interaction.reply({ embeds: [err], ephemeral: true })
         }
       }
     },
@@ -466,7 +489,16 @@ module.exports = createSystemSlashCommand({
         const ui = await getGuildUiConfig(client, interaction.guild.id)
         const min = interaction.options.getInteger('min', true)
         const max = interaction.options.getInteger('max', true)
-        if (max < min) return interaction.reply({ content: `${Emojis.error} max debe ser >= min.`, ephemeral: true })
+        if (max < min) {
+          const err = errorEmbed({
+            ui,
+            system: 'utility',
+            title: 'Rango inválido',
+            reason: 'max debe ser mayor o igual a min.',
+            hint: `${Emojis.dot} min=${Format.inlineCode(min)} max=${Format.inlineCode(max)}`
+          })
+          return interaction.reply({ embeds: [err], ephemeral: true })
+        }
         const v = min + Math.floor(Math.random() * (max - min + 1))
         const e = embed({
           ui,
@@ -534,7 +566,14 @@ module.exports = createSystemSlashCommand({
           })
           return interaction.reply({ embeds: [e], ephemeral: true })
         } catch (e) {
-          return interaction.reply({ content: `${Emojis.error} Base64 inválido.`, ephemeral: true })
+          const err = errorEmbed({
+            ui,
+            system: 'utility',
+            title: 'Base64 inválido',
+            reason: 'No pude decodificar ese contenido.',
+            hint: 'Revisá que no tenga espacios ni caracteres extra.'
+          })
+          return interaction.reply({ embeds: [err], ephemeral: true })
         }
       }
     },
@@ -568,7 +607,16 @@ module.exports = createSystemSlashCommand({
         const ui = await getGuildUiConfig(client, interaction.guild.id)
         const hex = String(interaction.options.getString('hex', true)).trim()
         const m = /^#?([0-9a-fA-F]{6})$/.exec(hex)
-        if (!m) return interaction.reply({ content: `${Emojis.error} HEX inválido. Usa #RRGGBB.`, ephemeral: true })
+        if (!m) {
+          const err = errorEmbed({
+            ui,
+            system: 'utility',
+            title: 'HEX inválido',
+            reason: 'Usa el formato #RRGGBB.',
+            hint: `Ej: ${Format.inlineCode('#5865F2')}`
+          })
+          return interaction.reply({ embeds: [err], ephemeral: true })
+        }
         const int = parseInt(m[1], 16)
         const e = embed({
           ui,

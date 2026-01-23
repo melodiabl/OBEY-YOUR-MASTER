@@ -5,6 +5,7 @@ const MemberAuthSchema = require('../../database/schemas/MemberAuthSchema')
 const { invalidateIdentityCache } = require('../../core/auth/resolveInternalIdentity')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
+const { getGuildUiConfig, headerLine, embed, okEmbed, errorEmbed } = require('../../core/ui/uiKit')
 
 function roleChoices () {
   return INTERNAL_ROLE_ORDER
@@ -32,15 +33,21 @@ module.exports = createSystemSlashCommand({
       description: 'Muestra tu rol interno actual',
       auth: { role: INTERNAL_ROLES.USER, perms: [] },
       handler: async (client, interaction, { identity }) => {
-        return interaction.reply({
-          content: [
-            `${Emojis.learning} **Identidad interna**`,
-            Format.divider(18),
-            `${Emojis.human} **Rol:** ${Format.inlineCode(identity.role)}`,
-            `${Emojis.success} **Grants:** ${Format.inlineCode(identity.grants.length)}  ${Emojis.dot}  ${Emojis.error} **Denies:** ${Format.inlineCode(identity.denies.length)}`
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
+        const e = embed({
+          ui,
+          system: 'security',
+          kind: 'info',
+          title: `${Emojis.learning} Identidad interna`,
+          description: [
+            headerLine(Emojis.security, 'Quién sos (para el bot)'),
+            `${Emojis.dot} **Rol:** ${Format.inlineCode(identity.role)}`,
+            `${Emojis.dot} **Grants:** ${Format.inlineCode(identity.grants.length)}  ${Emojis.dot} **Denies:** ${Format.inlineCode(identity.denies.length)}`,
+            `${Emojis.dot} **Usuario:** <@${interaction.user.id}>`
           ].join('\n'),
-          ephemeral: true
+          signature: 'Acceso claro, sin sorpresas'
         })
+        return interaction.reply({ embeds: [e], ephemeral: true })
       }
     }
   ],
@@ -58,14 +65,17 @@ module.exports = createSystemSlashCommand({
           ],
           auth: { role: INTERNAL_ROLES.ADMIN, perms: [PERMS.AUTH_MANAGE] },
           handler: async (client, interaction, { identity }) => {
+            const ui = await getGuildUiConfig(client, interaction.guild.id)
             const target = interaction.options.getUser('usuario', true)
             const role = interaction.options.getString('rol', true)
 
             if (!isValidInternalRole(role) || role === INTERNAL_ROLES.OWNER) {
-              return interaction.reply({ content: `${Emojis.error} Rol interno inválido.`, ephemeral: true })
+              const e = errorEmbed({ ui, system: 'security', title: 'Rol inválido', reason: 'Ese rol interno no es válido para overrides.' })
+              return interaction.reply({ embeds: [e], ephemeral: true })
             }
             if (role === INTERNAL_ROLES.CREATOR && !canTouchCreator(identity)) {
-              return interaction.reply({ content: `${Emojis.error} Solo **OWNER/CREATOR** puede asignar **CREATOR**.`, ephemeral: true })
+              const e = errorEmbed({ ui, system: 'security', title: 'Acción restringida', reason: 'Solo OWNER/CREATOR puede asignar CREATOR.' })
+              return interaction.reply({ embeds: [e], ephemeral: true })
             }
 
             await MemberAuthSchema.findOneAndUpdate(
@@ -75,7 +85,16 @@ module.exports = createSystemSlashCommand({
             )
 
             invalidateIdentityCache({ guildId: interaction.guild.id, userId: target.id })
-            return interaction.reply({ content: `${Emojis.success} Rol interno de <@${target.id}> → **${role}**.`, ephemeral: true })
+            const e = okEmbed({
+              ui,
+              system: 'security',
+              title: `${Emojis.success} Rol aplicado`,
+              lines: [
+                `${Emojis.dot} **Usuario:** <@${target.id}>`,
+                `${Emojis.dot} **Nuevo rol:** ${Format.inlineCode(role)}`
+              ]
+            })
+            return interaction.reply({ embeds: [e], ephemeral: true })
           }
         },
         {
@@ -86,12 +105,14 @@ module.exports = createSystemSlashCommand({
           ],
           auth: { role: INTERNAL_ROLES.ADMIN, perms: [PERMS.AUTH_MANAGE] },
           handler: async (client, interaction, { identity }) => {
+            const ui = await getGuildUiConfig(client, interaction.guild.id)
             const target = interaction.options.getUser('usuario', true)
 
             try {
               const existing = await MemberAuthSchema.findOne({ guildID: interaction.guild.id, userID: target.id })
               if (existing?.role === INTERNAL_ROLES.CREATOR && !canTouchCreator(identity)) {
-                return interaction.reply({ content: `${Emojis.error} Solo **OWNER/CREATOR** puede modificar overrides de **CREATOR**.`, ephemeral: true })
+                const e = errorEmbed({ ui, system: 'security', title: 'Acción restringida', reason: 'Solo OWNER/CREATOR puede modificar overrides de CREATOR.' })
+                return interaction.reply({ embeds: [e], ephemeral: true })
               }
             } catch (e) {}
 
@@ -102,7 +123,13 @@ module.exports = createSystemSlashCommand({
             )
 
             invalidateIdentityCache({ guildId: interaction.guild.id, userId: target.id })
-            return interaction.reply({ content: `${Emojis.success} Override eliminado para <@${target.id}>.`, ephemeral: true })
+            const e = okEmbed({
+              ui,
+              system: 'security',
+              title: `${Emojis.success} Override eliminado`,
+              lines: [`${Emojis.dot} **Usuario:** <@${target.id}>`]
+            })
+            return interaction.reply({ embeds: [e], ephemeral: true })
           }
         }
       ]
@@ -126,6 +153,7 @@ module.exports = createSystemSlashCommand({
           ],
           auth: { role: INTERNAL_ROLES.ADMIN, perms: [PERMS.AUTH_MANAGE] },
           handler: async (client, interaction) => {
+            const ui = await getGuildUiConfig(client, interaction.guild.id)
             const internalRole = interaction.options.getString('rol_interno', true)
             const discordRole = interaction.options.getRole('rol_discord', true)
 
@@ -137,7 +165,16 @@ module.exports = createSystemSlashCommand({
             guildData.internalRoleMappings = mappings
             await guildData.save()
 
-            return interaction.reply({ content: `${Emojis.success} Mapeado <@&${discordRole.id}> → **${internalRole}**.`, ephemeral: true })
+            const e = okEmbed({
+              ui,
+              system: 'security',
+              title: `${Emojis.success} Mapeo agregado`,
+              lines: [
+                `${Emojis.dot} **Rol Discord:** <@&${discordRole.id}>`,
+                `${Emojis.dot} **Rol interno:** ${Format.inlineCode(internalRole)}`
+              ]
+            })
+            return interaction.reply({ embeds: [e], ephemeral: true })
           }
         },
         {
@@ -155,6 +192,7 @@ module.exports = createSystemSlashCommand({
           ],
           auth: { role: INTERNAL_ROLES.ADMIN, perms: [PERMS.AUTH_MANAGE] },
           handler: async (client, interaction) => {
+            const ui = await getGuildUiConfig(client, interaction.guild.id)
             const internalRole = interaction.options.getString('rol_interno', true)
             const discordRole = interaction.options.getRole('rol_discord', true)
 
@@ -166,7 +204,16 @@ module.exports = createSystemSlashCommand({
             guildData.internalRoleMappings = mappings
             await guildData.save()
 
-            return interaction.reply({ content: `${Emojis.success} Quitado <@&${discordRole.id}> del mapeo de **${internalRole}**.`, ephemeral: true })
+            const e = okEmbed({
+              ui,
+              system: 'security',
+              title: `${Emojis.success} Mapeo quitado`,
+              lines: [
+                `${Emojis.dot} **Rol Discord:** <@&${discordRole.id}>`,
+                `${Emojis.dot} **Rol interno:** ${Format.inlineCode(internalRole)}`
+              ]
+            })
+            return interaction.reply({ embeds: [e], ephemeral: true })
           }
         },
         {
@@ -174,15 +221,24 @@ module.exports = createSystemSlashCommand({
           description: 'Muestra el mapeo actual de roles',
           auth: { role: INTERNAL_ROLES.ADMIN, perms: [PERMS.AUTH_MANAGE] },
           handler: async (client, interaction) => {
+            const ui = await getGuildUiConfig(client, interaction.guild.id)
             const guildData = await client.db.getGuildData(interaction.guild.id)
             const mappings = ensureMap(guildData.internalRoleMappings)
             const lines = []
             for (const role of [INTERNAL_ROLES.ADMIN, INTERNAL_ROLES.MOD, INTERNAL_ROLES.USER]) {
               const ids = Array.isArray(mappings.get(role)) ? mappings.get(role) : []
-              const pretty = ids.length ? ids.map(id => `<@&${id}>`).join(', ') : '*Sin mapeos*'
-              lines.push(`${Emojis.dot} **${role}**: ${pretty}`)
+              const pretty = ids.length ? ids.map(id => `<@&${id}>`).join(', ') : Format.italic('Sin mapeos')
+              lines.push(`${Emojis.dot} ${Format.bold(role)}: ${pretty}`)
             }
-            return interaction.reply({ content: lines.join('\n'), ephemeral: true })
+
+            const e = embed({
+              ui,
+              system: 'security',
+              kind: 'info',
+              title: `${Emojis.security} Mapeo de roles`,
+              description: [headerLine(Emojis.security, 'Discord → interno'), lines.join('\n')].join('\n')
+            })
+            return interaction.reply({ embeds: [e], ephemeral: true })
           }
         }
       ]

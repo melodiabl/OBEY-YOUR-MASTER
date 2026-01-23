@@ -30,6 +30,7 @@ module.exports = {
       description: [
         headerLine(Emojis.info, 'Panel de ayuda'),
         `${Emojis.dot} Navega por categoría con el menú.`,
+        `${Emojis.dot} Centro de control: ${Format.inlineCode('/panel')} (atajos + estado + módulos).`,
         `${Emojis.dot} Tip: muchos comandos tienen *subcomandos* (ej: ${Format.inlineCode('/auth role set')}).`
       ].join('\n'),
       fields: [

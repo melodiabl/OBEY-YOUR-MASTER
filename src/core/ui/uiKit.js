@@ -15,6 +15,7 @@ const SYSTEM_STYLES = Object.freeze({
   music: { emoji: BaseEmojis.music, color: 0x5865f2 },
   economy: { emoji: BaseEmojis.economy, color: 0xf1c40f },
   games: { emoji: BaseEmojis.games, color: 0x57f287 },
+  clans: { emoji: BaseEmojis.clan, color: 0x9b59b6 },
   levels: { emoji: BaseEmojis.level, color: 0xfee75c },
   reputation: { emoji: BaseEmojis.reputation, color: 0xeb459e },
   ai: { emoji: BaseEmojis.ai, color: 0x5865f2 },
@@ -27,6 +28,8 @@ const SYSTEM_STYLES = Object.freeze({
   inventory: { emoji: BaseEmojis.inventory, color: 0x1abc9c },
   events: { emoji: BaseEmojis.events, color: 0x2ecc71 },
   learning: { emoji: BaseEmojis.learning, color: 0x9b59b6 },
+  auth: { emoji: BaseEmojis.learning, color: 0x9b59b6 },
+  infra: { emoji: BaseEmojis.system, color: 0x95a5a6 },
   security: { emoji: BaseEmojis.security, color: 0xe74c3c },
   info: { emoji: BaseEmojis.info, color: 0x3498db },
   utility: { emoji: BaseEmojis.utility, color: 0x99aab5 }
@@ -61,6 +64,12 @@ function getSystemStyle (systemKey) {
 
 function headerLine (emoji, title) {
   return `${emoji} **${title}**\n${Format.divider(18)}`
+}
+
+function footerLine (ui, text) {
+  const t = String(text || '').trim()
+  if (!t) return null
+  return `${emoji(ui, 'star')} ${Format.italic(t)} ${emoji(ui, 'star')}`
 }
 
 function toLines (value) {
@@ -105,6 +114,7 @@ function embed ({
   lines,
   fields,
   footer,
+  signature,
   thumbnail,
   image,
   timestamp = true
@@ -118,6 +128,10 @@ function embed ({
   const allLines = []
   if (description) allLines.push(...toLines(description))
   if (lines) allLines.push(...toLines(lines))
+  if (signature) {
+    const sig = footerLine(ui, signature)
+    if (sig) allLines.push('', sig)
+  }
   if (allLines.length) e.setDescription(allLines.join('\n'))
 
   if (Array.isArray(fields) && fields.length) e.addFields(fields)
@@ -134,7 +148,7 @@ function okEmbed ({ ui, system, title, lines, fields, footer } = {}) {
     ui,
     system,
     kind: 'success',
-    title: title ? String(title) : `${style.emoji} Exito`,
+    title: title ? String(title) : `${emoji(ui, 'success')} Éxito`,
     description: lines ? [headerLine(style.emoji, 'Listo'), ...toLines(lines)].join('\n') : headerLine(style.emoji, 'Listo'),
     fields,
     footer
@@ -159,6 +173,41 @@ function errorEmbed ({ ui, system, title, reason, hint, fields, footer } = {}) {
   })
 }
 
+function warnEmbed ({ ui, system, title, lines, fields, footer } = {}) {
+  const body = [
+    headerLine(emoji(ui, 'warn'), title || 'Atención'),
+    ...toLines(lines)
+  ].filter(Boolean)
+
+  return embed({
+    ui,
+    system,
+    kind: 'warn',
+    title: `${emoji(ui, 'warn')} Aviso`,
+    description: body.join('\n'),
+    fields,
+    footer
+  })
+}
+
+function infoEmbed ({ ui, system, title, lines, fields, footer } = {}) {
+  const style = getSystemStyle(system)
+  const body = [
+    headerLine(style.emoji, title || 'Información'),
+    ...toLines(lines)
+  ].filter(Boolean)
+
+  return embed({
+    ui,
+    system,
+    kind: 'info',
+    title: `${style.emoji} ${title || 'Info'}`,
+    description: body.join('\n'),
+    fields,
+    footer
+  })
+}
+
 async function safeReply (interaction, payload) {
   try {
     if (interaction.deferred || interaction.replied) return await interaction.editReply(payload)
@@ -177,8 +226,11 @@ module.exports = {
   invalidateGuildUiConfig,
   emoji,
   headerLine,
+  footerLine,
   embed,
   okEmbed,
   errorEmbed,
+  warnEmbed,
+  infoEmbed,
   safeReply
 }

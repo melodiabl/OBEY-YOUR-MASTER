@@ -5,6 +5,7 @@ const { audit } = require('../../core/audit/auditService')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
 const { getGuildUiConfig, errorEmbed, embed } = require('../../core/ui/uiKit')
+const { handlePanelInteraction } = require('../../core/ui/panels/panelKit')
 
 const globalCooldownCache = new TTLCache({ defaultTtlMs: 5_000, maxSize: 200_000 })
 const commandCooldownCache = new TTLCache({ defaultTtlMs: 10_000, maxSize: 500_000 })
@@ -54,6 +55,12 @@ async function replySafe (interaction, payload) {
 module.exports = async (client, interaction) => {
   try {
     if (!interaction.guild || !interaction.channel) return
+
+    // Panel premium (botones / menú)
+    try {
+      const handled = await handlePanelInteraction(client, interaction)
+      if (handled) return
+    } catch (e) {}
 
     // Menú help
     if (interaction.isStringSelectMenu?.()) {

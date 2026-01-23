@@ -3,7 +3,15 @@ const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const { clans } = require('../../systems')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
-const { EmbedBuilder } = require('discord.js')
+const { getGuildUiConfig, headerLine, embed, okEmbed, errorEmbed, warnEmbed } = require('../../core/ui/uiKit')
+
+function money (n) {
+  try {
+    return Number(n || 0).toLocaleString('es-ES')
+  } catch (e) {
+    return String(n || 0)
+  }
+}
 
 module.exports = createSystemSlashCommand({
   name: 'clan',
@@ -23,10 +31,21 @@ module.exports = createSystemSlashCommand({
       ],
       auth: { role: INTERNAL_ROLES.USER, perms: [] },
       handler: async (client, interaction) => {
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
         const name = interaction.options.getString('nombre', true)
-        const tag = interaction.options.getString('tag')
+        const tag = interaction.options.getString('tag')?.trim()
         const clan = await clans.createClan({ client, guildID: interaction.guild.id, ownerID: interaction.user.id, name, tag })
-        return interaction.reply({ content: `✅ Clan creado: **${clan.name}**${clan.tag ? ` [${clan.tag}]` : ''}`, ephemeral: true })
+
+        const e = okEmbed({
+          ui,
+          system: 'clans',
+          title: `${Emojis.clan} Clan creado`,
+          lines: [
+            `${Emojis.dot} **Nombre:** ${Format.bold(clan.name)}${clan.tag ? ` ${Format.inlineCode('[' + clan.tag + ']')}` : ''}`,
+            `${Emojis.dot} **Líder:** <@${clan.ownerID}>`
+          ]
+        })
+        return interaction.reply({ embeds: [e], ephemeral: true })
       }
     },
     {
@@ -39,30 +58,40 @@ module.exports = createSystemSlashCommand({
       ],
       auth: { role: INTERNAL_ROLES.USER, perms: [] },
       handler: async (client, interaction) => {
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
         const u = interaction.options.getUser('usuario') || interaction.user
         const clan = await clans.getClanByUser({ client, guildID: interaction.guild.id, userID: u.id })
 
         if (!clan) {
-          return interaction.reply({
-            content: `${Emojis.error} No se encontró un clan asociado a ${Format.bold(u.username)}.`,
-            ephemeral: true
+          const e = errorEmbed({
+            ui,
+            system: 'clans',
+            title: 'Sin clan',
+            reason: `No encontré un clan asociado a ${Format.bold(u.username)}.`,
+            hint: `Crea uno con ${Format.inlineCode('/clan create')}.`
           })
+          return interaction.reply({ embeds: [e], ephemeral: true })
         }
 
-        const embed = new EmbedBuilder()
-          .setTitle(`${Emojis.clan} Clan: ${clan.name}${clan.tag ? ` [${clan.tag}]` : ''}`)
-          .setColor('Gold')
-          .setDescription(clan.motto ? Format.quote(clan.motto) : Format.italic('Sin lema del clan'))
-          .addFields(
-            { name: `${Emojis.owner} Líder`, value: `<@${clan.ownerID}>`, inline: true },
-            { name: `${Emojis.member} Miembros`, value: Format.inlineCode((clan.memberIDs || []).length.toString()), inline: true },
-            { name: `${Emojis.bank} Banco`, value: `${Emojis.money} ${Format.bold((clan.bank || 0).toLocaleString())}`, inline: true }
-          )
-          .setFooter({ text: `ID: ${clan._id || 'Desconocido'}` })
-          .setTimestamp()
+        const title = `${clan.name}${clan.tag ? ` [${clan.tag}]` : ''}`
+        const motto = clan.motto ? `${Emojis.quote} ${Format.italic(clan.motto)}` : `${Emojis.dot} ${Format.italic('Sin lema todavía')}`
 
-        if (clan.bannerUrl) embed.setImage(clan.bannerUrl)
-        return interaction.reply({ embeds: [embed] })
+        const e = embed({
+          ui,
+          system: 'clans',
+          kind: 'info',
+          title: `${Emojis.clan} Clan: ${title}`,
+          description: [headerLine(Emojis.clan, 'Resumen'), motto].join('\n'),
+          fields: [
+            { name: `${Emojis.owner} Líder`, value: `<@${clan.ownerID}>`, inline: true },
+            { name: `${Emojis.member} Miembros`, value: Format.inlineCode(String((clan.memberIDs || []).length)), inline: true },
+            { name: `${Emojis.bank} Banco`, value: `${Emojis.money} ${Format.bold(money(clan.bank || 0))}`, inline: true }
+          ],
+          footer: `ID: ${clan._id || 'N/A'}`
+        })
+
+        if (clan.bannerUrl) e.setImage(clan.bannerUrl)
+        return interaction.reply({ embeds: [e], ephemeral: true })
       }
     },
     {
@@ -75,10 +104,23 @@ module.exports = createSystemSlashCommand({
       ],
       auth: { role: INTERNAL_ROLES.USER, perms: [] },
       handler: async (client, interaction) => {
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
         const target = interaction.options.getUser('usuario', true)
-        if (target.bot) return interaction.reply({ content: 'No puedes invitar bots.', ephemeral: true })
+        if (target.bot) {
+          const e = errorEmbed({ ui, system: 'clans', title: 'Invitación inválida', reason: 'No puedes invitar bots.' })
+          return interaction.reply({ embeds: [e], ephemeral: true })
+        }
         await clans.inviteToClan({ client, guildID: interaction.guild.id, inviterID: interaction.user.id, targetID: target.id })
-        return interaction.reply({ content: `✅ Invitación enviada a <@${target.id}>.`, ephemeral: true })
+        const e = okEmbed({
+          ui,
+          system: 'clans',
+          title: `${Emojis.clan} Invitación enviada`,
+          lines: [
+            `${Emojis.dot} Invitado: <@${target.id}>`,
+            `${Emojis.dot} Puede aceptar con ${Format.inlineCode('/clan accept')}.`
+          ]
+        })
+        return interaction.reply({ embeds: [e], ephemeral: true })
       }
     },
     {
@@ -86,8 +128,15 @@ module.exports = createSystemSlashCommand({
       description: 'Acepta una invitación de clan pendiente',
       auth: { role: INTERNAL_ROLES.USER, perms: [] },
       handler: async (client, interaction) => {
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
         const clan = await clans.acceptInvite({ client, guildID: interaction.guild.id, userID: interaction.user.id })
-        return interaction.reply({ content: `✅ Te uniste a **${clan.name}**${clan.tag ? ` [${clan.tag}]` : ''}.`, ephemeral: true })
+        const e = okEmbed({
+          ui,
+          system: 'clans',
+          title: `${Emojis.clan} ¡Bienvenido!`,
+          lines: [`${Emojis.dot} Te uniste a ${Format.bold(clan.name)}${clan.tag ? ` ${Format.inlineCode('[' + clan.tag + ']')}` : ''}.`]
+        })
+        return interaction.reply({ embeds: [e], ephemeral: true })
       }
     },
     {
@@ -95,8 +144,15 @@ module.exports = createSystemSlashCommand({
       description: 'Sales de tu clan',
       auth: { role: INTERNAL_ROLES.USER, perms: [] },
       handler: async (client, interaction) => {
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
         const clan = await clans.leaveClan({ client, guildID: interaction.guild.id, userID: interaction.user.id })
-        return interaction.reply({ content: `✅ Saliste del clan **${clan.name}**.`, ephemeral: true })
+        const e = warnEmbed({
+          ui,
+          system: 'clans',
+          title: 'Saliste del clan',
+          lines: [`${Emojis.dot} Clan: ${Format.bold(clan.name)}`]
+        })
+        return interaction.reply({ embeds: [e], ephemeral: true })
       }
     },
     {
@@ -104,23 +160,24 @@ module.exports = createSystemSlashCommand({
       description: 'Lista los miembros de tu clan',
       auth: { role: INTERNAL_ROLES.USER, perms: [] },
       handler: async (client, interaction) => {
+        const ui = await getGuildUiConfig(client, interaction.guild.id)
         const clan = await clans.requireClanByUser({ client, guildID: interaction.guild.id, userID: interaction.user.id })
         const ids = Array.isArray(clan.memberIDs) ? clan.memberIDs : []
+        const shown = ids.slice(0, 30)
+        const list = shown.length ? shown.map(id => `${Emojis.dot} <@${id}>`).join('\n') : Format.italic('No hay miembros.')
 
-        const embed = new EmbedBuilder()
-          .setTitle(`${Emojis.member} Miembros de: ${clan.name}`)
-          .setColor('Blue')
-          .setDescription(Format.subtext(`Total de miembros: ${Format.bold(ids.length.toString())}`))
-          .setTimestamp()
-
-        const memberList = ids.slice(0, 30).map(id => `${Emojis.dot} <@${id}>`).join('\n')
-        embed.addFields({
-          name: `Lista de Miembros${ids.length > 30 ? ' (Primeros 30)' : ''}`,
-          value: memberList || 'No hay miembros.'
+        const e = embed({
+          ui,
+          system: 'clans',
+          kind: 'info',
+          title: `${Emojis.member} Miembros — ${clan.name}`,
+          description: [
+            headerLine(Emojis.clan, `Total: ${ids.length}`),
+            list,
+            ids.length > 30 ? Format.subtext(`Y ${ids.length - 30} miembros más…`) : null
+          ].filter(Boolean).join('\n')
         })
-
-        if (ids.length > 30) embed.setFooter({ text: `Y ${ids.length - 30} miembros más...` })
-        return interaction.reply({ embeds: [embed], ephemeral: true })
+        return interaction.reply({ embeds: [e], ephemeral: true })
       }
     }
   ]

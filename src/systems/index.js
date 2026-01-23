@@ -81,5 +81,8 @@ module.exports = {
   },
   get suggestions () {
     return cached('suggestions', () => require('./suggestions/suggestionService'))
+  },
+  get ai () {
+    return cached('ai', () => require('./ai/aiService'))
   }
 }

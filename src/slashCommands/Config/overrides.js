@@ -3,7 +3,7 @@ const { INTERNAL_ROLES, INTERNAL_ROLE_ORDER, isValidInternalRole } = require('..
 const PERMS = require('../../core/auth/permissionKeys')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
-const { getGuildUiConfig, headerLine, embed } = require('../../core/ui/uiKit')
+const { getGuildUiConfig, headerLine, embed, errorEmbed } = require('../../core/ui/uiKit')
 
 function ensureMap (v) {
   if (!v) return new Map()
@@ -90,7 +90,10 @@ module.exports = createSystemSlashCommand({
         const guildData = await client.db.getGuildData(interaction.guild.id)
 
         const key = String(interaction.options.getString('clave', true)).trim()
-        if (!key) return interaction.reply({ content: `${Emojis.error} Clave inválida.`, ephemeral: true })
+        if (!key) {
+          const err = errorEmbed({ ui, system: 'config', title: 'Clave inválida', reason: 'La clave está vacía.' })
+          return interaction.reply({ embeds: [err], ephemeral: true })
+        }
 
         const enabled = interaction.options.getBoolean('enabled')
         const visibility = interaction.options.getString('visibility')
@@ -99,10 +102,12 @@ module.exports = createSystemSlashCommand({
         const perms = interaction.options.getString('perms')
 
         if (role && (!isValidInternalRole(role) || role === INTERNAL_ROLES.OWNER)) {
-          return interaction.reply({ content: `${Emojis.error} Rol inválido.`, ephemeral: true })
+          const err = errorEmbed({ ui, system: 'security', title: 'Rol inválido', reason: 'El rol interno no es válido para overrides.' })
+          return interaction.reply({ embeds: [err], ephemeral: true })
         }
         if (role === INTERNAL_ROLES.CREATOR && ![INTERNAL_ROLES.OWNER, INTERNAL_ROLES.CREATOR].includes(identity?.role)) {
-          return interaction.reply({ content: `${Emojis.error} Solo **OWNER/CREATOR** puede exigir rol **CREATOR**.`, ephemeral: true })
+          const err = errorEmbed({ ui, system: 'security', title: 'Acción restringida', reason: 'Solo OWNER/CREATOR puede exigir rol CREATOR.' })
+          return interaction.reply({ embeds: [err], ephemeral: true })
         }
 
         const map = ensureMap(guildData.commandOverrides)

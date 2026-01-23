@@ -2,6 +2,9 @@ const { SlashCommandBuilder } = require('discord.js')
 const TTLCache = require('../cache/ttlCache')
 const { resolveInternalIdentity } = require('../auth/resolveInternalIdentity')
 const { authorizeInternal } = require('../auth/authorize')
+const Emojis = require('../../utils/emojis')
+const Format = require('../../utils/formatter')
+const { getGuildUiConfig, errorEmbed, warnEmbed, safeReply } = require('../ui/uiKit')
 
 const cooldownCache = new TTLCache({ defaultTtlMs: 60_000, maxSize: 200_000 })
 
@@ -38,13 +41,6 @@ function getCooldownRemainingMs (key) {
 
 function setCooldown (key, ms) {
   cooldownCache.set(key, Date.now() + ms, ms)
-}
-
-async function safeReply (interaction, payload) {
-  try {
-    if (interaction.deferred || interaction.replied) return await interaction.followUp(payload)
-    return await interaction.reply(payload)
-  } catch (e) {}
 }
 
 function createSystemSlashCommand ({
@@ -95,7 +91,7 @@ function createSystemSlashCommand ({
     for (const sc of normalizeList(group.subcommands)) {
       if (!sc || typeof sc !== 'object') continue
       const scName = requireString(sc.name, 'subcommand.name')
-      const scDesc = requireString(sc.description, 'subcommand.description')
+      requireString(sc.description, 'subcommand.description')
       if (gMap.has(scName)) throw new Error(`Subcommand duplicado: ${gName}.${scName}`)
       gMap.set(scName, sc)
     }
@@ -118,12 +114,22 @@ function createSystemSlashCommand ({
     CMD: builder,
     autocomplete,
     async execute (client, interaction) {
+      const ui = await getGuildUiConfig(client, interaction.guild.id)
       const groupName = interaction.options.getSubcommandGroup(false)
       const subcommandName = interaction.options.getSubcommand()
       const spec = groupName
         ? groupRegistry.get(groupName)?.get(subcommandName)
         : registry.get(subcommandName)
-      if (!spec) return safeReply(interaction, { content: '❌ Subcomando inválido.', ephemeral: true })
+      if (!spec) {
+        const e = errorEmbed({
+          ui,
+          system: moduleKey || 'utility',
+          title: 'Subcomando inválido',
+          reason: `No existe: ${Format.inlineCode(groupName ? `${groupName}.${subcommandName}` : subcommandName)}`,
+          hint: `Usa ${Format.inlineCode('/help')} para ver comandos disponibles.`
+        })
+        return safeReply(interaction, { embeds: [e], ephemeral: true })
+      }
 
       const identity = await resolveInternalIdentity({
         guildId: interaction.guild.id,
@@ -138,7 +144,16 @@ function createSystemSlashCommand ({
         requiredPerms: authSpec?.perms || []
       })
 
-      if (!authz.ok) return safeReply(interaction, { content: `❌ ${authz.reason}`, ephemeral: true })
+      if (!authz.ok) {
+        const e = errorEmbed({
+          ui,
+          system: moduleKey || 'security',
+          title: 'Acceso denegado',
+          reason: authz.reason,
+          hint: `${Emojis.dot} Si creés que es un error, pedí a un admin que revise ${Format.inlineCode('/auth')} y ${Format.inlineCode('/overrides')}.`
+        })
+        return safeReply(interaction, { embeds: [e], ephemeral: true })
+      }
 
       const cooldownMs = Number(spec.cooldownMs ?? defaultCooldownMs) || 0
       if (cooldownMs > 0) {
@@ -152,17 +167,33 @@ function createSystemSlashCommand ({
         if (remaining > 0) {
           const seconds = Math.ceil(remaining / 1000)
           const shown = groupName ? `${groupName} ${subcommandName}` : subcommandName
-          return safeReply(interaction, { content: `⏳ Espera **${seconds}s** para volver a usar \`/${cmdName} ${shown}\`.`, ephemeral: true })
+          const e = warnEmbed({
+            ui,
+            system: moduleKey || 'security',
+            title: 'Cooldown',
+            lines: [
+              `${Emojis.dot} Espera ${Format.bold(`${seconds}s`)} para volver a usar ${Format.inlineCode(`/${cmdName} ${shown}`)}.`,
+              `${Emojis.dot} Tip: algunos cooldowns se pueden ajustar en ${Format.inlineCode('/overrides set')}.`
+            ]
+          })
+          return safeReply(interaction, { embeds: [e], ephemeral: true })
         }
         setCooldown(key, cooldownMs)
       }
 
       try {
-        return await spec.handler(client, interaction, { identity })
+        return await spec.handler(client, interaction, { identity, ui })
       } catch (e) {
         const msg = e?.message || String(e || 'Error desconocido')
         const shown = groupName ? `${groupName} ${subcommandName}` : subcommandName
-        return safeReply(interaction, { content: `❌ Error en \`/${cmdName} ${shown}\`: ${msg}`, ephemeral: true })
+        const err = errorEmbed({
+          ui,
+          system: moduleKey || 'security',
+          title: 'Error ejecutando comando',
+          reason: msg,
+          hint: `Ruta: ${Format.inlineCode(`/${cmdName} ${shown}`)}`
+        })
+        return safeReply(interaction, { embeds: [err], ephemeral: true })
       }
     }
   }
