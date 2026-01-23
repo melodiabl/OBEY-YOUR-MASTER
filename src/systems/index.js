@@ -7,6 +7,24 @@ function cached (key, factory) {
   return value
 }
 
+function requireOneOf (paths, { stub, label } = {}) {
+  const list = Array.isArray(paths) ? paths.filter(Boolean) : []
+  for (const p of list) {
+    try {
+      // eslint-disable-next-line import/no-dynamic-require
+      return require(p)
+    } catch (e) {
+      const msg = String(e?.message || '')
+      const notFoundThis = e?.code === 'MODULE_NOT_FOUND' && msg.includes(`Cannot find module '${p}'`)
+      if (notFoundThis) continue
+      throw e
+    }
+  }
+
+  if (label) console.warn(`[systems] Módulo opcional no disponible: ${label}`.yellow || `[systems] Módulo opcional no disponible: ${label}`)
+  return stub
+}
+
 module.exports = {
   get clans () {
     return cached('clans', () => require('./clans/clanService'))
@@ -71,7 +89,13 @@ module.exports = {
     }))
   },
   get logs () {
-    return cached('logs', () => require('./logs/logService'))
+    return cached('logs', () => requireOneOf(
+      ['./logs/logService', './Logs/logService'],
+      {
+        label: 'logs/logService',
+        stub: { sendLog: async () => {} }
+      }
+    ))
   },
   get welcome () {
     return cached('welcome', () => require('./welcome/welcomeService'))
