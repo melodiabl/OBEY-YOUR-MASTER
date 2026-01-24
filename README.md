@@ -113,6 +113,14 @@ El bot utiliza una jerarquía clara de **Slash Commands** con subcomandos para m
 - **MongoDB:** local o Atlas.
 - **Intents:** habilitar `Message Content`, `Guild Members` (y los demás necesarios según tu servidor).
 
+<details>
+<summary><b>Extras recomendados (opcional)</b></summary>
+
+- **Música:** Lavalink (incluido `Lavalink.jar`) + Java instalado. Config en `application.yml`.
+- **IA:** define `OPENAI_API_KEY` si usas canal IA / respuestas automáticas.
+
+</details>
+
 ---
 
 ## 🔧 Configuración (.env)
@@ -126,6 +134,19 @@ PREFIX="!"
 STATUS="OBEY YOUR MASTER | /help"
 OWNER_IDS="TU_ID_DISCORD"
 ```
+
+<details>
+<summary><b>Variables opcionales</b></summary>
+
+```env
+OPENAI_API_KEY="TU_API_KEY"
+CREATOR_IDS="ID1 ID2"
+
+# Modo comandos legacy por prefijo: compat | hint | disabled
+LEGACY_PREFIX_MODE="compat"
+```
+
+</details>
 
 > [!WARNING]
 > Nunca compartas tu `.env`.
@@ -158,4 +179,3 @@ Para estabilidad 24/7 y buen rendimiento:
 <sub>© 2026 OBEY YOUR MASTER · Desarrollado por melodia · Impulsado por SkyUltraPlus</sub>
 
 </div>
-
