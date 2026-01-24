@@ -158,8 +158,8 @@ module.exports = createSystemSlashCommand({
       description: 'Ajusta bitrate de un canal de voz',
       auth: { role: INTERNAL_ROLES.MOD, perms: [PERMS.VOICE_MANAGE] },
       options: [
-        { apply: (sub) => sub.addChannelOption(o => o.setName('canal').setDescription('Canal de voz (opcional)').setRequired(false).addChannelTypes(ChannelType.GuildVoice)) },
-        { apply: (sub) => sub.addIntegerOption(o => o.setName('kbps').setDescription('Bitrate en kbps (8-384)').setRequired(true).setMinValue(8).setMaxValue(384)) }
+        { apply: (sub) => sub.addIntegerOption(o => o.setName('kbps').setDescription('Bitrate en kbps (8-384)').setRequired(true).setMinValue(8).setMaxValue(384)) },
+        { apply: (sub) => sub.addChannelOption(o => o.setName('canal').setDescription('Canal de voz (opcional)').setRequired(false).addChannelTypes(ChannelType.GuildVoice)) }
       ],
       handler: async (client, interaction) => {
         const channel = interaction.options.getChannel('canal') || interaction.member?.voice?.channel

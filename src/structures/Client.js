@@ -189,6 +189,11 @@ module.exports = class extends Client {
           const partes = rutaArchivo.split(/[\\/]/)
           const CATEGORIA = partes[partes.length - 2]
           const NOMBRE_COMANDO = partes.pop().split('.')[0]
+
+          // Archivos auxiliares (ej: _catalog.js) o mÃ³dulos sin CMD: se ignoran.
+          if (String(NOMBRE_COMANDO).startsWith('_')) return
+          if (!COMANDO?.CMD || typeof COMANDO.CMD.toJSON !== 'function') return
+
           COMANDO.CMD.name = NOMBRE_COMANDO
           COMANDO.CATEGORY = CATEGORIA
 
