@@ -5,6 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "start": "node .",
+    "wizard": "node ./src/cli/wizard.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -26,6 +27,8 @@
     "@vitalets/google-translate-api": "^9.2.1",
     "canvacord": "^6.0.4",
     "canvas": "^3.2.1",
+    "cfonts": "^3.3.0",
+    "chalk": "^4.1.2",
     "colors": "^1.4.0",
     "cron": "^2.2.0",
     "discord-giveaways": "^6.0.1",
@@ -33,6 +36,7 @@
     "dotenv": "^16.6.1",
     "fetch": "^1.1.0",
     "glob": "^8.0.3",
+    "inquirer": "^8.2.6",
     "libsodium-wrappers": "^0.7.15",
     "moment": "^2.29.4",
     "mongoose": "^6.8.3",

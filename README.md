@@ -152,6 +152,17 @@ LEGACY_PREFIX_MODE="compat"
 > [!WARNING]
 > Nunca compartas tu `.env`.
 
+### Wizard (terminal)
+Para editar/crear tu `.env` con menús en la terminal:
+```bash
+npm run wizard
+```
+
+También puedes abrirlo desde el entrypoint:
+```bash
+node . --wizard
+```
+
 ---
 
 ## 🚀 Instalación rápida
