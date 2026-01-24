@@ -1,43 +1,49 @@
+const Systems = require('../../systems')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
-const { replyEmbed } = require('../../core/ui/messageKit')
+const { replyEmbed, replyWarn } = require('../../core/ui/messageKit')
 const { headerLine } = require('../../core/ui/uiKit')
+const { money } = require('../../slashCommands/economy/_catalog')
 
-const SHOP = {
-  pan: 50,
-  hacha: 150,
-  cana: 200,
-  elixir: 500,
-  escudo: 300
-}
-
-function money (n) {
-  try {
-    return Number(n || 0).toLocaleString('es-ES')
-  } catch (e) {
-    return String(n || 0)
-  }
+function itemEmoji (item) {
+  const e = item?.meta?.emoji
+  return e ? String(e) : Emojis.inventory
 }
 
 module.exports = {
-  DESCRIPTION: 'Lista los artículos disponibles en la tienda',
+  DESCRIPTION: 'Lista items de la tienda (persistente).',
   ALIASES: ['tienda'],
-  async execute (client, message) {
-    const lines = Object.entries(SHOP).map(([item, price]) => `${Emojis.dot} ${Format.bold(item)} — ${Emojis.money} ${Format.inlineCode(money(price))}`)
+  async execute (client, message, args) {
+    const query = String((Array.isArray(args) ? args.join(' ') : '') || '').trim()
+    const rows = await Systems.items.listShop({ query })
+
+    if (!rows.length) {
+      return replyWarn(client, message, {
+        system: 'economy',
+        title: 'Sin resultados',
+        lines: [`${Emojis.dot} No encontre items para ${Format.inlineCode(query || 'tu busqueda')}.`]
+      })
+    }
+
+    const lines = rows.map((it) => {
+      const buy = Number(it.buyPrice || 0)
+      const sell = Number(it.sellPrice || 0)
+      return `${Emojis.dot} ${itemEmoji(it)} ${Format.bold(it.name)} ${Format.subtext(it.itemId)} — ${Emojis.money} ${Format.inlineCode(money(buy))} / ${Format.inlineCode(money(sell))}`
+    })
 
     return replyEmbed(client, message, {
       system: 'economy',
       kind: 'info',
       title: `${Emojis.shop} Tienda`,
       description: [
-        headerLine(Emojis.shop, 'Catálogo'),
+        headerLine(Emojis.shop, query ? `Catalogo (filtro: ${query})` : 'Catalogo'),
         lines.join('\n'),
         Format.softDivider(20),
-        `${Emojis.dot} Comprar: ${Format.inlineCode('buy <item>')}`,
-        `${Emojis.dot} Vender: ${Format.inlineCode('sell <item>')}`
+        `${Emojis.dot} Comprar: ${Format.inlineCode('buy <id> [cantidad]')}`,
+        `${Emojis.dot} Vender: ${Format.inlineCode('sell <id> [cantidad]')}`,
+        `${Emojis.dot} Inventario: ${Format.inlineCode('inventory')}`
       ].join('\n'),
-      signature: 'Compra inteligente'
+      signature: 'Tienda real (DB)'
     })
   }
 }
-

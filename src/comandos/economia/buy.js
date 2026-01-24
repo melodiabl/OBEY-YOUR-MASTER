@@ -1,63 +1,83 @@
+const Systems = require('../../systems')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
-const { replyOk, replyError } = require('../../core/ui/messageKit')
+const { replyOk, replyError, replyWarn } = require('../../core/ui/messageKit')
+const { money } = require('../../slashCommands/economy/_catalog')
 
-const SHOP = {
-  pan: 50,
-  hacha: 150,
-  cana: 200,
-  elixir: 500,
-  escudo: 300
+function itemEmoji (item) {
+  const e = item?.meta?.emoji
+  return e ? String(e) : Emojis.inventory
 }
 
-function money (n) {
-  try {
-    return Number(n || 0).toLocaleString('es-ES')
-  } catch (e) {
-    return String(n || 0)
-  }
+async function resolveItem (raw) {
+  const token = String(raw || '').trim()
+  if (!token) return { ok: false, reason: 'Falta item.' }
+
+  const byId = await Systems.items.getItem(token).catch(() => null)
+  if (byId) return { ok: true, item: byId }
+
+  const rows = await Systems.items.listShop({ query: token }).catch(() => [])
+  if (!rows.length) return { ok: false, reason: 'Item invalido.' }
+  if (rows.length === 1) return { ok: true, item: rows[0] }
+
+  const names = rows.slice(0, 5).map(r => Format.inlineCode(r.itemId)).join(', ')
+  return { ok: false, reason: 'Busqueda ambigua.', hint: `Opciones: ${names}` }
 }
 
 module.exports = {
-  DESCRIPTION: 'Compra un artículo de la tienda',
+  DESCRIPTION: 'Compra un item de la tienda (persistente).',
   ALIASES: ['comprar'],
   async execute (client, message, args) {
-    const item = String(args[0] || '').trim().toLowerCase()
-    if (!item || !SHOP[item]) {
+    const itemToken = String(args?.[0] || '').trim()
+    const qty = Math.max(1, Number(args?.[1]) || 1)
+
+    const resolved = await resolveItem(itemToken)
+    if (!resolved.ok) {
       return replyError(client, message, {
         system: 'economy',
-        title: 'Artículo inválido',
-        reason: 'Ese artículo no existe en la tienda.',
-        hint: `Usa ${Format.inlineCode('shop')} para ver el catálogo.`
+        title: 'No se pudo comprar',
+        reason: resolved.reason,
+        hint: resolved.hint || `Tip: usa ${Format.inlineCode('shop')} para ver ids.`
       })
     }
 
-    const cost = SHOP[item]
-    const userData = await client.db.getUserData(message.author.id)
-    if ((userData.money || 0) < cost) {
-      return replyError(client, message, {
+    const item = resolved.item
+    if (Number(item.buyPrice || 0) <= 0) {
+      return replyWarn(client, message, {
         system: 'economy',
-        title: 'Fondos insuficientes',
-        reason: `Necesitas ${money(cost)} monedas.`,
-        hint: `Tip: usa ${Format.inlineCode('work')} o ${Format.inlineCode('daily')}.`
+        title: 'No esta en venta',
+        lines: [`${Emojis.dot} ${Format.inlineCode(item.itemId)} no se puede comprar.`]
       })
     }
 
-    userData.money -= cost
-    if (!Array.isArray(userData.inventory)) userData.inventory = []
-    userData.inventory.push(item)
-    await userData.save()
+    try {
+      const res = await Systems.items.buyItem({
+        client,
+        guildID: message.guild.id,
+        userID: message.author.id,
+        itemId: item.itemId,
+        qty
+      })
 
-    return replyOk(client, message, {
-      system: 'economy',
-      title: `${Emojis.success} Compra realizada`,
-      lines: [
-        `${Emojis.dot} Item: ${Format.bold(item)}`,
-        `${Emojis.dot} Precio: ${Emojis.money} ${Format.inlineCode(money(cost))}`,
-        `${Emojis.dot} Efectivo: ${Format.inlineCode(money(userData.money))}`
-      ],
-      signature: 'Buen trade'
-    })
+      const bal = await Systems.economy.getBalances(client, message.author.id).catch(() => ({ money: null, bank: null }))
+
+      return replyOk(client, message, {
+        system: 'economy',
+        title: 'Compra realizada',
+        lines: [
+          `${Emojis.dot} Item: ${itemEmoji(res.item)} ${Format.bold(res.item.name)} ${Format.subtext(res.item.itemId)}`,
+          `${Emojis.dot} Cantidad: ${Format.inlineCode(String(res.qty))}`,
+          `${Emojis.dot} Total: ${Emojis.money} ${Format.inlineCode(money(res.total))}`,
+          bal?.money !== null ? `${Emojis.dot} Efectivo: ${Format.inlineCode(money(bal.money))}` : null
+        ].filter(Boolean),
+        signature: 'Compra persistente'
+      })
+    } catch (e) {
+      return replyError(client, message, {
+        system: 'economy',
+        title: 'No se pudo comprar',
+        reason: String(e?.message || 'Error al comprar.')
+      })
+    }
   }
 }
-
