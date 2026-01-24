@@ -20,8 +20,6 @@ Diseñado específicamente para servidores de gran escala que requieren estabili
 ---
 
 ## 🧩 Ecosistema de Sistemas
-He organizado las funcionalidades en categorías para facilitar la navegación:
-
 | 🛡️ Seguridad y Control | 💰 Economía y RPG | 🎵 Media y Social |
 | :--- | :--- | :--- |
 | Moderación avanzada | Sistema de economía global | Música en alta calidad |
