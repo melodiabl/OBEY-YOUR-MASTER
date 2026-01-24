@@ -19,9 +19,10 @@
   <a href="https://www.skyultraplus.com/">
     <img alt="Hosting" src="https://img.shields.io/badge/hosting-skyultraplus-8A2BE2?style=for-the-badge" />
   </a>
-</p>
-
-<p>
+<<a href="https://dash.swallox.com/">
+    <img alt="Hosting" src="https://img.shields.io/badge/hosting-swallox-8AB2E2?style=for-the-badge" />
+</a>
+>
   <a href="#sobre-el-proyecto">Sobre</a> •
   <a href="#ecosistema-de-sistemas">Sistemas</a> •
   <a href="#estructura-de-comandos">Comandos</a> •
@@ -166,6 +167,7 @@ npm start
 ## ☁️ Hosting recomendado
 Para estabilidad 24/7 y buen rendimiento:
 - SkyUltraPlus — Hosting de alto rendimiento: https://www.skyultraplus.com/
+- Swallox — Hosting de alto rendimiento: https://dash.swallox.com/
 - Soporte: https://discord.gg/QJeavgKU
 
 ---
@@ -174,8 +176,8 @@ Para estabilidad 24/7 y buen rendimiento:
 
 ### 📢 Canales oficiales
 📦 Repositorio: https://github.com/melodiabl/OBEY-YOUR-MASTER  
-📲 WhatsApp: https://whatsapp.com/channel/0029VbBZ4YX4inoqvA74nA20
+📲 WhatsApp: https://whatsapp.com/channel/0029VbBZ4YX20 y Swallox
 
-<sub>© 2026 OBEY YOUR MASTER · Desarrollado por melodia · Impulsado por SkyUltraPlus</sub>
+<sub>© 2026 OBEY YOUR MASTER · Desarrollado por melodia · Impulsado por SkyUltraPlus y Swallox</sub>
 
 </div>
