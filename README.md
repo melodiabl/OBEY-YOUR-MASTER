@@ -22,12 +22,12 @@
 </p>
 
 <p>
-  <a href="#-sobre-el-proyecto">Sobre</a> •
-  <a href="#-ecosistema-de-sistemas">Sistemas</a> •
-  <a href="#-estructura-de-comandos">Comandos</a> •
-  <a href="#-instalación-rápida">Instalación</a> •
-  <a href="#-configuración-env">.env</a> •
-  <a href="#-hosting-recomendado">Hosting</a>
+  <a href="#sobre-el-proyecto">Sobre</a> •
+  <a href="#ecosistema-de-sistemas">Sistemas</a> •
+  <a href="#estructura-de-comandos">Comandos</a> •
+  <a href="#instalación-rápida">Instalación</a> •
+  <a href="#configuración-env">.env</a> •
+  <a href="#hosting-recomendado">Hosting</a>
 </p>
 
 </div>
