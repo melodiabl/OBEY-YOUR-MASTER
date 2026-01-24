@@ -1,8 +1,8 @@
 <div align="center">
 
-╔══════════════════════════════════════╗
-║ 🤖 **<<< NOMBRE_DEL_BOT >>>** 🤖 ║
-╚══════════════════════════════════════╝
+╔══════════════════════════════════════════════╗
+║ 🤖 **OBEY YOUR MASTER** 🤖 ║
+╚══════════════════════════════════════════════╝
 
 ✦ Bot de Discord avanzado  
 ✦ Sistemas completos · Comandos masivos · Escala grande  
@@ -21,22 +21,23 @@
 
 ╭─ ✦ **SOBRE EL PROYECTO** ✦ ─╮
 │                              │
-│ **<<< NOMBRE_DEL_BOT >>>** es │
-│ un bot de Discord diseñado   │
-│ para servidores medianos y   │
-│ grandes que requieren muchos │
-│ sistemas y comandos bien     │
-│ organizados.                 │
+│ **OBEY YOUR MASTER** es un   │
+│ bot de Discord diseñado para │
+│ servidores medianos y grandes│
+│ que requieren múltiples      │
+│ sistemas y una gran cantidad │
+│ de comandos bien organizados.│
 │                              │
 │ El proyecto está pensado     │
 │ para crecer de forma         │
-│ continua sin perder orden.   │
+│ constante y soportar         │
+│ funcionalidades avanzadas.   │
 │                              │
 ╰──────────────────────────────╯
 
-Este bot centraliza múltiples funcionalidades en una sola base,
-permitiendo administrar, automatizar y ampliar servidores
-con un solo sistema.
+Este bot centraliza administración, automatización,
+entretenimiento y control del servidor en una sola base,
+permitiendo escalar sin fragmentar funcionalidades.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -46,17 +47,17 @@ con un solo sistema.
 │                             │
 │ • Integrar múltiples         │
 │   sistemas en un solo bot   │
-│ • Ofrecer gran cantidad     │
-│   de comandos               │
-│ • Mantener estructura       │
-│   clara y escalable         │
+│ • Ofrecer cientos de        │
+│   comandos organizados      │
 │ • Facilitar expansión       │
-│   futura                    │
+│   continua                  │
+│ • Mantener compatibilidad   │
+│   con grandes comunidades   │
 │                             │
 ╰─────────────────────────────╯
 
 El proyecto está preparado para manejar
-**cientos de comandos** y **decenas de sistemas**.
+**decenas de sistemas** y **cientos de comandos**.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -94,9 +95,11 @@ El proyecto está preparado para manejar
 │ ⚙️ Configuración            │
 │ 🎭 Roles automáticos        │
 │ 📸 Galería multimedia       │
-│ 📈 Crecimiento servidor     │
+│ 📈 Crecimiento del servidor │
 │                            │
 ╰────────────────────────────╯
+
+*(la lista se expande constantemente)*
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -112,6 +115,8 @@ El proyecto está preparado para manejar
 │ ✔ Comandos por eventos     │
 │                            │
 ╰────────────────────────────╯
+
+### 📂 Ejemplo de estructura lógica
 
 ```txt
 /music play
@@ -135,30 +140,49 @@ El proyecto está preparado para manejar
 /ai moderate
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+🔗 Relación entre sistemas
+╭─ 🔗 SINCRONIZACIÓN ─╮
+│ │
+│ • Economía ↔ Rankings │
+│ • Actividad ↔ Niveles │
+│ • Moderación ↔ Logs │
+│ • Perfil ↔ Logros │
+│ • Música ↔ Actividad │
+│ • IA ↔ Administración │
+│ │
+╰─────────────────────────╯
+
+Los sistemas están pensados para interactuar entre sí
+y no funcionar de forma aislada.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 🖥️ Hosting recomendado
-╭─ ☁️ SKYULTRAPLUS HOSTING ─╮
+╭─ ☁️ SKYULTRAPLUS ─╮
 │ │
-│ Este bot está optimizado │
-│ para ejecutarse en │
-│ SkyUltraPlus, un host │
-│ enfocado en rendimiento y │
-│ estabilidad para bots de │
-│ Discord y aplicaciones │
-│ Node.js. │
+│ Este bot se ejecuta y │
+│ se prueba utilizando │
+│ SkyUltraPlus, un │
+│ hosting orientado a │
+│ alto rendimiento para │
+│ bots de Discord y │
+│ aplicaciones Node.js. │
 │ │
-│ Recomendado para: │
+│ Ideal para: │
 │ • Bots 24/7 │
-│ • Alta carga de comandos │
-│ • Proyectos escalables │
-│ • MongoDB / Node.js │
+│ • Proyectos grandes │
+│ • Alta carga │
+│ • Escalabilidad │
 │ │
-│ 👉 Web: <<< LINK_SKYULTRAPLUS >>> │
-│ 👉 Discord: <<< DISCORD_SKY >>> │
+│ 🌐 Web: │
+│ https://www.skyultraplus.com/ │
+│ 💬 Discord: │
+│ https://discord.gg/QJeavgKU │
 │ │
-╰──────────────────────────────╯
+╰───────────────────────╯
 
 El uso de SkyUltraPlus no es obligatorio,
-pero es la opción recomendada para un funcionamiento estable.
+pero es el hosting recomendado para este proyecto.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -167,7 +191,7 @@ Node.js 16.x (LTS)
 
 npm / yarn
 
-Discord Developer Portal
+Bot creado en Discord Developer Portal
 
 Intents habilitados:
 
@@ -180,18 +204,22 @@ MongoDB (local o Atlas)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🔧 Configuración
-BOT_TOKEN="<<< TOKEN >>>"
-MONGO_URL="<<< MONGO_URL >>>"
+Archivo .env:
+
+BOT_TOKEN="TU_TOKEN"
+MONGO_URL="TU_MONGO_URL"
 
 PREFIX="!"
-STATUS="<<< ESTADO_DEL_BOT >>>"
+STATUS="OBEY YOUR MASTER | /help"
 STATUS_TYPE="PLAYING"
 LANGUAGE="es"
 COLOR="#5865F2"
-OWNER_IDS="<<< TU_ID >>>"
+OWNER_IDS="TU_ID_DISCORD"
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🚀 Ejecución
+git clone https://github.com/melodiabl/OBEY-YOUR-MASTER.git
+cd OBEY-YOUR-MASTER
 npm install
 node .
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -209,17 +237,23 @@ node .
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📜 Créditos
-Proyecto basado en una base de Discord.js v14.
-La base fue modificada y ampliada para adaptarse
-a nuevos requerimientos y sistemas.
+Proyecto desarrollado por melodia.
+Basado en una base de Discord.js v14,
+modificada y ampliada para soportar sistemas avanzados
+y crecimiento continuo.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🔰 Soporte y contacto
-💬 Discord del bot: <<< INVITE >>>
-☁️ Hosting recomendado: SkyUltraPlus
-👤 Responsable del proyecto: <<< TU_NOMBRE >>>
+💬 Hosting recomendado: SkyUltraPlus
+🌐 https://www.skyultraplus.com/
+
+📢 WhatsApp (canal oficial):
+https://whatsapp.com/channel/0029VbBZ4YX4inoqvA74nA20
+
+📦 Repositorio:
+https://github.com/melodiabl/OBEY-YOUR-MASTER.git
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-⭐ Proyecto en crecimiento continuo
+⭐ Proyecto en evolución constante
