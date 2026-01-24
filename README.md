@@ -167,8 +167,8 @@ npm start
 ## ☁️ Hosting recomendado
 Para estabilidad 24/7 y buen rendimiento:
 - SkyUltraPlus — Hosting de alto rendimiento: https://www.skyultraplus.com/
-- Swallox — Hosting de alto rendimiento: https://dash.swallox.com/
 - Soporte: https://discord.gg/QJeavgKU
+- Swallox — Hosting de alto rendimiento: https://dash.swallox.com/
 
 ---
 
@@ -176,7 +176,7 @@ Para estabilidad 24/7 y buen rendimiento:
 
 ### 📢 Canales oficiales
 📦 Repositorio: https://github.com/melodiabl/OBEY-YOUR-MASTER  
-📲 WhatsApp: https://whatsapp.com/channel/0029VbBZ4YX20 y Swallox
+📲 WhatsApp: https://whatsapp.com/channel/0029VbBZ4YX20
 
 <sub>© 2026 OBEY YOUR MASTER · Desarrollado por melodia · Impulsado por SkyUltraPlus y Swallox</sub>
 
