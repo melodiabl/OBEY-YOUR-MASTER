@@ -64,7 +64,8 @@ module.exports = {
   get moderation () {
     return cached('moderation', () => ({
       ...require('./moderation/moderationService'),
-      ...require('./moderation/warnThresholdService')
+      ...require('./moderation/warnThresholdService'),
+      ...require('./moderation/appealService')
     }))
   },
   get pets () {
@@ -107,5 +108,11 @@ module.exports = {
   },
   get ai () {
     return cached('ai', () => require('./ai/aiService'))
+  },
+  get security () {
+    return cached('security', () => require('./security/securityService'))
+  },
+  get voice () {
+    return cached('voice', () => require('./voice/voiceService'))
   }
 }

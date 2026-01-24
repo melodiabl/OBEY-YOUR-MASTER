@@ -127,6 +127,12 @@ module.exports = async (client, message) => {
     GUILD_DATA = client.dbGuild.getGuildData(message.guild.id)
   }
 
+  // AutoMod (seguridad): filtro de invites / mentions / badwords (configurable)
+  try {
+    const res = await Systems.security.handleMessageAutomod({ client, message })
+    if (res?.triggered) return
+  } catch (e) {}
+
   // Sistema AFK
   try {
     await Systems.afk.checkAfk(message)

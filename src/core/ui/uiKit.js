@@ -32,6 +32,7 @@ const SYSTEM_STYLES = Object.freeze({
   auth: { emoji: BaseEmojis.learning, color: 0x9b59b6 },
   infra: { emoji: BaseEmojis.system, color: 0x95a5a6 },
   security: { emoji: BaseEmojis.security, color: 0xe74c3c },
+  voice: { emoji: BaseEmojis.voice, color: 0x3498db },
   info: { emoji: BaseEmojis.info, color: 0x3498db },
   utility: { emoji: BaseEmojis.utility, color: 0x99aab5 }
 })

@@ -10,19 +10,29 @@ module.exports = async client => {
     startGiveawayScheduler(client)
   } catch (e) {}
 
+  // Limpieza de canales temporales de voz (si quedaron huérfanos)
+  try {
+    const { cleanupOrphanTempChannels } = require('../../systems').voice
+    cleanupOrphanTempChannels({ client }).catch(() => {})
+  } catch (e) {}
+
   setInterval(() => pickPresence(client), 60 * 1000)
   try {
     const r = await registerSlashCommands(client)
-    if (r?.counts?.dropped > 0) {
-      console.log(`(/) Publicados: global=${r.counts.global}. Ignorados=${r.counts.dropped} (límite Discord: 100 comandos globales).`.yellow)
+    const global = r?.counts?.global || 0
+    const guild = r?.counts?.guild || 0
+    const overflow = r?.counts?.overflow || 0
+    if (overflow > 0) {
+      console.log(`(/) Publicados: global=${global} + guild=${guild}. Overflow ignorado=${overflow} (límites: 100 global + 100 guild).`.yellow)
+    } else if (guild > 0) {
+      console.log(`(/) Publicados: global=${global} + guild=${guild}.`.green)
     } else {
-      console.log(`(/) Publicados: global=${r.counts.global}.`.green)
+      console.log(`(/) Publicados: global=${global}.`.green)
     }
   } catch (e) {
     console.log(`(/) Error publicando comandos: ${e?.message || e}`.bgRed)
   }
 }
-
 async function pickPresence (client) {
   const options = [
     { type: ActivityType.Listening, text: '/panel', status: PresenceUpdateStatus.Online },
@@ -35,4 +45,3 @@ async function pickPresence (client) {
     status: options[option].status
   })
 }
-

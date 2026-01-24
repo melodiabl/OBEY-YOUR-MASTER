@@ -1,10 +1,11 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js')
 const { getUserHistory } = require('../../systems').moderation
 const { INTERNAL_ROLES } = require('../../core/auth/internalRoles')
 const PERMS = require('../../core/auth/permissionKeys')
 const Emojis = require('../../utils/emojis')
 const Format = require('../../utils/formatter')
-const { replyWarn } = require('../../core/ui/interactionKit')
+const { replyEmbed, replyWarn } = require('../../core/ui/interactionKit')
+const { headerLine } = require('../../core/ui/uiKit')
 
 module.exports = {
   MODULE: 'moderation',
@@ -47,16 +48,27 @@ module.exports = {
 
     const lines = data.cases.map(c => {
       const ts = `<t:${Math.floor(new Date(c.createdAt).getTime() / 1000)}:R>`
-      return `#${c.caseNumber} \`${c.type}\` ${ts} por <@${c.moderatorID}>`
+      const reason = String(c.reason || 'Sin razón.').slice(0, 120)
+      return [
+        `${Emojis.dot} ${Format.bold(`#${c.caseNumber}`)} ${Format.inlineCode(c.type)} ${ts}`,
+        `${Emojis.dot} Mod: <@${c.moderatorID}>`,
+        `${Emojis.quote} ${Format.italic(reason)}`
+      ].join('\n')
     })
 
-    const embed = new EmbedBuilder()
-      .setTitle(`Historial: ${target.tag}`)
-      .setColor('Blurple')
-      .setDescription(lines.join('\n'))
-      .addFields({ name: 'Warns (UserSchema)', value: String(data.warnsCount), inline: true })
-      .setTimestamp()
-
-    return interaction.reply({ embeds: [embed], ephemeral: true })
+    return replyEmbed(client, interaction, {
+      system: 'moderation',
+      kind: 'info',
+      title: `${Emojis.moderation} Historial`,
+      description: [
+        headerLine(Emojis.moderation, target.tag),
+        `${Emojis.dot} Usuario: <@${target.id}> ${Format.subtext(target.id)}`,
+        `${Emojis.dot} Warns actuales: ${Format.inlineCode(String(data.warnsCount))}`,
+        Format.softDivider(20),
+        lines.join('\n\n')
+      ].join('\n'),
+      thumbnail: target.displayAvatarURL({ size: 256 }),
+      signature: `Tip: ${Format.inlineCode('/warns')} ${Emojis.dot} ${Format.inlineCode('/unwarn')}`
+    }, { ephemeral: true })
   }
 }

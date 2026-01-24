@@ -7,6 +7,12 @@ const { getGuildUiConfig, headerLine, embed } = require('../../core/ui/uiKit')
 function onOff (ok) {
   return ok ? `${Emojis.success} on` : `${Emojis.error} off`
 }
+function isModuleOn (guildData, key) {
+  const modules = guildData?.modules
+  if (!modules) return true
+  if (typeof modules.get === 'function') return modules.get(key) !== false
+  return modules?.[key] !== false
+}
 
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -15,6 +21,7 @@ module.exports = {
 
   async execute (client, interaction) {
     const ui = await getGuildUiConfig(client, interaction.guild.id)
+    const guildData = await client.db.getGuildData(interaction.guild.id).catch(() => null)
 
     const fields = [
       { name: `${Emojis.economy} Economía`, value: onOff(Boolean(Systems.economy)), inline: true },
@@ -24,7 +31,9 @@ module.exports = {
       { name: `${Emojis.giveaway} Sorteos`, value: onOff(Boolean(Systems.giveaways)), inline: true },
       { name: `${Emojis.ticket} Tickets`, value: onOff(Boolean(Systems.tickets)), inline: true },
       { name: `${Emojis.moderation} Moderación`, value: onOff(Boolean(Systems.moderation)), inline: true },
-      { name: `${Emojis.logs} Logs`, value: onOff(Boolean(Systems.logs)), inline: true }
+      { name: `${Emojis.logs} Logs`, value: onOff(Boolean(Systems.logs)), inline: true },
+      { name: `${Emojis.security} Seguridad`, value: onOff(Boolean(Systems.security) && isModuleOn(guildData, 'security')), inline: true },
+      { name: `${Emojis.voice} Voice`, value: onOff(Boolean(Systems.voice) && isModuleOn(guildData, 'voice')), inline: true }
     ]
 
     const e = embed({

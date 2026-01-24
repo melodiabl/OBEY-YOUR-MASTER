@@ -9,7 +9,11 @@ function splitForGlobalLimit (slashArray) {
   const global = all.slice(0, GLOBAL_MAX)
   const dropped = all.slice(GLOBAL_MAX)
 
-  return { all, global, dropped }
+  const GUILD_MAX = 100
+  const guild = dropped.slice(0, GUILD_MAX)
+  const overflow = dropped.slice(GUILD_MAX)
+
+  return { all, global, dropped, guild, overflow }
 }
 
 function getDeprecatedCommandNames (client) {
@@ -44,7 +48,7 @@ async function deleteCommandsByName (commandManager, names) {
 }
 
 async function registerSlashCommands (client, { cleanupDeprecated = true, cleanupPaceMs = 200 } = {}) {
-  const { all, global, dropped } = splitForGlobalLimit(client?.slashArray)
+  const { all, global, dropped, guild, overflow } = splitForGlobalLimit(client?.slashArray)
   const app = client?.application
 
   if (!app?.commands?.set) return { ok: false, reason: 'no_application' }
@@ -56,7 +60,9 @@ async function registerSlashCommands (client, { cleanupDeprecated = true, cleanu
     counts: {
       total: all.length,
       global: global.length,
-      dropped: dropped.length
+      dropped: dropped.length,
+      guild: guild.length,
+      overflow: overflow.length
     },
     cleanup: { deprecatedDeletedGlobal: 0, deprecatedDeletedGuild: 0 }
   }
@@ -65,6 +71,15 @@ async function registerSlashCommands (client, { cleanupDeprecated = true, cleanu
   await app.commands.set(global)
 
   // 2) Overflow como guild commands (máx 100)
+  // Overflow como guild commands (mÃ¡x 100 por guild)
+  if (guild.length) {
+    const guilds = Array.from(client.guilds.cache.values())
+    for (const g of guilds) {
+      await g.commands.set(guild).catch(() => {})
+      if (cleanupPaceMs > 0) await sleep(cleanupPaceMs)
+    }
+  }
+
   if (deprecatedNames.length && String(process.env.GUILD_COMMAND_CLEANUP_DISABLED || '').trim() !== '1') {
     // Limpia comandos legacy en guilds (ej: ticket-close) que quedaron registrados en el pasado.
     const guilds = Array.from(client.guilds.cache.values())

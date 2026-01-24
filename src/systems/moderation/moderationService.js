@@ -1,6 +1,7 @@
 const GuildSchema = require('../../database/schemas/GuildSchema')
 const ModerationCaseSchema = require('../../database/schemas/ModerationCaseSchema')
 const UserSchema = require('../../database/schemas/UserSchema')
+const GuildMemberStateSchema = require('../../database/schemas/GuildMemberStateSchema')
 
 async function nextCaseNumber (guildID) {
   const doc = await GuildSchema.findOneAndUpdate(
@@ -94,5 +95,66 @@ module.exports = {
   unwarnUser,
   timeoutUser,
   logAction,
-  getUserHistory
+  getUserHistory,
+  setPermanentMute,
+  clearPermanentMute,
+  getPermanentMuteState
+}
+
+async function setPermanentMute ({ guildID, targetID, moderatorID, reason }) {
+  const r = String(reason || 'Sin razón.').slice(0, 500)
+  await GuildMemberStateSchema.findOneAndUpdate(
+    { guildID, userID: targetID },
+    {
+      $set: {
+        permMuted: true,
+        muteReason: r,
+        mutedBy: moderatorID,
+        mutedAt: new Date()
+      }
+    },
+    { upsert: true, new: true, setDefaultsOnInsert: true }
+  )
+
+  const modCase = await logCase({
+    guildID,
+    type: 'perm_mute',
+    targetID,
+    moderatorID,
+    reason: r,
+    meta: { permanent: true }
+  })
+
+  return modCase
+}
+
+async function clearPermanentMute ({ guildID, targetID, moderatorID, reason }) {
+  const r = String(reason || 'Sin razón.').slice(0, 500)
+  await GuildMemberStateSchema.findOneAndUpdate(
+    { guildID, userID: targetID },
+    {
+      $set: {
+        permMuted: false,
+        muteReason: null,
+        mutedBy: moderatorID,
+        mutedAt: null
+      }
+    },
+    { upsert: true, new: true, setDefaultsOnInsert: true }
+  )
+
+  const modCase = await logCase({
+    guildID,
+    type: 'unperm_mute',
+    targetID,
+    moderatorID,
+    reason: r,
+    meta: { permanent: true }
+  })
+
+  return modCase
+}
+
+async function getPermanentMuteState ({ guildID, targetID }) {
+  return GuildMemberStateSchema.findOne({ guildID, userID: targetID }).catch(() => null)
 }
