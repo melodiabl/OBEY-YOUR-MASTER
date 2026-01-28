@@ -5,7 +5,9 @@
   "main": "./index.js",
   "scripts": {
     "start": "node .",
+    "menu": "node . --menu",
     "wizard": "node ./src/cli/wizard.js",
+    "check-env": "node . --check-env",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

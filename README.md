@@ -163,6 +163,13 @@ También puedes abrirlo desde el entrypoint:
 node . --wizard
 ```
 
+### CLI (index principal)
+```bash
+node . --help
+node . --menu
+node . --check-env
+```
+
 ---
 
 ## 🚀 Instalación rápida

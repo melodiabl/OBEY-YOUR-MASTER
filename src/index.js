@@ -12,6 +12,18 @@ try {
   }
 } catch (e) {}
 
+try {
+  const required = ['BOT_TOKEN', 'MONGO_URL']
+  const missing = required.filter((k) => !process.env[k] || !String(process.env[k]).trim())
+
+  if (missing.length) {
+    const chalk = require('chalk')
+    console.error(chalk.red(`[Config] Faltan variables requeridas: ${missing.join(', ')}`))
+    console.error(chalk.yellow('Usa `node . --wizard` para configurarlas.'))
+    process.exit(1)
+  }
+} catch (e) {}
+
 const Bot = require('./structures/Client.js')
 ;(async () => {
   try {
