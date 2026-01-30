@@ -2,6 +2,8 @@ const fs = require('node:fs')
 const path = require('node:path')
 const net = require('node:net')
 const { spawn, execSync } = require('node:child_process')
+const https = require('node:https')
+const { exec } = require('node:child_process')
 
 function parseBool (v) {
   const s = String(v || '').trim().toLowerCase()
@@ -60,32 +62,81 @@ function canConnect ({ host, port, timeoutMs = 600 }) {
   })
 }
 
-function buildLavalinkEnv (baseEnv) {
-  const env = { ...baseEnv }
-
-  const host = normalizeConnectHost(env.LAVALINK_CONNECT_HOST || env.LAVALINK_HOST || '127.0.0.1')
-  const port = String(env.LAVALINK_PORT || '2333')
-  const password = String(env.LAVALINK_PASSWORD || 'youshallnotpass')
-
-  // Spring Boot env overrides
-  env.SERVER_ADDRESS = String(env.LAVALINK_BIND || env.SERVER_ADDRESS || '0.0.0.0')
-  env.SERVER_PORT = String(env.SERVER_PORT || port)
-  env.LAVALINK_SERVER_PASSWORD = String(env.LAVALINK_SERVER_PASSWORD || password)
-
-  // Lavasrc Spotify (opcional)
-  const spotifyClientId = env.LAVALINK_SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENTID
-  const spotifyClientSecret = env.LAVALINK_SPOTIFY_CLIENT_SECRET || env.SPOTIFY_CLIENT_SECRET || env.SPOTIFY_CLIENTSECRET
-
-  if (spotifyClientId) env.LAVALINK_SERVER_LAVASRC_SPOTIFY_CLIENTID = String(spotifyClientId)
-  if (spotifyClientSecret) env.LAVALINK_SERVER_LAVASRC_SPOTIFY_CLIENTSECRET = String(spotifyClientSecret)
-
-  return { env, host, port: Number(port), password }
+/**
+ * Descarga un archivo desde una URL
+ */
+function downloadFile(url, dest) {
+  return new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(dest)
+    https.get(url, (response) => {
+      if (response.statusCode === 301 || response.statusCode === 302) {
+        return downloadFile(response.headers.location, dest).then(resolve).catch(reject)
+      }
+      response.pipe(file)
+      file.on('finish', () => {
+        file.close()
+        resolve()
+      })
+    }).on('error', (err) => {
+      fs.unlink(dest, () => {})
+      reject(err)
+    })
+  })
 }
 
 /**
- * Busca un binario de Java válido en el sistema
- * @returns {string|null} Path al binario o null si no se encuentra
+ * Instala Java 17 automáticamente
  */
+async function installJava() {
+  const isWindows = process.platform === 'win32'
+  const javaDir = path.resolve('bin', 'java-runtime')
+  ensureDir(javaDir)
+
+  const javaBin = path.join(javaDir, 'bin', isWindows ? 'java.exe' : 'java')
+  if (fileExists(javaBin)) return javaBin
+
+  console.log('[Java] No se encontró Java 17. Iniciando descarga automática...'.cyan)
+  
+  const arch = process.arch === 'x64' ? 'x64' : 'aarch64'
+  const os = isWindows ? 'windows' : 'linux'
+  const ext = isWindows ? 'zip' : 'tar.gz'
+  const url = `https://api.adoptium.net/v3/binary/latest/17/ga/${os}/${arch}/jdk/hotspot/normal/eclipse?project=jdk`
+  
+  const tempFile = path.join(javaDir, `java-temp.${ext}`)
+  
+  try {
+    await downloadFile(url, tempFile)
+    console.log('[Java] Descarga completada. Extrayendo...'.cyan)
+
+    if (isWindows) {
+      // Usar PowerShell para extraer zip en Windows
+      execSync(`powershell -Command "Expand-Archive -Path '${tempFile}' -DestinationPath '${javaDir}' -Force"`)
+    } else {
+      // Usar tar para extraer en Linux
+      execSync(`tar -xzf "${tempFile}" -C "${javaDir}" --strip-components=1`)
+      execSync(`chmod +x "${javaBin}"`)
+    }
+
+    // Limpiar archivo temporal
+    fs.unlinkSync(tempFile)
+
+    // En Windows, Adoptium extrae en una subcarpeta, necesitamos encontrar el bin
+    if (isWindows) {
+      const dirs = fs.readdirSync(javaDir).filter(f => fs.statSync(path.join(javaDir, f)).isDirectory())
+      const subDir = dirs.find(d => d.startsWith('jdk'))
+      if (subDir) {
+        const actualBin = path.join(javaDir, subDir, 'bin', 'java.exe')
+        return actualBin
+      }
+    }
+
+    return javaBin
+  } catch (e) {
+    console.error('[Java] Error instalando Java:'.red, e.message)
+    return null
+  }
+}
+
 function findJavaBinary() {
   const isWindows = process.platform === 'win32'
   const javaExe = isWindows ? 'java.exe' : 'java'
@@ -93,16 +144,14 @@ function findJavaBinary() {
   const candidates = [
     process.env.JAVA_BIN,
     process.env.JAVA_HOME && path.join(process.env.JAVA_HOME, 'bin', javaExe),
+    path.resolve('bin', 'java-runtime', 'bin', javaExe), // Local install
     'java',
     !isWindows && '/usr/bin/java',
-    !isWindows && '/usr/lib/jvm/default-java/bin/java',
-    !isWindows && '/usr/lib/jvm/java-17-openjdk-amd64/bin/java',
-    !isWindows && '/usr/lib/jvm/java-11-openjdk-amd64/bin/java'
+    !isWindows && '/usr/lib/jvm/default-java/bin/java'
   ].filter(Boolean)
 
   for (const candidate of candidates) {
     try {
-      // Validamos que el binario funcione ejecutando -version
       execSync(`"${candidate}" -version`, { 
         stdio: 'ignore', 
         timeout: 2000,
@@ -124,21 +173,22 @@ async function autoStartLavalink (client, options = {}) {
   const jarPath = path.resolve(options.jarPath || process.env.LAVALINK_JAR || 'Lavalink.jar')
   const configPath = path.resolve(options.configPath || process.env.LAVALINK_CONFIG || 'application.yml')
   
-  // Buscar Java automáticamente si no se provee uno en las opciones
-  const javaBin = options.javaBin || findJavaBinary()
+  let javaBin = options.javaBin || findJavaBinary()
   
+  if (!javaBin) {
+    javaBin = await installJava()
+  }
+
   if (!javaBin) {
     return {
       ok: false,
       started: false,
       reason: 'missing_java',
-      error: 'No se encontró un binario de Java funcional en el sistema. Asegúrate de tener Java 17+ instalado.'
+      error: 'No se pudo encontrar ni instalar Java 17 automáticamente.'
     }
   }
 
   const { env, host, port } = buildLavalinkEnv(process.env)
-
-  // Evita duplicados: si ya responde el puerto, no lo iniciamos.
   const already = await canConnect({ host, port })
   if (already) return { ok: true, started: false, reason: 'already_running', host, port }
 
@@ -163,7 +213,6 @@ async function autoStartLavalink (client, options = {}) {
     stdio: ['ignore', 'pipe', 'pipe']
   })
 
-  // Importante: si no existe `java` (ENOENT), Node emite `error` en el child.
   child.once('error', (err) => { spawnError = err })
 
   try {
@@ -185,20 +234,16 @@ async function autoStartLavalink (client, options = {}) {
     })
   }
 
-  // Espera breve a que levante
   const maxWaitMs = Math.max(1000, Number(process.env.LAVALINK_STARTUP_TIMEOUT_MS || 10_000))
   const startedAt = Date.now()
   while (Date.now() - startedAt < maxWaitMs) {
     if (spawnError) {
-      const code = spawnError.code || spawnError.errno
-      const isMissingJava = String(code).toUpperCase() === 'ENOENT'
       if (client && client.lavalinkProcess === child) client.lavalinkProcess = null
       return {
         ok: false,
         started: false,
-        reason: isMissingJava ? 'missing_java' : 'spawn_failed',
+        reason: 'spawn_failed',
         javaBin,
-        code,
         error: spawnError.message
       }
     }
@@ -206,20 +251,6 @@ async function autoStartLavalink (client, options = {}) {
       return { ok: true, started: true, host, port, jarPath, configPath, pid: child.pid }
     }
     await wait(250)
-  }
-
-  if (spawnError) {
-    const code = spawnError.code || spawnError.errno
-    const isMissingJava = String(code).toUpperCase() === 'ENOENT'
-    if (client && client.lavalinkProcess === child) client.lavalinkProcess = null
-    return {
-      ok: false,
-      started: false,
-      reason: isMissingJava ? 'missing_java' : 'spawn_failed',
-      javaBin,
-      code,
-      error: spawnError.message
-    }
   }
 
   return { ok: true, started: true, host, port, jarPath, configPath, pid: child.pid, warning: 'timeout_waiting_port' }
