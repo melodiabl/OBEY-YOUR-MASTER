@@ -3,7 +3,6 @@ const path = require('node:path')
 const net = require('node:net')
 const { spawn, execSync } = require('node:child_process')
 const https = require('node:https')
-const { exec } = require('node:child_process')
 
 function parseBool (v) {
   const s = String(v || '').trim().toLowerCase()
@@ -62,25 +61,63 @@ function canConnect ({ host, port, timeoutMs = 600 }) {
   })
 }
 
+function buildLavalinkEnv (baseEnv) {
+  const env = { ...baseEnv }
+
+  const host = normalizeConnectHost(env.LAVALINK_CONNECT_HOST || env.LAVALINK_HOST || '127.0.0.1')
+  const port = String(env.LAVALINK_PORT || '2333')
+  const password = String(env.LAVALINK_PASSWORD || 'youshallnotpass')
+
+  // Spring Boot env overrides
+  env.SERVER_ADDRESS = String(env.LAVALINK_BIND || env.SERVER_ADDRESS || '0.0.0.0')
+  env.SERVER_PORT = String(env.SERVER_PORT || port)
+  env.LAVALINK_SERVER_PASSWORD = String(env.LAVALINK_SERVER_PASSWORD || password)
+
+  // Lavasrc Spotify (opcional)
+  const spotifyClientId = env.LAVALINK_SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENTID
+  const spotifyClientSecret = env.LAVALINK_SPOTIFY_CLIENT_SECRET || env.SPOTIFY_CLIENT_SECRET || env.SPOTIFY_CLIENTSECRET
+
+  if (spotifyClientId) env.LAVALINK_SERVER_LAVASRC_SPOTIFY_CLIENTID = String(spotifyClientId)
+  if (spotifyClientSecret) env.LAVALINK_SERVER_LAVASRC_SPOTIFY_CLIENTSECRET = String(spotifyClientSecret)
+
+  return { env, host, port: Number(port), password }
+}
+
 /**
- * Descarga un archivo desde una URL
+ * Descarga un archivo manejando redirecciones y errores de stream
  */
 function downloadFile(url, dest) {
   return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(dest)
-    https.get(url, (response) => {
-      if (response.statusCode === 301 || response.statusCode === 302) {
-        return downloadFile(response.headers.location, dest).then(resolve).catch(reject)
+    https.get(url, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        return downloadFile(res.headers.location, dest).then(resolve).catch(reject)
       }
-      response.pipe(file)
+
+      if (res.statusCode !== 200) {
+        return reject(new Error(`Status Code: ${res.statusCode}`))
+      }
+
+      const file = fs.createWriteStream(dest)
+      res.pipe(file)
+
       file.on('finish', () => {
-        file.close()
-        resolve()
+        file.close((err) => {
+          if (err) reject(err)
+          else resolve()
+        })
       })
-    }).on('error', (err) => {
-      fs.unlink(dest, () => {})
-      reject(err)
-    })
+
+      file.on('error', (err) => {
+        fs.unlink(dest, () => {})
+        reject(err)
+      })
+
+      res.on('error', (err) => {
+        file.destroy()
+        fs.unlink(dest, () => {})
+        reject(err)
+      })
+    }).on('error', reject)
   })
 }
 
@@ -106,33 +143,39 @@ async function installJava() {
   
   try {
     await downloadFile(url, tempFile)
+    
+    // Verificar que el archivo no esté vacío (común en errores de stream)
+    const stats = fs.statSync(tempFile)
+    if (stats.size < 1000000) { // Menos de 1MB es sospechoso para un JDK
+      throw new Error('El archivo descargado es demasiado pequeño o está corrupto.')
+    }
+
     console.log('[Java] Descarga completada. Extrayendo...'.cyan)
 
     if (isWindows) {
-      // Usar PowerShell para extraer zip en Windows
       execSync(`powershell -Command "Expand-Archive -Path '${tempFile}' -DestinationPath '${javaDir}' -Force"`)
     } else {
-      // Usar tar para extraer en Linux
+      // Usar --strip-components=1 para evitar la carpeta intermedia
       execSync(`tar -xzf "${tempFile}" -C "${javaDir}" --strip-components=1`)
-      execSync(`chmod +x "${javaBin}"`)
+      if (fileExists(javaBin)) execSync(`chmod +x "${javaBin}"`)
     }
 
-    // Limpiar archivo temporal
-    fs.unlinkSync(tempFile)
+    if (fileExists(tempFile)) fs.unlinkSync(tempFile)
 
-    // En Windows, Adoptium extrae en una subcarpeta, necesitamos encontrar el bin
-    if (isWindows) {
+    // Fallback para Windows si la extracción falló o cambió de estructura
+    if (isWindows && !fileExists(javaBin)) {
       const dirs = fs.readdirSync(javaDir).filter(f => fs.statSync(path.join(javaDir, f)).isDirectory())
-      const subDir = dirs.find(d => d.startsWith('jdk'))
+      const subDir = dirs.find(d => d.toLowerCase().includes('jdk'))
       if (subDir) {
-        const actualBin = path.join(javaDir, subDir, 'bin', 'java.exe')
-        return actualBin
+        const foundBin = path.join(javaDir, subDir, 'bin', 'java.exe')
+        if (fileExists(foundBin)) return foundBin
       }
     }
 
-    return javaBin
+    return fileExists(javaBin) ? javaBin : null
   } catch (e) {
     console.error('[Java] Error instalando Java:'.red, e.message)
+    if (fileExists(tempFile)) fs.unlinkSync(tempFile)
     return null
   }
 }
@@ -144,7 +187,7 @@ function findJavaBinary() {
   const candidates = [
     process.env.JAVA_BIN,
     process.env.JAVA_HOME && path.join(process.env.JAVA_HOME, 'bin', javaExe),
-    path.resolve('bin', 'java-runtime', 'bin', javaExe), // Local install
+    path.resolve('bin', 'java-runtime', 'bin', javaExe),
     'java',
     !isWindows && '/usr/bin/java',
     !isWindows && '/usr/lib/jvm/default-java/bin/java'
