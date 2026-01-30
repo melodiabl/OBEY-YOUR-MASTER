@@ -40,8 +40,8 @@ async function initMusic (client) {
     resume: true,
     resumeTimeout: 60,
     resumeByLibrary: true,
-    reconnectTries: 10,
-    reconnectInterval: 5,
+    reconnectTries: 20, // Más intentos
+    reconnectInterval: 10, // Más espacio entre reintentos (10s) para no saturar
     moveOnDisconnect: true
   }
 
@@ -55,9 +55,9 @@ async function initMusic (client) {
 
   shoukaku.on('ready', (name) => console.log(`[Lavalink] Nodo "${name}" conectado correctamente.`.green))
   shoukaku.on('error', (name, error) => {
-    // No mostramos errores de conexión inicial como críticos, ya que Shoukaku reintentará
-    if (error?.message?.includes('ECONNREFUSED')) {
-      console.log(`[Lavalink] Nodo "${name}" esperando disponibilidad en ${host}:${port}...`.yellow)
+    // No mostramos errores de conexión inicial como críticos mientras Lavalink arranca
+    if (error?.message?.includes('ECONNREFUSED') || error?.message?.includes('closed')) {
+      console.log(`[Lavalink] Nodo "${name}" esperando disponibilidad...`.yellow)
     } else {
       console.error(`[Lavalink] Error en nodo "${name}": ${error}`.red)
     }

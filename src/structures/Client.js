@@ -84,15 +84,23 @@ module.exports = class extends Client {
     await this.loadCommands()
     await this.loadSlashCommands()
     
-    // IMPORTANTE: Primero iniciamos Lavalink y esperamos a que el puerto responda
-    await this.autoStartLavalink()
-    
-    // Luego inicializamos el sistema de música (Shoukaku)
-    await this.initMusicSystem()
-    
+    // Conectar DB antes del login
     await this.db.connect()
 
+    // Login del bot para que esté online lo antes posible
     this.login(process.env.BOT_TOKEN)
+
+    // Lanzamos Lavalink y el sistema de música en segundo plano (asíncrono)
+    // Esto evita que el host mate el proceso si Lavalink tarda mucho en arrancar
+    this.launchMusicSystem().catch(e => console.error('[Music] Error en lanzamiento asíncrono:', e))
+  }
+
+  async launchMusicSystem () {
+    // Iniciamos Lavalink (esto ahora no bloquea el login del bot)
+    await this.autoStartLavalink()
+    
+    // Inicializamos el sistema de música (Shoukaku gestionará los reintentos)
+    await this.initMusicSystem()
   }
 
   async loadPlugins () {
