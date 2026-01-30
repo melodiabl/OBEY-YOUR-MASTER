@@ -68,10 +68,10 @@ function buildLavalinkEnv (baseEnv) {
   const port = String(env.LAVALINK_PORT || '2333')
   const password = String(env.LAVALINK_PASSWORD || 'youshallnotpass')
 
-  // Spring Boot env overrides
-  env.SERVER_ADDRESS = String(env.LAVALINK_BIND || env.SERVER_ADDRESS || '0.0.0.0')
-  env.SERVER_PORT = String(env.SERVER_PORT || port)
-  env.LAVALINK_SERVER_PASSWORD = String(env.LAVALINK_SERVER_PASSWORD || password)
+  // Spring Boot env overrides (Usando nombres de variables que Lavalink reconoce)
+  env.SERVER_PORT = port
+  env.SERVER_ADDRESS = env.LAVALINK_BIND || '0.0.0.0'
+  env.LAVALINK_SERVER_PASSWORD = password
 
   // Lavasrc Spotify (opcional)
   const spotifyClientId = env.LAVALINK_SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENTID
@@ -228,7 +228,7 @@ async function autoStartLavalink (client, options = {}) {
     }
   }
 
-  const { env, host, port } = buildLavalinkEnv(process.env)
+  const { env, host, port, password } = buildLavalinkEnv(process.env)
   const already = await canConnect({ host, port })
   if (already) return { ok: true, started: false, reason: 'already_running', host, port }
 
@@ -236,7 +236,14 @@ async function autoStartLavalink (client, options = {}) {
     return { ok: false, started: false, reason: 'missing_jar', jarPath }
   }
 
-  const args = ['-jar', jarPath]
+  // Argumentos de Java con inyección de propiedades de Spring Boot para sobreescribir application.yml
+  const args = [
+    `-Dserver.port=${port}`,
+    `-Dserver.address=${env.SERVER_ADDRESS}`,
+    `-Dlavalink.server.password=${password}`,
+    '-jar', jarPath
+  ]
+  
   if (fileExists(configPath)) {
     args.push(`--spring.config.location=file:${configPath}`)
   }
