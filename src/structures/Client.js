@@ -84,22 +84,18 @@ module.exports = class extends Client {
     await this.loadCommands()
     await this.loadSlashCommands()
     
-    // Conectar DB antes del login
     await this.db.connect()
 
-    // Login del bot para que esté online lo antes posible
     this.login(process.env.BOT_TOKEN)
 
-    // Lanzamos Lavalink y el sistema de música en segundo plano (asíncrono)
-    // Esto evita que el host mate el proceso si Lavalink tarda mucho en arrancar
-    this.launchMusicSystem().catch(e => console.error('[Music] Error en lanzamiento asíncrono:', e))
+    // Solo inicializamos el sistema de música (Lavalink ahora es externo y hardcoded)
+    this.launchMusicSystem().catch(e => console.error('[Music] Error en lanzamiento:', e))
   }
 
   async launchMusicSystem () {
-    // Iniciamos Lavalink (esto ahora no bloquea el login del bot)
-    await this.autoStartLavalink()
+    // Hemos desactivado el autoStartLavalink local para usar el nodo público hardcoded
+    // await this.autoStartLavalink() 
     
-    // Inicializamos el sistema de música (Shoukaku gestionará los reintentos)
     await this.initMusicSystem()
   }
 
@@ -127,23 +123,8 @@ module.exports = class extends Client {
   }
 
   async autoStartLavalink () {
-    try {
-      const res = await autoStartLavalink(this)
-      if (res?.started) {
-        console.log(`[Lavalink] Autostart: ${res.ok ? 'ok' : 'fail'} host=${res.host || 'n/a'} port=${res.port || 'n/a'}`.cyan)
-      }
-      if (res?.ok === false) {
-        const details = []
-        if (res.javaBin) details.push(`java=${res.javaBin}`)
-        if (res.code) details.push(`code=${res.code}`)
-        if (res.jarPath) details.push(`jar=${res.jarPath}`)
-        if (res.error) details.push(`error=${res.error}`)
-        const extra = details.length ? ` (${details.join(' ')})` : ''
-        console.log(`[Lavalink] Autostart falló: ${res.reason || 'unknown'}${extra}`.yellow)
-      }
-    } catch (e) {
-      console.log(`[Lavalink] Autostart error: ${e?.message || e}`.yellow)
-    }
+    // Función mantenida por compatibilidad pero desactivada internamente
+    console.log('[Music] Autostart local desactivado. Usando nodo externo.'.gray)
   }
 
   async loadCommands () {
@@ -185,8 +166,6 @@ module.exports = class extends Client {
 
     let RUTA_ARCHIVOS = await this.utils.loadFiles('/src/slashCommands')
 
-    // Orden estable: evita cambios de orden al registrar.
-    // Priorizamos la carpeta 'music' para asegurar que no se queden fuera por el límite de 100 comandos globales.
     RUTA_ARCHIVOS = RUTA_ARCHIVOS.slice().sort((a, b) => {
       const aIsMusic = a.includes('/music/') || a.includes('\\music\\')
       const bIsMusic = b.includes('/music/') || b.includes('\\music\\')
@@ -203,7 +182,6 @@ module.exports = class extends Client {
           const CATEGORIA = partes[partes.length - 2]
           const NOMBRE_COMANDO = partes.pop().split('.')[0]
 
-          // Archivos auxiliares (ej: _catalog.js) o mÃ³dulos sin CMD: se ignoran.
           if (String(NOMBRE_COMANDO).startsWith('_')) return
           if (!COMANDO?.CMD || typeof COMANDO.CMD.toJSON !== 'function') return
 
@@ -212,8 +190,6 @@ module.exports = class extends Client {
 
           if (NOMBRE_COMANDO) this.slashCommands.set(NOMBRE_COMANDO, COMANDO)
 
-          // Permite comandos legacy/migrados: se pueden ejecutar si existen en Discord,
-          // pero no se registran (no cuentan para el límite de 100 global).
           if (COMANDO.REGISTER !== false) this.slashArray.push(COMANDO.CMD.toJSON())
         } catch (e) {
           console.log(`(/) ERROR AL CARGAR EL COMANDO ${rutaArchivo}`.bgRed)
@@ -249,7 +225,6 @@ module.exports = class extends Client {
 
     const RUTA_ARCHIVOS = await this.utils.loadFiles('/src/eventos')
 
-    // No usar removeAllListeners(): rompe listeners de librerías externas.
     for (const [eventName, listener] of this._eventListeners.entries()) {
       this.removeListener(eventName, listener)
     }
