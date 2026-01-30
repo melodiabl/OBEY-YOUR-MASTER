@@ -144,9 +144,8 @@ async function installJava() {
   try {
     await downloadFile(url, tempFile)
     
-    // Verificar que el archivo no esté vacío (común en errores de stream)
     const stats = fs.statSync(tempFile)
-    if (stats.size < 1000000) { // Menos de 1MB es sospechoso para un JDK
+    if (stats.size < 1000000) {
       throw new Error('El archivo descargado es demasiado pequeño o está corrupto.')
     }
 
@@ -155,14 +154,12 @@ async function installJava() {
     if (isWindows) {
       execSync(`powershell -Command "Expand-Archive -Path '${tempFile}' -DestinationPath '${javaDir}' -Force"`)
     } else {
-      // Usar --strip-components=1 para evitar la carpeta intermedia
       execSync(`tar -xzf "${tempFile}" -C "${javaDir}" --strip-components=1`)
       if (fileExists(javaBin)) execSync(`chmod +x "${javaBin}"`)
     }
 
     if (fileExists(tempFile)) fs.unlinkSync(tempFile)
 
-    // Fallback para Windows si la extracción falló o cambió de estructura
     if (isWindows && !fileExists(javaBin)) {
       const dirs = fs.readdirSync(javaDir).filter(f => fs.statSync(path.join(javaDir, f)).isDirectory())
       const subDir = dirs.find(d => d.toLowerCase().includes('jdk'))
@@ -277,7 +274,8 @@ async function autoStartLavalink (client, options = {}) {
     })
   }
 
-  const maxWaitMs = Math.max(1000, Number(process.env.LAVALINK_STARTUP_TIMEOUT_MS || 10_000))
+  // Espera a que levante (Lavalink con plugins puede tardar bastante)
+  const maxWaitMs = Math.max(1000, Number(process.env.LAVALINK_STARTUP_TIMEOUT_MS || 40000))
   const startedAt = Date.now()
   while (Date.now() - startedAt < maxWaitMs) {
     if (spawnError) {
@@ -291,9 +289,10 @@ async function autoStartLavalink (client, options = {}) {
       }
     }
     if (await canConnect({ host, port, timeoutMs: 400 })) {
+      console.log(`[Lavalink] Conexión establecida en ${host}:${port}`.green)
       return { ok: true, started: true, host, port, jarPath, configPath, pid: child.pid }
     }
-    await wait(250)
+    await wait(500)
   }
 
   return { ok: true, started: true, host, port, jarPath, configPath, pid: child.pid, warning: 'timeout_waiting_port' }
