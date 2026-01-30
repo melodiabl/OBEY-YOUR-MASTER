@@ -36,8 +36,17 @@ async function initMusic (client) {
     secure: process.env.LAVALINK_SECURE === 'true'
   }]
 
+  const shoukakuOptions = {
+    resume: true,
+    resumeTimeout: 60,
+    resumeByLibrary: true,
+    reconnectTries: 10,
+    reconnectInterval: 5,
+    moveOnDisconnect: true
+  }
+
   console.log(`[Music] Conectando a Lavalink en ${Nodes[0].url}...`.blue)
-  const shoukaku = new Shoukaku(new Connectors.DiscordJS(client), Nodes)
+  const shoukaku = new Shoukaku(new Connectors.DiscordJS(client), Nodes, shoukakuOptions)
 
   // Forzar inicialización si el cliente ya está listo, ya que Shoukaku espera 'clientReady'
   if (client.readyAt) {
@@ -45,7 +54,14 @@ async function initMusic (client) {
   }
 
   shoukaku.on('ready', (name) => console.log(`[Lavalink] Nodo "${name}" conectado correctamente.`.green))
-  shoukaku.on('error', (name, error) => console.error(`[Lavalink] Error en nodo "${name}": ${error}`.red))
+  shoukaku.on('error', (name, error) => {
+    // No mostramos errores de conexión inicial como críticos, ya que Shoukaku reintentará
+    if (error?.message?.includes('ECONNREFUSED')) {
+      console.log(`[Lavalink] Nodo "${name}" esperando disponibilidad en ${host}:${port}...`.yellow)
+    } else {
+      console.error(`[Lavalink] Error en nodo "${name}": ${error}`.red)
+    }
+  })
   shoukaku.on('disconnect', (name, players, moved) => console.warn(`[Lavalink] Nodo "${name}" desconectado.`.yellow))
 
   const service = new MusicService(shoukaku)

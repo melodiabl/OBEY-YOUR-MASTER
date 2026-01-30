@@ -83,8 +83,13 @@ module.exports = class extends Client {
     await this.loadHandlers()
     await this.loadCommands()
     await this.loadSlashCommands()
+    
+    // IMPORTANTE: Primero iniciamos Lavalink y esperamos a que el puerto responda
     await this.autoStartLavalink()
-    this.initMusicSystem()
+    
+    // Luego inicializamos el sistema de música (Shoukaku)
+    await this.initMusicSystem()
+    
     await this.db.connect()
 
     this.login(process.env.BOT_TOKEN)
