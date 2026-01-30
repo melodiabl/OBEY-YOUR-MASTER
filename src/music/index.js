@@ -12,16 +12,15 @@ function normalizeConnectHost (host) {
 }
 
 async function initMusic (client) {
-  console.log('[Music] Inicializando sistema...'.blue)
+  console.log('[DEBUG-Music] Inicializando sistema Shoukaku...'.gray)
   if (client?.music) return client.music
   if (musicInstance) {
     client.music = musicInstance
     return musicInstance
   }
 
-  // Esperar a que el bot esté listo
   if (!client.readyAt) {
-    console.log('[Music] Esperando a que el cliente esté listo...'.yellow)
+    console.log('[DEBUG-Music] Esperando evento "ready" de Discord...'.gray)
     await new Promise(resolve => client.once('ready', resolve))
   }
 
@@ -40,33 +39,46 @@ async function initMusic (client) {
     resume: true,
     resumeTimeout: 60,
     resumeByLibrary: true,
-    reconnectTries: 20, // Más intentos
-    reconnectInterval: 10, // Más espacio entre reintentos (10s) para no saturar
+    reconnectTries: 20,
+    reconnectInterval: 10,
     moveOnDisconnect: true
   }
 
-  console.log(`[Music] Conectando a Lavalink en ${Nodes[0].url}...`.blue)
+  console.log(`[DEBUG-Music] Intentando conectar nodo Shoukaku a ${Nodes[0].url}...`.gray)
   const shoukaku = new Shoukaku(new Connectors.DiscordJS(client), Nodes, shoukakuOptions)
 
-  // Forzar inicialización si el cliente ya está listo, ya que Shoukaku espera 'clientReady'
   if (client.readyAt) {
+    console.log('[DEBUG-Music] Forzando evento clientReady para Shoukaku.'.gray)
     process.nextTick(() => client.emit('clientReady'))
   }
 
-  shoukaku.on('ready', (name) => console.log(`[Lavalink] Nodo "${name}" conectado correctamente.`.green))
+  shoukaku.on('ready', (name) => {
+    console.log(`[Lavalink] Nodo "${name}" conectado y listo para reproducir.`.green)
+  })
+
   shoukaku.on('error', (name, error) => {
-    // No mostramos errores de conexión inicial como críticos mientras Lavalink arranca
     if (error?.message?.includes('ECONNREFUSED') || error?.message?.includes('closed')) {
-      console.log(`[Lavalink] Nodo "${name}" esperando disponibilidad...`.yellow)
+      console.log(`[DEBUG-Music] Nodo "${name}" no disponible aún (ECONNREFUSED). Reintentando en segundo plano...`.gray)
     } else {
-      console.error(`[Lavalink] Error en nodo "${name}": ${error}`.red)
+      console.error(`[Lavalink] Error crítico en nodo "${name}": ${error}`.red)
     }
   })
-  shoukaku.on('disconnect', (name, players, moved) => console.warn(`[Lavalink] Nodo "${name}" desconectado.`.yellow))
+
+  shoukaku.on('disconnect', (name, players, moved) => {
+    console.warn(`[Lavalink] Nodo "${name}" se ha desconectado.`.yellow)
+  })
+
+  shoukaku.on('debug', (name, info) => {
+    if (process.env.MUSIC_DEBUG === 'true') {
+      console.log(`[DEBUG-Shoukaku] ${name}: ${info}`.gray)
+    }
+  })
 
   const service = new MusicService(shoukaku)
   musicInstance = service
   if (client) client.music = service
+  
+  console.log('[DEBUG-Music] MusicService inyectado en el cliente.'.gray)
   return service
 }
 

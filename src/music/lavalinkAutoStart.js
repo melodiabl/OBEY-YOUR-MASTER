@@ -68,12 +68,10 @@ function buildLavalinkEnv (baseEnv) {
   const port = String(env.LAVALINK_PORT || '2333')
   const password = String(env.LAVALINK_PASSWORD || 'youshallnotpass')
 
-  // Spring Boot env overrides (Usando nombres de variables que Lavalink reconoce)
   env.SERVER_PORT = port
   env.SERVER_ADDRESS = env.LAVALINK_BIND || '0.0.0.0'
   env.LAVALINK_SERVER_PASSWORD = password
 
-  // Lavasrc Spotify (opcional)
   const spotifyClientId = env.LAVALINK_SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENT_ID || env.SPOTIFY_CLIENTID
   const spotifyClientSecret = env.LAVALINK_SPOTIFY_CLIENT_SECRET || env.SPOTIFY_CLIENT_SECRET || env.SPOTIFY_CLIENTSECRET
 
@@ -83,9 +81,6 @@ function buildLavalinkEnv (baseEnv) {
   return { env, host, port: Number(port), password }
 }
 
-/**
- * Descarga un archivo manejando redirecciones y errores de stream
- */
 function downloadFile(url, dest) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
@@ -121,9 +116,6 @@ function downloadFile(url, dest) {
   })
 }
 
-/**
- * Instala Java 17 automáticamente
- */
 async function installJava() {
   const isWindows = process.platform === 'win32'
   const javaDir = path.resolve('bin', 'java-runtime')
@@ -132,7 +124,7 @@ async function installJava() {
   const javaBin = path.join(javaDir, 'bin', isWindows ? 'java.exe' : 'java')
   if (fileExists(javaBin)) return javaBin
 
-  console.log('[Java] No se encontró Java 17. Iniciando descarga automática...'.cyan)
+  console.log('[DEBUG-Java] No se encontró Java local. Iniciando instalación...'.gray)
   
   const arch = process.arch === 'x64' ? 'x64' : 'aarch64'
   const os = isWindows ? 'windows' : 'linux'
@@ -142,15 +134,17 @@ async function installJava() {
   const tempFile = path.join(javaDir, `java-temp.${ext}`)
   
   try {
+    console.log(`[DEBUG-Java] Descargando JDK desde: ${url}`.gray)
     await downloadFile(url, tempFile)
     
     const stats = fs.statSync(tempFile)
+    console.log(`[DEBUG-Java] Descarga finalizada (${(stats.size / 1024 / 1024).toFixed(2)} MB)`.gray)
+
     if (stats.size < 1000000) {
-      throw new Error('El archivo descargado es demasiado pequeño o está corrupto.')
+      throw new Error('Archivo corrupto (demasiado pequeño)')
     }
 
-    console.log('[Java] Descarga completada. Extrayendo...'.cyan)
-
+    console.log('[DEBUG-Java] Extrayendo archivos...'.gray)
     if (isWindows) {
       execSync(`powershell -Command "Expand-Archive -Path '${tempFile}' -DestinationPath '${javaDir}' -Force"`)
     } else {
@@ -159,19 +153,11 @@ async function installJava() {
     }
 
     if (fileExists(tempFile)) fs.unlinkSync(tempFile)
-
-    if (isWindows && !fileExists(javaBin)) {
-      const dirs = fs.readdirSync(javaDir).filter(f => fs.statSync(path.join(javaDir, f)).isDirectory())
-      const subDir = dirs.find(d => d.toLowerCase().includes('jdk'))
-      if (subDir) {
-        const foundBin = path.join(javaDir, subDir, 'bin', 'java.exe')
-        if (fileExists(foundBin)) return foundBin
-      }
-    }
+    console.log(`[DEBUG-Java] Instalación completada en: ${javaBin}`.gray)
 
     return fileExists(javaBin) ? javaBin : null
   } catch (e) {
-    console.error('[Java] Error instalando Java:'.red, e.message)
+    console.error('[DEBUG-Java] Error crítico en instalación:'.red, e.message)
     if (fileExists(tempFile)) fs.unlinkSync(tempFile)
     return null
   }
@@ -185,10 +171,10 @@ function findJavaBinary() {
     process.env.JAVA_BIN,
     process.env.JAVA_HOME && path.join(process.env.JAVA_HOME, 'bin', javaExe),
     path.resolve('bin', 'java-runtime', 'bin', javaExe),
-    'java',
-    !isWindows && '/usr/bin/java',
-    !isWindows && '/usr/lib/jvm/default-java/bin/java'
+    'java'
   ].filter(Boolean)
+
+  console.log(`[DEBUG-Java] Buscando binario en ${candidates.length} ubicaciones...`.gray)
 
   for (const candidate of candidates) {
     try {
@@ -197,6 +183,7 @@ function findJavaBinary() {
         timeout: 2000,
         windowsHide: true 
       })
+      console.log(`[DEBUG-Java] Binario válido encontrado: ${candidate}`.gray)
       return candidate
     } catch (e) {
       continue
@@ -207,12 +194,19 @@ function findJavaBinary() {
 }
 
 async function autoStartLavalink (client, options = {}) {
+  console.log('[DEBUG-Lavalink] Iniciando proceso de auto-start...'.gray)
   const enabled = parseBool(process.env.LAVALINK_AUTOSTART || process.env.AUTO_START_LAVALINK)
-  if (!enabled) return { ok: true, started: false, reason: 'disabled' }
+  if (!enabled) {
+    console.log('[DEBUG-Lavalink] Auto-start desactivado en configuración.'.gray)
+    return { ok: true, started: false, reason: 'disabled' }
+  }
 
   const jarPath = path.resolve(options.jarPath || process.env.LAVALINK_JAR || 'Lavalink.jar')
   const configPath = path.resolve(options.configPath || process.env.LAVALINK_CONFIG || 'application.yml')
   
+  console.log(`[DEBUG-Lavalink] JAR: ${jarPath}`.gray)
+  console.log(`[DEBUG-Lavalink] Config: ${configPath}`.gray)
+
   let javaBin = options.javaBin || findJavaBinary()
   
   if (!javaBin) {
@@ -220,6 +214,7 @@ async function autoStartLavalink (client, options = {}) {
   }
 
   if (!javaBin) {
+    console.error('[DEBUG-Lavalink] Fallo fatal: No se encontró Java.'.red)
     return {
       ok: false,
       started: false,
@@ -229,14 +224,18 @@ async function autoStartLavalink (client, options = {}) {
   }
 
   const { env, host, port, password } = buildLavalinkEnv(process.env)
+  console.log(`[DEBUG-Lavalink] Intentando conexión previa a ${host}:${port}...`.gray)
   const already = await canConnect({ host, port })
-  if (already) return { ok: true, started: false, reason: 'already_running', host, port }
+  if (already) {
+    console.log('[DEBUG-Lavalink] Lavalink ya está corriendo en este puerto. Saltando inicio.'.gray)
+    return { ok: true, started: false, reason: 'already_running', host, port }
+  }
 
   if (!fileExists(jarPath)) {
+    console.error(`[DEBUG-Lavalink] Archivo no encontrado: ${jarPath}`.red)
     return { ok: false, started: false, reason: 'missing_jar', jarPath }
   }
 
-  // Argumentos de Java con inyección de propiedades de Spring Boot para sobreescribir application.yml
   const args = [
     `-Dserver.port=${port}`,
     `-Dserver.address=${env.SERVER_ADDRESS}`,
@@ -247,6 +246,8 @@ async function autoStartLavalink (client, options = {}) {
   if (fileExists(configPath)) {
     args.push(`--spring.config.location=file:${configPath}`)
   }
+
+  console.log(`[DEBUG-Lavalink] Lanzando: ${javaBin} ${args.join(' ')}`.gray)
 
   ensureDir(path.resolve('logs'))
   const outPath = path.resolve('logs', 'lavalink.out.log')
@@ -260,7 +261,10 @@ async function autoStartLavalink (client, options = {}) {
     stdio: ['ignore', 'pipe', 'pipe']
   })
 
-  child.once('error', (err) => { spawnError = err })
+  child.once('error', (err) => { 
+    spawnError = err
+    console.error(`[DEBUG-Lavalink] Error de spawn: ${err.message}`.red)
+  })
 
   try {
     const out = fs.createWriteStream(outPath, { flags: 'a' })
@@ -273,35 +277,29 @@ async function autoStartLavalink (client, options = {}) {
 
   const restart = parseBool(process.env.LAVALINK_AUTORESTART)
   if (restart) {
-    child.once('exit', async () => {
-      try {
-        await wait(1500)
-        await autoStartLavalink(client, options)
-      } catch (e) {}
+    child.once('exit', (code) => {
+      console.log(`[DEBUG-Lavalink] Proceso cerrado con código ${code}. Reiniciando...`.yellow)
+      setTimeout(() => autoStartLavalink(client, options), 2000)
     })
   }
 
-  // Espera a que levante (Lavalink con plugins puede tardar bastante)
   const maxWaitMs = Math.max(1000, Number(process.env.LAVALINK_STARTUP_TIMEOUT_MS || 40000))
   const startedAt = Date.now()
+  console.log(`[DEBUG-Lavalink] Esperando hasta ${maxWaitMs / 1000}s para disponibilidad...`.gray)
+
   while (Date.now() - startedAt < maxWaitMs) {
     if (spawnError) {
       if (client && client.lavalinkProcess === child) client.lavalinkProcess = null
-      return {
-        ok: false,
-        started: false,
-        reason: 'spawn_failed',
-        javaBin,
-        error: spawnError.message
-      }
+      return { ok: false, started: false, reason: 'spawn_failed', javaBin, error: spawnError.message }
     }
     if (await canConnect({ host, port, timeoutMs: 400 })) {
-      console.log(`[Lavalink] Conexión establecida en ${host}:${port}`.green)
+      console.log(`[DEBUG-Lavalink] Puerto ${port} abierto. Lavalink listo.`.green)
       return { ok: true, started: true, host, port, jarPath, configPath, pid: child.pid }
     }
-    await wait(500)
+    await wait(1000)
   }
 
+  console.warn('[DEBUG-Lavalink] Tiempo de espera agotado, pero el proceso sigue vivo.'.yellow)
   return { ok: true, started: true, host, port, jarPath, configPath, pid: child.pid, warning: 'timeout_waiting_port' }
 }
 
