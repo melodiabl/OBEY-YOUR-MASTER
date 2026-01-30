@@ -1,7 +1,7 @@
 const fs = require('node:fs')
 const path = require('node:path')
 const net = require('node:net')
-const { spawn } = require('node:child_process')
+const { spawn, execSync } = require('node:child_process')
 
 function parseBool (v) {
   const s = String(v || '').trim().toLowerCase()
@@ -82,13 +82,59 @@ function buildLavalinkEnv (baseEnv) {
   return { env, host, port: Number(port), password }
 }
 
+/**
+ * Busca un binario de Java válido en el sistema
+ * @returns {string|null} Path al binario o null si no se encuentra
+ */
+function findJavaBinary() {
+  const isWindows = process.platform === 'win32'
+  const javaExe = isWindows ? 'java.exe' : 'java'
+  
+  const candidates = [
+    process.env.JAVA_BIN,
+    process.env.JAVA_HOME && path.join(process.env.JAVA_HOME, 'bin', javaExe),
+    'java',
+    !isWindows && '/usr/bin/java',
+    !isWindows && '/usr/lib/jvm/default-java/bin/java',
+    !isWindows && '/usr/lib/jvm/java-17-openjdk-amd64/bin/java',
+    !isWindows && '/usr/lib/jvm/java-11-openjdk-amd64/bin/java'
+  ].filter(Boolean)
+
+  for (const candidate of candidates) {
+    try {
+      // Validamos que el binario funcione ejecutando -version
+      execSync(`"${candidate}" -version`, { 
+        stdio: 'ignore', 
+        timeout: 2000,
+        windowsHide: true 
+      })
+      return candidate
+    } catch (e) {
+      continue
+    }
+  }
+
+  return null
+}
+
 async function autoStartLavalink (client, options = {}) {
   const enabled = parseBool(process.env.LAVALINK_AUTOSTART || process.env.AUTO_START_LAVALINK)
   if (!enabled) return { ok: true, started: false, reason: 'disabled' }
 
   const jarPath = path.resolve(options.jarPath || process.env.LAVALINK_JAR || 'Lavalink.jar')
   const configPath = path.resolve(options.configPath || process.env.LAVALINK_CONFIG || 'application.yml')
-  const javaBin = String(options.javaBin || process.env.JAVA_BIN || 'java')
+  
+  // Buscar Java automáticamente si no se provee uno en las opciones
+  const javaBin = options.javaBin || findJavaBinary()
+  
+  if (!javaBin) {
+    return {
+      ok: false,
+      started: false,
+      reason: 'missing_java',
+      error: 'No se encontró un binario de Java funcional en el sistema. Asegúrate de tener Java 17+ instalado.'
+    }
+  }
 
   const { env, host, port } = buildLavalinkEnv(process.env)
 
@@ -118,7 +164,6 @@ async function autoStartLavalink (client, options = {}) {
   })
 
   // Importante: si no existe `java` (ENOENT), Node emite `error` en el child.
-  // Sin listener, eso termina en uncaughtException.
   child.once('error', (err) => { spawnError = err })
 
   try {
