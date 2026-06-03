@@ -619,6 +619,11 @@ Este proyecto está patrocinado y recomendado por:
 ---
 
 <div align="center">
-  <sub>Hecho con ❤️ · 2026</sub><br/>
-  <sub>Patrocinado por <a href="https://www.swallox.com/">Swallox</a> & <a href="https://www.skyultraplus.com/">SkyUltraPlus</a></sub>
+
+### 📢 Canales oficiales
+📦 Repositorio: https://github.com/melodiabl/OBEY-YOUR-MASTER  
+📲 WhatsApp: https://whatsapp.com/channel/0029VbBZ4YX20
+
+<sub>© 2026 OBEY YOUR MASTER · Desarrollado por melodia · Impulsado por SkyUltraPlus y Swallox</sub>
+
 </div>
