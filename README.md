@@ -21,6 +21,31 @@
   <a href="#-dashboard">Dashboard</a>
 </p>
 
+---
+
+### 💜 Patrocinado por
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <a href="https://www.swallox.com/">
+        <img src="https://img.shields.io/badge/🖥️_Swallox-Hosting_Patrocinador-8AB2E2?style=for-the-badge" alt="Swallox" /><br/>
+        <b>Swallox</b><br/>
+        <sub>Hosting de alto rendimiento para bots Discord</sub>
+      </a>
+    </td>
+    <td align="center" width="50%">
+      <a href="https://www.skyultraplus.com/">
+        <img src="https://img.shields.io/badge/☁️_SkyUltraPlus-Hosting_Patrocinador-8A2BE2?style=for-the-badge" alt="SkyUltraPlus" /><br/>
+        <b>SkyUltraPlus</b><br/>
+        <sub>VPS y hosting premium para proyectos de escala</sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+> ¿Quieres hostear este bot? Ambos proveedores ofrecen planes optimizados para Node.js y Discord bots.
+
 </div>
 
 ---
@@ -566,6 +591,34 @@ npm install && pm2 restart obey-bot  # Si usas PM2
 
 ---
 
+## 🖥️ Hosting recomendado
+
+Este proyecto está patrocinado y recomendado por:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.swallox.com/">
+        <b>💜 Swallox</b>
+      </a><br/>
+      Hosting optimizado para bots Discord y Node.js.<br/>
+      Planes desde servidores VPS hasta hosting administrado.<br/>
+      <a href="https://www.swallox.com/">👉 www.swallox.com</a>
+    </td>
+    <td align="center">
+      <a href="https://www.skyultraplus.com/">
+        <b>☁️ SkyUltraPlus</b>
+      </a><br/>
+      VPS premium de alto rendimiento para proyectos de escala.<br/>
+      Infraestructura confiable con soporte 24/7.<br/>
+      <a href="https://www.skyultraplus.com/">👉 www.skyultraplus.com</a>
+    </td>
+  </tr>
+</table>
+
+---
+
 <div align="center">
-  <sub>Hecho con ❤️ · 2026 · Basado en <a href="https://github.com/Tomato6966/Multipurpose-discord-bot">Tomato6966/Multipurpose-discord-bot</a></sub>
+  <sub>Hecho con ❤️ · 2026 · Basado en <a href="https://github.com/Tomato6966/Multipurpose-discord-bot">Tomato6966/Multipurpose-discord-bot</a></sub><br/>
+  <sub>Patrocinado por <a href="https://www.swallox.com/">Swallox</a> & <a href="https://www.skyultraplus.com/">SkyUltraPlus</a></sub>
 </div>
