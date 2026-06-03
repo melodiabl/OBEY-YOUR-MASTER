@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup-antilink",
@@ -73,7 +73,7 @@ module.exports = {
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setPlaceholder("Click me to setup the Anti-Link-Links System!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
@@ -90,7 +90,7 @@ module.exports = {
                         })
                     );
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Anti-Links System Setup",
@@ -102,11 +102,11 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -150,7 +150,7 @@ module.exports = {
                             );
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable3"]))
                                         .setColor(es.color)
                                         .setFooter(client.getFooter(es)),
@@ -163,7 +163,7 @@ module.exports = {
                             let thesettings = client.settings.get(message.guild.id, `antilink`);
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable4"]))
                                         .setColor(es.color)
                                         .setDescription(
@@ -185,7 +185,7 @@ module.exports = {
                         {
                             tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable5"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable6"]))
@@ -212,7 +212,7 @@ module.exports = {
                                         if (antisettings.includes(channel.id))
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable7"]
@@ -230,7 +230,7 @@ module.exports = {
                                             );
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable8"]
@@ -249,7 +249,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable9"]
@@ -274,7 +274,7 @@ module.exports = {
                                 .catch(e => {
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable11"])
                                                 )
@@ -290,7 +290,7 @@ module.exports = {
                         {
                             tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable12"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable13"]))
@@ -317,7 +317,7 @@ module.exports = {
                                         if (!antisettings.includes(channel.id))
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antilink"][
@@ -337,7 +337,7 @@ module.exports = {
                                             );
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antilink"][
@@ -358,7 +358,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antilink"][
@@ -385,7 +385,7 @@ module.exports = {
                                 .catch(e => {
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable18"])
                                                 )
@@ -401,7 +401,7 @@ module.exports = {
                         {
                             tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle("Which Link do you want to enable?")
                                         .setColor(es.color)
                                         .setDescription(
@@ -428,7 +428,7 @@ module.exports = {
                                         if (antisettings.includes(content))
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             "This Link is already Allowed! you can remove it if you want!"
                                                         )
@@ -440,7 +440,7 @@ module.exports = {
                                             client.settings.push(message.guild.id, content, "antilink.whitelistedlinks");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(`Added the Link ${content} to the allowed links!`)
                                                         .setColor(es.color)
                                                         .setDescription(
@@ -455,7 +455,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable9"]
@@ -481,7 +481,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable11"])
                                                 )
@@ -499,7 +499,7 @@ module.exports = {
                             if (antisettings.length < 1) return message.reply(`${allEmojis.msg.ERROR} There are no links whitelisted...`);
                             tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle("Which Link do you want to disable again?\nSend the Link in the Chat")
                                         .setColor(es.color)
                                         .setDescription(`${antisettings.map(i => `\`${i}\``).join("\n")}`)
@@ -520,7 +520,7 @@ module.exports = {
                                         if (!antisettings.includes(content))
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle("This Link is already not whitelisted!")
                                                         .setColor(es.wrongcolor)
                                                         .setFooter(client.getFooter(es)),
@@ -530,7 +530,7 @@ module.exports = {
                                             client.settings.remove(message.guild.id, content, "antilink.whitelistedlinks");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(`Removed the Link ${content} from the allowed links!`)
                                                         .setColor(es.color)
                                                         .setDescription(
@@ -545,7 +545,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable9"]
@@ -571,7 +571,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antilink"]["variable11"])
                                                 )
@@ -587,7 +587,7 @@ module.exports = {
                         {
                             tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle("How often should someone be allowed to do it within 15 Seconds?")
                                         .setColor(es.color)
                                         .setDescription(
@@ -615,7 +615,7 @@ module.exports = {
                                             client.settings.set(message.guild.id, Number(number), "antilink.mute_amount");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             "Successfully set the New Maximum Allowed Amounts to " +
                                                                 number +
@@ -634,7 +634,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
@@ -661,7 +661,7 @@ module.exports = {
                                 .catch(e => {
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"])
                                                 )
@@ -683,7 +683,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

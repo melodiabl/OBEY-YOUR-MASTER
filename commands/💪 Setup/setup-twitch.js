@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup-twitch",
@@ -60,7 +60,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -78,7 +78,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new MessageEmbed()
+                let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Twitch-Logger",
@@ -89,11 +89,11 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -129,7 +129,7 @@ module.exports = {
                             if (client.social_log.get(message.guild.id, "twitch.channels").length <= 0)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(`There are no Twitch Channels Setupped yet!`)
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Add some others first...`.substring(0, 2000))
@@ -147,7 +147,7 @@ module.exports = {
                             });
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(`All [${channels.length}] Twitch-Channels`)
                                         .setColor(es.wrongcolor)
                                         .setDescription(
@@ -166,7 +166,7 @@ module.exports = {
                             if (client.social_log.get(message.guild.id, "twitch.channels").length <= 0)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(`There are no Twitch Channels Setupped yet!`)
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Add some others first...`.substring(0, 2000))
@@ -183,7 +183,7 @@ module.exports = {
                                 return Obj;
                             });
                             //define the selection
-                            let Selection = new MessageSelectMenu()
+                            let Selection = new StringSelectMenuBuilder()
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(menuoptions.length) //OPTIONAL, this is how many values you can have at each selection
                                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -203,7 +203,7 @@ module.exports = {
                                 );
 
                             //define the embed
-                            let MenuEmbed = new MessageEmbed()
+                            let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
                                 .setAuthor(
                                     "Twitch-Poster",
@@ -214,11 +214,11 @@ module.exports = {
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
-                                components: [new MessageActionRow().addComponents(Selection)],
+                                components: [new ActionRowBuilder().addComponents(Selection)],
                             });
                             //Create the collector
                             const collector = menumsg.createMessageComponentCollector({
-                                filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                                 time: 90000,
                             });
                             //Menu Collections
@@ -256,7 +256,7 @@ module.exports = {
                                 return message.reply("❌ **You can't have more then 10 Twitch Channels**");
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable5"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable6"]))
@@ -277,7 +277,7 @@ module.exports = {
                                         channelname = channelname[channelname.length - 1];
                                         tempmsg = await message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable7"])
                                                     )
@@ -301,7 +301,7 @@ module.exports = {
                                                     var discorduser = msg.id;
                                                     tempmsg = await message.reply({
                                                         embeds: [
-                                                            new Discord.MessageEmbed()
+                                                            new Discord.EmbedBuilder()
                                                                 .setTitle(
                                                                     eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitch"][
@@ -344,7 +344,7 @@ module.exports = {
 
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setTitle(
                                                                                 eval(
                                                                                     client.la[ls]["cmds"]["setup"][
@@ -370,7 +370,7 @@ module.exports = {
                                                             console.log(e);
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -394,7 +394,7 @@ module.exports = {
                                                 console.log(e);
                                                 return message.reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setTitle(
                                                                 eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-twitch"][
@@ -416,7 +416,7 @@ module.exports = {
                                     console.log(e);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable15"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -430,7 +430,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable17"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable18"]))
@@ -450,7 +450,7 @@ module.exports = {
                                         client.social_log.set(message.guild.id, "", "twitch.channelId");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable19"])
                                                     )
@@ -467,7 +467,7 @@ module.exports = {
                                             client.social_log.set(message.guild.id, channel.id, "twitch.channelId");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable20"]
@@ -480,7 +480,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable21"]
@@ -504,7 +504,7 @@ module.exports = {
                                     console.log(e);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable23"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -518,7 +518,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable24"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable25"]))
@@ -538,7 +538,7 @@ module.exports = {
                                         client.social_log.set(message.guild.id, "", "twitch.roleID_GIVE");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable26"])
                                                     )
@@ -555,7 +555,7 @@ module.exports = {
                                             client.social_log.set(message.guild.id, channel.id, "twitch.roleID_GIVE");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable27"]
@@ -568,7 +568,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable28"]
@@ -592,7 +592,7 @@ module.exports = {
                                     console.log(e);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable30"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -606,7 +606,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable31"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable32"]))
@@ -626,7 +626,7 @@ module.exports = {
                                         client.social_log.set(message.guild.id, "", "twitch.roleID_PING");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable33"])
                                                     )
@@ -643,7 +643,7 @@ module.exports = {
                                             client.social_log.set(message.guild.id, channel.id, "twitch.roleID_PING");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable34"]
@@ -656,7 +656,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable35"]
@@ -680,7 +680,7 @@ module.exports = {
                                     console.log(e);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable37"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -696,7 +696,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

@@ -72,7 +72,7 @@ module.exports = client => {
                         });
                     })
                     .then(function (res) {
-                        const attach = new Discord.MessageAttachment(res);
+                        const attach = new Discord.AttachmentBuilder(res);
                         channel.send({ files: [attach] }).catch(() => {});
                     });
             }
@@ -82,7 +82,7 @@ module.exports = client => {
                     .get("https://nekobot.xyz/api/image")
                     .query({ type: "pgif" })
                     .end((err, response) => {
-                        const attach = new Discord.MessageAttachment(response.body.message);
+                        const attach = new Discord.AttachmentBuilder(response.body.message);
                         channel.send({ files: [attach] }).catch(() => {});
                     });
             }
@@ -98,7 +98,7 @@ module.exports = client => {
                         });
                     })
                     .then(function (res) {
-                        const attach = new Discord.MessageAttachment(res);
+                        const attach = new Discord.AttachmentBuilder(res);
                         channel.send({ files: [attach] }).catch(() => {});
                     });
             }
@@ -108,7 +108,7 @@ module.exports = client => {
                     .get("https://nekobot.xyz/api/image")
                     .query({ type: "pgif" })
                     .end((err, response) => {
-                        const attach = new Discord.MessageAttachment(response.body.message);
+                        const attach = new Discord.AttachmentBuilder(response.body.message);
                         channel.send({ files: [attach] }).catch(() => {});
                     });
             }

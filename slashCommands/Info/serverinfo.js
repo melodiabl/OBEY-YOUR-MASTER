@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -62,7 +62,7 @@ module.exports = {
             interaction?.reply({
                 ephemeral: true,
                 embeds: [
-                    new Discord.MessageEmbed()
+                    new Discord.EmbedBuilder()
                         .setAuthor(
                             client.la[ls].cmds.info.serverinfo.author + " " + message.guild.name,
                             message.guild.iconURL({
@@ -178,8 +178,7 @@ module.exports = {
                                 dynamic: true,
                             })
                         )
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 "ID: " + message.guild.id,
                                 message.guild.iconURL({
                                     dynamic: true,

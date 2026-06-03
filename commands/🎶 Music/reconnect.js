@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -19,7 +19,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "MUSIC")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -33,7 +33,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({ content: eval(client.la[ls]["cmds"]["music"]["reconnect"]["variable1"]) });
                 //get the player instance
-                const player = client.manager.players.get(message.guild.id);
+                const player = client.shoukaku?.players?.get(message.guild.id) ?? null;
                 //if there is a player and they are not in the same channel, return Error
                 if (player && player.state === "CONNECTED") await player.destroy();
                 playermanager(
@@ -51,7 +51,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

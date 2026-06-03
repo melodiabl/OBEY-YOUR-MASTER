@@ -1,10 +1,10 @@
-var { MessageEmbed } = require("discord.js");
+var { EmbedBuilder } = require("discord.js");
 var Discord = require("discord.js");
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emojis = require("../../botconfig/emojis.json");
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup-apply",
@@ -20,8 +20,8 @@ module.exports = {
         let MilratoGuild = client.guilds.cache.get("773668217163218944");
         if (MilratoGuild) theemoji = "877653386747605032";
         let allbuttons = [
-            new MessageActionRow().addComponents([
-                new MessageButton().setStyle("SUCCESS").setEmoji(theemoji).setCustomId("User_Apply").setLabel("Apply"),
+            new ActionRowBuilder().addComponents([
+                new ButtonBuilder().setStyle(Discord.ButtonStyle.Success).setEmoji(theemoji).setCustomId("User_Apply").setLabel("Apply"),
             ]),
         ];
         let es = client.settings.get(message.guild.id, "embed");
@@ -50,8 +50,8 @@ module.exports = {
                     });
                 }
                 //define the selection
-                let row1 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row1 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -69,8 +69,8 @@ module.exports = {
                         )
                 );
                 //define the selection
-                let row2 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row2 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -89,8 +89,8 @@ module.exports = {
                 );
 
                 //define the selection
-                let row3 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row3 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -109,8 +109,8 @@ module.exports = {
                 );
 
                 //define the selection
-                let row4 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row4 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -129,7 +129,7 @@ module.exports = {
                 );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         client.getAuthor(
@@ -147,7 +147,7 @@ module.exports = {
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -184,7 +184,7 @@ module.exports = {
                 console.log(String(e.stack).grey.bgRed);
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].common.erroroccur)
@@ -360,7 +360,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -380,7 +380,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         SetupNumber + " Apply Setup",
@@ -391,11 +391,11 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -426,7 +426,7 @@ module.exports = {
                 console.log(String(e.stack).grey.bgRed);
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].common.erroroccur)
@@ -462,14 +462,14 @@ module.exports = {
                             var color = "GREEN";
                             var desc;
                             var userid = cmduser.id;
-                            let row = new MessageActionRow().addComponents([
-                                new MessageButton().setStyle("SECONDARY").setCustomId("1").setEmoji("1️⃣"),
-                                new MessageButton().setStyle("SECONDARY").setCustomId("2").setEmoji("2️⃣"),
+                            let row = new ActionRowBuilder().addComponents([
+                                new ButtonBuilder().setStyle(Discord.ButtonStyle.Secondary).setCustomId("1").setEmoji("1️⃣"),
+                                new ButtonBuilder().setStyle(Discord.ButtonStyle.Secondary).setCustomId("2").setEmoji("2️⃣"),
                             ]);
                             var pickmsg = await message.reply({
                                 components: [row],
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setFooter(client.getFooter(es))
                                         .setColor(es.color)
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable6"]))
@@ -498,7 +498,7 @@ module.exports = {
                                 var f_applychannel;
                                 message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setAuthor(
@@ -547,7 +547,7 @@ module.exports = {
                                                 ],
                                             })
                                             .then(ch => {
-                                                var embed = new Discord.MessageEmbed()
+                                                var embed = new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(es.color)
                                                     .setFooter(client.getFooter(es));
@@ -611,7 +611,7 @@ module.exports = {
                                                             .catch(error => {
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setTitle(
                                                                                 eval(
                                                                                     client.la[ls]["cmds"]["setup"][
@@ -658,7 +658,7 @@ module.exports = {
                                                                             })
                                                                             .then(collected => {
                                                                                 desc = collected.first().content;
-                                                                                var setupembed = new Discord.MessageEmbed()
+                                                                                var setupembed = new Discord.EmbedBuilder()
                                                                                     .setFooter(client.getFooter(es))
                                                                                     .setColor(color)
                                                                                     .setDescription(desc)
@@ -703,9 +703,8 @@ module.exports = {
                                                                                     if (counter === 25) {
                                                                                         message.reply({
                                                                                             embeds: [
-                                                                                                new Discord.MessageEmbed()
-                                                                                                    .setFooter(
-                                                                                                        client.getFooter(es)
+                                                                                                new Discord.EmbedBuilder()
+                                                                                                    .setFooter(client.getFooter(es)
                                                                                                     )
                                                                                                     .setColor("RED")
                                                                                                     .setAuthor(
@@ -1040,7 +1039,7 @@ module.exports = {
                                                                                                 .catch(error => {
                                                                                                     return message.reply({
                                                                                                         embeds: [
-                                                                                                            new Discord.MessageEmbed()
+                                                                                                            new Discord.EmbedBuilder()
                                                                                                                 .setTitle(
                                                                                                                     eval(
                                                                                                                         client
@@ -1066,10 +1065,8 @@ module.exports = {
                                                                                                                         2000
                                                                                                                     )
                                                                                                                 )
-                                                                                                                .setFooter(
-                                                                                                                    client.getFooter(
-                                                                                                                        es
-                                                                                                                    )
+                                                                                                                .setFooter(client.getFooter(
+                                                                                                                        es)
                                                                                                                 ),
                                                                                                         ],
                                                                                                     });
@@ -1122,11 +1119,9 @@ module.exports = {
                                                                                                         return message.reply(
                                                                                                             {
                                                                                                                 embeds: [
-                                                                                                                    new Discord.MessageEmbed()
-                                                                                                                        .setFooter(
-                                                                                                                            client.getFooter(
-                                                                                                                                es
-                                                                                                                            )
+                                                                                                                    new Discord.EmbedBuilder()
+                                                                                                                        .setFooter(client.getFooter(
+                                                                                                                                es)
                                                                                                                         )
                                                                                                                         .setColor(
                                                                                                                             es.color
@@ -1174,11 +1169,9 @@ module.exports = {
                                                                                                         return message.reply(
                                                                                                             {
                                                                                                                 embeds: [
-                                                                                                                    new Discord.MessageEmbed()
-                                                                                                                        .setFooter(
-                                                                                                                            client.getFooter(
-                                                                                                                                es
-                                                                                                                            )
+                                                                                                                    new Discord.EmbedBuilder()
+                                                                                                                        .setFooter(client.getFooter(
+                                                                                                                                es)
                                                                                                                         )
                                                                                                                         .setColor(
                                                                                                                             es.color
@@ -1224,17 +1217,15 @@ module.exports = {
                                                                                                         );
 
                                                                                                     if (
-                                                                                                        !message.guild.me
+                                                                                                        !message.guild.members.me
                                                                                                             .roles
                                                                                                     )
                                                                                                         return message.reply(
                                                                                                             {
                                                                                                                 embeds: [
-                                                                                                                    new Discord.MessageEmbed()
-                                                                                                                        .setFooter(
-                                                                                                                            client.getFooter(
-                                                                                                                                es
-                                                                                                                            )
+                                                                                                                    new Discord.EmbedBuilder()
+                                                                                                                        .setFooter(client.getFooter(
+                                                                                                                                es)
                                                                                                                         )
                                                                                                                         .setColor(
                                                                                                                             "RED"
@@ -1268,7 +1259,7 @@ module.exports = {
                                                                                                         );
 
                                                                                                     var botrole =
-                                                                                                        message.guild.me
+                                                                                                        message.guild.members.me
                                                                                                             .roles.highest;
                                                                                                     if (
                                                                                                         guildrole.rawPosition >=
@@ -1290,11 +1281,9 @@ module.exports = {
                                                                                                         return message.reply(
                                                                                                             {
                                                                                                                 embeds: [
-                                                                                                                    new Discord.MessageEmbed()
-                                                                                                                        .setFooter(
-                                                                                                                            client.getFooter(
-                                                                                                                                es
-                                                                                                                            )
+                                                                                                                    new Discord.EmbedBuilder()
+                                                                                                                        .setFooter(client.getFooter(
+                                                                                                                                es)
                                                                                                                         )
                                                                                                                         .setColor(
                                                                                                                             es.color
@@ -1342,11 +1331,9 @@ module.exports = {
                                                                                                     );
                                                                                                     return message.reply({
                                                                                                         embeds: [
-                                                                                                            new Discord.MessageEmbed()
-                                                                                                                .setFooter(
-                                                                                                                    client.getFooter(
-                                                                                                                        es
-                                                                                                                    )
+                                                                                                            new Discord.EmbedBuilder()
+                                                                                                                .setFooter(client.getFooter(
+                                                                                                                        es)
                                                                                                                 )
                                                                                                                 .setColor(
                                                                                                                     es.color
@@ -1390,7 +1377,7 @@ module.exports = {
                                                                                                     console.log(error);
                                                                                                     return message.reply({
                                                                                                         embeds: [
-                                                                                                            new Discord.MessageEmbed()
+                                                                                                            new Discord.EmbedBuilder()
                                                                                                                 .setTitle(
                                                                                                                     eval(
                                                                                                                         client
@@ -1416,10 +1403,8 @@ module.exports = {
                                                                                                                         2000
                                                                                                                     )
                                                                                                                 )
-                                                                                                                .setFooter(
-                                                                                                                    client.getFooter(
-                                                                                                                        es
-                                                                                                                    )
+                                                                                                                .setFooter(client.getFooter(
+                                                                                                                        es)
                                                                                                                 ),
                                                                                                         ],
                                                                                                     });
@@ -1431,7 +1416,7 @@ module.exports = {
                                                                                 console.log(error);
                                                                                 return message.reply({
                                                                                     embeds: [
-                                                                                        new Discord.MessageEmbed()
+                                                                                        new Discord.EmbedBuilder()
                                                                                             .setTitle(
                                                                                                 eval(
                                                                                                     client.la[ls]["cmds"][
@@ -1465,7 +1450,7 @@ module.exports = {
 
                                 pickmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable33"]))
@@ -1493,7 +1478,7 @@ module.exports = {
                                             message
                                                 .reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setColor("RED")
                                                             .setFooter(client.getFooter(es))
                                                             .setTitle(
@@ -1527,7 +1512,7 @@ module.exports = {
                                     return message
                                         .reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setColor("RED")
                                                     .setFooter(client.getFooter(es))
                                                     .setTitle(
@@ -1544,7 +1529,7 @@ module.exports = {
 
                                 pickmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable37"]))
@@ -1572,7 +1557,7 @@ module.exports = {
                                             message
                                                 .reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setColor("RED")
                                                             .setFooter(client.getFooter(es))
                                                             .setTitle(
@@ -1606,7 +1591,7 @@ module.exports = {
                                     return message
                                         .reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setColor("RED")
                                                     .setFooter(client.getFooter(es))
                                                     .setTitle(
@@ -1623,7 +1608,7 @@ module.exports = {
 
                                 message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setAuthor(
@@ -1634,7 +1619,7 @@ module.exports = {
                                     ],
                                 });
 
-                                var embed = new Discord.MessageEmbed()
+                                var embed = new Discord.EmbedBuilder()
                                     .setFooter(client.getFooter(es))
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es));
@@ -1685,7 +1670,7 @@ module.exports = {
                                     return message
                                         .reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setColor("RED")
                                                     .setFooter(client.getFooter(es))
                                                     .setTitle(
@@ -1720,7 +1705,7 @@ module.exports = {
                                             })
                                             .then(collected => {
                                                 desc = collected.first().content;
-                                                var setupembed = new Discord.MessageEmbed()
+                                                var setupembed = new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(color)
                                                     .setDescription(desc)
@@ -1760,7 +1745,7 @@ module.exports = {
                                                     if (counter === 25) {
                                                         message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("RED")
                                                                     .setAuthor(
@@ -2040,7 +2025,7 @@ module.exports = {
                                                                 return message
                                                                     .reply({
                                                                         embeds: [
-                                                                            new Discord.MessageEmbed()
+                                                                            new Discord.EmbedBuilder()
                                                                                 .setColor("RED")
                                                                                 .setFooter(client.getFooter(es))
                                                                                 .setTitle(
@@ -2096,7 +2081,7 @@ module.exports = {
                                                                     if (collected.first().content.toLowerCase() === "no") {
                                                                         return message.reply({
                                                                             embeds: [
-                                                                                new Discord.MessageEmbed()
+                                                                                new Discord.EmbedBuilder()
                                                                                     .setFooter(client.getFooter(es))
                                                                                     .setColor(es.color)
                                                                                     .setTitle(
@@ -2120,7 +2105,7 @@ module.exports = {
                                                                     if (!role)
                                                                         return message.reply({
                                                                             embeds: [
-                                                                                new Discord.MessageEmbed()
+                                                                                new Discord.EmbedBuilder()
                                                                                     .setFooter(client.getFooter(es))
                                                                                     .setColor(es.color)
                                                                                     .setTitle(
@@ -2141,10 +2126,10 @@ module.exports = {
                                                                         });
                                                                     var guildrole = message.guild.roles.cache.get(role.id);
 
-                                                                    if (!message.guild.me.roles)
+                                                                    if (!message.guild.members.me.roles)
                                                                         return message.reply({
                                                                             embeds: [
-                                                                                new Discord.MessageEmbed()
+                                                                                new Discord.EmbedBuilder()
                                                                                     .setFooter(client.getFooter(es))
                                                                                     .setColor("RED")
                                                                                     .setDescription(
@@ -2163,7 +2148,7 @@ module.exports = {
                                                                             ],
                                                                         });
 
-                                                                    var botrole = message.guild.me.roles.highest;
+                                                                    var botrole = message.guild.members.me.roles.highest;
                                                                     if (guildrole.rawPosition >= botrole.rawPosition) {
                                                                         message.reply({
                                                                             content: eval(
@@ -2174,7 +2159,7 @@ module.exports = {
                                                                         });
                                                                         return message.reply({
                                                                             embeds: [
-                                                                                new Discord.MessageEmbed()
+                                                                                new Discord.EmbedBuilder()
                                                                                     .setFooter(client.getFooter(es))
                                                                                     .setColor(es.color)
                                                                                     .setTitle(
@@ -2201,7 +2186,7 @@ module.exports = {
                                                                     );
                                                                     return message.reply({
                                                                         embeds: [
-                                                                            new Discord.MessageEmbed()
+                                                                            new Discord.EmbedBuilder()
                                                                                 .setFooter(client.getFooter(es))
                                                                                 .setColor(es.color)
                                                                                 .setTitle(
@@ -2231,7 +2216,7 @@ module.exports = {
                                                                 return message
                                                                     .reply({
                                                                         embeds: [
-                                                                            new Discord.MessageEmbed()
+                                                                            new Discord.EmbedBuilder()
                                                                                 .setColor("RED")
                                                                                 .setFooter(client.getFooter(es))
                                                                                 .setTitle(
@@ -2262,7 +2247,7 @@ module.exports = {
                                             return message
                                                 .reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setColor("RED")
                                                             .setFooter(client.getFooter(es))
                                                             .setTitle(
@@ -2289,7 +2274,7 @@ module.exports = {
                             message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setAuthor(
@@ -2312,7 +2297,7 @@ module.exports = {
                                             apply_for_here.set(message.guild.id, collected.first().content, pre + ".accept");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor("GREEN")
                                                         .setAuthor(
@@ -2327,7 +2312,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable68"])
                                                         )
@@ -2345,7 +2330,7 @@ module.exports = {
                             message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setAuthor(
@@ -2374,10 +2359,10 @@ module.exports = {
                                                 });
                                             var guildrole = message.guild.roles.cache.get(role.id);
 
-                                            if (!message.guild.me.roles)
+                                            if (!message.guild.members.me.roles)
                                                 return message.reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setFooter(client.getFooter(es))
                                                             .setColor("RED")
                                                             .setDescription(
@@ -2396,13 +2381,13 @@ module.exports = {
                                                     ],
                                                 });
 
-                                            var botrole = message.guild.me.roles.highest;
+                                            var botrole = message.guild.members.me.roles.highest;
 
                                             if (guildrole.rawPosition <= botrole.rawPosition) {
                                                 apply_for_here.set(message.guild.id, role.id, pre + ".accept_role");
                                                 return message.reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setFooter(client.getFooter(es))
                                                             .setColor("GREEN")
                                                             .setAuthor(
@@ -2416,7 +2401,7 @@ module.exports = {
                                             }
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor("RED")
                                                         .setDescription(
@@ -2434,7 +2419,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable72"])
                                                         )
@@ -2452,7 +2437,7 @@ module.exports = {
                             message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setAuthor(
@@ -2475,7 +2460,7 @@ module.exports = {
                                             apply_for_here.set(message.guild.id, collected.first().content, pre + ".deny");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor("GREEN")
                                                         .setAuthor(
@@ -2490,7 +2475,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable73"])
                                                         )
@@ -2508,7 +2493,7 @@ module.exports = {
                             message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setAuthor(
@@ -2531,7 +2516,7 @@ module.exports = {
                                             apply_for_here.set(message.guild.id, collected.first().content, pre + ".ticket");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor("GREEN")
                                                         .setAuthor(
@@ -2546,7 +2531,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable74"])
                                                         )
@@ -2565,7 +2550,7 @@ module.exports = {
                             var tempmsg2;
                             tempmsg2 = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable75"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable76"]))
@@ -2581,7 +2566,7 @@ module.exports = {
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable77"]))
                                             .setColor("RED")
                                             .setDescription(
@@ -2618,7 +2603,7 @@ module.exports = {
                             if (timeouterror)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable78"]))
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -2631,7 +2616,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -2658,7 +2643,7 @@ module.exports = {
                                                         );
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("GREEN")
                                                                     .setAuthor(
@@ -2673,7 +2658,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -2697,7 +2682,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -2728,10 +2713,10 @@ module.exports = {
                                                             });
                                                         var guildrole = message.guild.roles.cache.get(role.id);
 
-                                                        if (!message.guild.me.roles)
+                                                        if (!message.guild.members.me.roles)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("RED")
                                                                         .setDescription(
@@ -2750,13 +2735,13 @@ module.exports = {
                                                                 ],
                                                             });
 
-                                                        var botrole = message.guild.me.roles.highest;
+                                                        var botrole = message.guild.members.me.roles.highest;
 
                                                         if (guildrole.rawPosition <= botrole.rawPosition) {
                                                             apply_for_here.set(message.guild.id, role.id, pre + ".one.role");
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("GREEN")
                                                                         .setAuthor(
@@ -2770,7 +2755,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("RED")
                                                                     .setDescription(
@@ -2792,7 +2777,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -2816,7 +2801,7 @@ module.exports = {
                                         apply_for_here.set(message.guild.id, "", pre + ".one.role");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor("GREEN")
                                                     .setAuthor(
@@ -2834,7 +2819,7 @@ module.exports = {
                                     apply_for_here.set(message.guild.id, "", pre + ".one.image.url");
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setFooter(client.getFooter(es))
                                                 .setColor("GREEN")
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable84"])),
@@ -2847,7 +2832,7 @@ module.exports = {
                                         tempmsg2 = await tempmsg2
                                             .edit({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable85"])
@@ -2855,10 +2840,9 @@ module.exports = {
                                                         .setDescription(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable86"])
                                                         )
-                                                        .setFooter(
-                                                            "Pick the INDEX NUMBER / send the IMAGE URl",
-                                                            client.user.displayAvatarURL()
-                                                        )
+                                                        .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                            iconURL: client.user.displayAvatarURL()
+                                                        })
                                                         .setThumbnail(client.user.displayAvatarURL()),
                                                 ],
                                             })
@@ -2885,7 +2869,7 @@ module.exports = {
                                                                 );
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setFooter(client.getFooter(es))
                                                                             .setColor("GREEN")
                                                                             .setTitle(
@@ -2900,7 +2884,7 @@ module.exports = {
                                                             }
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -2928,7 +2912,7 @@ module.exports = {
                                                             );
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("GREEN")
                                                                         .setTitle(
@@ -2943,7 +2927,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -2977,7 +2961,7 @@ module.exports = {
                                     } catch (e) {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable91"])
                                                     )
@@ -2999,7 +2983,7 @@ module.exports = {
                             var tempmsg2;
                             tempmsg2 = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable93"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable94"]))
@@ -3015,7 +2999,7 @@ module.exports = {
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable95"]))
                                             .setColor("RED")
                                             .setDescription(
@@ -3052,7 +3036,7 @@ module.exports = {
                             if (timeouterror)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable96"]))
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -3065,7 +3049,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -3092,7 +3076,7 @@ module.exports = {
                                                         );
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("GREEN")
                                                                     .setAuthor(
@@ -3107,7 +3091,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -3131,7 +3115,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -3155,7 +3139,7 @@ module.exports = {
                                                         if (!role)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor(es.color)
                                                                         .setTitle(
@@ -3176,10 +3160,10 @@ module.exports = {
                                                             });
                                                         var guildrole = message.guild.roles.cache.get(role.id);
 
-                                                        if (!message.guild.me.roles)
+                                                        if (!message.guild.members.me.roles)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("RED")
                                                                         .setDescription(
@@ -3198,13 +3182,13 @@ module.exports = {
                                                                 ],
                                                             });
 
-                                                        var botrole = message.guild.me.roles.highest;
+                                                        var botrole = message.guild.members.me.roles.highest;
 
                                                         if (guildrole.rawPosition <= botrole.rawPosition) {
                                                             apply_for_here.set(message.guild.id, role.id, pre + ".two.role");
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("GREEN")
                                                                         .setAuthor(
@@ -3218,7 +3202,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("RED")
                                                                     .setDescription(
@@ -3240,7 +3224,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -3264,7 +3248,7 @@ module.exports = {
                                         apply_for_here.set(message.guild.id, "", pre + ".two.role");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor("GREEN")
                                                     .setAuthor(
@@ -3283,7 +3267,7 @@ module.exports = {
                                         apply_for_here.set(message.guild.id, "", pre + ".two.image.url");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor("GREEN")
                                                     .setTitle(
@@ -3300,7 +3284,7 @@ module.exports = {
                                             tempmsg2 = await tempmsg2
                                                 .edit({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setColor(es.color)
                                                             .setTitle(
                                                                 eval(
@@ -3316,10 +3300,9 @@ module.exports = {
                                                                     ]
                                                                 )
                                                             )
-                                                            .setFooter(
-                                                                "Pick the INDEX NUMBER / send the IMAGE URl",
-                                                                client.user.displayAvatarURL()
-                                                            )
+                                                            .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                                iconURL: client.user.displayAvatarURL()
+                                                            })
                                                             .setThumbnail(client.user.displayAvatarURL()),
                                                     ],
                                                 })
@@ -3346,7 +3329,7 @@ module.exports = {
                                                                     );
                                                                     return message.reply({
                                                                         embeds: [
-                                                                            new Discord.MessageEmbed()
+                                                                            new Discord.EmbedBuilder()
                                                                                 .setFooter(client.getFooter(es))
                                                                                 .setColor("GREEN")
                                                                                 .setTitle(
@@ -3361,7 +3344,7 @@ module.exports = {
                                                                 }
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setTitle(
                                                                                 eval(
                                                                                     client.la[ls]["cmds"]["setup"][
@@ -3389,7 +3372,7 @@ module.exports = {
                                                                 );
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setFooter(client.getFooter(es))
                                                                             .setColor("GREEN")
                                                                             .setTitle(
@@ -3404,7 +3387,7 @@ module.exports = {
                                                             }
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -3449,7 +3432,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable110"]
@@ -3476,7 +3459,7 @@ module.exports = {
                             var tempmsg2;
                             tempmsg2 = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable112"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable113"]))
@@ -3492,7 +3475,7 @@ module.exports = {
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable114"]))
                                             .setColor("RED")
                                             .setDescription(
@@ -3529,7 +3512,7 @@ module.exports = {
                             if (timeouterror)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable115"]))
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -3542,7 +3525,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -3569,7 +3552,7 @@ module.exports = {
                                                         );
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("GREEN")
                                                                     .setAuthor(
@@ -3584,7 +3567,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -3608,7 +3591,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -3632,7 +3615,7 @@ module.exports = {
                                                         if (!role)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor(es.color)
                                                                         .setTitle(
@@ -3653,10 +3636,10 @@ module.exports = {
                                                             });
                                                         var guildrole = message.guild.roles.cache.get(role.id);
 
-                                                        if (!message.guild.me.roles)
+                                                        if (!message.guild.members.me.roles)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("RED")
                                                                         .setDescription(
@@ -3675,7 +3658,7 @@ module.exports = {
                                                                 ],
                                                             });
 
-                                                        var botrole = message.guild.me.roles.highest;
+                                                        var botrole = message.guild.members.me.roles.highest;
 
                                                         if (guildrole.rawPosition <= botrole.rawPosition) {
                                                             apply_for_here.set(
@@ -3685,7 +3668,7 @@ module.exports = {
                                                             );
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("GREEN")
                                                                         .setAuthor(
@@ -3699,7 +3682,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("RED")
                                                                     .setDescription(
@@ -3721,7 +3704,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -3745,7 +3728,7 @@ module.exports = {
                                         apply_for_here.set(message.guild.id, "", pre + ".three.role");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor("GREEN")
                                                     .setAuthor(
@@ -3763,7 +3746,7 @@ module.exports = {
                                     apply_for_here.set(message.guild.id, "", pre + ".three.image.url");
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setFooter(client.getFooter(es))
                                                 .setColor("GREEN")
                                                 .setTitle(
@@ -3778,7 +3761,7 @@ module.exports = {
                                         tempmsg2 = await tempmsg2
                                             .edit({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle(
                                                             eval(
@@ -3790,10 +3773,9 @@ module.exports = {
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable124"]
                                                             )
                                                         )
-                                                        .setFooter(
-                                                            "Pick the INDEX NUMBER / send the IMAGE URl",
-                                                            client.user.displayAvatarURL()
-                                                        )
+                                                        .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                            iconURL: client.user.displayAvatarURL()
+                                                        })
                                                         .setThumbnail(client.user.displayAvatarURL()),
                                                 ],
                                             })
@@ -3820,7 +3802,7 @@ module.exports = {
                                                                 );
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setFooter(client.getFooter(es))
                                                                             .setColor("GREEN")
                                                                             .setTitle(
@@ -3835,7 +3817,7 @@ module.exports = {
                                                             }
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -3863,7 +3845,7 @@ module.exports = {
                                                             );
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("GREEN")
                                                                         .setTitle(
@@ -3878,7 +3860,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -3912,7 +3894,7 @@ module.exports = {
                                     } catch (e) {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable129"])
                                                     )
@@ -3929,7 +3911,7 @@ module.exports = {
                                 default:
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor("RED")
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable131"]))
                                                 .setDescription(
@@ -3947,7 +3929,7 @@ module.exports = {
                             var tempmsg2;
                             tempmsg2 = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable133"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable134"]))
@@ -3963,7 +3945,7 @@ module.exports = {
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable135"]))
                                             .setColor("RED")
                                             .setDescription(
@@ -4000,7 +3982,7 @@ module.exports = {
                             if (timeouterror)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable136"]))
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -4013,7 +3995,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -4040,7 +4022,7 @@ module.exports = {
                                                         );
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("GREEN")
                                                                     .setAuthor(
@@ -4055,7 +4037,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -4079,7 +4061,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -4103,7 +4085,7 @@ module.exports = {
                                                         if (!role)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor(es.color)
                                                                         .setTitle(
@@ -4124,10 +4106,10 @@ module.exports = {
                                                             });
                                                         var guildrole = message.guild.roles.cache.get(role.id);
 
-                                                        if (!message.guild.me.roles)
+                                                        if (!message.guild.members.me.roles)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("RED")
                                                                         .setDescription(
@@ -4146,7 +4128,7 @@ module.exports = {
                                                                 ],
                                                             });
 
-                                                        var botrole = message.guild.me.roles.highest;
+                                                        var botrole = message.guild.members.me.roles.highest;
 
                                                         if (guildrole.rawPosition <= botrole.rawPosition) {
                                                             apply_for_here.set(
@@ -4156,7 +4138,7 @@ module.exports = {
                                                             );
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("GREEN")
                                                                         .setAuthor(
@@ -4170,7 +4152,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("RED")
                                                                     .setDescription(
@@ -4192,7 +4174,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -4216,7 +4198,7 @@ module.exports = {
                                         apply_for_here.set(message.guild.id, "", pre + ".four.role");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor("GREEN")
                                                     .setAuthor(
@@ -4234,7 +4216,7 @@ module.exports = {
                                     apply_for_here.set(message.guild.id, "", pre + ".four.image.url");
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setFooter(client.getFooter(es))
                                                 .setColor("GREEN")
                                                 .setTitle(
@@ -4249,7 +4231,7 @@ module.exports = {
                                         tempmsg2 = await tempmsg2
                                             .edit({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle(
                                                             eval(
@@ -4261,10 +4243,9 @@ module.exports = {
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable145"]
                                                             )
                                                         )
-                                                        .setFooter(
-                                                            "Pick the INDEX NUMBER / send the IMAGE URl",
-                                                            client.user.displayAvatarURL()
-                                                        )
+                                                        .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                            iconURL: client.user.displayAvatarURL()
+                                                        })
                                                         .setThumbnail(client.user.displayAvatarURL()),
                                                 ],
                                             })
@@ -4291,7 +4272,7 @@ module.exports = {
                                                                 );
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setFooter(client.getFooter(es))
                                                                             .setColor("GREEN")
                                                                             .setTitle(
@@ -4306,7 +4287,7 @@ module.exports = {
                                                             }
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -4334,7 +4315,7 @@ module.exports = {
                                                             );
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("GREEN")
                                                                         .setTitle(
@@ -4349,7 +4330,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -4383,7 +4364,7 @@ module.exports = {
                                     } catch (e) {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable150"])
                                                     )
@@ -4400,7 +4381,7 @@ module.exports = {
                                 default:
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor("RED")
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable152"]))
                                                 .setDescription(
@@ -4419,7 +4400,7 @@ module.exports = {
                             var tempmsg2;
                             tempmsg2 = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable154"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable155"]))
@@ -4435,7 +4416,7 @@ module.exports = {
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable156"]))
                                             .setColor("RED")
                                             .setDescription(
@@ -4472,7 +4453,7 @@ module.exports = {
                             if (timeouterror)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable157"]))
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -4485,7 +4466,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -4512,7 +4493,7 @@ module.exports = {
                                                         );
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("GREEN")
                                                                     .setAuthor(
@@ -4527,7 +4508,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -4551,7 +4532,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setAuthor(
@@ -4575,7 +4556,7 @@ module.exports = {
                                                         if (!role)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor(es.color)
                                                                         .setTitle(
@@ -4596,10 +4577,10 @@ module.exports = {
                                                             });
                                                         var guildrole = message.guild.roles.cache.get(role.id);
 
-                                                        if (!message.guild.me.roles)
+                                                        if (!message.guild.members.me.roles)
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("RED")
                                                                         .setDescription(
@@ -4618,7 +4599,7 @@ module.exports = {
                                                                 ],
                                                             });
 
-                                                        var botrole = message.guild.me.roles.highest;
+                                                        var botrole = message.guild.members.me.roles.highest;
 
                                                         if (guildrole.rawPosition <= botrole.rawPosition) {
                                                             apply_for_here.set(
@@ -4628,7 +4609,7 @@ module.exports = {
                                                             );
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor("GREEN")
                                                                         .setAuthor(
@@ -4642,7 +4623,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor("RED")
                                                                     .setDescription(
@@ -4664,7 +4645,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -4688,7 +4669,7 @@ module.exports = {
                                         apply_for_here.set(message.guild.id, "", pre + ".five.role");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor("GREEN")
                                                     .setAuthor(
@@ -4706,7 +4687,7 @@ module.exports = {
                                     apply_for_here.set(message.guild.id, "", pre + ".five.image.url");
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setFooter(client.getFooter(es))
                                                 .setColor("GREEN")
                                                 .setAuthor(
@@ -4724,7 +4705,7 @@ module.exports = {
                                         tempmsg2 = await tempmsg2
                                             .edit({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle(
                                                             eval(
@@ -4736,10 +4717,9 @@ module.exports = {
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable165"]
                                                             )
                                                         )
-                                                        .setFooter(
-                                                            "Pick the INDEX NUMBER / send the IMAGE URl",
-                                                            client.user.displayAvatarURL()
-                                                        )
+                                                        .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                            iconURL: client.user.displayAvatarURL()
+                                                        })
                                                         .setThumbnail(client.user.displayAvatarURL()),
                                                 ],
                                             })
@@ -4766,7 +4746,7 @@ module.exports = {
                                                                 );
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setFooter(client.getFooter(es))
 
                                                                             .setColor("GREEN")
@@ -4782,7 +4762,7 @@ module.exports = {
                                                             }
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -4810,7 +4790,7 @@ module.exports = {
                                                             );
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
 
                                                                         .setColor("GREEN")
@@ -4826,7 +4806,7 @@ module.exports = {
                                                         }
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
@@ -4860,7 +4840,7 @@ module.exports = {
                                     } catch (e) {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable170"])
                                                     )
@@ -4877,7 +4857,7 @@ module.exports = {
                                 default:
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor("RED")
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable172"]))
                                                 .setDescription(
@@ -4892,17 +4872,14 @@ module.exports = {
                     case "editquestion":
                         {
                             var Questions = apply_for_here.get(message.guild.id, pre + ".QUESTIONS");
-                            var embed = new Discord.MessageEmbed()
+                            var embed = new Discord.EmbedBuilder()
                                 .setFooter(client.getFooter(es))
 
                                 .setColor(es.color)
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable174"])) //Tomato#6966
-                                .setFooter(
-                                    "ADD THE INDEX TO EDIT THE MSG",
-                                    message.guild.iconURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setFooter({ text: "ADD THE INDEX TO EDIT THE MSG",
+                                    iconURL: message.guild.iconURL({ dynamic: true })
+                                })
                                 .setTimestamp();
 
                             for (var i = 0; i < Questions.length; i++) {
@@ -4920,7 +4897,7 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         embed,
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable175"]))
@@ -4944,7 +4921,7 @@ module.exports = {
                                                 message
                                                     .reply({
                                                         embeds: [
-                                                            new Discord.MessageEmbed()
+                                                            new Discord.EmbedBuilder()
                                                                 .setFooter(client.getFooter(es))
                                                                 .setColor(es.color)
                                                                 .setAuthor(
@@ -5098,7 +5075,7 @@ module.exports = {
                                                                     message.guild.id,
                                                                     pre + ".QUESTIONS"
                                                                 );
-                                                                var new_embed = new Discord.MessageEmbed()
+                                                                var new_embed = new Discord.EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor(es.color)
                                                                     .setTitle(
@@ -5108,12 +5085,9 @@ module.exports = {
                                                                             ]
                                                                         )
                                                                     ) //Tomato#6966
-                                                                    .setFooter(
-                                                                        message.guild.name,
-                                                                        message.guild.iconURL({
-                                                                            dynamic: true,
-                                                                        })
-                                                                    )
+                                                                    .setFooter({ text: message.guild.name,
+                                                                        iconURL: message.guild.iconURL({ dynamic: true })
+                                                                    })
                                                                     .setTimestamp();
                                                                 for (var i = 0; i < Questions.length; i++) {
                                                                     try {
@@ -5130,7 +5104,7 @@ module.exports = {
                                                             .catch(error => {
                                                                 return message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setTitle(
                                                                                 eval(
                                                                                     client.la[ls]["cmds"]["setup"][
@@ -5150,7 +5124,7 @@ module.exports = {
                                             } else {
                                                 message.reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setFooter(client.getFooter(es))
                                                             .setColor("RED")
                                                             .setAuthor(
@@ -5169,7 +5143,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable179"]
@@ -5188,7 +5162,7 @@ module.exports = {
                         message
                             .reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setFooter(client.getFooter(es))
                                         .setColor(es.color)
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable180"]))
@@ -5211,10 +5185,10 @@ module.exports = {
                                             });
                                         var guildrole = message.guild.roles.cache.get(role.id);
 
-                                        if (!message.guild.me.roles)
+                                        if (!message.guild.members.me.roles)
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor("RED")
                                                         .setDescription(
@@ -5231,13 +5205,13 @@ module.exports = {
                                                 ],
                                             });
 
-                                        var botrole = message.guild.me.roles.highest;
+                                        var botrole = message.guild.members.me.roles.highest;
 
                                         if (guildrole.rawPosition <= botrole.rawPosition) {
                                             apply_for_here.set(message.guild.id, role.id, pre + ".TEMP_ROLE");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor("GREEN")
                                                         .setAuthor(
@@ -5251,7 +5225,7 @@ module.exports = {
                                         }
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor("RED")
                                                     .setDescription(
@@ -5269,7 +5243,7 @@ module.exports = {
                                     .catch(error => {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable185"])
                                                     )
@@ -5286,7 +5260,7 @@ module.exports = {
                             message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable186"]))
@@ -5431,7 +5405,7 @@ module.exports = {
                                             apply_for_here.push(message.guild.id, obj, pre + ".QUESTIONS");
                                             message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor("GREEN")
                                                         .setAuthor(
@@ -5443,16 +5417,13 @@ module.exports = {
                                                 ],
                                             });
                                             Questions = apply_for_here.get(message.guild.id, pre + ".QUESTIONS");
-                                            var embed = new Discord.MessageEmbed()
+                                            var embed = new Discord.EmbedBuilder()
                                                 .setFooter(client.getFooter(es))
                                                 .setColor(es.color)
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable188"])) //Tomato#6966
-                                                .setFooter(
-                                                    message.guild.name,
-                                                    message.guild.iconURL({
-                                                        dynamic: true,
-                                                    })
-                                                )
+                                                .setFooter({ text: message.guild.name,
+                                                    iconURL: message.guild.iconURL({ dynamic: true })
+                                                })
                                                 .setTimestamp();
 
                                             for (var i = 0; i < Questions.length; i++) {
@@ -5472,7 +5443,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable189"]
@@ -5490,17 +5461,14 @@ module.exports = {
                     case "removequestion":
                         {
                             var Questions = apply_for_here.get(message.guild.id, pre + ".QUESTIONS");
-                            var embed = new Discord.MessageEmbed()
+                            var embed = new Discord.EmbedBuilder()
                                 .setFooter(client.getFooter(es))
 
                                 .setColor(es.color)
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable190"])) //Tomato#6966
-                                .setFooter(
-                                    "ADD THE INDEX TO EDIT THE MSG",
-                                    message.guild.iconURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setFooter({ text: "ADD THE INDEX TO EDIT THE MSG",
+                                    iconURL: message.guild.iconURL({ dynamic: true })
+                                })
                                 .setTimestamp();
 
                             for (var i = 0; i < Questions.length; i++) {
@@ -5518,7 +5486,7 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         embed,
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setFooter(client.getFooter(es))
 
                                             .setColor(es.color)
@@ -5561,18 +5529,15 @@ module.exports = {
                                                 }
                                                 apply_for_here.set(message.guild.id, arr, pre + ".QUESTIONS");
                                                 Questions = apply_for_here.get(message.guild.id, pre + ".QUESTIONS");
-                                                var new_embed = new Discord.MessageEmbed()
+                                                var new_embed = new Discord.EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(es.color)
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable193"])
                                                     ) //Tomato#6966
-                                                    .setFooter(
-                                                        message.guild.name,
-                                                        message.guild.iconURL({
-                                                            dynamic: true,
-                                                        })
-                                                    )
+                                                    .setFooter({ text: message.guild.name,
+                                                        iconURL: message.guild.iconURL({ dynamic: true })
+                                                    })
                                                     .setTimestamp();
                                                 for (var i = 0; i < Questions.length; i++) {
                                                     try {
@@ -5588,7 +5553,7 @@ module.exports = {
                                             } else {
                                                 message.reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setFooter(client.getFooter(es))
                                                             .setColor("RED")
                                                             .setAuthor(
@@ -5607,7 +5572,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable194"]
@@ -5630,7 +5595,7 @@ module.exports = {
                             var userid = cmduser.id;
                             pickmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setFooter(client.getFooter(es))
 
                                         .setColor(es.color)
@@ -5657,7 +5622,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setColor("RED")
                                                         .setFooter(client.getFooter(es))
                                                         .setTitle(
@@ -5687,7 +5652,7 @@ module.exports = {
                                 return message
                                     .reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor("RED")
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable199"]))
@@ -5702,7 +5667,7 @@ module.exports = {
 
                             message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setFooter(client.getFooter(es))
                                         .setColor(es.color)
                                         .setAuthor(
@@ -5712,7 +5677,7 @@ module.exports = {
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
-                            var embed = new Discord.MessageEmbed()
+                            var embed = new Discord.EmbedBuilder()
                                 .setFooter(client.getFooter(es))
                                 .setColor(es.color)
                                 .setFooter(client.getFooter(es));
@@ -5760,7 +5725,7 @@ module.exports = {
                                 return message
                                     .reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor("RED")
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable204"]))
@@ -5791,7 +5756,7 @@ module.exports = {
                                 })
                                 .then(collected => {
                                     desc = collected.first().content;
-                                    var setupembed = new Discord.MessageEmbed()
+                                    var setupembed = new Discord.EmbedBuilder()
                                         .setFooter(client.getFooter(es))
                                         .setColor(color)
                                         .setDescription(desc)
@@ -5812,7 +5777,7 @@ module.exports = {
 
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setFooter(client.getFooter(es))
                                                 .setColor(es.color)
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable207"]))
@@ -5829,7 +5794,7 @@ module.exports = {
                                 return message
                                     .reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor("RED")
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable209"]))
@@ -5846,7 +5811,7 @@ module.exports = {
                             message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setColor("RED")
                                             .setFooter(client.getFooter(es))
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable210"]))
@@ -5870,7 +5835,7 @@ module.exports = {
                             var userid = cmduser.id;
                             pickmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setFooter(client.getFooter(es))
                                         .setColor(es.color)
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable212"]))
@@ -5897,7 +5862,7 @@ module.exports = {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setColor("RED")
                                                         .setFooter(client.getFooter(es))
                                                         .setTitle(
@@ -5927,7 +5892,7 @@ module.exports = {
                                 return message
                                     .reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor("RED")
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable215"]))
@@ -5948,7 +5913,7 @@ module.exports = {
                             message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setColor("RED")
                                             .setFooter(client.getFooter(es))
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable217"]))
@@ -5971,7 +5936,7 @@ module.exports = {
                                 !apply_for_here.get(message.guild.id, `${pre}.last_verify`),
                                 `${pre}.last_verify`
                             );
-                            var embed = new Discord.MessageEmbed()
+                            var embed = new Discord.EmbedBuilder()
                                 .setFooter(client.getFooter(es))
                                 .setColor(es.color)
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable219"])) //Tomato#6966
@@ -5987,7 +5952,7 @@ module.exports = {
                 console.log(String(e.stack).grey.bgRed);
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].common.erroroccur)

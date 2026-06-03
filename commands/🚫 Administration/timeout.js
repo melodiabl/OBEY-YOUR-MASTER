@@ -1,4 +1,4 @@
-const { MessageEmbed, Permissions } = require(`discord.js`);
+const { EmbedBuilder, Permissions } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -37,12 +37,12 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
             )
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
@@ -59,7 +59,7 @@ module.exports = {
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable4"]))
@@ -100,7 +100,7 @@ module.exports = {
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable6"])),
@@ -112,7 +112,7 @@ module.exports = {
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle("❌ **I am not able to manage this User**"),
@@ -124,7 +124,7 @@ module.exports = {
                     kickmember.user
                         .send({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -152,7 +152,7 @@ module.exports = {
                 message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable10"]))
@@ -167,7 +167,7 @@ module.exports = {
                     message
                         .reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -199,7 +199,7 @@ module.exports = {
                             if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                             channel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -226,8 +226,7 @@ module.exports = {
                                             eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                         )
                                         .setTimestamp()
-                                        .setFooter(
-                                            client.getFooter(
+                                        .setFooter(client.getFooter(
                                                 "ID: " + message.author.id,
                                                 message.author.displayAvatarURL({ dynamic: true })
                                             )
@@ -243,7 +242,7 @@ module.exports = {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].common.erroroccur)
@@ -255,7 +254,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))

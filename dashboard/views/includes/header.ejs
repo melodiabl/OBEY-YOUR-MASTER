@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title || 'OBEY YOUR MASTER BOT Dashboard' %></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/"><i class="fas fa-robot"></i> OBEY YOUR MASTER BOT</a>
+  <div class="nav-links">
+    <% if (user) { %>
+      <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <span class="user-info">
+        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" onerror="this.src='/img/default.png'" width="32" height="32" class="avatar">
+        <%= user.username %>
+      </span>
+      <a href="/logout" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
+    <% } else { %>
+      <a href="/login" class="btn-login"><i class="fab fa-discord"></i> Login con Discord</a>
+    <% } %>
+  </div>
+</nav>

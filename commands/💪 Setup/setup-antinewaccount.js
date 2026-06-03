@@ -1,11 +1,11 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing, duration } = require(`${process.cwd()}/handlers/functions`);
 const ms = require("ms");
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup-antinewaccount",
@@ -75,7 +75,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -93,7 +93,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new MessageEmbed()
+                let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Anti-New-Account",
@@ -104,11 +104,11 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -145,7 +145,7 @@ module.exports = {
                             let thesettings = client.settings.get(message.guild.id, `antinewaccount`);
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(
                                             `${thesettings ? `Enabled New Account Detection` : `Disabled New Account Detection`}`
                                         )
@@ -171,7 +171,7 @@ module.exports = {
                             let extramessage = settings.extra_message;
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(`What should be the new Extra Message?`)
                                         .setColor(es.color)
                                         .addField(
@@ -200,7 +200,7 @@ module.exports = {
                                         client.settings.set(message.guild.id, extramessage, `antinewaccount.extra_message`);
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(`Defined the New Extra Message!`)
                                                     .setColor(es.color)
                                                     .addField(
@@ -219,7 +219,7 @@ module.exports = {
                                 .catch(e => {
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(`Something went wrong`)
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -235,7 +235,7 @@ module.exports = {
                             const extramessage = thesettings.extra_message;
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(`Settings of the New Account Detection Setup`)
                                         .setColor(es.color)
                                         .setDescription(
@@ -278,7 +278,7 @@ module.exports = {
                                 },
                             ];
                             //define the selection
-                            let Selection = new MessageSelectMenu()
+                            let Selection = new StringSelectMenuBuilder()
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -298,7 +298,7 @@ module.exports = {
                                 );
 
                             //define the embed
-                            let MenuEmbed = new MessageEmbed()
+                            let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
                                 .setAuthor(
                                     "Anti-New-Account",
@@ -309,11 +309,11 @@ module.exports = {
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
-                                components: [new MessageActionRow().addComponents(Selection)],
+                                components: [new ActionRowBuilder().addComponents(Selection)],
                             });
                             //Create the collector
                             const collector = menumsg.createMessageComponentCollector({
-                                filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                                 time: 90000,
                             });
                             //Menu Collections
@@ -329,7 +329,7 @@ module.exports = {
                                     client.settings.set(message.guild.id, menu?.values[0], `antinewaccount.action`);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(`Successfully set the new Action to: ${menu?.values[0]}`)
                                                 .setColor(es.color)
                                                 .setDescription(
@@ -361,7 +361,7 @@ module.exports = {
                         let extramessage = settings.extra_message;
                         var tempmsg = await message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setTitle(`What should be the new Minimum Account Age?`)
                                     .setColor(es.color)
                                     .addField(
@@ -395,7 +395,7 @@ module.exports = {
                                     client.settings.set(message.guild.id, time, `antinewaccount.delay`);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(`Defined the New Minimum Account Duration!`)
                                                 .setColor(es.color)
                                                 .addField(
@@ -413,7 +413,7 @@ module.exports = {
                             .catch(e => {
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(`Something went wrong`)
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -428,7 +428,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

@@ -1,4 +1,4 @@
-var { MessageEmbed, MessageSelectMenu, MessageActionRow } = require(`discord.js`);
+var { EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 const { getNumberEmojis } = require("../../botconfig/emojiFunctions");
 var config = require(`${process.cwd()}/botconfig/config.json`);
@@ -39,7 +39,7 @@ module.exports = {
                     });
                 }
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -57,7 +57,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Member Counter Setup",
@@ -69,7 +69,7 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //function to handle the menuselection
                 function menuselection(menu) {
@@ -83,7 +83,7 @@ module.exports = {
                 }
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -112,7 +112,7 @@ module.exports = {
             async function second_layer(SetupNumber, menuoptiondata) {
                 var tempmsg = await message.reply({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable6"]))
                             .setColor(es.color)
                             .setThumbnail(
@@ -143,7 +143,7 @@ module.exports = {
                             let temptype = SetupNumber;
                             message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable8"]))
                                         .setColor(es.color)
                                         .setThumbnail(
@@ -161,7 +161,7 @@ module.exports = {
 
                             tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable9"]))
                                         .setColor(es.color)
                                         .setThumbnail(
@@ -407,7 +407,7 @@ module.exports = {
                                         );
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable10"]
@@ -621,7 +621,7 @@ module.exports = {
                                     console.log(String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable11"])
                                                 )
@@ -639,7 +639,7 @@ module.exports = {
                         console.log(e.stack ? String(e.stack).grey : String(e).grey);
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable12"]))
                                     .setColor(es.wrongcolor)
                                     .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -652,7 +652,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable15"]))

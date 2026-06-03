@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -40,7 +40,7 @@ module.exports = {
             try {
                 const member = guild.members.cache.get(user.id);
                 //create the EMBED
-                const embeduserinfo = new MessageEmbed();
+                const embeduserinfo = new EmbedBuilder();
                 embeduserinfo.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }));
                 embeduserinfo.setAuthor(
                     handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.tag }),
@@ -69,7 +69,7 @@ module.exports = {
             } catch (e) {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 //create the EMBED
-                const embeduserinfo = new MessageEmbed();
+                const embeduserinfo = new EmbedBuilder();
                 embeduserinfo.setThumbnail(user.displayAvatarURL({ dynamic: true, size: 512 }));
                 embeduserinfo.setAuthor(
                     handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.tag }),

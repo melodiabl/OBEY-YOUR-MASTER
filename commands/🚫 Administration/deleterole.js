@@ -2,7 +2,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { MessageEmbed, MessageActionRow, MessageButton, Permissions } = require(`discord.js`);
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Permissions } = require(`discord.js`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `deleterole`,
@@ -13,10 +13,10 @@ module.exports = {
     description: `Delets a Role from this Server`,
     type: "role",
     run: async (client, message, args, cmduser, text, prefix) => {
-        if (!message.guild.me.permissions.has([Permissions.FLAGS.MANAGE_ROLES]))
+        if (!message.guild.members.me.permissions.has([PermissionFlagsBits.MANAGE_ROLES]))
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable1"])),
@@ -46,11 +46,11 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
             )
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable2"]))
@@ -62,19 +62,19 @@ module.exports = {
                 message.guild.roles.cache.get(args[0]);
             if (!role || role == null || role == undefined || role.name == null || role.name == undefined)
                 return message.reply({ embeds: [] });
-            let button_verify = new MessageButton()
-                .setStyle("SUCCESS")
+            let button_verify = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Success)
                 .setCustomId("deleterole_verify")
                 .setLabel("Verify this Step")
                 .setEmoji("833101995723194437");
             let msg = await message.channel.send({
                 content: `<@${message.author.id}>`,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable6"]))
                         .setColor(es.color),
                 ],
-                components: [new MessageActionRow().addComponents(button_verify)],
+                components: [new ActionRowBuilder().addComponents(button_verify)],
             });
             let edited = false;
             const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
@@ -90,8 +90,8 @@ module.exports = {
                 edited = true;
                 msg.edit({
                     content: `<@${message.author.id}>`,
-                    embeds: [new MessageEmbed().setTitle("Verified!").setColor(es.color)],
-                    components: [new MessageActionRow().addComponents(button_verify.setDisabled(true))],
+                    embeds: [new EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                    components: [new ActionRowBuilder().addComponents(button_verify.setDisabled(true))],
                 }).catch(e => {
                     console.log(String(e).grey);
                 });
@@ -103,7 +103,7 @@ module.exports = {
                         .then(r => {
                             message.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -125,7 +125,7 @@ module.exports = {
                                     if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                                     channel.send({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -155,8 +155,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                                 )
                                                 .setTimestamp()
-                                                .setFooter(
-                                                    client.getFooter(
+                                                .setFooter(client.getFooter(
                                                         "ID: " + message.author.id,
                                                         message.author.displayAvatarURL({ dynamic: true })
                                                     )
@@ -172,7 +171,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable12"]))
@@ -182,7 +181,7 @@ module.exports = {
                 }
             });
 
-            let endedembed = new MessageEmbed().setTitle("Time ran out!").setColor(es.wrongcolor);
+            let endedembed = new EmbedBuilder().setTitle("Time ran out!").setColor(es.wrongcolor);
             collector.on("end", collected => {
                 if (!edited) {
                     edited = true;
@@ -190,12 +189,12 @@ module.exports = {
                         content: `<@${message.author.id}>`,
                         embeds: [endedembed],
                         components: [
-                            new MessageActionRow().addComponents(
+                            new ActionRowBuilder().addComponents(
                                 button_verify
                                     .setDisabled(true)
                                     .setLabel("FAILED TO VERIFY")
                                     .setEmoji("833101993668771842")
-                                    .setStyle("DANGER")
+                                    .setStyle(Discord.ButtonStyle.Danger)
                             ),
                         ],
                     }).catch(e => {
@@ -207,7 +206,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

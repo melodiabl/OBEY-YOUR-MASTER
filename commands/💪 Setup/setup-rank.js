@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing, edit_msg, send_roster } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup-rank",
@@ -63,7 +63,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -81,7 +81,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new MessageEmbed()
+                let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Rank Setup",
@@ -92,11 +92,11 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -131,7 +131,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable5"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable6"]))
@@ -156,7 +156,7 @@ module.exports = {
                                             client.points.set(message.guild.id, false, "disabled");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable7"])
                                                         )
@@ -167,7 +167,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable8"])
                                                         )
@@ -187,7 +187,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable10"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -204,7 +204,7 @@ module.exports = {
                                 client.points.set(message.guild.id, false, "disabled");
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable11"]))
                                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable12"]))
                                             .setColor(es.color)
@@ -214,7 +214,7 @@ module.exports = {
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable13"]))
                                             .setColor(es.wrongcolor)
                                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable14"]))
@@ -230,7 +230,7 @@ module.exports = {
                                 if (client.points.get(message.guild.id, "disabled"))
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable15"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
@@ -242,7 +242,7 @@ module.exports = {
                                 client.points.set(message.guild.id, true, "disabled");
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable17"]))
                                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable18"]))
                                             .setColor(es.color)
@@ -252,7 +252,7 @@ module.exports = {
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable19"]))
                                             .setColor(es.wrongcolor)
                                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable20"]))
@@ -269,7 +269,7 @@ module.exports = {
                             });
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle("What do you want to do now?")
                                         .setColor(es.color)
                                         .addField(
@@ -307,7 +307,7 @@ module.exports = {
                                             client.points.set(message.guild.id, oldRankRoles, "rankroles");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             `**REMOVED** the Levelup-Role: ${Role.name} for the Levelup-Level: ${parseInt(arggs[0])}`
                                                         )
@@ -323,7 +323,7 @@ module.exports = {
                                             client.points.set(message.guild.id, oldRankRoles, "rankroles");
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             `**CHANGE** the Levelup-Role: ${Role.name} for the Levelup-Level: ${parseInt(arggs[0])}`
                                                         )
@@ -339,7 +339,7 @@ module.exports = {
                                         client.points.set(message.guild.id, oldRankRoles, "rankroles");
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         `**ADDED** the Levelup-Role: ${Role.name} for the Levelup-Level: ${parseInt(arggs[0])}`
                                                     )
@@ -353,7 +353,7 @@ module.exports = {
                                     } catch (e) {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable8"])
                                                     )
@@ -370,7 +370,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable10"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -394,7 +394,7 @@ module.exports = {
                             }
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle("Settings of the Ranking System")
                                         .setColor(es.color)
                                         .addField(
@@ -418,7 +418,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

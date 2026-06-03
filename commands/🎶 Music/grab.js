@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -23,7 +23,7 @@ module.exports = {
             if (!client.settings.get(message.guild.id, "MUSIC")) {
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].common.disabled.title)
@@ -34,7 +34,7 @@ module.exports = {
             message.author
                 .send({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setAuthor(
                                 client.la[ls].cmds.music.grab?.author,
                                 message.author.displayAvatarURL({
@@ -54,15 +54,11 @@ module.exports = {
                             .addField(client.la[ls].cmds.music.grab?.field3, `\`${player.queue.length} Songs\``, true)
                             .addField(client.la[ls].cmds.music.grab?.field4, `\`${prefix}play ${player.queue.current.uri}\``)
                             .addField(client.la[ls].cmds.music.grab?.field5, `<#${message.channel.id}>`)
-                            .setFooter(
-                                handlemsg(client.la[ls].cmds.music.grab?.footer, {
+                            .setFooter({ text: handlemsg(client.la[ls].cmds.music.grab?.footer, {
                                     usertag: player.queue.current.requester.tag,
                                     guild: message.guild.name + " | " + message.guild.id,
-                                }),
-                                player.queue.current.requester.displayAvatarURL({
-                                    dynamic: true,
-                                })
-                            ),
+                                }), iconURL: player.queue.current.requester.displayAvatarURL({ dynamic: true })
+                            }),
                     ],
                 })
                 .catch(e => {
@@ -73,7 +69,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["music"]["grab"]["variable2"])),

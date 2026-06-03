@@ -9,7 +9,7 @@ module.exports = function (client, options) {
         });
         if (message.channel.id == client.settings.get(message.guild.id, `counter`)) {
             if (!client.settings.has(message.guild.id, "language"))
-                client.settings.ensure(message.guild.id, { language: "en" });
+                client.settings.ensure(message.guild.id, { language: "es" });
             let ls = client.settings.get(message.guild.id, "language");
             let count = client.settings.get(message.guild.id, `counternum`);
             let counterauthor = client.settings.get(message.guild.id, `counterauthor`);
@@ -18,7 +18,7 @@ module.exports = function (client, options) {
                 count = 0;
             }
             if (!message.author.bot && message.author.id === counterauthor) {
-                if (message.channel.permissionsFor(message.channel.guild.me).has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                if (message.channel.permissionsFor(message.channel.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
                     message.delete().catch(() => {});
                 } else {
                     message.reply("❌ **I am missing the MANAGE_MESSAGES Permission!**").then(m => {
@@ -35,7 +35,7 @@ module.exports = function (client, options) {
                 return;
             }
             if (!message.author.bot && isNaN(message.content)) {
-                if (message.channel.permissionsFor(message.channel.guild.me).has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                if (message.channel.permissionsFor(message.channel.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
                     message.delete().catch(() => {});
                 } else {
                     message.reply("❌ **I am missing the MANAGE_MESSAGES Permission!**").then(m => {
@@ -52,7 +52,7 @@ module.exports = function (client, options) {
                 return;
             }
             if (!message.author.bot && parseInt(message.content) !== count + 1) {
-                if (message.channel.permissionsFor(message.channel.guild.me).has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                if (message.channel.permissionsFor(message.channel.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
                     message.delete().catch(() => {});
                 } else {
                     message.reply("❌ **I am missing the MANAGE_MESSAGES Permission!**").then(m => {

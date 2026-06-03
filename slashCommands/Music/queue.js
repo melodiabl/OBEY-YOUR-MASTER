@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -21,7 +21,7 @@ module.exports = {
             return interaction?.reply({
                 ephemeral: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -38,7 +38,7 @@ module.exports = {
                     ?.reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setAuthor(
                                     `Queue for ${message.guild.name}  -  [ ${tracks.length} Tracks ]`,
                                     message.guild.iconURL({
@@ -66,7 +66,7 @@ module.exports = {
                     ?.reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setAuthor(
                                     `Queue for ${message.guild.name}  -  [ ${player.queue.length} Tracks ]`,
                                     message.guild.iconURL({
@@ -113,7 +113,7 @@ module.exports = {
             for (let i = 0; i < limit; i++) {
                 let desc = String(quelist[i]).substring(0, 2048);
                 await embeds.push(
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setAuthor(
                             `Queue for ${guild.name}  -  [ ${player.queue.length} Tracks ]`,
                             guild.iconURL({

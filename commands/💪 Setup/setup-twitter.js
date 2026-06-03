@@ -1,4 +1,4 @@
-var { MessageEmbed, MessageSelectMenu, MessageActionRow } = require(`discord.js`);
+var { EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -57,7 +57,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -75,7 +75,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new MessageEmbed()
+                let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Twitter Setup",
@@ -86,11 +86,11 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -127,7 +127,7 @@ module.exports = {
                             var userid;
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable10"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable11"]))
@@ -163,7 +163,7 @@ module.exports = {
                             if (timeouterror)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable14"]))
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -207,7 +207,7 @@ module.exports = {
                                         //require("../../social_log/twitterfeed").creat_twit(client);
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable17"])
                                                     )
@@ -228,7 +228,7 @@ module.exports = {
                                     } catch (e) {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable20"])
                                                     )
@@ -248,7 +248,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable22"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable23"]))
@@ -277,7 +277,7 @@ module.exports = {
                                             //require("../../social_log/twitterfeed").creat_twit(client);
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable24"]
@@ -305,7 +305,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable27"]
@@ -329,7 +329,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable29"])
                                                 )
@@ -345,7 +345,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable30"]))
                                         .setColor(es.color)
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable31"]))
@@ -369,7 +369,7 @@ module.exports = {
                                         //require("../../social_log/twitterfeed").creat_twit(client);
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable32"])
                                                     )
@@ -389,7 +389,7 @@ module.exports = {
                                     } catch (e) {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable35"])
                                                     )
@@ -406,7 +406,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable37"])
                                                 )
@@ -428,7 +428,7 @@ module.exports = {
                             //require("../../social_log/twitterfeed").creat_twit(client);
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable38"]))
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable39"]))
                                         .setColor(es.color)
@@ -445,7 +445,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable41"]))
                                         .setColor(es.color)
                                         .setURL("https://tweeterid.com")
@@ -470,7 +470,7 @@ module.exports = {
                                         //require("../../social_log/twitterfeed").creat_twit(client);
                                         message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         `${allEmojis.msg.SUCCESS} Set the TWITTER USER ID TO: \`${collected.first().content}\``.substring(
                                                             0,
@@ -487,7 +487,7 @@ module.exports = {
 
                                         var tempmsg = await message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable44"])
                                                     )
@@ -515,7 +515,7 @@ module.exports = {
                                                     //require("../../social_log/twitterfeed").creat_twit(client);
                                                     return message.reply({
                                                         embeds: [
-                                                            new Discord.MessageEmbed()
+                                                            new Discord.EmbedBuilder()
                                                                 .setTitle(
                                                                     `${allEmojis.msg.SUCCESS} Set the TWITTER USER Name TO: \`${collected.first().content}\``.substring(
                                                                         0,
@@ -548,7 +548,7 @@ module.exports = {
                                                 } catch (e) {
                                                     return message.reply({
                                                         embeds: [
-                                                            new Discord.MessageEmbed()
+                                                            new Discord.EmbedBuilder()
                                                                 .setTitle(
                                                                     eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitter"][
@@ -573,7 +573,7 @@ module.exports = {
                                                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                                 return message.reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setTitle(
                                                                 eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-twitter"][
@@ -590,7 +590,7 @@ module.exports = {
                                     } catch (e) {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable51"])
                                                     )
@@ -607,7 +607,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable53"])
                                                 )
@@ -625,7 +625,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

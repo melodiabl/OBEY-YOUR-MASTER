@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -24,7 +24,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "MUSIC")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -37,7 +37,7 @@ module.exports = {
             if (!args[0])
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
 
                             .setTitle(eval(client.la[ls]["cmds"]["music"]["searchradio"]["variable1"]))
@@ -47,7 +47,7 @@ module.exports = {
             if (!args[1])
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
 
                             .setTitle(eval(client.la[ls]["cmds"]["music"]["searchradio"]["variable3"]))
@@ -101,7 +101,7 @@ module.exports = {
             if (!filter)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
 
                             .setTitle(eval(client.la[ls]["cmds"]["music"]["searchradio"]["variable5"]))
@@ -123,11 +123,10 @@ module.exports = {
                         }
                     }
 
-                    let embed = new MessageEmbed()
+                    let embed = new EmbedBuilder()
                         .setTitle(`Search result for: 🔎 **\`${filter.searchterm}`.substring(0, 256 - 3) + "`**")
                         .setColor(es.color)
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `Search-Request by: ${message.author.tag}`,
                                 message.author.displayAvatarURL({
                                     dynamic: true,
@@ -141,7 +140,7 @@ module.exports = {
 
                     await message.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
 
                                 .setTitle(eval(client.la[ls]["cmds"]["music"]["searchradio"]["variable7"])),
@@ -159,7 +158,7 @@ module.exports = {
                         if (!player.queue.current) player.destroy();
                         return message.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setTitle(eval(client.la[ls]["cmds"]["music"]["searchradio"]["variable8"]))
                                     .setColor(es.wrongcolor),
                             ],
@@ -170,7 +169,7 @@ module.exports = {
                         if (player && !player.queue.current) player.destroy();
                         return message.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.wrongcolor)
 
                                     .setTitle(eval(client.la[ls]["cmds"]["music"]["searchradio"]["variable9"])),
@@ -181,7 +180,7 @@ module.exports = {
                     if (isNaN(index))
                         return message.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.wrongcolor)
 
                                     .setTitle(eval(client.la[ls]["cmds"]["music"]["searchradio"]["variable10"])),
@@ -190,7 +189,7 @@ module.exports = {
                     if (index < 0 || index > counter - 1)
                         return message.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.wrongcolor)
 
                                     .setTitle(eval(client.la[ls]["cmds"]["music"]["searchradio"]["variable11"])),
@@ -203,7 +202,7 @@ module.exports = {
                     console.log(String(e.stack).dim.bgRed);
                     return message.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
 
                                 .setTitle(client.la[ls].common.erroroccur)
@@ -215,7 +214,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
 
                         .setTitle(client.la[ls].common.erroroccur)

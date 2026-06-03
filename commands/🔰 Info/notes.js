@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const { GetUser, GetGlobalUser, handlemsg, delay } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
 module.exports = {
     name: "notes",
     aliases: ["mynotes"],
@@ -27,49 +27,49 @@ module.exports = {
                 ],
             });
             var notes = client.notes.get(message.author.id, "notes");
-            var button_forward = new MessageButton()
-                .setStyle("PRIMARY")
+            var button_forward = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId("notes_forwards")
                 .setEmoji("832598861813776394")
                 .setLabel("Forwards");
-            var button_back = new MessageButton()
-                .setStyle("PRIMARY")
+            var button_back = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId("notes_backwards")
                 .setEmoji("833802907509719130")
                 .setLabel("Backwards");
-            var button_jump = new MessageButton()
-                .setStyle("PRIMARY")
+            var button_jump = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId("notes_jump")
                 .setLabel("Jump to Page")
                 .setEmoji("🔢");
-            var button_empty1 = new MessageButton()
-                .setStyle("SECONDARY")
+            var button_empty1 = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Secondary)
                 .setCustomId("notes_empty1")
                 .setLabel("\u200b")
                 .setDisabled(true);
-            var button_list = new MessageButton()
-                .setStyle("PRIMARY")
+            var button_list = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId("notes_list")
                 .setLabel("List Notes")
                 .setEmoji("📑");
 
-            var button_create = new MessageButton()
-                .setStyle("SUCCESS")
+            var button_create = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Success)
                 .setCustomId("notes_create")
                 .setEmoji("📋")
                 .setLabel("Create New Note");
-            var button_edit = new MessageButton()
-                .setStyle("PRIMARY")
+            var button_edit = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId("notes_edit")
                 .setEmoji("✏️")
                 .setLabel("Edit this Note");
-            var button_Delete = new MessageButton()
-                .setStyle("PRIMARY")
+            var button_Delete = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId("notes_delete")
                 .setEmoji("🗑")
                 .setLabel("Delete this Note");
-            var button_disable = new MessageButton()
-                .setStyle("SECONDARY")
+            var button_disable = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Secondary)
                 .setCustomId("notes_disable")
                 .setLabel("Stop the Buttons")
                 .setEmoji("833101993668771842");
@@ -78,9 +78,9 @@ module.exports = {
             var currentPage = 0;
             if (!notes || notes.length == 0) {
                 embeds.push(
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter(message.author.tag + ` Page | 0/0`, message.author.displayAvatarURL({ dynamic: true }))
+                        .setFooter({ text: message.author.tag + ` Page | 0/0`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
                         .setTitle(`<:no:833101993668771842> No Notes created yet`)
                         .setDescription(`To create your first Note click on the green Button "\`📋 Create New Note\`"`)
                 );
@@ -92,9 +92,9 @@ module.exports = {
                 button_Delete.setDisabled(true);
             } else {
                 embeds.push(
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+                        .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
                         .setTitle(`All of your Notes you can jump to!`)
                         .setDescription(
                             `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
@@ -107,14 +107,13 @@ module.exports = {
                 for (const note of notes) {
                     counter++;
                     embeds.push(
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(
-                                message.author.tag +
+                            .setFooter({ text: message.author.tag +
                                     ` | Page: ${counter}/${notes.length + 1}` +
                                     ` | ${note.edited ? "Edited" : "Created"} at: `,
-                                message.author.displayAvatarURL({ dynamic: true })
-                            )
+                                iconURL: message.author.displayAvatarURL({ dynamic: true })
+                            })
                             .setTitle(`${note.title}`)
                             .setDescription(`${note.description}`)
                             .setTimestamp(Date.now())
@@ -123,14 +122,14 @@ module.exports = {
                 button_edit.setDisabled(true);
                 button_Delete.setDisabled(true);
             }
-            var buttonRow1 = new MessageActionRow().addComponents([
+            var buttonRow1 = new ActionRowBuilder().addComponents([
                 button_back,
                 button_forward,
                 button_jump,
                 button_empty1,
                 button_list,
             ]);
-            var buttonRow2 = new MessageActionRow().addComponents([
+            var buttonRow2 = new ActionRowBuilder().addComponents([
                 button_create,
                 button_edit,
                 button_Delete,
@@ -226,12 +225,11 @@ module.exports = {
                                         embeds = [];
                                         if (!notes || notes.length == 0) {
                                             embeds.push(
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setFooter(
-                                                        message.author.tag + ` Page | 0/0`,
-                                                        message.author.displayAvatarURL({ dynamic: true })
-                                                    )
+                                                    .setFooter({ text: message.author.tag + ` Page | 0/0`,
+                                                        iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                    })
                                                     .setTitle(`<:no:833101993668771842> No Notes created yet`)
                                                     .setDescription(
                                                         `To create your first Note click on the green Button "\`📋 Create New Note\`"`
@@ -245,12 +243,11 @@ module.exports = {
                                             button_Delete.setDisabled(true);
                                         } else {
                                             embeds.push(
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setFooter(
-                                                        message.author.tag,
-                                                        message.author.displayAvatarURL({ dynamic: true })
-                                                    )
+                                                    .setFooter({ text: message.author.tag,
+                                                        iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                    })
                                                     .setTitle(`All of your Notes you can jump to!`)
                                                     .setDescription(
                                                         `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
@@ -263,28 +260,27 @@ module.exports = {
                                             for (const note of notes) {
                                                 counter++;
                                                 embeds.push(
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setColor(es.color)
-                                                        .setFooter(
-                                                            message.author.tag +
+                                                        .setFooter({ text: message.author.tag +
                                                                 ` | Page: ${counter}/${notes.length + 1}` +
                                                                 ` | ${note.edited ? "Edited" : "Created"} at: `,
-                                                            message.author.displayAvatarURL({ dynamic: true })
-                                                        )
+                                                            iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                        })
                                                         .setTitle(`${note.title}`)
                                                         .setDescription(`${note.description}`)
                                                         .setTimestamp(Date.now())
                                                 );
                                             }
                                         }
-                                        var buttonRow1 = new MessageActionRow().addComponents([
+                                        var buttonRow1 = new ActionRowBuilder().addComponents([
                                             button_back.setDisabled(false),
                                             button_forward.setDisabled(false),
                                             button_jump.setDisabled(false),
                                             button_empty1.setDisabled(false),
                                             button_list.setDisabled(false),
                                         ]);
-                                        var buttonRow2 = new MessageActionRow().addComponents([
+                                        var buttonRow2 = new ActionRowBuilder().addComponents([
                                             button_create.setDisabled(false),
                                             button_edit.setDisabled(false),
                                             button_Delete.setDisabled(false),
@@ -329,7 +325,7 @@ module.exports = {
                                     return message
                                         .reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle("Your Time ran out!")
                                                     .setColor(es.wrongcolor)
                                                     .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -349,7 +345,7 @@ module.exports = {
                             return message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle("Your Time ran out!")
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -368,14 +364,14 @@ module.exports = {
                             if (currentPage == 0) {
                                 button_edit.setDisabled(true);
                                 button_Delete.setDisabled(true);
-                                var buttonRow1 = new MessageActionRow().addComponents([
+                                var buttonRow1 = new ActionRowBuilder().addComponents([
                                     button_back,
                                     button_forward,
                                     button_jump,
                                     button_empty1,
                                     button_list,
                                 ]);
-                                var buttonRow2 = new MessageActionRow().addComponents([
+                                var buttonRow2 = new ActionRowBuilder().addComponents([
                                     button_create,
                                     button_edit,
                                     button_Delete,
@@ -396,14 +392,14 @@ module.exports = {
                         } else {
                             button_edit.setDisabled(false);
                             button_Delete.setDisabled(false);
-                            var buttonRow1 = new MessageActionRow().addComponents([
+                            var buttonRow1 = new ActionRowBuilder().addComponents([
                                 button_back,
                                 button_forward,
                                 button_jump,
                                 button_empty1,
                                 button_list,
                             ]);
-                            var buttonRow2 = new MessageActionRow().addComponents([
+                            var buttonRow2 = new ActionRowBuilder().addComponents([
                                 button_create,
                                 button_edit,
                                 button_Delete,
@@ -429,14 +425,14 @@ module.exports = {
                         await b?.deferUpdate();
                         button_edit.setDisabled(true);
                         button_Delete.setDisabled(true);
-                        var buttonRow1 = new MessageActionRow().addComponents([
+                        var buttonRow1 = new ActionRowBuilder().addComponents([
                             button_back,
                             button_forward,
                             button_jump,
                             button_empty1,
                             button_list,
                         ]);
-                        var buttonRow2 = new MessageActionRow().addComponents([
+                        var buttonRow2 = new ActionRowBuilder().addComponents([
                             button_create,
                             button_edit,
                             button_Delete,
@@ -462,14 +458,14 @@ module.exports = {
                             currentPage++;
                             button_edit.setDisabled(false);
                             button_Delete.setDisabled(false);
-                            var buttonRow1 = new MessageActionRow().addComponents([
+                            var buttonRow1 = new ActionRowBuilder().addComponents([
                                 button_back,
                                 button_forward,
                                 button_jump,
                                 button_empty1,
                                 button_list,
                             ]);
-                            var buttonRow2 = new MessageActionRow().addComponents([
+                            var buttonRow2 = new ActionRowBuilder().addComponents([
                                 button_create,
                                 button_edit,
                                 button_Delete,
@@ -491,14 +487,14 @@ module.exports = {
                             if (currentPage == 0) {
                                 button_edit.setDisabled(true);
                                 button_Delete.setDisabled(true);
-                                var buttonRow1 = new MessageActionRow().addComponents([
+                                var buttonRow1 = new ActionRowBuilder().addComponents([
                                     button_back,
                                     button_forward,
                                     button_jump,
                                     button_empty1,
                                     button_list,
                                 ]);
-                                var buttonRow2 = new MessageActionRow().addComponents([
+                                var buttonRow2 = new ActionRowBuilder().addComponents([
                                     button_create,
                                     button_edit,
                                     button_Delete,
@@ -529,14 +525,14 @@ module.exports = {
                         button_edit.setDisabled(true);
                         button_Delete.setDisabled(true);
                         button_disable.setDisabled(true);
-                        var buttonRow1 = new MessageActionRow().addComponents([
+                        var buttonRow1 = new ActionRowBuilder().addComponents([
                             button_back,
                             button_forward,
                             button_jump,
                             button_empty1,
                             button_list,
                         ]);
-                        var buttonRow2 = new MessageActionRow().addComponents([
+                        var buttonRow2 = new ActionRowBuilder().addComponents([
                             button_create,
                             button_edit,
                             button_Delete,
@@ -596,14 +592,14 @@ module.exports = {
                                 if (Page == 0) {
                                     button_edit.setDisabled(true);
                                     button_Delete.setDisabled(true);
-                                    var buttonRow1 = new MessageActionRow().addComponents([
+                                    var buttonRow1 = new ActionRowBuilder().addComponents([
                                         button_back,
                                         button_forward,
                                         button_jump,
                                         button_empty1,
                                         button_list,
                                     ]);
-                                    var buttonRow2 = new MessageActionRow().addComponents([
+                                    var buttonRow2 = new ActionRowBuilder().addComponents([
                                         button_create,
                                         button_edit,
                                         button_Delete,
@@ -613,14 +609,14 @@ module.exports = {
                                 } else {
                                     button_edit.setDisabled(false);
                                     button_Delete.setDisabled(false);
-                                    var buttonRow1 = new MessageActionRow().addComponents([
+                                    var buttonRow1 = new ActionRowBuilder().addComponents([
                                         button_back,
                                         button_forward,
                                         button_jump,
                                         button_empty1,
                                         button_list,
                                     ]);
-                                    var buttonRow2 = new MessageActionRow().addComponents([
+                                    var buttonRow2 = new ActionRowBuilder().addComponents([
                                         button_create,
                                         button_edit,
                                         button_Delete,
@@ -646,7 +642,7 @@ module.exports = {
                             return message
                                 .reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle("Your Time ran out!")
                                             .setColor(es.wrongcolor)
                                             .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -677,12 +673,11 @@ module.exports = {
                         embeds = [];
                         if (!notes || notes.length == 0) {
                             embeds.push(
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter(
-                                        message.author.tag + ` Page | 0/0`,
-                                        message.author.displayAvatarURL({ dynamic: true })
-                                    )
+                                    .setFooter({ text: message.author.tag + ` Page | 0/0`,
+                                        iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                    })
                                     .setTitle(`<:no:833101993668771842> No Notes created yet`)
                                     .setDescription(
                                         `To create your first Note click on the green Button "\`📋 Create New Note\`"`
@@ -696,9 +691,9 @@ module.exports = {
                             button_Delete.setDisabled(true);
                         } else {
                             embeds.push(
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+                                    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
                                     .setTitle(`All of your Notes you can jump to!`)
                                     .setDescription(
                                         `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
@@ -711,14 +706,13 @@ module.exports = {
                             for (const note of notes) {
                                 counter++;
                                 embeds.push(
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.color)
-                                        .setFooter(
-                                            message.author.tag +
+                                        .setFooter({ text: message.author.tag +
                                                 ` | Page: ${counter}/${notes.length + 1}` +
                                                 ` | ${note.edited ? "Edited" : "Created"} at: `,
-                                            message.author.displayAvatarURL({ dynamic: true })
-                                        )
+                                            iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                        })
                                         .setTitle(`${note.title}`)
                                         .setDescription(`${note.description}`)
                                         .setTimestamp(Date.now())
@@ -729,14 +723,14 @@ module.exports = {
                             button_edit.setDisabled(true);
                             button_Delete.setDisabled(true);
                         }
-                        var buttonRow1 = new MessageActionRow().addComponents([
+                        var buttonRow1 = new ActionRowBuilder().addComponents([
                             button_back,
                             button_forward,
                             button_jump,
                             button_empty1,
                             button_list,
                         ]);
-                        var buttonRow2 = new MessageActionRow().addComponents([
+                        var buttonRow2 = new ActionRowBuilder().addComponents([
                             button_create,
                             button_edit,
                             button_Delete,
@@ -824,12 +818,11 @@ module.exports = {
                                             notes[thenote] = newnote;
                                             client.notes.set(message.author.id, notes, "notes");
                                             notes = client.notes.get(message.author.id, "notes");
-                                            embeds[0] = new MessageEmbed()
+                                            embeds[0] = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setFooter(
-                                                    message.author.tag,
-                                                    message.author.displayAvatarURL({ dynamic: true })
-                                                )
+                                                .setFooter({ text: message.author.tag,
+                                                    iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                })
                                                 .setTitle(`All of your Notes you can jump to!`)
                                                 .setDescription(
                                                     `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
@@ -837,25 +830,24 @@ module.exports = {
                                                         2048
                                                     )
                                                 );
-                                            embeds[thenote + 1] = new MessageEmbed()
+                                            embeds[thenote + 1] = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setFooter(
-                                                    message.author.tag +
+                                                .setFooter({ text: message.author.tag +
                                                         ` | Page: ${thenote + 2}/${embeds.length}` +
                                                         ` | ${newnote.edited ? "Edited" : "Created"} at: `,
-                                                    message.author.displayAvatarURL({ dynamic: true })
-                                                )
+                                                    iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                })
                                                 .setTitle(`${title}`)
                                                 .setDescription(`${description}`)
                                                 .setTimestamp(Date.now());
-                                            var buttonRow1 = new MessageActionRow().addComponents([
+                                            var buttonRow1 = new ActionRowBuilder().addComponents([
                                                 button_back.setDisabled(false),
                                                 button_forward.setDisabled(false),
                                                 button_jump.setDisabled(false),
                                                 button_empty1.setDisabled(false),
                                                 button_list.setDisabled(false),
                                             ]);
-                                            var buttonRow2 = new MessageActionRow().addComponents([
+                                            var buttonRow2 = new ActionRowBuilder().addComponents([
                                                 button_create.setDisabled(false),
                                                 button_edit.setDisabled(false),
                                                 button_Delete.setDisabled(false),
@@ -900,7 +892,7 @@ module.exports = {
                                         return message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle("Your Time ran out!")
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -920,7 +912,7 @@ module.exports = {
                                 return message
                                     .reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle("Your Time ran out!")
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -950,14 +942,14 @@ module.exports = {
                     button_edit.setDisabled(true);
                     button_Delete.setDisabled(true);
                     button_disable.setDisabled(true);
-                    var buttonRow1 = new MessageActionRow().addComponents([
+                    var buttonRow1 = new ActionRowBuilder().addComponents([
                         button_back.setDisabled(false),
                         button_forward.setDisabled(false),
                         button_jump.setDisabled(false),
                         button_empty1.setDisabled(false),
                         button_list.setDisabled(false),
                     ]);
-                    var buttonRow2 = new MessageActionRow().addComponents([
+                    var buttonRow2 = new ActionRowBuilder().addComponents([
                         button_create.setDisabled(false),
                         button_edit.setDisabled(false),
                         button_Delete.setDisabled(false),
@@ -979,7 +971,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

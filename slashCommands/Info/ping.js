@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -28,7 +28,7 @@ module.exports = {
                 ?.reply({
                     ephemeral: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -56,7 +56,7 @@ module.exports = {
                     interaction?.editReply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -66,8 +66,7 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(
-                                    client.getFooter(
+                                .setFooter(client.getFooter(
                                         "It Takes longer, because i am getting my host ping!",
                                         es.footericon &&
                                             (es.footericon.includes("http://") || es.footericon.includes("https://"))

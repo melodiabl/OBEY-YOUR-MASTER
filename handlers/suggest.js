@@ -1,5 +1,4 @@
-const { Client, Collection, MessageEmbed, MessageAttachment } = require(`discord.js`);
-const { MessageButton, MessageActionRow } = require("discord.js");
+const { Client, Collection, EmbedBuilder, AttachmentBuilder, ButtonStyle, ButtonBuilder, ActionRowBuilder } = require(`discord.js`);
 const { allEmojis } = require("../botconfig/emojiFunctions");
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 module.exports = client => {
@@ -26,39 +25,42 @@ module.exports = client => {
                 denyemoji: `${allEmojis.msg.ERROR}`,
             },
         });
-        let settings = client.settings.get(message.guild.id, "suggest");
+        let settings = client.settings.get(message.guild.id, "suggest") || {
+            channel: "", approveemoji: "✅", denyemoji: "❌",
+            footertext: "Vote on this suggestion!", statustext: "Waiting for votes...",
+        };
         var approveemoji = settings.approveemoji;
         var denyemoji = settings.denyemoji;
         var footertext = settings.footertext;
         var statustext = settings.statustext;
         var feedbackchannel = settings.channel;
-        let whobutton = new MessageButton()
-            .setStyle("PRIMARY")
+        let whobutton = new ButtonBuilder()
+            .setStyle(ButtonStyle.Primary)
             .setEmoji("❓")
             .setCustomId("Suggest_who")
             .setLabel("Who voted?");
-        let upvotebutton = new MessageButton()
-            .setStyle("SECONDARY")
+        let upvotebutton = new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
             .setEmoji(approveemoji)
             .setCustomId("Suggest_upvote")
             .setLabel("0");
-        let downvotebutton = new MessageButton()
-            .setStyle("SECONDARY")
+        let downvotebutton = new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
             .setEmoji(denyemoji)
             .setCustomId("Suggest_downvote")
             .setLabel("0");
-        let allbuttons = [new MessageActionRow().addComponents([upvotebutton, downvotebutton, whobutton])];
-        let supvotebutton = new MessageButton()
-            .setStyle("SECONDARY")
+        let allbuttons = [new ActionRowBuilder().addComponents([upvotebutton, downvotebutton, whobutton])];
+        let supvotebutton = new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
             .setEmoji("✅")
             .setCustomId("Suggest_upvote")
             .setLabel("0");
-        let sdownvotebutton = new MessageButton()
-            .setStyle("SECONDARY")
+        let sdownvotebutton = new ButtonBuilder()
+            .setStyle(ButtonStyle.Secondary)
             .setEmoji("❌")
             .setCustomId("Suggest_downvote")
             .setLabel("0");
-        let allbuttonsSave = [new MessageActionRow().addComponents([supvotebutton, sdownvotebutton, whobutton])];
+        let allbuttonsSave = [new ActionRowBuilder().addComponents([supvotebutton, sdownvotebutton, whobutton])];
         if (!feedbackchannel) return;
         if (message.channel.id === feedbackchannel) {
             try {
@@ -76,7 +78,7 @@ module.exports = client => {
             var es = client.settings.get(message.guild.id, `embed`);
             var url = ``;
             var imagename = `Unknown`;
-            var embed = new MessageEmbed()
+            var embed = new EmbedBuilder()
                 .setThumbnail(message.member.user.displayAvatarURL({ dynamic: true }))
                 .addField(`:thumbsup: **__Up Votes__**`, `**\`\`\`0 Votes\`\`\`**`, true)
                 .addField(`:thumbsdown: **__Down Votes__**`, `**\`\`\`0 Votes\`\`\`**`, true)
@@ -210,7 +212,7 @@ module.exports = client => {
                 return button?.reply({
                     ephemeral: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(button?.message.embeds[0].color)
                             .setTitle(`❓ **Who reacted with what?** ❓`)
                             .addField(
@@ -238,7 +240,7 @@ module.exports = client => {
             embed.fields[0].value = `**\`\`\`${SuggestionsData.upvotes} Votes\`\`\`**`;
             embed.fields[1].key = `:thumbsdown: **__Down Votes__**`;
             embed.fields[1].value = `**\`\`\`${SuggestionsData.downvotes} Votes\`\`\`**`;
-            let settings = client.settings.get(button?.message.guild.id, "suggest");
+            let settings = client.settings.get(button?.message.guild.id, "suggest") || { approveemoji: "✅", denyemoji: "❌" };
             var approveemoji = settings.approveemoji;
             var denyemoji = settings.denyemoji;
             if (button.message.attachments.size > 0) {
@@ -246,41 +248,41 @@ module.exports = client => {
                     embed.setImage(button.message.attachments.first().attachment);
                 }
             }
-            let whobutton = new MessageButton()
-                .setStyle("PRIMARY")
+            let whobutton = new ButtonBuilder()
+                .setStyle(ButtonStyle.Primary)
                 .setEmoji("❓")
                 .setCustomId("Suggest_who")
                 .setLabel("Who voted?");
-            let upvotebutton = new MessageButton()
-                .setStyle("SECONDARY")
+            let upvotebutton = new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
                 .setEmoji(approveemoji)
                 .setCustomId("Suggest_upvote")
                 .setLabel(String(SuggestionsData.upvotes));
-            let downvotebutton = new MessageButton()
-                .setStyle("SECONDARY")
+            let downvotebutton = new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
                 .setEmoji(denyemoji)
                 .setCustomId("Suggest_downvote")
                 .setLabel(String(SuggestionsData.downvotes));
-            let supvotebutton = new MessageButton()
-                .setStyle("SECONDARY")
+            let supvotebutton = new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
                 .setEmoji("✅")
                 .setCustomId("Suggest_upvote")
                 .setLabel(String(SuggestionsData.upvotes));
-            let sdownvotebutton = new MessageButton()
-                .setStyle("SECONDARY")
+            let sdownvotebutton = new ButtonBuilder()
+                .setStyle(ButtonStyle.Secondary)
                 .setEmoji("❌")
                 .setCustomId("Suggest_downvote")
                 .setLabel(String(SuggestionsData.downvotes));
             button?.message
                 .edit({
                     embeds: [embed],
-                    components: [new MessageActionRow().addComponents([upvotebutton, downvotebutton, whobutton])],
+                    components: [new ActionRowBuilder().addComponents([upvotebutton, downvotebutton, whobutton])],
                 })
                 .catch(e => {
                     button?.message
                         .edit({
                             embeds: [embed],
-                            components: [new MessageActionRow().addComponents([supvotebutton, sdownvotebutton, whobutton])],
+                            components: [new ActionRowBuilder().addComponents([supvotebutton, sdownvotebutton, whobutton])],
                         })
                         .catch(e => {
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);

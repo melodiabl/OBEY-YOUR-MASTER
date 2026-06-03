@@ -1,4 +1,4 @@
-const { MessageEmbed, Permissions } = require(`discord.js`);
+const { EmbedBuilder, Permissions } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -15,10 +15,10 @@ module.exports = {
         let ls = client.settings.get(message.guild.id, "language");
 
         try {
-            if (!message.guild.me.permissions.has([Permissions.FLAGS.BAN_MEMBERS]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BAN_MEMBERS]))
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"])),
@@ -45,12 +45,12 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
             )
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
@@ -62,7 +62,7 @@ module.exports = {
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle("❌ Invalid Command Usage")
@@ -82,7 +82,7 @@ module.exports = {
                     return message
                         .reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(`✅ Banned ${ban.tag || `Unkown User with id: \`${banuser}\``}`)
@@ -95,7 +95,7 @@ module.exports = {
                     return message
                         .reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(`❌ Could not ban ${banuser}`)
@@ -108,7 +108,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))

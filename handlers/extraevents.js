@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const { simple_databasing } = require(`./functions`);
 module.exports = client => {
@@ -21,7 +21,7 @@ module.exports = client => {
         if (!MessageComponents) return []; // Returning so it doesn't crash
 
         return MessageComponents.map(({ components }) => {
-            return new MessageActionRow().addComponents(components.map(c => c.setDisabled(true)));
+            return new ActionRowBuilder().addComponents(components.map(c => c.setDisabled(true)));
         });
     };
     client.getFooter = (es, stringurl = null) => {
@@ -154,8 +154,8 @@ module.exports = client => {
             .catch(() => {});
         simple_databasing(client, guild.id);
         let ls = client.settings.get(guild.id, "language");
-        let embed = new MessageEmbed()
-            .setColor("GREEN")
+        let embed = new EmbedBuilder()
+            .setColor("#57F287")
             .setTitle(`<a:Join_vc:863876115584385074> Joined a New Server`)
             .addField("Guild Info", `>>> \`\`\`${guild.name} (${guild.id})\`\`\``)
             .addField(
@@ -168,7 +168,7 @@ module.exports = client => {
             .setThumbnail(guild.iconURL({ dynamic: true }));
         for (const owner of config.ownerIDS) {
             //If the Owner is Tomato, and the Bot is in not a Milrato Development, Public Bot, then dont send information!
-            if (owner == "442355791412854784") {
+            if (owner == "1087034447825735741") {
                 let milratoGuild = client.guilds.cache.get("773668217163218944");
                 if (milratoGuild && !milratoGuild.me.roles.cache.has("779021235790807050")) {
                     continue;
@@ -232,8 +232,8 @@ module.exports = client => {
                 theowner = user;
             })
             .catch(() => {});
-        let embed = new MessageEmbed()
-            .setColor("RED")
+        let embed = new EmbedBuilder()
+            .setColor("#ED4245")
             .setTitle(`<:leaves:866356598356049930> Left a Server`)
             .addField("Guild Info", `>>> \`\`\`${guild.name} (${guild.id})\`\`\``)
             .addField(
@@ -245,7 +245,7 @@ module.exports = client => {
             .setThumbnail(guild.iconURL({ dynamic: true }));
         for (const owner of config.ownerIDS) {
             //If the Owner is Tomato, and the Bot is in not a Milrato Development, Public Bot, then dont send information!
-            if (owner == "442355791412854784") {
+            if (owner == "1087034447825735741") {
                 let milratoGuild = client.guilds.cache.get("773668217163218944");
                 if (milratoGuild && !milratoGuild.me.roles.cache.has("779021235790807050")) {
                     continue;

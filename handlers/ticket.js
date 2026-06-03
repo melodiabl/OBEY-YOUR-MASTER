@@ -1,5 +1,5 @@
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const { MessageEmbed, MessageButton, MessageActionRow, MessageSelectMenu, Permissions } = require(`discord.js`);
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder, Permissions } = require(`discord.js`);
 const moment = require("moment");
 const { dbEnsure } = require("./functions");
 const { allEmojis } = require("../botconfig/emojiFunctions");
@@ -223,7 +223,7 @@ module.exports = (client, preindex) => {
                     "ticketdata"
                 );
 
-                var ticketembed = new MessageEmbed()
+                var ticketembed = new EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -232,8 +232,7 @@ module.exports = (client, preindex) => {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .setFooter(
-                        client.getFooter(
+                    .setFooter(client.getFooter(
                             `To close/manage this ticket react with the buttons\nYou can also type: ${client.settings.get(guild.id, "prefix")}ticket`,
                             es.footericon
                         )
@@ -250,8 +249,8 @@ module.exports = (client, preindex) => {
                     .setDescription(ticket.message.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
                 var ticketembeds = [ticketembed];
                 if (ticket.claim.enabled) {
-                    var claimEmbed = new MessageEmbed()
-                        .setColor("ORANGE")
+                    var claimEmbed = new EmbedBuilder()
+                        .setColor("#E67E22")
                         .setThumbnail(
                             es.thumb
                                 ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
@@ -270,34 +269,34 @@ module.exports = (client, preindex) => {
                         .setDescription(ticket.claim.messageOpen.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
                     ticketembeds.push(claimEmbed);
                 }
-                const { MessageButton } = require("discord.js");
-                let button_close = new MessageButton()
-                    .setStyle("PRIMARY")
+                const { ButtonBuilder } = require("discord.js");
+                let button_close = new ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setCustomId("ticket_close")
                     .setLabel("Close")
                     .setEmoji("🔒");
-                let button_delete = new MessageButton()
-                    .setStyle("SECONDARY")
+                let button_delete = new ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Secondary)
                     .setCustomId("ticket_delete")
                     .setLabel("Delete")
                     .setEmoji("🗑️");
-                let button_transcript = new MessageButton()
-                    .setStyle("PRIMARY")
+                let button_transcript = new ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Primary)
                     .setCustomId("ticket_transcript")
                     .setLabel("Transcript")
                     .setEmoji("📑");
-                let button_user = new MessageButton()
-                    .setStyle("SUCCESS")
+                let button_user = new ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Success)
                     .setCustomId("ticket_user")
                     .setLabel("Users")
                     .setEmoji("👤");
-                let button_role = new MessageButton()
-                    .setStyle("SUCCESS")
+                let button_role = new ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Success)
                     .setCustomId("ticket_role")
                     .setLabel("Roles")
                     .setEmoji("📌");
                 const allbuttons = [
-                    new MessageActionRow().addComponents([
+                    new ActionRowBuilder().addComponents([
                         button_close,
                         button_delete,
                         button_transcript,
@@ -307,9 +306,9 @@ module.exports = (client, preindex) => {
                 ];
                 if (ticket.claim.enabled) {
                     allbuttons.push(
-                        new MessageActionRow().addComponents([
-                            new MessageButton()
-                                .setStyle("SECONDARY")
+                        new ActionRowBuilder().addComponents([
+                            new ButtonBuilder()
+                                .setStyle(Discord.ButtonStyle.Secondary)
                                 .setCustomId("ticket_claim")
                                 .setLabel("Claim the Ticket")
                                 .setEmoji("✅"),
@@ -317,8 +316,8 @@ module.exports = (client, preindex) => {
                     );
                 }
                 let ticketroles = ticket.adminroles.map(r => `<@&${r}>`);
-                if (ch.permissionsFor(ch.guild.me).has(Permissions.FLAGS.SEND_MESSAGES)) {
-                    if (ch.permissionsFor(ch.guild.me).has(Permissions.FLAGS.EMBED_LINKS)) {
+                if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.SEND_MESSAGES)) {
+                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.EMBED_LINKS)) {
                         await ch
                             .send({
                                 content: `<@${user.id}> ${ticketroles.length > 0 ? "| " + ticketroles.join(" / ") : ""}`,
@@ -329,7 +328,7 @@ module.exports = (client, preindex) => {
                                 console.log(String(O).grey);
                             })
                             .then(msg => {
-                                if (msg.channel.permissionsFor(msg.guild.me).has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
                                     msg.pin().catch(O => {
                                         console.log(String(O).grey);
                                     });
@@ -349,7 +348,7 @@ module.exports = (client, preindex) => {
                                 console.log(String(O).grey);
                             })
                             .then(msg => {
-                                if (msg.channel.permissionsFor(msg.guild.me).has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
                                     msg.pin().catch(O => {
                                         console.log(String(O).grey);
                                     });

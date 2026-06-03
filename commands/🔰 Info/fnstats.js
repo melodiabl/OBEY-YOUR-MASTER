@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const Canvas = require("discord-canvas");
-const { MessageEmbed } = require("discord.js");
+const Canvas = null; // discord-canvas incompatible con Node 22
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -67,7 +67,7 @@ module.exports = {
                     .setPlatform(platform.toLowerCase())
                     .toAttachment();
                 if (!image) return message.channel.send("User not found / Epic INvalid");
-                let attachment = new Discord.MessageAttachment(image.toBuffer(), "FortniteStats.png");
+                let attachment = new Discord.AttachmentBuilder(image.toBuffer(), "FortniteStats.png");
                 themsg.edit({ content: `Stats of: \`${Epic}\` on \`${platform}\``, files: [attachment] });
             } catch (e) {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -77,7 +77,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

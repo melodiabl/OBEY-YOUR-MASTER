@@ -1,4 +1,4 @@
-const { MessageEmbed, splitMessage } = require("discord.js");
+const { EmbedBuilder, splitMessage } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -18,7 +18,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "ECONOMY")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -270,7 +270,7 @@ module.exports = {
                 for (let i = 0; i < description.length; i += 10) {
                     const current = description.slice(i, k);
                     k += 10;
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setDescription(current)
                         .setTitle(TITLE)
                         .setColor(es.color)
@@ -292,8 +292,7 @@ module.exports = {
             const queueEmbed = await message
                 .reply({
                     embeds: [
-                        embeds[currentPage].setFooter(
-                            client.getFooter(
+                        embeds[currentPage].setFooter(client.getFooter(
                                 `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                 user.displayAvatarURL({ dynamic: true })
                             )
@@ -318,8 +317,7 @@ module.exports = {
                             currentPage++;
                             queueEmbed.edit({
                                 embeds: [
-                                    embeds[currentPage].setFooter(
-                                        client.getFooter(
+                                    embeds[currentPage].setFooter(client.getFooter(
                                             `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                             user.displayAvatarURL({ dynamic: true })
                                         )
@@ -330,8 +328,7 @@ module.exports = {
                             currentPage = 0;
                             queueEmbed.edit({
                                 embeds: [
-                                    embeds[currentPage].setFooter(
-                                        client.getFooter(
+                                    embeds[currentPage].setFooter(client.getFooter(
                                             `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                             user.displayAvatarURL({ dynamic: true })
                                         )
@@ -344,8 +341,7 @@ module.exports = {
                             --currentPage;
                             queueEmbed.edit({
                                 embeds: [
-                                    embeds[currentPage].setFooter(
-                                        client.getFooter(
+                                    embeds[currentPage].setFooter(client.getFooter(
                                             `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                             user.displayAvatarURL({ dynamic: true })
                                         )
@@ -357,8 +353,7 @@ module.exports = {
                             queueEmbed.edit({
                                 embeds: [
                                     embeds[
-                                        currentPage.setFooter(
-                                            client.getFooter(
+                                        currentPage.setFooter(client.getFooter(
                                                 `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                                 user.displayAvatarURL({ dynamic: true })
                                             )
@@ -378,7 +373,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

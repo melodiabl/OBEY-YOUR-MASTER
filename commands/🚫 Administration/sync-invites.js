@@ -2,10 +2,10 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { MessageEmbed, Permissions } = require(`discord.js`);
+const { EmbedBuilder, Permissions } = require(`discord.js`);
 const { databasing, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 let running = new Map();
-const { MessageButton, MessageActionRow } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
 module.exports = {
     name: `sync-invites`,
     category: `🚫 Administration`,
@@ -18,10 +18,10 @@ module.exports = {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            if (!message.guild.me.permissions.has([Permissions.FLAGS.MANAGE_GUILD]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.MANAGE_GUILD]))
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable1"])),
@@ -30,26 +30,26 @@ module.exports = {
             if (running.has(message.guild.id) && running.get(message.guild.id)) {
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable2"])),
                     ],
                 });
             }
-            let approve = new MessageButton()
-                .setStyle("SUCCESS")
+            let approve = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Success)
                 .setCustomId("1")
                 .setEmoji("833101995723194437")
                 .setLabel("YES DO IT!");
-            let deny = new MessageButton()
-                .setStyle("PRIMARY")
+            let deny = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId("2")
                 .setEmoji("833101993668771842")
                 .setLabel("Cancel");
             let awaitedmsg = await message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable3"])),
@@ -75,7 +75,7 @@ module.exports = {
                     if (guildInvites.size == 0) {
                         return message.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable4"])),
@@ -162,7 +162,7 @@ module.exports = {
                     if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                     channel.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -189,8 +189,7 @@ module.exports = {
                                     eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                 )
                                 .setTimestamp()
-                                .setFooter(
-                                    client.getFooter(
+                                .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL({ dynamic: true })
                                     )
@@ -205,7 +204,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

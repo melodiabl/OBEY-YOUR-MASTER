@@ -1,5 +1,5 @@
 ﻿const Discord = require("discord.js");
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -18,7 +18,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "FUN")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -34,7 +34,7 @@ module.exports = {
         //send loading message
         var tempmsg = await message.reply({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setColor(ee.color)
                     .setAuthor(
                         "Getting Image Data..",
@@ -75,7 +75,7 @@ module.exports = {
         if (user.id == user2.id)
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle("❌ You forgot to ping at least one Member!")
@@ -92,7 +92,7 @@ module.exports = {
         });
         client.memer.bed(avatar1, avatar2).then(image => {
             //make an attachment
-            var attachment = new MessageAttachment(image, "bed.png");
+            var attachment = new AttachmentBuilder(image, "bed.png");
             //delete old message
             tempmsg.delete();
             //send new Message

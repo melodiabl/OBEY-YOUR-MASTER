@@ -1,7 +1,10 @@
 // ************* IMPORT MODULES *************  //
 const CronJob = require("cron").CronJob;
 // ************ IMPORT FILE DATA ************* //
-const TikTokScraper = require("tiktok-scraper");
+// tiktok-scraper incompatible con Node 22 — social log de TikTok desactivado
+const TikTokScraper = null;
+module.exports = () => {}; // desactivado
+if (false) {
 const { delay } = require("../handlers/functions");
 const moment = require(`moment`);
 module.exports = client => {

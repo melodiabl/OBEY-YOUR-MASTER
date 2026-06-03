@@ -1,4 +1,4 @@
-var { MessageEmbed, MessageButton, MessageActionRow, MessageMenuOption, MessageSelectMenu } = require(`discord.js`);
+var { EmbedBuilder, ButtonBuilder, ActionRowBuilder, MessageMenuOption, StringSelectMenuBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -21,7 +21,7 @@ module.exports = {
         if (!config.ownerIDS.some(r => r.includes(message.author.id)))
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable1"]))
@@ -64,7 +64,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -82,7 +82,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new MessageEmbed()
+                let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Change Status",
@@ -93,11 +93,11 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -130,7 +130,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable7"]))
                                         .setColor(es.color)
                                         .setDescription(
@@ -213,7 +213,7 @@ module.exports = {
                                             console.log(e.stack ? String(e.stack).dim : String(e).dim);
                                             return message.channel.send({
                                                 embeds: [
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(
@@ -227,7 +227,7 @@ module.exports = {
                                         }
                                         return message.channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(es.color)
                                                     .setTitle(
@@ -241,7 +241,7 @@ module.exports = {
                                     console.log(e);
                                     return message.reply({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable11"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
@@ -260,7 +260,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable7"]))
                                         .setColor(es.color)
                                         .setDescription(
@@ -343,7 +343,7 @@ module.exports = {
                                             console.log(e.stack ? String(e.stack).dim : String(e).dim);
                                             return message.channel.send({
                                                 embeds: [
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(
@@ -357,7 +357,7 @@ module.exports = {
                                         }
                                         return message.channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(es.color)
                                                     .setTitle(
@@ -371,7 +371,7 @@ module.exports = {
                                     console.log(e);
                                     return message.reply({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable11"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
@@ -418,7 +418,7 @@ module.exports = {
                                     },
                                 ];
                                 //define the selection
-                                let Selection = new MessageSelectMenu()
+                                let Selection = new StringSelectMenuBuilder()
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -438,7 +438,7 @@ module.exports = {
                                     );
 
                                 //define the embed
-                                let MenuEmbed = new MessageEmbed()
+                                let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
                                     .setAuthor(
                                         "Change Status",
@@ -449,11 +449,11 @@ module.exports = {
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
-                                    components: [new MessageActionRow().addComponents(Selection)],
+                                    components: [new ActionRowBuilder().addComponents(Selection)],
                                 });
                                 //Create the collector
                                 const collector = menumsg.createMessageComponentCollector({
-                                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                                     time: 90000,
                                 });
                                 //Menu Collections
@@ -477,7 +477,7 @@ module.exports = {
                                                 console.log(e.stack ? String(e.stack).dim : String(e).dim);
                                                 return message.channel.send({
                                                     embeds: [
-                                                        new MessageEmbed()
+                                                        new EmbedBuilder()
                                                             .setFooter(client.getFooter(es))
                                                             .setColor(es.wrongcolor)
                                                             .setTitle(
@@ -499,7 +499,7 @@ module.exports = {
                                             }
                                             return message.channel.send({
                                                 embeds: [
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.color)
                                                         .setTitle(
@@ -531,7 +531,7 @@ module.exports = {
                         {
                             tempmsg = await message.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable22"]))
                                         .setColor(es.color)
                                         .setDescription(
@@ -555,7 +555,7 @@ module.exports = {
                                     if (!isValidURL(msg))
                                         return message.channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(es.wrongcolor)
                                                     .setTitle(
@@ -566,7 +566,7 @@ module.exports = {
                                     if (!msg.includes("twitch"))
                                         return message.channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(es.wrongcolor)
                                                     .setTitle(
@@ -585,7 +585,7 @@ module.exports = {
                                             console.log(e.stack ? String(e.stack).dim : String(e).dim);
                                             return message.channel.send({
                                                 embeds: [
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(
@@ -603,7 +603,7 @@ module.exports = {
                                         }
                                         return message.channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(es.color)
                                                     .setTitle(
@@ -617,7 +617,7 @@ module.exports = {
                                     console.log(e);
                                     return message.reply({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable28"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
@@ -659,7 +659,7 @@ module.exports = {
                                     },
                                 ];
                                 //define the selection
-                                let Selection = new MessageSelectMenu()
+                                let Selection = new StringSelectMenuBuilder()
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -679,7 +679,7 @@ module.exports = {
                                     );
 
                                 //define the embed
-                                let MenuEmbed = new MessageEmbed()
+                                let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
                                     .setAuthor(
                                         "Change Status",
@@ -690,11 +690,11 @@ module.exports = {
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
-                                    components: [new MessageActionRow().addComponents(Selection)],
+                                    components: [new ActionRowBuilder().addComponents(Selection)],
                                 });
                                 //Create the collector
                                 const collector = menumsg.createMessageComponentCollector({
-                                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                                     time: 90000,
                                 });
                                 //Menu Collections
@@ -710,7 +710,7 @@ module.exports = {
                                         client.user.setStatus(temptype);
                                         return message.channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setFooter(client.getFooter(es))
                                                     .setColor(es.color)
                                                     .setTitle(
@@ -741,7 +741,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

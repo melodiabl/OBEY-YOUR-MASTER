@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`../../botconfig/config.json`);
 var ee = require(`../../botconfig/embed.json`);
 const emoji = require(`../../botconfig/emojis.json`);
@@ -47,7 +47,7 @@ module.exports = {
             if (boosts >= 2) maxbitrate = 128000;
             if (boosts >= 7) maxbitrate = 256000;
             if (boosts >= 14) maxbitrate = 384000;
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
                 .setAuthor(
                     client.getAuthor(
                         client.la[ls].cmds.info.serverinfo.author + " " + message.guild.name,
@@ -189,8 +189,8 @@ module.exports = {
 
             let embeds = [];
             embeds.push(embed);
-            let embed_emojis = new Discord.MessageEmbed();
-            let embed_roles = new Discord.MessageEmbed();
+            let embed_emojis = new Discord.EmbedBuilder();
+            let embed_roles = new Discord.EmbedBuilder();
 
             //emoji
             embed_emojis.setTitle(eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variablex_1"]));
@@ -213,7 +213,7 @@ module.exports = {
             embeds.push(embed_roles);
 
             if (message.guild.banner) {
-                let embed2 = new Discord.MessageEmbed()
+                let embed2 = new Discord.EmbedBuilder()
                     .setTitle(`**<:arrow:832598861813776394> SERVER BANNER:**`)
                     .setDescription(
                         `[Download Link](${message.guild.bannerURL({ size: 1024 })})${message.guild.discoverySplash ? ` | [Link of Discovery Splash Image](${message.guild.discoverySplashURL({ size: 4096 })})` : ""}\n> This is the Image which is shown on the Top left Corner of this Server, where you see the Channels!`
@@ -221,7 +221,7 @@ module.exports = {
                     .setImage(message.guild.bannerURL({ size: 4096 }));
                 embeds.push(embed2);
             } else if (message.guild.discoverySplash) {
-                let embed2 = new Discord.MessageEmbed()
+                let embed2 = new Discord.EmbedBuilder()
                     .setTitle(`**<:arrow:832598861813776394> SERVER DISCOVERY SPLASH:**`)
                     .setDescription(
                         `[Download Link](${message.guild.discoverySplashURL({ size: 1024 })})${message.guild.banner ? ` | [Link of Discovery Splash Image](${message.guild.bannerURL({ size: 4096 })})` : ""}\nThis is the Image you see when you get invited to this Server on the official Discord Website!`
@@ -239,8 +239,7 @@ module.exports = {
                     );
                 }
                 embed.setColor(es.color);
-                embed.setFooter(
-                    client.getFooter(
+                embed.setFooter(client.getFooter(
                         "ID: " + message.guild.id,
                         message.guild.iconURL({
                             dynamic: true,
@@ -254,7 +253,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

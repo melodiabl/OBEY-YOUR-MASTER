@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton, MessageActionRow, Collection, MessageAttachment, Permissions } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, Collection, AttachmentBuilder, Permissions } = require("discord.js");
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -91,14 +91,14 @@ module.exports = client => {
                 return channel.send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable5"]))
                             .setColor(es.wrongcolor),
                     ],
                 });
             }
-            let button_ticket_verify = new MessageButton()
-                .setStyle("SUCCESS")
+            let button_ticket_verify = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Success)
                 .setCustomId("ticket_verify")
                 .setLabel("Verify this Step")
                 .setEmoji("833101995723194437");
@@ -106,11 +106,11 @@ module.exports = client => {
                 .send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable6"]))
                             .setColor(es.color),
                     ],
-                    components: [new MessageActionRow().addComponents(button_ticket_verify)],
+                    components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
                 })
                 .then(async msg => {
                     const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
@@ -128,8 +128,8 @@ module.exports = client => {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.MessageEmbed().setTitle("Verified!").setColor(es.color)],
-                                components: [new MessageActionRow().addComponents(button_ticket_verify.setDisabled(true))],
+                                embeds: [new Discord.EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                                components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
                             });
@@ -173,7 +173,7 @@ module.exports = client => {
                                 }
                             }
 
-                            if (msg.channel.permissionsFor(msg.channel.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (msg.channel.permissionsFor(msg.channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 await msg.channel.permissionOverwrites.edit(data.user, {
                                     SEND_MESSAGES: false,
                                     VIEW_CHANNEL: false,
@@ -182,7 +182,7 @@ module.exports = client => {
                             msg.channel.send({
                                 content: `<@${buttonuser.id}>`,
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(
                                             eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable7"])
                                         )
@@ -227,7 +227,7 @@ module.exports = client => {
                                     if (!adminchannel) return client.settings.set(guild.id, "no", `adminlog`);
                                     adminchannel.send({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -272,14 +272,14 @@ module.exports = client => {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.MessageEmbed().setTitle("Cancelled!").setColor(es.wrongcolor)],
-                                components: [new MessageActionRow().addComponents(button_ticket_verify.setDisabled(true))],
+                                embeds: [new Discord.EmbedBuilder().setTitle("Cancelled!").setColor(es.wrongcolor)],
+                                components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
                             });
                         }
                     });
-                    let endedembed = new Discord.MessageEmbed()
+                    let endedembed = new Discord.EmbedBuilder()
                         .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable12"]))
                         .setColor(es.wrongcolor);
                     collector.on("end", collected => {
@@ -289,12 +289,12 @@ module.exports = client => {
                                 content: `<@${buttonuser.id}>`,
                                 embeds: [endedembed],
                                 components: [
-                                    new MessageActionRow().addComponents(
+                                    new ActionRowBuilder().addComponents(
                                         button_ticket_verify
                                             .setDisabled(true)
                                             .setLabel("FAILED TO VERIFY")
                                             .setEmoji("833101993668771842")
-                                            .setStyle("DANGER")
+                                            .setStyle(Discord.ButtonStyle.Danger)
                                     ),
                                 ],
                             }).catch(e => {
@@ -322,14 +322,14 @@ module.exports = client => {
                 !cmdroles.includes(interaction?.user.id) && [...member.roles.cache.values()] &&
                 !member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![guild.ownerId, config.ownerid].includes(interaction?.user.id) &&
-                !member.permissions.has("ADMINISTRATOR") &&
+                !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) &&
                 !member.roles.cache.some(r => theadminroles.includes(r ? r.id : r)) &&
                 !theadminroles.includes(member.id)
             ) {
                 return channel.send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle("<:no:833101993668771842> You are not allowed to delete this Ticket")
@@ -340,19 +340,19 @@ module.exports = client => {
                     ],
                 });
             }
-            let button_ticket_verify = new MessageButton()
-                .setStyle("SUCCESS")
+            let button_ticket_verify = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Success)
                 .setCustomId("ticket_verify")
                 .setLabel("Verify this Step")
                 .setEmoji("833101995723194437");
             let msg = await channel.send({
                 content: `<@${buttonuser.id}>`,
                 embeds: [
-                    new Discord.MessageEmbed()
+                    new Discord.EmbedBuilder()
                         .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable13"]))
                         .setColor(es.color),
                 ],
-                components: [new MessageActionRow().addComponents(button_ticket_verify)],
+                components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
             });
             const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
                 time: 30000,
@@ -369,8 +369,8 @@ module.exports = client => {
                     edited = true;
                     b.update({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.MessageEmbed().setTitle("Verified!").setColor(es.color)],
-                        components: [new MessageActionRow().addComponents(button_ticket_verify.setDisabled(true))],
+                        embeds: [new Discord.EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                        components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
                     });
@@ -428,9 +428,9 @@ module.exports = client => {
                                     .then(async path => {
                                         try {
                                             // try to send the file
-                                            const attachment = new MessageAttachment(path); //send it as an attachment
+                                            const attachment = new AttachmentBuilder(path); //send it as an attachment
                                             //send the Transcript Into the Channel and then Deleting it again from the FOLDER
-                                            let sendembed = new MessageEmbed()
+                                            let sendembed = new EmbedBuilder()
                                                 .setTitle(
                                                     eval(
                                                         client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
@@ -486,7 +486,7 @@ module.exports = client => {
 
                     await msg.channel.send({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable14"]))
                                 .setColor(es.color)
                                 .setThumbnail(
@@ -519,7 +519,7 @@ module.exports = client => {
                             if (!adminchannel) return client.settings.set(guild.id, "no", `adminlog`);
                             adminchannel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -559,14 +559,14 @@ module.exports = client => {
                     edited = true;
                     b.update({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.MessageEmbed().setTitle("Cancelled!").setColor(es.wrongcolor)],
-                        components: [new MessageActionRow().addComponents(button_ticket_verify.setDisabled(true))],
+                        embeds: [new Discord.EmbedBuilder().setTitle("Cancelled!").setColor(es.wrongcolor)],
+                        components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
                     });
                 }
             });
-            let endedembed = new Discord.MessageEmbed()
+            let endedembed = new Discord.EmbedBuilder()
                 .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable18"]))
                 .setColor(es.wrongcolor);
             collector.on("end", collected => {
@@ -576,12 +576,12 @@ module.exports = client => {
                         content: `<@${buttonuser.id}>`,
                         embeds: [endedembed],
                         components: [
-                            new MessageActionRow().addComponents(
+                            new ActionRowBuilder().addComponents(
                                 button_ticket_verify
                                     .setDisabled(true)
                                     .setLabel("FAILED TO VERIFY")
                                     .setEmoji("833101993668771842")
-                                    .setStyle("DANGER")
+                                    .setStyle(Discord.ButtonStyle.Danger)
                             ),
                         ],
                     }).catch(e => {
@@ -625,9 +625,9 @@ module.exports = client => {
                 .then(async path => {
                     try {
                         // try to send the file
-                        const attachment = new MessageAttachment(path); //send it as an attachment
+                        const attachment = new AttachmentBuilder(path); //send it as an attachment
                         //send the Transcript Into the Channel and then Deleting it again from the FOLDER
-                        let sendembed = new MessageEmbed()
+                        let sendembed = new EmbedBuilder()
                             .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable20"]))
                             .setColor(ee.color)
                             .setFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` });
@@ -659,7 +659,7 @@ module.exports = client => {
                                 if (!adminchannel) return client.settings.set(guild.id, "no", `adminlog`);
                                 adminchannel.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -704,7 +704,7 @@ module.exports = client => {
                         channel.send({
                             content: `<@${buttonuser.id}>`,
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setAuthor(
                                         "ERROR! Transcript is to big, to be sent into the Channel!",
                                         user.displayAvatarURL({
@@ -728,13 +728,13 @@ module.exports = client => {
                 !cmdroles.includes(interaction?.user.id) && [...member.roles.cache.values()] &&
                 !member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![guild.ownerId, config.ownerid].includes(interaction?.user.id) &&
-                !member.permissions.has("ADMINISTRATOR") &&
+                !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) &&
                 !member.roles.cache.some(r => theadminroles.includes(r ? r.id : r))
             ) {
                 return channel.send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle("<:no:833101993668771842> You are not allowed to add/remove Users to/from this Ticket")
@@ -748,7 +748,7 @@ module.exports = client => {
                 .send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable32"]))
                             .setColor(es.color)
                             .setThumbnail(
@@ -806,8 +806,8 @@ module.exports = client => {
                                         if (!element.allow.includes("VIEW_CHANNEL")) {
                                             if (
                                                 !channel
-                                                    .permissionsFor(channel.guild.me)
-                                                    .has(Permissions.FLAGS.MANAGE_CHANNELS)
+                                                    .permissionsFor(channel.guild.members.me)
+                                                    .has(PermissionFlagsBits.MANAGE_CHANNELS)
                                             ) {
                                                 return channel.send(
                                                     `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
@@ -822,7 +822,7 @@ module.exports = client => {
                                                     channel.send({
                                                         content: `<@${buttonuser.id}>`,
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.color)
                                                                 .setThumbnail(
                                                                     es.thumb
@@ -852,7 +852,7 @@ module.exports = client => {
                                                                 return client.settings.set(guild.id, "no", `adminlog`);
                                                             adminchannel.send({
                                                                 embeds: [
-                                                                    new MessageEmbed()
+                                                                    new EmbedBuilder()
                                                                         .setColor(es.color)
                                                                         .setThumbnail(
                                                                             es.thumb
@@ -913,7 +913,7 @@ module.exports = client => {
                                                 .catch(e => {
                                                     return channel.send({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.wrongcolor)
                                                                 .setFooter(client.getFooter(es))
                                                                 .setTitle(
@@ -936,8 +936,8 @@ module.exports = client => {
                                         } else {
                                             if (
                                                 !channel
-                                                    .permissionsFor(channel.guild.me)
-                                                    .has(Permissions.FLAGS.MANAGE_CHANNELS)
+                                                    .permissionsFor(channel.guild.members.me)
+                                                    .has(PermissionFlagsBits.MANAGE_CHANNELS)
                                             ) {
                                                 return channel.send(
                                                     `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
@@ -952,7 +952,7 @@ module.exports = client => {
                                                     return channel.send({
                                                         content: `<@${buttonuser.id}>`,
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.color)
                                                                 .setThumbnail(
                                                                     es.thumb
@@ -977,7 +977,7 @@ module.exports = client => {
                                                 .catch(e => {
                                                     return channel.send({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.wrongcolor)
                                                                 .setFooter(client.getFooter(es))
                                                                 .setTitle(
@@ -1001,7 +1001,7 @@ module.exports = client => {
                                     }
                                 });
                             } else {
-                                if (!channel.permissionsFor(channel.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                     return channel.send(
                                         `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
                                     );
@@ -1015,7 +1015,7 @@ module.exports = client => {
                                         channel.send({
                                             content: `<@${buttonuser.id}>`,
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -1044,7 +1044,7 @@ module.exports = client => {
                                                 if (!adminchannel) return client.settings.set(guild.id, "no", `adminlog`);
                                                 adminchannel.send({
                                                     embeds: [
-                                                        new MessageEmbed()
+                                                        new EmbedBuilder()
                                                             .setColor(es.color)
                                                             .setThumbnail(
                                                                 es.thumb
@@ -1105,7 +1105,7 @@ module.exports = client => {
                                     .catch(e => {
                                         return channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.wrongcolor)
                                                     .setFooter(client.getFooter(es))
                                                     .setTitle(
@@ -1130,7 +1130,7 @@ module.exports = client => {
                                         return channel.send({
                                             content: `<@${buttonuser.id}>`,
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(
                                                             client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
@@ -1157,13 +1157,13 @@ module.exports = client => {
                 !cmdroles.includes(interaction?.user.id) && [...member.roles.cache.values()] &&
                 !member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![guild.ownerId, config.ownerid].includes(interaction?.user.id) &&
-                !member.permissions.has("ADMINISTRATOR") &&
+                !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) &&
                 !member.roles.cache.some(r => theadminroles.includes(r ? r.id : r))
             ) {
                 return channel.send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle("<:no:833101993668771842> You are not allowed to add/remove Roles to/from this Ticket")
@@ -1177,7 +1177,7 @@ module.exports = client => {
                 .send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable51"]))
                             .setColor(es.color)
                             .setThumbnail(
@@ -1235,8 +1235,8 @@ module.exports = client => {
                                         if (!element.allow.includes("VIEW_CHANNEL")) {
                                             if (
                                                 !channel
-                                                    .permissionsFor(channel.guild.me)
-                                                    .has(Permissions.FLAGS.MANAGE_CHANNELS)
+                                                    .permissionsFor(channel.guild.members.me)
+                                                    .has(PermissionFlagsBits.MANAGE_CHANNELS)
                                             ) {
                                                 return channel.send(
                                                     `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
@@ -1250,7 +1250,7 @@ module.exports = client => {
                                                 .then(channel => {
                                                     channel.send({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.color)
                                                                 .setThumbnail(
                                                                     es.thumb
@@ -1280,7 +1280,7 @@ module.exports = client => {
                                                                 return client.settings.set(guild.id, "no", `adminlog`);
                                                             adminchannel.send({
                                                                 embeds: [
-                                                                    new MessageEmbed()
+                                                                    new EmbedBuilder()
                                                                         .setColor(es.color)
                                                                         .setThumbnail(
                                                                             es.thumb
@@ -1341,7 +1341,7 @@ module.exports = client => {
                                                 .catch(e => {
                                                     return channel.send({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.wrongcolor)
                                                                 .setFooter(client.getFooter(es))
                                                                 .setTitle(
@@ -1364,8 +1364,8 @@ module.exports = client => {
                                         } else {
                                             if (
                                                 !channel
-                                                    .permissionsFor(channel.guild.me)
-                                                    .has(Permissions.FLAGS.MANAGE_CHANNELS)
+                                                    .permissionsFor(channel.guild.members.me)
+                                                    .has(PermissionFlagsBits.MANAGE_CHANNELS)
                                             ) {
                                                 return channel.send(
                                                     `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
@@ -1379,7 +1379,7 @@ module.exports = client => {
                                                 .then(channel => {
                                                     return channel.send({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.color)
                                                                 .setThumbnail(
                                                                     es.thumb
@@ -1404,7 +1404,7 @@ module.exports = client => {
                                                 .catch(e => {
                                                     return channel.send({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.wrongcolor)
                                                                 .setFooter(client.getFooter(es))
                                                                 .setTitle(
@@ -1428,7 +1428,7 @@ module.exports = client => {
                                     }
                                 });
                             } else {
-                                if (!channel.permissionsFor(channel.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                     return channel.send(
                                         `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
                                     );
@@ -1441,7 +1441,7 @@ module.exports = client => {
                                     .then(channel => {
                                         channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -1470,7 +1470,7 @@ module.exports = client => {
                                                 if (!adminchannel) return client.settings.set(guild.id, "no", `adminlog`);
                                                 adminchannel.send({
                                                     embeds: [
-                                                        new MessageEmbed()
+                                                        new EmbedBuilder()
                                                             .setColor(es.color)
                                                             .setThumbnail(
                                                                 es.thumb
@@ -1531,7 +1531,7 @@ module.exports = client => {
                                     .catch(e => {
                                         return channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.wrongcolor)
                                                     .setFooter(client.getFooter(es))
                                                     .setTitle(
@@ -1558,7 +1558,7 @@ module.exports = client => {
                             return channel.send({
                                 content: `<@${buttonuser.id}>`,
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(
                                             eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable69"])
                                         )
@@ -1576,13 +1576,13 @@ module.exports = client => {
                 !cmdroles.includes(interaction?.user.id) && [...member.roles.cache.values()] &&
                 !member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![guild.ownerId, config.ownerid].includes(interaction?.user.id) &&
-                !member.permissions.has("ADMINISTRATOR") &&
+                !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) &&
                 !member.roles.cache.some(r => theadminroles.includes(r ? r.id : r))
             ) {
                 return channel.send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle("<:no:833101993668771842> You are not allowed to claim this Ticket")
@@ -1593,8 +1593,8 @@ module.exports = client => {
                 });
             }
             let data = client.setups.get(channel.id, "ticketdata");
-            if (!channel.permissionsFor(member).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
-                if (!channel.permissionsFor(channel.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+            if (!channel.permissionsFor(member).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
+                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                     return channel.send(`❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`);
                 }
                 channel.permissionOverwrites
@@ -1622,7 +1622,7 @@ module.exports = client => {
             channel
                 .send({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.color)
                             .setAuthor(member.user.tag, member.displayAvatarURL({ dynamic: true }))
                             .setDescription(
@@ -1642,7 +1642,7 @@ module.exports = client => {
     client.on("interactionCreate", interaction => {
         if (
             interaction?.guildId &&
-            interaction?.isSelectMenu() &&
+            interaction?.isStringSelectMenu() &&
             interaction?.message &&
             interaction?.message.author.id == client.user.id
         ) {
@@ -1898,7 +1898,7 @@ module.exports = client => {
                         }
                     }
 
-                    var ticketembed = new MessageEmbed()
+                    var ticketembed = new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -1907,9 +1907,8 @@ module.exports = client => {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(
-                            client.getFooter(
-                                `To close/manage this ticket react with the buttons\nYou can also type: ${client.settings.get(guild.id, "prefix")}ticket`,
+                        .setFooter(client.getFooter(
+                                `To close/manage this ticket react with the buttons\nYou can also type: ${client.settings.get(guild.id, "prefix" )}ticket`,
                                 es.footericon
                             )
                         )
@@ -1925,8 +1924,8 @@ module.exports = client => {
                         .setDescription(replyMsg.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
                     var ticketembeds = [ticketembed];
                     if (settings.claim.enabled) {
-                        var claimEmbed = new MessageEmbed()
-                            .setColor("ORANGE")
+                        var claimEmbed = new EmbedBuilder()
+                            .setColor("#E67E22")
                             .setThumbnail(
                                 es.thumb
                                     ? es.footericon &&
@@ -1946,34 +1945,34 @@ module.exports = client => {
                             .setDescription(settings.claim.messageOpen.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
                         ticketembeds.push(claimEmbed);
                     }
-                    const { MessageButton } = require("discord.js");
-                    let button_close = new MessageButton()
-                        .setStyle("PRIMARY")
+                    const { ButtonBuilder } = require("discord.js");
+                    let button_close = new ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Primary)
                         .setCustomId("ticket_close")
                         .setLabel("Close")
                         .setEmoji("🔒");
-                    let button_delete = new MessageButton()
-                        .setStyle("SECONDARY")
+                    let button_delete = new ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Secondary)
                         .setCustomId("ticket_delete")
                         .setLabel("Delete")
                         .setEmoji("🗑️");
-                    let button_transcript = new MessageButton()
-                        .setStyle("PRIMARY")
+                    let button_transcript = new ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Primary)
                         .setCustomId("ticket_transcript")
                         .setLabel("Transcript")
                         .setEmoji("📑");
-                    let button_user = new MessageButton()
-                        .setStyle("SUCCESS")
+                    let button_user = new ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Success)
                         .setCustomId("ticket_user")
                         .setLabel("Users")
                         .setEmoji("👤");
-                    let button_role = new MessageButton()
-                        .setStyle("SUCCESS")
+                    let button_role = new ButtonBuilder()
+                        .setStyle(Discord.ButtonStyle.Success)
                         .setCustomId("ticket_role")
                         .setLabel("Roles")
                         .setEmoji("📌");
                     const allbuttons = [
-                        new MessageActionRow().addComponents([
+                        new ActionRowBuilder().addComponents([
                             button_close,
                             button_delete,
                             button_transcript,
@@ -1983,17 +1982,17 @@ module.exports = client => {
                     ];
                     if (settings.claim.enabled) {
                         allbuttons.push(
-                            new MessageActionRow().addComponents([
-                                new MessageButton()
-                                    .setStyle("SECONDARY")
+                            new ActionRowBuilder().addComponents([
+                                new ButtonBuilder()
+                                    .setStyle(Discord.ButtonStyle.Secondary)
                                     .setCustomId("ticket_claim")
                                     .setLabel("Claim the Ticket")
                                     .setEmoji("✅"),
                             ])
                         );
                     }
-                    if (ch.permissionsFor(ch.guild.me).has(Permissions.FLAGS.SEND_MESSAGES)) {
-                        if (ch.permissionsFor(ch.guild.me).has(Permissions.FLAGS.EMBED_LINKS)) {
+                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.SEND_MESSAGES)) {
+                        if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.EMBED_LINKS)) {
                             await ch
                                 .send({
                                     content: `<@${user.id}>${extrastring}`,
@@ -2004,7 +2003,7 @@ module.exports = client => {
                                     console.log(String(O).grey);
                                 })
                                 .then(msg => {
-                                    if (msg.channel.permissionsFor(msg.guild.me).has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                    if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
                                         msg.pin().catch(O => {
                                             console.log(String(O).grey);
                                         });
@@ -2023,7 +2022,7 @@ module.exports = client => {
                                     console.log(String(O).grey);
                                 })
                                 .then(msg => {
-                                    if (msg.channel.permissionsFor(msg.guild.me).has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                                    if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
                                         msg.pin().catch(O => {
                                             console.log(String(O).grey);
                                         });
@@ -2044,7 +2043,7 @@ module.exports = client => {
     client.on("interactionCreate", interaction => {
         if (
             interaction?.guildId &&
-            interaction?.isSelectMenu() &&
+            interaction?.isStringSelectMenu() &&
             interaction?.message &&
             interaction?.message.author.id == client.user.id
         ) {
@@ -2111,7 +2110,7 @@ module.exports = client => {
                     interaction?.reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setFooter(client.getFooter(es))
                                 .setThumbnail(
@@ -2145,7 +2144,7 @@ module.exports = client => {
     client.on("interactionCreate", interaction => {
         if (
             interaction?.guildId &&
-            interaction?.isSelectMenu() &&
+            interaction?.isStringSelectMenu() &&
             interaction?.message &&
             interaction?.message.author.id == client.user.id
         ) {

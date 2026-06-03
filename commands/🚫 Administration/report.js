@@ -2,7 +2,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `report`,
@@ -19,7 +19,7 @@ module.exports = {
             if (client.settings.get(message.guild.id, `reportlog`) == "no")
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["report"]["variable1"]))
@@ -33,7 +33,7 @@ module.exports = {
             if (!member)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["report"]["variable3"]))
@@ -44,7 +44,7 @@ module.exports = {
             if (member.roles.highest.position > message.member.roles.highest.position)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["report"]["variable5"])),
@@ -55,7 +55,7 @@ module.exports = {
             if (!reason)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["report"]["variable6"]))
@@ -67,7 +67,7 @@ module.exports = {
 
             message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -83,7 +83,7 @@ module.exports = {
             });
             member.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -101,7 +101,7 @@ module.exports = {
             try {
                 channel.send({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -126,8 +126,7 @@ module.exports = {
                                 eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                             )
                             .setTimestamp()
-                            .setFooter(
-                                client.getFooter("ID: " + member.user.id, member.user.displayAvatarURL({ dynamic: true }))
+                            .setFooter(client.getFooter("ID: " + member.user.id, member.user.displayAvatarURL({ dynamic: true }))
                             ),
                     ],
                 });
@@ -141,7 +140,7 @@ module.exports = {
                     if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                     channel.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -166,8 +165,7 @@ module.exports = {
                                     eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                 )
                                 .setTimestamp()
-                                .setFooter(
-                                    client.getFooter(
+                                .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL({ dynamic: true })
                                     )
@@ -182,7 +180,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

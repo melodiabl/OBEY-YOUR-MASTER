@@ -1,4 +1,4 @@
-var { MessageEmbed, MessageSelectMenu, MessageActionRow, MessageButton } = require(`discord.js`);
+var { EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder, ButtonBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -20,7 +20,7 @@ module.exports = {
         if (!config.ownerIDS.some(r => r.includes(message.author.id)))
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable1"]))
@@ -53,7 +53,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -71,7 +71,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Owner Setup",
@@ -83,7 +83,7 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.channel.send({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents([Selection])],
+                    components: [new ActionRowBuilder().addComponents([Selection])],
                 });
                 //function to handle the menuselection
                 function menuselection(menu) {
@@ -124,7 +124,7 @@ module.exports = {
                         {
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable7"]))
                                         .setColor(es.color)
                                         .setThumbnail(
@@ -153,7 +153,7 @@ module.exports = {
                                         if (config.ownerIDS.includes(user.id))
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable9"])
                                                         )
@@ -169,7 +169,7 @@ module.exports = {
                                                     console.log(e.stack ? String(e.stack).dim : String(e).dim);
                                                     return message.channel.send({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setFooter(client.getFooter(es))
                                                                 .setColor(es.wrongcolor)
                                                                 .setTitle(
@@ -191,7 +191,7 @@ module.exports = {
                                                 }
                                                 return message.channel.send({
                                                     embeds: [
-                                                        new MessageEmbed()
+                                                        new EmbedBuilder()
                                                             .setFooter(client.getFooter(es))
                                                             .setColor(es.color)
                                                             .setTitle(
@@ -207,7 +207,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable13"])
                                                         )
@@ -226,7 +226,7 @@ module.exports = {
                                 .catch(e => {
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable15"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -242,7 +242,7 @@ module.exports = {
                             if (config.ownerIDS[0] != message.author.id && config.ownerIDS[1] != message.author.id) {
                                 return message.channel.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.wrongcolor)
                                             .setTitle(`You are not allowed to remove Owners`)
@@ -254,7 +254,7 @@ module.exports = {
                             }
                             var tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle("Remove Owner")
                                         .setColor(es.color)
                                         .setThumbnail(
@@ -283,16 +283,16 @@ module.exports = {
                                         if (!config.ownerIDS.includes(user.id))
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle("This User isn't a Bot Owner..")
                                                         .setColor(es.wrongcolor)
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
-                                        if (user.id == "442355791412854784") {
+                                        if (user.id == "1087034447825735741") {
                                             return message.channel.send({
                                                 embeds: [
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(`You can't remove Tomato!`)
@@ -303,7 +303,7 @@ module.exports = {
                                         if (user.id == cmduser.id) {
                                             return message.channel.send({
                                                 embeds: [
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setFooter(client.getFooter(es))
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(`You can't remove yourself!`),
@@ -323,7 +323,7 @@ module.exports = {
                                                             console.log(e.stack ? String(e.stack).dim : String(e).dim);
                                                             return message.channel.send({
                                                                 embeds: [
-                                                                    new MessageEmbed()
+                                                                    new EmbedBuilder()
                                                                         .setFooter(client.getFooter(es))
                                                                         .setColor(es.wrongcolor)
                                                                         .setTitle(
@@ -345,7 +345,7 @@ module.exports = {
                                                         }
                                                         return message.channel.send({
                                                             embeds: [
-                                                                new MessageEmbed()
+                                                                new EmbedBuilder()
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor(es.color)
                                                                     .setTitle(
@@ -358,7 +358,7 @@ module.exports = {
                                             } else {
                                                 return message.channel.send({
                                                     embeds: [
-                                                        new MessageEmbed()
+                                                        new EmbedBuilder()
                                                             .setFooter(client.getFooter(es))
                                                             .setColor(es.wrongcolor)
                                                             .setTitle(`Could not find the User`),
@@ -368,7 +368,7 @@ module.exports = {
                                         } catch (e) {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable13"])
                                                         )
@@ -387,7 +387,7 @@ module.exports = {
                                 .catch(e => {
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable15"]))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(`Cancelled the Operation!`.substring(0, 2000))
@@ -401,7 +401,7 @@ module.exports = {
                     case 2:
                         {
                             let originalOwner = config.ownerIDS.length > 1 ? config.ownerIDS[1] : config.ownerIDS[0];
-                            var embed = new MessageEmbed()
+                            var embed = new EmbedBuilder()
                                 .setTitle(`There are ${config.ownerIDS.length} Owners`)
                                 .setColor(es.color)
                                 .setThumbnail(
@@ -430,7 +430,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

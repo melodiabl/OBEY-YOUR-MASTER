@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup",
@@ -218,7 +218,7 @@ module.exports = {
                         emoji: allEmojis.msg.youtube,
                     },
                 ];
-                let Selection1 = new MessageSelectMenu()
+                let Selection1 = new StringSelectMenuBuilder()
                     .setPlaceholder("Click me to setup the (1/3) Systems [A-C]!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
@@ -238,7 +238,7 @@ module.exports = {
                             })
                             .filter(Boolean)
                     );
-                let Selection2 = new MessageSelectMenu()
+                let Selection2 = new StringSelectMenuBuilder()
                     .setPlaceholder("Click me to setup the (2/3) Systems [C-R]!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
@@ -261,7 +261,7 @@ module.exports = {
                             })
                             .filter(Boolean)
                     );
-                let Selection3 = new MessageSelectMenu()
+                let Selection3 = new StringSelectMenuBuilder()
                     .setPlaceholder("Click me to setup the (3/3) Systems [R-Z]!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
@@ -282,7 +282,7 @@ module.exports = {
                             .filter(Boolean)
                     );
                 //define the embed
-                let MenuEmbed1 = new Discord.MessageEmbed()
+                let MenuEmbed1 = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Setup-Systems | (1/3) [A-C]",
@@ -290,7 +290,7 @@ module.exports = {
                         "https://discord.gg/milrato"
                     )
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable1"]));
-                let MenuEmbed2 = new Discord.MessageEmbed()
+                let MenuEmbed2 = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Setup-Systems | (2/3) [C-R]",
@@ -298,7 +298,7 @@ module.exports = {
                         "https://discord.gg/milrato"
                     )
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable2"]));
-                let MenuEmbed3 = new Discord.MessageEmbed()
+                let MenuEmbed3 = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Setup-Systems | (3/3) [R-Z]",
@@ -309,15 +309,15 @@ module.exports = {
                 //send the menu msg
                 let menumsg1 = await message.reply({
                     embeds: [MenuEmbed1],
-                    components: [new MessageActionRow().addComponents(Selection1)],
+                    components: [new ActionRowBuilder().addComponents(Selection1)],
                 });
                 let menumsg2 = await message.reply({
                     embeds: [MenuEmbed2],
-                    components: [new MessageActionRow().addComponents(Selection2)],
+                    components: [new ActionRowBuilder().addComponents(Selection2)],
                 });
                 let menumsg3 = await message.reply({
                     embeds: [MenuEmbed3],
-                    components: [new MessageActionRow().addComponents(Selection3)],
+                    components: [new ActionRowBuilder().addComponents(Selection3)],
                 });
                 //function to handle the menuselection
                 function menuselection(menu) {
@@ -368,7 +368,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

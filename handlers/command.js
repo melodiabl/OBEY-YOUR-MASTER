@@ -1,10 +1,9 @@
 const { readdirSync } = require("fs");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const serialize = require("serialize-javascript");
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 console.log("Welcome to SERVICE HANDLER /--/ By https://milrato.eu /--/ Discord: Tomato#6966".yellow);
 module.exports = async client => {
-    const { default: Enmap } = await import("enmap");
     let dateNow = Date.now();
     console.log(`${String("[x] :: ".magenta)}Now loading the Commands ...`.brightGreen);
     try {
@@ -31,25 +30,27 @@ module.exports = async client => {
         console.log(String(e.stack).grey.bgRed);
     }
 
-    client.backupDB = new Enmap({ name: "backups", dataDir: "./databases" });
+    // backupDB: inicializado en loaddb.js como EnmapLike
+    if (!client.backupDB) { const EnmapLike = require('./enmap-like'); client.backupDB = new EnmapLike() }
 
     const { GiveawaysManager } = require("discord-giveaways");
-    client.giveawayDB = new Enmap({ name: "giveaways", dataDir: "./databases" });
+    // giveawayDB: Map simple compatible con la API de discord-giveaways
+    client.giveawayDB = new Map()
     const GiveawayManagerWithOwnDatabase = class extends GiveawaysManager {
         async getAllGiveaways() {
-            return client.giveawayDB.fetchEverything().array();
+            return [...client.giveawayDB.values()]
         }
         async saveGiveaway(messageId, giveawayData) {
-            client.giveawayDB.set(messageId, giveawayData);
-            return true;
+            client.giveawayDB.set(messageId, giveawayData)
+            return true
         }
         async editGiveaway(messageId, giveawayData) {
-            client.giveawayDB.set(messageId, giveawayData);
-            return true;
+            client.giveawayDB.set(messageId, giveawayData)
+            return true
         }
         async deleteGiveaway(messageId) {
-            client.giveawayDB.delete(messageId);
-            return true;
+            client.giveawayDB.delete(messageId)
+            return true
         }
     };
 
@@ -70,7 +71,7 @@ module.exports = async client => {
                 member
                     .send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(ee.wrongcolor)
                                 .setThumbnail(member.guild.iconURL({ dynamic: true }))
                                 .setAuthor(
@@ -80,7 +81,7 @@ module.exports = async client => {
                                 .setDescription(
                                     `> **Your are not fullfilling the Requirements for [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}), please make sure to fullfill them!.**\n\n> Go back to the Channel: <#${giveaway.channelId}>`
                                 )
-                                .setFooter(member.guild.name, member.guild.iconURL({ dynamic: true })),
+                                .setFooter({ text: member.guild.name, iconURL: member.guild.iconURL({ dynamic: true }) }),
                         ],
                     })
                     .catch(() => {});
@@ -92,7 +93,7 @@ module.exports = async client => {
             member
                 .send({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.color)
                             .setThumbnail(member.guild.iconURL({ dynamic: true }))
                             .setAuthor(
@@ -102,7 +103,7 @@ module.exports = async client => {
                             .setDescription(
                                 `> **Your entry for [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}) has been confirmed.**\n\n**Prize:**\n> ${giveaway.prize}\n\n**Winnersamount:**\n> \`${giveaway.winnerCount}\`\n\n**Your Bonus Entries**\n> \`${BonusEntries}\`\n\n> Go back to the Channel: <#${giveaway.channelId}>`
                             )
-                            .setFooter(member.guild.name, member.guild.iconURL({ dynamic: true })),
+                            .setFooter({ text: member.guild.name, iconURL: member.guild.iconURL({ dynamic: true }) }),
                     ],
                 })
                 .catch(() => {});
@@ -116,14 +117,14 @@ module.exports = async client => {
             member
                 .send({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setThumbnail(member.guild.iconURL({ dynamic: true }))
                             .setAuthor(`Giveaway Left!`, `https://cdn.discordapp.com/emojis/833101995723194437.gif?size=128`)
                             .setDescription(
                                 `> **You left [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}) and aren't participating anymore.**\n\n> Go back to the Channel: <#${giveaway.channelId}>`
                             )
-                            .setFooter(member.guild.name, member.guild.iconURL({ dynamic: true })),
+                            .setFooter({ text: member.guild.name, iconURL: member.guild.iconURL({ dynamic: true }) }),
                     ],
                 })
                 .catch(() => {});
@@ -138,14 +139,14 @@ module.exports = async client => {
                 .send({
                     contents: `Congratulations, **${winner.user.tag}**! You won the Giveaway.`,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.color)
                             .setThumbnail(winner.guild.iconURL({ dynamic: true }))
                             .setAuthor(`Giveaway Won!`, `https://cdn.discordapp.com/emojis/833101995723194437.gif?size=128`)
                             .setDescription(
                                 `> **You won [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}), congrats!**\n\n> Go to the Channel: <#${giveaway.channelId}>\n\n**Prize:**\n> ${giveaway.prize}`
                             )
-                            .setFooter(winner.guild.name, winner.guild.iconURL({ dynamic: true })),
+                            .setFooter({ text: winner.guild.name, iconURL: winner.guild.iconURL({ dynamic: true }) }),
                     ],
                 })
                 .catch(() => {});
@@ -161,14 +162,14 @@ module.exports = async client => {
                 .send({
                     contents: `Congratulations, **${winner.user.tag}**! You won the Giveaway through a \`reroll\`.`,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setThumbnail(winner.guild.iconURL({ dynamic: true }))
-                            .setAuthor(`Giveaway Won!`, `https://cdn.discordapp.com/emojis/833101995723194437.gif?size=128`)
+                            .setAuthor({ name: `Giveaway Won!`, iconURL: `https://cdn.discordapp.com/emojis/833101995723194437.gif?size=128` })
                             .setDescription(
                                 `> **You won [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}), congrats!**\n\n> Go to the Channel: <#${giveaway.channelId}>\n\n**Prize:**\n> ${giveaway.prize}`
                             )
-                            .setFooter(winner.guild.name, winner.guild.iconURL({ dynamic: true })),
+                            .setFooter({ text: winner.guild.name, iconURL: winner.guild.iconURL({ dynamic: true }) }),
                     ],
                 })
                 .catch(() => {});

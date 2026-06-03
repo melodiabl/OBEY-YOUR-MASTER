@@ -1,4 +1,4 @@
-var { MessageEmbed } = require("discord.js");
+var { EmbedBuilder } = require("discord.js");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var { format, delay, arrayMove } = require("../functions");
@@ -8,7 +8,7 @@ async function request(client, message, args, type, slashCommand) {
     let ls = client.settings.get(message.guild.id, "language");
     var search = args.join(" ");
     var res;
-    var player = client.manager.players.get(message.guild.id);
+    var player = client.shoukaku?.players?.get(message.guild.id) ?? null;
     //if no node, connect it
     if (player && player.node && !player.node.connected) await player.node.connect();
     //if no player create it
@@ -47,7 +47,7 @@ async function request(client, message, args, type, slashCommand) {
                     .reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(ee.wrongcolor)
                                 .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                                 .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["request"]["variable1"])),
@@ -57,7 +57,7 @@ async function request(client, message, args, type, slashCommand) {
             return message
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                             .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["request"]["variable1"])),
@@ -121,7 +121,7 @@ async function request(client, message, args, type, slashCommand) {
                     .reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(ee.wrongcolor)
                                 .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                                 .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["request"]["variable2"])),
@@ -131,7 +131,7 @@ async function request(client, message, args, type, slashCommand) {
             return message
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                             .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["request"]["variable2"])),

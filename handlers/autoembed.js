@@ -43,7 +43,7 @@ module.exports = client => {
                 //if it is an Embed do this
                 if (targetMessage.embeds[0]) {
                     const oldEmbed = targetMessage.embeds[0];
-                    const embed = new Discord.MessageEmbed();
+                    const embed = new Discord.EmbedBuilder();
                     if (oldEmbed.title) embed.setTitle(oldEmbed.title);
                     if (oldEmbed.description) embed.setDescription(oldEmbed.description);
                     embed
@@ -82,7 +82,7 @@ module.exports = client => {
                 }
                 //else do this
                 else {
-                    let embed = new Discord.MessageEmbed()
+                    let embed = new Discord.EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -100,7 +100,7 @@ module.exports = client => {
                     //add images if added (no videos possible)
                     if (message.attachments.size > 0) {
                         if (message.attachments.every(attachIsImage)) {
-                            const attachment = new MessageAttachment(url, imagename);
+                            const attachment = new AttachmentBuilder(url, imagename);
                             files = [attachment];
                         }
                     }

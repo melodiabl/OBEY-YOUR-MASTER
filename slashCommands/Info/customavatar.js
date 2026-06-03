@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -54,7 +54,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
         }
         if (customavatar) {
-            let embed = new MessageEmbed()
+            let embed = new EmbedBuilder()
                 .setAuthor(
                     handlemsg(client.la[ls].cmds.info.avatar.author, {
                         usertag: user.tag,
@@ -89,7 +89,7 @@ module.exports = {
                 ephemeral: true,
             });
         } else {
-            let embed = new MessageEmbed()
+            let embed = new EmbedBuilder()
                 .setAuthor(
                     handlemsg(client.la[ls].cmds.info.avatar.author, {
                         usertag: user.tag,

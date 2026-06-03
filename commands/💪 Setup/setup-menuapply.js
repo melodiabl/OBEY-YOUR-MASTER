@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup-menuapply",
@@ -36,8 +36,8 @@ module.exports = {
                     });
                 }
 
-                let row1 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row1 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -54,8 +54,8 @@ module.exports = {
                             })
                         )
                 );
-                let row2 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row2 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -72,8 +72,8 @@ module.exports = {
                             })
                         )
                 );
-                let row3 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row3 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -90,8 +90,8 @@ module.exports = {
                             })
                         )
                 );
-                let row4 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row4 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -109,7 +109,7 @@ module.exports = {
                         )
                 );
 
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         client.getAuthor(
@@ -128,9 +128,9 @@ module.exports = {
                         row2,
                         row3,
                         row4,
-                        new MessageActionRow().addComponents(
-                            new MessageButton()
-                                .setStyle("LINK")
+                        new ActionRowBuilder().addComponents(
+                            new ButtonBuilder()
+                                .setStyle(Discord.ButtonStyle.Link)
                                 .setURL("https://youtu.be/QGESDc31d4U")
                                 .setLabel("Tutorial Video")
                                 .setEmoji(allEmojis.msg.youtube)
@@ -139,7 +139,7 @@ module.exports = {
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                     errors: ["time"],
                 });
@@ -207,7 +207,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -224,7 +224,7 @@ module.exports = {
                         })
                     );
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Menu Apply Setup",
@@ -237,10 +237,10 @@ module.exports = {
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
                     components: [
-                        new MessageActionRow().addComponents(Selection),
-                        new MessageActionRow().addComponents(
-                            new MessageButton()
-                                .setStyle("LINK")
+                        new ActionRowBuilder().addComponents(Selection),
+                        new ActionRowBuilder().addComponents(
+                            new ButtonBuilder()
+                                .setStyle(Discord.ButtonStyle.Link)
                                 .setURL("https://youtu.be/QGESDc31d4U")
                                 .setLabel("Tutorial Video")
                                 .setEmoji(allEmojis.msg.youtube)
@@ -249,7 +249,7 @@ module.exports = {
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                     errors: ["time"],
                 });
@@ -290,7 +290,7 @@ module.exports = {
                             }
                             let tempmsg = await message.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.color)
                                         .setTitle("What should be the Text to display in the Embed?")
                                         .setDescription(
@@ -308,7 +308,7 @@ module.exports = {
                             if (collected && collected.first().content) {
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.color)
                                             .setTitle("In where should I send the Open a New Apply Message?")
                                             .setDescription(
@@ -327,7 +327,7 @@ module.exports = {
                                     let data = theDB.get(message.guild.id, pre + ".data");
                                     let channel = collected2.first().mentions.channels.first();
                                     let msgContent = collected.first().content;
-                                    let embed = new MessageEmbed()
+                                    let embed = new EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -341,7 +341,7 @@ module.exports = {
                                         .setDescription(msgContent)
                                         .setTitle("📋 Apply");
                                     //define the selection
-                                    let Selection = new MessageSelectMenu()
+                                    let Selection = new StringSelectMenuBuilder()
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1)
                                         .setMinValues(1)
@@ -363,11 +363,11 @@ module.exports = {
                                     channel
                                         .send({
                                             embeds: [embed],
-                                            components: [new MessageActionRow().addComponents([Selection])],
+                                            components: [new ActionRowBuilder().addComponents([Selection])],
                                         })
                                         .catch(() => {
                                             //define the selection
-                                            let Selection = new MessageSelectMenu()
+                                            let Selection = new StringSelectMenuBuilder()
                                                 .setCustomId("MenuSelection")
                                                 .setMaxValues(1)
                                                 .setMinValues(1)
@@ -387,7 +387,7 @@ module.exports = {
                                             channel
                                                 .send({
                                                     embeds: [embed],
-                                                    components: [new MessageActionRow().addComponents([Selection])],
+                                                    components: [new ActionRowBuilder().addComponents([Selection])],
                                                 })
                                                 .then(msg => {
                                                     theDB.set(message.guild.id, msg.id, pre + ".messageId");
@@ -423,7 +423,7 @@ module.exports = {
                             //ask for value and description
                             let tempmsg = await message.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.color)
                                         .setTitle("What should be the VALUE and DESCRIPTION of the Menu-Option?")
                                         .setDescription(
@@ -461,8 +461,8 @@ module.exports = {
                                     });
                                 }
 
-                                let row1 = new MessageActionRow().addComponents(
-                                    new MessageSelectMenu()
+                                let row1 = new ActionRowBuilder().addComponents(
+                                    new StringSelectMenuBuilder()
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -481,8 +481,8 @@ module.exports = {
                                             })
                                         )
                                 );
-                                let row2 = new MessageActionRow().addComponents(
-                                    new MessageSelectMenu()
+                                let row2 = new ActionRowBuilder().addComponents(
+                                    new StringSelectMenuBuilder()
                                         .setCustomId("MenuSelection2")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -501,8 +501,8 @@ module.exports = {
                                             })
                                         )
                                 );
-                                let row3 = new MessageActionRow().addComponents(
-                                    new MessageSelectMenu()
+                                let row3 = new ActionRowBuilder().addComponents(
+                                    new StringSelectMenuBuilder()
                                         .setCustomId("MenuSelection3")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -521,8 +521,8 @@ module.exports = {
                                             })
                                         )
                                 );
-                                let row4 = new MessageActionRow().addComponents(
-                                    new MessageSelectMenu()
+                                let row4 = new ActionRowBuilder().addComponents(
+                                    new StringSelectMenuBuilder()
                                         .setCustomId("MenuSelection4")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -542,7 +542,7 @@ module.exports = {
                                         )
                                 );
                                 //define the embed
-                                let MenuEmbed = new Discord.MessageEmbed()
+                                let MenuEmbed = new Discord.EmbedBuilder()
                                     .setColor(es.color)
                                     .setAuthor(
                                         client.getAuthor(
@@ -559,7 +559,7 @@ module.exports = {
                                 });
                                 //Create the collector
                                 const collector = menumsg.createMessageComponentCollector({
-                                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                                     time: 90000,
                                 });
                                 //Menu Collections
@@ -591,7 +591,7 @@ module.exports = {
                                                 `<:no:833101993668771842> **The ${applySystemExecution}. Apply System is not setupped / has no Questions, create it first with: \`${prefix}setup-apply\`**`
                                             );
 
-                                        var rermbed = new MessageEmbed()
+                                        var rermbed = new EmbedBuilder()
                                             .setColor(es.color)
                                             .setTitle("What should be the EMOJI to be displayed?")
                                             .setDescription(
@@ -674,7 +674,7 @@ module.exports = {
                                             );
                                             message.reply({
                                                 embeds: [
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle("Successfully added the New Data to the List!")
                                                         .setDescription(
@@ -712,7 +712,7 @@ module.exports = {
                                     "<:no:833101993668771842> **There are no Open-Apply-Options to remove**"
                                 );
                             }
-                            let embed = new MessageEmbed()
+                            let embed = new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -726,7 +726,7 @@ module.exports = {
                                 .setDescription("Just pick the Options you want to remove!")
                                 .setTitle("Which Option Do you want to remove?");
                             //define the selection
-                            let Selection = new MessageSelectMenu()
+                            let Selection = new StringSelectMenuBuilder()
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(data.length)
                                 .setMinValues(1)
@@ -750,10 +750,10 @@ module.exports = {
                             menumsg = await message
                                 .reply({
                                     embeds: [embed],
-                                    components: [new MessageActionRow().addComponents([Selection])],
+                                    components: [new ActionRowBuilder().addComponents([Selection])],
                                 })
                                 .catch(async () => {
-                                    let Selection = new MessageSelectMenu()
+                                    let Selection = new StringSelectMenuBuilder()
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(data.length)
                                         .setMinValues(1)
@@ -772,12 +772,12 @@ module.exports = {
                                         );
                                     menumsg = await message.reply({
                                         embeds: [embed],
-                                        components: [new MessageActionRow().addComponents([Selection])],
+                                        components: [new ActionRowBuilder().addComponents([Selection])],
                                     });
                                 });
                             //Create the collector
                             const collector = menumsg.createMessageComponentCollector({
-                                filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                                 time: 90000,
                                 errors: ["time"],
                             });
@@ -815,7 +815,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

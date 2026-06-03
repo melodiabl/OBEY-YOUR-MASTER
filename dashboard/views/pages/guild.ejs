@@ -1,0 +1,82 @@
+<%- include('../includes/header', { title: guild.name + ' - Configuración', user }) %>
+
+<div class="container">
+  <div class="guild-header">
+    <% if (guild.icon) { %><img src="<%= guild.icon %>" class="guild-icon-lg"><% } %>
+    <div>
+      <h2><%= guild.name %></h2>
+      <span class="badge"><%= guild.memberCount %> miembros</span>
+      <% if (typeof saved !== 'undefined') { %><span class="badge success">✅ Guardado</span><% } %>
+    </div>
+  </div>
+
+  <form method="POST" action="/dashboard/<%= guild.id %>">
+    <!-- General -->
+    <div class="settings-section">
+      <h3><i class="fas fa-cog"></i> General</h3>
+      <div class="form-row">
+        <label>Prefijo</label>
+        <input type="text" name="prefix" value="<%= settings.prefix || '!' %>" maxlength="5" class="form-input short">
+      </div>
+    </div>
+
+    <!-- Moderation -->
+    <div class="settings-section">
+      <h3><i class="fas fa-shield-alt"></i> Moderación</h3>
+      <div class="form-row">
+        <label>Canal de logs</label>
+        <select name="modLogChannel" class="form-select">
+          <option value="">-- Desactivado --</option>
+          <% channels.forEach(ch => { %>
+            <option value="<%= ch.id %>" <%= settings.modLogChannel === ch.id ? 'selected' : '' %>>#<%= ch.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-row toggles">
+        <label class="toggle-label">
+          <input type="checkbox" name="antiSpam" value="on" <%= settings.antiSpam ? 'checked' : '' %>>
+          <span>Anti-Spam</span>
+        </label>
+        <label class="toggle-label">
+          <input type="checkbox" name="antiLinks" value="on" <%= settings.antiLinks ? 'checked' : '' %>>
+          <span>Anti-Links</span>
+        </label>
+        <label class="toggle-label">
+          <input type="checkbox" name="antiCaps" value="on" <%= settings.antiCaps ? 'checked' : '' %>>
+          <span>Anti-Caps</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Welcome/Leave -->
+    <div class="settings-section">
+      <h3><i class="fas fa-door-open"></i> Bienvenida / Despedida</h3>
+      <div class="form-row">
+        <label>Canal de bienvenida</label>
+        <select name="welcomeChannel" class="form-select">
+          <option value="">-- Desactivado --</option>
+          <% channels.forEach(ch => { %>
+            <option value="<%= ch.id %>" <%= settings.welcomeChannel === ch.id ? 'selected' : '' %>>#<%= ch.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Mensaje de bienvenida <small>({user} = mención, {server} = nombre del servidor)</small></label>
+        <input type="text" name="welcomeMessage" value="<%= settings.welcomeMessage || '' %>" class="form-input" placeholder="¡Bienvenido {user} a {server}!">
+      </div>
+      <div class="form-row">
+        <label>Canal de despedida</label>
+        <select name="leaveChannel" class="form-select">
+          <option value="">-- Desactivado --</option>
+          <% channels.forEach(ch => { %>
+            <option value="<%= ch.id %>" <%= settings.leaveChannel === ch.id ? 'selected' : '' %>>#<%= ch.name %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-save"><i class="fas fa-save"></i> Guardar Cambios</button>
+  </form>
+</div>
+
+<%- include('../includes/footer') %>

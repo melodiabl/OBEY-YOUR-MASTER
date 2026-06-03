@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -23,7 +23,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "MUSIC")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -33,11 +33,11 @@ module.exports = {
         }
         try {
             let channel = message.member.voice.channel;
-            let botchannel = message.guild.me.voice.channel;
+            let botchannel = message.guild.members.me.voice.channel;
             if (!botchannel)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setTitle(eval(client.la[ls]["cmds"]["music"]["moveme"]["variable1"])),
                     ],
@@ -45,7 +45,7 @@ module.exports = {
             if (!channel)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setTitle(eval(client.la[ls]["cmds"]["music"]["moveme"]["variable2"])),
                     ],
@@ -53,7 +53,7 @@ module.exports = {
             if (botchannel.userLimit >= botchannel.members.length)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setTitle(eval(client.la[ls]["cmds"]["music"]["moveme"]["variable3"])),
                     ],
@@ -61,7 +61,7 @@ module.exports = {
             if (botchannel.id == channel.id)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setTitle(eval(client.la[ls]["cmds"]["music"]["moveme"]["variable4"])),
                     ],
@@ -72,7 +72,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
 
                         .setTitle(client.la[ls].common.erroroccur)

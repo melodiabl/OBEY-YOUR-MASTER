@@ -2,7 +2,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { MessageEmbed, Permissions, MessageSelectMenu, MessageButton, MessageActionRow } = require(`discord.js`);
+const { EmbedBuilder, Permissions, StringSelectMenuBuilder, ButtonBuilder, ActionRowBuilder } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const { databasing, GetUser } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -75,7 +75,7 @@ module.exports = {
                 },
             ];
             //define the selection
-            let Selection = new MessageSelectMenu()
+            let Selection = new StringSelectMenuBuilder()
                 .setCustomId("MenuSelection")
                 .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -118,7 +118,7 @@ module.exports = {
             let { invites, fake, leaves } = memberData;
             let realinvites = invites - fake - leaves;
             //define the embed
-            let MenuEmbed = new MessageEmbed()
+            let MenuEmbed = new EmbedBuilder()
                 .setColor(es.color)
                 .setAuthor(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable1"]))
                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable2"]))
@@ -133,7 +133,7 @@ module.exports = {
             //send the menu msg
             let menumsg = await message.reply({
                 embeds: [MenuEmbed],
-                components: [new MessageActionRow().addComponents(Selection)],
+                components: [new ActionRowBuilder().addComponents(Selection)],
             });
             //function to handle the menuselection
             async function menuselection(menu) {
@@ -145,7 +145,7 @@ module.exports = {
                     });
                 await menu?.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.color)
                             .setAuthor(
                                 client.la[ls].cmds.info.botfaq.menuembed.title,
@@ -208,7 +208,7 @@ module.exports = {
                         realinvites = invites - fake - leaves;
                         message.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setAuthor(
                                         `New Invites of: ${user.tag}`,
                                         user.displayAvatarURL({ dynamic: true }),
@@ -254,7 +254,7 @@ module.exports = {
                     if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                     channel.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -281,8 +281,7 @@ module.exports = {
                                     eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                 )
                                 .setTimestamp()
-                                .setFooter(
-                                    client.getFooter(
+                                .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL({ dynamic: true })
                                     )
@@ -297,7 +296,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

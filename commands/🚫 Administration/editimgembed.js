@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
@@ -36,11 +36,11 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has("ADMINISTRATOR")
+                !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)
             )
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["editimgembed"]["variable1"]))
@@ -50,7 +50,7 @@ module.exports = {
             if (!args[0])
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["editimgembed"]["variable3"]))
@@ -80,7 +80,7 @@ module.exports = {
                 .then(msg => {
                     msg.edit({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -129,7 +129,7 @@ module.exports = {
                     if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                     channel.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -163,7 +163,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

@@ -1,5 +1,5 @@
 ﻿const Discord = require("discord.js");
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -18,7 +18,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "FUN")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -35,7 +35,7 @@ module.exports = {
         //send loading message
         var tempmsg = await message.reply({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setColor(ee.color)
                     .setAuthor(
                         "Getting Image Data..",
@@ -69,7 +69,7 @@ module.exports = {
         //get the memer image
         client.memer.youtube(avatar, user.username, text).then(image => {
             //make an attachment
-            var attachment = new MessageAttachment(image, "youtube.png");
+            var attachment = new AttachmentBuilder(image, "youtube.png");
             //delete old message
             tempmsg.delete();
             //send new Message

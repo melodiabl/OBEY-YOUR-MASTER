@@ -1,4 +1,4 @@
-const { MessageEmbed, Permissions } = require("discord.js");
+const { EmbedBuilder, Permissions } = require("discord.js");
 const Discord = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -18,7 +18,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "VOICE")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -41,7 +41,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable1"]))
                                 .setFooter(client.getFooter(es)),
@@ -63,13 +63,13 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable2"]))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
@@ -81,7 +81,7 @@ module.exports = {
                             },
                         ])
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -94,7 +94,7 @@ module.exports = {
                             });
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -113,7 +113,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable5"]))
                                 .setFooter(client.getFooter(es)),
@@ -125,7 +125,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable6"]))
                                 .setFooter(client.getFooter(es)),
@@ -146,14 +146,14 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable7"]))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
 
-                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
@@ -162,7 +162,7 @@ module.exports = {
                             CONNECT: true,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -175,7 +175,7 @@ module.exports = {
                             });
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -194,7 +194,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable10"]))
                                 .setFooter(client.getFooter(es)),
@@ -206,7 +206,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable1"]))
                                 .setFooter(client.getFooter(es)),
@@ -228,13 +228,13 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable2"]))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
@@ -246,7 +246,7 @@ module.exports = {
                             },
                         ])
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -259,7 +259,7 @@ module.exports = {
                             });
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -278,7 +278,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable5"]))
                                 .setFooter(client.getFooter(es)),
@@ -290,7 +290,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable6"]))
                                 .setFooter(client.getFooter(es)),
@@ -311,14 +311,14 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable7"]))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
 
-                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
@@ -328,7 +328,7 @@ module.exports = {
                             SPEAK: true,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -342,7 +342,7 @@ module.exports = {
                             });
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -361,7 +361,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable10"]))
                                 .setFooter(client.getFooter(es)),
@@ -373,7 +373,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable11"]))
                                 .setFooter(client.getFooter(es)),
@@ -394,7 +394,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable12"]))
                                     .setFooter(client.getFooter(es)),
@@ -403,7 +403,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable13"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable14"]))
@@ -416,7 +416,7 @@ module.exports = {
                     if (!member || member == null || member == undefined)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable15"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable16"]))
@@ -426,7 +426,7 @@ module.exports = {
                     if (!member.voice.channel)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable17"]))
                                     .setFooter(client.getFooter(es)),
@@ -435,7 +435,7 @@ module.exports = {
                     if (member.voice.channel.id != channel.id)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable18"]))
                                     .setFooter(client.getFooter(es)),
@@ -445,7 +445,7 @@ module.exports = {
                         member.voice.disconnect();
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -462,7 +462,7 @@ module.exports = {
                     } catch (e) {
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable20"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable21"]))
@@ -473,7 +473,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable22"]))
                                 .setFooter(client.getFooter(es)),
@@ -485,7 +485,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable23"]))
                                 .setFooter(client.getFooter(es)),
@@ -506,7 +506,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable24"]))
                                     .setFooter(client.getFooter(es)),
@@ -515,7 +515,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable25"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable26"]))
@@ -528,7 +528,7 @@ module.exports = {
                     if (!member || member == null || member == undefined)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable27"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable28"]))
@@ -537,13 +537,13 @@ module.exports = {
                         });
                     let txt = args.slice(1).join(" ");
                     try {
-                        if (!channel.permissionsFor(channel.guild.me).has(Permissions.FLAGS.CREATE_INSTANT_INVITE)) {
+                        if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.CREATE_INSTANT_INVITE)) {
                             return message.reply(
                                 `${allEmojis.msg.ERROR} **I am missing the CREATE_INSTANT_INVITE PERMISSION for \`${channel.name}\`**`
                             );
                         }
                         channel.createInvite().then(invite => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -554,7 +554,7 @@ module.exports = {
                                     CONNECT: true,
                                 })
                                 .then(lol => {
-                                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                         return message.reply(
                                             `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                         );
@@ -568,7 +568,7 @@ module.exports = {
                                     member.user
                                         .send({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -592,7 +592,7 @@ module.exports = {
                                         .catch(e => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["voice"]["voice"]["variable30"])
@@ -607,7 +607,7 @@ module.exports = {
                                 });
                             return message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -625,7 +625,7 @@ module.exports = {
                     } catch (e) {
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable33"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable34"]))
@@ -636,7 +636,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable35"]))
                                 .setFooter(client.getFooter(es)),
@@ -648,7 +648,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable36"]))
                                 .setFooter(client.getFooter(es)),
@@ -669,7 +669,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable37"]))
                                     .setFooter(client.getFooter(es)),
@@ -678,7 +678,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable38"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable39"]))
@@ -691,7 +691,7 @@ module.exports = {
                     if (!member || member == null || member == undefined)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable40"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable41"]))
@@ -703,7 +703,7 @@ module.exports = {
                             member.voice.disconnect();
                             message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -720,7 +720,7 @@ module.exports = {
                         } catch (e) {
                             message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable43"]))
                                         .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable44"]))
@@ -729,7 +729,7 @@ module.exports = {
                             });
                         }
 
-                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
@@ -738,7 +738,7 @@ module.exports = {
                             CONNECT: false,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -751,7 +751,7 @@ module.exports = {
                             });
                             message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -769,7 +769,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable46"]))
                                 .setFooter(client.getFooter(es)),
@@ -781,7 +781,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable47"]))
                                 .setFooter(client.getFooter(es)),
@@ -802,7 +802,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable48"]))
                                     .setFooter(client.getFooter(es)),
@@ -811,7 +811,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable49"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable50"]))
@@ -824,14 +824,14 @@ module.exports = {
                     if (!member || member == null || member == undefined)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable51"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable52"]))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
@@ -840,7 +840,7 @@ module.exports = {
                             CONNECT: true,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -853,7 +853,7 @@ module.exports = {
                             });
                             message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -872,7 +872,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable55"]))
                                 .setFooter(client.getFooter(es)),
@@ -884,7 +884,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable56"]))
                                 .setFooter(client.getFooter(es)),
@@ -905,7 +905,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable57"]))
                                     .setFooter(client.getFooter(es)),
@@ -914,7 +914,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable58"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable59"]))
@@ -927,14 +927,14 @@ module.exports = {
                     if (!member || member == null || member == undefined)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable60"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable61"]))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
@@ -943,7 +943,7 @@ module.exports = {
                             CONNECT: true,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -956,7 +956,7 @@ module.exports = {
                             });
                             message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -975,7 +975,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable64"]))
                                 .setFooter(client.getFooter(es)),
@@ -987,7 +987,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable65"]))
                                 .setFooter(client.getFooter(es)),
@@ -1008,7 +1008,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable66"]))
                                     .setFooter(client.getFooter(es)),
@@ -1017,7 +1017,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable67"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable68"]))
@@ -1030,14 +1030,14 @@ module.exports = {
                     if (!member || member == null || member == undefined)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable69"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable70"]))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
@@ -1046,7 +1046,7 @@ module.exports = {
                             CONNECT: false,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 return message.reply(
                                     `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                 );
@@ -1059,7 +1059,7 @@ module.exports = {
                             });
                             message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -1078,7 +1078,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable73"]))
                                 .setFooter(client.getFooter(es)),
@@ -1090,7 +1090,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable74"]))
                                 .setFooter(client.getFooter(es)),
@@ -1111,7 +1111,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable75"]))
                                     .setFooter(client.getFooter(es)),
@@ -1120,7 +1120,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable76"])),
@@ -1129,7 +1129,7 @@ module.exports = {
                     if (isNaN(args[0]))
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable77"])),
@@ -1139,7 +1139,7 @@ module.exports = {
                     if (userlimit > 99 || userlimit < 0)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable78"])),
@@ -1148,7 +1148,7 @@ module.exports = {
                     channel.setUserLimit(userlimit).then(vc => {
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -1166,7 +1166,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable80"]))
                                 .setFooter(client.getFooter(es)),
@@ -1178,7 +1178,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable81"]))
                                 .setFooter(client.getFooter(es)),
@@ -1199,7 +1199,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable82"]))
                                     .setFooter(client.getFooter(es)),
@@ -1208,7 +1208,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable83"])),
@@ -1217,7 +1217,7 @@ module.exports = {
                     if (isNaN(args[0]))
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable84"])),
@@ -1232,7 +1232,7 @@ module.exports = {
                     if (userlimit > maxbitrate || userlimit < 8000)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable85"])),
@@ -1241,7 +1241,7 @@ module.exports = {
                     channel.setBitrate(userlimit).then(vc => {
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -1259,7 +1259,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable87"]))
                                 .setFooter(client.getFooter(es)),
@@ -1271,7 +1271,7 @@ module.exports = {
                 if (!channel)
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable88"]))
                                 .setFooter(client.getFooter(es)),
@@ -1292,7 +1292,7 @@ module.exports = {
                     if (!owner)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable89"]))
                                     .setFooter(client.getFooter(es)),
@@ -1301,7 +1301,7 @@ module.exports = {
                     if (!args[0])
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable90"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable91"]))
@@ -1314,7 +1314,7 @@ module.exports = {
                     if (!member || member == null || member == undefined)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable92"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable93"]))
@@ -1324,7 +1324,7 @@ module.exports = {
                     if (!member.voice.channel)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable94"]))
                                     .setFooter(client.getFooter(es)),
@@ -1333,14 +1333,14 @@ module.exports = {
                     if (member.voice.channel.id != channel.id)
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable95"]))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
                     try {
-                        if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                        if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                             return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
                         }
                         vc.permissionOverwrites
@@ -1351,7 +1351,7 @@ module.exports = {
                                 CONNECT: true,
                             })
                             .then(l => {
-                                if (!vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                                if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                     return message.reply(
                                         `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
                                     );
@@ -1367,7 +1367,7 @@ module.exports = {
                                         client.jointocreatemap.set(`owner_${vc.guild.id}_${vc.id}`, member.user.id);
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -1387,7 +1387,7 @@ module.exports = {
                     } catch (e) {
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable97"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable98"]))
@@ -1398,7 +1398,7 @@ module.exports = {
                 } else {
                     return message.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable99"]))
                                 .setFooter(client.getFooter(es)),
@@ -1408,7 +1408,7 @@ module.exports = {
             } else {
                 return message.reply({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable100"]))
                             .setColor(es.color)
                             .setThumbnail(
@@ -1428,7 +1428,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

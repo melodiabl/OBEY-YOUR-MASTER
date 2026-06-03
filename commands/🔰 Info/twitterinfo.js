@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -38,14 +38,12 @@ module.exports = {
                     if (err) return message.reply(client.la[ls].common.usernotfound);
                     var user = data[0];
                     if (!user) message.reply(client.la[ls].common.usernotfound);
-                    var embed = new Discord.MessageEmbed()
+                    var embed = new Discord.EmbedBuilder()
                         .setColor(`#${user.profile_background_color}`)
                         .setThumbnail(user.profile_image_url_https ? user.profile_image_url_https : user.profile_image_url)
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `ID: ${user.id_str}`,
-                                user.profile_image_url_https ? user.profile_image_url_https : user.profile_image_url
-                            )
+                                user.profile_image_url_https ? user.profile_image_url_https : user.profile_image_url)
                         )
                         .addField(client.la[ls].cmds.info.twitterinfo.field1.title, `\`${user.name}\``, true)
                         .addField(
@@ -82,7 +80,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

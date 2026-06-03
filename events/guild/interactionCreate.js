@@ -46,7 +46,7 @@ module.exports = async (client, interaction) => {
     }
     if (command) {
         if (!command.category?.toLowerCase().includes("nsfw") && botchannel.toString() !== "") {
-            if (!botchannel.includes(channelId) && !member.permissions.has("ADMINISTRATOR")) {
+            if (!botchannel.includes(channelId) && !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
                 for (const channelId of botchannel) {
                     let channel = guild.channels.cache.get(channelId);
                     if (!channel) {
@@ -57,7 +57,7 @@ module.exports = async (client, interaction) => {
                 return interaction?.reply({
                     ephmerla: true,
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].common.botchat.title)
@@ -85,7 +85,7 @@ module.exports = async (client, interaction) => {
                 return interaction?.reply({
                     ephemeral: true,
                     embeds: [
-                        new Discord.MessageEmbed().setColor(es.wrongcolor).setTitle(
+                        new Discord.EmbedBuilder().setColor(es.wrongcolor).setTitle(
                             handlemsg(client.la[ls].common.cooldown, {
                                 time: timeLeft.toFixed(1),
                                 commandname: command.name,
@@ -108,7 +108,7 @@ module.exports = async (client, interaction) => {
             return interaction?.reply({
                 ephemeral: true,
                 embeds: [
-                    new Discord.MessageEmbed()
+                    new Discord.EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.permissions.title)
@@ -119,11 +119,11 @@ module.exports = async (client, interaction) => {
             });
         }
 
-        const player = client.manager.players.get(guild.id);
+        const player = client.shoukaku?.players?.get(guild.id) ?? null;
 
         if (player && player.node && !player.node.connected) player.node.connect();
 
-        if (guild.me.voice.channel && player) {
+        if (guild.members.me.voice.channel && player) {
             //destroy the player if there is no one
             if (!player.queue) await player.destroy();
             await delay(350);
@@ -137,14 +137,14 @@ module.exports = async (client, interaction) => {
             if (command.parameters.type == "music") {
                 //get the channel instance
                 const { channel } = member.voice;
-                const mechannel = guild.me.voice.channel;
+                const mechannel = guild.members.me.voice.channel;
                 //if not in a voice Channel return error
                 if (!channel) {
                     not_allowed = true;
                     return interaction?.reply({
                         ephemeral: true,
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(client.la[ls].common.join_vc),
@@ -153,14 +153,14 @@ module.exports = async (client, interaction) => {
                 }
                 //If there is no player, then kick the bot out of the channel, if connected to
                 if (!player && mechannel) {
-                    await guild.me.voice.disconnect().catch(e => {});
+                    await guild.members.me.voice.disconnect().catch(e => {});
                     await delay(350);
                 }
                 if (player && player.queue && player.queue.current && command.parameters.check_dj) {
                     if (check_if_dj(client, interaction?.member, player.queue.current)) {
                         return interaction?.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(ee.wrongcolor)
                                     .setFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` })
                                     .setTitle(
@@ -181,7 +181,7 @@ module.exports = async (client, interaction) => {
                         return interaction?.reply({
                             ephemeral: true,
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(client.la[ls].common.nothing_playing),
@@ -198,7 +198,7 @@ module.exports = async (client, interaction) => {
                         return interaction?.reply({
                             ephemeral: true,
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(client.la[ls].common.not_connected),
@@ -213,7 +213,7 @@ module.exports = async (client, interaction) => {
                         return interaction?.reply({
                             ephemeral: true,
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(client.la[ls].common.nothing_playing),
@@ -226,7 +226,7 @@ module.exports = async (client, interaction) => {
                     return interaction?.reply({
                         ephemeral: true,
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(client.la[ls].common.wrong_vc)
@@ -239,7 +239,7 @@ module.exports = async (client, interaction) => {
                     return interaction?.reply({
                         ephemeral: true,
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(client.la[ls].common.wrong_vc)

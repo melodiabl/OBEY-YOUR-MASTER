@@ -114,7 +114,7 @@ module.exports = client => {
             if (!channel) return;
 
             //define the leave embed
-            const leaveembed = new Discord.MessageEmbed()
+            const leaveembed = new Discord.EmbedBuilder()
                 .setColor(es.wrongcolor)
                 .setThumbnail(
                     es.thumb
@@ -124,8 +124,7 @@ module.exports = client => {
                         : null
                 )
                 .setTimestamp()
-                .setFooter(
-                    client.getFooter(
+                .setFooter(client.getFooter(
                         "Good bye: " + member.user.id,
                         member.user.displayAvatarURL({
                             dynamic: true,
@@ -144,7 +143,7 @@ module.exports = client => {
         }
         async function dm_msg_withoutimg(member) {
             //define the leave embed
-            const leaveembed = new Discord.MessageEmbed()
+            const leaveembed = new Discord.EmbedBuilder()
                 .setColor(es.wrongcolor)
                 .setThumbnail(
                     es.thumb
@@ -154,8 +153,7 @@ module.exports = client => {
                         : null
                 )
                 .setTimestamp()
-                .setFooter(
-                    client.getFooter(
+                .setFooter(client.getFooter(
                         "Good bye: " + member.user.id,
                         member.user.displayAvatarURL({
                             dynamic: true,
@@ -175,7 +173,7 @@ module.exports = client => {
 
         async function dm_msg_withimg(member) {
             //define the leave embed
-            const leaveembed = new Discord.MessageEmbed()
+            const leaveembed = new Discord.EmbedBuilder()
                 .setColor(es.wrongcolor)
                 .setThumbnail(
                     es.thumb
@@ -185,8 +183,7 @@ module.exports = client => {
                         : null
                 )
                 .setTimestamp()
-                .setFooter(
-                    client.getFooter(
+                .setFooter(client.getFooter(
                         "Good bye: " + member.user.id,
                         member.user.displayAvatarURL({
                             dynamic: true,
@@ -211,7 +208,7 @@ module.exports = client => {
             if (!channel) return;
 
             //define the leave embed
-            const leaveembed = new Discord.MessageEmbed()
+            const leaveembed = new Discord.EmbedBuilder()
                 .setColor(es.wrongcolor)
                 .setThumbnail(
                     es.thumb
@@ -221,8 +218,7 @@ module.exports = client => {
                         : null
                 )
                 .setTimestamp()
-                .setFooter(
-                    client.getFooter(
+                .setFooter(client.getFooter(
                         "Good bye: " + member.user.id,
                         member.user.displayAvatarURL({
                             dynamic: true,
@@ -244,7 +240,7 @@ module.exports = client => {
         async function dm_msg_autoimg(member) {
             try {
                 //define the leave embed
-                const leaveembed = new Discord.MessageEmbed()
+                const leaveembed = new Discord.EmbedBuilder()
                     .setColor(es.wrongcolor)
                     .setThumbnail(
                         es.thumb
@@ -254,8 +250,7 @@ module.exports = client => {
                             : null
                     )
                     .setTimestamp()
-                    .setFooter(
-                        client.getFooter(
+                    .setFooter(client.getFooter(
                             "Good bye: " + member.user.id,
                             member.user.displayAvatarURL({
                                 dynamic: true,
@@ -297,7 +292,7 @@ module.exports = client => {
                 if (client.settings.get(member.guild.id, "leave.framedm")) {
                     let background;
                     var framecolor = client.settings.get(member.guild.id, "leave.framecolordm").toUpperCase();
-                    if (framecolor == "WHITE") framecolor = "#FFFFF9";
+                    if (framecolor == "#FFFFFF") framecolor = "#FFFFF9";
                     if (
                         client.settings.get(member.guild.id, "leave.discriminatordm") &&
                         client.settings.get(member.guild.id, "leave.servernamedm")
@@ -317,7 +312,7 @@ module.exports = client => {
                 }
 
                 var fillcolors = client.settings.get(member.guild.id, "leave.framecolordm").toUpperCase();
-                if (fillcolors == "WHITE") fillcolor == "#FFFFF9";
+                if (fillcolors == "#FFFFFF") fillcolor == "#FFFFF9";
                 ctx.fillStyle = fillcolors.toLowerCase();
 
                 //set the first text string
@@ -369,7 +364,7 @@ module.exports = client => {
                 }
 
                 //get it as a discord attachment
-                const attachment = new Discord.MessageAttachment(canvas.toBuffer("image/webp"), "leave-image.png");
+                const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "leave-image.png");
                 //define the leave embed
                 //send the leave embed to there
                 member.user
@@ -388,7 +383,7 @@ module.exports = client => {
                 let channel = await client.channels.fetch(leavechannel).catch(() => {});
                 if (!channel) return;
                 //define the leave embed
-                const leaveembed = new Discord.MessageEmbed()
+                const leaveembed = new Discord.EmbedBuilder()
                     .setColor(es.wrongcolor)
                     .setThumbnail(
                         es.thumb
@@ -398,8 +393,7 @@ module.exports = client => {
                             : null
                     )
                     .setTimestamp()
-                    .setFooter(
-                        client.getFooter(
+                    .setFooter(client.getFooter(
                             "Good bye: " + member.user.id,
                             member.user.displayAvatarURL({
                                 dynamic: true,
@@ -439,7 +433,7 @@ module.exports = client => {
                 if (client.settings.get(member.guild.id, "leave.frame")) {
                     let background;
                     var framecolor = client.settings.get(member.guild.id, "leave.framecolor").toUpperCase();
-                    if (framecolor == "WHITE") framecolor = "#FFFFF9";
+                    if (framecolor == "#FFFFFF") framecolor = "#FFFFF9";
                     if (
                         client.settings.get(member.guild.id, "leave.discriminator") &&
                         client.settings.get(member.guild.id, "leave.servername")
@@ -460,7 +454,7 @@ module.exports = client => {
                 }
 
                 var fillcolor = client.settings.get(member.guild.id, "leave.framecolor").toUpperCase();
-                if (fillcolor == "WHITE") fillcolor == "#FFFFF9";
+                if (fillcolor == "#FFFFFF") fillcolor == "#FFFFF9";
                 ctx.fillStyle = fillcolor.toLowerCase();
 
                 //set the first text string
@@ -511,7 +505,7 @@ module.exports = client => {
                     ctx.drawImage(avatar, 65, canvas.height / 2 - 250, 500, 500);
                 }
                 //get it as a discord attachment
-                const attachment = new Discord.MessageAttachment(canvas.toBuffer("image/webp"), "leave-image.png");
+                const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "leave-image.png");
                 //define the leave embed
                 //send the leave embed to there
                 channel

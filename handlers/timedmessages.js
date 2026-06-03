@@ -70,7 +70,7 @@ module.exports = client => {
                         channel
                             .send({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setFooter(client.getFooter(es))
                                         .setThumbnail(

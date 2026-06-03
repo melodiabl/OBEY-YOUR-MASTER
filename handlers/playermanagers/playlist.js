@@ -1,4 +1,4 @@
-var { MessageEmbed } = require("discord.js");
+var { EmbedBuilder } = require("discord.js");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var { format, delay, arrayMove } = require("../functions");
@@ -9,7 +9,7 @@ async function playlist(client, message, args, type, slashCommand = false) {
     var search = args.join(" ");
     try {
         var res;
-        var player = client.manager.players.get(message.guild.id);
+        var player = client.shoukaku?.players?.get(message.guild.id) ?? null;
         //if no node, connect it
         if (player && player.node && !player.node.connected) await player.node.connect();
         //if no player create it
@@ -52,7 +52,7 @@ async function playlist(client, message, args, type, slashCommand = false) {
                     .reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(ee.wrongcolor)
                                 .setTitle(eval(client.la[ls]["handlers"]["playermanagers"]["playlist"]["variable1"]))
                                 .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playlist"]["variable2"])),
@@ -62,7 +62,7 @@ async function playlist(client, message, args, type, slashCommand = false) {
             return message
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(eval(client.la[ls]["handlers"]["playermanagers"]["playlist"]["variable1"]))
                             .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playlist"]["variable2"])),
@@ -82,7 +82,7 @@ async function playlist(client, message, args, type, slashCommand = false) {
                     .reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(ee.wrongcolor)
                                 .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                                 .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playlist"]["variable3"])),
@@ -92,7 +92,7 @@ async function playlist(client, message, args, type, slashCommand = false) {
             return message
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                             .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playlist"]["variable3"])),
@@ -132,7 +132,7 @@ async function playlist(client, message, args, type, slashCommand = false) {
             player.queue.add(res.tracks);
         }
         //send information
-        var playlistembed = new MessageEmbed()
+        var playlistembed = new EmbedBuilder()
             .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playlist"]["variable4"]))
             .setColor(ee.color)
             .setThumbnail(`https://img.youtube.com/vi/${res.tracks[0].identifier}/mqdefault.jpg`)
@@ -168,7 +168,7 @@ async function playlist(client, message, args, type, slashCommand = false) {
                 .reply({
                     ephemeral: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**"),
                     ],
@@ -177,7 +177,7 @@ async function playlist(client, message, args, type, slashCommand = false) {
         message
             .reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(ee.wrongcolor)
                         .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**"),
                 ],

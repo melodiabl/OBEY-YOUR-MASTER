@@ -1,4 +1,4 @@
-const { MessageEmbed, Permissions } = require(`discord.js`);
+const { EmbedBuilder, Permissions } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -38,11 +38,11 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([Permissions.FLAGS.ADMINSTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.ADMINSTRATOR])
             )
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
@@ -53,7 +53,7 @@ module.exports = {
             if (!channels || channels.size == 0)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(`<:no:833101993668771842> **There are no open Threads in this Server**`),
@@ -62,7 +62,7 @@ module.exports = {
             for (const channel of channels) await channel.join();
             message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
                         .setTitle(`${allEmojis.msg.SUCCESS} **I joined \`${channels.size}\` Threads**`),
@@ -74,7 +74,7 @@ module.exports = {
                     if (!ch) return client.settings.set(message.guild.id, "no", `adminlog`);
                     ch.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -101,8 +101,7 @@ module.exports = {
                                     eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                 )
                                 .setTimestamp()
-                                .setFooter(
-                                    client.getFooter(
+                                .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL({ dynamic: true })
                                     )
@@ -117,7 +116,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))

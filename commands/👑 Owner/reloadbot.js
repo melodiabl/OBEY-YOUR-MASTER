@@ -1,4 +1,4 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -19,7 +19,7 @@ module.exports = {
         if (!config.ownerIDS.some(r => r.includes(message.author.id)))
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["reloadbot"]["variable1"]))
@@ -65,7 +65,7 @@ ${clientapp.description ? clientapp.description : "❌ NO DESCRIPTION YET!"}
             await client.destroy();
             let tempmsg = await message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
                         .setAuthor(
@@ -147,7 +147,7 @@ ${clientapp.description ? clientapp.description : "❌ NO DESCRIPTION YET!"}
             await delay(3000);
             await tempmsg.edit({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
                         .setAuthor(
@@ -162,7 +162,7 @@ ${clientapp.description ? clientapp.description : "❌ NO DESCRIPTION YET!"}
             console.log(String(e.stack).dim.bgRed);
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

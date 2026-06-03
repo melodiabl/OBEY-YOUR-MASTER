@@ -29,7 +29,7 @@ module.exports = {
         try {
             let tempmsg = await interaction?.reply({
                 embeds: [
-                    new Discord.MessageEmbed()
+                    new Discord.EmbedBuilder()
                         .setColor(es.color)
                         .setAuthor(
                             client.la[ls].cmds.info.botinfo.loading,
@@ -58,7 +58,7 @@ module.exports = {
                     author: member.user,
                     createdTimestamp,
                 };
-                const botinfo = new Discord.MessageEmbed()
+                const botinfo = new Discord.EmbedBuilder()
                     .setAuthor(
                         client.user.tag + " Information",
                         es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
@@ -99,7 +99,7 @@ module.exports = {
                     )
                     .addField(
                         client.la[ls].cmds.info.botinfo.field4.title,
-                        `\`\`\`yml\nName: Tomato#6966\nID: [442355791412854784]\`\`\``,
+                        `\`\`\`yml\nName: Tomato#6966\nID: [1087034447825735741]\`\`\``,
                         true
                     )
                     .addField(

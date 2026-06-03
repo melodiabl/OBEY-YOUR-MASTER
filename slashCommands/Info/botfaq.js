@@ -3,7 +3,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const { duration, handlemsg } = require(`${process.cwd()}/handlers/functions`);
-const { MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 module.exports = {
     name: "botfaq",
     description: "Frequently Asked Questions, about me!",
@@ -91,8 +91,8 @@ module.exports = {
                 },
             ];
             //define the selection
-            let Selection = new MessageActionRow().addComponents(
-                new MessageSelectMenu()
+            let Selection = new ActionRowBuilder().addComponents(
+                new StringSelectMenuBuilder()
                     .setCustomId("Botfaq-SlashCmd")
                     .setPlaceholder(client.la[ls].cmds.info.botfaq.placeholder)
                     .addOptions(
@@ -107,7 +107,7 @@ module.exports = {
                     )
             );
             //define the embed
-            let MenuEmbed = new Discord.MessageEmbed()
+            let MenuEmbed = new Discord.EmbedBuilder()
                 .setColor(es.color)
                 .setAuthor(
                     client.la[ls].cmds.info.botfaq.menuembed.title,
@@ -122,7 +122,7 @@ module.exports = {
                 let menuoptiondata = menuoptions.find(v => v.value.substring(0, 25) == interaction?.values[0]);
                 interaction?.reply({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setColor(es.color)
                             .setAuthor(
                                 client.la[ls].cmds.info.botfaq.menuembed.title,
@@ -136,7 +136,7 @@ module.exports = {
             }
             //Event
             client.on("interactionCreate", interaction => {
-                if (!interaction?.isSelectMenu()) return;
+                if (!interaction?.isStringSelectMenu()) return;
                 if (interaction?.customId === "Botfaq-SlashCmd" && interaction?.applicationId == client.user.id) {
                     menuselection(interaction);
                 }

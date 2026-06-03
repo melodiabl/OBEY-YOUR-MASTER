@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -132,7 +132,7 @@ module.exports = {
                               state: "OFFLINE - No activity",
                           };
                     //create the EMBED
-                    const embeduserinfo = new MessageEmbed();
+                    const embeduserinfo = new EmbedBuilder();
                     embeduserinfo.setThumbnail(
                         customavatar ? customavatar : member.user.displayAvatarURL({ dynamic: true, size: 512 })
                     );
@@ -234,7 +234,7 @@ module.exports = {
                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                     const userFlags = user.flags?.toArray();
                     //create the EMBED
-                    const embeduserinfo = new MessageEmbed();
+                    const embeduserinfo = new EmbedBuilder();
                     embeduserinfo.setThumbnail(
                         customavatar ? customavatar : user.displayAvatarURL({ dynamic: true, size: 512 })
                     );

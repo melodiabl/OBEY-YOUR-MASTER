@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { isValidSnowflakeId } = require("../../handlers/functions");
 const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
@@ -37,8 +37,8 @@ module.exports = {
                     });
                 }
 
-                let row1 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row1 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -55,8 +55,8 @@ module.exports = {
                             })
                         )
                 );
-                let row2 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row2 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -73,8 +73,8 @@ module.exports = {
                             })
                         )
                 );
-                let row3 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row3 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -91,8 +91,8 @@ module.exports = {
                             })
                         )
                 );
-                let row4 = new MessageActionRow().addComponents(
-                    new MessageSelectMenu()
+                let row4 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -111,7 +111,7 @@ module.exports = {
                 );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         client.getAuthor(
@@ -139,7 +139,7 @@ module.exports = {
                 }
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -224,7 +224,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -244,7 +244,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         SetupNumber + " Ticket Setup",
@@ -255,7 +255,7 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //function to handle the menuselection
                 function menuselection(menu) {
@@ -268,7 +268,7 @@ module.exports = {
                 }
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -301,7 +301,7 @@ module.exports = {
                         {
                             let parentId = client.setups.get(message.guild.id, `ticketsystem${SetupNumber}.closedParent`);
                             let parent = parentId ? message.guild.channels.cache.get(parentId) : null;
-                            var rembed = new MessageEmbed()
+                            var rembed = new EmbedBuilder()
                                 .setColor(es.color)
                                 .setFooter(client.getFooter(es))
                                 .setTitle("What should be the new Closed Ticket Category?")
@@ -344,7 +344,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]
@@ -362,7 +362,7 @@ module.exports = {
                     case "Set Default Ticket Name":
                         {
                             let defaultname = client.setups.get(message.guild.id, `ticketsystem${SetupNumber}.defaultname`);
-                            var rembed = new MessageEmbed()
+                            var rembed = new EmbedBuilder()
                                 .setColor(es.color)
                                 .setFooter(client.getFooter(es))
                                 .setTitle("What should be the new Default Ticket Name?")
@@ -402,7 +402,7 @@ module.exports = {
                                         .catch(error => {
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]
@@ -418,7 +418,7 @@ module.exports = {
                         }
                         break;
                     case "Create Ticket-System":
-                        var msg11 = new MessageEmbed()
+                        var msg11 = new EmbedBuilder()
                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable6"]))
                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable7"]))
                             .setFooter(client.getFooter(es))
@@ -443,7 +443,7 @@ module.exports = {
                                         if (!channel)
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable8"])
                                                         )
@@ -452,7 +452,7 @@ module.exports = {
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
-                                        var msg6 = new MessageEmbed()
+                                        var msg6 = new EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable9"]))
                                             .setDescription(
                                                 eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable10"])
@@ -489,9 +489,9 @@ module.exports = {
                                                             `ticketsystem${SetupNumber}.channelid`
                                                         );
 
-                                                        let button_open = new MessageActionRow().addComponents([
-                                                            new MessageButton()
-                                                                .setStyle("SUCCESS")
+                                                        let button_open = new ActionRowBuilder().addComponents([
+                                                            new ButtonBuilder()
+                                                                .setStyle(Discord.ButtonStyle.Success)
                                                                 .setCustomId("create_a_ticket")
                                                                 .setLabel("Create a Ticket")
                                                                 .setEmoji("📨"),
@@ -500,7 +500,7 @@ module.exports = {
                                                         channel
                                                             .send({
                                                                 embeds: [
-                                                                    new MessageEmbed()
+                                                                    new EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -533,7 +533,7 @@ module.exports = {
                                                                     `ticketsystem${SetupNumber}.enabled`
                                                                 );
                                                                 //msg.react(emoji2react)
-                                                                var themebd = new MessageEmbed()
+                                                                var themebd = new EmbedBuilder()
                                                                     .setColor(es.color)
                                                                     .setTitle(
                                                                         eval(
@@ -559,7 +559,7 @@ module.exports = {
                                                     .catch(error => {
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-ticket"][
@@ -580,7 +580,7 @@ module.exports = {
                                     .catch(error => {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable16"])
                                                     )
@@ -624,7 +624,7 @@ module.exports = {
                         );
                         break;
                     case "Edit Message":
-                        var rembed = new MessageEmbed()
+                        var rembed = new EmbedBuilder()
                             .setColor(es.color)
                             .setFooter(client.getFooter(es))
 
@@ -653,7 +653,7 @@ module.exports = {
                                     .catch(error => {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"])
                                                     )
@@ -666,7 +666,7 @@ module.exports = {
                             });
                         break;
                     case "Add Ticket Role":
-                        var rrembed = new MessageEmbed()
+                        var rrembed = new EmbedBuilder()
                             .setColor(es.color)
                             .setFooter(client.getFooter("Pick the INDEX NUMBER", es.footericon))
 
@@ -704,7 +704,7 @@ module.exports = {
                                     .catch(error => {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable26"])
                                                     )
@@ -717,7 +717,7 @@ module.exports = {
                             });
                         break;
                     case "Remove Ticket Role":
-                        var rrrembed = new MessageEmbed()
+                        var rrrembed = new EmbedBuilder()
                             .setColor(es.color)
                             .setFooter(client.getFooter("Pick the INDEX NUMBER", es.footericon))
 
@@ -763,7 +763,7 @@ module.exports = {
                                     .catch(error => {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable32"])
                                                     )
@@ -776,7 +776,7 @@ module.exports = {
                             });
                         break;
                     case "Ticket Category":
-                        var rembed = new MessageEmbed()
+                        var rembed = new EmbedBuilder()
                             .setColor(es.color)
                             .setFooter(client.getFooter(es))
 
@@ -820,7 +820,7 @@ module.exports = {
                                     .catch(error => {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable38"])
                                                     )
@@ -867,7 +867,7 @@ module.exports = {
                                     },
                                 ];
                                 //define the selection
-                                let Selection = new MessageSelectMenu()
+                                let Selection = new StringSelectMenuBuilder()
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1)
                                     .setMinValues(1)
@@ -889,7 +889,7 @@ module.exports = {
                                     );
 
                                 //define the embed
-                                let MenuEmbed = new Discord.MessageEmbed()
+                                let MenuEmbed = new Discord.EmbedBuilder()
                                     .setColor(es.color)
                                     .setAuthor(
                                         SetupNumber + " Ticket Setup",
@@ -900,7 +900,7 @@ module.exports = {
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
-                                    components: [new MessageActionRow().addComponents(Selection)],
+                                    components: [new ActionRowBuilder().addComponents(Selection)],
                                 });
                                 //function to handle the menuselection
                                 function menuselection(menu) {
@@ -915,7 +915,7 @@ module.exports = {
                                 }
                                 //Create the collector
                                 const collector = menumsg.createMessageComponentCollector({
-                                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                                     time: 90000,
                                 });
                                 //Menu Collections
@@ -958,7 +958,7 @@ module.exports = {
                                             );
                                             return message.reply({
                                                 embeds: [
-                                                    new MessageEmbed()
+                                                    new EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setThumbnail(
                                                             es.thumb
@@ -982,7 +982,7 @@ module.exports = {
                                         break;
                                     case "Edit Open Message":
                                         {
-                                            var rembed = new MessageEmbed()
+                                            var rembed = new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle("What should be the new Message when a User opens a Ticket?")
@@ -1015,7 +1015,7 @@ module.exports = {
                                                         .catch(error => {
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -1036,7 +1036,7 @@ module.exports = {
                                         break;
                                     case "Edit Claim Message":
                                         {
-                                            var rembed = new MessageEmbed()
+                                            var rembed = new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle("What should be the new Message when a Staff claims a Ticket?")
@@ -1069,7 +1069,7 @@ module.exports = {
                                                         .catch(error => {
                                                             return message.reply({
                                                                 embeds: [
-                                                                    new Discord.MessageEmbed()
+                                                                    new Discord.EmbedBuilder()
                                                                         .setTitle(
                                                                             eval(
                                                                                 client.la[ls]["cmds"]["setup"][
@@ -1094,7 +1094,7 @@ module.exports = {
                         break;
                     case "Log Channel":
                         //ticketlogid
-                        var rembed = new MessageEmbed()
+                        var rembed = new EmbedBuilder()
                             .setColor(es.color)
                             .setFooter(client.getFooter(es))
                             .setTitle(
@@ -1138,7 +1138,7 @@ module.exports = {
                                     .catch(error => {
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable38"])
                                                     )
@@ -1164,7 +1164,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -68,7 +68,7 @@ module.exports = client => {
             const selected = data[Math.floor(Math.random() * data.length)];
 
             if (!client.settings.has(channel.guild.id, "language"))
-                client.settings.ensure(channel.guild.id, { language: "en" });
+                client.settings.ensure(channel.guild.id, { language: "es" });
             let ls = client.settings.get(channel.guild.id, "language");
             return channel.send(eval(client.la[ls]["handlers"]["automemejs"]["automeme"]["variable1"]));
         } catch {}

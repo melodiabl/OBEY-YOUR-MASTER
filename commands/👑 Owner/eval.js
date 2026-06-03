@@ -1,5 +1,5 @@
 const {
-    MessageEmbed,
+    EmbedBuilder,
     Util: { splitMessage },
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
@@ -19,31 +19,29 @@ module.exports = {
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
-        if ("442355791412854784" !== message.author.id)
+        if ("1087034447825735741" !== message.author.id)
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(
-                            client.user.username,
-                            es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                        .setFooter({ text: client.user.username,
+                            iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                 ? es.footericon
                                 : client.user.displayAvatarURL()
-                        )
+                        })
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["eval"]["variable1"])),
                 ],
             });
         if (!args[0])
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(
-                            client.user.username,
-                            es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                        .setFooter({ text: client.user.username,
+                            iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                 ? es.footericon
                                 : client.user.displayAvatarURL()
-                        )
+                        })
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["eval"]["variable2"])),
                 ],
             });
@@ -57,7 +55,7 @@ module.exports = {
             //if the token is included return error
             //if (string.includes(client.token)) return console.log(`ERROR NO TOKEN GRABBING ;)`.dim);
             //define queueembed
-            let evalEmbed = new MessageEmbed()
+            let evalEmbed = new EmbedBuilder()
                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["eval"]["variable3"]))
                 .setColor(es.color);
             //split the description
@@ -75,7 +73,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["eval"]["variable5"]))

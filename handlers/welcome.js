@@ -32,7 +32,7 @@ module.exports = client => {
     client.on("ready", async () => {
         for (const guild of [...client.guilds.cache.values()]) {
             let fetchedInvites = null;
-            if (guild.me.permissions.has(Discord.Permissions.FLAGS.MANAGE_GUILD)) {
+            if (guild.members.me.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)) {
                 await guild.invites.fetch().catch(() => {});
             }
             fetchedInvites = await generateInvitesCache(guild.invites.cache);
@@ -46,7 +46,7 @@ module.exports = client => {
      */
     client.on("guildCreate", async guild => {
         let fetchedInvites = null;
-        if (guild.me.permissions.has(Discord.Permissions.FLAGS.MANAGE_GUILD)) {
+        if (guild.members.me.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)) {
             await guild.invites.fetch().catch(() => {});
         }
         fetchedInvites = await generateInvitesCache(guild.invites.cache);
@@ -137,7 +137,7 @@ module.exports = client => {
             let perm = false; //if manage guild permissions
 
             //if i dont exist in the guild fetch me
-            if (!member.guild.me) {
+            if (!member.guild.members.me) {
                 await member.guild.members
                     .fetch({
                         user: client.user.id,
@@ -146,7 +146,7 @@ module.exports = client => {
                     .catch(() => {});
             }
             //if not allowed set perm to true
-            if (!member.guild.me.permissions.has(Discord.Permissions.FLAGS.MANAGE_GUILD)) perm = true;
+            if (!member.guild.members.me.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)) perm = true;
             /**
              * @INFO
              * GET THE INVITE LINK INFORMATION
@@ -319,7 +319,7 @@ module.exports = client => {
                 captcha.drawTrace(); //draw trace lines on captcha canvas.
                 captcha.drawCaptcha(); //draw captcha text on captcha canvas
                 const buffer = captcha.png; //returns buffer of the captcha image
-                const attachment = new Discord.MessageAttachment(buffer, `${captcha.text}_Captcha.png`);
+                const attachment = new Discord.AttachmentBuilder(buffer, `${captcha.text}_Captcha.png`);
                 //fin a muted role
                 let mutedrole = member.guild.roles.cache.find(r => r.name.toLowerCase().includes("captcha")) || false;
                 //if no muted role found, create a new one
@@ -329,7 +329,7 @@ module.exports = client => {
                             name: `DISABLED - CAPTCHA`,
                             color: `#222222`,
                             hoist: true,
-                            position: member.guild.me.roles.highest.position - 1,
+                            position: member.guild.members.me.roles.highest.position - 1,
                             reason: `This role got created, to DISABLED - CAPTCHA Members!`,
                         })
                         .catch(e => {
@@ -349,7 +349,7 @@ module.exports = client => {
                     )
                     .forEach(async ch => {
                         try {
-                            if (ch.permissionsFor(ch.guild.me).has(Discord.Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (ch.permissionsFor(ch.guild.members.me).has(Discord.PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 await ch.permissionOverwrites
                                     .edit(mutedrole, {
                                         VIEW_CHANNEL: false,
@@ -367,7 +367,7 @@ module.exports = client => {
                     });
                 //Add the role
                 member.roles.add(mutedrole.id).catch(() => {});
-                const captchaembed = new Discord.MessageEmbed()
+                const captchaembed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -447,8 +447,8 @@ module.exports = client => {
                                         } else {
                                             let channels = member.guild.channels.cache.filter(ch =>
                                                 ch
-                                                    .permissionsFor(member.guild.me)
-                                                    .has(Discord.Permissions.FLAGS.CREATE_INSTANT_INVITE)
+                                                    .permissionsFor(member.guild.members.me)
+                                                    .has(Discord.PermissionFlagsBits.CREATE_INSTANT_INVITE)
                                             );
                                             if (channels.size > 0) {
                                                 member.guild.invites
@@ -501,8 +501,8 @@ module.exports = client => {
                                     } else {
                                         let channels = member.guild.channels.cache.filter(ch =>
                                             ch
-                                                .permissionsFor(member.guild.me)
-                                                .has(Discord.Permissions.FLAGS.CREATE_INSTANT_INVITE)
+                                                .permissionsFor(member.guild.members.me)
+                                                .has(Discord.PermissionFlagsBits.CREATE_INSTANT_INVITE)
                                         );
                                         if (channels.size > 0) {
                                             member.guild.invites
@@ -551,8 +551,8 @@ module.exports = client => {
                             })
                             .then(ch => {
                                 try {
-                                    if (ch.permissionsFor(ch.guild.me).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
-                                        if (ch.permissionsFor(ch.guild.me).has(Discord.Permissions.FLAGS.EMBED_LINKS)) {
+                                    if (ch.permissionsFor(ch.guild.members.me).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
+                                        if (ch.permissionsFor(ch.guild.members.me).has(Discord.PermissionFlagsBits.EMBED_LINKS)) {
                                             ch.send({
                                                 content: `<@${member.user.id}>`,
                                                 embeds: [captchaembed],
@@ -617,7 +617,7 @@ module.exports = client => {
                                                                         let channels = member.guild.channels.cache.filter(
                                                                             ch =>
                                                                                 ch
-                                                                                    .permissionsFor(member.guild.me)
+                                                                                    .permissionsFor(member.guild.members.me)
                                                                                     .has(
                                                                                         Discord.Permissions.FLAGS
                                                                                             .CREATE_INSTANT_INVITE
@@ -684,7 +684,7 @@ module.exports = client => {
                                                                 } else {
                                                                     let channels = member.guild.channels.cache.filter(ch =>
                                                                         ch
-                                                                            .permissionsFor(member.guild.me)
+                                                                            .permissionsFor(member.guild.members.me)
                                                                             .has(
                                                                                 Discord.Permissions.FLAGS
                                                                                     .CREATE_INSTANT_INVITE
@@ -803,7 +803,7 @@ module.exports = client => {
                                                                         let channels = member.guild.channels.cache.filter(
                                                                             ch =>
                                                                                 ch
-                                                                                    .permissionsFor(member.guild.me)
+                                                                                    .permissionsFor(member.guild.members.me)
                                                                                     .has(
                                                                                         Discord.Permissions.FLAGS
                                                                                             .CREATE_INSTANT_INVITE
@@ -870,7 +870,7 @@ module.exports = client => {
                                                                 } else {
                                                                     let channels = member.guild.channels.cache.filter(ch =>
                                                                         ch
-                                                                            .permissionsFor(member.guild.me)
+                                                                            .permissionsFor(member.guild.members.me)
                                                                             .has(
                                                                                 Discord.Permissions.FLAGS
                                                                                     .CREATE_INSTANT_INVITE
@@ -971,7 +971,7 @@ module.exports = client => {
                         console.log(e.stack ? String(e.stack).grey : String(e).grey);
                     }
                 } else {
-                    if (channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
+                    if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
                         channel.send({ content: themessage }).catch(() => {});
                     }
                 }
@@ -1002,7 +1002,7 @@ module.exports = client => {
                 if (!channel) return;
 
                 //define the welcome embed
-                const welcomeembed = new Discord.MessageEmbed()
+                const welcomeembed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -1030,8 +1030,8 @@ module.exports = client => {
                     );
 
                 //send the welcome embed to there
-                if (channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
-                    if (channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.EMBED_LINKS)) {
+                if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
+                    if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.EMBED_LINKS)) {
                         channel
                             .send({
                                 content: `<@${member.user.id}>`,
@@ -1049,7 +1049,7 @@ module.exports = client => {
             }
             async function dm_msg_withoutimg(member) {
                 //define the welcome embed
-                const welcomeembed = new Discord.MessageEmbed()
+                const welcomeembed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -1084,7 +1084,7 @@ module.exports = client => {
 
             async function dm_msg_withimg(member) {
                 //define the welcome embed
-                const welcomeembed = new Discord.MessageEmbed()
+                const welcomeembed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -1124,7 +1124,7 @@ module.exports = client => {
                 if (!channel) return;
 
                 //define the welcome embed
-                const welcomeembed = new Discord.MessageEmbed()
+                const welcomeembed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -1150,8 +1150,8 @@ module.exports = client => {
                 if (client.settings.get(member.guild.id, "welcome.invite"))
                     welcomeembed.addField("\u200b", `${invitemessage}`);
                 //send the welcome embed to there
-                if (channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
-                    if (channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.EMBED_LINKS)) {
+                if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
+                    if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.EMBED_LINKS)) {
                         channel
                             .send({
                                 content: `<@${member.user.id}>`,
@@ -1171,7 +1171,7 @@ module.exports = client => {
             async function dm_msg_autoimg(member) {
                 try {
                     //define the welcome embed
-                    const welcomeembed = new Discord.MessageEmbed()
+                    const welcomeembed = new Discord.EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -1230,7 +1230,7 @@ module.exports = client => {
                     if (client.settings.get(member.guild.id, "welcome.framedm")) {
                         let background;
                         var framecolor = client.settings.get(member.guild.id, "welcome.framecolordm").toUpperCase();
-                        if (framecolor == "WHITE") framecolor = "#FFFFF9";
+                        if (framecolor == "#FFFFFF") framecolor = "#FFFFF9";
                         if (
                             client.settings.get(member.guild.id, "welcome.discriminatordm") &&
                             client.settings.get(member.guild.id, "welcome.servernamedm")
@@ -1250,7 +1250,7 @@ module.exports = client => {
                     }
 
                     var fillcolors = client.settings.get(member.guild.id, "welcome.framecolordm").toUpperCase();
-                    if (fillcolors == "WHITE") framecolor = "#FFFFF9";
+                    if (fillcolors == "#FFFFFF") framecolor = "#FFFFF9";
                     ctx.fillStyle = fillcolors.toLowerCase();
 
                     //set the first text string
@@ -1302,7 +1302,7 @@ module.exports = client => {
                     }
 
                     //get it as a discord attachment
-                    const attachment = new Discord.MessageAttachment(canvas.toBuffer("image/webp"), `welcome-image.png`);
+                    const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), `welcome-image.png`);
                     //send the welcome embed to there
                     member.user
                         .send({
@@ -1321,7 +1321,7 @@ module.exports = client => {
                     let channel = await client.channels.fetch(welcomechannel).catch(() => {});
                     if (!channel) return;
                     //define the welcome embed
-                    const welcomeembed = new Discord.MessageEmbed()
+                    const welcomeembed = new Discord.EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -1381,7 +1381,7 @@ module.exports = client => {
                         if (client.settings.get(member.guild.id, "welcome.frame")) {
                             let background;
                             var framecolor = client.settings.get(member.guild.id, "welcome.framecolor").toUpperCase();
-                            if (framecolor == "WHITE") framecolor = "#FFFFF9";
+                            if (framecolor == "#FFFFFF") framecolor = "#FFFFF9";
                             if (
                                 client.settings.get(member.guild.id, "welcome.discriminator") &&
                                 client.settings.get(member.guild.id, "welcome.servername")
@@ -1404,7 +1404,7 @@ module.exports = client => {
                         }
 
                         var fillcolor = client.settings.get(member.guild.id, "welcome.framecolor").toUpperCase();
-                        if (fillcolor == "WHITE") framecolor = "#FFFFF9";
+                        if (fillcolor == "#FFFFFF") framecolor = "#FFFFF9";
                         ctx.fillStyle = fillcolor.toLowerCase();
 
                         //set the first text string
@@ -1460,12 +1460,12 @@ module.exports = client => {
                             ctx.drawImage(avatar, 65, canvas.height / 2 - 250, 500, 500);
                         }
                         //get it as a discord attachment
-                        const attachment = new Discord.MessageAttachment(canvas.toBuffer("image/webp"), `welcome-image.png`);
+                        const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), `welcome-image.png`);
                         //send the welcome embed to there
-                        if (channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
+                        if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
                             if (
-                                channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.EMBED_LINKS) &&
-                                channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.ATTACH_FILES)
+                                channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.EMBED_LINKS) &&
+                                channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.ATTACH_FILES)
                             ) {
                                 channel
                                     .send({
@@ -1475,7 +1475,7 @@ module.exports = client => {
                                     })
                                     .catch(() => {});
                             } else if (
-                                channel.permissionsFor(channel.guild.me).has(Discord.Permissions.FLAGS.ATTACH_FILES)
+                                channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.ATTACH_FILES)
                             ) {
                                 channel
                                     .send({
@@ -1540,7 +1540,7 @@ module.exports = client => {
             await member
                 .send({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(`You got banned from __${member.guild.name}__`)
                             .setThumbnail(member.guild.iconURL({ dynamic: true }))
                             .setFooter({
@@ -1573,7 +1573,7 @@ module.exports = client => {
             await member
                 .send({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(`You got kicked from __${member.guild.name}__`)
                             .setThumbnail(member.guild.iconURL({ dynamic: true }))
                             .setFooter({

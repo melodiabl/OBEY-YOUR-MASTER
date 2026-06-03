@@ -1,4 +1,4 @@
-var { MessageEmbed, Permissions, MessageButton, MessageActionRow, MessageSelectMenu } = require(`discord.js`);
+var { EmbedBuilder, Permissions, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 var config = require(`${process.cwd()}/botconfig/config.json`);
@@ -19,7 +19,7 @@ module.exports = {
         let ls = client.settings.get(message.guild.id, "language");
         //only allow the Server owner, (&Tomato) to execute this Command, (Tomato just because if he needs to help for Shop Bots)
         if (message.author.id != message.guild.ownerId) {
-            if (message.author.id != "442355791412854784")
+            if (message.author.id != "1087034447825735741")
                 return message.reply({ content: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable1"]) });
         }
 
@@ -276,7 +276,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -294,7 +294,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Anti Nuke Setup",
@@ -306,7 +306,7 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //function to handle the menuselection
                 async function menuselection(menu) {
@@ -317,7 +317,7 @@ module.exports = {
                         await message.reply({
                             content: `${allEmojis.msg.SUCCESS} **The Current Anti-Nuke Settings**`,
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable5"]))
@@ -354,7 +354,7 @@ module.exports = {
                         });
                         return menu?.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable14"]))
@@ -409,7 +409,7 @@ module.exports = {
                             },
                         ];
                         //define the selection
-                        let Selection = new MessageSelectMenu()
+                        let Selection = new StringSelectMenuBuilder()
                             .setCustomId("MenuSelection")
                             .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                             .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -427,7 +427,7 @@ module.exports = {
                             );
 
                         //define the embed
-                        let MenuEmbed = new Discord.MessageEmbed()
+                        let MenuEmbed = new Discord.EmbedBuilder()
                             .setColor(es.color)
                             .setAuthor(
                                 "Anti Nuke Settings",
@@ -438,7 +438,7 @@ module.exports = {
                         //send the menu msg
                         let menumsg = await message.reply({
                             embeds: [MenuEmbed],
-                            components: [new MessageActionRow().addComponents(Selection)],
+                            components: [new ActionRowBuilder().addComponents(Selection)],
                         });
                         //function to handle the menuselection
                         async function menuselection2(menu) {
@@ -454,7 +454,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable18"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -513,7 +513,7 @@ module.exports = {
 
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable20"])
                                                     )
@@ -546,7 +546,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable23"])
                                                 )
@@ -560,7 +560,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable24"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -619,7 +619,7 @@ module.exports = {
 
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable26"])
                                                     )
@@ -652,7 +652,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable29"])
                                                 )
@@ -666,7 +666,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable30"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -744,7 +744,7 @@ module.exports = {
 
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable32"])
                                                     )
@@ -777,7 +777,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable35"])
                                                 )
@@ -791,7 +791,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable36"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -869,7 +869,7 @@ module.exports = {
 
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable38"])
                                                     )
@@ -902,7 +902,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable41"])
                                                 )
@@ -916,7 +916,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable42"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -994,7 +994,7 @@ module.exports = {
 
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable44"])
                                                     )
@@ -1027,7 +1027,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable47"])
                                                 )
@@ -1041,7 +1041,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable48"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -1119,7 +1119,7 @@ module.exports = {
 
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable50"])
                                                     )
@@ -1152,7 +1152,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable53"])
                                                 )
@@ -1166,7 +1166,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable54"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -1244,7 +1244,7 @@ module.exports = {
 
                                         return message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable56"])
                                                     )
@@ -1277,7 +1277,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable59"])
                                                 )
@@ -1294,7 +1294,7 @@ module.exports = {
                         }
                         //Create the collector
                         const collector = menumsg.createMessageComponentCollector({
-                            filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                            filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                             time: 90000,
                         });
                         //Menu Collections
@@ -1388,7 +1388,7 @@ module.exports = {
                             },
                         ];
                         //define the selection
-                        let Selection = new MessageSelectMenu()
+                        let Selection = new StringSelectMenuBuilder()
                             .setCustomId("MenuSelection")
                             .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                             .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -1406,7 +1406,7 @@ module.exports = {
                             );
 
                         //define the embed
-                        let MenuEmbed = new Discord.MessageEmbed()
+                        let MenuEmbed = new Discord.EmbedBuilder()
                             .setColor(es.color)
                             .setAuthor(
                                 "Anti Nuke Settings",
@@ -1417,7 +1417,7 @@ module.exports = {
                         //send the menu msg
                         let menumsg = await message.reply({
                             embeds: [MenuEmbed],
-                            components: [new MessageActionRow().addComponents(Selection)],
+                            components: [new ActionRowBuilder().addComponents(Selection)],
                         });
                         //function to handle the menuselection
                         async function menuselection3(menu) {
@@ -1436,7 +1436,7 @@ module.exports = {
                                 );
                                 return menu?.reply({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setThumbnail(
@@ -1463,7 +1463,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable67"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -1491,7 +1491,7 @@ module.exports = {
                                                     .first()
                                                     .send({
                                                         embeds: [
-                                                            new Discord.MessageEmbed()
+                                                            new Discord.EmbedBuilder()
                                                                 .setTitle(
                                                                     eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-antinuke"][
@@ -1515,7 +1515,7 @@ module.exports = {
                                             try {
                                                 message.reply({
                                                     embeds: [
-                                                        new Discord.MessageEmbed()
+                                                        new Discord.EmbedBuilder()
                                                             .setTitle(
                                                                 eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-antinuke"][
@@ -1545,7 +1545,7 @@ module.exports = {
                                             );
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antinuke"][
@@ -1572,7 +1572,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable72"])
                                                 )
@@ -1589,7 +1589,7 @@ module.exports = {
                                 );
                                 return menu?.reply({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setThumbnail(
@@ -1616,7 +1616,7 @@ module.exports = {
                                 let timeouterror = false;
                                 let tempmsg = await message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable76"]))
                                             .setColor(es.color)
                                             .setDescription(
@@ -1639,7 +1639,7 @@ module.exports = {
                                             client.Anti_Nuke_System.set(message.guild.id, false, `all.quarantine`);
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antinuke"][
@@ -1661,7 +1661,7 @@ module.exports = {
                                             );
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antinuke"][
@@ -1688,7 +1688,7 @@ module.exports = {
                                 if (timeouterror)
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable80"])
                                                 )
@@ -1797,7 +1797,7 @@ module.exports = {
                                         },
                                     ];
                                     //define the selection
-                                    let Selection = new MessageSelectMenu()
+                                    let Selection = new StringSelectMenuBuilder()
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -1817,7 +1817,7 @@ module.exports = {
                                         );
 
                                     //define the embed
-                                    let MenuEmbed = new Discord.MessageEmbed()
+                                    let MenuEmbed = new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setAuthor(
                                             "Antinuke Setup",
@@ -1829,7 +1829,7 @@ module.exports = {
                                     //send the menu msg
                                     let menumsg = await message.reply({
                                         embeds: [MenuEmbed],
-                                        components: [new MessageActionRow().addComponents(Selection)],
+                                        components: [new ActionRowBuilder().addComponents(Selection)],
                                     });
                                     //function to handle the menuselection
 
@@ -1892,7 +1892,7 @@ module.exports = {
 
                                     tempmsg = await message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle("Enter the Amount now!")
                                                 .setColor(es.color)
                                                 .setDescription(
@@ -1920,7 +1920,7 @@ module.exports = {
                                             client.Anti_Nuke_System.set(message.guild.id, thenumber, finalkey);
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             `\`${finalkey}\` Is now limited to **\`${thenumber} Actions\`**`
                                                         )
@@ -1933,7 +1933,7 @@ module.exports = {
                                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable69"]
@@ -1950,7 +1950,7 @@ module.exports = {
                         }
                         //Create the collector
                         const collector = menumsg.createMessageComponentCollector({
-                            filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                            filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                             time: 90000,
                         });
                         //Menu Collections
@@ -2169,7 +2169,7 @@ module.exports = {
                         return menu?.reply({
                             content: `${allEmojis.msg.SUCCESS} **Now using the Suggested Settings!**`,
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable82"]))
@@ -2230,7 +2230,7 @@ module.exports = {
                         for (const ch of channels.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966)) {
                             try {
                                 if (ch) {
-                                    if (ch.permissionsFor(ch.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                         ch.permissionOverwrites.edit(role, {
                                             VIEW_CHANNEL: false,
                                             SEND_MESSAGES: false,
@@ -2252,7 +2252,7 @@ module.exports = {
                 }
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -2279,7 +2279,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

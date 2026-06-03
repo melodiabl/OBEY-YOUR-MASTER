@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -54,14 +54,14 @@ module.exports = {
             message
                 .reply({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setColor(es.color)
                             .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
                             .setTitle(`Epic Games Account!`)
                             .addField("**Epic Games Name:**", `\`\`\`${data.epic}\`\`\``)
                             .addField("**Platform:**", `\`\`\`${data.Platform}\`\`\``)
                             .addField("**Input Method:**", `\`\`\`${data.InputMethod}\`\`\``)
-                            .setFooter("ID: " + user.id, user.displayAvatarURL({ dynamic: true })),
+                            .setFooter({ text: "ID: " + user.id, iconURL: user.displayAvatarURL({ dynamic: true }) }),
                     ],
                 })
                 .catch(() => {});
@@ -69,7 +69,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

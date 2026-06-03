@@ -1,4 +1,4 @@
-const { MessageEmbed, Permissions } = require(`discord.js`);
+const { EmbedBuilder, Permissions } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -22,7 +22,7 @@ module.exports = {
             if (!warnmember)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["detailwarn"]["variable1"]))
@@ -33,7 +33,7 @@ module.exports = {
             if (!args[1])
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["detailwarn"]["variable3"]))
@@ -65,7 +65,7 @@ module.exports = {
                 )
                     return message.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["detailwarn"]["variable5"])),
@@ -74,7 +74,7 @@ module.exports = {
                 if (isNaN(args[1]) || Number(args[1]) >= warnIDs.length || Number(args[1]) < 0)
                     return message.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["detailwarn"]["variable6"]))
@@ -92,7 +92,7 @@ module.exports = {
 
                 message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -126,7 +126,7 @@ module.exports = {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].common.erroroccur)
@@ -138,7 +138,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["detailwarn"]["variable10"]))

@@ -2,7 +2,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const ms = require(`ms`);
-const { MessageEmbed, Permissions } = require(`discord.js`);
+const { EmbedBuilder, Permissions } = require(`discord.js`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `unmute`,
@@ -16,10 +16,10 @@ module.exports = {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            if (!message.guild.me.permissions.has("MANAGE_ROLES"))
+            if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.MANAGE_ROLES))
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["unmute"]["variable1"])),
@@ -46,11 +46,11 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
             )
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["unmute"]["variable2"]))
@@ -63,7 +63,7 @@ module.exports = {
             if (!member)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["unmute"]["variable4"]))
@@ -74,7 +74,7 @@ module.exports = {
             if (member.roles.highest.position >= message.member.roles.highest.position)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["unmute"]["variable6"])),
@@ -92,17 +92,17 @@ module.exports = {
             if (!mutedrole) {
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["unmute"]["variable7"])),
                     ],
                 });
             }
-            if (mutedrole.position > message.guild.me.roles.highest.position) {
+            if (mutedrole.position > message.guild.members.me.roles.highest.position) {
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["unmute"]["variable8"])),
@@ -114,7 +114,7 @@ module.exports = {
             } catch (e) {
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["unmute"]["variable9"]))
@@ -124,7 +124,7 @@ module.exports = {
             }
             message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -139,7 +139,7 @@ module.exports = {
             });
             member.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -159,7 +159,7 @@ module.exports = {
                     if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                     channel.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -193,7 +193,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

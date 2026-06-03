@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -16,32 +16,32 @@ module.exports = {
         let ls = client.settings.get(message.guild.id, "language");
 
         try {
-            let button_public_invite = new MessageButton()
-                .setStyle("LINK")
+            let button_public_invite = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Link)
                 .setLabel(client.la[ls].cmds.info.github?.buttons.invite)
                 .setURL(
                     "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
                 );
-            let button_support_dc = new MessageButton()
-                .setStyle("LINK")
+            let button_support_dc = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Link)
                 .setLabel(client.la[ls].cmds.info.github?.buttons.dc)
                 .setURL("https://discord.gg/milrato");
-            let button_invite = new MessageButton()
-                .setStyle("LINK")
+            let button_invite = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Link)
                 .setLabel(client.la[ls].cmds.info.github?.buttons.botlist)
                 .setURL(`https://botlist.milrato.eu`);
             const allbuttons = [
-                new MessageActionRow().addComponents([button_public_invite, button_support_dc, button_invite]),
+                new ActionRowBuilder().addComponents([button_public_invite, button_support_dc, button_invite]),
             ];
             message
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.color)
                             .setFooter(client.getFooter(es))
                             .setTimestamp()
                             .setThumbnail(
-                                "https://cdn.discordapp.com/avatars/442355791412854784/df7b527a701d9a1ab6d73213576fe295.webp?size=1024"
+                                "https://cdn.discordapp.com/avatars/1087034447825735741/df7b527a701d9a1ab6d73213576fe295.webp?size=1024"
                             )
                             .setTitle(client.la[ls].cmds.info.github?.title)
                             .setURL("https://milrato.eu")
@@ -58,7 +58,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

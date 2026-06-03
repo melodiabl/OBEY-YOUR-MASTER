@@ -1,4 +1,4 @@
-const { MessageEmbed, DiscordAPIError, Message, Permissions } = require("discord.js");
+const { EmbedBuilder, DiscordAPIError, Message, Permissions } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
@@ -35,11 +35,11 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
             )
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable1"]))
@@ -50,7 +50,7 @@ module.exports = {
                 message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -81,7 +81,7 @@ module.exports = {
                                 if (!channel)
                                     return message.reply({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.wrongcolor)
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle(
@@ -93,7 +93,7 @@ module.exports = {
                                 message.channel
                                     .send({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -126,7 +126,7 @@ module.exports = {
                                                 message
                                                     .reply({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.color)
                                                                 .setThumbnail(
                                                                     es.thumb
@@ -166,7 +166,7 @@ module.exports = {
                                                                 channel
                                                                     .send({
                                                                         embeds: [
-                                                                            new MessageEmbed()
+                                                                            new EmbedBuilder()
                                                                                 .setColor(es.color)
                                                                                 .setThumbnail(
                                                                                     es.thumb
@@ -186,8 +186,7 @@ module.exports = {
                                                                                     "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
                                                                                     "https://discord.gg/fA8VGa4V"
                                                                                 )
-                                                                                .setFooter(
-                                                                                    client.getFooter(
+                                                                                .setFooter(client.getFooter(
                                                                                         `by: ${message.author.username}`,
                                                                                         message.author.displayAvatarURL({
                                                                                             dynamic: true,
@@ -207,7 +206,7 @@ module.exports = {
                                                 message
                                                     .reply({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.color)
                                                                 .setThumbnail(
                                                                     es.thumb
@@ -247,7 +246,7 @@ module.exports = {
                                                                 channel
                                                                     .send({
                                                                         embeds: [
-                                                                            new MessageEmbed()
+                                                                            new EmbedBuilder()
                                                                                 .setColor(es.color)
                                                                                 .setThumbnail(
                                                                                     es.thumb
@@ -267,8 +266,7 @@ module.exports = {
                                                                                     "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
                                                                                     "https://discord.gg/fA8VGa4V"
                                                                                 )
-                                                                                .setFooter(
-                                                                                    client.getFooter(
+                                                                                .setFooter(client.getFooter(
                                                                                         `by: ${message.author.username}`,
                                                                                         message.author.displayAvatarURL({
                                                                                             dynamic: true,
@@ -306,7 +304,7 @@ module.exports = {
                                                     message
                                                         .reply({
                                                             embeds: [
-                                                                new MessageEmbed()
+                                                                new EmbedBuilder()
                                                                     .setColor(es.color)
                                                                     .setThumbnail(
                                                                         es.thumb
@@ -368,7 +366,7 @@ module.exports = {
                                                     message
                                                         .reply({
                                                             embeds: [
-                                                                new MessageEmbed()
+                                                                new EmbedBuilder()
                                                                     .setColor(es.color)
                                                                     .setThumbnail(
                                                                         es.thumb
@@ -405,7 +403,7 @@ module.exports = {
                                                                     errors: ["time"],
                                                                 })
                                                                 .then(collected => {
-                                                                    const embed = new MessageEmbed()
+                                                                    const embed = new EmbedBuilder()
                                                                         .setColor(es.color)
                                                                         .setThumbnail(
                                                                             es.thumb
@@ -421,8 +419,7 @@ module.exports = {
                                                                             "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
                                                                             "https://discord.gg/fA8VGa4V"
                                                                         )
-                                                                        .setFooter(
-                                                                            client.getFooter(
+                                                                        .setFooter(client.getFooter(
                                                                                 `by: ${message.author.username}`,
                                                                                 message.author.displayAvatarURL({
                                                                                     dynamic: true,
@@ -443,7 +440,7 @@ module.exports = {
                                                                 });
                                                         })
                                                         .catch(e => {
-                                                            const embed = new MessageEmbed()
+                                                            const embed = new EmbedBuilder()
                                                                 .setColor(es.color)
                                                                 .setThumbnail(
                                                                     es.thumb
@@ -459,8 +456,7 @@ module.exports = {
                                                                     "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
                                                                     "https://discord.gg/fA8VGa4V"
                                                                 )
-                                                                .setFooter(
-                                                                    client.getFooter(
+                                                                .setFooter(client.getFooter(
                                                                         `by: ${message.author.username}`,
                                                                         message.author.displayAvatarURL({ dynamic: true })
                                                                     )
@@ -478,7 +474,7 @@ module.exports = {
                                             } else {
                                                 return message.reply({
                                                     embeds: [
-                                                        new MessageEmbed()
+                                                        new EmbedBuilder()
                                                             .setColor(es.wrongcolor)
                                                             .setFooter(client.getFooter(es))
                                                             .setTitle(
@@ -500,7 +496,7 @@ module.exports = {
                 message.channel
                     .send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -515,8 +511,7 @@ module.exports = {
                                     "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
                                     "https://discord.gg/fA8VGa4V"
                                 )
-                                .setFooter(
-                                    client.getFooter(
+                                .setFooter(client.getFooter(
                                         `by: ${message.author.username}`,
                                         message.author.displayAvatarURL({ dynamic: true })
                                     )
@@ -536,7 +531,7 @@ module.exports = {
                     if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                     channel.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -561,8 +556,7 @@ module.exports = {
                                     eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                 )
                                 .setTimestamp()
-                                .setFooter(
-                                    client.getFooter(
+                                .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL({ dynamic: true })
                                     )
@@ -577,7 +571,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

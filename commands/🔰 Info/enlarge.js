@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
@@ -22,11 +22,11 @@ module.exports = {
                 return message.reply(handlemsg(client.la[ls].cmds.info.enlarge.error1));
             if ((emoji = emoteRegex.exec(message))) {
                 let url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".png?v=1";
-                let attachment = new Discord.MessageAttachment(url, "emoji?.png");
+                let attachment = new Discord.AttachmentBuilder(url, "emoji?.png");
                 message.reply({ files: [attachment] });
             } else if ((emoji = animatedEmoteRegex.exec(message))) {
                 let url2 = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".gif?v=1";
-                let attachment2 = new Discord.MessageAttachment(url2, "emoji?.gif");
+                let attachment2 = new Discord.AttachmentBuilder(url2, "emoji?.gif");
                 message.reply({ files: [attachment2] });
             } else {
                 return message.reply(handlemsg(client.la[ls].cmds.info.enlarge.error2));
@@ -35,7 +35,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

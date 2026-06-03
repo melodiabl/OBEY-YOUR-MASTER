@@ -6,7 +6,7 @@ module.exports = c => {
         send_log(
             c,
             channel.guild,
-            "GREEN",
+            "#57F287",
             "Channel CREATED",
             `**Channel:** \`${channel?.name}\`\n**ChannelID:** \`${channel.id}\`\n**ChannelTYPE:** \`${channel.type}\``,
             "https://cdn.discordapp.com/attachments/849047781276647425/869531337411952670/845717716559593512.png"
@@ -17,7 +17,7 @@ module.exports = c => {
         send_log(
             c,
             channel.guild,
-            "RED",
+            "#ED4245",
             "Channel DELETED",
             `**Channel:** \`${channel?.name}\`\n**ChannelID:** \`${channel.id}\`\n**ChannelTYPE:** \`${channel.type}\``,
             "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png"
@@ -28,7 +28,7 @@ module.exports = c => {
         send_log(
             c,
             channel.guild,
-            "YELLOW",
+            "#FEE75C",
             "Channel PINS UPDATE",
             `Channel: \`${channel?.name}\`\nChannelID: \`${channel.id}\`\nPinned at \`${time}\``,
             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/265/pushpin_1f4cc.png"
@@ -39,7 +39,7 @@ module.exports = c => {
         send_log(
             c,
             channel.guild,
-            "YELLOW",
+            "#FEE75C",
             "Channel PINS UPDATE",
             `Channel: \`${channel?.name}\`\nChannelID: \`${channel.id}\`\nPinned at \`${time}\``,
             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/265/pushpin_1f4cc.png"
@@ -51,7 +51,7 @@ module.exports = c => {
             send_log(
                 c,
                 oldChannel.guild,
-                "YELLOW",
+                "#FEE75C",
                 "Channel UPDATED - NAME",
                 `**Channel:** \`${oldChannel?.name}\`\n**ChannelID**: \`${oldChannel.id}\`\n\n` +
                     `**Channel:** \`${newChannel?.name}\`\n**ChannelID**: \`${newChannel.id}\``,
@@ -61,7 +61,7 @@ module.exports = c => {
             send_log(
                 c,
                 oldChannel.guild,
-                "YELLOW",
+                "#FEE75C",
                 "Channel UPDATED - TYPE",
                 `**Channel:** \`${oldChannel?.name}\`\n**ChannelID**: \`${oldChannel.id}\`\n\n` +
                     `**Channel:** \`${newChannel?.name}\`\n**ChannelID**: \`${newChannel.id}\``,
@@ -71,7 +71,7 @@ module.exports = c => {
             send_log(
                 c,
                 oldChannel.guild,
-                "YELLOW",
+                "#FEE75C",
                 "Channel UPDATED - TOPIC",
                 `**Channel:** \`${oldChannel?.name}\`\n**ChannelID**: \`${oldChannel.id}\`\n\n` +
                     `**Channel:** \`${newChannel?.name}\`\n**ChannelID**: \`${newChannel.id}\`\n\n**ChannelTOPIC:** \`${newChannel.topic}\``,
@@ -85,7 +85,7 @@ module.exports = c => {
         send_log(
             c,
             emoji?.guild,
-            "GREEN",
+            "#57F287",
             "EMOJI CREATED",
             `EMOJI: ${emoji}\nEMOJINAME: ${emoji?.name}\nEMOJIID: ${emoji?.id}\nEMOJIURL: ${emoji?.url}`,
             "https://cdn.discordapp.com/attachments/849047781276647425/869531337411952670/845717716559593512.png"
@@ -96,7 +96,7 @@ module.exports = c => {
         send_log(
             c,
             emoji?.guild,
-            "RED",
+            "#ED4245",
             "EMOJI DELETED",
             `EMOJI: ${emoji}\nEMOJINAME: ${emoji?.name}\nEMOJIID: ${emoji?.id}\nEMOJIURL: ${emoji?.url}`,
             "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png"
@@ -107,7 +107,7 @@ module.exports = c => {
         send_log(
             c,
             newEmoji?.guild,
-            "ORANGE",
+            "#E67E22",
             "EMOJI NAME CHANGED",
             `__Emoji: ${newEmoji}__ \n\n**Before:** \`${oldEmoji?.name}\`\n**After:** \`${newEmoji?.name}\`\n**Emoji ID:** \`${newEmoji?.id}\``,
             "https://cdn.discordapp.com/attachments/849047781276647425/869529692867289128/861357037064421386.png"
@@ -119,7 +119,7 @@ module.exports = c => {
         send_log(
             c,
             guild,
-            "RED",
+            "#ED4245",
             "USER BANNED",
             `User: ${user} (\`${user.id}\`)\n\`${user.tag}\``,
             user.displayAvatarURL({ dynamic: true })
@@ -130,7 +130,7 @@ module.exports = c => {
         send_log(
             c,
             guild,
-            "YELLOW",
+            "#FEE75C",
             "USER UNBANNED",
             `User: ${user} (\`${user.id}\`)\n\`${user.tag}\``,
             user.displayAvatarURL({ dynamic: true })
@@ -143,7 +143,7 @@ module.exports = c => {
             send_log(
                 member.guild,
                 c,
-                "GREEN",
+                "#57F287",
                 "MEMBER JOINED",
                 `Member: ${member.user} (\`${member.user.id}\`)\n\`${member.user.tag}\`\n\n**Account created:** \`${moment(member.user.createdTimestamp).format("DD/MM/YYYY") + "` | " + "`" + moment(member.user.createdTimestamp).format("hh:mm:ss")}`,
                 member.user.displayAvatarURL({ dynamic: true })
@@ -152,7 +152,7 @@ module.exports = c => {
             send_log(
                 c,
                 member.guild,
-                "ORANGE",
+                "#E67E22",
                 "BOT ADDED",
                 `**Bot:** ${member.user} (\`${member.user.id}\`)\n\`${member.user.tag}\`\n\n**Bot created:** \`${moment(member.user.createdTimestamp).format("DD/MM/YYYY") + "` | " + "`" + moment(member.user.createdTimestamp).format("hh:mm:ss")}`
             );
@@ -170,7 +170,7 @@ module.exports = c => {
             send_log(
                 c,
                 member.guild,
-                "RED",
+                "#ED4245",
                 "MEMBER LEFT",
                 `Member: ${member.user} (\`${member.user.id}\`)\n\`${member.user.tag}\``,
                 member.user.displayAvatarURL({
@@ -186,7 +186,7 @@ module.exports = c => {
         send_log(
             c,
             ban.guild,
-            "RED",
+            "#ED4245",
             "⚠️ MEMBER GOT BANNED ⚠️",
             `Member: ${ban.user} (\`${ban.user.id}\`)\n\`${ban.user.tag}\`\n\nReason: ${ban.reason ? ban.reason : "No Reason provided!"}`,
             ban.user.displayAvatarURL({
@@ -201,7 +201,7 @@ module.exports = c => {
         send_log(
             c,
             ban.guild,
-            "ORANGE",
+            "#E67E22",
             "⛔ MEMBER GOT __UN__BANNED ⛔",
             `Member: ${ban.user} (\`${ban.user.id}\`)\n\`${ban.user.tag}\`\n\nReason was: ${ban.reason ? ban.reason : "No Reason provided!"}`,
             ban.user.displayAvatarURL({
@@ -213,7 +213,7 @@ module.exports = c => {
         send_log(
             guild,
             c,
-            "RED",
+            "#ED4245",
             `MEMBER CHUNK / RAID - [${members.size}] Members`,
             members.size < 20
                 ? members
@@ -264,7 +264,7 @@ module.exports = c => {
             send_log(
                 c,
                 oldMember.guild,
-                `${roleadded ? "GREEN" : "RED"}`,
+                `${roleadded ? "#57F287" : "#ED4245"}`,
                 "Member ROLES Changed",
                 `Member: ${newMember.user}\nUser: \`${oldMember.user.tag}\`\n\n${text}`,
                 "https://cdn.discordapp.com/attachments/849047781276647425/869529692867289128/861357037064421386.png"
@@ -276,7 +276,7 @@ module.exports = c => {
         send_log(
             c,
             message.guild,
-            "ORANGE",
+            "#E67E22",
             "Message Deleted",
             `**Author : ** <@${message.author?.id}> - *${message.author?.tag}*\n**Date : ** ${message.createdAt}\n**Channel : ** <#${message.channel?.id}> - *${message.channel?.name}*\n\n**Deleted Message : **\n\`\`\`\n${message.content?.replace(/`/g, "'").substring(0, 1800)}\n\`\`\``,
             "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png",
@@ -290,7 +290,7 @@ module.exports = c => {
         send_log(
             c,
             messages.guild,
-            "RED",
+            "#ED4245",
             `[${messages.size}] Messages Deleted BULK`,
             `${messages.size} Messages deleted in: ${messages.channel}`,
             "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png"
@@ -307,7 +307,7 @@ module.exports = c => {
         send_log(
             c,
             oldMessage.guild,
-            "YELLOW",
+            "#FEE75C",
             "Message UPDATED",
             ` **Author:** <@${newMessage.author.id}> - *${newMessage.author.tag}*\n**Date:** ${newMessage.createdAt}\n**Channel:** <#${newMessage.channel?.id}> - *${newMessage.channel?.name}*\n**Orignal Message:**\n\`\`\`\n${oldMessage.content ? oldMessage.content.replace(/`/g, "'") : "UNKNOWN CONTENT"}\n\`\`\`\n**Updated Message :**\n\`\`\`\n${newMessage.content ? newMessage.content.replace(/`/g, "'") : "UNKNOWN CONTENT"}\n\`\`\``,
             "https://cdn.discordapp.com/attachments/849047781276647425/869530575411773440/857128740198023190.png",
@@ -322,7 +322,7 @@ module.exports = c => {
         send_log(
             c,
             role.guild,
-            "GREEN",
+            "#57F287",
             "ROLE CREATED",
             `ROLE: ${role}\nROLENAME: ${role?.name}\nROLEID: ${role.id}\nHEXCOLOR: ${role.hexColor}\nPOSITION: ${role.position}`,
             "https://cdn.discordapp.com/attachments/849047781276647425/869531337411952670/845717716559593512.png"
@@ -334,7 +334,7 @@ module.exports = c => {
         send_log(
             c,
             role.guild,
-            "RED",
+            "#ED4245",
             "ROLE DELETED",
             `ROLE: ${role}\nROLENAME: ${role?.name}\nROLEID: ${role.id}\nHEXCOLOR: ${role.hexColor}\nPOSITION: ${role.position}`,
             "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png"
@@ -347,7 +347,7 @@ module.exports = c => {
             send_log(
                 c,
                 oldRole.guild,
-                "ORANGE",
+                "#E67E22",
                 "ROLE NAME CHANGED",
                 `__ROLE: ${newRole}__ \n\n**Before:** \`${oldRole.color.toString(16)}\`\n**After:** \`${newRole.color.toString(16)}\`\n**ROLE ID:** \`${newRole.id}\``
             );
@@ -355,7 +355,7 @@ module.exports = c => {
             send_log(
                 c,
                 oldRole.guild,
-                "ORANGE",
+                "#E67E22",
                 "ROLE COLOR CHANGED",
                 `__ROLE: ${newRole}__ \n\n**Before:** \`${oldRole.color.toString(16)}\`\n**After:** \`${newRole.color.toString(16)}\`\n**ROLE ID:** \`${newRole.id}\``
             );
@@ -382,7 +382,7 @@ module.exports = c => {
             return send_log(
                 c,
                 newState.guild,
-                "GREEN",
+                "#57F287",
                 "CHANNEL JOINED",
                 `**User:** <@${newState.member.user.id}> (\`${newState.member.user.id}\`) (**${newState.member.user.tag}**)\n\nCHANNEL: <#${newState.channelId}> (\`${newState.channelId}\`)  ${newState.channel ? `(**${newState.channel?.name}**)` : ""}`,
                 "https://cdn.discordapp.com/attachments/849047781276647425/869529604296159282/863876115584385074.gif"
@@ -407,7 +407,7 @@ module.exports = c => {
             return send_log(
                 c,
                 newState.guild,
-                "RED",
+                "#ED4245",
                 "CHANNEL LEFT",
                 `**User:** <@${newState.member.user.id}> (\`${newState.member.user.id}\`) (**${newState.member.user.tag}**)\n\nCHANNEL: <#${oldState.channelId}> (\`${oldState.channelId}\` ${oldState.channel ? `(**${oldState.channel?.name}**)` : ""}`,
                 "https://cdn.discordapp.com/attachments/849047781276647425/869529603562172456/850830662897762324.png"
@@ -432,7 +432,7 @@ module.exports = c => {
             return send_log(
                 c,
                 newState.guild,
-                "GREEN",
+                "#57F287",
                 "CHANNEL SWITCHED",
                 `**User:** <@${newState.member.user.id}> (\`${newState.member.user.id}\`) (**${newState.member.user.tag}**)\n\nTO CHANNEL: <#${newState.channelId}> (\`${newState.channelId}\`) ${newState.channel ? `(**${newState.channel?.name}**)` : ""}\n\nFROM CHANNEL: <#${oldState.channelId}> (\`${oldState.channelId}\`) ${oldState.channel ? `(**${oldState.channel?.name}**)` : ""}`,
                 "https://cdn.discordapp.com/attachments/849047781276647425/869529684805840896/841989410978398218.gif"
@@ -445,8 +445,8 @@ async function send_log(c, guild, color, title, description, thumb, fieldt, fiel
     try {
         if (!guild || guild?.available == false) return console.log("NO GUILD");
         //CREATE THE EMBED
-        const LogEmbed = new Discord.MessageEmbed()
-            .setColor(color ? color : "BLACK")
+        const LogEmbed = new Discord.EmbedBuilder()
+            .setColor(color ? color : "#23272A")
             .setDescription(description ? description.substring(0, 2048) : "\u200b")
             .setTitle(title ? title.substring(0, 256) : "\u200b")
             .setTimestamp()
@@ -457,14 +457,10 @@ async function send_log(c, guild, color, title, description, thumb, fieldt, fiel
                           format: "png",
                       })
             )
-            .setFooter(
-                c.getFooter(
+            .setFooter(c.getFooter(
                     guild?.name + " | powered by: milrato.eu",
-                    guild?.iconURL({
-                        format: "png",
-                    })
-                )
-            );
+                    guild?.iconURL({ format: "png" })
+                ));
         if (fieldt && fieldv) {
             if (fieldv.trim() !== ">>>") {
                 LogEmbed.addField(fieldt.substring(0, 256), fieldv.substring(0, 1024));

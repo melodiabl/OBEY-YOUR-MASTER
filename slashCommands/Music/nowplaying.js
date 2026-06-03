@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageAttachment } = require(`discord.js`);
+const { EmbedBuilder, AttachmentBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -18,7 +18,7 @@ module.exports = {
             return interaction?.reply({
                 ephemeral: true,
                 embed: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -32,12 +32,12 @@ module.exports = {
                 return interaction?.reply({
                     ephemeral: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setTitle(eval(client.la[ls]["cmds"]["music"]["nowplaying"]["variable1"])),
                     ],
                 });
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setAuthor(
                     `Current song playing:`,
                     message.guild.iconURL({
@@ -56,8 +56,7 @@ module.exports = {
                 )
                 .addField(`${emoji?.msg.song_by} Song By: `, `\`${player.queue.current.author}\``, true)
                 .addField(`${emoji?.msg.repeat_mode} Queue length: `, `\`${player.queue.length} Songs\``, true)
-                .setFooter(
-                    client.getFooter(
+                .setFooter(client.getFooter(
                         `Requested by: ${player.queue.current.requester.tag}`,
                         player.queue.current.requester.displayAvatarURL({
                             dynamic: true,

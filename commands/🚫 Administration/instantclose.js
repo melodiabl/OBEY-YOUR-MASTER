@@ -1,11 +1,11 @@
-const { MessageEmbed, Collection, MessageAttachment, Permissions } = require("discord.js");
+const { EmbedBuilder, Collection, AttachmentBuilder, Permissions } = require("discord.js");
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const moment = require("moment");
 const fs = require("fs");
 const { databasing, delay, create_transcript, GetUser, GetRole } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
 module.exports = {
     name: "instantclose",
     category: "🚫 Administration",
@@ -76,12 +76,12 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) &&
+                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR]) &&
                 !message.member.roles.cache.some(r => ticket.adminroles.includes(r ? r.id : r))
             )
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable3"]))
@@ -94,14 +94,14 @@ module.exports = {
                 return message.reply({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable5"]))
                             .setColor(es.wrongcolor),
                     ],
                 });
             }
-            let button_ticket_verify = new MessageButton()
-                .setStyle("SUCCESS")
+            let button_ticket_verify = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Success)
                 .setCustomId("ticket_verify")
                 .setLabel("Verify this Step")
                 .setEmoji("833101995723194437");
@@ -109,11 +109,11 @@ module.exports = {
                 .reply({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable6"]))
                             .setColor(es.color),
                     ],
-                    components: [new MessageActionRow().addComponents(button_ticket_verify)],
+                    components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
                 })
                 .then(async msg => {
                     const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
@@ -131,8 +131,8 @@ module.exports = {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.MessageEmbed().setTitle("Verified!").setColor(es.color)],
-                                components: [new MessageActionRow().addComponents(button_ticket_verify.setDisabled(true))],
+                                embeds: [new Discord.EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                                components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
                             });
@@ -176,7 +176,7 @@ module.exports = {
                                 }
                             }
 
-                            if (msg.channel.permissionsFor(msg.channel.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                            if (msg.channel.permissionsFor(msg.channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                 await msg.channel.permissionOverwrites.edit(data.user, {
                                     SEND_MESSAGES: false,
                                     VIEW_CHANNEL: false,
@@ -185,7 +185,7 @@ module.exports = {
                             msg.channel.send({
                                 content: `<@${buttonuser.id}>`,
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(
                                             eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable7"])
                                         )
@@ -229,7 +229,7 @@ module.exports = {
                                     if (!adminchannel) return client.settings.set(guild.id, "no", `adminlog`);
                                     adminchannel.send({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -263,8 +263,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                                 )
                                                 .setTimestamp()
-                                                .setFooter(
-                                                    client.getFooter(
+                                                .setFooter(client.getFooter(
                                                         "ID: " + message.author.id,
                                                         message.author.displayAvatarURL({ dynamic: true })
                                                     )
@@ -279,14 +278,14 @@ module.exports = {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.MessageEmbed().setTitle("Cancelled!").setColor(es.wrongcolor)],
-                                components: [new MessageActionRow().addComponents(button_ticket_verify.setDisabled(true))],
+                                embeds: [new Discord.EmbedBuilder().setTitle("Cancelled!").setColor(es.wrongcolor)],
+                                components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
                             });
                         }
                     });
-                    let endedembed = new Discord.MessageEmbed()
+                    let endedembed = new Discord.EmbedBuilder()
                         .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable12"]))
                         .setColor(es.wrongcolor);
                     collector.on("end", collected => {
@@ -296,12 +295,12 @@ module.exports = {
                                 content: `<@${buttonuser.id}>`,
                                 embeds: [endedembed],
                                 components: [
-                                    new MessageActionRow().addComponents(
+                                    new ActionRowBuilder().addComponents(
                                         button_ticket_verify
                                             .setDisabled(true)
                                             .setLabel("FAILED TO VERIFY")
                                             .setEmoji("833101993668771842")
-                                            .setStyle("DANGER")
+                                            .setStyle(Discord.ButtonStyle.Danger)
                                     ),
                                 ],
                             }).catch(e => {
@@ -314,7 +313,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable6"]))

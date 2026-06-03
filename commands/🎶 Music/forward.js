@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -23,7 +23,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "MUSIC")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -36,7 +36,7 @@ module.exports = {
             if (!args[0])
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setTitle(
                                 handlemsg(client.la[ls].cmds.music.forward.allowed, {
@@ -56,7 +56,7 @@ module.exports = {
             //Send Success Message
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle(client.la[ls].cmds.music.forward.title)
                         .setDescription(
                             handlemsg(client.la[ls].cmds.music.forward.description, {
@@ -72,7 +72,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["music"]["forward"]["variable1"])),

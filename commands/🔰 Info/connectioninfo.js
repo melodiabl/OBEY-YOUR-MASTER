@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -42,7 +42,7 @@ module.exports = {
             if (!member.voice || !member.voice.channel)
                 return message.reply("❌ **This User is not Connected to a Voicechannel!**");
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setTitle(`Connection Info of: \`${user.tag}\``)
                 .addField(
                     "<:arrow:832598861813776394> **Channel**",
@@ -74,7 +74,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

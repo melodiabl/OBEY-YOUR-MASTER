@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const moment = require("moment");
@@ -29,7 +29,7 @@ module.exports = {
 
                 const authorFetch = await emoji?.fetchAuthor();
                 const checkOrCross = bool => (bool ? "✅" : "❌");
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setTitle(eval(client.la[ls]["cmds"]["info"]["emojiinfo"]["variable1"]))
                     .setColor(es.color)
                     .setThumbnail(
@@ -62,13 +62,13 @@ module.exports = {
                 message.reply({ embeds: [embed] });
             } else if ((emoji1 = animatedEmoteRegex.exec(message))) {
                 let url2 = "https://cdn.discordapp.com/emojis/" + emoji1[1] + ".gif?v=1";
-                let attachment2 = new Discord.MessageAttachment(url2, "emoji?.gif");
+                let attachment2 = new Discord.AttachmentBuilder(url2, "emoji?.gif");
                 const emoji = message.guild.emojis.cache.find(emj => emj.name === emoji1[1] || emj.id == emoji1[1]);
                 if (!emoji) return message.reply(handlemsg(client.la[ls].cmds.info.emojiinfo.error2));
 
                 const authorFetch = await emoji?.fetchAuthor();
                 const checkOrCross = bool => (bool ? "✅" : "❌");
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setTitle(eval(client.la[ls]["cmds"]["info"]["emojiinfo"]["variable2"]))
                     .setColor(es.color)
                     .setThumbnail(
@@ -106,7 +106,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

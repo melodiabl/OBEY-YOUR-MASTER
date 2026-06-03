@@ -1,10 +1,11 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const moment = require("moment");
-const TikTokScraper = require("tiktok-scraper");
+// tiktok-scraper no disponible en Node 22 — comando desactivado temporalmente
+const TikTokScraper = null;
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "tiktokinfo",
@@ -24,7 +25,7 @@ module.exports = {
                     });
                     if (!posts.collector[0]) return message.reply(client.la[ls].common.usernotfound);
                     author = posts.collector[0].authorMeta;
-                    var embed = new Discord.MessageEmbed()
+                    var embed = new Discord.EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -77,7 +78,7 @@ module.exports = {
                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                     return message.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(client.la[ls].common.erroroccur)
@@ -90,7 +91,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

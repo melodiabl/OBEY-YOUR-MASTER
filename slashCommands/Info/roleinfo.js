@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 module.exports = {
     name: "roleinfo",
@@ -33,7 +33,7 @@ module.exports = {
             if (!role || role == null || role.id == null || !role.id)
                 return interaction?.reply(client.la[ls].common.rolenotfound);
             //create the EMBED
-            const embeduserinfo = new MessageEmbed();
+            const embeduserinfo = new EmbedBuilder();
             embeduserinfo.setThumbnail(guild.iconURL({ dynamic: true, size: 512 }));
             embeduserinfo.setAuthor(
                 client.la[ls].cmds.info.roleinfo.author + " " + role.name,

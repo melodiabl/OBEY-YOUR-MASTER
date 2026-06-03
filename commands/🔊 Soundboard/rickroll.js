@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const path = require("path");
 const fs = require("fs");
 const CmdName = path.parse(__filename).name;
@@ -16,7 +16,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "SOUNDBOARD")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -30,31 +30,31 @@ module.exports = {
             });
         }
         const { channel } = message.member.voice;
-        const botchannel = message.guild.me.voice.channel;
+        const botchannel = message.guild.members.me.voice.channel;
         if (!channel) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle("<:no:833101993668771842> You need to join a voice channel")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
                 ],
             });
         }
-        if (!channel.permissionsFor(message.guild.me).has("CONNECT")) {
+        if (!channel.permissionsFor(message.guild.members.me).has("CONNECT")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle("❌ I'm missing the Permission to join your Voice Channel")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
                 ],
             });
         }
-        if (!channel.permissionsFor(message.guild.me).has("SPEAK")) {
+        if (!channel.permissionsFor(message.guild.members.me).has("SPEAK")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle("❌ I'm missing the Permission to speak in your Voice Channel")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
@@ -64,7 +64,7 @@ module.exports = {
         if (channel.userLimit != 0 && channel.full) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle("❌ Your Voice Channel is full!")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
@@ -74,7 +74,7 @@ module.exports = {
         if (botchannel) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle(`<:no:833101993668771842> I am already connected in: \`${botchannel.name}\``)
                         .setFooter(client.getFooter(es)),
                 ],
@@ -96,7 +96,7 @@ module.exports = {
         if (!file || !fs.existsSync(file)) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle("❌ Could not find the AUDIO")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),

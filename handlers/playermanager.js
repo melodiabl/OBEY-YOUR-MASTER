@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { format, delay, arrayMove } = require(`./functions`);
@@ -11,11 +11,11 @@ module.exports = async (client, message, args, type, slashCommand = false, extra
 
     ee = client.settings.get(message.guild.id, "embed");
     var es = client.settings.get(message.guild.id, "embed");
-    if (!client.settings.has(message.guild.id, "language")) client.settings.ensure(message.guild.id, { language: "en" });
+    if (!client.settings.has(message.guild.id, "language")) client.settings.ensure(message.guild.id, { language: "es" });
     let ls = client.settings.get(message.guild.id, "language");
 
     let { channel } = message.member.voice;
-    let botchannel = message.guild.me.voice.channel;
+    let botchannel = message.guild.members.me.voice.channel;
     const permissions = channel.permissionsFor(client.user);
 
     if (!permissions.has("CONNECT")) {
@@ -24,7 +24,7 @@ module.exports = async (client, message, args, type, slashCommand = false, extra
                 .reply({
                     ephemeral: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setFooter(client.getFooter(ee))
                             .setTitle(eval(client.la[ls]["handlers"]["playermanagerjs"]["playermanager"]["variable1"])),
@@ -34,7 +34,7 @@ module.exports = async (client, message, args, type, slashCommand = false, extra
         return message
             .reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(ee.wrongcolor)
                         .setFooter(client.getFooter(ee))
                         .setTitle(eval(client.la[ls]["handlers"]["playermanagerjs"]["playermanager"]["variable1"])),
@@ -48,7 +48,7 @@ module.exports = async (client, message, args, type, slashCommand = false, extra
                 .reply({
                     ephemeral: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setFooter(client.getFooter(ee))
                             .setTitle(eval(client.la[ls]["handlers"]["playermanagerjs"]["playermanager"]["variable2"])),
@@ -58,7 +58,7 @@ module.exports = async (client, message, args, type, slashCommand = false, extra
         return message
             .reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(ee.wrongcolor)
                         .setFooter(client.getFooter(ee))
                         .setTitle(eval(client.la[ls]["handlers"]["playermanagerjs"]["playermanager"]["variable2"])),
@@ -71,7 +71,7 @@ module.exports = async (client, message, args, type, slashCommand = false, extra
             return slashCommand
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setTitle("❌ Your Voice Channel is full!")
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es)),
@@ -81,7 +81,7 @@ module.exports = async (client, message, args, type, slashCommand = false, extra
         return message
             .reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle("❌ Your Voice Channel is full!")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
@@ -89,37 +89,8 @@ module.exports = async (client, message, args, type, slashCommand = false, extra
             })
             .catch(() => {});
     }
-    if (method[0] === "song") require("./playermanagers/song")(client, message, args, type, slashCommand, extras);
-    else if (method[0] === "request") require("./playermanagers/request")(client, message, args, type, slashCommand);
-    else if (method[0] === "playlist") require("./playermanagers/playlist")(client, message, args, type, slashCommand);
-    else if (method[0] === "similar") require("./playermanagers/similar")(client, message, args, type, slashCommand);
-    else if (method[0] === "search") require("./playermanagers/search")(client, message, args, type, slashCommand);
-    else if (method[0] === "skiptrack") require("./playermanagers/skiptrack")(client, message, args, type, slashCommand);
-    else if (method[0] === "playtop") require("./playermanagers/playtop")(client, message, args, type, slashCommand);
-    else {
-        if (slashCommand)
-            return slashCommand
-                .reply({
-                    ephemeral: true,
-                    embeds: [
-                        new MessageEmbed()
-                            .setColor(ee.wrongcolor)
-                            .setFooter(client.getFooter(ee))
-                            .setTitle(eval(client.la[ls]["handlers"]["playermanagerjs"]["playermanager"]["variable3"])),
-                    ],
-                })
-                .catch(e => console.log(String(e).grey));
-        return message
-            .reply({
-                embeds: [
-                    new MessageEmbed()
-                        .setColor(ee.wrongcolor)
-                        .setFooter(client.getFooter(ee))
-                        .setTitle(eval(client.la[ls]["handlers"]["playermanagerjs"]["playermanager"]["variable3"])),
-                ],
-            })
-            .catch(e => console.log(String(e).grey));
-    }
+    // Todos los tipos enrutan a song.js que usa Shoukaku directamente
+    require("./playermanagers/song")(client, message, args, type, slashCommand, extras);
 };
 /**
  * @INFO

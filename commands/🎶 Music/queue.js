@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -22,7 +22,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "MUSIC")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -38,7 +38,7 @@ module.exports = {
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setAuthor(
                                     `Queue for ${message.guild.name}  -  [ ${player.queue.length} Tracks ]`,
                                     message.guild.iconURL({
@@ -65,7 +65,7 @@ module.exports = {
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setAuthor(
                                     `Queue for ${message.guild.name}  -  [ ${player.queue.length} Tracks ]`,
                                     message.guild.iconURL({
@@ -113,7 +113,7 @@ module.exports = {
             for (let i = 0; i < limit; i++) {
                 let desc = String(quelist[i]).substring(0, 2048);
                 await embeds.push(
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setAuthor(
                             `Queue for ${message.guild.name}  -  [ ${player.queue.length} Tracks ]`,
                             message.guild.iconURL({
@@ -138,7 +138,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
 
                         .setTitle(client.la[ls].common.erroroccur)

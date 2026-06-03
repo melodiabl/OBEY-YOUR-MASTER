@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing, edit_msg, send_roster } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup-customcommand",
@@ -43,7 +43,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -61,7 +61,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Custom Command Setup",
@@ -72,12 +72,12 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
 
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -114,7 +114,7 @@ module.exports = {
                             if (client.customcommands.get(message.guild.id, "commands").length > 24)
                                 return message.reply({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setTitle(
                                                 eval(client.la[ls]["cmds"]["setup"]["setup-customcommand"]["variable5"])
                                             )
@@ -127,7 +127,7 @@ module.exports = {
                                 });
                             tempmsg = await message.reply({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-customcommand"]["variable6"]))
                                         .setColor(es.color)
                                         .setDescription(
@@ -153,7 +153,7 @@ module.exports = {
                                         };
                                         tempmsg = await message.reply({
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setTitle(
                                                         eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-customcommand"][
@@ -185,7 +185,7 @@ module.exports = {
                                                     thecustomcommand.output = msg;
                                                     var ttempmsg = await message.reply({
                                                         embeds: [
-                                                            new Discord.MessageEmbed()
+                                                            new Discord.EmbedBuilder()
                                                                 .setTitle(
                                                                     eval(
                                                                         client.la[ls]["cmds"]["setup"][
@@ -231,7 +231,7 @@ module.exports = {
 
                                                                 message.reply({
                                                                     embeds: [
-                                                                        new Discord.MessageEmbed()
+                                                                        new Discord.EmbedBuilder()
                                                                             .setTitle(
                                                                                 eval(
                                                                                     client.la[ls]["cmds"]["setup"][
@@ -254,7 +254,7 @@ module.exports = {
                                                                 if (reaction.emoji?.name == "✅") {
                                                                     message.reply({
                                                                         embeds: [
-                                                                            new Discord.MessageEmbed()
+                                                                            new Discord.EmbedBuilder()
                                                                                 .setColor(es.color)
                                                                                 .setDescription(thecustomcommand.output)
                                                                                 .setFooter(client.getFooter(es)),
@@ -274,7 +274,7 @@ module.exports = {
                                                     if (timeouterror)
                                                         return message.reply({
                                                             embeds: [
-                                                                new Discord.MessageEmbed()
+                                                                new Discord.EmbedBuilder()
                                                                     .setTitle(
                                                                         eval(
                                                                             client.la[ls]["cmds"]["setup"][
@@ -300,7 +300,7 @@ module.exports = {
                                         if (timeouterror)
                                             return message.reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setTitle(
                                                             eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-customcommand"][
@@ -321,7 +321,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-customcommand"]["variable16"])
                                                 )
@@ -350,7 +350,7 @@ module.exports = {
                                 });
                             });
                             //define the selection
-                            let Selection = new MessageSelectMenu()
+                            let Selection = new StringSelectMenuBuilder()
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(cuc.length) //OPTIONAL, this is how many values you can have at each selection
                                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -370,7 +370,7 @@ module.exports = {
                                 );
 
                             //define the embed
-                            let MenuEmbed = new Discord.MessageEmbed()
+                            let MenuEmbed = new Discord.EmbedBuilder()
                                 .setColor(es.color)
                                 .setAuthor(
                                     "Custom Command Setup",
@@ -381,11 +381,11 @@ module.exports = {
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
-                                components: [new MessageActionRow().addComponents(Selection)],
+                                components: [new ActionRowBuilder().addComponents(Selection)],
                             });
                             //Create the collector
                             const collector = menumsg.createMessageComponentCollector({
-                                filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                                 time: 90000,
                             });
                             //Menu Collections
@@ -402,7 +402,7 @@ module.exports = {
                                     }
                                     return message.reply({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setTitle(`Deleted ${menu?.values.length} Custom Commands!`)
                                                 .setDescription(
                                                     `There are now \`${cuc.length - menu?.values.length} Custom Commands\` left!`
@@ -430,26 +430,24 @@ module.exports = {
                     case "Show Settings":
                         {
                             let cuc = client.customcommands.get(message.guild.id, "commands");
-                            var embed = new Discord.MessageEmbed()
+                            var embed = new Discord.EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-customcommand"]["variable22"]))
                                 .setColor(es.color)
-                                .setFooter(
-                                    ee.footertext,
-                                    es.footericon &&
+                                .setFooter({ text: ee.footertext,
+                                    iconURL: es.footericon &&
                                         (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                         ? es.footericon
                                         : client.user.displayAvatarURL()
-                                );
-                            var embed2 = new Discord.MessageEmbed()
+                                });
+                            var embed2 = new Discord.EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-customcommand"]["variable22"]))
                                 .setColor(es.color)
-                                .setFooter(
-                                    ee.footertext,
-                                    es.footericon &&
+                                .setFooter({ text: ee.footertext,
+                                    iconURL: es.footericon &&
                                         (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                         ? es.footericon
                                         : client.user.displayAvatarURL()
-                                );
+                                });
                             var sendembed2 = false;
                             for (let i = 0; i < cuc.length; i++) {
                                 try {
@@ -480,7 +478,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

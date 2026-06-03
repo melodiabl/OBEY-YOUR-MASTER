@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -25,7 +25,7 @@ module.exports = {
             }
             var { user } = member;
             if (user.id != message.author.id) {
-                if (!message.member.permissions.has(Discord.Permissions.FLAGS.ADMINISTRATOR)) {
+                if (!message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
                     return message.reply("❌ **Only Admins can add Quotes to other Users!**");
                 }
             }
@@ -42,7 +42,7 @@ module.exports = {
             if (!id || !isNaN(id))
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle("❌ Wrong command Usage!")
@@ -55,9 +55,9 @@ module.exports = {
                     `❌ **Invalid Quote ID!**\n> Use one between \`0\` and \`${data.length - 1}\`\nTo see all Quotes type: \`${prefix}quotes ${user.id}\``
                 );
             }
-            let embed = new MessageEmbed()
+            let embed = new EmbedBuilder()
                 .setColor(es.color)
-                .setFooter(user.id, user.displayAvatarURL({ dynamic: true }))
+                .setFooter({ text: user.id, iconURL: user.displayAvatarURL({ dynamic: true }) })
                 .addField("**Quote by:**", `<@${data[Number(id)].by}>`)
                 .addField("**Quote at:**", `\`\`\`${moment(data[Number(id)].at).format("DD/MM/YYYY HH:mm")}\`\`\``)
                 .setTitle("**Quote Text:**")
@@ -73,7 +73,7 @@ module.exports = {
             return message.reply({
                 embeds: [
                     embed,
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setTitle(`🗑️ Removed the above showed Quoted from \`${user.tag}\``)
                         .setDescription(`**${user.username}** now has **\`${data.length} Quotes\`**!`),
@@ -83,7 +83,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

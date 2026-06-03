@@ -1,4 +1,4 @@
-var { MessageEmbed, MessageButton, MessageActionRow, MessageMenuOption, MessageSelectMenu } = require(`discord.js`);
+var { EmbedBuilder, ButtonBuilder, ActionRowBuilder, MessageMenuOption, StringSelectMenuBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -20,7 +20,7 @@ module.exports = {
         if (!config.ownerIDS.some(r => r.includes(message.author.id)))
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable1"]))
@@ -48,7 +48,7 @@ module.exports = {
                     },
                 ];
                 //define the selection
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
@@ -66,7 +66,7 @@ module.exports = {
                     );
 
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Advertising Setup",
@@ -78,7 +78,7 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.channel.send({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents([Selection])],
+                    components: [new ActionRowBuilder().addComponents([Selection])],
                 });
                 //function to handle the menuselection
                 function menuselection(menu) {
@@ -127,7 +127,7 @@ module.exports = {
                                     console.log(e.stack ? String(e.stack).dim : String(e).dim);
                                     return message.channel.send({
                                         embedq: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setFooter(client.getFooter(es))
                                                 .setColor(es.wrongcolor)
                                                 .setTitle(
@@ -146,7 +146,7 @@ module.exports = {
                                 client.ad.textad = advertisement.textad;
                                 return message.channel.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setFooter(client.getFooter(es))
                                             .setColor(es.color)
                                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable8"])),
@@ -157,7 +157,7 @@ module.exports = {
                         break;
                     case 1:
                         {
-                            var embed = new MessageEmbed()
+                            var embed = new EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable9"]))
                                 .setColor(es.color)
                                 .setThumbnail(
@@ -187,7 +187,7 @@ module.exports = {
             console.log(String(e.stack).dim.bgRed);
             return message.channel.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

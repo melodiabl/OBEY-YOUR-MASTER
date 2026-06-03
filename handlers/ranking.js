@@ -19,7 +19,7 @@ module.exports = function (client) {
             if (message.author.bot || !message.guild) return;
 
             if (!client.settings.has(message.guild.id, "language"))
-                client.settings.ensure(message.guild.id, { language: "en" });
+                client.settings.ensure(message.guild.id, { language: "es" });
             let ls = client.settings.get(message.guild.id, "language");
 
             client.setups.ensure(message.guild.id, {
@@ -45,11 +45,11 @@ module.exports = function (client) {
             });
             let guildsettings = client.settings.get(message.guild.id);
             const prefix = guildsettings.prefix;
-            const embedcolor = guildsettings.embed.color || "#fffff9";
+            const embedcolor = guildsettings?.embed?.color || "#5865F2";
 
             let ranking = client.setups.get(message.guild.id, "ranking");
 
-            if (!ranking.enabled) return;
+            if (!ranking?.enabled) return;
             const key = `${message.guild.id}-${message.author.id}`;
 
             function databasing(rankuser) {
@@ -169,8 +169,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `setxpcounter`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable1"]));
                         setxpcounter();
@@ -178,18 +178,18 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `setglobalxpcounter`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable2"]));
                         setglobalxpcounter();
                         break;
                     /////////////////////////////////
                     case `addpoints`:
-                        if (message.author.id == "442355791412854784") return addpoints();
+                        if (message.author.id == "1087034447825735741") return addpoints();
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable3"]));
                         addpoints();
@@ -197,8 +197,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `setpoints`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable4"]));
 
@@ -207,8 +207,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `removepoints`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable5"]));
 
@@ -217,8 +217,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `addlevel`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable6"]));
 
@@ -227,8 +227,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `setlevel`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable7"]));
 
@@ -237,8 +237,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `removelevel`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable8"]));
 
@@ -247,8 +247,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `resetranking`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable9"]));
 
@@ -257,8 +257,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `registerall`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable10"]));
 
@@ -267,8 +267,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `addrandomall`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable11"]));
 
@@ -277,8 +277,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `resetrankingall`:
                         if (
-                            !message.member.permissions.has("ADMINISTRATOR") ||
-                            !message.member.permissions.has("MANAGE_GUILD")
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable12"]));
 
@@ -406,7 +406,7 @@ module.exports = function (client) {
                 ctx.drawImage(avatar, 83.5, 36, 345, 345);
 
                 //get it as a discord attachment
-                const attachment = new Discord.MessageAttachment(canvas.toBuffer("image/webp"), "ranking-image.png");
+                const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "ranking-image.png");
 
                 if (!client.points.get(message.guild.id, "channel"))
                     return message.channel.send({ content: `${message.author}`, files: [attachment] });
@@ -951,7 +951,7 @@ module.exports = function (client) {
                                       .join(", ")}\n**Note:** *\`You only gain Points, if you leave the Channel!\`*`
                                 : ""
                         }`,
-                        files: [new Discord.MessageAttachment(canvas.toBuffer("image/webp"), "card.png")],
+                        files: [new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "card.png")],
                     });
                 } catch (error) {
                     console.log(error);
@@ -1000,7 +1000,7 @@ module.exports = function (client) {
 
                 for (let i = 25; i <= maxnum; i += 25) {
                     const top = sorted.splice(0, 25);
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setTitle(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable18"]))
                         .setTimestamp()
                         .setColor(embedcolor);
@@ -1019,7 +1019,7 @@ module.exports = function (client) {
                         } catch {}
                     }
                     embed.setDescription(string.substring(0, 2048));
-                    embed.setFooter(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable19"]));
+                    embed.setFooter({ text: eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable19"]) });
                     embeds.push(embed);
                 }
                 return embeds;
@@ -1227,7 +1227,7 @@ module.exports = function (client) {
                     }
                     return res(true);
                 }).then(async () => {
-                    const attachment = new Discord.MessageAttachment(canvas.toBuffer("image/webp"), "ranking-image.png");
+                    const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "ranking-image.png");
 
                     var filtered = client.points
                         .filter(p => p.guild === message.guild.id)
@@ -1349,7 +1349,7 @@ module.exports = function (client) {
                         }
                         return res(true);
                     }).then(async () => {
-                        const attachment2 = new Discord.MessageAttachment(
+                        const attachment2 = new Discord.AttachmentBuilder(
                             canvas2.toBuffer("image/webp"),
                             "ranking-image.png"
                         );
@@ -1390,7 +1390,7 @@ module.exports = function (client) {
                     if (Number(args[1]) > 10)
                         return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable25"]));
                     client.points.set(key, Number(args[1]), `xpcounter`); //set points to 0
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable26"]));
                     message.reply({ embeds: [embed] });
@@ -1407,7 +1407,7 @@ module.exports = function (client) {
                     if (Number(args[1]) > 10)
                         return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable29"]));
                     client.points.set(message.guild.id, Number(args[0]), `setglobalxpcounter`); //set points to 0
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable30"]));
                     message.reply({ embeds: [embed] });
@@ -1462,7 +1462,7 @@ module.exports = function (client) {
                             const newPoints = client.points.get(key, `points`); //get current NEW points
 
                             //THE INFORMATION EMBED
-                            const embed = new Discord.MessageEmbed()
+                            const embed = new Discord.EmbedBuilder()
                                 .setAuthor(
                                     `Ranking of:  ${rankuser.tag}`,
                                     rankuser.displayAvatarURL({
@@ -1481,7 +1481,7 @@ module.exports = function (client) {
                         }
                     }
 
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable37"]));
                     message.reply({ embeds: [embed] });
@@ -1529,7 +1529,7 @@ module.exports = function (client) {
                             const newPoints = client.points.get(key, `points`); //get current NEW points
 
                             //THE INFORMATION EMBED
-                            const embed = new Discord.MessageEmbed()
+                            const embed = new Discord.EmbedBuilder()
                                 .setAuthor(
                                     `Ranking of:  ${rankuser.tag}`,
                                     rankuser.displayAvatarURL({
@@ -1547,7 +1547,7 @@ module.exports = function (client) {
                         }
                     }
 
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable45"]));
                     message.channel.send({ embeds: [embed] }).catch(() => {});
@@ -1605,7 +1605,7 @@ module.exports = function (client) {
                             const newPoints = client.points.get(key, `points`); //get current NEW points
 
                             //THE INFORMATION EMBED
-                            const embed = new Discord.MessageEmbed()
+                            const embed = new Discord.EmbedBuilder()
                                 .setAuthor(
                                     `Ranking of:  ${rankuser.tag}`,
                                     rankuser.displayAvatarURL({
@@ -1624,7 +1624,7 @@ module.exports = function (client) {
                         }
                     }
 
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable54"]));
                     message.reply({ embeds: [embed] });
@@ -1668,7 +1668,7 @@ module.exports = function (client) {
                     const newPoints = client.points.get(key, `points`); //get current NEW points
 
                     //THE INFORMATION EMBED
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setAuthor(
                             `Ranking of:  ${rankuser.tag}`,
                             rankuser.displayAvatarURL({
@@ -1679,7 +1679,7 @@ module.exports = function (client) {
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
-                    const sssembed = new Discord.MessageEmbed()
+                    const sssembed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable62"]));
                     message.reply(sssembed);
@@ -1728,7 +1728,7 @@ module.exports = function (client) {
 
                     const newPoints = client.points.get(key, `points`); //get current NEW points
                     //THE INFORMATION EMBED
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setAuthor(
                             `Ranking of:  ${rankuser.tag}`,
                             rankuser.displayAvatarURL({
@@ -1739,7 +1739,7 @@ module.exports = function (client) {
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
-                    const sssembed = new Discord.MessageEmbed()
+                    const sssembed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable70"]));
                     message.reply(sssembed);
@@ -1788,7 +1788,7 @@ module.exports = function (client) {
                     const newPoints = client.points.get(key, `points`); //get current NEW points
 
                     //THE INFORMATION EMBED
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setAuthor(
                             `Ranking of:  ${rankuser.tag}`,
                             rankuser.displayAvatarURL({
@@ -1799,7 +1799,7 @@ module.exports = function (client) {
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
-                    const sssembed = new Discord.MessageEmbed()
+                    const sssembed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable77"]));
                     message.reply(sssembed);
@@ -1832,7 +1832,7 @@ module.exports = function (client) {
                     client.points.set(key, "", `oldmessage`); //set old message to 0
 
                     //THE INFORMATION EMBED
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setAuthor(
                             `Ranking of:  ${rankuser.tag}`,
                             rankuser.displayAvatarURL({
@@ -1843,7 +1843,7 @@ module.exports = function (client) {
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
-                    const sssembed = new Discord.MessageEmbed()
+                    const sssembed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable83"]));
                     message.reply(sssembed);
@@ -1860,7 +1860,7 @@ module.exports = function (client) {
                     let rankuser = message.guild.members.cache.get(allmembers[i]).user;
                     databasing(rankuser);
                 }
-                const embed = new Discord.MessageEmbed()
+                const embed = new Discord.EmbedBuilder()
                     .setColor(embedcolor)
                     .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable85"]));
                 message.reply({ content: `I limited the MAXIMUM MEMBERS to 100`, embeds: [embed] });
@@ -1885,7 +1885,7 @@ module.exports = function (client) {
                         client.points.set(key, "", `oldmessage`); //set old message to 0
                     }
                 }
-                const embed = new Discord.MessageEmbed()
+                const embed = new Discord.EmbedBuilder()
                     .setColor(embedcolor)
                     .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable86"]));
                 message.reply({ embeds: [embed] });
@@ -1905,14 +1905,14 @@ module.exports = function (client) {
                     Giving_Ranking_Points(`${message.guild.id}-${rankuser.id}`, maxnum);
                     Giving_Ranking_Points(`${message.guild.id}-${message.author.id}`, maxnum);
                 }
-                const embed = new Discord.MessageEmbed()
+                const embed = new Discord.EmbedBuilder()
                     .setColor(embedcolor)
                     .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable88"]));
                 message.reply({ embeds: [embed] });
             }
 
             function levelinghelp() {
-                const embed = new Discord.MessageEmbed()
+                const embed = new Discord.EmbedBuilder()
                     .setTitle(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable89"]))
                     .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable90"]))
                     .setColor(embedcolor)
@@ -2051,7 +2051,7 @@ module.exports = function (client) {
                     },
                 });
                 let ranking = client.setups.get(newState.guild.id, "ranking");
-                if (!ranking.enabled) return;
+                if (!ranking?.enabled) return;
                 const key = `${newState.guild.id}-${newState.member.user.id}`;
                 client.points.ensure(key, {
                     user: newState.member.user.id,

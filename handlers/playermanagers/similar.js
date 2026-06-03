@@ -1,4 +1,4 @@
-var { MessageEmbed } = require("discord.js");
+var { EmbedBuilder } = require("discord.js");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var { format, delay, arrayMove } = require("../functions");
@@ -10,7 +10,7 @@ async function similar(client, message, args, type, slashCommand) {
         //get a playlist out of it
         var mixURL = args.join(" ");
         //get the player instance
-        var player = client.manager.players.get(message.guild.id);
+        var player = client.shoukaku?.players?.get(message.guild.id) ?? null;
         //if no node, connect it
         if (player && player.node && !player.node.connected) await player.node.connect();
         //search for similar tracks
@@ -20,7 +20,7 @@ async function similar(client, message, args, type, slashCommand) {
             return client.channels.cache
                 .get(player.textChannel)
                 .send(
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle(eval(client.la[ls]["handlers"]["playermanagers"]["similar"]["variable1"]))
                         .setColor(ee.wrongcolor)
                 );
@@ -30,7 +30,7 @@ async function similar(client, message, args, type, slashCommand) {
             //add the track
             player.queue.add(res.tracks[0]);
             //send information message
-            var embed2 = new MessageEmbed()
+            var embed2 = new EmbedBuilder()
                 .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["similar"]["variable2"]))
                 .setColor(ee.color)
                 .setThumbnail(`https://img.youtube.com/vi/${res.tracks[0].identifier}/mqdefault.jpg`)
@@ -78,12 +78,11 @@ async function similar(client, message, args, type, slashCommand) {
                         `**${++index})** [\`${String(track.title).substring(0, 60).split("[").join("{").split("]").join("}")}\`](${track.uri}) - \`${format(track.duration).split(" | ")[0]}\``
                 )
                 .join("\n");
-            var searchembed = new MessageEmbed()
+            var searchembed = new EmbedBuilder()
                 .setTitle(`Search result for: 🔎 **\`${player.queue.current.title}`.substring(0, 256 - 3) + "`**")
                 .setColor(ee.color)
                 .setDescription(results)
-                .setFooter(
-                    client.getFooter(
+                .setFooter(client.getFooter(
                         `Search-Request by: ${track.requester.tag}`,
                         track.requester.displayAvatarURL({
                             dynamic: true,
@@ -93,7 +92,7 @@ async function similar(client, message, args, type, slashCommand) {
             message.reply({ embeds: [searchembed] });
             await message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(ee.color)
                         .setTitle(eval(client.la[ls]["handlers"]["playermanagers"]["similar"]["variable3"])),
                 ],
@@ -104,7 +103,7 @@ async function similar(client, message, args, type, slashCommand) {
                 if (!player.queue.current) player.destroy();
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setTitle(eval(client.la[ls]["handlers"]["playermanagers"]["similar"]["variable4"]))
                             .setColor(ee.wrongcolor),
                     ],
@@ -115,7 +114,7 @@ async function similar(client, message, args, type, slashCommand) {
                 if (!player.queue.current) player.destroy();
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(eval(client.la[ls]["handlers"]["playermanagers"]["similar"]["variable5"])),
                     ],
@@ -125,7 +124,7 @@ async function similar(client, message, args, type, slashCommand) {
             if (index < 0 || index > max - 1)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(eval(client.la[ls]["handlers"]["playermanagers"]["similar"]["variable6"])),
                     ],
@@ -135,7 +134,7 @@ async function similar(client, message, args, type, slashCommand) {
                 return message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(ee.wrongcolor)
                                 .setTitle(
                                     String("❌ Error | Found nothing for: **`" + player.queue.current.title).substring(
@@ -168,7 +167,7 @@ async function similar(client, message, args, type, slashCommand) {
                 player.pause(false);
             } else {
                 player.queue.add(track);
-                var embed = new MessageEmbed()
+                var embed = new EmbedBuilder()
                     .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["similar"]["variable8"]))
                     .setColor(ee.color)
                     .setThumbnail(`https://img.youtube.com/vi/${track.identifier}/mqdefault.jpg`)
@@ -202,7 +201,7 @@ async function similar(client, message, args, type, slashCommand) {
         return message
             .reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(ee.wrongcolor)
                         .setTitle(
                             String("❌ Error | Found nothing for: **`" + player.queue.current.title).substring(0, 256 - 3) +

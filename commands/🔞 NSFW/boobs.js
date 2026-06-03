@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 const rp = require("request-promise-native");
 const config = require(`${process.cwd()}/botconfig/config.json`);
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 module.exports = {
     name: "boobs",
     category: "🔞 NSFW",
@@ -14,7 +14,7 @@ module.exports = {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         if (!client.settings.get(message.guild.id, "NSFW")) {
-            const x = new MessageEmbed()
+            const x = new EmbedBuilder()
                 .setColor(es.wrongcolor)
                 .setFooter(client.getFooter(es))
                 .setTitle(client.la[ls].common.disabled.title)
@@ -38,7 +38,7 @@ module.exports = {
                 });
             })
             .then(function (res) {
-                let attachment = new MessageAttachment(res, "file.png");
+                let attachment = new AttachmentBuilder(res, "file.png");
                 message.reply({
                     files: [attachment],
                 });

@@ -27,6 +27,26 @@ const dirSetup = [
         CmdName: "fun",
         CmdDescription: "Fun related Commands!",
     },
+    {
+        Folder: "Giveaway",
+        CmdName: "giveaway",
+        CmdDescription: "Manage server giveaways!",
+    },
+    {
+        Folder: "Moderation",
+        CmdName: "moderation",
+        CmdDescription: "Advanced moderation tools!",
+    },
+    {
+        Folder: "Invites",
+        CmdName: "invites",
+        CmdDescription: "Invite tracking & leaderboard!",
+    },
+    {
+        Folder: "Ticket",
+        CmdName: "ticket",
+        CmdDescription: "Ticket management commands!",
+    },
 ];
 module.exports = client => {
     try {
@@ -104,10 +124,10 @@ module.exports = client => {
                                                     .setDescription(option.StringChoices.description)
                                                     .setRequired(option.StringChoices.required)
                                                     .addChoices(
-                                                        option.StringChoices.choices.map(c => [
-                                                            String(c[0]).replace(/\s+/g, "_").toLowerCase(),
-                                                            String(c[1]),
-                                                        ])
+                                                        ...option.StringChoices.choices.map(c => ({
+                                                            name: String(c[0]).substring(0, 100),
+                                                            value: String(c[1]),
+                                                        }))
                                                     )
                                             );
                                         } else if (
@@ -125,10 +145,10 @@ module.exports = client => {
                                                     .setDescription(option.IntChoices.description)
                                                     .setRequired(option.IntChoices.required)
                                                     .addChoices(
-                                                        option.IntChoices.choices.map(c => [
-                                                            String(c[0]).replace(/\s+/g, "_").toLowerCase(),
-                                                            parseInt(c[1]),
-                                                        ])
+                                                        ...option.IntChoices.choices.map(c => ({
+                                                            name: String(c[0]).substring(0, 100),
+                                                            value: parseInt(c[1]),
+                                                        }))
                                                     )
                                             );
                                         } else {
@@ -210,10 +230,10 @@ module.exports = client => {
                                         .setDescription(option.StringChoices.description)
                                         .setRequired(option.StringChoices.required)
                                         .addChoices(
-                                            option.StringChoices.choices.map(c => [
-                                                String(c[0]).replace(/\s+/g, "_").toLowerCase(),
-                                                String(c[1]),
-                                            ])
+                                            ...option.StringChoices.choices.map(c => ({
+                                                name: String(c[0]).substring(0, 100),
+                                                value: String(c[1]),
+                                            }))
                                         )
                                 );
                             } else if (
@@ -229,10 +249,10 @@ module.exports = client => {
                                         .setDescription(option.IntChoices.description)
                                         .setRequired(option.IntChoices.required)
                                         .addChoices(
-                                            option.IntChoices.choices.map(c => [
-                                                String(c[0]).replace(/\s+/g, "_").toLowerCase(),
-                                                parseInt(c[1]),
-                                            ])
+                                            ...option.IntChoices.choices.map(c => ({
+                                                name: String(c[0]).substring(0, 100),
+                                                value: parseInt(c[1]),
+                                            }))
                                         )
                                 );
                             } else {

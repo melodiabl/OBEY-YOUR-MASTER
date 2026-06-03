@@ -3,7 +3,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const ms = require("ms");
-var { MessageEmbed, Permissions } = require(`discord.js`);
+var { EmbedBuilder, Permissions } = require(`discord.js`);
 const { databasing, delay } = require(`./functions`);
 const countermap = new Map();
 const messagesmap = new Map();
@@ -87,13 +87,12 @@ module.exports = client => {
                     let warnings = warnData.filter(v => v.guild == message.guild.id);
                     message.channel.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setAuthor(
                                     client.getAuthor(message.author.tag, message.member.displayAvatarURL({ dynamic: true }))
                                 )
-                                .setColor("ORANGE")
-                                .setFooter(
-                                    client.getFooter(
+                                .setColor("#E67E22")
+                                .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL({ dynamic: true })
                                     )
@@ -108,7 +107,7 @@ module.exports = client => {
                         if (!message.member.kickable)
                             message.channel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable8"])),
@@ -118,7 +117,7 @@ module.exports = client => {
                             try {
                                 message.member.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -139,7 +138,7 @@ module.exports = client => {
                             } catch {
                                 return message.channel.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.wrongcolor)
                                             .setFooter(client.getFooter(es))
                                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable11"]))
@@ -157,7 +156,7 @@ module.exports = client => {
                                     .then(() => {
                                         message.channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -182,7 +181,7 @@ module.exports = client => {
                                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                 message.channel.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.wrongcolor)
                                             .setFooter(client.getFooter(es))
                                             .setTitle(client.la[ls].common.erroroccur)
@@ -198,7 +197,7 @@ module.exports = client => {
                         if (!message.member.bannable)
                             message.channel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable16"])),
@@ -208,7 +207,7 @@ module.exports = client => {
                             try {
                                 message.member.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -226,7 +225,7 @@ module.exports = client => {
                             } catch {
                                 message.channel.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.wrongcolor)
                                             .setFooter(client.getFooter(es))
                                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable18"]))
@@ -244,7 +243,7 @@ module.exports = client => {
                                     .then(() => {
                                         message.channel.send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -269,7 +268,7 @@ module.exports = client => {
                                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                 message.channel.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.wrongcolor)
                                             .setFooter(client.getFooter(es))
                                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable22"]))
@@ -308,7 +307,7 @@ module.exports = client => {
                                 message.channel
                                     .send({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -344,7 +343,7 @@ module.exports = client => {
                                     message.channel
                                         .send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -365,7 +364,7 @@ module.exports = client => {
                                     message.channel
                                         .send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -389,7 +388,7 @@ module.exports = client => {
                             message.channel
                                 .send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -416,7 +415,7 @@ module.exports = client => {
                                     message.channel
                                         .send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -437,7 +436,7 @@ module.exports = client => {
                                     message.channel
                                         .send({
                                             embeds: [
-                                                new MessageEmbed()
+                                                new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -461,7 +460,7 @@ module.exports = client => {
                             message.channel
                                 .send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -484,7 +483,7 @@ module.exports = client => {
                     return message.channel
                         .send({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(`${member.user.tag} No Selfbots are allowed in here!`)
@@ -503,7 +502,7 @@ module.exports = client => {
                 return message.channel
                     .send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(client.la[ls].common.erroroccur)

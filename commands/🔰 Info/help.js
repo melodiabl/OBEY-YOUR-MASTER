@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -21,7 +21,7 @@ module.exports = {
 
         try {
             if (args[0]) {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -40,7 +40,7 @@ module.exports = {
                     else cuc = cuc.map(cmd => `\`${cmd.name}\``);
                     const items = cuc;
 
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -52,7 +52,7 @@ module.exports = {
                         .setThumbnail(client.user.displayAvatarURL())
                         .setTitle(eval(client.la[ls]["cmds"]["info"]["help"]["variable1"]))
                         .setDescription(items.join("︲"))
-                        .setFooter(handlemsg(client.la[ls].cmds.info.help.nocustom), client.user.displayAvatarURL());
+                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.help.nocustom), iconURL: client.user.displayAvatarURL() });
 
                     message.reply({ embeds: [embed] });
                     return;
@@ -74,7 +74,7 @@ module.exports = {
                 } else if (cat) {
                     var category = cat;
                     const items = client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``);
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -85,10 +85,7 @@ module.exports = {
                         )
                         .setThumbnail(client.user.displayAvatarURL())
                         .setTitle(eval(client.la[ls]["cmds"]["info"]["help"]["variable2"]))
-                        .setFooter(
-                            handlemsg(client.la[ls].cmds.info.help.nocustom, { prefix: prefix }),
-                            client.user.displayAvatarURL()
-                        );
+                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.help.nocustom, { prefix: prefix }), iconURL: client.user.displayAvatarURL() });
                     let embeds = allotherembeds_eachcategory();
                     if (cat == "🔰 Info") return message.reply({ embeds: [embeds[0]] });
                     if (cat == "💸 Economy") return message.reply({ embeds: [embeds[1]] });
@@ -142,32 +139,31 @@ module.exports = {
                         handlemsg(client.la[ls].cmds.info.help.detail.usage),
                         `\`\`\`${prefix}${cmd.usage}\`\`\``
                     );
-                    embed.setFooter(
-                        handlemsg(client.la[ls].cmds.info.help.detail.syntax),
-                        es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                    embed.setFooter({ text: handlemsg(client.la[ls].cmds.info.help.detail.syntax),
+                        iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                             ? es.footericon
                             : client.user.displayAvatarURL()
-                    );
+                    });
                 }
                 return message.reply({ embeds: [embed] });
             }
-            let button_back = new MessageButton()
-                .setStyle("SUCCESS")
+            let button_back = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Success)
                 .setCustomId("1")
                 .setEmoji("833802907509719130")
                 .setLabel(handlemsg(client.la[ls].cmds.info.help.buttons.back));
-            let button_home = new MessageButton()
-                .setStyle("DANGER")
+            let button_home = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Danger)
                 .setCustomId("2")
                 .setEmoji("🏠")
                 .setLabel(handlemsg(client.la[ls].cmds.info.help.buttons.home));
-            let button_forward = new MessageButton()
-                .setStyle("SUCCESS")
+            let button_forward = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Success)
                 .setCustomId("3")
                 .setEmoji("832598861813776394")
                 .setLabel(handlemsg(client.la[ls].cmds.info.help.buttons.forward));
-            let button_tutorial = new MessageButton()
-                .setStyle("LINK")
+            let button_tutorial = new ButtonBuilder()
+                .setStyle(Discord.ButtonStyle.Link)
                 .setEmoji("840260133686870036")
                 .setLabel("Tutorial")
                 .setURL("https://youtu.be/E0R7d8gS908");
@@ -303,22 +299,22 @@ module.exports = {
                 }
                 //return i // do not return, cause its disabled! to be shown
             });
-            let menuSelection = new MessageSelectMenu()
+            let menuSelection = new StringSelectMenuBuilder()
                 .setCustomId("MenuSelection")
                 .setPlaceholder("Click me to view Help-Menu-Category-Page(s)")
                 .setMinValues(1)
                 .setMaxValues(5)
                 .addOptions(menuOptions.filter(Boolean));
-            let buttonRow = new MessageActionRow().addComponents([
+            let buttonRow = new ActionRowBuilder().addComponents([
                 button_back,
                 button_home,
                 button_forward,
                 button_tutorial,
             ]);
-            let SelectionRow = new MessageActionRow().addComponents([menuSelection]);
+            let SelectionRow = new ActionRowBuilder().addComponents([menuSelection]);
             const allbuttons = [buttonRow, SelectionRow];
             //define default embed
-            let OverviewEmbed = new MessageEmbed()
+            let OverviewEmbed = new EmbedBuilder()
                 .setColor(es.color)
                 .setThumbnail(
                     es.thumb
@@ -327,7 +323,7 @@ module.exports = {
                             : client.user.displayAvatarURL()
                         : null
                 )
-                //.setFooter("Page Overview\n"+ client.user.username, client.user.displayAvatarURL())
+                //.setFooter({ text: "Page Overview\n"+ client.user.username, client.user.displayAvatarURL( }))
                 .setFooter({ text: "Page Overview\n" + client.user.username, iconURL: client.user.displayAvatarURL() })
                 .setTitle(`Information about __${client.user.username}__`)
                 .addField(
@@ -381,7 +377,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
 
             //create a collector for the thinggy
             const collector = helpmsg.createMessageComponentCollector({
-                filter: i => (i?.isButton() || i?.isSelectMenu()) && i?.user && i?.message.author.id == client.user.id,
+                filter: i => (i?.isButton() || i?.isStringSelectMenu()) && i?.user && i?.message.author.id == client.user.id,
                 time: 180e3,
             });
             //array of all embeds, here simplified just 10 embeds with numbers 0 - 9
@@ -420,7 +416,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                         await helpmsg.edit({ embeds: [embeds[currentPage]], components: allbuttons }).catch(e => {});
                         b?.deferUpdate().catch(e => {});
                     }
-                    if (b?.isSelectMenu()) {
+                    if (b?.isStringSelectMenu()) {
                         //b?.reply(`***Going to the ${b?.customId.replace("button_cat_", "")} Page***, *please wait 2 Seconds for the next Input*`, true)
                         //information, music, admin, settings, voice, minigames, nsfw
                         let index = 0;
@@ -504,7 +500,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
 
             collector.on("end", collected => {
                 //array of all disabled buttons
-                let d_buttonRow = new MessageActionRow().addComponents([
+                let d_buttonRow = new ActionRowBuilder().addComponents([
                     button_back.setDisabled(true),
                     button_home.setDisabled(true),
                     button_forward.setDisabled(true),
@@ -528,7 +524,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 var embeds = [];
 
                 //INFORMATION COMMANDS
-                var embed0 = new MessageEmbed()
+                var embed0 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🔰 Info").size}\`] 🔰 Information Commands 🔰`
                     )
@@ -588,7 +584,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 embeds.push(embed0);
 
                 //ECONOMY COMMANDS
-                var embed1 = new MessageEmbed()
+                var embed1 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "💸 Economy").size}\`] 💸 Economy Commands 💸 | ${settings.ECONOMY ? enabledString : disabledString}`
                     )
@@ -630,7 +626,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.ECONOMY || settings.showdisabled) embeds.push(embed1);
 
                 //SCHOOL COMMANDS
-                var embed2 = new MessageEmbed()
+                var embed2 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🏫 School Commands").size}\`] 🏫 School Commands 🏫 | ${settings.SCHOOL ? enabledString : disabledString}`
                     )
@@ -663,7 +659,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.SCHOOL || settings.showdisabled) embeds.push(embed2);
 
                 //MUSIC COMMANDS type: song, queue, queuesong, bot
-                var embed3 = new MessageEmbed()
+                var embed3 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🎶 Music").size}\`] 🎶 Music Commands 🎶 | ${settings.MUSIC ? enabledString : disabledString}`
                     )
@@ -705,7 +701,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.MUSIC || settings.showdisabled) embeds.push(embed3);
 
                 //FILTER COMMANDS
-                var embed4 = new MessageEmbed()
+                var embed4 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "👀 Filter").size}\`] 👀 Filter Commands 👀 | ${settings.FILTER ? enabledString : disabledString}`
                     )
@@ -719,7 +715,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.FILTER || settings.showdisabled) embeds.push(embed4);
 
                 //CUSTOM QUEUE COMMANDS
-                var embed5 = new MessageEmbed()
+                var embed5 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "⚜️ Custom Queue(s)").first().extracustomdesc.length}\`] ⚜️ Custom Queue(s) Commands ⚜️ | ${settings.CUSTOMQUEUE ? enabledString : disabledString}`
                     )
@@ -739,7 +735,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.CUSTOMQUEUE || settings.showdisabled) embeds.push(embed5);
 
                 //ADMINISTRATION
-                var embed6 = new MessageEmbed()
+                var embed6 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🚫 Administration").size}\`] 🚫 Admin Commands 🚫`
                     )
@@ -799,7 +795,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 embeds.push(embed6);
 
                 //SETUP
-                var embed7 = new MessageEmbed()
+                var embed7 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "💪 Setup").size}\`] 💪 Setup Commands 💪`
                     )
@@ -850,7 +846,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 embeds.push(embed7);
 
                 //Settings
-                var embed8 = new MessageEmbed()
+                var embed8 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "⚙️ Settings").size}\`] ⚙️ Settings Commands ⚙️`
                     )
@@ -892,7 +888,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 embeds.push(embed8);
 
                 //Owner
-                var embed9 = new MessageEmbed()
+                var embed9 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "👑 Owner").size}\`] 👑 Owner Commands 👑`
                     )
@@ -925,7 +921,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 embeds.push(embed9);
 
                 //Programming Commands
-                var embed10 = new MessageEmbed()
+                var embed10 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "⌨️ Programming").size}\`] ⌨️ Programming Commands ⌨️ | ${settings.PROGRAMMING ? enabledString : disabledString}`
                     )
@@ -939,7 +935,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.PROGRAMMING || settings.showdisabled) embeds.push(embed10);
 
                 //Ranking
-                var embed11 = new MessageEmbed()
+                var embed11 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "📈 Ranking").size}\`] 📈 Ranking Commands 📈 | ${settings.RANKING ? enabledString : disabledString}`
                     )
@@ -970,7 +966,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.RANKING || settings.showdisabled) embeds.push(embed11);
 
                 //SOUNDBOARD COMMANDS
-                var embed12 = new MessageEmbed()
+                var embed12 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🔊 Soundboard").size}\`] 🔊 Soundboard Commands 🔊 | ${settings.SOUNDBOARD ? enabledString : disabledString}`
                     )
@@ -984,7 +980,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.SOUNDBOARD || settings.showdisabled) embeds.push(embed12);
 
                 //Voice COMMANDS
-                var embed13 = new MessageEmbed()
+                var embed13 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🎤 Voice").first().extracustomdesc.length}\`] 🎤 Voice Commands 🎤 | ${settings.VOICE ? enabledString : disabledString}`
                     )
@@ -1004,7 +1000,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.VOICE || settings.showdisabled) embeds.push(embed13);
 
                 //FUN COMMANDS
-                var embed14 = new MessageEmbed()
+                var embed14 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🕹️ Fun").size}\`] 🕹️ Fun Commands 🕹️ | ${settings.FUN ? enabledString : disabledString}`
                     )
@@ -1046,7 +1042,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.FUN || settings.showdisabled) embeds.push(embed14);
 
                 //MINIGAMES
-                var embed15 = new MessageEmbed()
+                var embed15 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🎮 MiniGames").size}\`] 🎮 Mini Games Commands 🎮 | ${settings.MINIGAMES ? enabledString : disabledString}`
                     )
@@ -1088,7 +1084,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.MINIGAMES || settings.showdisabled) embeds.push(embed15);
 
                 //ANIME EMOTIONS
-                var embed16 = new MessageEmbed()
+                var embed16 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "😳 Anime-Emotions").size}\`] 😳 Anime Commands 😳 | ${settings.ANIME ? enabledString : disabledString}`
                     )
@@ -1119,7 +1115,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.ANIME || settings.showdisabled) embeds.push(embed16);
 
                 //NSFW COMMANDS
-                var embed17 = new MessageEmbed()
+                var embed17 = new EmbedBuilder()
                     .setTitle(
                         `[\`${client.commands.filter(cmd => cmd.category === "🔞 NSFW").size}\`] 🔞 NSFW Commands 🔞 | ${settings.NSFW ? enabledString : disabledString}`
                     )
@@ -1150,7 +1146,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                 if (!filterdisabled || settings.NSFW || settings.showdisabled) embeds.push(embed17);
 
                 //CUSTOM COMMANDS EMBED
-                var embed18 = new MessageEmbed().setTitle(eval(client.la[ls]["cmds"]["info"]["help"]["variable23"]));
+                var embed18 = new EmbedBuilder().setTitle(eval(client.la[ls]["cmds"]["info"]["help"]["variable23"]));
                 let cuc = client.customcommands.get(message.guild.id, "commands");
                 if (cuc.length < 1) cuc = ["NO CUSTOM COMMANDS DEFINED YET, do it with: `!setup-customcommands`"];
                 else cuc = cuc.map(cmd => `\`${cmd.name}\``);
@@ -1169,8 +1165,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `Page ${index + 1} / ${embeds.length}\nTo see command Descriptions and Information, type: ${config.prefix}help [CMD NAME]`,
                                 client.user.displayAvatarURL()
                             )
@@ -1181,7 +1176,7 @@ ${allEmojis.msg.milratodev}  Made by [**Milrato Development**](https://discord.g
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

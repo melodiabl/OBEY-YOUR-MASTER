@@ -6,11 +6,7 @@ const Platforms = {
 };
 const fortnite = require("fortnite");
 module.exports = async client => {
-    const { default: Enmap } = await import("enmap");
-    client.epicgamesDB = new Enmap({
-        name: "epicgamesDB",
-        dataDir: "./databases/settings",
-    });
+    const EnmapLike = require('./enmap-like'); client.epicgamesDB = new EnmapLike();
 
     client.on("interactionCreate", async interaction => {
         if (!interaction.isButton()) return;
@@ -41,14 +37,14 @@ module.exports = async client => {
                 content: `:question: **You already connected your EpicGames Account to __${guild.name}__**\n> Do you want to change it?\n**Name:** \`${data.epic}\`\n**Platform:** \`${Platforms[data.Platform]}\`\n**Input Method:** \`${data.InputMethod}\``,
                 ephemeral: true,
                 components: [
-                    new Discord.MessageActionRow().addComponents([
-                        new Discord.MessageButton()
-                            .setStyle("PRIMARY")
+                    new Discord.ActionRowBuilder().addComponents([
+                        new Discord.ButtonBuilder()
+                            .setStyle(Discord.ButtonStyle.Primary)
                             .setEmoji("✋")
                             .setLabel("Yes Change it!")
                             .setCustomId("epicgamesverify_f"),
-                        new Discord.MessageButton()
-                            .setStyle("SECONDARY")
+                        new Discord.ButtonBuilder()
+                            .setStyle(Discord.ButtonStyle.Secondary)
                             .setEmoji("✋")
                             .setLabel("No I want to keep it!")
                             .setCustomId("no"),
@@ -60,8 +56,8 @@ module.exports = async client => {
             user.send({
                 content: `:question: **Select your Platform**\n> Where do you play on?`,
                 components: [
-                    new Discord.MessageActionRow().addComponents([
-                        new Discord.MessageSelectMenu()
+                    new Discord.ActionRowBuilder().addComponents([
+                        new Discord.StringSelectMenuBuilder()
                             .setMaxValues(1)
                             .setMinValues(1)
                             .setPlaceholder("Select the Platform")
@@ -145,8 +141,8 @@ module.exports = async client => {
                     user.send({
                         content: `:question: **Select your Platform**\n> Where do you play on?`,
                         components: [
-                            new Discord.MessageActionRow().addComponents([
-                                new Discord.MessageSelectMenu()
+                            new Discord.ActionRowBuilder().addComponents([
+                                new Discord.StringSelectMenuBuilder()
                                     .setMaxValues(1)
                                     .setMinValues(1)
                                     .setPlaceholder("Select the Platform")
@@ -207,15 +203,14 @@ module.exports = async client => {
                             logChannel
                                 .send({
                                     embeds: [
-                                        new Discord.MessageEmbed()
-                                            .setColor("GREEN")
+                                        new Discord.EmbedBuilder()
+                                            .setColor("#57F287")
                                             .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
                                             .setTitle(`Linked/Updated their EPICGAMES Account!`)
                                             .addField("**Epic Games Name:**", `\`\`\`${Username}\`\`\``)
                                             .addField("**Platform:**", `\`\`\`${Platform}\`\`\``)
                                             .addField("**Input Method:**", `\`\`\`${InputMethod}\`\`\``)
-                                            .setFooter(
-                                                client.getFooter("ID: " + user.id, user.displayAvatarURL({ dynamic: true }))
+                                            .setFooter(client.getFooter("ID: " + user.id, user.displayAvatarURL({ dynamic: true }))
                                             ),
                                     ],
                                 })

@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -21,29 +21,29 @@ module.exports = {
                         ephemeral: true,
                         content: "<:no:833101993668771842> You can't Invite a Normal user! **IT MUST BE A BOT**",
                     });
-                let button_public_invite = new MessageButton()
-                    .setStyle("LINK")
+                let button_public_invite = new ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Link)
                     .setLabel(handlemsg(client.la[ls].cmds.info.invite.buttons.public))
                     .setURL(
                         "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
                     );
-                let button_support_dc = new MessageButton()
-                    .setStyle("LINK")
+                let button_support_dc = new ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Link)
                     .setLabel(handlemsg(client.la[ls].cmds.info.invite.buttons.server))
                     .setURL("https://discord.com/gg/milrato");
-                let button_invite = new MessageButton()
-                    .setStyle("LINK")
+                let button_invite = new ButtonBuilder()
+                    .setStyle(Discord.ButtonStyle.Link)
                     .setLabel("Invite " + user.username)
                     .setURL(
                         `https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot%20applications.commands`
                     );
                 //array of all buttons
                 const allbuttons = [
-                    new MessageActionRow().addComponents([button_public_invite, button_support_dc, button_invite]),
+                    new ActionRowBuilder().addComponents([button_public_invite, button_support_dc, button_invite]),
                 ];
                 message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.color)
                             .setTitle(`Invite: __**${user.tag}**__`)
                             .setDescription(
@@ -52,8 +52,7 @@ module.exports = {
                             .setURL(
                                 `https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot%20applications.commands`
                             )
-                            .setFooter(
-                                client.getFooter(`${user.username} | powered by milrato.eu`, "https://imgur.com/jPItIw0.gif")
+                            .setFooter(client.getFooter(`${user.username} | powered by milrato.eu`, "https://imgur.com/jPItIw0.gif")
                             ),
                     ],
                     components: allbuttons,
@@ -63,7 +62,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

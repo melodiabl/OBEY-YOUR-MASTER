@@ -2,12 +2,12 @@ const Discord = require("discord.js");
 const {
     Client,
     Collection,
-    MessageEmbed,
-    MessageAttachment,
+    EmbedBuilder,
+    AttachmentBuilder,
     Permissions,
-    MessageButton,
-    MessageActionRow,
-    MessageSelectMenu,
+    ButtonBuilder,
+    ActionRowBuilder,
+    StringSelectMenuBuilder,
 } = require("discord.js");
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -71,7 +71,7 @@ function check_if_dj(client, member, song) {
         }
         if (member.roles.cache.has(djRole)) isdj = true;
     }
-    if (!isdj && !member.permissions.has("ADMINISTRATOR") && song?.requester?.id != member.id)
+    if (!isdj && !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) && song?.requester?.id != member.id)
         return roleid.map(i => `<@&${i}>`).join(", ");
     return false;
 }
@@ -291,7 +291,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
         //define a variable for the total break of the loop later
         let totalbreak = false;
         //define the embed
-        let rosterembed = new Discord.MessageEmbed()
+        let rosterembed = new Discord.EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
                 es.thumb
@@ -849,7 +849,7 @@ async function send_roster_msg(client, guild, the_roster_db, pre) {
     if (the_roster_db?.get(guild.id, pre + ".rosterchannel") == "notvalid") return;
     let channel = await client.channels.fetch(the_roster_db?.get(guild.id, pre + ".rosterchannel")).catch(() => {});
     //define the embed
-    let rosterembed = new Discord.MessageEmbed()
+    let rosterembed = new Discord.EmbedBuilder()
         .setColor(es.color)
         .setThumbnail(
             es.thumb
@@ -970,7 +970,7 @@ async function create_transcript_buffer(Messages, Channel, Guild) {
                 `<meta charset="utf-8" />` +
                 `<meta name="viewport" content="width=device-width" />` +
                 `<style>mark{background-color: #202225;color:#F3F3F3;}@font-face{font-family:Whitney;src:url(https://cdn.jsdelivr.net/gh/mahtoid/DiscordUtils@master/whitney-300.woff);font-weight:300}@font-face{font-family:Whitney;src:url(https://cdn.jsdelivr.net/gh/mahtoid/DiscordUtils@master/whitney-400.woff);font-weight:400}@font-face{font-family:Whitney;src:url(https://cdn.jsdelivr.net/gh/mahtoid/DiscordUtils@master/whitney-500.woff);font-weight:500}@font-face{font-family:Whitney;src:url(https://cdn.jsdelivr.net/gh/mahtoid/DiscordUtils@master/whitney-600.woff);font-weight:600}@font-face{font-family:Whitney;src:url(https://cdn.jsdelivr.net/gh/mahtoid/DiscordUtils@master/whitney-700.woff);font-weight:700}body{font-family:Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:17px}a{text-decoration:none}a:hover{text-decoration:underline}img{object-fit:contain}.markdown{max-width:100%;line-height:1.3;overflow-wrap:break-word}.preserve-whitespace{white-space:pre-wrap}.spoiler{display:inline-block}.spoiler--hidden{cursor:pointer}.spoiler-text{border-radius:3px}.spoiler--hidden .spoiler-text{color:transparent}.spoiler--hidden .spoiler-text::selection{color:transparent}.spoiler-image{position:relative;overflow:hidden;border-radius:3px}.spoiler--hidden .spoiler-image{box-shadow:0 0 1px 1px rgba(0,0,0,.1)}.spoiler--hidden .spoiler-image *{filter:blur(44px)}.spoiler--hidden .spoiler-image:after{content:"SPOILER";color:#dcddde;background-color:rgba(0,0,0,.6);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-weight:600;padding:100%;border-radius:20px;letter-spacing:.05em;font-size:.9em}.spoiler--hidden:hover .spoiler-image:after{color:#fff;background-color:rgba(0,0,0,.9)}blockquote{margin:.1em 0;padding-left:.6em;border-left:4px solid;border-radius:3px}.pre{font-family:Consolas,"Courier New",Courier,monospace}.pre--multiline{margin-top:.25em;padding:.5em;border:2px solid;border-radius:5px}.pre--inline{padding:2px;border-radius:3px;font-size:.85em}.mention{border-radius:3px;padding:0 2px;color:#dee0fc;background:rgba(88,101,242,.3);font-weight:500}.mention:hover{background:rgba(88,101,242,.6)}.emoji{width:1.25em;height:1.25em;margin:0 .06em;vertical-align:-.4em}.emoji--small{width:1em;height:1em}.emoji--large{width:2.8em;height:2.8em}.chatlog{max-width:100%}.message-group{display:grid;margin:0 .6em;padding:.9em 0;border-top:1px solid;grid-template-columns:auto 1fr}.reference-symbol{grid-column:1;border-style:solid;border-width:2px 0 0 2px;border-radius:8px 0 0 0;margin-left:16px;margin-top:8px}.attachment-icon{float:left;height:100%;margin-right:10px}.reference{display:flex;grid-column:2;margin-left:1.2em;margin-bottom:.25em;font-size:.875em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;align-items:center}.reference-av{border-radius:50%;height:16px;width:16px;margin-right:.25em}.reference-name{margin-right:.25em;font-weight:600}.reference-link{flex-grow:1;overflow:hidden;text-overflow:ellipsis}.reference-link:hover{text-decoration:none}.reference-content>*{display:inline}.reference-edited-tst{margin-left:.25em;font-size:.8em}.ath-av-container{grid-column:1;width:40px;height:40px}.ath-av{border-radius:50%;height:40px;width:40px}.messages{grid-column:2;margin-left:1.2em;min-width:50%}.messages .bot-tag{top:-.2em}.ath-name{font-weight:500}.tst{margin-left:.3em;font-size:.75em}.message{padding:.1em .3em;margin:0 -.3em;background-color:transparent;transition:background-color 1s ease}.content{font-size:.95em;word-wrap:break-word}.edited-tst{margin-left:.15em;font-size:.8em}.attachment{margin-top:.3em}.attachment-thumbnail{vertical-align:top;max-width:45vw;max-height:225px;border-radius:3px}.attachment-container{height:40px;width:100%;max-width:520px;padding:10px;border:1px solid;border-radius:3px;overflow:hidden;background-color:#2f3136;border-color:#292b2f}.attachment-icon{float:left;height:100%;margin-right:10px}.attachment-filesize{color:#72767d;font-size:12px}.attachment-filename{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.embed{display:flex;margin-top:.3em;max-width:520px}.embed-color-pill{flex-shrink:0;width:.25em;border-top-left-radius:3px;border-bottom-left-radius:3px}.embed-content-container{display:flex;flex-direction:column;padding:.5em .6em;border:1px solid;border-top-right-radius:3px;border-bottom-right-radius:3px}.embed-content{display:flex;width:100%}.embed-text{flex:1}.embed-ath{display:flex;margin-bottom:.3em;align-items:center}.embed-ath-icon{margin-right:.5em;width:20px;height:20px;border-radius:50%}.embed-ath-name{font-size:.875em;font-weight:600}.embed-title{margin-bottom:.2em;font-size:.875em;font-weight:600}.embed-description{font-weight:500;font-size:.85em}.embed-fields{display:flex;flex-wrap:wrap}.embed-field{flex:0;min-width:100%;max-width:506px;padding-top:.6em;font-size:.875em}.embed-field--inline{flex:1;flex-basis:auto;min-width:150px}.embed-field-name{margin-bottom:.2em;font-weight:600}.embed-field-value{font-weight:500}.embed-thumbnail{flex:0;margin-left:1.2em;max-width:80px;max-height:80px;border-radius:3px}.embed-image-container{margin-top:.6em}.embed-image{max-width:500px;max-height:400px;border-radius:3px}.embed-footer{margin-top:.6em}.embed-footer-icon{margin-right:.2em;width:20px;height:20px;border-radius:50%;vertical-align:middle}.embed-footer-text{display:inline;font-size:.75em;font-weight:500}.reactions{display:flex}.reaction{display:flex;align-items:center;margin:.35em .1em .1em .1em;padding:.2em .35em;border-radius:8px}.reaction-count{min-width:9px;margin-left:.35em;font-size:.875em}.bot-tag{position:relative;margin-left:.3em;margin-right:.3em;padding:.05em .3em;border-radius:3px;vertical-align:middle;line-height:1.3;background:#7289da;color:#fff;font-size:.625em;font-weight:500}.postamble{margin:1.4em .3em .6em .3em;padding:1em;border-top:1px solid}body{background-color:#36393e;color:#dcddde}a{color:#0096cf}.spoiler-text{background-color:rgba(255,255,255,.1)}.spoiler--hidden .spoiler-text{background-color:#202225}.spoiler--hidden:hover .spoiler-text{background-color:rgba(32,34,37,.8)}.quote{border-color:#4f545c}.pre{background-color:#2f3136!important}.pre--multiline{border-color:#282b30!important;color:#b9bbbe!important}.preamble__entry{color:#fff}.message-group{border-color:rgba(255,255,255,.1)}.reference-symbol{border-color:#4f545c}.reference-icon{width:20px;display:inline-block;vertical-align:bottom}.reference{color:#b5b6b8}.reference-link{color:#b5b6b8}.reference-link:hover{color:#fff}.reference-edited-tst{color:rgba(255,255,255,.2)}.ath-name{color:#fff}.tst{color:rgba(255,255,255,.2)}.message--highlighted{background-color:rgba(114,137,218,.2)!important}.message--pinned{background-color:rgba(249,168,37,.05)}.edited-tst{color:rgba(255,255,255,.2)}.embed-color-pill--default{background-color:#4f545c}.embed-content-container{background-color:rgba(46,48,54,.3);border-color:rgba(46,48,54,.6)}.embed-ath-name{color:#fff}.embed-ath-name-link{color:#fff}.embed-title{color:#fff}.embed-description{color:rgba(255,255,255,.6)}.embed-field-name{color:#fff}.embed-field-value{color:rgba(255,255,255,.6)}.embed-footer{color:rgba(255,255,255,.6)}.reaction{background-color:rgba(255,255,255,.05)}.reaction-count{color:rgba(255,255,255,.3)}.info{display:flex;max-width:100%;margin:0 5px 10px 5px}.guild-icon-container{flex:0}.guild-icon{max-width:88px;max-height:88px}.metadata{flex:1;margin-left:10px}.guild-name{font-size:1.2em}.channel-name{font-size:1em}.channel-topic{margin-top:2px}.channel-message-count{margin-top:2px}.channel-timezone{margin-top:2px;font-size:.9em}.channel-date-range{margin-top:2px}</style>` +
-                `<script>function scrollToMessage(e,t){var o=document.getElementById("message-"+t);null!=o&&(e.preventDefault(),o.classList.add("message--highlighted"),window.scrollTo({top:o.getBoundingClientRect().top-document.body.getBoundingClientRect().top-window.innerHeight/2,behavior:"smooth"}),window.setTimeout(function(){o.classList.remove("message--highlighted")},2e3))}function scrollToMessage(e,t){var o=document.getElementById("message-"+t);o&&(e.preventDefault(),o.classList.add("message--highlighted"),window.scrollTo({top:o.getBoundingClientRect().top-document.body.getBoundingClientRect().top-window.innerHeight/2,behavior:"smooth"}),window.setTimeout(function(){o.classList.remove("message--highlighted")},2e3))}function showSpoiler(e,t){t&&t.classList.contains("spoiler--hidden")&&(e.preventDefault(),t.classList.remove("spoiler--hidden"))}</script>` +
+                `<script>function scrollToMessage(e,t){var o=document.getElementById("message-"+t);null!=o&&(e.preventDefault(),o.classList.add("message--highlighted"),window.scrollTo({top:o.getBoundingClientRect().top-document.body.getBoundingClientRect().top-window.innerHeight/2,behavior:"smooth"),window.setTimeout(function(){o.classList.remove("message--highlighted")},2e3))}function scrollToMessage(e,t){var o=document.getElementById("message-"+t);o&&(e.preventDefault(),o.classList.add("message--highlighted"),window.scrollTo({top:o.getBoundingClientRect().top-document.body.getBoundingClientRect().top-window.innerHeight/2,behavior:"smooth"),window.setTimeout(function(){o.classList.remove("message--highlighted")},2e3))}function showSpoiler(e,t){t&&t.classList.contains("spoiler--hidden")&&(e.preventDefault(),t.classList.remove("spoiler--hidden"))}</script>` +
                 `<script>document.addEventListener('DOMContentLoaded', () => {document.querySelectorAll('.pre--multiline').forEach((block) => {hljs.highlightBlock(block);});});</script>` +
                 `</head>`;
             let messagesArray = [];
@@ -1419,7 +1419,7 @@ function stations(client, prefix, message) {
     let ls = client.settings.get(message.guild.id, "language");
 
     try {
-        const reyfm_iloveradio_embed = new MessageEmbed()
+        const reyfm_iloveradio_embed = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
                 es.thumb
@@ -1431,7 +1431,7 @@ function stations(client, prefix, message) {
             .setFooter(client.getFooter(es))
             .setTitle("Pick your Station, by typing in the right `INDEX` Number!")
             .setDescription(`Example: \`${prefix}radio 11\``);
-        const stationsembed = new MessageEmbed()
+        const stationsembed = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
                 es.thumb
@@ -1443,7 +1443,7 @@ function stations(client, prefix, message) {
             .setFooter(client.getFooter(es))
             .setTitle("Pick your Station, by typing in the right `INDEX` Number!")
             .setDescription(`Example: \`${prefix}radio 44\``);
-        const stationsembed2 = new MessageEmbed()
+        const stationsembed2 = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
                 es.thumb
@@ -1455,7 +1455,7 @@ function stations(client, prefix, message) {
             .setFooter(client.getFooter(es))
             .setTitle("Pick your Station, by typing in the right `INDEX` Number!")
             .setDescription(`Example: \`${prefix}radio 69\``);
-        const stationsembed3 = new MessageEmbed()
+        const stationsembed3 = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
                 es.thumb
@@ -1467,7 +1467,7 @@ function stations(client, prefix, message) {
             .setFooter(client.getFooter(es))
             .setTitle("Pick your Station, by typing in the right `INDEX` Number!")
             .setDescription(`Example: \`${prefix}radio 120\``);
-        const stationsembed4 = new MessageEmbed()
+        const stationsembed4 = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
                 es.thumb
@@ -1625,7 +1625,7 @@ function stations(client, prefix, message) {
             requests += `**${i + beforeindex}** [${radios.OTHERS.request[i].split(" ")[0].replace("-", " ").substring(0, 20)}](${radios.OTHERS.request[i].split(" ")[1]})\n`;
             if (requests.length > 1900) {
                 embeds.push(
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -1661,7 +1661,7 @@ function escapeRegex(str) {
 
 async function autoplay(client, player, type) {
     let es = client.settings.get(player.guild, "embed");
-    if (!client.settings.has(player.guild, "language")) dbEnsure(client.settings, player.guild, { language: "en" });
+    if (!client.settings.has(player.guild, "language")) dbEnsure(client.settings, player.guild, { language: "es" });
     let ls = client.settings.get(player.guild, "language");
     try {
         if (player.queue.length > 0) return;
@@ -1669,10 +1669,11 @@ async function autoplay(client, player, type) {
         if (!previoustrack) return;
 
         const mixURL = `https://www.youtube.com/watch?v=${previoustrack.identifier}&list=RD${previoustrack.identifier}`;
-        const response = await client.manager.search(mixURL, previoustrack.requester);
+        const _searchRes = await client.music?.search(mixURL, previoustrack.requester)
+        const response = _searchRes ? { loadType: 'PLAYLIST_LOADED', tracks: _searchRes.tracks, playlist: { name: 'Mix' } } : null
         //if nothing is found, send error message, plus if there  is a delay for the empty QUEUE send error message TOO
         if (!response || response.loadType === "LOAD_FAILED" || response.loadType !== "PLAYLIST_LOADED") {
-            let embed = new MessageEmbed()
+            let embed = new EmbedBuilder()
                 .setTitle(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable7"]))
                 .setDescription(
                     config.settings.LeaveOnEmpty_Queue.enabled && type != "skip"
@@ -1688,9 +1689,9 @@ async function autoplay(client, player, type) {
             if (config.settings.LeaveOnEmpty_Queue.enabled && type != "skip") {
                 return setTimeout(() => {
                     try {
-                        player = client.manager.players.get(player.guild);
+                        player = client.shoukaku?.players?.get(player.guild) ?? null;
                         if (player.queue.size === 0) {
-                            let embed = new MessageEmbed();
+                            let embed = new EmbedBuilder();
                             try {
                                 embed.setTitle(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable8"]));
                             } catch {}
@@ -1801,7 +1802,7 @@ async function swap_pages(client, message, description, TITLE) {
             for (let i = 0; i < description.length; i += 20) {
                 const current = description.slice(i, k);
                 k += 20;
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setDescription(current.join("\n"))
                     .setTitle(TITLE)
                     .setColor(es.color)
@@ -1825,7 +1826,7 @@ async function swap_pages(client, message, description, TITLE) {
             for (let i = 0; i < description.length; i += 1000) {
                 const current = description.slice(i, k);
                 k += 1000;
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setDescription(current)
                     .setTitle(TITLE)
                     .setColor(es.color)
@@ -1848,7 +1849,7 @@ async function swap_pages(client, message, description, TITLE) {
         return message.channel
             .send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle(`${emoji?.msg.ERROR} No Content added to the SWAP PAGES Function`)
                         .setColor(es.wrongcolor)
                         .setThumbnail(
@@ -1865,25 +1866,25 @@ async function swap_pages(client, message, description, TITLE) {
     if (embeds.length === 1)
         return message.channel.send({ embeds: [embeds[0]] }).catch(e => console.log("THIS IS TO PREVENT A CRASH"));
 
-    let button_back = new MessageButton()
-        .setStyle("SUCCESS")
+    let button_back = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Success)
         .setCustomId("1")
         .setEmoji("833802907509719130")
         .setLabel("Back");
-    let button_home = new MessageButton().setStyle("DANGER").setCustomId("2").setEmoji("🏠").setLabel("Home");
-    let button_forward = new MessageButton()
-        .setStyle("SUCCESS")
+    let button_home = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+    let button_forward = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Success)
         .setCustomId("3")
         .setEmoji("832598861813776394")
         .setLabel("Forward");
-    let button_blank = new MessageButton()
-        .setStyle("SECONDARY")
+    let button_blank = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Secondary)
         .setCustomId("button_blank")
         .setLabel("\u200b")
         .setDisabled();
-    let button_stop = new MessageButton().setStyle("DANGER").setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
     const allbuttons = [
-        new MessageActionRow().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
+        new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
     //Send message with buttons
     let swapmsg = await message.channel.send({
@@ -1971,25 +1972,25 @@ async function swap_pages2(client, message, embeds) {
     let cmduser = message.author;
     if (embeds.length === 1)
         return message.channel.send({ embeds: [embeds[0]] }).catch(e => console.log("THIS IS TO PREVENT A CRASH"));
-    let button_back = new MessageButton()
-        .setStyle("SUCCESS")
+    let button_back = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Success)
         .setCustomId("1")
         .setEmoji("833802907509719130")
         .setLabel("Back");
-    let button_home = new MessageButton().setStyle("DANGER").setCustomId("2").setEmoji("🏠").setLabel("Home");
-    let button_forward = new MessageButton()
-        .setStyle("SUCCESS")
+    let button_home = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+    let button_forward = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Success)
         .setCustomId("3")
         .setEmoji("832598861813776394")
         .setLabel("Forward");
-    let button_blank = new MessageButton()
-        .setStyle("SECONDARY")
+    let button_blank = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Secondary)
         .setCustomId("button_blank")
         .setLabel("\u200b")
         .setDisabled();
-    let button_stop = new MessageButton().setStyle("DANGER").setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
     const allbuttons = [
-        new MessageActionRow().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
+        new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
     let prefix = client.settings.get(message.guild.id, "prefix");
     //Send message with buttons
@@ -2076,7 +2077,7 @@ async function swap_pages2(client, message, embeds) {
 function getDisabledComponents(MessageComponents) {
     if (!MessageComponents) return []; // Returning so it doesn't crash
     return MessageComponents.map(({ components }) => {
-        return new MessageActionRow().addComponents(components.map(c => c.setDisabled(true)));
+        return new ActionRowBuilder().addComponents(components.map(c => c.setDisabled(true)));
     });
 }
 async function swap_pages2_interaction(client, interaction, embeds) {
@@ -2086,25 +2087,25 @@ async function swap_pages2_interaction(client, interaction, embeds) {
         return interaction
             ?.reply({ ephemeral: true, embeds: [embeds[0]] })
             .catch(e => console.log("THIS IS TO PREVENT A CRASH"));
-    let button_back = new MessageButton()
-        .setStyle("SUCCESS")
+    let button_back = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Success)
         .setCustomId("1")
         .setEmoji("833802907509719130")
         .setLabel("Back");
-    let button_home = new MessageButton().setStyle("DANGER").setCustomId("2").setEmoji("🏠").setLabel("Home");
-    let button_forward = new MessageButton()
-        .setStyle("SUCCESS")
+    let button_home = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+    let button_forward = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Success)
         .setCustomId("3")
         .setEmoji("832598861813776394")
         .setLabel("Forward");
-    let button_blank = new MessageButton()
-        .setStyle("SECONDARY")
+    let button_blank = new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Secondary)
         .setCustomId("button_blank")
         .setLabel("\u200b")
         .setDisabled();
-    let button_stop = new MessageButton().setStyle("DANGER").setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
     const allbuttons = [
-        new MessageActionRow().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
+        new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
     let prefix = client.settings.get(interaction?.member.guild.id, "prefix");
     //Send message with buttons
@@ -2309,7 +2310,7 @@ function databasing(client, guildid, userid) {
                 autoembeds: [],
                 volume: "69",
                 adminroles: [],
-                language: "en",
+                language: "es",
 
                 mute: {
                     style: "timeout",
@@ -2708,7 +2709,7 @@ async function check_created_voice_channels(client) {
                                     client.jointocreatemap.delete(`tempvoicechannel_${vc.guild.id}_${vc.id}`);
                                     client.jointocreatemap.delete(`owner_${vc.guild.id}_${vc.id}`);
                                     //move user
-                                    if (vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                                    if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                                         vc.delete().catch(e => console.error(e));
                                         console.log(
                                             `Deleted the Channel: ${vc.name} in: ${vc.guild ? vc.guild.name : "undefined"} DUE TO EMPTYNESS`
@@ -2739,13 +2740,13 @@ function create_join_to_create_Channel(client, voiceState, type) {
     let chname = client.jtcsettings.get(voiceState.member.guild.id, `jtcsettings${type}.channelname`) || "{user}'s Room";
 
     //CREATE THE CHANNEL
-    if (!voiceState.guild.me.permissions.has("MANAGE_CHANNELS")) {
+    if (!voiceState.guild.members.me.permissions.has(Discord.PermissionFlagsBits.MANAGE_CHANNELS)) {
         try {
             voiceState.member.user.send(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable10"]));
         } catch {
             try {
                 let channel = guild.channels.cache.find(
-                    channel => channel.type === "GUILD_TEXT" && channel.permissionsFor(guild.me).has("SEND_MESSAGES")
+                    channel => channel.type === "GUILD_TEXT" && channel.permissionsFor(guild.members.me).has("SEND_MESSAGES")
                 );
                 channel
                     .send(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable11"]))
@@ -2801,17 +2802,17 @@ function create_join_to_create_Channel(client, voiceState, type) {
             client.jointocreatemap.set(`tempvoicechannel_${vc.guild.id}_${vc.id}`, vc.id);
             //move user
             if (
-                vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MOVE_MEMBERS) &&
-                voiceState.channel.permissionsFor(voiceState.guild.me).has(Permissions.FLAGS.MOVE_MEMBERS)
+                vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MOVE_MEMBERS) &&
+                voiceState.channel.permissionsFor(voiceState.guild.members.me).has(PermissionFlagsBits.MOVE_MEMBERS)
             ) {
                 await voiceState.setChannel(vc);
             }
             /*//move to parent
-        if(vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)){
+        if(vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)){
           await vc.setParent(voiceState.channel.parent)
         }*/
             //add permissions
-            if (vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+            if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                 await vc.permissionOverwrites
                     .edit(voiceState.id, {
                         MANAGE_CHANNELS: true,
@@ -2909,7 +2910,7 @@ function simple_databasing(client, guildid, userid) {
                 unkowncmdmessage: false,
                 defaultvolume: 30,
                 channel: "773836425678422046",
-                language: "en",
+                language: "es",
                 warnsettings: {
                     ban: false,
                     kick: false,

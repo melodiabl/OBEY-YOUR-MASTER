@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -18,7 +18,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "FUN")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -34,7 +34,7 @@ module.exports = {
         try {
             let tempmsg = await message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
                         .setAuthor(
@@ -63,8 +63,8 @@ module.exports = {
                 format: "png",
             });
             let image = await canvacord.Canvas.rip(avatar);
-            let attachment = await new Discord.MessageAttachment(image, "rip.png");
-            let fastembed2 = new Discord.MessageEmbed()
+            let attachment = await new Discord.AttachmentBuilder(image, "rip.png");
+            let fastembed2 = new Discord.EmbedBuilder()
                 .setFooter(client.getFooter(es))
                 .setAuthor(`Meme for: ${user.tag}`, avatar)
                 .setColor(es.color)
@@ -75,7 +75,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

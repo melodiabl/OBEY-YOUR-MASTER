@@ -1,33 +1,36 @@
 {
-    "token": "GET from: https://discord.com/developers/applications",
-    "prefix": "//",
+    "token": "",
+    "mongourl": "",
+    "prefix": "!",
     "ownerIDS": [
-        "442355791412854784"
+        "1087034447825735741"
     ],
-    "fnbr": "GET from: https://fnbr.co",
-    "fortnitetracker": "GET from: https://fortnitetracker.com",
-    "memer_api": "GET from: https://discord.gg/Mc2FudJkgP",
+    "ownerid": "1087034447825735741",
+    "fnbr": "",
+    "fortnitetracker": "",
+    "memer_api": "",
     "status": {
-        "text": "{prefix}help | on {guildcount} Servers, with {membercount} Members | Played: {songsplayed} Songs",
-        "text2": "By: discord.gg/dcdev",
-        "type": "PLAYING",
+        "text": "OBEY YOUR MASTER | !help",
+        "text2": "discord.gg/obey",
+        "type": "LISTENING",
         "url": "https://twitch.tv/milratodiscordbot"
     },
     "clientsettings": {
         "nodes": [
             {
-                "host": "localhost",
+                "host": "127.0.0.1",
                 "port": 2333,
-                "password": "youshallnotpass"
+                "password": "melodia@2010",
+                "identifier": "Main Lavalink",
+                "secure": false
             }
         ]
     },
     "spotify": {
-        "clientSecret": "GET from: https://developers.spotify.com",
-        "clientID": "GET from: https://developers.spotify.com"
+        "clientSecret": "",
+        "clientID": ""
     },
     "settings": {
-        "COMMENT": "time_delay 0 === insta leave",
         "leaveOnEmpty_Channel": {
             "enabled": true,
             "time_delay": 30000
@@ -39,10 +42,6 @@
         "selfDeaf": true
     },
     "lyricssettings": {
-        "lyrics_finder": true,
-        "ksoft_api": {
-            "use_this_instead": true,
-            "api_key": "DISABLED"
-        }
+        "lyrics_finder": true
     }
 }

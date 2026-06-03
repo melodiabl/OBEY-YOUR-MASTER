@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -26,7 +26,7 @@ module.exports = {
             var { user } = member;
 
             if (user.id != message.author.id) {
-                if (!message.member.permissions.has(Discord.Permissions.FLAGS.ADMINISTRATOR)) {
+                if (!message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
                     return message.reply("❌ **Only Admins can add Quotes to other Users!**");
                 }
             }
@@ -87,7 +87,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

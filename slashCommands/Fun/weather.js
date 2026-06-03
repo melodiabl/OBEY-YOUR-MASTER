@@ -1,6 +1,6 @@
 const weather = require("weather-js");
 const Discord = require("discord.js");
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -23,7 +23,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "FUN")) {
             return interaction?.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -50,7 +50,7 @@ module.exports = {
             },
             function (e, result) {
                 if (e) return console.log(e.stack ? String(e.stack).grey : String(e).grey);
-                let embed = new MessageEmbed()
+                let embed = new EmbedBuilder()
                     .setColor(es.color)
                     .setFooter(client.getFooter(es))
                     .setTitle(eval(client.la[ls]["cmds"]["fun"]["weather"]["variable4"]))

@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "setup-autobackup",
@@ -23,7 +23,7 @@ module.exports = {
             ///////////////////////////////////////
             ///////////////////////////////////////
 
-            if (!message.guild.me.permissions.has(Discord.Permissions.FLAGS.ADMINISTRATOR)) {
+            if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
                 return message.reply("<:no:833101993668771842> **I am missing the ADMINISTRATOR Permission!**");
             }
             let owner = await message.guild.fetchOwner().catch(e => {
@@ -57,7 +57,7 @@ module.exports = {
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
-                let Selection = new MessageSelectMenu()
+                let Selection = new StringSelectMenuBuilder()
                     .setPlaceholder("Click me to setup the Anti Caps System!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
@@ -74,7 +74,7 @@ module.exports = {
                         })
                     );
                 //define the embed
-                let MenuEmbed = new Discord.MessageEmbed()
+                let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor(
                         "Auto-Backup System Setup",
@@ -85,11 +85,11 @@ module.exports = {
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
-                    components: [new MessageActionRow().addComponents(Selection)],
+                    components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
-                    filter: i => i?.isSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
                     time: 90000,
                 });
                 //Menu Collections
@@ -105,7 +105,7 @@ module.exports = {
                         );
                         return message.reply({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setTitle(
                                         client.settings.get(message.guild.id, "autobackup")
                                             ? "Enabled Auto-Backups"
@@ -144,7 +144,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

@@ -1,10 +1,10 @@
-var { MessageEmbed } = require(`discord.js`);
+var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 module.exports = {
     name: "setup-reactionrole",
     category: "💪 Setup",
@@ -26,7 +26,7 @@ module.exports = {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            var rembed = new MessageEmbed()
+            var rembed = new EmbedBuilder()
                 .setColor(es.color)
                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable2"]))
                 .setDescription(
@@ -69,7 +69,7 @@ module.exports = {
                     Emojimsg: "",
                     Role: "",
                 };
-                var rermbed = new MessageEmbed()
+                var rermbed = new EmbedBuilder()
                     .setColor(es.color)
                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable3"]))
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable4"]));
@@ -126,7 +126,7 @@ module.exports = {
 
                 function ask_role() {
                     counters++;
-                    var rermbed = new MessageEmbed()
+                    var rermbed = new EmbedBuilder()
                         .setColor(es.color)
                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable8"]));
                     message.reply({ embeds: [rermbed] }).then(msg => {
@@ -174,7 +174,7 @@ module.exports = {
                 message
                     .reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable12"]))
@@ -207,7 +207,7 @@ module.exports = {
                                         break;
                                 }
 
-                                var thisembed = new MessageEmbed()
+                                var thisembed = new EmbedBuilder()
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable15"]))
@@ -233,7 +233,7 @@ module.exports = {
                                                 message
                                                     .reply({
                                                         embeds: [
-                                                            new MessageEmbed()
+                                                            new EmbedBuilder()
                                                                 .setColor(es.color)
                                                                 .setFooter(client.getFooter(es))
                                                                 .setTitle(
@@ -275,15 +275,13 @@ module.exports = {
                                                                             ch => ch.guild.id == message.guild.id
                                                                         )
                                                                         .first();
-                                                                    var embed = new MessageEmbed()
+                                                                    var embed = new EmbedBuilder()
                                                                         .setColor(es.color)
                                                                         .setTitle(title.substring(0, 256))
-                                                                        .setFooter(
-                                                                            message.guild.name,
-                                                                            message.guild.iconURL({
-                                                                                dynamic: true,
-                                                                            })
-                                                                        );
+                                                                        .setFooter({ text: message.guild.name,
+                                                                            iconURL: message.guild.iconURL({
+                                                                                dynamic: true })
+                                                                        });
                                                                     var buffer = "";
                                                                     for (var i = 0; i < objet.Parameters.length; i++) {
                                                                         try {
@@ -366,7 +364,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

@@ -1,8 +1,8 @@
-const { MessageEmbed, Permissions } = require("discord.js");
+const { EmbedBuilder, Permissions } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { MessageButton, MessageActionRow } = require("discord.js"); // using discord.js but edited!
+const { ButtonBuilder, ActionRowBuilder } = require("discord.js"); // using discord.js but edited!
 module.exports = {
     name: "embedbuilder",
     category: "🚫 Administration",
@@ -37,63 +37,63 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
             )
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable1"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable2"])),
                     ],
                 });
-            let embedToBuild = new MessageEmbed().setAuthor(
+            let embedToBuild = new EmbedBuilder().setAuthor(
                 message.member.user.tag,
                 message.member.user.avatarURL({ dynamic: true })
             );
 
-            let title = new MessageButton().setLabel("Title").setStyle("PRIMARY").setCustomId(`buildEmbed_builder_title`);
+            let title = new ButtonBuilder().setLabel("Title").setStyle(Discord.ButtonStyle.Primary).setCustomId(`buildEmbed_builder_title`);
 
-            let description = new MessageButton()
+            let description = new ButtonBuilder()
                 .setLabel("Description")
-                .setStyle("PRIMARY")
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_desc`);
 
-            let footer = new MessageButton().setLabel("Footer").setStyle("PRIMARY").setCustomId(`buildEmbed_builder_footer`);
+            let footer = new ButtonBuilder().setLabel("Footer").setStyle(Discord.ButtonStyle.Primary).setCustomId(`buildEmbed_builder_footer`);
 
-            let footerImage = new MessageButton()
+            let footerImage = new ButtonBuilder()
                 .setLabel("Footer Image")
-                .setStyle("PRIMARY")
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_footerimg`);
 
-            let image = new MessageButton().setLabel("Image").setStyle("PRIMARY").setCustomId(`buildEmbed_builder_img`);
+            let image = new ButtonBuilder().setLabel("Image").setStyle(Discord.ButtonStyle.Primary).setCustomId(`buildEmbed_builder_img`);
 
-            let thumbnail = new MessageButton()
+            let thumbnail = new ButtonBuilder()
                 .setLabel("Thumbnail")
-                .setStyle("PRIMARY")
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_thumb`);
 
-            let timestamp = new MessageButton()
+            let timestamp = new ButtonBuilder()
                 .setLabel("Timestamp")
-                .setStyle("PRIMARY")
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_timestamp`);
 
-            let color = new MessageButton().setLabel("Color").setStyle("PRIMARY").setCustomId(`buildEmbed_builder_color`);
+            let color = new ButtonBuilder().setLabel("Color").setStyle(Discord.ButtonStyle.Primary).setCustomId(`buildEmbed_builder_color`);
 
-            let save = new MessageButton().setLabel("📨 Send").setStyle("DANGER").setCustomId(`buildEmbed_save`);
+            let save = new ButtonBuilder().setLabel("📨 Send").setStyle(Discord.ButtonStyle.Danger).setCustomId(`buildEmbed_save`);
 
-            let cancel = new MessageButton().setLabel("❌ Cancel").setStyle("DANGER").setCustomId(`buildEmbed_cancel`);
+            let cancel = new ButtonBuilder().setLabel("❌ Cancel").setStyle(Discord.ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`);
 
-            let channel = new MessageButton()
+            let channel = new ButtonBuilder()
                 .setLabel("💬 Select Channel")
-                .setStyle("PRIMARY")
+                .setStyle(Discord.ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_channel`);
 
-            let buttonRow = new MessageActionRow().addComponents([title, description]);
-            let buttonRow1 = new MessageActionRow().addComponents([footer, color, timestamp]);
-            let buttonRow2 = new MessageActionRow().addComponents([footerImage, image, thumbnail]);
-            let buttonRow3 = new MessageActionRow().addComponents([save, cancel, channel]);
+            let buttonRow = new ActionRowBuilder().addComponents([title, description]);
+            let buttonRow1 = new ActionRowBuilder().addComponents([footer, color, timestamp]);
+            let buttonRow2 = new ActionRowBuilder().addComponents([footerImage, image, thumbnail]);
+            let buttonRow3 = new ActionRowBuilder().addComponents([save, cancel, channel]);
 
             let msg = await message.reply({
                 embeds: [embedToBuild],
@@ -137,8 +137,8 @@ module.exports = {
                     button?.message.edit({
                         content: `<a:Loading:833101350623117342> **Please send me Your Input now!**`,
                         components: [
-                            new MessageActionRow().addComponents([
-                                new MessageButton().setLabel("Cancel").setStyle("DANGER").setCustomId(`buildEmbed_cancel`),
+                            new ActionRowBuilder().addComponents([
+                                new ButtonBuilder().setLabel("Cancel").setStyle(Discord.ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`),
                             ]),
                         ],
                     });
@@ -161,7 +161,7 @@ module.exports = {
                     if (builderId == "channel") channel2send = finalInput.mentions.channels.first() || false;
                     if (builderId == "title") embedToBuild.setTitle(finalInput.content);
                     if (builderId == "desc") embedToBuild.setDescription(finalInput.content);
-                    if (builderId == "footer") embedToBuild.setFooter(finalInput.content);
+                    if (builderId == "footer") embedToBuild.setFooter({ text: finalInput.content });
 
                     if (builderId == "color") {
                         if (!/^#[0-9A-F]{6}$/i?.test(finalInput.content)) embedToBuild.setColor("RANDOM");
@@ -169,11 +169,9 @@ module.exports = {
                     }
                     if (builderId == "footerimg") {
                         if (ifUrl.test(finalInput)) {
-                            embedToBuild.setFooter(
-                                client.getFooter(
+                            embedToBuild.setFooter(client.getFooter(
                                     `${embedToBuild.footer ? embedToBuild.footer.text : "\u200B"}`,
-                                    finalInput.content
-                                )
+                                    finalInput.content)
                             );
                         }
                     }
@@ -237,7 +235,7 @@ module.exports = {
                     if (!channel2) return client.settings.set(message.guild.id, "no", `adminlog`);
                     channel2.send({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -262,8 +260,7 @@ module.exports = {
                                     eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                 )
                                 .setTimestamp()
-                                .setFooter(
-                                    client.getFooter(
+                                .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL({ dynamic: true })
                                     )
@@ -278,7 +275,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

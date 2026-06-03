@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const fetch = require("node-fetch");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -56,17 +56,17 @@ class GuessThePokemon {
 
         if (!this.options.slash_command)
             thinkMsg = await this.message.channel.send({
-                embeds: [new MessageEmbed().setDescription(this.options.thinkMessage).setColor(this.options.embed.color)],
+                embeds: [new EmbedBuilder().setDescription(this.options.thinkMessage).setColor(this.options.embed.color)],
             });
 
         const { data } = await fetch("https://api.aniketdev.cf/pokemon").then(res => res.json());
-        const attachment = new MessageAttachment(data.hiddenImage, "question-image.png");
+        const attachment = new AttachmentBuilder(data.hiddenImage, "question-image.png");
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setImage("attachment://question-image.png")
-            .setFooter(this.options.embed.footer)
+            .setFooter({ text: this.options.embed.footer })
             .addField("Type(s)", data.types.join(", ") || "No data.")
             .addField("Abilities", data.abilities.join(", ") || "No data.")
             .setAuthor(this.message.author.tag, this.message.author.displayAvatarURL({ dynamic: true }));
@@ -91,9 +91,9 @@ class GuessThePokemon {
             }
 
             if (message.content.toLowerCase() === data.name.toLowerCase()) {
-                const attachment2 = new MessageAttachment(data.image, "answer-image.png");
+                const attachment2 = new AttachmentBuilder(data.image, "answer-image.png");
 
-                const editEmbed = new MessageEmbed()
+                const editEmbed = new EmbedBuilder()
                     .setColor(this.options.embed.color)
                     .setTitle(this.options.embed.title)
                     .setImage("attachment://answer-image.png")
@@ -137,7 +137,7 @@ module.exports = {
         let ls = client.settings.get(message.guild.id, "language");
         if (!client.settings.get(message.guild.id, "MINIGAMES")) {
             return message.reply(
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setColor(es.wrongcolor)
                     .setFooter(client.getFooter(es))
                     .setTitle(client.la[ls].common.disabled.title)

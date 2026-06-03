@@ -2,7 +2,7 @@
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-var { MessageEmbed, MessageAttachment, User, Permissions } = require(`discord.js`);
+var { EmbedBuilder, AttachmentBuilder, User, Permissions } = require(`discord.js`);
 const { databasing } = require(`./functions`);
 const fetch = require("node-fetch");
 module.exports = client => {
@@ -17,7 +17,7 @@ module.exports = client => {
             if (!chatbot || chatbot == "no") return;
             if (message.channel.id == chatbot) {
                 if (message.attachments.size > 0) {
-                    const attachment = new MessageAttachment(
+                    const attachment = new AttachmentBuilder(
                         "https://cdn.discordapp.com/attachments/816645188461264896/826736269509525524/I_CANNOT_READ_FILES.png"
                     );
                     return message.channel.send({ files: [attachment] });
@@ -118,8 +118,8 @@ module.exports = client => {
                             if (!message.deleted) {
                                 if (
                                     message.channel
-                                        .permissionsFor(message.channel.guild.me)
-                                        .has(Permissions.FLAGS.MANAGE_MESSAGES)
+                                        .permissionsFor(message.channel.guild.members.me)
+                                        .has(PermissionFlagsBits.MANAGE_MESSAGES)
                                 ) {
                                     message.delete().catch(() => {
                                         //Try a second time

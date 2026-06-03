@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 
@@ -1205,7 +1205,7 @@ class HangmanGame {
         this.guesssed = [];
         this.wrongs = 0;
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setColor("#2f3136")
             .setAuthor("Hangman Minigame", "https://imgur.com/0guxxtY.png", "https://discord.gg/milrato")
             .setDescription(this.getDescription())
@@ -1250,7 +1250,7 @@ class HangmanGame {
         }
 
         if (this.inGame) {
-            const editEmbed = new Discord.MessageEmbed()
+            const editEmbed = new Discord.EmbedBuilder()
                 .setColor("#2f3136")
                 .setTitle(eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variable2"]))
                 .setDescription(this.getDescription())
@@ -1267,7 +1267,7 @@ class HangmanGame {
         let es = client.settings.get(this.gameEmbed.guild.id, "embed");
         let ls = client.settings.get(this.gameEmbed.guild.id, "language");
         this.inGame = false;
-        const editEmbed = new Discord.MessageEmbed()
+        const editEmbed = new Discord.EmbedBuilder()
             .setColor("RED")
             .setAuthor("Hangman Minigame", "https://imgur.com/0guxxtY.png", "https://discord.gg/milrato")
             .setDescription(win ? "**Chat Wins!**" : "**Chat losses**")
@@ -1331,7 +1331,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "MINIGAMES")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)

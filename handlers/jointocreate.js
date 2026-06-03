@@ -1,4 +1,4 @@
-const { MessageEmbed, Collection, Permissions } = require("discord.js");
+const { EmbedBuilder, Collection, Permissions } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const kernelsettings = require(`${process.cwd()}/botconfig/settings.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -85,7 +85,7 @@ module.exports = function (client) {
                     let randommemberid = members[Math.floor(Math.random() * members.length)];
                     //set the new owner + perms
                     client.jointocreatemap.set(`owner_${vc.guild.id}_${vc.id}`, randommemberid);
-                    if (vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                    if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                         vc.permissionOverwrites
                             .edit(randommemberid, {
                                 CONNECT: true,
@@ -104,7 +104,7 @@ module.exports = function (client) {
                             .then(user => {
                                 user.send({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(oldState.member.displayAvatarURL({ dynamic: true }))
                                             .setFooter(client.getFooter(es))
@@ -172,7 +172,7 @@ module.exports = function (client) {
                         let randommemberid = members[Math.floor(Math.random() * members.length)];
                         //set the new owner + perms
                         client.jointocreatemap.set(`owner_${vc.guild.id}_${vc.id}`, randommemberid);
-                        if (vc.permissionsFor(vc.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)) {
+                        if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
                             vc.permissionOverwrites
                                 .edit(randommemberid, {
                                     CONNECT: true,
@@ -191,7 +191,7 @@ module.exports = function (client) {
                                 .then(user => {
                                     user.send({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(oldState.member.displayAvatarURL({ dynamic: true }))
                                                 .setFooter(client.getFooter(es))

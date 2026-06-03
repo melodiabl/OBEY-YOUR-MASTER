@@ -1,4 +1,4 @@
-var { MessageEmbed } = require("discord.js");
+var { EmbedBuilder } = require("discord.js");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var { format, delay, arrayMove } = require("../functions");
@@ -7,7 +7,7 @@ module.exports = playtop;
 async function playtop(client, message, args, type, slashCommand) {
     let ls = client.settings.get(message.guild.id, "language");
     const search = args.join(" ");
-    var player = client.manager.players.get(message.guild.id);
+    var player = client.shoukaku?.players?.get(message.guild.id) ?? null;
     //if no node, connect it
     if (player && player.node && !player.node.connected) await player.node.connect();
     //if no player create it
@@ -58,7 +58,7 @@ async function playtop(client, message, args, type, slashCommand) {
                     .reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(ee.wrongcolor)
                                 .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                                 .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playtop"]["variable1"])),
@@ -68,7 +68,7 @@ async function playtop(client, message, args, type, slashCommand) {
             return message
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                             .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playtop"]["variable1"])),
@@ -119,7 +119,7 @@ async function playtop(client, message, args, type, slashCommand) {
             for (const track of oldQueue) player.queue.add(track);
         }
         //send track information
-        var playembed = new MessageEmbed()
+        var playembed = new EmbedBuilder()
             .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playtop"]["variable2"]))
             .setColor(ee.color)
             .setThumbnail(`https://img.youtube.com/vi/${res.tracks[0].identifier}/mqdefault.jpg`)
@@ -160,7 +160,7 @@ async function playtop(client, message, args, type, slashCommand) {
                     .reply({
                         ephemeral: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(ee.wrongcolor)
                                 .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                                 .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playtop"]["variable3"])),
@@ -170,7 +170,7 @@ async function playtop(client, message, args, type, slashCommand) {
             return message
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setTitle(String("❌ Error | Found nothing for: **`" + search).substring(0, 256 - 3) + "`**")
                             .setDescription(eval(client.la[ls]["handlers"]["playermanagers"]["playtop"]["variable3"])),
@@ -208,7 +208,7 @@ async function playtop(client, message, args, type, slashCommand) {
             for (const track of oldQueue) player.queue.add(track);
         }
         var time = 0;
-        let playlistembed = new Discord.MessageEmbed()
+        let playlistembed = new Discord.EmbedBuilder()
             .setAuthor(
                 `Playlist added to Queue`,
                 message.author.displayAvatarURL({
@@ -236,7 +236,7 @@ async function playtop(client, message, args, type, slashCommand) {
             )
             .addField("Enqueued", `\`${res.tracks.length}\``, true);
         //if bot allowed to send embed, do it otherwise pure txt msg
-        if (message.guild.me.permissionsIn(message.channel).has("EMBED_LINKS")) {
+        if (message.guild.members.me.permissionsIn(message.channel).has("EMBED_LINKS")) {
             if (slashCommand) return slashCommand.reply({ ephemeral: true, embeds: [playlistembed] }).catch(() => {});
             message.reply({ embeds: [playlistembed] }).catch(() => {});
         } else {

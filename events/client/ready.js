@@ -43,10 +43,14 @@ module.exports = client => {
         });
 
         change_status(client);
-        //loop through the status per each 10 minutes
-        setInterval(() => {
-            change_status(client);
-        }, 90 * 1000);
+        setInterval(() => { change_status(client); }, 90 * 1000);
+
+        // Auto-deploy slash commands globales al iniciar
+        if (client.allCommands && client.allCommands.length > 0) {
+            client.application.commands.set(client.allCommands)
+                .then(d => console.log(`[Slash] ${d.size} slash commands desplegados globalmente.`.cyan))
+                .catch(e => console.warn('[Slash] No se pudo desplegar:', e.message))
+        }
     } catch (e) {
         console.log(String(e.stack).grey.bgRed);
     }

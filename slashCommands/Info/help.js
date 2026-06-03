@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton, MessageActionRow, Interaction } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, Interaction } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -76,7 +76,7 @@ module.exports = {
                 if (cat) {
                     var category = cat;
                     const items = client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``);
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -87,10 +87,7 @@ module.exports = {
                         )
                         .setThumbnail(client.user.displayAvatarURL())
                         .setTitle(eval(client.la[ls]["cmds"]["info"]["help"]["variable2"]))
-                        .setFooter(
-                            handlemsg(client.la[ls].cmds.info.help.nocustom, { prefix: prefix }),
-                            client.user.displayAvatarURL()
-                        );
+                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.help.nocustom, { prefix: prefix }), iconURL: client.user.displayAvatarURL() });
 
                     if (category.toLowerCase().includes("custom")) {
                         const cmd =
@@ -106,7 +103,7 @@ module.exports = {
                 }
             }
             if (CommandStr) {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -125,7 +122,7 @@ module.exports = {
                     else cuc = cuc.map(cmd => `\`${cmd.name}\``);
                     const items = cuc;
 
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -137,7 +134,7 @@ module.exports = {
                         .setThumbnail(client.user.displayAvatarURL())
                         .setTitle(eval(client.la[ls]["cmds"]["info"]["help"]["variable1"]))
                         .setDescription(items.join(", "))
-                        .setFooter(handlemsg(client.la[ls].cmds.info.help.nocustom), client.user.displayAvatarURL());
+                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.help.nocustom), iconURL: client.user.displayAvatarURL() });
 
                     allembeds.push(embed);
                 }
@@ -156,7 +153,7 @@ module.exports = {
                 } else if (!cmd && cat) {
                     var category = cat;
                     const items = client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``);
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -167,10 +164,7 @@ module.exports = {
                         )
                         .setThumbnail(client.user.displayAvatarURL())
                         .setTitle(eval(client.la[ls]["cmds"]["info"]["help"]["variable2"]))
-                        .setFooter(
-                            handlemsg(client.la[ls].cmds.info.help.nocustom, { prefix: prefix }),
-                            client.user.displayAvatarURL()
-                        );
+                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.help.nocustom, { prefix: prefix }), iconURL: client.user.displayAvatarURL() });
 
                     if (category.toLowerCase().includes("custom")) {
                         const cmd =
@@ -210,12 +204,11 @@ module.exports = {
                             handlemsg(client.la[ls].cmds.info.help.detail.usage),
                             `\`\`\`${prefix}${cmd.usage}\`\`\``
                         );
-                        embed.setFooter(
-                            handlemsg(client.la[ls].cmds.info.help.detail.syntax),
-                            es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                        embed.setFooter({ text: handlemsg(client.la[ls].cmds.info.help.detail.syntax),
+                            iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                 ? es.footericon
                                 : client.user.displayAvatarURL()
-                        );
+                        });
                     }
                     allembeds.push(embed);
                 }

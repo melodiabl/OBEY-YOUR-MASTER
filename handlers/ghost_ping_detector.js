@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 module.exports = async client => {
     let messageIds = new Map();
     client.on("messageCreate", message => {
@@ -72,13 +72,12 @@ module.exports = async client => {
                 let warnings = warnData.filter(v => v.guild == message.guild.id);
                 message.channel.send({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setAuthor(
                                 client.getAuthor(message.author.tag, message.member.displayAvatarURL({ dynamic: true }))
                             )
-                            .setColor("ORANGE")
-                            .setFooter(
-                                client.getFooter(
+                            .setColor("#E67E22")
+                            .setFooter(client.getFooter(
                                     "ID: " + message.author.id,
                                     message.author.displayAvatarURL({ dynamic: true })
                                 )
@@ -93,7 +92,7 @@ module.exports = async client => {
                     if (!message.member.kickable)
                         message.channel.send({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable8"])),
@@ -103,7 +102,7 @@ module.exports = async client => {
                         try {
                             message.member.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -121,7 +120,7 @@ module.exports = async client => {
                         } catch {
                             return message.channel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable11"]))
@@ -137,7 +136,7 @@ module.exports = async client => {
                                 .then(() => {
                                     message.channel.send({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -162,7 +161,7 @@ module.exports = async client => {
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                             message.channel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(client.la[ls].common.erroroccur)
@@ -176,7 +175,7 @@ module.exports = async client => {
                     if (!message.member.bannable)
                         message.channel.send({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable16"])),
@@ -186,7 +185,7 @@ module.exports = async client => {
                         try {
                             message.member.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -203,7 +202,7 @@ module.exports = async client => {
                         } catch {
                             message.channel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable18"]))
@@ -219,7 +218,7 @@ module.exports = async client => {
                                 .then(() => {
                                     message.channel.send({
                                         embeds: [
-                                            new MessageEmbed()
+                                            new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -244,7 +243,7 @@ module.exports = async client => {
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                             message.channel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable22"]))
@@ -268,14 +267,13 @@ module.exports = async client => {
             channel
                 .send({
                     embeds: [
-                        new MessageEmbed()
-                            .setFooter(
-                                client.getFooter(
+                        new EmbedBuilder()
+                            .setFooter(client.getFooter(
                                     "ID:" + message.author.id,
                                     message.member.displayAvatarURL({ dynamic: true })
                                 )
                             )
-                            .setColor("ORANGE")
+                            .setColor("#E67E22")
                             .setTitle("GHOST-PING-DETECTED")
                             .setDescription(
                                 `**Message-Author:**\n> ${message.author} | ${message.author.tag} (\`${message.author.id}\`)\n**Channel:**\n> ${message.channel} | ${message.channel.name} (\`${message.channel.id}\`)\n**Time-for-Deletion:**\n> \`${Math.floor((Date.now() - messageIds.get(message.id)) / 1000)} Seconds\`\n\n**[${message.mentions.users.size}] Ping${message.mentions.users.size == 1 ? "" : "s"}:**\n> ${message.mentions.users.map(p => `${p}`).join(", ")}`.substring(

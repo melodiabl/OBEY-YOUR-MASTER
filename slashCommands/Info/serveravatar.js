@@ -24,7 +24,7 @@ module.exports = {
             interaction?.reply({
                 ephemeral: true,
                 embeds: [
-                    new Discord.MessageEmbed()
+                    new Discord.EmbedBuilder()
                         .setAuthor(
                             handlemsg(client.la[ls].cmds.info.serveravatar.author, { servername: guild.name }),
                             guild.iconURL({ dynamic: true }),

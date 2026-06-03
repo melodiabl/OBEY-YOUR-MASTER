@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -18,7 +18,7 @@ module.exports = {
             if (message.member.guild.ownerId !== message.author.id)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable1"])),
@@ -28,7 +28,7 @@ module.exports = {
             let themsg = message
                 .reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -74,7 +74,7 @@ module.exports = {
                                 //send the success message
                                 return message.reply({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -97,7 +97,7 @@ module.exports = {
                             console.log(String(e.stack).grey.yellow);
                             return message.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable6"])),
@@ -109,7 +109,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

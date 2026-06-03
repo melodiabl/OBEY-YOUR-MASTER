@@ -5,44 +5,44 @@ const config = require(`../botconfig/config.json`);
 const Discord = require(`discord.js`);
 const antimap = new Map();
 const cooldown = new Set();
-const { MessageButton, MessageActionRow, Permissions } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, Permissions } = require("discord.js");
 
 const Buttons = {
-    acceptbutton: new MessageButton().setStyle("SUCCESS").setEmoji(`✅`).setCustomId(`Apply_accept`).setLabel(`Accept`),
-    declinebutton: new MessageButton().setStyle("DANGER").setEmoji(`❌`).setCustomId(`Apply_deny`).setLabel(`Decline`),
-    ticketbutton: new MessageButton()
-        .setStyle("SECONDARY")
+    acceptbutton: new ButtonBuilder().setStyle(Discord.ButtonStyle.Success).setEmoji(`✅`).setCustomId(`Apply_accept`).setLabel(`Accept`),
+    declinebutton: new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setEmoji(`❌`).setCustomId(`Apply_deny`).setLabel(`Decline`),
+    ticketbutton: new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Secondary)
         .setEmoji(`🎟️`)
         .setCustomId(`Apply_ticket`)
         .setLabel(`Ask Question`),
-    emoji1button: new MessageButton().setStyle("PRIMARY").setEmoji(`1️⃣`).setCustomId(`Apply_1`),
-    emoji2button: new MessageButton().setStyle("PRIMARY").setEmoji(`2️⃣`).setCustomId(`Apply_2`),
-    emoji3button: new MessageButton().setStyle("PRIMARY").setEmoji(`3️⃣`).setCustomId(`Apply_3`),
-    emoji4button: new MessageButton().setStyle("PRIMARY").setEmoji(`4️⃣`).setCustomId(`Apply_4`),
-    emoji5button: new MessageButton().setStyle("PRIMARY").setEmoji(`5️⃣`).setCustomId(`Apply_5`),
-    acceptbutton_d: new MessageButton()
-        .setStyle("SUCCESS")
+    emoji1button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`1️⃣`).setCustomId(`Apply_1`),
+    emoji2button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`2️⃣`).setCustomId(`Apply_2`),
+    emoji3button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`3️⃣`).setCustomId(`Apply_3`),
+    emoji4button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`4️⃣`).setCustomId(`Apply_4`),
+    emoji5button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`5️⃣`).setCustomId(`Apply_5`),
+    acceptbutton_d: new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Success)
         .setEmoji(`✅`)
         .setCustomId(`Apply_accept`)
         .setLabel(`Accept`)
         .setDisabled(true),
-    declinebutton_d: new MessageButton()
-        .setStyle("DANGER")
+    declinebutton_d: new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Danger)
         .setEmoji(`❌`)
         .setCustomId(`Apply_deny`)
         .setLabel(`Decline`)
         .setDisabled(true),
-    ticketbutton_d: new MessageButton()
-        .setStyle("SECONDARY")
+    ticketbutton_d: new ButtonBuilder()
+        .setStyle(Discord.ButtonStyle.Secondary)
         .setEmoji(`🎟️`)
         .setCustomId(`Apply_ticket`)
         .setLabel(`Ask Question`)
         .setDisabled(true),
-    emoji1button_d: new MessageButton().setStyle("PRIMARY").setEmoji(`1️⃣`).setCustomId(`Apply_1`).setDisabled(true),
-    emoji2button_d: new MessageButton().setStyle("PRIMARY").setEmoji(`2️⃣`).setCustomId(`Apply_2`).setDisabled(true),
-    emoji3button_d: new MessageButton().setStyle("PRIMARY").setEmoji(`3️⃣`).setCustomId(`Apply_3`).setDisabled(true),
-    emoji4button_d: new MessageButton().setStyle("PRIMARY").setEmoji(`4️⃣`).setCustomId(`Apply_4`).setDisabled(true),
-    emoji5button_d: new MessageButton().setStyle("PRIMARY").setEmoji(`5️⃣`).setCustomId(`Apply_5`).setDisabled(true),
+    emoji1button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`1️⃣`).setCustomId(`Apply_1`).setDisabled(true),
+    emoji2button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`2️⃣`).setCustomId(`Apply_2`).setDisabled(true),
+    emoji3button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`3️⃣`).setCustomId(`Apply_3`).setDisabled(true),
+    emoji4button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`4️⃣`).setCustomId(`Apply_4`).setDisabled(true),
+    emoji5button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`5️⃣`).setCustomId(`Apply_5`).setDisabled(true),
 };
 //Start the module
 module.exports = client => {
@@ -82,12 +82,12 @@ module.exports = client => {
         let ticketsetupapply = `ticket-setup-apply-${index}`;
         let pre = `apply${index}`;
         let apply_db = client.apply;
-        let buttonRow1 = new MessageActionRow().addComponents([
+        let buttonRow1 = new ActionRowBuilder().addComponents([
             Buttons.acceptbutton,
             Buttons.declinebutton,
             Buttons.ticketbutton,
         ]);
-        let buttonRow2 = new MessageActionRow().addComponents([
+        let buttonRow2 = new ActionRowBuilder().addComponents([
             Buttons.emoji1button,
             Buttons.emoji2button,
             Buttons.emoji3button,
@@ -102,7 +102,7 @@ module.exports = client => {
             if (cooldown.has(user.id)) {
                 return interaction?.reply({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable1`]))
@@ -131,7 +131,7 @@ module.exports = client => {
                     ?.reply({
                         content: `${user}`,
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable5`]))
@@ -162,7 +162,7 @@ module.exports = client => {
                 //send the user the first question
                 user.send({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -215,7 +215,7 @@ module.exports = client => {
                                 return user
                                     .send({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -235,7 +235,7 @@ module.exports = client => {
                                         message
                                             .reply({
                                                 embeds: [
-                                                    new Discord.MessageEmbed()
+                                                    new Discord.EmbedBuilder()
                                                         .setColor(es.wrongcolor)
                                                         .setFooter(client.getFooter(es))
                                                         .setTitle(
@@ -262,7 +262,7 @@ module.exports = client => {
                             ?.editReply({
                                 content: `${user}`,
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable10`]))
@@ -286,7 +286,7 @@ module.exports = client => {
                 if (apply_db.get(guild.id, `${pre}.last_verify`)) {
                     user.send({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -311,7 +311,7 @@ module.exports = client => {
                                 let reaction = collected.first();
                                 if (reaction.emoji?.name === `✅`) {
                                     antimap.delete(originaluser.id);
-                                    var embed = new Discord.MessageEmbed()
+                                    var embed = new Discord.EmbedBuilder()
                                         .setFooter(client.getFooter(es))
                                         .setColor(es.color)
                                         .setThumbnail(
@@ -324,12 +324,9 @@ module.exports = client => {
                                         )
                                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable13`])) //${user.tag} -
                                         .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable14`]))
-                                        .setFooter(
-                                            originaluser.id,
-                                            originaluser.displayAvatarURL({
-                                                dynamic: true,
-                                            })
-                                        )
+                                        .setFooter({ text: originaluser.id,
+                                            iconURL: originaluser.displayAvatarURL({ dynamic: true })
+                                        })
                                         .setThumbnail(
                                             originaluser.displayAvatarURL({
                                                 dynamic: true,
@@ -361,7 +358,7 @@ module.exports = client => {
                                         //react with each emoji of all reactions
                                     });
                                     // `Producing Code` (May take some time)
-                                    const finished_embed = new Discord.MessageEmbed()
+                                    const finished_embed = new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -412,7 +409,7 @@ module.exports = client => {
                                     antimap.delete(originaluser.id);
                                     originaluser.send({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor(es.wrongcolor)
                                                 .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable18`]))
                                                 .setFooter(client.getFooter(es)),
@@ -425,7 +422,7 @@ module.exports = client => {
                                 antimap.delete(originaluser.id);
                                 originaluser.send({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setColor(es.wrongcolor)
                                             .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable19`]))
                                             .setFooter(client.getFooter(es)),
@@ -435,7 +432,7 @@ module.exports = client => {
                     });
                 } else {
                     antimap.delete(user.id);
-                    var embed = new Discord.MessageEmbed()
+                    var embed = new Discord.EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(es.color)
                         .setThumbnail(
@@ -447,12 +444,9 @@ module.exports = client => {
                         )
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable20`])) //${user.tag} -
                         .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable21`]))
-                        .setFooter(
-                            originaluser.id,
-                            originaluser.displayAvatarURL({
-                                dynamic: true,
-                            })
-                        )
+                        .setFooter({ text: originaluser.id,
+                            iconURL: originaluser.displayAvatarURL({ dynamic: true })
+                        })
                         .setTimestamp();
 
                     //for each question add a field
@@ -476,7 +470,7 @@ module.exports = client => {
                     //react with each emoji of all reactions
 
                     // `Producing Code` (May take some time)
-                    const finished_embed = new Discord.MessageEmbed()
+                    const finished_embed = new Discord.EmbedBuilder()
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -541,7 +535,7 @@ module.exports = client => {
             message
                 .reply({
                     embeds: [
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable26`]))
@@ -612,7 +606,7 @@ module.exports = client => {
                 if (!targetMessage)
                     return interaction?.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setFooter(client.getFooter(es))
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable28`]))
@@ -628,7 +622,7 @@ module.exports = client => {
                 if (!oldEmbed)
                     return interaction?.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setFooter(client.getFooter(es))
                                 .setColor(es.wrongcolor)
                                 .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable29`]))
@@ -648,7 +642,7 @@ module.exports = client => {
                     Apply_5: `5️⃣`,
                 };
                 //create a new embed
-                const embed = new Discord.MessageEmbed()
+                const embed = new Discord.EmbedBuilder()
                     .setFooter(client.getFooter(es))
                     .setTitle(oldEmbed.title)
                     .setDescription(
@@ -669,12 +663,12 @@ module.exports = client => {
                     } catch {}
                 }
 
-                let buttonRow1_d = new MessageActionRow().addComponents([
+                let buttonRow1_d = new ActionRowBuilder().addComponents([
                     Buttons.acceptbutton_d,
                     Buttons.declinebutton_d,
                     Buttons.ticketbutton_d,
                 ]);
-                let buttonRow2_d = new MessageActionRow().addComponents([
+                let buttonRow2_d = new ActionRowBuilder().addComponents([
                     Buttons.emoji1button_d,
                     Buttons.emoji2button_d,
                     Buttons.emoji3button_d,
@@ -704,12 +698,11 @@ module.exports = client => {
                         });
 
                     //CREATE THE APPROVE MESSAGE
-                    var approve = new Discord.MessageEmbed()
+                    var approve = new Discord.EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable30`]))
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `By: ` + interaction?.user.tag,
                                 interaction?.user.displayAvatarURL({
                                     dynamic: true,
@@ -792,13 +785,12 @@ module.exports = client => {
                                 `${pre}.Apply`
                             );
                         });
-                    var deny = new Discord.MessageEmbed()
+                    var deny = new Discord.EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(es.wrongcolor)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable34`]))
                         .setDescription(apply_db.get(message.guild.id, `${pre}.deny`))
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `By: ` + interaction?.user.tag,
                                 interaction?.user.displayAvatarURL({
                                     dynamic: true,
@@ -897,7 +889,7 @@ module.exports = client => {
                                 setTimeout(() => {
                                     try {
                                         if (
-                                            channel.permissionsFor(channel.guild.me).has(Permissions.FLAGS.MANAGE_CHANNELS)
+                                            channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)
                                         ) {
                                             channel.permissionOverwrites
                                                 .edit(usert.id, {
@@ -915,44 +907,44 @@ module.exports = client => {
                                     } catch {}
                                 }, 2000);
                                 //TRY CATCH SEND CHANNEL INFORMATION
-                                let button_close = new MessageButton()
-                                    .setStyle("PRIMARY")
+                                let button_close = new ButtonBuilder()
+                                    .setStyle(Discord.ButtonStyle.Primary)
                                     .setCustomId("ticket_close")
                                     .setLabel("Close")
                                     .setEmoji(`🔒`);
-                                let button_delete = new MessageButton()
-                                    .setStyle("SECONDARY")
+                                let button_delete = new ButtonBuilder()
+                                    .setStyle(Discord.ButtonStyle.Secondary)
                                     .setCustomId("ticket_delete")
                                     .setLabel(`Delete`)
                                     .setEmoji(`🗑️`);
-                                let button_transcript = new MessageButton()
-                                    .setStyle("PRIMARY")
+                                let button_transcript = new ButtonBuilder()
+                                    .setStyle(Discord.ButtonStyle.Primary)
                                     .setCustomId("ticket_transcript")
                                     .setLabel(`Transcript`)
                                     .setEmoji(`📑`);
-                                let button_user = new MessageButton()
-                                    .setStyle("SUCCESS")
+                                let button_user = new ButtonBuilder()
+                                    .setStyle(Discord.ButtonStyle.Success)
                                     .setCustomId("ticket_user")
                                     .setLabel(`Managee Users`)
                                     .setEmoji(`👤`);
-                                let button_role = new MessageButton()
-                                    .setStyle("SUCCESS")
+                                let button_role = new ButtonBuilder()
+                                    .setStyle(Discord.ButtonStyle.Success)
                                     .setCustomId("ticket_role")
                                     .setLabel(`Managee Roles`)
                                     .setEmoji(`📌`);
-                                let buttonRow1 = new MessageActionRow().addComponents([
+                                let buttonRow1 = new ActionRowBuilder().addComponents([
                                     button_close,
                                     button_delete,
                                     button_transcript,
                                 ]);
-                                let buttonRow2 = new MessageActionRow().addComponents([button_user, button_role]);
+                                let buttonRow2 = new ActionRowBuilder().addComponents([button_user, button_role]);
                                 const allbuttons = [buttonRow1, buttonRow2];
                                 try {
                                     if (client.setups.get(`TICKETS`, applytickets).includes(usert.id)) {
                                         channel.send({
                                             content: `<@${usert.id}>\nBecause he already has a TICKET for this Application System, this Channel got created!`,
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -966,8 +958,7 @@ module.exports = client => {
                                                     .setTitle(
                                                         eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable36`])
                                                     )
-                                                    .setFooter(
-                                                        client.getFooter(
+                                                    .setFooter(client.getFooter(
                                                             `Just Delete this channel, if not needed there is no delete/close command!`,
                                                             message.guild.iconURL({
                                                                 dynamic: true,
@@ -1000,7 +991,7 @@ module.exports = client => {
                                         channel.send({
                                             content: `<@${usert.id}>`,
                                             embeds: [
-                                                new Discord.MessageEmbed()
+                                                new Discord.EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setThumbnail(
                                                         es.thumb
@@ -1014,8 +1005,7 @@ module.exports = client => {
                                                     .setTitle(
                                                         eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable37`])
                                                     )
-                                                    .setFooter(
-                                                        client.getFooter(
+                                                    .setFooter(client.getFooter(
                                                             `To close/manage this ticket react with the buttons
 You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                                                             message.guild.iconURL({
@@ -1039,11 +1029,10 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                                 //try catch send user message
                                 try {
                                     //CREATE THE APPROVE MESSAGE
-                                    var approve = new Discord.MessageEmbed()
+                                    var approve = new Discord.EmbedBuilder()
                                         .setColor(`ORANGE`)
                                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable38`]))
-                                        .setFooter(
-                                            client.getFooter(
+                                        .setFooter(client.getFooter(
                                                 `By: ` + interaction?.user.tag,
                                                 interaction?.user.displayAvatarURL({
                                                     dynamic: true,
@@ -1112,12 +1101,11 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         });
 
                     //CREATE THE APPROVE MESSAGE
-                    var approve = new Discord.MessageEmbed()
+                    var approve = new Discord.EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable41`]))
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `By: ` + interaction?.user.tag,
                                 interaction?.user.displayAvatarURL({
                                     dynamic: true,
@@ -1210,12 +1198,11 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         });
 
                     //CREATE THE APPROVE MESSAGE
-                    var approve = new Discord.MessageEmbed()
+                    var approve = new Discord.EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable44`]))
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `By: ` + interaction?.user.tag,
                                 interaction?.user.displayAvatarURL({
                                     dynamic: true,
@@ -1308,12 +1295,11 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         });
 
                     //CREATE THE APPROVE MESSAGE
-                    var approve = new Discord.MessageEmbed()
+                    var approve = new Discord.EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable47`]))
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `By: ` + interaction?.user.tag,
                                 interaction?.user.displayAvatarURL({
                                     dynamic: true,
@@ -1406,12 +1392,11 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         });
 
                     //CREATE THE APPROVE MESSAGE
-                    var approve = new Discord.MessageEmbed()
+                    var approve = new Discord.EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable50`]))
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `By: ` + interaction?.user.tag,
                                 interaction?.user.displayAvatarURL({
                                     dynamic: true,
@@ -1504,12 +1489,11 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         });
 
                     //CREATE THE APPROVE MESSAGE
-                    var approve = new Discord.MessageEmbed()
+                    var approve = new Discord.EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable53`]))
-                        .setFooter(
-                            client.getFooter(
+                        .setFooter(client.getFooter(
                                 `By: ` + interaction?.user.tag,
                                 interaction?.user.displayAvatarURL({
                                     dynamic: true,
@@ -1588,7 +1572,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                     interaction?.channel
                         .send({
                             embeds: [
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable56`]))
@@ -1606,7 +1590,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                 } else {
                     interaction?.reply({
                         embeds: [
-                            new Discord.MessageEmbed()
+                            new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable56`]))

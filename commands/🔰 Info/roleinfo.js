@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -33,7 +33,7 @@ module.exports = {
             if (!role || role == null || role.id == null || !role.id)
                 return message.reply(client.la[ls].common.rolenotfound);
             //create the EMBED
-            const embeduserinfo = new MessageEmbed();
+            const embeduserinfo = new EmbedBuilder();
             embeduserinfo.setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }));
             embeduserinfo.setAuthor(
                 client.la[ls].cmds.info.roleinfo.author + " " + role.name,
@@ -80,7 +80,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

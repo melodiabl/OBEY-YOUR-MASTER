@@ -163,7 +163,7 @@ module.exports = async client => {
                 );
 
             //structure for the embed
-            var embed = new Discord.MessageEmbed()
+            var embed = new Discord.EmbedBuilder()
                 .setColor(`BLUE`)
                 .setURL(`https://www.twitch.tv/${StreamData.user_login}`)
                 .setDescription(StreamData.title ? StreamData.title : `\u200b`)
@@ -171,7 +171,7 @@ module.exports = async client => {
                 .addField(`Playing:`, `\`${StreamData.game_name ? StreamData.game_name : `Unknown Game`}\``, true)
                 .addField(`Viewers:`, `${StreamData.viewer_count ? `\`${StreamData.viewer_count}\`` : `~~\`0\`~~`}`, true)
                 .addField(`Twitch:`, `[Watch Stream](https://www.twitch.tv/${StreamData.user_login})`, true)
-                .setFooter(client.getFooter(`Check his Stream out ;)`))
+                .setFooter(client.getFooter(`Check his Stream out ; })`))
                 .setImage(
                     `https://static-cdn.jtvnw.net/previews-ttv/live_user_${StreamData.user_login}-640x360.jpg?cacheBypass=${Math.random().toString()}`
                 )

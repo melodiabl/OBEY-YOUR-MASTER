@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`);
+const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -33,7 +33,7 @@ module.exports = {
             if (!warnmember)
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable3"]))
@@ -62,11 +62,10 @@ module.exports = {
                 )
                     return message.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(
-                                    client.getFooter(
-                                        `He/She has: ${client.userProfiles.get(warnmember.id, "warnings") ? client.userProfiles.get(warnmember.id, "warnings").length : 0} Global Warns`,
+                                .setFooter(client.getFooter(
+                                        `He/She has: ${client.userProfiles.get(warnmember.id, "warnings" ) ? client.userProfiles.get(warnmember.id, "warnings").length : 0} Global Warns`,
                                         "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/275/globe-with-meridians_1f310.png"
                                     )
                                 )
@@ -75,7 +74,7 @@ module.exports = {
                         ],
                     });
 
-                let warnembed = new MessageEmbed()
+                let warnembed = new EmbedBuilder()
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -84,9 +83,8 @@ module.exports = {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .setFooter(
-                        client.getFooter(
-                            `He/She has: ${client.userProfiles.get(warnmember.id, "warnings") ? client.userProfiles.get(warnmember.id, "warnings").length : 0} Global Warns`,
+                    .setFooter(client.getFooter(
+                            `He/She has: ${client.userProfiles.get(warnmember.id, "warnings" ) ? client.userProfiles.get(warnmember.id, "warnings").length : 0} Global Warns`,
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/275/globe-with-meridians_1f310.png"
                         )
                     )
@@ -113,7 +111,7 @@ module.exports = {
                         if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
                         channel.send({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -138,8 +136,7 @@ module.exports = {
                                         eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
                                     )
                                     .setTimestamp()
-                                    .setFooter(
-                                        client.getFooter(
+                                    .setFooter(client.getFooter(
                                             "ID: " + message.author.id,
                                             message.author.displayAvatarURL({ dynamic: true })
                                         )
@@ -154,7 +151,7 @@ module.exports = {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].common.erroroccur)
@@ -166,7 +163,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable11"]))

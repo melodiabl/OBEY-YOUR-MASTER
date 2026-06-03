@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -23,7 +23,7 @@ module.exports = {
 
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(es.color)
                         .setThumbnail(
@@ -41,7 +41,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setFooter(client.getFooter(es))
                         .setColor(es.wrongcolor)
                         .setTitle(client.la[ls].common.erroroccur)

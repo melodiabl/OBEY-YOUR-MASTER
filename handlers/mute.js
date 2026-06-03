@@ -36,7 +36,7 @@ module.exports = async client => {
                     try {
                         let es = client.settings.get(muteuser.guild, "embed");
                         if (!client.settings.has(muteuser.guild, "language"))
-                            client.settings.ensure(muteuser.guild, { language: "en" });
+                            client.settings.ensure(muteuser.guild, { language: "es" });
                         let ls = client.settings.get(muteuser.guild, "language");
                         let guild = client.guilds.cache.get(muteuser.guild);
                         let member = guild.members.cache.get(muteuser.user);
@@ -47,7 +47,7 @@ module.exports = async client => {
                             channel
                                 .send({
                                     embeds: [
-                                        new Discord.MessageEmbed()
+                                        new Discord.EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -84,13 +84,8 @@ module.exports = async client => {
     client.Jobremind = new CronJob(
         "*/5 * * * * *",
         async function () {
-            let data = client.afkDB.get("REMIND");
-            if (!data) {
-                client.afkDB.ensure("REMIND", {
-                    REMIND: [],
-                });
-                data = [];
-            }
+            client.afkDB.ensure("REMIND", { REMIND: [] });
+            let data = client.afkDB.get("REMIND") || { REMIND: [] };
             var reminds_now = data.REMIND.filter(v => {
                 return v.time - (Date.now() - v.timestamp) <= 0;
             });
@@ -114,7 +109,7 @@ module.exports = async client => {
                         member
                             .send({
                                 embeds: [
-                                    new Discord.MessageEmbed()
+                                    new Discord.EmbedBuilder()
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -140,7 +135,7 @@ module.exports = async client => {
                                 if (channel) {
                                     channel.send({
                                         embeds: [
-                                            new Discord.MessageEmbed()
+                                            new Discord.EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb

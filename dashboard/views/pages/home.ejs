@@ -1,0 +1,19 @@
+<%- include('../includes/header', { title: 'OBEY YOUR MASTER BOT - Inicio', user }) %>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1><i class="fas fa-robot"></i> OBEY YOUR MASTER BOT</h1>
+    <p>Bot de Discord multifuncional con música, moderación, sorteos y más.</p>
+    <div class="stats-row">
+      <div class="stat-card"><i class="fas fa-server"></i><span><%= bot.guilds %></span><small>Servidores</small></div>
+      <div class="stat-card"><i class="fas fa-terminal"></i><span><%= bot.commands %>+</span><small>Comandos</small></div>
+    </div>
+    <% if (!user) { %>
+      <a href="/login" class="btn-primary"><i class="fab fa-discord"></i> Conectar con Discord</a>
+    <% } else { %>
+      <a href="/dashboard" class="btn-primary"><i class="fas fa-tachometer-alt"></i> Ir al Dashboard</a>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../includes/footer') %>

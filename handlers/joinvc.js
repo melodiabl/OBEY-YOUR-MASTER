@@ -1,5 +1,5 @@
 module.exports = client => {
-    var { MessageEmbed } = require(`discord.js`);
+    var { EmbedBuilder } = require(`discord.js`);
     let thumbs = {
         join: "https://cdn.discordapp.com/emojis/866356465299488809.png?size=128",
         leave: "https://cdn.discordapp.com/emojis/866356598356049930.png?size=128",
@@ -71,10 +71,9 @@ module.exports = client => {
                             channel
                                 .send({
                                     embeds: [
-                                        new MessageEmbed()
-                                            .setColor("RED")
-                                            .setFooter(
-                                                client.getFooter(
+                                        new EmbedBuilder()
+                                            .setColor("#ED4245")
+                                            .setFooter(client.getFooter(
                                                     `ID: ${vcMember.id}`,
                                                     vcMember.displayAvatarURL({ dynamic: true })
                                                 )
@@ -94,10 +93,9 @@ module.exports = client => {
                             theMsg
                                 .edit({
                                     embeds: [
-                                        new MessageEmbed()
-                                            .setColor("RED")
-                                            .setFooter(
-                                                client.getFooter(
+                                        new EmbedBuilder()
+                                            .setColor("#ED4245")
+                                            .setFooter(client.getFooter(
                                                     `ID: ${vcMember.id}`,
                                                     vcMember.displayAvatarURL({ dynamic: true })
                                                 )
@@ -160,10 +158,9 @@ module.exports = client => {
                     channel
                         .send({
                             embeds: [
-                                new MessageEmbed()
-                                    .setColor("GREEN")
-                                    .setFooter(
-                                        client.getFooter(`ID: ${vcMember.id}`, vcMember.displayAvatarURL({ dynamic: true }))
+                                new EmbedBuilder()
+                                    .setColor("#57F287")
+                                    .setFooter(client.getFooter(`ID: ${vcMember.id}`, vcMember.displayAvatarURL({ dynamic: true }))
                                     )
                                     .setThumbnail(thumbs.join)
                                     .setDescription(

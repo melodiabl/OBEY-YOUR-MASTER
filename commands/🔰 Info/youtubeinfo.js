@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const moment = require("moment");
 const { databasing, delay, getLatestVideos, channelInfo } = require("../../handlers/functions");
-const { MessageButton, MessageActionRow } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "youtubeinfo",
@@ -18,15 +18,15 @@ module.exports = {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            let button_back = new MessageButton().setStyle("PRIMARY").setCustomId("1").setLabel("<< Back");
-            let button_forward = new MessageButton().setStyle("PRIMARY").setCustomId("3").setLabel("Forward >>");
-            const allbuttons = [new MessageActionRow().addComponents([button_back, button_forward])];
+            let button_back = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setCustomId("1").setLabel("<< Back");
+            let button_forward = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setCustomId("3").setLabel("Forward >>");
+            const allbuttons = [new ActionRowBuilder().addComponents([button_back, button_forward])];
             let url = args[0];
             if (url && typeof url === "string") {
                 if (url.match(/^https?:\/\/(www\.)?youtube\.com\/(channel\/UC[\w-]{21}[AQgw]|(c\/|user\/)?[\w-]+)$/) == null)
                     return message.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(client.la[ls].cmds.info.youtubeinfo.error1)
@@ -41,7 +41,7 @@ module.exports = {
             } else {
                 return message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(client.la[ls].cmds.info.youtubeinfo.error1)
@@ -55,7 +55,7 @@ module.exports = {
             }
             let tempmsg = await message.reply({
                 embeds: [
-                    new Discord.MessageEmbed()
+                    new Discord.EmbedBuilder()
                         .setColor(es.color)
                         .setAuthor(
                             client.la[ls].cmds.info.youtubeinfo.loading,
@@ -65,7 +65,7 @@ module.exports = {
                 ],
             });
             let Channel = await channelInfo(url);
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
                 .setTitle(Channel.name)
                 .setURL(Channel.url)
                 .setColor("RED")
@@ -73,11 +73,11 @@ module.exports = {
                 .addField(client.la[ls].cmds.info.youtubeinfo.field2, Channel.tags.map(t => `\`${t}\``).join(",  "))
                 .addField(client.la[ls].cmds.info.youtubeinfo.field3, Channel.unlisted ? "✅" : "❌", true)
                 .addField(client.la[ls].cmds.info.youtubeinfo.field4, Channel.familySafe ? "✅" : "❌", true)
-                .setFooter("ID: " + Channel.id)
+                .setFooter({ text: "ID: " + Channel.id })
                 .setImage(Channel.mobileBanner[0] ? Channel.mobileBanner[0].url : null)
                 .setDescription(String(Channel.description).substring(0, 1500));
             let Videos = await getLatestVideos(url);
-            let embed2 = new Discord.MessageEmbed()
+            let embed2 = new Discord.EmbedBuilder()
                 .setTitle(
                     handlemsg(client.la[ls].cmds.info.youtubeinfo.videosof, {
                         author: Videos[0].author,
@@ -161,7 +161,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

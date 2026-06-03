@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -19,7 +19,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "FUN")) {
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.disabled.title)
@@ -38,7 +38,7 @@ module.exports = {
                     let content = JSON.parse(response.body);
                     var title = content[0].data.children[0].data.title;
                     var joke = content[0].data.children[0].data.selftext;
-                    let jokeembed = new MessageEmbed()
+                    let jokeembed = new EmbedBuilder()
                         .setDescription(joke)
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
@@ -52,7 +52,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)

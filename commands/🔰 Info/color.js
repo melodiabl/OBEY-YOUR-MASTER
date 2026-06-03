@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -35,7 +35,7 @@ module.exports = {
                     content: client.la[ls].cmds.info.color.invalid + `\n${json.error}`,
                     codeBlock: "js",
                 });
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setTitle(eval(client.la[ls]["cmds"]["info"]["color"]["variable1"]))
                 .addField("<:arrow:832598861813776394> **Name**", "```" + json.name + "```", true)
                 .addField("<:arrow:832598861813776394> **Hex**", "```" + json.hex + "```", true)
@@ -55,7 +55,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)
