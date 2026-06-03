@@ -619,6 +619,6 @@ Este proyecto está patrocinado y recomendado por:
 ---
 
 <div align="center">
-  <sub>Hecho con ❤️ · 2026 · Basado en <a href="https://github.com/Tomato6966/Multipurpose-discord-bot">Tomato6966/Multipurpose-discord-bot</a></sub><br/>
+  <sub>Hecho con ❤️ · 2026</sub><br/>
   <sub>Patrocinado por <a href="https://www.swallox.com/">Swallox</a> & <a href="https://www.skyultraplus.com/">SkyUltraPlus</a></sub>
 </div>
