@@ -622,7 +622,8 @@ Este proyecto está patrocinado y recomendado por:
 
 ### 📢 Canales oficiales
 📦 Repositorio: https://github.com/melodiabl/OBEY-YOUR-MASTER  
-📲 WhatsApp: https://whatsapp.com/channel/0029VbBZ4YX20
+📲 WhatsApp: https://whatsapp.com/channel/0029VbBZ4YX20  
+💬 Discord (soporte): https://discord.gg/QJeavgKU
 
 <sub>© 2026 OBEY YOUR MASTER · Desarrollado por melodia · Impulsado por SkyUltraPlus y Swallox</sub>
 
