@@ -12,7 +12,7 @@ module.exports = {
     cooldown: 5,
     usage: "setup-tiktok  -->  Follow Steps",
     description: "Manage the tiktok logger, addstreamer, editstreamer, removestreamer, etc.",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -32,13 +32,13 @@ module.exports = {
                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable1"]))
                         .setColor(es.color)
                         .setDescription(
-                            `1️⃣ **== Set** Discord **Channel** for Posting new Vids
+                            `1️⃣ **== Set** Discord **Canal** for Posting new Vids
         
-2️⃣ **== Add** tiktok Channel
+2️⃣ **== Add** tiktok Canal
         
-3️⃣ **== Remove** tiktok Channel
+3️⃣ **== Remove** tiktok Canal
 
-4️⃣ **== Edit** tiktok Channel
+4️⃣ **== Edit** tiktok Canal
 
 
 
@@ -88,7 +88,7 @@ module.exports = {
                         new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable3"]))
                             .setColor(es.wrongcolor)
-                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                             .setFooter(client.getFooter(es)),
                     ],
                 });
@@ -135,7 +135,7 @@ module.exports = {
                             new Discord.EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable8"]))
                                 .setColor(es.wrongcolor)
-                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                 .setFooter(client.getFooter(es)),
                         ],
                     });
@@ -158,7 +158,7 @@ module.exports = {
                             .setDescription(
                                 `Example:
           
-https://www.tiktok.com/@milratodev`
+https://www.tiktok.com/@melodiadev`
                             )
                             .setFooter(client.getFooter(es)),
                     ],
@@ -213,7 +213,7 @@ https://www.tiktok.com/@milratodev`
                             new Discord.EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable14"]))
                                 .setColor(es.wrongcolor)
-                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                 .setFooter(client.getFooter(es)),
                         ],
                     });
@@ -239,7 +239,7 @@ https://www.tiktok.com/@milratodev`
                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable16"]))
                             .setColor(es.color)
                             .setDescription(
-                                buffer + "\n\n\n*React with the emoji regarding to the Channel you wanna remove*"
+                                buffer + "\n\n\n*React with the emoji regarding to the Canal you wanna remove*"
                             )
                             .setFooter(client.getFooter(es)),
                     ],
@@ -279,7 +279,7 @@ https://www.tiktok.com/@milratodev`
                             new Discord.EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable18"]))
                                 .setColor(es.wrongcolor)
-                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                 .setFooter(client.getFooter(es)),
                         ],
                     });
@@ -304,7 +304,7 @@ https://www.tiktok.com/@milratodev`
                         new Discord.EmbedBuilder()
                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable20"]))
                             .setColor(es.color)
-                            .setDescription(buffer + "\n\n\n*React with the emoji regarding to the Channel you wanna edit*")
+                            .setDescription(buffer + "\n\n\n*React with the emoji regarding to the Canal you wanna edit*")
                             .setFooter(client.getFooter(es)),
                     ],
                 });
@@ -337,13 +337,10 @@ https://www.tiktok.com/@milratodev`
 **CURRENT MESSAGE:**
 > ${client.tiktok.get(channel, "message")}`.substring(0, 2048)
                                     )
-                                    .addField(
-                                        "**VARIABLES**",
-                                        `
+                                    .addFields({ name: "**VARIABLES**", value: `
 > \`{url}\` ... will be replaced with the video **LINK**
 > \`{author}\` ... will be replaced with the video's **Author**
-> \`{title}\` ... will be replaced with the video's **title**`
-                                    )
+> \`{title}\` ... will be replaced with the video's **title**` })
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
@@ -362,7 +359,7 @@ https://www.tiktok.com/@milratodev`
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable22"]))
-                                                .setDescription("New Message:\n" + msg.content)
+                                                .setDescription("New Mensaje:\n" + msg.content)
                                                 .setColor(es.color)
                                                 .setFooter(client.getFooter(es)),
                                         ],
@@ -382,7 +379,7 @@ https://www.tiktok.com/@milratodev`
                                     new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable23"]))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -397,7 +394,7 @@ https://www.tiktok.com/@milratodev`
                             new Discord.EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-tiktok"]["variable24"]))
                                 .setColor(es.wrongcolor)
-                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                 .setFooter(client.getFooter(es)),
                         ],
                     });
@@ -427,10 +424,10 @@ https://www.tiktok.com/@milratodev`
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

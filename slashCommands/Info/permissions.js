@@ -8,13 +8,13 @@ const { GetUser, GetGlobalUser } = require(`${process.cwd()}/handlers/functions`
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "permissions",
-    description: "Get permissions information about a user",
+    description: "Obtén información de permisos sobre un usuario",
     options: [
         //{"Integer": { name: "ping_amount", description: "How many times do you want to ping?", required: true }}, //to use in the code: interacton.getInteger("ping_amount")
         //{"String": { name: "ping_amount", description: "How many times do you want to ping?", required: true }}, //to use in the code: interacton.getString("ping_amount")
-        { User: { name: "which_user", description: "From Which User do you want to see the Invites?", required: false } }, //to use in the code: interacton.getUser("ping_a_user")
-        //{"Channel": { name: "what_channel", description: "To Ping a Channel lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
-        //{"Role": { name: "what_role", description: "To Ping a Role lol", required: false }}, //to use in the code: interacton.getRole("what_role")
+        { User: { name: "which_user", description: "De qué usuario quieres ver los permisos?", required: false } }, //to use in the code: interacton.getUser("ping_a_user")
+        //{"Channel": { name: "what_channel", description: "To Ping a Canal lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
+        //{"Role": { name: "what_role", description: "To Ping a Rol lol", required: false }}, //to use in the code: interacton.getRole("what_role")
         //{"IntChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", 1], ["Discord Api", 2]] }, //here the second array input MUST BE A NUMBER // TO USE IN THE CODE: interacton.getInteger("what_ping")
         //{"StringChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", "botping"], ["Discord Api", "api"]] }}, //here the second array input MUST BE A STRING // TO USE IN THE CODE: interacton.getString("what_ping")
     ],
@@ -41,19 +41,12 @@ module.exports = {
                 const member = guild.members.cache.get(user.id);
                 //create the EMBED
                 const embeduserinfo = new EmbedBuilder();
-                embeduserinfo.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }));
-                embeduserinfo.setAuthor(
-                    handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.tag }),
-                    member.user.displayAvatarURL({ dynamic: true }),
-                    "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
-                );
-                embeduserinfo.addField(
-                    handlemsg(client.la[ls].cmds.info.permissions.from2),
-                    `${member.permissions
+                embeduserinfo.setThumbnail(member.user.displayAvatarURL({ size: 512 }));
+                embeduserinfo.setAuthor({ name: handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.username }), iconURL: member.user.displayAvatarURL() });
+                embeduserinfo.addFields({ name: handlemsg(client.la[ls].cmds.info.permissions.from2), value: `${member.permissions
                         .toArray()
                         .map(p => `\`${p}\``)
-                        .join(", ")}`
-                );
+                        .join(", ")}` });
                 embeduserinfo
                     .setColor(es.color)
                     .setThumbnail(
@@ -70,19 +63,12 @@ module.exports = {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 //create the EMBED
                 const embeduserinfo = new EmbedBuilder();
-                embeduserinfo.setThumbnail(user.displayAvatarURL({ dynamic: true, size: 512 }));
-                embeduserinfo.setAuthor(
-                    handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.tag }),
-                    member.user.displayAvatarURL({ dynamic: true }),
-                    "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
-                );
-                embeduserinfo.addField(
-                    handlemsg(client.la[ls].cmds.info.permissions.from2),
-                    `${member.permissions
+                embeduserinfo.setThumbnail(user.displayAvatarURL({ size: 512 }));
+                embeduserinfo.setAuthor({ name: handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.username }), iconURL: member.user.displayAvatarURL() });
+                embeduserinfo.addFields({ name: handlemsg(client.la[ls].cmds.info.permissions.from2), value: `${member.permissions
                         .toArray()
                         .map(p => `\`${p}\``)
-                        .join(", ")}`
-                );
+                        .join(", ")}` });
                 embeduserinfo
                     .setColor(es.color)
                     .setThumbnail(
@@ -103,10 +89,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

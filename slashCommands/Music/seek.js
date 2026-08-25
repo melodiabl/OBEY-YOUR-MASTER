@@ -1,67 +1,28 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { createBar, format } = require(`${process.cwd()}/handlers/functions`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
+function fmtMs(ms){const s=Math.floor((ms||0)/1000);return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 module.exports = {
-    name: `seek`,
-    description: `Changes the position(seek) of the Song`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    options: [
-        { Integer: { name: "seconds", description: "To what amount of Seconds do you want to seek?", required: true } },
-    ],
-    run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
-        //let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return interaction?.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            let args = [interaction?.options.getInteger("seconds")];
-            //if number is out of range return error
-            if (Number(args[0]) < 0 || Number(args[0]) >= player.queue.current.duration / 1000)
-                return interaction?.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["seek"]["variable1"])),
-                    ],
-                });
-            //seek to the position
-            player.seek(Number(args[0]) * 1000);
-            //send success message
-            return interaction?.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["cmds"]["music"]["seek"]["variable2"]))
-                        .addField(`${emoji?.msg.time} Progress: `, createBar(player))
-                        .setColor(es.color),
-                ],
-            });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'seek', description: 'Salta a un momento de la cancion',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  options: [{ String: { name: 'tiempo', description: 'Formato: 1:30 o 90 (segundos)', required: true } }],
+  run: async (client, interaction) => {
+    if (!interaction.member?.voice?.channel)
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
+    await interaction.deferReply()
+    const raw = interaction.options.getString('tiempo') || ''
+    let ms
+    if (raw.includes(':')) { const [m, s] = raw.split(':').map(Number); ms = ((m||0)*60+(s||0))*1000 }
+    else ms = (parseFloat(raw)||0)*1000
+    if (!ms || ms < 0)
+      return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Tiempo inválido. Usa `1:30` o `90`.')] })
+    try {
+      const player = client.shoukaku?.players?.get(interaction.guild.id)
+      if (!player) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay reproductor activo.')] })
+      await player.seekTo(ms)
+      const state = client.music?.getState(interaction.guild.id)
+      const dur = state?.currentTrack?.info?.length || 0
+      await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
+        .setTitle('⏩ Posición cambiada')
+        .setDescription(`Saltado a **\`${fmtMs(ms)}\`** ${dur ? `/ \`${fmtMs(dur)}\`` : ''}`)] })
+    } catch (e) { await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ ${e.message}`)] }) }
+  },
+}

@@ -41,7 +41,16 @@ const GuildSchema = new Schema({
   totalCount: String,
   // Misc
   autoEmbed: { type: Boolean, default: false },
-  autoMeme: { type: Boolean, default: false },
-  autoNsfw: String,
-}, { timestamps: true })
+  autoMeme:  { type: Boolean, default: false },
+  autoNsfw:  String,
+  logChannels: {
+    messages:   { type: String, default: null },
+    members:    { type: String, default: null },
+    moderation: { type: String, default: null },
+    voice:      { type: String, default: null },
+    server:     { type: String, default: null },
+  },
+  djRole:          { type: String, default: null },
+  birthdayChannel: { type: String, default: null },
+}, { timestamps: true, strict: false })
 module.exports = model('Guild', GuildSchema)

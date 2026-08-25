@@ -1,63 +1,14 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
 module.exports = {
-    name: `clearqueue`,
-    category: `🎶 Music`,
-    aliases: [`clearqu`],
-    description: `Cleares the Queue`,
-    usage: `clearqueue`,
-    cooldown: 10,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    type: "queue",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //clear the QUEUE
-            player.queue.clear();
-            //Send Success Message
-            message.reply({
-                embeds: [new EmbedBuilder().setTitle(client.la[ls].cmds.music.clearqueue.title).setColor(es.color)],
-            });
-            message.react("💥").catch(() => {});
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["clearqueue"]["variable1"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'clearqueue', category: '🎶 Music',
+  aliases: ['cq', 'clear'],
+  description: 'Limpia la cola de reproducción',
+  usage: 'clearqueue',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  run: async (client, message) => {
+    const state = client.music?.getState(message.guild.id)
+    if (!state) return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay sesión de música activa.')] }).catch(() => {})
+    state.queue = []
+    message.reply({ embeds: [new EmbedBuilder().setColor(0x57F287).setDescription('🗑️ Cola limpiada.')] }).catch(() => {})
+  },
+}

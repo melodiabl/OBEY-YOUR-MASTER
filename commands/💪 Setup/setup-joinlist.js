@@ -11,7 +11,7 @@ module.exports = {
     aliases: ["joinlist", "setupjoinlist", "joinlist-setup", "joinlistsetup"],
     cooldown: 4,
     usage: "setup-joinlist help / setup-joinlist <type> <action> <data>",
-    description: "Manages the Joinlist",
+    description: "Gestiona la Lista de Entradas",
     type: "security",
     run: async (client, message, args, user, text, prefix, player) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -38,12 +38,12 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setTitle("Help for joinlist")
+                            .setTitle("Ayuda para lista de uniones")
                             .setDescription(
-                                `The Joinlist Command allows you to setup specific Rules for users to succeed, when they join!\n> **The Usage is**: \`${prefix}joinlist <type> <action> <data>\``
+                                `The Joinlist Comando allows you to setup specific Rules for users to succeed, when they join!\n> **The Usage is**: \`${prefix}joinlist <type> <action> <data>\``
                             )
-                            .addField("Valid Types:", `> ${validtypes.map(d => `\`${d}\``).join(", ")}`)
-                            .addField("Valid Actions:", `> ${validactions.map(d => `\`${d}\``).join(", ")}`),
+                            .addFields({ name: "Valid Types:", value: `> ${validtypes.map(d => `\`${d}\``).join(", ")}` })
+                            .addFields({ name: "Valid Actions:", value: `> ${validactions.map(d => `\`${d}\``).join(", ")}` }),
                         new EmbedBuilder()
                             .setColor(es.color)
                             .setTitle(
@@ -127,24 +127,24 @@ module.exports = {
             }
             if (!type)
                 return message.reply(
-                    `${allEmojis.msg.ERROR} **Please provide the joinlist type!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
+                    `${allEmojis.msg.ERROR} **Por favor provide the joinlist type!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
                 );
             if (!action)
                 return message.reply(
-                    `${allEmojis.msg.ERROR} **Please provide the joinlist action!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
+                    `${allEmojis.msg.ERROR} **Por favor provide the joinlist action!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
                 );
             if (!data)
                 return message.reply(
-                    `${allEmojis.msg.ERROR} **Please provide the joinlist data!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
+                    `${allEmojis.msg.ERROR} **Por favor provide the joinlist data!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
                 );
 
             if (!validtypes.includes(type))
                 return message.reply(
-                    `${allEmojis.msg.ERROR} **Please a VALID joinlist type!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
+                    `${allEmojis.msg.ERROR} **Por favor a VALID joinlist type!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
                 );
             if (!validactions.includes(action))
                 return message.reply(
-                    `${allEmojis.msg.ERROR} **Please a VALID joinlist action!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
+                    `${allEmojis.msg.ERROR} **Por favor a VALID joinlist action!**\n> **Get Help:** \`${prefix}joinlist help\`\n> Usage: \`${prefix}joinlist <type> <action> <data>\`\nValid Types: ${validtypes.map(d => `\`${d}\``).join(", ")}\nValid Actions: ${validactions.map(d => `\`${d}\``).join(", ")}`
                 );
 
             client.settings.ensure(message.guild.id, {
@@ -179,7 +179,7 @@ module.exports = {
                     client.settings.set(message.guild.id, joinlist, "joinlist");
                     message.reply(`Successfully removed \`${data}\` from the action \`${action}\` from the \`${type}\``);
                 } else {
-                    message.reply("Could not find it in the db");
+                    message.reply("No se pudo encontrar en la base de datos");
                 }
             }
             //add
@@ -198,7 +198,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, nickname });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User's name contains \`${data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
+                                    `If a Usuario's name contains \`${data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
                                 );
                             } else if (action == "timeout") {
                                 const dur = args[3] ? args.slice(3).join("") : null;
@@ -226,7 +226,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, time });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User's name contains \`${data}\` then he will be \`${action}ed\` for ${duration(
+                                    `If a Usuario's name contains \`${data}\` then he will be \`${action}ed\` for ${duration(
                                         time
                                     )
                                         .map(d => `\`${d}\``)
@@ -237,7 +237,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, days });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User's name contains \`${data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
+                                    `If a Usuario's name contains \`${data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
                                 );
                             }
                         }
@@ -255,7 +255,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, nickname });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has the name \`${data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
+                                    `If a Usuario has the name \`${data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
                                 );
                             } else if (action == "timeout") {
                                 const dur = args[3] ? args.slice(3).join("") : null;
@@ -283,7 +283,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, time });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has the name \`${data}\` then he will be \`${action}ed\` for ${duration(time)
+                                    `If a Usuario has the name \`${data}\` then he will be \`${action}ed\` for ${duration(time)
                                         .map(d => `\`${d}\``)
                                         .join(", ")} (\`${type}\`)`
                                 );
@@ -292,7 +292,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, days });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has the name \`${data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
+                                    `If a Usuario has the name \`${data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
                                 );
                             }
                         }
@@ -302,7 +302,7 @@ module.exports = {
                             //userid
                             if (!isValidSnowflakeId(data)) {
                                 return message.reply(
-                                    `Valid Datas for \`${action}\` are \`USER_IDS\`\nA User ID is between 17 and 20 characters long!`
+                                    `Valid Datas for \`${action}\` are \`USER_IDS\`\nA Usuario ID is between 17 and 20 characters long!`
                                 );
                             }
                             //  joinlist userid setnickname GUILD_ID <new_nickname/{random}>
@@ -315,7 +315,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, nickname });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has the id \`${data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
+                                    `If a Usuario has the id \`${data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
                                 );
                             } else if (action == "timeout") {
                                 const dur = args[3] ? args.slice(3).join("") : null;
@@ -343,7 +343,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, time });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has the id \`${data}\` then he will be \`${action}ed\` for ${duration(time)
+                                    `If a Usuario has the id \`${data}\` then he will be \`${action}ed\` for ${duration(time)
                                         .map(d => `\`${d}\``)
                                         .join(", ")} (\`${type}\`)`
                                 );
@@ -352,7 +352,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, days });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has the id \`${data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
+                                    `If a Usuario has the id \`${data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
                                 );
                             }
                         }
@@ -378,7 +378,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, nickname });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User is in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
+                                    `If a Usuario is in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
                                 );
                             } else if (action == "timeout") {
                                 const dur = args[3] ? args.slice(3).join("") : null;
@@ -406,7 +406,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, time });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User is in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then he will be \`${action}ed\` for ${duration(
+                                    `If a Usuario is in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then he will be \`${action}ed\` for ${duration(
                                         time
                                     )
                                         .map(d => `\`${d}\``)
@@ -417,7 +417,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, days });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User is in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
+                                    `If a Usuario is in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
                                 );
                             }
                         }
@@ -443,7 +443,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, nickname });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User is not in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
+                                    `If a Usuario is not in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then his nickname will be changed to ${nickname} (\`${type}\`)`
                                 );
                             } else if (action == "timeout") {
                                 const dur = args[3] ? args.slice(3).join("") : null;
@@ -470,7 +470,7 @@ module.exports = {
                                     );
                                 joinlist[type].push({ data, action, time });
                                 message.reply(
-                                    `If a User is not in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then he will be \`${action}ed\` for ${duration(
+                                    `If a Usuario is not in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then he will be \`${action}ed\` for ${duration(
                                         time
                                     )
                                         .map(d => `\`${d}\``)
@@ -481,7 +481,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, days });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User is not in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
+                                    `If a Usuario is not in the Guild \`${client.guilds.cache.get(data) ? client.guilds.cache.get(data).name : data}\` then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
                                 );
                             }
                         }
@@ -505,7 +505,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, nickname });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has no Avatar then his Nickname will be ${data == "enable" ? "" : "__not__ (disable)"} changed to: ${nickname} (\`${type}\`)`
+                                    `If a Usuario has no Avatar then his Nickname will be ${data == "enable" ? "" : "__not__ (disable)"} changed to: ${nickname} (\`${type}\`)`
                                 );
                             } else if (action == "timeout") {
                                 const dur = args[3] ? args.slice(3).join("") : null;
@@ -533,7 +533,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, time });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has no Avatar then he will be \`${action}ed\` for ${duration(time)
+                                    `If a Usuario has no Avatar then he will be \`${action}ed\` for ${duration(time)
                                         .map(d => `\`${d}\``)
                                         .join(", ")} (\`${type}\`)`
                                 );
@@ -542,7 +542,7 @@ module.exports = {
                                 joinlist[type].push({ data, action, days });
                                 client.settings.set(message.guild.id, joinlist, "joinlist");
                                 message.reply(
-                                    `If a User has no Avatar then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
+                                    `If a Usuario has no Avatar then he will be \`${action}ed\` ${action == "ban" ? `for ${days !== 0 ? `${days} Days` : `ever! (Optional: add days afterwards)`}` : ``} (\`${type}\`)`
                                 );
                             }
                         }
@@ -568,10 +568,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
+ * Bot Coded by Melodia | https://github?.com/melodiabl/discord-js-lavalink-Music-Bot-erela-js
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

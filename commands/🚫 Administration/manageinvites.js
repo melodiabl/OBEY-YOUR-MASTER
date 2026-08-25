@@ -2,7 +2,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { EmbedBuilder, Permissions, StringSelectMenuBuilder, ButtonBuilder, ActionRowBuilder } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits, StringSelectMenuBuilder, ButtonBuilder, ActionRowBuilder } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const { databasing, GetUser } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -10,8 +10,8 @@ module.exports = {
     category: `🚫 Administration`,
     cooldown: 4,
     usage: `manageinvites @USER --> Follow the Steps`,
-    description: `Manages the Invites of a User`,
-    memberpermissions: ["ADMINISTRATOR"],
+    description: `Manages the Invites of a Usuario`,
+    memberpermissions: ['Administrador'],
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -36,41 +36,41 @@ module.exports = {
                     value: "Add Joins",
                     description: "Add a specific Number of Joins to: " + user.username,
                     replymsg: "Please Send the Number of Invites (Joins) you want to add to him/her!",
-                    emoji: "866356465299488809", //optional
+                    emoji: "📨", //optional
                 },
                 {
                     value: "Remove Joins",
                     description: "Remove a specific Number of Joins to: " + user.username,
                     replymsg: "Please Send the Number of Invites (Joins) you want to remove to him/her!",
-                    emoji: "866356465299488809", //optional
+                    emoji: "📨", //optional
                 },
                 {
                     value: "Add Fakes",
                     description: "Add a specific Number of Fakes to: " + user.username,
                     replymsg: "Please Send the Number of Fake-Invites you want to add to him/her!",
-                    emoji: "833101993668771842", //optional
+                    emoji: "❌", //optional
                 },
                 {
                     value: "Remove Fakes",
                     description: "Remove a specific Number of Fakes to: " + user.username,
                     replymsg: "Please Send the Number of Fake-Invites you want to remove to him/her!",
-                    emoji: "833101993668771842", //optional
+                    emoji: "❌", //optional
                 },
                 {
                     value: "Add Leaves",
                     description: "Add a specific Number of Leaves to: " + user.username,
                     replymsg: "Please Send the Number of Leaves you want to add to him/her!",
-                    emoji: "866356598356049930", //optional
+                    emoji: "📩", //optional
                 },
                 {
                     value: "Remove Leaves",
                     description: "Remove a specific Number of Leaves to: " + user.username,
                     replymsg: "Please Send the Number of Leaves you want to remove to him/her!",
-                    emoji: "866356598356049930", //optional
+                    emoji: "📩", //optional
                 },
                 {
                     value: "Cancel",
-                    description: `Cancel and stop the Ticket-Setup!`,
+                    description: `Cancelar and stop the Ticket-Configuración!`,
                     emoji: allEmojis.msg.cancel,
                 },
             ];
@@ -120,16 +120,10 @@ module.exports = {
             //define the embed
             let MenuEmbed = new EmbedBuilder()
                 .setColor(es.color)
-                .setAuthor(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable1"]))
+                .setAuthor({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable1"]) })
                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable2"]))
-                .addField(
-                    "**CURRENT INVITES:**",
-                    `<:Like:857334024087011378> ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!`
-                )
-                .addField(
-                    eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variablex_3"]),
-                    eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable3"])
-                );
+                .addFields({ name: "**CURRENT INVITES:**", value: `<:Like:857334024087011378> ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!` })
+                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variablex_3"]), value: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable3"]) });
             //send the menu msg
             let menumsg = await message.reply({
                 embeds: [MenuEmbed],
@@ -147,11 +141,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor(
-                                client.la[ls].cmds.info.botfaq.menuembed.title,
-                                client.user.displayAvatarURL(),
-                                "https://discord.gg/milrato"
-                            )
+                            .setAuthor({ name: client.la[ls].cmds.info.botfaq.menuembed.title, iconURL: client.user.displayAvatarURL(), url: "https://github.com/melodiabl" })
                             .setDescription(menuoptiondata.replymsg),
                     ],
                 });
@@ -209,11 +199,7 @@ module.exports = {
                         message.reply({
                             embeds: [
                                 new EmbedBuilder()
-                                    .setAuthor(
-                                        `New Invites of: ${user.tag}`,
-                                        user.displayAvatarURL({ dynamic: true }),
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({ name: `New Invites of: ${user.username}`, iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" })
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -223,14 +209,8 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .addField(
-                                        "\u200b",
-                                        `<:Like:857334024087011378> ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!`
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variablex_6"]),
-                                        eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable6"])
-                                    )
+                                    .addFields({ name: "\u200b", value: `<:Like:857334024087011378> ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!` })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variablex_6"]), value: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable6"]) })
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
@@ -238,6 +218,8 @@ module.exports = {
             }
             //Event
             client.on("interactionCreate", menu => {
+    if (!menu?.isStringSelectMenu() && !menu?.isButton()) return;
+
                 if (menu?.message.id === menumsg.id) {
                     if (menu?.user.id === cmduser.id) menuselection(menu);
                     else
@@ -265,25 +247,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable7"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],
@@ -308,10 +279,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

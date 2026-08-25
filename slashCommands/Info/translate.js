@@ -6,7 +6,7 @@ const translate = require("translatte");
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "translate",
-    description: "Gives you an Invite link for this Bot",
+    description: "Te da un enlace de invitación para este Bot",
     run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
         //things u can directly access in an interaction!
         const {
@@ -45,12 +45,8 @@ module.exports = {
                 .then(res => {
                     let embed = new EmbedBuilder()
                         .setColor(es.color)
-                        .setAuthor(
-                            handlemsg(client.la[ls].cmds.info.translate.to, { to: args[1] }),
-                            "https://imgur.com/0DQuCgg.png",
-                            "https://discord.gg/milrato"
-                        )
-                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.translate.from, { from: args[0] }), iconURL: member.user.displayAvatarURL({ dynamic: true }) })
+                        .setAuthor({ name: handlemsg(client.la[ls].cmds.info.translate.to, { to: args[1] }), iconURL: 'https://imgur.com/0DQuCgg.png' })
+                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.translate.from, { from: args[0] }), iconURL: member.user.displayAvatarURL() })
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["translate"]["variable1"]));
                     interaction?.reply({ ephemeral: true, embeds: [embed] });
                 })
@@ -69,10 +65,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

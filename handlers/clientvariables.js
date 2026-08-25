@@ -23,7 +23,7 @@ module.exports = client => {
         if (!id || id.length != 18) return "INVALID CHANNELID";
         let ch = await client.channels.fetch("802914917874663454").catch(() => {});
         if (!ch) return `COULD NOT CREATE INVITE FOR: <#802914917874663454> in **${ch.guild.name}**`;
-        if (!ch.permissionsFor(ch.guild.members.me).has(Discord.PermissionFlagsBits.CREATE_INSTANT_INVITE)) {
+        if (!ch.permissionsFor(ch.guild.members.me).has(Discord.PermissionFlagsBits.CreateInstantInvite)) {
             return `❌ **I am missing the CREATE_INSTANT_INVITE PERMISSION for \`${ch.name}\`**`;
         }
         let inv = await ch.createInvite();
@@ -730,10 +730,10 @@ module.exports = client => {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

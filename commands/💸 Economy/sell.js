@@ -222,10 +222,10 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable3"]))
-                            .addField("To sell items:", `\`${prefix}sell Pen 2\``),
+                            .addFields({ name: "To sell items:", value: `\`${prefix}sell Pen 2\`` }),
                     ],
                 });
 
@@ -235,7 +235,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable4"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable5"])),
                     ],
@@ -319,10 +319,10 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable6"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable7"]))
-                            .addField("To sell items:", `\`${prefix}sell Pen 2\``),
+                            .addFields({ name: "To sell items:", value: `\`${prefix}sell Pen 2\`` }),
                     ],
                 });
             if (data.items[`${args[0].toLowerCase()}`] == 0)
@@ -330,7 +330,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable8"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable9"])),
                     ],
@@ -340,7 +340,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable10"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable11"])),
                     ],
@@ -363,7 +363,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable12"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable13"])),
                 ],
@@ -384,10 +384,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

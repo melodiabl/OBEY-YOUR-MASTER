@@ -8,7 +8,7 @@ module.exports = {
     aliases: ["ai", "aichat", "ai-chat"],
     cooldown: 2,
     usage: "chat <TEXT>",
-    description: "Let's you chat with the Bot via cmd",
+    description: "Te permite chatear con el Bot mediante cmd",
     type: "text",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -43,7 +43,7 @@ module.exports = {
             if (message.content) message.content = args.join(" ");
             if (message.attachments.size > 0)
                 return message.reply({
-                    content: "Look at this too...",
+                    content: "Mira esto también...",
                     files: "https://cdn.discordapp.com/attachments/816645188461264896/826736269509525524/I_CANNOT_READ_FILES.png",
                 });
             fetch(`http://api.brainshop.ai/get?bid=153861&key=0ZjvbPWKAxJvcJ96&uid=1&msg=${encodeURIComponent(message)}`)
@@ -67,10 +67,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://milrato.eue
+ * Bot Coded by Melodia | https://github.com/melodiable
  * @INFO
- * Work for Milrato Development | https://discord.gg/milrato
+ * Work for Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

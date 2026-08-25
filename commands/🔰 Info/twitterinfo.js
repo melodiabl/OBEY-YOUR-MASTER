@@ -12,7 +12,7 @@ module.exports = {
     aliases: ["twitterinfo", "twitteruserinfo", "tuserinfo", "uinfo", "tuser", "twitteruser"],
     category: "🔰 Info",
     cooldown: 60,
-    description: "Get information about a Twitter User",
+    description: "Get information about a Twitter Usuario",
     usage: "twitterinfo <TWITTERUSER>",
     type: "util",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -45,30 +45,14 @@ module.exports = {
                                 `ID: ${user.id_str}`,
                                 user.profile_image_url_https ? user.profile_image_url_https : user.profile_image_url)
                         )
-                        .addField(client.la[ls].cmds.info.twitterinfo.field1.title, `\`${user.name}\``, true)
-                        .addField(
-                            client.la[ls].cmds.info.twitterinfo.field2.title,
-                            `\`${moment(user.created_at).format("DD/MM/YYYY")}\`\n\`${moment(user.created_at).format("hh:mm:ss")}\``,
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.twitterinfo.field3.title,
-                            handlemsg(client.la[ls].cmds.info.twitterinfo.field3.value, { followers: user.followers_count }),
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.twitterinfo.field4.title,
-                            handlemsg(client.la[ls].cmds.info.twitterinfo.field4.value, { friends: user.friends_count }),
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.twitterinfo.field5.title,
-                            handlemsg(client.la[ls].cmds.info.twitterinfo.field5.value, { statuses: user.statuses_count }),
-                            true
-                        );
+                        .addFields({ name: client.la[ls].cmds.info.twitterinfo.field1.title, value: `\`${user.name}\``, inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.twitterinfo.field2.title, value: `\`${moment(user.created_at).format("DD/MM/YYYY")}\`\n\`${moment(user.created_at).format("hh:mm:ss")}\``, inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.twitterinfo.field3.title, value: handlemsg(client.la[ls].cmds.info.twitterinfo.field3.value, { followers: user.followers_count }), inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.twitterinfo.field4.title, value: handlemsg(client.la[ls].cmds.info.twitterinfo.field4.value, { friends: user.friends_count }), inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.twitterinfo.field5.title, value: handlemsg(client.la[ls].cmds.info.twitterinfo.field5.value, { statuses: user.statuses_count }), inline: true });
                     if (user.location)
                         embed
-                            .addField(client.la[ls].cmds.info.twitterinfo.field6.title, `\`${user.location}\``, true)
+                            .addFields({ name: client.la[ls].cmds.info.twitterinfo.field6.title, value: `\`${user.location}\``, inline: true })
                             .setTitle(handlemsg(client.la[ls].cmds.info.twitterinfo.title, { name: user.screen_name }))
                             .setURL(`https://twitter.com/${user.screen_name}`);
                     if (user.description)
@@ -93,10 +77,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

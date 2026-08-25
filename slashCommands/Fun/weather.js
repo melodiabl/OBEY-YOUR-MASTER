@@ -41,7 +41,7 @@ module.exports = {
         if (unit.toLowerCase() === "c" || unit.toLowerCase() === "f") {
             degree = unit.toUpperCase();
         } else {
-            return message.reply({ content: eval(client.la[ls]["cmds"]["fun"]["weather"]["variable2"]) });
+            return interaction?.reply({ content: eval(client.la[ls]["cmds"]["fun"]["weather"]["variable2"]) });
         }
         weather.find(
             {
@@ -56,12 +56,14 @@ module.exports = {
                     .setTitle(eval(client.la[ls]["cmds"]["fun"]["weather"]["variable4"]))
                     .setThumbnail(result[0].current.imageUrl)
                     .setDescription(eval(client.la[ls]["cmds"]["fun"]["weather"]["variable5"]))
-                    .addField("**Temp:**", `${result[0].current.temperature}°${result[0].location.degreetype}`, true)
-                    .addField("**Weather:**", `${result[0].current.skytext}`, true)
-                    .addField("**Day:**", `${result[0].current.shortday}`, true)
-                    .addField("**Feels like:**", `${result[0].current.feelslike}°${result[0].location.degreetype}`, true)
-                    .addField("**Humidity:**", `${result[0].current.humidity}%`, true)
-                    .addField("**Wind:**", `${result[0].current.winddisplay}`, true);
+                    .addFields(
+                        { name: "**Temp:**", value: `${result[0].current.temperature}°${result[0].location.degreetype}`, inline: true },
+                        { name: "**Weather:**", value: `${result[0].current.skytext}`, inline: true },
+                        { name: "**Day:**", value: `${result[0].current.shortday}`, inline: true },
+                        { name: "**Feels like:**", value: `${result[0].current.feelslike}°${result[0].location.degreetype}`, inline: true },
+                        { name: "**Humidity:**", value: `${result[0].current.humidity}%`, inline: true },
+                        { name: "**Wind:**", value: `${result[0].current.winddisplay}`, inline: true }
+                    );
                 interaction?.reply({ embeds: [embed], ephemeral: true });
             }
         );
@@ -69,10 +71,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

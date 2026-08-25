@@ -1,47 +1,21 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
 module.exports = {
-    name: `replay`,
-    description: `Replays the current song`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
-        //let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return interaction?.reply({
-                ephemeral: true,
-                embed: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //seek to 0
-            player.seek(0);
-            //send informational message
-            interaction?.reply({ embeds: [new EmbedBuilder().setColor(es.color).setTitle(`🔃 Replaying the Track!`)] });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'replay', description: 'Reinicia la cancion actual desde el principio',
+  parameters: { type: 'music', activeplayer: true, previoussong: false }, options: [],
+  run: async (client, interaction) => {
+    if (!interaction.member?.voice?.channel)
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
+    await interaction.deferReply()
+    try {
+      const player = client.shoukaku?.players?.get(interaction.guild.id)
+      if (!player) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay reproductor activo.')] })
+      const track = client.music?.getState(interaction.guild.id)?.currentTrack
+      const info = track?.info || track
+      await player.seekTo(0)
+      await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
+        .setTitle('🔄 Canción reiniciada')
+        .setDescription(info?.title ? `**${info.title}** reproducida desde el inicio.` : 'Reiniciada desde el principio.')
+        .setThumbnail(info?.artworkUrl || undefined)] })
+    } catch (e) { await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ ${e.message}`)] }) }
+  },
+}

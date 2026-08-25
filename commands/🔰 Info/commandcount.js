@@ -22,11 +22,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter({ text: "It could take up to 30 Seconds ...", iconURL: client.user.displayAvatarURL() })
-                        .setAuthor(
-                            handlemsg(client.la[ls].cmds.info.commandcount.tempmsg),
-                            "https://cdn.discordapp.com/emojis/756773010123522058.gif",
-                            "https://discord.gg/milrato"
-                        ),
+                        .setAuthor({ name: handlemsg(client.la[ls].cmds.info.commandcount.tempmsg), iconURL: "https://cdn.discordapp.com/emojis/756773010123522058.gif", url: "https://github.com/melodiabl" }),
                 ],
             });
             let lines = 0;
@@ -98,10 +94,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

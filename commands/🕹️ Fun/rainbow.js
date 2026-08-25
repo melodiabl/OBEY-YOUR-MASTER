@@ -9,8 +9,8 @@ module.exports = {
     name: "rainbow",
     aliases: [""],
     category: "🕹️ Fun",
-    description: "IMAGE CMD",
-    usage: "rainbow @User",
+    description: "COMANDO DE IMAGEN",
+    usage: "rainbow @Usuario",
     type: "user",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -37,10 +37,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
-                        .setAuthor(
-                            "Getting Image Data..",
-                            "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif"
-                        ),
+                        .setAuthor({ name: "Obteniendo datos de imagen...", iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif" }),
                 ],
             });
             //find the USER
@@ -60,7 +57,6 @@ module.exports = {
             }
             let avatar = user.displayAvatarURL({
                 dynamic: false,
-                format: "png",
             });
             let image = await canvacord.Canvas.rainbow(avatar);
             let attachment = await new AttachmentBuilder(image, "rainbow.png");
@@ -93,10 +89,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

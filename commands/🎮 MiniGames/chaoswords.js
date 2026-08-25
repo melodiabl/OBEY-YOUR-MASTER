@@ -30,7 +30,7 @@ module.exports = {
         await ChaosWords({
             interaction: message,
             client: client,
-            embed: {
+            embeds: [{
                 title: "ChaosWords",
                 footer: {
                     text: es.footertext,
@@ -38,7 +38,7 @@ module.exports = {
                 description: "You have **{{time}}** to find the hidden words in the below sentence.",
                 color: es.color,
                 timestamp: new Date(),
-            },
+            }],
             winMessage: "GG, You won! You made it in **{{time}}**.",
             loseMessage: "Better luck next time!",
             wrongWord: "Wrong Guess! You have **{{remaining_tries}}** tries left.",

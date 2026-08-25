@@ -3,7 +3,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const ms = require("ms");
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-var { EmbedBuilder, Permissions } = require(`discord.js`);
+var { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { databasing, delay } = require(`./functions`);
 const countermap = new Map();
 module.exports = client => {
@@ -20,14 +20,14 @@ module.exports = client => {
             client.settings.ensure(message.guild.id, {
                 adminroles: [],
             });
-            var adminroles = client.settings.get(message.guild.id, " ");
+            var adminroles = client.settings.get(message.guild.id, "adminroles");
             if (
                 (adminroles &&
                     adminroles.length > 0 &&
                     [...message.member.roles.cache.values()].length > 0 &&
                     message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r))) ||
                 [message.guild.ownerId, config.ownerid].includes(message.author.id) ||
-                message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)
+                message.member.permissions.has(PermissionFlagsBits.Administrator)
             )
                 return;
             client.settings.ensure(message.guild.id, {
@@ -52,7 +52,7 @@ module.exports = client => {
             });
             let autowarn = client.settings.get(message.guild.id, "autowarn");
             let antimention = client.settings.get(message.guild.id, "antimention");
-            if (antimention.whitelistedchannels.some(r => message.channel.parentId == r || message.channel.id == r)) return;
+            if ((antimention.whitelistedchannels || []).some(r => message.channel.parentId == r || message.channel.id == r)) return;
             let mute_amount = antimention.mute_amount;
             let member = message.member;
             if (!antimention.enabled) return;
@@ -80,9 +80,7 @@ module.exports = client => {
                             reason: "Antimention Autowarn",
                             when: new Date().toLocaleString(`de`),
                             oldhighesrole: message.member.roles ? message.member.roles.highest : `Had No Roles`,
-                            oldthumburl: message.author.displayAvatarURL({
-                                dynamic: true,
-                            }),
+                            oldthumburl: message.author.displayAvatarURL(),
                         });
                         // Push the action to the user's warnings
                         client.userProfiles.push(message.author.id, newActionId, "warnings");
@@ -96,14 +94,14 @@ module.exports = client => {
                                 new EmbedBuilder()
                                     .setAuthor(
                                         client.getAuthor(
-                                            message.author.tag,
-                                            message.member.displayAvatarURL({ dynamic: true })
+                                            message.author.username,
+                                            message.member.displayAvatarURL()
                                         )
                                     )
                                     .setColor("#E67E22")
                                     .setFooter(client.getFooter(
                                             "ID: " + message.author.id,
-                                            message.author.displayAvatarURL({ dynamic: true })
+                                            message.author.displayAvatarURL()
                                         )
                                     )
                                     .setDescription(
@@ -325,7 +323,7 @@ module.exports = client => {
                     if (Number(countermap.get(message.author.id)) > mute_amount) {
                         let time = 10 * 60 * 1000;
                         let mutetime = time;
-                        let reason = "Mentioning too Many People in a short period of time";
+                        let reason = "Mencionando a demasiadas personas en un corto período de tiempo";
 
                         member
                             .timeout(mutetime, reason)
@@ -345,14 +343,14 @@ module.exports = client => {
                                                         : null
                                                 )
                                                 .setFooter(client.getFooter(es))
-                                                .setTitle(`${member.user.tag} got muted for spamming pings`)
-                                                .setDescription(`He/She/They will get unmuted after 10 Mins`),
+                                                .setTitle(`${member.user.username} fue silenciado por spammear pings`)
+                                                .setDescription(`Será desilenciado después de 10 minutos`),
                                         ],
                                     })
                                     .catch(() => {});
                             })
                             .catch(() => {
-                                return message.channel.send(`❌ **I could not timeout ${member.user.tag}**`).then(m => {
+                                return message.channel.send(`❌ **No pude aplicar timeout a ${member.user.username}**`).then(m => {
                                     setTimeout(() => {
                                         m.delete().catch(() => {});
                                     }, 5000);
@@ -367,9 +365,9 @@ module.exports = client => {
                                     new EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
-                                        .setTitle(`${member.user.tag} Stop pinging so many Members/Roles`)
+                                        .setTitle(`${member.user.username} Deja de mencionar a tantos miembros/roles`)
                                         .setDescription(
-                                            `You pinged ${allmentions} but you are allowed to only ping ${antimention.limit} Roles/Members / Message`
+                                            `Mencionaste ${allmentions} pero solo puedes mencionar ${antimention.limit} roles/miembros por mensaje`
                                         ),
                                 ],
                             })

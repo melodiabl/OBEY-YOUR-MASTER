@@ -9,7 +9,7 @@ module.exports = {
     name: "membercount",
     aliases: ["members"],
     category: "🔰 Info",
-    description: "Shows how many Members there are in this Server",
+    description: "Shows how many Members there are in this Servidor",
     usage: "membercount",
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -21,38 +21,18 @@ module.exports = {
             message.reply({
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setAuthor(
-                            client.la[ls].cmds.info.membercount.title + " " + message.guild.name,
-                            message.guild.iconURL({
-                                dynamic: true,
-                            }),
-                            "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
-                        )
+                        .setAuthor({ name: client.la[ls].cmds.info.membercount.title + " " + message.guild.name, iconURL: message.guild.iconURL(), url: "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands" })
                         .setColor(es.color)
-                        .addField(client.la[ls].cmds.info.membercount.field1, "😀 `" + message.guild.memberCount + "`", true)
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field2,
-                            "👤 `" + message.guild.members.cache.filter(member => !member.user.bot).size + "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field3,
-                            "🤖 `" + message.guild.members.cache.filter(member => member.user.bot).size + "`",
-                            true
-                        )
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field1, value: "😀 `" + message.guild.memberCount + "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field2, value: "👤 `" + message.guild.members.cache.filter(member => !member.user.bot).size + "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field3, value: "🤖 `" + message.guild.members.cache.filter(member => member.user.bot).size + "`", inline: true })
 
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field4,
-                            "🟢 `" +
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field4, value: "🟢 `" +
                                 message.guild.members.cache.filter(
                                     member => member.presence && member.presence && member.presence.status != "offline"
                                 ).size +
-                                "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field4,
-                            "🟢 `" +
+                                "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field4, value: "🟢 `" +
                                 message.guild.members.cache.filter(
                                     member =>
                                         !member.user.bot &&
@@ -60,12 +40,8 @@ module.exports = {
                                         member.presence &&
                                         member.presence.status != "offline"
                                 ).size +
-                                "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field4,
-                            "🟢 `" +
+                                "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field4, value: "🟢 `" +
                                 message.guild.members.cache.filter(
                                     member =>
                                         member.user.bot &&
@@ -73,22 +49,14 @@ module.exports = {
                                         member.presence &&
                                         member.presence.status != "offline"
                                 ).size +
-                                "`",
-                            true
-                        )
+                                "`", inline: true })
 
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field5,
-                            "🟠 `" +
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field5, value: "🟠 `" +
                                 message.guild.members.cache.filter(
                                     member => member.presence && member.presence && member.presence.status == "idle"
                                 ).size +
-                                "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field5,
-                            "🟠 `" +
+                                "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field5, value: "🟠 `" +
                                 message.guild.members.cache.filter(
                                     member =>
                                         !member.user.bot &&
@@ -96,12 +64,8 @@ module.exports = {
                                         member.presence &&
                                         member.presence.status == "idle"
                                 ).size +
-                                "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field5,
-                            "🟠 `" +
+                                "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field5, value: "🟠 `" +
                                 message.guild.members.cache.filter(
                                     member =>
                                         member.user.bot &&
@@ -109,22 +73,14 @@ module.exports = {
                                         member.presence &&
                                         member.presence.status == "idle"
                                 ).size +
-                                "`",
-                            true
-                        )
+                                "`", inline: true })
 
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field6,
-                            "🔴 `" +
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field6, value: "🔴 `" +
                                 message.guild.members.cache.filter(
                                     member => member.presence && member.presence && member.presence.status == "dnd"
                                 ).size +
-                                "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field6,
-                            "🔴 `" +
+                                "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field6, value: "🔴 `" +
                                 message.guild.members.cache.filter(
                                     member =>
                                         !member.user.bot &&
@@ -132,12 +88,8 @@ module.exports = {
                                         member.presence &&
                                         member.presence.status == "dnd"
                                 ).size +
-                                "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field6,
-                            "🔴 `" +
+                                "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field6, value: "🔴 `" +
                                 message.guild.members.cache.filter(
                                     member =>
                                         member.user.bot &&
@@ -145,41 +97,27 @@ module.exports = {
                                         member.presence &&
                                         member.presence.status == "dnd"
                                 ).size +
-                                "`",
-                            true
-                        )
+                                "`", inline: true })
 
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field7,
-                            ":black_circle:`" +
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field7, value: ":black_circle:`" +
                                 message.guild.members.cache.filter(
                                     member => !member.presence || (member.presence && member.presence.status == "offline")
                                 ).size +
-                                "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field7,
-                            ":black_circle:`" +
+                                "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field7, value: ":black_circle:`" +
                                 message.guild.members.cache.filter(
                                     member =>
                                         !member.user.bot &&
                                         (!member.presence || (member.presence && member.presence.status == "offline"))
                                 ).size +
-                                "`",
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.membercount.field7,
-                            ":black_circle:`" +
+                                "`", inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.membercount.field7, value: ":black_circle:`" +
                                 message.guild.members.cache.filter(
                                     member =>
                                         member.user.bot &&
                                         (!member.presence || (member.presence && member.presence.status == "offline"))
                                 ).size +
-                                "`",
-                            true
-                        )
+                                "`", inline: true })
                         .setTimestamp(),
                 ],
             });
@@ -199,10 +137,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

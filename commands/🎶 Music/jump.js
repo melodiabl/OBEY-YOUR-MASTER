@@ -1,88 +1,18 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { fx, err, E } = require('../../handlers/music/responses')
 module.exports = {
-    name: `jump`,
-    category: `🎶 Music`,
-    aliases: [`skipto`],
-    description: `Skips to a specific Track`,
-    usage: `skipto <Trackindex>`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    type: "queue",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //if no args send error plus example
-            if (!args[0])
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(client.la[ls].cmds.music.jump.error1)
-                            .setDescription(eval(client.la[ls]["cmds"]["music"]["jump"]["variable1"])),
-                    ],
-                });
-            //if userinput is not a Number
-            if (isNaN(args[0]))
-                return message.reply({
-                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(client.la[ls].cmds.music.jump.error2)],
-                });
-            //if the wished track is bigger then the Queue Size
-            if (Number(args[0]) > player.queue.size)
-                return message.reply({
-                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(client.la[ls].cmds.music.jump.error3)],
-                });
-            //remove all tracks to the jumped song
-            player.queue.remove(0, Number(args[0]) - 1);
-            //stop the player
-            player.stop();
-            //Send Success Message
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(handlemsg(client.la[ls].cmds.music.jump.title, { number: args[0] }))
-                        .setDescription(handlemsg(client.la[ls].cmds.music.jump.description, { number: args[0] }))
-                        .setColor(es.color),
-                ],
-            });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["jump"]["variable2"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'jump', category: '🎶 Music',
+  aliases: ['skipto'],
+  description: 'Salta a una posición específica de la cola',
+  usage: 'jump <posición>',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  run: async (client, message, args) => {
+    const guildId = message.guild.id
+    const mstate  = client.music?.getState(guildId)
+    if (!mstate?.currentTrack) return message.reply({ embeds: [err('No hay música reproduciéndose.')] }).catch(() => {})
+    const pos = parseInt(args[0])
+    if (isNaN(pos) || pos < 1) return message.reply({ embeds: [err('Ingresa una posición válida.')] }).catch(() => {})
+    let failed = false
+    await client.music.jump(guildId, pos).catch(e => { failed = true; message.reply({ embeds: [err(e.message)] }).catch(() => {}) })
+    if (!failed) return message.reply({ embeds: [fx(E.skip, `Saltado a la pista **#${pos}** de la cola`)] }).catch(() => {})
+  },
+}

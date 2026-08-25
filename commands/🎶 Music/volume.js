@@ -1,86 +1,18 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { fx, err, E } = require('../../handlers/music/responses')
 module.exports = {
-    name: `volume`,
-    category: `🎶 Music`,
-    aliases: [`vol`],
-    description: `Changes the Volume`,
-    usage: `volume <0-150>`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    type: "queuesong",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //if the Volume Number is out of Range return error msg
-            if (Number(args[0]) <= 0 || Number(args[0]) > 150)
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["volume"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["music"]["volume"]["variable2"])),
-                    ],
-                });
-            //if its not a Number return error msg
-            if (isNaN(args[0]))
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["volume"]["variable3"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["music"]["volume"]["variable4"])),
-                    ],
-                });
-            //change the volume
-            player.setVolume(Number(args[0]));
-            //send success message
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["cmds"]["music"]["volume"]["variable5"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["volume"]["variable6"]))
-                        .setColor(es.color),
-                ],
-            });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["volume"]["variable7"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'volume', category: '🎶 Music',
+  aliases: ['vol', 'v'],
+  description: 'Ajusta el volumen (0-200)',
+  usage: 'volume <0-200>',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  run: async (client, message, args) => {
+    const guildId = message.guild.id
+    const mstate  = client.music?.getState(guildId)
+    if (!mstate?.currentTrack) return message.reply({ embeds: [err('No hay música reproduciéndose.')] }).catch(() => {})
+    const vol = parseInt(args[0])
+    if (isNaN(vol) || vol < 0 || vol > 200) return message.reply({ embeds: [err('Ingresa un número entre **0** y **200**.')] }).catch(() => {})
+    await client.music.setVolume(guildId, vol).catch(() => {})
+    const emoji = vol === 0 ? E.volDown : vol >= 100 ? E.volUp : E.volDown
+    return message.reply({ embeds: [fx(emoji, `Volumen ajustado a **${vol}%**`)] }).catch(() => {})
+  },
+}

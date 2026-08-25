@@ -9,8 +9,8 @@ const path = require("path");
 module.exports = {
     name: path.parse(__filename).name,
     category: "🕹️ Fun",
-    usage: `${path.parse(__filename).name} [@User]`,
-    description: "*Image cmd in the style:* " + path.parse(__filename).name,
+    usage: `${path.parse(__filename).name} [@Usuario]`,
+    description: "*Comando de imagen al estilo:* " + path.parse(__filename).name,
     type: "user",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -37,10 +37,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
-                        .setAuthor(
-                            "Getting Image Data..",
-                            "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif"
-                        ),
+                        .setAuthor({ name: "Obteniendo datos de imagen...", iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif" }),
                 ],
             });
             //find the USER
@@ -60,13 +57,12 @@ module.exports = {
             }
             let avatar = user.displayAvatarURL({
                 dynamic: false,
-                format: "png",
             });
             let image = await canvacord.Canvas.rip(avatar);
             let attachment = await new Discord.AttachmentBuilder(image, "rip.png");
             let fastembed2 = new Discord.EmbedBuilder()
                 .setFooter(client.getFooter(es))
-                .setAuthor(`Meme for: ${user.tag}`, avatar)
+                .setAuthor({ name: `Meme para: ${user.username}`, iconURL: avatar })
                 .setColor(es.color)
                 .setImage("attachment://rip.png");
             await message.reply({ embeds: [fastembed2], files: [attachment] });
@@ -87,10 +83,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

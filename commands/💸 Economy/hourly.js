@@ -48,7 +48,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["hourly"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["hourly"]["variable3"])),
                     ],
@@ -75,7 +75,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["hourly"]["variable4"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["hourly"]["variable5"])),
                 ],
@@ -96,10 +96,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -1,54 +1,28 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const playermanager = require(`../../handlers/playermanager`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder, PermissionFlagsBits } = require('discord.js')
 module.exports = {
-    name: `playtop`,
-    category: `Song`,
-    aliases: [`ptop`, `pt`],
-    description: `Adds a song with the given name/url on the top of the queue`,
-    usage: `playtop <link/query>`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    type: "queue",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        //if no args added return error message if allowed to send an embed
-        if (!args[0])
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setTitle(eval(client.la[ls]["cmds"]["music"]["playtop"]["variable1"])),
-                ],
-            });
-        return playermanager(client, message, args, `playtop:youtube`);
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'playtop', category: '🎶 Music',
+  aliases: ['pt', 'playnext'],
+  description: 'Añade una canción al inicio de la cola',
+  usage: 'playtop <canción>',
+  parameters: { type: 'music', activeplayer: false, previoussong: false },
+  run: async (client, message, args) => {
+    const query = args.join(' ')
+    if (!query) return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Ingresa el nombre de la canción.')] }).catch(() => {})
+    const voiceChannel = message.member?.voice?.channel
+    if (!voiceChannel) return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Únete a un canal de voz.')] }).catch(() => {})
+    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription('🔎 Buscando...')] })
+    try {
+      const player = await client.music.joinChannel(message.guild.id, voiceChannel.id, message.channel.id)
+      const result = await client.music.search(query, message.author)
+      if (!result?.tracks?.length) return loading.edit({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No se encontraron resultados.')] }).catch(() => {})
+      const state  = client.music.getState(message.guild.id)
+      const track  = result.tracks[0]
+      state.queue.unshift(track)
+      if (!state.currentTrack) await client.music._playNext(message.guild.id, player)
+      const info = track.info || track
+      loading.edit({ embeds: [new EmbedBuilder().setColor(0x57F287).setDescription(`⬆️ **${info.title || query}** añadida al inicio de la cola.`)] }).catch(() => {})
+    } catch (e) {
+      loading.edit({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ ${e.message || e}`)] }).catch(() => {})
+    }
+  },
+}

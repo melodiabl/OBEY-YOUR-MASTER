@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits,
+    ButtonStyle
+} = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require("ms");
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
@@ -8,7 +10,7 @@ module.exports = {
     name: "loadbackup",
     aliases: ["load-backup", "lbackup", "backupload"],
     category: "🚫 Administration",
-    description: "Load a Backup of the Server",
+    description: "Load a Backup of the Servidor",
     usage: "loadbackup <serverId (usually the same server)> <backupid>",
     type: "server",
     cooldown: 120,
@@ -16,16 +18,16 @@ module.exports = {
         let server = client.guilds.cache.get(args[0]);
         if (!server)
             return message.reply(
-                `<:no:833101993668771842> **You forgot to add from which Server i should load the Backup in here**\n> Type: \`${prefix}loadbackup <ServerId> <BackupId>\``
+                `<:no:833101993668771842> **You forgot to add from which Servidor i should load the Backup in here**\n> Type: \`${prefix}loadbackup <ServerId> <BackupId>\``
             );
-        if (!server.me.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
+        if (!server.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
             return message.reply(
-                `<:no:833101993668771842> **I am missing the ADMINISTRATOR Permission in ${server.name}!**`
+                `<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso in ${server.name}!**`
             );
         }
-        if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
+        if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
             return message.reply(
-                `<:no:833101993668771842> **I am missing the ADMINISTRATOR Permission in ${server.name}!**`
+                `<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso in ${server.name}!**`
             );
         }
         let owner = await server.fetchOwner().catch(e => {
@@ -35,7 +37,7 @@ module.exports = {
             return message.reply("Could not get owner of this guild");
         });
         if (owner.id != cmduser.id || owner2.id != cmduser.id) {
-            return message.reply(`<:no:833101993668771842> **You need to be Owner in both Servers!**`);
+            return message.reply(`<:no:833101993668771842> **You need to be Propietario in both Servers!**`);
         }
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -60,7 +62,7 @@ module.exports = {
             !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
             !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
             ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-            !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+            !message.member.permissions.has([PermissionFlagsBits.Administrator])
         )
             return message.reply({
                 embeds: [
@@ -105,7 +107,7 @@ module.exports = {
                 content: `⚠️ **THIS WILL CLEAR ALL CURRENT GUILD DATA!** ⚠️\n> This cannot be undone!`,
                 components: [
                     new Discord.ActionRowBuilder().addComponents([
-                        new Discord.ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setLabel("Continue").setCustomId("verified"),
+                        new Discord.ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel("Continue").setCustomId("verified"),
                     ]),
                 ],
             })
@@ -153,23 +155,14 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setAuthor(
-                                `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                message.author.displayAvatarURL({ dynamic: true })
-                            )
+                            .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]))
-                            .addField(
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                            )
-                            .addField(
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                            )
+                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                             .setTimestamp()
                             .setFooter(client.getFooter(
                                     "ID: " + message.author.id,
-                                    message.author.displayAvatarURL({ dynamic: true })
+                                    message.author.displayAvatarURL()
                                 )
                             ),
                     ],

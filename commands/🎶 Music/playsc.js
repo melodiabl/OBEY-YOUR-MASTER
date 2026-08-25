@@ -1,72 +1,11 @@
-const Discord = require(`discord.js`);
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const playermanager = require(`../../handlers/playermanager`);
-const { allEmojis } = require("../../botconfig/emojiFunctions");
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
 module.exports = {
-    name: `playsc`,
-    category: `🎶 Music`,
-    aliases: [`psc`, `playsoundcloud`],
-    description: `Plays a song from soundcloud`,
-    usage: `playsc <Song / URL>`,
-    parameters: {
-        type: "music",
-        activeplayer: false,
-        previoussong: false,
-    },
-    type: "queuesong",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //if no args return error
-            if (!args[0])
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["playsc"]["variable1"])),
-                    ],
-                });
-            message.react("🔎").catch(() => {});
-            message.react(allEmojis.msg.youtube).catch(() => {});
-            //play the song as SOUNDCLOUD
-            playermanager(client, message, args, `song:soundcloud`);
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["playsc"]["variable2"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'playsc', category: '🎶 Music',
+  aliases: ["psc"],
+  description: 'Reproduce en SoundCloud',
+  usage: 'playsc',
+  parameters: { type: 'music', activeplayer: false, previoussong: false },
+  run: async (client, message) => {
+    message.reply({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription('> Usa el comando `/play` en Discord.')] }).catch(() => {})
+  },
+}

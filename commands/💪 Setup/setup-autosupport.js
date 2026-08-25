@@ -1,4 +1,6 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -12,8 +14,8 @@ module.exports = {
     aliases: ["setupautosupport", "autosupport-setup", "autosupportsetup", "autosupportsystem"],
     cooldown: 5,
     usage: "setup-autosupport --> Follow Steps",
-    description: "Manage up to 25 different Auto-Support Messages in a DISCORD-MENU",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Administra hasta 25 mensajes de soporte automático diferentes en un menú de Discord",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -30,7 +32,7 @@ module.exports = {
                 for (let i = 1; i <= 100; i++) {
                     menuoptions.push({
                         value: `${i}. Auto Support`,
-                        description: `Manage/Edit the ${i}. Auto Support Setup`,
+                        description: `Manage/Edit the ${i}. Auto Support Configuración`,
                         emoji: NumberEmojiIds[i],
                     });
                 }
@@ -40,7 +42,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Auto Support System!")
+                        .setPlaceholder("¡Haz clic para configurar the Auto Support System!")
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -58,7 +60,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Auto Support System!")
+                        .setPlaceholder("¡Haz clic para configurar the Auto Support System!")
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -76,7 +78,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Auto Support System!")
+                        .setPlaceholder("¡Haz clic para configurar the Auto Support System!")
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -94,7 +96,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Auto Support System!")
+                        .setPlaceholder("¡Haz clic para configurar the Auto Support System!")
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -110,13 +112,11 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        client.getAuthor(
+                    .setAuthor(client.getAuthor(
                             "Auto Support Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png",
-                            "https://discord.gg/milrato"
-                        )
-                    )
+                            "https://github.com/melodiabl"
+                        ))
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
 
                 //send the menu msg
@@ -129,7 +129,7 @@ module.exports = {
                         row4,
                         new ActionRowBuilder().addComponents(
                             new ButtonBuilder()
-                                .setStyle(Discord.ButtonStyle.Link)
+                                .setStyle(ButtonStyle.Link)
                                 .setURL("https://youtu.be/QGESDc31d4U")
                                 .setLabel("Tutorial Video")
                                 .setEmoji(allEmojis.msg.youtube)
@@ -156,14 +156,14 @@ module.exports = {
                         second_layer();
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`,
                     });
@@ -193,7 +193,7 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Send the Config	Message",
-                        description: `(Re) Send the auto-responding Support Message (with MENU)`,
+                        description: `(Re) Send the auto-responding Support Mensaje (with MENU)`,
                         emoji: "👍",
                     },
                     {
@@ -217,7 +217,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
-                    .setPlaceholder("Click me to setup the Auto-Support System!")
+                    .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -232,11 +232,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Auto Support Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/question-mark_2753.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Auto Support Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/question-mark_2753.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -260,14 +256,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values.length > 0 ? collected.first().values[0] : "Nothing"}\`**`,
                     });
@@ -290,7 +286,7 @@ module.exports = {
                                         .setColor(es.color)
                                         .setTitle("What should be the Text to display in the Embed?")
                                         .setDescription(
-                                            `For Example:\n> \`\`\`To get general Help for our Server and our Topics, make sure to select the right option!\`\`\``
+                                            `For Example:\n> \`\`\`To get general Help for our Servidor and our Topics, make sure to select the right option!\`\`\``
                                         ),
                                 ],
                             });
@@ -306,9 +302,9 @@ module.exports = {
                                     embeds: [
                                         new EmbedBuilder()
                                             .setColor(es.color)
-                                            .setTitle("In where should I send the Auto-Support Message?")
+                                            .setTitle("In where should I send the Auto-Support Mensaje?")
                                             .setDescription(
-                                                `Please Ping the Channel now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`
+                                                `Por favor Ping the Canal now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`
                                             ),
                                     ],
                                 });
@@ -399,11 +395,11 @@ module.exports = {
                                             );
                                         });
                                 } else {
-                                    return message.reply("<:no:833101993668771842> **You did not ping a valid Channel!**");
+                                    return message.reply("<:no:833101993668771842> **You did not ping a valid Canal!**");
                                 }
                             } else {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**"
+                                    "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
                                 );
                             }
                         }
@@ -436,7 +432,7 @@ module.exports = {
                             if (collected && collected.first().content) {
                                 if (!collected.first().content.includes("++"))
                                     return message.reply(
-                                        "<:no:833101993668771842> **Invalid Usage! Please mind the Usage and check the Example**"
+                                        "<:no:833101993668771842> **No válido Usage! Por favor mind the Usage and check the Example**"
                                     );
                                 let value = collected.first().content.split("++")[0].trim().substring(0, 25);
                                 let index2 = data.findIndex(v => v.value == value);
@@ -455,12 +451,12 @@ module.exports = {
                                     components: [
                                         new ActionRowBuilder().addComponents([
                                             new ButtonBuilder()
-                                                .setStyle(Discord.ButtonStyle.Success)
+                                                .setStyle(ButtonStyle.Success)
                                                 .setLabel("In an Embed")
                                                 .setEmoji("✅")
                                                 .setCustomId("yes"),
                                             new ButtonBuilder()
-                                                .setStyle(Discord.ButtonStyle.Danger)
+                                                .setStyle(ButtonStyle.Danger)
                                                 .setLabel("Not in an Embed")
                                                 .setEmoji("❌")
                                                 .setCustomId("no"),
@@ -487,10 +483,10 @@ module.exports = {
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setTitle(
-                                                        "What should be the Reply Message Content when someone Selects an Auto-Support-Option?"
+                                                        "What should be the Reply Mensaje Content when someone Selects an Auto-Support-Option?"
                                                     )
                                                     .setDescription(
-                                                        `For Example:\n> \`\`\`{user} Make sure to check out #ticket-support Channel to open a Ticket!\`\`\``
+                                                        `For Example:\n> \`\`\`{user} Make sure to check out #ticket-support Canal to open a Ticket!\`\`\``
                                                     ),
                                             ],
                                         });
@@ -593,14 +589,14 @@ module.exports = {
                                                             .setColor(es.color)
                                                             .setTitle("Successfully added the New Data to the List!")
                                                             .setDescription(
-                                                                `Make sure to re-send the Message, so that it's also updating it!\n> \`${prefix}setup-autosupport\` --> Send Config Message`
+                                                                `Make sure to re-send the Mensaje, so that it's also updating it!\n> \`${prefix}setup-autosupport\` --> Send Config Mensaje`
                                                             ),
                                                     ],
                                                 });
                                             }
                                         } else {
                                             return message.reply(
-                                                "<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**"
+                                                "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
                                             );
                                         }
                                     }
@@ -608,14 +604,14 @@ module.exports = {
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     tempmsg.edit({
-                                        embeds: [tempmsg.embeds[0].setDescription(`~~${tempmsg.embeds[0].description}~~`)],
+                                        embeds: [tempEmbedBuilder.from(msg.embeds[0]).setDescription(`~~${tempmsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.customId : "Nothing | CANCELLED"}\`**`,
                                     });
                                 });
                             } else {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**"
+                                    "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
                                 );
                             }
                         }
@@ -646,7 +642,7 @@ module.exports = {
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(1)
                                 .setMinValues(1)
-                                .setPlaceholder("Click me to setup the Auto-Support System!")
+                                .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
                                 .addOptions(
                                     data.map((option, index) => {
                                         let Obj = {
@@ -672,7 +668,7 @@ module.exports = {
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1)
                                         .setMinValues(1)
-                                        .setPlaceholder("Click me to setup the Auto-Support System!")
+                                        .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
                                         .addOptions(
                                             data.map((option, index) => {
                                                 let Obj = {
@@ -721,7 +717,7 @@ module.exports = {
                                     if (collected && collected.first().content) {
                                         if (!collected.first().content.includes("++"))
                                             return message.reply(
-                                                "<:no:833101993668771842> **Invalid Usage! Please mind the Usage and check the Example**"
+                                                "<:no:833101993668771842> **No válido Usage! Por favor mind the Usage and check the Example**"
                                             );
                                         let value = collected.first().content.split("++")[0].trim().substring(0, 25);
                                         let index2 = data.findIndex(v => v.value == value);
@@ -740,12 +736,12 @@ module.exports = {
                                             components: [
                                                 new ActionRowBuilder().addComponents([
                                                     new ButtonBuilder()
-                                                        .setStyle(Discord.ButtonStyle.Success)
+                                                        .setStyle(ButtonStyle.Success)
                                                         .setLabel("In an Embed")
                                                         .setEmoji("✅")
                                                         .setCustomId("yes"),
                                                     new ButtonBuilder()
-                                                        .setStyle(Discord.ButtonStyle.Danger)
+                                                        .setStyle(ButtonStyle.Danger)
                                                         .setLabel("Not in an Embed")
                                                         .setEmoji("❌")
                                                         .setCustomId("no"),
@@ -772,10 +768,10 @@ module.exports = {
                                                         new EmbedBuilder()
                                                             .setColor(es.color)
                                                             .setTitle(
-                                                                "What should be the Reply Message Content when someone Selects an Auto-Support-Option?"
+                                                                "What should be the Reply Mensaje Content when someone Selects an Auto-Support-Option?"
                                                             )
                                                             .setDescription(
-                                                                `For Example:\n> \`\`\`{user} Make sure to check out #ticket-support Channel to open a Ticket!\`\`\``
+                                                                `For Example:\n> \`\`\`{user} Make sure to check out #ticket-support Canal to open a Ticket!\`\`\``
                                                             ),
                                                     ],
                                                 });
@@ -879,7 +875,7 @@ module.exports = {
                                                     }
                                                 } else {
                                                     return message.reply(
-                                                        "<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**"
+                                                        "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
                                                     );
                                                 }
                                             }
@@ -888,7 +884,7 @@ module.exports = {
                                         collector.on("end", collected => {
                                             tempmsg.edit({
                                                 embeds: [
-                                                    tempmsg.embeds[0].setDescription(`~~${tempmsg.embeds[0].description}~~`),
+                                                    tempEmbedBuilder.from(msg.embeds[0]).setDescription(`~~${tempmsg.embeds[0].description}~~`),
                                                 ],
                                                 components: [],
                                                 content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.customId : "Nothing | CANCELLED"}\`**`,
@@ -896,19 +892,19 @@ module.exports = {
                                         });
                                     } else {
                                         return message.reply(
-                                            "<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**"
+                                            "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
                                         );
                                     }
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                     components: [],
                                     content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**`,
                                 });
@@ -941,7 +937,7 @@ module.exports = {
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(data.length)
                                 .setMinValues(1)
-                                .setPlaceholder("Click me to setup the Auto-Support System!")
+                                .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
                                 .addOptions(
                                     data.map((option, index) => {
                                         let Obj = {
@@ -967,7 +963,7 @@ module.exports = {
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1)
                                         .setMinValues(1)
-                                        .setPlaceholder("Click me to setup the Auto-Support System!")
+                                        .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
                                         .addOptions(
                                             data.map((option, index) => {
                                                 let Obj = {
@@ -1004,14 +1000,14 @@ module.exports = {
                                     );
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                     components: [],
                                     content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**`,
                                 });
@@ -1036,10 +1032,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

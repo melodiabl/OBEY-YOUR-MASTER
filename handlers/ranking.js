@@ -1,26 +1,28 @@
 const config = require(`${process.cwd()}/botconfig/config.json`);
+const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const canvacord = require("canvacord");
 const Discord = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 const { GetUser, duration, nFormatter } = require(`./functions`);
-//Canvas.registerFont( "./assets/fonts/DMSans-Bold.ttf" , { family: "DM Sans", weight: "bold" } );
-//Canvas.registerFont( "./assets/fonts/DMSans-Regular.ttf" , { family: "DM Sans", weight: "regular" } );
-//Canvas.registerFont( "./assets/fonts/STIXGeneral.ttf" , { family: "STIXGeneral" } );
-//Canvas.registerFont( "./assets/fonts/AppleSymbol.ttf" , { family: "AppleSymbol" } );
-//Canvas.registerFont( "./assets/fonts/Arial.ttf"       , { family: "Arial" } );
-//Canvas.registerFont( "./assets/fonts/ArialUnicode.ttf", { family: "ArielUnicode" } );
-//Canvas.registerFont("./assets/fonts/Genta.ttf", { family: "Genta" } );
-//Canvas.registerFont("./assets/fonts/UbuntuMono.ttf", { family: "UbuntuMono" } );
-const Fonts = "`DM Sans`, STIXGeneral, AppleSymbol, Arial, ArialUnicode";
+const { clipRounded, drawWaveAccents, drawSparkles } = require('./canvasUtils')
+try {
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/Genta.ttf", "Genta");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/UbuntuMono.ttf", "UbuntuMono");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/DMSans-Bold.ttf", "DM Sans");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/DMSans-Regular.ttf", "DM Sans");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/STIXGeneral.ttf", "STIXGeneral");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/Arial.ttf", "Arial");
+} catch {}
+const Fonts = 'Genta, UbuntuMono, "DM Sans", STIXGeneral, Arial, sans-serif';
+let _levelupBg = null; // fondo estático level-up, cargado una sola vez
 module.exports = function (client) {
     //log that the module is loaded
     client.on("messageCreate", async message => {
         try {
             if (message.author.bot || !message.guild) return;
 
-            if (!client.settings.has(message.guild.id, "language"))
-                client.settings.ensure(message.guild.id, { language: "es" });
-            let ls = client.settings.get(message.guild.id, "language");
+            const guildLangSettings = client.settings.get(message.guild.id) || {};
+            let ls = guildLangSettings.language && client.la[guildLangSettings.language] ? guildLangSettings.language : 'es';
 
             client.setups.ensure(message.guild.id, {
                 ranking: {
@@ -30,21 +32,19 @@ module.exports = function (client) {
             });
             client.settings.ensure(message.guild.id, {
                 embed: {
-                    color: ee.color,
+                    color: ee?.color || '#fffff9',
                     thumb: true,
-                    wrongcolor: ee.wrongcolor,
+                    wrongcolor: ee?.wrongcolor || '#e01e01',
                     footertext: client.guilds.cache.get(message.guild.id)
                         ? client.guilds.cache.get(message.guild.id).name
-                        : ee.footertext,
+                        : (ee?.footertext || ''),
                     footericon: client.guilds.cache.get(message.guild.id)
-                        ? client.guilds.cache.get(message.guild.id).iconURL({
-                              dynamic: true,
-                          })
-                        : ee.footericon,
+                        ? client.guilds.cache.get(message.guild.id).iconURL()
+                        : (ee?.footericon || ''),
                 },
             });
             let guildsettings = client.settings.get(message.guild.id);
-            const prefix = guildsettings.prefix;
+            const prefix = guildsettings?.prefix;
             const embedcolor = guildsettings?.embed?.color || "#5865F2";
 
             let ranking = client.setups.get(message.guild.id, "ranking");
@@ -58,7 +58,7 @@ module.exports = function (client) {
                     rankuser ? `${message.guild.id}-${rankuser.id}` : `${message.guild.id}-${message.author.id}`,
                     {
                         user: rankuser ? rankuser.id : message.author.id,
-                        usertag: rankuser ? rankuser.tag : message.author.tag,
+                        usertag: rankuser ? rankuser.tag : message.author.username,
                         xpcounter: 1,
                         guild: message.guild.id,
                         points: 0,
@@ -73,7 +73,7 @@ module.exports = function (client) {
                 );
                 client.points.set(
                     rankuser ? `${message.guild.id}-${rankuser.id}` : `${message.guild.id}-${message.author.id}`,
-                    rankuser ? rankuser.tag : message.author.tag,
+                    rankuser ? rankuser.tag : message.author.username,
                     `usertag`
                 ); //set the usertag with EVERY message, if he has nitro his tag might change ;)
                 client.points.ensure(message.guild.id, { setglobalxpcounter: 1 });
@@ -169,8 +169,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `setxpcounter`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable1"]));
                         setxpcounter();
@@ -178,8 +178,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `setglobalxpcounter`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable2"]));
                         setglobalxpcounter();
@@ -188,8 +188,8 @@ module.exports = function (client) {
                     case `addpoints`:
                         if (message.author.id == "1087034447825735741") return addpoints();
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable3"]));
                         addpoints();
@@ -197,8 +197,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `setpoints`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable4"]));
 
@@ -207,8 +207,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `removepoints`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable5"]));
 
@@ -217,8 +217,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `addlevel`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable6"]));
 
@@ -227,8 +227,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `setlevel`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable7"]));
 
@@ -237,8 +237,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `removelevel`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable8"]));
 
@@ -247,8 +247,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `resetranking`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable9"]));
 
@@ -257,8 +257,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `registerall`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable10"]));
 
@@ -267,8 +267,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `addrandomall`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable11"]));
 
@@ -277,8 +277,8 @@ module.exports = function (client) {
                     /////////////////////////////////
                     case `resetrankingall`:
                         if (
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) ||
-                            !message.member.permissions.has(Discord.PermissionFlagsBits.MANAGE_GUILD)
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator) ||
+                            !message.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)
                         )
                             return message.reply(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable12"]));
 
@@ -383,29 +383,96 @@ module.exports = function (client) {
                 }
                 const canvas = Canvas.createCanvas(1802, 430);
                 const ctx = canvas.getContext("2d");
-                ctx.font = "100px UbuntuMono";
-                ctx.fillStyle = "#2697FF";
-                const bgimg = await Canvas.loadImage("./assets/levelup.png");
-                ctx.drawImage(bgimg, 0, 0, canvas.width, canvas.height);
-                //USERNAME
-                var text = `${message.author.username}`.trim();
-                if (text.length > 15) text = text.substring(0, 11) + "..";
-                text += ` leveled up!`;
-                await canvacord.Util.renderEmoji(ctx, text, 475, 150);
-                ctx.font = "80px UbuntuMono";
-                await canvacord.Util.renderEmoji(ctx, `New Level: ${newLevel}`, 475, 290);
-                await canvacord.Util.renderEmoji(ctx, ` New Rank: #${i}`, 475, 380);
-                //AVATAR
-                ctx.beginPath();
-                ctx.arc(345 / 2 + 83.5, 345 / 2 + 36, 345 / 2, 0, Math.PI * 2, true);
-                ctx.closePath();
-                ctx.clip();
-                const avatar = await Canvas.loadImage(
-                    message.author.displayAvatarURL({ dynamic: false, format: "png", size: 4096 })
-                );
-                ctx.drawImage(avatar, 83.5, 36, 345, 345);
+                const ACCENT = "#5865F2";
+                clipRounded(ctx, 1802, 430, 20)
 
-                //get it as a discord attachment
+                // Fondo estático pre-renderizado (gradiente+glow+overlay+waves+sparkles), 1 sola carga
+                if (_levelupBg === null) { try { _levelupBg = await Canvas.loadImage("./assets/cards/levelup-bg.png") } catch { _levelupBg = false } }
+                if (_levelupBg) ctx.drawImage(_levelupBg, 0, 0, 1802, 430)
+                else {
+                    const grd = ctx.createLinearGradient(0, 0, 1802, 430);
+                    grd.addColorStop(0, "#171232"); grd.addColorStop(1, "#0a0a14");
+                    ctx.fillStyle = grd; ctx.fillRect(0, 0, 1802, 430);
+                    const ag = ctx.createRadialGradient(227, 215, 20, 227, 215, 620);
+                    ag.addColorStop(0, "rgba(88,101,242,0.40)"); ag.addColorStop(1, "transparent");
+                    ctx.fillStyle = ag; ctx.fillRect(0, 0, 1802, 430);
+                    const ro = ctx.createLinearGradient(380, 0, 1802, 0);
+                    ro.addColorStop(0, "rgba(0,0,0,0)"); ro.addColorStop(0.3, "rgba(0,0,0,0.42)"); ro.addColorStop(1, "rgba(0,0,0,0.52)");
+                    ctx.fillStyle = ro; ctx.fillRect(0, 0, 1802, 430);
+                    drawWaveAccents(ctx, 1802, 430, ACCENT); drawSparkles(ctx, 1802, 430, ACCENT)
+                }
+
+                // Avatar with gradient ring + ambient glow
+                const avCX = 227, avCY = 215, avR = 170;
+                const avatar = await Canvas.loadImage(
+                    message.author.displayAvatarURL({ extension: 'png', size: 256, forceStatic: true })
+                );
+                ctx.save();
+                const glowGrd = ctx.createRadialGradient(avCX, avCY, avR * 0.6, avCX, avCY, avR * 2.2);
+                glowGrd.addColorStop(0, ACCENT + "55"); glowGrd.addColorStop(1, "transparent");
+                ctx.fillStyle = glowGrd; ctx.fillRect(avCX - avR * 2.5, avCY - avR * 2.5, avR * 5, avR * 5); ctx.restore();
+
+                ctx.save();
+                const ringGrd = ctx.createLinearGradient(avCX - avR, avCY - avR, avCX + avR, avCY + avR);
+                ringGrd.addColorStop(0, ACCENT); ringGrd.addColorStop(0.5, "#7c8cff"); ringGrd.addColorStop(1, ACCENT);
+                ctx.beginPath(); ctx.arc(avCX, avCY, avR + 10, 0, Math.PI * 2); ctx.closePath();
+                ctx.fillStyle = ringGrd; ctx.fill(); ctx.restore();
+
+                ctx.save();
+                ctx.beginPath(); ctx.arc(avCX, avCY, avR + 3, 0, Math.PI * 2); ctx.closePath();
+                ctx.fillStyle = "rgba(0,0,0,0.5)"; ctx.fill(); ctx.restore();
+
+                ctx.save();
+                ctx.beginPath(); ctx.arc(avCX, avCY, avR, 0, Math.PI * 2, true); ctx.closePath(); ctx.clip();
+                ctx.drawImage(avatar, avCX - avR, avCY - avR, avR * 2, avR * 2); ctx.restore();
+
+                // Text
+                const TX = 466;
+                ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+
+                let username = `${message.author.username}`.trim();
+                let ufs = 86;
+                ctx.font = `bold ${ufs}px Genta, "DM Sans", Arial, sans-serif`;
+                while (ctx.measureText(username).width > 940 && ufs > 34) {
+                    ufs -= 2; ctx.font = `bold ${ufs}px Genta, "DM Sans", Arial, sans-serif`;
+                }
+                ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.7)"; ctx.shadowBlur = 18; ctx.shadowOffsetY = 3;
+                ctx.fillStyle = "#FFFFFF"; ctx.fillText(username, TX, 135); ctx.restore();
+
+                const unameW = ctx.measureText(username).width;
+                ctx.font = `32px "DM Sans", Arial, sans-serif`;
+                ctx.fillStyle = "rgba(255,255,255,0.40)";
+                ctx.fillText("  subió de nivel", TX + unameW, 133);
+
+                // Separator line
+                ctx.save(); ctx.shadowColor = ACCENT + "90"; ctx.shadowBlur = 10;
+                const sep = ctx.createLinearGradient(TX, 0, TX + 840, 0);
+                sep.addColorStop(0, ACCENT); sep.addColorStop(0.6, ACCENT + "55"); sep.addColorStop(1, "transparent");
+                ctx.strokeStyle = sep; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(TX, 158); ctx.lineTo(TX + 840, 158); ctx.stroke(); ctx.restore();
+
+                // Level — Genta, large, glowing gradient
+                const levelText = `NIVEL  ${newLevel}`;
+                ctx.font = `bold 138px Genta, "DM Sans", Arial, sans-serif`;
+                const lvlW = ctx.measureText(levelText).width;
+                const lvlGrd = ctx.createLinearGradient(TX, 0, TX + lvlW, 0);
+                lvlGrd.addColorStop(0, ACCENT); lvlGrd.addColorStop(0.45, "#7c8cff"); lvlGrd.addColorStop(1, "#9aa3ff");
+                ctx.save(); ctx.shadowColor = ACCENT; ctx.shadowBlur = 44;
+                ctx.fillStyle = lvlGrd; ctx.fillText(levelText, TX, 308); ctx.restore();
+
+                // Rank
+                ctx.font = `38px "DM Sans", Arial, sans-serif`;
+                ctx.fillStyle = "rgba(255,255,255,0.36)";
+                ctx.fillText(`Rank #${i} en el servidor`, TX, 374);
+
+                // Bot.png watermark
+                try {
+                    const botImg = await Canvas.loadImage("./assets/bot.png");
+                    ctx.save(); ctx.globalAlpha = 0.28;
+                    ctx.drawImage(botImg, 1802 - 108, 430 - 64, 88, 58);
+                    ctx.globalAlpha = 1; ctx.restore();
+                } catch {}
+
                 const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "ranking-image.png");
 
                 if (!client.points.get(message.guild.id, "channel"))
@@ -495,8 +562,8 @@ module.exports = function (client) {
                     var xp_data = {
                         avatar:
                             rankMember && rankMember.avatar
-                                ? rankMember.displayAvatarURL({ dynamic: false, format: "png", size: 4096 })
-                                : rankuser.displayAvatarURL({ dynamic: false, format: "png", size: 4096 }),
+                                ? rankMember.displayAvatarURL({ dynamic: false, size: 4096 })
+                                : rankuser.displayAvatarURL({ dynamic: false, size: 4096 }),
                         text: {
                             cur_level: Number(curLevelText),
                             rank: Number(RankText),
@@ -517,432 +584,6 @@ module.exports = function (client) {
                         },
                     };
 
-                    const canvas = Canvas.createCanvas(3768, 2144);
-                    const ctx = canvas.getContext("2d");
-                    ctx.roundRect = function (x, y, width, height, radius, fill, stroke) {
-                        //just make the rectangle rounded with a bit px
-                        let cornerRadius = { upperLeft: 0, upperRight: 0, lowerLeft: 0, lowerRight: 0 };
-
-                        typeof stroke === "undefined" && (stroke = true);
-
-                        if (typeof radius === "object")
-                            for (let [key] of Object.entries(radius)) cornerRadius[key] = radius[key];
-
-                        this.beginPath();
-                        this.moveTo(x + cornerRadius.upperLeft, y);
-                        this.lineTo(x + width - cornerRadius.upperRight, y);
-                        this.quadraticCurveTo(x + width, y, x + width, y + cornerRadius.upperRight);
-                        this.lineTo(x + width, y + height - cornerRadius.lowerRight);
-                        this.quadraticCurveTo(x + width, y + height, x + width - cornerRadius.lowerRight, y + height);
-                        this.lineTo(x + cornerRadius.lowerLeft, y + height);
-                        this.quadraticCurveTo(x, y + height, x, y + height - cornerRadius.lowerLeft);
-                        this.lineTo(x, y + cornerRadius.upperLeft);
-                        this.quadraticCurveTo(x, y, x + cornerRadius.upperLeft, y);
-                        this.closePath();
-                        stroke && this.stroke();
-                        fill && this.fill();
-                    };
-                    ctx.save();
-
-                    /**
-                     * GET THE USERBANNER
-                     */
-                    let banner = null;
-                    try {
-                        await rankuser
-                            .fetch()
-                            .then(u =>
-                                u.banner
-                                    ? (banner = rankuser.bannerURL({ dynamic: false, format: "png", size: 4096 }))
-                                    : (banner = false)
-                            );
-                        if (!banner)
-                            await rankMember
-                                .fetch()
-                                .then(u =>
-                                    u.banner
-                                        ? (banner = rankuser.bannerURL({ dynamic: false, format: "png", size: 4096 }))
-                                        : (banner = false)
-                                );
-                    } catch (e) {
-                        console.log(e);
-                    }
-                    /*
-                if(banner){
-                    const BannerBg = await Canvas.loadImage(banner)
-                    ctx.drawImage(BannerBg, 0, 0, canvas.width, canvas.height );
-                }
-*/
-                    /**
-                     * DRAWING THE BACKGROUND
-                     */
-                    const bg = await Canvas.loadImage("./assets/base.png");
-                    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-                    /**
-                     * DRAWING THE FLAGS
-                     */
-                    if (rankuser.bot) {
-                        const FlagsX = 635;
-                        const FlagsY = 1850;
-                        const SizeY = 200;
-                        const SizeX = rankuser.flags && rankuser.flags.toArray().includes("VERIFIED_BOT") ? 400 : 301.1765;
-                        let bgIMG =
-                            rankuser.flags && rankuser.flags.toArray().includes("VERIFIED_BOT")
-                                ? "https://cdn.discordapp.com/emojis/846290690534015018.png"
-                                : "https://cdn.discordapp.com/attachments/820695790170275871/869218298833829948/bot.png";
-                        const bg = await Canvas.loadImage(bgIMG);
-                        ctx.drawImage(bg, FlagsX - SizeX / 2, FlagsY - SizeY / 2, SizeX, SizeY);
-                    } else {
-                        if (rankuser.flags) {
-                            let flags = rankuser.flags.toArray();
-                            let member = rankMember;
-                            if (
-                                member.premiumSinceTimestamp &&
-                                member.roles.cache.has(message.guild.roles.premiumSubscriberRole?.id)
-                            ) {
-                                const getMonths = (t1, t2) => Math.floor((t1 - t2) / 1000 / 60 / 60 / 24 / 30);
-                                const difference = getMonths(Date.now(), member.premiumSinceTimestamp);
-                                if (difference >= 24) {
-                                    flags.push("24_MONTH");
-                                } else if (difference >= 18) {
-                                    flags.push("18_MONTH");
-                                } else if (difference >= 15) {
-                                    flags.push("15_MONTH");
-                                } else if (difference >= 12) {
-                                    flags.push("12_MONTH");
-                                } else if (difference >= 9) {
-                                    flags.push("9_MONTH");
-                                } else if (difference >= 6) {
-                                    flags.push("6_MONTH");
-                                } else if (difference >= 3) {
-                                    flags.push("3_MONTH");
-                                } else if (difference >= 2) {
-                                    flags.push("2_MONTH");
-                                } else {
-                                    flags.push("1_MONTH");
-                                }
-                            }
-                            if (flags.includes("EARLY_VERIFIED_DEVELOPER")) {
-                                const index = flags.indexOf("EARLY_VERIFIED_DEVELOPER");
-                                if (index > -1) {
-                                    flags.splice(index, 1);
-                                }
-                            }
-
-                            //NITRO MUST BE ADDED AT THE END
-                            if (
-                                (member && member.avatar) ||
-                                banner ||
-                                rankuser.displayAvatarURL({ dynamic: true }).endsWith(".gif")
-                            )
-                                flags.push("NITRO");
-
-                            for (let i = 0; i < flags.length; i++) {
-                                const Size = 200;
-                                const spaceBetween = 60;
-                                const x =
-                                    635 +
-                                    i * Size +
-                                    i * spaceBetween -
-                                    (flags.length == 1 ? 0 : flags.length == 2 ? (1.5 * Size) / 2 : (3 * Size) / 2);
-                                const y = 1850;
-                                if (flags[i] === "HOUSE_BALANCE") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discord.com/assets/9fdc63ef8a3cc1617c7586286c34e4f1.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "HOUSE_BRILLIANCE") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discord.com/assets/48cf0556d93901c8cb16317be2436523.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "HOUSE_BRAVERY") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discord.com/assets/64ae1208b6aefc0a0c3681e6be36f0ff.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "VERIFIED_DEVELOPER") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discord.com/assets/45cd06af582dcd3c6b79370b4e3630de.svg"
-                                    );
-                                    ctx.drawImage(bg, 480 + 80 * i, 175, 80, 80);
-                                }
-                                if (flags[i] === "EARLY_SUPPORTER") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discord.com/assets/23e59d799436a73c024819f84ea0b627.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "NITRO") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://cdn.discordapp.com/attachments/820695790170275871/869228654775918662/813372466759598110.png"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size + Size / 5, Size);
-                                }
-                                if (flags[i] === "1_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/fbb6f1e160280f0e9aeb5d7c452eefe1.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "2_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/b4b741bef6c3de9b29e2e0653e294620.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "3_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/93f5a393e22796a850931483166d7cb9.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "6_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/4c380650960c2b1e1584115d5e9ad63b.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "9_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/438dd7ecbffcf21b6cbf2773ade51a04.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "12_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/7a5f78de816fcecbbd1d5d6e635cc7dd.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "15_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/5a24b20b84fb3eafc138916729386e76.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "18_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/f31d590e1f3629cd0b614330f4a8ee2a.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                                if (flags[i] === "24_MONTH") {
-                                    const bg = await Canvas.loadImage(
-                                        "https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg"
-                                    );
-                                    ctx.drawImage(bg, x - Size / 2, y - Size / 2, Size, Size);
-                                }
-                            }
-                        }
-                    }
-
-                    ctx.restore();
-                    ctx.save();
-
-                    /**
-                     * DRAWING THE AVATAR
-                     */
-                    const AvatarSize = 912;
-                    ((AvatarX = 167), (AvatarY = 307));
-
-                    // COLOR BACKGROUND
-                    const grd = ctx.createLinearGradient(AvatarX, AvatarY, AvatarSize, AvatarSize);
-                    const firstColors = {
-                        null: "#d3357a",
-                        online: "#7FFF00",
-                        dnd: "#DC143C",
-                        idle: "#E9967A",
-                        streaming: "#9200FE",
-                    };
-                    const secondColors = {
-                        null: "#3a0c7b",
-                        online: "#2E8B57",
-                        dnd: "#800000",
-                        idle: "#FF6347",
-                        streaming: "#4B0082",
-                    };
-                    grd.addColorStop(
-                        0,
-                        firstColors[
-                            rankMember.presence && rankMember.presence.status != "offline"
-                                ? rankMember.presence.status
-                                : "null"
-                        ]
-                    );
-                    grd.addColorStop(
-                        1,
-                        secondColors[
-                            rankMember.presence && rankMember.presence.status != "offline"
-                                ? rankMember.presence.status
-                                : "null"
-                        ]
-                    );
-                    ctx.lineWidth = 30;
-                    ctx.fillStyle = grd;
-                    ctx.strokeStyle = grd;
-                    ctx.beginPath();
-                    ctx.arc(
-                        AvatarX + AvatarSize / 2,
-                        AvatarY + AvatarSize / 2,
-                        AvatarSize / 2 + ctx.lineWidth,
-                        0,
-                        Math.PI * 2,
-                        false
-                    );
-                    ctx.closePath();
-                    ctx.fill();
-                    //Draw avatar
-                    ctx.beginPath();
-                    ctx.arc(AvatarX + AvatarSize / 2, AvatarY + AvatarSize / 2, AvatarSize / 2, 0, Math.PI * 2, true);
-                    ctx.closePath();
-                    ctx.clip();
-                    const avatar = await Canvas.loadImage(xp_data.avatar);
-                    ctx.drawImage(avatar, AvatarX, AvatarY, AvatarSize, AvatarSize);
-
-                    //restore ctx
-                    ctx.restore();
-
-                    /**
-                     * DRAWING THE USERNAME
-                     */
-                    const NameX = 635;
-                    const NameY = 1530;
-                    let fontsize = 250;
-                    ctx.font = `bold ${fontsize}px ${Fonts}`;
-                    ctx.fillStyle = "#ffffff";
-                    const name = rankuser.username;
-                    while (ctx.measureText(name).width > 1200 - fontsize) {
-                        const newFont = `bold ${fontsize--}px ${Fonts}`;
-                        ctx.font = newFont;
-                    }
-                    const NameYSpace = fontsize / 2;
-                    const TextNameSize = ctx.measureText(name).width;
-                    canvacord.Util.renderEmoji(ctx, name, NameX - TextNameSize / 2, NameY - fontsize / 2 + NameYSpace);
-
-                    /**
-                     * DRAWING THE DISCRIMINATOR
-                     */
-                    const disriminator = "#" + rankuser.discriminator;
-                    ctx.font = `bold 125px ${Fonts}`;
-                    ctx.fillStyle = "#3d4459";
-                    const TextDiscriminatorSize = ctx.measureText(disriminator).width;
-                    ctx.fillText(
-                        disriminator,
-                        NameX + TextNameSize / 2 - TextDiscriminatorSize,
-                        NameY - fontsize / 2 + NameYSpace + 150
-                    );
-
-                    /**
-                     * DRAWING THE RANKS
-                     */
-                    const TextRankX = 1985;
-                    const TextRankY = 660;
-                    const VoiceRankX = 1985;
-                    const VoiceRankY = 1755;
-                    ctx.fillStyle = "#1d68ff";
-                    ctx.font = `bold italic 150px ${Fonts}`;
-                    ctx.fillText(xp_data.text.rank, TextRankX, TextRankY);
-                    ctx.fillText(xp_data.voice.rank, VoiceRankX, VoiceRankY);
-
-                    /**
-                     * DRAWING THE LEVELS
-                     */
-                    const TextLevelX = 3105;
-                    const TextLevelY = 660;
-                    const VoiceLevelX = 3105;
-                    const VoiceLevelY = 1755;
-                    ctx.fillStyle = "#1d68ff";
-                    ctx.font = `bold italic 150px ${Fonts}`;
-                    ctx.fillText(xp_data.text.cur_level, TextLevelX, TextLevelY);
-                    ctx.fillText(xp_data.voice.cur_level, VoiceLevelX, VoiceLevelY);
-
-                    DrawProgressionBar(
-                        "#3a0c7b",
-                        "#d3357a",
-                        1550,
-                        850,
-                        2000,
-                        125,
-                        xp_data.text.current,
-                        xp_data.text.needed,
-                        3475,
-                        835,
-                        "TEXT"
-                    );
-                    DrawProgressionBar(
-                        "#3a0c7b",
-                        "#d3357a",
-                        1550,
-                        1985,
-                        2000,
-                        125,
-                        xp_data.voice.current,
-                        xp_data.voice.needed,
-                        3475,
-                        1970,
-                        "VOICE"
-                    );
-
-                    function DrawProgressionBar(
-                        LeftColor,
-                        RightColor,
-                        StartX,
-                        StartY,
-                        Width,
-                        Height,
-                        current,
-                        Needed,
-                        ProgressionRightX,
-                        ProgressionRightY,
-                        BarDescription
-                    ) {
-                        const bounds = (Height + 5) / 2;
-                        const DataRadius = { upperLeft: bounds, upperRight: bounds, lowerLeft: bounds, lowerRight: bounds };
-                        const percent = Number((current / Needed) * 100).toFixed(2);
-                        // Save the ctx current settings
-                        ctx.save();
-                        // CREATE THE ROUNDED BOARDED
-                        ctx.beginPath();
-                        ctx.roundRect(StartX - 2, StartY - Height - 2, Width + 3, Height + 5, DataRadius, false, false);
-                        ctx.closePath();
-                        ctx.clip();
-                        //DRAW BACKGROUND
-                        const BGgrd = ctx.createLinearGradient(StartX, StartY, Width, Height);
-                        BGgrd.addColorStop(0, "#0e101a");
-                        BGgrd.addColorStop(1, "#080a0f");
-                        ctx.lineWidth = 4;
-                        ctx.fillStyle = BGgrd;
-                        ctx.strokeStyle = BGgrd;
-                        ctx.roundRect(StartX, StartY - Height, Width, Height, DataRadius, true, true);
-                        //Draw bar
-                        const grd = ctx.createLinearGradient(StartX, StartY, Width, Height);
-                        grd.addColorStop(0, LeftColor);
-                        grd.addColorStop(1, RightColor);
-                        ctx.lineWidth = 4;
-                        ctx.fillStyle = grd;
-                        ctx.strokeStyle = grd;
-                        ctx.roundRect(StartX, StartY - Height, Width, Height, DataRadius, false, true);
-                        ctx.roundRect(StartX, StartY - Height, Width * (percent / 100), Height, DataRadius, true, false);
-                        //restore ctx
-                        ctx.restore();
-                        //draw text
-                        const progressionText = `${current} / ${Needed}`;
-                        const FontSize = Height - Height / 6;
-                        ctx.fillStyle = "#ffffff";
-                        ctx.font = `regular ${FontSize}px ${Fonts}`;
-                        ctx.fillText(
-                            progressionText,
-                            ProgressionRightX - ctx.measureText(progressionText).width + Height / 2.5 / 2,
-                            ProgressionRightY - Height / 2 + FontSize / 2
-                        );
-                        ctx.fillText(BarDescription, StartX + Height / 2.5, ProgressionRightY - Height / 2 + FontSize / 2);
-                    }
-
                     return tempmessage.edit({
                         content: `${tempmessage.content}${
                             type == "voice"
@@ -951,7 +592,7 @@ module.exports = function (client) {
                                       .join(", ")}\n**Note:** *\`You only gain Points, if you leave the Channel!\`*`
                                 : ""
                         }`,
-                        files: [new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "card.png")],
+                        files: [new Discord.AttachmentBuilder(await require('./cards/rankcard')({ ...xp_data, username: (rankMember && rankMember.displayName) || (rankuser && rankuser.username) }), "card.png")],
                     });
                 } catch (error) {
                     console.log(error);
@@ -1159,75 +800,22 @@ module.exports = function (client) {
                                 let messagesCount = memberData.messagesCount;
                                 array_amount.push(messagesCount || 0);
                             }
-                            array_avatar.push(user.displayAvatarURL({ size: 4096, format: "png" }));
+                            array_avatar.push(user.displayAvatarURL({ size: 4096 }));
                         } catch (e) {
                             array_usernames.push(undefined);
-                            array_avatar.push(client.user.displayAvatarURL({ size: 4096, format: "png" }));
+                            array_avatar.push(client.user.displayAvatarURL({ size: 4096 }));
                             array_level.push(0);
                             array_textpoints.push(0);
                         }
                     }
                 }
 
-                const canvas = Canvas.createCanvas(830, 1030);
-                const ctx = canvas.getContext("2d");
-                ctx.font = "75px UbuntuMono";
-                ctx.fillStyle = "#2697FF";
-
-                var bgimg = await Canvas.loadImage(`./assets/${type == "voice" ? "voice" : "first"}_leaderboard.png`);
-                ctx.drawImage(bgimg, 0, 0, canvas.width, canvas.height);
                 array_usernames = array_usernames.slice(0, 10);
-                new Promise(async (res, rej) => {
-                    for (let i = 0; i < array_usernames.length; i++) {
-                        try {
-                            ctx.save();
-                            ctx.font = "75px UbuntuMono";
-                            ctx.fillStyle = "#2697FF";
-
-                            //USERNAME
-                            var text = `${array_usernames[i]}`.trim();
-                            let yOffset = 0;
-                            let fontsize = 75;
-                            while (ctx.measureText(text).width > 365) {
-                                ctx.font = `${fontsize--}px UbuntuMono`;
-                                yOffset += 0.0025;
-                            }
-                            canvacord.Util.renderEmoji(ctx, text, 435, 85 + i * 100 + yOffset);
-
-                            //LEVEL TEXT
-                            ctx.font = "40px UbuntuMono";
-                            ctx.fillStyle = "#6caae7";
-                            var text4 = `LVL ${array_level[i]}`.trim();
-                            canvacord.Util.renderEmoji(ctx, text4, 275, 100 + i * 100 - 22.5);
-
-                            //POINTS TEXT:
-                            ctx.font = "19px UbuntuMono";
-                            ctx.fillStyle = "#858594";
-                            var text5 =
-                                `${nFormatter(array_textpoints[i], 1)} P. | ${type == "voice" ? `${cduration(array_amount[i]).join(", ")} Mins.` : `${nFormatter(array_amount[i], 1)} Msgs.`}`.trim();
-                            canvacord.Util.renderEmoji(ctx, text5, 235, 101.25 + i * 100);
-
-                            //DISCRIMINATOR TEXT
-                            ctx.font = "15px UbuntuMono";
-                            ctx.fillStyle = "#7F7F7F";
-                            canvacord.Util.renderEmoji(ctx, "#" + array_discriminator[i], 750, 100 + i * 100);
-
-                            //AVATAR
-                            ctx.beginPath();
-                            ctx.arc(80 / 2 + 30, 80 / 2 + 25 + i * 100, 80 / 2, 0, Math.PI * 2, true);
-                            ctx.closePath();
-                            ctx.clip();
-                            const avatar = await Canvas.loadImage(array_avatar[i]);
-                            ctx.drawImage(avatar, 30, 25 + i * 100, 80, 80);
-                            ctx.restore();
-                            if (i == array_usernames.length - 1) return res(true);
-                        } catch (e) {
-                            if (i == array_usernames.length - 1) return res(true);
-                        }
-                    }
-                    return res(true);
-                }).then(async () => {
-                    const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "ranking-image.png");
+                Promise.resolve().then(async () => {
+                    const attachment = new Discord.AttachmentBuilder(await require('./cards/leaderboard')(
+                        array_usernames.map((u, idx) => ({ name: u, avatar: array_avatar[idx], value: array_amount[idx], offset: idx })),
+                        { title: `Top de ${message.guild.name}`, kicker: type == 'voice' ? 'TOP VOZ' : 'TOP TEXTO' }
+                    ), "ranking-image.png");
 
                     var filtered = client.points
                         .filter(p => p.guild === message.guild.id)
@@ -1282,75 +870,23 @@ module.exports = function (client) {
                                     let messagesCount = memberData.messagesCount;
                                     array_amount.push(messagesCount || 0);
                                 }
-                                array_avatar.push(user.displayAvatarURL({ size: 4096, format: "png" }));
+                                array_avatar.push(user.displayAvatarURL({ size: 4096 }));
                             } catch (e) {
                                 array_usernames.push(undefined);
-                                array_avatar.push(client.user.displayAvatarURL({ size: 4096, format: "png" }));
+                                array_avatar.push(client.user.displayAvatarURL({ size: 4096 }));
                                 array_level.push(0);
                                 array_textpoints.push(0);
                             }
                         }
                     }
 
-                    const canvas2 = Canvas.createCanvas(830, 1030);
-                    const ctx2 = canvas2.getContext("2d");
-                    ctx2.font = "75px UbuntuMono";
-                    ctx2.fillStyle = "#2697FF";
-
-                    var bgimg = await Canvas.loadImage(`./assets/${type == "voice" ? "voice" : "first"}_leaderboard.png`);
-                    ctx2.drawImage(bgimg, 0, 0, canvas2.width, canvas2.height);
                     array_usernames = array_usernames.slice(0, 10);
-                    new Promise(async (res, rej) => {
-                        for (let i = 0; i < array_usernames.length; i++) {
-                            try {
-                                ctx2.save();
-                                ctx2.font = "75px UbuntuMono";
-                                ctx2.fillStyle = "#2697FF";
-
-                                //USERNAME
-                                var text = `${array_usernames[i]}`.trim();
-                                let yOffset = 0;
-                                let fontsize = 75;
-                                while (ctx2.measureText(text).width > 365) {
-                                    ctx2.font = `${fontsize--}px UbuntuMono`;
-                                    yOffset += 0.0025;
-                                }
-                                canvacord.Util.renderEmoji(ctx2, text, 435, 85 + i * 100 + yOffset);
-
-                                //LEVEL TEXT
-                                ctx2.font = "40px UbuntuMono";
-                                ctx2.fillStyle = "#6caae7";
-                                var text4 = `LVL ${array_level[i]}`.trim();
-                                canvacord.Util.renderEmoji(ctx2, text4, 275, 100 + i * 100 - 22.5);
-
-                                //POINTS TEXT:
-                                ctx2.font = "19px UbuntuMono";
-                                ctx2.fillStyle = "#858594";
-                                var text5 = `${cduration(array_textpoints[i]).join(", ")}`.trim();
-                                canvacord.Util.renderEmoji(ctx2, text5, 235, 101.25 + i * 100);
-
-                                //DISCRIMINATOR TEXT
-                                ctx2.font = "15px UbuntuMono";
-                                ctx2.fillStyle = "#7F7F7F";
-                                canvacord.Util.renderEmoji(ctx2, "#" + array_discriminator[i], 750, 100 + i * 100);
-
-                                //AVATAR
-                                ctx2.beginPath();
-                                ctx2.arc(80 / 2 + 30, 80 / 2 + 25 + i * 100, 80 / 2, 0, Math.PI * 2, true);
-                                ctx2.closePath();
-                                ctx2.clip();
-                                const avatar = await Canvas.loadImage(array_avatar[i]);
-                                ctx2.drawImage(avatar, 30, 25 + i * 100, 80, 80);
-                                ctx2.restore();
-                                if (i == array_usernames.length - 1) return res(true);
-                            } catch (e) {
-                                if (i == array_usernames.length - 1) return res(true);
-                            }
-                        }
-                        return res(true);
-                    }).then(async () => {
+                    Promise.resolve().then(async () => {
                         const attachment2 = new Discord.AttachmentBuilder(
-                            canvas2.toBuffer("image/webp"),
+                            await require('./cards/leaderboard')(
+                                array_usernames.map((u, idx) => ({ name: u, avatar: array_avatar[idx], value: array_amount[idx], offset: 10 + idx })),
+                                { title: `Top de ${message.guild.name}`, kicker: type == 'voice' ? 'TOP VOZ' : 'TOP TEXTO' }
+                            ),
                             "ranking-image.png"
                         );
                         tempmessage.delete().catch(() => {});
@@ -1463,12 +999,10 @@ module.exports = function (client) {
 
                             //THE INFORMATION EMBED
                             const embed = new Discord.EmbedBuilder()
-                                .setAuthor(
-                                    `Ranking of:  ${rankuser.tag}`,
-                                    rankuser.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({
+                                    name: `Ranking of:  ${rankuser.tag}`,
+                                    iconURL: rankuser.displayAvatarURL()
+                                })
                                 .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable36"]))
                                 .setColor(embedcolor);
                             //send ping and embed message only IF the adding will be completed!
@@ -1530,12 +1064,10 @@ module.exports = function (client) {
 
                             //THE INFORMATION EMBED
                             const embed = new Discord.EmbedBuilder()
-                                .setAuthor(
-                                    `Ranking of:  ${rankuser.tag}`,
-                                    rankuser.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({
+                                    name: `Ranking of:  ${rankuser.tag}`,
+                                    iconURL: rankuser.displayAvatarURL()
+                                })
                                 .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable44"]))
                                 .setColor(embedcolor);
                             //send ping and embed message
@@ -1606,12 +1138,10 @@ module.exports = function (client) {
 
                             //THE INFORMATION EMBED
                             const embed = new Discord.EmbedBuilder()
-                                .setAuthor(
-                                    `Ranking of:  ${rankuser.tag}`,
-                                    rankuser.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({
+                                    name: `Ranking of:  ${rankuser.tag}`,
+                                    iconURL: rankuser.displayAvatarURL()
+                                })
                                 .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable53"]))
                                 .setColor(embedcolor);
                             //send ping and embed message only IF the removing will be completed!
@@ -1669,12 +1199,10 @@ module.exports = function (client) {
 
                     //THE INFORMATION EMBED
                     const embed = new Discord.EmbedBuilder()
-                        .setAuthor(
-                            `Ranking of:  ${rankuser.tag}`,
-                            rankuser.displayAvatarURL({
-                                dynamic: true,
-                            })
-                        )
+                        .setAuthor({
+                            name: `Ranking of:  ${rankuser.tag}`,
+                            iconURL: rankuser.displayAvatarURL()
+                        })
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable61"]))
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
@@ -1729,12 +1257,10 @@ module.exports = function (client) {
                     const newPoints = client.points.get(key, `points`); //get current NEW points
                     //THE INFORMATION EMBED
                     const embed = new Discord.EmbedBuilder()
-                        .setAuthor(
-                            `Ranking of:  ${rankuser.tag}`,
-                            rankuser.displayAvatarURL({
-                                dynamic: true,
-                            })
-                        )
+                        .setAuthor({
+                            name: `Ranking of:  ${rankuser.tag}`,
+                            iconURL: rankuser.displayAvatarURL()
+                        })
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable69"]))
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
@@ -1789,12 +1315,10 @@ module.exports = function (client) {
 
                     //THE INFORMATION EMBED
                     const embed = new Discord.EmbedBuilder()
-                        .setAuthor(
-                            `Ranking of:  ${rankuser.tag}`,
-                            rankuser.displayAvatarURL({
-                                dynamic: true,
-                            })
-                        )
+                        .setAuthor({
+                            name: `Ranking of:  ${rankuser.tag}`,
+                            iconURL: rankuser.displayAvatarURL()
+                        })
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable76"]))
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
@@ -1833,12 +1357,10 @@ module.exports = function (client) {
 
                     //THE INFORMATION EMBED
                     const embed = new Discord.EmbedBuilder()
-                        .setAuthor(
-                            `Ranking of:  ${rankuser.tag}`,
-                            rankuser.displayAvatarURL({
-                                dynamic: true,
-                            })
-                        )
+                        .setAuthor({
+                            name: `Ranking of:  ${rankuser.tag}`,
+                            iconURL: rankuser.displayAvatarURL()
+                        })
                         .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable82"]))
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
@@ -2055,7 +1577,7 @@ module.exports = function (client) {
                 const key = `${newState.guild.id}-${newState.member.user.id}`;
                 client.points.ensure(key, {
                     user: newState.member.user.id,
-                    usertag: newState.member.user.tag,
+                    usertag: newState.member.user.username,
                     xpcounter: 1,
                     guild: newState.guild.id,
                     points: 0,
@@ -2067,7 +1589,7 @@ module.exports = function (client) {
                     voicetime: 0,
                     oldmessage: "",
                 });
-                client.points.set(key, newState.member.user.tag, `usertag`);
+                client.points.set(key, newState.member.user.username, `usertag`);
                 let VoicePoints = Math.floor(connectedTime / 60000);
                 client.points.math(key, "+", Math.floor(connectedTime / 60000), `voicetime`);
                 //console.log("CONNECTED TIME: " + Math.floor(connectedTime / 60000) + "min | " + "POINTS FOR IT: " + VoicePoints);
@@ -2110,7 +1632,7 @@ module.exports = function (client) {
         }
     });
 };
-//Coded by Tomato#6966!
+//Desarrollado por Melodia | github.com/melodiabl
 function shortenLargeNumber(num, digits) {
     var units = ["k", "M", "G", "T", "P", "E", "Z", "Y"],
         decimal;

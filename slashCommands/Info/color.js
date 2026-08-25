@@ -7,13 +7,13 @@ const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers
 const fetch = require("node-fetch");
 module.exports = {
     name: "color",
-    description: "Get Hex Color Information",
+    description: "Obtén información de color hex",
     options: [
         //{"Integer": { name: "ping_amount", description: "How many times do you want to ping?", required: true }}, //to use in the code: interacton.getInteger("ping_amount")
-        { String: { name: "color", description: "What Color do you want to check? Example: #ee33ff", required: true } }, //to use in the code: interacton.getString("ping_amount")
-        //{"User": { name: "which_user", description: "From Which User do you want to get the Avatar?", required: false }}, //to use in the code: interacton.getUser("ping_a_user")
-        //{"Channel": { name: "what_channel", description: "To Ping a Channel lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
-        //{"Role": { name: "what_role", description: "To Ping a Role lol", required: false }}, //to use in the code: interacton.getRole("what_role")
+        { String: { name: "color", description: "Qué color quieres ver? Ejemplo: #ee33ff", required: true } }, //to use in the code: interacton.getString("ping_amount")
+        //{"User": { name: "which_user", description: "From Which Usuario do you want to get the Avatar?", required: false }}, //to use in the code: interacton.getUser("ping_a_user")
+        //{"Channel": { name: "what_channel", description: "To Ping a Canal lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
+        //{"Role": { name: "what_role", description: "To Ping a Rol lol", required: false }}, //to use in the code: interacton.getRole("what_role")
         //{"IntChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", 1], ["Discord Api", 2]] }, //here the second array input MUST BE A NUMBER // TO USE IN THE CODE: interacton.getInteger("what_ping")
         //{"StringChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", "botping"], ["Discord Api", "api"]] }}, //here the second array input MUST BE A STRING // TO USE IN THE CODE: interacton.getString("what_ping")
     ],
@@ -49,13 +49,11 @@ module.exports = {
                 });
             const embed = new Discord.EmbedBuilder()
                 .setTitle(eval(client.la[ls]["cmds"]["info"]["color"]["variable1"]))
-                .addField("<:arrow:832598861813776394> **Name**", json.name, true)
-                .addField("<:arrow:832598861813776394> **Hex**", json.hex, true)
-                .addField("<:arrow:832598861813776394> **RGB**", json.rgb, true)
-                .addField(
-                    `<:arrow:832598861813776394> **${client.la[ls].cmds.info.color.brightershade}**`,
-                    json.brightened,
-                    true
+                .addFields(
+                    { name: "<:arrow:832598861813776394> **Name**", value: json.name, inline: true },
+                    { name: "<:arrow:832598861813776394> **Hex**", value: json.hex, inline: true },
+                    { name: "<:arrow:832598861813776394> **RGB**", value: json.rgb, inline: true },
+                    { name: `<:arrow:832598861813776394> **${client.la[ls].cmds.info.color.brightershade}**`, value: json.brightened, inline: true }
                 )
                 .setThumbnail(json.color_image)
                 .setColor(json.hex);
@@ -70,10 +68,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -1,25 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title || 'OBEY YOUR MASTER BOT Dashboard' %></title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= title || 'OBEY YOUR MASTER — Dashboard' %></title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<nav class="navbar">
-  <a class="navbar-brand" href="/"><i class="fas fa-robot"></i> OBEY YOUR MASTER BOT</a>
-  <div class="nav-links">
+<button class="menu-btn" id="menuBtn" aria-label="Menú"><i class="fas fa-bars"></i></button>
+<div class="overlay" id="overlay"></div>
+<div class="layout">
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar" id="sidebar">
+  <a href="/" class="sidebar-brand">
+    <div class="brand-logo"><i class="fas fa-robot"></i></div>
+    <div>
+      <div class="brand-name">OBEY YOUR MASTER</div>
+      <div class="brand-sub">Dashboard v14</div>
+    </div>
+  </a>
+
+  <nav class="sidebar-nav">
+    <span class="nav-sec">Navegación</span>
+    <a href="/" class="nav-link">
+      <i class="fas fa-house"></i> Inicio
+    </a>
     <% if (user) { %>
-      <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-      <span class="user-info">
-        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" onerror="this.src='/img/default.png'" width="32" height="32" class="avatar">
-        <%= user.username %>
-      </span>
-      <a href="/logout" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
+    <a href="/panel" class="nav-link <%= (typeof activePage !== 'undefined' && activePage === 'home') ? 'active' : '' %>">
+      <i class="fas fa-gauge-high"></i> Panel
+    </a>
+    <a href="/dashboard" class="nav-link <%= (typeof activePage !== 'undefined' && activePage === 'servers') ? 'active' : '' %>">
+      <i class="fas fa-server"></i> Mis Servidores
+      <% if (typeof guildCount !== 'undefined') { %><span class="nav-pill"><%= guildCount %></span><% } %>
+    </a>
+    <% } %>
+
+    <div class="nav-sep"></div>
+    <span class="nav-sec">Música</span>
+    <a href="/dashboard" class="nav-link" id="nav-player-link" style="display:none">
+      <i class="fas fa-music"></i> Player Web
+    </a>
+    <div class="nav-sep"></div>
+    <span class="nav-sec">Recursos</span>
+    <a href="https://github.com/melodiabl/OBEY-YOUR-MASTER" target="_blank" class="nav-link">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://discord.gg/QJeavgKU" target="_blank" class="nav-link">
+      <i class="fab fa-discord"></i> Soporte
+    </a>
+    <a href="https://www.skyultraplus.com/" target="_blank" class="nav-link">
+      <i class="fas fa-cloud"></i> SkyUltraPlus
+    </a>
+    <a href="https://dash.swallox.com/" target="_blank" class="nav-link">
+      <i class="fas fa-server"></i> Swallox
+    </a>
+  </nav>
+
+  <div class="sidebar-user">
+    <% if (user) { %>
+      <div class="su-avatar">
+        <% if (user.avatar) { %>
+          <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" onerror="this.parentNode.textContent='<%= (user.username||'?')[0].toUpperCase() %>'">
+        <% } else { %><%= (user.username || '?')[0].toUpperCase() %><% } %>
+      </div>
+      <div class="su-name"><%= user.global_name || user.username || 'Usuario' %></div>
+      <a href="/logout" class="su-logout" title="Cerrar sesión"><i class="fas fa-right-from-bracket"></i></a>
     <% } else { %>
-      <a href="/login" class="btn-login"><i class="fab fa-discord"></i> Login con Discord</a>
+      <a href="/login" class="btn btn-discord btn-sm" style="width:100%;justify-content:center"><i class="fab fa-discord"></i> Iniciar sesión</a>
     <% } %>
   </div>
-</nav>
+</aside>
+
+<!-- ── TOPBAR ── -->
+<header class="topbar">
+  <div class="topbar-bc">
+    <a href="/"><i class="fas fa-house" style="font-size:11px"></i></a>
+    <% if (typeof breadcrumb !== 'undefined' && breadcrumb && breadcrumb.length) { %>
+      <% breadcrumb.forEach((bc, i) => { %>
+        <span class="sep"><i class="fas fa-chevron-right" style="font-size:9px"></i></span>
+        <% if (bc.url && i < breadcrumb.length - 1) { %><a href="<%= bc.url %>"><%= bc.label %></a>
+        <% } else { %><span class="cur"><%= bc.label %></span><% } %>
+      <% }) %>
+    <% } %>
+  </div>
+  <div class="topbar-right">
+    <div class="live-badge"><span class="live-dot"></span><span id="hdr-guilds">—</span> servidores</div>
+    <% if (!user) { %>
+      <a href="/login" class="btn btn-discord btn-sm"><i class="fab fa-discord"></i> Login</a>
+    <% } %>
+  </div>
+</header>
+
+<!-- ── PAGE ── -->
+<main class="main"><div class="page">

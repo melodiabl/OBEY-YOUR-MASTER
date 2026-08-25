@@ -1,0 +1,199 @@
+<%- include('../includes/header', {
+  title: guild.name + ' — Estadísticas',
+  user,
+  breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/'+guild.id }, { label: 'Estadísticas' }]
+}) %>
+
+<div class="page-hd">
+  <div class="page-ico ico-p"><i class="fas fa-chart-line"></i></div>
+  <div>
+    <div class="page-title">ESTADÍSTICAS</div>
+    <div class="page-sub"><%= guild.name %> · Datos en tiempo real</div>
+  </div>
+  <div class="page-actions">
+    <a href="/dashboard/<%= guild.id %>" class="btn btn-ghost btn-sm"><i class="fas fa-arrow-left"></i> Configuración</a>
+  </div>
+</div>
+
+<!-- Stat cards top -->
+<div class="stat-grid" style="margin-bottom:20px">
+  <div class="stat-card">
+    <div class="stat-icon text-p"><i class="fas fa-users"></i></div>
+    <div class="stat-num"><%= guild.memberCount.toLocaleString() %></div>
+    <div class="stat-lbl">Miembros totales</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon text-green"><i class="fas fa-user-check"></i></div>
+    <div class="stat-num"><%= guild.onlineCount %></div>
+    <div class="stat-lbl">En línea ahora</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon ico-pink" style="width:auto;height:auto;border-radius:0;padding:0"><i class="fas fa-gavel" style="color:var(--pink)"></i></div>
+    <div class="stat-num"><%= guild.warnCount %></div>
+    <div class="stat-lbl">Warns activos</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon" style="color:var(--yellow)"><i class="fas fa-ticket"></i></div>
+    <div class="stat-num"><%= guild.ticketCount %></div>
+    <div class="stat-lbl">Tickets creados</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon" style="color:var(--purple)"><i class="fas fa-hashtag"></i></div>
+    <div class="stat-num"><%= guild.channelCount %></div>
+    <div class="stat-lbl">Canales</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon" style="color:var(--green)"><i class="fas fa-tag"></i></div>
+    <div class="stat-num"><%= guild.roleCount %></div>
+    <div class="stat-lbl">Roles</div>
+  </div>
+</div>
+
+<!-- Charts grid -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+  <!-- Members chart -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-ico ico-p"><i class="fas fa-users"></i></div>
+      <div><div class="card-title">Distribución de miembros</div><div class="card-desc">Online · Ocupado · No molestar · Desconectado</div></div>
+    </div>
+    <div class="card-body" style="align-items:center">
+      <canvas id="memberChart" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- Channel types -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-ico ico-purple"><i class="fas fa-hashtag"></i></div>
+      <div><div class="card-title">Tipos de canales</div><div class="card-desc">Texto · Voz · Categorías · Hilos</div></div>
+    </div>
+    <div class="card-body" style="align-items:center">
+      <canvas id="channelChart" height="200"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Music now playing -->
+<div class="card" style="margin-bottom:16px">
+  <div class="card-head">
+    <div class="card-ico ico-p"><i class="fas fa-music"></i></div>
+    <div><div class="card-title">Música en vivo</div><div class="card-desc">Reproductores activos ahora mismo</div></div>
+    <span class="live-badge" style="margin-left:auto"><span class="live-dot"></span>EN VIVO</span>
+  </div>
+  <div class="card-body" id="np-live" style="gap:8px">
+    <div class="text-muted" style="font-size:13px;text-align:center;padding:12px 0"><i class="fas fa-spinner fa-spin" style="margin-right:6px"></i>Cargando...</div>
+  </div>
+</div>
+
+<!-- Top roles by members -->
+<div class="card">
+  <div class="card-head">
+    <div class="card-ico ico-green"><i class="fas fa-award"></i></div>
+    <div><div class="card-title">Roles más populares</div><div class="card-desc">Top roles por cantidad de miembros</div></div>
+  </div>
+  <div class="card-body" style="gap:8px;padding:12px 16px">
+    <% topRoles.forEach((r, i) => { %>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 10px;background:var(--surf2);border-radius:8px;border:1px solid var(--border)">
+      <span style="font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);width:18px">#<%= i+1 %></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:<%= r.color || '#8888a0' %>;flex-shrink:0"></span>
+      <span style="font-size:13px;font-weight:600;color:#fff;flex:1"><%= r.name %></span>
+      <span style="font-size:12px;color:var(--muted)"><%= r.count %> miembros</span>
+      <div style="width:100px;height:4px;background:var(--surf3);border-radius:2px;overflow:hidden">
+        <div style="height:100%;background:var(--p);border-radius:2px;width:<%=Math.round(r.count/guild.memberCount*100)%>%"></div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+<!-- Invite leaderboard -->
+<% if (typeof inviteLeaderboard !== 'undefined' && inviteLeaderboard.length > 0) { %>
+<div class="card" style="margin-top:16px">
+  <div class="card-head">
+    <div class="card-ico ico-green"><i class="fas fa-user-plus"></i></div>
+    <div><div class="card-title">Top invitadores</div><div class="card-desc">Miembros que más han invitado al servidor</div></div>
+  </div>
+  <div class="card-body" style="display:flex;flex-direction:column;gap:6px">
+    <% const medals = ['🥇','🥈','🥉'] %>
+    <% inviteLeaderboard.forEach((u, i) => { %>
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px">
+      <span style="font-size:18px;width:28px;text-align:center"><%= medals[i] || `#${i+1}` %></span>
+      <% if (u.avatar) { %><img src="<%= u.avatar %>" style="width:32px;height:32px;border-radius:50%;object-fit:cover"><% } else { %><div style="width:32px;height:32px;border-radius:50%;background:var(--surf3)"></div><% } %>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:700;color:#fff"><%= u.username %></div>
+        <div style="font-size:11px;color:var(--muted)"><%= u.total %> totales · <%= u.fake %> falsas · <%= u.leaves %> bajas</div>
+      </div>
+      <span style="font-size:15px;font-weight:800;color:var(--green)"><%= u.invites %></span>
+    </div>
+    <% }) %>
+  </div>
+</div>
+<% } %>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" integrity="sha384-e6nUZLBkQ86NJ6TVVKAeSaK8jWa3NhkYWZFomE39AvDbQWeie9PlQqM3pmYW5d1g" crossorigin="anonymous"></script>
+<script>
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+
+Chart.defaults.color = '#8888a0'
+Chart.defaults.font.family = "'Space Grotesk', sans-serif"
+
+// Member presence donut
+new Chart(document.getElementById('memberChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Online', 'Ocupado', 'No molestar', 'Desconectado'],
+    datasets: [{
+      data: [<%=guild.onlineCount%>, <%=guild.idleCount%>, <%=guild.dndCount%>, <%=guild.offlineCount%>],
+      backgroundColor: ['#57F287','#FEE75C','#ED4245','#4f545c'],
+      borderWidth: 0, hoverOffset: 6,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    plugins: { legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
+    cutout: '65%',
+  }
+})
+
+// Channel types donut
+new Chart(document.getElementById('channelChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Texto', 'Voz', 'Categorías', 'Foros/Otros'],
+    datasets: [{
+      data: [<%=guild.textChannels%>, <%=guild.voiceChannels%>, <%=guild.categories%>, <%=guild.otherChannels%>],
+      backgroundColor: ['#5865F2','#9B59B6','#EB459E','#4f545c'],
+      borderWidth: 0, hoverOffset: 6,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    plugins: { legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
+    cutout: '65%',
+  }
+})
+
+// Now playing live
+const GRADS = ['#5865F2,#9B59B6','#EB459E,#5865F2','#57F287,#5865F2','#9B59B6,#EB459E']
+function loadNP() {
+  fetch('/api/nowplaying').then(r=>r.ok?r.json():null).then(d=>{
+    const c = document.getElementById('np-live')
+    const tracks = d?.tracks || []
+    if (!tracks.length) { c.innerHTML='<div class="text-muted" style="font-size:13px;text-align:center;padding:12px 0"><i class="fas fa-music" style="opacity:.3;margin-right:6px"></i>Sin reproductores activos</div>'; return }
+    c.innerHTML = tracks.map((t,i)=>`
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px">
+        <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,${GRADS[i%4]});display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🎵</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(t.trackTitle)}</div>
+          <div style="font-size:11px;color:var(--muted)">${esc(t.guildName)} · ${esc(t.trackAuthor)}</div>
+        </div>
+        <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;background:rgba(87,242,135,.12);color:var(--green)">▶ LIVE</span>
+      </div>`).join('')
+  }).catch(()=>{})
+}
+loadNP()
+setInterval(loadNP, 15000)
+</script>
+
+<%- include('../includes/footer') %>

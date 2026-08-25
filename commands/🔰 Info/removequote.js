@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder,
+    PermissionFlagsBits
+} = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -9,7 +11,7 @@ module.exports = {
     name: "removequote",
     aliases: ["rquote", "removequotes"],
     category: "🔰 Info",
-    description: "Removes a Quote from a User/you",
+    description: "Removes a Quote from a Usuario/you",
     usage: "removequote <@USER> <ID>",
     type: "user",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -25,7 +27,7 @@ module.exports = {
             }
             var { user } = member;
             if (user.id != message.author.id) {
-                if (!message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
+                if (!message.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
                     return message.reply("❌ **Only Admins can add Quotes to other Users!**");
                 }
             }
@@ -52,14 +54,14 @@ module.exports = {
 
             if (Number(id) < 0 || Number(id) > data.length - 1 || !data[Number(id)] || !data[Number(id)].text) {
                 return message.reply(
-                    `❌ **Invalid Quote ID!**\n> Use one between \`0\` and \`${data.length - 1}\`\nTo see all Quotes type: \`${prefix}quotes ${user.id}\``
+                    `❌ **No válido Quote ID!**\n> Use one between \`0\` and \`${data.length - 1}\`\nTo see all Quotes type: \`${prefix}quotes ${user.id}\``
                 );
             }
             let embed = new EmbedBuilder()
                 .setColor(es.color)
-                .setFooter({ text: user.id, iconURL: user.displayAvatarURL({ dynamic: true }) })
-                .addField("**Quote by:**", `<@${data[Number(id)].by}>`)
-                .addField("**Quote at:**", `\`\`\`${moment(data[Number(id)].at).format("DD/MM/YYYY HH:mm")}\`\`\``)
+                .setFooter({ text: user.id, iconURL: user.displayAvatarURL() })
+                .addFields({ name: "**Quote by:**", value: `<@${data[Number(id)].by}>` })
+                .addFields({ name: "**Quote at:**", value: `\`\`\`${moment(data[Number(id)].at).format("DD/MM/YYYY HH:mm")}\`\`\`` })
                 .setTitle("**Quote Text:**")
                 .setDescription(`${String(data[Number(id)].text).substring(0, 2000)}`);
             if (data[Number(id)].image) {
@@ -75,7 +77,7 @@ module.exports = {
                     embed,
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setTitle(`🗑️ Removed the above showed Quoted from \`${user.tag}\``)
+                        .setTitle(`🗑️ Removido the above showed Quoted from \`${user.username}\``)
                         .setDescription(`**${user.username}** now has **\`${data.length} Quotes\`**!`),
                 ],
             });
@@ -95,10 +97,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

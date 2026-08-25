@@ -1,5 +1,6 @@
 var {
-  EmbedBuilder
+  EmbedBuilder, ChannelType,
+    ButtonStyle
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
@@ -14,15 +15,15 @@ const {
   StringSelectMenuBuilder
 } = require('discord.js');
 const { isValidSnowflakeId } = require('../../handlers/functions');
-const { getNumberEmojis, allEmojis } = require('../../botconfig/emojiFunctions');
+const { getNumberEmojis, isEmoji, allEmojis } = require('../../botconfig/emojiFunctions');
 module.exports = {
   name: "setup-menuticket",
   category: "💪 Setup",
   aliases: ["setupmenuticket", "menuticket-setup", "menuticketsetup", "menuticketsystem"],
   cooldown: 5,
   usage: "setup-menuticket --> Follow Steps",
-  description: "Manage up to 25 different Ticket Systems in a form of a DISCORD-MENU",
-  memberpermissions: ["ADMINISTRATOR"],
+  description: "Administra hasta 25 sistemas de tickets diferentes en forma de un menú de Discord",
+  memberpermissions: ['Administrador'],
   type: "system",
   run: async (client, message, args, cmduser, text, prefix) => {
 
@@ -42,7 +43,7 @@ module.exports = {
             const emoji = NumberEmojis[i];
           menuoptions.push({
             value: `${i}. Menu Ticket`,
-            description: `Manage/Edit the ${i}. Menu Ticket Setup`,
+            description: `Manage/Edit the ${i}. Menu Ticket Configuración`,
             ...(emoji ? { emoji } : {})
           })
         }
@@ -51,7 +52,7 @@ module.exports = {
           .setCustomId('MenuSelection')
           .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
           .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-          .setPlaceholder('Click me to setup the Menu Ticket System!')
+          .setPlaceholder('¡Haz clic para configurar the Menu Ticket System!')
           .addOptions(
             menuoptions.slice(0, 25).map(option => {
               let Obj = {
@@ -68,7 +69,7 @@ module.exports = {
           .setCustomId('MenuSelection2')
           .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
           .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-          .setPlaceholder('Click me to setup the Menu Ticket System!')
+          .setPlaceholder('¡Haz clic para configurar the Menu Ticket System!')
           .addOptions(
             menuoptions.slice(25, 50).map(option => {
               let Obj = {
@@ -85,7 +86,7 @@ module.exports = {
           .setCustomId('MenuSelection3')
           .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
           .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-          .setPlaceholder('Click me to setup the Menu Ticket System!')
+          .setPlaceholder('¡Haz clic para configurar the Menu Ticket System!')
           .addOptions(
             menuoptions.slice(50, 75).map(option => {
               let Obj = {
@@ -102,7 +103,7 @@ module.exports = {
           .setCustomId('MenuSelection4')
           .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
           .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-          .setPlaceholder('Click me to setup the Menu Ticket System!')
+          .setPlaceholder('¡Haz clic para configurar the Menu Ticket System!')
           .addOptions(
             menuoptions.slice(75, 100).map(option => {
               let Obj = {
@@ -119,130 +120,13 @@ module.exports = {
         //define the embed
         let MenuEmbed = new Discord.EmbedBuilder()
           .setColor(es.color)
-          .setAuthor(client.getAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://discord.gg/milrato'))
-          .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]))
+.setAuthor(client.getAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://github.com/melodiabl'))
+                   .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]))
 
-        //send the menu msg
-        let menumsg = await message.reply({
-          embeds: [MenuEmbed],
-          components: [row1, row2, row3, row4, new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(Discord.ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel("Tutorial Video")
-            .setEmoji(allEmojis.msg.youtube))]
-        })
-        //Create the collector
-        const collector = menumsg.createMessageComponentCollector({
-          filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
-          time: 90000, errors: ["time"]
-        })
-        //Menu Collections
-        collector.on('collect', menu => {
-          if (menu?.user.id === cmduser.id) {
-            collector.stop();
-            let menuoptiondata = menuoptions.find(v => v.value == menu?.values[0])
-            if (menu?.values[0] == "Cancel") return menu?.reply(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable3"]))
-            menu?.deferUpdate();
-            let SetupNumber = menu?.values[0].split(".")[0];
-            pre = `menuticket${SetupNumber}`;
-            theDB = client.menuticket; //change to the right database
-            second_layer(SetupNumber)
-          } else menu?.reply({
-            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
-            ephemeral: true
-          });
-        });
-        //Once the Collections ended edit the menu message
-        collector.on('end', collected => {
-          menumsg.edit({
-            embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
-            components: [],
-            content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`
-          }).catch(() => { });
-        });
-      }
-      async function second_layer(SetupNumber) {
-        //setup-menuticket
-        theDB.ensure(message.guild.id, {
-          messageId: "",
-          channelId: "",
-          claim: {
-            enabled: false,
-            messageOpen: "Dear {user}!\n> *Please wait until a Staff Member, claimed your Ticket!*",
-            messageClaim: "{claimer} **has claimed the Ticket!**\n> He will now give {user} support!"
-          },
-          access: [],
-          data: [
-            /*
-              {
-                value: "",
-                description: "",
-                category: null,
-                replyMsg: "{user} Welcome to the Support!",
-              }
-            */
-          ]
-        }, pre);
-        let menuoptions = [{
-          value: "Send the Config	Message",
-          description: `(Re) Send the Open a Ticket Message (with MENU)`,
-          emoji: "👍"
-        },
-        {
-          value: "Add Ticket Option",
-          description: `Add up to 25 different open-Ticket-Option`,
-          emoji: "📤"
-        },
-        {
-          value: "Edit Ticket Option",
-          description: `Edit one of your Ticket Options Data`,
-          emoji: "✒️"
-        },
-        {
-          value: "Manage General Access",
-          description: `Add/Remove Users/Roles`,
-          emoji: "👍"
-        },
-        {
-          value: "Remove Ticket Option",
-          description: `Remove a open-Ticket-Option`,
-          emoji: "🗑"
-        },
-        {
-          value: "Closed Ticket Category",
-          description: `When Closing a Ticket, it will be moved to there`,
-          emoji: "✂️"
-        },
-        {
-          value: "Ticket Claim System",
-          description: `Manage the Claim System for this Ticket System.`,
-          emoji: "✅"
-        },
-        ]
-        //define the selection
-        let Selection = new StringSelectMenuBuilder()
-          .setCustomId('MenuSelection')
-          .setMaxValues(1)
-          .setMinValues(1)
-          .setPlaceholder('Click me to setup the Menu-Ticket System!')
-          .addOptions(
-            menuoptions.map(option => {
-              let Obj = {
-                label: option.label ? option.label.substring(0, 50) : option.value.substring(0, 50),
-                value: option.value.substring(0, 50),
-                description: option.description.substring(0, 50),
-              }
-              if (option.emoji) Obj.emoji = option.emoji;
-              return Obj;
-            }))
-        //define the embed
-        let MenuEmbed = new Discord.EmbedBuilder()
-          .setColor(es.color)
-          //.setAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://discord.gg/milrato')
-          .setAuthor({ name: "Menu Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png", url: "https://discord.gg/milrato" })
-          .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]))
-
-        //send the menu msg
-        let menumsg = await message.reply({
-          embeds: [MenuEmbed],
-          components: [new ActionRowBuilder().addComponents(Selection), new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(Discord.ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel("Tutorial Video")
+                 //send the menu msg
+                 let menumsg = await message.reply({
+                   embeds: [MenuEmbed],
+                   components: [new ActionRowBuilder().addComponents(Selection), new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel("Tutorial Video")
             .setEmoji(allEmojis.msg.youtube))]
         })
         //Create the collector
@@ -259,14 +143,14 @@ module.exports = {
             menu?.deferUpdate();
             handle_the_picks(menu?.values[0], menuoptiondata, SetupNumber)
           } else menu?.reply({
-            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
             ephemeral: true
           });
         });
         //Once the Collections ended edit the menu message
         collector.on('end', collected => {
           menumsg.edit({
-            embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+            embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
             components: [],
             content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`
           })
@@ -292,17 +176,17 @@ module.exports = {
               },
               {
                 value: "Edit Open Message",
-                description: `Edit the Claim-Info-Message when a Ticket opens`,
+                description: `Edit the Claim-Información-Mensaje when a Ticket opens`,
                 emoji: "🛠"
               },
               {
                 value: "Edit Claim Message",
-                description: `Edit the Claim-Message when a Staff claims it!`,
+                description: `Edit the Claim-Mensaje when a Staff claims it!`,
                 emoji: "😎"
               },
               {
                 value: "Cancel",
-                description: `Cancel and stop the Ticket-Setup!`,
+                description: `Cancelar and stop the Ticket-Configuración!`,
                 emoji: allEmojis.msg.cancel
               }
               ]
@@ -326,7 +210,7 @@ module.exports = {
               //define the embed
               let MenuEmbed = new Discord.EmbedBuilder()
                 .setColor(es.color)
-                .setAuthor(SetupNumber + " Ticket Setup", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", "https://discord.gg/milrato")
+                .setAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" })
                 .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]))
               //send the menu msg
               let menumsg = await message.reply({
@@ -353,14 +237,14 @@ module.exports = {
                   if (menu?.values[0] == "Cancel") return menu?.reply(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable3"]))
                   menuselection(menu)
                 } else menu?.reply({
-                  content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                  content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                   ephemeral: true
                 });
               });
               //Once the Collections ended edit the menu message
               collector.on('end', collected => {
                 menumsg.edit({
-                  embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                  embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                   components: [],
                   content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`
                 })
@@ -374,10 +258,10 @@ module.exports = {
                   claimData = theDB.get(message.guild.id, `${pre}.claim`);
                   return message.reply({
                     embeds: [
-                      new EmbedBuilder().setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
+                      new EmbedBuilder().setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
                         .setFooter(client.getFooter(es))
-                        .setTitle(`${claimData.enabled ? "Enabled the Claim System" : "Disabled the Claim System"}`)
-                        .setDescription(`${claimData.enabled ? "When a User opens a Ticket, a Staff Member needs to claim it, before he can send something in there!\n> This is useful for Professionality and Information!\n> **NOTE:** Admins can always chat..." : "You now don't need to claim a Ticket anymore"}`)
+                        .setTitle(`${claimData.enabled ? "Activado the Claim System" : "Desactivado the Claim System"}`)
+                        .setDescription(`${claimData.enabled ? "When a Usuario opens a Ticket, a Staff Miembro needs to claim it, before he can send something in there!\n> This is useful for Professionality and Information!\n> **NOTE:** Admins can always chat..." : "You now don't need to claim a Ticket anymore"}`)
                     ]
                   });
                 } break;
@@ -385,8 +269,8 @@ module.exports = {
                   var rembed = new EmbedBuilder()
                     .setColor(es.color)
                     .setFooter(client.getFooter(es))
-                    .setTitle("What should be the new Message when a User opens a Ticket?")
-                    .setDescription(String("{user} will be replaced with a USERPING\n\n**Current Message:**\n>>> " + claimData.messageOpen.substring(0, 1900)))
+                    .setTitle("What should be the new Mensaje when a Usuario opens a Ticket?")
+                    .setDescription(String("{user} will be replaced with a USERPING\n\n**Current Mensaje:**\n>>> " + claimData.messageOpen.substring(0, 1900)))
                   message.reply({
                     embeds: [rembed]
                   }).then(msg => {
@@ -397,13 +281,13 @@ module.exports = {
                       errors: ['time']
                     }).then(collected => {
                       theDB.set(message.guild.id, collected.first().content, `${pre}.claim.messageOpen`);
-                      message.reply(`Successfully set the New Message!`)
+                      message.reply(`Successfully set the New Mensaje!`)
                     }).catch(error => {
                       return message.reply({
                         embeds: [new Discord.EmbedBuilder()
                           .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]))
                           .setColor(es.wrongcolor)
-                          .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                          .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                           .setFooter(client.getFooter(es))
                         ]
                       });
@@ -414,8 +298,8 @@ module.exports = {
                   var rembed = new EmbedBuilder()
                     .setColor(es.color)
                     .setFooter(client.getFooter(es))
-                    .setTitle("What should be the new Message when a Staff claims a Ticket?")
-                    .setDescription(String("{user} will be replaced with a USERPING\n{claimer} will be replaced with a PING for WHO CLAIMED IT\n\n**Current Message:**\n>>> " + claimData.messageClaim.substring(0, 1900)))
+                    .setTitle("What should be the new Mensaje when a Staff claims a Ticket?")
+                    .setDescription(String("{user} will be replaced with a USERPING\n{claimer} will be replaced with a PING for WHO CLAIMED IT\n\n**Current Mensaje:**\n>>> " + claimData.messageClaim.substring(0, 1900)))
                   message.reply({
                     embeds: [rembed]
                   }).then(msg => {
@@ -426,13 +310,13 @@ module.exports = {
                       errors: ['time']
                     }).then(collected => {
                       theDB.set(message.guild.id, collected.first().content, `${pre}.claim.messageClaim`);
-                      message.reply(`Successfully set the New Message!`)
+                      message.reply(`Successfully set the New Mensaje!`)
                     }).catch(error => {
                       return message.reply({
                         embeds: [new Discord.EmbedBuilder()
                           .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]))
                           .setColor(es.wrongcolor)
-                          .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                          .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                           .setFooter(client.getFooter(es))
                         ]
                       });
@@ -447,7 +331,7 @@ module.exports = {
             let data = theDB.get(message.guild.id, pre + ".data");
             let settings = theDB.get(message.guild.id, pre);
             if (!data || data.length < 1) {
-              return message.reply("<:no:833101993668771842> **You need to add at least 1 Open-Ticket-Option**")
+              return message.reply("<:no:833101993668771842> **Necesitas añadir al menos 1 opción de ticket abierto**")
             }
             let tempmsg = await message.reply({
               embeds: [
@@ -468,8 +352,8 @@ module.exports = {
                 embeds: [
                   new EmbedBuilder()
                     .setColor(es.color)
-                    .setTitle("In where should I send the Open a New Ticket Message?")
-                    .setDescription(`Please Ping the Channel now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`)
+                    .setTitle("In where should I send the Open a New Ticket Mensaje?")
+                    .setDescription(`Por favor Ping the Canal now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`)
                 ]
               });
 
@@ -484,7 +368,7 @@ module.exports = {
                 let msgContent = collected.first().content;
                 let embed = new EmbedBuilder()
                   .setColor(es.color)
-                  .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
+                  .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
                   .setFooter(client.getFooter(es))
                   .setDescription(msgContent)
                   .setTitle("📨 Open a Ticket")
@@ -542,17 +426,17 @@ module.exports = {
                   message.reply(`Successfully Setupped the Menu-Ticket in <#${channel.id}>`)
                 });
               } else {
-                return message.reply("<:no:833101993668771842> **You did not ping a valid Channel!**")
+                return message.reply("<:no:833101993668771842> **¡No mencionaste un canal válido!**")
               }
             } else {
-              return message.reply("<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**")
+              return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
             }
           }
             break;
           case "Add Ticket Option": {
             let data = theDB.get(message.guild.id, pre + ".data");
             if (data.length >= 25) {
-              return message.reply("<:no:833101993668771842> **You reached the limit of 25 different Options!** Remove another Option first!")
+              return message.reply("<:no:833101993668771842> **¡Alcanzaste el límite de 25 opciones diferentes!** Elimina otra opción primero")
             }
             //ask for value and description
             let tempmsg = await message.reply({
@@ -569,7 +453,7 @@ module.exports = {
               time: 90000, errors: ["time"]
             });
             if (collected && collected.first().content) {
-              if (!collected.first().content.includes("++")) return message.reply("<:no:833101993668771842> **Invalid Usage! Please mind the Usage and check the Example**")
+              if (!collected.first().content.includes("++")) return message.reply("<:no:833101993668771842> **¡Uso no válido! Por favor sigue el uso y revisa el ejemplo**")
               let value = collected.first().content.split("++")[0].trim().substring(0, 25);
               let index = data.findIndex(v => v.value == value);
               if (index >= 0) {
@@ -600,8 +484,8 @@ module.exports = {
                   embeds: [
                     new EmbedBuilder()
                       .setColor(es.color)
-                      .setTitle("What should be the Reply Message when someone Opens a Ticket?")
-                      .setDescription(`For Example:\n> \`\`\`{user} Welcome to the Support! Tell us what you need help with!\`\`\``)
+                      .setTitle("What should be the Reply Mensaje when someone Opens a Ticket?")
+                      .setDescription(`For Example:\n> \`\`\`{user} Bienvenido to the Support! Tell us what you need help with!\`\`\``)
                   ]
                 });
                 let collected3 = await tempmsg.channel.awaitMessages({
@@ -627,9 +511,9 @@ module.exports = {
                   });
                   if (collected4 && collected4.first().content) {
                     if (!collected4.first().content || !collected4.first().content.includes("{member}")) {
-                      message.reply("You need to have {member} somewhere, using the SUGGESTION DEFAULTNAME (you change it via edit)");
+message.reply("Necesitas tener {member} en algún lugar, usando el nombre predeterminado sugerido (puedes cambiarlo mediante edición)");
                     } else if (!collected4.first().content || collected4.first().content.length > 32) {
-                      message.reply("A Channelname can't be longer then 32 Characters, using the SUGGESTION DEFAULTNAME (you change it via edit)");
+message.reply("El nombre del canal no puede tener más de 32 caracteres, usando el nombre predeterminado sugerido (puedes cambiarlo mediante edición)");
                     } else {
                       defaultname = collected4.first().content
                     }
@@ -697,13 +581,13 @@ module.exports = {
                           new EmbedBuilder()
                             .setColor(es.color)
                             .setTitle("Successfully added the New Data to the List!")
-                            .setDescription(`Make sure to re-send the Message, so that it's also updating it!\n> \`${prefix}setup-menuticket\` --> Send Config Message`)
-                            .addField("Value:", `> ${value}`.substring(0, 1024), true)
-                            .addField("Description:", `> ${description}`.substring(0, 1024), true)
-                            .addField("Category:", `> <#${category}> (${category})`.substring(0, 1024), true)
-                            .addField("Defaultname:", `> \`${defaultname}\` --> \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\``.substring(0, 1024), true)
-                            .addField("ReplyMsg:", `> ${replyMsg}`.substring(0, 1024), true)
-                            .addField("Emoji:", `> ${emojiMsg}`.substring(0, 1024), true)
+                            .setDescription(`Make sure to re-send the Mensaje, so that it's also updating it!\n> \`${prefix}setup-menuticket\` --> Send Config Mensaje`)
+                            .addFields({ name: "Value:", value: `> ${value}`.substring(0, 1024), inline: true })
+                            .addFields({ name: "Description:", value: `> ${description}`.substring(0, 1024), inline: true })
+                            .addFields({ name: "Category:", value: `> <#${category}> (${category})`.substring(0, 1024), inline: true })
+                            .addFields({ name: "Defaultname:", value: `> \`${defaultname}\` --> \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\``.substring(0, 1024), inline: true })
+                            .addFields({ name: "ReplyMsg:", value: `> ${replyMsg}`.substring(0, 1024), inline: true })
+                            .addFields({ name: "Emoji:", value: `> ${emojiMsg}`.substring(0, 1024), inline: true })
                         ]
                       });
                     }
@@ -711,16 +595,16 @@ module.exports = {
 
 
                   } else {
-                    return message.reply("<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**")
+                    return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
                   }
                 } else {
-                  return message.reply("<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**")
+                  return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
                 }
               } else {
-                return message.reply("<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**")
+                return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
               }
             } else {
-              return message.reply("<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**")
+              return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
             }
           }
             break;
@@ -729,11 +613,11 @@ module.exports = {
 
             let data = theDB.get(message.guild.id, pre + ".data");
             if (!data || data.length < 1) {
-              return message.reply("<:no:833101993668771842> **There are no Open-Ticket-Options to remove**")
+              return message.reply("<:no:833101993668771842> **No hay opciones de ticket abierto para eliminar**")
             }
             let embed = new EmbedBuilder()
               .setColor(es.color)
-              .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
+              .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
               .setFooter(client.getFooter(es))
               .setDescription("Just pick the Options you want to edit!")
               .setTitle("Which Option do you want to edit?")
@@ -742,7 +626,7 @@ module.exports = {
               .setCustomId('MenuSelection')
               .setMaxValues(1)
               .setMinValues(1)
-              .setPlaceholder('Click me to setup the Menu-Ticket System!')
+              .setPlaceholder('¡Haz clic para configurar the Menu-Ticket System!')
               .addOptions(
                 data.map((option, index) => {
                   let Obj = {
@@ -821,7 +705,7 @@ module.exports = {
                 },
                 {
                   value: "Change Reply Message",
-                  description: `Change the Message when he opened the Ticket`,
+                  description: `Change the Mensaje when he opened the Ticket`,
                   emoji: "✅"
                 },
                 ]
@@ -844,13 +728,13 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                   .setColor(es.color)
-                  .setAuthor(client.getAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://discord.gg/milrato'))
+.setAuthor(client.getAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://github.com/melodiabl'))
                   .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]))
 
                 //send the menu msg
                 let menumsg = await message.reply({
                   embeds: [MenuEmbed],
-                  components: [new ActionRowBuilder().addComponents(Selection), new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(Discord.ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel("Tutorial Video")
+                  components: [new ActionRowBuilder().addComponents(Selection), new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel("Tutorial Video")
                     .setEmoji(allEmojis.msg.youtube))]
                 })
                 //Create the collector
@@ -867,14 +751,14 @@ module.exports = {
                     menu?.deferUpdate();
                     handle_the_picks3(menu?.values[0], menuoptiondata, SetupNumber)
                   } else menu?.reply({
-                    content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                     ephemeral: true
                   });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on('end', collected => {
                   menumsg.edit({
-                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                     components: [],
                     content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`
                   })
@@ -898,18 +782,18 @@ module.exports = {
                         time: 90000, errors: ["time"]
                       });
                       if (collected && collected.first().content) {
-                        if (!collected.first().content.includes("++")) return message.reply("<:no:833101993668771842> **Invalid Usage! Please mind the Usage and check the Example**")
+                        if (!collected.first().content.includes("++")) return message.reply("<:no:833101993668771842> **¡Uso no válido! Por favor sigue el uso y revisa el ejemplo**")
                         let value = collected.first().content.split("++")[0].trim().substring(0, 25);
                         let index2 = data.findIndex(v => v.value == value);
                         if (index2 >= 0 && index != index2) {
-                          return message.reply("<:no:833101993668771842> **Options can't have the SAME VALUE!** There is already an Option with that Value!");
+return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener el MISMO VALOR!** Ya hay una opción con ese valor");
                         }
                         let description = collected.first().content.split("++")[1].trim().substring(0, 50);
                         data[index].value = value;
                         data[index].description = description;
                         return finished();
                       } else {
-                        return message.reply("<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**")
+                        return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
                       }
                     } break;
                     case `Change Open Category`: {
@@ -926,13 +810,13 @@ module.exports = {
                         max: 1,
                         time: 90000, errors: ["time"]
                       });
-                      let categoryId = collected ? collected2.first().content : "";
+                      let categoryId = collected ? collected.first().content : "";
                       let category = message.guild.channels.cache.get(categoryId) || null;
                       if (category && category.id) {
                         data[index].category = category.id;
                         return finished();
                       }
-                      return message.reply("<:no:833101993668771842> **Invalid Category-ID added**")
+                      return message.reply("<:no:833101993668771842> **No válido Category-ID added**")
                     } break;
                     case `Change Default-Name`: {
                       let defaultname = "🎫・{count}・{member}";
@@ -949,12 +833,12 @@ module.exports = {
                         max: 1,
                         time: 90000, errors: ["time"]
                       });
-                      if (!collected4.first().content || !collected4.first().content.includes("{member}")) {
-                        return message.reply("You need to have {member} somewhere, using the SUGGESTION DEFAULTNAME (you change it via edit)");
-                      } else if (!collected4.first().content || collected4.first().content.length > 32) {
-                        return message.reply("A Channelname can't be longer then 32 Characters, using the SUGGESTION DEFAULTNAME (you change it via edit)");
+                      if (!collected.first().content || !collected.first().content.includes("{member}")) {
+                        return message.reply("Necesitas tener {member} en algún lugar, usando el nombre predeterminado sugerido (puedes cambiarlo mediante edición)");
+                      } else if (!collected.first().content || collected.first().content.length > 32) {
+                        return message.reply("El nombre del canal no puede tener más de 32 caracteres, usando el nombre predeterminado sugerido (puedes cambiarlo mediante edición)");
                       } else {
-                        data[index].defaultname = collected4.first().content
+                        data[index].defaultname = collected.first().content
                         return finished();
                       }
                     } break;
@@ -1016,8 +900,8 @@ module.exports = {
                         embeds: [
                           new EmbedBuilder()
                             .setColor(es.color)
-                            .setTitle("What should be the Reply Message when someone Opens a Ticket?")
-                            .setDescription(`For Example:\n> \`\`\`{user} Welcome to the Support! Tell us what you need help with!\`\`\``)
+                            .setTitle("What should be the Reply Mensaje when someone Opens a Ticket?")
+                            .setDescription(`For Example:\n> \`\`\`{user} Bienvenido to the Support! Tell us what you need help with!\`\`\``)
                         ]
                       });
                       let collected = await tempmsg.channel.awaitMessages({
@@ -1026,10 +910,10 @@ module.exports = {
                         time: 90000, errors: ["time"]
                       });
                       if (collected && collected.first().content) {
-                        data[index].replyMsg = collected3.first().content;
+                        data[index].replyMsg = collected.first().content;
                         return finished();
                       } else {
-                        return message.reply("<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**")
+                        return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
                       }
                     } break;
                   }
@@ -1051,12 +935,12 @@ module.exports = {
                         .setColor(es.color)
                         .setTitle("**Successfully edited:**")
                         .setDescription(`>>> ${menu?.values.map(i => `\`${i}\``).join(", ")}\n\nDon't forget to resend the Ticket Config-Message!`)
-                        .addField("Value:", `> ${value}`.substring(0, 1024), true)
-                        .addField("Description:", `> ${description}`.substring(0, 1024), true)
-                        .addField("Category:", `> <#${category}> (${category})`.substring(0, 1024), true)
-                        .addField("Defaultname:", `> \`${defaultname}\` --> \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\``.substring(0, 1024), true)
-                        .addField("ReplyMsg:", `> ${replyMsg}`.substring(0, 1024), true)
-                        .addField("Emoji:", `> ${emojiMsg}`.substring(0, 1024), true)
+                        .addFields({ name: "Value:", value: `> ${value}`.substring(0, 1024), inline: true })
+                        .addFields({ name: "Description:", value: `> ${description}`.substring(0, 1024), inline: true })
+                        .addFields({ name: "Category:", value: `> <#${category}> (${category})`.substring(0, 1024), inline: true })
+                        .addFields({ name: "Defaultname:", value: `> \`${defaultname}\` --> \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\``.substring(0, 1024), inline: true })
+                        .addFields({ name: "ReplyMsg:", value: `> ${replyMsg}`.substring(0, 1024), inline: true })
+                        .addFields({ name: "Emoji:", value: `> ${emojiMsg}`.substring(0, 1024), inline: true })
 
                     ]
                   });
@@ -1065,14 +949,14 @@ module.exports = {
 
 
               } else menu?.reply({
-                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                 ephemeral: true
               });
             });
             //Once the Collections ended edit the menu message
             collector.on('end', collected => {
               menumsg.edit({
-                embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                 components: [],
                 content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected.size > 0 ? collected.first().values[0] : "NOTHING"}\`**`
               })
@@ -1082,11 +966,11 @@ module.exports = {
           case "Remove Ticket Option": {
             let data = theDB.get(message.guild.id, pre + ".data");
             if (!data || data.length < 1) {
-              return message.reply("<:no:833101993668771842> **There are no Open-Ticket-Options to remove**")
+              return message.reply("<:no:833101993668771842> **No hay opciones de ticket abierto para eliminar**")
             }
             let embed = new EmbedBuilder()
               .setColor(es.color)
-              .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
+              .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
               .setFooter(client.getFooter(es))
               .setDescription("Just pick the Options you want to remove!")
               .setTitle("Which Option Do you want to remove?")
@@ -1095,7 +979,7 @@ module.exports = {
               .setCustomId('MenuSelection')
               .setMaxValues(data.length)
               .setMinValues(1)
-              .setPlaceholder('Click me to setup the Menu-Ticket System!')
+              .setPlaceholder('¡Haz clic para configurar the Menu-Ticket System!')
               .addOptions(
                 data.map((option, index) => {
                     const emoji = NumberEmojis[index + 1];
@@ -1153,14 +1037,14 @@ module.exports = {
                 theDB.set(message.guild.id, data, pre + ".data");
                 message.reply(`**Successfully removed:**\n>>> ${menu?.values.map(i => `\`${i}\``).join(", ")}\n\nDon't forget to resend the Ticket Config-Message!`)
               } else menu?.reply({
-                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                 ephemeral: true
               });
             });
             //Once the Collections ended edit the menu message
             collector.on('end', collected => {
               menumsg.edit({
-                embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                 components: [],
                 content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected.first().values[0]}\`**`
               })
@@ -1174,7 +1058,7 @@ module.exports = {
               .setColor(es.color)
               .setFooter(client.getFooter(es))
               .setTitle("What should be the new Closed Ticket Category?")
-              .setDescription(`Currently it's: \`${parentId ? "Not Setupped yet" : parent ? parent.name : `Channel not Found: ${parentId}`}\`!\nWhen closing a Ticket, it will be moved to there until it get's deleted!\n> **Send the new __PARENT ID__ now!**`)
+              .setDescription(`Currently it's: \`${parentId ? "Not Setupped yet" : parent ? parent.name : `Canal not Found: ${parentId}`}\`!\nWhen closing a Ticket, it will be moved to there until it get's deleted!\n> **Send the new __PARENT ID__ now!**`)
             message.reply({
               embeds: [rembed]
             }).then(msg => {
@@ -1192,7 +1076,7 @@ module.exports = {
                 if (!parent) {
                   return message.reply(`There is no parent i can access in this Guild which has the ID ${content}`);
                 }
-                if (parent.type !== "GUILD_CATEGORY") {
+                if (parent.type !== ChannelType.GuildCategory) {
                   return message.reply(`<#${parent.id}> is not a CATEGORY/PARENT`);
                 }
                 theDB.set(message.guild.id, parent.id, `${pre}.closedParent`);
@@ -1202,7 +1086,7 @@ module.exports = {
                   embeds: [new Discord.EmbedBuilder()
                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]))
                     .setColor(es.wrongcolor)
-                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                     .setFooter(client.getFooter(es))
                   ]
                 });
@@ -1215,7 +1099,7 @@ module.exports = {
               embeds: [
                 new EmbedBuilder()
                   .setColor(es.color)
-                  .setTitle("What User(s) or Role(s) do you want to add/remove?")
+                  .setTitle("What Usuario(s) or Role(s) do you want to add/remove?")
                   .setDescription(`Just ping them! If they are already added, they will get removed!`)
               ]
             });
@@ -1271,10 +1155,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

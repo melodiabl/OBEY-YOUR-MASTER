@@ -13,7 +13,7 @@ module.exports = {
     name: `eval`,
     category: `👑 Owner`,
     aliases: [`evaluate`],
-    description: `eval Command`,
+    description: `eval Comando`,
     usage: `eval <CODE>`,
     type: "bot",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -85,10 +85,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

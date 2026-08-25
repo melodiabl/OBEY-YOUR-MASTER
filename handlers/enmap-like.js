@@ -75,6 +75,16 @@ class EnmapLike {
 
   inc(key, path) { this.math(String(key), 'add', path, 1) }
 
+  find(fn) {
+    for (const v of this._data.values()) { try { if (fn(v)) return v } catch {} }
+    return null
+  }
+
+  findKey(fn) {
+    for (const [k, v] of this._data) { try { if (fn(v)) return k } catch {} }
+    return null
+  }
+
   filter(fn) {
     const keys = []
     for (const [k, v] of this._data) { try { if (fn(v)) keys.push(k) } catch {} }

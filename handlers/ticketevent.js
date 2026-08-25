@@ -1,4 +1,7 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, Collection, AttachmentBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, Collection, AttachmentBuilder, PermissionFlagsBits,
+    ButtonStyle,
+    ChannelType
+} = require("discord.js");
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -31,13 +34,14 @@ module.exports = client => {
         const adminroles = client.settings.get(guild.id, "adminroles");
         const cmdroles = client.settings.get(guild.id, "cmdadminroles.ticket");
         const cmdroles2 = client.settings.get(guild.id, "cmdadminroles.close");
+        const cmdrole = [];
         try {
             for (const r of cmdroles2) cmdrole.push(r);
         } catch {}
 
         if (!client.setups.has(channel.id)) {
             if (interaction.customId != "ticket_verify") {
-                interaction?.reply({ content: "❌ This channel is not a Ticket", ephemeral: true });
+                interaction?.reply({ content: "❌ Este canal no es un ticket", ephemeral: true });
             }
             return;
         }
@@ -66,7 +70,6 @@ module.exports = client => {
             closedParent = settings.closedParent;
             theadminroles = adminRoles;
         }
-        const cmdrole = [];
         if (cmdroles.length > 0) {
             for (const r of cmdroles) {
                 if (guild.roles.cache.get(r)) {
@@ -98,10 +101,10 @@ module.exports = client => {
                 });
             }
             let button_ticket_verify = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_verify")
                 .setLabel("Verify this Step")
-                .setEmoji("833101995723194437");
+                .setEmoji("✅");
             channel
                 .send({
                     content: `<@${buttonuser.id}>`,
@@ -113,7 +116,7 @@ module.exports = client => {
                     components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
                 })
                 .then(async msg => {
-                    const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
+                    const collector = msg.createMessageComponentCollector( { filter:bb => !bb?.user.bot,
                         time: 30000,
                     }); //collector for 5 seconds
                     collector.on("collect", async b => {
@@ -128,7 +131,7 @@ module.exports = client => {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                                embeds: [new Discord.EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
                                 components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
@@ -150,7 +153,7 @@ module.exports = client => {
 
                             if (closedParent) {
                                 let ticketCh = msg.guild.channels.cache.get(closedParent);
-                                if (ticketCh && ticketCh.type == "GUILD_CATEGORY") {
+                                if (ticketCh && ticketCh.type == ChannelType.GuildCategory) {
                                     if (ticketCh.children.size < 50) {
                                         await msg.channel
                                             .setParent(ticketCh.id, { lockPermissions: false })
@@ -173,7 +176,7 @@ module.exports = client => {
                                 }
                             }
 
-                            if (msg.channel.permissionsFor(msg.channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (msg.channel.permissionsFor(msg.channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 await msg.channel.permissionOverwrites.edit(data.user, {
                                     SEND_MESSAGES: false,
                                     VIEW_CHANNEL: false,
@@ -196,17 +199,14 @@ module.exports = client => {
                                                 : null
                                         )
                                         .setDescription(
-                                            `Closed the Ticket of <@${data.user}> and removed him from the Channel!`.substring(
+                                            `Closed the Ticket of <@${data.user}> and removed him from the Canal!`.substring(
                                                 0,
                                                 2000
                                             )
                                         )
-                                        .addField("User: ", `<@${data.user}>`)
-                                        .addField(
-                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variablex_8"]),
-                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable8"])
-                                        )
-                                        .addField("State: ", `${data.state}`)
+                                        .addFields({ name: "User: ", value: `<@${data.user}>` })
+                                        .addFields({ name: eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variablex_8"]), value: eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable8"]) })
+                                        .addFields({ name: "State: ", value: `${data.state}` })
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -240,10 +240,8 @@ module.exports = client => {
                                                 )
                                                 .setFooter(client.getFooter(es))
                                                 .setAuthor(
-                                                    `ticket --> LOG | ${user.tag}`,
-                                                    user.displayAvatarURL({
-                                                        dynamic: true,
-                                                    })
+                                                    `ticket --> LOG | ${user.username}`,
+                                                    user.displayAvatarURL()
                                                 )
                                                 .setDescription(
                                                     eval(
@@ -252,14 +250,8 @@ module.exports = client => {
                                                         ]
                                                     )
                                                 )
-                                                .addField(
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                                )
-                                                .addField(
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                                )
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                                 .setTimestamp()
                                                 .setFooter({ text: `ID: ${user.id}` }),
                                         ],
@@ -272,7 +264,7 @@ module.exports = client => {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.EmbedBuilder().setTitle("Cancelled!").setColor(es.wrongcolor)],
+                                embeds: [new Discord.EmbedBuilder().setTitle("Cancelado!").setColor(es.wrongcolor)],
                                 components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
@@ -293,8 +285,8 @@ module.exports = client => {
                                         button_ticket_verify
                                             .setDisabled(true)
                                             .setLabel("FAILED TO VERIFY")
-                                            .setEmoji("833101993668771842")
-                                            .setStyle(Discord.ButtonStyle.Danger)
+                                            .setEmoji("❌")
+                                            .setStyle(ButtonStyle.Danger)
                                     ),
                                 ],
                             }).catch(e => {
@@ -322,7 +314,7 @@ module.exports = client => {
                 !cmdroles.includes(interaction?.user.id) && [...member.roles.cache.values()] &&
                 !member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![guild.ownerId, config.ownerid].includes(interaction?.user.id) &&
-                !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) &&
+                !member.permissions.has(Discord.PermissionFlagsBits.Administrator) &&
                 !member.roles.cache.some(r => theadminroles.includes(r ? r.id : r)) &&
                 !theadminroles.includes(member.id)
             ) {
@@ -332,19 +324,19 @@ module.exports = client => {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle("<:no:833101993668771842> You are not allowed to delete this Ticket")
+                            .setTitle("<:no:833101993668771842> No tienes permiso para eliminar este ticket")
                             .setDescription(
                                 `${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`
                             )
-                            .addField("Ticket Specific Role(s)/User(s):", `${ticketspecific.join(", ")}`.substring(0, 1024)),
+                            .addFields({ name: "Ticket Specific Role(s)/User(s):", value: `${ticketspecific.join(", ")}`.substring(0, 1024) }),
                     ],
                 });
             }
             let button_ticket_verify = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_verify")
                 .setLabel("Verify this Step")
-                .setEmoji("833101995723194437");
+                .setEmoji("✅");
             let msg = await channel.send({
                 content: `<@${buttonuser.id}>`,
                 embeds: [
@@ -354,7 +346,7 @@ module.exports = client => {
                 ],
                 components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
             });
-            const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
+            const collector = msg.createMessageComponentCollector( { filter:bb => !bb?.user.bot,
                 time: 30000,
             }); //collector for 5 seconds
             collector.on("collect", async b => {
@@ -369,7 +361,7 @@ module.exports = client => {
                     edited = true;
                     b.update({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                        embeds: [new Discord.EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
                         components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
@@ -450,9 +442,7 @@ module.exports = client => {
                                                     )
                                                 );
                                                 sendembed.setThumbnail(
-                                                    user.user.displayAvatarURL({
-                                                        dynamic: true,
-                                                    })
+                                                    user.user.displayAvatarURL()
                                                 );
                                             } catch {
                                                 sendembed.setDescription(channel.topic);
@@ -531,22 +521,14 @@ module.exports = client => {
                                         )
                                         .setFooter(client.getFooter(es))
                                         .setAuthor(
-                                            `ticket --> LOG | ${user.tag}`,
-                                            user.displayAvatarURL({
-                                                dynamic: true,
-                                            })
+                                            `ticket --> LOG | ${user.username}`,
+                                            user.displayAvatarURL()
                                         )
                                         .setDescription(
                                             eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable15"])
                                         )
-                                        .addField(
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                        )
-                                        .addField(
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                        )
+                                        .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                        .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                         .setTimestamp()
                                         .setFooter({ text: `ID: ${user.id}` }),
                                 ],
@@ -559,7 +541,7 @@ module.exports = client => {
                     edited = true;
                     b.update({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.EmbedBuilder().setTitle("Cancelled!").setColor(es.wrongcolor)],
+                        embeds: [new Discord.EmbedBuilder().setTitle("Cancelado!").setColor(es.wrongcolor)],
                         components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
@@ -580,8 +562,8 @@ module.exports = client => {
                                 button_ticket_verify
                                     .setDisabled(true)
                                     .setLabel("FAILED TO VERIFY")
-                                    .setEmoji("833101993668771842")
-                                    .setStyle(Discord.ButtonStyle.Danger)
+                                    .setEmoji("❌")
+                                    .setStyle(ButtonStyle.Danger)
                             ),
                         ],
                     }).catch(e => {
@@ -637,9 +619,7 @@ module.exports = client => {
                                 eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable21"])
                             );
                             sendembed.setThumbnail(
-                                user.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                user.user.displayAvatarURL()
                             );
                         } catch {
                             sendembed.setDescription(channel.topic);
@@ -673,23 +653,15 @@ module.exports = client => {
                                             .setFooter(client.getFooter(es))
                                             .setAuthor(
                                                 client.getAuthor(
-                                                    `ticket --> LOG | ${user.tag}`,
-                                                    user.displayAvatarURL({
-                                                        dynamic: true,
-                                                    })
+                                                    `ticket --> LOG | ${user.username}`,
+                                                    user.displayAvatarURL()
                                                 )
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable22"])
                                             )
-                                            .addField(
-                                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                            )
-                                            .addField(
-                                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                            )
+                                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                             .setTimestamp()
                                             .setFooter({ text: `ID: ${user.id}` }),
                                     ],
@@ -707,9 +679,7 @@ module.exports = client => {
                                 new EmbedBuilder()
                                     .setAuthor(
                                         "ERROR! Transcript is to big, to be sent into the Channel!",
-                                        user.displayAvatarURL({
-                                            dynamic: true,
-                                        })
+                                        user.displayAvatarURL()
                                     )
                                     .setFooter({
                                         text: `${eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable25"])}`,
@@ -728,7 +698,7 @@ module.exports = client => {
                 !cmdroles.includes(interaction?.user.id) && [...member.roles.cache.values()] &&
                 !member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![guild.ownerId, config.ownerid].includes(interaction?.user.id) &&
-                !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) &&
+                !member.permissions.has(Discord.PermissionFlagsBits.Administrator) &&
                 !member.roles.cache.some(r => theadminroles.includes(r ? r.id : r))
             ) {
                 return channel.send({
@@ -737,7 +707,7 @@ module.exports = client => {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle("<:no:833101993668771842> You are not allowed to add/remove Users to/from this Ticket")
+                            .setTitle("<:no:833101993668771842> No tienes permiso para añadir/eliminar usuarios de este ticket")
                             .setDescription(
                                 `${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`
                             ),
@@ -807,10 +777,10 @@ module.exports = client => {
                                             if (
                                                 !channel
                                                     .permissionsFor(channel.guild.members.me)
-                                                    .has(PermissionFlagsBits.MANAGE_CHANNELS)
+                                                    .has(PermissionFlagsBits.ManageChannels)
                                             ) {
                                                 return channel.send(
-                                                    `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                                    `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                                 );
                                             }
                                             channel.permissionOverwrites
@@ -865,10 +835,8 @@ module.exports = client => {
                                                                         )
                                                                         .setFooter(client.getFooter(es))
                                                                         .setAuthor(
-                                                                            `ticket --> LOG | ${user.tag}`,
-                                                                            user.displayAvatarURL({
-                                                                                dynamic: true,
-                                                                            })
+                                                                            `ticket --> LOG | ${user.username}`,
+                                                                            user.displayAvatarURL()
                                                                         )
                                                                         .setDescription(
                                                                             eval(
@@ -877,30 +845,24 @@ module.exports = client => {
                                                                                 ]["variable36"]
                                                                             )
                                                                         )
-                                                                        .addField(
-                                                                            eval(
+                                                                        .addFields({ name: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
                                                                                     "ban"
                                                                                 ]["variablex_15"]
-                                                                            ),
-                                                                            eval(
+                                                                            ), value: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
                                                                                     "ban"
                                                                                 ]["variable15"]
-                                                                            )
-                                                                        )
-                                                                        .addField(
-                                                                            eval(
+                                                                            ) })
+                                                                        .addFields({ name: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
                                                                                     "ban"
                                                                                 ]["variablex_16"]
-                                                                            ),
-                                                                            eval(
+                                                                            ), value: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
                                                                                     "ban"
                                                                                 ]["variable16"]
-                                                                            )
-                                                                        )
+                                                                            ) })
                                                                         .setTimestamp()
                                                                         .setFooter({ text: `ID: ${user.id}` }),
                                                                 ],
@@ -937,10 +899,10 @@ module.exports = client => {
                                             if (
                                                 !channel
                                                     .permissionsFor(channel.guild.members.me)
-                                                    .has(PermissionFlagsBits.MANAGE_CHANNELS)
+                                                    .has(PermissionFlagsBits.ManageChannels)
                                             ) {
                                                 return channel.send(
-                                                    `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                                    `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                                 );
                                             }
                                             channel.permissionOverwrites
@@ -1001,9 +963,9 @@ module.exports = client => {
                                     }
                                 });
                             } else {
-                                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                     return channel.send(
-                                        `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                        `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                     );
                                 }
                                 channel.permissionOverwrites
@@ -1057,10 +1019,8 @@ module.exports = client => {
                                                             )
                                                             .setFooter(client.getFooter(es))
                                                             .setAuthor(
-                                                                `ticket --> LOG | ${user.tag}`,
-                                                                user.displayAvatarURL({
-                                                                    dynamic: true,
-                                                                })
+                                                                `ticket --> LOG | ${user.username}`,
+                                                                user.displayAvatarURL()
                                                             )
                                                             .setDescription(
                                                                 eval(
@@ -1069,30 +1029,24 @@ module.exports = client => {
                                                                     ]["variable45"]
                                                                 )
                                                             )
-                                                            .addField(
-                                                                eval(
+                                                            .addFields({ name: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
                                                                         "variablex_15"
                                                                     ]
-                                                                ),
-                                                                eval(
+                                                                ), value: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
                                                                         "variable15"
                                                                     ]
-                                                                )
-                                                            )
-                                                            .addField(
-                                                                eval(
+                                                                ) })
+                                                            .addFields({ name: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
                                                                         "variablex_16"
                                                                     ]
-                                                                ),
-                                                                eval(
+                                                                ), value: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
                                                                         "variable16"
                                                                     ]
-                                                                )
-                                                            )
+                                                                ) })
                                                             .setTimestamp()
                                                             .setFooter({ text: `ID: ${user.id}` }),
                                                     ],
@@ -1139,7 +1093,7 @@ module.exports = client => {
                                                         )
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`"Cancelled"`.substring(0, 2000))
+                                                    .setDescription(`"Cancelado"`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -1157,7 +1111,7 @@ module.exports = client => {
                 !cmdroles.includes(interaction?.user.id) && [...member.roles.cache.values()] &&
                 !member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![guild.ownerId, config.ownerid].includes(interaction?.user.id) &&
-                !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) &&
+                !member.permissions.has(Discord.PermissionFlagsBits.Administrator) &&
                 !member.roles.cache.some(r => theadminroles.includes(r ? r.id : r))
             ) {
                 return channel.send({
@@ -1166,7 +1120,7 @@ module.exports = client => {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle("<:no:833101993668771842> You are not allowed to add/remove Roles to/from this Ticket")
+                            .setTitle("<:no:833101993668771842> No tienes permiso para añadir/eliminar roles de este ticket")
                             .setDescription(
                                 `${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`
                             ),
@@ -1236,10 +1190,10 @@ module.exports = client => {
                                             if (
                                                 !channel
                                                     .permissionsFor(channel.guild.members.me)
-                                                    .has(PermissionFlagsBits.MANAGE_CHANNELS)
+                                                    .has(PermissionFlagsBits.ManageChannels)
                                             ) {
                                                 return channel.send(
-                                                    `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                                    `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                                 );
                                             }
                                             channel.permissionOverwrites
@@ -1293,10 +1247,8 @@ module.exports = client => {
                                                                         )
                                                                         .setFooter(client.getFooter(es))
                                                                         .setAuthor(
-                                                                            `ticket --> LOG | ${user.tag}`,
-                                                                            user.displayAvatarURL({
-                                                                                dynamic: true,
-                                                                            })
+                                                                            `ticket --> LOG | ${user.username}`,
+                                                                            user.displayAvatarURL()
                                                                         )
                                                                         .setDescription(
                                                                             eval(
@@ -1305,30 +1257,24 @@ module.exports = client => {
                                                                                 ]["variable55"]
                                                                             )
                                                                         )
-                                                                        .addField(
-                                                                            eval(
+                                                                        .addFields({ name: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
                                                                                     "ban"
                                                                                 ]["variablex_15"]
-                                                                            ),
-                                                                            eval(
+                                                                            ), value: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
                                                                                     "ban"
                                                                                 ]["variable15"]
-                                                                            )
-                                                                        )
-                                                                        .addField(
-                                                                            eval(
+                                                                            ) })
+                                                                        .addFields({ name: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
                                                                                     "ban"
                                                                                 ]["variablex_16"]
-                                                                            ),
-                                                                            eval(
+                                                                            ), value: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
                                                                                     "ban"
                                                                                 ]["variable16"]
-                                                                            )
-                                                                        )
+                                                                            ) })
                                                                         .setTimestamp()
                                                                         .setFooter({ text: `ID: ${user.id}` }),
                                                                 ],
@@ -1365,10 +1311,10 @@ module.exports = client => {
                                             if (
                                                 !channel
                                                     .permissionsFor(channel.guild.members.me)
-                                                    .has(PermissionFlagsBits.MANAGE_CHANNELS)
+                                                    .has(PermissionFlagsBits.ManageChannels)
                                             ) {
                                                 return channel.send(
-                                                    `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                                    `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                                 );
                                             }
                                             channel.permissionOverwrites
@@ -1428,9 +1374,9 @@ module.exports = client => {
                                     }
                                 });
                             } else {
-                                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                     return channel.send(
-                                        `❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                        `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                     );
                                 }
                                 channel.permissionOverwrites
@@ -1483,10 +1429,8 @@ module.exports = client => {
                                                             )
                                                             .setFooter(client.getFooter(es))
                                                             .setAuthor(
-                                                                `ticket --> LOG | ${user.tag}`,
-                                                                user.displayAvatarURL({
-                                                                    dynamic: true,
-                                                                })
+                                                                `ticket --> LOG | ${user.username}`,
+                                                                user.displayAvatarURL()
                                                             )
                                                             .setDescription(
                                                                 eval(
@@ -1495,30 +1439,24 @@ module.exports = client => {
                                                                     ]["variable64"]
                                                                 )
                                                             )
-                                                            .addField(
-                                                                eval(
+                                                            .addFields({ name: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
                                                                         "variablex_15"
                                                                     ]
-                                                                ),
-                                                                eval(
+                                                                ), value: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
                                                                         "variable15"
                                                                     ]
-                                                                )
-                                                            )
-                                                            .addField(
-                                                                eval(
+                                                                ) })
+                                                            .addFields({ name: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
                                                                         "variablex_16"
                                                                     ]
-                                                                ),
-                                                                eval(
+                                                                ), value: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
                                                                         "variable16"
                                                                     ]
-                                                                )
-                                                            )
+                                                                ) })
                                                             .setTimestamp()
                                                             .setFooter({ text: `ID: ${user.id}` }),
                                                     ],
@@ -1563,7 +1501,7 @@ module.exports = client => {
                                             eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable69"])
                                         )
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`"Cancelled"`.substring(0, 2000))
+                                        .setDescription(`"Cancelado"`.substring(0, 2000))
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -1576,7 +1514,7 @@ module.exports = client => {
                 !cmdroles.includes(interaction?.user.id) && [...member.roles.cache.values()] &&
                 !member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![guild.ownerId, config.ownerid].includes(interaction?.user.id) &&
-                !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) &&
+                !member.permissions.has(Discord.PermissionFlagsBits.Administrator) &&
                 !member.roles.cache.some(r => theadminroles.includes(r ? r.id : r))
             ) {
                 return channel.send({
@@ -1585,7 +1523,7 @@ module.exports = client => {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle("<:no:833101993668771842> You are not allowed to claim this Ticket")
+                            .setTitle("<:no:833101993668771842> No tienes permiso para reclamar este ticket")
                             .setDescription(
                                 `${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`
                             ),
@@ -1593,9 +1531,9 @@ module.exports = client => {
                 });
             }
             let data = client.setups.get(channel.id, "ticketdata");
-            if (!channel.permissionsFor(member).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
-                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                    return channel.send(`❌ **I am missing the Permissions MANAGE_CHANNELS for: \`${channel.name}\`**`);
+            if (!channel.permissionsFor(member).has(Discord.PermissionFlagsBits.SendMessages)) {
+                if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                    return channel.send(`❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`);
                 }
                 channel.permissionOverwrites
                     .edit(member.user, {
@@ -1604,7 +1542,7 @@ module.exports = client => {
                     .catch(e => {
                         return interaction?.reply({
                             ephemeral: true,
-                            content: "❌ **Can't change the Permissions of you!**",
+                            content: "❌ **¡No se pueden cambiar tus permisos!**",
                         });
                     });
             }
@@ -1624,7 +1562,7 @@ module.exports = client => {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor(member.user.tag, member.displayAvatarURL({ dynamic: true }))
+                            .setAuthor({ name: member.user.username, iconURL: member.displayAvatarURL() })
                             .setDescription(
                                 messageClaim
                                     .replace(/\{claimer\}/gi, `${member.user}`)
@@ -1704,7 +1642,7 @@ module.exports = client => {
                 if (index < 0) {
                     return interaction?.reply({
                         ephemeral: true,
-                        content: "❌ **Could not find the Ticket-Settings for this Option**",
+                        content: "❌ **No se pudo encontrar la configuración del ticket para esta opción**",
                     });
                 }
                 let data = settings.data[index];
@@ -1764,11 +1702,11 @@ module.exports = client => {
                     .replace(/\s/giu, "-")
                     .substring(0, 31);
                 let optionsData = {
-                    topic: `📨 Ticket for: ${user.tag} (${user.id}) | ${values[0]} | ✅ Created at: ${moment().format("LLLL")}`,
-                    type: "GUILD_TEXT",
-                    reason: `Menu Ticket System for: ${user.tag}`,
+                    topic: `📨 Ticket for: ${user.username} (${user.id}) | ${values[0]} | ✅ Created at: ${moment().format("LLLL")}`,
+                    type: ChannelType.GuildText,
+                    reason: `Menu Ticket System for: ${user.username}`,
                 };
-                guild.channels.create(channelname.substring(0, 31), optionsData).then(async ch => {
+                guild.channels.create({ name: channelname.substring(0, 31), ...optionsData }).then(async ch => {
                     await interaction?.reply({
                         content: `<a:Loading:833101350623117342> **Creating your ticket?...** (Usually takes 0-2 Seconds)`,
                         ephemeral: true,
@@ -1776,7 +1714,7 @@ module.exports = client => {
                     try {
                         var cat = guild.channels.cache.get(settings.data[index].category);
                         if (cat) {
-                            if (cat.type == "GUILD_CATEGORY") {
+                            if (cat.type == ChannelType.GuildCategory) {
                                 if (cat.children.size < 50) {
                                     await ch.setParent(String(cat.id)).catch(() => {});
                                 }
@@ -1914,11 +1852,9 @@ module.exports = client => {
                         )
                         .setAuthor(
                             client.getAuthor(
-                                `Ticket for: ${user.tag}`,
-                                user.displayAvatarURL({
-                                    dynamic: true,
-                                }),
-                                "https://discord.gg/milrato"
+                                `Ticket for: ${user.username}`,
+                                user.displayAvatarURL(),
+                                "https://github.com/melodiabl"
                             )
                         )
                         .setDescription(replyMsg.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
@@ -1939,7 +1875,7 @@ module.exports = client => {
                                 client.getAuthor(
                                     `A Staff Member will claim the Ticket soon!`,
                                     "https://cdn.discordapp.com/emojis/833101350623117342.gif?size=44",
-                                    "https://discord.gg/milrato"
+                                    "https://github.com/melodiabl"
                                 )
                             )
                             .setDescription(settings.claim.messageOpen.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
@@ -1947,27 +1883,27 @@ module.exports = client => {
                     }
                     const { ButtonBuilder } = require("discord.js");
                     let button_close = new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setCustomId("ticket_close")
                         .setLabel("Close")
                         .setEmoji("🔒");
                     let button_delete = new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Secondary)
+                        .setStyle(ButtonStyle.Secondary)
                         .setCustomId("ticket_delete")
                         .setLabel("Delete")
                         .setEmoji("🗑️");
                     let button_transcript = new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setCustomId("ticket_transcript")
                         .setLabel("Transcript")
                         .setEmoji("📑");
                     let button_user = new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Success)
+                        .setStyle(ButtonStyle.Success)
                         .setCustomId("ticket_user")
                         .setLabel("Users")
                         .setEmoji("👤");
                     let button_role = new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Success)
+                        .setStyle(ButtonStyle.Success)
                         .setCustomId("ticket_role")
                         .setLabel("Roles")
                         .setEmoji("📌");
@@ -1984,15 +1920,15 @@ module.exports = client => {
                         allbuttons.push(
                             new ActionRowBuilder().addComponents([
                                 new ButtonBuilder()
-                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                    .setStyle(ButtonStyle.Secondary)
                                     .setCustomId("ticket_claim")
                                     .setLabel("Claim the Ticket")
                                     .setEmoji("✅"),
                             ])
                         );
                     }
-                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.SEND_MESSAGES)) {
-                        if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.EMBED_LINKS)) {
+                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.SendMessages)) {
+                        if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.EmbedLinks)) {
                             await ch
                                 .send({
                                     content: `<@${user.id}>${extrastring}`,
@@ -2003,7 +1939,7 @@ module.exports = client => {
                                     console.log(String(O).grey);
                                 })
                                 .then(msg => {
-                                    if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
+                                    if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.ManageMessages)) {
                                         msg.pin().catch(O => {
                                             console.log(String(O).grey);
                                         });
@@ -2022,7 +1958,7 @@ module.exports = client => {
                                     console.log(String(O).grey);
                                 })
                                 .then(msg => {
-                                    if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
+                                    if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.ManageMessages)) {
                                         msg.pin().catch(O => {
                                             console.log(String(O).grey);
                                         });
@@ -2101,7 +2037,7 @@ module.exports = client => {
                 if (index < 0) {
                     return interaction?.reply({
                         ephemeral: true,
-                        content: "❌ **Could not find the Auto-Support-Data-Settings for this Option**",
+                        content: "❌ **No se pudo encontrar la configuración de auto-soporte para esta opción**",
                     });
                 }
                 let data = settings.data[index];
@@ -2198,12 +2134,12 @@ module.exports = client => {
             if (index < 0) {
                 return interaction?.reply({
                     ephemeral: true,
-                    content: "❌ **Could not find the Ticket-Settings for this Option**",
+                    content: "❌ **No se pudo encontrar la configuración del ticket para esta opción**",
                 });
             }
             const data = settings.data[index];
             if (!data)
-                return interaction?.reply({ ephemeral: true, content: "❌ **Could not find the Data for this System**" });
+                return interaction?.reply({ ephemeral: true, content: "❌ **No se pudo encontrar los datos de este sistema**" });
             require(`./apply.js`).ApplySystem({
                 guild: guild,
                 channel: message.channel,

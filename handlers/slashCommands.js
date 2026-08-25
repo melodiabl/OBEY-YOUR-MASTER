@@ -47,6 +47,51 @@ const dirSetup = [
         CmdName: "ticket",
         CmdDescription: "Ticket management commands!",
     },
+    {
+        Folder: "Birthday",
+        CmdName: "birthday",
+        CmdDescription: "Sistema de cumpleaños del servidor!",
+    },
+    {
+        Folder: "Welcome",
+        CmdName: "welcome",
+        CmdDescription: "Comandos del sistema de bienvenida!",
+    },
+    {
+        Folder: "Config",
+        CmdName: "config",
+        CmdDescription: "Configurar el servidor!",
+    },
+    {
+        Folder: "Economy",
+        CmdName: "economy",
+        CmdDescription: "Sistema de economía del servidor!",
+    },
+    {
+        Folder: "Rank",
+        CmdName: "rank",
+        CmdDescription: "Sistema de niveles y ranking!",
+    },
+    {
+        Folder: "Soundboard",
+        CmdName: "soundboard",
+        CmdDescription: "Reproducir sonidos en un canal de voz!",
+    },
+    {
+        Folder: "Anime",
+        CmdName: "anime",
+        CmdDescription: "Expresiones y emociones al estilo anime!",
+    },
+    {
+        Folder: "Playlist",
+        CmdName: "playlist",
+        CmdDescription: "Gestiona tus playlists personales",
+    },
+    {
+        Folder: "Favorites",
+        CmdName: "favoritos",
+        CmdDescription: "Tus canciones favoritas!",
+    },
 ];
 module.exports = client => {
     try {
@@ -124,10 +169,10 @@ module.exports = client => {
                                                     .setDescription(option.StringChoices.description)
                                                     .setRequired(option.StringChoices.required)
                                                     .addChoices(
-                                                        ...option.StringChoices.choices.map(c => ({
-                                                            name: String(c[0]).substring(0, 100),
-                                                            value: String(c[1]),
-                                                        }))
+                                                        ...option.StringChoices.choices.map(c => Array.isArray(c)
+                                                            ? { name: String(c[0]).substring(0, 100), value: String(c[1]) }
+                                                            : { name: String(c.name).substring(0, 100), value: String(c.value) }
+                                                        )
                                                     )
                                             );
                                         } else if (
@@ -145,11 +190,23 @@ module.exports = client => {
                                                     .setDescription(option.IntChoices.description)
                                                     .setRequired(option.IntChoices.required)
                                                     .addChoices(
-                                                        ...option.IntChoices.choices.map(c => ({
-                                                            name: String(c[0]).substring(0, 100),
-                                                            value: parseInt(c[1]),
-                                                        }))
+                                                        ...option.IntChoices.choices.map(c => Array.isArray(c)
+                                                            ? { name: String(c[0]).substring(0, 100), value: parseInt(c[1]) }
+                                                            : { name: String(c.name).substring(0, 100), value: parseInt(c.value) }
+                                                        )
                                                     )
+                                            );
+                                        } else if (
+                                            option.StringAutocomplete &&
+                                            option.StringAutocomplete.name &&
+                                            option.StringAutocomplete.description
+                                        ) {
+                                            subcommand.addStringOption(op =>
+                                                op
+                                                    .setName(String(option.StringAutocomplete.name).replace(/\s+/g, "_").toLowerCase())
+                                                    .setDescription(option.StringAutocomplete.description)
+                                                    .setRequired(option.StringAutocomplete.required ?? true)
+                                                    .setAutocomplete(true)
                                             );
                                         } else {
                                             console.log(
@@ -230,10 +287,10 @@ module.exports = client => {
                                         .setDescription(option.StringChoices.description)
                                         .setRequired(option.StringChoices.required)
                                         .addChoices(
-                                            ...option.StringChoices.choices.map(c => ({
-                                                name: String(c[0]).substring(0, 100),
-                                                value: String(c[1]),
-                                            }))
+                                            ...option.StringChoices.choices.map(c => Array.isArray(c)
+                                                ? { name: String(c[0]).substring(0, 100), value: String(c[1]) }
+                                                : { name: String(c.name).substring(0, 100), value: String(c.value) }
+                                            )
                                         )
                                 );
                             } else if (
@@ -249,10 +306,10 @@ module.exports = client => {
                                         .setDescription(option.IntChoices.description)
                                         .setRequired(option.IntChoices.required)
                                         .addChoices(
-                                            ...option.IntChoices.choices.map(c => ({
-                                                name: String(c[0]).substring(0, 100),
-                                                value: parseInt(c[1]),
-                                            }))
+                                            ...option.IntChoices.choices.map(c => Array.isArray(c)
+                                                ? { name: String(c[0]).substring(0, 100), value: parseInt(c[1]) }
+                                                : { name: String(c.name).substring(0, 100), value: parseInt(c.value) }
+                                            )
                                         )
                                 );
                             } else {
@@ -273,10 +330,10 @@ module.exports = client => {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

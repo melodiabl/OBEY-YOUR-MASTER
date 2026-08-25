@@ -38,34 +38,18 @@ module.exports = {
                 (await message.guild.members.fetch(user.id).catch(() => {})) ||
                 false;
 
-            if (!member) return message.reply("❌ **This User is not a Member of this Guild!**");
+            if (!member) return message.reply("❌ **This Usuario is not a Miembro of this Guild!**");
             if (!member.voice || !member.voice.channel)
-                return message.reply("❌ **This User is not Connected to a Voicechannel!**");
+                return message.reply("❌ **This Usuario is not Conectado to a Voicechannel!**");
 
             const embed = new Discord.EmbedBuilder()
-                .setTitle(`Connection Info of: \`${user.tag}\``)
-                .addField(
-                    "<:arrow:832598861813776394> **Channel**",
-                    `> **${member.voice.channel.name}** ${member.voice.channel}`,
-                    true
-                )
-                .addField("<:arrow:832598861813776394> **Channel-ID**", `> \`${member.voice.channel.id}\``, true)
-                .addField(
-                    "<:arrow:832598861813776394> **Members in there**",
-                    `> \`${member.voice.channel.members.size} total Members\``,
-                    true
-                )
-                .addField(
-                    "<:arrow:832598861813776394> **Full Channel?**",
-                    `> ${member.voice.channel.full ? "✅" : "❌"}`,
-                    true
-                )
-                .addField("<:arrow:832598861813776394> **Bitrate**", `> ${member.voice.channel.bitrate}`, true)
-                .addField(
-                    "<:arrow:832598861813776394> **User join limit**",
-                    `> \`${member.voice.channel.userLimit != 0 ? member.voice.channel.userLimit : "No limit!"}\``,
-                    true
-                );
+                .setTitle(`Connection Información of: \`${user.username}\``)
+                .addFields({ name: "<:arrow:832598861813776394> **Channel**", value: `> **${member.voice.channel.name}** ${member.voice.channel}`, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> **Channel-ID**", value: `> \`${member.voice.channel.id}\``, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> **Members in there**", value: `> \`${member.voice.channel.members.size} total Members\``, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> **Full Channel?**", value: `> ${member.voice.channel.full ? "✅" : "❌"}`, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> **Bitrate**", value: `> ${member.voice.channel.bitrate}`, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> **User join limit**", value: `> \`${member.voice.channel.userLimit != 0 ? member.voice.channel.userLimit : "No limit!"}\``, inline: true });
 
             message.reply({
                 embeds: [embed],
@@ -86,10 +70,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

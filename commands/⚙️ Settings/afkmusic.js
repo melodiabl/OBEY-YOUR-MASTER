@@ -5,11 +5,11 @@ const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 module.exports = {
     name: "afkmusic",
     category: "⚙️ Settings",
-    aliases: ["awayfromkeyboard", "24/7"],
+    aliases: ["awayfromkeyboard"],
     cooldown: 10,
     usage: "afkmusic",
-    description: "Toggles if the Current Queue should be stated on 'afk' or not [DEFAULT: false]",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Toggles if the Current Cola should be stated on 'afk' or not [DEFAULT: false]",
+    memberpermissions: ['Administrador'],
     parameters: { type: "music", activeplayer: true },
     type: "music",
     run: async (client, message, args, user, text, prefix, player) => {
@@ -49,10 +49,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
+ * Bot Coded by Melodia | https://github?.com/melodiabl/discord-js-lavalink-Music-Bot-erela-js
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

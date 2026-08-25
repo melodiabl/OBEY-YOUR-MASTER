@@ -40,7 +40,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable1"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable2"])),
                     ],
@@ -52,7 +52,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable4"])),
                     ],
@@ -73,7 +73,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable6"])),
                     ],
                 });
@@ -83,7 +83,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable7"])),
                     ],
                 });
@@ -104,7 +104,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable8"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable9"])),
                 ],
@@ -125,10 +125,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

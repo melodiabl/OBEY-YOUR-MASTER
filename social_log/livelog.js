@@ -168,10 +168,10 @@ module.exports = async client => {
                 .setURL(`https://www.twitch.tv/${StreamData.user_login}`)
                 .setDescription(StreamData.title ? StreamData.title : `\u200b`)
                 .setTitle(`🔴 ${StreamData.user_name} is now live`)
-                .addField(`Playing:`, `\`${StreamData.game_name ? StreamData.game_name : `Unknown Game`}\``, true)
-                .addField(`Viewers:`, `${StreamData.viewer_count ? `\`${StreamData.viewer_count}\`` : `~~\`0\`~~`}`, true)
-                .addField(`Twitch:`, `[Watch Stream](https://www.twitch.tv/${StreamData.user_login})`, true)
-                .setFooter(client.getFooter(`Check his Stream out ; })`))
+                .addFields({ name: `Playing:`, value: `\`${StreamData.game_name ? StreamData.game_name : `Unknown Game`}\``, inline: true })
+                .addFields({ name: `Viewers:`, value: `${StreamData.viewer_count ? `\`${StreamData.viewer_count}\`` : `~~\`0\`~~`}`, inline: true })
+                .addFields({ name: `Twitch:`, value: `[Watch Stream](https://www.twitch.tv/${StreamData.user_login})`, inline: true })
+                .setFooter(client.getFooter(`Check his Stream out ; } })`))
                 .setImage(
                     `https://static-cdn.jtvnw.net/previews-ttv/live_user_${StreamData.user_login}-640x360.jpg?cacheBypass=${Math.random().toString()}`
                 )

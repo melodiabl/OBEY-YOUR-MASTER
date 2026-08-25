@@ -1207,13 +1207,10 @@ class HangmanGame {
 
         const embed = new Discord.EmbedBuilder()
             .setColor("#2f3136")
-            .setAuthor("Hangman Minigame", "https://imgur.com/0guxxtY.png", "https://discord.gg/milrato")
+            .setAuthor({ name: "Hangman Minigame", iconURL: "https://imgur.com/0guxxtY.png", url: "https://github.com/melodiabl" })
             .setDescription(this.getDescription())
-            .addField(
-                eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variablex_1"]),
-                eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variable1"])
-            )
-            .addField("How To Play", "React to this message using the emojis that look like letters (🅰️, 🇹, )");
+            .addFields({ name: eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variablex_1"]), value: eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variable1"]) })
+            .addFields({ name: "How To Play", value: "React to this message using the emojis that look like letters (🅰️, 🇹, )" });
 
         console.log("\n\n\n\n\n\n\n\n\n\nNEW HANGMAN GAME\n\n" + this.word + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
@@ -1254,8 +1251,8 @@ class HangmanGame {
                 .setColor("#2f3136")
                 .setTitle(eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variable2"]))
                 .setDescription(this.getDescription())
-                .addField("Letters Guessed", this.guesssed.length == 0 ? "\u200b" : this.guesssed.join(" "))
-                .addField("How To Play", "React to this message using the emojis that look like letters (🅰️, 🇹, )");
+                .addFields({ name: "Letters Guessed", value: this.guesssed.length == 0 ? "\u200b" : this.guesssed.join(" ") })
+                .addFields({ name: "How To Play", value: "React to this message using the emojis that look like letters (🅰️, 🇹, )" });
 
             this.gameEmbed.edit({ embeds: [editEmbed] });
             this.waitForReaction();
@@ -1268,13 +1265,10 @@ class HangmanGame {
         let ls = client.settings.get(this.gameEmbed.guild.id, "language");
         this.inGame = false;
         const editEmbed = new Discord.EmbedBuilder()
-            .setColor("RED")
-            .setAuthor("Hangman Minigame", "https://imgur.com/0guxxtY.png", "https://discord.gg/milrato")
+            .setColor("#ED4245")
+            .setAuthor({ name: "Hangman Minigame", iconURL: "https://imgur.com/0guxxtY.png", url: "https://github.com/melodiabl" })
             .setDescription(win ? "**Chat Wins!**" : "**Chat losses**")
-            .addField(
-                eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variablex_3"]),
-                eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variable3"])
-            );
+            .addFields({ name: eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variablex_3"]), value: eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variable3"]) });
         this.gameEmbed.edit({ embeds: [editEmbed] });
 
         this.gameEmbed.reactions.removeAll();

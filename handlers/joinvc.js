@@ -75,15 +75,15 @@ module.exports = client => {
                                             .setColor("#ED4245")
                                             .setFooter(client.getFooter(
                                                     `ID: ${vcMember.id}`,
-                                                    vcMember.displayAvatarURL({ dynamic: true })
+                                                    vcMember.displayAvatarURL()
                                                 )
                                             )
                                             .setThumbnail(thumbs.leave)
                                             .setDescription(
-                                                `<@${vcMember.id}> **(\`${vcMember.user.tag}\`) left the VC:** <#${oldState.channelId}>`
+                                                `<@${vcMember.id}> **(\`${vcMember.user.username}\`) left the VC:** <#${oldState.channelId}>`
                                             ),
                                     ],
-                                    content: `**\`${vcMember.user.tag}\` LEFT!** *Removed the MESSAGE*`.substring(0, 2000),
+                                    content: `**\`${vcMember.user.username}\` LEFT!** *Removed the MESSAGE*`.substring(0, 2000),
                                 })
                                 .catch(() => {})
                                 .then(msg => {
@@ -97,15 +97,15 @@ module.exports = client => {
                                             .setColor("#ED4245")
                                             .setFooter(client.getFooter(
                                                     `ID: ${vcMember.id}`,
-                                                    vcMember.displayAvatarURL({ dynamic: true })
+                                                    vcMember.displayAvatarURL()
                                                 )
                                             )
                                             .setThumbnail(thumbs.leave)
                                             .setDescription(
-                                                `<@${vcMember.id}> **(\`${vcMember.user.tag}\`) left the VC:** <#${oldState.channelId}> **again...**`
+                                                `<@${vcMember.id}> **(\`${vcMember.user.username}\`) left the VC:** <#${oldState.channelId}> **again...**`
                                             ),
                                     ],
-                                    content: `**\`${vcMember.user.tag}\` LEFT!** *Removed the MESSAGE*`.substring(0, 2000),
+                                    content: `**\`${vcMember.user.username}\` LEFT!** *Removed the MESSAGE*`.substring(0, 2000),
                                 })
                                 .catch(() => {})
                                 .then(msg => {
@@ -160,11 +160,11 @@ module.exports = client => {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor("#57F287")
-                                    .setFooter(client.getFooter(`ID: ${vcMember.id}`, vcMember.displayAvatarURL({ dynamic: true }))
+                                    .setFooter(client.getFooter(`ID: ${vcMember.id}`, vcMember.displayAvatarURL())
                                     )
                                     .setThumbnail(thumbs.join)
                                     .setDescription(
-                                        `<@${vcMember.id}> **(\`${vcMember.user.tag}\`) joined the VC:** <#${newState.channelId}>`
+                                        `<@${vcMember.id}> **(\`${vcMember.user.username}\`) joined the VC:** <#${newState.channelId}>`
                                     ),
                             ],
                             content:

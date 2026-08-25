@@ -1,89 +1,19 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
 module.exports = {
-    name: `volume`,
-    category: `🎶 Music`,
-    aliases: [`vol`],
-    description: `Changes the Volume`,
-    usage: `volume <0-150>`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    options: [
-        { Integer: { name: "volume", description: "To What % do you want to change the volume to?", required: true } },
-    ],
-    run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
-        //let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return interaction?.reply({
-                ephemeral: true,
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            let args = [interaction?.options.getInteger("volume")];
-            //if the Volume Number is out of Range return error msg
-            if (Number(args[0]) <= 0 || Number(args[0]) > 150)
-                return interaction?.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["volume"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["music"]["volume"]["variable2"])),
-                    ],
-                });
-            //if its not a Number return error msg
-            if (isNaN(args[0]))
-                return interaction?.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["volume"]["variable3"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["music"]["volume"]["variable4"])),
-                    ],
-                });
-            //change the volume
-            player.setVolume(Number(args[0]));
-            //send success message
-            return interaction?.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["cmds"]["music"]["volume"]["variable5"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["volume"]["variable6"]))
-                        .setColor(es.color),
-                ],
-            });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return interaction?.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["volume"]["variable7"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'volume', description: 'Ajusta el volumen (0-200)',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  options: [{ Integer: { name: 'volumen', description: 'Nivel de volumen (0-200)', required: true } }],
+  run: async (client, interaction) => {
+    if (!interaction.member?.voice?.channel)
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
+    await interaction.deferReply()
+    const vol = Math.max(0, Math.min(200, interaction.options.getInteger('volumen') || 100))
+    const prev = client.music?.getState(interaction.guild.id)?.volume || 100
+    await client.music?.setVolume(interaction.guild.id, vol)
+    const emoji = vol === 0 ? '🔇' : vol < 40 ? '🔉' : '🔊'
+    const bar = '▰'.repeat(Math.round(vol / 10)) + '▱'.repeat(20 - Math.round(vol / 10))
+    await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
+      .setTitle(`${emoji} Volumen`)
+      .setDescription(`${bar}\n\n\`${prev}%\` → **\`${vol}%\`**`)] })
+  },
+}

@@ -1,89 +1,22 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { createBar, format } = require(`${process.cwd()}/handlers/functions`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { fx, err, E } = require('../../handlers/music/responses')
+const { EmbedBuilder } = require('discord.js')
 module.exports = {
-    name: `grab`,
-    category: `🎶 Music`,
-    aliases: [`save`, `yoink`],
-    description: `Saves the current playing song to your Direct Messages`,
-    usage: `grab`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        previoussong: false,
-    },
-    type: "song",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        try {
-            let es = client.settings.get(message.guild.id, "embed");
-            let ls = client.settings.get(message.guild.id, "language");
-            if (!client.settings.get(message.guild.id, "MUSIC")) {
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].common.disabled.title)
-                            .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                    ],
-                });
-            }
-            message.author
-                .send({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setAuthor(
-                                client.la[ls].cmds.music.grab?.author,
-                                message.author.displayAvatarURL({
-                                    dynamic: true,
-                                })
-                            )
-                            .setThumbnail(`https://img.youtube.com/vi/${player.queue.current.identifier}/mqdefault.jpg`)
-                            .setURL(player.queue.current.uri)
-                            .setColor(es.color)
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["grab"]["variable1"]))
-                            .addField(
-                                client.la[ls].cmds.music.grab?.field1,
-                                `\`${format(player.queue.current.duration)}\``,
-                                true
-                            )
-                            .addField(client.la[ls].cmds.music.grab?.field2, `\`${player.queue.current.author}\``, true)
-                            .addField(client.la[ls].cmds.music.grab?.field3, `\`${player.queue.length} Songs\``, true)
-                            .addField(client.la[ls].cmds.music.grab?.field4, `\`${prefix}play ${player.queue.current.uri}\``)
-                            .addField(client.la[ls].cmds.music.grab?.field5, `<#${message.channel.id}>`)
-                            .setFooter({ text: handlemsg(client.la[ls].cmds.music.grab?.footer, {
-                                    usertag: player.queue.current.requester.tag,
-                                    guild: message.guild.name + " | " + message.guild.id,
-                                }), iconURL: player.queue.current.requester.displayAvatarURL({ dynamic: true })
-                            }),
-                    ],
-                })
-                .catch(e => {
-                    return message.reply({ content: client.la[ls].common.dms_disabled });
-                });
-            message.react(emoji?.react.SUCCESS).catch(e => console.log("Could not react"));
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["grab"]["variable2"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'grab', category: '🎶 Music',
+  aliases: ['save', 'dm'],
+  description: 'Envía por DM la canción actual',
+  usage: 'grab',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  run: async (client, message) => {
+    const mstate = client.music?.getState(message.guild.id)
+    if (!mstate?.currentTrack) return message.reply({ embeds: [err('No hay música reproduciéndose.')] }).catch(() => {})
+    const info = mstate.currentTrack.info || mstate.currentTrack
+    const dm = new EmbedBuilder().setColor(0x00ff33)
+      .setTitle(`${E.music} ${info.title || '?'}`.slice(0, 250))
+      .setDescription(`${E.artist} **${info.author || '?'}**\n${E.link} [Abrir enlace](${info.uri || ''})`)
+      .setThumbnail(info.artworkUrl || null)
+      .setFooter({ text: `Guardado desde ${message.guild.name}` })
+    message.author.send({ embeds: [dm] })
+      .then(() => message.reply({ embeds: [fx(E.link, 'Te envié la canción por DM 📩')] }).catch(() => {}))
+      .catch(() => message.reply({ embeds: [err('No pude enviarte el DM. Revisa tu privacidad.')] }).catch(() => {}))
+  },
+}

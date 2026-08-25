@@ -38,7 +38,7 @@ module.exports = {
                         .setTitle(eval(client.la[ls]["cmds"]["programming"]["httpstatus"]["variable4"]))
                         .setImage(`https://http.cat/${status}.jpg`)
                         .setDescription(status === "599" ? "Network Connect Timeout Error" : STATUS_CODES[status])
-                        .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 64 })),
+                        .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL({ size: 64 }) }),
                 ],
             });
         } catch (e) {

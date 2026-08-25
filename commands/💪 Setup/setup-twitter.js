@@ -13,9 +13,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setuptwitter", "twitter-setup"],
     cooldown: 5,
-    usage: "setup-twitter  --> Follow the Steps",
+    usage: "setup-twitter --> Sigue los Pasos",
     description: "Manage the 2x Twitter Systems (set channel, set twitter)",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -32,27 +32,27 @@ module.exports = {
                     },
                     {
                         value: "Set Poster Channel",
-                        description: `Define a Channel to post the messages to!`,
+                        description: `Define a Canal to post the messages to!`,
                         emoji: allEmojis.msg.channel,
                     },
                     {
                         value: "Set Posting Message",
-                        description: `Show Settings of the Admin Commands Log`,
+                        description: `Show Ajustes of the Admin Commands Log`,
                         emoji: allEmojis.msg.message,
                     },
                     {
                         value: `${client.social_log.get(message.guild.id, `twitter.REETWET`) ? "Disable Retweets" : "Enable Retweets"}`,
-                        description: `Show Settings of the Admin Commands Log`,
+                        description: `Show Ajustes of the Admin Commands Log`,
                         emoji: `${client.social_log.get(message.guild.id, `twitter.REETWET`) ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`,
                     },
                     {
                         value: "Manual Setup",
-                        description: `Force-Setup the UName and ID if normal is invalid`,
+                        description: `Force-Configuración the UName and ID if normal is invalid`,
                         emoji: allEmojis.msg.info,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Admin-Command-Log-Setup!`,
+                        description: `Cancelar and stop the Admin-Comando-Log-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -61,7 +61,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Admin-Command-Log")
+                    .setPlaceholder("¡Haz clic para configurar the Admin-Command-Log")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -77,11 +77,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Twitter Setup",
-                        "https://cdn.discordapp.com/emojis/840255600851812393.png?size=96",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Twitter Setup", iconURL: "https://cdn.discordapp.com/emojis/840255600851812393.png?size=96", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -105,14 +101,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -166,7 +162,7 @@ module.exports = {
                                         new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable14"]))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                             .setFooter(client.getFooter(es)),
                                     ],
                                 });
@@ -215,12 +211,9 @@ module.exports = {
                                                     .setDescription(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable18"])
                                                     )
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-twitter"]["variablex_19"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable19"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable19"]) })
                                                     .setURL(`https://twitter.com/${TwitterName}`)
                                                     .setFooter(client.getFooter(es)),
                                             ],
@@ -289,16 +282,13 @@ module.exports = {
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable25"]
                                                             )
                                                         )
-                                                        .addField(
-                                                            eval(
+                                                        .addFields({ name: eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"][
                                                                     "variablex_26"
                                                                 ]
-                                                            ),
-                                                            eval(
+                                                            ), value: eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable26"]
-                                                            )
-                                                        )
+                                                            ) })
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
@@ -322,7 +312,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        throw "you didn't ping a valid Channel";
+                                        throw "you no mencionaste un Channel";
                                     }
                                 })
                                 .catch(e => {
@@ -334,7 +324,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable29"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -377,12 +367,9 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable33"])
                                                     )
                                                     .setColor(es.color)
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-twitter"]["variablex_34"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable34"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable34"]) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -411,7 +398,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable37"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -432,10 +419,7 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable38"]))
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable39"]))
                                         .setColor(es.color)
-                                        .addField(
-                                            eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variablex_40"]),
-                                            eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable40"])
-                                        )
+                                        .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variablex_40"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable40"]) })
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -530,18 +514,15 @@ module.exports = {
                                                                     )
                                                                 )
                                                                 .setColor(es.color)
-                                                                .addField(
-                                                                    eval(
+                                                                .addFields({ name: eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitter"][
                                                                             "variablex_47"
                                                                         ]
-                                                                    ),
-                                                                    eval(
+                                                                    ), value: eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitter"][
                                                                             "variable47"
                                                                         ]
-                                                                    )
-                                                                )
+                                                                    ) })
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
                                                     });
@@ -582,7 +563,7 @@ module.exports = {
                                                                 )
                                                             )
                                                             .setColor(es.wrongcolor)
-                                                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                             .setFooter(client.getFooter(es)),
                                                     ],
                                                 });
@@ -612,7 +593,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable53"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -637,10 +618,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/MilratoDev/discord-js-lavalink-Music-Bot-erela-js
+ * Bot Coded by Melodia | https://github?.com/melodiaDev/discord-js-lavalink-Music-Bot-erela-js
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

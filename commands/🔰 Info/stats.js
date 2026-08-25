@@ -30,34 +30,15 @@ module.exports = {
                                 : null
                         )
                         .setFooter(client.getFooter(es))
-                        .addField(
-                            client.la[ls].cmds.info.stats.field1.title,
-                            handlemsg(client.la[ls].cmds.info.stats.field1.value, {
+                        .addFields({ name: client.la[ls].cmds.info.stats.field1.title, value: handlemsg(client.la[ls].cmds.info.stats.field1.value, {
                                 allcommands: Math.ceil((global.commands * [...client.guilds.cache.values()].length) / 10),
-                            }),
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.stats.field2.title,
-                            handlemsg(client.la[ls].cmds.info.stats.field2.value, {
+                            }), inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.stats.field2.title, value: handlemsg(client.la[ls].cmds.info.stats.field2.value, {
                                 allsongs: Math.ceil((global.songs * [...client.guilds.cache.values()].length) / 10),
-                            }),
-                            true
-                        )
-                        .addField(
-                            eval(client.la[ls]["cmds"]["info"]["stats"]["variablex_1"]),
-                            eval(client.la[ls]["cmds"]["info"]["stats"]["variable1"])
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.stats.field3.title,
-                            handlemsg(client.la[ls].cmds.info.stats.field3.value, { guildcommands: guild.commands }),
-                            true
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.stats.field4.title,
-                            handlemsg(client.la[ls].cmds.info.stats.field4.value, { guildsongs: guild.songs }),
-                            true
-                        )
+                            }), inline: true })
+                        .addFields({ name: eval(client.la[ls]["cmds"]["info"]["stats"]["variablex_1"]), value: eval(client.la[ls]["cmds"]["info"]["stats"]["variable1"]) })
+                        .addFields({ name: client.la[ls].cmds.info.stats.field3.title, value: handlemsg(client.la[ls].cmds.info.stats.field3.value, { guildcommands: guild.commands }), inline: true })
+                        .addFields({ name: client.la[ls].cmds.info.stats.field4.title, value: handlemsg(client.la[ls].cmds.info.stats.field4.value, { guildsongs: guild.songs }), inline: true })
                         .setTitle(handlemsg(client.la[ls].cmds.info.stats.title, { botname: client.user.username })),
                 ],
             });
@@ -77,10 +58,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

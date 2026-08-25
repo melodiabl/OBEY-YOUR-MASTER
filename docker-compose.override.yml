@@ -1,0 +1,9 @@
+services:
+  lavalink:
+    labels:
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.config-hash: "managed-by-podman-compose"
+  bot:
+    labels:
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.config-hash: "managed-by-podman-compose"

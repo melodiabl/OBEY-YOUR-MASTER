@@ -61,11 +61,7 @@ module.exports = {
             message.reply({
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setAuthor(
-                            handlemsg(client.la[ls].cmds.info.invites.author, { usertag: user.tag }),
-                            user.displayAvatarURL({ dynamic: true }),
-                            "https://discord.gg/milrato"
-                        )
+                        .setAuthor({ name: handlemsg(client.la[ls].cmds.info.invites.author, { usertag: user.username }), iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" })
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -74,26 +70,14 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .addField(
-                            "\u200b",
-                            handlemsg(client.la[ls].cmds.info.invites.field1.value, { realinvites: realinvites, user: user })
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.invites.field2.title,
-                            handlemsg(client.la[ls].cmds.info.invites.field2.value, {
+                        .addFields({ name: "\u200b", value: handlemsg(client.la[ls].cmds.info.invites.field1.value, { realinvites: realinvites, user: user }) })
+                        .addFields({ name: client.la[ls].cmds.info.invites.field2.title, value: handlemsg(client.la[ls].cmds.info.invites.field2.value, {
                                 invites: invites,
                                 fake: fake,
                                 leaves: leaves,
-                            })
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.invites.field3.title,
-                            `>>> \`\`\`yml\nJoins - Fakes - Leaves = RealInvites\n${invites}${" ".repeat("Joins ".length - String(invites).length)}- ${fake}${" ".repeat("Fakes ".length - String(fake).length)}- ${leaves}${" ".repeat("Leaves ".length - String(leaves).length)}= ${realinvites}\n\`\`\``
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.invites.field4.title,
-                            handlemsg(client.la[ls].cmds.info.invites.field4.value, { messagesCount: messagesCount })
-                        )
+                            }) })
+                        .addFields({ name: client.la[ls].cmds.info.invites.field3.title, value: `>>> \`\`\`yml\nJoins - Fakes - Leaves = RealInvites\n${invites}${" ".repeat("Joins ".length - String(invites).length)}- ${fake}${" ".repeat("Fakes ".length - String(fake).length)}- ${leaves}${" ".repeat("Leaves ".length - String(leaves).length)}= ${realinvites}\n\`\`\`` })
+                        .addFields({ name: client.la[ls].cmds.info.invites.field4.title, value: handlemsg(client.la[ls].cmds.info.invites.field4.value, { messagesCount: messagesCount }) })
                         .setFooter(client.getFooter(es)),
                 ],
             });
@@ -113,10 +97,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

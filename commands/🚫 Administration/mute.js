@@ -2,21 +2,21 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { databasing, delay } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `mute`,
     category: `🚫 Administration`,
     aliases: [``],
     cooldown: 4,
-    usage: `mute @User <Time+Format(e.g: 10m) / perma> [REASON]`,
-    description: `Mutes a User for a specific Time!`,
+    usage: `mute @Usuario <Time+Format(e.g: 10m) / perma> [REASON]`,
+    description: `Mutes a Usuario for a specific Time!`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.MANAGE_ROLES]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.ManageRoles]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -46,7 +46,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -107,7 +107,7 @@ module.exports = {
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
-                                    .setTitle("❌ **I am not able to manage this User**"),
+                                    .setTitle("❌ **I am not able to manage this Usuario**"),
                             ],
                         })
                         .catch(() => {});
@@ -135,7 +135,7 @@ module.exports = {
                         //send Information in the Chat
                         message
                             .reply({
-                                content: `||**Timeout until <t:${Math.floor((mutetime + Date.now()) / 1000)}:F>** - *Because no valid Role*||`,
+                                content: `||**Timeout until <t:${Math.floor((mutetime + Date.now()) / 1000)}:F>** - *Because no valid Rol*||`,
                                 embeds: [
                                     new EmbedBuilder()
                                         .setColor(es.color)
@@ -182,7 +182,7 @@ module.exports = {
                     })
                     .catch(e => {
                         console.log(e);
-                        return message.reply(`❌ **I could not timeout ${member.user.tag}**`).then(m => {
+                        return message.reply(`❌ **I could not timeout ${member.user.username}**`).then(m => {
                             setTimeout(() => {
                                 m.delete().catch(() => {});
                             }, 5000);
@@ -281,7 +281,7 @@ module.exports = {
                             )
                             .forEach(async ch => {
                                 try {
-                                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                         await ch.permissionOverwrites
                                             .edit(mutedRole, {
                                                 SEND_MESSAGES: false,
@@ -410,7 +410,7 @@ module.exports = {
                             )
                             .forEach(async ch => {
                                 try {
-                                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                         await ch.permissionOverwrites
                                             .edit(mutedRole, {
                                                 SEND_MESSAGES: false,
@@ -456,25 +456,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["mute"]["variable24"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],
@@ -499,10 +488,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

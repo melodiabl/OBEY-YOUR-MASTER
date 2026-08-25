@@ -13,7 +13,7 @@ module.exports = {
     cooldown: 5,
     usage: "setup-youtube  -->  Follow Steps",
     description: "Manage the youtube logger, addstreamer, editstreamer, removestreamer, etc.",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -25,7 +25,7 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Set Discord Channel",
-                        description: `Define Poster Channel, where Uploads will be`,
+                        description: `Define Poster Canal, where Uploads will be`,
                         emoji: allEmojis.msg.channel,
                     },
                     {
@@ -45,12 +45,12 @@ module.exports = {
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Ai-Chat`,
+                        description: `Show Ajustes of the Ai-Chat`,
                         emoji: allEmojis.msg.info,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ai-Chat-Setup!`,
+                        description: `Cancelar and stop the Ai-Chat-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -59,7 +59,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Youtube System")
+                    .setPlaceholder("¡Haz clic para configurar the Youtube System")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -75,11 +75,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Youtube-Poster",
-                        "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Youtube-Poster", iconURL: "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -103,14 +99,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -168,7 +164,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable8"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -214,7 +210,7 @@ module.exports = {
                                                 !msg.content.toLowerCase().includes("c"))
                                         )
                                             return message.reply(
-                                                "YOU DID NOT SEND A VALID YOUTUBE CHANNEL\nNote, such links doesn't work: `https://youtube.com/Tomato6966` / `https://youtube.com/c/Tomato6966`\nIt must be something like this: `https://www.youtube.com/channel/UC1AgotpFHNhzolUtAjPgZqQ`"
+                                                "YOU DID NOT SEND A VALID YOUTUBE CHANNEL\nNote, such links doesn't work: `https://youtube.com/melodiabl` / `https://youtube.com/c/melodiabl`\nIt must be something like this: `https://www.youtube.com/channel/UC1AgotpFHNhzolUtAjPgZqQ`"
                                             );
                                         if (
                                             client.social_log.get(message.guild.id, "youtube.channels").includes(msg.content)
@@ -257,7 +253,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable14"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -312,12 +308,8 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor(
-                                    "Youtube-Poster",
-                                    "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128",
-                                    "https://discord.gg/milrato"
-                                )
-                                .setDescription("Select all Youtube Channels you want to remove!");
+                                .setAuthor({ name: "Youtube-Poster", iconURL: "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128", url: "https://github.com/melodiabl" })
+                                .setDescription("Seleccionar all Youtube Channels you want to remove!");
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
@@ -343,14 +335,14 @@ module.exports = {
                                     menu?.reply(`✅ **Successfully removed ${menu?.values.length} Youtube Accounts!**`);
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                     components: [],
                                     content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                 });
@@ -404,12 +396,8 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor(
-                                    "Youtube-Poster",
-                                    "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128",
-                                    "https://discord.gg/milrato"
-                                )
-                                .setDescription("Select the Youtube Channel you want to edit!");
+                                .setAuthor({ name: "Youtube-Poster", iconURL: "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128", url: "https://github.com/melodiabl" })
+                                .setDescription("Seleccionar the Youtube Canal you want to edit!");
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
@@ -448,10 +436,7 @@ module.exports = {
                                                         2048
                                                     )
                                                 )
-                                                .addField(
-                                                    "**VARIABLES**",
-                                                    `> \`{url}\` ... will be replaced with the video **LINK**\n> \`{author}\` ... will be replaced with the video's **Author**\n> \`{title}\` ... will be replaced with the video's **title**\n> \`{date}\` ... will be replaced with the video's **date**`
-                                                )
+                                                .addFields({ name: "**VARIABLES**", value: `> \`{url}\` ... will be replaced with the video **LINK**\n> \`{author}\` ... will be replaced with the video's **Author**\n> \`{title}\` ... will be replaced with the video's **title**\n> \`{date}\` ... will be replaced with the video's **date**` })
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -476,7 +461,7 @@ module.exports = {
                                                                     ]
                                                                 )
                                                             )
-                                                            .setDescription("New Message:\n" + msg.content)
+                                                            .setDescription("New Mensaje:\n" + msg.content)
                                                             .setColor(es.color)
                                                             .setFooter(client.getFooter(es)),
                                                     ],
@@ -497,21 +482,21 @@ module.exports = {
                                                             )
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
                                         });
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                     components: [],
                                     content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                 });
@@ -524,10 +509,10 @@ module.exports = {
                             message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(`Settings of the Youtube Poster`)
+                                        .setTitle(`Ajustes of the Youtube Poster`)
                                         .setColor(es.wrongcolor)
                                         .setDescription(
-                                            `**Discord Poster Channel:** <#${client.social_log.get(message.guild.id, "youtube.dc_channel")}>\n**[${channels.length}] Channels:**${channels.length == 0 ? "\n> `NONE`" : channels.map(d => `\n> [${d.split("/")[d.split("/").length - 1]}](${d})`).join("\n")}`.substring(
+                                            `**Discord Poster Canal:** <#${client.social_log.get(message.guild.id, "youtube.dc_channel")}>\n**[${channels.length}] Channels:**${channels.length == 0 ? "\n> `NONE`" : channels.map(d => `\n> [${d.split("/")[d.split("/").length - 1]}](${d})`).join("\n")}`.substring(
                                                 0,
                                                 2000
                                             )
@@ -555,10 +540,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

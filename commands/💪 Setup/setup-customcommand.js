@@ -11,10 +11,10 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupcustomcommand", "setupcustomcommands", "customcommand-setup", "setup-customcommands"],
     cooldown: 5,
-    usage: "setup-customcommand  --> Follow the Steps",
+    usage: "setup-customcommand --> Sigue los Pasos",
     description:
-        'Define Custom Commands, Create Custom Commands and Remove Custom Commands --> "Custom Command Names, that sends Custom Messages"',
-    memberpermissions: ["ADMINISTRATOR"],
+        'Define Personalizado Commands, Create Personalizado Commands and Remove Personalizado Commands --> "Custom Command Names, that sends Custom Messages"',
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -28,17 +28,17 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Create Custom Command",
-                        description: `Create a Custom Command of your Choice`,
+                        description: `Create a Personalizado Comando of your Choice`,
                         emoji: "✅",
                     },
                     {
                         value: "Delete Custom Command",
-                        description: `Delete one of the Custom Command(s)`,
+                        description: `Delete one of the Personalizado Comando(s)`,
                         emoji: "❌",
                     },
                     {
                         value: "Show Settings",
-                        description: `Show the all Custom Commands!`,
+                        description: `Show the all Personalizado Commands!`,
                         emoji: "📑",
                     },
                 ];
@@ -47,7 +47,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Automated Embed System!")
+                    .setPlaceholder("¡Haz clic para configurar the Automated Embed System!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -63,11 +63,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Custom Command Setup",
-                        "https://images-ext-1.discordapp.net/external/HF-XNy3iUP4D95zv2fuTUy1csYWuNa5IZj2HSCSkvhs/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/flexed-biceps_1f4aa.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Custom Command Setup", iconURL: "https://images-ext-1.discordapp.net/external/HF-XNy3iUP4D95zv2fuTUy1csYWuNa5IZj2HSCSkvhs/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/flexed-biceps_1f4aa.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -92,14 +88,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -120,7 +116,7 @@ module.exports = {
                                             )
                                             .setColor(es.wrongcolor)
                                             .setDescription(
-                                                `You cannot have more then **25** Custom Commands`.substring(0, 2000)
+                                                `You cannot have more then **25** Personalizado Commands`.substring(0, 2000)
                                             )
                                             .setFooter(client.getFooter(es)),
                                     ],
@@ -264,7 +260,7 @@ module.exports = {
                                                                     message.reply(thecustomcommand.output);
                                                                 }
                                                             } else {
-                                                                throw "you didn't ping a valid Channel";
+                                                                throw "you no mencionaste un Channel";
                                                             }
                                                         })
                                                         .catch(e => {
@@ -284,13 +280,13 @@ module.exports = {
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `Cancelled the Operation!`.substring(0, 2000)
+                                                                        `¡Operación Cancelada!`.substring(0, 2000)
                                                                     )
                                                                     .setFooter(client.getFooter(es)),
                                                             ],
                                                         });
                                                 } else {
-                                                    throw "you didn't ping a valid Channel";
+                                                    throw "you no mencionaste un Channel";
                                                 }
                                             })
                                             .catch(e => {
@@ -309,12 +305,12 @@ module.exports = {
                                                             )
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
                                     } else {
-                                        throw "you didn't ping a valid Channel";
+                                        throw "you no mencionaste un Channel";
                                     }
                                 })
                                 .catch(e => {
@@ -326,7 +322,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-customcommand"]["variable16"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -336,7 +332,7 @@ module.exports = {
                     case "Delete Custom Command":
                         {
                             let cuc = client.customcommands.get(message.guild.id, "commands");
-                            if (!cuc || cuc.length < 1) return message.reply(`${allEmojis.msg.ERROR} There are no Custom Commands`);
+                            if (!cuc || cuc.length < 1) return message.reply(`${allEmojis.msg.ERROR} There are no Personalizado Commands`);
                             let menuoptions = [];
                             cuc.forEach((cc, index) => {
                                 const emoji = NumberEmojis[index + 1];
@@ -372,12 +368,8 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new Discord.EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor(
-                                    "Custom Command Setup",
-                                    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/flexed-biceps_1f4aa.png",
-                                    "https://discord.gg/milrato"
-                                )
-                                .setDescription(`**Select all \`Custom Commands\` which should get __deleted__**`);
+                                .setAuthor({ name: "Custom Command Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/flexed-biceps_1f4aa.png", url: "https://github.com/melodiabl" })
+                                .setDescription(`**Seleccionar all \`Personalizado Commands\` which should get __deleted__**`);
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
@@ -403,9 +395,9 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(`Deleted ${menu?.values.length} Custom Commands!`)
+                                                .setTitle(`Eliminado ${menu?.values.length} Personalizado Commands!`)
                                                 .setDescription(
-                                                    `There are now \`${cuc.length - menu?.values.length} Custom Commands\` left!`
+                                                    `There are now \`${cuc.length - menu?.values.length} Personalizado Commands\` left!`
                                                 )
                                                 .setColor(es.color)
                                                 .setFooter(client.getFooter(es)),
@@ -413,14 +405,14 @@ module.exports = {
                                     });
                                 }
                                 menu?.reply({
-                                    content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                     ephemeral: true,
                                 });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                     components: [],
                                     content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected.first().values.length} Commands\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                 });
@@ -455,15 +447,9 @@ module.exports = {
                                     if (string.length > 250) string = string.substring(0, 250) + " ...";
                                     if (i > 13) {
                                         sendembed2 = true;
-                                        embed2.addField(
-                                            `<:arrow:832598861813776394> \`${cuc[i].name}\` | ${cuc[i].embed ? "✅ Embed" : "❌ Embed"}`,
-                                            ">>> " + string
-                                        );
+                                        embed2.addFields({ name: `<:arrow:832598861813776394> \`${cuc[i].name}\` | ${cuc[i].embed ? "✅ Embed" : "❌ Embed"}`, value: ">>> " + string });
                                     } else
-                                        embed.addField(
-                                            `<:arrow:832598861813776394> \`${cuc[i].name}\` | ${cuc[i].embed ? "✅ Embed" : "❌ Embed"}`,
-                                            ">>> " + string
-                                        );
+                                        embed.addFields({ name: `<:arrow:832598861813776394> \`${cuc[i].name}\` | ${cuc[i].embed ? "✅ Embed" : "❌ Embed"}`, value: ">>> " + string });
                                 } catch (e) {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                 }
@@ -490,10 +476,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

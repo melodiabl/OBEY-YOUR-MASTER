@@ -1,4 +1,6 @@
-const { EmbedBuilder, Collection, AttachmentBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, Collection, AttachmentBuilder, PermissionFlagsBits,
+    ButtonStyle
+} = require("discord.js");
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -72,7 +74,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR]) &&
+                !message.member.permissions.has([PermissionFlagsBits.Administrator]) &&
                 !message.member.roles.cache.some(r => ticket.adminroles.includes(r ? r.id : r))
             )
                 return message.reply({
@@ -86,10 +88,10 @@ module.exports = {
                 });
             let buttonuser = cmduser.user;
             let button_ticket_verify = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_verify")
                 .setLabel("Verify this Step")
-                .setEmoji("833101995723194437");
+                .setEmoji("✅");
             let msg = await message.reply({
                 content: `<@${buttonuser.id}>`,
                 embeds: [
@@ -99,7 +101,7 @@ module.exports = {
                 ],
                 components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
             });
-            const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
+            const collector = msg.createMessageComponentCollector( { filter:bb => !bb?.user.bot,
                 time: 30000,
             }); //collector for 5 seconds
             collector.on("collect", async b => {
@@ -114,7 +116,7 @@ module.exports = {
                     edited = true;
                     msg.edit({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                        embeds: [new Discord.EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
                         components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
@@ -195,9 +197,7 @@ module.exports = {
                                                     )
                                                 );
                                                 sendembed.setThumbnail(
-                                                    user.user.displayAvatarURL({
-                                                        dynamic: true,
-                                                    })
+                                                    user.user.displayAvatarURL()
                                                 );
                                             } catch {
                                                 sendembed.setDescription(channel.topic);
@@ -275,27 +275,16 @@ module.exports = {
                                                 : null
                                         )
                                         .setFooter(client.getFooter(es))
-                                        .setAuthor(
-                                            `ticket --> LOG | ${message.author.tag}`,
-                                            message.author.displayAvatarURL({
-                                                dynamic: true,
-                                            })
-                                        )
+                                        .setAuthor({ name: `ticket --> LOG | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                         .setDescription(
                                             eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable15"])
                                         )
-                                        .addField(
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                        )
-                                        .addField(
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                        )
+                                        .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                        .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                         .setTimestamp()
                                         .setFooter(client.getFooter(
                                                 "ID: " + message.author.id,
-                                                message.author.displayAvatarURL({ dynamic: true })
+                                                message.author.displayAvatarURL()
                                             )
                                         ),
                                 ],
@@ -308,7 +297,7 @@ module.exports = {
                     edited = true;
                     msg.edit({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.EmbedBuilder().setTitle("Cancelled!").setColor(es.wrongcolor)],
+                        embeds: [new Discord.EmbedBuilder().setTitle("Cancelado!").setColor(es.wrongcolor)],
                         components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
@@ -329,8 +318,8 @@ module.exports = {
                                 button_ticket_verify
                                     .setDisabled(true)
                                     .setLabel("FAILED TO VERIFY")
-                                    .setEmoji("833101993668771842")
-                                    .setStyle(Discord.ButtonStyle.Danger)
+                                    .setEmoji("❌")
+                                    .setStyle(ButtonStyle.Danger)
                             ),
                         ],
                     }).catch(e => {
@@ -355,10 +344,10 @@ module.exports = {
 
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -11,7 +11,7 @@ module.exports = {
     aliases: ["rinfo"],
     category: "🔰 Info",
     description: "Get information about a role",
-    usage: "roleinfo [@Role/Id/Name]",
+    usage: "roleinfo [@Rol/Id/Name]",
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -34,44 +34,26 @@ module.exports = {
                 return message.reply(client.la[ls].common.rolenotfound);
             //create the EMBED
             const embeduserinfo = new EmbedBuilder();
-            embeduserinfo.setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }));
-            embeduserinfo.setAuthor(
-                client.la[ls].cmds.info.roleinfo.author + " " + role.name,
-                message.guild.iconURL({ dynamic: true }),
-                "https://discord.gg/milrato"
-            );
-            embeduserinfo.addField(client.la[ls].cmds.info.roleinfo.field1, `\`${role.name}\``, true);
-            embeduserinfo.addField(client.la[ls].cmds.info.roleinfo.field2, `\`${role.id}\``, true);
-            embeduserinfo.addField(client.la[ls].cmds.info.roleinfo.field3, `\`${role.hexColor}\``, true);
-            embeduserinfo.addField(
-                client.la[ls].cmds.info.roleinfo.field4,
-                "`" +
+            embeduserinfo.setThumbnail(message.guild.iconURL({ size: 512 }));
+            embeduserinfo.setAuthor({ name: client.la[ls].cmds.info.roleinfo.author + " " + role.name, iconURL: message.guild.iconURL(), url: "https://github.com/melodiabl" });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field1, value: `\`${role.name}\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field2, value: `\`${role.id}\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field3, value: `\`${role.hexColor}\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field4, value: "`" +
                     moment(role.createdAt).format("DD/MM/YYYY") +
                     "`\n" +
                     "`" +
                     moment(role.createdAt).format("hh:mm:ss") +
-                    "`",
-                true
-            );
-            embeduserinfo.addField(
-                client.la[ls].cmds.info.roleinfo.field5,
-                `\`${role.rawPosition}\` / \`${message.guild.roles.highest.rawPosition}\``,
-                true
-            );
-            embeduserinfo.addField(
-                client.la[ls].cmds.info.roleinfo.field6,
-                `\`${role.members.size} Members have it\``,
-                true
-            );
-            embeduserinfo.addField(client.la[ls].cmds.info.roleinfo.field7, `\`${role.hoist ? "✔️" : "❌"}\``, true);
-            embeduserinfo.addField(client.la[ls].cmds.info.roleinfo.field8, `\`${role.mentionable ? "✔️" : "❌"}\``, true);
-            embeduserinfo.addField(
-                client.la[ls].cmds.info.roleinfo.field9,
-                `${role.permissions
+                    "`", inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field5, value: `\`${role.rawPosition}\` / \`${message.guild.roles.highest.rawPosition}\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field6, value: `\`${role.members.size} Members have it\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field7, value: `\`${role.hoist ? "✔️" : "❌"}\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field8, value: `\`${role.mentionable ? "✔️" : "❌"}\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field9, value: `${role.permissions
                     .toArray()
                     .map(p => `\`${p}\``)
                     .join(", ")}`
-            );
+            });
             embeduserinfo.setColor(role.hexColor);
             embeduserinfo.setFooter(client.getFooter(es));
             //send the EMBED
@@ -92,10 +74,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

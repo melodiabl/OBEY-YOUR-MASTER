@@ -30,7 +30,6 @@ module.exports = {
                 if (!member) (await message.guild.members.fetch(user.id).catch(() => {})) || false;
                 if (member && member.avatar) {
                     customavatar = member.displayAvatarURL({
-                        dynamic: true,
                         size: 4096,
                     });
                 }
@@ -39,13 +38,9 @@ module.exports = {
             }
             if (customavatar) {
                 let embed = new Discord.EmbedBuilder()
-                    .setAuthor(
-                        handlemsg(client.la[ls].cmds.info.avatar.author, {
-                            usertag: user.tag,
-                        }),
-                        customavatar,
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: handlemsg(client.la[ls].cmds.info.avatar.author, {
+                            usertag: user.username,
+                        }), iconURL: customavatar, url: "https://github.com/melodiabl" })
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -54,17 +49,9 @@ module.exports = {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .addField("<:arrow:832598861813776394> PNG", `[\`LINK\`](${customavatar})`, true)
-                    .addField(
-                        "<:arrow:832598861813776394> JPEG",
-                        `[\`LINK\`](${customavatar.replace("png", "jpg").replace("gif", "jpg")})`,
-                        true
-                    )
-                    .addField(
-                        "<:arrow:832598861813776394> WEBP",
-                        `[\`LINK\`](${customavatar.replace("png", "webp").replace("gif", "webp")})`,
-                        true
-                    )
+                    .addFields({ name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${customavatar})`, inline: true })
+                    .addFields({ name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${customavatar.replace("png", "jpg").replace("gif", "jpg")})`, inline: true })
+                    .addFields({ name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${customavatar.replace("png", "webp").replace("gif", "webp")})`, inline: true })
                     .setURL(customavatar)
                     .setFooter(client.getFooter(es))
                     .setImage(customavatar);
@@ -73,15 +60,9 @@ module.exports = {
                 });
             } else {
                 let embed = new EmbedBuilder()
-                    .setAuthor(
-                        handlemsg(client.la[ls].cmds.info.avatar.author, {
-                            usertag: user.tag,
-                        }),
-                        user.displayAvatarURL({
-                            dynamic: true,
-                        }),
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: handlemsg(client.la[ls].cmds.info.avatar.author, {
+                            usertag: user.username,
+                        }), iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" })
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -90,35 +71,20 @@ module.exports = {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .addField(
-                        "<:arrow:832598861813776394> PNG",
-                        `[\`LINK\`](${user.displayAvatarURL({ format: "png" })})`,
-                        true
-                    )
-                    .addField(
-                        "<:arrow:832598861813776394> JPEG",
-                        `[\`LINK\`](${user.displayAvatarURL({ format: "jpg" })})`,
-                        true
-                    )
-                    .addField(
-                        "<:arrow:832598861813776394> WEBP",
-                        `[\`LINK\`](${user.displayAvatarURL({ format: "webp" })})`,
-                        true
-                    )
+                    .addFields({ name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                    .addFields({ name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                    .addFields({ name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
                     .setURL(
-                        user.displayAvatarURL({
-                            dynamic: true,
-                        })
+                        user.displayAvatarURL()
                     )
                     .setFooter(client.getFooter(es))
                     .setImage(
                         user.displayAvatarURL({
-                            dynamic: true,
                             size: 512,
                         })
                     )
                     .setDescription(
-                        `**Member has no Custom Avatar / unable to find the Member, in this Server**\n> *I am displaying, his normal AVATAR!*`
+                        `**Miembro has no Personalizado Avatar / unable to find the Miembro, in this Servidor**\n> *I am displaying, his normal AVATAR!*`
                     );
                 message.reply({
                     embeds: [embed],
@@ -140,10 +106,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

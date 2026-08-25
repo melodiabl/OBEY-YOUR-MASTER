@@ -13,13 +13,15 @@ module.exports = {
     cooldown: 5,
     usage: "setup-warn --> Follow Steps",
     description:
-        "Adjust the Settings for the warn system, like add a Role per specific warn amount or ban/kick on a specific amount of warn",
-    memberpermissions: ["ADMINISTRATOR"],
+        "Adjust the Ajustes for the warn system, like add a Rol per specific warn amount or ban/kick on a specific amount of warn",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         let warnsettings = client.settings.get(message.guild.id, "warnsettings");
+        const Mensaje = message;
+        const commandUserId = cmduser?.id || cmduser;
         try {
             first_layer();
             async function first_layer() {
@@ -36,22 +38,22 @@ module.exports = {
                     },
                     {
                         value: "Add Role on Warn",
-                        description: `Define a Role to give, if he has X Warns`,
+                        description: `Define a Rol to give, if he has X Warns`,
                         emoji: allEmojis.msg.roles,
                     },
                     {
                         value: "Remove Role on Warn",
-                        description: `Remove a X Warn Defined Role`,
+                        description: `Remove a X Warn Defined Rol`,
                         emoji: allEmojis.msg.roles,
                     },
                     {
                         value: "Show Settings",
-                        description: `Show the Current Settings`,
+                        description: `Show the Current Ajustes`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ticket-Setup!`,
+                        description: `Cancelar and stop the Ticket-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -60,7 +62,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Warn System!")
+                    .setPlaceholder("¡Haz clic para configurar the Warn System!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -76,44 +78,36 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Warn Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Warn Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable2"]));
-                let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
                     components: [new ActionRowBuilder().addComponents(Selection)],
                 });
                 //function to handle the menuselection
-                function menuselection(menu) {
+                async function menuselection(menu) {
                     let menuoptiondata = menuoptions.find(v => v.value == menu?.values[0]);
                     let menuoptionindex = menuoptions.findIndex(v => v.value == menu?.values[0]);
                     if (menu?.values[0] == "Cancel")
                         return menu?.reply(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable3"]));
-                    menu?.deferUpdate();
-                    used1 = true;
+                    await menu?.deferUpdate();
                     handle_the_picks(menuoptionindex, menuoptiondata);
                 }
-                //Event
-                client.on("interactionCreate", menu => {
-                    if (menu?.message.id === menumsg.id) {
-                        if (menu?.user.id === cmduser.id) {
-                            if (used1)
-                                return menu?.reply({
-                                    content: `<:no:833101993668771842> You already selected something, this Selection is now disabled!`,
-                                    ephemeral: true,
-                                });
-                            menuselection(menu);
-                        } else
-                            menu?.reply({
-                                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
-                                ephemeral: true,
-                            });
-                    }
+                const collector = menumsg.createMessageComponentCollector({ time: 180000 });
+                collector.on("collect", async menu => {
+                    if (!menu?.isStringSelectMenu()) return;
+                    if (menu?.user.id !== commandUserId)
+                        return menu?.reply({
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${commandUserId}>`,
+                            flags: Discord.MessageFlags.Ephemeral,
+                        });
+
+                    collector.stop("selected");
+                    await menuselection(menu);
+                });
+                collector.on("end", () => {
+                    menumsg.edit({ components: [] }).catch(() => null);
                 });
             }
 
@@ -128,13 +122,13 @@ module.exports = {
                         message.reply({ embeds: [msg6] }).then(msg => {
                             msg.channel
                                 .awaitMessages({
-                                    filter: m => m.author.id == cmduser,
+                                    filter: m => m.author.id === commandUserId,
                                     max: 1,
                                     time: 180000,
                                     errors: ["time"],
                                 })
                                 .then(collected => {
-                                    amount = collected.first().content;
+                                    const amount = collected.first().content;
                                     if (!amount)
                                         return message.reply({
                                             embeds: [
@@ -143,7 +137,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable6"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled`.substring(0, 2000))
+                                                    .setDescription(`Cancelado`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -201,7 +195,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable11"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -217,13 +211,13 @@ module.exports = {
                         message.reply({ embeds: [msg7] }).then(msg => {
                             msg.channel
                                 .awaitMessages({
-                                    filter: m => m.author.id == cmduser,
+                                    filter: m => m.author.id === commandUserId,
                                     max: 1,
                                     time: 180000,
                                     errors: ["time"],
                                 })
                                 .then(collected => {
-                                    amount = collected.first().content;
+                                    const amount = collected.first().content;
                                     if (!amount)
                                         return message.reply({
                                             embeds: [
@@ -232,7 +226,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable14"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled`.substring(0, 2000))
+                                                    .setDescription(`Cancelado`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -290,7 +284,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable19"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -306,7 +300,7 @@ module.exports = {
                         message.reply({ embeds: [msg8] }).then(msg => {
                             msg.channel
                                 .awaitMessages({
-                                    filter: m => m.author.id == cmduser,
+                                    filter: m => m.author.id === commandUserId,
                                     max: 1,
                                     time: 180000,
                                     errors: ["time"],
@@ -318,6 +312,7 @@ module.exports = {
                                         .first()
                                         .mentions.roles.filter(r => r.guild.id == message.guild.id)
                                         .first();
+                                    const Rol = role;
                                     if (!role || !role.id)
                                         return message.reply({
                                             embeds: [
@@ -326,7 +321,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable22"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled`.substring(0, 2000))
+                                                    .setDescription(`Cancelado`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -338,7 +333,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable23"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled`.substring(0, 2000))
+                                                    .setDescription(`Cancelado`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -402,7 +397,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable28"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -418,7 +413,7 @@ module.exports = {
                         message.reply({ embeds: [msg8] }).then(msg => {
                             msg.channel
                                 .awaitMessages({
-                                    filter: m => m.author.id == cmduser,
+                                    filter: m => m.author.id === commandUserId,
                                     max: 1,
                                     time: 180000,
                                     errors: ["time"],
@@ -434,7 +429,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable31"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled`.substring(0, 2000))
+                                                    .setDescription(`Cancelado`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -499,7 +494,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable36"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -519,7 +514,7 @@ module.exports = {
                                     new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable39"]))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -550,10 +545,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -8,8 +8,8 @@ module.exports = {
     name: `unlockchannel`,
     category: `🚫 Administration`,
     aliases: [`unlockch`, "unlchannel"],
-    description: `Unlocks a Channel`,
-    usage: `unlockchannel [#channel / Inside of a Channel]`,
+    description: `Unlocks a Canal`,
+    usage: `unlockchannel [#channel / Inside of a Canal]`,
     type: "channel",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -38,7 +38,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINSTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -68,7 +68,7 @@ module.exports = {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle(`<:no:833101993668771842> **This Channel is a Thread u can't unlock it!**`),
+                            .setTitle(`<:no:833101993668771842> **This Canal is a Thread u can't unlock it!**`),
                     ],
                 });
 
@@ -114,9 +114,9 @@ module.exports = {
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
-                                .setTitle(`<:no:833101993668771842> **This Channel is not locked!**`)
+                                .setTitle(`<:no:833101993668771842> **This Canal is not locked!**`)
                                 .setDescription(
-                                    `This usually means, that the Channel **PERMISSIONS** are so defined, that __all__ of them are ALLOWING to send a Message!`
+                                    `This usually means, that the Canal **PERMISSIONS** are so defined, that __all__ of them are ALLOWING to send a Mensaje!`
                                 ),
                         ],
                     });
@@ -171,25 +171,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["addrole"]["variable13"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],
@@ -214,10 +203,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

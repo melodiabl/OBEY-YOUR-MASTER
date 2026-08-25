@@ -10,9 +10,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupantipings", "setup-pings", "setuppings", "antipings-setup", "antipingssetup"],
     cooldown: 5,
-    usage: "setup-antipings  -->  Follow the Steps",
-    description: "Enable + Change the allowed amount of Mentions / Message",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-antipings --> Sigue los Pasos",
+    description: "Activar + Cambiar la cantidad permitida de Menciones / Mensaje",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -43,10 +43,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

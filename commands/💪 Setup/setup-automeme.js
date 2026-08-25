@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupautomeme", "cmdlog", "automeme-setup", "automemesetup"],
     cooldown: 5,
-    usage: "setup-automeme  -->  Follow the Steps",
-    description: "This Setup allows you to send logs into a specific Channel, when someone enters a the Command: report",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-automeme --> Sigue los Pasos",
+    description: "Esta Configuración te permite enviar registros a un Canal específico cuando alguien usa el Comando: report",
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -24,7 +24,7 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Enable Auto-Meme",
-                        description: `Define the Auto-Meme Channel`,
+                        description: `Define the Auto-Meme Canal`,
                         emoji: "✅",
                     },
                     {
@@ -34,12 +34,12 @@ module.exports = {
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Auto-Meme`,
+                        description: `Show Ajustes of the Auto-Meme`,
                         emoji: "📑",
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Auto-Meme-Setup!`,
+                        description: `Cancelar and stop the Auto-Meme-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -48,7 +48,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Automated Meme System!")
+                    .setPlaceholder("¡Haz clic para configurar the Automated Meme System!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -64,11 +64,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Auto MEME Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/302/clown-face_1f921.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Auto MEME Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/302/clown-face_1f921.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 let used1 = false;
                 //send the menu msg
@@ -93,14 +89,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -128,7 +124,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     let channel =
                                         message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first() ||
                                         message.guild.channels.cache.get(message.content.trim().split(" ")[0]);
@@ -146,7 +142,7 @@ module.exports = {
                                             ],
                                         });
                                     }
-                                    return message.reply("NO CHANNEL PINGED");
+                                    return message.reply("NO SE MENCIONÓ NINGÚN CANAL");
                                 })
                                 .catch(e => {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -157,7 +153,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-automeme"]["variable8"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -173,7 +169,7 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-automeme"]["variable9"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `I will not send automatic Meme Images to a Channel anymore`.substring(0, 2048)
+                                            `I will not send automatic Meme Images to a Canal anymore`.substring(0, 2048)
                                         )
                                         .setFooter(client.getFooter(es)),
                                 ],
@@ -189,7 +185,7 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-automeme"]["variable10"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Channel:** ${thesettings == "no" ? "Not Setupped" : `<#${thesettings}> | \`${thesettings}\``}\n\n**Cooldown:** 1 Minute`.substring(
+                                            `**Canal:** ${thesettings == "no" ? "Not Setupped" : `<#${thesettings}> | \`${thesettings}\``}\n\n**Cooldown:** 1 Minute`.substring(
                                                 0,
                                                 2048
                                             )
@@ -217,10 +213,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

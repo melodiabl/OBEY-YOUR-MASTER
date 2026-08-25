@@ -121,11 +121,8 @@ module.exports = async client => {
                                         )
                                         .setFooter(client.getFooter(es))
                                         .setTitle(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable12"]))
-                                        .addField(
-                                            eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variablex_13"]),
-                                            eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable13"])
-                                        )
-                                        .addField("Created at:", `\`${at}\``)
+                                        .addFields({ name: eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variablex_13"]), value: eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable13"]) })
+                                        .addFields({ name: "Created at:", value: `\`${at}\`` })
                                         .setDescription(content),
                                 ],
                             })
@@ -150,11 +147,8 @@ module.exports = async client => {
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable12"])
                                                 )
-                                                .addField(
-                                                    eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variablex_13"]),
-                                                    eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable13"])
-                                                )
-                                                .addField("Created at:", `\`${now}\``)
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variablex_13"]), value: eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable13"]) })
+                                                .addFields({ name: "Created at:", value: `\`${now}\`` })
                                                 .setDescription(content),
                                         ],
                                         content: `<@${member.id}>`,

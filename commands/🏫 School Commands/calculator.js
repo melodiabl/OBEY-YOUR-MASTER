@@ -35,13 +35,13 @@ module.exports = {
         }
         await Calculator({
             interaction: message,
-            embed: {
+            embeds: [{
                 title: "Calculator",
                 color: es.color,
                 footer: {
                     text: es.footertext,
                 },
-            },
+            }],
             disabledQuery: "Calculator got disabled!",
             invalidQuery: "The provided equation is invalid!",
         });

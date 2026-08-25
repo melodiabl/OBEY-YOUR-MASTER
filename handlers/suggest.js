@@ -79,20 +79,20 @@ module.exports = client => {
             var url = ``;
             var imagename = `Unknown`;
             var embed = new EmbedBuilder()
-                .setThumbnail(message.member.user.displayAvatarURL({ dynamic: true }))
-                .addField(`:thumbsup: **__Up Votes__**`, `**\`\`\`0 Votes\`\`\`**`, true)
-                .addField(`:thumbsdown: **__Down Votes__**`, `**\`\`\`0 Votes\`\`\`**`, true)
+                .setThumbnail(message.member.user.displayAvatarURL())
+                .addFields({ name: `:thumbsup: **__Up Votes__**`, value: `**\`\`\`0 Votes\`\`\`**`, inline: true })
+                .addFields({ name: `:thumbsdown: **__Down Votes__**`, value: `**\`\`\`0 Votes\`\`\`**`, inline: true })
                 .setColor(es.color)
                 .setAuthor(
                     client.getAuthor(
-                        message.author.tag + "' Suggestion",
-                        message.member.user.displayAvatarURL({ dynamic: true }),
+                        message.author.username + "' Suggestion",
+                        message.member.user.displayAvatarURL(),
                         `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`
                     )
                 )
                 .setDescription("\n" + message.content + "\n")
-                .setFooter(client.getFooter(footertext, message.guild.iconURL({ dynamic: true })));
-            //.addField(`Status`, `REASON`)
+                .setFooter(client.getFooter(footertext, message.guild.iconURL()));
+            //.addFields({ name: `Status`, value: `REASON` })
             if (message.content) {
                 embed.setDescription(">>> " + message.content);
             }
@@ -181,7 +181,7 @@ module.exports = client => {
             if (button?.customId == "Suggest_upvote") {
                 if (SuggestionsData.voted_ppl.includes(button?.user.id)) {
                     return button?.reply({
-                        content: `You can't upvote the Suggestion of <@${SuggestionsData.user}> twice!`,
+                        content: `You can't upvote the Sugerencia of <@${SuggestionsData.user}> twice!`,
                         ephemeral: true,
                     });
                 }
@@ -196,7 +196,7 @@ module.exports = client => {
             if (button?.customId == "Suggest_downvote") {
                 if (SuggestionsData.downvoted_ppl.includes(button?.user.id)) {
                     return button?.reply({
-                        content: `You can't downvote the Suggestion of <@${SuggestionsData.user}> twice!`,
+                        content: `You can't downvote the Sugerencia of <@${SuggestionsData.user}> twice!`,
                         ephemeral: true,
                     });
                 }
@@ -215,22 +215,14 @@ module.exports = client => {
                         new EmbedBuilder()
                             .setColor(button?.message.embeds[0].color)
                             .setTitle(`❓ **Who reacted with what?** ❓`)
-                            .addField(
-                                `${SuggestionsData.upvotes} Upvotes`,
-                                `${SuggestionsData.voted_ppl && SuggestionsData.voted_ppl.length > 0 ? (SuggestionsData.voted_ppl.length < 20 ? SuggestionsData.voted_ppl.map(r => `<@${r}>`).join("\n") : [...SuggestionsData.voted_ppl.slice(0, 20).map(r => `<@${r}>`), `${SuggestionsData.voted_ppl.length - 20} more...`].join("\n")) : "Noone"}`.substring(
+                            .addFields({ name: `${SuggestionsData.upvotes} Upvotes`, value: `${SuggestionsData.voted_ppl && SuggestionsData.voted_ppl.length > 0 ? (SuggestionsData.voted_ppl.length < 20 ? SuggestionsData.voted_ppl.map(r => `<@${r}>`).join("\n") : [...SuggestionsData.voted_ppl.slice(0, 20).map(r => `<@${r}>`), `${SuggestionsData.voted_ppl.length - 20} more...`].join("\n")) : "Noone"}`.substring(
                                     0,
                                     1024
-                                ),
-                                true
-                            )
-                            .addField(
-                                `${SuggestionsData.downvotes} Downvotes`,
-                                `${SuggestionsData.downvoted_ppl && SuggestionsData.downvoted_ppl.length > 0 ? (SuggestionsData.downvoted_ppl.length < 20 ? SuggestionsData.downvoted_ppl.map(r => `<@${r}>`).join("\n") : [...SuggestionsData.downvoted_ppl.slice(0, 20).map(r => `<@${r}>`), `${SuggestionsData.downvoted_ppl.length - 20} more...`].join("\n")) : "Noone"}`.substring(
+                                ), inline: true })
+                            .addFields({ name: `${SuggestionsData.downvotes} Downvotes`, value: `${SuggestionsData.downvoted_ppl && SuggestionsData.downvoted_ppl.length > 0 ? (SuggestionsData.downvoted_ppl.length < 20 ? SuggestionsData.downvoted_ppl.map(r => `<@${r}>`).join("\n") : [...SuggestionsData.downvoted_ppl.slice(0, 20).map(r => `<@${r}>`), `${SuggestionsData.downvoted_ppl.length - 20} more...`].join("\n")) : "Noone"}`.substring(
                                     0,
                                     1024
-                                ),
-                                true
-                            ),
+                                ), inline: true }),
                     ],
                 });
             }

@@ -6,13 +6,13 @@ const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const { GetUser, GetGlobalUser, handlemsg, nFormatter } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "invites",
-    description: "See how many Invites a user has!",
+    description: "Ver cuántas invitaciones tiene un usuario!",
     options: [
         //{"Integer": { name: "ping_amount", description: "How many times do you want to ping?", required: true }}, //to use in the code: interacton.getInteger("ping_amount")
         //{"String": { name: "ping_amount", description: "How many times do you want to ping?", required: true }}, //to use in the code: interacton.getString("ping_amount")
-        { User: { name: "which_user", description: "From Which User do you want to see the Invites?", required: false } }, //to use in the code: interacton.getUser("ping_a_user")
-        //{"Channel": { name: "what_channel", description: "To Ping a Channel lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
-        //{"Role": { name: "what_role", description: "To Ping a Role lol", required: false }}, //to use in the code: interacton.getRole("what_role")
+        { User: { name: "which_user", description: "De qué usuario quieres ver las invitaciones?", required: false } }, //to use in the code: interacton.getUser("ping_a_user")
+        //{"Channel": { name: "what_channel", description: "To Ping a Canal lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
+        //{"Role": { name: "what_role", description: "To Ping a Rol lol", required: false }}, //to use in the code: interacton.getRole("what_role")
         //{"IntChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", 1], ["Discord Api", 2]] }, //here the second array input MUST BE A NUMBER // TO USE IN THE CODE: interacton.getInteger("what_ping")
         //{"StringChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", "botping"], ["Discord Api", "api"]] }}, //here the second array input MUST BE A STRING // TO USE IN THE CODE: interacton.getString("what_ping")
     ],
@@ -74,11 +74,11 @@ module.exports = {
                 ephemeral: true,
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setAuthor(
-                            handlemsg(client.la[ls].cmds.info.invites.author, { usertag: user.tag }),
-                            user.displayAvatarURL({ dynamic: true }),
-                            "https://discord.gg/milrato"
-                        )
+                        .setAuthor({
+                            name: handlemsg(client.la[ls].cmds.info.invites.author, { usertag: user.username }),
+                            iconURL: user.displayAvatarURL(),
+                            url: "https://github.com/melodiabl"
+                        })
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -87,25 +87,11 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .addField(
-                            "\u200b",
-                            handlemsg(client.la[ls].cmds.info.invites.field1.value, { realinvites: realinvites, user: user })
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.invites.field2.title,
-                            handlemsg(client.la[ls].cmds.info.invites.field2.value, {
-                                invites: invites,
-                                fake: fake,
-                                leaves: leaves,
-                            })
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.invites.field3.title,
-                            `>>> \`\`\`yml\nJoins - Fakes - Leaves = RealInvites\n${invites}${" ".repeat("Joins ".length - String(invites).length)}- ${fake}${" ".repeat("Fakes ".length - String(fake).length)}- ${leaves}${" ".repeat("Leaves ".length - String(leaves).length)}= ${realinvites}\n\`\`\``
-                        )
-                        .addField(
-                            client.la[ls].cmds.info.invites.field4.title,
-                            handlemsg(client.la[ls].cmds.info.invites.field4.value, { messagesCount: messagesCount })
+                        .addFields(
+                            { name: "\u200b", value: handlemsg(client.la[ls].cmds.info.invites.field1.value, { realinvites: realinvites, user: user }) },
+                            { name: client.la[ls].cmds.info.invites.field2.title, value: handlemsg(client.la[ls].cmds.info.invites.field2.value, { invites: invites, fake: fake, leaves: leaves }) },
+                            { name: client.la[ls].cmds.info.invites.field3.title, value: `>>> \`\`\`yml\nJoins - Fakes - Leaves = RealInvites\n${invites}${" ".repeat("Joins ".length - String(invites).length)}- ${fake}${" ".repeat("Fakes ".length - String(fake).length)}- ${leaves}${" ".repeat("Leaves ".length - String(leaves).length)}= ${realinvites}\n\`\`\`` },
+                            { name: client.la[ls].cmds.info.invites.field4.title, value: handlemsg(client.la[ls].cmds.info.invites.field4.value, { messagesCount: messagesCount }) }
                         )
                         .setFooter(client.getFooter(es)),
                 ],
@@ -117,10 +103,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

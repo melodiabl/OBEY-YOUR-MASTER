@@ -1,4 +1,4 @@
-var { EmbedBuilder } = require("discord.js");
+var { EmbedBuilder, ChannelType } = require("discord.js");
 var Discord = require("discord.js");
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -11,9 +11,9 @@ module.exports = {
     aliases: ["setup-jointocreate", "setupjtc", "setupjointocreate", "jtc-setup", "jtcsetup"],
     cooldown: 5,
     usage: "setup-jtc  -->  Follow Steps",
-    description: "Manage 25 different Join to Create Systems",
+    description: "Gestiona 25 Sistemas de Unirse para Crear diferentes",
     type: "system",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -27,7 +27,7 @@ module.exports = {
                     const emoji = NumberEmojis[index + 1];
                     menuoptions.push({
                         value: `${i + 1} Join-To-Create System`,
-                        description: `Manage/Edit the ${i + 1} Join-to-Create Setup`,
+                        description: `Manage/Edit the ${i + 1} Join-to-Create Configuración`,
                         ...(emoji ? { emoji } : {}),
                     });
                 }
@@ -37,7 +37,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Join-to-Create System!")
+                        .setPlaceholder("¡Haz clic para configurar the Join-to-Create System!")
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -55,7 +55,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Join-to-Create System!")
+                        .setPlaceholder("¡Haz clic para configurar the Join-to-Create System!")
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -73,7 +73,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Join-to-Create System!")
+                        .setPlaceholder("¡Haz clic para configurar the Join-to-Create System!")
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -91,7 +91,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Join-to-Create System!")
+                        .setPlaceholder("¡Haz clic para configurar the Join-to-Create System!")
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -108,11 +108,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Join-to-Create Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/291/studio-microphone_1f399-fe0f.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Join-to-Create Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/291/studio-microphone_1f399-fe0f.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({ embeds: [MenuEmbed], components: [row1, row2, row3, row4] });
@@ -140,14 +136,14 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -168,12 +164,12 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Create Channel Setup",
-                        description: `Create a Join to Create Channel`,
+                        description: `Create a Join to Create Canal`,
                         emoji: allEmojis.msg.setup,
                     },
                     {
                         value: "Use Current Channel",
-                        description: `Use your connected VC as a new Setup`,
+                        description: `Use your connected VC as a new Configuración`,
                         emoji: allEmojis.msg.dj,
                     },
                     {
@@ -183,7 +179,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ticket-Setup!`,
+                        description: `Cancelar and stop the Ticket-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -210,13 +206,11 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        client.getAuthor(
+                    .setAuthor(client.getAuthor(
                             SetupNumber + " Join-to-Create Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/291/studio-microphone_1f399-fe0f.png",
-                            "https://discord.gg/milrato"
-                        )
-                    )
+                            "https://github.com/melodiabl"
+                        ))
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -244,14 +238,14 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -268,7 +262,7 @@ module.exports = {
                             if (boosts >= 30) maxbitrate = 384000;
                             message.guild.channels
                                 .create("Join to Create", {
-                                    type: "GUILD_VOICE",
+                                    type: ChannelType.GuildVoice,
                                     bitrate: maxbitrate,
                                     userLimit: 4,
                                     permissionOverwrites: [
@@ -353,7 +347,7 @@ module.exports = {
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable14"]))
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `**New Channel Name:**\n> \`${thedb?.get(message.guild.id, pre + ".channelname")}\`\n\n**What it could look like:**\n> \`${thedb?.get(message.guild.id, pre + ".channelname").replace("{user}", `${message.author.username}`)}\``
+                                                    `**New Canal Name:**\n> \`${thedb?.get(message.guild.id, pre + ".channelname")}\`\n\n**What it could look like:**\n> \`${thedb?.get(message.guild.id, pre + ".channelname").replace("{user}", `${message.author.username}`)}\``
                                                 )
                                                 .setFooter(client.getFooter(es)),
                                         ],
@@ -368,7 +362,7 @@ module.exports = {
                                         new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable16"]))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                             .setFooter(client.getFooter(es)),
                                     ],
                                 });
@@ -392,10 +386,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

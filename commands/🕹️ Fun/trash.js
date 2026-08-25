@@ -9,8 +9,8 @@ module.exports = {
     name: "trash",
     aliases: [""],
     category: "🕹️ Fun",
-    description: "IMAGE CMD",
-    usage: "trash @User",
+    description: "COMANDO DE IMAGEN",
+    usage: "trash @Usuario",
     type: "user",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -32,10 +32,7 @@ module.exports = {
             embeds: [
                 new EmbedBuilder()
                     .setColor(ee.color)
-                    .setAuthor(
-                        "Getting Image Data..",
-                        "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif"
-                    ),
+                    .setAuthor({ name: "Obteniendo datos de imagen...", iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif" }),
             ],
         });
         //find the USER
@@ -54,7 +51,7 @@ module.exports = {
             user = message.mentions.users.first() || message.author;
         }
         //get avatar of the user
-        var avatar = user.displayAvatarURL({ format: "png" });
+        var avatar = user.displayAvatarURL();
         //get the memer image
         client.memer.trash(avatar).then(image => {
             //make an attachment
@@ -66,7 +63,7 @@ module.exports = {
                 .reply({
                     embeds: [
                         tempmsg.embeds[0]
-                            .setAuthor(`Meme for: ${user.tag}`, avatar)
+                            .setAuthor({ name: `Meme para: ${user.username}`, iconURL: avatar })
                             .setColor(es.color)
                             .setImage("attachment://trash.png"),
                     ],
@@ -78,10 +75,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

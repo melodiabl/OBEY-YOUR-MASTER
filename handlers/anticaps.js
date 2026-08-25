@@ -2,7 +2,7 @@
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-var { EmbedBuilder, Permissions } = require(`discord.js`);
+var { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { databasing, delay } = require(`./functions`);
 const countermap = new Map();
 const ms = require("ms");
@@ -27,7 +27,7 @@ module.exports = client => {
                     [...message.member.roles.cache.values()].length > 0 &&
                     message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r))) ||
                 [message.guild.ownerId, config.ownerid].includes(message.author.id) ||
-                message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)
+                message.member.permissions.has(PermissionFlagsBits.Administrator)
             )
                 return;
             client.settings.ensure(message.guild.id, {
@@ -54,7 +54,7 @@ module.exports = client => {
             let mute_amount = anticaps.mute_amount;
             if (!anticaps.enabled) return;
             let es = client.settings.get(message.guild.id, "embed");
-            if (anticaps.whitelistedchannels.some(r => message.channel.parentId == r || message.channel.id == r)) return;
+            if ((anticaps.whitelistedchannels || []).some(r => message.channel.parentId == r || message.channel.id == r)) return;
             let member = message.member;
             if (!message.content) return;
             if (message.content.split(" ").join("").length < 8) return;
@@ -80,9 +80,7 @@ module.exports = client => {
                             reason: "AntiCaps Autowarn",
                             when: new Date().toLocaleString(`de`),
                             oldhighesrole: message.member.roles ? message.member.roles.highest : `Had No Roles`,
-                            oldthumburl: message.author.displayAvatarURL({
-                                dynamic: true,
-                            }),
+                            oldthumburl: message.author.displayAvatarURL(),
                         });
                         // Push the action to the user's warnings
                         client.userProfiles.push(message.author.id, newActionId, "warnings");
@@ -96,14 +94,14 @@ module.exports = client => {
                                 new EmbedBuilder()
                                     .setAuthor(
                                         client.getAuthor(
-                                            message.author.tag,
-                                            message.member.displayAvatarURL({ dynamic: true })
+                                            message.author.username,
+                                            message.member.displayAvatarURL()
                                         )
                                     )
                                     .setColor("#E67E22")
                                     .setFooter(client.getFooter(
                                             "ID: " + message.author.id,
-                                            message.author.displayAvatarURL({ dynamic: true })
+                                            message.author.displayAvatarURL()
                                         )
                                     )
                                     .setDescription(
@@ -313,7 +311,7 @@ module.exports = client => {
                             }
                         }
                     }
-                    if (message.channel.permissionsFor(message.channel.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
+                    if (message.channel.permissionsFor(message.channel.guild.members.me).has(PermissionFlagsBits.ManageMessages)) {
                         message.delete().catch(e => {
                             console.log(e);
                         });
@@ -365,7 +363,7 @@ module.exports = client => {
                                     .catch(() => {});
                             })
                             .catch(() => {
-                                return message.channel.send(`❌ **I could not timeout ${member.user.tag}**`).then(m => {
+                                return message.channel.send(`❌ **I could not timeout ${member.user.username}**`).then(m => {
                                     setTimeout(() => {
                                         m.delete().catch(() => {});
                                     }, 5000);

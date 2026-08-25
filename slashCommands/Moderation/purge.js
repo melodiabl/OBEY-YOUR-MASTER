@@ -1,4 +1,4 @@
-const { PermissionFlagsBits } = require('discord.js')
+const { PermissionFlagsBits, EmbedBuilder } = require('discord.js')
 module.exports = {
   name: 'purge',
   description: 'Eliminar mensajes en masa del canal actual',
@@ -21,15 +21,18 @@ module.exports = {
     { User: { name: 'usuario', description: 'Solo mensajes de este usuario', required: false } },
   ],
   run: async (client, interaction) => {
+    const err = d => ({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(d)], ephemeral: true })
+    const ok  = d => ({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(d)], ephemeral: true })
+
     const amount = interaction.options.getInteger('cantidad')
     const filter = interaction.options.getString('filtro') || 'all'
     const targetUser = interaction.options.getUser('usuario')
 
     if (amount < 1 || amount > 99)
-      return interaction.reply({ content: '❌ La cantidad debe estar entre 1 y 99.', ephemeral: true })
+      return interaction.reply(err('❌ La cantidad debe estar entre 1 y 99.'))
 
     if (!interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionFlagsBits.ManageMessages))
-      return interaction.reply({ content: '❌ No tengo permisos para eliminar mensajes aquí.', ephemeral: true })
+      return interaction.reply(err('❌ No tengo permisos para eliminar mensajes aquí.'))
 
     await interaction.deferReply({ ephemeral: true })
 
@@ -51,12 +54,12 @@ module.exports = {
 
       const slice = [...toDelete.values()].slice(0, amount)
       if (!slice.length)
-        return interaction.editReply('❌ No se encontraron mensajes que coincidan.')
+        return interaction.editReply(err('❌ No se encontraron mensajes que coincidan.'))
 
       const deleted = await interaction.channel.bulkDelete(slice, true)
-      await interaction.editReply(`✅ ${deleted.size} mensaje(s) eliminado(s).`)
+      await interaction.editReply(ok(`🗑️ **${deleted.size}** mensaje(s) eliminado(s).`))
     } catch (e) {
-      await interaction.editReply(`❌ Error: ${e.message}`)
+      await interaction.editReply(err(`❌ Error: ${e.message}`))
     }
   },
 }

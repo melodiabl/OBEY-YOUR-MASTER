@@ -9,7 +9,7 @@ module.exports = {
     name: "serverbanner",
     aliases: ["sbanner"],
     category: "🔰 Info",
-    description: "Get the Banner of the Server",
+    description: "Get the Banner of the Servidor",
     usage: "serverbanner",
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -28,7 +28,7 @@ module.exports = {
                 message.reply({ embeds: [embed] });
             } else {
                 let embed = new Discord.EmbedBuilder()
-                    .setTitle(`<:no:833101993668771842> **This Server has no Banner!**`)
+                    .setTitle(`<:no:833101993668771842> **This Servidor has no Banner!**`)
                     .setColor(es.color)
                     .setFooter(client.getFooter(es))
                     .setThumbnail(
@@ -56,10 +56,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

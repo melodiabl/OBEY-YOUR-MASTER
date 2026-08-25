@@ -1,28 +1,86 @@
-<%- include('../includes/header', { title: 'Dashboard - Servidores', user }) %>
+<%- include('../includes/header', {
+  title: 'Mis Servidores — Dashboard',
+  user,
+  activePage: 'servers',
+  guildCount: guilds.length,
+  breadcrumb: [{ label: 'Mis Servidores' }]
+}) %>
 
-<div class="container">
-  <h2><i class="fas fa-server"></i> Tus Servidores</h2>
-  <p class="subtitle">Selecciona un servidor para configurarlo.</p>
+<div class="page-hd">
+  <div class="page-ico ico-p"><i class="fas fa-server"></i></div>
+  <div>
+    <div class="page-title">MIS SERVIDORES</div>
+    <div class="page-sub">Selecciona un servidor para configurarlo</div>
+  </div>
+  <div class="page-actions" style="gap:8px;align-items:center">
+    <% if (guilds.length) { %>
+      <span class="text-muted" style="font-size:13px"><%= guilds.filter(g=>g.inBot).length %> con bot · <%= guilds.filter(g=>!g.inBot).length %> sin bot</span>
+    <% } %>
+    <button id="btn-refresh-guilds" class="btn btn-ghost btn-sm" onclick="refreshGuilds()">
+      <i class="fas fa-sync-alt"></i> Actualizar
+    </button>
+  </div>
+</div>
+
+<% if (!guilds.length) { %>
+  <div class="card">
+    <div class="card-body">
+      <div class="empty">
+        <i class="fas fa-server"></i>
+        <h3>Sin servidores</h3>
+        <p>No tienes servidores con permiso de administración o gestión.</p>
+        <a href="https://discord.com/oauth2/authorize?client_id=<%= clientId %>&scope=bot+applications.commands&permissions=8" target="_blank" class="btn btn-p">
+          <i class="fab fa-discord"></i> Invitar al bot
+        </a>
+      </div>
+    </div>
+  </div>
+<% } else { %>
   <div class="guild-grid">
     <% guilds.forEach(guild => { %>
-      <div class="guild-card <%= guild.inBot ? '' : 'not-in-bot' %>">
+      <div class="guild-card <%= guild.inBot ? '' : 'out' %>">
         <% if (guild.icon) { %>
-          <img src="<%= guild.icon %>" alt="<%= guild.name %>" class="guild-icon">
+          <img src="<%= guild.icon %>" alt="<%= guild.name %>" class="g-icon">
         <% } else { %>
-          <div class="guild-icon-placeholder"><%= guild.name[0] %></div>
+          <div class="g-icon-ph"><%= guild.name ? guild.name[0] : '?' %></div>
         <% } %>
-        <h3><%= guild.name %></h3>
+        <div class="g-name"><%= guild.name %></div>
+        <% if (guild.memberCount) { %>
+          <div class="g-meta"><i class="fas fa-users" style="font-size:10px"></i> <%= guild.memberCount.toLocaleString() %> miembros</div>
+        <% } %>
+        <span class="g-badge <%= guild.inBot ? 'in' : 'out' %>">
+          <%= guild.inBot ? '● Bot activo' : '○ Sin bot' %>
+        </span>
         <% if (guild.inBot) { %>
-          <a href="/dashboard/<%= guild.id %>" class="btn-manage">Gestionar <i class="fas fa-arrow-right"></i></a>
+          <a href="/dashboard/<%= guild.id %>" class="btn btn-p btn-sm" style="width:100%;justify-content:center;margin-top:2px">
+            Gestionar <i class="fas fa-arrow-right" style="font-size:10px"></i>
+          </a>
         <% } else { %>
-          <a href="https://discord.com/oauth2/authorize?client_id=<%= clientId %>&scope=bot&permissions=8" target="_blank" class="btn-invite">Invitar Bot <i class="fas fa-plus"></i></a>
+          <a href="https://discord.com/oauth2/authorize?client_id=<%= clientId %>&scope=bot+applications.commands&permissions=8&guild_id=<%= guild.id %>" target="_blank"
+             class="btn btn-ghost btn-sm" style="width:100%;justify-content:center;margin-top:2px">
+            <i class="fas fa-plus"></i> Invitar bot
+          </a>
         <% } %>
       </div>
     <% }) %>
-    <% if (!guilds.length) { %>
-      <p class="empty">No tienes servidores con permiso de administración.</p>
-    <% } %>
   </div>
-</div>
+<% } %>
+
+<script>
+async function refreshGuilds() {
+  const btn = document.getElementById('btn-refresh-guilds')
+  btn.disabled = true
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Actualizando...'
+  try {
+    const r = await fetch('/api/refresh-guilds', { method: 'POST' }).then(r => r.json())
+    if (r.ok) window.location.reload()
+    else btn.innerHTML = '<i class="fas fa-sync-alt"></i> Error'
+  } catch {
+    btn.innerHTML = '<i class="fas fa-sync-alt"></i> Error'
+  } finally {
+    setTimeout(() => { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar' }, 2000)
+  }
+}
+</script>
 
 <%- include('../includes/footer') %>

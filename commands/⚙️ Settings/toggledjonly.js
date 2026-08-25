@@ -8,7 +8,7 @@ module.exports = {
     category: "⚙️ Settings",
     description: "Set's a Command to the DJ ONLY State, by typing it again, it gets to not DJ ONLY aka its a toggle",
     usage: "adddj @role",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     run: async (client, message, args, cmduser, text, prefix) => {
     
       let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
@@ -40,7 +40,7 @@ module.exports = {
             try{
               client.settings.remove(message.guild.id, args[0], `djonlycmds`);
               return message.reply({embeds :[new EmbedBuilder()
-                .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
+                .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
                 .setFooter(client.getFooter(es))
                 .setTitle(eval(client.la[ls]["cmds"]["settings"]["toggledjonly"]["variable3"]))
                 .setDescription(eval(client.la[ls]["cmds"]["settings"]["toggledjonly"]["variable4"]))
@@ -59,7 +59,7 @@ module.exports = {
             try{
               client.settings.push(message.guild.id, args[0], `djonlycmds`);
               return message.reply({embeds :[new EmbedBuilder()
-                .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
+                .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
                 .setFooter(client.getFooter(es))
                 .setTitle(eval(client.la[ls]["cmds"]["settings"]["toggledjonly"]["variable7"]))
                 .setDescription(eval(client.la[ls]["cmds"]["settings"]["toggledjonly"]["variable8"]))
@@ -95,10 +95,10 @@ module.exports = {
 */
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

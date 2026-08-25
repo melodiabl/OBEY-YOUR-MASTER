@@ -5,13 +5,13 @@ const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "customavatar",
-    description: "Get the Custom avatar of an Member",
+    description: "Get the Personalizado avatar of an Miembro",
     options: [
         //{"Integer": { name: "ping_amount", description: "How many times do you want to ping?", required: true }}, //to use in the code: interacton.getInteger("ping_amount")
         //{"String": { name: "ping_amount", description: "How many times do you want to ping?", required: true }}, //to use in the code: interacton.getString("ping_amount")
-        { User: { name: "which_user", description: "From Which User do you want to get the Avatar?", required: false } }, //to use in the code: interacton.getUser("ping_a_user")
-        //{"Channel": { name: "what_channel", description: "To Ping a Channel lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
-        //{"Role": { name: "what_role", description: "To Ping a Role lol", required: false }}, //to use in the code: interacton.getRole("what_role")
+        { User: { name: "which_user", description: "From Which Usuario do you want to get the Avatar?", required: false } }, //to use in the code: interacton.getUser("ping_a_user")
+        //{"Channel": { name: "what_channel", description: "To Ping a Canal lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
+        //{"Role": { name: "what_role", description: "To Ping a Rol lol", required: false }}, //to use in the code: interacton.getRole("what_role")
         //{"IntChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", 1], ["Discord Api", 2]] }, //here the second array input MUST BE A NUMBER // TO USE IN THE CODE: interacton.getInteger("what_ping")
         //{"StringChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", "botping"], ["Discord Api", "api"]] }}, //here the second array input MUST BE A STRING // TO USE IN THE CODE: interacton.getString("what_ping")
     ],
@@ -46,7 +46,6 @@ module.exports = {
         try {
             if (member && member.avatar) {
                 customavatar = member.displayAvatarURL({
-                    dynamic: true,
                     size: 4096,
                 });
             }
@@ -55,13 +54,13 @@ module.exports = {
         }
         if (customavatar) {
             let embed = new EmbedBuilder()
-                .setAuthor(
-                    handlemsg(client.la[ls].cmds.info.avatar.author, {
-                        usertag: user.tag,
+                .setAuthor({
+                    name: handlemsg(client.la[ls].cmds.info.avatar.author, {
+                        usertag: user.username,
                     }),
-                    customavatar,
-                    "https://discord.gg/milrato"
-                )
+                    iconURL: customavatar,
+                    url: "https://github.com/melodiabl"
+                })
                 .setColor(es.color)
                 .setThumbnail(
                     es.thumb
@@ -70,16 +69,10 @@ module.exports = {
                             : client.user.displayAvatarURL()
                         : null
                 )
-                .addField("<:arrow:832598861813776394> PNG", `[\`LINK\`](${customavatar})`, true)
-                .addField(
-                    "<:arrow:832598861813776394> JPEG",
-                    `[\`LINK\`](${customavatar.replace("png", "jpg").replace("gif", "jpg")})`,
-                    true
-                )
-                .addField(
-                    "<:arrow:832598861813776394> WEBP",
-                    `[\`LINK\`](${customavatar.replace("png", "webp").replace("gif", "webp")})`,
-                    true
+                .addFields(
+                    { name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${customavatar})`, inline: true },
+                    { name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${customavatar.replace("png", "jpg").replace("gif", "jpg")})`, inline: true },
+                    { name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${customavatar.replace("png", "webp").replace("gif", "webp")})`, inline: true }
                 )
                 .setURL(customavatar)
                 .setFooter(client.getFooter(es))
@@ -90,15 +83,13 @@ module.exports = {
             });
         } else {
             let embed = new EmbedBuilder()
-                .setAuthor(
-                    handlemsg(client.la[ls].cmds.info.avatar.author, {
-                        usertag: user.tag,
+                .setAuthor({
+                    name: handlemsg(client.la[ls].cmds.info.avatar.author, {
+                        usertag: user.username,
                     }),
-                    user.displayAvatarURL({
-                        dynamic: true,
-                    }),
-                    "https://discord.gg/milrato"
-                )
+                    iconURL: user.displayAvatarURL(),
+                    url: "https://github.com/melodiabl"
+                })
                 .setColor(es.color)
                 .setThumbnail(
                     es.thumb
@@ -107,31 +98,20 @@ module.exports = {
                             : client.user.displayAvatarURL()
                         : null
                 )
-                .addField("<:arrow:832598861813776394> PNG", `[\`LINK\`](${user.displayAvatarURL({ format: "png" })})`, true)
-                .addField(
-                    "<:arrow:832598861813776394> JPEG",
-                    `[\`LINK\`](${user.displayAvatarURL({ format: "jpg" })})`,
-                    true
-                )
-                .addField(
-                    "<:arrow:832598861813776394> WEBP",
-                    `[\`LINK\`](${user.displayAvatarURL({ format: "webp" })})`,
-                    true
-                )
+                .addFields({ name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
                 .setURL(
-                    user.displayAvatarURL({
-                        dynamic: true,
-                    })
+                    user.displayAvatarURL()
                 )
                 .setFooter(client.getFooter(es))
                 .setImage(
                     user.displayAvatarURL({
-                        dynamic: true,
                         size: 512,
                     })
                 )
                 .setDescription(
-                    `**Member has no Custom Avatar / unable to find the Member, in this Server**\n> *I am displaying, his normal AVATAR!*`
+                    `**Miembro has no Personalizado Avatar / unable to find the Miembro, in this Servidor**\n> *I am displaying, his normal AVATAR!*`
                 );
             interaction?.reply({
                 embeds: [embed],
@@ -142,10 +122,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

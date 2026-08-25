@@ -39,7 +39,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable4"])),
                     ],
@@ -51,7 +51,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable5"]))
                             .setDescription(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable6"])),
                     ],
@@ -129,7 +129,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable8"])),
                     ],
                 });
@@ -139,7 +139,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable9"])),
                     ],
                 });
@@ -151,7 +151,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable10"]))
                         .setDescription(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable11"])),
                 ],
@@ -172,10 +172,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

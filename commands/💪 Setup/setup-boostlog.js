@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupboostlog", "boostlogsetup"],
     cooldown: 5,
-    usage: "setup-boostlog <#Channel/disable>",
-    description: "Log the Server Boosts",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-boostlog <#Canal/disable>",
+    description: "Registrar los Impulsos del Servidor",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -26,11 +26,11 @@ module.exports = {
                     message: "",
                     log: false,
                     stopBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **stopped Boosting us..** <:Cat_Sad:867722685949804565>",
+                        "<a:Server_Boosts:867777823468027924> {member} **dejó de impulsarnos..** <:Cat_Sad:867722685949804565>",
                     startBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **has boosted us!** <a:Light_Saber_Dancce:867721861462229013>",
+                        "<a:Server_Boosts:867777823468027924> {member} **nos ha impulsado!** <a:Light_Saber_Dancce:867721861462229013>",
                     againBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **has boosted us again!** <:Tada_WON:867724032207224833>",
+                        "<a:Server_Boosts:867777823468027924> {member} **nos ha impulsado de nuevo!** <:Tada_WON:867724032207224833>",
                 },
             });
 
@@ -39,32 +39,32 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Enable Boost-Log",
-                        description: `Enable Boost-Log and define the Channel`,
+                        description: `Activar Boost-Log y definir el Canal`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
                         value: "Disable Boost-Log",
-                        description: `Disable the Boost-Log`,
+                        description: `Desactivar el Boost-Log`,
                         emoji: allEmojis.msg.cleared,
                     },
                     {
                         value: "Start Boost Message",
-                        description: `Define the Started Boosting Message`,
-                        emoji: "867777823468027924",
+                        description: `Definir el Mensaje de Inicio de Impulso`,
+                        emoji: "🚀",
                     },
                     {
                         value: "Stop Boost Message",
-                        description: `Define the Stopped Boosting Message`,
-                        emoji: "867777823468027924",
+                        description: `Definir el Mensaje de Impulso Detenido`,
+                        emoji: "🚀",
                     },
                     {
                         value: "Again Boost Message",
-                        description: `Define the Again Boosting Message`,
-                        emoji: "867777823468027924",
+                        description: `Definir el Mensaje de Otro Impulso`,
+                        emoji: "🚀",
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ai-Chat-Setup!`,
+                        description: `Cancelar y detener la Ai-Chat-Configuración`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -73,7 +73,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Boost-Log")
+                    .setPlaceholder("¡Haz clic para configurar el Boost-Log!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -90,11 +90,11 @@ module.exports = {
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
                     .setAuthor({
-                        name: "Boost-Log",
-                        url: "https://discord.gg/milrato",
+                        name: "Registro de Impulso",
+                        url: "https://github.com/melodiabl",
                         iconURL: "https://cdn.discordapp.com/emojis/833402717950836806.gif?size=128&quality=lossless",
                     })
-                    //.setAuthor('Boost-Log', 'https://cdn.discordapp.com/emojis/833402717950836806.gif?size=128&quality=lossless', 'https://discord.gg/milrato')
+                    //.setAuthor('Boost-Log', 'https://cdn.discordapp.com/emojis/833402717950836806.gif?size=128&quality=lossless', 'https://github.com/melodiabl')
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -118,16 +118,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Seleccionado: \`${collected ? collected.first().values[0] : "Nada"}\`**` : "❌ **NADA SELECCIONADO - CANCELADO**"}`,
                     });
                 });
             }
@@ -154,7 +154,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     let channel =
                                         message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first() ||
                                         message.guild.channels.cache.get(message.content.trim().split(" ")[0]);
@@ -163,10 +163,10 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setTitle("Enabled the Boost Log!")
+                                                    .setTitle("¡Boost Log Activado!")
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `When someone starts/stops boosting i will send a log information in: <#${channel.id}>`.substring(
+                                                        `Cuando alguien comience/detenga el impulso, enviaré información de registro en: <#${channel.id}>`.substring(
                                                             0,
                                                             2048
                                                         )
@@ -175,7 +175,7 @@ module.exports = {
                                             ],
                                         });
                                     }
-                                    return message.reply("NO CHANNEL PINGED");
+                                    return message.reply("NO SE MENCIONÓ NINGÚN CANAL");
                                 })
                                 .catch(e => {
                                     return message.reply({
@@ -183,7 +183,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-aichat"]["variable8"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -195,10 +195,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("What should be the message when, someone starts Boosting?")
+                                        .setTitle("¿Cuál debería ser el mensaje cuando alguien comienza a Impulsar?")
                                         .setColor(es.color)
                                         .setDescription(
-                                            `\`{member}\` will be replaced with a ping of the boosting member!\n**Current Message:**\n> ${client.settings.get(message.guild.id, "boost.startBoost")}`.substring(
+                                            `\`{member}\` será reemplazado con una mención del miembro que impulsa!\n**Mensaje Actual:**\n> ${client.settings.get(message.guild.id, "boost.startBoost")}`.substring(
                                                 0,
                                                 2048
                                             )
@@ -215,16 +215,16 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     client.settings.set(message.guild.id, message, "boost.startBoost");
                                     const log = client.settings.get(message.guild.id, "boost.log");
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle("Changed the Start Boosting Log Message!")
+                                                .setTitle("¡Mensaje de Registro de Inicio de Impulso Cambiado!")
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `${log ? `When someone starts boosting i will send it in: <#${log}>` : `When someone starts boosting i will send it, as soon as you enabled this log!`}`.substring(
+                                                    `${log ? `Cuando alguien comience a impulsar, lo enviaré en: <#${log}>` : `Cuando alguien comience a impulsar, lo enviaré tan pronto como habilites este registro!`}`.substring(
                                                         0,
                                                         2048
                                                     )
@@ -239,7 +239,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-aichat"]["variable8"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -251,10 +251,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("What should be the message when, someone stops Boosting?")
+                                        .setTitle("¿Cuál debería ser el mensaje cuando alguien deja de Impulsar?")
                                         .setColor(es.color)
                                         .setDescription(
-                                            `\`{member}\` will be replaced with a ping of the boosting member!\n**Current Message:**\n> ${client.settings.get(message.guild.id, "boost.stopBoost")}`.substring(
+                                            `\`{member}\` será reemplazado con una mención del miembro que impulsa!\n**Mensaje Actual:**\n> ${client.settings.get(message.guild.id, "boost.stopBoost")}`.substring(
                                                 0,
                                                 2048
                                             )
@@ -271,16 +271,16 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     client.settings.set(message.guild.id, message, "boost.stopBoost");
                                     const log = client.settings.get(message.guild.id, "boost.log");
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle("Changed the Stop Boosting Log Message!")
+                                                .setTitle("¡Mensaje de Registro de Detención de Impulso Cambiado!")
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `${log ? `When someone stops boosting i will send it in: <#${log}>` : `When someone stops boosting i will send it, as soon as you enabled this log!`}`.substring(
+                                                    `${log ? `Cuando alguien deje de impulsar, lo enviaré en: <#${log}>` : `Cuando alguien deje de impulsar, lo enviaré tan pronto como habilites este registro!`}`.substring(
                                                         0,
                                                         2048
                                                     )
@@ -295,7 +295,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-aichat"]["variable8"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -307,10 +307,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("What should be the message when, someone boosts again?")
+                                        .setTitle("¿Cuál debería ser el mensaje cuando alguien impulsa de nuevo?")
                                         .setColor(es.color)
                                         .setDescription(
-                                            `\`{member}\` will be replaced with a ping of the boosting member!\n**Current Message:**\n> ${client.settings.get(message.guild.id, "boost.againBoost")}`.substring(
+                                            `\`{member}\` será reemplazado con una mención del miembro que impulsa!\n**Mensaje Actual:**\n> ${client.settings.get(message.guild.id, "boost.againBoost")}`.substring(
                                                 0,
                                                 2048
                                             )
@@ -327,16 +327,16 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     client.settings.set(message.guild.id, message, "boost.againBoost");
                                     const log = client.settings.get(message.guild.id, "boost.log");
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle("Changed the Again Boosting Log Message!")
+                                                .setTitle("¡Mensaje de Registro de Otro Impulso Cambiado!")
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `${log ? `When someone boosts again i will send it in: <#${log}>` : `When someone boosts again i will send it, as soon as you enabled this log!`}`.substring(
+                                                    `${log ? `Cuando alguien impulse de nuevo, lo enviaré en: <#${log}>` : `Cuando alguien impulse de nuevo, lo enviaré tan pronto como habilites este registro!`}`.substring(
                                                         0,
                                                         2048
                                                     )
@@ -351,7 +351,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-aichat"]["variable8"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -364,9 +364,9 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Disabled the Boost Log!")
+                                        .setTitle("¡Boost Log Desactivado!")
                                         .setColor(es.color)
-                                        .setDescription(`I will no longer Show the Boost Log`.substring(0, 2048))
+                                        .setDescription(`Ya no mostraré el Registro de Impulso`.substring(0, 2048))
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -390,10 +390,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

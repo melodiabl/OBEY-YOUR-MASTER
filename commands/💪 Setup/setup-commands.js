@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupcommands", "setup-command", "setupcommand"],
     cooldown: 5,
-    usage: "setup-commands  -->  Follow the Steps",
-    description: "Enable/Disable specific Commands",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-commands --> Sigue los Pasos",
+    description: "Activar/Desactivar Comandos específicos",
+    memberpermissions: ['Administrador'],
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -25,79 +25,79 @@ module.exports = {
                         label: "ECONOMY",
                         value: "ECONOMY",
                         emoji: "💸",
-                        description: `${client.settings.get(message.guild.id, "ECONOMY") ? "❌ Disable ECONOMY Commands" : "✅ Enable ECONOMY Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "ECONOMY") ? "❌ Desactivar Comandos ECONOMY" : "✅ Activar Comandos ECONOMY"}`,
                     },
                     {
                         label: "SCHOOL",
                         value: "SCHOOL",
                         emoji: "🏫",
-                        description: `${client.settings.get(message.guild.id, "SCHOOL") ? "❌ Disable SCHOOL Commands" : "✅ Enable SCHOOL Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "SCHOOL") ? "❌ Desactivar SCHOOL" : "✅ Activar SCHOOL"}`,
                     },
                     {
                         label: "MUSIC",
                         value: "MUSIC",
                         emoji: "🎶",
-                        description: `${client.settings.get(message.guild.id, "MUSIC") ? "❌ Disable Music Commands" : "✅ Enable Music Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "MUSIC") ? "❌ Desactivar Music" : "✅ Activar Music"}`,
                     },
                     {
                         label: "FILTER",
                         value: "FILTER",
                         emoji: "👀",
-                        description: `${client.settings.get(message.guild.id, "FILTER") ? "❌ Disable FILTER Commands" : "✅ Enable FILTER Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "FILTER") ? "❌ Desactivar FILTER" : "✅ Activar FILTER"}`,
                     },
                     {
                         label: "CUSTOMQUEUE",
                         value: "CUSTOMQUEUE",
                         emoji: "⚜️",
-                        description: `${client.settings.get(message.guild.id, "CUSTOMQUEUE") ? "❌ Disable CUSTOM-QUEUE Commands" : "✅ Enable CUSTOM-QUEUE Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "CUSTOMQUEUE") ? "❌ Desactivar CUSTOM-QUEUE" : "✅ Activar CUSTOM-QUEUE"}`,
                     },
                     {
                         label: "PROGRAMMING",
                         value: "PROGRAMMING",
                         emoji: "⌨️",
-                        description: `${client.settings.get(message.guild.id, "PROGRAMMING") ? "❌ Disable PROGRAMMING Commands" : "✅ Enable PROGRAMMING Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "PROGRAMMING") ? "❌ Desactivar PROGRAMMING" : "✅ Activar PROGRAMMING"}`,
                     },
                     {
                         label: "RANKING",
                         value: "RANKING",
                         emoji: "📈",
-                        description: `${client.settings.get(message.guild.id, "RANKING") ? "❌ Disable RANKING Commands" : "✅ Enable RANKING Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "RANKING") ? "❌ Desactivar RANKING" : "✅ Activar RANKING"}`,
                     },
                     {
                         label: "SOUNDBOARD",
                         value: "SOUNDBOARD",
                         emoji: "🔊",
-                        description: `${client.settings.get(message.guild.id, "SOUNDBOARD") ? "❌ Disable SOUNDBOARD Commands" : "✅ Enable SOUNDBOARD Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "SOUNDBOARD") ? "❌ Desactivar SOUNDBOARD" : "✅ Activar SOUNDBOARD"}`,
                     },
                     {
                         label: "VOICE",
                         value: "VOICE",
                         emoji: "🎤",
-                        description: `${client.settings.get(message.guild.id, "VOICE") ? "❌ Disable VOICE Commands" : "✅ Enable VOICE Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "VOICE") ? "❌ Desactivar VOICE" : "✅ Activar VOICE"}`,
                     },
                     {
                         label: "FUN",
                         value: "FUN",
                         emoji: "🕹️",
-                        description: `${client.settings.get(message.guild.id, "FUN") ? "❌ Disable FUN Commands" : "✅ Enable FUN Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "FUN") ? "❌ Desactivar FUN" : "✅ Activar FUN"}`,
                     },
                     {
                         label: "MINIGAMES",
                         value: "MINIGAMES",
                         emoji: "🎮",
-                        description: `${client.settings.get(message.guild.id, "MINIGAMES") ? "❌ Disable MINIGAMES Commands" : "✅ Enable MINIGAMES Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "MINIGAMES") ? "❌ Desactivar MINIGAMES" : "✅ Activar MINIGAMES"}`,
                     },
                     {
                         label: "ANIME",
                         value: "ANIME",
                         emoji: "😳",
-                        description: `${client.settings.get(message.guild.id, "ANIME") ? "❌ Disable ANIME Commands" : "✅ Enable ANIME Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "ANIME") ? "❌ Desactivar ANIME" : "✅ Activar ANIME"}`,
                     },
                     {
                         label: "NSFW",
                         value: "NSFW",
                         emoji: "🔞",
-                        description: `${client.settings.get(message.guild.id, "NSFW") ? "❌ Disable NSFW Commands" : "✅ Enable NSFW Commands"}`,
+                        description: `${client.settings.get(message.guild.id, "NSFW") ? "❌ Desactivar NSFW" : "✅ Activar NSFW"}`,
                     },
                 ];
             }
@@ -113,10 +113,10 @@ module.exports = {
             }
 
             let embed = new Discord.EmbedBuilder()
-                .setTitle(`Setup the allowed/not-allowed Command-Categories of this Server`)
+                .setTitle(`Configuración the allowed/not-allowed Comando-Categories of this Servidor`)
                 .setColor(es.color)
                 .setDescription(
-                    `**In the selection down below all Categories are listed**\n\n**Select it to either disable/enable it!**\n\n**You can select all (*at least 1*) Command-Categories if you want to disable/enable all of them at once!**`
+                    `**In the selection down below all Categories are listed**\n\n**Seleccionar it to either disable/enable it!**\n\n**You can select all (*at least 1*) Command-Categories if you want to disable/enable all of them at once!**`
                 );
 
             //Send message with buttons
@@ -132,7 +132,7 @@ module.exports = {
             collector.on("collect", async b => {
                 if (b?.user.id !== message.author.id)
                     return b?.reply({
-                        content: `${allEmojis.msg.ERROR} Only the one who typed the Command is allowed to select Things!`,
+                        content: `${allEmojis.msg.ERROR} Only the one who typed the Comando is allowed to select Things!`,
                         ephemeral: true,
                     });
 
@@ -145,18 +145,18 @@ module.exports = {
                     client.settings.set(message.guild.id, !oldstate, `${value.toUpperCase()}`);
                 }
                 b?.reply(
-                    `${allEmojis.msg.SUCCESS} **\`Enabled ${enabled} Command-Categories\` and \`Disabled ${disabled} Command-Categories\` out of \`${b?.values.length} selected Command-Categories\`**`
+                    `${allEmojis.msg.SUCCESS} **\`Activado ${enabled} Categorías de Comandos\` y \`Desactivado ${disabled} Categorías de Comandos\` de \`${b?.values.length} Categorías de Comandos seleccionadas\`**`
                 );
             });
             collector.on("end", () => {
                 msg.edit({
-                    content: `${allEmojis.msg.ERROR} Time ran out/Input finished! Cancelled`,
+                    content: `${allEmojis.msg.ERROR} Time ran out/Input finished! Cancelado`,
                     embeds: [
-                        msg.embeds[0].setDescription(
+                        EmbedBuilder.from(msg.embeds[0]).setDescription(
                             `${getMenuOptions()
                                 .map(
                                     option =>
-                                        `> ${option.emoji} **${option.value}-Commands**: ${option.description.split(" ")[0] != "❌" ? `\`Are now disabled [❌]\`` : `\`Are now enabled [✅]\``}`
+                                        `> ${option.emoji} **${option.value}-Comandos**: ${option.description.split(" ")[0] != "❌" ? `\`Ahora desactivados [❌]\`` : `\`Ahora activados [✅]\``}`
                                 )
                                 .join("\n\n")}`
                         ),
@@ -180,10 +180,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

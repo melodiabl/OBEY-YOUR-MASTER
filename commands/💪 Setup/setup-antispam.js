@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupantispam", "setup-spam", "setupspam", "antispam-setup", "antispamsetup"],
     cooldown: 5,
-    usage: "setup-antispam  -->  Follow the Steps",
-    description: "Enable + Change the Maximum Amount of Messages to be allowed to send in under 10 Seconds",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-antispam --> Sigue los Pasos",
+    description: "Activar + Cambiar la Cantidad Máxima de Mensajes permitidos para enviar en menos de 10 Segundos",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -33,17 +33,17 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: `Enable & Set Anti Spam`,
-                        description: "Enable and limit the allowed Messages / 10 Seconds",
-                        emoji: "833101995723194437",
+                        description: "Activar y limitar los Mensajes permitidos / 10 Segundos",
+                        emoji: "✅",
                     },
                     {
                         value: `Disable Anti Spam`,
-                        description: "Don't prevent Spamming",
-                        emoji: "833101993668771842",
+                        description: "No prevenir Spam",
+                        emoji: "❌",
                     },
                     {
                         value: "Settings",
-                        description: `Show the Current Settings of the Anti-Spam System`,
+                        description: `Show the Current Ajustes of the Anti-Spam System`,
                         emoji: "📑",
                     },
                     {
@@ -63,12 +63,12 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Anti-Spam-Setup!`,
+                        description: `Cancelar and stop the Anti-Spam-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("Click me to setup the Anti Spam System!")
+                    .setPlaceholder("¡Haz clic para configurar the Anti Spam System!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -86,11 +86,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Anti-Spam System Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/a-button-blood-type_1f170-fe0f.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Anti-Spam System Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/a-button-blood-type_1f170-fe0f.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-anticaps"]["variable1"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -115,14 +111,14 @@ module.exports = {
                         handle_the_picks(menuoptiondataIndex, SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -174,10 +170,10 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle("Successfully Enabled the Anti-Spam System")
+                                                        .setTitle("Successfully Activado the Anti-Spam System")
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If a non Admin User types more Messages in under 10 Seconds then ${limit} his message(s) will be deleted + he will be "warned" (no warn system warn but yeah)\n\nIf he continues to do that, he will get Muted`.substring(
+                                                            `If a non Admin Usuario types more Messages in under 10 Seconds then ${limit} his message(s) will be deleted + he will be "warned" (no warn system warn but yeah)\n\nIf he continues to do that, he will get Muted`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -206,7 +202,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't ping a valid Channel");
+                                        message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -218,7 +214,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-anticaps"]["variable10"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -245,10 +241,10 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("The Settings of the Anti Spam System")
+                                        .setTitle("The Ajustes of the Anti Spam System")
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Enabled:** ${thesettings.enabled ? allEmojis.msg.SUCCESS : allEmojis.msg.ERROR}\n\n**Allowed Messages / 10 Seconds:** \`${thesettings.limit} Messages\``.substring(
+                                            `**Activado:** ${thesettings.enabled ? allEmojis.msg.SUCCESS : allEmojis.msg.ERROR}\n\n**Allowed Messages / 10 Seconds:** \`${thesettings.limit} Messages\``.substring(
                                                 0,
                                                 2048
                                             )
@@ -313,11 +309,11 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            `The Channel \`${channel.name}\` is now got added to the Whitelisted Channels of this System`
+                                                            `The Canal \`${channel.name}\` is now got added to the Whitelisted Channels of this System`
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Every single Channel:\n<#${client.settings.get(message.guild.id, "antispam.whitelistedchannels").join(">\n<#")}>\nis not checked by the System`.substring(
+                                                            `Every single Canal:\n<#${client.settings.get(message.guild.id, "antispam.whitelistedchannels").join(">\n<#")}>\nis not checked by the System`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -349,7 +345,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't ping a valid Channel");
+                                        message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -360,7 +356,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -422,11 +418,11 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            `The Channel \`${channel.name}\` is now removed out of the Whitelisted Channels of this System`
+                                                            `The Canal \`${channel.name}\` is now removed out of the Whitelisted Channels of this System`
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Every single Channel:\n> <#${client.settings.get(message.guild.id, "antispam.whitelistedchannels").join(">\n> <#")}>\nis not checked by the System`.substring(
+                                                            `Every single Canal:\n> <#${client.settings.get(message.guild.id, "antispam.whitelistedchannels").join(">\n> <#")}>\nis not checked by the System`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -458,7 +454,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't ping a valid Channel");
+                                        message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -469,7 +465,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -559,7 +555,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -588,10 +584,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

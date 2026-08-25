@@ -31,7 +31,7 @@ module.exports = {
             } else {
                 user = message.author;
             }
-            return message.reply(`${user.tag}`);
+            return message.reply(`${user.username}`);
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
@@ -48,10 +48,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

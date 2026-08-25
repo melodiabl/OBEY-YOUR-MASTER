@@ -46,7 +46,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable4"])),
                     ],
@@ -59,7 +59,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable5"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable6"])),
                     ],
@@ -69,7 +69,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable7"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable8"])),
                     ],
@@ -79,7 +79,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable9"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable10"])),
                     ],
@@ -90,7 +90,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable11"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable12"])),
                     ],
@@ -100,7 +100,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable13"])),
                     ],
                 });
@@ -123,7 +123,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable14"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable15"])),
                 ],
@@ -144,10 +144,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

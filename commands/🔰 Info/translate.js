@@ -24,12 +24,8 @@ module.exports = {
                 .then(res => {
                     let embed = new EmbedBuilder()
                         .setColor(es.color)
-                        .setAuthor(
-                            handlemsg(client.la[ls].cmds.info.translate.to, { to: args[1] }),
-                            "https://imgur.com/0DQuCgg.png",
-                            "https://discord.gg/milrato"
-                        )
-                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.translate.from, { from: args[0] }), iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                        .setAuthor({ name: handlemsg(client.la[ls].cmds.info.translate.to, { to: args[1] }), iconURL: "https://imgur.com/0DQuCgg.png", url: "https://github.com/melodiabl" })
+                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.translate.from, { from: args[0] }), iconURL: message.author.displayAvatarURL() })
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["translate"]["variable1"]));
                     message.reply({ embeds: [embed] });
                 })
@@ -57,10 +53,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

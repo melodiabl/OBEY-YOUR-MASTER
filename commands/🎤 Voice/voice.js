@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const Discord = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -11,7 +11,7 @@ module.exports = {
     extracustomdesc:
         "`voice add`, `voice ban`, `voice bitrate`, `voice invite`, `voice kick`, `voice limit`, `voice lock`, `voice promote`, `voice trust`, `voice trust`, `voice unban`, `voice unlock`, `voice untrust`, `voice stage`, `voice unstage`, `voice stage`, `voice unstage`",
     usage: "`voice <CMD_TYPE> [Options]`\n\nValid CMD_TYPES: `lock`, `invite`, `add`, `kick`, `unlock`, `ban`, `unban`, `trust`, `untrust`, `limit`, `bitrate`, `promote`, `stage`, `unstage`",
-    description: "The Voice Commands are there for the JOIN TO CREATE COMMANDS, use them to adjust your hosted channel!",
+    description: "Los Comandos de Voz son para los COMANDOS DE UNIRSE PARA CREAR, úsalos para ajustar tu canal creado!",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -69,8 +69,8 @@ module.exports = {
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                        return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                        return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
                         .set([
@@ -81,9 +81,9 @@ module.exports = {
                             },
                         ])
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites.edit(message.author.id, {
@@ -153,8 +153,8 @@ module.exports = {
                             ],
                         });
 
-                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                        return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                        return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
                         .edit(message.guild.id, {
@@ -162,9 +162,9 @@ module.exports = {
                             CONNECT: true,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites.edit(message.author.id, {
@@ -234,8 +234,8 @@ module.exports = {
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                        return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                        return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
                         .set([
@@ -246,9 +246,9 @@ module.exports = {
                             },
                         ])
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites.edit(message.author.id, {
@@ -269,8 +269,8 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle("✅ STAGED your Channel!")
-                                        .setDescription(`Noone can speak anymore!`)
+                                        .setTitle("✅ ¡ESCENARIO en tu Canal!")
+                                        .setDescription(`¡Nadie puede hablar ya!`)
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -318,8 +318,8 @@ module.exports = {
                             ],
                         });
 
-                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                        return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                        return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
                         .edit(message.guild.id, {
@@ -328,9 +328,9 @@ module.exports = {
                             SPEAK: true,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites.edit(message.author.id, {
@@ -352,8 +352,8 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle("✅ UNSTAGED your Channel!")
-                                        .setDescription(`Everyone can speak in your Channel now!`)
+                                        .setTitle("✅ ¡SIN ESCENARIO en tu Canal!")
+                                        .setDescription(`¡Todos pueden hablar en tu Canal ahora!`)
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -537,15 +537,15 @@ module.exports = {
                         });
                     let txt = args.slice(1).join(" ");
                     try {
-                        if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.CREATE_INSTANT_INVITE)) {
+                        if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.CreateInstantInvite)) {
                             return message.reply(
-                                `${allEmojis.msg.ERROR} **I am missing the CREATE_INSTANT_INVITE PERMISSION for \`${channel.name}\`**`
+                                `${allEmojis.msg.ERROR} **Me falta el PERMISO CREATE_INSTANT_INVITE para \`${channel.name}\`**`
                             );
                         }
                         channel.createInvite().then(invite => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites
@@ -554,9 +554,9 @@ module.exports = {
                                     CONNECT: true,
                                 })
                                 .then(lol => {
-                                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                         return message.reply(
-                                            `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                            `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                         );
                                     }
                                     vc.permissionOverwrites.edit(message.author.id, {
@@ -581,7 +581,7 @@ module.exports = {
                                                     )
                                                     .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable29"]))
                                                     .setDescription(
-                                                        `[Click here](${invite.url}) to join **${channel.name}**\n\n${txt ? txt : ""}`.substring(
+                                                        `[Click aquí](${invite.url}) para unirte a **${channel.name}**\n\n${txt ? txt : ""}`.substring(
                                                             0,
                                                             2000
                                                         )
@@ -729,8 +729,8 @@ module.exports = {
                             });
                         }
 
-                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                        return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                        return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
                         .edit(member.user.id, {
@@ -738,9 +738,9 @@ module.exports = {
                             CONNECT: false,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites.edit(message.author.id, {
@@ -831,8 +831,8 @@ module.exports = {
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                        return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                        return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
                         .edit(member.user.id, {
@@ -840,9 +840,9 @@ module.exports = {
                             CONNECT: true,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites.edit(message.author.id, {
@@ -934,8 +934,8 @@ module.exports = {
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                        return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                        return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
                         .edit(member.user.id, {
@@ -943,9 +943,9 @@ module.exports = {
                             CONNECT: true,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites.edit(message.author.id, {
@@ -1037,8 +1037,8 @@ module.exports = {
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
-                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                        return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                    if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                        return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                     }
                     vc.permissionOverwrites
                         .edit(member.user.id, {
@@ -1046,9 +1046,9 @@ module.exports = {
                             CONNECT: false,
                         })
                         .then(lol => {
-                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 return message.reply(
-                                    `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                    `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                 );
                             }
                             vc.permissionOverwrites.edit(message.author.id, {
@@ -1340,8 +1340,8 @@ module.exports = {
                             ],
                         });
                     try {
-                        if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
-                            return message.reply(`${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`);
+                        if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                            return message.reply(`${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`);
                         }
                         vc.permissionOverwrites
                             .edit(member.user.id, {
@@ -1351,9 +1351,9 @@ module.exports = {
                                 CONNECT: true,
                             })
                             .then(l => {
-                                if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                                if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                     return message.reply(
-                                        `${allEmojis.msg.ERROR} **I am missing the MANAGE_CHANNEL PERMISSION for \`${vc.name}\`**`
+                                        `${allEmojis.msg.ERROR} **Me falta el PERMISO MANAGE_CHANNEL para \`${vc.name}\`**`
                                     );
                                 }
                                 vc.permissionOverwrites
@@ -1440,10 +1440,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

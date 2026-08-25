@@ -1,54 +1,17 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
 module.exports = {
-    name: `shuffle`,
-    description: `Shuffles the Queue`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
-        //let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return interaction?.reply({
-                ephemeral: true,
-                embed: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //set into the player instance an old Queue, before the shuffle...
-            player.set(
-                `beforeshuffle`,
-                player.queue.map(track => track)
-            );
-            //shuffle the Queue
-            player.queue.shuffle();
-            //send informational message
-            interaction?.reply({
-                embeds: [new EmbedBuilder().setColor(es.color).setTitle(`${emoji?.msg.shuffle} Shuffled the Queue!`)],
-            });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'shuffle', description: 'Mezcla aleatoriamente la cola',
+  parameters: { type: 'music', activeplayer: true, previoussong: false }, options: [],
+  run: async (client, interaction) => {
+    if (!interaction.member?.voice?.channel)
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
+    await interaction.deferReply()
+    const enabled = await client.music.shuffle(interaction.guild.id)
+    const state   = client.music?.getState(interaction.guild.id)
+    await interaction.editReply({ embeds: [new EmbedBuilder().setColor(enabled ? 0x1DB954 : 0x5865F2)
+      .setTitle(enabled ? '🔀 Mezclar activado' : '➡️ Mezclar desactivado')
+      .setDescription(enabled
+        ? `La cola se mezcló y las próximas pistas se elegirán al azar${state?.queue?.length ? ` (**${state.queue.length}** en cola)` : ''}.`
+        : 'Las pistas volverán a sonar en orden.')] })
+  },
+}

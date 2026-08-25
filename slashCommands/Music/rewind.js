@@ -1,70 +1,22 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { createBar, format } = require(`${process.cwd()}/handlers/functions`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
+function fmtMs(ms){const s=Math.floor((ms||0)/1000);return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 module.exports = {
-    name: `rewind`,
-    description: `Seeks a specific amount of Seconds backwards`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    options: [{ Integer: { name: "seconds", description: "How many Seconds do you want to rewind?", required: true } }],
-    run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
-        //let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return interaction?.reply({
-                ephemeral: true,
-                embed: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            let args = [interaction?.options.getInteger("seconds")];
-
-            if (!args[0])
-                return interaction?.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["rewind"]["variable1"])),
-                    ],
-                });
-            let seektime = player.position - Number(args[0]) * 1000;
-            if (seektime >= player.queue.current.duration - player.position || seektime < 0) {
-                seektime = 0;
-            }
-            //seek to the right time
-            player.seek(Number(seektime));
-            //send success message
-            return interaction?.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["cmds"]["music"]["rewind"]["variable2"]))
-                        .addField(`${emoji?.msg.time} Progress: `, createBar(player))
-                        .setColor(es.color),
-                ],
-            });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'rewind', description: 'Retrocede la cancion X segundos',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  options: [{ Integer: { name: 'segundos', description: 'Segundos a retroceder (default 30)', required: false } }],
+  run: async (client, interaction) => {
+    if (!interaction.member?.voice?.channel)
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
+    await interaction.deferReply()
+    try {
+      const sec = Math.max(1, interaction.options.getInteger('segundos') || 30)
+      const player = client.shoukaku?.players?.get(interaction.guild.id)
+      if (!player) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay reproductor activo.')] })
+      const newPos = Math.max(0, (player.position || 0) - sec * 1000)
+      await player.seekTo(newPos)
+      await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
+        .setTitle('⏪ Retrocedido')
+        .setDescription(`**-${sec}s** → \`${fmtMs(newPos)}\``)] })
+    } catch (e) { await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ ${e.message}`)] }) }
+  },
+}

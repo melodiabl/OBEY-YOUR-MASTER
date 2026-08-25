@@ -12,8 +12,8 @@ module.exports = {
     aliases: ["setuplogger", "logger-setup", "loggersetup", "setup-auditlog"],
     cooldown: 5,
     usage: "setup-logger  -->  Follow Steps",
-    description: "Enable/Disable the Logger / Audit log System",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Activar/Desactivar el Sistema de Registro / Registro de Auditoría",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -26,7 +26,7 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Enable Audit-Log",
-                        description: `Define the Audit-Log Channel`,
+                        description: `Define the Audit-Log Canal`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
@@ -36,12 +36,12 @@ module.exports = {
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Audit-Log`,
+                        description: `Show Ajustes of the Audit-Log`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Audit-Log-Setup!`,
+                        description: `Cancelar and stop the Audit-Log-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -50,7 +50,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Admin-Command-Log")
+                    .setPlaceholder("¡Haz clic para configurar the Admin-Command-Log")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -66,11 +66,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Audit Logger Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/bookmark_1f516.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Audit Logger Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/bookmark_1f516.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -94,14 +90,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -162,7 +158,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't ping a valid Channel");
+                                        return message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -174,7 +170,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -200,10 +196,10 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Settings of the AUDIT-LOG")
+                                        .setTitle("Ajustes of the AUDIT-LOG")
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Channel:** ${thesettings.channel == "no" ? "Not Setupped" : `<#${thesettings.channel}> | \`${thesettings.channel}\``}`.substring(
+                                            `**Canal:** ${thesettings.channel == "no" ? "Not Setupped" : `<#${thesettings.channel}> | \`${thesettings.channel}\``}`.substring(
                                                 0,
                                                 2048
                                             )
@@ -231,10 +227,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

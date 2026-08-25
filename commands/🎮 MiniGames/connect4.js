@@ -1,4 +1,7 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
 function disableButtons(components) {
     for (let x = 0; x < components.length; x++) {
         for (let y = 0; y < components[x].components.length; y++) {
@@ -50,14 +53,14 @@ class Connect4Game {
         if (!options.waitMessage) options.waitMessage = "Waiting for the opponent...";
         if (typeof options.waitMessage !== "string") throw new TypeError("WAIT_MESSAGE: Wait Message must be a string.");
 
-        if (!options.gameEndMessage) options.gameEndMessage = "The game went unfinished :(";
+        if (!options.gameEndMessage) options.gameEndMessage = "El juego quedó sin terminar :(";
         if (typeof options.gameEndMessage !== "string")
             throw new TypeError("GAME_END_MESSAGE: Game End Message must be a string.");
-        if (!options.winMessage) options.winMessage = "{emoji} | **{winner}** won the game!";
+        if (!options.winMessage) options.winMessage = "{emoji} | **{winner}** ganó el juego!";
         if (typeof options.winMessage !== "string") throw new TypeError("WIN_MESSAGE: Win Message must be a string.");
-        if (!options.drawMessage) options.drawMessage = "It was a draw!";
+        if (!options.drawMessage) options.drawMessage = "¡Fue un empate!";
         if (typeof options.drawMessage !== "string") throw new TypeError("DRAW_MESSAGE: Draw Message must be a string.");
-        if (!options.othersMessage) options.othersMessage = "You are not allowed to use buttons for this message!";
+        if (!options.othersMessage) options.othersMessage = "¡No tienes permiso para usar botones en este mensaje!";
         if (typeof options.othersMessage !== "string")
             throw new TypeError("INVALID_OTHERS_MESSAGE: Others Message must be a string.");
 
@@ -112,13 +115,13 @@ class Connect4Game {
         }
         this.inGame = true;
 
-        const btn1 = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji("1️⃣").setCustomId("1_connect4");
-        const btn2 = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji("2️⃣").setCustomId("2_connect4");
-        const btn3 = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji("3️⃣").setCustomId("3_connect4");
-        const btn4 = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji("4️⃣").setCustomId("4_connect4");
-        const btn5 = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji("5️⃣").setCustomId("5_connect4");
-        const btn6 = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji("6️⃣").setCustomId("6_connect4");
-        const btn7 = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji("7️⃣").setCustomId("7_connect4");
+        const btn1 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("1️⃣").setCustomId("1_connect4");
+        const btn2 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("2️⃣").setCustomId("2_connect4");
+        const btn3 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("3️⃣").setCustomId("3_connect4");
+        const btn4 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("4️⃣").setCustomId("4_connect4");
+        const btn5 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("5️⃣").setCustomId("5_connect4");
+        const btn6 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("6️⃣").setCustomId("6_connect4");
+        const btn7 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("7️⃣").setCustomId("7_connect4");
 
         const row1 = new ActionRowBuilder().addComponents(btn1, btn2, btn3, btn4);
         const row2 = new ActionRowBuilder().addComponents(btn5, btn6, btn7);
@@ -131,16 +134,16 @@ class Connect4Game {
     GameEmbed() {
         const status = this.options.turnMessage
             .replace("{emoji}", this.getChip())
-            .replace("{player}", this.redTurn ? this.message.author.tag : this.opponent.tag);
+            .replace("{player}", this.redTurn ? this.message.author.username : this.opponent.tag);
 
         return new EmbedBuilder()
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setDescription(this.getGameBoard())
-            .addField(this.options.embed.statusTitle || "Status", status)
+            .addFields({ name: this.options.embed.statusTitle || "Status", value: status })
             .setFooter(client.getFooter(
                     `${this.message.author.username} vs ${this.opponent.username}`,
-                    this.message.guild.iconURL({ dynamic: true })
+                    this.message.guild.iconURL()
                 )
             );
     }
@@ -152,10 +155,10 @@ class Connect4Game {
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setDescription(this.getGameBoard())
-            .addField(this.options.embed.statusTitle || "Status", this.getResultText(result))
+            .addFields({ name: this.options.embed.statusTitle || "Status", value: this.getResultText(result) })
             .setFooter(client.getFooter(
                     `${this.message.author.username} vs ${this.opponent.username}`,
-                    this.message.guild.iconURL({ dynamic: true })
+                    this.message.guild.iconURL()
                 )
             );
 
@@ -169,7 +172,7 @@ class Connect4Game {
 
         collector.on("collect", async btn => {
             if (btn.user.id !== this.message.author.id && btn.user.id !== this.opponent.id) {
-                const authors = this.message.author.tag + "and" + this.opponent.tag;
+                const authors = this.message.author.username + "and" + this.opponent.tag;
                 return btn.reply({ content: this.options.othersMessage.replace("{author}", authors), ephemeral: true });
             }
 
@@ -203,7 +206,7 @@ class Connect4Game {
             }
 
             if (this.hasWon(placedX, placedY)) {
-                this.gameOver({ result: "winner", name: btn.user.tag, emoji: this.getChip() }, msg);
+                this.gameOver({ result: "winner", name: btn.user.username, emoji: this.getChip() }, msg);
             } else if (this.isBoardFull()) {
                 this.gameOver({ result: "tie" }, msg);
             } else {
@@ -329,20 +332,20 @@ module.exports = {
             message: message,
             slash_command: false,
             opponent: opponent.user,
-            embed: {
+            embeds: [{
                 title: "Connect 4",
                 color: es.color,
-            },
+            }],
             emojis: {
                 player1: "🔵",
                 player2: "🟡",
             },
             waitMessage: "Waiting for the opponent...",
             turnMessage: "{emoji} | Its turn of player **{player}**.",
-            winMessage: "{emoji} | **{winner}** won the game!",
-            gameEndMessage: "The game went unfinished :(",
-            drawMessage: "It was a draw!",
-            othersMessage: "You are not allowed to use buttons for this message!",
+            winMessage: "{emoji} | **{winner}** ganó el juego!",
+            gameEndMessage: "El juego quedó sin terminar :(",
+            drawMessage: "¡Fue un empate!",
+            othersMessage: "¡No tienes permiso para usar botones en este mensaje!",
             askMessage: "Hey {opponent}, {challenger} challenged you for a game of Connect 4!",
             cancelMessage: "Looks like they refused to have a game of Connect4. :(",
             timeEndMessage: "Since the opponent didnt answer, i dropped the game!",
@@ -365,11 +368,11 @@ async function verify(options) {
 
         const btn1 = new ButtonBuilder()
             .setLabel(options.buttons?.accept || "Accept")
-            .setStyle(Discord.ButtonStyle.Success)
+            .setStyle(ButtonStyle.Success)
             .setCustomId("accept");
         const btn2 = new ButtonBuilder()
             .setLabel(options.buttons?.reject || "Reject")
-            .setStyle(Discord.ButtonStyle.Danger)
+            .setStyle(ButtonStyle.Danger)
             .setCustomId("reject");
         const row = new ActionRowBuilder().addComponents(btn1, btn2);
 

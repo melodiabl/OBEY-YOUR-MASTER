@@ -1,4 +1,6 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder, ChannelType,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -13,8 +15,8 @@ module.exports = {
     aliases: ["setupticket", "ticket-setup", "ticketsetup", "ticketsystem"],
     cooldown: 5,
     usage: "setup-ticket --> Follow Steps",
-    description: "Manage 25 different Ticket Systems, Ticket-Roles, messages, create/disable",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Gestiona 25 Sistemas de Tickets diferentes, Roles de Ticket, mensajes, crear/desactivar",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -32,7 +34,7 @@ module.exports = {
                     const emoji = NumberEmojis[i];
                     menuoptions.push({
                         value: `${i} Ticket System`,
-                        description: `Manage/Edit the ${i} Ticket Setup`,
+                        description: `Manage/Edit the ${i} Ticket Configuración`,
                         ...(emoji ? { emoji } : {}),
                     });
                 }
@@ -42,7 +44,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Ticket System!")
+                        .setPlaceholder("¡Haz clic para configurar the Ticket System!")
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -60,7 +62,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Ticket System!")
+                        .setPlaceholder("¡Haz clic para configurar the Ticket System!")
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -78,7 +80,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Ticket System!")
+                        .setPlaceholder("¡Haz clic para configurar the Ticket System!")
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -96,7 +98,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Ticket System!")
+                        .setPlaceholder("¡Haz clic para configurar the Ticket System!")
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -113,13 +115,11 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        client.getAuthor(
+                    .setAuthor(client.getAuthor(
                             "Ticket Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png",
-                            "https://discord.gg/milrato"
-                        )
-                    )
+                            "https://github.com/melodiabl"
+                        ))
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 let used1 = false;
                 //send the menu msg
@@ -152,14 +152,14 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -174,17 +174,17 @@ module.exports = {
                     },
                     {
                         value: "Edit Message",
-                        description: `Edit the Message when a Ticket opens`,
+                        description: `Edit the Mensaje when a Ticket opens`,
                         emoji: "🛠",
                     },
                     {
                         value: "Add Ticket Role",
-                        description: `Add a Ticket Role for managing the Tickets`,
+                        description: `Add a Ticket Rol for managing the Tickets`,
                         emoji: "😎",
                     },
                     {
                         value: "Remove Ticket Role",
-                        description: `Remove a Ticket Role from managing the Tickets`,
+                        description: `Remove a Ticket Rol from managing the Tickets`,
                         emoji: "💩",
                     },
                     {
@@ -199,12 +199,12 @@ module.exports = {
                     },
                     {
                         value: "Log Channel",
-                        description: `Define a Channel for Ticket Logs!`,
+                        description: `Define a Canal for Ticket Logs!`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Set Default Ticket Name",
-                        description: `Define a Default Ticket Channel Name!`,
+                        description: `Define a Default Ticket Canal Name!`,
                         emoji: "💬",
                     },
                     {
@@ -219,7 +219,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ticket-Setup!`,
+                        description: `Cancelar and stop the Ticket-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -246,11 +246,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        SetupNumber + " Ticket Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -281,14 +277,14 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -306,7 +302,7 @@ module.exports = {
                                 .setFooter(client.getFooter(es))
                                 .setTitle("What should be the new Closed Ticket Category?")
                                 .setDescription(
-                                    `Currently it's: \`${parentId ? "Not Setupped yet" : parent ? parent.name : `Channel not Found: ${parentId}`}\`!\nWhen closing a Ticket, it will be moved to there until it get's deleted!\n> **Send the new __PARENT ID__ now!**`
+                                    `Currently it's: \`${parentId ? "Not Setupped yet" : parent ? parent.name : `Canal not Found: ${parentId}`}\`!\nWhen closing a Ticket, it will be moved to there until it get's deleted!\n> **Send the new __PARENT ID__ now!**`
                                 );
                             message
                                 .reply({
@@ -331,7 +327,7 @@ module.exports = {
                                                     `There is no parent i can access in this Guild which has the ID ${content}`
                                                 );
                                             }
-                                            if (parent.type !== "GUILD_CATEGORY") {
+                                            if (parent.type !== ChannelType.GuildCategory) {
                                                 return message.reply(`<#${parent.id}> is not a CATEGORY/PARENT`);
                                             }
                                             client.setups.set(
@@ -351,7 +347,7 @@ module.exports = {
                                                             )
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
@@ -409,7 +405,7 @@ module.exports = {
                                                             )
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
@@ -448,7 +444,7 @@ module.exports = {
                                                             eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable8"])
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
@@ -491,7 +487,7 @@ module.exports = {
 
                                                         let button_open = new ActionRowBuilder().addComponents([
                                                             new ButtonBuilder()
-                                                                .setStyle(Discord.ButtonStyle.Success)
+                                                                .setStyle(ButtonStyle.Success)
                                                                 .setCustomId("create_a_ticket")
                                                                 .setLabel("Create a Ticket")
                                                                 .setEmoji("📨"),
@@ -569,7 +565,7 @@ module.exports = {
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `Cancelled the Operation!`.substring(0, 2000)
+                                                                        `¡Operación Cancelada!`.substring(0, 2000)
                                                                     )
                                                                     .setFooter(client.getFooter(es)),
                                                             ],
@@ -585,7 +581,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable16"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -658,7 +654,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -709,7 +705,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable26"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -768,7 +764,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable32"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -825,7 +821,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable38"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -852,17 +848,17 @@ module.exports = {
                                     },
                                     {
                                         value: "Edit Open Message",
-                                        description: `Edit the Claim-Info-Message when a Ticket opens`,
+                                        description: `Edit the Claim-Información-Mensaje when a Ticket opens`,
                                         emoji: allEmojis.msg.edit,
                                     },
                                     {
                                         value: "Edit Claim Message",
-                                        description: `Edit the Claim-Message when a Staff claims it!`,
+                                        description: `Edit the Claim-Mensaje when a Staff claims it!`,
                                         emoji: allEmojis.msg.edit,
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Ticket-Setup!`,
+                                        description: `Cancelar and stop the Ticket-Configuración!`,
                                         emoji: allEmojis.msg.cancel,
                                     },
                                 ];
@@ -891,11 +887,7 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new Discord.EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        SetupNumber + " Ticket Setup",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -930,14 +922,14 @@ module.exports = {
                                         menuselection(menu);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -971,10 +963,10 @@ module.exports = {
                                                         )
                                                         .setFooter(client.getFooter(es))
                                                         .setTitle(
-                                                            `${claimData.enabled ? "Enabled the Claim System" : "Disabled the Claim System"}`
+                                                            `${claimData.enabled ? "Activado the Claim System" : "Desactivado the Claim System"}`
                                                         )
                                                         .setDescription(
-                                                            `${claimData.enabled ? "When a User opens a Ticket, a Staff Member needs to claim it, before he can send something in there!\n> This is useful for Professionality and Information!\n> **NOTE:** Admins can always chat..." : "You now don't need to claim a Ticket anymore"}`
+                                                            `${claimData.enabled ? "When a Usuario opens a Ticket, a Staff Miembro needs to claim it, before he can send something in there!\n> This is useful for Professionality and Information!\n> **NOTE:** Admins can always chat..." : "You now don't need to claim a Ticket anymore"}`
                                                         ),
                                                 ],
                                             });
@@ -985,10 +977,10 @@ module.exports = {
                                             var rembed = new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setFooter(client.getFooter(es))
-                                                .setTitle("What should be the new Message when a User opens a Ticket?")
+                                                .setTitle("What should be the new Mensaje when a Usuario opens a Ticket?")
                                                 .setDescription(
                                                     String(
-                                                        "{user} will be replaced with a USERPING\n\n**Current Message:**\n>>> " +
+                                                        "{user} will be replaced with a USERPING\n\n**Current Mensaje:**\n>>> " +
                                                             claimData.messageOpen.substring(0, 1900)
                                                     )
                                                 );
@@ -1010,7 +1002,7 @@ module.exports = {
                                                                 collected.first().content,
                                                                 `ticketsystem${SetupNumber}.claim.messageOpen`
                                                             );
-                                                            message.reply(`Successfully set the New Message!`);
+                                                            message.reply(`Successfully set the New Mensaje!`);
                                                         })
                                                         .catch(error => {
                                                             return message.reply({
@@ -1025,7 +1017,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.wrongcolor)
                                                                         .setDescription(
-                                                                            `Cancelled the Operation!`.substring(0, 2000)
+                                                                            `¡Operación Cancelada!`.substring(0, 2000)
                                                                         )
                                                                         .setFooter(client.getFooter(es)),
                                                                 ],
@@ -1039,10 +1031,10 @@ module.exports = {
                                             var rembed = new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setFooter(client.getFooter(es))
-                                                .setTitle("What should be the new Message when a Staff claims a Ticket?")
+                                                .setTitle("What should be the new Mensaje when a Staff claims a Ticket?")
                                                 .setDescription(
                                                     String(
-                                                        "{user} will be replaced with a USERPING\n{claimer} will be replaced with a PING for WHO CLAIMED IT\n\n**Current Message:**\n>>> " +
+                                                        "{user} will be replaced with a USERPING\n{claimer} will be replaced with a PING for WHO CLAIMED IT\n\n**Current Mensaje:**\n>>> " +
                                                             claimData.messageClaim.substring(0, 1900)
                                                     )
                                                 );
@@ -1064,7 +1056,7 @@ module.exports = {
                                                                 collected.first().content,
                                                                 `ticketsystem${SetupNumber}.claim.messageClaim`
                                                             );
-                                                            message.reply(`Successfully set the New Message!`);
+                                                            message.reply(`Successfully set the New Mensaje!`);
                                                         })
                                                         .catch(error => {
                                                             return message.reply({
@@ -1079,7 +1071,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.wrongcolor)
                                                                         .setDescription(
-                                                                            `Cancelled the Operation!`.substring(0, 2000)
+                                                                            `¡Operación Cancelada!`.substring(0, 2000)
                                                                         )
                                                                         .setFooter(client.getFooter(es)),
                                                                 ],
@@ -1098,10 +1090,10 @@ module.exports = {
                             .setColor(es.color)
                             .setFooter(client.getFooter(es))
                             .setTitle(
-                                "In What Channel do you want to send Logs of this Ticket-System (When a Ticket gets DELETED)"
+                                "In What Canal do you want to send Logs of this Ticket-System (When a Ticket gets DELETED)"
                             )
                             .setDescription(
-                                `Ping the Channel / send \`no\` for disabeling Logs!\n\n*The Log will only be sent if the ticket gets __DELETED__ via the BUTTON (not the closing)*`
+                                `Ping the Canal / send \`no\` for disabeling Logs!\n\n*The Log will only be sent if the ticket gets __DELETED__ via the BUTTON (not the closing)*`
                             );
                         message
                             .reply({
@@ -1132,7 +1124,7 @@ module.exports = {
                                                 "",
                                                 `ticketsystem${SetupNumber}.ticketlogid`
                                             );
-                                            message.reply("❌ Disabled the Log, because you did not send a valid channel");
+                                            message.reply("❌ Desactivado the Log, because you did not send a valid channel");
                                         }
                                     })
                                     .catch(error => {
@@ -1143,7 +1135,7 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable38"])
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -1176,10 +1168,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

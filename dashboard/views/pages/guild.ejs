@@ -1,82 +1,602 @@
-<%- include('../includes/header', { title: guild.name + ' - Configuración', user }) %>
+<%- include('../includes/header', {
+  title: guild.name + ' — Configuración',
+  user,
+  activePage: 'settings',
+  breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name }]
+}) %>
 
-<div class="container">
-  <div class="guild-header">
-    <% if (guild.icon) { %><img src="<%= guild.icon %>" class="guild-icon-lg"><% } %>
-    <div>
-      <h2><%= guild.name %></h2>
-      <span class="badge"><%= guild.memberCount %> miembros</span>
-      <% if (typeof saved !== 'undefined') { %><span class="badge success">✅ Guardado</span><% } %>
+<!-- Saved/error alert -->
+<% if (typeof saved !== 'undefined' && saved) { %>
+  <div class="alert alert-success" id="saved-alert" style="margin-bottom:14px">
+    <i class="fas fa-check-circle"></i> Configuración guardada correctamente.
+  </div>
+<% } %>
+<% if (typeof error !== 'undefined' && error) { %>
+  <div class="alert alert-error" style="margin-bottom:14px">
+    <i class="fas fa-exclamation-circle"></i> Error al guardar: <%= error %>
+  </div>
+<% } %>
+
+<!-- Guild header -->
+<div class="guild-hd">
+  <div class="gh-icon">
+    <% if (guild.icon) { %>
+      <img src="<%= guild.icon %>" alt="<%= guild.name %>">
+    <% } else { %><%= guild.name ? guild.name[0] : '?' %><% } %>
+  </div>
+  <div>
+    <div class="gh-name"><%= guild.name %></div>
+    <div class="gh-meta">
+      <span><i class="fas fa-users"></i> <%= (guild.memberCount||0).toLocaleString() %> miembros</span>
+      <span><i class="fas fa-hashtag"></i> <%= channels.length %> canales</span>
+      <span><i class="fas fa-tag"></i> <%= roles.length %> roles</span>
     </div>
   </div>
-
-  <form method="POST" action="/dashboard/<%= guild.id %>">
-    <!-- General -->
-    <div class="settings-section">
-      <h3><i class="fas fa-cog"></i> General</h3>
-      <div class="form-row">
-        <label>Prefijo</label>
-        <input type="text" name="prefix" value="<%= settings.prefix || '!' %>" maxlength="5" class="form-input short">
-      </div>
-    </div>
-
-    <!-- Moderation -->
-    <div class="settings-section">
-      <h3><i class="fas fa-shield-alt"></i> Moderación</h3>
-      <div class="form-row">
-        <label>Canal de logs</label>
-        <select name="modLogChannel" class="form-select">
-          <option value="">-- Desactivado --</option>
-          <% channels.forEach(ch => { %>
-            <option value="<%= ch.id %>" <%= settings.modLogChannel === ch.id ? 'selected' : '' %>>#<%= ch.name %></option>
-          <% }) %>
-        </select>
-      </div>
-      <div class="form-row toggles">
-        <label class="toggle-label">
-          <input type="checkbox" name="antiSpam" value="on" <%= settings.antiSpam ? 'checked' : '' %>>
-          <span>Anti-Spam</span>
-        </label>
-        <label class="toggle-label">
-          <input type="checkbox" name="antiLinks" value="on" <%= settings.antiLinks ? 'checked' : '' %>>
-          <span>Anti-Links</span>
-        </label>
-        <label class="toggle-label">
-          <input type="checkbox" name="antiCaps" value="on" <%= settings.antiCaps ? 'checked' : '' %>>
-          <span>Anti-Caps</span>
-        </label>
-      </div>
-    </div>
-
-    <!-- Welcome/Leave -->
-    <div class="settings-section">
-      <h3><i class="fas fa-door-open"></i> Bienvenida / Despedida</h3>
-      <div class="form-row">
-        <label>Canal de bienvenida</label>
-        <select name="welcomeChannel" class="form-select">
-          <option value="">-- Desactivado --</option>
-          <% channels.forEach(ch => { %>
-            <option value="<%= ch.id %>" <%= settings.welcomeChannel === ch.id ? 'selected' : '' %>>#<%= ch.name %></option>
-          <% }) %>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Mensaje de bienvenida <small>({user} = mención, {server} = nombre del servidor)</small></label>
-        <input type="text" name="welcomeMessage" value="<%= settings.welcomeMessage || '' %>" class="form-input" placeholder="¡Bienvenido {user} a {server}!">
-      </div>
-      <div class="form-row">
-        <label>Canal de despedida</label>
-        <select name="leaveChannel" class="form-select">
-          <option value="">-- Desactivado --</option>
-          <% channels.forEach(ch => { %>
-            <option value="<%= ch.id %>" <%= settings.leaveChannel === ch.id ? 'selected' : '' %>>#<%= ch.name %></option>
-          <% }) %>
-        </select>
-      </div>
-    </div>
-
-    <button type="submit" class="btn-save"><i class="fas fa-save"></i> Guardar Cambios</button>
-  </form>
+  <div class="gh-actions" style="display:flex;gap:8px">
+    <a href="/music/<%= guild.id %>" class="btn btn-p btn-sm"><i class="fas fa-music"></i> Música</a>
+    <a href="/stats/<%= guild.id %>" class="btn btn-sec btn-sm"><i class="fas fa-chart-line"></i> Estadísticas</a>
+    <a href="/dashboard" class="btn btn-ghost btn-sm"><i class="fas fa-arrow-left"></i> Volver</a>
+  </div>
 </div>
+
+<!-- Settings layout -->
+<form method="POST" action="/dashboard/<%= guild.id %>" id="settings-form">
+<input type="hidden" name="_activeTab" id="active-tab-input" value="general">
+<div class="settings-layout">
+
+  <!-- Sidebar tabs -->
+  <nav class="settings-nav" id="settings-nav">
+    <button type="button" class="stab active" data-tab="general"><i class="fas fa-cog"></i> General</button>
+    <button type="button" class="stab" data-tab="moderation"><i class="fas fa-shield-halved"></i> Moderación</button>
+    <button type="button" class="stab" data-tab="welcome"><i class="fas fa-door-open"></i> Bienvenida</button>
+    <button type="button" class="stab" data-tab="music"><i class="fas fa-music"></i> Música</button>
+    <button type="button" class="stab" data-tab="levels"><i class="fas fa-chart-line"></i> Niveles</button>
+    <button type="button" class="stab" data-tab="tickets"><i class="fas fa-ticket"></i> Tickets</button>
+    <div class="stab-sep"></div>
+    <button type="button" class="stab" data-tab="logs"><i class="fas fa-scroll"></i> Logs</button>
+    <button type="button" class="stab" data-tab="invites"><i class="fas fa-user-plus"></i> Invitaciones</button>
+    <button type="button" class="stab" data-tab="social"><i class="fas fa-rss"></i> Social</button>
+    <button type="button" class="stab" data-tab="misc"><i class="fas fa-sliders"></i> Misc</button>
+  </nav>
+
+  <!-- Tab panels -->
+  <div class="settings-content" id="settings-content">
+
+    <!-- ── GENERAL ── -->
+    <div class="section-panel active" id="tab-general">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-p"><i class="fas fa-cog"></i></div>
+          <div><div class="card-title">Configuración general</div><div class="card-desc">Opciones básicas del bot en este servidor</div></div>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Prefijo de comandos</label>
+              <span class="form-help">Usado para comandos legacy (texto)</span>
+              <input type="text" name="prefix" value="<%= settings.prefix || '!' %>" maxlength="5" class="form-input sm">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Idioma</label>
+              <span class="form-help">Idioma del bot en este servidor</span>
+              <select name="language" class="form-select">
+                <option value="es" <%= (settings.language||'es')==='es'?'selected':'' %>>🇪🇸 Español</option>
+                <option value="en" <%= settings.language==='en'?'selected':'' %>>🇺🇸 English</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Canal de cumpleaños</label>
+            <span class="form-help">El bot anunciará cumpleaños automáticamente aquí</span>
+            <select name="birthdayChannel" class="form-select">
+              <option value="">— Desactivado —</option>
+              <% channels.forEach(ch => { %>
+                <option value="<%= ch.id %>" <%= settings.birthdayChannel===ch.id?'selected':'' %>>#<%= ch.name %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Canal de conteo de miembros</label>
+            <span class="form-help">Canal de voz que muestra el total de miembros</span>
+            <select name="memberCount" class="form-select">
+              <option value="">— Desactivado —</option>
+              <% channels.forEach(ch => { %>
+                <option value="<%= ch.id %>" <%= settings.memberCount===ch.id?'selected':'' %>>#<%= ch.name %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-yellow"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <div><div class="card-title">Automatización</div><div class="card-desc">Respuestas automáticas del bot</div></div>
+        </div>
+        <div class="card-body">
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <div class="ti-info">
+                <span class="ti-label">Auto-embed de links</span>
+                <span class="ti-desc">Genera previews de URLs compartidas en el chat</span>
+              </div>
+              <label class="toggle"><input type="checkbox" name="autoEmbed" value="on" <%= settings.autoEmbed?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+            <label class="toggle-item">
+              <div class="ti-info">
+                <span class="ti-label">Auto-meme</span>
+                <span class="ti-desc">Publica memes aleatoriamente en canales configurados</span>
+              </div>
+              <label class="toggle"><input type="checkbox" name="autoMeme" value="on" <%= settings.autoMeme?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MODERACIÓN ── -->
+    <div class="section-panel" id="tab-moderation">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-red"><i class="fas fa-shield-halved"></i></div>
+          <div><div class="card-title">Logs de moderación</div><div class="card-desc">Canal donde se registran acciones de moderación</div></div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Canal de logs</label>
+            <select name="modLogChannel" class="form-select">
+              <option value="">— Desactivado —</option>
+              <% channels.forEach(ch => { %>
+                <option value="<%= ch.id %>" <%= (settings.logChannels?.moderation||settings.modLogChannel)===ch.id?'selected':'' %>>#<%= ch.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rol de silenciado (mute)</label>
+            <select name="muteRole" class="form-select">
+              <option value="">— Ninguno —</option>
+              <% roles.forEach(r => { %>
+                <option value="<%= r.id %>" <%= (settings.mute?.roleId||settings.muteRole)===r.id?'selected':'' %> style="color:<%= r.color||'inherit' %>"><%= r.name %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-red"><i class="fas fa-robot"></i></div>
+          <div><div class="card-title">AutoMod — Básico</div><div class="card-desc">Filtros automáticos de contenido</div></div>
+        </div>
+        <div class="card-body">
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <div class="ti-info"><span class="ti-label">Anti-Spam</span><span class="ti-desc">Detecta y sanciona mensajes repetitivos o flood</span></div>
+              <label class="toggle"><input type="checkbox" name="antiSpam" value="on" <%= (settings.autowarn?.antispam??settings.antiSpam)?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+            <label class="toggle-item">
+              <div class="ti-info"><span class="ti-label">Anti-Links</span><span class="ti-desc">Elimina invitaciones de Discord y URLs externas</span></div>
+              <label class="toggle"><input type="checkbox" name="antiLinks" value="on" <%= (settings.autowarn?.antilinks??settings.antiLinks)?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+            <label class="toggle-item">
+              <div class="ti-info"><span class="ti-label">Anti-Mayúsculas</span><span class="ti-desc">Bloquea mensajes con exceso de mayúsculas (CAPS)</span></div>
+              <label class="toggle"><input type="checkbox" name="antiCaps" value="on" <%= (settings.autowarn?.anticaps??settings.antiCaps)?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-red"><i class="fas fa-shield-virus"></i></div>
+          <div><div class="card-title">AutoMod — Avanzado</div><div class="card-desc">Protecciones adicionales del servidor</div></div>
+        </div>
+        <div class="card-body">
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <div class="ti-info"><span class="ti-label">Anti-Discord</span><span class="ti-desc">Bloquea invitaciones a otros servidores de Discord</span></div>
+              <label class="toggle"><input type="checkbox" name="antiDiscord" value="on" id="chk-antidiscord" <%= (settings.antidiscord?.enabled??settings.antiDiscord)?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+            <div class="form-group" id="anti-discord-opts" style="<%= (settings.antidiscord?.enabled??settings.antiDiscord)?'':'display:none' %>">
+              <label class="form-label">Silenciar tras X infracciones</label>
+              <input type="number" name="antiDiscordMute" class="form-input" min="1" max="10" value="<%= settings.antidiscord?.mute_amount ?? 2 %>" style="width:90px">
+            </div>
+            <label class="toggle-item">
+              <div class="ti-info"><span class="ti-label">Anti-Menciones</span><span class="ti-desc">Limita las menciones masivas en un mensaje</span></div>
+              <label class="toggle"><input type="checkbox" name="antiMention" value="on" id="chk-antimention" <%= (settings.antimention?.enabled??settings.antiMention)?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+            <div class="form-group" id="anti-mention-opts" style="<%= (settings.antimention?.enabled??settings.antiMention)?'':'display:none' %>">
+              <label class="form-label">Máximo de menciones por mensaje</label>
+              <input type="number" name="antiMentionLimit" class="form-input" min="2" max="20" value="<%= settings.antimention?.limit ?? 5 %>" style="width:90px">
+            </div>
+            <label class="toggle-item">
+              <div class="ti-info"><span class="ti-label">Anti-Selfbot</span><span class="ti-desc">Detecta y sanciona selfbots automáticamente</span></div>
+              <label class="toggle"><input type="checkbox" name="antiSelfbot" value="on" <%= (settings.antiselfbot?.enabled??settings.antiSelfbot)?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BIENVENIDA ── -->
+    <div class="section-panel" id="tab-welcome">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-green"><i class="fas fa-door-open"></i></div>
+          <div><div class="card-title">Mensaje de bienvenida</div><div class="card-desc">Cuando alguien entra al servidor</div></div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Canal de bienvenida</label>
+            <select name="welcomeChannel" class="form-select">
+              <option value="">— Desactivado —</option>
+              <% channels.forEach(ch => { %>
+                <option value="<%= ch.id %>" <%= (settings.welcome?.channel||settings.welcomeChannel)===ch.id?'selected':'' %>>#<%= ch.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mensaje de bienvenida</label>
+            <span class="form-help">Variables: <code class="font-mono">{user}</code> mención · <code class="font-mono">{server}</code> nombre del servidor · <code class="font-mono">{count}</code> nº de miembros</span>
+            <textarea name="welcomeMessage" class="form-textarea" placeholder="¡Bienvenido {user} a {server}! 🎉"><%= settings.welcome?.msg||settings.welcome?.message||settings.welcomeMessage||'' %></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-red"><i class="fas fa-door-closed"></i></div>
+          <div><div class="card-title">Mensaje de despedida</div><div class="card-desc">Cuando alguien sale del servidor</div></div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Canal de despedida</label>
+            <select name="leaveChannel" class="form-select">
+              <option value="">— Desactivado —</option>
+              <% channels.forEach(ch => { %>
+                <option value="<%= ch.id %>" <%= (settings.leave?.channel||settings.leaveChannel)===ch.id?'selected':'' %>>#<%= ch.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mensaje de despedida</label>
+            <span class="form-help">Variables: <code class="font-mono">{user}</code> · <code class="font-mono">{server}</code></span>
+            <textarea name="leaveMessage" class="form-textarea" placeholder="Adiós {user}, ¡esperamos que vuelvas! 👋"><%= settings.leave?.msg||settings.leave?.message||settings.leaveMessage||'' %></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MÚSICA ── -->
+    <div class="section-panel" id="tab-music">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-p"><i class="fas fa-music"></i></div>
+          <div><div class="card-title">Sistema de música</div><div class="card-desc">Lavalink 4 · Spotify · YouTube</div></div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Canal de música fijo</label>
+            <span class="form-help">El bot solo aceptará comandos de música en este canal</span>
+            <select name="musicChannel" class="form-select">
+              <option value="">— Cualquier canal —</option>
+              <% channels.forEach(ch => { %>
+                <option value="<%= ch.id %>" <%= settings.musicChannel===ch.id?'selected':'' %>>#<%= ch.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Volumen por defecto</label>
+            <span class="form-help">Valor entre 1 y 200 (100 = normal)</span>
+            <input type="number" name="defaultVolume" value="<%= settings.defaultVolume || 100 %>" min="1" max="200" class="form-input sm">
+          </div>
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <div class="ti-info">
+                <span class="ti-label">Autoplay por defecto</span>
+                <span class="ti-desc">Reproducir pistas similares cuando la cola termina</span>
+              </div>
+              <label class="toggle"><input type="checkbox" name="autoplay" value="on" <%= settings.autoplay?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-pink"><i class="fas fa-user-shield"></i></div>
+          <div><div class="card-title">Rol de DJ</div><div class="card-desc">Solo este rol puede controlar la música</div></div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Rol de DJ</label>
+            <span class="form-help">Sin rol configurado = cualquier usuario puede usar la música</span>
+            <select name="djRole" class="form-select">
+              <option value="">— Sin restricción —</option>
+              <% roles.forEach(r => { %><option value="<%= r.id %>" <%= (settings.djroles?.[0]||settings.djRole)===r.id?'selected':'' %>><%= r.name %></option><% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info">
+        <i class="fas fa-circle-info"></i>
+        <span>Usa <code class="font-mono">/247</code> para modo 24/7 · <code class="font-mono">/autoplay</code> para autoplay · <code class="font-mono">/filter</code> para 13 filtros de audio.</span>
+      </div>
+    </div>
+
+    <!-- ── NIVELES ── -->
+    <div class="section-panel" id="tab-levels">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-green"><i class="fas fa-chart-line"></i></div>
+          <div><div class="card-title">Sistema de niveles XP</div><div class="card-desc">Recompensas por actividad en el servidor</div></div>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-info" style="margin:0 0 4px">
+            <i class="fas fa-circle-info"></i>
+            <span>El sistema XP se configura con <code class="font-mono">!setup-ranking</code> · El canal y las recompensas de rol se asignan desde Discord.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TICKETS ── -->
+    <div class="section-panel" id="tab-tickets">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-purple"><i class="fas fa-ticket"></i></div>
+          <div><div class="card-title">Sistema de tickets</div><div class="card-desc">Soporte y atención al usuario</div></div>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-info" style="margin:0 0 4px">
+            <i class="fas fa-circle-info"></i>
+            <span>El sistema de tickets se configura con <code class="font-mono">/setupticket</code> · La categoría, mensajes y permisos se asignan desde Discord.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LOGS ── -->
+    <div class="section-panel" id="tab-logs">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-p"><i class="fas fa-scroll"></i></div>
+          <div><div class="card-title">Canales de logs</div><div class="card-desc">Cada categoría puede tener su propio canal</div></div>
+        </div>
+        <div class="card-body">
+          <% const lc = settings.logChannels || {} %>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"><i class="fas fa-envelope" style="margin-right:6px;color:var(--p)"></i>Mensajes</label>
+              <span class="form-help">Edits, deletes, purges</span>
+              <select name="log_messages" class="form-select">
+                <option value="">— Desactivado —</option>
+                <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.messages||lc.get?.('messages')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label"><i class="fas fa-user-plus" style="margin-right:6px;color:var(--green)"></i>Miembros</label>
+              <span class="form-help">Entradas, salidas, cambios de rol</span>
+              <select name="log_members" class="form-select">
+                <option value="">— Desactivado —</option>
+                <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.members||lc.get?.('members')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"><i class="fas fa-gavel" style="margin-right:6px;color:var(--red)"></i>Moderación</label>
+              <span class="form-help">Bans, kicks, warns, mutes</span>
+              <select name="log_moderation" class="form-select">
+                <option value="">— Desactivado —</option>
+                <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.moderation||lc.get?.('moderation')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label"><i class="fas fa-microphone" style="margin-right:6px;color:var(--purple)"></i>Voz</label>
+              <span class="form-help">Entradas/salidas de canales de voz</span>
+              <select name="log_voice" class="form-select">
+                <option value="">— Desactivado —</option>
+                <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.voice||lc.get?.('voice')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><i class="fas fa-server" style="margin-right:6px;color:var(--yellow)"></i>Servidor</label>
+            <span class="form-help">Cambios de roles, canales, configuración del servidor</span>
+            <select name="log_server" class="form-select">
+              <option value="">— Desactivado —</option>
+              <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.server||lc.get?.('server')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INVITACIONES ── -->
+    <div class="section-panel" id="tab-invites">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-green"><i class="fas fa-user-plus"></i></div>
+          <div><div class="card-title">Tracking de invitaciones</div><div class="card-desc">Top de miembros que más han invitado al servidor</div></div>
+          <button type="button" class="btn btn-ghost" style="margin-left:auto;font-size:12px" onclick="loadInviteLeaderboard()"><i class="fas fa-rotate"></i> Actualizar</button>
+        </div>
+        <div class="card-body" id="invite-lb-body">
+          <div class="text-muted" style="text-align:center;padding:20px 0;font-size:13px">
+            <i class="fas fa-spinner fa-spin" style="margin-right:8px"></i>Cargando...
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info">
+        <i class="fas fa-circle-info"></i>
+        <span>Los comandos <code class="font-mono">/invites</code> y <code class="font-mono">/inviteleaderboard</code> muestran esta información desde Discord.</span>
+      </div>
+    </div>
+
+    <!-- ── REDES SOCIALES ── -->
+    <div class="section-panel" id="tab-social">
+      <div class="alert alert-info" style="margin-bottom:4px">
+        <i class="fas fa-circle-info"></i>
+        <span>Los logs de redes sociales (YouTube, TikTok, Twitter) se configuran con los comandos del bot directamente desde Discord.</span>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-pink"><i class="fas fa-rss"></i></div>
+          <div><div class="card-title">Canales de notificación</div><div class="card-desc">Configura desde Discord con <code class="font-mono">/config social</code></div></div>
+        </div>
+        <div class="card-body">
+          <% const social = settings.socialLog instanceof Map ? Object.fromEntries(settings.socialLog) : (settings.socialLog || {}) %>
+          <% const socialPlatforms = [
+            { key: 'youtube', icon: 'fab fa-youtube', label: 'YouTube', color: '#ff4444' },
+            { key: 'tiktok',  icon: 'fab fa-tiktok',  label: 'TikTok',  color: '#fff' },
+            { key: 'twitter', icon: 'fab fa-x-twitter',label: 'Twitter/X', color: '#1DA1F2' },
+            { key: 'twitch',  icon: 'fab fa-twitch',  label: 'Twitch',  color: '#9146FF' },
+          ] %>
+          <% socialPlatforms.forEach(p => { %>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px;margin-bottom:6px">
+              <span style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px"><i class="<%= p.icon %>" style="color:<%= p.color %>"></i><%= p.label %></span>
+              <% const ch = social[p.key] ? channels.find(c=>c.id===social[p.key]) : null %>
+              <span style="font-size:12px;color:var(--muted)"><%= ch ? '#'+ch.name : 'No configurado' %></span>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MISC ── -->
+    <div class="section-panel" id="tab-misc">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-purple"><i class="fas fa-sliders"></i></div>
+          <div><div class="card-title">Opciones adicionales</div></div>
+        </div>
+        <div class="card-body">
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <div class="ti-info">
+                <span class="ti-label">Auto-NSFW</span>
+                <span class="ti-desc">Respuestas NSFW automáticas (solo en canales marcados +18)</span>
+              </div>
+              <label class="toggle"><input type="checkbox" name="autoNsfwEnabled" value="on" <%= settings.autoNsfw?'checked':'' %>><span class="tslider"></span></label>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-ico ico-red" style="background:rgba(237,66,69,.12)"><i class="fas fa-triangle-exclamation"></i></div>
+          <div><div class="card-title" style="color:var(--red)">Zona de peligro</div><div class="card-desc">Acciones irreversibles</div></div>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Las siguientes acciones se ejecutan directamente con comandos en Discord:<br>
+            <code class="font-mono">/purge</code> · <code class="font-mono">/backup create</code> · <code class="font-mono">/clearwarns</code></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end settings-content -->
+</div><!-- end settings-layout -->
+</form>
+
+<!-- Save bar -->
+<div class="save-bar" id="save-bar">
+  <span class="sb-msg"><strong>Cambios sin guardar</strong> — Recuerda guardar antes de salir.</span>
+  <button type="button" class="btn btn-ghost btn-sm" id="save-discard">Descartar</button>
+  <button type="submit" form="settings-form" class="btn btn-p btn-sm" id="save-btn">
+    <i class="fas fa-save"></i> Guardar cambios
+  </button>
+</div>
+
+<script>
+// Tab navigation
+const tabInput = document.getElementById('active-tab-input')
+document.querySelectorAll('.stab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab
+    document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'))
+    document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'))
+    btn.classList.add('active')
+    const panel = document.getElementById('tab-' + tab)
+    if (panel) panel.classList.add('active')
+    if (tabInput) tabInput.value = tab
+    history.replaceState(null, '', location.pathname + '?tab=' + tab)
+  })
+})
+// Restore tab from URL
+const urlTab = new URLSearchParams(location.search).get('tab')
+if (urlTab) {
+  const btn = document.querySelector(`.stab[data-tab="${urlTab}"]`)
+  if (btn) btn.click()
+}
+
+// Track changes → show save bar
+const form = document.getElementById('settings-form')
+const saveBar = document.getElementById('save-bar')
+let dirty = false
+form.addEventListener('change', () => { if (!dirty) { dirty = true; saveBar.classList.add('show') } })
+form.addEventListener('input', () => { if (!dirty) { dirty = true; saveBar.classList.add('show') } })
+document.getElementById('save-discard')?.addEventListener('click', () => { dirty = false; saveBar.classList.remove('show'); form.reset() })
+form.addEventListener('submit', () => { dirty = false; saveBar.classList.remove('show') })
+
+// Auto-hide saved alert
+const savedAlert = document.getElementById('saved-alert')
+if (savedAlert) setTimeout(() => savedAlert.style.opacity = '0', 3500)
+
+// AutoMod advanced — show/hide sub-options
+const chkDiscord  = document.getElementById('chk-antidiscord')
+const chkMention  = document.getElementById('chk-antimention')
+const optsDiscord = document.getElementById('anti-discord-opts')
+const optsMention = document.getElementById('anti-mention-opts')
+if (chkDiscord && optsDiscord) {
+  chkDiscord.addEventListener('change', () => { optsDiscord.style.display = chkDiscord.checked ? '' : 'none' })
+}
+if (chkMention && optsMention) {
+  chkMention.addEventListener('change', () => { optsMention.style.display = chkMention.checked ? '' : 'none' })
+}
+
+// Invite leaderboard
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+function loadInviteLeaderboard() {
+  const body = document.getElementById('invite-lb-body')
+  if (!body) return
+  body.innerHTML = '<div class="text-muted" style="text-align:center;padding:20px 0;font-size:13px"><i class="fas fa-spinner fa-spin" style="margin-right:8px"></i>Cargando...</div>'
+  fetch(`/api/invites/<%= guild.id %>`)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      if (!d?.leaderboard?.length) {
+        body.innerHTML = '<div class="text-muted" style="text-align:center;padding:20px 0;font-size:13px"><i class="fas fa-user-plus" style="margin-right:8px;opacity:.4"></i>Sin datos de invitaciones todavía</div>'
+        return
+      }
+      const medals = ['🥇','🥈','🥉']
+      body.innerHTML = '<div style="display:flex;flex-direction:column;gap:6px">' +
+        d.leaderboard.map((u, i) => `
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surf2);border:1px solid var(--border);border-radius:8px">
+            <span style="font-size:18px;width:28px;text-align:center">${medals[i]||`#${i+1}`}</span>
+            ${u.avatar ? `<img src="${esc(u.avatar)}" style="width:32px;height:32px;border-radius:50%;object-fit:cover">` : '<div style="width:32px;height:32px;border-radius:50%;background:var(--surf3)"></div>'}
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:700;color:#fff">${esc(u.username)}</div>
+              <div style="font-size:11px;color:var(--muted)">${u.total} totales · ${u.fake} falsas · ${u.leaves} bajas</div>
+            </div>
+            <span style="font-size:15px;font-weight:800;color:var(--green)">${u.invites}</span>
+          </div>`).join('') + '</div>'
+    }).catch(() => {
+      body.innerHTML = '<div class="text-muted" style="text-align:center;padding:20px 0;font-size:13px">Error al cargar</div>'
+    })
+}
+
+// Load leaderboard when tab is activated
+document.querySelectorAll('.stab[data-tab="invites"]').forEach(btn => {
+  btn.addEventListener('click', () => { setTimeout(loadInviteLeaderboard, 100) })
+})
+// If invites tab is active on load
+if (new URLSearchParams(location.search).get('tab') === 'invites') loadInviteLeaderboard()
+</script>
 
 <%- include('../includes/footer') %>

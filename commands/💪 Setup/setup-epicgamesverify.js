@@ -1,4 +1,6 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -11,9 +13,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupepicgamesverify", "epicgamesverify-setup", "epicgamesverifysetup"],
     cooldown: 5,
-    usage: "setup-epicgamesverify  -->  Follow the Steps",
-    description: "Setup an Epic Games Verification System for your Server to Host events and play better together!",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-epicgamesverify --> Sigue los Pasos",
+    description: "Configura un sistema de verificación de Epic Games para tu servidor y organiza eventos y juega mejor juntos!",
+    memberpermissions: ['Administrador'],
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -24,12 +26,12 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Enable Verification",
-                        description: `Define the Channel for the Verification Process`,
+                        description: `Define the Canal for the Verification Process`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
                         value: "Enable Log",
-                        description: `Define the Command Log Channel`,
+                        description: `Define the Comando Log Canal`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
@@ -39,7 +41,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Setup!`,
+                        description: `Cancelar and stop the Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -48,7 +50,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Epic Games Verify")
+                    .setPlaceholder("¡Haz clic para configurar the Epic Games Verify")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -64,11 +66,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Epic Games Verify Setup",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/882px-Epic_Games_logo.svg.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Epic Games Verify Setup", iconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/882px-Epic_Games_logo.svg.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -92,14 +90,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -135,7 +133,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     if (message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first()) {
                                         var channel = message.mentions.channels
                                             .filter(ch => ch.guild.id == message.guild.id)
@@ -145,20 +143,20 @@ module.exports = {
                                             embeds: [
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setFooter({ text: message.guild.name + " | Powered by: discord.gg/milrato",
-                                                        iconURL: message.guild.iconURL({ dynamic: true })
+                                                    .setFooter({ text: message.guild.name + " | Powered by: github.com/melodiabl",
+                                                        iconURL: message.guild.iconURL()
                                                     })
-                                                    .setThumbnail(es.thumb ? message.guild.iconURL({ dynamic: true }) : null)
+                                                    .setThumbnail(es.thumb ? message.guild.iconURL() : undefined)
                                                     .setTitle(`Click the Button to Verify and Link your Epic Games Account`)
                                                     .setDescription(
-                                                        `If you click the Button you can verify your Epic Games account to this Server!\nYou can click it again to change your Account details!`
+                                                        `If you click the Button you can verify your Epic Games account to this Servidor!\nYou can click it again to change your Account details!`
                                                     ),
                                             ],
                                             components: [
                                                 new ActionRowBuilder().addComponents([
                                                     new ButtonBuilder()
                                                         .setCustomId("epicgamesverify")
-                                                        .setStyle(Discord.ButtonStyle.Primary)
+                                                        .setStyle(ButtonStyle.Primary)
                                                         .setLabel("Verify")
                                                         .setEmoji("✋"),
                                                 ]),
@@ -170,10 +168,10 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setTitle("Enabled the Verification System!")
+                                                    .setTitle("Activado the Verification System!")
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `People can now verify their Epic Games Account in <#${channel.id}>\n> If wished, you can edit the Embed in there by running the \`${prefix}editembed\` Command!`.substring(
+                                                        `People can now verify their Epic Games Account in <#${channel.id}>\n> If wished, you can edit the Embed in there by running the \`${prefix}editembed\` Comando!`.substring(
                                                             0,
                                                             2048
                                                         )
@@ -182,7 +180,7 @@ module.exports = {
                                             ],
                                         });
                                     }
-                                    return message.reply("NO CHANNEL PINGED");
+                                    return message.reply("NO SE MENCIONÓ NINGÚN CANAL");
                                 })
                                 .catch(e => {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -193,7 +191,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -223,7 +221,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     if (message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first()) {
                                         client.epicgamesDB.set(
                                             message.guild.id,
@@ -234,7 +232,7 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setTitle("Enabled the Log")
+                                                    .setTitle("Activado the Log")
                                                     .setColor(es.color)
                                                     .setDescription(
                                                         `I will now log all Actions in <#${message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first().id}>`.substring(
@@ -246,7 +244,7 @@ module.exports = {
                                             ],
                                         });
                                     }
-                                    return message.reply("NO CHANNEL PINGED");
+                                    return message.reply("NO SE MENCIONÓ NINGÚN CANAL");
                                 })
                                 .catch(e => {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -257,7 +255,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -270,7 +268,7 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Disabled the Log Channel")
+                                        .setTitle("Desactivado the Log Canal")
                                         .setColor(es.color)
                                         .setFooter(client.getFooter(es)),
                                 ],
@@ -295,10 +293,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

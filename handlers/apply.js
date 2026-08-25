@@ -5,44 +5,44 @@ const config = require(`../botconfig/config.json`);
 const Discord = require(`discord.js`);
 const antimap = new Map();
 const cooldown = new Set();
-const { ButtonBuilder, ActionRowBuilder, Permissions } = require("discord.js");
+const { ButtonBuilder, ActionRowBuilder, PermissionFlagsBits, ButtonStyle } = require("discord.js");
 
 const Buttons = {
-    acceptbutton: new ButtonBuilder().setStyle(Discord.ButtonStyle.Success).setEmoji(`✅`).setCustomId(`Apply_accept`).setLabel(`Accept`),
-    declinebutton: new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setEmoji(`❌`).setCustomId(`Apply_deny`).setLabel(`Decline`),
+    acceptbutton: new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(`✅`).setCustomId(`Apply_accept`).setLabel(`Accept`),
+    declinebutton: new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(`❌`).setCustomId(`Apply_deny`).setLabel(`Decline`),
     ticketbutton: new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Secondary)
+        .setStyle(ButtonStyle.Secondary)
         .setEmoji(`🎟️`)
         .setCustomId(`Apply_ticket`)
         .setLabel(`Ask Question`),
-    emoji1button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`1️⃣`).setCustomId(`Apply_1`),
-    emoji2button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`2️⃣`).setCustomId(`Apply_2`),
-    emoji3button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`3️⃣`).setCustomId(`Apply_3`),
-    emoji4button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`4️⃣`).setCustomId(`Apply_4`),
-    emoji5button: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`5️⃣`).setCustomId(`Apply_5`),
+    emoji1button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`1️⃣`).setCustomId(`Apply_1`),
+    emoji2button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`2️⃣`).setCustomId(`Apply_2`),
+    emoji3button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`3️⃣`).setCustomId(`Apply_3`),
+    emoji4button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`4️⃣`).setCustomId(`Apply_4`),
+    emoji5button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`5️⃣`).setCustomId(`Apply_5`),
     acceptbutton_d: new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Success)
+        .setStyle(ButtonStyle.Success)
         .setEmoji(`✅`)
         .setCustomId(`Apply_accept`)
         .setLabel(`Accept`)
         .setDisabled(true),
     declinebutton_d: new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Danger)
+        .setStyle(ButtonStyle.Danger)
         .setEmoji(`❌`)
         .setCustomId(`Apply_deny`)
         .setLabel(`Decline`)
         .setDisabled(true),
     ticketbutton_d: new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Secondary)
+        .setStyle(ButtonStyle.Secondary)
         .setEmoji(`🎟️`)
         .setCustomId(`Apply_ticket`)
         .setLabel(`Ask Question`)
         .setDisabled(true),
-    emoji1button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`1️⃣`).setCustomId(`Apply_1`).setDisabled(true),
-    emoji2button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`2️⃣`).setCustomId(`Apply_2`).setDisabled(true),
-    emoji3button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`3️⃣`).setCustomId(`Apply_3`).setDisabled(true),
-    emoji4button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`4️⃣`).setCustomId(`Apply_4`).setDisabled(true),
-    emoji5button_d: new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setEmoji(`5️⃣`).setCustomId(`Apply_5`).setDisabled(true),
+    emoji1button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`1️⃣`).setCustomId(`Apply_1`).setDisabled(true),
+    emoji2button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`2️⃣`).setCustomId(`Apply_2`).setDisabled(true),
+    emoji3button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`3️⃣`).setCustomId(`Apply_3`).setDisabled(true),
+    emoji4button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`4️⃣`).setCustomId(`Apply_4`).setDisabled(true),
+    emoji5button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`5️⃣`).setCustomId(`Apply_5`).setDisabled(true),
 };
 //Start the module
 module.exports = client => {
@@ -106,10 +106,7 @@ module.exports = client => {
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable1`]))
-                            .addField(
-                                eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variablex_2`]),
-                                eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable2`])
-                            ),
+                            .addFields({ name: eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variablex_2`]), value: eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable2`]) }),
                     ],
                     ephemeral: true,
                 });
@@ -322,15 +319,13 @@ module.exports = client => {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable13`])) //${user.tag} -
+                                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable13`])) //${user.username} -
                                         .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable14`]))
                                         .setFooter({ text: originaluser.id,
-                                            iconURL: originaluser.displayAvatarURL({ dynamic: true })
+                                            iconURL: originaluser.displayAvatarURL()
                                         })
                                         .setThumbnail(
-                                            originaluser.displayAvatarURL({
-                                                dynamic: true,
-                                            })
+                                            originaluser.displayAvatarURL()
                                         )
                                         .setTimestamp();
 
@@ -340,10 +335,7 @@ module.exports = client => {
                                             let qu = Object.values(Questions[i]);
                                             if (qu.length > 100)
                                                 qu = String(Object.values(Questions[i])).substr(0, 100) + ` ...`;
-                                            embed.addField(
-                                                (`**` + Object.keys(Questions[i]) + `. |** ` + qu).substr(0, 256),
-                                                `>>> ` + String(answers[i]).substr(0, 1000)
-                                            );
+                                            embed.addFields({ name: (`**` + Object.keys(Questions[i]) + `. |** ` + qu).substr(0, 256), value: `>>> ` + String(answers[i]).substr(0, 1000) });
                                         } catch (e) {
                                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                             /* */
@@ -369,7 +361,7 @@ module.exports = client => {
                                                 : null
                                         )
                                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable15`]))
-                                        .addField(`\u200b`, `**❯** Go Back to the Channel ${originalchannel}`)
+                                        .addFields({ name: `\u200b`, value: `**❯** Go Back to the Channel ${originalchannel}` })
                                         .setFooter(client.getFooter(es));
 
                                     //send an informational message
@@ -395,14 +387,14 @@ module.exports = client => {
                                                 //add the role
                                                 member.roles.add(role.id).catch(e => {
                                                     channel_tosend.send(
-                                                        `I am Missing Permissions to grant the Role\n` + e.message
+                                                        `I am Missing PermissionFlagsBits to grant the Role\n` + e.message
                                                     );
                                                 });
                                             }
                                         }
                                     } catch (e) {
                                         console.log(e.stack ? String(e.stack).grey : String(e).grey);
-                                        channel_tosend.send(`I am Missing Permissions to grant the TEMPROLE\n` + e.message);
+                                        channel_tosend.send(`I am Missing PermissionFlagsBits to grant the TEMPROLE\n` + e.message);
                                         /* */
                                     }
                                 } else {
@@ -442,10 +434,10 @@ module.exports = client => {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable20`])) //${user.tag} -
+                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable20`])) //${user.username} -
                         .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable21`]))
                         .setFooter({ text: originaluser.id,
-                            iconURL: originaluser.displayAvatarURL({ dynamic: true })
+                            iconURL: originaluser.displayAvatarURL()
                         })
                         .setTimestamp();
 
@@ -454,10 +446,7 @@ module.exports = client => {
                         try {
                             let qu = Object.values(Questions[i]);
                             if (qu.length > 100) qu = String(Object.values(Questions[i])).substr(0, 100) + ` ...`;
-                            embed.addField(
-                                (`**` + Object.keys(Questions[i]) + `. |** ` + qu).substr(0, 256),
-                                `>>> ` + String(answers[i]).substr(0, 1000)
-                            );
+                            embed.addFields({ name: (`**` + Object.keys(Questions[i]) + `. |** ` + qu).substr(0, 256), value: `>>> ` + String(answers[i]).substr(0, 1000) });
                         } catch {
                             /* */
                         }
@@ -480,10 +469,10 @@ module.exports = client => {
                                 : null
                         )
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable22`]))
-                        .addField(`\u200b`, `**❯** Go Back to the Channel ${originalchannel}`)
+                        .addFields({ name: `\u200b`, value: `**❯** Go Back to the Channel ${originalchannel}` })
                         .setFooter(client.getFooter(es));
                     originaluser.send({
-                        content: `**❯** Go Back to the Channel ${originalchannel}`,
+                        content: `**❯** Go Atrás to the Canal ${originalchannel}`,
                         embeds: [finished_embed],
                     });
 
@@ -507,7 +496,7 @@ module.exports = client => {
                                     );
                                 //add the role
                                 member.roles.add(role.id).catch(e => {
-                                    channel_tosend.send(`I am Missing Permissions to grant the Role\n` + e.message);
+                                    channel_tosend.send(`I am Missing PermissionFlagsBits to grant the Role\n` + e.message);
                                 });
                             }
                         }
@@ -657,7 +646,7 @@ module.exports = client => {
                     try {
                         for (var i = 0; i <= oldEmbed.fields.length; i++) {
                             try {
-                                if (oldEmbed.fields[i]) embed.addField(oldEmbed.fields[i].name, oldEmbed.fields[i].value);
+                                if (oldEmbed.fields[i]) embed.addFields({ name: oldEmbed.fields[i].name, value: oldEmbed.fields[i].value });
                             } catch {}
                         }
                     } catch {}
@@ -703,10 +692,8 @@ module.exports = client => {
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable30`]))
                         .setFooter(client.getFooter(
-                                `By: ` + interaction?.user.tag,
-                                interaction?.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                `By: ` + interaction?.user.username,
+                                interaction?.user.displayAvatarURL()
                             )
                         )
                         .setDescription(apply_db.get(message.guild.id, `${pre}.accept`));
@@ -747,7 +734,7 @@ module.exports = client => {
                             //try to add the role
                             var member = message.guild.members.cache.get(usert.id);
                             member.roles.add(roleid).catch(e => {
-                                channel_tosend.send(`I am Missing Permissions to grant the Role\n` + e.message);
+                                channel_tosend.send(`I am Missing PermissionFlagsBits to grant the Role\n` + e.message);
                             });
                         }
                     } catch (e) {
@@ -791,10 +778,8 @@ module.exports = client => {
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable34`]))
                         .setDescription(apply_db.get(message.guild.id, `${pre}.deny`))
                         .setFooter(client.getFooter(
-                                `By: ` + interaction?.user.tag,
-                                interaction?.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                `By: ` + interaction?.user.username,
+                                interaction?.user.displayAvatarURL()
                             )
                         );
 
@@ -889,7 +874,7 @@ module.exports = client => {
                                 setTimeout(() => {
                                     try {
                                         if (
-                                            channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)
+                                            channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)
                                         ) {
                                             channel.permissionOverwrites
                                                 .edit(usert.id, {
@@ -908,27 +893,27 @@ module.exports = client => {
                                 }, 2000);
                                 //TRY CATCH SEND CHANNEL INFORMATION
                                 let button_close = new ButtonBuilder()
-                                    .setStyle(Discord.ButtonStyle.Primary)
+                                    .setStyle(ButtonStyle.Primary)
                                     .setCustomId("ticket_close")
                                     .setLabel("Close")
                                     .setEmoji(`🔒`);
                                 let button_delete = new ButtonBuilder()
-                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                    .setStyle(ButtonStyle.Secondary)
                                     .setCustomId("ticket_delete")
                                     .setLabel(`Delete`)
                                     .setEmoji(`🗑️`);
                                 let button_transcript = new ButtonBuilder()
-                                    .setStyle(Discord.ButtonStyle.Primary)
+                                    .setStyle(ButtonStyle.Primary)
                                     .setCustomId("ticket_transcript")
                                     .setLabel(`Transcript`)
                                     .setEmoji(`📑`);
                                 let button_user = new ButtonBuilder()
-                                    .setStyle(Discord.ButtonStyle.Success)
+                                    .setStyle(ButtonStyle.Success)
                                     .setCustomId("ticket_user")
                                     .setLabel(`Managee Users`)
                                     .setEmoji(`👤`);
                                 let button_role = new ButtonBuilder()
-                                    .setStyle(Discord.ButtonStyle.Success)
+                                    .setStyle(ButtonStyle.Success)
                                     .setCustomId("ticket_role")
                                     .setLabel(`Managee Roles`)
                                     .setEmoji(`📌`);
@@ -942,7 +927,7 @@ module.exports = client => {
                                 try {
                                     if (client.setups.get(`TICKETS`, applytickets).includes(usert.id)) {
                                         channel.send({
-                                            content: `<@${usert.id}>\nBecause he already has a TICKET for this Application System, this Channel got created!`,
+                                            content: `<@${usert.id}>\nBecause he already has a TICKET for this Application System, this Canal got created!`,
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setColor(es.color)
@@ -960,9 +945,7 @@ module.exports = client => {
                                                     )
                                                     .setFooter(client.getFooter(
                                                             `Just Delete this channel, if not needed there is no delete/close command!`,
-                                                            message.guild.iconURL({
-                                                                dynamic: true,
-                                                            })
+                                                            message.guild.iconURL()
                                                         )
                                                     )
                                                     .setDescription(
@@ -1008,9 +991,7 @@ module.exports = client => {
                                                     .setFooter(client.getFooter(
                                                             `To close/manage this ticket react with the buttons
 You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
-                                                            message.guild.iconURL({
-                                                                dynamic: true,
-                                                            })
+                                                            message.guild.iconURL()
                                                         )
                                                     )
                                                     .setDescription(
@@ -1033,10 +1014,8 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                                         .setColor(`ORANGE`)
                                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable38`]))
                                         .setFooter(client.getFooter(
-                                                `By: ` + interaction?.user.tag,
-                                                interaction?.user.displayAvatarURL({
-                                                    dynamic: true,
-                                                })
+                                                `By: ` + interaction?.user.username,
+                                                interaction?.user.displayAvatarURL()
                                             )
                                         )
                                         .setDescription(
@@ -1106,10 +1085,8 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable41`]))
                         .setFooter(client.getFooter(
-                                `By: ` + interaction?.user.tag,
-                                interaction?.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                `By: ` + interaction?.user.username,
+                                interaction?.user.displayAvatarURL()
                             )
                         )
                         .setDescription(apply_db.get(message.guild.id, `${pre}.one.message`));
@@ -1156,7 +1133,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             //try to add the role
                             var member = message.guild.members.cache.get(usert.id);
                             member.roles.add(roleid).catch(e => {
-                                channel_tosend.send(`I am Missing Permissions to grant the Role\n` + e.message);
+                                channel_tosend.send(`I am Missing PermissionFlagsBits to grant the Role\n` + e.message);
                             });
                         }
                     } catch (e) {
@@ -1203,10 +1180,8 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable44`]))
                         .setFooter(client.getFooter(
-                                `By: ` + interaction?.user.tag,
-                                interaction?.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                `By: ` + interaction?.user.username,
+                                interaction?.user.displayAvatarURL()
                             )
                         )
                         .setDescription(apply_db.get(message.guild.id, `${pre}.two.message`));
@@ -1253,7 +1228,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             //try to add the role
                             var member = message.guild.members.cache.get(usert.id);
                             member.roles.add(roleid).catch(e => {
-                                channel_tosend.send(`I am Missing Permissions to grant the Role\n` + e.message);
+                                channel_tosend.send(`I am Missing PermissionFlagsBits to grant the Role\n` + e.message);
                             });
                         }
                     } catch (e) {
@@ -1300,10 +1275,8 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable47`]))
                         .setFooter(client.getFooter(
-                                `By: ` + interaction?.user.tag,
-                                interaction?.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                `By: ` + interaction?.user.username,
+                                interaction?.user.displayAvatarURL()
                             )
                         )
                         .setDescription(apply_db.get(message.guild.id, `${pre}.three.message`));
@@ -1350,7 +1323,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             //try to add the role
                             var member = message.guild.members.cache.get(usert.id);
                             member.roles.add(roleid).catch(e => {
-                                channel_tosend.send(`I am Missing Permissions to grant the Role\n` + e.message);
+                                channel_tosend.send(`I am Missing PermissionFlagsBits to grant the Role\n` + e.message);
                             });
                         }
                     } catch (e) {
@@ -1397,10 +1370,8 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable50`]))
                         .setFooter(client.getFooter(
-                                `By: ` + interaction?.user.tag,
-                                interaction?.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                `By: ` + interaction?.user.username,
+                                interaction?.user.displayAvatarURL()
                             )
                         )
                         .setDescription(apply_db.get(message.guild.id, `${pre}.four.message`));
@@ -1447,7 +1418,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             //try to add the role
                             var member = message.guild.members.cache.get(usert.id);
                             member.roles.add(roleid).catch(e => {
-                                channel_tosend.send(`I am Missing Permissions to grant the Role\n` + e.message);
+                                channel_tosend.send(`I am Missing PermissionFlagsBits to grant the Role\n` + e.message);
                             });
                         }
                     } catch (e) {
@@ -1494,10 +1465,8 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         .setColor(`GREEN`)
                         .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable53`]))
                         .setFooter(client.getFooter(
-                                `By: ` + interaction?.user.tag,
-                                interaction?.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                `By: ` + interaction?.user.username,
+                                interaction?.user.displayAvatarURL()
                             )
                         )
                         .setDescription(apply_db.get(message.guild.id, `${pre}.five.message`));
@@ -1544,7 +1513,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             //try to add the role
                             var member = message.guild.members.cache.get(usert.id);
                             member.roles.add(roleid).catch(e => {
-                                channel_tosend.send(`I am Missing Permissions to grant the Role\n` + e.message);
+                                channel_tosend.send(`I am Missing PermissionFlagsBits to grant the Role\n` + e.message);
                             });
                         }
                     } catch (e) {

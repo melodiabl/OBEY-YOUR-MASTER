@@ -21,8 +21,8 @@ module.exports = {
     ],
     cooldown: 5,
     usage: "setup-rank --> Follow Steps",
-    description: "Manage the Ranking System with stuff like channel, background, etc",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Gestiona el Sistema de Ranking con cosas como canal, fondo, etc",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -33,7 +33,7 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Channel Levelup",
-                        description: `Define the a Channel for all Levelup Messages`,
+                        description: `Define the a Canal for all Levelup Messages`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
@@ -53,12 +53,12 @@ module.exports = {
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Ranking System`,
+                        description: `Show Ajustes of the Ranking System`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ranking-System-Setup!`,
+                        description: `Cancelar and stop the Ranking-System-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -67,7 +67,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Ranking-System")
+                    .setPlaceholder("¡Haz clic para configurar the Ranking-System")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -83,11 +83,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Rank Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/page-with-curl_1f4c3.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Rank Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/page-with-curl_1f4c3.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -111,14 +107,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -180,7 +176,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        throw "you didn't ping a valid Channel";
+                                        throw "you no mencionaste un Channel";
                                     }
                                 })
                                 .catch(e => {
@@ -190,7 +186,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable10"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -272,14 +268,8 @@ module.exports = {
                                     new Discord.EmbedBuilder()
                                         .setTitle("What do you want to do now?")
                                         .setColor(es.color)
-                                        .addField(
-                                            "To __add__ a Rank Role send the Following:",
-                                            "> `LEVEL @ROLE`\nExample:\n > `3 @Level3` / `5 @LEVEL5`\n\n*After a Role has been set, you can just type this again to CHAGEN it!*"
-                                        )
-                                        .addField(
-                                            "To __remove__ a Rank Role send the Following:",
-                                            "> `LEVEL`\nExample:\n > `3` / `5`"
-                                        )
+                                        .addFields({ name: "To __add__ a Rank Role send the Following:", value: "> `LEVEL @ROLE`\nExample:\n > `3 @Level3` / `5 @LEVEL5`\n\n*After a Role has been set, you can just type this again to CHAGEN it!*" })
+                                        .addFields({ name: "To __remove__ a Rank Role send the Following:", value: "> `LEVEL`\nExample:\n > `3` / `5`" })
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -295,7 +285,7 @@ module.exports = {
                                     let arggs = message.content.trim().split(" ");
                                     if (!arggs[0] || isNaN(arggs[0]))
                                         return message.reply(
-                                            "**❌ YOU DID WRONG! Please read what the introduction tells you!**\nCancelled!"
+                                            "**❌ YOU DID WRONG! Por favor read what the introduction tells you!**\nCancelled!"
                                         );
                                     var Role =
                                         message.mentions.roles.filter(ch => ch.guild.id == message.guild.id).first() ||
@@ -309,7 +299,7 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            `**REMOVED** the Levelup-Role: ${Role.name} for the Levelup-Level: ${parseInt(arggs[0])}`
+                                                            `**REMOVED** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
@@ -325,7 +315,7 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            `**CHANGE** the Levelup-Role: ${Role.name} for the Levelup-Level: ${parseInt(arggs[0])}`
+                                                            `**CHANGE** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
@@ -341,7 +331,7 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        `**ADDED** the Levelup-Role: ${Role.name} for the Levelup-Level: ${parseInt(arggs[0])}`
+                                                        `**ADDED** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
@@ -373,7 +363,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable10"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -395,12 +385,9 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Settings of the Ranking System")
+                                        .setTitle("Ajustes of the Ranking System")
                                         .setColor(es.color)
-                                        .addField(
-                                            "**Levelup-Message**",
-                                            `> Disabled: ${!disabled ? "NO (ACTIVE)" : "Yes (DISABLED)"}\n> **Reply in ${channel ? `<#${channel}>` : "the same Channel"}**`
-                                        )
+                                        .addFields({ name: "**Levelup-Message**", value: `> Disabled: ${!disabled ? "NO (ACTIVE)" : "Yes (DISABLED)"}\n> **Reply in ${channel ? `<#${channel}>` : "the same Channel"}**` })
                                         .setDescription(
                                             `**Level up Roles:**\n>>> ${rankroles.length > 0 ? rankroles.join("\n") : "`NONE`"}`.substring(
                                                 0,
@@ -430,10 +417,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

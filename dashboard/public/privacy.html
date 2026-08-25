@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OBEY · Política de Privacidad</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#1DB954;--bg:#0c0c10;--surface:#15151b;--line:rgba(255,255,255,.09);--txt:#f3f3f5;--txt2:#a6a7ad}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:'Hanken Grotesk',system-ui,sans-serif;line-height:1.7;font-size:16px}
+.wrap{max-width:820px;margin:0 auto;padding:clamp(24px,5vw,60px) clamp(18px,5vw,28px)}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:30px}
+.brand .lg{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#1DB954,#1ed760);display:grid;place-items:center;color:#04130a;font-size:1.3rem;font-weight:800}
+.brand b{font-size:1.3rem;font-weight:800;letter-spacing:-.02em}
+.brand small{display:block;color:var(--txt2);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+h1{font-size:clamp(1.8rem,5vw,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.upd{color:var(--txt2);font-size:.85rem;margin-bottom:36px}
+h2{font-size:clamp(1.15rem,3.5vw,1.4rem);font-weight:700;margin:34px 0 12px;padding-top:18px;border-top:1px solid var(--line);color:#fff}
+h2:first-of-type{border-top:none;padding-top:0}
+p,li{color:var(--txt2)}
+p{margin-bottom:12px}
+ul{margin:0 0 14px;padding-left:22px}
+li{margin-bottom:7px}
+b,strong{color:var(--txt)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:18px 0}
+footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);color:var(--txt2);font-size:.85rem;display:flex;gap:18px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><div class="lg">⚡</div><div><b>OBEY</b><small>Bot de Música</small></div></div>
+  <h1>Política de Privacidad</h1>
+  <p class="upd">Última actualización: 18 de junio de 2026</p>
+
+  <p>Esta Política de Privacidad describe qué datos recopila <b>OBEY</b> (el "Bot"), cómo los usamos y tus opciones. Al añadir o usar el Bot en un servidor de Discord, aceptas esta política.</p>
+
+  <h2>1. Datos que recopilamos</h2>
+  <p>Recopilamos únicamente lo necesario para que el Bot funcione:</p>
+  <ul>
+    <li><b>Datos de servidor:</b> ID del servidor, IDs de canales y la configuración que defines (prefijo, idioma, canal de música, ajustes de sistemas como moderación, niveles, etc.).</li>
+    <li><b>Datos de usuario:</b> tu ID de usuario de Discord, asociado a funciones que tú activas: canciones favoritas, playlists, historial/estadísticas de reproducción, economía, niveles y similares.</li>
+    <li><b>Datos de música:</b> títulos, artistas y enlaces de las canciones que reproduces, favoritos y playlists que creas.</li>
+    <li><b>Presencia de voz (temporal):</b> en qué canal de voz estás para poder reproducir música; no se almacena de forma permanente.</li>
+    <li><b>Panel web (opcional):</b> si inicias sesión en el dashboard con Discord, usamos los permisos <code>identify</code> y <code>guilds</code> para mostrarte tus servidores. La sesión se guarda de forma segura.</li>
+  </ul>
+  <div class="box">No recopilamos el contenido de tus mensajes salvo el comando que invocas, ni contraseñas, ni datos de pago.</div>
+
+  <h2>2. Cómo usamos los datos</h2>
+  <ul>
+    <li>Proveer las funciones del Bot (música, favoritos, playlists, configuración por servidor, estadísticas).</li>
+    <li>Recordar tus preferencias y las del servidor entre sesiones.</li>
+    <li>Mostrar rankings y "más reproducidas" del servidor.</li>
+  </ul>
+  <p>No vendemos, alquilamos ni compartimos tus datos con terceros con fines comerciales.</p>
+
+  <h2>3. Terceros</h2>
+  <p>Para reproducir audio, el Bot consulta servicios de música (como Spotify, YouTube, SoundCloud o Apple Music) a través de Lavalink. Esas plataformas tienen sus propias políticas. El Bot funciona sobre la API de <b>Discord</b>, sujeta a la <a href="https://discord.com/privacy">Política de Privacidad de Discord</a>.</p>
+
+  <h2>4. Almacenamiento y seguridad</h2>
+  <p>Los datos se guardan en una base de datos MongoDB privada con acceso restringido. Aplicamos medidas razonables para protegerlos, aunque ningún sistema es 100% infalible.</p>
+
+  <h2>5. Retención y eliminación</h2>
+  <p>Conservamos los datos mientras uses el Bot. Puedes eliminar tus datos:</p>
+  <ul>
+    <li>Quitando el Bot del servidor (se eliminan los datos de configuración de ese servidor).</li>
+    <li>Usando los comandos de borrado disponibles, o solicitándolo en nuestro servidor de soporte.</li>
+  </ul>
+
+  <h2>6. Tus derechos</h2>
+  <p>Puedes solicitar acceso, corrección o eliminación de tus datos personales contactándonos en el servidor de soporte.</p>
+
+  <h2>7. Menores</h2>
+  <p>El Bot está destinado a usuarios que cumplen los <a href="https://discord.com/terms">Términos de Servicio de Discord</a> respecto a la edad mínima. No recopilamos conscientemente datos de menores de esa edad.</p>
+
+  <h2>8. Cambios</h2>
+  <p>Podemos actualizar esta política. Los cambios se publican en esta misma página con su fecha. El uso continuado del Bot implica la aceptación de la versión vigente.</p>
+
+  <h2>9. Contacto</h2>
+  <p>Para cualquier duda sobre privacidad, contáctanos en nuestro <b>servidor de soporte de Discord</b>.</p>
+
+  <footer>
+    <a href="/terms.html">Condiciones del Servicio</a>
+    <a href="/">Inicio</a>
+    <span>© 2026 OBEY</span>
+  </footer>
+</div>
+</body>
+</html>

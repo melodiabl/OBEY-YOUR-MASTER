@@ -1,4 +1,4 @@
-const { EmbedBuilder, DiscordAPIError, Message, Permissions } = require("discord.js");
+const { EmbedBuilder, DiscordAPIError, Message, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
@@ -35,7 +35,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -181,16 +181,10 @@ module.exports = {
                                                                                             : client.user.displayAvatarURL()
                                                                                         : null
                                                                                 )
-                                                                                .setAuthor(
-                                                                                    `${message.guild.name} | POLL`,
-                                                                                    "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
-                                                                                    "https://discord.gg/fA8VGa4V"
-                                                                                )
+                                                                                .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
                                                                                 .setFooter(client.getFooter(
                                                                                         `by: ${message.author.username}`,
-                                                                                        message.author.displayAvatarURL({
-                                                                                            dynamic: true,
-                                                                                        })
+                                                                                        message.author.displayAvatarURL()
                                                                                     )
                                                                                 )
                                                                                 .setDescription(collected.first().content),
@@ -261,16 +255,10 @@ module.exports = {
                                                                                             : client.user.displayAvatarURL()
                                                                                         : null
                                                                                 )
-                                                                                .setAuthor(
-                                                                                    `${message.guild.name} | POLL`,
-                                                                                    "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
-                                                                                    "https://discord.gg/fA8VGa4V"
-                                                                                )
+                                                                                .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
                                                                                 .setFooter(client.getFooter(
                                                                                         `by: ${message.author.username}`,
-                                                                                        message.author.displayAvatarURL({
-                                                                                            dynamic: true,
-                                                                                        })
+                                                                                        message.author.displayAvatarURL()
                                                                                     )
                                                                                 )
                                                                                 .setDescription(collected.first().content),
@@ -414,23 +402,17 @@ module.exports = {
                                                                                     : client.user.displayAvatarURL()
                                                                                 : null
                                                                         )
-                                                                        .setAuthor(
-                                                                            `${message.guild.name} | POLL`,
-                                                                            "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
-                                                                            "https://discord.gg/fA8VGa4V"
-                                                                        )
+                                                                        .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
                                                                         .setFooter(client.getFooter(
                                                                                 `by: ${message.author.username}`,
-                                                                                message.author.displayAvatarURL({
-                                                                                    dynamic: true,
-                                                                                })
+                                                                                message.author.displayAvatarURL()
                                                                             )
                                                                         );
                                                                     if (collected.first().content.toLowerCase() != "no")
                                                                         embed.setDescription(collected.first().content);
 
                                                                     for (let i = 0; i < emojicontent.length; i++) {
-                                                                        embed.addField(emojis[i] + " :", emojicontent[i]);
+                                                                        embed.addFields({ name: emojis[i] + " :", value: emojicontent[i] });
                                                                     }
                                                                     channel.send({ embeds: [embed] }).then(msg => {
                                                                         for (let i = 0; i < emojicounter; i++) {
@@ -451,18 +433,14 @@ module.exports = {
                                                                             : client.user.displayAvatarURL()
                                                                         : null
                                                                 )
-                                                                .setAuthor(
-                                                                    `${message.guild.name} | POLL`,
-                                                                    "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
-                                                                    "https://discord.gg/fA8VGa4V"
-                                                                )
+                                                                .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
                                                                 .setFooter(client.getFooter(
                                                                         `by: ${message.author.username}`,
-                                                                        message.author.displayAvatarURL({ dynamic: true })
+                                                                        message.author.displayAvatarURL()
                                                                     )
                                                                 );
                                                             for (let i = 0; i < emojicontent.length; i++) {
-                                                                embed.addField(emojis[i] + " :", emojicontent[i]);
+                                                                embed.addFields({ name: emojis[i] + " :", value: emojicontent[i] });
                                                             }
                                                             channel.send({ embeds: [embed] }).then(msg => {
                                                                 for (let i = 0; i < emojicounter; i++) {
@@ -506,14 +484,10 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setAuthor(
-                                    `${message.guild.name} | POLL`,
-                                    "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png",
-                                    "https://discord.gg/fA8VGa4V"
-                                )
+                                .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
                                 .setFooter(client.getFooter(
                                         `by: ${message.author.username}`,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 )
                                 .setDescription(args.join(" ")),
@@ -542,23 +516,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({ dynamic: true })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable17"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],
@@ -583,10 +548,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

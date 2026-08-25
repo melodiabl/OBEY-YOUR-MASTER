@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupautonsfw", "cmdlog", "autonsfw-setup", "autonsfwsetup"],
     cooldown: 5,
-    usage: "setup-autonsfw  -->  Follow the Steps",
-    description: "This Setup allows you to send logs into a specific Channel, when someone enters a the Command: report",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-autonsfw  --> Sigue los Pasos",
+    description: "Esta Configuración te permite enviar registros a un Canal específico cuando alguien usa el Comando: report",
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -24,22 +24,22 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Enable Auto-Nsfw",
-                        description: `Define the Auto-Nsfw Channel`,
+                        description: `Definir el Canal de Auto-Nsfw`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
                         value: "Disable Auto-Nsfw",
-                        description: `Disable the Admin Auto-Nsfw`,
+                        description: `Desactivar el Auto-Nsfw de Administrador`,
                         emoji: allEmojis.msg.ERROR,
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Auto-Nsfw`,
+                        description: `Mostrar Ajustes del Auto-Nsfw`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Auto-Nsfw-Setup!`,
+                        description: `Cancelar y detener la Auto-Nsfw-Configuración`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -48,7 +48,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Automated Nsfw System!")
+                    .setPlaceholder("¡Haz clic para configurar el Sistema de Nsfw Automatizado!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -64,11 +64,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Auto NSFW Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/no-one-under-eighteen_1f51e.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Configuración de Auto NSFW", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/no-one-under-eighteen_1f51e.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 let used1 = false;
                 //send the menu msg
@@ -93,16 +89,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Seleccionado: \`${collected ? collected.first().values[0] : "Nada"}\`**` : "❌ **NADA SELECCIONADO - CANCELADO**"}`,
                     });
                 });
             }
@@ -129,7 +125,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     let channel =
                                         message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first() ||
                                         message.guild.channels.cache.get(message.content.trim().split(" ")[0]);
@@ -144,7 +140,7 @@ module.exports = {
                                                             )
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
@@ -157,12 +153,12 @@ module.exports = {
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-autonsfw"]["variable8"])
                                                     )
                                                     .setColor(es.color)
-                                                    .setDescription(`Posting now, every Minute`.substring(0, 2048))
+                                                    .setDescription(`Publicando ahora, cada Minuto`.substring(0, 2048))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
                                     }
-                                    return message.reply("NO CHANNEL PINGED");
+                                    return message.reply("NO SE MENCIONÓ NINGÚN CANAL");
                                 })
                                 .catch(e => {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -173,7 +169,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-automeme"]["variable8"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -189,7 +185,7 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-autonsfw"]["variable10"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `I will not send automatic NSFW Images to a Channel anymore`.substring(0, 2048)
+                                            `Ya no enviaré imágenes NSFW automáticas a un Canal`.substring(0, 2048)
                                         )
                                         .setFooter(client.getFooter(es)),
                                 ],
@@ -205,7 +201,7 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-autonsfw"]["variable11"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Channel:** ${thesettings == "no" ? "Not Setupped" : `<#${thesettings}> | \`${thesettings}\``}\n\n**Cooldown:** 1 Minute`.substring(
+                                            `**Canal:** ${thesettings == "no" ? "No Configurado" : `<#${thesettings}> | \`${thesettings}\``}\n\n**Cooldown:** 1 Minuto`.substring(
                                                 0,
                                                 2048
                                             )
@@ -233,10 +229,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

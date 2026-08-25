@@ -6,7 +6,7 @@ const { handlemsg, getRandomNum } = require(`${process.cwd()}/handlers/functions
 var cp = require("child_process");
 module.exports = {
     name: "ping",
-    description: "Gives you information on how fast the Bot can respond to you",
+    description: "Te da información sobre qué tan rápido el Bot puede responderte",
     run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
         //things u can directly access in an interaction!
         const {
@@ -39,7 +39,7 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setTitle(handlemsg(client.la[ls].cmds.info.ping.m1)),
+.setTitle(handlemsg(client.la[ls].cmds.info.ping.m1)),
                     ],
                 })
                 .then(msg => {
@@ -67,7 +67,7 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(
-                                        "It Takes longer, because i am getting my host ping!",
+                                        "Tarda más, porque estoy obteniendo el ping de mi host!",
                                         es.footericon &&
                                             (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                             ? es.footericon
@@ -91,10 +91,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

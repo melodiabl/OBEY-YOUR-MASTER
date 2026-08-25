@@ -7,7 +7,7 @@ module.exports = {
     name: "toggledisabled",
     aliases: ["toggleshowdisabled"],
     category: "⚙️ Settings",
-    description: "Toggles if the Bot help Message should show Disabled Commands or not [DEFAULT: true]",
+    description: "Toggles if the Bot help Mensaje should show Desactivado Commands or not [DEFAULT: true]",
     usage: "toggledisabled",
     type: "bot",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -54,10 +54,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

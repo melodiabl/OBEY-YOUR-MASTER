@@ -1,10 +1,11 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var radios = require(`../../botconfig/radiostations.json`);
-var playermanager = require(`../../handlers/playermanager`);
 var { stations, databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -13,9 +14,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupmusic"],
     cooldown: 10,
-    usage: "setup-music #Channel",
-    description: "Setup a Music Request Channel",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-music #Canal",
+    description: "Configuración de un Canal de Solicitud de Música",
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -30,9 +31,9 @@ module.exports = {
             var embeds = [
                 new EmbedBuilder()
                     .setColor(es.color)
-                    .setTitle(`📃 Queue of __${message.guild.name}__`)
-                    .setDescription(`**Currently there are __0 Songs__ in the Queue**`)
-                    .setThumbnail(message.guild.iconURL({ dynamic: true })),
+                    .setTitle(`📃 Cola of __${message.guild.name}__`)
+                    .setDescription(`**Currently there are __0 Songs__ in the Cola**`)
+                    .setThumbnail(message.guild.iconURL()),
                 new EmbedBuilder()
                     .setColor(es.color)
                     .setFooter(client.getFooter(es))
@@ -40,7 +41,7 @@ module.exports = {
                         message.guild.banner ? message.guild.bannerURL({ size: 4096 }) : "https://imgur.com/jLvYdb4.png"
                     )
                     .setTitle(
-                        `Start Listening to Music, by connecting to a Voice Channel and sending either the **SONG LINK** or **SONG NAME** in this Channel!`
+                        `Start Listening to Music, by connecting to a Voice Canal and sending either the **SONG LINK** or **SONG NAME** in this Canal!`
                     )
                     .setDescription(
                         `> *I support ${allEmojis.msg.youtube} Youtube, ${allEmojis.msg.spotify} Spotify, ${allEmojis.msg.soundcloud} Soundcloud and direct MP3 Links!*`
@@ -50,13 +51,13 @@ module.exports = {
             var components = [
                 new ActionRowBuilder().addComponents([
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Success)
+                        .setStyle(ButtonStyle.Success)
                         .setCustomId("Join")
                         .setEmoji(`👌`)
                         .setLabel(`Join`)
                         .setDisabled(false),
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Danger)
+                        .setStyle(ButtonStyle.Danger)
                         .setCustomId("Leave")
                         .setEmoji(`👋`)
                         .setLabel(`Leave`)
@@ -64,26 +65,26 @@ module.exports = {
                 ]),
                 new ActionRowBuilder().addComponents([
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setCustomId("Skip")
                         .setEmoji(`⏭`)
                         .setLabel(`Skip`)
                         .setDisabled(),
-                    new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("Stop").setEmoji(`🏠`).setLabel(`Stop`).setDisabled(),
+                    new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("Stop").setEmoji(`🏠`).setLabel(`Stop`).setDisabled(),
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Secondary)
+                        .setStyle(ButtonStyle.Secondary)
                         .setCustomId("Pause")
                         .setEmoji("⏸")
                         .setLabel(`Pause`)
                         .setDisabled(),
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Success)
+                        .setStyle(ButtonStyle.Success)
                         .setCustomId("Autoplay")
                         .setEmoji("🔁")
                         .setLabel(`Autoplay`)
                         .setDisabled(),
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setCustomId("Shuffle")
                         .setEmoji("🔀")
                         .setLabel(`Shuffle`)
@@ -91,31 +92,31 @@ module.exports = {
                 ]),
                 new ActionRowBuilder().addComponents([
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Success)
+                        .setStyle(ButtonStyle.Success)
                         .setCustomId("Song")
                         .setEmoji(`🔁`)
                         .setLabel(`Song`)
                         .setDisabled(),
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Success)
+                        .setStyle(ButtonStyle.Success)
                         .setCustomId("Queue")
                         .setEmoji(`🔂`)
                         .setLabel(`Queue`)
                         .setDisabled(),
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setCustomId("Forward")
                         .setEmoji("⏩")
                         .setLabel(`+10 Sec`)
                         .setDisabled(),
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setCustomId("Rewind")
                         .setEmoji("⏪")
                         .setLabel(`-10 Sec`)
                         .setDisabled(),
                     new ButtonBuilder()
-                        .setStyle(Discord.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setCustomId("Lyrics")
                         .setEmoji("📝")
                         .setLabel(`Lyrics`)
@@ -123,7 +124,7 @@ module.exports = {
                 ]),
             ];
             let channel = message.mentions.channels.first();
-            if (!channel) return message.reply("❌ **You forgot to ping a Text-Channel!**");
+            if (!channel) return message.reply("❌ **¡Olvidaste mencionar un canal de texto!**");
             //send the data in the channel
             channel.send({ embeds, components }).then(msg => {
                 client.musicsettings.set(message.guild.id, channel.id, "channel");
@@ -147,10 +148,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -2,7 +2,7 @@
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-var { EmbedBuilder, AttachmentBuilder, User, Permissions } = require(`discord.js`);
+var { EmbedBuilder, AttachmentBuilder, User, PermissionFlagsBits, ChannelType } = require(`discord.js`);
 const { databasing } = require(`./functions`);
 const fetch = require("node-fetch");
 module.exports = client => {
@@ -31,7 +31,7 @@ module.exports = client => {
                             message.channel.send({ content: data.cnt }).catch(() => {});
                         });
                 } catch (e) {
-                    message.channel.send({ content: "<:no:833101993668771842> AI CHAT API IS DOWN" }).catch(() => {});
+                    message.channel.send({ content: "<:no:833101993668771842> LA API DE CHAT IA ESTÁ CAÍDA" }).catch(() => {});
                 }
             }
         } catch (e) {
@@ -46,7 +46,7 @@ module.exports = client => {
                 if (client.afkDB.has(message.guild.id + user.id)) {
                     await message
                         .reply({
-                            content: `<:Crying:867724032316407828> **${user.tag}** went AFK <t:${Math.floor(client.afkDB.get(message.guild.id + user.id, "stamp") / 1000)}:R>!${
+                            content: `<:Crying:867724032316407828> **${user.username}** went AFK <t:${Math.floor(client.afkDB.get(message.guild.id + user.id, "stamp") / 1000)}:R>!${
                                 client.afkDB.get(message.guild.id + user.id, "message") &&
                                 client.afkDB.get(message.guild.id + user.id, "message").length > 1
                                     ? `\n\n__His Message__\n>>> ${String(
@@ -88,7 +88,7 @@ module.exports = client => {
                     return console.log("AFK CMD");
                 await message
                     .reply({
-                        content: `:tada: Welcome back **${message.author.username}!** :tada:\n> You went <t:${Math.floor(client.afkDB.get(message.guild.id + message.author.id, "stamp") / 1000)}:R> Afk`,
+                        content: `:tada: Bienvenido back **${message.author.username}!** :tada:\n> You went <t:${Math.floor(client.afkDB.get(message.guild.id + message.author.id, "stamp") / 1000)}:R> Afk`,
                     })
                     .then(msg => {
                         setTimeout(() => {
@@ -111,15 +111,15 @@ module.exports = client => {
                 ],
             });
             let channels = client.setups.get(message.guild.id, "autodelete");
-            if (channels && channels.some(ch => ch.id == message.channel.id) && message.channel.type == "GUILD_TEXT") {
+            if (channels && channels.some(ch => ch.id == message.channel.id) && message.channel.type == ChannelType.GuildText) {
                 setTimeout(
                     () => {
                         try {
-                            if (!message.deleted) {
+                            if (!message.deletedTimestamp) {
                                 if (
                                     message.channel
                                         .permissionsFor(message.channel.guild.members.me)
-                                        .has(PermissionFlagsBits.MANAGE_MESSAGES)
+                                        .has(PermissionFlagsBits.ManageMessages)
                                 ) {
                                     message.delete().catch(() => {
                                         //Try a second time
@@ -128,7 +128,7 @@ module.exports = client => {
                                         }, 1500);
                                     });
                                 } else {
-                                    message.reply("❌ **I am missing the MANAGE_MESSAGES Permission!**").then(m => {
+                                    message.reply("❌ **I am missing the MANAGE_MESSAGES Permiso!**").then(m => {
                                         setTimeout(() => {
                                             m.delete().catch(() => {});
                                         }, 3500);
@@ -150,7 +150,7 @@ module.exports = client => {
         let snipes = client.snipes.has(message.channel.id) ? client.snipes.get(message.channel.id) : [];
         if (snipes.length > 15) snipes.splice(0, 14);
         snipes.unshift({
-            tag: message.author.tag,
+            tag: message.author.username,
             id: message.author.id,
             avatar: message.author.displayAvatarURL(),
             content: message.content,

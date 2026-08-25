@@ -1,6 +1,20 @@
-<footer class="footer">
-  <p>OBEY YOUR MASTER BOT Dashboard &copy; 2026 | Powered by Discord.js v14</p>
+</div></main><!-- end .page / .main -->
+</div><!-- end .layout -->
+
+<div id="toasts"></div>
+
+<footer style="text-align:center;padding:22px 16px 30px;color:#717278;font-size:.82rem;border-top:1px solid rgba(255,255,255,.06);margin-top:30px">
+  <a href="/terms.html" style="color:#a6a7ad;text-decoration:none">Condiciones del Servicio</a>
+  <span style="opacity:.4;margin:0 8px">·</span>
+  <a href="/privacy.html" style="color:#a6a7ad;text-decoration:none">Política de Privacidad</a>
+  <span style="opacity:.4;margin:0 8px">·</span>
+  <span>© 2026 OBEY</span>
 </footer>
+
 <script src="/js/main.js"></script>
+<script>
+// Live stats header counter
+fetch('/api/stats').then(r=>r.ok?r.json():null).then(d=>{ if(d){ const el=document.getElementById('hdr-guilds'); if(el) el.textContent=d.guilds??'—' } }).catch(()=>{})
+</script>
 </body>
 </html>

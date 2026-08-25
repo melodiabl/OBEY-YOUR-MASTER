@@ -59,13 +59,13 @@ module.exports = {
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
                         .setURL(`https://npmjs.com/package/${pkg}`)
-                        .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 64 }))
+                        .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL({ size: 64 }) })
                         .setDescription(
                             [
                                 body.description || "No Description.",
                                 `**Version:** ${body["dist-tags"].latest}`,
                                 `**License:** ${body.license}`,
-                                `**Author:** ${body.author ? body.author.name : "Unknown"}`,
+                                `**Author:** ${body.author ? body.author.name : "Desconocido"}`,
                                 `**Modified:** ${new Date(body.time.modified).toDateString()}`,
                                 `**Dependencies:** ${deps && deps.length ? deps.join(", ") : "None"}`,
                             ].join("\n")

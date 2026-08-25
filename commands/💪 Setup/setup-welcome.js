@@ -1,4 +1,6 @@
-var { EmbedBuilder, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require(`discord.js`);
+var { EmbedBuilder, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -6,18 +8,145 @@ var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
 //Import npm modules
 const Canvas = require("@napi-rs/canvas");
+
+function hexToRgba(hex, a) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+async function drawWelcome({ member, guild, accentColor, showAvatar, showDiscriminator, showMemberCount, showServerName, background, isLeave }) {
+  const canvas = Canvas.createCanvas(1772, 720);
+  const ctx = canvas.getContext("2d");
+  const W = 1772, H = 720;
+  const ACCENT = accentColor || "#5865F2";
+
+  if (background && background !== "transparent") {
+    try { const bg = await Canvas.loadImage(background); ctx.drawImage(bg, 0, 0, W, H); } catch {}
+  } else {
+    const grd = ctx.createLinearGradient(0, 0, W, H);
+    grd.addColorStop(0, "#0d0d1a"); grd.addColorStop(0.5, "#16162e"); grd.addColorStop(1, "#0a0a18");
+    ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H);
+    try {
+      const icon = await Canvas.loadImage(guild.iconURL({ size: 256 }));
+      ctx.globalAlpha = 0.04; ctx.drawImage(icon, W - 280, H - 280, 200, 200); ctx.globalAlpha = 1;
+    } catch {}
+  }
+
+  const cardX = 80, cardY = 110, cardW = 920, cardH = 500, cardR = 32;
+
+  ctx.save();
+  ctx.shadowColor = "rgba(0,0,0,0.6)"; ctx.shadowBlur = 60; ctx.shadowOffsetY = 15;
+  roundRect(ctx, cardX, cardY, cardW, cardH, cardR);
+  const cgrd = ctx.createLinearGradient(cardX, cardY, cardX, cardY + cardH);
+  cgrd.addColorStop(0, hexToRgba(ACCENT, 0.08)); cgrd.addColorStop(1, "rgba(12,12,30,0.92)");
+  ctx.fillStyle = cgrd; ctx.fill();
+  ctx.restore();
+
+  ctx.save();
+  roundRect(ctx, cardX + 14, cardY + 40, 5, cardH - 80, 2.5);
+  ctx.fillStyle = ACCENT; ctx.fill();
+  ctx.restore();
+
+  if (showAvatar) {
+    try {
+      const av = await Canvas.loadImage(member.user.displayAvatarURL({ extension: 'png', size: 256, forceStatic: true }));
+      const as = 200, ax = cardX + 65, ay = cardY + (cardH - as) / 2;
+      ctx.save();
+      ctx.shadowColor = hexToRgba(ACCENT, 0.5); ctx.shadowBlur = 30;
+      ctx.beginPath(); ctx.arc(ax + as / 2, ay + as / 2, as / 2 + 6, 0, Math.PI * 2); ctx.closePath();
+      ctx.fillStyle = ACCENT; ctx.fill();
+      ctx.restore();
+      ctx.save();
+      ctx.beginPath(); ctx.arc(ax + as / 2, ay + as / 2, as / 2, 0, Math.PI * 2); ctx.closePath();
+      ctx.clip(); ctx.drawImage(av, ax, ay, as, as);
+      ctx.restore();
+    } catch {}
+  }
+
+  const textX = cardX + (showAvatar ? 265 : 60);
+  const textY = cardY + 170;
+  const maxTextW = cardW - (textX - cardX) - 50;
+
+  let fs = 54;
+  ctx.font = `bold ${fs}px "DM Sans", "Arial", sans-serif`;
+  while (ctx.measureText(member.user.username).width > maxTextW && fs > 24) ctx.font = `bold ${fs--}px "DM Sans", "Arial", sans-serif`;
+  ctx.fillStyle = "#FFFFFF"; ctx.fillText(member.user.username, textX, textY);
+  const nw = ctx.measureText(member.user.username).width;
+
+  if (showDiscriminator && member.user.discriminator && member.user.discriminator !== "0") {
+    ctx.font = '28px "DM Sans", "Arial", sans-serif';
+    ctx.fillStyle = "#888899"; ctx.fillText(`#${member.user.discriminator}`, textX + nw + 18, textY - 2);
+  }
+
+  const lY = textY + 40;
+  ctx.save(); ctx.shadowColor = hexToRgba(ACCENT, 0.3); ctx.shadowBlur = 10;
+  ctx.fillStyle = ACCENT; ctx.fillRect(textX, lY, 70, 4); ctx.restore();
+
+  if (showServerName) {
+    ctx.font = '30px "DM Sans", "Arial", sans-serif';
+    ctx.fillStyle = ACCENT;
+    ctx.fillText(isLeave ? `Gracias por visitarnos, ${guild.name}` : `Te damos la bienvenida a ${guild.name}`, textX, lY + 48);
+  }
+
+  if (showMemberCount) {
+    ctx.font = '22px "DM Sans", "Arial", sans-serif';
+    ctx.fillStyle = "#9999AA";
+    ctx.fillText(`Eres el miembro #${guild.memberCount}`, textX, lY + (showServerName ? 96 : 50));
+  }
+
+  try {
+    ctx.save(); ctx.shadowColor = hexToRgba(ACCENT, 0.2); ctx.shadowBlur = 15;
+    roundRect(ctx, cardX + cardW - 150, cardY + 40, 120, 44, 22);
+    ctx.fillStyle = hexToRgba(ACCENT, 0.15); ctx.fill(); ctx.restore();
+    ctx.font = 'bold 16px "DM Sans", "Arial", sans-serif';
+    ctx.fillStyle = ACCENT; ctx.textAlign = "right";
+    ctx.fillText(isLeave ? "HASTA PRONTO" : "NUEVO MIEMBRO", cardX + cardW - 48, cardY + 68);
+    ctx.textAlign = "left";
+  } catch {}
+
+  try {
+    ctx.save(); ctx.globalAlpha = 0.05;
+    const i2 = await Canvas.loadImage(guild.iconURL({ size: 128 }));
+    ctx.drawImage(i2, W - 200, 30, 130, 130); ctx.globalAlpha = 1; ctx.restore();
+  } catch {}
+
+  return canvas.encode('png');
+}
 const canvacord = require("canvacord");
+try {
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/Genta.ttf", "Genta");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/UbuntuMono.ttf", "UbuntuMono");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/DMSans-Bold.ttf", "DM Sans");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/STIXGeneral.ttf", "STIXGeneral");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/Arial.ttf", "Arial");
+} catch {}
 const { allEmojis } = require("../../botconfig/emojiFunctions");
-const Fonts = "Genta, UbuntuMono, `DM Sans`, STIXGeneral, AppleSymbol, Arial, ArialUnicode";
-const wideFonts = "`DM Sans`, STIXGeneral, AppleSymbol, Arial, ArialUnicode";
+const Fonts = 'Genta, UbuntuMono, "DM Sans", STIXGeneral, Arial';
+const wideFonts = '"DM Sans", STIXGeneral, Arial';
 module.exports = {
     name: "setup-welcome",
     category: "💪 Setup",
     aliases: ["setupwelcome"],
     cooldown: 5,
     usage: "setup-welcome --> Follow Steps",
-    description: "Manage the Welcome System (Message, Invite Tracker, Image-Design, Captcha System, Roles, etc.)",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Manage the Bienvenido System (Mensaje, Invite Tracker, Image-Design, Captcha System, Roles, etc.)",
+    memberpermissions: ['Administrador'],
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -30,22 +159,22 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Channel Welcome Messages",
-                        description: `Manage Welcome Messages in 1 CHANNEL`,
+                        description: `Manage Bienvenido Messages in 1 CHANNEL`,
                         emoji: allEmojis.msg.channel, //
                     },
                     {
                         value: "Channel Welcome Message 2",
-                        description: `Set a normal msg for a 2nd Channel (without Embed)`,
+                        description: `Set a normal msg for a 2nd Canal (without Embed)`,
                         emoji: allEmojis.msg.channel, //
                     },
                     {
                         value: "Direct Welcome Messages",
-                        description: `Manage Welcome Messages on DMS`,
+                        description: `Manage Bienvenido Messages on DMS`,
                         emoji: "😬",
                     },
                     {
                         value: "Welcome Roles (On Join)",
-                        description: `Manage the Welcome Roles. Add/remove/list them!`,
+                        description: `Manage the Bienvenido Roles. Add/remove/list them!`,
                         emoji: allEmojis.msg.roles,
                     },
                     {
@@ -55,12 +184,12 @@ module.exports = {
                     },
                     {
                         value: `Test Welcome`,
-                        description: `Test the current welcome Message`,
+                        description: `Test the current welcome Mensaje`,
                         emoji: `💪`,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Welcome-Setup!`,
+                        description: `Cancelar and stop the Bienvenido-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -69,7 +198,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Welcome-System")
+                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -87,11 +216,11 @@ module.exports = {
                     .setColor(es.color)
                     .setAuthor({
                         name: "Welcome Setup",
-                        url: "https://discord.gg/milrato",
+                        url: "https://github.com/melodiabl",
                         iconURL:
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
                     })
-                    //.setAuthor('Welcome Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png', 'https://discord.gg/milrato')
+                    //.setAuthor('Welcome Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png', 'https://github.com/melodiabl')
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -115,14 +244,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -143,27 +272,27 @@ module.exports = {
                                     },
                                     {
                                         value: "Disable Welcome",
-                                        description: `Disable the Welcome Messages`,
+                                        description: `Disable the Bienvenido Messages`,
                                         emoji: allEmojis.msg.ERROR,
                                     },
                                     {
                                         value: "Manage the Image",
-                                        description: `Manage the Welcome Image for the Message`,
+                                        description: `Manage the Bienvenido Image for the Mensaje`,
                                         emoji: "🖼️",
                                     },
                                     {
                                         value: "Edit the Message",
-                                        description: `Edit the Welcome Message ...`,
-                                        emoji: "877653386747605032",
+                                        description: `Edit the Bienvenido Mensaje ...`,
+                                        emoji: "🖼️",
                                     },
                                     {
                                         value: `${client.settings.get(message.guild.id, "welcome.invite") ? "Disable InviteInformation" : "Enable Invite Information"}`,
                                         description: `${client.settings.get(message.guild.id, "welcome.invite") ? "No longer show Information who invited him/her" : "Show Information about who invited him/her"}`,
-                                        emoji: "877653386747605032",
+                                        emoji: "🖼️",
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Welcome-Setup!`,
+                                        description: `Cancelar and stop the Bienvenido-Configuración!`,
                                         emoji: allEmojis.msg.cacnel,
                                     },
                                 ];
@@ -172,7 +301,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to setup the Welcome-System")
+                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -190,11 +319,11 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Welcome Setup",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({
+                                        name: "Welcome Setup",
+                                        iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
+                                        url: "https://github.com/melodiabl"
+                                    })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -220,14 +349,14 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -284,7 +413,7 @@ module.exports = {
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setDescription(
-                                                                        `If Someone joins this Server, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
+                                                                        `If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
                                                                             0,
                                                                             2048
                                                                         )
@@ -293,7 +422,7 @@ module.exports = {
                                                             ],
                                                         });
                                                     }
-                                                    return message.reply("you didn't ping a valid channel");
+                                                    return message.reply("you no mencionaste un channel");
                                                 })
                                                 .catch(e => {
                                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -309,7 +438,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -330,7 +459,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Server, no message will be sent into a Channel!\nSet a Channel with: \`${prefix}setup-welcome\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
+                                                            `If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-welcome\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -402,7 +531,7 @@ module.exports = {
                                                     },
                                                     {
                                                         value: "Cancel",
-                                                        description: `Cancel and stop the Welcome-Setup!`,
+                                                        description: `Cancelar and stop the Bienvenido-Configuración!`,
                                                         emoji: allEmojis.msg.cacnel,
                                                     },
                                                 ];
@@ -411,7 +540,7 @@ module.exports = {
                                                     .setCustomId("MenuSelection")
                                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                                    .setPlaceholder("Click me to setup the Welcome-System")
+                                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
                                                     .addOptions(
                                                         menuoptions.map(option => {
                                                             let Obj = {
@@ -429,11 +558,11 @@ module.exports = {
                                                 //define the embed
                                                 let MenuEmbed = new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setAuthor(
-                                                        "Welcome Setup",
-                                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                                        "https://discord.gg/milrato"
-                                                    )
+                                                    .setAuthor({
+                                                        name: "Welcome Setup",
+                                                        iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
+                                                        url: "https://github.com/melodiabl"
+                                                    })
                                                     .setDescription(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"])
                                                     );
@@ -470,7 +599,7 @@ module.exports = {
                                                         handle_the_picks_3(menu?.values[0], SetupNumber, menuoptiondata);
                                                     } else
                                                         menu?.reply({
-                                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                             ephemeral: true,
                                                         });
                                                 });
@@ -478,7 +607,7 @@ module.exports = {
                                                 collector.on("end", collected => {
                                                     menumsg.edit({
                                                         embeds: [
-                                                            menumsg.embeds[0].setDescription(
+                                                            EmbedBuilder.from(menumsg.embeds[0]).setDescription(
                                                                 `~~${menumsg.embeds[0].description}~~`
                                                             ),
                                                         ],
@@ -508,7 +637,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with__out__ an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with__out__ an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -720,7 +849,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `Cancelled the Operation!`.substring(
+                                                                                    `¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
                                                                                     )
@@ -751,7 +880,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -921,7 +1050,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `Cancelled the Operation!`.substring(
+                                                                                    `¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
                                                                                     )
@@ -952,7 +1081,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -985,7 +1114,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1018,7 +1147,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1048,7 +1177,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1078,7 +1207,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1092,44 +1221,44 @@ module.exports = {
                                                         {
                                                             let row1 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FFFFF9")
                                                                     .setEmoji("⬜")
                                                                     .setLabel("#FFFFF9"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FAFA25")
                                                                     .setEmoji("🟨")
                                                                     .setLabel("#FAFA25"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA9E25")
                                                                     .setEmoji("🟧")
                                                                     .setLabel("#FA9E25"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA2525")
                                                                     .setEmoji("🟥")
                                                                     .setLabel("#FA2525"),
                                                             ]);
                                                             let row2 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#25FA6C")
                                                                     .setEmoji("🟩")
                                                                     .setLabel("#25FA6C"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#3A98F0")
                                                                     .setEmoji("🟦")
                                                                     .setLabel("#3A98F0"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#8525FA")
                                                                     .setEmoji("🟪")
                                                                     .setLabel("#8525FA"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#030303")
                                                                     .setEmoji("⬛")
                                                                     .setLabel("#030303"),
@@ -1165,7 +1294,7 @@ module.exports = {
                                                             collector.on("end", collected => {
                                                                 tempmsg.edit({
                                                                     embeds: [
-                                                                        tempmsg.embeds[0].setDescription(
+                                                                        tempEmbedBuilder.from(msg.embeds[0]).setDescription(
                                                                             `~~${tempmsg.embeds[0].description}~~`
                                                                         ),
                                                                     ],
@@ -1194,7 +1323,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(color)
                                                                                 .setDescription(
-                                                                                    `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                    `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                         0,
                                                                                         2048
                                                                                     )
@@ -1204,7 +1333,7 @@ module.exports = {
                                                                     });
                                                                 }
                                                                 button?.reply(
-                                                                    "❌ **Only the Command Executor is allowed to react!**"
+                                                                    "❌ **Only the Comando Executor is allowed to react!**"
                                                                 );
                                                             });
                                                         }
@@ -1225,7 +1354,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `\`{user}\` ... will be replaced with the Userping (e.g: ${cmduser})\n\`{username}\` ... will be replaced with the Username (e.g: ${cmduser.user.username})\n\`{usertag}\` ... will be replaced with the Usertag (e.g: ${cmduser.user.tag})\n\n**Enter your Message now!**`
+                                                            `\`{user}\` ... will be replaced with the Userping (e.g: ${cmduser})\n\`{username}\` ... will be replaced with the Username (e.g: ${cmduser.user.username})\n\`{usertag}\` ... will be replaced with the Usertag (e.g: ${cmduser.user.username})\n\n**Enter your Message now!**`
                                                         )
                                                         .setFooter(client.getFooter(es)),
                                                 ],
@@ -1252,7 +1381,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `If Someone joins this Server, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.tag}`)}`.substring(
+                                                                    `If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
                                                                         0,
                                                                         2048
                                                                     )
@@ -1275,7 +1404,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -1300,7 +1429,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Server, a message with Invite Information will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
+                                                            `If Someone joins this Servidor, a message with Invite Information will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -1326,17 +1455,17 @@ module.exports = {
                                     },
                                     {
                                         value: "Disable Welcome 2",
-                                        description: `Disable the second Welcome Message`,
+                                        description: `Disable the second Bienvenido Mensaje`,
                                         emoji: allEmojis.msg.ERROR,
                                     },
                                     {
                                         value: "Edit the Message",
-                                        description: `Edit the second Welcome Message ...`,
-                                        emoji: "877653386747605032",
+                                        description: `Edit the second Bienvenido Mensaje ...`,
+                                        emoji: "🖼️",
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Welcome-Setup!`,
+                                        description: `Cancelar and stop the Bienvenido-Configuración!`,
                                         emoji: allEmojis.msg.cacnel,
                                     },
                                 ];
@@ -1345,7 +1474,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to setup the Welcome-System")
+                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -1363,11 +1492,11 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Welcome Setup",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({
+                                        name: "Welcome Setup",
+                                        iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
+                                        url: "https://github.com/melodiabl"
+                                    })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -1393,14 +1522,14 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -1461,7 +1590,7 @@ module.exports = {
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setDescription(
-                                                                        `If Someone joins this Server, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
+                                                                        `If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
                                                                             0,
                                                                             2048
                                                                         )
@@ -1470,7 +1599,7 @@ module.exports = {
                                                             ],
                                                         });
                                                     }
-                                                    return message.reply("you didn't ping a valid channel");
+                                                    return message.reply("you no mencionaste un channel");
                                                 })
                                                 .catch(e => {
                                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -1486,7 +1615,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -1507,7 +1636,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Server, no message will be sent into a Channel!\nSet a Channel with: \`${prefix}setup-welcome\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
+                                                            `If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-welcome\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -1529,7 +1658,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `\`{user}\` ... will be replaced with the Userping (e.g: ${cmduser})\n\`{username}\` ... will be replaced with the Username (e.g: ${cmduser.user.username})\n\`{usertag}\` ... will be replaced with the Usertag (e.g: ${cmduser.user.tag})\n\n**Enter your Message now!**`
+                                                            `\`{user}\` ... will be replaced with the Userping (e.g: ${cmduser})\n\`{username}\` ... will be replaced with the Username (e.g: ${cmduser.user.username})\n\`{usertag}\` ... will be replaced with the Usertag (e.g: ${cmduser.user.username})\n\n**Enter your Message now!**`
                                                         )
                                                         .setFooter(client.getFooter(es)),
                                                 ],
@@ -1560,7 +1689,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `If Someone joins this Server, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.tag}`)}`.substring(
+                                                                    `If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
                                                                         0,
                                                                         2048
                                                                     )
@@ -1583,7 +1712,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -1609,22 +1738,22 @@ module.exports = {
                                     },
                                     {
                                         value: "Manage the Image",
-                                        description: `Manage the Welcome Image for the Message`,
+                                        description: `Manage the Bienvenido Image for the Mensaje`,
                                         emoji: "🖼️",
                                     },
                                     {
                                         value: "Edit the Message",
-                                        description: `Edit the Welcome Message ...`,
-                                        emoji: "877653386747605032",
+                                        description: `Edit the Bienvenido Mensaje ...`,
+                                        emoji: "🖼️",
                                     },
                                     {
                                         value: `${client.settings.get(message.guild.id, "welcome.invite") ? "Disable InviteInformation" : "Enable Invite Information"}`,
                                         description: `${client.settings.get(message.guild.id, "welcome.invite") ? "No longer show Information who invited him/her" : "Show Information about who invited him/her"}`,
-                                        emoji: "877653386747605032",
+                                        emoji: "🖼️",
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Welcome-Setup!`,
+                                        description: `Cancelar and stop the Bienvenido-Configuración!`,
                                         emoji: allEmojis.msg.cacnel,
                                     },
                                 ];
@@ -1633,7 +1762,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to setup the Welcome-System")
+                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -1651,11 +1780,11 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "DM - Welcome Setup",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({
+                                        name: "DM - Welcome Setup",
+                                        iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
+                                        url: "https://github.com/melodiabl"
+                                    })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -1681,14 +1810,14 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -1698,12 +1827,9 @@ module.exports = {
                                 switch (optionhandletype) {
                                     case `${!client.settings.get(message.guild.id, "welcome.dm") ? "ENABLE DM WELCOME" : "DISABLE DM WELCOME"}`:
                                         {
-                                            client.settings.set(
-                                                message.guild.id,
-                                                !client.settings.set(message.guild.id, "nochannel", "welcome.dm"),
-                                                "welcome.dm"
-                                            );
-                                            if (!client.settings.set(message.guild.id, "nochannel", "welcome.dm")) {
+                                            const currentDm = client.settings.get(message.guild.id, "welcome.dm");
+                                            client.settings.set(message.guild.id, !currentDm, "welcome.dm");
+                                            if (!client.settings.get(message.guild.id, "welcome.dm")) {
                                                 return message.reply({
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
@@ -1795,7 +1921,7 @@ module.exports = {
                                                     },
                                                     {
                                                         value: "Cancel",
-                                                        description: `Cancel and stop the Welcome-Setup!`,
+                                                        description: `Cancelar and stop the Bienvenido-Configuración!`,
                                                         emoji: allEmojis.msg.cacnel,
                                                     },
                                                 ];
@@ -1804,7 +1930,7 @@ module.exports = {
                                                     .setCustomId("MenuSelection")
                                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                                    .setPlaceholder("Click me to setup the Welcome-System")
+                                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
                                                     .addOptions(
                                                         menuoptions.map(option => {
                                                             let Obj = {
@@ -1822,11 +1948,11 @@ module.exports = {
                                                 //define the embed
                                                 let MenuEmbed = new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setAuthor(
-                                                        "Welcome Setup",
-                                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                                        "https://discord.gg/milrato"
-                                                    )
+                                                    .setAuthor({
+                                                        name: "Welcome Setup",
+                                                        iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
+                                                        url: "https://github.com/melodiabl"
+                                                    })
                                                     .setDescription(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"])
                                                     );
@@ -1863,7 +1989,7 @@ module.exports = {
                                                         handle_the_picks_3(menu?.values[0], SetupNumber, menuoptiondata);
                                                     } else
                                                         menu?.reply({
-                                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                             ephemeral: true,
                                                         });
                                                 });
@@ -1871,7 +1997,7 @@ module.exports = {
                                                 collector.on("end", collected => {
                                                     menumsg.edit({
                                                         embeds: [
-                                                            menumsg.embeds[0].setDescription(
+                                                            EmbedBuilder.from(menumsg.embeds[0]).setDescription(
                                                                 `~~${menumsg.embeds[0].description}~~`
                                                             ),
                                                         ],
@@ -2101,7 +2227,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `Cancelled the Operation!`.substring(
+                                                                                    `¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
                                                                                     )
@@ -2296,7 +2422,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `Cancelled the Operation!`.substring(
+                                                                                    `¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
                                                                                     )
@@ -2354,7 +2480,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2387,7 +2513,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2420,7 +2546,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2450,7 +2576,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2464,44 +2590,44 @@ module.exports = {
                                                         {
                                                             let row1 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FFFFF9")
                                                                     .setEmoji("⬜")
                                                                     .setLabel("#FFFFF9"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FAFA25")
                                                                     .setEmoji("🟨")
                                                                     .setLabel("#FAFA25"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA9E25")
                                                                     .setEmoji("🟧")
                                                                     .setLabel("#FA9E25"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA2525")
                                                                     .setEmoji("🟥")
                                                                     .setLabel("#FA2525"),
                                                             ]);
                                                             let row2 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#25FA6C")
                                                                     .setEmoji("🟩")
                                                                     .setLabel("#25FA6C"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#3A98F0")
                                                                     .setEmoji("🟦")
                                                                     .setLabel("#3A98F0"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#8525FA")
                                                                     .setEmoji("🟪")
                                                                     .setLabel("#8525FA"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#030303")
                                                                     .setEmoji("⬛")
                                                                     .setLabel("#030303"),
@@ -2537,7 +2663,7 @@ module.exports = {
                                                             collector.on("end", collected => {
                                                                 tempmsg.edit({
                                                                     embeds: [
-                                                                        tempmsg.embeds[0].setDescription(
+                                                                        tempEmbedBuilder.from(msg.embeds[0]).setDescription(
                                                                             `~~${tempmsg.embeds[0].description}~~`
                                                                         ),
                                                                     ],
@@ -2566,7 +2692,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(color)
                                                                                 .setDescription(
-                                                                                    `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                    `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                         0,
                                                                                         2048
                                                                                     )
@@ -2576,7 +2702,7 @@ module.exports = {
                                                                     });
                                                                 }
                                                                 button?.reply(
-                                                                    "❌ **Only the Command Executor is allowed to react!**"
+                                                                    "❌ **Only the Comando Executor is allowed to react!**"
                                                                 );
                                                             });
                                                         }
@@ -2630,7 +2756,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.tag}`)}`.substring(
+                                                                    `${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
                                                                         0,
                                                                         2048
                                                                     )
@@ -2653,7 +2779,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -2695,22 +2821,22 @@ module.exports = {
                                 let menuoptions = [
                                     {
                                         value: "Add Role",
-                                        description: `Add a Welcome Role`,
+                                        description: `Add a Bienvenido Rol`,
                                         emoji: "✅",
                                     },
                                     {
                                         value: "Remove Role",
-                                        description: `Remove a Welcome Role`,
+                                        description: `Remove a Bienvenido Rol`,
                                         emoji: "🗑️",
                                     },
                                     {
                                         value: "Show Roles",
-                                        description: `Show all Welcome Roles`,
+                                        description: `Show all Bienvenido Roles`,
                                         emoji: "📑",
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Welcome-Setup!`,
+                                        description: `Cancelar and stop the Bienvenido-Configuración!`,
                                         emoji: allEmojis.msg.cacnel,
                                     },
                                 ];
@@ -2719,7 +2845,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to setup the Welcome-System")
+                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -2737,11 +2863,11 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Welcome Setup",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({
+                                        name: "Welcome Setup",
+                                        iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
+                                        url: "https://github.com/melodiabl"
+                                    })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -2767,14 +2893,14 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -2859,7 +2985,7 @@ module.exports = {
                                                             ],
                                                         });
                                                     }
-                                                    return message.reply("you didn't ping a valid Role");
+                                                    return message.reply("¡no mencionaste un Rol válido!");
                                                 })
                                                 .catch(e => {
                                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -2875,7 +3001,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -2960,7 +3086,7 @@ module.exports = {
                                                             ],
                                                         });
                                                     }
-                                                    return message.reply("you didn't ping a valid Role");
+                                                    return message.reply("¡no mencionaste un Rol válido!");
                                                 })
                                                 .catch(e => {
                                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -2976,7 +3102,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -3039,7 +3165,7 @@ module.exports = {
                         {
                             var { member } = message;
                             let welcome = client.settings.get(member.guild.id, "welcome");
-                            let invitemessage = `Invited by ${member.user.tag ? `**${member.user.tag}**` : `<@${member.user.id}>`}\n<:Like:857334024087011378> **X Invites**\n[<:joines:866356465299488809> X Joins | <:leaves:866356598356049930> X Leaves | <:no:833101993668771842> X Fakes]`;
+                            let invitemessage = `Invited by ${member.user.username ? `**${member.user.username}**` : `<@${member.user.id}>`}\n<:Like:857334024087011378> **X Invites**\n[<:joines:866356465299488809> X Joins | <:leaves:866356598356049930> X Leaves | <:no:833101993668771842> X Fakes]`;
                             if (welcome) {
                                 let themessage = String(welcome.secondmsg);
                                 if (!themessage || themessage.length == 0)
@@ -3047,11 +3173,11 @@ module.exports = {
                                 themessage = themessage
                                     .replace("{user}", `${member.user}`)
                                     .replace("{username}", `${member.user.username}`)
-                                    .replace("{usertag}", `${member.user.tag}`);
+                                    .replace("{usertag}", `${member.user.username}`);
                                 if (
                                     message.channel
                                         .permissionsFor(message.channel.guild.members.me)
-                                        .has(Discord.PermissionFlagsBits.SEND_MESSAGES)
+                                        .has(Discord.PermissionFlagsBits.SendMessages)
                                 ) {
                                     message.channel
                                         .send({
@@ -3097,7 +3223,7 @@ module.exports = {
                                     )
                                     .setTimestamp()
                                     .setFooter({ text: "ID: " + member.user.id,
-                                        iconURL: member.user.displayAvatarURL({ dynamic: true })
+                                        iconURL: member.user.displayAvatarURL()
                                     })
                                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable7"]))
                                     .setDescription(
@@ -3105,17 +3231,17 @@ module.exports = {
                                             .get(member.guild.id, "welcome.msg")
                                             .replace("{user}", `${member.user}`)
                                             .replace("{username}", `${member.user.username}`)
-                                            .replace("{usertag}", `${member.user.tag}`)
+                                            .replace("{usertag}", `${member.user.username}`)
                                     )
-                                    .addField(
+                                    .addFields(
                                         eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variablex_8"]),
                                         eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable8"])
                                     );
 
                                 //send the welcome embed to there
-                                if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
+                                if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SendMessages)) {
                                     if (
-                                        channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.EMBED_LINKS)
+                                        channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.EmbedLinks)
                                     ) {
                                         channel
                                             .send({
@@ -3151,7 +3277,7 @@ module.exports = {
                                     )
                                     .setTimestamp()
                                     .setFooter({ text: "ID: " + member.user.id,
-                                        iconURL: member.user.displayAvatarURL({ dynamic: true })
+                                        iconURL: member.user.displayAvatarURL()
                                     })
                                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable9"]))
                                     .setDescription(
@@ -3159,10 +3285,10 @@ module.exports = {
                                             .get(member.guild.id, "welcome.dm_msg")
                                             .replace("{user}", `${member.user}`)
                                             .replace("{username}", `${member.user.username}`)
-                                            .replace("{usertag}", `${member.user.tag}`)
+                                            .replace("{usertag}", `${member.user.username}`)
                                     );
                                 if (client.settings.get(member.guild.id, "welcome.invitedm"))
-                                    welcomeembed.addField("\u200b", `${invitemessage}`);
+                                    welcomeembed.addFields("\u200b", `${invitemessage}`);
                                 //send the welcome embed to there
                                 channel
                                     .send({
@@ -3187,7 +3313,7 @@ module.exports = {
                                     )
                                     .setTimestamp()
                                     .setFooter({ text: "ID: " + member.user.id,
-                                        iconURL: member.user.displayAvatarURL({ dynamic: true })
+                                        iconURL: member.user.displayAvatarURL()
                                     })
                                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable10"]))
                                     .setDescription(
@@ -3195,11 +3321,11 @@ module.exports = {
                                             .get(member.guild.id, "welcome.dm_msg")
                                             .replace("{user}", `${member.user}`)
                                             .replace("{username}", `${member.user.username}`)
-                                            .replace("{usertag}", `${member.user.tag}`)
+                                            .replace("{usertag}", `${member.user.username}`)
                                     )
                                     .setImage(client.settings.get(member.guild.id, "welcome.customdm"));
                                 if (client.settings.get(member.guild.id, "welcome.invitedm"))
-                                    welcomeembed.addField("\u200b", `${invitemessage}`);
+                                    welcomeembed.addFields("\u200b", `${invitemessage}`);
                                 //send the welcome embed to there
                                 channel
                                     .send({
@@ -3224,7 +3350,7 @@ module.exports = {
                                     )
                                     .setTimestamp()
                                     .setFooter({ text: "ID: " + member.user.id,
-                                        iconURL: member.user.displayAvatarURL({ dynamic: true })
+                                        iconURL: member.user.displayAvatarURL()
                                     })
                                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable11"]))
                                     .setDescription(
@@ -3232,15 +3358,15 @@ module.exports = {
                                             .get(member.guild.id, "welcome.msg")
                                             .replace("{user}", `${member.user}`)
                                             .replace("{username}", `${member.user.username}`)
-                                            .replace("{usertag}", `${member.user.tag}`)
+                                            .replace("{usertag}", `${member.user.username}`)
                                     )
                                     .setImage(client.settings.get(member.guild.id, "welcome.custom"));
                                 if (client.settings.get(member.guild.id, "welcome.invite"))
-                                    welcomeembed.addField("\u200b", `${invitemessage}`);
+                                    welcomeembed.addFields("\u200b", `${invitemessage}`);
                                 //send the welcome embed to there
-                                if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SEND_MESSAGES)) {
+                                if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SendMessages)) {
                                     if (
-                                        channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.EMBED_LINKS)
+                                        channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.EmbedLinks)
                                     ) {
                                         channel
                                             .send({
@@ -3278,7 +3404,7 @@ module.exports = {
                                         )
                                         .setTimestamp()
                                         .setFooter({ text: "ID: " + member.user.id,
-                                            iconURL: member.user.displayAvatarURL({ dynamic: true })
+                                            iconURL: member.user.displayAvatarURL()
                                         })
                                         .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable12"]))
                                         .setDescription(
@@ -3286,147 +3412,23 @@ module.exports = {
                                                 .get(member.guild.id, "welcome.dm_msg")
                                                 .replace("{user}", `${member.user}`)
                                                 .replace("{username}", `${member.user.username}`)
-                                                .replace("{usertag}", `${member.user.tag}`)
+                                                .replace("{usertag}", `${member.user.username}`)
                                         );
                                     if (client.settings.get(member.guild.id, "welcome.invitedm"))
-                                        welcomeembed.addField("\u200b", `${invitemessage}`);
+                                        welcomeembed.addFields("\u200b", `${invitemessage}`);
                                     //member roles add on welcome every single role
-                                    const canvas = Canvas.createCanvas(1772, 633);
-                                    //make it "2D"
-                                    const ctx = canvas.getContext(`2d`);
-
-                                    if (client.settings.get(member.guild.id, "welcome.backgrounddm") !== "transparent") {
-                                        try {
-                                            const bgimg = await Canvas.loadImage(
-                                                client.settings.get(member.guild.id, "welcome.backgrounddm")
-                                            );
-                                            ctx.drawImage(bgimg, 0, 0, canvas.width, canvas.height);
-                                        } catch {}
-                                    } else {
-                                        try {
-                                            if (
-                                                !member.guild.iconURL() ||
-                                                member.guild.iconURL() == null ||
-                                                member.guild.iconURL() == undefined
-                                            )
-                                                return;
-                                            const img = await Canvas.loadImage(
-                                                member.guild.iconURL({
-                                                    format: "png",
-                                                })
-                                            );
-                                            ctx.globalAlpha = 0.3;
-                                            //draw the guildicon
-                                            ctx.drawImage(img, 1772 - 633, 0, 633, 633);
-                                            ctx.globalAlpha = 1;
-                                        } catch {}
-                                    }
-
-                                    if (client.settings.get(member.guild.id, "welcome.framedm")) {
-                                        let background;
-                                        var framecolor = client.settings
-                                            .get(member.guild.id, "welcome.framecolordm")
-                                            .toUpperCase();
-                                        if (framecolor == "WHITE") framecolor = "#FFFFF9";
-                                        if (
-                                            client.settings.get(member.guild.id, "welcome.discriminatordm") &&
-                                            client.settings.get(member.guild.id, "welcome.servernamedm")
-                                        )
-                                            background = await Canvas.loadImage(
-                                                `./assets/welcome/${framecolor}/welcome3frame.png`
-                                            );
-                                        else if (client.settings.get(member.guild.id, "welcome.discriminatordm"))
-                                            background = await Canvas.loadImage(
-                                                `./assets/welcome/${framecolor}/welcome2frame_unten.png`
-                                            );
-                                        else if (client.settings.get(member.guild.id, "welcome.servernamedm"))
-                                            background = await Canvas.loadImage(
-                                                `./assets/welcome/${framecolor}/welcome2frame_oben.png`
-                                            );
-                                        else
-                                            background = await Canvas.loadImage(
-                                                `./assets/welcome/${framecolor}/welcome1frame.png`
-                                            );
-
-                                        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-                                        if (client.settings.get(member.guild.id, "welcome.pbdm")) {
-                                            background = await Canvas.loadImage(
-                                                `./assets/welcome/${framecolor}/welcome1framepb?.png`
-                                            );
-                                            ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-                                        }
-                                    }
-
-                                    var fillcolors = client.settings
-                                        .get(member.guild.id, "welcome.framecolordm")
-                                        .toUpperCase();
-                                    if (fillcolors == "WHITE") framecolor = "#FFFFF9";
-                                    ctx.fillStyle = fillcolors.toLowerCase();
-
-                                    //set the first text string
-                                    var textString3 = `${member.user.username}`;
-                                    //if the text is too big then smaller the text
-                                    if (textString3.length >= 14) {
-                                        ctx.font = `100px ${Fonts}`;
-                                        await canvacord.Util.renderEmoji(ctx, textString3, 720, canvas.height / 2);
-                                    }
-                                    //else dont do it
-                                    else {
-                                        ctx.font = `150px ${Fonts}`;
-                                        await canvacord.Util.renderEmoji(ctx, textString3, 720, canvas.height / 2 + 20);
-                                    }
-
-                                    ctx.font = `bold 50px ${wideFonts}`;
-                                    //define the Discriminator Tag
-                                    if (client.settings.get(member.guild.id, "welcome.discriminatordm")) {
-                                        await canvacord.Util.renderEmoji(
-                                            ctx,
-                                            `#${member.user.discriminator}`,
-                                            750,
-                                            canvas.height / 2 + 125
-                                        );
-                                    }
-                                    //define the Member count
-                                    if (client.settings.get(member.guild.id, "welcome.membercountdm")) {
-                                        await canvacord.Util.renderEmoji(
-                                            ctx,
-                                            `Member #${member.guild.memberCount}`,
-                                            750,
-                                            canvas.height / 2 + 200
-                                        );
-                                    }
-                                    //get the Guild Name
-                                    if (client.settings.get(member.guild.id, "welcome.servernamedm")) {
-                                        await canvacord.Util.renderEmoji(
-                                            ctx,
-                                            `${member.guild.name}`,
-                                            700,
-                                            canvas.height / 2 - 150
-                                        );
-                                    }
-
-                                    if (client.settings.get(member.guild.id, "welcome.pbdm")) {
-                                        //create a circular "mask"
-                                        ctx.beginPath();
-                                        ctx.arc(315, canvas.height / 2, 250, 0, Math.PI * 2, true); //position of img
-                                        ctx.closePath();
-                                        ctx.clip();
-                                        //define the user avatar
-                                        const avatar = await Canvas.loadImage(
-                                            member.user.displayAvatarURL({
-                                                format: `png`,
-                                            })
-                                        );
-                                        //draw the avatar
-                                        ctx.drawImage(avatar, 65, canvas.height / 2 - 250, 500, 500);
-                                    }
-
-                                    //get it as a discord attachment
-                                    const attachment = new Discord.AttachmentBuilder(
-                                        canvas.toBuffer("image/webp"),
-                                        `welcome-image.png`
-                                    );
-                                    //send the welcome embed to there
+                                    const buf = await drawWelcome({
+                                        member,
+                                        guild: member.guild,
+                                        accentColor: client.settings.get(member.guild.id, "welcome.framecolordm") || "#5865F2",
+                                        showAvatar: client.settings.get(member.guild.id, "welcome.pbdm") || false,
+                                        showDiscriminator: client.settings.get(member.guild.id, "welcome.discriminatordm") || false,
+                                        showMemberCount: client.settings.get(member.guild.id, "welcome.membercountdm") || false,
+                                        showServerName: client.settings.get(member.guild.id, "welcome.servernamedm") || false,
+                                        background: client.settings.get(member.guild.id, "welcome.backgrounddm"),
+                                        isLeave: false,
+                                    });
+                                    const attachment = new Discord.AttachmentBuilder(buf, `welcome-image.png`);
                                     channel
                                         .send({
                                             content: `**DIRECT MESSAGE WELCOME:**\n\n<@${member.user.id}>`,
@@ -3453,7 +3455,7 @@ module.exports = {
                                         )
                                         .setTimestamp()
                                         .setFooter({ text: "ID: " + member.user.id,
-                                            iconURL: member.user.displayAvatarURL({ dynamic: true })
+                                            iconURL: member.user.displayAvatarURL()
                                         })
 
                                         .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable13"]))
@@ -3462,160 +3464,36 @@ module.exports = {
                                                 .get(member.guild.id, "welcome.msg")
                                                 .replace("{user}", `${member.user}`)
                                                 .replace("{username}", `${member.user.username}`)
-                                                .replace("{usertag}", `${member.user.tag}`)
+                                                .replace("{usertag}", `${member.user.username}`)
                                         );
                                     if (client.settings.get(member.guild.id, "welcome.invite"))
-                                        welcomeembed.addField("\u200b", `${invitemessage}`);
+                                        welcomeembed.addFields("\u200b", `${invitemessage}`);
                                     try {
-                                        //member roles add on welcome every single role
-                                        const canvas = Canvas.createCanvas(1772, 633);
-                                        //make it "2D"
-                                        const ctx = canvas.getContext(`2d`);
-
-                                        if (client.settings.get(member.guild.id, "welcome.background") !== "transparent") {
-                                            try {
-                                                const bgimg = await Canvas.loadImage(
-                                                    client.settings.get(member.guild.id, "welcome.background")
-                                                );
-                                                ctx.drawImage(bgimg, 0, 0, canvas.width, canvas.height);
-                                            } catch {}
-                                        } else {
-                                            try {
-                                                if (
-                                                    !member.guild.iconURL() ||
-                                                    member.guild.iconURL() == null ||
-                                                    member.guild.iconURL() == undefined
-                                                )
-                                                    return;
-                                                const img = await Canvas.loadImage(
-                                                    member.guild.iconURL({
-                                                        format: "png",
-                                                    })
-                                                );
-                                                ctx.globalAlpha = 0.3;
-                                                //draw the guildicon
-                                                ctx.drawImage(img, 1772 - 633, 0, 633, 633);
-                                                ctx.globalAlpha = 1;
-                                            } catch {}
-                                        }
-
-                                        if (client.settings.get(member.guild.id, "welcome.frame")) {
-                                            let background;
-                                            var framecolor = client.settings
-                                                .get(member.guild.id, "welcome.framecolor")
-                                                .toUpperCase();
-                                            if (framecolor == "WHITE") framecolor = "#FFFFF9";
-                                            if (
-                                                client.settings.get(member.guild.id, "welcome.discriminator") &&
-                                                client.settings.get(member.guild.id, "welcome.servername")
-                                            )
-                                                background = await Canvas.loadImage(
-                                                    `./assets/welcome/${framecolor}/welcome3frame.png`
-                                                );
-                                            else if (client.settings.get(member.guild.id, "welcome.discriminator"))
-                                                background = await Canvas.loadImage(
-                                                    `./assets/welcome/${framecolor}/welcome2frame_unten.png`
-                                                );
-                                            else if (client.settings.get(member.guild.id, "welcome.servername"))
-                                                background = await Canvas.loadImage(
-                                                    `./assets/welcome/${framecolor}/welcome2frame_oben.png`
-                                                );
-                                            else
-                                                background = await Canvas.loadImage(
-                                                    `./assets/welcome/${framecolor}/welcome1frame.png`
-                                                );
-
-                                            ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-                                            if (client.settings.get(member.guild.id, "welcome.pb")) {
-                                                background = await Canvas.loadImage(
-                                                    `./assets/welcome/${framecolor}/welcome1framepb?.png`
-                                                );
-                                                ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-                                            }
-                                        }
-
-                                        var fillcolor = client.settings
-                                            .get(member.guild.id, "welcome.framecolor")
-                                            .toUpperCase();
-                                        if (fillcolor == "WHITE") framecolor = "#FFFFF9";
-                                        ctx.fillStyle = fillcolor.toLowerCase();
-
-                                        //set the first text string
-                                        var textString3 = `${member.user.username}`;
-                                        //if the text is too big then smaller the text
-                                        if (textString3.length >= 14) {
-                                            ctx.font = `100px ${Fonts}`;
-                                            await canvacord.Util.renderEmoji(ctx, textString3, 720, canvas.height / 2);
-                                        }
-                                        //else dont do it
-                                        else {
-                                            ctx.font = `150px ${Fonts}`;
-                                            await canvacord.Util.renderEmoji(ctx, textString3, 720, canvas.height / 2 + 20);
-                                        }
-
-                                        ctx.font = `bold 50px ${wideFonts}`;
-                                        //define the Discriminator Tag
-                                        if (client.settings.get(member.guild.id, "welcome.discriminator")) {
-                                            await canvacord.Util.renderEmoji(
-                                                ctx,
-                                                `#${member.user.discriminator}`,
-                                                750,
-                                                canvas.height / 2 + 125
-                                            );
-                                        }
-                                        //define the Member count
-                                        if (client.settings.get(member.guild.id, "welcome.membercount")) {
-                                            await canvacord.Util.renderEmoji(
-                                                ctx,
-                                                `Member #${member.guild.memberCount}`,
-                                                750,
-                                                canvas.height / 2 + 200
-                                            );
-                                        }
-                                        //get the Guild Name
-                                        if (client.settings.get(member.guild.id, "welcome.servername")) {
-                                            await canvacord.Util.renderEmoji(
-                                                ctx,
-                                                `${member.guild.name}`,
-                                                700,
-                                                canvas.height / 2 - 150
-                                            );
-                                        }
-
-                                        if (client.settings.get(member.guild.id, "welcome.pb")) {
-                                            //create a circular "mask"
-                                            ctx.beginPath();
-                                            ctx.arc(315, canvas.height / 2, 250, 0, Math.PI * 2, true); //position of img
-                                            ctx.closePath();
-                                            ctx.clip();
-                                            //define the user avatar
-                                            const avatar = await Canvas.loadImage(
-                                                member.user.displayAvatarURL({
-                                                    format: `png`,
-                                                })
-                                            );
-                                            //draw the avatar
-                                            ctx.drawImage(avatar, 65, canvas.height / 2 - 250, 500, 500);
-                                        }
-                                        //get it as a discord attachment
-                                        const attachment = new Discord.AttachmentBuilder(
-                                            canvas.toBuffer("image/webp"),
-                                            `welcome-image.png`
-                                        );
+                                        const buf = await drawWelcome({
+                                            member,
+                                            guild: member.guild,
+                                            accentColor: client.settings.get(member.guild.id, "welcome.framecolor") || "#5865F2",
+                                            showAvatar: client.settings.get(member.guild.id, "welcome.pb") || false,
+                                            showDiscriminator: client.settings.get(member.guild.id, "welcome.discriminator") || false,
+                                            showMemberCount: client.settings.get(member.guild.id, "welcome.membercount") || false,
+                                            showServerName: client.settings.get(member.guild.id, "welcome.servername") || false,
+                                            background: client.settings.get(member.guild.id, "welcome.background"),
+                                            isLeave: false,
+                                        });
+                                        const attachment = new Discord.AttachmentBuilder(buf, `welcome-image.png`);
                                         //send the welcome embed to there
                                         if (
                                             channel
                                                 .permissionsFor(channel.guild.members.me)
-                                                .has(Discord.PermissionFlagsBits.SEND_MESSAGES)
+                                                .has(Discord.PermissionFlagsBits.SendMessages)
                                         ) {
                                             if (
                                                 channel
                                                     .permissionsFor(channel.guild.members.me)
-                                                    .has(Discord.PermissionFlagsBits.EMBED_LINKS) &&
+                                                    .has(Discord.PermissionFlagsBits.EmbedLinks) &&
                                                 channel
                                                     .permissionsFor(channel.guild.members.me)
-                                                    .has(Discord.PermissionFlagsBits.ATTACH_FILES)
+                                                    .has(Discord.PermissionFlagsBits.AttachFiles)
                                             ) {
                                                 channel
                                                     .send({
@@ -3627,7 +3505,7 @@ module.exports = {
                                             } else if (
                                                 channel
                                                     .permissionsFor(channel.guild.members.me)
-                                                    .has(Discord.PermissionFlagsBits.ATTACH_FILES)
+                                                    .has(Discord.PermissionFlagsBits.AttachFiles)
                                             ) {
                                                 channel
                                                     .send({
@@ -3679,10 +3557,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

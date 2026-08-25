@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "serveravatar",
-    description: "Shows the ServerAvatar",
+    description: "Muestra el avatar del servidor",
     run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
         //things u can directly access in an interaction!
         const {
@@ -25,11 +25,11 @@ module.exports = {
                 ephemeral: true,
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setAuthor(
-                            handlemsg(client.la[ls].cmds.info.serveravatar.author, { servername: guild.name }),
-                            guild.iconURL({ dynamic: true }),
-                            "https://discord.gg/milrato"
-                        )
+                        .setAuthor({
+                            name: handlemsg(client.la[ls].cmds.info.serveravatar.author, { servername: guild.name }),
+                            iconURL: guild.iconURL(),
+                            url: "https://github.com/melodiabl"
+                        })
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -38,26 +38,17 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .addField("<:arrow:832598861813776394> PNG", `[\`LINK\`](${guild.iconURL({ format: "png" })})`, true)
-                        .addField(
-                            "<:arrow:832598861813776394> JPEG",
-                            `[\`LINK\`](${guild.iconURL({ format: "jpg" })})`,
-                            true
-                        )
-                        .addField(
-                            "<:arrow:832598861813776394> WEBP",
-                            `[\`LINK\`](${guild.iconURL({ format: "webp" })})`,
-                            true
+                        .addFields(
+                            { name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${guild.iconURL()})`, inline: true },
+                            { name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${guild.iconURL()})`, inline: true },
+                            { name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${guild.iconURL()})`, inline: true }
                         )
                         .setURL(
-                            guild.iconURL({
-                                dynamic: true,
-                            })
+                            guild.iconURL()
                         )
                         .setFooter(client.getFooter(es))
                         .setImage(
                             guild.iconURL({
-                                dynamic: true,
                                 size: 256,
                             })
                         ),
@@ -70,10 +61,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

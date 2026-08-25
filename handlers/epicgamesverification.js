@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const { ButtonStyle } = require("discord.js");
 const Platforms = {
     pc: "PC",
     psn: "Playstation",
@@ -39,12 +40,12 @@ module.exports = async client => {
                 components: [
                     new Discord.ActionRowBuilder().addComponents([
                         new Discord.ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setEmoji("✋")
                             .setLabel("Yes Change it!")
                             .setCustomId("epicgamesverify_f"),
                         new Discord.ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Secondary)
+                            .setStyle(ButtonStyle.Secondary)
                             .setEmoji("✋")
                             .setLabel("No I want to keep it!")
                             .setCustomId("no"),
@@ -54,37 +55,37 @@ module.exports = async client => {
         } else {
             //else force Create it!
             user.send({
-                content: `:question: **Select your Platform**\n> Where do you play on?`,
+                content: `:question: **Seleccionar your Platform**\n> Where do you play on?`,
                 components: [
                     new Discord.ActionRowBuilder().addComponents([
                         new Discord.StringSelectMenuBuilder()
                             .setMaxValues(1)
                             .setMinValues(1)
-                            .setPlaceholder("Select the Platform")
+                            .setPlaceholder("Selecciona la plataforma")
                             .setCustomId("Platform")
                             .addOptions([
                                 {
-                                    label: "PC | Computer",
+                                    label: "PC | Computadora",
                                     value: "pc",
-                                    description: "If you play on Computer / Laptop",
-                                    emoji: "840608514648047666",
+                                    description: "Si juegas en computadora/portátil",
+                                    emoji: "🖥️",
                                 },
                                 {
                                     label: "Playstation",
                                     value: "psn",
-                                    description: "If you play on a Playstation",
-                                    emoji: "840608342040117249",
+                                    description: "Si juegas en una PlayStation",
+                                    emoji: "🎮",
                                 },
                                 {
                                     label: "Xbox",
                                     value: "xbl",
-                                    description: "If you play on a XBOX",
-                                    emoji: "840608097701330996",
+                                    description: "Si juegas en una Xbox",
+                                    emoji: "🎮",
                                 },
                                 {
                                     label: "Others",
                                     value: "others",
-                                    description: "If you play on something else..",
+                                    description: "Si juegas en otra cosa...",
                                 },
                             ]),
                     ]),
@@ -92,7 +93,7 @@ module.exports = async client => {
             })
                 .then(async msg => {
                     interaction.reply({
-                        content: "👍 **Check your DIRECT Messages! And answer my Questions**",
+                        content: "👍 **¡Revisa tus mensajes directos! Y responde mis preguntas**",
                         ephemeral: true,
                     });
                     let Platform =
@@ -109,10 +110,10 @@ module.exports = async client => {
                             })
                             .catch(() => {})) || false;
                     if (!Platform) {
-                        return user.send("❌ Cancelled, due to no reaction in under 2 Minutes!");
+                        return user.send("❌ Cancelado, por no reaccionar en menos de 2 minutos");
                     }
                     user.send(
-                        `:question: **What is your EPIC GAMES Username?**\n> Make sure to send just the Username and send it 1:1 as it is \`Epicgames.com\``
+                        `:question: **¿Cuál es tu nombre de usuario de EPIC GAMES?**\n> Asegúrate de enviar solo el nombre de usuario tal cual aparece en \`Epicgames.com\``
                     );
                     let Username =
                         (await msg.channel
@@ -120,12 +121,12 @@ module.exports = async client => {
                             .then(c => c.first()?.content)
                             .catch(() => {})) || false;
                     if (!Username) {
-                        return user.send("❌ Cancelled, due to not sending the Username in under 2 Minutes!");
+                        return user.send("❌ Cancelado, por no enviar el nombre de usuario en menos de 2 minutos");
                     }
                     let others = client.epicgamesDB.find(d => d.guild && d.guild == guildId && d.epic && d.epic == Username);
                     if (others && others.length > 0)
                         return user.send(
-                            `❌ **Someone with the User-ID: \`${others.user}\` Linked their Account with this Epic Games Name!**`
+                            `❌ **Alguien con la ID de usuario: \`${others.user}\` ¡Vinculó su cuenta con este nombre de Epic Games!**`
                         );
                     let fortniteClient = new fortnite("e032828b-886d-4ed6-9aa1-0e2e725592a8");
                     let tdata =
@@ -133,43 +134,43 @@ module.exports = async client => {
                         false;
                     if (!tdata || tdata.code === 404) {
                         return user.send(
-                            "❌ Could not find your Epic Games Account, please try again and make sure you send the right name!"
+                            "❌ No se pudo encontrar tu cuenta de Epic Games, inténtalo de nuevo y asegúrate de enviar el nombre correcto"
                         );
                     }
                     client.epicgamesDB.set(user.id, Username, "epic");
                     client.epicgamesDB.set(user.id, Platform, "Platform");
                     user.send({
-                        content: `:question: **Select your Platform**\n> Where do you play on?`,
+                        content: `:question: **Seleccionar your Platform**\n> Where do you play on?`,
                         components: [
                             new Discord.ActionRowBuilder().addComponents([
                                 new Discord.StringSelectMenuBuilder()
                                     .setMaxValues(1)
                                     .setMinValues(1)
-                                    .setPlaceholder("Select the Platform")
+                                    .setPlaceholder("Selecciona la plataforma")
                                     .setCustomId("Platform")
                                     .addOptions([
                                         {
-                                            label: "Keyboard and Mouse",
+                                            label: "Teclado y ratón",
                                             value: "kbm",
-                                            description: "If you play on Keyboard and Mouse",
+                                            description: "Si juegas con teclado y ratón",
                                             emoji: "⌨️",
                                         },
                                         {
                                             label: "Controller",
                                             value: "controller",
-                                            description: "If you play on a Controller",
+                                            description: "Si juegas con un control",
                                             emoji: "🎮",
                                         },
                                         {
                                             label: "Touch",
                                             value: "touch",
-                                            description: "If you play on a Touch Device",
+                                            description: "Si juegas en un dispositivo táctil",
                                             emoji: "📱",
                                         },
                                         {
                                             label: "Others",
                                             value: "others",
-                                            description: "If you play on something else..",
+                                            description: "Si juegas en otra cosa...",
                                         },
                                     ]),
                             ]),
@@ -190,11 +191,11 @@ module.exports = async client => {
                                 .catch(() => {})) || false;
                         if (!InputMethod) {
                             client.epicgamesDB.set(user.id, "others", "InputMethod");
-                            user.send("Set the Default Input Method due to no reaction in under 2 Minutes!");
+                            user.send("Método de entrada predeterminado establecido por falta de reacción en menos de 2 minutos");
                         } else {
                             client.epicgamesDB.set(user.id, InputMethod, "InputMethod");
                         }
-                        user.send("✋ **Successfully Linked your Account!**").catch(() => {});
+                        user.send("✋ **¡Cuenta vinculada correctamente!**").catch(() => {});
                         let logChannel =
                             guild.channels.cache.get(guilddata.logChannel) ||
                             (await guild.channels.fetch(guilddata.logChannel).catch(() => {})) ||
@@ -205,12 +206,12 @@ module.exports = async client => {
                                     embeds: [
                                         new Discord.EmbedBuilder()
                                             .setColor("#57F287")
-                                            .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
-                                            .setTitle(`Linked/Updated their EPICGAMES Account!`)
-                                            .addField("**Epic Games Name:**", `\`\`\`${Username}\`\`\``)
-                                            .addField("**Platform:**", `\`\`\`${Platform}\`\`\``)
-                                            .addField("**Input Method:**", `\`\`\`${InputMethod}\`\`\``)
-                                            .setFooter(client.getFooter("ID: " + user.id, user.displayAvatarURL({ dynamic: true }))
+                                            .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
+                                            .setTitle(`¡Vinculó/Actualizó su cuenta de EPIC GAMES!`)
+                                            .addFields({ name: "**Nombre de Epic Games:**", value: `\`\`\`${Username}\`\`\`` })
+                                            .addFields({ name: "**Plataforma:**", value: `\`\`\`${Platform}\`\`\`` })
+                                            .addFields({ name: "**Método de entrada:**", value: `\`\`\`${InputMethod}\`\`\`` })
+                                            .setFooter(client.getFooter("ID: " + user.id, user.displayAvatarURL())
                                             ),
                                     ],
                                 })
@@ -221,7 +222,7 @@ module.exports = async client => {
                 .catch(e => {
                     console.log(e);
                     interaction.reply({
-                        content: "❌ **I can't dm you... Please enable your DMS first!**",
+                        content: "❌ **No puedo enviarte MD... ¡Primero habilita tus mensajes directos!**",
                         ephemeral: true,
                     });
                 });

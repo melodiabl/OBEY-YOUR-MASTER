@@ -7,9 +7,9 @@ module.exports = {
     aliases: ["toggleprunning", "pruning", "prunning", "toggeldebug", "debug"],
     category: "⚙️ Settings",
     description:
-        "Toggles pruning. If its true a message of playing a new track will be sent, even if your afk. If false it wont send any message if a new Track plays! | Default: true aka send new Track information",
+        "Toggles pruning. If its true a message of playing a new track will be sent, even if your afk. If false it wont send any message if a new Pista plays! | Default: true aka send new Pista information",
     usage: "togglepruning",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     type: "music",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -53,10 +53,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

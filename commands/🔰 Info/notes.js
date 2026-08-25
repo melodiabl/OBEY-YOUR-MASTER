@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder,
+    ButtonStyle
+} = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -28,51 +30,51 @@ module.exports = {
             });
             var notes = client.notes.get(message.author.id, "notes");
             var button_forward = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_forwards")
-                .setEmoji("832598861813776394")
+                .setEmoji("▶️")
                 .setLabel("Forwards");
             var button_back = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_backwards")
-                .setEmoji("833802907509719130")
+                .setEmoji("◀️")
                 .setLabel("Backwards");
             var button_jump = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_jump")
                 .setLabel("Jump to Page")
                 .setEmoji("🔢");
             var button_empty1 = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Secondary)
+                .setStyle(ButtonStyle.Secondary)
                 .setCustomId("notes_empty1")
                 .setLabel("\u200b")
                 .setDisabled(true);
             var button_list = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_list")
                 .setLabel("List Notes")
                 .setEmoji("📑");
 
             var button_create = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("notes_create")
                 .setEmoji("📋")
                 .setLabel("Create New Note");
             var button_edit = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_edit")
                 .setEmoji("✏️")
                 .setLabel("Edit this Note");
             var button_Delete = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_delete")
                 .setEmoji("🗑")
                 .setLabel("Delete this Note");
             var button_disable = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Secondary)
+                .setStyle(ButtonStyle.Secondary)
                 .setCustomId("notes_disable")
                 .setLabel("Stop the Buttons")
-                .setEmoji("833101993668771842");
+                .setEmoji("❌");
 
             var embeds = [];
             var currentPage = 0;
@@ -80,7 +82,7 @@ module.exports = {
                 embeds.push(
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter({ text: message.author.tag + ` Page | 0/0`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: message.author.username + ` Page | 0/0`, iconURL: message.author.displayAvatarURL() })
                         .setTitle(`<:no:833101993668771842> No Notes created yet`)
                         .setDescription(`To create your first Note click on the green Button "\`📋 Create New Note\`"`)
                 );
@@ -94,7 +96,7 @@ module.exports = {
                 embeds.push(
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                         .setTitle(`All of your Notes you can jump to!`)
                         .setDescription(
                             `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
@@ -109,10 +111,10 @@ module.exports = {
                     embeds.push(
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter({ text: message.author.tag +
+                            .setFooter({ text: message.author.username +
                                     ` | Page: ${counter}/${notes.length + 1}` +
                                     ` | ${note.edited ? "Edited" : "Created"} at: `,
-                                iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                iconURL: message.author.displayAvatarURL()
                             })
                             .setTitle(`${note.title}`)
                             .setDescription(`${note.description}`)
@@ -176,7 +178,7 @@ module.exports = {
                                 });
                         let msgtodelete = [];
                         await b?.deferUpdate();
-                        var mmmm = await message.reply("What should be the __Title__ of your **new Note** ?").catch(e => {
+                        var mmmm = await message.reply("¿Cuál debería ser el __título__ de tu **nueva nota**?").catch(e => {
                             console.log(String(e).grey);
                         });
                         msgtodelete.push(mmmm);
@@ -227,8 +229,8 @@ module.exports = {
                                             embeds.push(
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setFooter({ text: message.author.tag + ` Page | 0/0`,
-                                                        iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                    .setFooter({ text: message.author.username + ` Page | 0/0`,
+                                                        iconURL: message.author.displayAvatarURL()
                                                     })
                                                     .setTitle(`<:no:833101993668771842> No Notes created yet`)
                                                     .setDescription(
@@ -245,8 +247,8 @@ module.exports = {
                                             embeds.push(
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setFooter({ text: message.author.tag,
-                                                        iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                    .setFooter({ text: message.author.username,
+                                                        iconURL: message.author.displayAvatarURL()
                                                     })
                                                     .setTitle(`All of your Notes you can jump to!`)
                                                     .setDescription(
@@ -262,10 +264,10 @@ module.exports = {
                                                 embeds.push(
                                                     new EmbedBuilder()
                                                         .setColor(es.color)
-                                                        .setFooter({ text: message.author.tag +
+                                                        .setFooter({ text: message.author.username +
                                                                 ` | Page: ${counter}/${notes.length + 1}` +
                                                                 ` | ${note.edited ? "Edited" : "Created"} at: `,
-                                                            iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                            iconURL: message.author.displayAvatarURL()
                                                         })
                                                         .setTitle(`${note.title}`)
                                                         .setDescription(`${note.description}`)
@@ -328,7 +330,7 @@ module.exports = {
                                                 new Discord.EmbedBuilder()
                                                     .setTitle("Your Time ran out!")
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                    .setDescription(`Cancelado the Operation!`.substring(0, 2000))
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         })
@@ -348,7 +350,7 @@ module.exports = {
                                         new Discord.EmbedBuilder()
                                             .setTitle("Your Time ran out!")
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                            .setDescription(`Cancelado the Operation!`.substring(0, 2000))
                                             .setFooter(client.getFooter(es)),
                                     ],
                                 })
@@ -539,7 +541,7 @@ module.exports = {
                             button_disable,
                         ]);
                         allbuttons = [buttonRow1, buttonRow2];
-                        await b?.reply("<:no:833101993668771842> **Disabled the Buttons**", true);
+                        await b?.reply("<:no:833101993668771842> **Desactivado the Buttons**", true);
                         await notemsg
                             .edit({
                                 content: `***NOTE BUTTONS DISABLED***`,
@@ -645,7 +647,7 @@ module.exports = {
                                         new Discord.EmbedBuilder()
                                             .setTitle("Your Time ran out!")
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                            .setDescription(`Cancelado the Operation!`.substring(0, 2000))
                                             .setFooter(client.getFooter(es)),
                                     ],
                                 })
@@ -656,7 +658,7 @@ module.exports = {
                     }
                     //Delete a note
                     if (b?.customId == "notes_delete") {
-                        await b?.reply("🗑 **Deleted the Note**", true);
+                        await b?.reply("🗑 **Eliminado the Note**", true);
                         client.notes.remove(
                             message.author.id,
                             v =>
@@ -675,8 +677,8 @@ module.exports = {
                             embeds.push(
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter({ text: message.author.tag + ` Page | 0/0`,
-                                        iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                    .setFooter({ text: message.author.username + ` Page | 0/0`,
+                                        iconURL: message.author.displayAvatarURL()
                                     })
                                     .setTitle(`<:no:833101993668771842> No Notes created yet`)
                                     .setDescription(
@@ -693,7 +695,7 @@ module.exports = {
                             embeds.push(
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                                    .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                                     .setTitle(`All of your Notes you can jump to!`)
                                     .setDescription(
                                         `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
@@ -708,10 +710,10 @@ module.exports = {
                                 embeds.push(
                                     new EmbedBuilder()
                                         .setColor(es.color)
-                                        .setFooter({ text: message.author.tag +
+                                        .setFooter({ text: message.author.username +
                                                 ` | Page: ${counter}/${notes.length + 1}` +
                                                 ` | ${note.edited ? "Edited" : "Created"} at: `,
-                                            iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                            iconURL: message.author.displayAvatarURL()
                                         })
                                         .setTitle(`${note.title}`)
                                         .setDescription(`${note.description}`)
@@ -755,9 +757,9 @@ module.exports = {
                         try {
                             let thmsg = await message.channel.messages.fetch(notemsg.id).catch(e => {
                                 console.log(String(e).grey);
-                                return message.reply("Something went wrong...");
+                                return message.reply("Algo salió mal...");
                             });
-                            if (!thmsg || !thmsg.embeds || !thmsg.embeds[0]) return message.reply("Something went wrong...");
+                            if (!thmsg || !thmsg.embeds || !thmsg.embeds[0]) return message.reply("Algo salió mal...");
                             console.log(String(thmsg.embeds[0].title));
                             let thenote = notes.findIndex(
                                 v =>
@@ -766,7 +768,7 @@ module.exports = {
                             );
 
                             var mmmm = await message
-                                .reply("What should be the __Title__ of your **new Note** ?")
+                                .reply("¿Cuál debería ser el __título__ de tu **nueva nota**?")
                                 .catch(e => {
                                     console.log(String(e).grey);
                                 });
@@ -820,8 +822,8 @@ module.exports = {
                                             notes = client.notes.get(message.author.id, "notes");
                                             embeds[0] = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setFooter({ text: message.author.tag,
-                                                    iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                .setFooter({ text: message.author.username,
+                                                    iconURL: message.author.displayAvatarURL()
                                                 })
                                                 .setTitle(`All of your Notes you can jump to!`)
                                                 .setDescription(
@@ -832,10 +834,10 @@ module.exports = {
                                                 );
                                             embeds[thenote + 1] = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setFooter({ text: message.author.tag +
+                                                .setFooter({ text: message.author.username +
                                                         ` | Page: ${thenote + 2}/${embeds.length}` +
                                                         ` | ${newnote.edited ? "Edited" : "Created"} at: `,
-                                                    iconURL: message.author.displayAvatarURL({ dynamic: true })
+                                                    iconURL: message.author.displayAvatarURL()
                                                 })
                                                 .setTitle(`${title}`)
                                                 .setDescription(`${description}`)
@@ -895,7 +897,7 @@ module.exports = {
                                                     new Discord.EmbedBuilder()
                                                         .setTitle("Your Time ran out!")
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                        .setDescription(`Cancelado the Operation!`.substring(0, 2000))
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             })
@@ -915,7 +917,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle("Your Time ran out!")
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`Cancelado the Operation!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     })
@@ -983,10 +985,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

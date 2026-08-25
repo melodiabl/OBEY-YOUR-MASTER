@@ -12,7 +12,7 @@ module.exports = {
     usage: "botfilename",
     type: "info",
     description:
-        "If we ask you for the Original Bot name or when you ordered it you can execute this Command to find it out!",
+        "If we ask you for the Original Bot name or when you ordered it you can execute this Comando to find it out!",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -49,7 +49,7 @@ ${
 \`\`\`yml
 Link: https://discord.com/developers/applications/${client.user.id}
 Name: ${clientapp.name} 
-${clientapp.owner.discriminator ? "Owner: " + clientapp.owner.tag : "Team: " + clientapp.owner.name + "\n |-> Members: " + clientapp.owner.members.map(uid => `${uid.user.tag}`).join(", ") + "\n |-> Team-Owner: " + `${guild.members.cache.get(clientapp.owner.ownerId) && guild.members.cache.get(clientapp.owner.ownerId).user ? guild.members.cache.get(clientapp.owner.ownerId).user.tag : clientapp.owner.ownerId}`} 
+${clientapp.owner.discriminator ? "Owner: " + clientapp.owner.tag : "Team: " + clientapp.owner.name + "\n |-> Members: " + clientapp.owner.members.map(uid => `${uid.user.username}`).join(", ") + "\n |-> Team-Owner: " + `${guild.members.cache.get(clientapp.owner.ownerId) && guild.members.cache.get(clientapp.owner.ownerId).user ? guild.members.cache.get(clientapp.owner.ownerId).user.username : clientapp.owner.ownerId}`} 
 Icon: ${clientapp.iconURL()}
 Bot-Public: ${clientapp.botPublic ? "✅" : "❌"} (Invite able)
 \`\`\`
@@ -77,10 +77,10 @@ ${clientapp.description ? clientapp.description : "❌ NO DESCRIPTION YET!"}
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

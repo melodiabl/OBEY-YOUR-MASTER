@@ -1,481 +1,224 @@
 const Discord = require("discord.js");
-const fs = require("fs");
+const { ChannelType } = Discord;
 const moment = require("moment");
+
+// Maps each log type to its settings key (matches dashboard logChannels.*)
+const LOG_CHANNELS = {
+    server:     ['logChannels.server',     'logger.channel'],
+    members:    ['logChannels.members',    'logger.channel'],
+    moderation: ['logChannels.moderation', 'logger.channel'],
+    messages:   ['logChannels.messages',   'logger.channel'],
+    voice:      ['logChannels.voice',      'logger.channel'],
+};
+
+function getLogChannel(c, guildId, logType) {
+    const keys = LOG_CHANNELS[logType] || LOG_CHANNELS.server;
+    for (const key of keys) {
+        const val = c.settings.get(guildId, key);
+        if (val && val !== 'no') return val;
+    }
+    // Old-format fallback: logger.channel
+    const old = c.settings.get(guildId, 'logger');
+    if (old?.channel && old.channel !== 'no') return old.channel;
+    return null;
+}
+
 module.exports = c => {
-    c.on("channelCreate", async function (channel) {
-        send_log(
-            c,
-            channel.guild,
-            "#57F287",
-            "Channel CREATED",
-            `**Channel:** \`${channel?.name}\`\n**ChannelID:** \`${channel.id}\`\n**ChannelTYPE:** \`${channel.type}\``,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869531337411952670/845717716559593512.png"
-        );
-        return;
+    // ─── SERVER EVENTS ────────────────────────────────────────────────────────
+    c.on("channelCreate", channel => {
+        send_log(c, channel.guild, 'server', "#57F287", "Channel CREATED",
+            `**Channel:** \`${channel?.name}\`\n**ID:** \`${channel.id}\`\n**Type:** \`${channel.type}\``);
     });
-    c.on("channelDelete", async function (channel) {
-        send_log(
-            c,
-            channel.guild,
-            "#ED4245",
-            "Channel DELETED",
-            `**Channel:** \`${channel?.name}\`\n**ChannelID:** \`${channel.id}\`\n**ChannelTYPE:** \`${channel.type}\``,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png"
-        );
-        return;
+    c.on("channelDelete", channel => {
+        send_log(c, channel.guild, 'server', "#ED4245", "Channel DELETED",
+            `**Channel:** \`${channel?.name}\`\n**ID:** \`${channel.id}\`\n**Type:** \`${channel.type}\``);
     });
-    c.on("channelPinsUpdate", async function (channel, time) {
-        send_log(
-            c,
-            channel.guild,
-            "#FEE75C",
-            "Channel PINS UPDATE",
-            `Channel: \`${channel?.name}\`\nChannelID: \`${channel.id}\`\nPinned at \`${time}\``,
-            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/265/pushpin_1f4cc.png"
-        );
-        return;
+    c.on("channelPinsUpdate", (channel, time) => {
+        send_log(c, channel.guild, 'server', "#FEE75C", "Channel PINS UPDATE",
+            `**Channel:** \`${channel?.name}\` (\`${channel.id}\`)\n**Pinned at:** \`${time}\``);
     });
-    c.on("channelPinsUpdate", async function (channel, time) {
-        send_log(
-            c,
-            channel.guild,
-            "#FEE75C",
-            "Channel PINS UPDATE",
-            `Channel: \`${channel?.name}\`\nChannelID: \`${channel.id}\`\nPinned at \`${time}\``,
-            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/265/pushpin_1f4cc.png"
-        );
-        return;
-    });
-    c.on("channelUpdate", async function (oldChannel, newChannel) {
-        if (oldChannel?.name != newChannel?.name) {
-            send_log(
-                c,
-                oldChannel.guild,
-                "#FEE75C",
-                "Channel UPDATED - NAME",
-                `**Channel:** \`${oldChannel?.name}\`\n**ChannelID**: \`${oldChannel.id}\`\n\n` +
-                    `**Channel:** \`${newChannel?.name}\`\n**ChannelID**: \`${newChannel.id}\``,
-                "https://cdn.discordapp.com/attachments/849047781276647425/869529692867289128/861357037064421386.png"
-            );
-        } else if (oldChannel.type != newChannel.type) {
-            send_log(
-                c,
-                oldChannel.guild,
-                "#FEE75C",
-                "Channel UPDATED - TYPE",
-                `**Channel:** \`${oldChannel?.name}\`\n**ChannelID**: \`${oldChannel.id}\`\n\n` +
-                    `**Channel:** \`${newChannel?.name}\`\n**ChannelID**: \`${newChannel.id}\``,
-                "https://cdn.discordapp.com/attachments/849047781276647425/869529692867289128/861357037064421386.png"
-            );
-        } else if (oldChannel.topic != newChannel.topic) {
-            send_log(
-                c,
-                oldChannel.guild,
-                "#FEE75C",
-                "Channel UPDATED - TOPIC",
-                `**Channel:** \`${oldChannel?.name}\`\n**ChannelID**: \`${oldChannel.id}\`\n\n` +
-                    `**Channel:** \`${newChannel?.name}\`\n**ChannelID**: \`${newChannel.id}\`\n\n**ChannelTOPIC:** \`${newChannel.topic}\``,
-                "https://cdn.discordapp.com/attachments/849047781276647425/869529692867289128/861357037064421386.png"
-            );
+    c.on("channelUpdate", (oldCh, newCh) => {
+        if (oldCh?.name !== newCh?.name) {
+            send_log(c, oldCh.guild, 'server', "#FEE75C", "Channel UPDATED — NAME",
+                `**Before:** \`${oldCh?.name}\`\n**After:** \`${newCh?.name}\`\n**ID:** \`${oldCh.id}\``);
+        } else if (oldCh.type !== newCh.type) {
+            send_log(c, oldCh.guild, 'server', "#FEE75C", "Channel UPDATED — TYPE",
+                `**Channel:** \`${oldCh?.name}\` (\`${oldCh.id}\`)`);
+        } else if (oldCh.topic !== newCh.topic) {
+            send_log(c, oldCh.guild, 'server', "#FEE75C", "Channel UPDATED — TOPIC",
+                `**Channel:** \`${oldCh?.name}\` (\`${oldCh.id}\`)\n**Topic:** \`${newCh.topic || '—'}\``);
         }
-        return;
     });
 
-    c.on("emojiCreate", async function (emoji) {
-        send_log(
-            c,
-            emoji?.guild,
-            "#57F287",
-            "EMOJI CREATED",
-            `EMOJI: ${emoji}\nEMOJINAME: ${emoji?.name}\nEMOJIID: ${emoji?.id}\nEMOJIURL: ${emoji?.url}`,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869531337411952670/845717716559593512.png"
-        );
-        return;
+    c.on("emojiCreate", emoji => {
+        send_log(c, emoji?.guild, 'server', "#57F287", "Emoji CREATED",
+            `${emoji}  \`${emoji?.name}\`  (ID: \`${emoji?.id}\`)`);
     });
-    c.on("emojiDelete", async function (emoji) {
-        send_log(
-            c,
-            emoji?.guild,
-            "#ED4245",
-            "EMOJI DELETED",
-            `EMOJI: ${emoji}\nEMOJINAME: ${emoji?.name}\nEMOJIID: ${emoji?.id}\nEMOJIURL: ${emoji?.url}`,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png"
-        );
-        return;
+    c.on("emojiDelete", emoji => {
+        send_log(c, emoji?.guild, 'server', "#ED4245", "Emoji DELETED",
+            `\`${emoji?.name}\`  (ID: \`${emoji?.id}\`)`);
     });
-    c.on("emojiUpdate", async function (oldEmoji, newEmoji) {
-        send_log(
-            c,
-            newEmoji?.guild,
-            "#E67E22",
-            "EMOJI NAME CHANGED",
-            `__Emoji: ${newEmoji}__ \n\n**Before:** \`${oldEmoji?.name}\`\n**After:** \`${newEmoji?.name}\`\n**Emoji ID:** \`${newEmoji?.id}\``,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869529692867289128/861357037064421386.png"
-        );
-        return;
+    c.on("emojiUpdate", (oldE, newE) => {
+        send_log(c, newE?.guild, 'server', "#E67E22", "Emoji NAME CHANGED",
+            `${newE}  **Before:** \`${oldE?.name}\` → **After:** \`${newE?.name}\`  (ID: \`${newE?.id}\`)`);
     });
 
-    c.on("guildBanAdd", async function ({ guild, user }) {
-        send_log(
-            c,
-            guild,
-            "#ED4245",
-            "USER BANNED",
-            `User: ${user} (\`${user.id}\`)\n\`${user.tag}\``,
-            user.displayAvatarURL({ dynamic: true })
-        );
-        return;
+    c.on("roleCreate", role => {
+        send_log(c, role.guild, 'server', "#57F287", "Role CREATED",
+            `${role}  \`${role?.name}\`  (ID: \`${role.id}\`)\nColor: \`${role.hexColor}\`  Position: \`${role.position}\``);
     });
-    c.on("guildBanRemove", async function ({ guild, user }) {
-        send_log(
-            c,
-            guild,
-            "#FEE75C",
-            "USER UNBANNED",
-            `User: ${user} (\`${user.id}\`)\n\`${user.tag}\``,
-            user.displayAvatarURL({ dynamic: true })
-        );
-        return;
+    c.on("roleDelete", role => {
+        send_log(c, role.guild, 'server', "#ED4245", "Role DELETED",
+            `\`${role?.name}\`  (ID: \`${role.id}\`)\nColor: \`${role.hexColor}\`  Position: \`${role.position}\``);
+    });
+    c.on("roleUpdate", (oldRole, newRole) => {
+        if (oldRole?.name !== newRole?.name) {
+            send_log(c, oldRole.guild, 'server', "#E67E22", "Role NAME CHANGED",
+                `${newRole}  **Before:** \`${oldRole.name}\` → **After:** \`${newRole.name}\`  (ID: \`${newRole.id}\`)`);
+        } else if (oldRole.color !== newRole.color) {
+            send_log(c, oldRole.guild, 'server', "#E67E22", "Role COLOR CHANGED",
+                `${newRole}  **Before:** \`#${oldRole.color.toString(16).padStart(6,'0')}\` → **After:** \`${newRole.hexColor}\`  (ID: \`${newRole.id}\`)`);
+        }
     });
 
-    c.on("guildMemberAdd", async function (member) {
-        if (!member.user.bot) {
-            send_log(
-                member.guild,
-                c,
-                "#57F287",
-                "MEMBER JOINED",
-                `Member: ${member.user} (\`${member.user.id}\`)\n\`${member.user.tag}\`\n\n**Account created:** \`${moment(member.user.createdTimestamp).format("DD/MM/YYYY") + "` | " + "`" + moment(member.user.createdTimestamp).format("hh:mm:ss")}`,
-                member.user.displayAvatarURL({ dynamic: true })
-            );
+    // ─── MEMBER EVENTS ────────────────────────────────────────────────────────
+    c.on("guildMemberAdd", member => {
+        const u = member.user;
+        if (!u.bot) {
+            send_log(c, member.guild, 'members', "#57F287", "Member JOINED",
+                `${u} (\`${u.id}\`)\n**Username:** \`${u.username}\`\n**Account created:** \`${moment(u.createdTimestamp).format("DD/MM/YYYY HH:mm:ss")}\``,
+                u.displayAvatarURL());
         } else {
-            send_log(
-                c,
-                member.guild,
-                "#E67E22",
-                "BOT ADDED",
-                `**Bot:** ${member.user} (\`${member.user.id}\`)\n\`${member.user.tag}\`\n\n**Bot created:** \`${moment(member.user.createdTimestamp).format("DD/MM/YYYY") + "` | " + "`" + moment(member.user.createdTimestamp).format("hh:mm:ss")}`
-            );
-            return;
+            send_log(c, member.guild, 'members', "#E67E22", "Bot ADDED",
+                `${u} (\`${u.id}\`)\n**Username:** \`${u.username}\`\n**Created:** \`${moment(u.createdTimestamp).format("DD/MM/YYYY")}\``);
         }
     });
-    let banMap = new Map();
-    //LEAVES
-    c.on("guildMemberRemove", async function (member) {
+
+    const banMap = new Map();
+
+    c.on("guildMemberRemove", member => {
         setTimeout(() => {
-            if (banMap.has(member.id)) {
-                banMap.delete(member.id);
-                return;
-            }
-            send_log(
-                c,
-                member.guild,
-                "#ED4245",
-                "MEMBER LEFT",
-                `Member: ${member.user} (\`${member.user.id}\`)\n\`${member.user.tag}\``,
-                member.user.displayAvatarURL({
-                    dynamic: true,
-                })
-            );
+            if (banMap.has(member.id)) { banMap.delete(member.id); return; }
+            const u = member.user;
+            send_log(c, member.guild, 'members', "#ED4245", "Member LEFT",
+                `${u} (\`${u.id}\`)  **\`${u.username}\`**`,
+                u.displayAvatarURL());
         }, 500);
     });
-    //BAN
-    c.on("guildBanAdd", async function (ban) {
-        //set it that it's a ban
+
+    c.on("guildMembersChunk", (members, guild) => {
+        const list = [...members.values()].slice(0, 20)
+            .map((m, i) => `${i+1}) ${m.user} — \`${m.user.username}\` — \`${m.user.id}\``)
+            .join("\n");
+        send_log(c, guild, 'members', "#ED4245",
+            `⚠️ MEMBER CHUNK / RAID — [${members.size}] Members`,
+            list + (members.size > 20 ? `\n… ${members.size - 20} more` : ''));
+    });
+
+    c.on("guildMemberUpdate", (oldMember, newMember) => {
+        const oldRoles = [...oldMember.roles.cache.keys()];
+        const newRoles = [...newMember.roles.cache.keys()];
+        const added   = newRoles.filter(x => !oldRoles.includes(x));
+        const removed = oldRoles.filter(x => !newRoles.includes(x));
+        if (!added.length && !removed.length) return;
+        const text = [
+            removed.length ? `❌ **Removed:** ${removed.map(r => `<@&${r}>`).join(', ')}` : '',
+            added.length   ? `✅ **Added:** ${added.map(r => `<@&${r}>`).join(', ')}`   : '',
+        ].filter(Boolean).join('\n');
+        send_log(c, oldMember.guild, 'members',
+            added.length ? "#57F287" : "#ED4245",
+            "Member ROLES Changed",
+            `${newMember.user} (\`${newMember.user.username}\`)\n\n${text}`);
+    });
+
+    // ─── MODERATION EVENTS ────────────────────────────────────────────────────
+    c.on("guildBanAdd", ban => {
         banMap.set(ban.user.id, true);
-        send_log(
-            c,
-            ban.guild,
-            "#ED4245",
-            "⚠️ MEMBER GOT BANNED ⚠️",
-            `Member: ${ban.user} (\`${ban.user.id}\`)\n\`${ban.user.tag}\`\n\nReason: ${ban.reason ? ban.reason : "No Reason provided!"}`,
-            ban.user.displayAvatarURL({
-                dynamic: true,
-            })
-        );
+        send_log(c, ban.guild, 'moderation', "#ED4245", "⚠️ Member BANNED",
+            `${ban.user} (\`${ban.user.id}\`)  \`${ban.user.username}\`\n**Reason:** ${ban.reason || 'No reason provided'}`,
+            ban.user.displayAvatarURL());
     });
-    //UNBAN
-    c.on("guildBanAdd", async function (ban) {
-        //set it that it's a ban
-        banMap.set(ban.user.id, true);
-        send_log(
-            c,
-            ban.guild,
-            "#E67E22",
-            "⛔ MEMBER GOT __UN__BANNED ⛔",
-            `Member: ${ban.user} (\`${ban.user.id}\`)\n\`${ban.user.tag}\`\n\nReason was: ${ban.reason ? ban.reason : "No Reason provided!"}`,
-            ban.user.displayAvatarURL({
-                dynamic: true,
-            })
-        );
-    });
-    c.on("guildMembersChunk", async function (members, guild, chunk) {
-        send_log(
-            guild,
-            c,
-            "#ED4245",
-            `MEMBER CHUNK / RAID - [${members.size}] Members`,
-            members.size < 20
-                ? members
-                      .map((member, index) => `${index}) - ${member.user} - ${member.user.tag} - \`${member.user.id}\``)
-                      .join("\n")
-                : [...members.values()]
-                      .slice(0, 20)
-                      .map(
-                          (member, index) =>
-                              `${index}) - ${member.user} - ${member.user.tag} - \`${member.user.id}\`\n${members.size - 20} more...`
-                      )
-                      .join("\n")
-        );
-    });
-    c.on("guildMemberUpdate", async function (oldMember, newMember) {
-        let options = {};
-        if (options[newMember.guild.id]) {
-            options = options[newMember.guild.id];
-        }
-        // Add default empty list
-        if (typeof options.excludedroles === "undefined") options.excludedroles = new Array([]);
-        if (typeof options.trackroles === "undefined") options.trackroles = true;
-        const oldMemberRoles = [...oldMember.roles.cache.keys()];
-        const newMemberRoles = [...newMember.roles.cache.keys()];
-        const oldRoles = oldMemberRoles
-            .filter(x => !options.excludedroles.includes(x))
-            .filter(x => !newMemberRoles.includes(x));
-        const newRoles = newMemberRoles
-            .filter(x => !options.excludedroles.includes(x))
-            .filter(x => !oldMemberRoles.includes(x));
-        const rolechanged = newRoles.length || oldRoles.length;
-        if (rolechanged) {
-            let roleadded = "";
-            if (newRoles.length > 0) {
-                for (let i = 0; i < newRoles.length; i++) {
-                    if (i > 0) roleadded += ", ";
-                    roleadded += `<@&${newRoles[i]}>`;
-                }
-            }
-            let roleremoved = "";
-            if (oldRoles.length > 0) {
-                for (let i = 0; i < oldRoles.length; i++) {
-                    if (i > 0) roleremoved += ", ";
-                    roleremoved += `<@&${oldRoles[i]}>`;
-                }
-            }
-            let text = `${roleremoved ? `❌ ROLE REMOVED: \n${roleremoved}` : ""}${roleadded ? `✅ ROLE ADDED:\n${roleadded}` : ""}`;
-            send_log(
-                c,
-                oldMember.guild,
-                `${roleadded ? "#57F287" : "#ED4245"}`,
-                "Member ROLES Changed",
-                `Member: ${newMember.user}\nUser: \`${oldMember.user.tag}\`\n\n${text}`,
-                "https://cdn.discordapp.com/attachments/849047781276647425/869529692867289128/861357037064421386.png"
-            );
-        }
+    c.on("guildBanRemove", ban => {
+        send_log(c, ban.guild, 'moderation', "#E67E22", "⛔ Member UNBANNED",
+            `${ban.user} (\`${ban.user.id}\`)  \`${ban.user.username}\`\n**Reason was:** ${ban.reason || 'No reason provided'}`,
+            ban.user.displayAvatarURL());
     });
 
-    c.on("messageDelete", async function (message) {
-        send_log(
-            c,
-            message.guild,
-            "#E67E22",
-            "Message Deleted",
-            `**Author : ** <@${message.author?.id}> - *${message.author?.tag}*\n**Date : ** ${message.createdAt}\n**Channel : ** <#${message.channel?.id}> - *${message.channel?.name}*\n\n**Deleted Message : **\n\`\`\`\n${message.content?.replace(/`/g, "'").substring(0, 1800)}\n\`\`\``,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png",
-            `**Attachment URL(s): **`,
-            `>>> ${[...message.attachments?.values()].map(x => x.proxyURL).join("\n\n")}`
-        );
-        return;
+    // ─── MESSAGE EVENTS ────────────────────────────────────────────────────────
+    c.on("messageDelete", message => {
+        if (!message.guild) return;
+        const attachments = [...(message.attachments?.values() || [])].map(x => x.proxyURL).join("\n");
+        const embed = build_embed(c, message.guild, "#E67E22", "Message DELETED",
+            `**Author:** <@${message.author?.id}> — \`${message.author?.username || '?'}\`\n**Channel:** <#${message.channel?.id}> — \`${message.channel?.name}\`\n**Date:** ${message.createdAt}\n\n**Content:**\n\`\`\`\n${(message.content || '').replace(/`/g, "'").substring(0, 1800)}\n\`\`\``);
+        if (attachments) embed.addFields({ name: 'Attachments', value: attachments.substring(0, 1024) });
+        send_embed(c, message.guild, 'messages', embed);
+    });
+    c.on("messageDeleteBulk", messages => {
+        if (!messages.first()?.guild) return;
+        send_log(c, messages.first().guild, 'messages', "#ED4245",
+            `[${messages.size}] Messages BULK Deleted`,
+            `${messages.size} messages deleted in <#${messages.first()?.channel?.id}>`);
+    });
+    c.on("messageUpdate", (oldMsg, newMsg) => {
+        if (oldMsg.author?.bot || newMsg.author?.bot) return;
+        if (oldMsg.channel.type !== ChannelType.GuildText) return;
+        if (oldMsg.content === newMsg.content) return;
+        send_log(c, oldMsg.guild, 'messages', "#FEE75C", "Message EDITED",
+            `**Author:** <@${newMsg.author.id}> — \`${newMsg.author.username}\`\n**Channel:** <#${newMsg.channel?.id}> — \`${newMsg.channel?.name}\`\n\n**Before:**\n\`\`\`\n${(oldMsg.content || '?').replace(/`/g, "'").substring(0, 900)}\n\`\`\`\n**After:**\n\`\`\`\n${(newMsg.content || '?').replace(/`/g, "'").substring(0, 900)}\n\`\`\``);
     });
 
-    c.on("messageDeleteBulk", async function (messages) {
-        send_log(
-            c,
-            messages.guild,
-            "#ED4245",
-            `[${messages.size}] Messages Deleted BULK`,
-            `${messages.size} Messages deleted in: ${messages.channel}`,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png"
-        );
-        return;
-    });
-
-    c.on("messageUpdate", async function (oldMessage, newMessage) {
-        if (oldMessage.author && oldMessage.author.bot) return;
-        if (newMessage.author && newMessage.author.bot) return;
-        if (oldMessage.channel.type !== "GUILD_TEXT") return;
-        if (newMessage.channel.type !== "GUILD_TEXT") return;
-        if (oldMessage.content === newMessage.content) return;
-        send_log(
-            c,
-            oldMessage.guild,
-            "#FEE75C",
-            "Message UPDATED",
-            ` **Author:** <@${newMessage.author.id}> - *${newMessage.author.tag}*\n**Date:** ${newMessage.createdAt}\n**Channel:** <#${newMessage.channel?.id}> - *${newMessage.channel?.name}*\n**Orignal Message:**\n\`\`\`\n${oldMessage.content ? oldMessage.content.replace(/`/g, "'") : "UNKNOWN CONTENT"}\n\`\`\`\n**Updated Message :**\n\`\`\`\n${newMessage.content ? newMessage.content.replace(/`/g, "'") : "UNKNOWN CONTENT"}\n\`\`\``,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869530575411773440/857128740198023190.png",
-            `**Attachment BEFORE: URL(s): **`,
-            `>>> ${[...newMessage.attachments?.values()].map(x => x.proxyURL).join("\n\n")}`,
-            `**Attachment AFTER: URL(s): **`,
-            `>>> ${[...newMessage.attachments?.values()].map(x => x.proxyURL).join("\n\n")}`
-        );
-    });
-
-    c.on("roleCreate", async function (role) {
-        send_log(
-            c,
-            role.guild,
-            "#57F287",
-            "ROLE CREATED",
-            `ROLE: ${role}\nROLENAME: ${role?.name}\nROLEID: ${role.id}\nHEXCOLOR: ${role.hexColor}\nPOSITION: ${role.position}`,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869531337411952670/845717716559593512.png"
-        );
-        return;
-    });
-
-    c.on("roleDelete", async function (role) {
-        send_log(
-            c,
-            role.guild,
-            "#ED4245",
-            "ROLE DELETED",
-            `ROLE: ${role}\nROLENAME: ${role?.name}\nROLEID: ${role.id}\nHEXCOLOR: ${role.hexColor}\nPOSITION: ${role.position}`,
-            "https://cdn.discordapp.com/attachments/849047781276647425/869530655871082516/850923749132992550.png"
-        );
-        return;
-    });
-
-    c.on("roleUpdate", async function (oldRole, newRole) {
-        if (oldRole?.name !== newRole?.name) {
-            send_log(
-                c,
-                oldRole.guild,
-                "#E67E22",
-                "ROLE NAME CHANGED",
-                `__ROLE: ${newRole}__ \n\n**Before:** \`${oldRole.color.toString(16)}\`\n**After:** \`${newRole.color.toString(16)}\`\n**ROLE ID:** \`${newRole.id}\``
-            );
-        } else if (oldRole.color !== newRole.color) {
-            send_log(
-                c,
-                oldRole.guild,
-                "#E67E22",
-                "ROLE COLOR CHANGED",
-                `__ROLE: ${newRole}__ \n\n**Before:** \`${oldRole.color.toString(16)}\`\n**After:** \`${newRole.color.toString(16)}\`\n**ROLE ID:** \`${newRole.id}\``
-            );
-        }
-        return;
-    });
+    // ─── VOICE EVENTS ─────────────────────────────────────────────────────────
     c.on("voiceStateUpdate", (oldState, newState) => {
+        const isTrivial = s1 => s2 =>
+            (s1.streaming !== s2.streaming) || (s1.serverDeaf !== s2.serverDeaf) ||
+            (s1.serverMute !== s2.serverMute) || (s1.selfDeaf !== s2.selfDeaf) ||
+            (s1.selfMute !== s2.selfMute) || (s1.selfVideo !== s2.selfVideo);
+        if (isTrivial(oldState)(newState)) return;
+        const u = newState.member?.user;
+        if (!u) return;
         if (!oldState.channelId && newState.channelId) {
-            if (
-                (!oldState.streaming && newState.streaming) ||
-                (oldState.streaming && !newState.streaming) ||
-                (!oldState.serverDeaf && newState.serverDeaf) ||
-                (oldState.serverDeaf && !newState.serverDeaf) ||
-                (!oldState.serverMute && newState.serverMute) ||
-                (oldState.serverMute && !newState.serverMute) ||
-                (!oldState.selfDeaf && newState.selfDeaf) ||
-                (oldState.selfDeaf && !newState.selfDeaf) ||
-                (!oldState.selfMute && newState.selfMute) ||
-                (oldState.selfMute && !newState.selfMute) ||
-                (!oldState.selfVideo && newState.selfVideo) ||
-                (oldState.selfVideo && !newState.selfVideo)
-            )
-                return;
-            return send_log(
-                c,
-                newState.guild,
-                "#57F287",
-                "CHANNEL JOINED",
-                `**User:** <@${newState.member.user.id}> (\`${newState.member.user.id}\`) (**${newState.member.user.tag}**)\n\nCHANNEL: <#${newState.channelId}> (\`${newState.channelId}\`)  ${newState.channel ? `(**${newState.channel?.name}**)` : ""}`,
-                "https://cdn.discordapp.com/attachments/849047781276647425/869529604296159282/863876115584385074.gif"
-            );
-        }
-        if (oldState.channelId && !newState.channelId) {
-            if (
-                (!oldState.streaming && newState.streaming) ||
-                (oldState.streaming && !newState.streaming) ||
-                (!oldState.serverDeaf && newState.serverDeaf) ||
-                (oldState.serverDeaf && !newState.serverDeaf) ||
-                (!oldState.serverMute && newState.serverMute) ||
-                (oldState.serverMute && !newState.serverMute) ||
-                (!oldState.selfDeaf && newState.selfDeaf) ||
-                (oldState.selfDeaf && !newState.selfDeaf) ||
-                (!oldState.selfMute && newState.selfMute) ||
-                (oldState.selfMute && !newState.selfMute) ||
-                (!oldState.selfVideo && newState.selfVideo) ||
-                (oldState.selfVideo && !newState.selfVideo)
-            )
-                return;
-            return send_log(
-                c,
-                newState.guild,
-                "#ED4245",
-                "CHANNEL LEFT",
-                `**User:** <@${newState.member.user.id}> (\`${newState.member.user.id}\`) (**${newState.member.user.tag}**)\n\nCHANNEL: <#${oldState.channelId}> (\`${oldState.channelId}\` ${oldState.channel ? `(**${oldState.channel?.name}**)` : ""}`,
-                "https://cdn.discordapp.com/attachments/849047781276647425/869529603562172456/850830662897762324.png"
-            );
-        }
-        if (oldState.channelId && newState.channelId) {
-            if (
-                (!oldState.streaming && newState.streaming) ||
-                (oldState.streaming && !newState.streaming) ||
-                (!oldState.serverDeaf && newState.serverDeaf) ||
-                (oldState.serverDeaf && !newState.serverDeaf) ||
-                (!oldState.serverMute && newState.serverMute) ||
-                (oldState.serverMute && !newState.serverMute) ||
-                (!oldState.selfDeaf && newState.selfDeaf) ||
-                (oldState.selfDeaf && !newState.selfDeaf) ||
-                (!oldState.selfMute && newState.selfMute) ||
-                (oldState.selfMute && !newState.selfMute) ||
-                (!oldState.selfVideo && newState.selfVideo) ||
-                (oldState.selfVideo && !newState.selfVideo)
-            )
-                return;
-            return send_log(
-                c,
-                newState.guild,
-                "#57F287",
-                "CHANNEL SWITCHED",
-                `**User:** <@${newState.member.user.id}> (\`${newState.member.user.id}\`) (**${newState.member.user.tag}**)\n\nTO CHANNEL: <#${newState.channelId}> (\`${newState.channelId}\`) ${newState.channel ? `(**${newState.channel?.name}**)` : ""}\n\nFROM CHANNEL: <#${oldState.channelId}> (\`${oldState.channelId}\`) ${oldState.channel ? `(**${oldState.channel?.name}**)` : ""}`,
-                "https://cdn.discordapp.com/attachments/849047781276647425/869529684805840896/841989410978398218.gif"
-            );
+            send_log(c, newState.guild, 'voice', "#57F287", "Voice JOINED",
+                `${u} (\`${u.id}\`)  \`${u.username}\`\n**Channel:** <#${newState.channelId}> \`${newState.channel?.name}\``);
+        } else if (oldState.channelId && !newState.channelId) {
+            send_log(c, newState.guild, 'voice', "#ED4245", "Voice LEFT",
+                `${u} (\`${u.id}\`)  \`${u.username}\`\n**Channel:** <#${oldState.channelId}> \`${oldState.channel?.name}\``);
+        } else if (oldState.channelId && newState.channelId && oldState.channelId !== newState.channelId) {
+            send_log(c, newState.guild, 'voice', "#57F287", "Voice SWITCHED",
+                `${u} (\`${u.id}\`)  \`${u.username}\`\n**From:** <#${oldState.channelId}>\n**To:** <#${newState.channelId}>`);
         }
     });
 };
 
-async function send_log(c, guild, color, title, description, thumb, fieldt, fieldv, fieldt2, fieldv2) {
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+
+function build_embed(c, guild, color, title, description, thumb) {
+    return new Discord.EmbedBuilder()
+        .setColor(color || "#23272A")
+        .setTitle((title || '').substring(0, 256))
+        .setDescription((description || '​').substring(0, 2048))
+        .setThumbnail(thumb || guild?.iconURL() || undefined)
+        .setFooter({ text: `${guild?.name || ''} • OBEY YOUR MASTER`, iconURL: guild?.iconURL() || undefined })
+        .setTimestamp();
+}
+
+async function send_embed(c, guild, logType, embed) {
     try {
-        if (!guild || guild?.available == false) return console.log("NO GUILD");
-        //CREATE THE EMBED
-        const LogEmbed = new Discord.EmbedBuilder()
-            .setColor(color ? color : "#23272A")
-            .setDescription(description ? description.substring(0, 2048) : "\u200b")
-            .setTitle(title ? title.substring(0, 256) : "\u200b")
-            .setTimestamp()
-            .setThumbnail(
-                thumb
-                    ? thumb
-                    : guild?.iconURL({
-                          format: "png",
-                      })
-            )
-            .setFooter(c.getFooter(
-                    guild?.name + " | powered by: milrato.eu",
-                    guild?.iconURL({ format: "png" })
-                ));
-        if (fieldt && fieldv) {
-            if (fieldv.trim() !== ">>>") {
-                LogEmbed.addField(fieldt.substring(0, 256), fieldv.substring(0, 1024));
-            }
+        if (!guild || guild?.available === false) return;
+        const channelId = getLogChannel(c, guild.id, logType);
+        if (!channelId) return;
+        const ch = await c.channels.fetch(channelId).catch(() => null);
+        if (!ch) return;
+        await ch.send({ embeds: [embed] }).catch(() => {});
+    } catch {}
+}
+
+async function send_log(c, guild, logType, color, title, description, thumb, ...fields) {
+    const embed = build_embed(c, guild, color, title, description, thumb);
+    for (let i = 0; i < fields.length - 1; i += 2) {
+        const name = fields[i], value = fields[i + 1];
+        if (name && value && value.trim() !== '>>>') {
+            embed.addFields({ name: name.substring(0, 256), value: value.substring(0, 1024) });
         }
-        if (fieldt2 && fieldv2) {
-            if (fieldv2.trim() !== ">>>") {
-                LogEmbed.addField(fieldt2.substring(0, 256), fieldv2.substring(0, 1024));
-            }
-        }
-        //GET THE CHANNEL
-        let loggersettings = c.settings.get(guild.id, "logger");
-        if (!loggersettings || loggersettings.channel === "no") return;
-        const logger = await c.channels.fetch(loggersettings.channel).catch(() => {});
-        if (!logger) throw new SyntaxError("CHANNEL NOT FOUND");
-        return logger.send({ embeds: [LogEmbed] }).catch(() => {});
-    } catch (e) {}
+    }
+    await send_embed(c, guild, logType, embed);
 }

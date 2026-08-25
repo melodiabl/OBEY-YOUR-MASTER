@@ -3,7 +3,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const ms = require("ms");
-var { EmbedBuilder, Permissions } = require(`discord.js`);
+var { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 let countermap = new Map();
 module.exports = client => {
     const { isValidURL, delay } = require(`./functions`);
@@ -40,7 +40,7 @@ module.exports = client => {
                         [...message.member.roles.cache.values()].length > 0 &&
                         message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r))) ||
                     [message.guild.ownerId, config.ownerid].includes(message.author.id) ||
-                    message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)
+                    message.member.permissions.has(Discord.PermissionFlagsBits.Administrator)
                 )
                     return;
                 client.settings.ensure(message.guild.id, {
@@ -52,8 +52,8 @@ module.exports = client => {
                             "giphy.com/gifs",
                             "c.tenor.com",
                             "tenor.com/view",
-                            "milrato.dev",
-                            "milrato.eu",
+                            "melodiabl.github.io",
+                            "github.com/melodiabl",
                             "github?.com",
                             "mozilla.org",
                             "w3schools.com",
@@ -164,7 +164,7 @@ module.exports = client => {
                     for (let arg of message.content.toLowerCase().split(" ")) {
                         if (isValidURL(arg) && isAllowedUrl(arg, antisettings)) {
                             if (
-                                antisettings.whitelistedchannels.some(
+                                (antisettings.whitelistedchannels || []).some(
                                     r => message.channel.parentId == r || message.channel.id == r
                                 )
                             )
@@ -202,9 +202,7 @@ module.exports = client => {
                                     reason: "Antilinks Autowarn",
                                     when: new Date().toLocaleString(`de`),
                                     oldhighesrole: message.member.roles ? message.member.roles.highest : `Had No Roles`,
-                                    oldthumburl: message.author.displayAvatarURL({
-                                        dynamic: true,
-                                    }),
+                                    oldthumburl: message.author.displayAvatarURL(),
                                 });
                                 // Push the action to the user's warnings
                                 client.userProfiles.push(message.author.id, newActionId, "warnings");
@@ -218,14 +216,14 @@ module.exports = client => {
                                         new EmbedBuilder()
                                             .setAuthor(
                                                 client.getAuthor(
-                                                    message.author.tag,
-                                                    message.member.displayAvatarURL({ dynamic: true })
+                                                    message.author.username,
+                                                    message.member.displayAvatarURL()
                                                 )
                                             )
                                             .setColor("#E67E22")
                                             .setFooter(client.getFooter(
                                                     "ID: " + message.author.id,
-                                                    message.author.displayAvatarURL({ dynamic: true })
+                                                    message.author.displayAvatarURL()
                                                 )
                                             )
                                             .setDescription(
@@ -521,7 +519,7 @@ module.exports = client => {
                                     })
                                     .catch(() => {
                                         return message.channel
-                                            .send(`❌ **I could not timeout ${member.user.tag}**`)
+                                            .send(`❌ **I could not timeout ${member.user.username}**`)
                                             .then(m => {
                                                 setTimeout(() => {
                                                     m.delete().catch(() => {});
@@ -580,7 +578,7 @@ module.exports = client => {
 function isAllowedUrl(arg, s) {
     if (
         !arg.includes("discord.com") &&
-        !s.whitelistedlinks.some(
+        !(s.whitelistedlinks || []).some(
             link => arg.toLowerCase().includes(link.toLowerCase()) || link.toLowerCase().includes(arg.toLowerCase())
         ) &&
         !arg.includes("discordapp.com") &&

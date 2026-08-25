@@ -38,7 +38,7 @@ module.exports = {
                 return message.reply(client.la[ls].common.usernotfound);
 
             //create the EMBED
-            const embeduserinfo = new EmbedBuilder().setColor(es.color).setTitle(`Banner of ${user.tag}`);
+            const embeduserinfo = new EmbedBuilder().setColor(es.color).setTitle(`Banner of ${user.username}`);
             let banner = false;
             try {
                 await user
@@ -46,7 +46,6 @@ module.exports = {
                     .then(user => {
                         if (user.banner) {
                             banner = user.bannerURL({
-                                dynamic: true,
                                 size: 4096,
                             });
                         }
@@ -58,7 +57,7 @@ module.exports = {
             if (banner) {
                 embeduserinfo.setImage(banner);
                 embeduserinfo.setColor(user.hexAccentColor ? user.hexAccentColor : es.color);
-                embeduserinfo.setDescription(`[Download the Banner of **${user.tag}**](${banner}) <@${user.id}>`);
+                embeduserinfo.setDescription(`[Download the Banner of **${user.username}**](${banner}) <@${user.id}>`);
             } else {
                 embeduserinfo.setColor(user.hexAccentColor ? user.hexAccentColor : es.color);
                 embeduserinfo.setTitle(`<:no:833101993668771842> **Has no Banner!**`);
@@ -80,10 +79,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

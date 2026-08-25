@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: [""],
     cooldown: 5,
-    usage: "setup  -->  Follow the Steps",
-    description: "Shows all setup commands",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup --> Sigue los Pasos",
+    description: "Muestra todos los comandos de configuración",
+    memberpermissions: ['Administrador'],
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -24,62 +24,62 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "setup-admin",
-                        description: `Setup Roles/Users for all/specific Admin Cmds`,
+                        description: `Configuración Roles/Users for all/specific Admin Cmds`,
                         emoji: "🔨",
                     },
                     {
                         value: "setup-admincmdlog",
-                        description: `Setup a Logger for Admin Commands to a Channel`,
+                        description: `Configuración a Logger for Admin Commands to a Canal`,
                         emoji: "📑",
                     },
                     {
                         value: "setup-aichat",
-                        description: `Setup a fun AI-Chat System to chat with me`,
+                        description: `Configuración a fun AI-Chat System to chat with me`,
                         emoji: "💬",
                     },
                     {
                         value: "setup-anticaps",
-                        description: `Setup a Anit-CAPS System to prevent CAPS-only msgs`,
+                        description: `Configuración a Anit-CAPS System to prevent CAPS-only msgs`,
                         emoji: "🅰️",
                     },
                     {
                         value: "setup-antidiscord",
-                        description: `Setup a Anit-DISCORD System to prevent DC-LINKS`,
+                        description: `Configuración a Anit-DISCORD System to prevent DC-LINKS`,
                         emoji: allEmojis.msg.discord_robot,
                     },
                     {
                         value: "setup-antilink",
-                        description: `Setup a Anit-LINK System to prevent LINKS`,
+                        description: `Configuración a Anit-LINK System to prevent LINKS`,
                         emoji: "🔗",
                     },
                     {
                         value: "setup-antinuke",
-                        description: `Setup a Anit-NUKE System to prevent NUKES`,
+                        description: `Configuración a Anit-NUKE System to prevent NUKES`,
                         emoji: allEmojis.msg.builder,
                     },
                     {
                         value: "setup-apply",
-                        description: `Setup up to 25 different Apply Systems`,
+                        description: `Configuración up to 25 different Apply Systems`,
                         emoji: "📋",
                     },
                     {
                         value: "setup-autodelete",
-                        description: `Setup auto deletion Channels`,
+                        description: `Configuración auto deletion Channels`,
                         emoji: "🗑️",
                     },
                     {
                         value: "setup-autoembed",
-                        description: `Define Channel(s) to replace messages with EMBEDS`,
+                        description: `Define Canal(s) to replace messages with EMBEDS`,
                         emoji: "📰",
                     },
                     {
                         value: "setup-automeme",
-                        description: `Define a Channel to post MEMES every Minute`,
+                        description: `Define a Canal to post MEMES every Minute`,
                         emoji: allEmojis.msg.automeme,
                     },
                     {
                         value: "setup-autonsfw",
-                        description: `Define a Channel to post NSFW every Minute`,
+                        description: `Define a Canal to post NSFW every Minute`,
                         emoji: "🔞",
                     },
                     {
@@ -94,32 +94,32 @@ module.exports = {
                     },
                     {
                         value: "setup-counter",
-                        description: `Setup a fun Number-Counter Channel`,
+                        description: `Configuración a fun Number-Counter Canal`,
                         emoji: "#️⃣",
                     },
                     {
                         value: "setup-customcommand",
-                        description: `Setup up to 25 different Custom-Commands`,
+                        description: `Configuración up to 25 different Personalizado-Commands`,
                         emoji: "⌨️",
                     },
                     {
                         value: "setup-dailyfact",
-                        description: `Setup a Channel to post daily Facts`,
+                        description: `Configuración a Canal to post daily Facts`,
                         emoji: "🗓",
                     },
                     {
                         value: "setup-embed",
-                        description: `Setup the Look of the Embeded Messages`,
+                        description: `Configuración the Look of the Embeded Messages`,
                         emoji: "📕",
                     },
                     {
                         value: "setup-jtc",
-                        description: `Setup the Join-To-Create Channel(s)`,
+                        description: `Configuración the Join-To-Create Canal(s)`,
                         emoji: "🔈",
                     },
                     {
                         value: "setup-keyword",
-                        description: `Setup up to 25 different Keyword-Messages`,
+                        description: `Configuración up to 25 different Keyword-Messages`,
                         emoji: "📖",
                     },
                     {
@@ -134,92 +134,92 @@ module.exports = {
                     },
                     {
                         value: "setup-logger",
-                        description: `Setup the Audit-Log`,
+                        description: `Configuración the Audit-Log`,
                         emoji: "🛠",
                     },
                     {
                         value: "setup-membercount",
-                        description: `Setup up to 25 different Member-Counters`,
+                        description: `Configuración up to 25 different Miembro-Counters`,
                         emoji: "📈",
                     },
                     {
                         value: "setup-radio",
-                        description: `Setup the Radio/Waitingroom System`,
+                        description: `Configuración the Radio/Waitingroom System`,
                         emoji: "📻",
                     },
                     {
                         value: "setup-rank",
-                        description: `Setup the Ranking System`,
+                        description: `Configuración the Ranking System`,
                         emoji: "📊",
                     },
                     {
                         value: "setup-reactionrole",
-                        description: `Setup Infinite Reaction Roles`,
+                        description: `Configuración Infinite Reaction Roles`,
                         emoji: "📌",
                     },
                     {
                         value: "setup-reportlog",
-                        description: `Setup the Report System & Channel`,
+                        description: `Configuración the Report System & Canal`,
                         emoji: "🗃",
                     },
                     {
                         value: "setup-roster",
-                        description: `Setup the Roster System`,
+                        description: `Configuración the Roster System`,
                         emoji: "📜",
                     },
                     {
                         value: "setup-serverstats",
-                        description: `Setup up to 25 different Member-Counters`,
+                        description: `Configuración up to 25 different Miembro-Counters`,
                         emoji: "📈",
                     },
                     {
                         value: "setup-suggestion",
-                        description: `Setup the Suggestion System`,
+                        description: `Configuración the Sugerencia System`,
                         emoji: "💡",
                     },
                     {
                         value: "setup-ticket",
-                        description: `Setup up to 25 different Ticket-Systems`,
+                        description: `Configuración up to 25 different Ticket-Systems`,
                         emoji: "📨",
                     },
                     {
                         value: "setup-tiktok",
-                        description: `Setup up to 3 different TikTok Logger Channels`,
+                        description: `Configuración up to 3 different TikTok Logger Channels`,
                         emoji: allEmojis.msg.tiktok,
                     },
                     {
                         value: "setup-twitch",
-                        description: `Setup up to 5 different Twitch Logger Channels`,
+                        description: `Configuración up to 5 different Twitch Logger Channels`,
                         emoji: allEmojis.msg.twitch,
                     },
                     {
                         value: "setup-twitter",
-                        description: `Setup up to 2 different Twitter Logger Channels`,
+                        description: `Configuración up to 2 different Twitter Logger Channels`,
                         emoji: allEmojis.msg.spotify,
                     },
                     {
                         value: "setup-validcode",
-                        description: `Setup the Valid-Code System`,
+                        description: `Configuración the Valid-Code System`,
                         emoji: allEmojis.msg.validcode,
                     },
                     {
                         value: "setup-warn",
-                        description: `Setup the Warn System Settings`,
+                        description: `Configuración the Warn System Ajustes`,
                         emoji: allEmojis.msg.warn,
                     },
                     {
                         value: "setup-welcome",
-                        description: `Setup the Welcome System/Messages`,
+                        description: `Configuración the Bienvenido System/Messages`,
                         emoji: allEmojis.msg.channel,
                     },
                     {
                         value: "setup-youtube",
-                        description: `Setup up to 5 different Youtube Logger Channels`,
+                        description: `Configuración up to 5 different Youtube Logger Channels`,
                         emoji: allEmojis.msg.youtube,
                     },
                 ];
                 let Selection1 = new StringSelectMenuBuilder()
-                    .setPlaceholder("Click me to setup the (1/3) Systems [A-C]!")
+                    .setPlaceholder("¡Haz clic para configurar the (1/3) Systems [A-C]!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -239,7 +239,7 @@ module.exports = {
                             .filter(Boolean)
                     );
                 let Selection2 = new StringSelectMenuBuilder()
-                    .setPlaceholder("Click me to setup the (2/3) Systems [C-R]!")
+                    .setPlaceholder("¡Haz clic para configurar the (2/3) Systems [C-R]!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -262,7 +262,7 @@ module.exports = {
                             .filter(Boolean)
                     );
                 let Selection3 = new StringSelectMenuBuilder()
-                    .setPlaceholder("Click me to setup the (3/3) Systems [R-Z]!")
+                    .setPlaceholder("¡Haz clic para configurar the (3/3) Systems [R-Z]!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -284,27 +284,15 @@ module.exports = {
                 //define the embed
                 let MenuEmbed1 = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Setup-Systems | (1/3) [A-C]",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Setup-Systems | (1/3) [A-C]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable1"]));
                 let MenuEmbed2 = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Setup-Systems | (2/3) [C-R]",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Setup-Systems | (2/3) [C-R]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable2"]));
                 let MenuEmbed3 = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Setup-Systems | (3/3) [R-Z]",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Setup-Systems | (3/3) [R-Z]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable3"]));
                 //send the menu msg
                 let menumsg1 = await message.reply({
@@ -328,13 +316,14 @@ module.exports = {
                 }
                 //Event
                 client.on("interactionCreate", menu => {
+                    if (!menu?.isStringSelectMenu() && !menu?.isButton()) return;
                     if (menu?.message.id === menumsg1.id) {
                         if (menu?.user.id === cmduser.id) {
                             menumsg1.edit({ components: [], embeds: menumsg1.embeds }).catch(() => {});
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -344,7 +333,7 @@ module.exports = {
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -354,7 +343,7 @@ module.exports = {
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -380,10 +369,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

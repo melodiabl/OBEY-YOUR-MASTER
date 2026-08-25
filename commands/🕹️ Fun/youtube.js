@@ -9,8 +9,8 @@ module.exports = {
     name: "youtubememe",
     aliases: [""],
     category: "🕹️ Fun",
-    description: "IMAGE CMD",
-    usage: "youtubememe @User <TEXT>",
+    description: "COMANDO DE IMAGEN",
+    usage: "youtubememe @Usuario <TEXT>",
     type: "usertext",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -37,10 +37,7 @@ module.exports = {
             embeds: [
                 new EmbedBuilder()
                     .setColor(ee.color)
-                    .setAuthor(
-                        "Getting Image Data..",
-                        "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif"
-                    ),
+                    .setAuthor({ name: "Obteniendo datos de imagen...", iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif" }),
             ],
         });
         //get pinged user, if not then use cmd user
@@ -50,7 +47,7 @@ module.exports = {
         //else not and define the user to be message.author
         else user = message.author;
         //get avatar of the user
-        var avatar = user.displayAvatarURL({ format: "png" });
+        var avatar = user.displayAvatarURL();
         //get the additional text
         var text = args.join(" ");
         //If no text added, return error
@@ -60,7 +57,7 @@ module.exports = {
                     embeds: [
                         tempmsg.embeds[0]
                             .setTitle(eval(client.la[ls]["cmds"]["fun"]["youtube"]["variable2"]))
-                            .setColor("RED")
+                            .setColor("#ED4245")
                             .setDescription(eval(client.la[ls]["cmds"]["fun"]["youtube"]["variable3"])),
                     ],
                 })
@@ -77,7 +74,7 @@ module.exports = {
                 .reply({
                     embeds: [
                         tempmsg.embeds[0]
-                            .setAuthor(`Meme for: ${user.tag}`, avatar)
+                            .setAuthor({ name: `Meme para: ${user.username}`, iconURL: avatar })
                             .setColor(es.color)
                             .setImage("attachment://youtube.png"),
                     ],
@@ -89,10 +86,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -2,34 +2,133 @@
 const Discord = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 const canvacord = require("canvacord");
+const FormData = require("form-data");
+const axios = require("axios");
 //Load fonts
-//Canvas.registerFont( "./assets/fonts/DMSans-Bold.ttf" , { family: "DM Sans", weight: "bold" } );
-//Canvas.registerFont( "./assets/fonts/DMSans-Regular.ttf" , { family: "DM Sans", weight: "regular" } );
-//Canvas.registerFont( "./assets/fonts/STIXGeneral.ttf" , { family: "STIXGeneral" } );
-//Canvas.registerFont( "./assets/fonts/AppleSymbol.ttf" , { family: "AppleSymbol" } );
-//Canvas.registerFont( "./assets/fonts/Arial.ttf"       , { family: "Arial" } );
-//Canvas.registerFont( "./assets/fonts/ArialUnicode.ttf", { family: "ArielUnicode" } );
-//Canvas.registerFont(`./assets/fonts/Genta.ttf`, { family: `Genta` } );
-//Canvas.registerFont("./assets/fonts/UbuntuMono.ttf", { family: "UbuntuMono" } );
+try {
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/Genta.ttf", "Genta");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/UbuntuMono.ttf", "UbuntuMono");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/DMSans-Bold.ttf", "DM Sans");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/STIXGeneral.ttf", "STIXGeneral");
+  Canvas.GlobalFonts.registerFromPath("./assets/fonts/Arial.ttf", "Arial");
+} catch {}
 //require functions from files
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
+const { clipRounded, drawCardBg } = require('./canvasUtils')
 //Create Variables
 const Fonts = "Genta, UbuntuMono, `DM Sans`, STIXGeneral, AppleSymbol, Arial, ArialUnicode";
 const wideFonts = "`DM Sans`, STIXGeneral, AppleSymbol, Arial, ArialUnicode";
 let invitemessage = "\u200b";
+
+function _roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+function _hexRgba(h, a) {
+  const r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+function _drawAmbientGlow(ctx, cx, cy, radius, color, alphaMax) {
+  const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+  grd.addColorStop(0, _hexRgba(color, alphaMax || 0.2));
+  grd.addColorStop(0.5, _hexRgba(color, (alphaMax || 0.2) * 0.3));
+  grd.addColorStop(1, _hexRgba(color, 0));
+  ctx.fillStyle = grd;
+  ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+}
+function _drawNoise(ctx, w, h, intensity) {
+  const id = ctx.createImageData(w, h);
+  const d = id.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const v = (Math.random() * 256) | 0;
+    d[i] = v; d[i + 1] = v; d[i + 2] = v; d[i + 3] = (intensity || 6);
+  }
+  ctx.putImageData(id, 0, 0);
+}
+async function _generateCard({ member, guild, accentColor, showAvatar, showDiscriminator, showMemberCount, showServerName, background, isLeave }) {
+  const canvas = Canvas.createCanvas(1772, 720), ctx = canvas.getContext("2d");
+  const W = 1772, H = 720, ACCENT = accentColor || "#5865F2";
+  clipRounded(ctx, W, H, 28)
+  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: background })
+  const cx = 80, cy = 110, cw = 930, ch = 500, cr = 36;
+  ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.7)"; ctx.shadowBlur = 80; ctx.shadowOffsetY = 20;
+  _roundRect(ctx, cx, cy, cw, ch, cr);
+  const gg = ctx.createRadialGradient(cx + 100, cy, 0, cx + cw / 2, cy + ch / 2, cw);
+  gg.addColorStop(0, _hexRgba(ACCENT, 0.06)); gg.addColorStop(0.5, "rgba(16,16,40,0.85)"); gg.addColorStop(1, "rgba(8,8,24,0.92)");
+  ctx.fillStyle = gg; ctx.fill(); ctx.restore();
+  _roundRect(ctx, cx, cy, cw, ch, cr); ctx.fillStyle = _hexRgba(ACCENT, 0.03); ctx.fill();
+  ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.4); ctx.shadowBlur = 20;
+  const ga = ctx.createLinearGradient(cx + 12, cy + 40, cx + 12, cy + ch - 40);
+  ga.addColorStop(0, ACCENT); ga.addColorStop(0.5, _hexRgba(ACCENT, 0.6)); ga.addColorStop(1, ACCENT);
+  _roundRect(ctx, cx + 12, cy + 40, 5, ch - 80, 2.5); ctx.fillStyle = ga; ctx.fill(); ctx.restore();
+  const asz = 194, ax = cx + 60, ay = cy + (ch - asz) / 2;
+  if (showAvatar) { try {
+    const av = await Canvas.loadImage(member.user.displayAvatarURL({ extension: 'png', size: 256, forceStatic: true }));
+    ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.6); ctx.shadowBlur = 40; ctx.shadowOffsetY = 5;
+    ctx.beginPath(); ctx.arc(ax + asz / 2, ay + asz / 2, asz / 2 + 8, 0, Math.PI * 2); ctx.closePath();
+    const rg = ctx.createLinearGradient(ax, ay, ax + asz, ay + asz);
+    rg.addColorStop(0, ACCENT); rg.addColorStop(0.5, _hexRgba(ACCENT, 0.4)); rg.addColorStop(1, ACCENT);
+    ctx.fillStyle = rg; ctx.fill(); ctx.restore();
+    ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.3)"; ctx.shadowBlur = 10;
+    ctx.beginPath(); ctx.arc(ax + asz / 2, ay + asz / 2, asz / 2, 0, Math.PI * 2); ctx.closePath(); ctx.clip();
+    ctx.drawImage(av, ax, ay, asz, asz); ctx.restore();
+  } catch {} }
+  const tx = cx + (showAvatar ? asz + 105 : 70), ty = cy + 180, mw = cw - (tx - cx) - 80;
+  let fs = 56; ctx.font = `bold ${fs}px "DM Sans", "Arial", sans-serif`;
+  while (ctx.measureText(member.user.username).width > mw && fs > 26) ctx.font = `bold ${fs--}px "DM Sans", "Arial", sans-serif`;
+  ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.4)"; ctx.shadowBlur = 15; ctx.shadowOffsetY = 3;
+  ctx.fillStyle = "#FFFFFF"; ctx.fillText(member.user.username, tx, ty); ctx.restore();
+  const nw = ctx.measureText(member.user.username).width;
+  if (showDiscriminator && member.user.discriminator && member.user.discriminator !== "0") {
+    ctx.font = '28px "DM Sans", "Arial", sans-serif'; ctx.fillStyle = "#9999AA"; ctx.fillText(`#${member.user.discriminator}`, tx + nw + 20, ty - 2);
+  }
+  const lY = ty + 45; ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.4); ctx.shadowBlur = 12;
+  const ag = ctx.createLinearGradient(tx, lY, tx + 90, lY);
+  ag.addColorStop(0, ACCENT); ag.addColorStop(0.6, _hexRgba(ACCENT, 0.5)); ag.addColorStop(1, "transparent");
+  ctx.fillStyle = ag; ctx.fillRect(tx, lY, 90, 4); ctx.restore();
+  let dY = lY + 55;
+  if (showServerName) {
+    ctx.font = '28px "DM Sans", "Arial", sans-serif'; ctx.fillStyle = ACCENT;
+    let msg = isLeave ? `Gracias por visitarnos, ${guild.name}` : `Te damos la bienvenida a ${guild.name}`;
+    while (ctx.measureText(msg + "\u2026").width > mw && msg.length > 5) msg = msg.slice(0, -1);
+    if (msg.length < (isLeave ? `Gracias por visitarnos, ${guild.name}` : `Te damos la bienvenida a ${guild.name}`).length) msg += "\u2026";
+    ctx.fillText(msg, tx, dY); dY += 48;
+  }
+  if (showMemberCount) {
+    ctx.font = '20px "DM Sans", "Arial", sans-serif'; ctx.fillStyle = "#8888AA";
+    ctx.fillText(isLeave ? `Fuiste el miembro #${guild.memberCount}` : `Eres el miembro #${guild.memberCount}`, tx, dY);
+  }
+  const bx = cx + cw - 28, by = cy + 36;
+  ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.3); ctx.shadowBlur = 20;
+  _roundRect(ctx, bx - 134, by, 134, 46, 23); ctx.fillStyle = _hexRgba(ACCENT, 0.12); ctx.fill(); ctx.restore();
+  ctx.save(); _roundRect(ctx, bx - 130, by + 2, 130, 42, 21); ctx.strokeStyle = _hexRgba(ACCENT, 0.25); ctx.lineWidth = 1; ctx.stroke(); ctx.restore();
+  ctx.font = 'bold 14px "DM Sans", "Arial", sans-serif'; ctx.fillStyle = ACCENT; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText(isLeave ? "HASTA PRONTO" : "NUEVO MIEMBRO", bx - 67, by + 23); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  _drawNoise(ctx, W, H, 6);
+  return canvas.encode('png');
+}
 //Start the module
 module.exports = client => {
     client.on("guildMemberRemove", async member => {
         if (!member.guild || member.user.bot) return; //if not finished yet return
-        let ls = client.settings.get(member.guild.id, "language");
-        let es = client.settings.get(member.guild.id, "embed");
+        const guildSettings = client.settings.get(member.guild.id) || {};
+        let ls = guildSettings.language && client.la[guildSettings.language] ? guildSettings.language : 'es';
+        let es = guildSettings.embed || { color: '#fffff9', wrongcolor: '#e01e01', thumb: false, footertext: '', footericon: '' };
         // Fetch guild and member data from the db
         EnsureInviteDB(member.guild, member.user);
 
-        let memberData = client.invitesdb.find(
-            v => v.id == member.id && v.guildId == member.guild.id && v.bot == member.user.bot
-        );
+        let memberData = client.invitesdb.get(member.guild.id + member.id);
+        if (!memberData) memberData = { joinData: { type: "unknown", invite: null } };
         if (!memberData.joinData) {
             memberData.joinData = {
                 type: "unknown",
@@ -39,9 +138,7 @@ module.exports = client => {
         const leftInviterData = client.invitesdb.find(
             v => v.guildId == member.guild.id && v.invited && Array.isArray(v.invited) && v.invited.includes(member.id)
         );
-        const leftInviterDataKey = client.invitesdb.findKey(
-            v => v.guildId == member.guild.id && v.invited && Array.isArray(v.invited) && v.invited.includes(member.id)
-        );
+        const leftInviterDataKey = leftInviterData ? member.guild.id + leftInviterData.id : null;
         // If the member was a rejoin, remove it from whom invited him before
         if (leftInviterData) {
             //make sure that the inviter Data is an array
@@ -121,19 +218,17 @@ module.exports = client => {
                         ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                             ? es.footericon
                             : client.user.displayAvatarURL()
-                        : null
+                        : undefined
                 )
                 .setTimestamp()
                 .setFooter(client.getFooter(
                         "Good bye: " + member.user.id,
-                        member.user.displayAvatarURL({
-                            dynamic: true,
-                        })
+                        member.user.displayAvatarURL()
                     )
                 )
                 .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable1"]))
-                .setDescription(client.settings.get(member.guild.id, "leave.msg").replace("{user}", `${member.user}`));
-            if (client.settings.get(member.guild.id, "leave.invite")) leaveembed.addField("\u200b", invitemessage);
+                .setDescription((client.settings.get(member.guild.id, "leave.msg") || "{user} left this Server").replace("{user}", `${member.user}`));
+            if (client.settings.get(member.guild.id, "leave.invite")) leaveembed.addFields({ name: "\u200b", value: invitemessage });
             //send the leave embed to there
             channel
                 .send({
@@ -150,19 +245,17 @@ module.exports = client => {
                         ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                             ? es.footericon
                             : client.user.displayAvatarURL()
-                        : null
+                        : undefined
                 )
                 .setTimestamp()
                 .setFooter(client.getFooter(
                         "Good bye: " + member.user.id,
-                        member.user.displayAvatarURL({
-                            dynamic: true,
-                        })
+                        member.user.displayAvatarURL()
                     )
                 )
                 .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable2"]))
-                .setDescription(client.settings.get(member.guild.id, "leave.dm_msg").replace("{user}", `${member.user}`));
-            if (client.settings.get(member.guild.id, "leave.invitedm")) leaveembed.addField("\u200b", invitemessage);
+                .setDescription((client.settings.get(member.guild.id, "leave.dm_msg") || "{user} left this Server").replace("{user}", `${member.user}`));
+            if (client.settings.get(member.guild.id, "leave.invitedm")) leaveembed.addFields({ name: "\u200b", value: invitemessage });
             //send the leave embed to there
             member.user
                 .send({
@@ -180,20 +273,18 @@ module.exports = client => {
                         ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                             ? es.footericon
                             : client.user.displayAvatarURL()
-                        : null
+                        : undefined
                 )
                 .setTimestamp()
                 .setFooter(client.getFooter(
                         "Good bye: " + member.user.id,
-                        member.user.displayAvatarURL({
-                            dynamic: true,
-                        })
+                        member.user.displayAvatarURL()
                     )
                 )
                 .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable3"]))
-                .setDescription(client.settings.get(member.guild.id, "leave.dm_msg").replace("{user}", `${member.user}`))
+                .setDescription((client.settings.get(member.guild.id, "leave.dm_msg") || "{user} left this Server").replace("{user}", `${member.user}`))
                 .setImage(client.settings.get(member.guild.id, "leave.customdm"));
-            if (client.settings.get(member.guild.id, "leave.invitedm")) leaveembed.addField("\u200b", invitemessage);
+            if (client.settings.get(member.guild.id, "leave.invitedm")) leaveembed.addFields({ name: "\u200b", value: invitemessage });
             //send the leave embed to there
             member.user
                 .send({
@@ -215,20 +306,18 @@ module.exports = client => {
                         ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                             ? es.footericon
                             : client.user.displayAvatarURL()
-                        : null
+                        : undefined
                 )
                 .setTimestamp()
                 .setFooter(client.getFooter(
                         "Good bye: " + member.user.id,
-                        member.user.displayAvatarURL({
-                            dynamic: true,
-                        })
+                        member.user.displayAvatarURL()
                     )
                 )
                 .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable4"]))
-                .setDescription(client.settings.get(member.guild.id, "leave.msg").replace("{user}", `${member.user}`))
+                .setDescription((client.settings.get(member.guild.id, "leave.msg") || "{user} left this Server").replace("{user}", `${member.user}`))
                 .setImage(client.settings.get(member.guild.id, "leave.custom"));
-            if (client.settings.get(member.guild.id, "leave.invite")) leaveembed.addField("\u200b", invitemessage);
+            if (client.settings.get(member.guild.id, "leave.invite")) leaveembed.addFields({ name: "\u200b", value: invitemessage });
             //send the leave embed to there
             channel
                 .send({
@@ -247,132 +336,52 @@ module.exports = client => {
                             ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                 ? es.footericon
                                 : client.user.displayAvatarURL()
-                            : null
+                            : undefined
                     )
                     .setTimestamp()
                     .setFooter(client.getFooter(
                             "Good bye: " + member.user.id,
-                            member.user.displayAvatarURL({
-                                dynamic: true,
-                            })
+                            member.user.displayAvatarURL()
                         )
                     )
                     .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable5"]))
                     .setDescription(
-                        client.settings.get(member.guild.id, "leave.dm_msg").replace("{user}", `${member.user}`)
+                        (client.settings.get(member.guild.id, "leave.dm_msg") || "{user} left this Server").replace("{user}", `${member.user}`)
                     );
-                if (client.settings.get(member.guild.id, "leave.invitedm")) leaveembed.addField("\u200b", invitemessage);
+                if (client.settings.get(member.guild.id, "leave.invitedm")) leaveembed.addFields({ name: "\u200b", value: invitemessage });
 
-                //member roles add on leave every single role
-                const canvas = Canvas.createCanvas(1772, 633);
-                //make it "2D"
-                const ctx = canvas.getContext("2d");
+                const buf = await _generateCard({
+                    member,
+                    guild: member.guild,
+                    accentColor: (client.settings.get(member.guild.id, "leave.framecolordm") || "#5865F2").replace("WHITE", "#FFFFF9").replace("#FFFFFF", "#FFFFF9"),
+                    showAvatar: client.settings.get(member.guild.id, "leave.pbdm") || false,
+                    showDiscriminator: client.settings.get(member.guild.id, "leave.discriminatordm") || false,
+                    showMemberCount: client.settings.get(member.guild.id, "leave.membercountdm") || false,
+                    showServerName: client.settings.get(member.guild.id, "leave.servernamedm") || false,
+                    background: client.settings.get(member.guild.id, "leave.backgrounddm"),
+                    isLeave: true,
+                });
 
-                if (client.settings.get(member.guild.id, "leave.backgrounddm") !== "transparent") {
-                    try {
-                        const bgimg = await Canvas.loadImage(client.settings.get(member.guild.id, "leave.backgrounddm"));
-                        ctx.drawImage(bgimg, 0, 0, canvas.width, canvas.height);
-                    } catch {}
-                } else {
-                    try {
-                        if (!member.guild.iconURL() || member.guild.iconURL() == null || member.guild.iconURL() == undefined)
-                            return;
-                        const img = await Canvas.loadImage(
-                            member.guild.iconURL({
-                                format: "png",
-                            })
-                        );
-                        ctx.globalAlpha = 0.3;
-                        //draw the guildicon
-                        ctx.drawImage(img, 1772 - 633, 0, 633, 633);
-                        ctx.globalAlpha = 1;
-                    } catch {}
-                }
-
-                if (client.settings.get(member.guild.id, "leave.framedm")) {
-                    let background;
-                    var framecolor = client.settings.get(member.guild.id, "leave.framecolordm").toUpperCase();
-                    if (framecolor == "#FFFFFF") framecolor = "#FFFFF9";
-                    if (
-                        client.settings.get(member.guild.id, "leave.discriminatordm") &&
-                        client.settings.get(member.guild.id, "leave.servernamedm")
-                    )
-                        background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome3frame.png`);
-                    else if (client.settings.get(member.guild.id, "leave.discriminatordm"))
-                        background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome2frame_unten.png`);
-                    else if (client.settings.get(member.guild.id, "leave.servernamedm"))
-                        background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome2frame_oben.png`);
-                    else background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome1frame.png`);
-
-                    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-                    if (client.settings.get(member.guild.id, "leave.pbdm")) {
-                        background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome1framepb.png`);
-                        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-                    }
-                }
-
-                var fillcolors = client.settings.get(member.guild.id, "leave.framecolordm").toUpperCase();
-                if (fillcolors == "#FFFFFF") fillcolor == "#FFFFF9";
-                ctx.fillStyle = fillcolors.toLowerCase();
-
-                //set the first text string
-                var textString3 = `${member.user.username}`;
-                //if the text is too big then smaller the text
-                if (textString3.length >= 14) {
-                    ctx.font = `100px ${Fonts}`;
-                    await canvacord.Util.renderEmoji(ctx, textString3, 720, canvas.height / 2);
-                }
-                //else dont do it
-                else {
-                    ctx.font = `150px ${Fonts}`;
-                    await canvacord.Util.renderEmoji(ctx, textString3, 720, canvas.height / 2 + 20);
-                }
-
-                ctx.font = `bold 50px ${wideFonts}`;
-                //define the Discriminator Tag
-                if (client.settings.get(member.guild.id, "leave.discriminatordm")) {
-                    await canvacord.Util.renderEmoji(ctx, `#${member.user.discriminator}`, 750, canvas.height / 2 + 125);
-                }
-                //define the Member count
-                if (client.settings.get(member.guild.id, "leave.membercountdm")) {
-                    await canvacord.Util.renderEmoji(
-                        ctx,
-                        `Member #${member.guild.memberCount}`,
-                        750,
-                        canvas.height / 2 + 200
+                //send DM leave card (axios: bypass undici UND_ERR_SOCKET on file uploads)
+                try {
+                    leaveembed.setImage('attachment://leave-image.png');
+                    const dmRes = await axios.post(
+                        'https://discord.com/api/v10/users/@me/channels',
+                        { recipient_id: member.user.id },
+                        { headers: { 'Content-Type': 'application/json', Authorization: `Bot ${client.token}` } }
                     );
-                }
-                //get the Guild Name
-                if (client.settings.get(member.guild.id, "leave.servernamedm")) {
-                    await canvacord.Util.renderEmoji(ctx, `${member.guild.name}`, 700, canvas.height / 2 - 150);
-                }
-
-                if (client.settings.get(member.guild.id, "leave.pbdm")) {
-                    //create a circular "mask"
-                    ctx.beginPath();
-                    ctx.arc(315, canvas.height / 2, 250, 0, Math.PI * 2, true); //position of img
-                    ctx.closePath();
-                    ctx.clip();
-                    //define the user avatar
-                    const avatar = await Canvas.loadImage(
-                        member.user.displayAvatarURL({
-                            format: "png",
-                        })
+                    const form = new FormData();
+                    form.append('files[0]', buf, { filename: 'leave-image.png', contentType: 'image/png' });
+                    form.append('payload_json', JSON.stringify({
+                        embeds: [leaveembed.toJSON()],
+                        attachments: [{ id: 0, filename: 'leave-image.png' }],
+                    }));
+                    await axios.post(
+                        `https://discord.com/api/v10/channels/${dmRes.data.id}/messages`,
+                        form,
+                        { headers: { ...form.getHeaders(), Authorization: `Bot ${client.token}` } }
                     );
-                    //draw the avatar
-                    ctx.drawImage(avatar, 65, canvas.height / 2 - 250, 500, 500);
-                }
-
-                //get it as a discord attachment
-                const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "leave-image.png");
-                //define the leave embed
-                //send the leave embed to there
-                member.user
-                    .send({
-                        embeds: [leaveembed.setImage(`attachment://leave-image.png`)],
-                        files: [attachment],
-                    })
-                    .catch(e => console.log("This catch prevents a crash"));
+                } catch {}
                 //member roles add on leave every single role
             } catch {}
         }
@@ -390,130 +399,43 @@ module.exports = client => {
                             ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                 ? es.footericon
                                 : client.user.displayAvatarURL()
-                            : null
+                            : undefined
                     )
                     .setTimestamp()
                     .setFooter(client.getFooter(
                             "Good bye: " + member.user.id,
-                            member.user.displayAvatarURL({
-                                dynamic: true,
-                            })
+                            member.user.displayAvatarURL()
                         )
                     )
                     .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable6"]))
-                    .setDescription(client.settings.get(member.guild.id, "leave.msg").replace("{user}", `${member.user}`));
-                if (client.settings.get(member.guild.id, "leave.invite")) leaveembed.addField("\u200b", invitemessage);
+                    .setDescription((client.settings.get(member.guild.id, "leave.msg") || "{user} left this Server").replace("{user}", `${member.user}`));
+                if (client.settings.get(member.guild.id, "leave.invite")) leaveembed.addFields({ name: "\u200b", value: invitemessage });
 
-                //member roles add on leave every single role
-                const canvas = Canvas.createCanvas(1772, 633);
-                //make it "2D"
-                const ctx = canvas.getContext("2d");
+                const buf = await _generateCard({
+                    member,
+                    guild: member.guild,
+                    accentColor: (client.settings.get(member.guild.id, "leave.framecolor") || "#5865F2").replace("WHITE", "#FFFFF9").replace("#FFFFFF", "#FFFFF9"),
+                    showAvatar: client.settings.get(member.guild.id, "leave.pb") || false,
+                    showDiscriminator: client.settings.get(member.guild.id, "leave.discriminator") || false,
+                    showMemberCount: client.settings.get(member.guild.id, "leave.membercount") || false,
+                    showServerName: client.settings.get(member.guild.id, "leave.servername") || false,
+                    background: client.settings.get(member.guild.id, "leave.background"),
+                    isLeave: true,
+                });
 
-                if (client.settings.get(member.guild.id, "leave.background") !== "transparent") {
-                    try {
-                        const bgimg = await Canvas.loadImage(client.settings.get(member.guild.id, "leave.background"));
-                        ctx.drawImage(bgimg, 0, 0, canvas.width, canvas.height);
-                    } catch {}
-                } else {
-                    try {
-                        if (!member.guild.iconURL() || member.guild.iconURL() == null || member.guild.iconURL() == undefined)
-                            return;
-                        const img = await Canvas.loadImage(
-                            member.guild.iconURL({
-                                format: "png",
-                            })
-                        );
-                        ctx.globalAlpha = 0.3;
-                        //draw the guildicon
-                        ctx.drawImage(img, 1772 - 633, 0, 633, 633);
-                        ctx.globalAlpha = 1;
-                    } catch {}
-                }
-
-                if (client.settings.get(member.guild.id, "leave.frame")) {
-                    let background;
-                    var framecolor = client.settings.get(member.guild.id, "leave.framecolor").toUpperCase();
-                    if (framecolor == "#FFFFFF") framecolor = "#FFFFF9";
-                    if (
-                        client.settings.get(member.guild.id, "leave.discriminator") &&
-                        client.settings.get(member.guild.id, "leave.servername")
-                    )
-                        background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome3frame.png`);
-                    else if (client.settings.get(member.guild.id, "leave.discriminator"))
-                        background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome2frame_unten.png`);
-                    else if (client.settings.get(member.guild.id, "leave.servername"))
-                        background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome2frame_oben.png`);
-                    else background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome1frame.png`);
-
-                    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-                    if (client.settings.get(member.guild.id, "leave.pb")) {
-                        background = await Canvas.loadImage(`./assets/welcome/${framecolor}/welcome1framepb.png`);
-                        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-                    }
-                }
-
-                var fillcolor = client.settings.get(member.guild.id, "leave.framecolor").toUpperCase();
-                if (fillcolor == "#FFFFFF") fillcolor == "#FFFFF9";
-                ctx.fillStyle = fillcolor.toLowerCase();
-
-                //set the first text string
-                var textString3 = `${member.user.username}`;
-                //if the text is too big then smaller the text
-                if (textString3.length >= 14) {
-                    ctx.font = `100px ${Fonts}`;
-                    await canvacord.Util.renderEmoji(ctx, textString3, 720, canvas.height / 2);
-                }
-                //else dont do it
-                else {
-                    ctx.font = `150px ${Fonts}`;
-                    await canvacord.Util.renderEmoji(ctx, textString3, 720, canvas.height / 2 + 20);
-                }
-
-                ctx.font = `bold 50px ${wideFonts}`;
-                //define the Discriminator Tag
-                if (client.settings.get(member.guild.id, "leave.discriminator")) {
-                    await canvacord.Util.renderEmoji(ctx, `#${member.user.discriminator}`, 750, canvas.height / 2 + 125);
-                }
-                //define the Member count
-                if (client.settings.get(member.guild.id, "leave.membercount")) {
-                    await canvacord.Util.renderEmoji(
-                        ctx,
-                        `Member #${member.guild.memberCount}`,
-                        750,
-                        canvas.height / 2 + 200
-                    );
-                }
-                //get the Guild Name
-                if (client.settings.get(member.guild.id, "leave.servername")) {
-                    await canvacord.Util.renderEmoji(ctx, `${member.guild.name}`, 700, canvas.height / 2 - 150);
-                }
-
-                if (client.settings.get(member.guild.id, "leave.pb")) {
-                    //create a circular "mask"
-                    ctx.beginPath();
-                    ctx.arc(315, canvas.height / 2, 250, 0, Math.PI * 2, true); //position of img
-                    ctx.closePath();
-                    ctx.clip();
-                    //define the user avatar
-                    const avatar = await Canvas.loadImage(
-                        member.user.displayAvatarURL({
-                            format: "png",
-                        })
-                    );
-                    //draw the avatar
-                    ctx.drawImage(avatar, 65, canvas.height / 2 - 250, 500, 500);
-                }
-                //get it as a discord attachment
-                const attachment = new Discord.AttachmentBuilder(canvas.toBuffer("image/webp"), "leave-image.png");
-                //define the leave embed
-                //send the leave embed to there
-                channel
-                    .send({
-                        embeds: [leaveembed.setImage(`attachment://leave-image.png`)],
-                        files: [attachment],
-                    })
-                    .catch(e => console.log("This catch prevents a crash"));
+                //send leave card (axios: bypass undici UND_ERR_SOCKET on file uploads)
+                leaveembed.setImage('attachment://leave-image.png');
+                const form = new FormData();
+                form.append('files[0]', buf, { filename: 'leave-image.png', contentType: 'image/png' });
+                form.append('payload_json', JSON.stringify({
+                    embeds: [leaveembed.toJSON()],
+                    attachments: [{ id: 0, filename: 'leave-image.png' }],
+                }));
+                axios.post(
+                    `https://discord.com/api/v10/channels/${channel.id}/messages`,
+                    form,
+                    { headers: { ...form.getHeaders(), Authorization: `Bot ${client.token}` } }
+                ).catch(() => {});
                 //member roles add on leave every single role
             } catch (e) {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);

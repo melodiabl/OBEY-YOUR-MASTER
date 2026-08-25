@@ -3,7 +3,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const ms = require("ms");
-var { EmbedBuilder, Permissions } = require(`discord.js`);
+var { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { databasing, delay } = require(`./functions`);
 const countermap = new Map();
 const messagesmap = new Map();
@@ -28,7 +28,7 @@ module.exports = client => {
                     [...message.member.roles.cache.values()].length > 0 &&
                     message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r))) ||
                 [message.guild.ownerId, config.ownerid].includes(message.author.id) ||
-                message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)
+                message.member.permissions.has(PermissionFlagsBits.Administrator)
             )
                 return;
             client.settings.ensure(message.guild.id, {
@@ -53,7 +53,7 @@ module.exports = client => {
             });
             let autowarn = client.settings.get(message.guild.id, "autowarn");
             let antispam = client.settings.get(message.guild.id, "antispam");
-            if (antispam.whitelistedchannels.some(r => message.channel.parentId == r || message.channel.id == r)) return;
+            if ((antispam.whitelistedchannels || []).some(r => message.channel.parentId == r || message.channel.id == r)) return;
             let mute_amount = antispam.mute_amount;
             let member = message.member;
             if (!antispam.enabled) return;
@@ -88,9 +88,7 @@ module.exports = client => {
                             reason: "Antispam Autowarn",
                             when: new Date().toLocaleString(`de`),
                             oldhighesrole: message.member.roles ? message.member.roles.highest : `Had No Roles`,
-                            oldthumburl: message.author.displayAvatarURL({
-                                dynamic: true,
-                            }),
+                            oldthumburl: message.author.displayAvatarURL(),
                         });
                         // Push the action to the user's warnings
                         client.userProfiles.push(message.author.id, newActionId, "warnings");
@@ -104,14 +102,14 @@ module.exports = client => {
                                 new EmbedBuilder()
                                     .setAuthor(
                                         client.getAuthor(
-                                            message.author.tag,
-                                            message.member.displayAvatarURL({ dynamic: true })
+                                            message.author.username,
+                                            message.member.displayAvatarURL()
                                         )
                                     )
                                     .setColor("#E67E22")
                                     .setFooter(client.getFooter(
                                             "ID: " + message.author.id,
-                                            message.author.displayAvatarURL({ dynamic: true })
+                                            message.author.displayAvatarURL()
                                         )
                                     )
                                     .setDescription(
@@ -352,15 +350,15 @@ module.exports = client => {
                                                 )
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle(
-                                                    `${member.user.tag} Got muted due to spamming to much, after warnings`
+                                                    `${member.user.username} fue silenciado por spammear demasiado, después de advertencias`
                                                 )
-                                                .setDescription(`He will get unmuted after 10 Minutes`),
+                                                .setDescription(`Será desilenciado después de 10 minutos`),
                                         ],
                                     })
                                     .catch(() => {});
                             })
                             .catch(() => {
-                                return message.channel.send(`❌ **I could not timeout ${member.user.tag}**`).then(m => {
+                                return message.channel.send(`❌ **No pude aplicar timeout a ${member.user.username}**`).then(m => {
                                     setTimeout(() => {
                                         m.delete().catch(() => {});
                                     }, 5000);
@@ -376,9 +374,9 @@ module.exports = client => {
                                         .setColor(es.wrongcolor)
                                         .setFooter(client.getFooter(es))
                                         .setTitle(
-                                            `${member.user.tag} You are not allowed to send more then ${messagelimit} Messages / 10 Seconds`
+                                            `${member.user.username} No tienes permitido enviar más de ${messagelimit} mensajes cada 10 segundos`
                                         )
-                                        .setDescription(`Please slow down!`),
+                                        .setDescription(`¡Por favor, reduce la velocidad!`),
                                 ],
                             })
                             .then(msg =>

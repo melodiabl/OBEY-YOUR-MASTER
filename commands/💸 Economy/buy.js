@@ -126,49 +126,34 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter({ text: user.tag + " | ❌ .. Unable to buy | ✅ ... Possible to buy",
-                                iconURL: user.displayAvatarURL({ dynamic: true })
+                            .setFooter({ text: user.username + " | ❌ .. Unable to buy | ✅ ... Possible to buy",
+                                iconURL: user.displayAvatarURL()
                             })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable3"]))
-                            .addField(
-                                "✏️ Useables",
-                                ">>> " +
+                            .addFields({ name: "✏️ Useables", value: ">>> " +
                                     `✏️ **\`Pensil [10 💸]\`** | ${p2b(10)}
 🖊️ **\`Pen [20 💸]\`** | ${p2b(20)}
 🟪 **\`Condom [30 💸]\`** | ${p2b(30)}
-🍼 **\`Bottle [50 💸]\`** | ${p2b(50)}`
-                            )
-                            .addField(
-                                "👕 Clothes",
-                                ">>> " +
+🍼 **\`Bottle [50 💸]\`** | ${p2b(50)}` })
+                            .addFields({ name: "👕 Clothes", value: ">>> " +
                                     `👟 **\`Nike Shoe [300 💸]\`** | ${p2b(300)}
-👕 **\`T-Shirt [60 💸]\`** | ${p2b(60)}`
-                            )
-                            .addField(
-                                "🐕 Animals",
-                                ">>> " +
+👕 **\`T-Shirt [60 💸]\`** | ${p2b(60)}` })
+                            .addFields({ name: "🐕 Animals", value: ">>> " +
                                     `🐟\`Fish [1000 💸]\`** | ${p2b(1000)}
 🐹 **\`Hamster [1500 💸]\`** | ${p2b(1500)}
 🐕 **\`Dog [2000 💸]\`** | ${p2b(2000)}
-😺 **\`Cat [2000 💸]\`** | ${p2b(2000)}`
-                            )
-                            .addField(
-                                "🚗 Means of Transport",
-                                ">>> " +
+😺 **\`Cat [2000 💸]\`** | ${p2b(2000)}` })
+                            .addFields({ name: "🚗 Means of Transport", value: ">>> " +
                                     `🛥️\`Yacht [75000 💸]\`** | ${p2b(75000)}
 🏎️ **\`Lamborghini [50000 💸]\`** | ${p2b(50000)}
 🚗 **\`Car [6400 💸]\`** | ${p2b(6400)}
 🏍️ **\`Motorbike [1500 💸]\`** | ${p2b(1500)}
-🚲 **\`Bicycle [500 💸]\`** | ${p2b(500)}`
-                            )
-                            .addField(
-                                "🏠 Livingarea",
-                                ">>> " +
+🚲 **\`Bicycle [500 💸]\`** | ${p2b(500)}` })
+                            .addFields({ name: "🏠 Livingarea", value: ">>> " +
                                     `🏘️ **\`Mansion [45000 💸]\`** | ${p2b(45000)}
 🏠 **\`House [8000 💸]\`** | ${p2b(8000)}
-🟫 **\`Dirthut [150 💸]\`** | ${p2b(150)}`
-                            ),
+🟫 **\`Dirthut [150 💸]\`** | ${p2b(150)}` }),
                     ],
                 });
             let amountofbuy = Number(args[1]) || 1;
@@ -177,7 +162,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable4"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable5"])),
                     ],
@@ -251,49 +236,34 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag + " | ❌ .. Unable to buy | ✅ ... Possible to buy",
-                                iconURL: user.displayAvatarURL({ dynamic: true })
+                            .setFooter({ text: user.username + " | ❌ .. Unable to buy | ✅ ... Possible to buy",
+                                iconURL: user.displayAvatarURL()
                             })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable6"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable7"]))
-                            .addField(
-                                "✏️ Useables",
-                                ">>> " +
+                            .addFields({ name: "✏️ Useables", value: ">>> " +
                                     `✏️ **\`Pensil [10 💸]\`** | ${p2b(10)}
 🖊️ **\`Pen [20 💸]\`** | ${p2b(20)}
 🟪 **\`Condom [30 💸]\`** | ${p2b(30)}
-🍼 **\`Bottle [50 💸]\`** | ${p2b(50)}`
-                            )
-                            .addField(
-                                "👕 Clothes",
-                                ">>> " +
+🍼 **\`Bottle [50 💸]\`** | ${p2b(50)}` })
+                            .addFields({ name: "👕 Clothes", value: ">>> " +
                                     `👟 **\`Nike Shoe [300 💸]\`** | ${p2b(300)}
-👕 **\`T-Shirt [60 💸]\`** | ${p2b(60)}`
-                            )
-                            .addField(
-                                "🐕 Animals",
-                                ">>> " +
+👕 **\`T-Shirt [60 💸]\`** | ${p2b(60)}` })
+                            .addFields({ name: "🐕 Animals", value: ">>> " +
                                     `🐟\`Fish [1000 💸]\`** | ${p2b(1000)}
 🐹 **\`Hamster [1500 💸]\`** | ${p2b(1500)}
 🐕 **\`Dog [2000 💸]\`** | ${p2b(2000)}
-😺 **\`Cat [2000 💸]\`** | ${p2b(2000)}`
-                            )
-                            .addField(
-                                "🚗 Means of Transport",
-                                ">>> " +
+😺 **\`Cat [2000 💸]\`** | ${p2b(2000)}` })
+                            .addFields({ name: "🚗 Means of Transport", value: ">>> " +
                                     `🛥️\`Yacht [75000 💸]\`** | ${p2b(75000)}
 🏎️ **\`Lamborghini [50000 💸]\`** | ${p2b(50000)}
 🚗 **\`Car [6400 💸]\`** | ${p2b(6400)}
 🏍️ **\`Motorbike [1500 💸]\`** | ${p2b(1500)}
-🚲 **\`Bicycle [500 💸]\`** | ${p2b(500)}`
-                            )
-                            .addField(
-                                "🏠 Livingarea",
-                                ">>> " +
+🚲 **\`Bicycle [500 💸]\`** | ${p2b(500)}` })
+                            .addFields({ name: "🏠 Livingarea", value: ">>> " +
                                     `🏘️ **\`Mansion [45000 💸]\`** | ${p2b(45000)}
 🏠 **\`House [8000 💸]\`** | ${p2b(8000)}
-🟫 **\`Dirthut [150 💸]\`** | ${p2b(150)}`
-                            ),
+🟫 **\`Dirthut [150 💸]\`** | ${p2b(150)}` }),
                     ],
                 });
             var endprize = prize * amountofbuy;
@@ -302,7 +272,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable8"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable9"])),
                     ],
@@ -322,7 +292,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable10"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable11"])),
                 ],
@@ -343,10 +313,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

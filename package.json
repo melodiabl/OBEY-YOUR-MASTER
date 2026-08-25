@@ -29,7 +29,7 @@
     "discord-giveaways": "^6.0.1",
     "discord.js": "^14.18.0",
     "dotenv": "^16.6.1",
-    "ejs": "^6.0.1",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "got": "^11.8.6",
@@ -43,8 +43,12 @@
     "random-words": "^2.0.1",
     "request-promise-native": "^1.0.9",
     "rss-parser": "^3.13.0",
+    "searchtify": "^2.0.1",
     "serialize-javascript": "^7.0.5",
     "shoukaku": "^4.3.0",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
+    "spotifly": "^0.1.1",
     "strip-ansi": "^7.1.0",
     "superagent": "^10.2.3",
     "translatte": "^3.0.1",
@@ -54,7 +58,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "node --watch index.js"
+    "dev": "node --watch index.js",
+    "test": "node --test test/*.test.js"
   },
   "author": "Tomato6966 (updated by OBEY team)",
   "license": "MIT"

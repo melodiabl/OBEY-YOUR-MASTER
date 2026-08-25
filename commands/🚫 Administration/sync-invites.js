@@ -2,7 +2,10 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits,
+    ButtonStyle
+} = require(`discord.js`);
+const Discord = require("discord.js");
 const { databasing, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 let running = new Map();
 const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
@@ -11,14 +14,14 @@ module.exports = {
     category: `🚫 Administration`,
     cooldown: 4,
     usage: `sync-invites`,
-    description: `Syncs all Invites, it could delete some old invites tho (if the link got deleted, etc.)`,
-    memberpermissions: ["ADMINISTRATOR"],
+    description: `Sincroniza todas las Invitaciones, aunque podría eliminar algunas invitaciones antiguas (si el enlace se eliminó, etc.)`,
+    memberpermissions: ['Administrador'],
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.MANAGE_GUILD]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.ManageGuild]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -38,15 +41,15 @@ module.exports = {
                 });
             }
             let approve = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("1")
-                .setEmoji("833101995723194437")
-                .setLabel("YES DO IT!");
+                .setEmoji("✅")
+                .setLabel("¡SÍ HAZLO!");
             let deny = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("2")
-                .setEmoji("833101993668771842")
-                .setLabel("Cancel");
+                .setEmoji("❌")
+                .setLabel("Cancelar");
             let awaitedmsg = await message.reply({
                 embeds: [
                     new EmbedBuilder()
@@ -67,7 +70,7 @@ module.exports = {
                     return b?.reply(handlemsg(client.la[ls].cmds.info.help.buttonerror, { prefix: prefix }), true);
                 //page forward
                 if (b?.customId == "1") {
-                    b?.reply("Syncing Invites...", true);
+                    b?.reply("Sincronizando Invitaciones...", true);
                     edited = true;
                     running.set(message.guild.id, true);
                     let guildInvites = await message.guild.invites.fetch().catch(() => {});
@@ -134,13 +137,13 @@ module.exports = {
                 }
                 //go home
                 else if (b?.customId == "2") {
-                    b?.reply("Cancelled!", true);
+                    b?.reply("¡Cancelado!", true);
                 }
             });
             collector.on("end", collected => {
                 if (!edited)
                     awaitedmsg.edit({
-                        content: "TIME HAS ENDED!",
+                        content: "¡SE ACABÓ EL TIEMPO!",
                         embeds: awaitedmsg.embeds[0],
                         buttons: [approve.setDisabled(true), deny.setDisabled(true)],
                     });
@@ -149,7 +152,7 @@ module.exports = {
             setTimeout(() => {
                 if (!edited)
                     awaitedmsg.edit({
-                        content: "TIME HAS ENDED!",
+                        content: "¡SE ACABÓ EL TIEMPO!",
                         embeds: awaitedmsg.embeds[0],
                         buttons: [approve.setDisabled(true), deny.setDisabled(true)],
                     });
@@ -173,25 +176,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable6"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],
@@ -216,10 +208,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

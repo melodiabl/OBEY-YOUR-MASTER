@@ -27,14 +27,14 @@ module.exports = {
         await LieSwatter({
             interaction: message,
             client: client,
-            embed: {
+            embeds: [{
                 title: "Lie Swatter",
                 color: es.color,
                 footer: {
                     text: es.footertext,
                 },
                 timestamp: new Date(),
-            },
+            }],
             thinkMessage: "I am thinking...",
             winMessage: "GG, It was a **{{answer}}**. You got it correct in **{{time}}**.",
             loseMessage: "Better luck next time! It was a **{{answer}}**.",

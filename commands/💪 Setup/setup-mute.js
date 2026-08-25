@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupmute", "mute-setup", "mutesetup"],
     cooldown: 5,
-    usage: "setup-mute  -->  Follow the Steps",
-    description: "Setup the Mute system Role/Timeout and the defaulttime if no time added",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-mute --> Sigue los Pasos",
+    description: "Configuración del sistema de Silencio Rol/Timeout y el tiempo predeterminado si no se agrega tiempo",
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -46,7 +46,7 @@ module.exports = {
                     },
                     {
                         value: "Set Mute-Role",
-                        description: `Define the Mute-Role`,
+                        description: `Define the Mute-Rol`,
                         emoji: allEmojis.msg.roles,
                     },
                     {
@@ -56,12 +56,12 @@ module.exports = {
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Mute System`,
+                        description: `Show Ajustes of the Mute System`,
                         emoji: "📑",
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Mute System-Setup!`,
+                        description: `Cancelar and stop the Mute System-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -70,7 +70,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Mute System")
+                    .setPlaceholder("¡Haz clic para configurar the Mute System")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -86,11 +86,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Mute System",
-                        "https://cdn.discordapp.com/emojis/771804364582420532.gif?size=96",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Mute System", iconURL: "https://cdn.discordapp.com/emojis/771804364582420532.gif?size=96", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -114,14 +110,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -143,10 +139,10 @@ module.exports = {
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setTitle(
-                                            'Which Role should I add when someone gets muted and the mute style == "role"'
+                                            'Which Rol should I add when someone gets muted and the mute style == "role"'
                                         )
                                         .setColor(es.color)
-                                        .setDescription("Ping the Role now, or send the id of it!")
+                                        .setDescription("Ping the Rol now, or send the id of it!")
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -159,7 +155,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     let role =
                                         message.mentions.roles.filter(ch => ch.guild.id == message.guild.id).first() ||
                                         message.guild.roles.cache.get(message.content.trim().split(" ")[0]);
@@ -171,7 +167,7 @@ module.exports = {
                                                     .setTitle("Set the MUTE ROLE")
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `I will now use the Role <@&${role.id}> if the mute style is set the "role"`.substring(
+                                                        `I will now use the Rol <@&${role.id}> if the mute style is set the "role"`.substring(
                                                             0,
                                                             2048
                                                         )
@@ -180,7 +176,7 @@ module.exports = {
                                             ],
                                         });
                                     }
-                                    return message.reply("NO CHANNEL PINGED");
+                                    return message.reply("NO SE MENCIONÓ NINGÚN CANAL");
                                 })
                                 .catch(e => {
                                     return message.reply({
@@ -188,7 +184,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-aichat"]["variable8"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -217,7 +213,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     const ms = require("ms");
 
                                     let time = 0;
@@ -237,7 +233,7 @@ module.exports = {
                                         }
                                     }
                                     if (!time || time < 0 || time > ms("1 Week")) {
-                                        return message.reply("Invalid time added! Must be more than 0 and less than 1 week");
+                                        return message.reply("¡Tiempo no válido! Debe ser mayor que 0 y menor que 1 semana");
                                     }
                                     client.settings.set(message.guild.id, time, `mute.defaultTime`);
                                     return message.reply({
@@ -261,7 +257,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-aichat"]["variable8"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -277,7 +273,7 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-aichat"]["variable10"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Channel:** ${thesettings == "no" ? "Not Setupped" : `<#${thesettings}> | \`${thesettings}\``}`.substring(
+                                            `**Canal:** ${thesettings == "no" ? "Not Setupped" : `<#${thesettings}> | \`${thesettings}\``}`.substring(
                                                 0,
                                                 2048
                                             )
@@ -305,10 +301,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

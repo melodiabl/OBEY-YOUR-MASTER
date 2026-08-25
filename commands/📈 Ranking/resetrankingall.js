@@ -8,7 +8,7 @@ module.exports = {
     aliases: [""], //every parameter can be an alias
     cooldown: 4, //this will set it to a 4 second cooldown
     usage: "resetrankingall", //this is for the help command for EACH cmd
-    description: "Reset ranking of everyone in this Server", //the description of the command
+    description: "Reset ranking of everyone in this Servidor", //the description of the command
     type: "manage",
     //running the command with the parameters: client, message, args, user, text, prefix
     run: async (client, message, args, cmduser, text, prefix) => {},

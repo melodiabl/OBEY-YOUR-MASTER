@@ -9,9 +9,9 @@ const path = require("path");
 module.exports = {
     name: path.parse(__filename).name,
     category: "🕹️ Fun",
-    usage: `${path.parse(__filename).name} <@User> [@User2]`,
+    usage: `${path.parse(__filename).name} <@Usuario> [@User2]`,
     type: "user",
-    description: "*Image cmd in the style:* " + path.parse(__filename).name,
+    description: "*Comando de imagen al estilo:* " + path.parse(__filename).name,
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -37,10 +37,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter(es))
-                        .setAuthor(
-                            "Getting Image Data..",
-                            "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif"
-                        ),
+                        .setAuthor({ name: "Obteniendo datos de imagen...", iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif" }),
                 ],
             });
             //find the USER
@@ -81,17 +78,15 @@ module.exports = {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle("❌ You forgot to ping at least one Member!")
+                            .setTitle("❌ ¡Olvidaste mencionar al menos a un miembro!")
                             .setDescription(`Usage: \`${prefix}kiss <@User1> [@User2]\``),
                     ],
                 });
             let avatar = user.displayAvatarURL({
                 dynamic: false,
-                format: "png",
             });
             let avatar2 = user2.displayAvatarURL({
                 dynamic: false,
-                format: "png",
             });
             let image = await canvacord.Canvas.kiss(avatar, avatar2);
             let attachment = await new Discord.AttachmentBuilder(image, "kiss.png");
@@ -117,10 +112,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

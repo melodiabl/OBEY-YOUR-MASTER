@@ -9,7 +9,7 @@ module.exports = {
     name: "latestquotes",
     aliases: ["lastquotes", "latestquote", "lastquote"],
     category: "🔰 Info",
-    description: "Shows the latest Quotes which are saved on this User/you",
+    description: "Shows the latest Quotes which are saved on this Usuario/you",
     usage: "latestquotes [@USER]",
     type: "user",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -37,13 +37,13 @@ module.exports = {
                     !data[Number(args[0])] ||
                     !data[Number(args[0])].text
                 ) {
-                    return message.reply(`❌ **Invalid Quote ID!**\n> Use one between \`0\` and \`${data.length - 1}\``);
+                    return message.reply(`❌ **No válido Quote ID!**\n> Use one between \`0\` and \`${data.length - 1}\``);
                 }
                 let embed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setFooter({ text: user.id, iconURL: user.displayAvatarURL({ dynamic: true }) })
-                    .addField("**Quote by:**", `<@${data[Number(args[0])].by}>`)
-                    .addField("**Quote at:**", `\`\`\`${moment(data[Number(args[0])].at).format("DD/MM/YYYY HH:mm")}\`\`\``)
+                    .setFooter({ text: user.id, iconURL: user.displayAvatarURL() })
+                    .addFields({ name: "**Quote by:**", value: `<@${data[Number(args[0])].by}>` })
+                    .addFields({ name: "**Quote at:**", value: `\`\`\`${moment(data[Number(args[0])].at).format("DD/MM/YYYY HH:mm")}\`\`\`` })
                     .setTitle("**Quote Text:**")
                     .setDescription(`${String(data[Number(args[0])].text).substring(0, 2000)}`);
                 if (data[Number(args[0])].image) {
@@ -52,7 +52,7 @@ module.exports = {
                 return message.reply({ embeds: [embed] });
             }
             if (!data || data.length == 0)
-                return message.reply({ content: "❌ **This User has no Quotes in this Server yet!**" });
+                return message.reply({ content: "❌ **¡Este usuario no tiene citas en este servidor todavía!**" });
             var datas = data
                 .sort((a, b) => b?.at - a.at)
                 .map(
@@ -63,7 +63,7 @@ module.exports = {
                 client,
                 message,
                 datas,
-                `Latest Quotes of **\`${user.tag}\`** in **\`${message.guild.name}\`**\nFor more details type:\n> \`${prefix}latestquotes ${user.id} [ID]\``
+                `Latest Quotes of **\`${user.username}\`** in **\`${message.guild.name}\`**\nFor more details type:\n> \`${prefix}latestquotes ${user.id} [ID]\``
             );
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
@@ -81,10 +81,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

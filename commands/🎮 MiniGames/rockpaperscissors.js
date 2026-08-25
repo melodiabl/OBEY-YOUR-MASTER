@@ -1,4 +1,7 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
 function disableButtons(components) {
     for (let x = 0; x < components.length; x++) {
         for (let y = 0; y < components[x].components.length; y++) {
@@ -54,29 +57,29 @@ class RPSGame {
             options.askMessage = "Hey {opponent}, {challenger} challenged you for a game of Rock Paper Scissors!";
         if (typeof options.askMessage !== "string") throw new TypeError("ASK_MESSAGE: Ask Messgae must be a string.");
         if (!options.cancelMessage)
-            options.cancelMessage = "Looks like they refused to have a game of Rock Paper Scissors. :(";
+            options.cancelMessage = "Parece que se negaron a jugar piedra, papel o tijeras. :(";
         if (typeof options.cancelMessage !== "string")
             throw new TypeError("CANCEL_MESSAGE: Cancel Message must be a string.");
-        if (!options.timeEndMessage) options.timeEndMessage = "Since the opponent didnt answer, i dropped the game!";
+        if (!options.timeEndMessage) options.timeEndMessage = "Como el oponente no respondió, cancelé el juego!";
         if (typeof options.timeEndMessage !== "string")
             throw new TypeError("TIME_END_MESSAGE: Time End Message must be a string.");
 
-        if (!options.othersMessage) options.othersMessage = "You are not allowed to use buttons for this message!";
+        if (!options.othersMessage) options.othersMessage = "¡No tienes permiso para usar botones en este mensaje!";
         if (typeof options.othersMessage !== "string")
             throw new TypeError("INVALID_OTHERS_MESSAGE: Others Message must be a string.");
-        if (!options.chooseMessage) options.chooseMessage = "You choose {emoji}!";
+        if (!options.chooseMessage) options.chooseMessage = "¡Elegiste {emoji}!";
         if (typeof options.chooseMessage !== "string")
             throw new TypeError("INVALID_CHOOSE_MESSAGE: Choose Message must be a string.");
-        if (!options.noChangeMessage) options.noChangeMessage = "You cannot change your selection!";
+        if (!options.noChangeMessage) options.noChangeMessage = "¡No puedes cambiar tu selección!";
         if (typeof options.noChangeMessage !== "string")
             throw new TypeError("INVALID_NOCHANGE_MESSAGE: noChange Message must be a string.");
 
-        if (!options.gameEndMessage) options.gameEndMessage = "The game went unfinished :(";
+        if (!options.gameEndMessage) options.gameEndMessage = "El juego quedó sin terminar :(";
         if (typeof options.gameEndMessage !== "string")
             throw new TypeError("GAME_END_MESSAGE: Game End Message must be a string.");
-        if (!options.winMessage) options.winMessage = "{winner} won the game!";
+        if (!options.winMessage) options.winMessage = "¡{winner} ganó el juego!";
         if (typeof options.winMessage !== "string") throw new TypeError("WIN_MESSAGE: Win Message must be a string.");
-        if (!options.drawMessage) options.drawMessage = "It was a draw!";
+        if (!options.drawMessage) options.drawMessage = "¡Fue un empate!";
         if (typeof options.drawMessage !== "string") throw new TypeError("DRAW_MESSAGE: Draw Message must be a string.");
 
         this.inGame = false;
@@ -119,17 +122,17 @@ class RPSGame {
 
         const rock = new ButtonBuilder()
             .setCustomId("r_rps")
-            .setStyle(Discord.ButtonStyle.Primary)
+            .setStyle(ButtonStyle.Primary)
             .setLabel(this.options.buttons.rock)
             .setEmoji(emojis.rock);
         const paper = new ButtonBuilder()
             .setCustomId("p_rps")
-            .setStyle(Discord.ButtonStyle.Primary)
+            .setStyle(ButtonStyle.Primary)
             .setLabel(this.options.buttons.paper)
             .setEmoji(emojis.paper);
         const scissors = new ButtonBuilder()
             .setCustomId("s_rps")
-            .setStyle(Discord.ButtonStyle.Primary)
+            .setStyle(ButtonStyle.Primary)
             .setLabel(this.options.buttons.scissors)
             .setEmoji(emojis.scissors);
         const row = new ActionRowBuilder().addComponents(rock, paper, scissors);
@@ -146,7 +149,7 @@ class RPSGame {
 
         collector.on("collect", async btn => {
             if (btn.user.id !== this.message.author.id && btn.user.id !== this.opponent.id) {
-                const authors = this.message.author.tag + "and" + this.opponent.tag;
+                const authors = this.message.author.username + "and" + this.opponent.tag;
                 return btn.reply({ content: this.options.othersMessage.replace("{author}", authors), ephemeral: true });
             }
 
@@ -210,8 +213,8 @@ class RPSGame {
             .setTitle(this.options.embed.title)
             .setColor(this.options.embed.color)
             .setDescription(result)
-            .addField(this.message.author.username, challenger, true)
-            .addField(this.opponent.username, opponent, true)
+            .addFields({ name: this.message.author.username, value: challenger, inline: true })
+            .addFields({ name: this.opponent.username, value: opponent, inline: true })
             .setTimestamp();
 
         return msg.edit({ embeds: [finalEmbed], components: disableButtons(msg.components) });
@@ -247,11 +250,11 @@ module.exports = {
             message: message,
             slash_command: false,
             opponent: opponent.user,
-            embed: {
+            embeds: [{
                 title: "Rock Paper Scissors",
                 description: "Press a button below to make a choice!",
                 color: es.color,
-            },
+            }],
             buttons: {
                 rock: "Rock",
                 paper: "Paper",
@@ -262,15 +265,15 @@ module.exports = {
                 paper: "📃",
                 scissors: "✂️",
             },
-            othersMessage: "You are not allowed to use buttons for this message!",
-            chooseMessage: "You choose {emoji}!",
-            noChangeMessage: "You cannot change your selection!",
-            askMessage: "Hey {opponent}, {challenger} challenged you for a game of Rock Paper Scissors!",
-            cancelMessage: "Looks like they refused to have a game of Rock Paper Scissors. :(",
-            timeEndMessage: "Since the opponent didnt answer, i dropped the game!",
-            drawMessage: "It was a draw!",
-            winMessage: "{winner} won the game!",
-            gameEndMessage: "The game went unfinished :(",
+            othersMessage: "¡No tienes permiso para usar botones en este mensaje!",
+            chooseMessage: "¡Elegiste {emoji}!",
+            noChangeMessage: "¡No puedes cambiar tu selección!",
+            askMessage: "¡Oye {opponent}, {challenger} te desafió a una partida de piedra, papel o tijeras!",
+            cancelMessage: "Parece que se negaron a jugar piedra, papel o tijeras. :(",
+            timeEndMessage: "Como el oponente no respondió, cancelé el juego",
+            drawMessage: "¡Fue un empate!",
+            winMessage: "¡{winner} ganó el juego!",
+            gameEndMessage: "El juego quedó sin terminar :(",
         }).startGame();
     },
 };
@@ -291,11 +294,11 @@ async function verify(options) {
 
         const btn1 = new ButtonBuilder()
             .setLabel(options.buttons?.accept || "Accept")
-            .setStyle(Discord.ButtonStyle.Success)
+            .setStyle(ButtonStyle.Success)
             .setCustomId("accept");
         const btn2 = new ButtonBuilder()
             .setLabel(options.buttons?.reject || "Reject")
-            .setStyle(Discord.ButtonStyle.Danger)
+            .setStyle(ButtonStyle.Danger)
             .setCustomId("reject");
         const row = new ActionRowBuilder().addComponents(btn1, btn2);
 

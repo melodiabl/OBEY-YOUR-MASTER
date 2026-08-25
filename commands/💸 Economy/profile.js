@@ -9,12 +9,13 @@ module.exports = {
     name: "profile",
     category: "💸 Economy",
     aliases: ["ecoprofile"],
-    description: "Shows the Profile of a User",
+    description: "Shows the Profile of a Usuario",
     usage: "profile [@USER]",
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
+        const isSpanish = ls === "es";
         if (!client.settings.get(message.guild.id, "ECONOMY")) {
             return message.reply({
                 embeds: [
@@ -38,16 +39,20 @@ module.exports = {
                 try {
                     user = await GetUser(message, args);
                 } catch (e) {
-                    if (!e) return message.reply(eval(client.la[ls]["cmds"]["economy"]["profile"]["variable1"]));
+                    if (!e) return message.reply(isSpanish
+                        ? "<:no:833101993668771842> NO SE PUDO ENCONTRAR AL USUARIO"
+                        : "<:no:833101993668771842> UNABLE TO FIND THE USER");
                     return message.reply({
-                        content: String("```" + e.message ? String(e.message).substring(0, 1900) : String(e) + "```"),
+                        content: `\`\`\`${String(e?.message || e).substring(0, 1900)}\`\`\``,
                     });
                 }
             } else {
                 user = message.author;
             }
             if (!user || user == null || user.id == null || !user.id) user = message.author;
-            if (user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["profile"]["variable2"]));
+            if (user.bot) return message.reply(isSpanish
+                ? "<:no:833101993668771842> **Un bot de Discord no puede tener economía.**"
+                : "<:no:833101993668771842> **A Discord bot cannot have an economy profile.**");
 
             //ensure the economy data
             ensure_economy_user(client, message.guild.id, user.id);
@@ -220,6 +225,17 @@ module.exports = {
                         break;
                 }
             }
+            const viewingSelf = user.id === message.author.id;
+            const subject = viewingSelf ? (isSpanish ? "Tú" : "You") : user.username;
+            const profileTitle = isSpanish
+                ? `🧸 **${subject}** ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(items)} artículos\` con un valor de \`${nFormatter(itemsvalue)} 💸\``
+                : `🧸 **${subject}** ${viewingSelf ? "have" : "has"} \`${nFormatter(items)} items\` worth \`${nFormatter(itemsvalue)} 💸\``;
+            const emptyInventory = isSpanish
+                ? `\`${nFormatter(Math.floor(data.balance))} 💸\` ${viewingSelf ? "Aún no tienes" : "Aún no tiene"} artículos.`
+                : `\`${nFormatter(Math.floor(data.balance))} 💸\` ${viewingSelf ? "You have" : "They have"} no items yet.`;
+            const profileDescription = isSpanish
+                ? `👛 **${subject}** ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(Math.floor(data.balance))} 💸\` en el bolsillo\n**🏦 ${subject} ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(data.bank)} 💸\` en el banco**\n\`\`\` \`\`\`**ARTÍCULOS:**\n${theitems.length ? ">>> " + theitems.join("\n\n") : emptyInventory}`
+                : `👛 **${subject}** ${viewingSelf ? "have" : "has"} \`${nFormatter(Math.floor(data.balance))} 💸\` in the pocket\n**🏦 ${subject} ${viewingSelf ? "have" : "has"} \`${nFormatter(data.bank)} 💸\` in the bank**\n\`\`\` \`\`\`**ITEMS:**\n${theitems.length ? ">>> " + theitems.join("\n\n") : emptyInventory}`;
             //return some message!
             return message.reply({
                 embeds: [
@@ -232,9 +248,9 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
-                        .setTitle(eval(client.la[ls]["cmds"]["economy"]["profile"]["variable3"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["economy"]["profile"]["variable4"])),
+                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                        .setTitle(profileTitle)
+                        .setDescription(profileDescription),
                 ],
             });
         } catch (e) {
@@ -245,7 +261,7 @@ module.exports = {
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["economy"]["profile"]["variable5"])),
+                        .setDescription(`\`\`\`${String(e?.message || e?.stack || e).substring(0, 1900)}\`\`\``),
                 ],
             });
         }
@@ -253,10 +269,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>OBEY YOUR MASTER — Bot de Discord</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+@font-face {
+  font-family: 'Genta';
+  src: url('/fonts/Genta.ttf') format('truetype');
+  font-weight: 400 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DMSans';
+  src: url('/fonts/DMSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DMSans';
+  src: url('/fonts/DMSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/*
+  DESIGN SYSTEM
+  BG: #080810   Surf: #0d0d1a   Surf2: #141428   Surf3: #1c1c35
+  P: #5865F2   Purple: #9B59B6   Pink: #EB459E   Green: #57F287
+  Type: Genta (display) · DMSans (body) · JetBrains Mono (code)
+*/
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:     #080810;
+  --surf:   #0d0d1a;
+  --surf2:  #141428;
+  --surf3:  #1c1c35;
+  --border: rgba(255,255,255,.06);
+  --p:      #5865F2;
+  --purple: #9B59B6;
+  --pink:   #EB459E;
+  --green:  #57F287;
+  --yellow: #FEE75C;
+  --red:    #ED4245;
+  --text:   #e8e8f4;
+  --muted:  #7878a0;
+  --glow:   rgba(88,101,242,.45);
+  --glow-p: rgba(155,89,182,.35);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DMSans', 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── CANVAS ── */
+#cvs { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(8,8,16,.85); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  transition: background .3s;
+}
+.nav-logo {
+  font-family: 'Genta', 'Bebas Neue', sans-serif;
+  font-size: 19px; letter-spacing: .1em;
+  color: #fff; text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo img {
+  width: 28px; height: auto; border-radius: 6px;
+  filter: drop-shadow(0 0 8px rgba(88,101,242,.7));
+  object-fit: contain;
+}
+.logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.75)} }
+.nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 13.5px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: #fff; }
+.nav-btn {
+  background: var(--p); color: #fff !important;
+  padding: 8px 18px; border-radius: 7px;
+  font-weight: 700 !important; letter-spacing: .02em;
+  transition: opacity .2s, transform .2s, box-shadow .2s !important;
+  box-shadow: 0 0 20px rgba(88,101,242,.35);
+}
+.nav-btn:hover { opacity: .9; transform: translateY(-1px) !important; box-shadow: 0 4px 28px rgba(88,101,242,.55) !important; }
+
+/* ── HERO ── */
+#hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 48px;
+  padding: 128px 80px 80px;
+  max-width: 1440px; margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(88,101,242,.08);
+  border: 1px solid rgba(88,101,242,.2);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  color: var(--muted); width: fit-content; margin-bottom: 28px;
+}
+.badge-live { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 1.5s ease infinite; }
+.badge-count { color: var(--p); font-weight: 700; }
+h1 {
+  font-family: 'Genta', 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 8.5vw, 100px);
+  line-height: .93; letter-spacing: .02em;
+  color: #fff; margin-bottom: 28px;
+}
+h1 em { font-style: normal; color: transparent; -webkit-text-stroke: 1.5px var(--p); }
+h1 .accent-p { color: var(--p); }
+.hero-sub {
+  font-size: 16.5px; color: var(--muted);
+  max-width: 480px; line-height: 1.75; margin-bottom: 38px;
+}
+.hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; }
+.btn-p {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--p); color: #fff; text-decoration: none;
+  padding: 13px 26px; border-radius: 8px; font-weight: 700; font-size: 14.5px;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 32px var(--glow);
+}
+.btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 48px rgba(88,101,242,.65); }
+.btn-g {
+  display: inline-flex; align-items: center; gap: 9px;
+  color: var(--muted); text-decoration: none;
+  padding: 13px 22px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.1); font-weight: 600; font-size: 14.5px;
+  transition: all .2s; background: rgba(255,255,255,.03); cursor: pointer; font-family: inherit;
+}
+.btn-g:hover { color: #fff; border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.06); }
+.hero-meta { display: flex; gap: 18px; flex-wrap: wrap; }
+.meta-tag { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+.meta-tag i { color: var(--p); font-size: 10px; }
+
+/* ── HERO RIGHT — art card ── */
+.hero-art {
+  position: relative;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.hero-art-main {
+  width: 100%; border-radius: 18px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.07);
+  box-shadow: 0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+  transform: perspective(1200px) rotateY(-4deg) rotateX(1.5deg);
+  transition: transform .4s ease;
+  background: var(--surf);
+}
+.hero-art-main:hover { transform: perspective(1200px) rotateY(-1deg) rotateX(0); }
+.ham-header {
+  background: var(--surf2); padding: 11px 18px;
+  display: flex; align-items: center; gap: 9px;
+  border-bottom: 1px solid var(--border);
+}
+.ham-dots { display: flex; gap: 5px; }
+.ham-dot { width: 10px; height: 10px; border-radius: 50%; }
+.ham-dot:nth-child(1) { background: var(--red); }
+.ham-dot:nth-child(2) { background: var(--yellow); }
+.ham-dot:nth-child(3) { background: var(--green); }
+.ham-title { font-size: 12px; color: var(--muted); margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+.ham-badge { margin-left: auto; font-size: 9px; font-weight: 700; background: rgba(87,242,135,.12); color: var(--green); padding: 2px 7px; border-radius: 3px; letter-spacing: .04em; animation: pulse 2s ease infinite; }
+.ham-body { padding: 18px; }
+.ham-base {
+  width: 100%; height: auto; border-radius: 10px;
+  display: block; object-fit: cover;
+  filter: brightness(.95) saturate(1.1);
+}
+
+/* mini cards row under hero art */
+.hero-art-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ham-mini {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+.ham-mini img { width: 100%; height: auto; display: block; }
+
+/* ── LIVE STATS BAR ── */
+#live-stats {
+  position: relative; z-index: 1;
+  background: linear-gradient(180deg, transparent, var(--surf));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.ls-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+.ls-item { padding: 38px 32px; text-align: center; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
+.ls-item::before {
+  content:''; position: absolute; inset: 0; opacity: 0;
+  background: radial-gradient(300px circle at 50% 100%, rgba(88,101,242,.07), transparent 70%);
+  transition: opacity .3s;
+}
+.ls-item:hover::before { opacity: 1; }
+.ls-item:last-child { border-right: none; }
+.ls-num { font-family: 'Genta', 'Bebas Neue', sans-serif; font-size: 56px; line-height: 1; color: #fff; display: block; margin-bottom: 6px; }
+.ls-num.live { background: linear-gradient(135deg, var(--p), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.ls-label { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.ls-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); margin-right: 6px; animation: pulse 1.5s ease infinite; vertical-align: middle; }
+
+/* ── NOW PLAYING FEED ── */
+#nowplaying-section { position: relative; z-index: 1; padding: 80px; max-width: 1440px; margin: 0 auto; }
+.np-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; margin-top: 40px; }
+.np-card {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px;
+  display: flex; align-items: center; gap: 14px;
+  transition: border-color .2s, transform .15s;
+}
+.np-card:hover { border-color: rgba(88,101,242,.4); transform: translateY(-2px); }
+.np-art { width: 50px; height: 50px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; }
+.np-art-img { width: 100%; height: 100%; border-radius: 10px; object-fit: cover; }
+.np-eq { position: absolute; bottom: 3px; right: 3px; display: flex; align-items: flex-end; gap: 1.5px; }
+.np-eq span { display: block; width: 2.5px; border-radius: 1.5px; background: var(--green); animation: viz var(--d,.4s) ease-in-out infinite alternate; }
+@keyframes viz { from{height:2px;opacity:.3} to{height:var(--h,10px);opacity:.9} }
+.np-info { flex: 1; min-width: 0; }
+.np-title { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-server { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.np-badge { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(87,242,135,.12); color: var(--green); letter-spacing: .05em; white-space: nowrap; }
+.np-empty { grid-column: 1/-1; text-align: center; padding: 48px; color: var(--muted); font-size: 15px; }
+.np-loading { display: flex; gap: 8px; justify-content: center; align-items: center; padding: 48px; grid-column: 1/-1; }
+.np-loading span { width: 8px; height: 8px; border-radius: 50%; background: var(--p); animation: bounce var(--d,.6s) ease-in-out infinite alternate; }
+@keyframes bounce { from{transform:translateY(0);opacity:.5} to{transform:translateY(-10px);opacity:1} }
+
+/* ── SECTION HEADER ── */
+.sec-label { font-size: 10.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--p); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.sec-label::before { content:''; display:block; width:22px; height:1px; background:var(--p); }
+.sec-h { font-family: 'Genta', 'Bebas Neue', sans-serif; font-size: clamp(40px,5vw,68px); letter-spacing: .02em; color: #fff; line-height: .95; margin-bottom: 14px; }
+.sec-sub { font-size: 15px; color: var(--muted); max-width: 480px; margin-bottom: 50px; line-height: 1.7; }
+
+/* ── WELCOME GALLERY ── */
+/* ── FEATURES BENTO ── */
+#features { position: relative; z-index: 1; padding: 0 80px 80px; max-width: 1440px; margin: 0 auto; }
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+.bc {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px;
+  transition: border-color .25s, transform .25s;
+  position: relative; overflow: hidden;
+}
+.bc:hover { border-color: rgba(88,101,242,.3); transform: translateY(-3px); }
+.bc::before {
+  content:''; position:absolute; inset:0; opacity:0; transition:opacity .3s;
+  background: radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(88,101,242,.05), transparent 60%);
+  pointer-events:none; border-radius:14px;
+}
+.bc:hover::before { opacity:1; }
+.bc-inner { position: relative; z-index: 1; }
+.s5 { grid-column: span 5; } .s7 { grid-column: span 7; }
+.s4 { grid-column: span 4; } .s8 { grid-column: span 8; }
+.bico { width: 46px; height: 46px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 22px; }
+.bico.mu  { background: rgba(88,101,242,.12);  color: var(--p); }
+.bico.mo  { background: rgba(235,69,158,.12);  color: var(--pink); }
+.bico.ec  { background: rgba(254,231,0,.08);   color: var(--yellow); }
+.bico.lv  { background: rgba(87,242,135,.1);   color: var(--green); }
+.bico.se  { background: rgba(237,66,69,.1);    color: var(--red); }
+.bico.ai  { background: rgba(155,89,182,.12);  color: var(--purple); }
+.btitle { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 9px; line-height: 1.3; }
+.bdesc { font-size: 13.5px; color: var(--muted); line-height: 1.75; }
+.btags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.tag {
+  background: var(--surf2); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 4px; padding: 2px 9px;
+  font-size: 10px; font-weight: 600; color: var(--muted);
+  font-family: 'JetBrains Mono', monospace; letter-spacing: .03em;
+}
+.waveform { display: flex; align-items: flex-end; gap: 3px; height: 30px; margin-top: 18px; }
+.waveform span { display:block; width:4px; background: linear-gradient(180deg, var(--p), var(--purple)); border-radius:2px; opacity:.75; animation: viz var(--d,.5s) ease-in-out infinite alternate; }
+
+/* ── PLAYER WIDGET ── */
+.player-widget {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
+  transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
+  transition: transform .4s ease;
+}
+.player-widget:hover { transform: perspective(1200px) rotateY(-1deg) rotateX(0); }
+.pw-header {
+  background: var(--surf2); padding: 12px 20px;
+  display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border);
+}
+.pw-header-icon { color: var(--p); font-size: 13px; }
+.pw-header-name { font-size: 13px; font-weight: 600; color: #f2f3f5; }
+.pw-header-badge { margin-left: auto; font-size: 9px; font-weight: 700; background: rgba(87,242,135,.12); color: var(--green); padding: 2px 8px; border-radius: 3px; letter-spacing: .05em; animation: pulse 2s ease infinite; }
+.pw-track { padding: 20px 20px 0; display: flex; gap: 16px; align-items: center; }
+.pw-art {
+  width: 66px; height: 66px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--p), var(--purple));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; position: relative; overflow: hidden;
+}
+.pw-art-vinyl {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0%, rgba(0,0,0,.25) 5%, transparent 10%);
+  animation: spin 4s linear infinite; transform-origin: center;
+  width: 200%; height: 200%; top: -50%; left: -50%;
+}
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.pw-art-vinyl.paused { animation-play-state: paused; }
+.pw-info { flex: 1; min-width: 0; }
+.pw-title { font-size: 14px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+.pw-author { font-size: 12px; color: var(--muted); margin-bottom: 7px; }
+.pw-src { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 3px; letter-spacing: .05em; }
+.pw-src.spotify { background: rgba(30,215,96,.12); color: #1ED760; }
+.pw-src.youtube  { background: rgba(255,0,0,.12); color: #ff4444; }
+.pw-src.sc       { background: rgba(255,85,0,.12); color: #ff5500; }
+.pw-progress { padding: 16px 20px 0; }
+.pw-bar-wrap { height: 4px; background: var(--surf3); border-radius: 2px; cursor: pointer; position: relative; }
+.pw-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--p), var(--purple)); transition: width .5s linear; position: relative; }
+.pw-bar-fill::after { content:''; position:absolute; right:-5px; top:-4px; width:12px; height:12px; border-radius:50%; background:#fff; box-shadow:0 0 6px var(--p); opacity:0; transition:opacity .2s; }
+.pw-bar-wrap:hover .pw-bar-fill::after { opacity:1; }
+.pw-times { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+.pw-viz { padding: 10px 20px 0; display: flex; align-items: flex-end; gap: 2px; height: 30px; }
+.pw-viz span { display:block; flex:1; border-radius:2px 2px 0 0; background: linear-gradient(180deg, var(--p), var(--purple)); opacity:.6; animation: viz var(--d,.5s) ease-in-out infinite alternate; }
+.pw-viz.paused span { animation-play-state: paused; }
+.pw-controls { padding: 12px 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.pw-btn { width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--surf2); color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all .15s; }
+.pw-btn:hover { background: var(--surf3); color: #fff; }
+.pw-btn.main { width: 46px; height: 46px; background: linear-gradient(135deg, var(--p), var(--purple)); color: #fff; font-size: 16px; box-shadow: 0 4px 22px var(--glow); }
+.pw-btn.main:hover { transform: scale(1.08); box-shadow: 0 6px 30px rgba(88,101,242,.7); }
+.pw-btn.active { color: var(--green); }
+.pw-queue { border-top: 1px solid var(--border); }
+.pw-queue-item { padding: 10px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.025); transition: background .15s; cursor: pointer; }
+.pw-queue-item:hover { background: var(--surf2); }
+.pw-queue-item.playing { background: rgba(88,101,242,.07); }
+.pw-qi-num { font-size: 10px; color: var(--muted); width: 14px; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
+.pw-qi-info { flex: 1; min-width: 0; }
+.pw-qi-title { font-size: 12px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pw-qi-sub { font-size: 10px; color: var(--muted); }
+.pw-qi-dur { font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+.pw-modes { padding: 8px 20px 16px; display: flex; gap: 8px; }
+.pw-mode-tag { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 3px; letter-spacing: .06em; }
+.pw-mode-tag.on-g  { background: rgba(87,242,135,.12);  color: var(--green); }
+.pw-mode-tag.on-p  { background: rgba(88,101,242,.12);  color: var(--p); }
+.pw-mode-tag.off   { background: var(--surf2); color: var(--muted); }
+
+/* ── COMMANDS ── */
+#commands { position: relative; z-index: 1; padding: 0 80px 80px; max-width: 1440px; margin: 0 auto; }
+.cmd-tabs { display: flex; gap: 4px; background: var(--surf); border: 1px solid var(--border); border-radius: 10px; padding: 5px; margin-bottom: 18px; overflow-x: auto; width: fit-content; }
+.cmd-tab { padding: 8px 17px; border-radius: 7px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; transition: all .15s; white-space: nowrap; border: none; background: none; font-family: inherit; }
+.cmd-tab:hover { color: #fff; }
+.cmd-tab.active { background: var(--p); color: #fff; box-shadow: 0 2px 12px var(--glow); }
+.cmd-panels { background: var(--surf); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.cmd-panel { display: none; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.cmd-panel.active { display: grid; }
+.cmd-row { display: flex; flex-direction: column; gap: 4px; padding: 17px 22px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background .15s; }
+.cmd-row:hover { background: var(--surf2); }
+.cmd-name { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 500; color: #fff; }
+.cmd-slash { color: var(--p); }
+.cmd-desc { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+/* ── SPONSORS ── */
+#sponsors { position: relative; z-index: 1; padding: 0 80px 80px; max-width: 1440px; margin: 0 auto; }
+.sp-inner { background: var(--surf); border: 1px solid var(--border); border-radius: 16px; padding: 48px; display: flex; align-items: center; gap: 56px; }
+.sp-text h3 { font-family: 'Genta', 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: .02em; color: #fff; margin-bottom: 10px; }
+.sp-text p { font-size: 14px; color: var(--muted); max-width: 360px; }
+.sp-cards { display: flex; gap: 14px; }
+.sp-card { background: var(--surf2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 26px; text-decoration: none; display: flex; align-items: center; gap: 14px; transition: border-color .2s, transform .2s, box-shadow .2s; min-width: 180px; }
+.sp-card:hover { border-color: rgba(88,101,242,.4); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,.3); }
+.sp-logo { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.sp-logo.sky { background: rgba(138,43,226,.2); color: #8A2BE2; }
+.sp-logo.swx { background: rgba(138,178,226,.2); color: #8AB2E2; }
+.sp-name { font-size: 14px; font-weight: 700; color: #fff; }
+.sp-sub { font-size: 11px; color: var(--muted); }
+.sp-badge { margin-left: auto; background: rgba(88,101,242,.12); border: 1px solid rgba(88,101,242,.2); color: var(--p); font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 3px; letter-spacing: .06em; }
+
+/* ── CTA ── */
+#cta { position: relative; z-index: 1; padding: 0 80px 80px; max-width: 1440px; margin: 0 auto; }
+.cta-inner {
+  background: linear-gradient(135deg, var(--surf), rgba(88,101,242,.05));
+  border: 1px solid rgba(88,101,242,.15);
+  border-radius: 20px; padding: 72px; text-align: center; position: relative; overflow: hidden;
+}
+.cta-inner::before {
+  content:''; position:absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(88,101,242,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner::after {
+  content:''; position:absolute; bottom: -60px; right: 10%;
+  width: 300px; height: 200px;
+  background: radial-gradient(ellipse, rgba(155,89,182,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-h { font-family: 'Genta', 'Bebas Neue', sans-serif; font-size: clamp(48px,6vw,80px); letter-spacing: .03em; color: #fff; margin-bottom: 16px; }
+.cta-sub { font-size: 16px; color: var(--muted); margin-bottom: 44px; }
+.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-link { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: color .2s; }
+.cta-link:hover { color: #fff; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 28px 80px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.footer-logo { font-family: 'Genta', 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: .1em; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.footer-logo img { width: 22px; height: auto; opacity: .6; object-fit: contain; }
+.footer-copy { font-size: 12.5px; color: var(--muted); }
+.footer-links { display: flex; gap: 22px; list-style: none; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 12.5px; transition: color .2s; }
+.footer-links a:hover { color: #fff; }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1200px) {
+  #hero { grid-template-columns: 1fr; padding: 110px 48px 60px; }
+  .hero-art { display: none; }
+  .ls-inner { grid-template-columns: repeat(2,1fr); }
+  .ls-item:nth-child(2) { border-right: none; }
+  #features,#commands,#sponsors,#cta,footer,#nowplaying-section { padding-left:48px; padding-right:48px; }
+  .s5,.s7,.s8 { grid-column: span 12; }
+  .s4 { grid-column: span 6; }
+  nav { padding: 0 24px; }
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .sp-inner { flex-direction: column; }
+}
+@media (max-width: 640px) {
+  .reveal { opacity: 1; transform: none; }
+  nav {
+    height: calc(64px + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) max(18px, env(safe-area-inset-right)) 0 max(18px, env(safe-area-inset-left));
+  }
+  .nav-logo { font-size: 15px; letter-spacing: .07em; }
+  .nav-links { gap: 0; }
+  .nav-links li:last-child { display: none; }
+  .nav-links li:nth-last-child(2) { display: block; }
+  .nav-links a { font-size: 13px; }
+  h1 { font-size: clamp(48px, 17vw, 64px); }
+  .ls-inner { grid-template-columns: repeat(2,1fr); }
+  .s4 { grid-column: span 12; }
+  .cta-inner { padding: 40px 24px; }
+  footer { flex-direction: column; text-align: center; }
+  .sp-cards { flex-direction: column; }
+  #hero { padding: calc(100px + env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) calc(48px + env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); }
+  #features,#commands,#sponsors,#cta,footer,#nowplaying-section { padding-left:24px; padding-right:24px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="cvs"></canvas>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="/" class="nav-logo">
+    <img src="/bot.png" alt="Bot" onerror="this.style.display='none'">
+    <span class="logo-dot"></span>
+    OBEY YOUR MASTER
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Sistemas</a></li>
+    <li><a href="#commands">Comandos</a></li>
+    <li><a href="#nowplaying-section">En Vivo</a></li>
+    <li><a href="/panel">Panel</a></li>
+    <li><a href="https://discord.com/oauth2/authorize?client_id=1460818547193417931&scope=bot+applications.commands&permissions=8" target="_blank" class="nav-btn"><i class="fab fa-discord"></i> Añadir</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="reveal">
+    <div class="hero-badge">
+      <span class="badge-live"></span>
+      <span class="badge-count" id="live-guild-count">—</span> servidores activos
+      &nbsp;·&nbsp;
+      <span class="badge-count" id="live-players-count">—</span> reproduciendo ahora
+    </div>
+    <h1>OBEY<br>YOUR<br><em>MASTER</em></h1>
+    <p class="hero-sub">El bot de Discord que lo controla todo — música 24/7 con Lavalink 4, moderación avanzada, tarjetas canvas personalizadas, economía completa y seguridad anti-raid.</p>
+    <div class="hero-actions">
+      <a href="https://discord.com/oauth2/authorize?client_id=1460818547193417931&scope=bot+applications.commands&permissions=8" target="_blank" class="btn-p">
+        <i class="fab fa-discord"></i> Añadir a Discord
+      </a>
+      <a href="/panel" class="btn-g"><i class="fas fa-gauge-high"></i> Panel de control</a>
+    </div>
+    <div class="hero-meta">
+      <span class="meta-tag"><i class="fas fa-circle"></i> 24/7 Online</span>
+      <span class="meta-tag"><i class="fas fa-bolt"></i> Lavalink 4</span>
+      <span class="meta-tag"><i class="fab fa-spotify"></i> Spotify · YouTube</span>
+      <span class="meta-tag"><i class="fas fa-database"></i> MongoDB</span>
+    </div>
+  </div>
+
+  <!-- HERO RIGHT — player widget + art -->
+  <div class="hero-art reveal" style="transition-delay:.12s">
+    <!-- Player widget -->
+    <div class="player-widget">
+      <div class="pw-header">
+        <i class="fas fa-music pw-header-icon"></i>
+        <span class="pw-header-name">música — Demo</span>
+        <span class="pw-header-badge">● EN VIVO</span>
+      </div>
+      <div class="pw-viz" id="viz">
+        <span style="--d:.3s;--h:8px"></span><span style="--d:.5s;--h:20px"></span>
+        <span style="--d:.4s;--h:13px"></span><span style="--d:.7s;--h:24px"></span>
+        <span style="--d:.35s;--h:10px"></span><span style="--d:.55s;--h:22px"></span>
+        <span style="--d:.45s;--h:18px"></span><span style="--d:.6s;--h:26px"></span>
+        <span style="--d:.38s;--h:12px"></span><span style="--d:.52s;--h:20px"></span>
+        <span style="--d:.42s;--h:28px"></span><span style="--d:.65s;--h:16px"></span>
+        <span style="--d:.33s;--h:22px"></span><span style="--d:.48s;--h:10px"></span>
+        <span style="--d:.57s;--h:18px"></span><span style="--d:.4s;--h:24px"></span>
+        <span style="--d:.62s;--h:14px"></span><span style="--d:.36s;--h:20px"></span>
+        <span style="--d:.5s;--h:8px"></span><span style="--d:.44s;--h:22px"></span>
+      </div>
+      <div class="pw-track">
+        <div class="pw-art" id="pw-art">
+          <span id="pw-art-emoji">🎵</span>
+          <div class="pw-art-vinyl" id="pw-vinyl"></div>
+        </div>
+        <div class="pw-info">
+          <div class="pw-title" id="pw-title">Cargando...</div>
+          <div class="pw-author" id="pw-author">—</div>
+          <span class="pw-src spotify" id="pw-src">SPOTIFY</span>
+        </div>
+      </div>
+      <div class="pw-progress">
+        <div class="pw-bar-wrap" id="pw-bar-wrap">
+          <div class="pw-bar-fill" id="pw-bar" style="width:0%"></div>
+        </div>
+        <div class="pw-times"><span id="pw-cur">0:00</span><span id="pw-dur">0:00</span></div>
+      </div>
+      <div class="pw-controls">
+        <button class="pw-btn" id="btn-shuffle" onclick="toggleShuffle()" title="Shuffle"><i class="fas fa-shuffle"></i></button>
+        <button class="pw-btn" onclick="prevTrack()"><i class="fas fa-backward-step"></i></button>
+        <button class="pw-btn main" id="btn-play" onclick="togglePlay()"><i class="fas fa-pause" id="play-icon"></i></button>
+        <button class="pw-btn" onclick="nextTrack()"><i class="fas fa-forward-step"></i></button>
+        <button class="pw-btn" id="btn-loop" onclick="toggleLoop()"><i class="fas fa-repeat"></i></button>
+      </div>
+      <div class="pw-modes">
+        <span class="pw-mode-tag on-g">24/7 ON</span>
+        <span class="pw-mode-tag on-p">AUTOPLAY</span>
+        <span class="pw-mode-tag off">Lavalink 4</span>
+      </div>
+      <div class="pw-queue">
+        <div class="pw-queue-item playing"><span class="pw-qi-num">▶</span><div class="pw-qi-info"><div class="pw-qi-title" id="qi-0-t">—</div><div class="pw-qi-sub" id="qi-0-s">—</div></div><span class="pw-qi-dur" id="qi-0-d">—</span></div>
+        <div class="pw-queue-item" onclick="jumpTo(1)"><span class="pw-qi-num">2</span><div class="pw-qi-info"><div class="pw-qi-title" id="qi-1-t">—</div><div class="pw-qi-sub" id="qi-1-s">—</div></div><span class="pw-qi-dur" id="qi-1-d">—</span></div>
+        <div class="pw-queue-item" onclick="jumpTo(2)"><span class="pw-qi-num">3</span><div class="pw-qi-info"><div class="pw-qi-title" id="qi-2-t">—</div><div class="pw-qi-sub" id="qi-2-s">—</div></div><span class="pw-qi-dur" id="qi-2-d">—</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE STATS -->
+<section id="live-stats">
+  <div class="ls-inner">
+    <div class="ls-item reveal"><span class="ls-num live" id="stat-guilds">—</span><span class="ls-label"><span class="ls-dot"></span>Servidores</span></div>
+    <div class="ls-item reveal" style="transition-delay:.08s"><span class="ls-num live" id="stat-players">—</span><span class="ls-label"><span class="ls-dot"></span>Reproductores activos</span></div>
+    <div class="ls-item reveal" style="transition-delay:.16s"><span class="ls-num">24/7</span><span class="ls-label">Disponibilidad</span></div>
+    <div class="ls-item reveal" style="transition-delay:.24s"><span class="ls-num">v14</span><span class="ls-label">Discord.js</span></div>
+  </div>
+</section>
+
+<!-- NOW PLAYING FEED -->
+<section id="nowplaying-section">
+  <p class="sec-label reveal">En Vivo</p>
+  <h2 class="sec-h reveal">AHORA<br>REPRODUCIENDO</h2>
+  <p class="sec-sub reveal">Pistas activas en este momento. Datos en tiempo real desde los servidores.</p>
+  <div class="np-feed reveal" id="np-feed">
+    <div class="np-loading">
+      <span style="--d:.3s"></span><span style="--d:.5s"></span><span style="--d:.4s"></span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES BENTO -->
+<section id="features">
+  <p class="sec-label reveal">Sistemas</p>
+  <h2 class="sec-h reveal">TODO LO QUE<br>NECESITAS</h2>
+  <p class="sec-sub reveal">Un ecosistema interconectado — economía activa niveles, niveles dan recompensas, seguridad protege cada acción.</p>
+  <div class="bento">
+    <div class="bc s7 reveal">
+      <div class="bc-inner">
+        <div class="bico mu"><i class="fas fa-music"></i></div>
+        <h3 class="btitle">Música 24/7 de alta calidad</h3>
+        <p class="bdesc">Lavalink 4 con catálogo de Spotify y reproducción mediante YouTube. Modo 24/7 persistente, autoplay por similitud, cola inteligente y 14 filtros de audio.</p>
+        <div class="waveform">
+          <span style="--d:.4s;--h:8px"></span><span style="--d:.6s;--h:24px"></span>
+          <span style="--d:.3s;--h:16px"></span><span style="--d:.5s;--h:28px"></span>
+          <span style="--d:.7s;--h:12px"></span><span style="--d:.4s;--h:20px"></span>
+          <span style="--d:.6s;--h:28px"></span><span style="--d:.3s;--h:14px"></span>
+          <span style="--d:.5s;--h:24px"></span><span style="--d:.4s;--h:8px"></span>
+          <span style="--d:.6s;--h:18px"></span><span style="--d:.3s;--h:28px"></span>
+        </div>
+        <div class="btags"><span class="tag">Lavalink 4</span><span class="tag">Spotify</span><span class="tag">YouTube</span><span class="tag">24/7</span><span class="tag">Autoplay</span><span class="tag">14 filtros</span></div>
+      </div>
+    </div>
+    <div class="bc s5 reveal" style="transition-delay:.1s">
+      <div class="bc-inner">
+        <div class="bico mo"><i class="fas fa-gavel"></i></div>
+        <h3 class="btitle">Moderación avanzada</h3>
+        <p class="bdesc">Warns progresivos con escalada automática, historial de casos, apelaciones, silencio permanente re-aplicado al reingresar.</p>
+        <div class="btags"><span class="tag">warns</span><span class="tag">mute</span><span class="tag">ban</span><span class="tag">historial</span><span class="tag">apelaciones</span></div>
+      </div>
+    </div>
+    <div class="bc s4 reveal" style="transition-delay:.15s">
+      <div class="bc-inner">
+        <div class="bico ec"><i class="fas fa-coins"></i></div>
+        <h3 class="btitle">Economía & RPG</h3>
+        <p class="bdesc">Wallet, banco, transferencias, tienda, inventario y misiones diarias/semanales.</p>
+        <div class="btags"><span class="tag">wallet</span><span class="tag">tienda</span><span class="tag">quests</span></div>
+      </div>
+    </div>
+    <div class="bc s4 reveal" style="transition-delay:.2s">
+      <div class="bc-inner">
+        <div class="bico lv"><i class="fas fa-chart-line"></i></div>
+        <h3 class="btitle">Niveles & XP</h3>
+        <p class="bdesc">XP por mensajes con tarjetas canvas generadas en tiempo real. Recompensas de rol automáticas al subir de nivel.</p>
+        <div class="btags"><span class="tag">XP</span><span class="tag">canvas</span><span class="tag">recompensas</span></div>
+      </div>
+    </div>
+    <div class="bc s4 reveal" style="transition-delay:.25s">
+      <div class="bc-inner">
+        <div class="bico se"><i class="fas fa-shield-virus"></i></div>
+        <h3 class="btitle">Anti-Raid</h3>
+        <p class="bdesc">Detección de alts, anti-nuke, automod configurable. Alertas en tiempo real.</p>
+        <div class="btags"><span class="tag">anti-raid</span><span class="tag">alt-detect</span><span class="tag">automod</span></div>
+      </div>
+    </div>
+    <div class="bc s8 reveal" style="transition-delay:.3s">
+      <div class="bc-inner">
+        <div class="bico ai"><i class="fas fa-brain"></i></div>
+        <h3 class="btitle">IA Conversacional</h3>
+        <p class="bdesc">Canal dedicado con memoria de contexto. El bot responde naturalmente con OpenAI, recuerda el historial del canal y ofrece asistencia técnica e inteligente.</p>
+        <div class="btags"><span class="tag">OpenAI</span><span class="tag">contexto</span><span class="tag">memoria</span><span class="tag">respuestas naturales</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMANDS -->
+<section id="commands">
+  <p class="sec-label reveal">Comandos</p>
+  <h2 class="sec-h reveal">625+ SLASH<br>COMMANDS</h2>
+  <p class="sec-sub reveal">Sin prefijos de texto. Organizados en categorías claras con autocompletado nativo.</p>
+  <div class="reveal">
+    <div class="cmd-tabs">
+      <button class="cmd-tab active" data-tab="musica">🎵 Música</button>
+      <button class="cmd-tab" data-tab="mod">🛡️ Moderación</button>
+      <button class="cmd-tab" data-tab="eco">💰 Economía</button>
+      <button class="cmd-tab" data-tab="cfg">⚙️ Config</button>
+      <button class="cmd-tab" data-tab="fun">🎮 Fun</button>
+      <button class="cmd-tab" data-tab="util">🔧 Utilidad</button>
+    </div>
+    <div class="cmd-panels">
+      <div class="cmd-panel active" id="panel-musica">
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>music play</div><div class="cmd-desc">Reproduce canción, playlist o álbum</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>247</div><div class="cmd-desc">Modo 24/7 — el bot nunca sale del canal</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>autoplay</div><div class="cmd-desc">Reproduce pistas similares automáticamente</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>music queue</div><div class="cmd-desc">Ver y gestionar la cola</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>music filter</div><div class="cmd-desc">14 filtros: bass, 8D, nightcore, lofi…</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>music nowplaying</div><div class="cmd-desc">Panel interactivo de reproducción actual</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>music loop</div><div class="cmd-desc">Repetir canción / cola completa</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>music seek</div><div class="cmd-desc">Saltar a un momento de la canción</div></div>
+      </div>
+      <div class="cmd-panel" id="panel-mod">
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>warn</div><div class="cmd-desc">Advertir a un usuario</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>mute</div><div class="cmd-desc">Silenciar usuario temporalmente</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>kick</div><div class="cmd-desc">Expulsar usuario del servidor</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>ban</div><div class="cmd-desc">Banear permanente o temporalmente</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>mod-history</div><div class="cmd-desc">Historial completo de casos</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>appeal create</div><div class="cmd-desc">Crear apelación de ban/mute</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>warn-policy</div><div class="cmd-desc">Configurar escalada automática de warns</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>clearwarns</div><div class="cmd-desc">Limpiar historial de warns</div></div>
+      </div>
+      <div class="cmd-panel" id="panel-eco">
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>economy balance</div><div class="cmd-desc">Ver cartera y banco</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>economy deposit</div><div class="cmd-desc">Depositar en banco</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>economy transfer</div><div class="cmd-desc">Transferir monedas</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>shop view</div><div class="cmd-desc">Ver tienda del servidor</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>work</div><div class="cmd-desc">Trabajar para ganar monedas</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>daily</div><div class="cmd-desc">Recompensa diaria</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>inventory</div><div class="cmd-desc">Ver tu inventario</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>leaderboard</div><div class="cmd-desc">Ranking del servidor</div></div>
+      </div>
+      <div class="cmd-panel" id="panel-cfg">
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>config logs</div><div class="cmd-desc">Configurar canales de logs</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>config welcome</div><div class="cmd-desc">Mensaje de bienvenida personalizado</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>security status</div><div class="cmd-desc">Estado del sistema de seguridad</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>security raid</div><div class="cmd-desc">Configurar anti-raid</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>boost canal</div><div class="cmd-desc">Canal de anuncios de boost</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>levels config</div><div class="cmd-desc">Configurar sistema de niveles</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>ticket setup</div><div class="cmd-desc">Configurar sistema de tickets</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>config autorole</div><div class="cmd-desc">Rol automático al unirse</div></div>
+      </div>
+      <div class="cmd-panel" id="panel-fun">
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>giveaway start</div><div class="cmd-desc">Iniciar un sorteo con requisitos</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>giveaway reroll</div><div class="cmd-desc">Re-sortear ganadores</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>poll create</div><div class="cmd-desc">Crear encuesta interactiva</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>pet adopt</div><div class="cmd-desc">Adoptar una mascota virtual</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>clan create</div><div class="cmd-desc">Crear un clan</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>quest list</div><div class="cmd-desc">Ver misiones activas</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>starboard config</div><div class="cmd-desc">Tablón de mensajes destacados</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>suggestion create</div><div class="cmd-desc">Enviar sugerencia al staff</div></div>
+      </div>
+      <div class="cmd-panel" id="panel-util">
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>userinfo</div><div class="cmd-desc">Información detallada de un usuario</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>serverinfo</div><div class="cmd-desc">Estadísticas del servidor</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>reminder set</div><div class="cmd-desc">Crear un recordatorio</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>afk set</div><div class="cmd-desc">Activar modo AFK</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>voice temp</div><div class="cmd-desc">Canal de voz temporal</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>backup create</div><div class="cmd-desc">Copia de seguridad del servidor</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>avatar</div><div class="cmd-desc">Ver avatar en alta resolución</div></div>
+        <div class="cmd-row"><div class="cmd-name"><span class="cmd-slash">/</span>translate</div><div class="cmd-desc">Traducir texto a otro idioma</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORS -->
+<section id="sponsors">
+  <div class="sp-inner reveal">
+    <div class="sp-text">
+      <p style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Hosting oficial</p>
+      <h3>IMPULSADO POR<br>LOS MEJORES</h3>
+      <p>Infraestructura 24/7 de alto rendimiento para que tu bot nunca caiga.</p>
+    </div>
+    <div class="sp-cards">
+      <a href="https://www.skyultraplus.com/" target="_blank" class="sp-card">
+        <div class="sp-logo sky"><i class="fas fa-cloud"></i></div>
+        <div><div class="sp-name">SkyUltraPlus</div><div class="sp-sub">skyultraplus.com</div></div>
+        <div class="sp-badge">PARTNER</div>
+      </a>
+      <a href="https://dash.swallox.com/" target="_blank" class="sp-card">
+        <div class="sp-logo swx"><i class="fas fa-server"></i></div>
+        <div><div class="sp-name">Swallox</div><div class="sp-sub">dash.swallox.com</div></div>
+        <div class="sp-badge">PARTNER</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner reveal">
+    <h2 class="cta-h">LISTO PARA<br>OBEDECER?</h2>
+    <p class="cta-sub">Añade OBEY YOUR MASTER a tu servidor y toma el control total.</p>
+    <div class="cta-btns">
+      <a href="https://discord.com/oauth2/authorize?client_id=1460818547193417931&scope=bot+applications.commands&permissions=8" target="_blank" class="btn-p" style="font-size:15px;padding:15px 34px">
+        <i class="fab fa-discord"></i> Añadir al servidor
+      </a>
+      <a href="/panel" class="btn-g"><i class="fas fa-gauge-high"></i> Panel de control</a>
+      <a href="https://discord.gg/QJeavgKU" target="_blank" class="btn-g"><i class="fab fa-discord"></i> Soporte</a>
+    </div>
+    <div style="margin-top:24px;display:flex;gap:26px;justify-content:center;flex-wrap:wrap">
+      <a href="https://github.com/melodiabl/OBEY-YOUR-MASTER" target="_blank" class="cta-link"><i class="fab fa-github"></i> melodiabl/OBEY-YOUR-MASTER</a>
+      <a href="https://discord.gg/QJeavgKU" target="_blank" class="cta-link"><i class="fab fa-discord"></i> discord.gg/QJeavgKU</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">
+    <img src="/bot.png" alt="" onerror="this.style.display='none'">
+    OBEY YOUR MASTER
+  </a>
+  <p class="footer-copy">Desarrollado por Melodia · 2026</p>
+  <ul class="footer-links">
+    <li><a href="https://github.com/melodiabl/OBEY-YOUR-MASTER" target="_blank">GitHub</a></li>
+    <li><a href="https://discord.gg/QJeavgKU" target="_blank">Discord</a></li>
+    <li><a href="https://www.skyultraplus.com/" target="_blank">SkyUltraPlus</a></li>
+    <li><a href="https://dash.swallox.com/" target="_blank">Swallox</a></li>
+  </ul>
+</footer>
+
+<script>
+/* ══ CANVAS — 3-layer aurora + constellation + particles ══ */
+;(function(){
+  const c = document.getElementById('cvs')
+  const ctx = c.getContext('2d')
+  let W, H, mx = 0, my = 0
+  let raf
+
+  function resize() {
+    W = c.width  = innerWidth
+    H = c.height = innerHeight
+    initBlobs()
+  }
+
+  /* ─── Layer 1: Aurora blobs ─── */
+  const mobileCanvas = matchMedia('(max-width: 700px), (prefers-reduced-motion: reduce)').matches
+  const BLOB_COLORS = [
+    { r: 88,  g: 101, b: 242 },  // indigo
+    { r: 155, g: 89,  b: 182 },  // purple
+    { r: 235, g: 69,  b: 158 },  // pink
+    { r: 87,  g: 242, b: 135 },  // green
+    { r: 88,  g: 101, b: 242 },  // indigo (repeated for weight)
+  ]
+  let blobs = []
+  function initBlobs() {
+    blobs = Array.from({length: mobileCanvas ? 2 : 5}, (_, i) => ({
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      r:  Math.min(W, H) * (.35 + Math.random() * .25),
+      vx: (Math.random() - .5) * .25,
+      vy: (Math.random() - .5) * .25,
+      c:  BLOB_COLORS[i % BLOB_COLORS.length],
+      phase: Math.random() * Math.PI * 2,
+    }))
+  }
+
+  function drawBlobs(t) {
+    for (const b of blobs) {
+      b.x += b.vx
+      b.y += b.vy
+      if (b.x < -b.r) b.x = W + b.r
+      if (b.x > W + b.r) b.x = -b.r
+      if (b.y < -b.r) b.y = H + b.r
+      if (b.y > H + b.r) b.y = -b.r
+
+      const pulse = Math.sin(t * .0003 + b.phase) * .012 + 0.038
+      const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r)
+      grad.addColorStop(0,   `rgba(${b.c.r},${b.c.g},${b.c.b},${pulse})`)
+      grad.addColorStop(.5,  `rgba(${b.c.r},${b.c.g},${b.c.b},${pulse * .4})`)
+      grad.addColorStop(1,   `rgba(${b.c.r},${b.c.g},${b.c.b},0)`)
+      ctx.fillStyle = grad
+      ctx.fillRect(0, 0, W, H)
+    }
+  }
+
+  /* ─── Layer 2: Star field ─── */
+  const STAR_COUNT = mobileCanvas ? 60 : 180
+  const stars = Array.from({length: STAR_COUNT}, () => ({
+    x:  Math.random(),
+    y:  Math.random(),
+    r:  .3 + Math.random() * 1.1,
+    a:  .15 + Math.random() * .55,
+    blink: Math.random() * Math.PI * 2,
+    bs: .003 + Math.random() * .005,
+  }))
+
+  function drawStars(t) {
+    for (const s of stars) {
+      s.blink += s.bs
+      const a = s.a * (.7 + .3 * Math.sin(s.blink))
+      ctx.beginPath()
+      ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(255,255,255,${a})`
+      ctx.fill()
+    }
+  }
+
+  /* ─── Layer 3: Constellation nodes ─── */
+  const NODE_COUNT = mobileCanvas ? 20 : 55
+  const CONNECT_DIST = mobileCanvas ? 90 : 130
+  let nodes = []
+  function initNodes() {
+    nodes = Array.from({length: NODE_COUNT}, () => ({
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      vx: (Math.random() - .5) * .4,
+      vy: (Math.random() - .5) * .4,
+      r:  .8 + Math.random() * 1.2,
+      hue: [242, 182, 158][0|(Math.random()*3)],
+    }))
+  }
+
+  function drawNodes() {
+    // attract gently toward mouse
+    for (const n of nodes) {
+      const dx = mx - n.x, dy = my - n.y
+      const dist = Math.sqrt(dx*dx + dy*dy)
+      if (dist < 300 && dist > 1) {
+        n.vx += (dx / dist) * .015
+        n.vy += (dy / dist) * .015
+      }
+      n.vx *= .985
+      n.vy *= .985
+      n.x += n.vx
+      n.y += n.vy
+      if (n.x < 0) { n.x = 0; n.vx *= -1 }
+      if (n.x > W) { n.x = W; n.vx *= -1 }
+      if (n.y < 0) { n.y = 0; n.vy *= -1 }
+      if (n.y > H) { n.y = H; n.vy *= -1 }
+    }
+
+    // draw connections
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x
+        const dy = nodes[i].y - nodes[j].y
+        const d  = Math.sqrt(dx*dx + dy*dy)
+        if (d < CONNECT_DIST) {
+          const a = (1 - d / CONNECT_DIST) * .18
+          ctx.beginPath()
+          ctx.moveTo(nodes[i].x, nodes[i].y)
+          ctx.lineTo(nodes[j].x, nodes[j].y)
+          ctx.strokeStyle = `rgba(88,101,242,${a})`
+          ctx.lineWidth = .8
+          ctx.stroke()
+        }
+      }
+    }
+
+    // draw nodes
+    for (const n of nodes) {
+      ctx.beginPath()
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2)
+      ctx.fillStyle = `hsla(${n.hue},80%,70%,.55)`
+      ctx.fill()
+    }
+  }
+
+  /* ─── Loop ─── */
+  let t0 = performance.now()
+  let lastFrame = 0
+  function loop(ts) {
+    raf = requestAnimationFrame(loop)
+    if (mobileCanvas && ts - lastFrame < 32) return
+    lastFrame = ts
+    const t = ts - t0
+    ctx.clearRect(0, 0, W, H)
+    ctx.globalCompositeOperation = 'source-over'
+    drawBlobs(t)
+    drawStars(t)
+    drawNodes()
+  }
+
+  addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY })
+  addEventListener('resize', resize)
+  resize()
+  initNodes()
+  loop(t0)
+})()
+
+/* ══ BENTO GLOW ══ */
+document.querySelectorAll('.bc').forEach(c => {
+  c.addEventListener('mousemove', e => {
+    const r = c.getBoundingClientRect()
+    c.style.setProperty('--mx', ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%')
+    c.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%')
+  })
+})
+
+/* ══ SCROLL REVEAL ══ */
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } })
+}, { threshold: .06 })
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el))
+
+/* ══ NAV scroll opacity ══ */
+addEventListener('scroll', () => {
+  document.getElementById('main-nav').style.background =
+    scrollY > 20 ? 'rgba(8,8,16,.97)' : 'rgba(8,8,16,.85)'
+})
+
+/* ══ COMMAND TABS ══ */
+document.querySelectorAll('.cmd-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.cmd-tab').forEach(x => x.classList.remove('active'))
+    document.querySelectorAll('.cmd-panel').forEach(x => x.classList.remove('active'))
+    t.classList.add('active')
+    document.getElementById('panel-' + t.dataset.tab).classList.add('active')
+  })
+})
+
+/* ══ PLAYER ══ */
+const TRACKS = [
+  { title:'Blinding Lights', author:'The Weeknd',      dur:200, src:'spotify', emoji:'🎸', grad:'#5865F2,#9B59B6' },
+  { title:'As It Was',       author:'Harry Styles',    dur:167, src:'spotify', emoji:'🌟', grad:'#EB459E,#5865F2' },
+  { title:'Flowers',         author:'Miley Cyrus',     dur:200, src:'youtube', emoji:'🌸', grad:'#9B59B6,#EB459E' },
+  { title:'Unholy',          author:'Sam Smith',       dur:195, src:'sc',      emoji:'🎹', grad:'#57F287,#5865F2' },
+  { title:'Cruel Summer',    author:'Taylor Swift',    dur:178, src:'spotify', emoji:'☀️', grad:'#FEE75C,#EB459E' },
+  { title:'Anti-Hero',       author:'Taylor Swift',    dur:200, src:'spotify', emoji:'🎭', grad:'#5865F2,#57F287' },
+  { title:'Vampire',         author:'Olivia Rodrigo',  dur:218, src:'youtube', emoji:'🦇', grad:'#ED4245,#9B59B6' },
+  { title:'Calm Down',       author:'Rema',            dur:239, src:'sc',      emoji:'🎺', grad:'#9B59B6,#FEE75C' },
+]
+let idx = 0, pos = 0, playing = true, loopMode = false, shuffleMode = false, _ticker = null
+
+const fmt = s => { const m = Math.floor(s / 60); return `${m}:${String(s%60).padStart(2,'0')}` }
+
+function updateTrack() {
+  const t = TRACKS[idx]
+  document.getElementById('pw-title').textContent  = t.title
+  document.getElementById('pw-author').textContent = t.author
+  const srcEl = document.getElementById('pw-src')
+  srcEl.textContent = t.src.toUpperCase(); srcEl.className = 'pw-src ' + t.src
+  document.getElementById('pw-art-emoji').textContent = t.emoji
+  document.getElementById('pw-art').style.background = `linear-gradient(135deg,${t.grad})`
+  document.getElementById('pw-dur').textContent = fmt(t.dur)
+  const nx = (idx+1)%TRACKS.length, nx2 = (idx+2)%TRACKS.length
+  document.getElementById('qi-0-t').textContent = TRACKS[idx].title;  document.getElementById('qi-0-s').textContent = TRACKS[idx].author;  document.getElementById('qi-0-d').textContent = fmt(TRACKS[idx].dur)
+  document.getElementById('qi-1-t').textContent = TRACKS[nx].title;   document.getElementById('qi-1-s').textContent = TRACKS[nx].author;   document.getElementById('qi-1-d').textContent = fmt(TRACKS[nx].dur)
+  document.getElementById('qi-2-t').textContent = TRACKS[nx2].title;  document.getElementById('qi-2-s').textContent = TRACKS[nx2].author;  document.getElementById('qi-2-d').textContent = fmt(TRACKS[nx2].dur)
+}
+function renderProgress() {
+  const pct = Math.min(100, (pos / TRACKS[idx].dur) * 100)
+  document.getElementById('pw-bar').style.width = pct + '%'
+  document.getElementById('pw-cur').textContent = fmt(Math.floor(pos))
+}
+function startTick() {
+  if (_ticker) clearInterval(_ticker)
+  _ticker = setInterval(() => { if (!playing) return; pos += .5; if (pos >= TRACKS[idx].dur) nextTrack(); renderProgress() }, 500)
+}
+function pauseViz(p) {
+  document.getElementById('viz').classList.toggle('paused', p)
+  document.getElementById('pw-vinyl').classList.toggle('paused', p)
+}
+function togglePlay() { playing = !playing; document.getElementById('play-icon').className = playing ? 'fas fa-pause' : 'fas fa-play'; pauseViz(!playing) }
+function nextTrack() { if (loopMode) { pos=0; return } if (shuffleMode) idx=0|(Math.random()*TRACKS.length); else idx=(idx+1)%TRACKS.length; pos=0; updateTrack(); renderProgress() }
+function prevTrack() { if (pos>4) { pos=0; renderProgress(); return } idx=(idx-1+TRACKS.length)%TRACKS.length; pos=0; updateTrack(); renderProgress() }
+function jumpTo(o) { idx=(idx+o)%TRACKS.length; pos=0; updateTrack(); renderProgress() }
+function toggleLoop() { loopMode=!loopMode; document.getElementById('btn-loop').classList.toggle('active',loopMode) }
+function toggleShuffle() { shuffleMode=!shuffleMode; document.getElementById('btn-shuffle').classList.toggle('active',shuffleMode) }
+document.getElementById('pw-bar-wrap').addEventListener('click', e => {
+  const r = e.currentTarget.getBoundingClientRect()
+  pos = ((e.clientX - r.left) / r.width) * TRACKS[idx].dur
+  renderProgress()
+})
+updateTrack(); startTick()
+
+/* ══ LIVE STATS ══ */
+const esc = s => String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+
+const FALLBACK = [
+  { guildName:'Melodia Music',   trackTitle:'Blinding Lights', trackAuthor:'The Weeknd',    grad:'#5865F2,#9B59B6' },
+  { guildName:'Chill Lounge',    trackTitle:'As It Was',       trackAuthor:'Harry Styles',  grad:'#EB459E,#5865F2' },
+  { guildName:'Night Vibes',     trackTitle:'Flowers',         trackAuthor:'Miley Cyrus',   grad:'#9B59B6,#EB459E' },
+  { guildName:'Bass Nation',     trackTitle:'Cruel Summer',    trackAuthor:'Taylor Swift',  grad:'#FEE75C,#EB459E' },
+  { guildName:'Lo-Fi Room',      trackTitle:'Calm Down',       trackAuthor:'Rema',          grad:'#57F287,#5865F2' },
+  { guildName:'Anime OST',       trackTitle:'Vampire',         trackAuthor:'Olivia Rodrigo',grad:'#ED4245,#9B59B6' },
+]
+
+function renderNPFeed(tracks) {
+  const feed = document.getElementById('np-feed')
+  if (!tracks?.length) {
+    feed.innerHTML = '<div class="np-empty"><i class="fas fa-music" style="display:block;font-size:28px;margin-bottom:10px;opacity:.3"></i>Sin pistas activas ahora mismo</div>'
+    return
+  }
+  feed.innerHTML = tracks.map((t, i) => {
+    const g = t.grad || ['#5865F2,#9B59B6','#EB459E,#5865F2','#57F287,#5865F2','#9B59B6,#EB459E','#FEE75C,#EB459E','#ED4245,#9B59B6'][i%6]
+    const artHtml = t.thumbnail
+      ? `<img src="${esc(t.thumbnail)}" class="np-art-img" loading="lazy" onerror="this.style.display='none'">`
+      : `<div style="width:100%;height:100%;border-radius:10px;background:linear-gradient(135deg,${g});display:flex;align-items:center;justify-content:center;font-size:20px">🎵</div>`
+    return `<div class="np-card">
+      <div class="np-art">${artHtml}
+        <div class="np-eq">
+          <span style="--d:.3s;--h:5px"></span>
+          <span style="--d:.5s;--h:9px"></span>
+          <span style="--d:.4s;--h:7px"></span>
+        </div>
+      </div>
+      <div class="np-info">
+        <div class="np-title">${esc(t.trackTitle||t.title||'')}</div>
+        <div class="np-server">${esc(t.guildName||'')} · ${esc(t.trackAuthor||t.author||'')}</div>
+      </div>
+      <span class="np-badge">▶ LIVE</span>
+    </div>`
+  }).join('')
+}
+
+async function fetchStats() {
+  try {
+    const [sRes, nRes] = await Promise.all([
+      fetch('/api/stats',      {cache:'no-store'}).catch(() => null),
+      fetch('/api/nowplaying', {cache:'no-store'}).catch(() => null),
+    ])
+    if (sRes?.ok) {
+      const s = await sRes.json()
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v }
+      set('stat-guilds',          s.guilds          ?? '—')
+      set('stat-players',         s.activePlayers   ?? '—')
+      set('live-guild-count',     (s.guilds||'—') + ' servidores')
+      set('live-players-count',   s.activePlayers   ?? '—')
+    }
+    if (nRes?.ok) {
+      const n = await nRes.json()
+      if (n.tracks?.length) renderNPFeed(n.tracks)
+      else renderNPFeed(FALLBACK)
+    } else {
+      renderNPFeed(FALLBACK)
+    }
+  } catch {
+    renderNPFeed(FALLBACK)
+  }
+}
+fetchStats()
+setInterval(fetchStats, 30_000)
+</script>
+</body>
+</html>

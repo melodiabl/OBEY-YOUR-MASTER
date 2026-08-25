@@ -65,20 +65,11 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variable1"]))
-                        .addField(
-                            eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variablex_2"]),
-                            eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variable2"])
-                        )
-                        .addField(
-                            eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variablex_3"]),
-                            eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variable3"])
-                        )
-                        .addField(
-                            eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variablex_4"]),
-                            eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variable4"])
-                        ),
+                        .addFields({ name: eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variablex_2"]), value: eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variable2"]) })
+                        .addFields({ name: eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variablex_3"]), value: eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variable3"]) })
+                        .addFields({ name: eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variablex_4"]), value: eval(client.la[ls]["cmds"]["economy"]["ecohelp"]["variable4"]) }),
                 ],
             });
         } catch (e) {
@@ -97,10 +88,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

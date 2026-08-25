@@ -19,8 +19,8 @@ module.exports = {
     ],
     cooldown: 5,
     usage: "setup-reactionrole --> Follow Steps",
-    description: "Create Reaction Roles, or delete all active Reaction Roles.",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Crea roles de reacción o elimina todos los roles de reacción activos.",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -31,7 +31,7 @@ module.exports = {
                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable2"]))
                 .setDescription(
                     `
-**How to setup Clan Bots's Reaction Role!**
+**How to setup Clan Bots's Reaction Rol!**
 > 1. React to message __BELOW__ **this** message
 
 > 2. Then, afterwards a new message appears! After that, you can PING the ROLE for the reacted EMOJI
@@ -279,8 +279,7 @@ module.exports = {
                                                                         .setColor(es.color)
                                                                         .setTitle(title.substring(0, 256))
                                                                         .setFooter({ text: message.guild.name,
-                                                                            iconURL: message.guild.iconURL({
-                                                                                dynamic: true })
+                                                                            iconURL: message.guild.iconURL()
                                                                         });
                                                                     var buffer = "";
                                                                     for (var i = 0; i < objet.Parameters.length; i++) {
@@ -376,10 +375,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -4,10 +4,13 @@ const {
     Collection,
     EmbedBuilder,
     AttachmentBuilder,
-    Permissions,
+    PermissionFlagsBits,
     ButtonBuilder,
     ActionRowBuilder,
     StringSelectMenuBuilder,
+    ActivityType,
+    ChannelType,
+    ButtonStyle
 } = require("discord.js");
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -71,7 +74,7 @@ function check_if_dj(client, member, song) {
         }
         if (member.roles.cache.has(djRole)) isdj = true;
     }
-    if (!isdj && !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR) && song?.requester?.id != member.id)
+    if (!isdj && !member.permissions.has(Discord.PermissionFlagsBits.Administrator) && song?.requester?.id != member.id)
         return roleid.map(i => `<@&${i}>`).join(", ");
     return false;
 }
@@ -164,16 +167,16 @@ function GetUser(message, arg) {
         } else if (!user && args[0]) {
         /**
          * @INFO
-         * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+         * Desarrollado por Melodia | https://github.com/melodiabl
          * @INFO
-         * Work for Milrato Development | https://milrato.eu
+         * Desarrollado por Melodia | https://github.com/melodiabl
          * @INFO
-         * Please mention him / Milrato Development, when using this Code!
+         * Desarrollado por Melodia | https://github.com/melodiabl
          * @INFO
          */
-            let alluser = message.guild.members.cache.map(member => String(member.user.tag).toLowerCase());
+            let alluser = message.guild.members.cache.map(member => String(member.user.username).toLowerCase());
             user = alluser.find(user => user.startsWith(args.join(" ").toLowerCase()));
-            user = message.guild.members.cache.find(me => String(me.user.tag).toLowerCase() == user);
+            user = message.guild.members.cache.find(me => String(me.user.username).toLowerCase() == user);
             if (!user || user == null || !user.id) {
                 alluser = message.guild.members.cache.map(member =>
                     String(member.displayName + "#" + member.user.discriminator).toLowerCase()
@@ -235,12 +238,12 @@ function GetGlobalUser(message, arg) {
             for (const g of guilds) {
                 var members = g.members.cache.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966);
                 for (const m of members) {
-                    alluser.push(m.user.tag);
+                    alluser.push(m.user.username);
                     allmembers.push(m);
                 }
             }
             user = alluser.find(user => user.startsWith(args.join(" ").toLowerCase()));
-            user = allmembers.find(me => String(me.user.tag).toLowerCase() == user);
+            user = allmembers.find(me => String(me.user.username).toLowerCase() == user);
             if (!user || user == null || !user.id) {
                 user = alluser.find(user => user.startsWith(args.join(" ").toLowerCase()));
                 user = allmembers.find(me => String(me.displayName + "#" + me.user.discriminator).toLowerCase() == user);
@@ -306,10 +309,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
         let rosterroles = data.rosterroles;
         //if there are no roles added add this to the embed
         if (rosterroles.length === 0)
-            rosterembed.addField(
-                eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variablex_2"]),
-                eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable2"])
-            );
+            rosterembed.addFields({ name: eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variablex_2"]), value: eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable2"]) });
         //loop through every single role
         for (let j = 0; j < rosterroles.length; j++) {
             //get the role
@@ -331,7 +331,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //define the memberarray
                 let memberarray = role.members.map(
                     member =>
-                        `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} <@${member.user.id}> | \`${member.user.tag}\``
+                        `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} <@${member.user.id}> | \`${member.user.username}\``
                 );
                 //loopthrough the array for 20 members / page
                 for (let i = 0; i < memberarray.length; i += 20) {
@@ -339,9 +339,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                     if (rosterembed.length > 5000) break;
                     if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                         try {
-                            rosterembed.addField(
-                                `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                            rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
@@ -351,26 +349,22 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                                               0,
                                               1024
                                           ),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                inline: the_roster_db?.get(guild.id, pre + ".inline")
+                            });
                             break;
                         } catch (e) {
                             console.error(e);
                         }
                     else
                         try {
-                            rosterembed.addField(
-                                i < 20
+                            rosterembed.addFields({ name: i < 20
                                     ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                                    : `\u200b`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    : `\u200b`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
                                           .join("\n")
-                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         } catch (e) {
                             console.error(e);
                         }
@@ -378,11 +372,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //if there are no members who have this role, do this
                 if (memberarray.length === 0) {
                     try {
-                        rosterembed.addField(
-                            `**__${role.name.toUpperCase()} [0]__**`,
-                            "> ***No one has this Role***".substring(0, 1024),
-                            the_roster_db?.get(guild.id, pre + ".inline")
-                        );
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`, value: "> ***No one has this Role***".substring(0, 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                     } catch (e) {
                         console.error(e);
                     }
@@ -398,9 +388,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                     if (rosterembed.length > 5000) break;
                     if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                         try {
-                            rosterembed.addField(
-                                `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                            rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
@@ -409,27 +397,21 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                                           `${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20 > 0 ? `\n${the_roster_db?.get(guild.id, pre + ".rosteremoji")} ***\`${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20}\` other Members have this Role ...***` : ""}`.substring(
                                               0,
                                               1024
-                                          ),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          ), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                             break;
                         } catch (e) {
                             console.error(e);
                         }
                     else
                         try {
-                            rosterembed.addField(
-                                i < 20
+                            rosterembed.addFields({ name: i < 20
                                     ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                                    : `\u200b`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    : `\u200b`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
                                           .join("\n")
-                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         } catch (e) {
                             console.error(e);
                         }
@@ -437,11 +419,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //if there are no members who have this role, do this
                 if (memberarray.length === 0) {
                     try {
-                        rosterembed.addField(
-                            `**__${role.name.toUpperCase()} [0]__**`,
-                            "> ***No one has this Role***".substring(0, 1024),
-                            the_roster_db?.get(guild.id, pre + ".inline")
-                        );
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`, value: "> ***No one has this Role***".substring(0, 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                     } catch (e) {
                         console.error(e);
                     }
@@ -449,7 +427,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
             } else if (data.rosterstyle == "3") {
                 //define the memberarray
                 let memberarray = role.members.map(
-                    member => `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} **${member.user.tag}**`
+                    member => `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} **${member.user.username}**`
                 );
                 //loopthrough the array for 20 members / page
                 for (let i = 0; i < memberarray.length; i += 20) {
@@ -457,9 +435,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                     if (rosterembed.length > 5000) break;
                     if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                         try {
-                            rosterembed.addField(
-                                `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                            rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
@@ -468,27 +444,21 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                                           `${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20 > 0 ? `\n${the_roster_db?.get(guild.id, pre + ".rosteremoji")} ***\`${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20}\` other Members have this Role ...***` : ""}`.substring(
                                               0,
                                               1024
-                                          ),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          ), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                             break;
                         } catch (e) {
                             console.error(e);
                         }
                     else
                         try {
-                            rosterembed.addField(
-                                i < 20
+                            rosterembed.addFields({ name: i < 20
                                     ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                                    : `\u200b`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    : `\u200b`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
                                           .join("\n")
-                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         } catch (e) {
                             console.error(e);
                         }
@@ -496,22 +466,18 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //if there are no members who have this role, do this
                 if (memberarray.length === 0) {
                     try {
-                        rosterembed.addField(
-                            `**__${role.name.toUpperCase()} [0]__**`,
-                            "> ***No one has this Role***".substring(0, 1024),
-                            the_roster_db?.get(guild.id, pre + ".inline")
-                        );
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`, value: "> ***No one has this Role***".substring(0, 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                     } catch (e) {
                         console.error(e);
                     }
                 }
                 /**
                  * @INFO
-                 * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+                 * Desarrollado por Melodia | https://github.com/melodiabl
                  * @INFO
-                 * Work for Milrato Development | https://milrato.eu
+                 * Desarrollado por Melodia | https://github.com/melodiabl
                  * @INFO
-                 * Please mention him / Milrato Development, when using this Code!
+                 * Desarrollado por Melodia | https://github.com/melodiabl
                  * @INFO
                  */
             } else if (data.rosterstyle == "4") {
@@ -525,9 +491,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                     if (rosterembed.length > 5000) break;
                     if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                         try {
-                            rosterembed.addField(
-                                `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                            rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
@@ -536,27 +500,21 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                                           `${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20 > 0 ? `\n${the_roster_db?.get(guild.id, pre + ".rosteremoji")} ***\`${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20}\` other Members have this Role ...***` : ""}`.substring(
                                               0,
                                               1024
-                                          ),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          ), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                             break;
                         } catch (e) {
                             console.error(e);
                         }
                     else
                         try {
-                            rosterembed.addField(
-                                i < 20
+                            rosterembed.addFields({ name: i < 20
                                     ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                                    : `\u200b`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    : `\u200b`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
                                           .join("\n")
-                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         } catch (e) {
                             console.error(e);
                         }
@@ -564,11 +522,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //if there are no members who have this role, do this
                 if (memberarray.length === 0) {
                     try {
-                        rosterembed.addField(
-                            `**__${role.name.toUpperCase()} [0]__**`,
-                            "> ***No one has this Role***".substring(0, 1024),
-                            the_roster_db?.get(guild.id, pre + ".inline")
-                        );
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`, value: "> ***No one has this Role***".substring(0, 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                     } catch (e) {
                         console.error(e);
                     }
@@ -585,9 +539,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                     if (rosterembed.length > 5000) break;
                     if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                         try {
-                            rosterembed.addField(
-                                `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                            rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
@@ -597,25 +549,21 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                                               0,
                                               1024
                                           ),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                inline: the_roster_db?.get(guild.id, pre + ".inline")
+                            });
                         } catch (e) {
                             console.error(e);
                         }
                     else
                         try {
-                            rosterembed.addField(
-                                i < 20
+                            rosterembed.addFields({ name: i < 20
                                     ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                                    : `\u200b`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    : `\u200b`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
                                           .join("\n")
-                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         } catch (e) {
                             console.error(e);
                         }
@@ -623,11 +571,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //if there are no members who have this role, do this
                 if (memberarray.length === 0) {
                     try {
-                        rosterembed.addField(
-                            `**__${role.name.toUpperCase()} [0]__**`,
-                            "> ***No one has this Role***".substring(0, 1024),
-                            the_roster_db?.get(guild.id, pre + ".inline")
-                        );
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`, value: "> ***No one has this Role***".substring(0, 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         break;
                     } catch (e) {
                         console.error(e);
@@ -646,9 +590,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                     if (!thearray) return;
                     if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                         try {
-                            rosterembed.addField(
-                                `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                            rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
@@ -657,27 +599,21 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                                           `${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20 > 0 ? `\n${the_roster_db?.get(guild.id, pre + ".rosteremoji")} ***\`${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20}\` other Members have this Role ...***` : ""}`.substring(
                                               0,
                                               1024
-                                          ),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          ), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                             break;
                         } catch (e) {
                             console.error(e);
                         }
                     else
                         try {
-                            rosterembed.addField(
-                                i < 20
+                            rosterembed.addFields({ name: i < 20
                                     ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                                    : `\u200b`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    : `\u200b`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
                                           .join("\n")
-                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         } catch (e) {
                             console.error(e);
                         }
@@ -685,11 +621,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //if there are no members who have this role, do this
                 if (memberarray.length === 0) {
                     try {
-                        rosterembed.addField(
-                            `**__${role.name.toUpperCase()} [0]__**`,
-                            "> ***No one has this Role***".substring(0, 1024),
-                            the_roster_db?.get(guild.id, pre + ".inline")
-                        );
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`, value: "> ***No one has this Role***".substring(0, 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                     } catch (e) {
                         console.error(e);
                     }
@@ -698,7 +630,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //define the memberarray
                 let memberarray = role.members.map(
                     member =>
-                        `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} <@${member.user.id}> | **${member.user.tag}**`
+                        `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} <@${member.user.id}> | **${member.user.username}**`
                 );
                 //loopthrough the array for 20 members / page
                 for (let i = 0; i < memberarray.length; i += 20) {
@@ -706,9 +638,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                     if (rosterembed.length > 5000) break;
                     if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                         try {
-                            rosterembed.addField(
-                                `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                            rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
@@ -717,27 +647,21 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                                           `${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20 > 0 ? `\n${the_roster_db?.get(guild.id, pre + ".rosteremoji")} ***\`${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20}\` other Members have this Role ...***` : ""}`.substring(
                                               0,
                                               1024
-                                          ),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          ), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                             break;
                         } catch (e) {
                             console.error(e);
                         }
                     else
                         try {
-                            rosterembed.addField(
-                                i < 20
+                            rosterembed.addFields({ name: i < 20
                                     ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                                    : `\u200b`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    : `\u200b`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
                                           .join("\n")
-                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         } catch (e) {
                             console.error(e);
                         }
@@ -745,11 +669,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //if there are no members who have this role, do this
                 if (memberarray.length === 0) {
                     try {
-                        rosterembed.addField(
-                            `**__${role.name.toUpperCase()} [0]__**`,
-                            "> ***No one has this Role***".substring(0, 1024),
-                            the_roster_db?.get(guild.id, pre + ".inline")
-                        );
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`, value: "> ***No one has this Role***".substring(0, 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                     } catch (e) {
                         console.error(e);
                     }
@@ -758,7 +678,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //define the memberarray
                 let memberarray = role.members.map(
                     member =>
-                        `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} <@${member.user.id}> | \`${member.user.tag}\``
+                        `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} <@${member.user.id}> | \`${member.user.username}\``
                 );
                 //loopthrough the array for 20 members / page
                 for (let i = 0; i < memberarray.length; i += 20) {
@@ -770,9 +690,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                     }
                     if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                         try {
-                            rosterembed.addField(
-                                `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                            rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
@@ -782,26 +700,22 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                                               0,
                                               1024
                                           ),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                inline: the_roster_db?.get(guild.id, pre + ".inline")
+                            });
                             break;
                         } catch (e) {
                             console.error(e);
                         }
                     else
                         try {
-                            rosterembed.addField(
-                                i < 20
+                            rosterembed.addFields({ name: i < 20
                                     ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                                    : `\u200b`,
-                                role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    : `\u200b`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
                                     ? "> No one has this Role"
                                     : thearray
                                           .slice(i, i + 20)
                                           .join("\n")
-                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                                the_roster_db?.get(guild.id, pre + ".inline")
-                            );
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                         } catch (e) {
                             console.error(e);
                         }
@@ -809,11 +723,7 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                 //if there are no members who have this role, do this
                 if (memberarray.length === 0) {
                     try {
-                        rosterembed.addField(
-                            `**__${role.name.toUpperCase()} [0]__**`,
-                            "> ***No one has this Role***".substring(0, 1024),
-                            the_roster_db?.get(guild.id, pre + ".inline")
-                        );
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`, value: "> ***No one has this Role***".substring(0, 1024), inline: the_roster_db?.get(guild.id, pre + ".inline") });
                     } catch (e) {
                         console.error(e);
                     }
@@ -864,10 +774,8 @@ async function send_roster_msg(client, guild, the_roster_db, pre) {
     let rosterroles = the_roster_db?.get(guild.id, pre + ".rosterroles");
     if (!rosterroles || rosterroles.length === 0)
         try {
-            rosterembed.addField(
-                eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variablex_2"]),
-                eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable2"])
-            );
+            rosterembed.addFields({ name: eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variablex_2"]), value: eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable2"])
+            });
         } catch (e) {
             console.error(e);
         }
@@ -887,7 +795,7 @@ async function send_roster_msg(client, guild, the_roster_db, pre) {
         }
         //define the memberarray
         let memberarray = role.members.map(
-            member => `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} <@${member.user.id}> | \`${member.user.tag}\``
+            member => `${the_roster_db?.get(guild.id, pre + ".rosteremoji")} <@${member.user.id}> | \`${member.user.username}\``
         );
         //loopthrough the array for 20 members / page
         for (let i = 0; i < memberarray.length; i += 20) {
@@ -899,50 +807,45 @@ async function send_roster_msg(client, guild, the_roster_db, pre) {
             }
             if (!the_roster_db?.get(guild.id, pre + ".showallroles") || memberarray.length < 20)
                 try {
-                    rosterembed.addField(
-                        `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`,
-                        role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
-                            ? "> No one has this Role"
-                            : thearray
-                                  .slice(i, i + 20)
-                                  .join("\n")
-                                  .substring(0, leftnum <= 1024 ? leftnum : 1024) +
-                                  `${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20 > 0 ? `\n${the_roster_db?.get(guild.id, pre + ".rosteremoji")} ***\`${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20}\` other Members have this Role ...***` : ""}`.substring(
-                                      0,
-                                      1024
-                                  ),
-                        the_roster_db?.get(guild.id, pre + ".inline")
-                    );
+                    rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`, value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    ? "> No one has this Role"
+                                    : thearray
+                                          .slice(i, i + 20)
+                                          .join("\n")
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024) +
+                                          `${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20 > 0 ? `\n${the_roster_db?.get(guild.id, pre + ".rosteremoji")} ***\`${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length - 20}\` other Members have this Role ...***` : ""}`.substring(
+                                              0,
+                                              1024
+                                          ),
+                                inline: the_roster_db?.get(guild.id, pre + ".inline") });
                     break;
                 } catch (e) {
                     console.error(e);
                 }
-            else
-                try {
-                    rosterembed.addField(
-                        i < 20
-                            ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
-                            : `\u200b`,
-                        role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
-                            ? "> No one has this Role"
-                            : thearray
-                                  .slice(i, i + 20)
-                                  .join("\n")
-                                  .substring(0, leftnum <= 1024 ? leftnum : 1024),
-                        the_roster_db?.get(guild.id, pre + ".inline")
-                    );
-                } catch (e) {
-                    console.error(e);
+                    else
+                        try {
+                            rosterembed.addFields({ name: i < 20
+                                    ? `**__${role.name.toUpperCase()} [${role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length}]__**`
+                                    : `\u200b`,
+                                value: role.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966).length == 0
+                                    ? "> No one has this Role"
+                                    : thearray
+                                          .slice(i, i + 20)
+                                          .join("\n")
+                                          .substring(0, leftnum <= 1024 ? leftnum : 1024),
+                                inline: the_roster_db?.get(guild.id, pre + ".inline")
+                            });
+                        } catch (e) {
+                            console.error(e);
+                        }
                 }
-        }
-        //if there are no members who have this role, do this
-        if (memberarray.length === 0) {
-            try {
-                rosterembed.addField(
-                    `**__${role.name.toUpperCase()} [0]__**`,
-                    "> ***No one has this Role***".substring(0, 1024),
-                    the_roster_db?.get(guild.id, pre + ".inline")
-                );
+                //if there are no members who have this role, do this
+                if (memberarray.length === 0) {
+                    try {
+                        rosterembed.addFields({ name: `**__${role.name.toUpperCase()} [0]__**`,
+                            value: "> ***No one has this Role***".substring(0, 1024),
+                            inline: the_roster_db?.get(guild.id, pre + ".inline")
+                        });
             } catch (e) {
                 console.error(e);
             }
@@ -983,9 +886,9 @@ async function create_transcript_buffer(Messages, Channel, Guild) {
                     let time = moment(msg.createdTimestamp).format("MMM DD, YYYY HH:mm:ss");
                     let subcontent =
                         `<div class="message-group">` +
-                        `<div class="ath-av-container"><img class="ath-av"src="${msg.author.displayAvatarURL({ dynamic: true })}" /></div>` +
+                        `<div class="ath-av-container"><img class="ath-av"src="${msg.author.displayAvatarURL()}" /></div>` +
                         `<div class="messages">` +
-                        `<span class="ath-name" title="${msg.author.username}" style="color: ${msg.member.roles.highest.hexColor};">${msg.author.tag}</span>`;
+                        `<span class="ath-name" title="${msg.author.username}" style="color: ${msg.member.roles.highest.hexColor};">${msg.author.username}</span>`;
                     if (msg.author.bot) subcontent += `<span class="bot-tag">BOT</span>`;
                     subcontent +=
                         `<span class="tst">ID: ${msg.author.id} | </span>` +
@@ -1065,14 +968,14 @@ async function create_transcript_buffer(Messages, Channel, Guild) {
                         `<div class="message-group">` +
                         `<div class="ath-av-container"><img class="ath-av"src="https://cdn-0.emojis.wiki/emoji-pics/twitter/pushpin-twitter.png" style="background-color: #000;filter: alpha(opacity=40);opacity: 0.4;" /></div>` +
                         `<div class="messages">` +
-                        `<span class="ath-name" title="${msg.author.username}" style="color: ${msg.member.roles.highest.hexColor};">${msg.author.tag}</span>`;
+                        `<span class="ath-name" title="${msg.author.username}" style="color: ${msg.member.roles.highest.hexColor};">${msg.author.username}</span>`;
                     if (msg.author.bot) subcontent += `<span class="bot-tag">BOT</span>`;
                     subcontent += `<span class="tst" style="font-weight:500;color:#848484;font-size: 14px;">pinned a message to this channel.</span><span class="tst">${time}</span></div></div></div>`;
                     messagesArray.push(subcontent);
                 }
             });
             baseHTML +=
-                `<body><div class="info"><div class="guild-icon-container"> <img class="guild-icon" src="${Guild.iconURL({ dynamic: true })}" />` +
+                `<body><div class="info"><div class="guild-icon-container"> <img class="guild-icon" src="${Guild.iconURL()}" />` +
                 `</div><div class="metadata">` +
                 `<div class="guild-name"><strong>Guild:</strong> ${Guild.name} (<mark>${Guild.id})</mark></div>` +
                 `<div class="channel-name"><strong>Channel:</strong> ${Channel.name} (<mark>${Channel.id})</mark></div>` +
@@ -1243,7 +1146,7 @@ function getMember(message, toFind = "") {
         target = message.mentions.members.filter(member => member.guild.id == message.guild.id).first();
     if (!target && toFind) {
         target = message.guild.members.cache.find(member => {
-            return member.displayName.toLowerCase().includes(toFind) || member.user.tag.toLowerCase().includes(toFind);
+            return member.displayName.toLowerCase().includes(toFind) || member.user.username.toLowerCase().includes(toFind);
         });
     }
     if (!target) target = message.member;
@@ -1429,7 +1332,7 @@ function stations(client, prefix, message) {
                     : null
             )
             .setFooter(client.getFooter(es))
-            .setTitle("Pick your Station, by typing in the right `INDEX` Number!")
+            .setTitle("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
             .setDescription(`Example: \`${prefix}radio 11\``);
         const stationsembed = new EmbedBuilder()
             .setColor(es.color)
@@ -1441,7 +1344,7 @@ function stations(client, prefix, message) {
                     : null
             )
             .setFooter(client.getFooter(es))
-            .setTitle("Pick your Station, by typing in the right `INDEX` Number!")
+            .setTitle("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
             .setDescription(`Example: \`${prefix}radio 44\``);
         const stationsembed2 = new EmbedBuilder()
             .setColor(es.color)
@@ -1453,7 +1356,7 @@ function stations(client, prefix, message) {
                     : null
             )
             .setFooter(client.getFooter(es))
-            .setTitle("Pick your Station, by typing in the right `INDEX` Number!")
+            .setTitle("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
             .setDescription(`Example: \`${prefix}radio 69\``);
         const stationsembed3 = new EmbedBuilder()
             .setColor(es.color)
@@ -1465,7 +1368,7 @@ function stations(client, prefix, message) {
                     : null
             )
             .setFooter(client.getFooter(es))
-            .setTitle("Pick your Station, by typing in the right `INDEX` Number!")
+            .setTitle("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
             .setDescription(`Example: \`${prefix}radio 120\``);
         const stationsembed4 = new EmbedBuilder()
             .setColor(es.color)
@@ -1477,7 +1380,7 @@ function stations(client, prefix, message) {
                     : null
             )
             .setFooter(client.getFooter(es))
-            .setTitle("CUSTOM REQUESTS | Pick your Station, by typing in the right `INDEX` Number!");
+            .setTitle("SOLICITUDES PERSONALIZADAS | ¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!");
 
         let beforeindex = 1;
         let REYFM = "";
@@ -1490,130 +1393,127 @@ function stations(client, prefix, message) {
             ILOVERADIO += `**${i + beforeindex}** [${radios.ILOVERADIO[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.ILOVERADIO[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.ILOVERADIO.length;
-        reyfm_iloveradio_embed.addField("**REYFM-STATIONS:**", `${REYFM}`.substring(0, 1024), true);
-        reyfm_iloveradio_embed.addField("**ILOVEMUSIC-STATIONS:**", `${ILOVERADIO}`.substring(0, 1024), true);
-        reyfm_iloveradio_embed.addField(
-            "**INFORMATIONS:**",
-            "> *On the next pages, are country specific Radiostations*\n> *Some of those might not work, because they might be offline, this is because of either ping, timezone or because that they are not maintained!*"
-        );
+        reyfm_iloveradio_embed.addFields({ name: "**REYFM-STATIONS:**", value: `${REYFM}`.substring(0, 1024), inline: true });
+        reyfm_iloveradio_embed.addFields({ name: "**ILOVEMUSIC-STATIONS:**", value: `${ILOVERADIO}`.substring(0, 1024), inline: true });
+        reyfm_iloveradio_embed.addFields({ name: "**INFORMATIONS:**", value: "> *On the next pages, are country specific Radiostations*\n> *Some of those might not work, because they might be offline, this is because of either ping, timezone or because that they are not maintained!*" });
 
         let United_Kingdom = "";
         for (let i = 0; i < radios.EU.United_Kingdom.length; i++) {
             United_Kingdom += `**${i + beforeindex}** [${radios.EU.United_Kingdom[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.United_Kingdom[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.United_Kingdom.length;
-        stationsembed.addField("🇬🇧 United Kingdom", `>>> ${United_Kingdom}`, true);
+        stationsembed.addFields({ name: "🇬🇧 United Kingdom", value: `>>> ${United_Kingdom}`, inline: true });
 
         let austria = "";
         for (let i = 0; i < radios.EU.Austria.length; i++) {
             austria += `**${i + beforeindex}** [${radios.EU.Austria[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Austria[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Austria.length;
-        stationsembed.addField("🇦🇹 Austria", `>>> ${austria}`, true);
+        stationsembed.addFields({ name: "🇦🇹 Austria", value: `>>> ${austria}`, inline: true });
 
         let Belgium = "";
         for (let i = 0; i < radios.EU.Belgium.length; i++) {
             Belgium += `**${i + beforeindex}** [${radios.EU.Belgium[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Belgium[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Belgium.length;
-        stationsembed.addField("🇧🇪 Belgium", `>>> ${Belgium}`, true);
+        stationsembed.addFields({ name: "🇧🇪 Belgium", value: `>>> ${Belgium}`, inline: true });
 
         let Bosnia = "";
         for (let i = 0; i < radios.EU.Bosnia.length; i++) {
             Bosnia += `**${i + beforeindex}** [${radios.EU.Bosnia[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Bosnia[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Bosnia.length;
-        stationsembed.addField("🇧🇦 Bosnia", `>>> ${Bosnia}`, true);
+        stationsembed.addFields({ name: "🇧🇦 Bosnia", value: `>>> ${Bosnia}`, inline: true });
 
         let Czech = "";
         for (let i = 0; i < radios.EU.Czech.length; i++) {
             Czech += `**${i + beforeindex}** [${radios.EU.Czech[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Czech[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Czech.length;
-        stationsembed.addField("🇨🇿 Czech", `>>> ${Czech}`, true);
+        stationsembed.addFields({ name: "🇨🇿 Czech", value: `>>> ${Czech}`, inline: true });
 
         let Denmark = "";
         for (let i = 0; i < radios.EU.Denmark.length; i++) {
             Denmark += `**${i + beforeindex}** [${radios.EU.Denmark[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Denmark[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Denmark.length;
-        stationsembed.addField("🇩🇰 Denmark", `>>> ${Denmark}`, true);
+        stationsembed.addFields({ name: "🇩🇰 Denmark", value: `>>> ${Denmark}`, inline: true });
 
         let germany = "";
         for (let i = 0; i < radios.EU.Germany.length; i++) {
             germany += `**${i + beforeindex}** [${radios.EU.Germany[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Germany[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Germany.length;
-        stationsembed2.addField("🇩🇪 Germany", `>>> ${germany}`, true);
+        stationsembed2.addFields({ name: "🇩🇪 Germany", value: `>>> ${germany}`, inline: true });
 
         let Hungary = "";
         for (let i = 0; i < radios.EU.Hungary.length; i++) {
             Hungary += `**${i + beforeindex}** [${radios.EU.Hungary[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Hungary[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Hungary.length;
-        stationsembed2.addField("🇭🇺 Hungary", `>>> ${Hungary}`, true);
+        stationsembed2.addFields({ name: "🇭🇺 Hungary", value: `>>> ${Hungary}`, inline: true });
 
         let Ireland = "";
         for (let i = 0; i < radios.EU.Ireland.length; i++) {
             Ireland += `**${i + beforeindex}** [${radios.EU.Ireland[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Ireland[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Ireland.length;
-        stationsembed2.addField("🇮🇪 Ireland", `>>> ${Ireland}`, true);
+        stationsembed2.addFields({ name: "🇮🇪 Ireland", value: `>>> ${Ireland}`, inline: true });
 
         let Italy = "";
         for (let i = 0; i < radios.EU.Italy.length; i++) {
             Italy += `**${i + beforeindex}** [${radios.EU.Italy[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Italy[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Italy.length;
-        stationsembed2.addField("🇮🇹 Italy", `>>> ${Italy}`, true);
+        stationsembed2.addFields({ name: "🇮🇹 Italy", value: `>>> ${Italy}`, inline: true });
 
         let Luxembourg = "";
         for (let i = 0; i < radios.EU.Luxembourg.length; i++) {
             Luxembourg += `**${i + beforeindex}** [${radios.EU.Luxembourg[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Luxembourg[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Luxembourg.length;
-        stationsembed2.addField("🇱🇺 Luxembourg", `>>> ${Luxembourg}`, true);
+        stationsembed2.addFields({ name: "🇱🇺 Luxembourg", value: `>>> ${Luxembourg}`, inline: true });
 
         let Romania = "";
         for (let i = 0; i < radios.EU.Romania.length; i++) {
             Romania += `**${i + beforeindex}** [${radios.EU.Romania[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Romania[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Romania.length;
-        stationsembed2.addField("🇷🇴 Romania", `>>> ${Romania}`, true);
+        stationsembed2.addFields({ name: "🇷🇴 Romania", value: `>>> ${Romania}`, inline: true });
 
         let Serbia = "";
         for (let i = 0; i < radios.EU.Serbia.length; i++) {
             Serbia += `**${i + beforeindex}** [${radios.EU.Serbia[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Serbia[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Serbia.length;
-        stationsembed3.addField("🇷🇸 Serbia", `>>> ${Serbia}`, true);
+        stationsembed3.addFields({ name: "🇷🇸 Serbia", value: `>>> ${Serbia}`, inline: true });
 
         let Spain = "";
         for (let i = 0; i < radios.EU.Spain.length; i++) {
             Spain += `**${i + beforeindex}** [${radios.EU.Spain[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Spain[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Spain.length;
-        stationsembed3.addField("🇪🇸 Spain", `>>> ${Spain}`, true);
+        stationsembed3.addFields({ name: "🇪🇸 Spain", value: `>>> ${Spain}`, inline: true });
 
         let Sweden = "";
         for (let i = 0; i < radios.EU.Sweden.length; i++) {
             Sweden += `**${i + beforeindex}** [${radios.EU.Sweden[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Sweden[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Sweden.length;
-        stationsembed3.addField("🇸🇪 Sweden", `>>> ${Sweden}`, true);
+        stationsembed3.addFields({ name: "🇸🇪 Sweden", value: `>>> ${Sweden}`, inline: true });
 
         let TURKEY = "";
         for (let i = 0; i < radios.EU.TURKEY.length; i++) {
             TURKEY += `**${i + beforeindex}** [${radios.EU.TURKEY[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.TURKEY[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.TURKEY.length;
-        stationsembed3.addField("🇹🇷 TURKEY", `>>> ${TURKEY}`, true);
+        stationsembed3.addFields({ name: "🇹🇷 TURKEY", value: `>>> ${TURKEY}`, inline: true });
         let Ukraine = "";
         for (let i = 0; i < radios.EU.Ukraine.length; i++) {
             Ukraine += `**${i + beforeindex}** [${radios.EU.Ukraine[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Ukraine[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Ukraine.length;
-        stationsembed3.addField("🇺🇦 Ukraine", `>>> ${Ukraine}`, true);
+        stationsembed3.addFields({ name: "🇺🇦 Ukraine", value: `>>> ${Ukraine}`, inline: true });
 
         let embeds = [];
         embeds.push(reyfm_iloveradio_embed);
@@ -1635,7 +1535,7 @@ function stations(client, prefix, message) {
                                 : null
                         )
                         .setFooter(client.getFooter(es))
-                        .setTitle("CUSTOM REQUESTS | Pick your Station, by typing in the right `INDEX` Number!")
+                        .setTitle("SOLICITUDES PERSONALIZADAS | ¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
                         .setDescription(`${requests}`)
                 );
                 requests = "";
@@ -1677,7 +1577,7 @@ async function autoplay(client, player, type) {
                 .setTitle(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable7"]))
                 .setDescription(
                     config.settings.LeaveOnEmpty_Queue.enabled && type != "skip"
-                        ? `I'll leave the Channel: \`${client.channels.cache.get(player.voiceChannel).name}\` in: \`${ms(config.settings.LeaveOnEmpty_Queue.time_delay, { long: true })}\`, If the Queue stays Empty! `
+                        ? `I'll leave the Canal: \`${client.channels.cache.get(player.voiceChannel).name}\` in: \`${ms(config.settings.LeaveOnEmpty_Queue.time_delay, { long: true })}\`, If the Queue stays Empty! `
                         : eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable9"])
                 )
                 .setColor(es.wrongcolor)
@@ -1784,11 +1684,11 @@ async function swap_pages(client, message, description, TITLE) {
     let cmduser = message.author;
     /**
      * @INFO
-     * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+     * Desarrollado por Melodia | https://github.com/melodiabl
      * @INFO
-     * Work for Milrato Development | https://milrato.eu
+     * Desarrollado por Melodia | https://github.com/melodiabl
      * @INFO
-     * Please mention him / Milrato Development, when using this Code!
+     * Desarrollado por Melodia | https://github.com/melodiabl
      * @INFO
      */
 
@@ -1850,7 +1750,7 @@ async function swap_pages(client, message, description, TITLE) {
             .send({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle(`${emoji?.msg.ERROR} No Content added to the SWAP PAGES Function`)
+                        .setTitle(`${emoji?.msg.ERROR} No se añadió contenido a la función de intercambio de páginas`)
                         .setColor(es.wrongcolor)
                         .setThumbnail(
                             es.thumb
@@ -1867,22 +1767,22 @@ async function swap_pages(client, message, description, TITLE) {
         return message.channel.send({ embeds: [embeds[0]] }).catch(e => console.log("THIS IS TO PREVENT A CRASH"));
 
     let button_back = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Success)
+        .setStyle(ButtonStyle.Success)
         .setCustomId("1")
-        .setEmoji("833802907509719130")
+        .setEmoji("◀️")
         .setLabel("Back");
-    let button_home = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
     let button_forward = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Success)
+        .setStyle(ButtonStyle.Success)
         .setCustomId("3")
-        .setEmoji("832598861813776394")
+        .setEmoji("▶️")
         .setLabel("Forward");
     let button_blank = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Secondary)
+        .setStyle(ButtonStyle.Secondary)
         .setCustomId("button_blank")
         .setLabel("\u200b")
         .setDisabled();
-    let button_stop = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
     const allbuttons = [
         new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
@@ -1925,7 +1825,7 @@ async function swap_pages(client, message, description, TITLE) {
         //go home
         else if (b?.customId == "2") {
             collector.resetTimer();
-            //b?.reply("***Going Back home***, *please wait 2 Seconds for the next Input*", true)
+            //b?.reply("***Going Atrás home***, *please wait 2 Seconds for the next Input*", true)
             currentPage = 0;
             await swapmsg
                 .edit({ embeds: [embeds[currentPage]], components: getDisabledComponents[swapmsg.components] })
@@ -1973,22 +1873,22 @@ async function swap_pages2(client, message, embeds) {
     if (embeds.length === 1)
         return message.channel.send({ embeds: [embeds[0]] }).catch(e => console.log("THIS IS TO PREVENT A CRASH"));
     let button_back = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Success)
+        .setStyle(ButtonStyle.Success)
         .setCustomId("1")
-        .setEmoji("833802907509719130")
+        .setEmoji("◀️")
         .setLabel("Back");
-    let button_home = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
     let button_forward = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Success)
+        .setStyle(ButtonStyle.Success)
         .setCustomId("3")
-        .setEmoji("832598861813776394")
+        .setEmoji("▶️")
         .setLabel("Forward");
     let button_blank = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Secondary)
+        .setStyle(ButtonStyle.Secondary)
         .setCustomId("button_blank")
         .setLabel("\u200b")
         .setDisabled();
-    let button_stop = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
     const allbuttons = [
         new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
@@ -2032,7 +1932,7 @@ async function swap_pages2(client, message, embeds) {
         //go home
         else if (b?.customId == "2") {
             collector.resetTimer();
-            //b?.reply("***Going Back home***, *please wait 2 Seconds for the next Input*", true)
+            //b?.reply("***Going Atrás home***, *please wait 2 Seconds for the next Input*", true)
             currentPage = 0;
             await swapmsg
                 .edit({ embeds: [embeds[currentPage]], components: getDisabledComponents[swapmsg.components] })
@@ -2088,22 +1988,22 @@ async function swap_pages2_interaction(client, interaction, embeds) {
             ?.reply({ ephemeral: true, embeds: [embeds[0]] })
             .catch(e => console.log("THIS IS TO PREVENT A CRASH"));
     let button_back = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Success)
+        .setStyle(ButtonStyle.Success)
         .setCustomId("1")
-        .setEmoji("833802907509719130")
+        .setEmoji("◀️")
         .setLabel("Back");
-    let button_home = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
     let button_forward = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Success)
+        .setStyle(ButtonStyle.Success)
         .setCustomId("3")
-        .setEmoji("832598861813776394")
+        .setEmoji("▶️")
         .setLabel("Forward");
     let button_blank = new ButtonBuilder()
-        .setStyle(Discord.ButtonStyle.Secondary)
+        .setStyle(ButtonStyle.Secondary)
         .setCustomId("button_blank")
         .setLabel("\u200b")
         .setDisabled();
-    let button_stop = new ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
     const allbuttons = [
         new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
@@ -2148,7 +2048,7 @@ async function swap_pages2_interaction(client, interaction, embeds) {
         //go home
         else if (b?.customId == "2") {
             collector.resetTimer();
-            //b?.reply("***Going Back home***, *please wait 2 Seconds for the next Input*", true)
+            //b?.reply("***Going Atrás home***, *please wait 2 Seconds for the next Input*", true)
             currentPage = 0;
             await swapmsg
                 .edit({ embeds: [embeds[currentPage]], components: getDisabledComponents[swapmsg.components] })
@@ -2202,11 +2102,11 @@ function databasing(client, guildid, userid) {
             });
             /**
              * @INFO
-             * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+             * Desarrollado por Melodia | https://github.com/melodiabl
              * @INFO
-             * Work for Milrato Development | https://milrato.eu
+             * Desarrollado por Melodia | https://github.com/melodiabl
              * @INFO
-             * Please mention him / Milrato Development, when using this Code!
+             * Desarrollado por Melodia | https://github.com/melodiabl
              * @INFO
              */
             dbEnsure(client.social_log, guildid, {
@@ -2330,11 +2230,11 @@ function databasing(client, guildid, userid) {
 
                 /**
                  * @INFO
-                 * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+                 * Desarrollado por Melodia | https://github.com/melodiabl
                  * @INFO
-                 * Work for Milrato Development | https://milrato.eu
+                 * Desarrollado por Melodia | https://github.com/melodiabl
                  * @INFO
-                 * Please mention him / Milrato Development, when using this Code!
+                 * Desarrollado por Melodia | https://github.com/melodiabl
                  * @INFO
                  */
 
@@ -2456,9 +2356,7 @@ function databasing(client, guildid, userid) {
                     wrongcolor: ee.wrongcolor,
                     footertext: client.guilds.cache.get(guildid) ? client.guilds.cache.get(guildid).name : ee.footertext,
                     footericon: client.guilds.cache.get(guildid)
-                        ? client.guilds.cache.get(guildid).iconURL({
-                              dynamic: true,
-                          })
+                        ? client.guilds.cache.get(guildid).iconURL()
                         : ee.footericon,
                 },
                 logger: {
@@ -2636,7 +2534,7 @@ function change_status(client) {
         client.user.setActivity(
             `${config.prefix}help | ${config.prefix}setup | ${totalGuilds} Guilds | ${Math.ceil(totalMembers / 1000)}k Members`,
             {
-                type: "WATCHING",
+                type: ActivityType.Watching,
                 shardID: shard,
             }
         );
@@ -2644,7 +2542,7 @@ function change_status(client) {
         client.user.setActivity(
             `${config.prefix}help | ${config.prefix}setup | ${client.guilds.cache.size} Guilds | ${Math.ceil(client.users.cache.size / 1000)}k Members`,
             {
-                type: "WATCHING",
+                type: ActivityType.Watching,
                 shardID: 0,
             }
         );
@@ -2670,7 +2568,7 @@ async function check_voice_channels(client) {
                 jointocreate.push(client.jtcsettings.get(guild.id, `jtcsettings${i}.channel`));
             }
             await guild.channels.cache
-                .filter(ch => ch.type == "GUILD_VOICE" && jointocreate.includes(ch.id))
+                .filter(ch => ch.type == ChannelType.GuildVoice && jointocreate.includes(ch.id))
                 .each(async (channel, j) => {
                     try {
                         let members = channel.members.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966);
@@ -2700,7 +2598,7 @@ async function check_created_voice_channels(client) {
             let guild = client.guilds.cache.get(guilds[i]);
             if (guild) {
                 guild.channels.cache
-                    .filter(ch => ch.type == "GUILD_VOICE")
+                    .filter(ch => ch.type == ChannelType.GuildVoice)
                     .each(async vc => {
                         try {
                             if (client.jointocreatemap.get(`tempvoicechannel_${vc.guild.id}_${vc.id}`) == vc.id) {
@@ -2709,7 +2607,7 @@ async function check_created_voice_channels(client) {
                                     client.jointocreatemap.delete(`tempvoicechannel_${vc.guild.id}_${vc.id}`);
                                     client.jointocreatemap.delete(`owner_${vc.guild.id}_${vc.id}`);
                                     //move user
-                                    if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                                    if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                         vc.delete().catch(e => console.error(e));
                                         console.log(
                                             `Deleted the Channel: ${vc.name} in: ${vc.guild ? vc.guild.name : "undefined"} DUE TO EMPTYNESS`
@@ -2740,13 +2638,13 @@ function create_join_to_create_Channel(client, voiceState, type) {
     let chname = client.jtcsettings.get(voiceState.member.guild.id, `jtcsettings${type}.channelname`) || "{user}'s Room";
 
     //CREATE THE CHANNEL
-    if (!voiceState.guild.members.me.permissions.has(Discord.PermissionFlagsBits.MANAGE_CHANNELS)) {
+    if (!voiceState.guild.members.me.permissions.has(Discord.PermissionFlagsBits.ManageChannels)) {
         try {
             voiceState.member.user.send(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable10"]));
         } catch {
             try {
                 let channel = guild.channels.cache.find(
-                    channel => channel.type === "GUILD_TEXT" && channel.permissionsFor(guild.members.me).has("SEND_MESSAGES")
+                    channel => channel.type === ChannelType.GuildText && channel.permissionsFor(guild.members.me).has(PermissionFlagsBits.SendMessages)
                 );
                 channel
                     .send(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable11"]))
@@ -2756,7 +2654,7 @@ function create_join_to_create_Channel(client, voiceState, type) {
         return;
     }
     const createOptions = {
-        type: "GUILD_VOICE",
+        type: ChannelType.GuildVoice,
         permissionOverwrites: [
             {
                 //the role "EVERYONE" is just able to VIEW_CHANNEL and CONNECT
@@ -2791,7 +2689,7 @@ function create_join_to_create_Channel(client, voiceState, type) {
     const DateNow = Date.now();
     //Create the channel
     voiceState.guild.channels
-        .create(String(chname.replace("{user}", voiceState.member.user.username)).substring(0, 32), createOptions)
+        .create({ name: String(chname.replace("{user}", voiceState.member.user.username)).substring(0, 32), ...createOptions })
         .then(async vc => {
             console.log(
                 `Created the Channel: ${String(chname.replace("{user}", voiceState.member.user.username)).substring(0, 32)} in: ${voiceState.guild ? voiceState.guild.name : "undefined"} after: ${Date.now() - DateNow}ms`
@@ -2802,17 +2700,17 @@ function create_join_to_create_Channel(client, voiceState, type) {
             client.jointocreatemap.set(`tempvoicechannel_${vc.guild.id}_${vc.id}`, vc.id);
             //move user
             if (
-                vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MOVE_MEMBERS) &&
-                voiceState.channel.permissionsFor(voiceState.guild.members.me).has(PermissionFlagsBits.MOVE_MEMBERS)
+                vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MoveMembers) &&
+                voiceState.channel.permissionsFor(voiceState.guild.members.me).has(PermissionFlagsBits.MoveMembers)
             ) {
                 await voiceState.setChannel(vc);
             }
             /*//move to parent
-        if(vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)){
+        if(vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)){
           await vc.setParent(voiceState.channel.parent)
         }*/
             //add permissions
-            if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+            if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                 await vc.permissionOverwrites
                     .edit(voiceState.id, {
                         MANAGE_CHANNELS: true,
@@ -2859,11 +2757,11 @@ async function create_transcript(message, client, msglimit) {
 }
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */
 
@@ -2931,9 +2829,7 @@ function simple_databasing(client, guildid, userid) {
                     wrongcolor: ee.wrongcolor,
                     footertext: client.guilds.cache.has(guildid) ? client.guilds.cache.get(guildid).name : ee.footertext,
                     footericon: client.guilds.cache.has(guildid)
-                        ? client.guilds.cache.get(guildid).iconURL({
-                              dynamic: true,
-                          })
+                        ? client.guilds.cache.get(guildid).iconURL()
                         : ee.footericon,
                 },
                 adminlog: "no",
@@ -3291,7 +3187,7 @@ const channelInfo = (url, options = {}) =>
             res = (yield axios_1.default.get(
                 url,
                 Object.assign(Object.assign({}, options.requestOptions), {
-                    responseType: "GUILD_TEXT",
+                    responseType: ChannelType.GuildText,
                 })
             )).data;
         } catch (err) {
@@ -3307,11 +3203,11 @@ const channelInfo = (url, options = {}) =>
         }
         /**
          * @INFO
-         * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+         * Desarrollado por Melodia | https://github.com/melodiabl
          * @INFO
-         * Work for Milrato Development | https://milrato.eu
+         * Desarrollado por Melodia | https://github.com/melodiabl
          * @INFO
-         * Please mention him / Milrato Development, when using this Code!
+         * Desarrollado por Melodia | https://github.com/melodiabl
          * @INFO
          */
 

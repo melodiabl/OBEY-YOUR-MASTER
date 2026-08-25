@@ -11,7 +11,7 @@ module.exports = {
     name: path.parse(__filename).name,
     category: "🕹️ Fun",
     usage: `${path.parse(__filename).name} <C/F> <Location>`,
-    description: "*Image cmd in the style:* " + path.parse(__filename).name,
+    description: "*Comando de imagen al estilo:* " + path.parse(__filename).name,
     type: "text",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -54,12 +54,12 @@ module.exports = {
                         .setTitle(eval(client.la[ls]["cmds"]["fun"]["weather"]["variable4"]))
                         .setThumbnail(result[0].current.imageUrl)
                         .setDescription(eval(client.la[ls]["cmds"]["fun"]["weather"]["variable5"]))
-                        .addField("**Temp:**", `${result[0].current.temperature}°${result[0].location.degreetype}`, true)
-                        .addField("**Weather:**", `${result[0].current.skytext}`, true)
-                        .addField("**Day:**", `${result[0].current.shortday}`, true)
-                        .addField("**Feels like:**", `${result[0].current.feelslike}°${result[0].location.degreetype}`, true)
-                        .addField("**Humidity:**", `${result[0].current.humidity}%`, true)
-                        .addField("**Wind:**", `${result[0].current.winddisplay}`, true);
+                        .addFields({ name: "**Temp:**", value: `${result[0].current.temperature}°${result[0].location.degreetype}`, inline: true })
+                        .addFields({ name: "**Weather:**", value: `${result[0].current.skytext}`, inline: true })
+                        .addFields({ name: "**Day:**", value: `${result[0].current.shortday}`, inline: true })
+                        .addFields({ name: "**Feels like:**", value: `${result[0].current.feelslike}°${result[0].location.degreetype}`, inline: true })
+                        .addFields({ name: "**Humidity:**", value: `${result[0].current.humidity}%`, inline: true })
+                        .addFields({ name: "**Wind:**", value: `${result[0].current.winddisplay}`, inline: true });
                     message.reply({ embeds: [embed] });
                 } catch (e) {
                     console.log(String(e.stack).grey.bgRed);
@@ -79,10 +79,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

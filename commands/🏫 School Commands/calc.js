@@ -65,14 +65,8 @@ module.exports = {
                     )
                     .setDescription(eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable4"]))
                     .setFooter(client.getFooter(es))
-                    .addField(
-                        eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variablex_5"]),
-                        eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable5"])
-                    )
-                    .addField(
-                        eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variablex_6"]),
-                        eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable6"])
-                    ),
+                    .addFields({ name: eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variablex_5"]), value: eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable5"]) })
+                    .addFields({ name: eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variablex_6"]), value: eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable6"]) }),
             ],
         });
     },

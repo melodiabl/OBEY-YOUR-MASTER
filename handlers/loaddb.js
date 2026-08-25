@@ -13,6 +13,22 @@ const ModerationSchema    = require('../database/schemas/ModerationSchema')
 const KeywordSchema       = require('../database/schemas/KeywordSchema')
 const CustomCommandSchema = require('../database/schemas/CustomCommandSchema')
 const PremiumSchema       = require('../database/schemas/PremiumSchema')
+const MuteSchema          = require('../database/schemas/MuteSchema')
+const EconomySchema       = require('../database/schemas/EconomySchema')
+const BlacklistSchema     = require('../database/schemas/BlacklistSchema')
+const StatsSchema         = require('../database/schemas/StatsSchema')
+const UserProfileSchema   = require('../database/schemas/UserProfileSchema')
+const AfkSchema           = require('../database/schemas/AfkSchema')
+const InviteSchema        = require('../database/schemas/InviteSchema')
+const { JTC1, JTC2, JTC3 } = require('../database/schemas/JTCSchema')
+const BackupSchema        = require('../database/schemas/BackupSchema')
+const NotesSchema         = require('../database/schemas/NotesSchema')
+const TikTokSchema        = require('../database/schemas/TikTokSchema')
+const YouTubeSchema       = require('../database/schemas/YouTubeSchema')
+const JoinVCSchema        = require('../database/schemas/JoinVCSchema')
+const RankingSchema       = require('../database/schemas/RankingSchema')
+const RosterSchema        = require('../database/schemas/RosterSchema')
+const QueueSavesSchema    = require('../database/schemas/QueueSavesSchema')
 
 // ─── Helpers para dot-notation path ──────────────────────────────────────────
 function getPath(obj, path) {
@@ -44,7 +60,7 @@ class SyncMap {
   // Precargar todos los docs desde MongoDB (llamar en ready)
   async preload() {
     try {
-      const docs = await this.model.find({}).lean()
+      const docs = await this.model.find().lean()
       for (const doc of docs) {
         const key = doc[this.guildKey]
         if (key) this._cache.set(String(key), doc)
@@ -145,19 +161,49 @@ class SyncMap {
     }
   }
 
-  // Enmap API: math(key, op, path, value)
-  math(key, op, path, value) {
+  // Enmap API: math — supports both (key, op, path, value) and (key, op, value, path)
+  math(key, op, arg3, arg4) {
     key = String(key)
     this.ensure(key, {})
     const doc = this._cache.get(key)
+    // detect arg order: if arg3 is a string it's the path, else it's the value
+    const path   = typeof arg3 === 'string' ? arg3 : arg4
+    const amount = typeof arg3 === 'string' ? arg4 : arg3
     const n = getPath(doc, path) || 0
-    const result = op === 'add' ? n + value : op === 'subtract' ? Math.max(0, n - value) : op === 'multiply' ? n * value : n
+    const result = (op === 'add' || op === '+') ? n + amount
+      : (op === 'subtract' || op === '-') ? Math.max(0, n - amount)
+      : (op === 'multiply' || op === '*') ? n * amount
+      : n
     setPath(doc, path, result)
     this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: result } }).catch(() => {})
   }
 
   // Enmap API: inc(key, path)
   inc(key, path) { this.math(String(key), 'add', path, 1) }
+
+  // Enmap API: push(key, value, path?)
+  push(key, value, path) {
+    key = String(key)
+    this.ensure(key, {})
+    const doc = this._cache.get(key)
+    if (path) {
+      const arr = getPath(doc, path) || []
+      arr.push(value)
+      setPath(doc, path, arr)
+      this.model.findOneAndUpdate({ [this.guildKey]: key }, { $push: { [path]: value } }, { upsert: true }).catch(() => {})
+    }
+  }
+
+  // Enmap API: find(fn) / findKey(fn)
+  find(fn) {
+    for (const v of this._cache.values()) { try { if (fn(v)) return v } catch {} }
+    return null
+  }
+
+  findKey(fn) {
+    for (const [k, v] of this._cache) { try { if (fn(v)) return k } catch {} }
+    return null
+  }
 
   // Enmap API: filter(fn) — returns { keyArray() }
   filter(fn) {
@@ -183,34 +229,7 @@ class SyncMap {
   get size()  { return this._cache.size }
 }
 
-// EnmapLike importado desde ./enmap-like.js
-
-// ─── PointsCache: XP en memoria ──────────────────────────────────────────────
-class PointsCache {
-  constructor() { this._data = new Map() }
-  ensure(key, def) {
-    key = String(key)
-    if (!this._data.has(key)) this._data.set(key, { ...def })
-    return this._data.get(key)
-  }
-  get(key, prop) {
-    const d = this._data.get(String(key))
-    if (!d) return prop ? 0 : null
-    return prop ? (d[prop] ?? 0) : d
-  }
-  set(key, prop, value) { const d = this.ensure(String(key), {}); d[prop] = value }
-  math(key, op, prop, value) {
-    const d = this.ensure(String(key), {})
-    d[prop] = op === 'add' ? (d[prop] || 0) + value : Math.max(0, (d[prop] || 0) - value)
-  }
-  inc(key, prop) { this.math(String(key), 'add', prop, 1) }
-  filter(fn) {
-    const keys = []
-    for (const [k, v] of this._data) { if (fn(v)) keys.push(k) }
-    return { _keys: keys, keyArray() { return this._keys } }
-  }
-  keyArray() { return [...this._data.keys()] }
-}
+// EnmapLike importado desde ./enmap-like.js (solo para snipes y jointocreatemap ephemeral)
 
 module.exports = async client => {
   const start = Date.now()
@@ -228,32 +247,35 @@ module.exports = async client => {
   client.customcommands = new SyncMap(CustomCommandSchema)
   client.premium        = new SyncMap(PremiumSchema)
 
-  // XP/puntos en memoria
-  client.points      = new PointsCache()
-  client.voicepoints = new PointsCache()
+  // XP/ranking persistido en MongoDB (voicepoints comparte colección con points)
+  client.points      = new SyncMap(RankingSchema, 'recordKey')
+  client.voicepoints = client.points // mismo store, misma colección
 
-  // Stores en memoria pura (sin persistencia necesaria)
-  client.mutes       = new EnmapLike()
-  client.afkDB       = new EnmapLike()
-  client.invitesdb   = new EnmapLike()
-  client.snipes      = new EnmapLike()
-  client.stats       = new EnmapLike()
-  // join-to-create voice channel settings
-  client.jtcsettings     = new EnmapLike()
-  client.jtcsettings2    = new EnmapLike()
-  client.jtcsettings3    = new EnmapLike()
-  client.jointocreatemap = new Map()  // Map simple: tempvoice y owner tracking
+  // Stores convertidos a SyncMap (persistencia MongoDB)
+  client.mutes       = new SyncMap(MuteSchema)
+  client.afkDB       = new SyncMap(AfkSchema)
+  client.stats       = new SyncMap(StatsSchema)
+  client.blacklist   = new SyncMap(BlacklistSchema, 'userId')
+  client.economy     = new SyncMap(EconomySchema)
+  client.userProfiles = new SyncMap(UserProfileSchema)
 
-  // Stores adicionales en memoria usados por handlers legacy
-  client.backupDB     = new EnmapLike()
-  client.blacklist    = new EnmapLike()
-  client.economy      = new EnmapLike()
-  client.notes        = new EnmapLike()
-  client.roster       = new EnmapLike()
-  client.joinvc       = new EnmapLike()
-  client.tiktok       = new EnmapLike()
-  client.youtube_log  = new EnmapLike()
-  client.userProfiles = new EnmapLike()
+  // Stores migrados a MongoDB
+  client.invitesdb    = new SyncMap(InviteSchema, 'entryKey')
+  client.jtcsettings  = new SyncMap(JTC1)
+  client.jtcsettings2 = new SyncMap(JTC2)
+  client.jtcsettings3 = new SyncMap(JTC3)
+  client.backupDB     = new SyncMap(BackupSchema)
+  client.notes        = new SyncMap(NotesSchema, 'userId')
+  client.roster       = new SyncMap(RosterSchema)
+  client.tiktok       = new SyncMap(TikTokSchema, 'channelKey')
+  client.youtube_log  = new SyncMap(YouTubeSchema, 'channelKey')
+  client.joinvc       = new SyncMap(JoinVCSchema)
+  client.queuesaves   = new SyncMap(QueueSavesSchema, 'userId')
+
+  // Stores efímeros (en memoria está bien)
+  client.snipes          = new EnmapLike()
+  client.jointocreatemap = new Map()
+  client.modActions      = new EnmapLike()
 
   // Advertisement feature (inicialización por defecto)
   client.ad = { enabled: false, statusad: null, spacedot: ' • ', textad: '' }
@@ -276,8 +298,28 @@ module.exports = async client => {
       client.keyword.preload(),
       client.customcommands.preload(),
       client.premium.preload(),
+      client.mutes.preload(),
+      client.afkDB.preload(),
+      client.stats.preload(),
+      client.blacklist.preload(),
+      client.economy.preload(),
+      client.userProfiles.preload(),
+      client.invitesdb.preload(),
+      client.jtcsettings.preload(),
+      client.jtcsettings2.preload(),
+      client.jtcsettings3.preload(),
+      client.backupDB.preload(),
+      client.notes.preload(),
+      client.roster.preload(),
+      client.tiktok.preload(),
+      client.youtube_log.preload(),
+      client.joinvc.preload(),
+      client.queuesaves.preload(),
+      client.points.preload(),
     ])
     console.log(`[DB] Precarga completa: ${client.settings.size} guilds en cache`.green)
+    client._dbReady = true
+    client.emit('dbReady')
   })
 
   console.log(`[DB] Listo en ${Date.now() - start}ms`.green)

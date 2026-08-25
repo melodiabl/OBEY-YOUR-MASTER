@@ -1,4 +1,7 @@
-const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder,
+    PermissionFlagsBits
+} = require("discord.js");
+const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -43,7 +46,7 @@ module.exports = {
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["minigames"]["betrayal-io"]["variable1"]))
                 );
-            if (!channel.permissionsFor(channel.guild.members.me).has("CREATE_INSTANT_INVITE")) {
+            if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.CreateInstantInvite)) {
                 const nochannel = new EmbedBuilder()
                     .setDescription(eval(client.la[ls]["cmds"]["minigames"]["betrayal-io"]["variable2"]))
                     .setColor(es.wrongcolor)

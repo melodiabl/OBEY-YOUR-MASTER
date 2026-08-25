@@ -4,7 +4,6 @@ var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 var radios = require(`../../botconfig/radiostations.json`);
-var playermanager = require(`../../handlers/playermanager`);
 var { stations, databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -22,8 +21,8 @@ module.exports = {
     ],
     cooldown: 10,
     usage: "setup-radio <RadioStation Num.>   -->    while beeing in a radio station",
-    description: "Manage the Waitingroom System / 24/7 Radio System",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Gestiona el Sistema de Sala de Espera / Sistema de Radio 24/7",
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -44,8 +43,8 @@ module.exports = {
                 });
             //get the player instance
             var player = client.shoukaku?.players?.get(message.guild.id) ?? null;
-            //if there is a player and they are not in the same channel, return Error
-            if (player && player.state === "CONNECTED") await player.destroy();
+            //if there is an active player, disconnect it before starting the radio
+            if (player) { try { await client.shoukaku.leaveVoiceChannel(message.guild.id); } catch {} }
             //if no args send all stations
             if (!args[0]) return stations(client, config.prefix, message);
             //if not a number error
@@ -190,7 +189,7 @@ module.exports = {
                             .setColor(es.wrongcolor)
                             .setTitle(`${emoji.msg.ERROR} Error | Radio Station not found`)
                             .setDescription(
-                                `Please use a Station between \`1\` and \`${lengthUntil(radios.OTHERS.request)}\``
+                                `Por favor use a Station between \`1\` and \`${lengthUntil(radios.OTHERS.request)}\``
                             ),
                     ],
                 });
@@ -207,7 +206,7 @@ module.exports = {
             //send the message of the searching
             message.reply(
                 new Discord.EmbedBuilder()
-                    .setTitle(`${allEmojis.msg.notes} Setup Complete for Radio Station:  ` + song.title)
+                    .setTitle(`${allEmojis.msg.notes} Configuración Complete for Radio Station:  ` + song.title)
                     .setColor("#7fafe3")
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-radio"]["variable8"]))
                     .setURL(song.url)
@@ -221,14 +220,13 @@ module.exports = {
             client.settings.set(message.guild.id, channel.id, `channel`);
             client.settings.set(message.guild.id, song.url, `song`);
             client.settings.set(message.guild.id, volume, `volume`);
-            //play the radio but make the URL to an array ;) like that: [ `urlhere` ]
-            playermanager(
-                client,
-                message,
-                Array(client.settings.get(message.guild.id, `song`)),
-                `song:radioraw`,
-                channel,
-                message.guild
+            //play the radio via client.music (Shoukaku)
+            await client.music.play(
+                message.guild.id,
+                channel.id,
+                message.channel.id,
+                client.settings.get(message.guild.id, `song`),
+                message.author
             );
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
@@ -246,10 +244,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

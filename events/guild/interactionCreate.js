@@ -7,7 +7,20 @@ const { onCoolDown, escapeRegex, delay, simple_databasing, databasing, handlemsg
 );
 const Discord = require("discord.js");
 module.exports = async (client, interaction) => {
-    if (!interaction?.isCommand()) return;
+    console.log(`[EVENT-FIRE] interactionCreate triggered — type: ${interaction?.type} | user: ${interaction?.user?.tag} | guild: ${interaction?.guild?.name}`);
+    // Autocomplete handler
+    if (interaction?.isAutocomplete()) {
+        const CategoryName = interaction?.commandName
+        const subCmd = interaction?.options.getSubcommand(false)
+        let cmd = false
+        if (subCmd && client.slashCommands.has(CategoryName + subCmd)) cmd = client.slashCommands.get(CategoryName + subCmd)
+        else if (client.slashCommands.has('normal' + CategoryName)) cmd = client.slashCommands.get('normal' + CategoryName)
+        if (cmd?.autocomplete) {
+            try { await cmd.autocomplete(client, interaction) } catch {}
+        }
+        return
+    }
+    if (!interaction?.isChatInputCommand()) return;
     const {
         member,
         channelId,
@@ -24,29 +37,28 @@ module.exports = async (client, interaction) => {
     const { guild } = member;
     if (!guild) {
         return interaction
-            ?.reply({ content: "❌ Interactions only Works inside of GUILDS!", ephemeral: true })
+            ?.reply({ content: "❌ ¡Las interacciones solo funcionan dentro de servidores!", ephemeral: true })
             .catch(() => {});
     }
     const CategoryName = interaction?.commandName;
     simple_databasing(client, guild.id, member.id);
     var not_allowed = false;
-    const guild_settings = client.settings.get(guild.id);
-    let es = guild_settings.embed;
-    let ls = guild_settings.language;
-    let { prefix, botchannel, unkowncmdmessage } = guild_settings;
+    const guild_settings = client.settings.get(guild.id) || {};
+    let es = guild_settings.embed || { color: '#fffff9', wrongcolor: '#e01e01', thumb: false, footertext: '', footericon: '' };
+    let ls = guild_settings.language && client.la[guild_settings.language] ? guild_settings.language : 'es';
+    let prefix = guild_settings.prefix || config.prefix;
+    let botchannel = guild_settings.botchannel || [];
+    let unkowncmdmessage = guild_settings.unkowncmdmessage ?? false;
     let command = false;
-    try {
-        if (client.slashCommands.has(CategoryName + interaction?.options.getSubcommand())) {
-            command = client.slashCommands.get(CategoryName + interaction?.options.getSubcommand());
-        }
-    } catch {
-        if (client.slashCommands.has("normal" + CategoryName)) {
-            command = client.slashCommands.get("normal" + CategoryName);
-        }
+    const subCmd = interaction?.options.getSubcommand(false); // false = don't throw if no subcommand
+    if (subCmd && client.slashCommands.has(CategoryName + subCmd)) {
+        command = client.slashCommands.get(CategoryName + subCmd);
+    } else if (client.slashCommands.has("normal" + CategoryName)) {
+        command = client.slashCommands.get("normal" + CategoryName);
     }
     if (command) {
         if (!command.category?.toLowerCase().includes("nsfw") && botchannel.toString() !== "") {
-            if (!botchannel.includes(channelId) && !member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
+            if (!botchannel.includes(channelId) && !member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
                 for (const channelId of botchannel) {
                     let channel = guild.channels.cache.get(channelId);
                     if (!channel) {
@@ -55,7 +67,7 @@ module.exports = async (client, interaction) => {
                 }
                 not_allowed = true;
                 return interaction?.reply({
-                    ephmerla: true,
+                    ephemeral: true,
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.wrongcolor)
@@ -102,37 +114,31 @@ module.exports = async (client, interaction) => {
         //if Command has specific permission return error
         if (
             command.memberpermissions &&
-            command.memberpermissions.length > 0 &&
-            !interaction?.member.permissions.has(command.memberpermissions)
+            command.memberpermissions.length > 0
         ) {
-            return interaction?.reply({
-                ephemeral: true,
-                embeds: [
-                    new Discord.EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.permissions.title)
-                        .setDescription(
-                            `${client.la[ls].common.permissions.description}\n> \`${command.memberpermissions.join("`, ``")}\``
-                        ),
-                ],
-            });
+            const permMap = { 'Administrador': 'Administrator' };
+            const resolvedPerms = command.memberpermissions.map(p => permMap[p] || p);
+            if (!interaction?.member.permissions.has(resolvedPerms)) {
+                return interaction?.reply({
+                    ephemeral: true,
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setColor(es.wrongcolor)
+                            .setFooter(client.getFooter(es))
+                            .setTitle(client.la[ls].common.permissions.title)
+                            .setDescription(
+                                `${client.la[ls].common.permissions.description}\n> \`${command.memberpermissions.join("`, ``")}\``
+                            ),
+                    ],
+                });
+            }
         }
 
         const player = client.shoukaku?.players?.get(guild.id) ?? null;
+        const mstate = client.music?.getState(guild.id) ?? null;
 
-        if (player && player.node && !player.node.connected) player.node.connect();
+        if (player?.node && !player.node.connected) player.node.connect();
 
-        if (guild.members.me.voice.channel && player) {
-            //destroy the player if there is no one
-            if (!player.queue) await player.destroy();
-            await delay(350);
-        }
-
-        ///////////////////////////////
-        ///////////////////////////////
-        ///////////////////////////////
-        ///////////////////////////////
         if (command.parameters) {
             if (command.parameters.type == "music") {
                 //get the channel instance
@@ -156,19 +162,15 @@ module.exports = async (client, interaction) => {
                     await guild.members.me.voice.disconnect().catch(e => {});
                     await delay(350);
                 }
-                if (player && player.queue && player.queue.current && command.parameters.check_dj) {
-                    if (check_if_dj(client, interaction?.member, player.queue.current)) {
+                if (mstate?.currentTrack && command.parameters.check_dj) {
+                    if (check_if_dj(client, interaction?.member, mstate.currentTrack?.info || mstate.currentTrack)) {
                         return interaction?.reply({
                             embeds: [
-                                new EmbedBuilder()
+                                new Discord.EmbedBuilder()
                                     .setColor(ee.wrongcolor)
                                     .setFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` })
-                                    .setTitle(
-                                        ` <: no: 833101993668771842 > ** You are not a DJ and not the Song Requester! ** `
-                                    )
-                                    .setDescription(
-                                        ` ** DJ - ROLES: ** \n${check_if_dj(client, interaction?.member, player.queue.current)}`
-                                    ),
+                                    .setTitle(` <:no:833101993668771842> **¡No eres DJ ni el solicitante de la canción!**`)
+                                    .setDescription(` **ROLES DE DJ:**\n${check_if_dj(client, interaction?.member, mstate.currentTrack?.info || mstate.currentTrack)}`),
                             ],
                             ephemeral: true,
                         });
@@ -176,7 +178,7 @@ module.exports = async (client, interaction) => {
                 }
                 //if no player available return error | aka not playing anything
                 if (command.parameters.activeplayer) {
-                    if (!player) {
+                    if (!player || !mstate?.currentTrack) {
                         not_allowed = true;
                         return interaction?.reply({
                             ephemeral: true,
@@ -189,11 +191,7 @@ module.exports = async (client, interaction) => {
                         });
                     }
                     if (!mechannel) {
-                        if (player)
-                            try {
-                                await player.destroy();
-                                await delay(350);
-                            } catch {}
+                        try { await client.shoukaku?.leaveVoiceChannel(guild.id); await delay(350); } catch {}
                         not_allowed = true;
                         return interaction?.reply({
                             ephemeral: true,
@@ -208,7 +206,7 @@ module.exports = async (client, interaction) => {
                 }
                 //if no previoussong
                 if (command.parameters.previoussong) {
-                    if (!player.queue.previous || player.queue.previous === null) {
+                    if (!mstate?.history?.length) {
                         not_allowed = true;
                         return interaction?.reply({
                             ephemeral: true,
@@ -221,8 +219,9 @@ module.exports = async (client, interaction) => {
                         });
                     }
                 }
-                //if not in the same channel --> return
-                if (player && channel.id !== player.voiceChannel && !command.parameters.notsamechannel) {
+                // check same voice channel using Shoukaku state
+                const botVcId = mstate?.voiceChannelId || mechannel?.id
+                if (botVcId && channel.id !== botVcId && !command.parameters.notsamechannel) {
                     return interaction?.reply({
                         ephemeral: true,
                         embeds: [
@@ -230,20 +229,7 @@ module.exports = async (client, interaction) => {
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(client.la[ls].common.wrong_vc)
-                                .setDescription(`Channel: <#${player.voiceChannel}>`),
-                        ],
-                    });
-                }
-                //if not in the same channel --> return
-                if (mechannel && channel.id !== mechannel.id && !command.parameters.notsamechannel) {
-                    return interaction?.reply({
-                        ephemeral: true,
-                        embeds: [
-                            new Discord.EmbedBuilder()
-                                .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(client.la[ls].common.wrong_vc)
-                                .setDescription(`Channel: <#${player.voiceChannel}> `),
+                                .setDescription(`Canal: <#${botVcId}>`),
                         ],
                     });
                 }

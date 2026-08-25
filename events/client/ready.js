@@ -1,7 +1,16 @@
 //here the event starts
 let config = require(`${process.cwd()}/botconfig/config.json`);
 const Discord = require("discord.js");
+const { ActivityType } = require("discord.js");
 const moment = require("moment");
+
+const ACTIVITY_TYPE_MAP = {
+    PLAYING: ActivityType.Playing,
+    LISTENING: ActivityType.Listening,
+    WATCHING: ActivityType.Watching,
+    STREAMING: ActivityType.Streaming,
+    COMPETING: ActivityType.Competing,
+};
 const { nFormatter } = require(`${process.cwd()}/handlers/functions`);
 module.exports = client => {
     //SETTING ALL GUILD DATA FOR THE DJ ONLY COMMANDS for the DEFAULT
@@ -20,8 +29,8 @@ module.exports = client => {
             );
             console.log(
                 `     ┃ `.bold.brightGreen +
-                    ` /--/ ${client.user.tag} /--/ `.bold.brightGreen +
-                    " ".repeat(-1 + stringlength - ` ┃ `.length - ` /--/ ${client.user.tag} /--/ `.length) +
+                    ` /--/ ${client.user.username} /--/ `.bold.brightGreen +
+                    " ".repeat(-1 + stringlength - ` ┃ `.length - ` /--/ ${client.user.username} /--/ `.length) +
                     "┃".bold.brightGreen
             );
             console.log(`     ┃ `.bold.brightGreen + " ".repeat(-1 + stringlength - ` ┃ `.length) + "┃".bold.brightGreen);
@@ -31,7 +40,7 @@ module.exports = client => {
         }
 
         console.table({
-            "Bot User:": `${client.user.tag}`,
+            "Bot User:": `${client.user.username}`,
             "Guild(s):": `${client.guilds.cache.size} Servers`,
             "Watching:": `${client.guilds.cache.reduce((a, b) => a + b?.memberCount, 0)} Members`,
             "Prefix:": `${config.prefix}`,
@@ -73,7 +82,7 @@ function change_status(client) {
                 .replace("{created}", moment(client.user.createdTimestamp).format("DD/MM/YYYY"))
                 .replace("{createdime}", moment(client.user.createdTimestamp).format("HH:mm:ss"))
                 .replace("{name}", client.user.username)
-                .replace("{tag}", client.user.tag)
+                .replace("{tag}", client.user.username)
                 .replace("{commands}", client.commands.size)
                 .replace(
                     "{usedcommands}",
@@ -89,7 +98,7 @@ function change_status(client) {
                         2
                     )
                 ),
-            { type: config.status.type, url: config.status.url }
+            { type: ACTIVITY_TYPE_MAP[config.status.type] ?? ActivityType.Listening, url: config.status.url }
         );
     } else {
         client.user.setActivity(
@@ -106,7 +115,7 @@ function change_status(client) {
                 .replace("{created}", moment(client.user.createdTimestamp).format("DD/MM/YYYY"))
                 .replace("{createdime}", moment(client.user.createdTimestamp).format("HH:mm:ss"))
                 .replace("{name}", client.user.username)
-                .replace("{tag}", client.user.tag)
+                .replace("{tag}", client.user.username)
                 .replace("{commands}", client.commands.size)
                 .replace(
                     "{usedcommands}",
@@ -122,7 +131,7 @@ function change_status(client) {
                         2
                     )
                 ),
-            { type: config.status.type, url: config.status.url }
+            { type: ACTIVITY_TYPE_MAP[config.status.type] ?? ActivityType.Listening, url: config.status.url }
         );
     }
     state = !state;
@@ -137,10 +146,10 @@ function change_status(client) {
 }
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

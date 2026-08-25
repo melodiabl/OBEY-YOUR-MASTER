@@ -1,4 +1,7 @@
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
@@ -37,7 +40,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -48,46 +51,43 @@ module.exports = {
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable2"])),
                     ],
                 });
-            let embedToBuild = new EmbedBuilder().setAuthor(
-                message.member.user.tag,
-                message.member.user.avatarURL({ dynamic: true })
-            );
+            let embedToBuild = new EmbedBuilder().setAuthor({ name: message.member.user.username, iconURL: message.member.user.avatarURL() });
 
-            let title = new ButtonBuilder().setLabel("Title").setStyle(Discord.ButtonStyle.Primary).setCustomId(`buildEmbed_builder_title`);
+            let title = new ButtonBuilder().setLabel("Title").setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_title`);
 
             let description = new ButtonBuilder()
                 .setLabel("Description")
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_desc`);
 
-            let footer = new ButtonBuilder().setLabel("Footer").setStyle(Discord.ButtonStyle.Primary).setCustomId(`buildEmbed_builder_footer`);
+            let footer = new ButtonBuilder().setLabel("Footer").setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_footer`);
 
             let footerImage = new ButtonBuilder()
                 .setLabel("Footer Image")
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_footerimg`);
 
-            let image = new ButtonBuilder().setLabel("Image").setStyle(Discord.ButtonStyle.Primary).setCustomId(`buildEmbed_builder_img`);
+            let image = new ButtonBuilder().setLabel("Image").setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_img`);
 
             let thumbnail = new ButtonBuilder()
                 .setLabel("Thumbnail")
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_thumb`);
 
             let timestamp = new ButtonBuilder()
                 .setLabel("Timestamp")
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_timestamp`);
 
-            let color = new ButtonBuilder().setLabel("Color").setStyle(Discord.ButtonStyle.Primary).setCustomId(`buildEmbed_builder_color`);
+            let color = new ButtonBuilder().setLabel("Color").setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_color`);
 
-            let save = new ButtonBuilder().setLabel("📨 Send").setStyle(Discord.ButtonStyle.Danger).setCustomId(`buildEmbed_save`);
+            let save = new ButtonBuilder().setLabel("📨 Send").setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_save`);
 
-            let cancel = new ButtonBuilder().setLabel("❌ Cancel").setStyle(Discord.ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`);
+            let cancel = new ButtonBuilder().setLabel("❌ Cancel").setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`);
 
             let channel = new ButtonBuilder()
                 .setLabel("💬 Select Channel")
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_channel`);
 
             let buttonRow = new ActionRowBuilder().addComponents([title, description]);
@@ -135,10 +135,10 @@ module.exports = {
                     );
 
                     button?.message.edit({
-                        content: `<a:Loading:833101350623117342> **Please send me Your Input now!**`,
+                        content: `<a:Loading:833101350623117342> **Por favor send me Your Input now!**`,
                         components: [
                             new ActionRowBuilder().addComponents([
-                                new ButtonBuilder().setLabel("Cancel").setStyle(Discord.ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`),
+                                new ButtonBuilder().setLabel("Cancel").setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`),
                             ]),
                         ],
                     });
@@ -246,23 +246,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({ dynamic: true })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable3"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],
@@ -287,10 +278,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

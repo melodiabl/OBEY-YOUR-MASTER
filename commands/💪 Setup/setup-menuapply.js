@@ -1,4 +1,6 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -12,8 +14,8 @@ module.exports = {
     aliases: ["setupmenuapply", "menuapply-setup", "menuapplysetup", "menuapplysystem"],
     cooldown: 5,
     usage: "setup-menuapply --> Follow Steps",
-    description: "Setup a Menu, which allows you to start one of the 25 Application Systems",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Configuración de un Menú que te permite iniciar uno de los 25 Sistemas de Solicitud",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -31,7 +33,7 @@ module.exports = {
                     const emoji = NumberEmojis[i];
                     menuoptions.push({
                         value: `${i}. Menu Apply`,
-                        description: `Manage/Edit the ${i}. Menu Apply Setup`,
+                        description: `Manage/Edit the ${i}. Menu Apply Configuración`,
                         ...(emoji ? { emoji } : {}),
                     });
                 }
@@ -41,7 +43,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -59,7 +61,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -77,7 +79,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -95,7 +97,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -111,13 +113,11 @@ module.exports = {
 
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        client.getAuthor(
+                    .setAuthor(client.getAuthor(
                             "Menu Apply Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png",
-                            "https://discord.gg/milrato"
-                        )
-                    )
+                            "https://github.com/melodiabl"
+                        ))
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
 
                 //send the menu msg
@@ -130,7 +130,7 @@ module.exports = {
                         row4,
                         new ActionRowBuilder().addComponents(
                             new ButtonBuilder()
-                                .setStyle(Discord.ButtonStyle.Link)
+                                .setStyle(ButtonStyle.Link)
                                 .setURL("https://youtu.be/QGESDc31d4U")
                                 .setLabel("Tutorial Video")
                                 .setEmoji(allEmojis.msg.youtube)
@@ -157,14 +157,14 @@ module.exports = {
                         second_layer();
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`,
                     });
@@ -192,7 +192,7 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Send the Config	Message",
-                        description: `(Re) Send the Menu Apply Message`,
+                        description: `(Re) Send the Menu Apply Mensaje`,
                         emoji: "👍",
                     },
                     {
@@ -211,7 +211,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
-                    .setPlaceholder("Click me to setup the Menu Apply System!")
+                    .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -226,11 +226,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Menu Apply Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Menu Apply Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
 
                 //send the menu msg
@@ -240,7 +236,7 @@ module.exports = {
                         new ActionRowBuilder().addComponents(Selection),
                         new ActionRowBuilder().addComponents(
                             new ButtonBuilder()
-                                .setStyle(Discord.ButtonStyle.Link)
+                                .setStyle(ButtonStyle.Link)
                                 .setURL("https://youtu.be/QGESDc31d4U")
                                 .setLabel("Tutorial Video")
                                 .setEmoji(allEmojis.msg.youtube)
@@ -264,14 +260,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`,
                     });
@@ -285,7 +281,7 @@ module.exports = {
                             let settings = theDB.get(message.guild.id, pre);
                             if (!data || data.length < 1) {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You need to add at least 1 Open-Apply-Option**"
+                                    "<:no:833101993668771842> **Necesitas añadir al menos 1 opción de solicitud abierta**"
                                 );
                             }
                             let tempmsg = await message.reply({
@@ -294,7 +290,7 @@ module.exports = {
                                         .setColor(es.color)
                                         .setTitle("What should be the Text to display in the Embed?")
                                         .setDescription(
-                                            `For Example:\n> \`\`\`Select for what you want to apply for!\`\`\``
+                                            `For Example:\n> \`\`\`Seleccionar for what you want to apply for!\`\`\``
                                         ),
                                 ],
                             });
@@ -310,9 +306,9 @@ module.exports = {
                                     embeds: [
                                         new EmbedBuilder()
                                             .setColor(es.color)
-                                            .setTitle("In where should I send the Open a New Apply Message?")
+                                            .setTitle("In where should I send the Open a New Apply Mensaje?")
                                             .setDescription(
-                                                `Please Ping the Channel now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`
+                                                `Por favor Ping the Canal now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`
                                             ),
                                     ],
                                 });
@@ -403,11 +399,11 @@ module.exports = {
                                             message.reply(`Successfully Setupped the Menu-Apply in <#${channel.id}>`);
                                         });
                                 } else {
-                                    return message.reply("<:no:833101993668771842> **You did not ping a valid Channel!**");
+                                    return message.reply("<:no:833101993668771842> **¡No mencionaste un canal válido!**");
                                 }
                             } else {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**"
+                                    "<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"
                                 );
                             }
                         }
@@ -417,7 +413,7 @@ module.exports = {
                             let data = theDB.get(message.guild.id, pre + ".data");
                             if (data.length >= 25) {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You reached the limit of 25 different Options!** Remove another Option first!"
+                                    "<:no:833101993668771842> **¡Alcanzaste el límite de 25 opciones diferentes!** Elimina otra opción primero"
                                 );
                             }
                             //ask for value and description
@@ -440,13 +436,13 @@ module.exports = {
                             if (collected && collected.first().content) {
                                 if (!collected.first().content.includes("++"))
                                     return message.reply(
-                                        "<:no:833101993668771842> **Invalid Usage! Please mind the Usage and check the Example**"
+                                        "<:no:833101993668771842> **¡Uso no válido! Por favor sigue el uso y revisa el ejemplo**"
                                     );
                                 let value = collected.first().content.split("++")[0].trim().substring(0, 25);
                                 let index = data.findIndex(v => v.value == value);
                                 if (index >= 0) {
                                     return message.reply(
-                                        "<:no:833101993668771842> **Options can't have the SAME VALUE!** There is already an Option with that Value!"
+                                        "<:no:833101993668771842> **¡Las opciones no pueden tener el MISMO VALOR!** Ya hay una opción con ese valor"
                                     );
                                 }
                                 let description = collected.first().content.split("++")[1].trim().substring(0, 50);
@@ -456,7 +452,7 @@ module.exports = {
                                     const emoji = NumberEmojis[i];
                                     menuoptions.push({
                                         value: `${i} Apply System`,
-                                        description: `Manage/Edit the ${i} Apply Setup`,
+                                        description: `Manage/Edit the ${i} Apply Configuración`,
                                         ...(emoji ? { emoji } : {}),
                                     });
                                 }
@@ -466,7 +462,7 @@ module.exports = {
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                                         .addOptions(
                                             menuoptions.slice(0, 25).map(option => {
                                                 let Obj = {
@@ -486,7 +482,7 @@ module.exports = {
                                         .setCustomId("MenuSelection2")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                                         .addOptions(
                                             menuoptions.slice(25, 50).map(option => {
                                                 let Obj = {
@@ -506,7 +502,7 @@ module.exports = {
                                         .setCustomId("MenuSelection3")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                                         .addOptions(
                                             menuoptions.slice(50, 75).map(option => {
                                                 let Obj = {
@@ -526,7 +522,7 @@ module.exports = {
                                         .setCustomId("MenuSelection4")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                                         .addOptions(
                                             menuoptions.slice(75, 100).map(option => {
                                                 let Obj = {
@@ -544,14 +540,12 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new Discord.EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        client.getAuthor(
+                                    .setAuthor(client.getAuthor(
                                             "Menu Apply Setup",
                                             "https://cdn.discordapp.com/emojis/877653386747605032.png?size=96",
-                                            "https://discord.gg/milrato"
-                                        )
-                                    )
-                                    .setDescription("Select which Application System should be started with this Option");
+                                            "https://github.com/melodiabl"
+                                        ))
+                                    .setDescription("Seleccionar which Application System should be started with this Option");
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -575,7 +569,7 @@ module.exports = {
                                         let index = data.findIndex(v => v.applySystemExecution == applySystemExecution);
                                         if (index >= 0) {
                                             return message.reply(
-                                                "<:no:833101993668771842> **Options can't start the Same Apply System!** There is already an Option with that Application System!"
+                                                "<:no:833101993668771842> **¡Las opciones no pueden iniciar el mismo sistema de solicitud!** Ya hay una opción con ese sistema de aplicación"
                                             );
                                         }
 
@@ -678,28 +672,28 @@ module.exports = {
                                                         .setColor(es.color)
                                                         .setTitle("Successfully added the New Data to the List!")
                                                         .setDescription(
-                                                            `Make sure to re-send the Message, so that it's also updating it!\n> \`${prefix}setup-menuapply\` --> Send Config Message`
+                                                            `Make sure to re-send the Mensaje, so that it's also updating it!\n> \`${prefix}setup-menuapply\` --> Send Config Mensaje`
                                                         ),
                                                 ],
                                             });
                                         }
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
                                 });
                             } else {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You did not enter a Valid Message in Time! CANCELLED!**"
+                                    "<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"
                                 );
                             }
                         }
@@ -709,7 +703,7 @@ module.exports = {
                             let data = theDB.get(message.guild.id, pre + ".data");
                             if (!data || data.length < 1) {
                                 return message.reply(
-                                    "<:no:833101993668771842> **There are no Open-Apply-Options to remove**"
+                                    "<:no:833101993668771842> **No hay opciones de solicitud abierta para eliminar**"
                                 );
                             }
                             let embed = new EmbedBuilder()
@@ -730,7 +724,7 @@ module.exports = {
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(data.length)
                                 .setMinValues(1)
-                                .setPlaceholder("Click me to setup the Menu Apply System!")
+                                .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                                 .addOptions(
                                     data.map((option, index) => {
                                         let Obj = {
@@ -757,7 +751,7 @@ module.exports = {
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(data.length)
                                         .setMinValues(1)
-                                        .setPlaceholder("Click me to setup the Menu Apply System!")
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
                                         .addOptions(
                                             data.map((option, index) => {
                                                 let Obj = {
@@ -795,14 +789,14 @@ module.exports = {
                                     );
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                     components: [],
                                     content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected.first().values[0]}\`**`,
                                 });
@@ -827,10 +821,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

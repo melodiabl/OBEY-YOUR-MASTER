@@ -11,10 +11,10 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupantidiscord", "setup-mod", "setupmod", "antidiscord-setup", "antidiscordsetup"],
     cooldown: 5,
-    usage: "setup-antidiscord  -->  Follow the Steps",
+    usage: "setup-antidiscord --> Sigue los Pasos",
     description:
-        "Enable/Disable anti Discord Link advertisements | Manage the Settings, you can add Whitelisted Links / Channels",
-    memberpermissions: ["ADMINISTRATOR"],
+        "Enable/Disable anti Discord Link advertisements | Manage the Ajustes, you can add Whitelisted Links / Channels",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -40,7 +40,7 @@ module.exports = {
                     },
                     {
                         value: "Settings",
-                        description: `Show the current Settings of the Anti-Discord System`,
+                        description: `Show the current Ajustes of the Anti-Discord System`,
                         emoji: allEmojis.msg.list,
                     },
                     {
@@ -55,7 +55,7 @@ module.exports = {
                     },
                     {
                         value: "Add Whitelist-LINK",
-                        description: `Allow Links of specific Server(s)`,
+                        description: `Allow Links of specific Servidor(s)`,
                         emoji: "🔗",
                     },
                     {
@@ -70,12 +70,12 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ticket-Setup!`,
+                        description: `Cancelar and stop the Ticket-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("Click me to setup the Anti-Discord-Links System!")
+                    .setPlaceholder("¡Haz clic para configurar the Anti-Discord-Links System!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -93,11 +93,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Anti-Discord-Links System Setup",
-                        "https://cdn.discordapp.com/emojis/858405056238714930.gif?v=1",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Anti-Discord-Links System Setup", iconURL: "https://cdn.discordapp.com/emojis/858405056238714930.gif?v=1", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable1"]));
                 let used1 = false;
                 //send the menu msg
@@ -125,14 +121,14 @@ module.exports = {
                         handle_the_picks(menuoptionindex, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -168,15 +164,12 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable4"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Enabled:** ${thesettings.enabled ? allEmojis.msg.SUCCESS : allEmojis.msg.ERROR}\n\n**Witelisted Channels:** ${thesettings.whitelistedchannels.length > 0 ? `<#${thesettings.whitelistedchannels.join("> | <#")}>` : "No Channels Whitelisted!"}\n\n**Information:** *Anti Discord are not enabled in Tickets from THIS BOT*`.substring(
+                                            `**Activado:** ${thesettings.enabled ? allEmojis.msg.SUCCESS : allEmojis.msg.ERROR}\n\n**Witelisted Channels:** ${thesettings.whitelistedchannels.length > 0 ? `<#${thesettings.whitelistedchannels.join("> | <#")}>` : "No Channels Whitelisted!"}\n\n**Information:** *Anti Discord are not enabled in Tickets from THIS BOT*`.substring(
                                                 0,
                                                 2048
                                             )
                                         )
-                                        .addField(
-                                            "**Whitelisted Links**",
-                                            `${thesettings.whitelistedlinks.lenght > 0 ? thesettings.whitelistedlinks.join("\n").substring(0, 1024) : "No Links allowed!"}`
-                                        )
+                                        .addFields({ name: "**Whitelisted Links**", value: `${thesettings.whitelistedlinks.lenght > 0 ? thesettings.whitelistedlinks.join("\n").substring(0, 1024) : "No Links allowed!"}` })
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -245,7 +238,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Every single Channel:\n<#${client.settings.get(message.guild.id, "antidiscord.whitelistedchannels").join(">\n<#")}>\nis not a checked by the Anti Discord Links System`.substring(
+                                                            `Every single Canal:\n<#${client.settings.get(message.guild.id, "antidiscord.whitelistedchannels").join(">\n<#")}>\nis not a checked by the Anti Discord Links System`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -277,7 +270,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't ping a valid Channel");
+                                        message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -288,7 +281,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -358,7 +351,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Every single Channel:\n> <#${client.settings.get(message.guild.id, "antidiscord.whitelistedchannels").join(">\n> <#")}>\nis not checked by the Anti Discord Links System`.substring(
+                                                            `Every single Canal:\n> <#${client.settings.get(message.guild.id, "antidiscord.whitelistedchannels").join(">\n> <#")}>\nis not checked by the Anti Discord Links System`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -390,7 +383,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't ping a valid Channel");
+                                        message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -401,7 +394,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -452,7 +445,7 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle(`Added the Link ${content} to the allowed links!`)
+                                                        .setTitle(`Añadido the Link ${content} to the allowed links!`)
                                                         .setColor(es.color)
                                                         .setDescription(
                                                             `Every single allowed Link:\n> ${client.settings.get(message.guild.id, "antidiscord.whitelistedlinks").join("\n> ")}\nIs not a checked by the Anti Discord Links System`.substring(
@@ -499,7 +492,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -548,7 +541,7 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle(`Removed the Link ${content} from the allowed links!`)
+                                                        .setTitle(`Removido the Link ${content} from the allowed links!`)
                                                         .setColor(es.color)
                                                         .setDescription(
                                                             `Every single allowed Link:\n> ${client.settings.get(message.guild.id, "antidiscord.whitelistedlinks").join("\n> ")}\nIs not a checked by the Anti Discord Links System`.substring(
@@ -595,7 +588,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -686,7 +679,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -715,10 +708,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

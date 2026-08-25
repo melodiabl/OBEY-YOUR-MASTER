@@ -1,4 +1,6 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -12,8 +14,8 @@ module.exports = {
     aliases: ["setupembed", "embed-setup", "embedsetup"],
     cooldown: 5,
     usage: "setup-embed  -->  Follow Steps",
-    description: "Change the Look of your Embeds (Color, Image, Thumbnail, ...)",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Cambia la apariencia de tus embeds (color, imagen, miniatura, ...)",
+    memberpermissions: ['Administrador'],
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -21,10 +23,10 @@ module.exports = {
         try {
             var timeouterror = false;
             let row = new ActionRowBuilder().addComponents(
-                new ButtonBuilder().setStyle(Discord.ButtonStyle.Secondary).setCustomId("1").setEmoji("1️⃣"),
-                new ButtonBuilder().setStyle(Discord.ButtonStyle.Secondary).setCustomId("2").setEmoji("2️⃣"),
-                new ButtonBuilder().setStyle(Discord.ButtonStyle.Secondary).setCustomId("3").setEmoji("3️⃣"),
-                new ButtonBuilder().setStyle(Discord.ButtonStyle.Secondary).setCustomId("4").setEmoji("4️⃣")
+                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("1").setEmoji("1️⃣"),
+                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("2").setEmoji("2️⃣"),
+                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("3").setEmoji("3️⃣"),
+                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("4").setEmoji("4️⃣")
             );
             var tempmsg = await message.reply({
                 components: [row],
@@ -101,15 +103,9 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .addField(
-                                        `**Supported Colors:**`,
-                                        `>>> **HTML/Hex-Colors** (\`#ffff00\`)\n\nColor-Names/Discord-Colors (\`FUCHSIA\`)\n\nHex-Notation Colors (\`0xffffff\`)`
-                                    )
-                                    .addField(
-                                        `**Discord Supported Colors:**`,
-                                        `>>> ${discordsupportedcolors.map(c => `\`${c}\``).join("︲")}`
-                                    )
-                                    .addField(`**Current Color:**`, `>>> \`${es.color}\``)
+                                    .addFields({ name: `**Supported Colors:**`, value: `>>> **HTML/Hex-Colors** (\`#ffff00\`)\n\nColor-Names/Discord-Colors (\`FUCHSIA\`)\n\nHex-Notation Colors (\`0xffffff\`)` })
+                                    .addFields({ name: `**Discord Supported Colors:**`, value: `>>> ${discordsupportedcolors.map(c => `\`${c}\``).join("︲")}` })
+                                    .addFields({ name: `**Current Color:**`, value: `>>> \`${es.color}\`` })
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
@@ -150,7 +146,7 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new EmbedBuilder()
-                                                    .setColor("RED")
+                                                    .setColor("#ED4245")
                                                     .setTitle(`${allEmojis.msg.ERROR} INVALID COLOR ADDED`)
                                                     .setDescription(
                                                         `\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``
@@ -200,7 +196,7 @@ module.exports = {
                                     new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable14"]))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -357,7 +353,7 @@ module.exports = {
                                     new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable25"]))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -437,7 +433,7 @@ module.exports = {
                                     new Discord.EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable30"]))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -480,14 +476,14 @@ module.exports = {
                     }
                 } else
                     button?.reply({
-                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                         ephemeral: true,
                     });
             });
             //Once the Collections ended edit the menu message
             collector.on("end", collected => {
                 tempmsg.edit({
-                    embeds: [tempmsg.embeds[0].setDescription(`~~${tempmsg.embeds[0].description}~~`)],
+                    embeds: [tempEmbedBuilder.from(msg.embeds[0]).setDescription(`~~${tempmsg.embeds[0].description}~~`)],
                     components: [],
                     content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\`. Button**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                 });
@@ -508,10 +504,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

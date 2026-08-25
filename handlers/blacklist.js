@@ -3,7 +3,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const ms = require("ms");
-var { EmbedBuilder, Permissions } = require(`discord.js`);
+var { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { databasing } = require(`./functions`);
 const countermap = new Map();
 module.exports = client => {
@@ -24,7 +24,7 @@ module.exports = client => {
                     [...message.member.roles.cache.values()].length > 0 &&
                     message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r))) ||
                 [message.guild.ownerId, config.ownerid].includes(message.author.id) ||
-                message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)
+                message.member.permissions.has(PermissionFlagsBits.Administrator)
             )
                 return;
             client.blacklist.ensure(message.guild.id, {
@@ -47,8 +47,8 @@ module.exports = client => {
             let autowarn = client.settings.get(message.guild.id, "autowarn");
             let blacklistwords = client.blacklist.get(message.guild.id, "words");
             if (
-                client.blacklist
-                    .get(message.guild.id, "whitelistedchannels")
+                (client.blacklist
+                    .get(message.guild.id, "whitelistedchannels") || [])
                     .some(r => message.channel.parentId == r || message.channel.id == r)
             )
                 return;
@@ -74,9 +74,7 @@ module.exports = client => {
                                 reason: "Blacklist Autowarn",
                                 when: new Date().toLocaleString(`de`),
                                 oldhighesrole: message.member.roles ? message.member.roles.highest : `Had No Roles`,
-                                oldthumburl: message.author.displayAvatarURL({
-                                    dynamic: true,
-                                }),
+                                oldthumburl: message.author.displayAvatarURL(),
                             });
                             // Push the action to the user's warnings
                             client.userProfiles.push(message.author.id, newActionId, "warnings");
@@ -90,14 +88,14 @@ module.exports = client => {
                                     new EmbedBuilder()
                                         .setAuthor(
                                             client.getAuthor(
-                                                message.author.tag,
-                                                message.member.displayAvatarURL({ dynamic: true })
+                                                message.author.username,
+                                                message.member.displayAvatarURL()
                                             )
                                         )
                                         .setColor("#E67E22")
                                         .setFooter(client.getFooter(
                                                 "ID: " + message.author.id,
-                                                message.author.displayAvatarURL({ dynamic: true })
+                                                message.author.displayAvatarURL()
                                             )
                                         )
                                         .setDescription(
@@ -373,7 +371,7 @@ module.exports = client => {
                                         .catch(() => {});
                                 })
                                 .catch(() => {
-                                    return message.channel.send(`❌ **I could not timeout ${member.user.tag}**`).then(m => {
+                                    return message.channel.send(`❌ **I could not timeout ${member.user.username}**`).then(m => {
                                         setTimeout(() => {
                                             m.delete().catch(() => {});
                                         }, 5000);

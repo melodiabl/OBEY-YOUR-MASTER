@@ -67,11 +67,11 @@ class GuessThePokemon {
             .setTitle(this.options.embed.title)
             .setImage("attachment://question-image.png")
             .setFooter({ text: this.options.embed.footer })
-            .addField("Type(s)", data.types.join(", ") || "No data.")
-            .addField("Abilities", data.abilities.join(", ") || "No data.")
-            .setAuthor(this.message.author.tag, this.message.author.displayAvatarURL({ dynamic: true }));
+            .addFields({ name: "Type(s)", value: data.types.join(", ") || "No data." })
+            .addFields({ name: "Abilities", value: data.abilities.join(", ") || "No data." })
+            .setAuthor({ name: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
 
-        if (thinkMsg && !thinkMsg.deleted) thinkMsg.delete().catch();
+        if (thinkMsg && !thinkMsg.deletedTimestamp) thinkMsg.delete().catch();
         const msg = await this.sendMessage({ embeds: [embed], files: [attachment] });
 
         const filter = m => m.author.id === this.message.author.id;
@@ -97,10 +97,10 @@ class GuessThePokemon {
                     .setColor(this.options.embed.color)
                     .setTitle(this.options.embed.title)
                     .setImage("attachment://answer-image.png")
-                    .addField("Pokemon Name", data.name, false)
-                    .addField("Type(s)", data.types.join(", ") || "No data.")
-                    .addField("Abilities", data.abilities.join(", ") || "No data.")
-                    .setAuthor(this.message.author.tag, this.message.author.displayAvatarURL({ dynamic: true }));
+                    .addFields({ name: "Pokemon Name", value: data.name, inline: false })
+                    .addFields({ name: "Type(s)", value: data.types.join(", ") || "No data." })
+                    .addFields({ name: "Abilities", value: data.abilities.join(", ") || "No data." })
+                    .setAuthor({ name: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
 
                 return msg.edit({
                     content: this.options.winMessage.replace("{pokemon}", data.name),
@@ -151,11 +151,11 @@ module.exports = {
         new GuessThePokemon({
             message: message,
             slash_command: false,
-            embed: {
+            embeds: [{
                 title: "Who's This Pokemon?",
                 footer: "You have only 1 chance",
                 color: es.color,
-            },
+            }],
             time: 60000,
             thinkMessage: "**Thinking...**",
             winMessage: "Nice! The pokemon was **{pokemon}**",

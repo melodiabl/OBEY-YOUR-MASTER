@@ -1,4 +1,7 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 class TicTacToe {
     /**
@@ -716,15 +719,15 @@ class TicTacToe {
 
         function getButtons() {
             return [
-                new ButtonBuilder().setCustomId(a11).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(a22).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(a33).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(b11).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(b22).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(b33).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(c11).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(c22).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(c33).setStyle(Discord.ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(a11).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(a22).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(a33).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(b11).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(b22).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(b33).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(c11).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(c22).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(c33).setStyle(ButtonStyle.Secondary).setLabel("~"),
             ];
         }
     }
@@ -760,7 +763,7 @@ module.exports = {
             });
         }
         const opponent = message.mentions.users.first();
-        if (!opponent) return message.reply(`${allEmojis.msg.ERROR} **Please mention who you want to challenge at tictactoe.**`);
+        if (!opponent) return message.reply(`${allEmojis.msg.ERROR} **Por favor mention who you want to challenge at tictactoe.**`);
         new TicTacToe({
             message: message, //required
             opponent: opponent, //required

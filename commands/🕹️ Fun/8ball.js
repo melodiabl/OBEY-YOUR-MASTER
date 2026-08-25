@@ -48,13 +48,11 @@ module.exports = {
                     .setTitle("8ball")
                     .setColor(embedColor)
                     .setThumbnail(
-                        message.author.displayAvatarURL({
-                            dynamic: true,
-                        })
+                        message.author.displayAvatarURL()
                     )
-                    .addField("Question: ", question, false)
-                    .addField("Asked by: ", message.author.tag, false)
-                    .addField("Reply: ", body.magic.answer, false)
+                    .addFields({ name: "Question: ", value: question, inline: false })
+                    .addFields({ name: "Asked by: ", value: message.author.username, inline: false })
+                    .addFields({ name: "Reply: ", value: body.magic.answer, inline: false })
                     .setFooter({ text: eval(client.la[ls]["cmds"]["fun"]["8ball"]["variable4"]) });
 
                 message.reply({ embeds: [embed3] });
@@ -72,10 +70,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

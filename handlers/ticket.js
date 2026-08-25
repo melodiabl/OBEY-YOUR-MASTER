@@ -1,5 +1,7 @@
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder, PermissionFlagsBits, ButtonStyle,
+    ChannelType
+} = require(`discord.js`);
 const moment = require("moment");
 const { dbEnsure } = require("./functions");
 const { allEmojis } = require("../botconfig/emojiFunctions");
@@ -102,9 +104,9 @@ module.exports = (client, preindex) => {
             .substring(0, 31);
 
         let optionsData = {
-            topic: `📨 #${String(filename).replace("ticket", "").length > 0 ? String(filename).replace("ticket", "") : "1"} Ticket for: ${user.tag} (${user.id}) | ✅ Created at: ${moment().format("LLLL")}`,
-            type: "GUILD_TEXT",
-            reason: `Ticket System #${String(filename).replace("ticket", "").length > 0 ? String(filename).replace("ticket", "") : "1"} for: ${user.tag}`,
+            topic: `📨 #${String(filename).replace("ticket", "").length > 0 ? String(filename).replace("ticket", "") : "1"} Ticket for: ${user.username} (${user.id}) | ✅ Created at: ${moment().format("LLLL")}`,
+            type: ChannelType.GuildText,
+            reason: `Ticket System #${String(filename).replace("ticket", "").length > 0 ? String(filename).replace("ticket", "") : "1"} for: ${user.username}`,
             permissionOverwrites: [],
         };
 
@@ -114,7 +116,7 @@ module.exports = (client, preindex) => {
         try {
             var cat = guild.channels.cache.get(ticket.parentid);
             if (cat) {
-                if (cat.type == "GUILD_CATEGORY") {
+                if (cat.type == ChannelType.GuildCategory) {
                     if (cat.children.size < 50) {
                         optionsData.parent = String(cat.id);
                     }
@@ -158,7 +160,7 @@ module.exports = (client, preindex) => {
             allow: [],
             deny: ["SEND_MESSAGES", "VIEW_CHANNEL", "EMBED_LINKS", "ADD_REACTIONS", "ATTACH_FILES"],
         });
-        //Add USER ID Permissions to the TICKET
+        //Add USER ID PermissionFlagsBits to the TICKET
         optionsData.permissionOverwrites.push({
             id: user.id,
             type: "member",
@@ -204,7 +206,7 @@ module.exports = (client, preindex) => {
             ephemeral: true,
         });
         guild.channels
-            .create(channelname.substring(0, 31), optionsData)
+            .create({ name: channelname.substring(0, 31), ...optionsData })
             .then(async ch => {
                 let es = client.settings.get(guild.id, "embed");
                 client.setups.push("TICKETS", user.id, ticketspath);
@@ -239,11 +241,9 @@ module.exports = (client, preindex) => {
                     )
                     .setAuthor(
                         client.getAuthor(
-                            `Ticket for: ${user.tag}`,
-                            user.displayAvatarURL({
-                                dynamic: true,
-                            }),
-                            "https://discord.gg/milrato"
+                            `Ticket for: ${user.username}`,
+                            user.displayAvatarURL(),
+                            "https://github.com/melodiabl"
                         )
                     )
                     .setDescription(ticket.message.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
@@ -263,7 +263,7 @@ module.exports = (client, preindex) => {
                             client.getAuthor(
                                 `A Staff Member will claim the Ticket soon!`,
                                 "https://cdn.discordapp.com/emojis/833101350623117342.gif?size=44",
-                                "https://discord.gg/milrato"
+                                "https://github.com/melodiabl"
                             )
                         )
                         .setDescription(ticket.claim.messageOpen.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
@@ -271,27 +271,27 @@ module.exports = (client, preindex) => {
                 }
                 const { ButtonBuilder } = require("discord.js");
                 let button_close = new ButtonBuilder()
-                    .setStyle(Discord.ButtonStyle.Primary)
+                    .setStyle(ButtonStyle.Primary)
                     .setCustomId("ticket_close")
                     .setLabel("Close")
                     .setEmoji("🔒");
                 let button_delete = new ButtonBuilder()
-                    .setStyle(Discord.ButtonStyle.Secondary)
+                    .setStyle(ButtonStyle.Secondary)
                     .setCustomId("ticket_delete")
                     .setLabel("Delete")
                     .setEmoji("🗑️");
                 let button_transcript = new ButtonBuilder()
-                    .setStyle(Discord.ButtonStyle.Primary)
+                    .setStyle(ButtonStyle.Primary)
                     .setCustomId("ticket_transcript")
                     .setLabel("Transcript")
                     .setEmoji("📑");
                 let button_user = new ButtonBuilder()
-                    .setStyle(Discord.ButtonStyle.Success)
+                    .setStyle(ButtonStyle.Success)
                     .setCustomId("ticket_user")
                     .setLabel("Users")
                     .setEmoji("👤");
                 let button_role = new ButtonBuilder()
-                    .setStyle(Discord.ButtonStyle.Success)
+                    .setStyle(ButtonStyle.Success)
                     .setCustomId("ticket_role")
                     .setLabel("Roles")
                     .setEmoji("📌");
@@ -308,7 +308,7 @@ module.exports = (client, preindex) => {
                     allbuttons.push(
                         new ActionRowBuilder().addComponents([
                             new ButtonBuilder()
-                                .setStyle(Discord.ButtonStyle.Secondary)
+                                .setStyle(ButtonStyle.Secondary)
                                 .setCustomId("ticket_claim")
                                 .setLabel("Claim the Ticket")
                                 .setEmoji("✅"),
@@ -316,8 +316,8 @@ module.exports = (client, preindex) => {
                     );
                 }
                 let ticketroles = ticket.adminroles.map(r => `<@&${r}>`);
-                if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.SEND_MESSAGES)) {
-                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.EMBED_LINKS)) {
+                if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.SendMessages)) {
+                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.EmbedLinks)) {
                         await ch
                             .send({
                                 content: `<@${user.id}> ${ticketroles.length > 0 ? "| " + ticketroles.join(" / ") : ""}`,
@@ -328,7 +328,7 @@ module.exports = (client, preindex) => {
                                 console.log(String(O).grey);
                             })
                             .then(msg => {
-                                if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
+                                if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.ManageMessages)) {
                                     msg.pin().catch(O => {
                                         console.log(String(O).grey);
                                     });
@@ -348,7 +348,7 @@ module.exports = (client, preindex) => {
                                 console.log(String(O).grey);
                             })
                             .then(msg => {
-                                if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.MANAGE_MESSAGES)) {
+                                if (msg.channel.permissionsFor(msg.guild.members.me).has(PermissionFlagsBits.ManageMessages)) {
                                     msg.pin().catch(O => {
                                         console.log(String(O).grey);
                                     });
@@ -357,12 +357,12 @@ module.exports = (client, preindex) => {
                     }
                 }
                 await interaction?.editReply({
-                    content: `${allEmojis.msg.SUCCESS} **Your Ticket is created!** <#${ch.id}>`,
+                    content: `${allEmojis.msg.SUCCESS} **¡Tu ticket ha sido creado!** <#${ch.id}>`,
                     ephemeral: true,
                 });
             })
             .catch(e => {
-                interaction?.editReply({ content: "❌ **Something went wrong!**", ephemeral: true });
+                interaction?.editReply({ content: "❌ **¡Algo salió mal!**", ephemeral: true });
                 console.error(e);
             });
     });

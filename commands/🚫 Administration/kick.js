@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -7,14 +7,14 @@ module.exports = {
     name: `kick`,
     category: `🚫 Administration`,
     aliases: [``],
-    description: `Kicks a Member from a Guild`,
-    usage: `kick @User [Reason]`,
+    description: `Kicks a Miembro from a Guild`,
+    usage: `kick @Usuario [Reason]`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.KICK_MEMBERS]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.KickMembers]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -44,7 +44,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -174,25 +174,16 @@ module.exports = {
                                                     : null
                                             )
                                             .setFooter(client.getFooter(es))
-                                            .setAuthor(
-                                                `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                                message.author.displayAvatarURL({ dynamic: true })
-                                            )
+                                            .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                             .setDescription(
                                                 eval(client.la[ls]["cmds"]["administration"]["kick"]["variable14"])
                                             )
-                                            .addField(
-                                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                            )
-                                            .addField(
-                                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                            )
+                                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                             .setTimestamp()
                                             .setFooter(client.getFooter(
                                                     "ID: " + message.author.id,
-                                                    message.author.displayAvatarURL({ dynamic: true })
+                                                    message.author.displayAvatarURL()
                                                 )
                                             ),
                                     ],

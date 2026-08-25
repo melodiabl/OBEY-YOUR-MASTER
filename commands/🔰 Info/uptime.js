@@ -31,10 +31,7 @@ module.exports = {
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["info"]["uptime"]["variable1"]))
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["uptime"]["variable2"]))
-                        .addField(
-                            eval(client.la[ls]["cmds"]["info"]["uptime"]["variablex_3"]),
-                            eval(client.la[ls]["cmds"]["info"]["uptime"]["variable3"])
-                        ),
+                        .addFields({ name: eval(client.la[ls]["cmds"]["info"]["uptime"]["variablex_3"]), value: eval(client.la[ls]["cmds"]["info"]["uptime"]["variable3"]) }),
                 ],
             });
         } catch (e) {
@@ -53,10 +50,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

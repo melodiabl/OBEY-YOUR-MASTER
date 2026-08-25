@@ -16,7 +16,7 @@ module.exports = {
         return interaction.reply({ content: '❌ Este canal no es un ticket.', ephemeral: true })
     }
 
-    // Permissions: ticket owner or staff
+    // PermissionFlagsBits: ticket owner or staff
     const isOwner = ticket ? ticket.userId === interaction.user.id : false
     const isStaff = interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)
     if (!isOwner && !isStaff)

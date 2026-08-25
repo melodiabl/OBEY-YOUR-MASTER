@@ -71,7 +71,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setTitle(body.full_name)
-                        .setAuthor("GitHub", "https://github?.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
+                        .setAuthor({ name: "GitHub", iconURL: "https://github?.githubassets.com/images/modules/logos_page/GitHub-Mark.png" })
                         .setURL(body.html_url)
                         .setThumbnail(body.owner.avatar_url)
                         .setColor(es.color)

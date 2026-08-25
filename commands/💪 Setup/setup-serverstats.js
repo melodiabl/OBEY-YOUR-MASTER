@@ -9,10 +9,10 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupserverstats", "serverstats-setup", "serverstatssetup", "setup-serverstatser", "setupserverstatser"],
     cooldown: 5,
-    usage: "setup-serverstats  -->  Follow the Steps",
+    usage: "setup-serverstats --> Sigue los Pasos",
     description:
-        "This Setup allows you to specify a Channel which Name should be renamed every 10 Minutes to a Member Counter of Bots, Users, or Members",
-    memberpermissions: ["ADMINISTRATOR"],
+        "This Configuración allows you to specify a Canal which Name should be renamed every 10 Minutes to a Miembro Counter of Bots, Users, or Members",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -43,10 +43,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
+ * Bot Coded by Melodia | https://github?.com/melodiabl/discord-js-lavalink-Music-Bot-erela-js
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

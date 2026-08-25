@@ -11,7 +11,7 @@ module.exports = {
     name: "tiktokinfo",
     aliases: ["tiktokinfo", "tiktokuserinfo", "ttuserinfo", "ttuser", "tiktokuser"],
     category: "🔰 Info",
-    description: "Get information about a Twitter User",
+    description: "Get information about a Twitter Usuario",
     usage: "tiktokinfo <TWITTERUSER>",
     type: "util",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -64,15 +64,12 @@ module.exports = {
                         return Obj;
                     });
                     for (const post of allposts)
-                        embed.addField(
-                            `**${String(post.title).charAt(0).toUpperCase() + String(post.title).slice(1)}**`,
-                            handlemsg(client.la[ls].cmds.info.tiktokinfo.videos, {
+                        embed.addFields({ name: `**${String(post.title).charAt(0).toUpperCase() + String(post.title).slice(1)}**`, value: handlemsg(client.la[ls].cmds.info.tiktokinfo.videos, {
                                 url: author.url,
                                 views: author.views,
                                 shares: author.shares,
                                 comments: author.comments,
-                            })
-                        );
+                            }) });
                     message.reply({ embeds: [embed] });
                 } catch (e) {
                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -104,10 +101,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

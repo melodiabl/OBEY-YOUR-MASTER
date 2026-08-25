@@ -38,12 +38,8 @@ module.exports = {
 
                 //create the EMBED
                 const embeduserinfo = new EmbedBuilder();
-                embeduserinfo.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }));
-                embeduserinfo.setAuthor(
-                    handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.tag }),
-                    member.user.displayAvatarURL({ dynamic: true }),
-                    "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
-                );
+                embeduserinfo.setThumbnail(member.user.displayAvatarURL({ size: 512 }));
+                embeduserinfo.setAuthor({ name: handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.username }), iconURL: member.user.displayAvatarURL(), url: "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands" });
                 embeduserinfo.setDescription(
                     `>>> ${
                         member.permissions.toArray().includes("ADMINISTRATOR")
@@ -72,20 +68,13 @@ module.exports = {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 //create the EMBED
                 const embeduserinfo = new EmbedBuilder();
-                embeduserinfo.setThumbnail(user.displayAvatarURL({ dynamic: true, size: 512 }));
-                embeduserinfo.setAuthor(
-                    handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.tag }),
-                    member.user.displayAvatarURL({ dynamic: true }),
-                    "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
-                );
-                embeduserinfo.addField(
-                    handlemsg(client.la[ls].cmds.info.permissions.from2),
-                    `${member.permissions
+                embeduserinfo.setThumbnail(user.displayAvatarURL({ size: 512 }));
+                embeduserinfo.setAuthor({ name: handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.username }), iconURL: member.user.displayAvatarURL(), url: "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands" });
+                embeduserinfo.addFields({ name: handlemsg(client.la[ls].cmds.info.permissions.from2), value: `${member.permissions
                         .toArray()
                         .sort((a, b) => a.localeCompare(b))
                         .map(p => `\`${p}\``)
-                        .join(", ")}`
-                );
+                        .join(", ")}` });
                 embeduserinfo
                     .setColor(es.color)
                     .setThumbnail(
@@ -115,10 +104,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

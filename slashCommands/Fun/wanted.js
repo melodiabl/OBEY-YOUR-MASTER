@@ -10,10 +10,10 @@ module.exports = {
     aliases: [""],
     category: "🕹️ Fun",
     description: "IMAGE CMD",
-    usage: "wanted @User",
+    usage: "wanted @Usuario",
     type: "user",
     options: [
-        { User: { name: "which_user", description: "From Which User do you want to get ... ?", required: false } }, //to use in the code: interacton.getUser("ping_a_user")
+        { User: { name: "which_user", description: "De qué usuario quieres obtener...?", required: false } }, //to use in the code: interacton.getUser("ping_a_user")
     ],
     run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
         if (!client.settings.get(message.guild.id, "FUN")) {
@@ -22,7 +22,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+.setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
@@ -39,7 +39,7 @@ module.exports = {
         let user = interaction?.options.getUser("which_user");
         if (!user) user = interaction?.member.user;
         //get avatar of the user
-        var avatar = user.displayAvatarURL({ format: "png" });
+        var avatar = user.displayAvatarURL();
         //get the memer image
         client.memer.wanted(avatar).then(image => {
             //make an attachment
@@ -51,7 +51,7 @@ module.exports = {
                         new EmbedBuilder()
                             .setColor(es.color)
                             .setFooter(client.getFooter(es))
-                            .setAuthor(`Meme for: ${user.tag}`, avatar)
+.setAuthor({ name: `Meme para: ${user.username}`, iconURL: avatar })
                             .setImage("attachment://wanted.png"),
                     ],
                     files: [attachment],
@@ -62,10 +62,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

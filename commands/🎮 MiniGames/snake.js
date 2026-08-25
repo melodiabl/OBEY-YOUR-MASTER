@@ -1,4 +1,7 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
 function disableButtons(components) {
     for (let x = 0; x < components.length; x++) {
         for (let y = 0; y < components[x].components.length; y++) {
@@ -57,10 +60,10 @@ class SnakeGame {
         if (!options.foods) options.foods = [];
         if (typeof options.foods !== "object") throw new TypeError("INVALID_FOODS: Foods Emojis must be a array.");
 
-        if (!options.othersMessage) options.othersMessage = "You are not allowed to use buttons for this message!";
+        if (!options.othersMessage) options.othersMessage = "¡No tienes permiso para usar botones en este mensaje!";
         if (typeof options.othersMessage !== "string")
             throw new TypeError("INVALID_OTHERS_MESSAGE: Others Message must be a string.");
-        if (!options.stopButton) options.stopButton = "Stop";
+        if (!options.stopButton) options.stopButton = "Detener";
         if (typeof options.stopButton !== "string")
             throw new TypeError("INVALID_STOP_BUTTON: Stop Button must be a string.");
 
@@ -152,16 +155,16 @@ class SnakeGame {
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setDescription("**Score:** " + this.score + "\n\n" + this.getGameBoard())
-            .setFooter({ text: this.message.author.tag, iconURL: this.message.author.displayAvatarURL({ dynamic: true }) });
+            .setFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
 
-        const up = new ButtonBuilder().setEmoji(emojis.up).setStyle(Discord.ButtonStyle.Primary).setCustomId("snake_up");
-        const left = new ButtonBuilder().setEmoji(emojis.left).setStyle(Discord.ButtonStyle.Primary).setCustomId("snake_left");
-        const down = new ButtonBuilder().setEmoji(emojis.down).setStyle(Discord.ButtonStyle.Primary).setCustomId("snake_down");
-        const right = new ButtonBuilder().setEmoji(emojis.right).setStyle(Discord.ButtonStyle.Primary).setCustomId("snake_right");
-        const stop = new ButtonBuilder().setLabel(this.options.stopButton).setStyle(Discord.ButtonStyle.Danger).setCustomId("snake_stop");
+        const up = new ButtonBuilder().setEmoji(emojis.up).setStyle(ButtonStyle.Primary).setCustomId("snake_up");
+        const left = new ButtonBuilder().setEmoji(emojis.left).setStyle(ButtonStyle.Primary).setCustomId("snake_left");
+        const down = new ButtonBuilder().setEmoji(emojis.down).setStyle(ButtonStyle.Primary).setCustomId("snake_down");
+        const right = new ButtonBuilder().setEmoji(emojis.right).setStyle(ButtonStyle.Primary).setCustomId("snake_right");
+        const stop = new ButtonBuilder().setLabel(this.options.stopButton).setStyle(ButtonStyle.Danger).setCustomId("snake_stop");
 
-        const dis1 = new ButtonBuilder().setLabel("\u200b").setStyle(Discord.ButtonStyle.Secondary).setCustomId("dis1").setDisabled(true);
-        const dis2 = new ButtonBuilder().setLabel("\u200b").setStyle(Discord.ButtonStyle.Secondary).setCustomId("dis2").setDisabled(true);
+        const dis1 = new ButtonBuilder().setLabel("\u200b").setStyle(ButtonStyle.Secondary).setCustomId("dis1").setDisabled(true);
+        const dis2 = new ButtonBuilder().setLabel("\u200b").setStyle(ButtonStyle.Secondary).setCustomId("dis2").setDisabled(true);
 
         const row1 = new ActionRowBuilder().addComponents(dis1, up, dis2, stop);
         const row2 = new ActionRowBuilder().addComponents(left, down, right);
@@ -182,7 +185,7 @@ class SnakeGame {
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setDescription("**Score:** " + this.score + "\n\n" + this.getGameBoard())
-            .setFooter({ text: this.message.author.tag, iconURL: this.message.author.displayAvatarURL({ dynamic: true }) });
+            .setFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
 
         msg.edit({ embeds: [moveEmbed], components: msg.components });
     }
@@ -195,7 +198,7 @@ class SnakeGame {
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setDescription(text + "\n\n" + this.getGameBoard())
-            .setFooter({ text: this.message.author.tag, iconURL: this.message.author.displayAvatarURL({ dynamic: true }) });
+            .setFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
 
         return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) });
     }
@@ -210,7 +213,7 @@ class SnakeGame {
         collector.on("collect", async btn => {
             if (btn.user.id !== this.message.author.id)
                 return btn.reply({
-                    content: this.options.othersMessage.replace("{author}", this.message.author.tag),
+                    content: this.options.othersMessage.replace("{author}", this.message.author.username),
                     ephemeral: true,
                 });
 
@@ -295,12 +298,12 @@ module.exports = {
         new SnakeGame({
             message: message,
             slash_command: false,
-            embed: {
+            embeds: [{
                 title: "Snake",
                 color: es.color,
                 footer: es.footertext,
                 overTitle: "Game Over",
-            },
+            }],
             snake: { head: "🔷", body: "🟦", tail: "🔹", over: "💀" },
             emojis: {
                 board: "⬛",
@@ -311,8 +314,8 @@ module.exports = {
                 left: "◀️",
             },
             foods: ["🍎", "🍇", "🍊", "🍕", "🍔", "🥪", "🥙", "🥗", "🥐", "🍿", "🥓", "🌯", "🍗", "🥟"],
-            stopButton: "Stop",
-            othersMessage: "You are not allowed to use buttons for this message!",
+            stopButton: "Detener",
+            othersMessage: "¡No tienes permiso para usar botones en este mensaje!",
         }).startGame();
     },
 };

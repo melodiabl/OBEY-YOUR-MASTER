@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -7,8 +7,8 @@ module.exports = {
     name: `unwarn`,
     category: `🚫 Administration`,
     aliases: [`removewarn`, `warnremove`],
-    description: `Removes a Warn from a Member with the ID`,
-    usage: `unwarn @User <WARN_ID>`,
+    description: `Removes a Warn from a Miembro with the ID`,
+    usage: `unwarn @Usuario <WARN_ID>`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -35,7 +35,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -118,7 +118,7 @@ module.exports = {
 
                 let warning = warnData[parseInt(args[1])];
                 let warned_by = message.guild.members.cache.get(warning.moderator)
-                    ? message.guild.members.cache.get(warning.moderator).user.tag
+                    ? message.guild.members.cache.get(warning.moderator).user.username
                     : warning.moderator;
                 let warned_at = warning.when;
                 let warned_in = client.guilds.cache.get(warning.guild)
@@ -140,14 +140,10 @@ module.exports = {
                                 )
                                 .setFooter(client.getFooter(es))
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["unwarn"]["variable11"]))
-                                .addField(`Warned by:`, `\`${warned_by}\``, true)
-                                .addField(`Warned at:`, `\`${warned_at}\``, true)
-                                .addField(`Warned in:`, `\`${warned_in}\``, true)
-                                .addField(
-                                    `Warn Reason:`,
-                                    `\`${warning.reason.length > 900 ? warning.reason.substring(0, 900) + ` ...` : warning.reason}\``,
-                                    true
-                                ),
+                                .addFields({ name: `Warned by:`, value: `\`${warned_by}\``, inline: true })
+                                .addFields({ name: `Warned at:`, value: `\`${warned_at}\``, inline: true })
+                                .addFields({ name: `Warned in:`, value: `\`${warned_in}\``, inline: true })
+                                .addFields({ name: `Warn Reason:`, value: `\`${warning.reason.length > 900 ? warning.reason.substring(0, 900) + ` ...` : warning.reason}\``, inline: true }),
                         ],
                     })
                     .catch(e => console.log(e.message));
@@ -166,14 +162,10 @@ module.exports = {
                             )
                             .setFooter(client.getFooter(es))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["unwarn"]["variable12"]))
-                            .addField(`Warned by:`, `\`${warned_by}\``, true)
-                            .addField(`Warned at:`, `\`${warned_at}\``, true)
-                            .addField(`Warned in:`, `\`${warned_in}\``, true)
-                            .addField(
-                                `Warn Reason:`,
-                                `\`${warning.reason.length > 900 ? warning.reason.substring(0, 900) + ` ...` : warning.reason}\``,
-                                true
-                            ),
+                            .addFields({ name: `Warned by:`, value: `\`${warned_by}\``, inline: true })
+                            .addFields({ name: `Warned at:`, value: `\`${warned_at}\``, inline: true })
+                            .addFields({ name: `Warned in:`, value: `\`${warned_in}\``, inline: true })
+                            .addFields({ name: `Warn Reason:`, value: `\`${warning.reason.length > 900 ? warning.reason.substring(0, 900) + ` ...` : warning.reason}\``, inline: true }),
                     ],
                 });
                 client.userProfiles.remove(warnmember.user.id, warnIDs[parseInt(args[1])], "warnings");
@@ -195,23 +187,14 @@ module.exports = {
                                             : null
                                     )
                                     .setFooter(client.getFooter(es))
-                                    .setAuthor(
-                                        `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                        message.author.displayAvatarURL({ dynamic: true })
-                                    )
+                                    .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["unwarn"]["variable13"]))
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                        eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                        eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                    )
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                     .setTimestamp()
                                     .setFooter(client.getFooter(
                                             "ID: " + message.author.id,
-                                            message.author.displayAvatarURL({ dynamic: true })
+                                            message.author.displayAvatarURL()
                                         )
                                     ),
                             ],
@@ -248,10 +231,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

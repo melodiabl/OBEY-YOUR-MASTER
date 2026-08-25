@@ -8,7 +8,7 @@ const { parseMilliseconds, duration, GetUser, nFormatter, ensure_economy_user } 
 module.exports = {
     name: "rob",
     category: "💸 Economy",
-    description: "Rob Money from a Specific User, you can Ping him, add his ID / Username, it will be a random amount!",
+    description: "Rob Money from a Specific Usuario, you can Ping him, add his ID / Username, it will be a random amount!",
     usage: "rob @USER",
     type: "game",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -48,7 +48,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["rob"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["rob"]["variable3"])),
                     ],
@@ -72,7 +72,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["rob"]["variable5"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["rob"]["variable6"])),
                     ],
@@ -101,7 +101,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+                        .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["rob"]["variable8"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["rob"]["variable9"])),
                 ],
@@ -122,10 +122,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

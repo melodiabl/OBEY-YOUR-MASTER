@@ -69,7 +69,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["dice"]["variable6"])),
                     ],
                 });
@@ -108,7 +108,7 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) }),
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() }),
                     ],
                 });
             } else {
@@ -123,7 +123,7 @@ module.exports = {
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["dice"]["variable10"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["dice"]["variable11"]))
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.tag, iconURL: user.displayAvatarURL({ dynamic: true }) }),
+                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() }),
                     ],
                 });
             }
@@ -143,10 +143,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder,
+    ButtonStyle
+} = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -11,15 +13,15 @@ module.exports = {
     name: "youtubeinfo",
     aliases: ["ytinfo", "youtubeuserinfo", "ytuserinfo", "ytuser", "youtubeuser"],
     category: "🔰 Info",
-    description: "Get information about a Youtube Channel-Link",
+    description: "Get information about a Youtube Canal-Link",
     usage: "youtubeinfo <YOUTUBECHANNELLINK>",
     type: "util",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            let button_back = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setCustomId("1").setLabel("<< Back");
-            let button_forward = new ButtonBuilder().setStyle(Discord.ButtonStyle.Primary).setCustomId("3").setLabel("Forward >>");
+            let button_back = new ButtonBuilder().setStyle(ButtonStyle.Primary).setCustomId("1").setLabel("<< Back");
+            let button_forward = new ButtonBuilder().setStyle(ButtonStyle.Primary).setCustomId("3").setLabel("Forward >>");
             const allbuttons = [new ActionRowBuilder().addComponents([button_back, button_forward])];
             let url = args[0];
             if (url && typeof url === "string") {
@@ -57,25 +59,21 @@ module.exports = {
                 embeds: [
                     new Discord.EmbedBuilder()
                         .setColor(es.color)
-                        .setAuthor(
-                            client.la[ls].cmds.info.youtubeinfo.loading,
-                            "https://cdn.discordapp.com/emojis/756773010123522058.gif",
-                            "https://discord.gg/milrato"
-                        ),
+                        .setAuthor({ name: client.la[ls].cmds.info.youtubeinfo.loading, iconURL: "https://cdn.discordapp.com/emojis/756773010123522058.gif", url: "https://github.com/melodiabl" }),
                 ],
             });
             let Channel = await channelInfo(url);
             let embed = new Discord.EmbedBuilder()
-                .setTitle(Channel.name)
+                .setTitle(Canal.name)
                 .setURL(Channel.url)
-                .setColor("RED")
-                .addField(client.la[ls].cmds.info.youtubeinfo.field1, "`" + Channel.subscribers + "`")
-                .addField(client.la[ls].cmds.info.youtubeinfo.field2, Channel.tags.map(t => `\`${t}\``).join(",  "))
-                .addField(client.la[ls].cmds.info.youtubeinfo.field3, Channel.unlisted ? "✅" : "❌", true)
-                .addField(client.la[ls].cmds.info.youtubeinfo.field4, Channel.familySafe ? "✅" : "❌", true)
+                .setColor("#ED4245")
+                .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field1, value: "`" + Channel.subscribers + "`" })
+                .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field2, value: Channel.tags.map(t => `\`${t}\``).join(",  ") })
+                .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field3, value: Channel.unlisted ? "✅" : "❌", inline: true })
+                .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field4, value: Channel.familySafe ? "✅" : "❌", inline: true })
                 .setFooter({ text: "ID: " + Channel.id })
-                .setImage(Channel.mobileBanner[0] ? Channel.mobileBanner[0].url : null)
-                .setDescription(String(Channel.description).substring(0, 1500));
+                .setImage(Channel.mobileBanner[0] ? Channel.mobileBanner[0].url : undefined)
+                .setDescription(String(Canal.description).substring(0, 1500));
             let Videos = await getLatestVideos(url);
             let embed2 = new Discord.EmbedBuilder()
                 .setTitle(
@@ -83,18 +81,15 @@ module.exports = {
                         author: Videos[0].author,
                     })
                 )
-                .setColor("RED")
+                .setColor("#ED4245")
                 .setURL(url);
             //For Each Video, add a new Field (just the first 10 Videos!)
             Videos.forEach((v, i) => {
                 if (i < 10) {
-                    embed2.addField(
-                        v.title,
-                        handlemsg(client.la[ls].cmds.info.youtubeinfo.videos, {
+                    embed2.addFields({ name: v.title, value: handlemsg(client.la[ls].cmds.info.youtubeinfo.videos, {
                             date: v.pubDate,
                             link: v.link,
-                        })
-                    );
+                        }) });
                 }
             });
             //Send the Message
@@ -174,10 +169,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

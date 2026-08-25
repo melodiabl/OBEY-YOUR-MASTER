@@ -38,10 +38,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.color)
                         .setImage(await anime.hug())
-                        .setAuthor(
-                            `${message.author.username} hugs${message.mentions.users.first() ? " " + message.mentions.users.first().username : " him-/herself.."}`,
-                            message.author.displayAvatarURL({ dynamic: true })
-                        ),
+                        .setAuthor({ name: `${message.author.username} hugs${message.mentions.users.first() ? " " + message.mentions.users.first().username : " him-/herself.."}`, iconURL: message.author.displayAvatarURL() }),
                 ],
             })
             .catch(() => {});
@@ -49,10 +46,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

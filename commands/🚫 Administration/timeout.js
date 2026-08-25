@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -7,8 +7,8 @@ const { databasing, duration } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `timeout`,
     category: `🚫 Administration`,
-    description: `Timeouts a Member from a Guild`,
-    usage: `timeout @User <Timespan> [Reason] | e.g: timeout @User 10h+20min Stop spamming!`,
+    description: `Timeouts a Miembro from a Guild`,
+    usage: `timeout @Usuario <Timespan> [Reason] | e.g: timeout @Usuario 10h+20min Stop spamming!`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -37,7 +37,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message
                     .reply({
@@ -70,7 +70,7 @@ module.exports = {
             if (!message.member || message.member.roles || !message.member.roles.highest)
                 await message.member.fetch().catch(() => {});
             if (kickmember.communicationDisabledUntilTimestamp)
-                return message.reply("❌ **This User is already timeouted!**");
+                return message.reply("❌ **This Usuario is already timeouted!**");
             let time = 0;
             if (!args[1])
                 return message.reply(
@@ -90,7 +90,7 @@ module.exports = {
 
             let reason = args.slice(2).join(` `);
             if (!reason) {
-                reason = `No Reason added | Timeout by: ${message.author.tag} (${message.author.id})`;
+                reason = `No Reason added | Timeout by: ${message.author.username} (${message.author.id})`;
             }
 
             const memberPosition = kickmember.roles.highest.rawPosition;
@@ -115,7 +115,7 @@ module.exports = {
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
-                                .setTitle("❌ **I am not able to manage this User**"),
+                                .setTitle("❌ **I am not able to manage this Usuario**"),
                         ],
                     })
                     .catch(() => {});
@@ -136,7 +136,7 @@ module.exports = {
                                     )
                                     .setFooter(client.getFooter(es))
                                     .setTitle(
-                                        `You got timeouted by \`${message.author.tag}\` for ${duration(time)
+                                        `You got timeouted by \`${message.author.username}\` for ${duration(time)
                                             .map(t => `\`${t}\``)
                                             .join(" ")}`
                                     )
@@ -179,7 +179,7 @@ module.exports = {
                                     )
                                     .setFooter(client.getFooter(es))
                                     .setTitle(
-                                        `**${kickmember.user.tag}** got timeouted by \`${message.author.tag}\` for ${duration(
+                                        `**${kickmember.user.username}** got timeouted by \`${message.author.username}\` for ${duration(
                                             time
                                         )
                                             .map(t => `\`${t}\``)
@@ -210,25 +210,14 @@ module.exports = {
                                                 : null
                                         )
                                         .setFooter(client.getFooter(es))
-                                        .setAuthor(
-                                            `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                            message.author.displayAvatarURL({
-                                                dynamic: true,
-                                            })
-                                        )
+                                        .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                         .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable14"]))
-                                        .addField(
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                        )
-                                        .addField(
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                            eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                        )
+                                        .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                        .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                         .setTimestamp()
                                         .setFooter(client.getFooter(
                                                 "ID: " + message.author.id,
-                                                message.author.displayAvatarURL({ dynamic: true })
+                                                message.author.displayAvatarURL()
                                             )
                                         ),
                                 ],
@@ -266,10 +255,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

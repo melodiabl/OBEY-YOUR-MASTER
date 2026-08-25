@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -7,8 +7,8 @@ module.exports = {
     name: `warn`,
     category: `🚫 Administration`,
     cooldown: 0.5,
-    description: `Warns a Member with a Reason`,
-    usage: `warn @User [Reason]`,
+    description: `Warns a Miembro with a Reason`,
+    usage: `warn @Usuario [Reason]`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -35,7 +35,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -95,9 +95,7 @@ module.exports = {
                     reason: reason,
                     when: new Date().toLocaleString(`de`),
                     oldhighesrole: warnmember.roles ? warnmember.roles.highest : `Had No Roles`,
-                    oldthumburl: warnmember.user.displayAvatarURL({
-                        dynamic: true,
-                    }),
+                    oldthumburl: warnmember.user.displayAvatarURL(),
                 });
                 // Push the action to the user's warnings
                 client.userProfiles.push(warnmember.user.id, newActionId, "warnings");
@@ -126,12 +124,7 @@ module.exports = {
                                     )
                                 )
 
-                                .setAuthor(
-                                    `You've got warned by: ${message.author.tag}`,
-                                    message.author.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({ name: `You've got warned by: ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable6"])),
                         ],
                     })
@@ -157,9 +150,7 @@ module.exports = {
 
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable7"]))
                             .setThumbnail(
-                                warnmember.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
+                                warnmember.user.displayAvatarURL()
                             )
                             .setDescription(
                                 `**He now has: ${warnings.length} Warnings in ${message.guild.name}**`.substring(0, 2048)
@@ -349,23 +340,14 @@ module.exports = {
                                             : null
                                     )
                                     .setFooter(client.getFooter(es))
-                                    .setAuthor(
-                                        `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                        message.author.displayAvatarURL({ dynamic: true })
-                                    )
+                                    .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable24"]))
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                        eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                        eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                    )
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                     .setTimestamp()
                                     .setFooter(client.getFooter(
                                             "ID: " + message.author.id,
-                                            message.author.displayAvatarURL({ dynamic: true })
+                                            message.author.displayAvatarURL()
                                         )
                                     ),
                             ],
@@ -402,10 +384,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

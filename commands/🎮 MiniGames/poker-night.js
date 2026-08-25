@@ -1,4 +1,7 @@
-const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder,
+    PermissionFlagsBits
+} = require("discord.js");
+const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -19,7 +22,7 @@ module.exports = {
 814288819477020702 Fishington.io
     */
     run: async (client, message, args, cmduser, text, prefix) => {
-        return message.reply("This Command is not currently not supported!");
+        return message.reply("This Comando is not currently not supported!");
 
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -45,7 +48,7 @@ module.exports = {
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["minigames"]["poker-night"]["variable1"]))
                 );
-            if (!channel.permissionsFor(channel.guild.members.me).has("CREATE_INSTANT_INVITE")) {
+            if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.CreateInstantInvite)) {
                 const nochannel = new EmbedBuilder()
                     .setDescription(eval(client.la[ls]["cmds"]["minigames"]["poker-night"]["variable2"]))
                     .setColor(es.wrongcolor)

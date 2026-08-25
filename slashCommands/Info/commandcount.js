@@ -7,7 +7,7 @@ const moment = require("moment");
 const fs = require("fs");
 module.exports = {
     name: "commandcount",
-    description: "Shows the Amount of Commands I have!",
+    description: "Muestra la cantidad de comandos que tengo!",
     run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
         //things u can directly access in an interaction!
         const {
@@ -31,13 +31,11 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.color)
                         .setFooter(client.getFooter("It could take up to 30 Seconds ...", client.user.displayAvatarURL()))
-                        .setAuthor(
-                            client.getAuthor(
-                                handlemsg(client.la[ls].cmds.info.commandcount.tempmsg),
-                                "https://cdn.discordapp.com/emojis/756773010123522058.gif",
-                                "https://discord.gg/milrato"
-                            )
-                        ),
+                        .setAuthor({
+                            name: handlemsg(client.la[ls].cmds.info.commandcount.tempmsg),
+                            iconURL: "https://cdn.discordapp.com/emojis/756773010123522058.gif",
+                            url: "https://github.com/melodiabl"
+                        }),
                 ],
                 ephemeral: true,
             });
@@ -81,7 +79,7 @@ module.exports = {
                                 : null
                         )
                         .setFooter(client.getFooter(es))
-                        .setTitle(handlemsg(client.la[ls].cmds.info.commandcount.title, { cmdcount: client.commands.size }))
+.setTitle(handlemsg(client.la[ls].cmds.info.commandcount.title, { cmdcount: client.commands.size }))
                         .setDescription(
                             handlemsg(client.la[ls].cmds.info.commandcount.description, {
                                 catcount: client.categories.length,
@@ -94,12 +92,12 @@ module.exports = {
             });
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
-            return message.reply({
+            return interaction?.reply({
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
+.setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],
             });
@@ -108,10 +106,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

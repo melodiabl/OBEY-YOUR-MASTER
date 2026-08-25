@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupadmincmdlog", "cmdlog", "admincmdlog-setup", "admincmdlogsetup"],
     cooldown: 5,
-    usage: "setup-admincmdlog  -->  Follow the Steps",
-    description: "Enable/Disable logging administration command executions",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-admincmdlog --> Sigue los Pasos",
+    description: "Activar/Desactivar el registro de ejecuciones de comandos de administración",
+    memberpermissions: ['Administrador'],
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -24,22 +24,22 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Enable Log",
-                        description: `Define the Command Log Channel`,
+                        description: `Define the Comando Log Canal`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
                         value: "Disable Log",
-                        description: `Disable the Admin Command Log`,
+                        description: `Disable the Admin Comando Log`,
                         emoji: allEmojis.msg.ERROR,
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Admin Commands Log`,
+                        description: `Show Ajustes of the Admin Commands Log`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Admin-Command-Log-Setup!`,
+                        description: `Cancelar and stop the Admin-Comando-Log-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -48,7 +48,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Admin-Command-Log")
+                    .setPlaceholder("¡Haz clic para configurar the Admin-Command-Log")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -64,11 +64,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Admin Setup",
-                        "https://cdn.discordapp.com/emojis/892521772002447400.png?size=96",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Admin Setup", iconURL: "https://cdn.discordapp.com/emojis/892521772002447400.png?size=96", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -92,14 +88,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -131,7 +127,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     if (message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first()) {
                                         client.settings.set(
                                             message.guild.id,
@@ -149,7 +145,7 @@ module.exports = {
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `If someone executes an Admin Command, an Information will be sent in that Channel`.substring(
+                                                        `If someone executes an Admin Comando, an Information will be sent in that Canal`.substring(
                                                             0,
                                                             2048
                                                         )
@@ -158,7 +154,7 @@ module.exports = {
                                             ],
                                         });
                                     }
-                                    return message.reply("NO CHANNEL PINGED");
+                                    return message.reply("NO SE MENCIONÓ NINGÚN CANAL");
                                 })
                                 .catch(e => {
                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -169,7 +165,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -185,7 +181,7 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable8"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `If someone executes an Admin Command, **no** Information will be sent`.substring(
+                                            `If someone executes an Admin Comando, **no** Information will be sent`.substring(
                                                 0,
                                                 2048
                                             )
@@ -204,7 +200,7 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable9"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Channel:** ${thesettings == "no" ? "Not Setupped" : `<#${thesettings}> | \`${thesettings}\``}`.substring(
+                                            `**Canal:** ${thesettings == "no" ? "Not Setupped" : `<#${thesettings}> | \`${thesettings}\``}`.substring(
                                                 0,
                                                 2048
                                             )
@@ -232,10 +228,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

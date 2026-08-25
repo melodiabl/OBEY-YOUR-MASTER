@@ -3,7 +3,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const ms = require("ms");
-var { EmbedBuilder, Permissions } = require(`discord.js`);
+var { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { databasing, delay } = require(`./functions`);
 const countermap = new Map();
 const messagesmap = new Map();
@@ -74,9 +74,7 @@ module.exports = client => {
                         reason: "AntiSelfBot Autowarn",
                         when: new Date().toLocaleString(`de`),
                         oldhighesrole: message.member.roles ? message.member.roles.highest : `Had No Roles`,
-                        oldthumburl: message.author.displayAvatarURL({
-                            dynamic: true,
-                        }),
+                        oldthumburl: message.author.displayAvatarURL(),
                     });
                     // Push the action to the user's warnings
                     client.userProfiles.push(message.author.id, newActionId, "warnings");
@@ -89,12 +87,12 @@ module.exports = client => {
                         embeds: [
                             new EmbedBuilder()
                                 .setAuthor(
-                                    client.getAuthor(message.author.tag, message.member.displayAvatarURL({ dynamic: true }))
+                                    client.getAuthor(message.author.username, message.member.displayAvatarURL())
                                 )
                                 .setColor("#E67E22")
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 )
                                 .setDescription(
@@ -319,14 +317,14 @@ module.exports = client => {
                                                         : null
                                                 )
                                                 .setFooter(client.getFooter(es))
-                                                .setTitle(`${member.user.tag} Got muted due to using a SelfBot`)
+                                                .setTitle(`${member.user.username} Got muted due to using a SelfBot`)
                                                 .setDescription(`He/She/They will get unmuted after 10 Minutes`),
                                         ],
                                     })
                                     .catch(() => {});
                             })
                             .catch(() => {
-                                return message.channel.send(`❌ **I could not timeout ${member.user.tag}**`).then(m => {
+                                return message.channel.send(`❌ **I could not timeout ${member.user.username}**`).then(m => {
                                     setTimeout(() => {
                                         m.delete().catch(() => {});
                                     }, 5000);
@@ -355,7 +353,7 @@ module.exports = client => {
                                                             : null
                                                     )
                                                     .setFooter(client.getFooter(es))
-                                                    .setTitle(`${member.user.tag} Got kicked for using a Selfbot`),
+                                                    .setTitle(`${member.user.username} Got kicked for using a Selfbot`),
                                             ],
                                         })
                                         .catch(() => {});
@@ -376,7 +374,7 @@ module.exports = client => {
                                                             : null
                                                     )
                                                     .setFooter(client.getFooter(es))
-                                                    .setTitle(`Could not kick ${member.user.tag} using a Selfbot`)
+                                                    .setTitle(`Could not kick ${member.user.username} using a Selfbot`)
                                                     .setDescription(
                                                         `\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``
                                                     ),
@@ -400,8 +398,8 @@ module.exports = client => {
                                                     : null
                                             )
                                             .setFooter(client.getFooter(es))
-                                            .setTitle(`Could not kick ${member.user.tag} using a Selfbot`)
-                                            .setDescription(`\`\`\`Member is not kickable\`\`\``),
+                                            .setTitle(`Could not kick ${member.user.username} using a Selfbot`)
+                                            .setDescription(`\`\`\`Miembro is not kickable\`\`\``),
                                     ],
                                 })
                                 .catch(() => {});
@@ -427,7 +425,7 @@ module.exports = client => {
                                                             : null
                                                     )
                                                     .setFooter(client.getFooter(es))
-                                                    .setTitle(`${member.user.tag} Got banned for using a Selfbot`),
+                                                    .setTitle(`${member.user.username} Got banned for using a Selfbot`),
                                             ],
                                         })
                                         .catch(() => {});
@@ -448,7 +446,7 @@ module.exports = client => {
                                                             : null
                                                     )
                                                     .setFooter(client.getFooter(es))
-                                                    .setTitle(`Could not ban ${member.user.tag} using a Selfbot`)
+                                                    .setTitle(`Could not ban ${member.user.username} using a Selfbot`)
                                                     .setDescription(
                                                         `\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``
                                                     ),
@@ -472,8 +470,8 @@ module.exports = client => {
                                                     : null
                                             )
                                             .setFooter(client.getFooter(es))
-                                            .setTitle(`Could not ban ${member.user.tag} using a Selfbot`)
-                                            .setDescription(`\`\`\`Member is not bannable\`\`\``),
+                                            .setTitle(`Could not ban ${member.user.username} using a Selfbot`)
+                                            .setDescription(`\`\`\`Miembro is not bannable\`\`\``),
                                     ],
                                 })
                                 .catch(() => {});
@@ -486,8 +484,8 @@ module.exports = client => {
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
                                     .setFooter(client.getFooter(es))
-                                    .setTitle(`${member.user.tag} No Selfbots are allowed in here!`)
-                                    .setDescription(`Please stop using them`),
+                                    .setTitle(`${member.user.username} No Selfbots are allowed in here!`)
+                                    .setDescription(`Por favor stop using them`),
                             ],
                         })
                         .then(msg =>

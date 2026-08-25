@@ -8,7 +8,7 @@ module.exports = {
     category: "⚙️ Settings",
     description: "Toggles if u are allowed to use MUSIC and FILTER Comamnds in different channels too! Default: true == Not allowed",
     usage: "togglerequestonly",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     run: async (client, message, args, cmduser, text, prefix) => {
     
       let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
@@ -18,7 +18,7 @@ module.exports = {
       client.settings.set(message.guild.id, !client.settings.get(message.guild.id, `requestonly`), `requestonly`);
       //return success embed
       return message.reply({embeds: [new EmbedBuilder()
-        .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
+        .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
         .setFooter(client.getFooter(es))
         .setTitle(eval(client.la[ls]["cmds"]["settings"]["togglerequestonly"]["variable1"]))
         .setDescription(eval(client.la[ls]["cmds"]["settings"]["togglerequestonly"]["variable2"]))
@@ -36,10 +36,10 @@ module.exports = {
 };*/
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

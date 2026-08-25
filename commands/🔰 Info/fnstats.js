@@ -9,7 +9,7 @@ module.exports = {
     name: "fnstats",
     aliases: ["fortnitestats", "fstats"],
     category: "🔰 Info",
-    description: "Shows the Fortnite Stats of a User",
+    description: "Shows the Fortnite Stats of a Usuario",
     usage: "fnstatns @USER | fnstats <platform> <Epic> | usermentions will only work if the user verification is setup",
     type: "games",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -36,7 +36,7 @@ module.exports = {
                     platform = data.Platform;
                 } else {
                     Epic = args.slice(1).join(" ");
-                    if (!Epic) return message.reply("Please enter a Epic Games name!\n>Usage: `fnstats <platform> <Epic>`");
+                    if (!Epic) return message.reply("Por favor enter a Epic Games name!\n>Usage: `fnstats <platform> <Epic>`");
                     platform = String(args[0]).toLowerCase() || "PC".toLowerCase();
                     if (platform !== "pc" && platform !== "xbl" && platform !== "psn")
                         return message.channel.send(
@@ -53,7 +53,7 @@ module.exports = {
                 });
                 let data = client.epicgamesDB.get(message.author.id);
                 if (!data.epic || data.epic.length < 5)
-                    return message.reply(`❌ **${message.author.tag}** did not verify/connect their Epic Games Account`);
+                    return message.reply(`❌ **${message.author.username}** did not verify/connect their Epic Games Account`);
                 Epic = data.epic;
                 platform = data.Platform;
             }
@@ -89,10 +89,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

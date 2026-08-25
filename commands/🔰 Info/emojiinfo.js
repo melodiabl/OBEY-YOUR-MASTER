@@ -40,24 +40,18 @@ module.exports = {
                             : null
                     )
                     .setThumbnail(emoji?.url)
-                    .addField(
-                        handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.title),
-                        [
+                    .addFields({ name: handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.title), value: [
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.value[0])} \`${emoji?.id}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.value[1])} [\`LINK\`](${emoji?.url})`,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.value[2])} ${authorFetch} (\`${authorFetch.id}\`)`,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.value[3])} \`${moment(emoji?.createdTimestamp).format("DD/MM/YYYY") + " | " + moment(emoji?.createdTimestamp).format("hh:mm:ss")}\``,
-                        ].join("\n")
-                    )
-                    .addField(
-                        handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.title),
-                        [
+                        ].join("\n") })
+                    .addFields({ name: handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.title), value: [
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[0])} \`${checkOrCross(emoji?.requireColons)}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[1])} \`${checkOrCross(emoji?.animated)}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[2])} \`${checkOrCross(emoji?.deleteable)}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[3])} \`${checkOrCross(emoji?.managed)}\``,
-                        ].join("\n")
-                    )
+                        ].join("\n") })
                     .setFooter(client.getFooter(es));
                 message.reply({ embeds: [embed] });
             } else if ((emoji1 = animatedEmoteRegex.exec(message))) {
@@ -79,24 +73,18 @@ module.exports = {
                             : null
                     )
                     .setThumbnail(emoji?.url)
-                    .addField(
-                        handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.title),
-                        [
+                    .addFields({ name: handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.title), value: [
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.value[0])} \`${emoji?.id}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.value[1])} [\`LINK\`](${emoji?.url})`,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.value[2])} ${authorFetch} (\`${authorFetch.id}\`)`,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field1.value[3])} \`${moment(emoji?.createdTimestamp).format("DD/MM/YYYY") + " | " + moment(emoji?.createdTimestamp).format("hh:mm:ss")}\``,
-                        ].join("\n")
-                    )
-                    .addField(
-                        handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.title),
-                        [
+                        ].join("\n") })
+                    .addFields({ name: handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.title), value: [
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[0])} \`${checkOrCross(emoji?.requireColons)}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[1])} \`${checkOrCross(emoji?.animated)}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[2])} \`${checkOrCross(emoji?.deleteable)}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[3])} \`${checkOrCross(emoji?.managed)}\``,
-                        ].join("\n")
-                    )
+                        ].join("\n") })
                     .setFooter(client.getFooter(es));
                 message.reply({ embeds: [embed] });
             } else {
@@ -118,10 +106,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

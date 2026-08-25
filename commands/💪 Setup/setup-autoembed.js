@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupautoembed", "autoembed-setup"],
     cooldown: 5,
-    usage: "setup-autoembed  --> Follow the Steps",
-    description: "Define a Channel where every message is replaced with an EMBED or disable this feature",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-autoembed  --> Sigue los Pasos",
+    description: "Define un Canal donde cada mensaje se reemplaza con un EMBED o desactiva esta función",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -25,22 +25,22 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Add a Channel",
-                        description: `Add a auto sending Embed Setup Channel`,
+                        description: `Agregar un Canal de Configuración de Embed de envío automático`,
                         emoji: NumberEmojis[1],
                     },
                     {
                         value: "Remove a Channel",
-                        description: `Remove a Channel from the Setup`,
+                        description: `Eliminar un Canal de la Configuración`,
                         emoji: NumberEmojis[2],
                     },
                     {
                         value: "Show all Channels",
-                        description: `Show all setup Channels!`,
+                        description: `¡Mostrar todos los Canales configurados!`,
                         emoji: "📑",
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Auto-Nsfw-Setup!`,
+                        description: `Cancelar y detener la Auto-Nsfw-Configuración`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -49,7 +49,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Automated Embed System!")
+                    .setPlaceholder("¡Haz clic para configurar el Sistema de Embed Automatizado!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -65,11 +65,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Auto Embed Setup",
-                        "https://cdn.discordapp.com/emojis/850829013438300221.png?size=96",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Configuración de Embed Automático", iconURL: "https://cdn.discordapp.com/emojis/850829013438300221.png?size=96", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 let used1 = false;
                 //send the menu msg
@@ -95,16 +91,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Seleccionado: \`${collected ? collected.first().values[0] : "Nada"}\`**` : "❌ **NADA SELECCIONADO - CANCELADO**"}`,
                     });
                 });
             }
@@ -201,7 +197,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't ping a valid Channel");
+                                        return message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -213,7 +209,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-autoembed"]["variable12"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -313,7 +309,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't ping a valid Channel");
+                                        return message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -325,7 +321,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-autoembed"]["variable12"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -378,10 +374,10 @@ module.exports = {
 
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

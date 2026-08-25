@@ -1,4 +1,6 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -11,9 +13,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setuplanguage", "setup-caps", "setupcaps", "language-setup", "languagesetup"],
     cooldown: 5,
-    usage: "setup-language  -->  Follow the Steps",
-    description: "Enable + Change the maximum Percent of UPPERCASE (caps) inside of a Message",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-language --> Sigue los Pasos",
+    description: "Activar + Cambiar el porcentaje máximo de MAYÚSCULAS dentro de un Mensaje",
+    memberpermissions: ['Administrador'],
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -42,7 +44,7 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: `Change Language`,
-                        description: "Change the Language of the Bot",
+                        description: "Cambiar el Idioma del Bot",
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
@@ -57,12 +59,12 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ticket-Setup!`,
+                        description: `Cancelar and stop the Ticket-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("Click me to setup the Language!")
+                    .setPlaceholder("¡Haz clic para configurar the Language!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -80,11 +82,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Language System Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/flag-united-kingdom_1f1ec-1f1e7.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Language System Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/flag-united-kingdom_1f1ec-1f1e7.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable1"]));
                 let used1 = false;
                 //send the menu msg
@@ -104,6 +102,8 @@ module.exports = {
                 }
                 //Event
                 client.on("interactionCreate", menu => {
+    if (!menu?.isStringSelectMenu() && !menu?.isButton()) return;
+
                     if (menu?.message.id === menumsg.id) {
                         if (menu?.user.id === cmduser.id) {
                             if (used1)
@@ -114,7 +114,7 @@ module.exports = {
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -126,55 +126,55 @@ module.exports = {
                 switch (menuoptionindex) {
                     case 0: {
                         let button_en = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_en")
                             .setEmoji("🇬🇧")
                             .setLabel("English")
                             .setDisabled(false);
                         let button_de = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_de")
                             .setEmoji("🇩🇪")
                             .setLabel("German")
                             .setDisabled(false);
                         let button_fr = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_fr")
                             .setEmoji("🇫🇷")
                             .setLabel("French")
                             .setDisabled(false);
                         let button_it = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_it")
                             .setEmoji("🇮🇹")
                             .setLabel("Italian")
                             .setDisabled(false);
                         let button_sp = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_sp")
                             .setEmoji("🇪🇸")
                             .setLabel("Spanish")
                             .setDisabled(false);
                         let button_ae = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_in")
                             .setEmoji("🇮🇳")
                             .setLabel("India (Hindi)")
                             .setDisabled(false);
                         let button_nl = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_nl")
                             .setEmoji("🇳🇱")
                             .setLabel("Dutch")
                             .setDisabled(false);
                         let button_tr = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_tr")
                             .setEmoji("🇹🇷")
                             .setLabel("Turkish")
                             .setDisabled(false);
                         let button_ir = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_ir")
                             .setEmoji("🇮🇷")
                             .setLabel("Iran")
@@ -202,55 +202,55 @@ module.exports = {
                         });
 
                         button_en = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_en")
                             .setEmoji("🇬🇧")
                             .setLabel("English")
                             .setDisabled(true);
                         button_de = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_de")
                             .setEmoji("🇩🇪")
                             .setLabel("German")
                             .setDisabled(true);
                         button_fr = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_fr")
                             .setEmoji("🇫🇷")
                             .setLabel("French")
                             .setDisabled(true);
                         button_it = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_it")
                             .setEmoji("🇮🇹")
                             .setLabel("Italian")
                             .setDisabled(true);
                         button_sp = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_sp")
                             .setEmoji("🇪🇸")
                             .setLabel("Spanish")
                             .setDisabled(true);
                         button_ae = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_in")
                             .setEmoji("🇮🇳")
                             .setLabel("India (Hindi)")
                             .setDisabled(true);
                         button_nl = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_nl")
                             .setEmoji("🇳🇱")
                             .setLabel("Dutch")
                             .setDisabled(true);
                         button_tr = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_tr")
                             .setEmoji("🇹🇷")
                             .setLabel("Turkish")
                             .setDisabled(true);
                         button_ir = new ButtonBuilder()
-                            .setStyle(Discord.ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_ir")
                             .setEmoji("🇮🇷")
                             .setLabel("Iran")
@@ -366,10 +366,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

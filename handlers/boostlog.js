@@ -39,19 +39,19 @@ module.exports = function (client, options) {
             let stopBoost = new EmbedBuilder()
                 .setFooter(client.getFooter("ID: " + nM.user.id))
                 .setTimestamp()
-                .setAuthor(client.getAuthor(nM.user.tag, nM.user.displayAvatarURL({ dynamic: true })))
+                .setAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL()))
                 .setColor("#ED4245")
                 .setDescription(`${String(settings.stopBoost).replace(/\{member\}/giu, `${nM.user}`)}`);
             let startBoost = new EmbedBuilder()
                 .setFooter(client.getFooter("ID: " + nM.user.id))
                 .setTimestamp()
-                .setAuthor(client.getAuthor(nM.user.tag, nM.user.displayAvatarURL({ dynamic: true })))
+                .setAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL()))
                 .setColor("#ff8afb")
                 .setDescription(`${String(settings.startBoost).replace(/\{member\}/giu, `${nM.user}`)}`);
             let againBoost = new EmbedBuilder()
                 .setFooter(client.getFooter("ID: " + nM.user.id))
                 .setTimestamp()
-                .setAuthor(client.getAuthor(nM.user.tag, nM.user.displayAvatarURL({ dynamic: true })))
+                .setAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL()))
                 .setColor("#ff8afb")
                 .setDescription(`${String(settings.againBoost).replace(/\{member\}/giu, `${nM.user}`)}`);
 

@@ -29,7 +29,7 @@ module.exports = {
             let clientapp = client.application ? await client.application.fetch().catch(e => false) : false;
             let guild = client.guilds.cache.get("773668217163218944");
             return message.reply({
-                content: `**<:no:833101993668771842> THIS COMMAND IS DISABLED, go to discord.gg/milrato and <#840332764603351101> to get it restarted!**\n\n\n> **Path:**
+                content: `**<:no:833101993668771842> THIS COMMAND IS DISABLED, go to github.com/melodiabl and <#840332764603351101> to get it restarted!**\n\n\n> **Path:**
 \`\`\`yml
 ${process.cwd()}
 \`\`\`
@@ -48,7 +48,7 @@ ${
 \`\`\`yml
 Link: https://discord.com/developers/applications/${client.user.id}
 Name: ${clientapp.name} 
-${clientapp.owner.discriminator ? "Owner: " + clientapp.owner.tag : "Team: " + clientapp.owner.name + "\n |-> Members: " + clientapp.owner.members.map(uid => `${uid.user.tag}`).join(", ") + "\n |-> Team-Owner: " + `${guild.members.cache.get(clientapp.owner.ownerId) && guild.members.cache.get(clientapp.owner.ownerId).user ? guild.members.cache.get(clientapp.owner.ownerId).user.tag : clientapp.owner.ownerId}`} 
+${clientapp.owner.discriminator ? "Owner: " + clientapp.owner.tag : "Team: " + clientapp.owner.name + "\n |-> Members: " + clientapp.owner.members.map(uid => `${uid.user.username}`).join(", ") + "\n |-> Team-Owner: " + `${guild.members.cache.get(clientapp.owner.ownerId) && guild.members.cache.get(clientapp.owner.ownerId).user ? guild.members.cache.get(clientapp.owner.ownerId).user.username : clientapp.owner.ownerId}`} 
 Icon: ${clientapp.iconURL()}
 Bot-Public: ${clientapp.botPublic ? "✅" : "❌"} (Invite able)
 \`\`\`
@@ -87,10 +87,10 @@ ${clientapp.description ? clientapp.description : "❌ NO DESCRIPTION YET!"}
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

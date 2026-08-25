@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require("ms");
 const { databasing, swap_pages } = require(`${process.cwd()}/handlers/functions`);
@@ -7,7 +7,7 @@ module.exports = {
     name: "giveaway",
     aliases: ["g"],
     category: "🚫 Administration",
-    description: "Giveaway manager",
+    description: "Gestor de Sorteos",
     usage: "giveaway <start/end/reroll/edit/delete/list>",
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -34,7 +34,7 @@ module.exports = {
             !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
             !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
             ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-            !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+            !message.member.permissions.has([PermissionFlagsBits.Administrator])
         )
             return message.reply({
                 embeds: [
@@ -52,26 +52,26 @@ module.exports = {
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable3"]))
-                        .setDescription(`> \`${prefix}giveaway start\` ... to start a new giveaway
+                        .setDescription(`> \`${prefix}giveaway start\` ... para iniciar un nuevo sorteo
 
-> \`${prefix}giveaway end <G-Id>\` ... to end a specific giveaway
+> \`${prefix}giveaway end <G-Id>\` ... para finalizar un sorteo específico
 
-> \`${prefix}giveaway reroll <G-Id> [winneramount]\` ... to reroll a specific giveaway
+> \`${prefix}giveaway reroll <G-Id> [winneramount]\` ... para repetir un sorteo específico
 
-> \`${prefix}giveaway pause <G-Id>\` ... to pause a specific giveaway
+> \`${prefix}giveaway pause <G-Id>\` ... para pausar un sorteo específico
 
-> \`${prefix}giveaway resume <G-Id>\` ... to resume a specific giveaway
+> \`${prefix}giveaway resume <G-Id>\` ... para reanudar un sorteo específico
 
-> \`${prefix}giveaway edit <G-Id>\` ... to edit a specific giveaway
+> \`${prefix}giveaway edit <G-Id>\` ... para editar un sorteo específico
 
-> \`${prefix}giveaway delete <G-Id>\` ... to delete a specific giveaway
+> \`${prefix}giveaway delete <G-Id>\` ... para eliminar un sorteo específico
 
-> \`${prefix}giveaway list [server/all]\` ... to list giveaways in here / globally
+> \`${prefix}giveaway list [server/all]\` ... para listar sorteos aquí / globalmente
 
-:warning: **SOMETIMES GIVEAWAY DON'T END** :warning:
-> Here is something you can do:
+:warning: **A VECES LOS SORTEOS NO TERMINAN** :warning:
+> Aquí hay algo que puedes hacer:
 > \`${prefix}giveaway winner <G-Id>\`
-> This will send the winner(s) of the Giveaway, received from the Database`),
+> Esto enviará los ganadores del Sorteo, recibidos de la Base de Datos`),
                 ],
             });
         var originalowner = message.author.id;
@@ -106,7 +106,7 @@ module.exports = {
                         .first()
                         .mentions.channels.filter(ch => ch.guild.id == message.guild.id)
                         .first() || message.guild.channels.cache.get(collected.first().content);
-                if (!channel) throw { message: "You did not mentioned a valid Channel, where the Giveaway should start!" };
+                if (!channel) throw { message: "¡No mencionaste un Canal válido donde debería iniciar el Sorteo!" };
                 giveawayChannel = channel;
 
                 let giveawayDuration;
@@ -138,7 +138,7 @@ module.exports = {
                 for (const a of gargs) {
                     giveawayDuration += ms(a.split(" ").join(""));
                 }
-                if (!giveawayDuration || isNaN(giveawayDuration)) throw { message: "You added a not valid Time!" };
+                if (!giveawayDuration || isNaN(giveawayDuration)) throw { message: "¡Agregaste un Tiempo no válido!" };
 
                 let giveawayNumberWinners;
                 await message.reply({
@@ -166,7 +166,7 @@ module.exports = {
                 });
                 giveawayNumberWinners = collected.first().content;
                 if (!giveawayNumberWinners || isNaN(giveawayNumberWinners) || parseInt(giveawayNumberWinners) <= 0)
-                    throw { message: "You added an invalid amount of Winners" };
+                    throw { message: "Agregaste una cantidad de Ganadores no válida" };
 
                 let giveawayPrize;
                 await message.reply({
@@ -217,31 +217,31 @@ module.exports = {
                     reaction: "867721863151747092",
                     lastChance: {
                         enabled: true,
-                        content: "⚠️ **LAST CHANCE TO ENTER!** ⚠️",
+                        content: "⚠️ **¡ÚLTIMA OPORTUNIDAD PARA ENTRAR!** ⚠️",
                         threshold: 60000,
                         embedColor: "#FEE75C",
                     },
                     pauseOptions: {
                         isPaused: false,
-                        content: "⏸️ **THIS GIVEAWAY IS PAUSED!** ⏸️",
+                        content: "⏸️ **¡ESTE SORTEO ESTÁ PAUSADO!** ⏸️",
                         unPauseAfter: null,
                         embedColor: "#582812",
                     },
                     bonusEntries: [],
                     messages: {
-                        inviteToParticipate: "***React with <a:Tada_Yellow:867721863151747092> to participate!***\n",
-                        drawing: "> Ends: {timestamp}\n",
-                        hostedBy: "**Hosted by:** {this.hostedBy}",
-                        dropMessage: "Be the first to react with <a:Tada_Yellow:867721863151747092>",
-                        noWinner: "\n**Giveaway cancelled!**\n> No valid participations. :cry:",
-                        endedAt: "Ends at",
+                        inviteToParticipate: "***¡Reacciona con <a:Tada_Yellow:867721863151747092> para participar!***\n",
+                        drawing: "> Termina: {timestamp}\n",
+                        hostedBy: "**Organizado por:** {this.hostedBy}",
+                        dropMessage: "Sé el primero en reaccionar con <a:Tada_Yellow:867721863151747092>",
+                        noWinner: "\n**¡Sorteo cancelado!**\n> No hay participaciones válidas. :cry:",
+                        endedAt: "Termina en",
                         giveaway:
-                            "<a:Tada_Yellow:867721863151747092> **GIVEAWAY STARTED** <a:Tada_Yellow:867721863151747092>",
+                            "<a:Tada_Yellow:867721863151747092> **SORTEO INICIADO** <a:Tada_Yellow:867721863151747092>",
                         giveawayEnded:
-                            "<a:Tada_Green:867721862858539048> **GIVEAWAY ENDED** <a:Tada_Green:867721862858539048>",
+                            "<a:Tada_Green:867721862858539048> **SORTEO FINALIZADO** <a:Tada_Green:867721862858539048>",
                         winMessage:
-                            "**Congrats** {winners}!\n> You won **{this.prize}**!\n> **Jump:** {this.messageURL}\nHosted by: {this.hostedBy}",
-                        embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}',
+                            "**Felicitaciones** {winners}!\n> Has ganado **{this.prize}**!\n> **Saltar:** {this.messageURL}\nOrganizado por: {this.hostedBy}",
+                        embedFooter: '{this.winnerCount} Ganador{this.winnerCount > 1 ? "es" : ""}',
                     },
                 };
 
@@ -259,9 +259,9 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setTitle(`Do you want to add Bonus Entry Roles?`)
+                            .setTitle(`¿Quieres agregar Roles de Entrada Extra?`)
                             .setDescription(
-                                `Type: \`no\` or \`0\` Bonus Entries, if you don't want to have any!\n\nTo add Bonus Entries, **Ping a Role and afterwards type the amount of Entries!**\n\n**Example:**\n> \`@ROLE 3\`\n\n> *If you want to add Multiple Bonus Entries do something like this:*\nExample:\n> \`@Role 2, @Role 2, @Role5\``
+                                `Escribe: \`no\` o \`0\` Entradas Extra, si no quieres tener ninguna!\n\nPara agregar Entradas Extra, **Menciona un Rol y luego escribe la cantidad de Entradas!**\n\n**Ejemplo:**\n> \`@ROL 3\`\n\n> *Si quieres agregar Múltiples Entradas Extra haz algo como esto:*\nEjemplo:\n> \`@Rol 2, @Rol 2, @Role5\``
                             ),
                     ],
                 });
@@ -275,9 +275,9 @@ module.exports = {
                 if (bonusentriesdata.mentions.roles.size > 0) {
                     let args = bonusentriesdata.content.split(",").map(i => i?.trim());
                     if (bonusentriesdata.mentions.roles.size > 1) {
-                        if (!args[0]) return message.reply("❌ Invalid Input of Multiple Bonus Roles, check the EXAMPLE!");
-                        options.messages.giveaway += "\n\n**BONUS ENTRY ROLES:**\n";
-                        options.messages.giveawayEnded += "\n\n**BONUS ENTRY ROLES:**\n";
+                        if (!args[0]) return message.reply("❌ ¡Entrada de Múltiples Roles Extra no válida, revisa el EJEMPLO!");
+                        options.messages.giveaway += "\n\n**ROLES DE ENTRADA EXTRA:**\n";
+                        options.messages.giveawayEnded += "\n\n**ROLES DE ENTRADA EXTRA:**\n";
                         [...bonusentriesdata.mentions.roles.values()].forEach((role, index) => {
                             let curData = args[index].split(" ");
                             let Amount = Math.floor(Number(curData[1]) || null) || null;
@@ -290,8 +290,8 @@ module.exports = {
                                 ),
                                 cumulative: true,
                             });
-                            options.messages.giveaway += `> <@&${role.id}> | \`${Amount ? Amount : 1} Points\`\n`;
-                            options.messages.giveawayEnded += `> <@&${role.id}> | \`${Amount ? Amount : 1} Points\`\n`;
+                            options.messages.giveaway += `> <@&${role.id}> | \`${Amount ? Amount : 1} Puntos\`\n`;
+                            options.messages.giveawayEnded += `> <@&${role.id}> | \`${Amount ? Amount : 1} Puntos\`\n`;
                         });
                     }
                     //One Bonus entrie
@@ -304,8 +304,8 @@ module.exports = {
                             ),
                             cumulative: true,
                         });
-                        options.messages.giveaway += `\n\n**BONUS ENTRY ROLE:**\n> <@&${bonusentriesdata.mentions.roles.first().id}> | \`${Math.floor(Number(bonusentriesdata.content.split(" ")[1])) ? Math.floor(Number(bonusentriesdata.content.split(" ")[1])) : 1} Points\`\n`;
-                        options.messages.giveawayEnded += `\n\n**BONUS ENTRY ROLE:**\n> <@&${bonusentriesdata.mentions.roles.first().id}> | \`${Math.floor(Number(bonusentriesdata.content.split(" ")[1])) ? Math.floor(Number(bonusentriesdata.content.split(" ")[1])) : 1} Points\`\n`;
+                        options.messages.giveaway += `\n\n**ROL DE ENTRADA EXTRA:**\n> <@&${bonusentriesdata.mentions.roles.first().id}> | \`${Math.floor(Number(bonusentriesdata.content.split(" ")[1])) ? Math.floor(Number(bonusentriesdata.content.split(" ")[1])) : 1} Puntos\`\n`;
+                        options.messages.giveawayEnded += `\n\n**ROL DE ENTRADA EXTRA:**\n> <@&${bonusentriesdata.mentions.roles.first().id}> | \`${Math.floor(Number(bonusentriesdata.content.split(" ")[1])) ? Math.floor(Number(bonusentriesdata.content.split(" ")[1])) : 1} Puntos\`\n`;
                     }
                 }
 
@@ -323,9 +323,9 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setTitle(`Do you want a Required Role?`)
+                            .setTitle(`¿Quieres un Rol Requerido?`)
                             .setDescription(
-                                `Type: \`no\` or \`0\` Required Roles, if you don't want to have any!\n\nTo add Required Roles, **Ping all Roles** which should be **required (the Users just need at least one of them)**\n\n**Example:**\n> \`@ROLE1 @Role2\` (1 Role is also enough)\n\n**NOTE:**\n> *Users without the Role, can react, but __won't be drawn__!*`
+                                `Escribe: \`no\` o \`0\` Roles Requeridos, si no quieres tener ninguno!\n\nPara agregar Roles Requeridos, **Menciona todos los Roles** que deberían ser **requeridos (los Usuarios solo necesitan al menos uno de ellos)**\n\n**Ejemplo:**\n> \`@ROL1 @Role2\` (1 Rol también es suficiente)\n\n**NOTA:**\n> *Los Usuarios sin el Rol pueden reaccionar, pero __no serán elegidos__!*`
                             ),
                     ],
                 });
@@ -338,8 +338,8 @@ module.exports = {
                 requiredroles = collected.first();
                 if (requiredroles.mentions.roles.size >= 1) {
                     let theRoles = [...requiredroles.mentions.roles.values()];
-                    options.messages.giveaway += `\n\n**REQUIRED ROLES:**\n${[...theRoles].map(r => `> <@&${r.id}>`).join("\n")}`;
-                    options.messages.giveawayEnded += `\n\n**REQUIRED ROLES:**\n${[...theRoles].map(r => `> <@&${r.id}>`).join("\n")}`;
+                    options.messages.giveaway += `\n\n**ROLES REQUERIDOS:**\n${[...theRoles].map(r => `> <@&${r.id}>`).join("\n")}`;
+                    options.messages.giveawayEnded += `\n\n**ROLES REQUERIDOS:**\n${[...theRoles].map(r => `> <@&${r.id}>`).join("\n")}`;
                     theRoles = theRoles.map(r => r.id);
                     options.exemptMembers = new Function(
                         "member",
@@ -383,7 +383,7 @@ module.exports = {
                     setEndTimestamp: Date.now(),
                 })
                 .then(() => {
-                    message.reply({ content: "Giveaway will end in less then 10 Seconds!" });
+                    message.reply({ content: "¡El sorteo terminará en menos de 10 Segundos!" });
                 })
                 .catch(e => {
                     if (e.startsWith(`Giveaway with message Id ${giveaway.messageId} is already ended.`)) {
@@ -411,7 +411,7 @@ module.exports = {
                     message.reply({
                         content:
                             eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable35"]) +
-                            "Tipp!\nAdd the amount of reroll winners to the end!",
+                                    "¡Consejo!\n¡Agrega la cantidad de ganadores para repetir al final!",
                     });
                 })
                 .catch(e => {
@@ -421,7 +421,7 @@ module.exports = {
                         console.error(e);
                         message.reply({
                             content:
-                                "<:no:833101993668771842> **An error occured...**```" +
+                                "<:no:833101993668771842> **Ocurrió un error...**\`\`\`" +
                                 String(e.message).substring(0, 1900) +
                                 "```",
                         });
@@ -439,7 +439,7 @@ module.exports = {
             client.giveawaysManager
                 .pause(giveaway.messageId)
                 .then(() => {
-                    message.reply({ content: "Successfully! Paused the Giveaway" });
+                    message.reply({ content: "¡Éxito! Sorteo Pausado" });
                 })
                 .catch(e => {
                     if (e.startsWith(`Giveaway with message Id ${giveaway.messageId} is not ended.`)) {
@@ -448,7 +448,7 @@ module.exports = {
                         console.error(e);
                         message.reply({
                             content:
-                                "<:no:833101993668771842> **An error occured...**```" +
+                                "<:no:833101993668771842> **Ocurrió un error...**\`\`\`" +
                                 String(e.message).substring(0, 1900) +
                                 "```",
                         });
@@ -468,7 +468,7 @@ module.exports = {
             client.giveawaysManager
                 .unpause(giveaway.messageId)
                 .then(() => {
-                    message.reply({ content: "Successfully! Unpaused the Giveaway!" });
+                    message.reply({ content: "¡Éxito! Sorteo Reanudado" });
                 })
                 .catch(e => {
                     if (e.startsWith(`Giveaway with message Id ${giveaway.messageId} is not ended.`)) {
@@ -477,7 +477,7 @@ module.exports = {
                         console.error(e);
                         message.reply({
                             content:
-                                "<:no:833101993668771842> **An error occured...**```" +
+                                "<:no:833101993668771842> **Ocurrió un error...**\`\`\`" +
                                 String(e.message).substring(0, 1900) +
                                 "```",
                         });
@@ -529,11 +529,11 @@ module.exports = {
                 for (let i = 0; i < allGiveaways.length; i++) {
                     try {
                         buffer.push(
-                            `> Prize: ${allGiveaways[i].prize}\n> Duration: \`${ms(new Date() - allGiveaways[i].startAt)}\` | [\`JUMP TO IT\`](https://discord.com/channels/${allGiveaways[i].guildId}/${allGiveaways[i].channelId}/${allGiveaways[i].messageId})\n`
+                            `> Premio: ${allGiveaways[i].prize}\n> Duración: \`${ms(new Date() - allGiveaways[i].startAt)}\` | [\`SALTAR A ÉL\`](https://discord.com/channels/${allGiveaways[i].guildId}/${allGiveaways[i].channelId}/${allGiveaways[i].messageId})\n`
                         );
                     } catch {}
                 }
-                if (buffer.length < 1) return message.reply("No Giveaways available!");
+                if (buffer.length < 1) return message.reply("¡No hay Sorteos disponibles!");
                 return swap_pages(
                     client,
                     message,
@@ -552,15 +552,15 @@ module.exports = {
                                     .get(allGiveaways[i].guildId)
                                     .channels.cache.first()
                                     .permissionsFor(message.guild.members.me)
-                                    .has(PermissionFlagsBits.CREATE_INSTANT_INVITE)
+                                    .has(PermissionFlagsBits.CreateInstantInvite)
                               ? await client.guilds.cache.get(allGiveaways[i].guildId).channels.cache.first().createInvite()
                               : "";
                     buffer.push(
-                        `> Guild: [\`${client.guilds.cache.get(allGiveaways[i].guildId).name}\`](${invite})\n> Prize: ${allGiveaways[i].prize}\n> Duration: \`${ms(new Date() - allGiveaways[i].startAt)}\` | [\`JUMP TO IT\`](https://discord.com/channels/${allGiveaways[i].guildId}/${allGiveaways[i].channelId}/${allGiveaways[i].messageId})\n`
+                        `> Guild: [\`${client.guilds.cache.get(allGiveaways[i].guildId).name}\`](${invite})\n> Premio: ${allGiveaways[i].prize}\n> Duración: \`${ms(new Date() - allGiveaways[i].startAt)}\` | [\`SALTAR A ÉL\`](https://discord.com/channels/${allGiveaways[i].guildId}/${allGiveaways[i].channelId}/${allGiveaways[i].messageId})\n`
                     );
                 } catch {}
             }
-            if (buffer.length < 1) return message.reply("No Giveaways available!");
+            if (buffer.length < 1) return message.reply("¡No hay Sorteos disponibles!");
             return swap_pages(
                 client,
                 message,
@@ -571,13 +571,13 @@ module.exports = {
             args.shift();
             if (!args[0]) {
                 return message.reply({
-                    content: `❌ The right usage of this Command is: \`${prefix}giveaway winner <GiveawayId>\` ... note that GiveawayId is the MessageId of the (Embed) Giveaway-Message`,
+                    content: `❌ El uso correcto de este Comando es: \`${prefix}giveaway winner <GiveawayId>\` ... ten en cuenta que GiveawayId es el MessageId del mensaje (Embed) del Sorteo`,
                 });
             }
             let giveaway = client.giveawayDB.find(g => g.messageId === args[0]);
 
             if (!giveaway) {
-                return message.reply({ content: "❌ Could not find Data of this Giveaway" });
+                return message.reply({ content: "❌ No se pudieron encontrar Datos de este Sorteo" });
             }
             if (giveaway.messages && giveaway.messages.winMessage && giveaway.messages.winMessage.includes("{winners}")) {
                 return message.reply({
@@ -594,7 +594,7 @@ module.exports = {
             }
             return message.reply({
                 content:
-                    `The Winner of https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId} ${giveaway.winnerIds.length == 1 ? "is" : "are"} ${giveaway.winnerIds.map(d => `<@${d}>`).join(", ")}`.substring(
+                    `El Ganador de https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId} ${giveaway.winnerIds.length == 1 ? "es" : "son"} ${giveaway.winnerIds.map(d => `<@${d}>`).join(", ")}`.substring(
                         0,
                         2000
                     ),
@@ -606,26 +606,26 @@ module.exports = {
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable47"]))
-                        .setDescription(`> \`${prefix}giveaway start\` ... to start a new giveaway
+                        .setDescription(`> \`${prefix}giveaway start\` ... para iniciar un nuevo sorteo
 
-> \`${prefix}giveaway end <G-Id>\` ... to end a specific giveaway
+> \`${prefix}giveaway end <G-Id>\` ... para finalizar un sorteo específico
 
-> \`${prefix}giveaway reroll <G-Id> [winneramount]\` ... to reroll a specific giveaway
+> \`${prefix}giveaway reroll <G-Id> [winneramount]\` ... para repetir un sorteo específico
 
-> \`${prefix}giveaway pause <G-Id>\` ... to pause a specific giveaway
+> \`${prefix}giveaway pause <G-Id>\` ... para pausar un sorteo específico
 
-> \`${prefix}giveaway resume <G-Id>\` ... to resume a specific giveaway
+> \`${prefix}giveaway resume <G-Id>\` ... para reanudar un sorteo específico
 
-> \`${prefix}giveaway edit <G-Id>\` ... to edit a specific giveaway
+> \`${prefix}giveaway edit <G-Id>\` ... para editar un sorteo específico
 
-> \`${prefix}giveaway delete <G-Id>\` ... to delete a specific giveaway
+> \`${prefix}giveaway delete <G-Id>\` ... para eliminar un sorteo específico
 
-> \`${prefix}giveaway list [server/all]\` ... to list giveaways in here / globally
+> \`${prefix}giveaway list [server/all]\` ... para listar sorteos aquí / globalmente
 
-:warning: **SOMETIMES GIVEAWAY DON'T END** :warning:
-> Here is something you can do:
+:warning: **A VECES LOS SORTEOS NO TERMINAN** :warning:
+> Aquí hay algo que puedes hacer:
 > \`${prefix}giveaway winner <G-Id>\`
-> This will send the winner(s) of the Giveaway, received from the Database`),
+> Esto enviará los ganadores del Sorteo, recibidos de la Base de Datos`),
                 ],
             });
         }
@@ -647,23 +647,14 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setAuthor(
-                                `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                message.author.displayAvatarURL({ dynamic: true })
-                            )
+                            .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]))
-                            .addField(
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                            )
-                            .addField(
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                            )
+                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                             .setTimestamp()
                             .setFooter(client.getFooter(
                                     "ID: " + message.author.id,
-                                    message.author.displayAvatarURL({ dynamic: true })
+                                    message.author.displayAvatarURL()
                                 )
                             ),
                     ],

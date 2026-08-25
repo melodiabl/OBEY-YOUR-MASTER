@@ -1,4 +1,6 @@
-const { EmbedBuilder, Collection, AttachmentBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, Collection, AttachmentBuilder, PermissionFlagsBits,
+    ButtonStyle
+} = require("discord.js");
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -137,7 +139,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR]) &&
+                !message.member.permissions.has([PermissionFlagsBits.Administrator]) &&
                 !message.member.roles.cache.some(r => ticket.adminroles.includes(r ? r.id : r))
             )
                 return message.reply({
@@ -150,27 +152,27 @@ module.exports = {
                     ],
                 });
             let button_close = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("ticket_close")
                 .setLabel("Close")
                 .setEmoji("🔒");
             let button_delete = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Secondary)
+                .setStyle(ButtonStyle.Secondary)
                 .setCustomId("ticket_delete")
                 .setLabel("Delete")
                 .setEmoji("🗑️");
             let button_transcript = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary)
                 .setCustomId("ticket_transcript")
                 .setLabel("Transcript")
                 .setEmoji("📑");
             let button_user = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_user")
                 .setLabel("Manage Users")
                 .setEmoji("👤");
             let button_role = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_role")
                 .setLabel("Manage Roles")
                 .setEmoji("📌");
@@ -201,7 +203,7 @@ module.exports = {
 
 > 📑 **== Create a Log** of the Ticket
 
-> 👤 **==** Manage **User** Access (Add/Remove)
+> 👤 **==** Manage **Usuario** Access (Add/Remove)
 
 > 📌 **==** Manage **Role** Access (Add/Remove)`
                         )
@@ -227,10 +229,10 @@ module.exports = {
 
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

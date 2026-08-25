@@ -11,7 +11,7 @@ const path = require("path");
 module.exports = {
     name: path.parse(__filename).name,
     category: "🕹️ Fun",
-    usage: `${path.parse(__filename).name} [@User]`,
+    usage: `${path.parse(__filename).name} [@Usuario]`,
     type: "user",
     description: "*Image cmd in the style:* " + path.parse(__filename).name,
     run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
@@ -21,7 +21,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+.setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
@@ -48,10 +48,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

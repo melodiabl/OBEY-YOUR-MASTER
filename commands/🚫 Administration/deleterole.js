@@ -2,18 +2,21 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, PermissionFlagsBits,
+    ButtonStyle
+} = require(`discord.js`);
+const Discord = require("discord.js");
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `deleterole`,
     category: `🚫 Administration`,
     aliases: [`roledelete`, "delete-role", "role-delete"],
     cooldown: 4,
-    usage: `deleterole  @Role`,
-    description: `Delets a Role from this Server`,
+    usage: `deleterole  @Rol`,
+    description: `Delets a Rol from this Servidor`,
     type: "role",
     run: async (client, message, args, cmduser, text, prefix) => {
-        if (!message.guild.members.me.permissions.has([PermissionFlagsBits.MANAGE_ROLES]))
+        if (!message.guild.members.me.permissions.has([PermissionFlagsBits.ManageRoles]))
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
@@ -46,7 +49,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -63,10 +66,10 @@ module.exports = {
             if (!role || role == null || role == undefined || role.name == null || role.name == undefined)
                 return message.reply({ embeds: [] });
             let button_verify = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("deleterole_verify")
                 .setLabel("Verify this Step")
-                .setEmoji("833101995723194437");
+                .setEmoji("✅");
             let msg = await message.channel.send({
                 content: `<@${message.author.id}>`,
                 embeds: [
@@ -77,7 +80,7 @@ module.exports = {
                 components: [new ActionRowBuilder().addComponents(button_verify)],
             });
             let edited = false;
-            const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
+            const collector = msg.createMessageComponentCollector( { filter:bb => !bb?.user.bot,
                 time: 30000,
             }); //collector for 5 seconds
             collector.on("collect", async b => {
@@ -90,7 +93,7 @@ module.exports = {
                 edited = true;
                 msg.edit({
                     content: `<@${message.author.id}>`,
-                    embeds: [new EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                    embeds: [new EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
                     components: [new ActionRowBuilder().addComponents(button_verify.setDisabled(true))],
                 }).catch(e => {
                     console.log(String(e).grey);
@@ -99,7 +102,7 @@ module.exports = {
                 //page forward
                 if (b?.customId == "deleterole_verify") {
                     let membersize = [...role.members.values()].length;
-                    role.delete(`${message.author.tag} Requested a Role delete`)
+                    role.delete(`${message.author.username} Requested a Role delete`)
                         .then(r => {
                             message.reply({
                                 embeds: [
@@ -137,27 +140,16 @@ module.exports = {
                                                         : null
                                                 )
                                                 .setFooter(client.getFooter(es))
-                                                .setAuthor(
-                                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                                    message.author.displayAvatarURL({
-                                                        dynamic: true,
-                                                    })
-                                                )
+                                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                                 .setDescription(
                                                     eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable9"])
                                                 )
-                                                .addField(
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                                )
-                                                .addField(
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                                )
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                                 .setTimestamp()
                                                 .setFooter(client.getFooter(
                                                         "ID: " + message.author.id,
-                                                        message.author.displayAvatarURL({ dynamic: true })
+                                                        message.author.displayAvatarURL()
                                                     )
                                                 ),
                                         ],
@@ -193,8 +185,8 @@ module.exports = {
                                 button_verify
                                     .setDisabled(true)
                                     .setLabel("FAILED TO VERIFY")
-                                    .setEmoji("833101993668771842")
-                                    .setStyle(Discord.ButtonStyle.Danger)
+                                    .setEmoji("❌")
+                                    .setStyle(ButtonStyle.Danger)
                             ),
                         ],
                     }).catch(e => {
@@ -218,10 +210,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

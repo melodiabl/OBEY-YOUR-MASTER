@@ -1,4 +1,6 @@
-const { EmbedBuilder, Collection, AttachmentBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, Collection, AttachmentBuilder, PermissionFlagsBits, ChannelType,
+    ButtonStyle
+} = require("discord.js");
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -76,7 +78,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR]) &&
+                !message.member.permissions.has([PermissionFlagsBits.Administrator]) &&
                 !message.member.roles.cache.some(r => ticket.adminroles.includes(r ? r.id : r))
             )
                 return message.reply({
@@ -101,10 +103,10 @@ module.exports = {
                 });
             }
             let button_ticket_verify = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Success)
+                .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_verify")
                 .setLabel("Verify this Step")
-                .setEmoji("833101995723194437");
+                .setEmoji("✅");
             message
                 .reply({
                     content: `<@${buttonuser.id}>`,
@@ -116,7 +118,7 @@ module.exports = {
                     components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
                 })
                 .then(async msg => {
-                    const collector = msg.createMessageComponentCollector(bb => !bb?.user.bot, {
+                    const collector = msg.createMessageComponentCollector( { filter:bb => !bb?.user.bot,
                         time: 30000,
                     }); //collector for 5 seconds
                     collector.on("collect", async b => {
@@ -131,7 +133,7 @@ module.exports = {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.EmbedBuilder().setTitle("Verified!").setColor(es.color)],
+                                embeds: [new Discord.EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
                                 components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
@@ -153,7 +155,7 @@ module.exports = {
 
                             if (closedParent) {
                                 let ticketCh = msg.guild.channels.cache.get(closedParent);
-                                if (ticketCh && ticketCh.type == "GUILD_CATEGORY") {
+                                if (ticketCh && ticketCh.type == ChannelType.GuildCategory) {
                                     if (ticketCh.children.size < 50) {
                                         await msg.channel
                                             .setParent(ticketCh.id, { lockPermissions: false })
@@ -176,7 +178,7 @@ module.exports = {
                                 }
                             }
 
-                            if (msg.channel.permissionsFor(msg.channel.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                            if (msg.channel.permissionsFor(msg.channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                 await msg.channel.permissionOverwrites.edit(data.user, {
                                     SEND_MESSAGES: false,
                                     VIEW_CHANNEL: false,
@@ -199,17 +201,14 @@ module.exports = {
                                                 : null
                                         )
                                         .setDescription(
-                                            `Closed the Ticket of <@${data.user}> and removed him from the Channel!`.substring(
+                                            `Closed the Ticket of <@${data.user}> and removed him from the Canal!`.substring(
                                                 0,
                                                 2000
                                             )
                                         )
-                                        .addField("User: ", `<@${data.user}>`)
-                                        .addField(
-                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variablex_8"]),
-                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable8"])
-                                        )
-                                        .addField("State: ", `${data.state}`)
+                                        .addFields({ name: "User: ", value: `<@${data.user}>` })
+                                        .addFields({ name: eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variablex_8"]), value: eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable8"]) })
+                                        .addFields({ name: "State: ", value: `${data.state}` })
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -241,12 +240,7 @@ module.exports = {
                                                         : null
                                                 )
                                                 .setFooter(client.getFooter(es))
-                                                .setAuthor(
-                                                    `ticket --> LOG | ${message.author.tag}`,
-                                                    message.author.displayAvatarURL({
-                                                        dynamic: true,
-                                                    })
-                                                )
+                                                .setAuthor({ name: `ticket --> LOG | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                                 .setDescription(
                                                     eval(
                                                         client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
@@ -254,18 +248,12 @@ module.exports = {
                                                         ]
                                                     )
                                                 )
-                                                .addField(
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                                )
-                                                .addField(
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                                )
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                                 .setTimestamp()
                                                 .setFooter(client.getFooter(
                                                         "ID: " + message.author.id,
-                                                        message.author.displayAvatarURL({ dynamic: true })
+                                                        message.author.displayAvatarURL()
                                                     )
                                                 ),
                                         ],
@@ -278,7 +266,7 @@ module.exports = {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.EmbedBuilder().setTitle("Cancelled!").setColor(es.wrongcolor)],
+                                embeds: [new Discord.EmbedBuilder().setTitle("Cancelado!").setColor(es.wrongcolor)],
                                 components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
@@ -299,8 +287,8 @@ module.exports = {
                                         button_ticket_verify
                                             .setDisabled(true)
                                             .setLabel("FAILED TO VERIFY")
-                                            .setEmoji("833101993668771842")
-                                            .setStyle(Discord.ButtonStyle.Danger)
+                                            .setEmoji("❌")
+                                            .setStyle(ButtonStyle.Danger)
                                     ),
                                 ],
                             }).catch(e => {
@@ -326,10 +314,10 @@ module.exports = {
 
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

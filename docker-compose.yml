@@ -1,4 +1,30 @@
 services:
+  lavalink:
+    profiles: ["managed-lavalink"]
+    image: ghcr.io/lavalink-devs/lavalink:4.2.2-alpine
+    container_name: obey_lavalink
+    restart: unless-stopped
+    network_mode: "host"
+    env_file: .env
+    environment:
+      - _JAVA_OPTIONS=-Xms256M -Xmx768M -Djava.net.preferIPv6Addresses=true -Djava.net.preferIPv4Stack=false
+    volumes:
+      - ./lavalink/application.yml:/opt/Lavalink/application.yml:ro
+      - ./lavalink/plugins:/opt/Lavalink/plugins:ro
+    mem_limit: 900m
+    memswap_limit: 1100m
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --header=\"Authorization: $${LAVALINK_PASSWORD}\" -O /dev/null http://127.0.0.1:2333/version || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
+
   bot:
     build: .
     container_name: obey_bot
@@ -7,6 +33,12 @@ services:
     network_mode: "host"
     mem_limit: 1200m
     memswap_limit: 1400m
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://127.0.0.1:3002/', r => process.exit(r.statusCode < 500 ? 0 : 1)).on('error', () => process.exit(1))\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     logging:
       driver: "json-file"
       options:

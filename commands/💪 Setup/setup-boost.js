@@ -10,9 +10,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupboost", "boostsetup"],
     cooldown: 5,
-    usage: "setup-boost <Message/disable>",
-    description: "Send a Boost 'Thank you' Message in the dm of a booster",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-boost <Mensaje/disable>",
+    description: "Envía un mensaje de agradecimiento por Boost al dm de un booster",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -25,21 +25,21 @@ module.exports = {
                     message: "",
                     log: false,
                     stopBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **stopped Boosting us..** <:Cat_Sad:867722685949804565>",
+                        "<a:Server_Boosts:867777823468027924> {member} **dejó de impulsarnos..** <:Cat_Sad:867722685949804565>",
                     startBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **has boosted us!** <a:Light_Saber_Dancce:867721861462229013>",
+                        "<a:Server_Boosts:867777823468027924> {member} **nos ha impulsado!** <a:Light_Saber_Dancce:867721861462229013>",
                     againBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **has boosted us again!** <:Tada_WON:867724032207224833>",
+                        "<a:Server_Boosts:867777823468027924> {member} **nos ha impulsado de nuevo!** <:Tada_WON:867724032207224833>",
                 },
             });
 
-            if (!args[0]) return message.reply("Usage: setup-boost <Message/disable>");
+            if (!args[0]) return message.reply("Uso: setup-boost <Mensaje/disable>");
             if (args[0].toLowerCase() == "disable") {
                 client.settings.set(message.guild.id, false, "boost.enabled");
-                message.reply("Disabled the boost messages");
+                message.reply("Mensajes de boost desactivados");
             } else {
                 message.reply(
-                    `I will send a dm to each user if they boost this server with this message:\n${args.join(" ")}`.substring(
+                    `Enviaré un dm a cada usuario si impulsan este servidor con este mensaje:\n${args.join(" ")}`.substring(
                         0,
                         2000
                     )
@@ -63,10 +63,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

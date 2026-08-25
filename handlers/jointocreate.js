@@ -1,4 +1,4 @@
-const { EmbedBuilder, Collection, Permissions } = require("discord.js");
+const { EmbedBuilder, Collection, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const kernelsettings = require(`${process.cwd()}/botconfig/settings.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -85,7 +85,7 @@ module.exports = function (client) {
                     let randommemberid = members[Math.floor(Math.random() * members.length)];
                     //set the new owner + perms
                     client.jointocreatemap.set(`owner_${vc.guild.id}_${vc.id}`, randommemberid);
-                    if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                    if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                         vc.permissionOverwrites
                             .edit(randommemberid, {
                                 CONNECT: true,
@@ -106,20 +106,17 @@ module.exports = function (client) {
                                     embeds: [
                                         new EmbedBuilder()
                                             .setColor(es.color)
-                                            .setThumbnail(oldState.member.displayAvatarURL({ dynamic: true }))
+                                            .setThumbnail(oldState.member.displayAvatarURL())
                                             .setFooter(client.getFooter(es))
                                             .setTitle(
-                                                `The VC-OWNER \`${oldState.member.user.tag}\` left the VC! A new Random Owner got picked!`
+                                                `The VC-OWNER \`${oldState.member.user.username}\` left the VC! A new Random Propietario got picked!`
                                             )
-                                            .addField(
-                                                `You now have access to all \`voice Commands\``,
-                                                `> ${client.commands
+                                            .addFields({ name: `You now have access to all \`voice Commands\``, value: `> ${client.commands
                                                     .filter(cmd => cmd.category === "🎤 Voice")
                                                     .first()
                                                     .extracustomdesc.split(",")
                                                     .map(i => i?.trim())
-                                                    .join("︲")}`
-                                            ),
+                                                    .join("︲")}` }),
                                     ],
                                 }).catch(() => {});
                             })
@@ -172,7 +169,7 @@ module.exports = function (client) {
                         let randommemberid = members[Math.floor(Math.random() * members.length)];
                         //set the new owner + perms
                         client.jointocreatemap.set(`owner_${vc.guild.id}_${vc.id}`, randommemberid);
-                        if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                        if (vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                             vc.permissionOverwrites
                                 .edit(randommemberid, {
                                     CONNECT: true,
@@ -193,20 +190,17 @@ module.exports = function (client) {
                                         embeds: [
                                             new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setThumbnail(oldState.member.displayAvatarURL({ dynamic: true }))
+                                                .setThumbnail(oldState.member.displayAvatarURL())
                                                 .setFooter(client.getFooter(es))
                                                 .setTitle(
-                                                    `The VC-OWNER \`${oldState.member.user.tag}\` left the VC! A new Random Owner got picked!`
+                                                    `The VC-OWNER \`${oldState.member.user.username}\` left the VC! A new Random Propietario got picked!`
                                                 )
-                                                .addField(
-                                                    `You now have access to all \`voice Commands\``,
-                                                    `> ${client.commands
+                                                .addFields({ name: `You now have access to all \`voice Commands\``, value: `> ${client.commands
                                                         .filter(cmd => cmd.category === "🎤 Voice")
                                                         .first()
                                                         .extracustomdesc.split(",")
                                                         .map(i => i?.trim())
-                                                        .join("︲")}`
-                                                ),
+                                                        .join("︲")}` }),
                                         ],
                                     }).catch(() => {});
                                 })
@@ -223,10 +217,10 @@ module.exports = function (client) {
 
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -8,22 +8,22 @@ module.exports = {
     name: `nickname`,
     category: `🚫 Administration`,
     aliases: [`changenickname`],
-    description: `Change the Nickname of a Member`,
-    usage: `nickname @User [New Nickname]`,
+    description: `Change the Nickname of a Miembro`,
+    usage: `nickname @Usuario [New Nickname]`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
 
         try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.MANAGE_NICKNAMES]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.ManageNicknames]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(
-                                `<:no:833101993668771842> **I am missing the Permission to Manage Nicknames of others**`
+                                `<:no:833101993668771842> **I am missing the Permiso to Manage Nicknames of others**`
                             ),
                     ],
                 });
@@ -49,7 +49,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.MANAGE_NICKNAMES])
+                !message.member.permissions.has([PermissionFlagsBits.ManageNicknames])
             )
                 return message.reply({
                     embeds: [
@@ -69,8 +69,8 @@ module.exports = {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle(`<:no:833101993668771842> **You forgot to ping a Member**`)
-                            .setDescription(`Usage: \`${prefix}nickname @User newnickname\``),
+                            .setTitle(`<:no:833101993668771842> **You forgot to ping a Miembro**`)
+                            .setDescription(`Usage: \`${prefix}nickname @Usuario newnickname\``),
                     ],
                 });
             if (!args[1])
@@ -80,7 +80,7 @@ module.exports = {
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(`<:no:833101993668771842> **You forgot to add a Nickname**`)
-                            .setDescription(`Usage: \`${prefix}nickname @User newnickname\``),
+                            .setDescription(`Usage: \`${prefix}nickname @Usuario newnickname\``),
                     ],
                 });
             let nickname = args.slice(1).join(" ");
@@ -91,7 +91,7 @@ module.exports = {
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
                             .setTitle(`<:no:833101993668771842> **The Nickname must have smaller then 32 Characters**`)
-                            .setDescription(`Usage: \`${prefix}nickname @User newnickname\``),
+                            .setDescription(`Usage: \`${prefix}nickname @Usuario newnickname\``),
                     ],
                 });
             kickmember
@@ -103,7 +103,7 @@ module.exports = {
                                 .setColor(es.color)
                                 .setFooter(client.getFooter(es))
                                 .setTitle(
-                                    `${allEmojis.msg.SUCCESS} **Successfully changed the username of \`${kickmember.user.tag}\` to \`${nickname}\`**`
+                                    `${allEmojis.msg.SUCCESS} **Successfully changed the username of \`${kickmember.user.username}\` to \`${nickname}\`**`
                                 ),
                         ],
                     });
@@ -136,10 +136,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

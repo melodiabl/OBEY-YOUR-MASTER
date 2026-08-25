@@ -1,4 +1,4 @@
-var { EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require(`discord.js`);
+var { EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder, ChannelType } = require(`discord.js`);
 var Discord = require(`discord.js`);
 const { getNumberEmojis } = require("../../botconfig/emojiFunctions");
 var config = require(`${process.cwd()}/botconfig/config.json`);
@@ -10,10 +10,10 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupmembercount", "membercount-setup", "membercountsetup", "setup-membercounter", "setupmembercounter"],
     cooldown: 5,
-    usage: "setup-membercount  -->  Follow the Steps",
+    usage: "setup-membercount --> Sigue los Pasos",
     description:
-        "This Setup allows you to specify a Channel which Name should be renamed every 10 Minutes to a Member Counter of Bots, Users, or Members",
-    memberpermissions: ["ADMINISTRATOR"],
+        "This Configuración allows you to specify a Canal which Name should be renamed every 10 Minutes to a Miembro Counter of Bots, Users, or Members",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -34,7 +34,7 @@ module.exports = {
                     const emoji = NumberEmojis[i];
                     menuoptions.push({
                         value: `${i} Member Counter`,
-                        description: `Manage/Edit the ${i}. Member Counter`,
+                        description: `Manage/Edit the ${i}. Miembro Counter`,
                         ...(emoji ? { emoji } : {}),
                     });
                 }
@@ -43,7 +43,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Member Counter!")
+                    .setPlaceholder("¡Haz clic para configurar the Member Counter!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -59,11 +59,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Member Counter Setup",
-                        "https://cdn.discordapp.com/emojis/891040423605321778.png?size=96",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Member Counter Setup", iconURL: "https://cdn.discordapp.com/emojis/891040423605321778.png?size=96", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 let used1 = false;
                 //send the menu msg
@@ -96,14 +92,14 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -131,7 +127,7 @@ module.exports = {
                     .awaitMessages({ filter: m => m.author.id == cmduser.id, max: 1, time: 90000, errors: ["time"] })
                     .then(async collected => {
                         var message = collected.first();
-                        if (!message) return message.reply("NO MESSAGE SENT");
+                        if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                         let channel =
                             message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first() ||
                             message.guild.channels.cache.get(message.content);
@@ -177,29 +173,21 @@ module.exports = {
 
 *Send the Name NOW!, mind that the Name must be shorter then 32 Characters!!!*`
                                         )
-                                        .addField(
-                                            `**USER KEYWORDS** (USERS __including__ Bots):`,
-                                            `> \`{user}\` / \`{users}\` will be replaced with the amount of all users, no matter if bot or not
+                                        .addFields({ name: `**USER KEYWORDS** (USERS __including__ Bots):`, value: `> \`{user}\` / \`{users}\` will be replaced with the amount of all users, no matter if bot or not
 
 > \`{online}\` will be replaced with the amount of **ONLINE** USERS
 > \`{idle}\` will be replaced with the amount of **IDLE** USERS
 > \`{dnd}\` will be replaced with the amount of **DND** USERS
 > \`{offline}\` will be replaced with the amount of **OFFLINE** USERS
-> \`{allonline}\` will be replaced with the amount of **ONLINE**+**IDLE**+**DND** USERS  `
-                                        )
-                                        .addField(
-                                            `**MEMBER KEYWORDS** (Members __without__ Bots):`,
-                                            `> \`{member}\` / \`{members}\` will be replaced with the amount of all Members (Humans)
+> \`{allonline}\` will be replaced with the amount of **ONLINE**+**IDLE**+**DND** USERS  ` })
+                                        .addFields({ name: `**MEMBER KEYWORDS** (Members __without__ Bots):`, value: `> \`{member}\` / \`{members}\` will be replaced with the amount of all Members (Humans)
 
 > \`{onlinemember}\` will be replaced with the amount of **ONLINE** MEMBERS
 > \`{idlemember}\` will be replaced with the amount of **IDLE** MEMBERS
 > \`{dndmember}\` will be replaced with the amount of **DND** MEMBERS
 > \`{offlinemember}\` will be replaced with the amount of **OFFLINE** MEMBERS
-> \`{allonlinemember}\` will be replaced with the amount of **ONLINE**+**IDLE**+**DND** MEMBERS (no Bots)  `
-                                        )
-                                        .addField(
-                                            `**OTHER KEYWORDS:**`,
-                                            `> \`{bot}\` / \`{bots}\` will be replaced with the amount of all bots
+> \`{allonlinemember}\` will be replaced with the amount of **ONLINE**+**IDLE**+**DND** MEMBERS (no Bots)  ` })
+                                        .addFields({ name: `**OTHER KEYWORDS:**`, value: `> \`{bot}\` / \`{bots}\` will be replaced with the amount of all bots
 > \`{channel}\` / \`{channels}\` will be replaced with the amount of all Channels
 > \`{text}\` / \`{texts}\` will be replaced with the amount of Text Channels
 > \`{voice}\` / \`{voices}\` will be replaced with the amount of Voice Channels
@@ -210,16 +198,12 @@ module.exports = {
 > \`{openthread}\` / \`{openthreads}\` will be replaced with the amount of open Threads
 > \`{archivedthread}\` / \`{archivedthreads}\` will be replaced with the amount of archived Threads
 
-> \`{role}\` / \`{roles}\` will be replaced with the amount of Roles`
-                                        )
-                                        .addField(
-                                            `**Examples:**`,
-                                            `> \`🗣 Members: {members}\`
+> \`{role}\` / \`{roles}\` will be replaced with the amount of Roles` })
+                                        .addFields({ name: `**Examples:**`, value: `> \`🗣 Members: {members}\`
 > \`🗣 Roles: {roles}\`
 > \`🗣 Channels: {channels}\`
 > \`🗣 Bots: {bots} \`
-> \`🗣 All Users: {users}\``
-                                        )
+> \`🗣 All Users: {users}\`` })
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -232,7 +216,7 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) throw "NO MESSAGE SENT";
+                                    if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                     let name = message.content;
                                     if (name && name.length <= 32) {
                                         let guild = message.guild;
@@ -337,15 +321,15 @@ module.exports = {
 
                                                 .replace(
                                                     /{text}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_TEXT").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildText).size
                                                 )
                                                 .replace(
                                                     /{voice}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_VOICE").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildVoice).size
                                                 )
                                                 .replace(
                                                     /{stage}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_STAGE_VOICE").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildStageVoice).size
                                                 )
                                                 .replace(
                                                     /{thread}/i,
@@ -353,36 +337,36 @@ module.exports = {
                                                 )
                                                 .replace(
                                                     /{news}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_NEWS").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildAnnouncement).size
                                                 )
                                                 .replace(
                                                     /{category}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_CATEGORY").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildCategory).size
                                                 )
                                                 .replace(
                                                     /{openthread}/i,
                                                     guild.channels.cache.filter(
-                                                        ch => ch.isThread() && !ch.deleted && !ch.archived
+                                                        ch => ch.isThread() && !ch.archived
                                                     ).size
                                                 )
                                                 .replace(
                                                     /{archivedthread}/i,
                                                     guild.channels.cache.filter(
-                                                        ch => ch.isThread() && !ch.deleted && ch.archived
+                                                        ch => ch.isThread() && ch.archived
                                                     ).size
                                                 )
 
                                                 .replace(
                                                     /{texts}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_TEXT").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildText).size
                                                 )
                                                 .replace(
                                                     /{voices}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_VOICE").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildVoice).size
                                                 )
                                                 .replace(
                                                     /{stages}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_STAGE_VOICE").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildStageVoice).size
                                                 )
                                                 .replace(
                                                     /{threads}/i,
@@ -390,18 +374,18 @@ module.exports = {
                                                 )
                                                 .replace(
                                                     /{parent}/i,
-                                                    guild.channels.cache.filter(ch => ch.type == "GUILD_CATEGORY").size
+                                                    guild.channels.cache.filter(ch => ch.type == ChannelType.GuildCategory).size
                                                 )
                                                 .replace(
                                                     /{openthreads}/i,
                                                     guild.channels.cache.filter(
-                                                        ch => ch.isThread() && !ch.deleted && !ch.archived
+                                                        ch => ch.isThread() && !ch.archived
                                                     ).size
                                                 )
                                                 .replace(
                                                     /{archivedthreads}/i,
                                                     guild.channels.cache.filter(
-                                                        ch => ch.isThread() && !ch.deleted && ch.archived
+                                                        ch => ch.isThread() && ch.archived
                                                     ).size
                                                 )
                                         );
@@ -526,18 +510,18 @@ module.exports = {
 
                                                             .replace(
                                                                 /{text}/i,
-                                                                guild.channels.cache.filter(ch => ch.type == "GUILD_TEXT")
+                                                                guild.channels.cache.filter(ch => ch.type == ChannelType.GuildText)
                                                                     .size
                                                             )
                                                             .replace(
                                                                 /{voice}/i,
-                                                                guild.channels.cache.filter(ch => ch.type == "GUILD_VOICE")
+                                                                guild.channels.cache.filter(ch => ch.type == ChannelType.GuildVoice)
                                                                     .size
                                                             )
                                                             .replace(
                                                                 /{stage}/i,
                                                                 guild.channels.cache.filter(
-                                                                    ch => ch.type == "GUILD_STAGE_VOICE"
+                                                                    ch => ch.type == ChannelType.GuildStageVoice
                                                                 ).size
                                                             )
                                                             .replace(
@@ -546,42 +530,42 @@ module.exports = {
                                                             )
                                                             .replace(
                                                                 /{news}/i,
-                                                                guild.channels.cache.filter(ch => ch.type == "GUILD_NEWS")
+                                                                guild.channels.cache.filter(ch => ch.type == ChannelType.GuildAnnouncement)
                                                                     .size
                                                             )
                                                             .replace(
                                                                 /{category}/i,
                                                                 guild.channels.cache.filter(
-                                                                    ch => ch.type == "GUILD_CATEGORY"
+                                                                    ch => ch.type == ChannelType.GuildCategory
                                                                 ).size
                                                             )
                                                             .replace(
                                                                 /{openthread}/i,
                                                                 guild.channels.cache.filter(
-                                                                    ch => ch.isThread() && !ch.deleted && !ch.archived
+                                                                    ch => ch.isThread() && !ch.archived
                                                                 ).size
                                                             )
                                                             .replace(
                                                                 /{archivedthread}/i,
                                                                 guild.channels.cache.filter(
-                                                                    ch => ch.isThread() && !ch.deleted && ch.archived
+                                                                    ch => ch.isThread() && ch.archived
                                                                 ).size
                                                             )
 
                                                             .replace(
                                                                 /{texts}/i,
-                                                                guild.channels.cache.filter(ch => ch.type == "GUILD_TEXT")
+                                                                guild.channels.cache.filter(ch => ch.type == ChannelType.GuildText)
                                                                     .size
                                                             )
                                                             .replace(
                                                                 /{voices}/i,
-                                                                guild.channels.cache.filter(ch => ch.type == "GUILD_VOICE")
+                                                                guild.channels.cache.filter(ch => ch.type == ChannelType.GuildVoice)
                                                                     .size
                                                             )
                                                             .replace(
                                                                 /{stages}/i,
                                                                 guild.channels.cache.filter(
-                                                                    ch => ch.type == "GUILD_STAGE_VOICE"
+                                                                    ch => ch.type == ChannelType.GuildStageVoice
                                                                 ).size
                                                             )
                                                             .replace(
@@ -591,19 +575,19 @@ module.exports = {
                                                             .replace(
                                                                 /{parent}/i,
                                                                 guild.channels.cache.filter(
-                                                                    ch => ch.type == "GUILD_CATEGORY"
+                                                                    ch => ch.type == ChannelType.GuildCategory
                                                                 ).size
                                                             )
                                                             .replace(
                                                                 /{openthreads}/i,
                                                                 guild.channels.cache.filter(
-                                                                    ch => ch.isThread() && !ch.deleted && !ch.archived
+                                                                    ch => ch.isThread() && !ch.archived
                                                                 ).size
                                                             )
                                                             .replace(
                                                                 /{archivedthreads}/i,
                                                                 guild.channels.cache.filter(
-                                                                    ch => ch.isThread() && !ch.deleted && ch.archived
+                                                                    ch => ch.isThread() && ch.archived
                                                                 ).size
                                                             )}\`
 
@@ -626,13 +610,13 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable11"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
                                 });
                         } else {
-                            message.reply("NO CHANNEL PINGED / NO ID ADDED");
+                            message.reply("NO SE MENCIONÓ NINGÚN CANAL / NO ID ADDED");
                         }
                     })
                     .catch(e => {
@@ -642,7 +626,7 @@ module.exports = {
                                 new Discord.EmbedBuilder()
                                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable12"]))
                                     .setColor(es.wrongcolor)
-                                    .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                     .setFooter(client.getFooter(es)),
                             ],
                         });
@@ -664,10 +648,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
+ * Bot Coded by Melodia | https://github?.com/melodiabl/discord-js-lavalink-Music-Bot-erela-js
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

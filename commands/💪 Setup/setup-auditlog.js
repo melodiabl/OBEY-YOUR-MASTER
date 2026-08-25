@@ -10,9 +10,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupauditlog", "auditlog-setup", "auditlogsetup"],
     cooldown: 5,
-    usage: "setup-auditlog  -->  Follow the Steps",
-    description: "Activate a Logger which logs every action in your Server which could be critical!",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-auditlog --> Sigue los Pasos",
+    description: "Activate a Logger which logs every action in your Servidor which could be critical!",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -43,10 +43,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

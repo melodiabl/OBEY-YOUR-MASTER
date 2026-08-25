@@ -8,7 +8,7 @@ module.exports = {
     name: "epic",
     aliases: ["epicinfo"],
     category: "🔰 Info",
-    description: "Get the Epic Information About the User",
+    description: "Get the Epic Information About the Usuario",
     usage: "epic [@USER]",
     type: "user",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -50,18 +50,18 @@ module.exports = {
             });
             let data = client.epicgamesDB.get(user.id);
             if (!data.epic || data.epic.length < 5)
-                return message.reply(`❌ **${user.tag}** did not verify/connect their Epic Games Account`);
+                return message.reply(`❌ **${user.username}** did not verify/connect their Epic Games Account`);
             message
                 .reply({
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
+                            .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
                             .setTitle(`Epic Games Account!`)
-                            .addField("**Epic Games Name:**", `\`\`\`${data.epic}\`\`\``)
-                            .addField("**Platform:**", `\`\`\`${data.Platform}\`\`\``)
-                            .addField("**Input Method:**", `\`\`\`${data.InputMethod}\`\`\``)
-                            .setFooter({ text: "ID: " + user.id, iconURL: user.displayAvatarURL({ dynamic: true }) }),
+                            .addFields({ name: "**Epic Games Name:**", value: `\`\`\`${data.epic}\`\`\`` })
+                            .addFields({ name: "**Platform:**", value: `\`\`\`${data.Platform}\`\`\`` })
+                            .addFields({ name: "**Input Method:**", value: `\`\`\`${data.InputMethod}\`\`\`` })
+                            .setFooter({ text: "ID: " + user.id, iconURL: user.displayAvatarURL() }),
                     ],
                 })
                 .catch(() => {});
@@ -81,10 +81,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

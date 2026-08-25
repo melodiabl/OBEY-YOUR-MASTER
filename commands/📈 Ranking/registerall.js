@@ -8,7 +8,7 @@ module.exports = {
     aliases: [""], //every parameter can be an alias
     cooldown: 4, //this will set it to a 4 second cooldown
     usage: "registerall", //this is for the help command for EACH cmd
-    description: "Register everyone in the Server to the Database", //the description of the command
+    description: "Register everyone in the Servidor to the Database", //the description of the command
     type: "manage",
     //running the command with the parameters: client, message, args, user, text, prefix
     run: async (client, message, args, cmduser, text, prefix) => {},

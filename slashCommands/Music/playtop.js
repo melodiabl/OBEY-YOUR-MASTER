@@ -1,64 +1,37 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const playermanager = require(`../../handlers/playermanager`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
+function fmtMs(ms){const s=Math.floor((ms||0)/1000);return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 module.exports = {
-    name: `playtop`,
-    category: `Song`,
-    aliases: [`ptop`, `pt`],
-    description: `Adds a song with the given name/url on the top of the queue`,
-    usage: `playtop <link/query>`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    options: [
-        {
-            String: {
-                name: "what_song",
-                description: "What Song/Playlist do you want to play? <LINK/SEARCH-QUERY>",
-                required: true,
-            },
-        },
-    ],
-    run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
-        //let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return interaction?.reply({
-                ephemeral: true,
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            let args = [interaction?.options.getString("what_song")];
-            if (!args[0]) args = [interaction?.options.getString("song")];
-            //Send information
-            interaction?.reply({
-                content: `Searching and attempting to play: **${args[0]}** from <:Youtube:840260133686870036> \`Youtube\`!`,
-            });
-            //Play the song from youtube
-            return playermanager(client, message, args, `playtop:youtube`, interaction);
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'playtop', description: 'Agrega una cancion al inicio de la cola (siguiente en reproducir)',
+  parameters: { type: 'music', activeplayer: false, previoussong: false },
+  options: [{ String: { name: 'cancion', description: 'Nombre o URL de la cancion', required: true } }],
+  run: async (client, interaction) => {
+    const query = interaction.options.getString('cancion')
+    if (!interaction.member?.voice?.channel) return interaction.reply({ content: '❌ Debes estar en un canal de voz.', ephemeral: true })
+    if (!client.music) return interaction.reply({ content: '❌ Sistema de música no disponible.', ephemeral: true })
+    await interaction.deferReply()
+    try {
+      const result = await client.music.search(query, interaction.user)
+      if (!result?.tracks?.length) return interaction.editReply({ content: '❌ Sin resultados.' })
+      const track = result.tracks[0]
+      const state = client.music.getState(interaction.guild.id)
+      // Insert at front of queue
+      if (state.currentTrack) {
+        state.queue.unshift(track)
+        const info = track.info||track
+        const embed = new EmbedBuilder().setColor(0x5865F2)
+          .setTitle('⬆️ Añadida al inicio de la cola')
+          .setDescription(`**[${info.title||query}](${info.uri||''})**\n${info.author||''}\nDuración: \`${fmtMs(info.length)}\``)
+          .setThumbnail(info.artworkUrl|| undefined)
+          .setFooter({ text: `Pedido por ${interaction.user.username}` })
+        return interaction.editReply({ embeds: [embed] })
+      } else {
+        // No current track — join and play directly
+        const vc = interaction.member.voice.channel
+        await client.music.joinChannel(interaction.guild.id, vc.id, interaction.channel.id)
+        state.queue.unshift(track)
+        await client.music._playNext(interaction.guild.id, client.shoukaku?.players?.get(interaction.guild.id))
+        return interaction.editReply({ content: `▶️ Reproduciendo **${track.info?.title||query}**` })
+      }
+    } catch (e) { await interaction.editReply({ content: `❌ ${e.message}` }) }
+  },
+}

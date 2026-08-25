@@ -1,4 +1,4 @@
-var { EmbedBuilder, Permissions, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require(`discord.js`);
+var { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 var config = require(`${process.cwd()}/botconfig/config.json`);
@@ -11,8 +11,8 @@ module.exports = {
     aliases: ["setupantinuke", "antinuke-setup", "antinukesetup", "antinukesystem"],
     cooldown: 5,
     usage: "setup-antinuke --> Follow Steps",
-    description: "Manage the Anti Nuke System",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Gestiona el Sistema Anti Nuke",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -255,23 +255,23 @@ module.exports = {
                     },
                     {
                         value: "Manage Settings",
-                        description: `Enable/Disable & Change the Anti Nuke Settings`,
+                        description: `Enable/Disable & Change the Anti Nuke Ajustes`,
                         emoji: allEmojis.msg.settings,
                     },
                     {
                         value: "Suggested Settings",
-                        description: `Use our suggested Settings!`,
+                        description: `Use our suggested Ajustes!`,
                         emoji: allEmojis.msg.builder,
                     },
                     {
                         value: "Sync Quarantine Role",
-                        description: `Add Perm !VIEW_CH. to all Chans.for the Qu. Role`,
+                        description: `Add Perm !VIEW_CH. to all Chans.for the Qu. Rol`,
                         emoji: "🔒",
                     },
 
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Anti-Nuke-Setup!`,
+                        description: `Cancelar and stop the Anti-Nuke-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -280,7 +280,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Anti Nuke System!")
+                    .setPlaceholder("¡Haz clic para configurar the Anti Nuke System!")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -296,11 +296,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Anti Nuke Setup",
-                        "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Anti Nuke Setup", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable3"]));
                 let used1 = false;
                 //send the menu msg
@@ -315,40 +311,19 @@ module.exports = {
                     used1 = true;
                     if (menu?.values[0] == "Information") {
                         await message.reply({
-                            content: `${allEmojis.msg.SUCCESS} **The Current Anti-Nuke Settings**`,
+                            content: `${allEmojis.msg.SUCCESS} **The Current Anti-Nuke Ajustes**`,
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable5"]))
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_6"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable6"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_7"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable7"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_8"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable8"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_9"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable9"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_10"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable10"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_11"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable11"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_12"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable12"])
-                                    )
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_6"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable6"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_7"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable7"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_8"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable8"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_9"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable9"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_10"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable10"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_11"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable11"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_12"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable12"]) })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable13"])),
                             ],
                         });
@@ -358,10 +333,7 @@ module.exports = {
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable14"]))
-                                    .addField(
-                                        "**Other Security Systems:**",
-                                        `\`${prefix}setup-antidiscord\` *... Enable/Disable & Adjust anti Discord Invite Links*\n\`${prefix}setup-antilink\` *... Enable/Disable & Adjust anti Links*\n\`${prefix}setup-anticaps\` *... Enable/Disable & Adjust anti Caps spamming*\n\`${prefix}setup-blacklist\` *... to add/remove Bad (blacklsited) Words*`
-                                    ),
+                                    .addFields({ name: "**Other Security Systems:**", value: `\`${prefix}setup-antidiscord\` *... Enable/Disable & Adjust anti Discord Invite Links*\n\`${prefix}setup-antilink\` *... Enable/Disable & Adjust anti Links*\n\`${prefix}setup-anticaps\` *... Enable/Disable & Adjust anti Caps spamming*\n\`${prefix}setup-blacklist\` *... to add/remove Bad (blacklsited) Words*` }),
                             ],
                         });
                     } else if (menu?.values[0] == "Manage Whitelist") {
@@ -384,27 +356,27 @@ module.exports = {
                             },
                             {
                                 value: "Anti Create Role Users/Roles",
-                                description: `Add/Remove Anti-Create-Role Users/Roles`,
+                                description: `Add/Remove Anti-Create-Rol Users/Roles`,
                                 emoji: allEmojis.msg.roles,
                             },
                             {
                                 value: "Anti Delete Role Users/Roles",
-                                description: `Add/Remove Anti-Delete-Role Users/Roles`,
+                                description: `Add/Remove Anti-Delete-Rol Users/Roles`,
                                 emoji: allEmojis.msg.roles,
                             },
                             {
                                 value: "Anti Create Channel Users/Roles",
-                                description: `Add/Remove Anti-Create-Channel Users/Roles`,
+                                description: `Add/Remove Anti-Create-Canal Users/Roles`,
                                 emoji: allEmojis.msg.channel,
                             },
                             {
                                 value: "Anti Delete Channel Users/Roles",
-                                description: `Add/Remove Anti-Delete-Channel Users/Roles`,
+                                description: `Add/Remove Anti-Delete-Canal Users/Roles`,
                                 emoji: allEmojis.msg.channel,
                             },
                             {
                                 value: "Cancel",
-                                description: `Cancel and stop the Anti-Nuke-Setup!`,
+                                description: `Cancelar and stop the Anti-Nuke-Configuración!`,
                                 emoji: allEmojis.msg.cancel,
                             },
                         ];
@@ -413,7 +385,7 @@ module.exports = {
                             .setCustomId("MenuSelection")
                             .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                             .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                            .setPlaceholder("Click me to setup the Anti Nuke Settings!")
+                            .setPlaceholder("¡Haz clic para configurar the Anti Nuke Settings!")
                             .addOptions(
                                 menuoptions.map(option => {
                                     let Obj = {
@@ -429,11 +401,7 @@ module.exports = {
                         //define the embed
                         let MenuEmbed = new Discord.EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor(
-                                "Anti Nuke Settings",
-                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png",
-                                "https://discord.gg/milrato"
-                            )
+                            .setAuthor({ name: "Anti Nuke Settings", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" })
                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable16"]));
                         //send the menu msg
                         let menumsg = await message.reply({
@@ -472,7 +440,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message) throw "NO MESSAGE SENT";
+                                        if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         let users = message.mentions.members
                                             .filter(r => r.guild.id == message.guild.id)
                                             .map(r => r.id);
@@ -519,23 +487,17 @@ module.exports = {
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `**Removed [${removedroles.length}] Roles and [${removedusers.length}] Users from the __general__ Whitelist!**`.substring(
+                                                        `**Removido [${removedroles.length}] Roles and [${removedusers.length}] Users from the __general__ Whitelist!**`.substring(
                                                             0,
                                                             2048
                                                         )
                                                     )
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_21"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable21"])
-                                                    )
-                                                    .addField(
-                                                        eval(
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable21"]) })
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_22"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable22"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable22"]) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -551,7 +513,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable23"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -578,7 +540,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message) throw "NO MESSAGE SENT";
+                                        if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         let users = message.mentions.members
                                             .filter(r => r.guild.id == message.guild.id)
                                             .map(r => r.id);
@@ -625,23 +587,17 @@ module.exports = {
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removed \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Bot add__ Whitelist (module)!**`.substring(
+                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Bot add__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
                                                         )
                                                     )
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_27"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable27"])
-                                                    )
-                                                    .addField(
-                                                        eval(
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable27"]) })
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_28"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable28"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable28"]) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -657,7 +613,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable29"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -684,7 +640,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message) throw "NO MESSAGE SENT";
+                                        if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         let users = message.mentions.members
                                             .filter(r => r.guild.id == message.guild.id)
                                             .map(r => r.id);
@@ -750,23 +706,17 @@ module.exports = {
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removed \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Kick/Ban__ Whitelist (module)!**`.substring(
+                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Kick/Ban__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
                                                         )
                                                     )
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_33"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable33"])
-                                                    )
-                                                    .addField(
-                                                        eval(
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable33"]) })
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_34"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable34"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable34"]) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -782,7 +732,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable35"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -809,7 +759,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message) throw "NO MESSAGE SENT";
+                                        if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         let users = message.mentions.members
                                             .filter(r => r.guild.id == message.guild.id)
                                             .map(r => r.id);
@@ -875,23 +825,17 @@ module.exports = {
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removed \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Create Role__ Whitelist (module)!**`.substring(
+                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Create Role__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
                                                         )
                                                     )
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_39"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable39"])
-                                                    )
-                                                    .addField(
-                                                        eval(
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable39"]) })
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_40"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable40"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable40"]) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -907,7 +851,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable41"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -934,7 +878,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message) throw "NO MESSAGE SENT";
+                                        if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         let users = message.mentions.members
                                             .filter(r => r.guild.id == message.guild.id)
                                             .map(r => r.id);
@@ -1000,23 +944,17 @@ module.exports = {
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removed \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Delete Role__ Whitelist (module)!**`.substring(
+                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Delete Role__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
                                                         )
                                                     )
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_45"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable45"])
-                                                    )
-                                                    .addField(
-                                                        eval(
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable45"]) })
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_46"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable46"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable46"]) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -1032,7 +970,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable47"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -1059,7 +997,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message) throw "NO MESSAGE SENT";
+                                        if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         let users = message.mentions.members
                                             .filter(r => r.guild.id == message.guild.id)
                                             .map(r => r.id);
@@ -1125,23 +1063,17 @@ module.exports = {
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removed \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Channel Create__ Whitelist (module)!**`.substring(
+                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Canal Create__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
                                                         )
                                                     )
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_51"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable51"])
-                                                    )
-                                                    .addField(
-                                                        eval(
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable51"]) })
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_52"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable52"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable52"]) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -1157,7 +1089,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable53"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -1184,7 +1116,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message) throw "NO MESSAGE SENT";
+                                        if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         let users = message.mentions.members
                                             .filter(r => r.guild.id == message.guild.id)
                                             .map(r => r.id);
@@ -1250,23 +1182,17 @@ module.exports = {
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removed \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Channel Delete__ Whitelist (module)!**`.substring(
+                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Canal Delete__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
                                                         )
                                                     )
-                                                    .addField(
-                                                        eval(
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_57"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable57"])
-                                                    )
-                                                    .addField(
-                                                        eval(
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable57"]) })
+                                                    .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_58"]
-                                                        ),
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable58"])
-                                                    )
+                                                        ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable58"]) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
@@ -1282,7 +1208,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable59"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -1304,14 +1230,14 @@ module.exports = {
                                 menuselection2(menu);
                             } else
                                 menu?.reply({
-                                    content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                     ephemeral: true,
                                 });
                         });
                         //Once the Collections ended edit the menu message
                         collector.on("end", collected => {
                             menumsg.edit({
-                                embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                 components: [],
                                 content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                             });
@@ -1332,7 +1258,7 @@ module.exports = {
                             },
                             {
                                 value: "Set Logger",
-                                description: `Define a (new) Logger Channel`,
+                                description: `Define a (new) Logger Canal`,
                                 emoji: allEmojis.msg.builder,
                             },
                             {
@@ -1348,42 +1274,42 @@ module.exports = {
                             },
                             {
                                 value: "Modify Quarantine Role",
-                                description: "Remove/add the Qurantine Role",
+                                description: "Eliminar/agregar el Rol de Cuarentena",
                                 emoji: allEmojis.msg.cleared,
                             },
                             {
                                 value: "Anti Bot Add",
-                                description: `Adjust the Settings of the Anti Bot Add System`,
+                                description: `Adjust the Ajustes of the Anti Bot Add System`,
                                 emoji: allEmojis.msg.discord_robot,
                             },
                             {
                                 value: "Anti Kick/Ban",
-                                description: `Adjust the Settings of the Anti Kick/Ban System`,
+                                description: `Adjust the Ajustes of the Anti Kick/Ban System`,
                                 emoji: allEmojis.msg.kick,
                             },
                             {
                                 value: "Anti Create Role",
-                                description: `Adjust the Settings of the Anti Create Role System`,
+                                description: `Adjust the Ajustes of the Anti Create Rol System`,
                                 emoji: allEmojis.msg.roles,
                             },
                             {
                                 value: "Anti Delete Role",
-                                description: `Adjust the Settings of the Anti Delete Role System`,
+                                description: `Adjust the Ajustes of the Anti Delete Rol System`,
                                 emoji: allEmojis.msg.roles,
                             },
                             {
                                 value: "Anti Create Channel",
-                                description: `Adjust the Settings of the Anti Create Channel System`,
+                                description: `Adjust the Ajustes of the Anti Create Canal System`,
                                 emoji: allEmojis.msg.channel,
                             },
                             {
                                 value: "Anti Delete Channel",
-                                description: `Adjust the Settings of the Anti Delete Channel System`,
+                                description: `Adjust the Ajustes of the Anti Delete Canal System`,
                                 emoji: allEmojis.msg.channel,
                             },
                             {
                                 value: "Cancel",
-                                description: `Cancel and stop the Anti-Nuke-Setup!`,
+                                description: `Cancelar and stop the Anti-Nuke-Configuración!`,
                                 emoji: allEmojis.msg.cancel,
                             },
                         ];
@@ -1392,7 +1318,7 @@ module.exports = {
                             .setCustomId("MenuSelection")
                             .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                             .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                            .setPlaceholder("Click me to setup the Anti Nuke Settings!")
+                            .setPlaceholder("¡Haz clic para configurar the Anti Nuke Settings!")
                             .addOptions(
                                 menuoptions.map(option => {
                                     let Obj = {
@@ -1408,11 +1334,7 @@ module.exports = {
                         //define the embed
                         let MenuEmbed = new Discord.EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor(
-                                "Anti Nuke Settings",
-                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png",
-                                "https://discord.gg/milrato"
-                            )
+                            .setAuthor({ name: "Anti Nuke Settings", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" })
                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable62"]));
                         //send the menu msg
                         let menumsg = await message.reply({
@@ -1452,10 +1374,7 @@ module.exports = {
                                             .setDescription(
                                                 eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable65"])
                                             )
-                                            .addField(
-                                                "\u200b",
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable66"])
-                                            ),
+                                            .addFields({ name: "\u200b", value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable66"]) }),
                                     ],
                                 });
                             } else if (String(index) == "1") {
@@ -1481,7 +1400,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message) throw "NO MESSAGE SENT";
+                                        if (!message) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         if (
                                             message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first()
                                         ) {
@@ -1564,7 +1483,7 @@ module.exports = {
                                                 ],
                                             });
                                         }
-                                        throw "NO CHANNEL PINGED";
+                                        throw "NO SE MENCIONÓ NINGÚN CANAL";
                                     })
                                     .catch(e => {
                                         timeouterror = e;
@@ -1577,7 +1496,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable72"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -1605,10 +1524,7 @@ module.exports = {
                                             .setDescription(
                                                 eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable74"])
                                             )
-                                            .addField(
-                                                "\u200b",
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable75"])
-                                            ),
+                                            .addFields({ name: "\u200b", value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable75"]) }),
                                     ],
                                 });
                             } else if (String(index) == "3") {
@@ -1634,7 +1550,7 @@ module.exports = {
                                     })
                                     .then(async collected => {
                                         var message = collected.first();
-                                        if (!message || !message.content) throw "NO MESSAGE SENT";
+                                        if (!message || !message.content) throw "NO SE ENVIÓ NINGÚN MENSAJE";
                                         if (message.content.toLowerCase() == "no") {
                                             client.Anti_Nuke_System.set(message.guild.id, false, `all.quarantine`);
                                             return message.reply({
@@ -1671,7 +1587,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `This Role will be added, if the User gets the roles removed!\n> You can also ran a command in the \`${prefix}setup-antinuke\` to set all channels to not visible when having this Role!`.substring(
+                                                            `This Rol will be added, if the Usuario gets the roles removed!\n> You can also ran a command in the \`${prefix}setup-antinuke\` to set all channels to not visible when having this Rol!`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -1680,7 +1596,7 @@ module.exports = {
                                                 ],
                                             });
                                         }
-                                        throw "NO CHANNEL PINGED";
+                                        throw "NO SE MENCIONÓ NINGÚN CANAL";
                                     })
                                     .catch(e => {
                                         timeouterror = e;
@@ -1693,7 +1609,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable80"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -1792,7 +1708,7 @@ module.exports = {
 
                                         {
                                             value: "Cancel",
-                                            description: `Cancel and stop the Ticket-Setup!`,
+                                            description: `Cancelar and stop the Ticket-Configuración!`,
                                             emoji: allEmojis.msg.cancel,
                                         },
                                     ];
@@ -1801,7 +1717,7 @@ module.exports = {
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                        .setPlaceholder("Click me to setup the Anti Nuke Settings!")
+                                        .setPlaceholder("¡Haz clic para configurar the Anti Nuke Settings!")
                                         .addOptions(
                                             menuoptions.map(option => {
                                                 let Obj = {
@@ -1819,11 +1735,7 @@ module.exports = {
                                     //define the embed
                                     let MenuEmbed = new Discord.EmbedBuilder()
                                         .setColor(es.color)
-                                        .setAuthor(
-                                            "Antinuke Setup",
-                                            "https://media.discordapp.net/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png",
-                                            "https://discord.gg/milrato"
-                                        )
+                                        .setAuthor({ name: "Antinuke Setup", iconURL: "https://media.discordapp.net/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" })
                                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable2"]));
                                     let used33 = false;
                                     //send the menu msg
@@ -1835,6 +1747,8 @@ module.exports = {
 
                                     //Event
                                     client.on("interactionCreate", menu => {
+    if (!menu?.isStringSelectMenu() && !menu?.isButton()) return;
+
                                         if (menu?.message.id === menumsg.id) {
                                             if (menu?.user.id === cmduser.id) {
                                                 if (used33)
@@ -1868,7 +1782,7 @@ module.exports = {
                                                 handle_the_picks_X(menuoptionindex - 1, menuoptiondata);
                                             } else
                                                 menu?.reply({
-                                                    content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                     ephemeral: true,
                                                 });
                                         }
@@ -1896,7 +1810,7 @@ module.exports = {
                                                 .setTitle("Enter the Amount now!")
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `Please Enter the Needed Amount until the Punishment: \`${finalkey}\`\n\n\`0\` ... means no action`
+                                                    `Por favor Enter the Needed Amount until the Punishment: \`${finalkey}\`\n\n\`0\` ... means no action`
                                                 )
                                                 .setFooter(client.getFooter(es)),
                                         ],
@@ -1940,7 +1854,7 @@ module.exports = {
                                                             )
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                         .setFooter(client.getFooter(es)),
                                                 ],
                                             });
@@ -1960,14 +1874,14 @@ module.exports = {
                                 menuselection3(menu);
                             } else
                                 menu?.reply({
-                                    content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                     ephemeral: true,
                                 });
                         });
                         //Once the Collections ended edit the menu message
                         collector.on("end", collected => {
                             menumsg.edit({
-                                embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                 components: [],
                                 content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                             });
@@ -2167,44 +2081,20 @@ module.exports = {
                             },
                         });
                         return menu?.reply({
-                            content: `${allEmojis.msg.SUCCESS} **Now using the Suggested Settings!**`,
+                            content: `${allEmojis.msg.SUCCESS} **Now using the Suggested Ajustes!**`,
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
                                     .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable82"]))
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_83"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable83"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_84"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable84"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_85"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable85"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_86"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable86"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_87"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable87"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_88"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable88"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_89"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable89"])
-                                    )
-                                    .addField(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_90"]),
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable90"])
-                                    )
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_83"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable83"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_84"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable84"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_85"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable85"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_86"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable86"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_87"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable87"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_88"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable88"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_89"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable89"]) })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_90"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable90"]) })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable91"])),
                             ],
                         });
@@ -2230,7 +2120,7 @@ module.exports = {
                         for (const ch of channels.map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966)) {
                             try {
                                 if (ch) {
-                                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.MANAGE_CHANNELS)) {
+                                    if (ch.permissionsFor(ch.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                         ch.permissionOverwrites.edit(role, {
                                             VIEW_CHANNEL: false,
                                             SEND_MESSAGES: false,
@@ -2262,14 +2152,14 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -2291,10 +2181,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

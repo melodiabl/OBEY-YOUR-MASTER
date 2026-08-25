@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupvalidcode", "validcode-setup", "validcodesetup"],
     cooldown: 5,
-    usage: "setup-validcode  -->  Follow the Steps",
-    description: "This Setup allows you to send logs into a specific Channel, when someone enters a the Command: report",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-validcode --> Sigue los Pasos",
+    description: "Esta Configuración te permite enviar registros a un Canal específico cuando alguien usa el Comando: report",
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -42,17 +42,17 @@ module.exports = {
                     },
                     {
                         value: "Settings",
-                        description: `Show the Current Settings of the Valid-Code System`,
+                        description: `Show the Current Ajustes of the Valid-Code System`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ticket-Setup!`,
+                        description: `Cancelar and stop the Ticket-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("Click me to setup the Valid-Code System!")
+                    .setPlaceholder("¡Haz clic para configurar the Valid-Code System!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -70,11 +70,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Valid-Code System Setup",
-                        "https://cdn.discordapp.com/emojis/858405056238714930.gif?v=1",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Valid-Code System Setup", iconURL: "https://cdn.discordapp.com/emojis/858405056238714930.gif?v=1", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable1"]));
                 let used1 = false;
                 //send the menu msg
@@ -94,6 +90,8 @@ module.exports = {
                 }
                 //Event
                 client.on("interactionCreate", menu => {
+    if (!menu?.isStringSelectMenu() && !menu?.isButton()) return;
+
                     if (menu?.message.id === menumsg.id) {
                         if (menu?.user.id === cmduser.id) {
                             if (used1)
@@ -104,7 +102,7 @@ module.exports = {
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -163,10 +161,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

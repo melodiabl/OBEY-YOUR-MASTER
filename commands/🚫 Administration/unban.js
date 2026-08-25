@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -7,16 +7,16 @@ module.exports = {
     name: `unban`,
     category: `🚫 Administration`,
     aliases: [`unbanhammer`],
-    description: `Unbans a Member from this Guild`,
+    description: `Unbans a Miembro from this Guild`,
     usage: `unban <ID>`,
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
 
         try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BAN_MEMBERS]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BanMembers]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -33,7 +33,7 @@ module.exports = {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle(`${emoji?.msg.ERROR} Please add a valid USERID`)
+                            .setTitle(`${emoji?.msg.ERROR} Por favor add a valid USERID`)
                             .setDescription(
                                 `Usage: \`${prefix}unban <ID>\`\nExample: \`${prefix}unban ${message.author.id}\``
                             ),
@@ -47,7 +47,7 @@ module.exports = {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle(`${emoji?.msg.ERROR} The User with that Id is not banned in this Server!`)
+                            .setTitle(`${emoji?.msg.ERROR} The Usuario with that Id is not banned in this Servidor!`)
                             .setDescription(`Type: \`${prefix}listbans\` to see all Bans!`),
                     ],
                 });
@@ -91,10 +91,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

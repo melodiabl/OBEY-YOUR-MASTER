@@ -20,9 +20,9 @@ module.exports = {
         "setup-newaccount",
     ],
     cooldown: 5,
-    usage: "setup-antinewaccount  -->  Follow the Steps",
-    description: "Setup a System which Blocks too new Accounts!",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-antinewaccount --> Sigue los Pasos",
+    description: "Configura un sistema que bloquea cuentas demasiado nuevas!",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -50,12 +50,12 @@ module.exports = {
                     },
                     {
                         value: "Set Extra Message",
-                        description: `Define an extra Message, sent to their DM`,
+                        description: `Define an extra Mensaje, sent to their DM`,
                         emoji: "💬",
                     },
                     {
                         value: "Select the Action",
-                        description: `Select the right Action kick/ban`,
+                        description: `Seleccionar the right Action kick/ban`,
                         emoji: "🔨",
                     },
                     {
@@ -65,12 +65,12 @@ module.exports = {
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Anti-New-Account`,
+                        description: `Show Ajustes of the Anti-New-Account`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Anti-New-Account-Setup!`,
+                        description: `Cancelar and stop the Anti-New-Account-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -79,7 +79,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Anti-New-Account")
+                    .setPlaceholder("¡Haz clic para configurar the Anti-New-Account")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -95,11 +95,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Anti-New-Account",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/hammer_1f528.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Anti-New-Account", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/hammer_1f528.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -123,14 +119,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -147,7 +143,7 @@ module.exports = {
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setTitle(
-                                            `${thesettings ? `Enabled New Account Detection` : `Disabled New Account Detection`}`
+                                            `${thesettings ? `Activado New Account Detection` : `Desactivado New Account Detection`}`
                                         )
                                         .setColor(es.color)
                                         .setDescription(
@@ -172,15 +168,12 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(`What should be the new Extra Message?`)
+                                        .setTitle(`What should be the new Extra Mensaje?`)
                                         .setColor(es.color)
-                                        .addField(
-                                            `**Current Extra-Message:**`,
-                                            `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
+                                        .addFields({ name: `**Current Extra-Message:**`, value: `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
                                                 0,
                                                 1024
-                                            )
-                                        )
+                                            ) })
                                         .setDescription(`Send it now!`)
                                         .setFooter(client.getFooter(es)),
                                 ],
@@ -194,27 +187,24 @@ module.exports = {
                                 })
                                 .then(async collected => {
                                     var message = collected.first();
-                                    if (!message) return message.reply("NO MESSAGE SENT");
+                                    if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                     if (message.content) {
                                         extramessage = message.content.slice(0, 1024);
                                         client.settings.set(message.guild.id, extramessage, `antinewaccount.extra_message`);
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setTitle(`Defined the New Extra Message!`)
+                                                    .setTitle(`Defined the New Extra Mensaje!`)
                                                     .setColor(es.color)
-                                                    .addField(
-                                                        `**New Extra-Message:**`,
-                                                        `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
+                                                    .addFields({ name: `**New Extra-Message:**`, value: `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
                                                             0,
                                                             1024
-                                                        )
-                                                    )
+                                                        ) })
                                                     .setFooter(client.getFooter(es)),
                                             ],
                                         });
                                     }
-                                    return message.reply("No Message Content Added");
+                                    return message.reply("No Mensaje Content Añadido");
                                 })
                                 .catch(e => {
                                     return message.reply({
@@ -222,7 +212,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(`Something went wrong`)
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -236,22 +226,19 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(`Settings of the New Account Detection Setup`)
+                                        .setTitle(`Ajustes of the New Account Detection Configuración`)
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Enabled:**\n> ${thesettings.enabled ? "✅" : "❌"}\n\n**Minimum Account Age:**\n> ${duration(
+                                            `**Activado:**\n> ${thesettings.enabled ? "✅" : "❌"}\n\n**Minimum Account Age:**\n> ${duration(
                                                 thesettings.delay
                                             )
                                                 .map(i => `\`${i}\``)
                                                 .join(", ")}\n\n**Action:**\n> ${thesettings.action}`.substring(0, 2048)
                                         )
-                                        .addField(
-                                            `**Current Extra-Message:**`,
-                                            `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
+                                        .addFields({ name: `**Current Extra-Message:**`, value: `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
                                                 0,
                                                 1024
-                                            )
-                                        )
+                                            ) })
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -273,7 +260,7 @@ module.exports = {
                                 },
                                 {
                                     value: "Cancel",
-                                    description: `Cancel and stop the Anti-New-Account-Setup!`,
+                                    description: `Cancelar and stop the Anti-New-Account-Configuración!`,
                                     emoji: allEmojis.msg.cancel,
                                 },
                             ];
@@ -300,11 +287,7 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor(
-                                    "Anti-New-Account",
-                                    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/hammer_1f528.png",
-                                    "https://discord.gg/milrato"
-                                )
+                                .setAuthor({ name: "Anti-New-Account", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/hammer_1f528.png", url: "https://github.com/melodiabl" })
                                 .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                             //send the menu msg
                             let menumsg = await message.reply({
@@ -343,14 +326,14 @@ module.exports = {
                                     });
                                 }
                                 menu?.reply({
-                                    content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                     ephemeral: true,
                                 });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                     components: [],
                                     content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                 });
@@ -364,12 +347,9 @@ module.exports = {
                                 new Discord.EmbedBuilder()
                                     .setTitle(`What should be the new Minimum Account Age?`)
                                     .setColor(es.color)
-                                    .addField(
-                                        `**Current Minimum Account Age:**`,
-                                        `${duration(settings.delay)
+                                    .addFields({ name: `**Current Minimum Account Age:**`, value: `${duration(settings.delay)
                                             .map(i => `\`${i}\``)
-                                            .join(", ")}`.substring(0, 1024)
-                                    )
+                                            .join(", ")}`.substring(0, 1024) })
                                     .setDescription(`Send it now!\nExample: \`2 Days\`, \`6 hours + 2 Days\``)
                                     .setFooter(client.getFooter(es)),
                             ],
@@ -383,7 +363,7 @@ module.exports = {
                             })
                             .then(async collected => {
                                 var message = collected.first();
-                                if (!message) return message.reply("NO MESSAGE SENT");
+                                if (!message) return message.reply("NO SE ENVIÓ NINGÚN MENSAJE");
                                 if (message.content) {
                                     let gargs = message.content.split("+");
                                     let time = 0;
@@ -396,19 +376,16 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(`Defined the New Minimum Account Duration!`)
+                                                .setTitle(`Defined the New Minimum Account Duración!`)
                                                 .setColor(es.color)
-                                                .addField(
-                                                    `**New Minimum Account Age:**`,
-                                                    `${duration(time)
+                                                .addFields({ name: `**New Minimum Account Age:**`, value: `${duration(time)
                                                         .map(i => `\`${i}\``)
-                                                        .join(", ")}`.substring(0, 1024)
-                                                )
+                                                        .join(", ")}`.substring(0, 1024) })
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
                                 }
-                                return message.reply("No Message Content and so no Time Added");
+                                return message.reply("No Mensaje Content and so no Time Añadido");
                             })
                             .catch(e => {
                                 return message.reply({
@@ -416,7 +393,7 @@ module.exports = {
                                         new Discord.EmbedBuilder()
                                             .setTitle(`Something went wrong`)
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                             .setFooter(client.getFooter(es)),
                                     ],
                                 });
@@ -440,10 +417,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

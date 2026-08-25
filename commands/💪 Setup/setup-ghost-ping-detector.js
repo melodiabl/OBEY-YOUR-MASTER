@@ -18,8 +18,8 @@ module.exports = {
     ],
     cooldown: 5,
     usage: "setup-ghost-ping-detector  -->  Follow Steps",
-    description: "Enable/Disable the ghost-ping-detector / Ghost-Ping-Detector - Logger",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Activar/Desactivar el detector de ghost-ping / Ghost-Ping-Detector - Registro",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -30,7 +30,7 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Enable Detector-Log",
-                        description: `Define the Ghost-Ping-Detector-Log Channel`,
+                        description: `Define the Ghost-Ping-Detector-Log Canal`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
@@ -40,12 +40,12 @@ module.exports = {
                     },
                     {
                         value: "Show Settings",
-                        description: `Show Settings of the Ghost-Ping-Detector-Log`,
+                        description: `Show Ajustes of the Ghost-Ping-Detector-Log`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Detector-Log-Setup!`,
+                        description: `Cancelar and stop the Detector-Log-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -54,7 +54,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Detector-Command-Log")
+                    .setPlaceholder("¡Haz clic para configurar the Detector-Command-Log")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -70,11 +70,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Ghost-Ping-Detector Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/bookmark_1f516.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Ghost-Ping-Detector Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/bookmark_1f516.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -98,14 +94,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -165,7 +161,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `${!isnan ? `And set the Ghost-Ping-Detected-Deletion Message Maximum Time to \`${maxtime / 1000} Seconds\`` : "You added an invalid time, so i set the Ghost-Ping-Detection Maximum Time to `10 Seconds`"}`
+                                                            `${!isnan ? `And set the Ghost-Ping-Detected-Deletion Mensaje Maximum Time to \`${maxtime / 1000} Seconds\`` : "You added an invalid time, so i set the Ghost-Ping-Detection Maximum Time to `10 Seconds`"}`
                                                         )
                                                         .setFooter(client.getFooter(es)),
                                                 ],
@@ -186,7 +182,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't ping a valid Channel");
+                                        return message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -198,7 +194,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -229,10 +225,10 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Settings of the Ghost-Ping-Detector-Log")
+                                        .setTitle("Ajustes of the Ghost-Ping-Detector-Log")
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Channel:** ${ghost_ping_detector == false ? "Not Setupped" : `<#${ghost_ping_detector}> | \`${ghost_ping_detector}\``}\n\n**Max-Time-For-Detection:** \`${Math.floor(ghost_ping_detector_max_time / 1000)} Seconds\``.substring(
+                                            `**Canal:** ${ghost_ping_detector == false ? "Not Setupped" : `<#${ghost_ping_detector}> | \`${ghost_ping_detector}\``}\n\n**Max-Time-For-Detection:** \`${Math.floor(ghost_ping_detector_max_time / 1000)} Seconds\``.substring(
                                                 0,
                                                 2048
                                             )
@@ -260,10 +256,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -12,8 +12,8 @@ module.exports = {
     aliases: ["setuproster", "roster-setup", "rostersetup"],
     cooldown: 5,
     usage: "setup-roster --> Follow Steps",
-    description: "Manage 25 different Roster Systems",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Gestiona 25 Sistemas de Lista diferentes",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -46,7 +46,7 @@ module.exports = {
                     const emoji = NumberEmojis[i];
                     menuoptions.push({
                         value: `${i} Roster System`,
-                        description: `Manage/Edit the ${i}. Server Roster System`,
+                        description: `Manage/Edit the ${i}. Servidor Roster System`,
                         ...(emoji ? { emoji } : {}),
                     });
                 }
@@ -56,7 +56,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Roster System!")
+                        .setPlaceholder("¡Haz clic para configurar the Roster System!")
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -74,7 +74,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Roster System!")
+                        .setPlaceholder("¡Haz clic para configurar the Roster System!")
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -92,7 +92,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Roster System!")
+                        .setPlaceholder("¡Haz clic para configurar the Roster System!")
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -110,7 +110,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("Click me to setup the Roster System!")
+                        .setPlaceholder("¡Haz clic para configurar the Roster System!")
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -127,13 +127,11 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        client.getAuthor(
+                    .setAuthor(client.getAuthor(
                             "Server Roster Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/page-with-curl_1f4c3.png",
-                            "https://discord.gg/milrato"
-                        )
-                    )
+                            "https://github.com/melodiabl"
+                        ))
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 let used1 = false;
                 //send the menu msg
@@ -164,14 +162,14 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -181,17 +179,17 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Define Channel",
-                        description: `Define the Channel for this Roster System`,
+                        description: `Define the Canal for this Roster System`,
                         emoji: allEmojis.msg.channel,
                     },
                     {
                         value: "Add Roster Role",
-                        description: `Add a Roster Role to the bottom to get displayed`,
+                        description: `Add a Roster Rol to the bottom to get displayed`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
                         value: "Remove Roster Role",
-                        description: `Removed a displayed Roster Role of the List`,
+                        description: `Removido a displayed Roster Rol of the List`,
                         emoji: allEmojis.msg.ERROR,
                     },
                     {
@@ -232,7 +230,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ticket-Setup!`,
+                        description: `Cancelar and stop the Ticket-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -259,11 +257,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        SetupNumber + " Server Roster Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/page-with-curl_1f4c3.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: SetupNumber + " Server Roster Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/page-with-curl_1f4c3.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -293,14 +287,14 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -372,7 +366,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't ping a valid Channel");
+                                        return message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -382,7 +376,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable12"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -472,7 +466,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't ping a valid Role");
+                                        return message.reply("¡no mencionaste un Rol válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -482,7 +476,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable21"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -572,7 +566,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't ping a valid Role");
+                                        return message.reply("¡no mencionaste un Rol válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -582,7 +576,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable30"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -762,7 +756,7 @@ module.exports = {
                                             ],
                                         });
                                     }
-                                    return message.reply("You reacted with a wrong emoji");
+                                    return message.reply("Reaccionaste con un emoji incorrecto");
                                 })
                                 .catch(e => {
                                     timeouterror = e;
@@ -773,7 +767,7 @@ module.exports = {
                                         new Discord.EmbedBuilder()
                                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable42"]))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                             .setFooter(client.getFooter(es)),
                                     ],
                                 });
@@ -814,7 +808,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n<@${message.author.id}> | \`${message.author.tag}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n<@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -840,7 +834,7 @@ module.exports = {
                                                             )
                                                             .setColor(es.color)
                                                             .setDescription(
-                                                                `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n${msg} <@${message.author.id}> | \`${message.author.tag}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                                `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n${msg} <@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                                     0,
                                                                     2048
                                                                 )
@@ -861,7 +855,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n${msg.substring(0, 5)} <@${message.author.id}> | \`${message.author.tag}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n${msg.substring(0, 5)} <@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -889,7 +883,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't add a valid message");
+                                        return message.reply("no añadiste un mensaje válido");
                                     }
                                 })
                                 .catch(e => {
@@ -899,7 +893,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable50"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -969,7 +963,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        return message.reply("you didn't add a valid message");
+                                        return message.reply("no añadiste un mensaje válido");
                                     }
                                 })
                                 .catch(e => {
@@ -979,7 +973,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable56"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -1075,10 +1069,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

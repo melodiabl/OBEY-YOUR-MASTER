@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -8,16 +8,16 @@ module.exports = {
     name: "listbans",
     category: `🚫 Administration`,
     aliases: [`banhammer`, "tempban"],
-    description: `Shows all Bans of the Server`,
+    description: `Shows all Bans of the Servidor`,
     usage: `listbans`,
-    memberpermissions: ["BAN_MEMBERS"],
+    memberpermissions: ['BAN_MEMBERS'],
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
 
         try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BAN_MEMBERS]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BanMembers]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -48,7 +48,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -59,7 +59,7 @@ module.exports = {
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"])),
                     ],
                 });
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BAN_MEMBERS]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BanMembers]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -94,10 +94,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -1,4 +1,7 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
 const apiBase = "https://api.aniketdev.cf";
 
 const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -31,11 +34,11 @@ module.exports = {
         }
         new TwoZeroFourEight({
             message: message,
-            embed: {
+            embeds: [{
                 title: "2048",
                 color: es.color,
                 overTitle: "Game Over",
-            },
+            }],
         }).startGame();
     },
 };
@@ -48,7 +51,7 @@ class TwoZeroFourEight {
             left: "⬅️",
             right: "➡️",
         };
-        options.othersMessage = "You are not allowed to use buttons for this message!";
+        options.othersMessage = "¡No tienes permiso para usar botones en este mensaje!";
         this.options = options;
         this.message = options.message;
         this.board = [];
@@ -94,16 +97,16 @@ class TwoZeroFourEight {
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setImage("attachment://board.png")
-            .addField(this.options.embed.curScore || "Score", this.score.toString())
+            .addFields({ name: this.options.embed.curScore || "Score", value: this.score.toString() })
             .setFooter(this.message.client.getFooter(
-                    this.message.author.tag + " | Aniket's Api",
-                    this.message.author.displayAvatarURL({ dynamic: true })
+                    this.message.author.username + " | Aniket's Api",
+                    this.message.author.displayAvatarURL()
                 ));
 
-        const up = new ButtonBuilder().setEmoji(emojis.up).setStyle(Discord.ButtonStyle.Primary).setCustomId("2048_up");
-        const left = new ButtonBuilder().setEmoji(emojis.left).setStyle(Discord.ButtonStyle.Primary).setCustomId("2048_left");
-        const down = new ButtonBuilder().setEmoji(emojis.down).setStyle(Discord.ButtonStyle.Primary).setCustomId("2048_down");
-        const right = new ButtonBuilder().setEmoji(emojis.right).setStyle(Discord.ButtonStyle.Primary).setCustomId("2048_right");
+        const up = new ButtonBuilder().setEmoji(emojis.up).setStyle(ButtonStyle.Primary).setCustomId("2048_up");
+        const left = new ButtonBuilder().setEmoji(emojis.left).setStyle(ButtonStyle.Primary).setCustomId("2048_left");
+        const down = new ButtonBuilder().setEmoji(emojis.down).setStyle(ButtonStyle.Primary).setCustomId("2048_down");
+        const right = new ButtonBuilder().setEmoji(emojis.right).setStyle(ButtonStyle.Primary).setCustomId("2048_right");
 
         const row = new ActionRowBuilder().addComponents(up, left, down, right);
 
@@ -125,7 +128,7 @@ class TwoZeroFourEight {
             if (buttonInteraction.user.id !== this.message.author.id) {
                 if (this.options.othersMessage == "false") return await buttonInteraction.deferUpdate();
                 return buttonInteraction.reply({
-                    content: this.options.othersMessage.replace("{author}", this.message.author.tag),
+                    content: this.options.othersMessage.replace("{author}", this.message.author.username),
                     ephemeral: true,
                 });
             }
@@ -153,10 +156,10 @@ class TwoZeroFourEight {
                 .setColor(this.options.embed.color)
                 .setTitle(this.options.embed.title)
                 .setImage("attachment://board.png")
-                .addField(this.options.embed.curScore || "Score", this.score.toString())
+                .addFields({ name: this.options.embed.curScore || "Score", value: this.score.toString() })
                 .setFooter(this.message.client.getFooter(
-                        this.message.author.tag + " | Aniket's Api",
-                        this.message.author.displayAvatarURL({ dynamic: true })
+                        this.message.author.username + " | Aniket's Api",
+                        this.message.author.displayAvatarURL()
                     ));
 
             msg.edit({
@@ -179,10 +182,10 @@ class TwoZeroFourEight {
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setImage("attachment://board.png")
-            .addField(overTitle, (this.options.embed.totalScore || "**Score:** ") + this.score)
+            .addFields({ name: overTitle, value: (this.options.embed.totalScore || "**Score:** ") + this.score })
             .setFooter(this.message.client.getFooter(
-                    this.message.author.tag + " | Aniket's Api",
-                    this.message.author.displayAvatarURL({ dynamic: true })
+                    this.message.author.username + " | Aniket's Api",
+                    this.message.author.displayAvatarURL()
                 ));
 
         msg.edit({

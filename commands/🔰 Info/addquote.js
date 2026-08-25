@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder,
+    PermissionFlagsBits
+} = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -9,7 +11,7 @@ module.exports = {
     name: "addquote",
     aliases: ["aquote", "addquotes"],
     category: "🔰 Info",
-    description: "Adds a Quote to a User/you",
+    description: "Adds a Quote to a Usuario/you",
     usage: "addquote [@USER] <TEXT> [Attachment of an Image]",
     type: "user",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -26,7 +28,7 @@ module.exports = {
             var { user } = member;
 
             if (user.id != message.author.id) {
-                if (!message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
+                if (!message.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
                     return message.reply("❌ **Only Admins can add Quotes to other Users!**");
                 }
             }
@@ -67,10 +69,10 @@ module.exports = {
                 },
                 "quotes"
             );
-            message.reply("Added the Quote to his Quotes!");
+            message.reply("Añadido the Quote to his Quotes!");
             let data = client.afkDB.get(user.id, "quotes");
             if (!data || data.length == 0)
-                return message.reply({ content: "❌ **This User has no Quotes in this Server yet!**" });
+                return message.reply({ content: "❌ **¡Este usuario no tiene citas en este servidor todavía!**" });
             var datas = data
                 .sort((a, b) => b?.at - a.at)
                 .map(
@@ -81,7 +83,7 @@ module.exports = {
                 client,
                 message,
                 datas,
-                `Latest Quotes of **\`${user.tag}\`** in **\`${message.guild.name}\`**\n\nFor more details type: \`${prefix}quotes ${user.id} [ID]\``
+                `Latest Quotes of **\`${user.username}\`** in **\`${message.guild.name}\`**\n\nFor more details type: \`${prefix}quotes ${user.id} [ID]\``
             );
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
@@ -99,10 +101,10 @@ module.exports = {
 };
 /*
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

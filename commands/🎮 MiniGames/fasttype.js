@@ -1170,7 +1170,7 @@ module.exports = {
         }
         await FastType({
             interaction: message,
-            embed: {
+            embeds: [{
                 title: "FastType",
                 description: "You have **{{time}}** to type the below sentence.",
                 color: es.color,
@@ -1178,7 +1178,7 @@ module.exports = {
                     text: es.footertext,
                 },
                 timestamp: new Date(),
-            },
+            }],
             sentence:
                 fastwords[Math.floor(Math.random() * fastwords.length)] +
                 " " +

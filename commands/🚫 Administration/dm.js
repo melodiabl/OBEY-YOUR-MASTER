@@ -1,5 +1,5 @@
 const { fail } = require("assert");
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require("../../botconfig/emojis.json");
@@ -10,7 +10,7 @@ module.exports = {
     category: "🚫 Administration",
     aliases: ["dm"],
     cooldown: 2,
-    usage: "dm <@User/@Role> <MESSAGE>",
+    usage: "dm <@Usuario/@Rol> <MESSAGE>",
     description: "Allows you to DM a USER or every USER of a ROLE",
     type: "memberrole",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -18,7 +18,7 @@ module.exports = {
         let ls = client.settings.get(message.guild.id, "language");
         try {
             return message.reply({ content: eval(client.la[ls]["cmds"]["administration"]["dm"]["variable1"]) });
-            if (!message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR]))
+            if (!message.member.permissions.has([PermissionFlagsBits.Administrator]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -56,11 +56,7 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `Message from: ${message.author.username}`,
-                                    message.author.displayAvatarURL({ dynamic: true }),
-                                    "https://discord.gg/milrato"
-                                )
+                                .setAuthor({ name: `Message from: ${message.author.username}`, iconURL: message.author.displayAvatarURL(), url: "https://github.com/melodiabl" })
                                 .setDescription(args.slice(1).join(" ").substring(0, 2048)),
                         ],
                     });
@@ -132,11 +128,7 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setAuthor(
-                                `Dming ${members.length} Members...`,
-                                "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif",
-                                "https://discord.gg/2dKrZQyaC4"
-                            )
+                            .setAuthor({ name: `Dming ${members.length} Members...`, iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif", url: "https://discord.gg/2dKrZQyaC4" })
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["dm"]["variable12"])),
                     ],
                 });
@@ -157,11 +149,7 @@ module.exports = {
                                                 : null
                                         )
                                         .setFooter(client.getFooter(es))
-                                        .setAuthor(
-                                            `Message from: ${message.author.username}`,
-                                            message.author.displayAvatarURL({ dynamic: true }),
-                                            "https://discord.gg/milrato"
-                                        )
+                                        .setAuthor({ name: `Message from: ${message.author.username}`, iconURL: message.author.displayAvatarURL(), url: "https://github.com/melodiabl" })
                                         .setDescription(args.slice(1).join(" ").substring(0, 2048)),
                                 ],
                             })
@@ -169,12 +157,12 @@ module.exports = {
                                 failedd = true;
                             });
                         if (failedd) {
-                            failed.push(member.user.tag);
+                            failed.push(member.user.username);
                         } else {
-                            succeeded.push(member.user.tag);
+                            succeeded.push(member.user.username);
                         }
                     } catch {
-                        failed.push(member.user.tag);
+                        failed.push(member.user.username);
                     }
                     await delay(1500);
                 }
@@ -198,10 +186,7 @@ module.exports = {
                                     ? `**FAILED MEMBERS:**\n> ${failed.map(r => `\`${r}\``).join("\n")}`.substring(0, 2048)
                                     : "**FAILED MEMBERS:**\n> No one Failed"
                             )
-                            .addField(
-                                eval(client.la[ls]["cmds"]["administration"]["dm"]["variablex_14"]),
-                                eval(client.la[ls]["cmds"]["administration"]["dm"]["variable14"])
-                            ),
+                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["dm"]["variablex_14"]), value: eval(client.la[ls]["cmds"]["administration"]["dm"]["variable14"]) }),
                     ],
                 });
             } else {
@@ -232,23 +217,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({ dynamic: true })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["dm"]["variable17"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],
@@ -273,10 +249,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

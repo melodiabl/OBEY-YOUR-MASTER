@@ -8,8 +8,8 @@ module.exports = {
     aliases: ["toggleplaymsg", "toggle-playmsg", "pruning", "toggle-pruning"],
     cooldown: 10,
     usage: "playmsg",
-    description: "Toggles if it should sends a Message with Buttons when a Song Starts! [Default: true]",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Toggles if it should sends a Mensaje with Buttons when a Canción Starts! [Default: true]",
+    memberpermissions: ['Administrador'],
     type: "music",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -53,10 +53,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
+ * Bot Coded by Melodia | https://github?.com/melodiabl/discord-js-lavalink-Music-Bot-erela-js
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

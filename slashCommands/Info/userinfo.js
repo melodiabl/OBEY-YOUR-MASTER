@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder,
+    PermissionFlagsBits
+} = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -37,9 +39,9 @@ const statuses = {
 };
 module.exports = {
     name: "userinfo", //the command name for the Slash Command
-    description: "Gives you information about a User", //the command description for Slash Command Overview
+    description: "Te da información sobre un usuario", //the command description for Slash Command Overview
     cooldown: 1,
-    memberpermissions: [], //Only allow members with specific Permissions to execute a Commmand [OPTIONAL]
+    memberpermissions: [], //Only allow members with specific PermissionFlagsBits to execute a Commmand [OPTIONAL]
     requiredroles: [], //Only allow specific Users with a Role to execute a Command [OPTIONAL]
     alloweduserids: [], //Only allow specific Users to execute a Command [OPTIONAL]
     options: [
@@ -50,12 +52,12 @@ module.exports = {
         {
             User: {
                 name: "which_user",
-                description: "From Which User do you want to get Information from?",
+                description: "De qué usuario quieres obtener información?",
                 required: false,
             },
         }, //to use in the code: interacton.getUser("ping_a_user")
-        //{"Channel": { name: "what_channel", description: "To Ping a Channel lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
-        //{"Role": { name: "what_role", description: "To Ping a Role lol", required: false }}, //to use in the code: interacton.getRole("what_role")
+        //{"Channel": { name: "what_channel", description: "To Ping a Canal lol", required: false }}, //to use in the code: interacton.getChannel("what_channel")
+        //{"Role": { name: "what_role", description: "To Ping a Rol lol", required: false }}, //to use in the code: interacton.getRole("what_role")
         //{"IntChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", 1], ["Discord Api", 2]] }, //here the second array input MUST BE A NUMBER // TO USE IN THE CODE: interacton.getInteger("what_ping")
         //{"StringChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", "botping"], ["Discord Api", "api"]] }}, //here the second array input MUST BE A STRING // TO USE IN THE CODE: interacton.getString("what_ping")
     ],
@@ -97,7 +99,6 @@ module.exports = {
                 try {
                     if (member && member.avatar) {
                         customavatar = member.displayAvatarURL({
-                            dynamic: true,
                             size: 4096,
                         });
                     }
@@ -110,7 +111,6 @@ module.exports = {
                         .then(user => {
                             if (user.banner) {
                                 banner = user.bannerURL({
-                                    dynamic: true,
                                     size: 4096,
                                 });
                             }
@@ -134,63 +134,23 @@ module.exports = {
                     //create the EMBED
                     const embeduserinfo = new EmbedBuilder();
                     embeduserinfo.setThumbnail(
-                        customavatar ? customavatar : member.user.displayAvatarURL({ dynamic: true, size: 512 })
+                        customavatar ? customavatar : member.user.displayAvatarURL({ size: 512 })
                     );
-                    embeduserinfo.setAuthor(
-                        handlemsg(client.la[ls].cmds.info.userinfo.author, { usertag: member.user.tag }),
-                        member.user.displayAvatarURL({ dynamic: true }),
-                        "https://discord.gg/milrato"
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field1,
-                        `> <@${member.user.id}>\n\`${member.user.tag}\``,
-                        true
-                    );
-                    embeduserinfo.addField(client.la[ls].cmds.info.userinfo.field2, `> \`${member.id}\``, true);
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field3,
-                        `> [\`Link to avatar\`](${member.user.displayAvatarURL({ format: "png" })})${customavatar ? `\n\n> [\`Link to Custom Avatar\`](${customavatar})` : ""}`,
-                        true
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field4,
-                        "> `" +
-                            moment(member.user.createdTimestamp).format("DD/MM/YYYY") +
-                            "`\n" +
-                            "`" +
-                            moment(member.user.createdTimestamp).format("hh:mm:ss") +
-                            "`",
-                        true
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field5,
-                        "> `" +
-                            moment(member.joinedTimestamp).format("DD/MM/YYYY") +
-                            "`\n" +
-                            "`" +
-                            moment(member.joinedTimestamp).format("hh:mm:ss") +
-                            "`",
-                        true
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field6,
-                        `> \`${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "None"}\``,
-                        true
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field7,
-                        `> \`${statuses[member.presence ? member.presence.status : "offline"]} ${member.presence ? member.presence.status : "offline"}\``,
-                        true
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field8,
-                        `> ${roles.size == 0 ? client.la[ls].cmds.info.userinfo.noroles : member.roles.highest.id === message.guild.id ? client.la[ls].cmds.info.userinfo.noroles : member.roles.highest}`,
-                        true
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field9,
-                        `> \`${member.user.bot ? "✔️" : "❌"}\``,
-                        true
+                    embeduserinfo.setAuthor({
+                        name: handlemsg(client.la[ls].cmds.info.userinfo.author, { usertag: member.user.username }),
+                        iconURL: member.user.displayAvatarURL(),
+                        url: "https://github.com/melodiabl"
+                    });
+                    embeduserinfo.addFields(
+                        { name: client.la[ls].cmds.info.userinfo.field1, value: `> <@${member.user.id}>\n\`${member.user.username}\``, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field2, value: `> \`${member.id}\``, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field3, value: `> [\`Link to avatar\`](${member.user.displayAvatarURL()})${customavatar ? `\n\n> [\`Link to Custom Avatar\`](${customavatar})` : ""}`, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field4, value: "> `" + moment(member.user.createdTimestamp).format("DD/MM/YYYY") + "`\n`" + moment(member.user.createdTimestamp).format("hh:mm:ss") + "`", inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field5, value: "> `" + moment(member.joinedTimestamp).format("DD/MM/YYYY") + "`\n`" + moment(member.joinedTimestamp).format("hh:mm:ss") + "`", inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field6, value: `> \`${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "None"}\``, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field7, value: `> \`${statuses[member.presence ? member.presence.status : "offline"]} ${member.presence ? member.presence.status : "offline"}\``, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field8, value: `> ${roles.size == 0 ? client.la[ls].cmds.info.userinfo.noroles : member.roles.highest.id === message.guild.id ? client.la[ls].cmds.info.userinfo.noroles : member.roles.highest}`, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field9, value: `> \`${member.user.bot ? "✔️" : "❌"}\``, inline: true }
                     );
                     var userstatus = client.la[ls].cmds.info.userinfo.nostatus;
                     if (activity) {
@@ -201,29 +161,10 @@ module.exports = {
                             userstatus = `\`${activity.type.toLowerCase().charAt(0).toUpperCase() + activity.type.toLowerCase().slice(1)} ${activity.name}\``;
                         }
                     }
-                    embeduserinfo.addField(client.la[ls].cmds.info.userinfo.field10, `> ${userstatus}`);
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field11,
-                        `> ${
-                            member.permissions.toArray().includes("ADMINISTRATOR")
-                                ? "`ADMINISTRATOR`"
-                                : member.permissions
-                                      .toArray()
-                                      .sort((a, b) => a.localeCompare(b))
-                                      .map(p => `\`${p}\``)
-                                      .join("︲")
-                        }`.substring(0, 2048)
-                    );
-                    embeduserinfo.addField(
-                        handlemsg(client.la[ls].cmds.info.userinfo.field12, { rolesize: roles.cache.size }),
-                        roles.cache.size < 25
-                            ? [...roles.cache.values()]
-                                  .sort((a, b) => b?.rawPosition - a.rawPosition)
-                                  .map(role => `<@&${role.id}>`)
-                                  .join(", ")
-                            : roles.cache.size > 25
-                              ? trimArray(roles.cache)
-                              : client.la[ls].cmds.info.userinfo.noroles
+                    embeduserinfo.addFields(
+                        { name: client.la[ls].cmds.info.userinfo.field10, value: `> ${userstatus}` },
+                        { name: client.la[ls].cmds.info.userinfo.field11, value: `> ${member.permissions.toArray().includes("ADMINISTRATOR") ? "`ADMINISTRATOR`" : member.permissions.toArray().sort((a, b) => a.localeCompare(b)).map(p => `\`${p}\``).join("︲")}`.substring(0, 2048) },
+                        { name: handlemsg(client.la[ls].cmds.info.userinfo.field12, { rolesize: roles.cache.size }), value: roles.cache.size < 25 ? [...roles.cache.values()].sort((a, b) => b?.rawPosition - a.rawPosition).map(role => `<@&${role.id}>`).join(", ") : roles.cache.size > 25 ? trimArray(roles.cache) : client.la[ls].cmds.info.userinfo.noroles }
                     );
                     embeduserinfo.setColor(es.color);
                     embeduserinfo.setFooter(client.getFooter(es));
@@ -236,36 +177,21 @@ module.exports = {
                     //create the EMBED
                     const embeduserinfo = new EmbedBuilder();
                     embeduserinfo.setThumbnail(
-                        customavatar ? customavatar : user.displayAvatarURL({ dynamic: true, size: 512 })
+                        customavatar ? customavatar : user.displayAvatarURL({ size: 512 })
                     );
-                    embeduserinfo.setAuthor(
-                        handlemsg(client.la[ls].cmds.info.userinfo.author, { usertag: user.tag }),
-                        user.displayAvatarURL({ dynamic: true }),
-                        "https://discord.gg/milrato"
+                    embeduserinfo.setAuthor({
+                        name: handlemsg(client.la[ls].cmds.info.userinfo.author, { usertag: user.username }),
+                        iconURL: user.displayAvatarURL(),
+                        url: "https://github.com/melodiabl"
+                    });
+                    embeduserinfo.addFields(
+                        { name: client.la[ls].cmds.info.userinfo.field1, value: `<@${user.id}>\n\`${user.username}\``, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field2, value: `\`${user.id}\``, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field3, value: `[\`Link to avatar\`](${user.displayAvatarURL()})`, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field4, value: "`" + moment(user.createdTimestamp).format("DD/MM/YYYY") + "`\n`" + moment(user.createdTimestamp).format("hh:mm:ss") + "`", inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field6, value: `\`${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "None"}\``, inline: true },
+                        { name: client.la[ls].cmds.info.userinfo.field9, value: `\`${user.bot ? "✔️" : "❌"}\``, inline: true }
                     );
-                    embeduserinfo.addField(client.la[ls].cmds.info.userinfo.field1, `<@${user.id}>\n\`${user.tag}\``, true);
-                    embeduserinfo.addField(client.la[ls].cmds.info.userinfo.field2, `\`${user.id}\``, true);
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field3,
-                        `[\`Link to avatar\`](${user.displayAvatarURL({ format: "png" })})`,
-                        true
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field4,
-                        "`" +
-                            moment(user.createdTimestamp).format("DD/MM/YYYY") +
-                            "`\n" +
-                            "`" +
-                            moment(user.createdTimestamp).format("hh:mm:ss") +
-                            "`",
-                        true
-                    );
-                    embeduserinfo.addField(
-                        client.la[ls].cmds.info.userinfo.field6,
-                        `\`${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "None"}\``,
-                        true
-                    );
-                    embeduserinfo.addField(client.la[ls].cmds.info.userinfo.field9, `\`${user.bot ? "✔️" : "❌"}\``, true);
                     embeduserinfo.setColor(es.color);
                     embeduserinfo.setFooter(client.getFooter(es));
                     if (banner) embeduserinfo.setImage(banner);
@@ -282,10 +208,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

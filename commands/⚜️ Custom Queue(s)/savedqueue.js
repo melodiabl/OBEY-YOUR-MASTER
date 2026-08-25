@@ -16,7 +16,7 @@ module.exports = {
     name: `savedqueue`,
     category: `⚜️ Custom Queue(s)`,
     aliases: [`savequeue`, `customqueue`, `savedqueue`],
-    description: `Saves the Current Queue onto a Name`,
+    description: `Saves the Current Cola onto a Name`,
     extracustomdesc:
         "`savedqueue create`, `savedqueue addcurrenttrack`, `savedqueue addcurrentqueue`, `savedqueue removetrack`, `savedqueue removedupes`, `savedqueueshowall`, `savedqueue showdetails`, `savedqueue createsave`, `savedqueue delete`, `savedqueue play`, `savedqueue shuffle`",
     usage: `\`savedqueue <Type> <Name> [Options]\`\n
@@ -204,7 +204,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setTitle(
-                                        `${allEmojis.msg.SUCCESS} Added ${track.title} onto the Queue \`${Name}\``.substring(
+                                        `${allEmojis.msg.SUCCESS} Añadido ${track.title} onto the Cola \`${Name}\``.substring(
                                             0,
                                             256
                                         )
@@ -406,7 +406,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setTitle(
-                                        `${allEmojis.msg.SUCCESS} Deleted ${deletetrack.title} of the Queue \`${Name}\``.substring(
+                                        `${allEmojis.msg.SUCCESS} Eliminado ${deletetrack.title} of the Cola \`${Name}\``.substring(
                                             0,
                                             256
                                         )
@@ -487,7 +487,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setTitle(
-                                        `${allEmojis.msg.SUCCESS} Shuffled ${newtracks.length} Tracks of the Queue \`${Name}\``.substring(
+                                        `${allEmojis.msg.SUCCESS} Shuffled ${newtracks.length} Tracks of the Cola \`${Name}\``.substring(
                                             0,
                                             256
                                         )
@@ -583,7 +583,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setTitle(
-                                        `${allEmojis.msg.SUCCESS} Removed ${counter} Tracks from the Queue \`${Name}\``.substring(
+                                        `${allEmojis.msg.SUCCESS} Removido ${counter} Tracks from the Cola \`${Name}\``.substring(
                                             0,
                                             256
                                         )
@@ -900,10 +900,7 @@ module.exports = {
                                             : null
                                     )
                                     .setFooter(client.getFooter(es))
-                                    .setAuthor(
-                                        eval(client.la[ls]["cmds"]["customqueues"]["savedqueue"]["variable89"]),
-                                        "https://cdn.discordapp.com/emojis/763781458417549352.gif"
-                                    )
+                                    .setAuthor({ name: eval(client.la[ls]["cmds"]["customqueues"]["savedqueue"]["variable89"]), iconURL: "https://cdn.discordapp.com/emojis/763781458417549352.gif" })
                                     .setDescription(eval(client.la[ls]["cmds"]["customqueues"]["savedqueue"]["variable90"])),
                             ],
                         });
@@ -1039,10 +1036,10 @@ Object.size = function (obj) {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

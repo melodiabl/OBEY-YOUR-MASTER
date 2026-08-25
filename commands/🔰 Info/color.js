@@ -37,17 +37,13 @@ module.exports = {
                 });
             const embed = new Discord.EmbedBuilder()
                 .setTitle(eval(client.la[ls]["cmds"]["info"]["color"]["variable1"]))
-                .addField("<:arrow:832598861813776394> **Name**", "```" + json.name + "```", true)
-                .addField("<:arrow:832598861813776394> **Hex**", "```" + json.hex + "```", true)
-                .addField("<:arrow:832598861813776394> **RGB**", "```" + json.rgb + "```", true)
-                .addField(
-                    `<:arrow:832598861813776394> **${client.la[ls].cmds.info.color.brightershade}**`,
-                    "```" + json.brightened + "```",
-                    true
-                )
+                .addFields({ name: "<:arrow:832598861813776394> **Name**", value: "```" + json.name + "```", inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> **Hex**", value: "```" + json.hex + "```", inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> **RGB**", value: "```" + json.rgb + "```", inline: true })
+                .addFields({ name: `<:arrow:832598861813776394> **${client.la[ls].cmds.info.color.brightershade}**`, value: "```" + json.brightened + "```", inline: true })
                 .setThumbnail(json.color_image)
                 .setColor(json.hex);
-            if (userinfo) embed.addField("Color ==  your Highest Role!", `> Usage: \`${prefix}color ${args[0]}\``);
+            if (userinfo) embed.addFields({ name: "Color ==  your Highest Role!", value: `> Usage: \`${prefix}color ${args[0]}\`` });
             message.reply({
                 embeds: [embed],
             });
@@ -67,10 +63,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

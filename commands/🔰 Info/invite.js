@@ -1,4 +1,7 @@
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -19,20 +22,20 @@ module.exports = {
                 if (!user.bot)
                     return interaction?.reply({
                         ephemeral: true,
-                        content: "<:no:833101993668771842> You can't Invite a Normal user! **IT MUST BE A BOT**",
+                        content: "<:no:833101993668771842> ¡No puedes invitar a un usuario normal! **DEBE SER UN BOT**",
                     });
                 let button_public_invite = new ButtonBuilder()
-                    .setStyle(Discord.ButtonStyle.Link)
+                    .setStyle(ButtonStyle.Link)
                     .setLabel(handlemsg(client.la[ls].cmds.info.invite.buttons.public))
                     .setURL(
                         "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
                     );
                 let button_support_dc = new ButtonBuilder()
-                    .setStyle(Discord.ButtonStyle.Link)
+                    .setStyle(ButtonStyle.Link)
                     .setLabel(handlemsg(client.la[ls].cmds.info.invite.buttons.server))
-                    .setURL("https://discord.com/gg/milrato");
+                    .setURL("https://github.com/melodiabl");
                 let button_invite = new ButtonBuilder()
-                    .setStyle(Discord.ButtonStyle.Link)
+                    .setStyle(ButtonStyle.Link)
                     .setLabel("Invite " + user.username)
                     .setURL(
                         `https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot%20applications.commands`
@@ -45,14 +48,14 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(ee.color)
-                            .setTitle(`Invite: __**${user.tag}**__`)
+                            .setTitle(`Invite: __**${user.username}**__`)
                             .setDescription(
                                 `||[*Click here for an Invitelink without Slash Commands*](https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot)||`
                             )
                             .setURL(
                                 `https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot%20applications.commands`
                             )
-                            .setFooter(client.getFooter(`${user.username} | powered by milrato.eu`, "https://imgur.com/jPItIw0.gif")
+                            .setFooter(client.getFooter(`${user.username} | powered by github.com/melodiabl`, "https://imgur.com/jPItIw0.gif")
                             ),
                     ],
                     components: allbuttons,
@@ -74,10 +77,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

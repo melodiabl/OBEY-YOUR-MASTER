@@ -1,4 +1,7 @@
-const { EmbedBuilder, ActionRowBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -7,24 +10,24 @@ module.exports = {
     name: "support",
     category: "🔰 Info",
     usage: "invite",
-    description: "Sends you the Support Server Link",
+    description: "Sends you the Support Servidor Link",
     type: "bot",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
             let button_public_invite = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Link)
+                .setStyle(ButtonStyle.Link)
                 .setLabel("Invite Public Bot")
                 .setURL(
                     "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
                 );
             let button_support_dc = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Link)
+                .setStyle(ButtonStyle.Link)
                 .setLabel("Support Server")
-                .setURL("https://discord.com/gg/milrato");
+                .setURL("https://github.com/melodiabl");
             let button_invite = new ButtonBuilder()
-                .setStyle(Discord.ButtonStyle.Link)
+                .setStyle(ButtonStyle.Link)
                 .setLabel("Invite this Bot")
                 .setURL(
                     `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`
@@ -39,7 +42,7 @@ module.exports = {
                         .setColor(ee.color)
                         .setTitle(client.la[ls].cmds.info.support.title)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["support"]["variable1"]))
-                        .setFooter({ text: "Clan Bot | powered by milrato.eu", iconURL: "https://imgur.com/jPItIw0.gif" })
+                        .setFooter({ text: "Clan Bot | powered by github.com/melodiabl", iconURL: "https://imgur.com/jPItIw0.gif" })
                         .setURL(
                             "https://discord.com/api/oauth2/authorize?client_id=784364932149280778&permissions=8&scope=bot%20applications.commands"
                         ),
@@ -62,10 +65,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

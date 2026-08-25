@@ -57,7 +57,7 @@ module.exports = client => {
                         );
                     embed.setTimestamp();
 
-                    if (oldEmbed.author) embed.setAuthor(oldEmbed.author.name, oldEmbed.author.iconURL, oldEmbed.author.url);
+                    if (oldEmbed.author) embed.setAuthor({ name: oldEmbed.author.name, iconURL: oldEmbed.author.iconURL, url: oldEmbed.author.url });
                     if (oldEmbed.image)
                         try {
                             embed.setImage(oldEmbed.image.url);
@@ -70,7 +70,7 @@ module.exports = client => {
                     if (oldEmbed.url) embed.setURL(oldEmbed.url);
                     if (oldEmbed.fields[0]) {
                         for (let i = 0; i <= oldEmbed.fields.length; i++) {
-                            if (oldEmbed.fields[i]) embed.addField(oldEmbed.fields[i].name, oldEmbed.fields[i].value);
+                            if (oldEmbed.fields[i]) embed.addFields({ name: oldEmbed.fields[i].name, value: oldEmbed.fields[i].value });
                         }
                     }
                     targetMessage.delete().catch(e => console.log("THIS ERROR PREVENTS A BUG"));
@@ -93,7 +93,7 @@ module.exports = client => {
                         )
                         .setFooter(client.getFooter(es))
 
-                        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }));
+                        .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL() });
                     if (message.content) embed.setDescription(message.content);
 
                     let files = null;

@@ -1,111 +1,25 @@
-const Discord = require(`discord.js`);
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const playermanager = require(`../../handlers/playermanager`);
-const { createBar } = require(`${process.cwd()}/handlers/functions`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
+function fmtMs(ms) { const s=Math.floor((ms||0)/1000),m=Math.floor(s/60),sec=s%60; return `${m}:${String(sec).padStart(2,'0')}` }
 module.exports = {
-    name: `queuestatus`,
-    category: `🎶 Music`,
-    aliases: [`qs`, `queueinfo`, `status`, `queuestat`, `queuestats`, `qus`],
-    description: `Shows the current Queuestatus`,
-    usage: `queuestatus`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        previoussong: false,
-    },
-    type: "queue",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            client.settings.ensure(message.guild.id, {
-                playmsg: true,
-            });
-            //toggle autoplay
-            let embed = new EmbedBuilder();
-            embed.setTitle(eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variable1"]));
-            embed.setDescription(eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variable2"]));
-            embed.addField(`${emoji?.msg.raise_volume} Volume`, `\`\`\`${player.volume}%\`\`\``, true);
-            embed.addField(`${emoji?.msg.repeat_mode} Queue Length: `, `\`\`\`${player.queue.length} Songs\`\`\``, true);
-            embed.addField(
-                `📨 Pruning: `,
-                `\`\`\`${client.settings.get(message.guild.id, "playmsg") ? `✅ Enabled` : `❌ Disabled`}\`\`\``,
-                true
-            );
-
-            embed.addField(
-                `${emoji?.msg.autoplay_mode} Song Loop: `,
-                `\`\`\`${player.trackRepeat ? `✅ Enabled` : `❌ Disabled`}\`\`\``,
-                true
-            );
-            embed.addField(
-                `${emoji?.msg.autoplay_mode} Queue Loop: `,
-                `\`\`\`${player.queueRepeat ? `✅ Enabled` : `❌ Disabled`}\`\`\``,
-                true
-            );
-            embed.addField(
-                eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variablex_3"]),
-                eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variable3"]),
-                true
-            );
-
-            embed.addField(`${emoji?.msg.equalizer} Equalizer: `, `\`\`\`${player.get("eq")}\`\`\``, true);
-            embed.addField(`🎛 Filter: `, `\`\`\`${player.get("filter")}\`\`\``, true);
-            embed.addField(
-                `:clock1: AFK Mode`,
-                `\`\`\`PLAYER: ${player.get("afk") ? `✅ Enabled` : `❌ Disabled`}\`\`\``,
-                true
-            );
-
-            embed.setColor(es.color);
-
-            embed.addField(
-                eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variablex_4"]),
-                eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variable4"])
-            );
-            if (player.queue && player.queue.current) {
-                embed.addField(
-                    eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variablex_5"]),
-                    eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variable5"])
-                );
-            }
-            message.reply({ embeds: [embed] });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["queuestatus"]["variable6"])),
-                ],
-            });
-        }
-    },
-};
-
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'queuestatus', category: '🎶 Music',
+  aliases: ['qs'],
+  description: 'Muestra el estado de la cola',
+  usage: 'queuestatus',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  run: async (client, message) => {
+    const state = client.music?.getState(message.guild.id)
+    if (!state?.currentTrack) return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay música reproduciéndose.')] }).catch(() => {})
+    const ci = state.currentTrack.info || state.currentTrack
+    const total = state.queue.reduce((a,t)=>a+(t.info?.length||0),0)
+    message.reply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
+      .setTitle('📋 Estado de la cola')
+      .addFields(
+        { name: '▶️ Reproduciendo', value: ci.title || '?', inline: false },
+        { name: '📋 En cola', value: String(state.queue.length), inline: true },
+        { name: '⏱ Duración total', value: fmtMs(total), inline: true },
+        { name: '🔁 Loop', value: state.loop || 'none', inline: true },
+        { name: '🔊 Volumen', value: `${state.volume}%`, inline: true },
+        { name: '🎲 Autoplay', value: state.autoplay ? 'Sí' : 'No', inline: true },
+      )] }).catch(() => {})
+  },
+}

@@ -14,7 +14,7 @@ module.exports = {
     usage: "setup-autowarn --> Follow Steps",
     description:
         "Enable / Disable Auto-Warn-Rules, on my Security Systems, like antispam, anticaps, antilinks, blacklist and more!",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -98,13 +98,9 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Auto-Warn Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Auto-Warn Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" })
                     .setDescription(
-                        "***Select all Auto-Warn Rules you want to enable/disable in the `Selection` down below!***\n> *The Warns will only be applied, if the responsible System for it, is enabled!*\n> **You must select at least 1 or more!**"
+                        "***Seleccionar all Auto-Warn Rules you want to enable/disable in the `Selection` down below!***\n> *The Warns will only be applied, if the responsible System for it, is enabled!*\n> **You must select at least 1 or more!**"
                     );
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -119,7 +115,7 @@ module.exports = {
                 collector.on("collect", async b => {
                     if (b?.user.id !== message.author.id)
                         return b?.reply({
-                            content: `${allEmojis.msg.ERROR} Only the one who typed the Command is allowed to select Things!`,
+                            content: `${allEmojis.msg.ERROR} Only the one who typed the Comando is allowed to select Things!`,
                             ephemeral: true,
                         });
 
@@ -133,15 +129,15 @@ module.exports = {
                         client.settings.set(message.guild.id, !oldstate, `autowarn.${value.toLowerCase()}`);
                     }
                     b?.reply(
-                        `${allEmojis.msg.SUCCESS} **\`Enabled ${enabled} Auto-Warn-Rules\` and \`Disabled ${disabled} Auto-Warn-Rules\` out of \`${b?.values.length} selected Auto-Warn-Rules\`**`
+                        `${allEmojis.msg.SUCCESS} **\`Activado ${enabled} Auto-Warn-Rules\` and \`Desactivado ${disabled} Auto-Warn-Rules\` out of \`${b?.values.length} selected Auto-Warn-Rules\`**`
                     );
                 });
                 collector.on("end", () => {
                     menumsg
                         .edit({
-                            content: `${allEmojis.msg.ERROR} Time ran out/Input finished! Cancelled`,
+                            content: `${allEmojis.msg.ERROR} Time ran out/Input finished! Cancelado`,
                             embeds: [
-                                menumsg.embeds[0].setDescription(
+                                EmbedBuilder.from(menumsg.embeds[0]).setDescription(
                                     `${getMenuOptions()
                                         .map(
                                             option =>
@@ -171,10 +167,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

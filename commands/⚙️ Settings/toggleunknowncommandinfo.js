@@ -6,7 +6,7 @@ module.exports = {
     name: "toggleunknowncommandinfo",
     aliases: ["toggleunknowncmdinfo", "toggleunknowninfo", "unknowncmdinfo", "unknowninfo", "unknowncommandinfo"],
     category: "⚙️ Settings",
-    description: "Toggles if the Bot should send you an Informational Message, when the Command is NOT FOUND",
+    description: "Toggles if the Bot should send you an Informational Mensaje, when the Comando is NOT FOUND",
     usage: "toggleunknowncommandinfo",
     type: "bot",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -55,10 +55,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

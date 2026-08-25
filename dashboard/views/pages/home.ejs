@@ -1,19 +1,171 @@
-<%- include('../includes/header', { title: 'OBEY YOUR MASTER BOT - Inicio', user }) %>
+<%- include('../includes/header', { title: 'OBEY YOUR MASTER — Dashboard', user, activePage: 'home' }) %>
 
-<div class="hero">
-  <div class="hero-content">
-    <h1><i class="fas fa-robot"></i> OBEY YOUR MASTER BOT</h1>
-    <p>Bot de Discord multifuncional con música, moderación, sorteos y más.</p>
-    <div class="stats-row">
-      <div class="stat-card"><i class="fas fa-server"></i><span><%= bot.guilds %></span><small>Servidores</small></div>
-      <div class="stat-card"><i class="fas fa-terminal"></i><span><%= bot.commands %>+</span><small>Comandos</small></div>
-    </div>
-    <% if (!user) { %>
-      <a href="/login" class="btn-primary"><i class="fab fa-discord"></i> Conectar con Discord</a>
+<div class="page-hd">
+  <div class="page-ico ico-p"><i class="fas fa-robot"></i></div>
+  <div>
+    <div class="page-title">PANEL DE CONTROL</div>
+    <div class="page-sub">Estado en tiempo real del bot</div>
+  </div>
+  <div class="page-actions">
+    <% if (user) { %>
+      <a href="/dashboard" class="btn btn-p"><i class="fas fa-server"></i> Mis Servidores</a>
     <% } else { %>
-      <a href="/dashboard" class="btn-primary"><i class="fas fa-tachometer-alt"></i> Ir al Dashboard</a>
+      <a href="/login" class="btn btn-discord"><i class="fab fa-discord"></i> Iniciar sesión</a>
     <% } %>
   </div>
 </div>
+
+<!-- Stat cards -->
+<div class="stat-grid" id="stat-grid">
+  <div class="stat-card">
+    <div class="stat-icon text-p"><i class="fas fa-server"></i></div>
+    <div class="stat-num" id="sc-guilds"><%= bot.guilds || '—' %></div>
+    <div class="stat-lbl">Servidores</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon text-green"><i class="fas fa-users"></i></div>
+    <div class="stat-num" id="sc-users">—</div>
+    <div class="stat-lbl">Usuarios</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon" style="color:var(--yellow)"><i class="fas fa-music"></i></div>
+    <div class="stat-num" id="sc-players">—</div>
+    <div class="stat-lbl">Reproductores</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon" style="color:var(--yellow)"><i class="fas fa-terminal"></i></div>
+    <div class="stat-num"><%= bot.commands || '625' %>+</div>
+    <div class="stat-lbl">Comandos</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon text-p"><i class="fas fa-clock"></i></div>
+    <div class="stat-num font-mono" id="sc-uptime" style="font-size:18px;margin-top:8px">—</div>
+    <div class="stat-lbl">Uptime</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon" style="color:var(--green)"><i class="fas fa-heartbeat"></i></div>
+    <div class="stat-num font-mono" id="sc-ping" style="font-size:18px;margin-top:8px">—</div>
+    <div class="stat-lbl">Ping WS</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon" style="color:#EB459E"><i class="fas fa-microchip"></i></div>
+    <div class="stat-num font-mono" id="sc-mem" style="font-size:18px;margin-top:8px">—</div>
+    <div class="stat-lbl">Memoria</div>
+  </div>
+  <div class="stat-card" id="sc-status-card">
+    <div class="stat-icon" style="color:var(--green)" id="sc-status-ico"><i class="fas fa-circle"></i></div>
+    <div class="stat-num" id="sc-status" style="font-size:15px;margin-top:8px">EN LÍNEA</div>
+    <div class="stat-lbl">Estado del bot</div>
+  </div>
+</div>
+
+<!-- Now playing -->
+<div class="card" style="margin-bottom:14px">
+  <div class="card-head">
+    <div class="card-ico ico-p"><i class="fas fa-music"></i></div>
+    <div>
+      <div class="card-title">Reproduciendo ahora</div>
+      <div class="card-desc">Pistas activas en servidores</div>
+    </div>
+    <span class="live-badge" style="margin-left:auto"><span class="live-dot"></span> EN VIVO</span>
+  </div>
+  <div class="card-body" id="np-cards" style="gap:8px">
+    <div class="text-muted" style="font-size:13px;text-align:center;padding:16px 0">
+      <i class="fas fa-spinner fa-spin" style="margin-right:8px"></i>Cargando...
+    </div>
+  </div>
+</div>
+
+<!-- Quick links -->
+<div class="card">
+  <div class="card-head">
+    <div class="card-ico ico-purple"><i class="fas fa-link"></i></div>
+    <div><div class="card-title">Accesos rápidos</div></div>
+  </div>
+  <div class="card-body" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+    <% if (user) { %>
+    <a href="/dashboard" class="toggle-item" style="text-decoration:none">
+      <div class="ti-info"><span class="ti-label"><i class="fas fa-server" style="margin-right:8px;color:var(--p)"></i>Mis Servidores</span><span class="ti-desc">Gestiona tus servidores</span></div>
+      <i class="fas fa-arrow-right text-muted" style="font-size:11px"></i>
+    </a>
+    <% } %>
+    <a href="https://discord.gg/QJeavgKU" target="_blank" class="toggle-item" style="text-decoration:none">
+      <div class="ti-info"><span class="ti-label"><i class="fab fa-discord" style="margin-right:8px;color:#5865F2"></i>Servidor de soporte</span><span class="ti-desc">discord.gg/QJeavgKU</span></div>
+      <i class="fas fa-external-link-alt text-muted" style="font-size:11px"></i>
+    </a>
+    <a href="https://www.skyultraplus.com/" target="_blank" class="toggle-item" style="text-decoration:none">
+      <div class="ti-info"><span class="ti-label"><i class="fas fa-cloud" style="margin-right:8px;color:#8A2BE2"></i>SkyUltraPlus</span><span class="ti-desc">Hosting oficial</span></div>
+      <i class="fas fa-external-link-alt text-muted" style="font-size:11px"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+
+function fmtUptime(s) {
+  s = Math.floor(s||0)
+  const d=Math.floor(s/86400), h=Math.floor((s%86400)/3600), m=Math.floor((s%3600)/60), sc=s%60
+  if(d>0)  return `${d}d ${h}h ${m}m`
+  if(h>0)  return `${h}h ${m}m`
+  if(m>0)  return `${m}m ${sc}s`
+  return `${sc}s`
+}
+
+function applyStats(d) {
+  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v }
+  set('sc-guilds',  d.guilds  ?? '—')
+  set('sc-users',   (d.users ?? 0).toLocaleString())
+  set('sc-players', d.activePlayers ?? '0')
+  set('sc-uptime',  fmtUptime(d.uptime))
+  set('sc-ping',    d.ping != null ? `${d.ping}ms` : '—')
+  set('sc-mem',     d.memUsed != null ? `${d.memUsed}MB` : '—')
+  const hg = document.getElementById('hdr-guilds')
+  if(hg) hg.textContent = d.guilds ?? '—'
+  // Status card color by ping
+  const ico = document.getElementById('sc-status-ico')
+  const lbl = document.getElementById('sc-status')
+  if(ico && lbl && d.ping != null) {
+    if(d.ping < 100)      { ico.style.color='var(--green)'; lbl.textContent='ÓPTIMO' }
+    else if(d.ping < 250) { ico.style.color='var(--yellow)'; lbl.textContent='NORMAL' }
+    else                  { ico.style.color='var(--red)'; lbl.textContent='LENTO' }
+  }
+}
+
+// SSE — stats en tiempo real
+if(typeof EventSource !== 'undefined') {
+  const es = new EventSource('/api/sse')
+  es.onmessage = e => { try { applyStats(JSON.parse(e.data)) } catch {} }
+  es.onerror   = () => { /* reconnects automatically */ }
+} else {
+  // Fallback: polling cada 10s
+  const poll = () => fetch('/api/stats').then(r=>r.ok?r.json():null).then(d=>{ if(d) applyStats(d) }).catch(()=>{})
+  poll(); setInterval(poll, 10000)
+}
+
+// Now playing — poll cada 15s
+function loadNP() {
+  fetch('/api/nowplaying').then(r=>r.ok?r.json():null).then(d=>{
+    const c=document.getElementById('np-cards')
+    if(!c) return
+    const tracks=d?.tracks||[]
+    if(!tracks.length) {
+      c.innerHTML='<div class="text-muted" style="font-size:13px;text-align:center;padding:16px 0"><i class="fas fa-music" style="margin-right:8px;opacity:.4"></i>Sin pistas activas ahora mismo</div>'
+      return
+    }
+    const GRADS=['#5865F2,#9B59B6','#EB459E,#5865F2','#57F287,#5865F2','#9B59B6,#EB459E']
+    c.innerHTML=tracks.map((t,i)=>`
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surf2);border:1px solid var(--border);border-radius:8px">
+        <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,${GRADS[i%4]});display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🎵</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(t.trackTitle)}</div>
+          <div style="font-size:11px;color:var(--muted)">${esc(t.guildName)} · ${esc(t.trackAuthor)}</div>
+        </div>
+        <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;background:rgba(87,242,135,.12);color:var(--green)">▶ LIVE</span>
+      </div>`).join('')
+  }).catch(()=>{})
+}
+loadNP(); setInterval(loadNP, 15000)
+</script>
 
 <%- include('../includes/footer') %>

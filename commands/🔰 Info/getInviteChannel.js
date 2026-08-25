@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -8,7 +8,7 @@ module.exports = {
     name: "getinvitechannel",
     category: "🔰 Info",
     usage: "getinvitechannel",
-    description: "Gives you an Invite link for an Channel",
+    description: "Gives you an Invite link for an Canal",
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -16,7 +16,7 @@ module.exports = {
         try {
             let Channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]) || message.channel;
             if (!Channel) return message.reply(handlemsg(client.la[ls].cmds.info.getinvitechannel.error));
-            if (!Channel.permissionsFor(Channel.guild.members.me).has(PermissionFlagsBits.CREATE_INSTANT_INVITE)) {
+            if (!Channel.permissionsFor(Channel.guild.members.me).has(PermissionFlagsBits.CreateInstantInvite)) {
                 return `❌ **I am missing the CREATE_INSTANT_INVITE PERMISSION for \`${Channel.name}\`**`;
             }
             await Channel.createInvite()
@@ -64,10 +64,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

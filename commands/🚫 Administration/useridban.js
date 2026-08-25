@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -8,7 +8,7 @@ module.exports = {
     name: `useridban`,
     category: `🚫 Administration`,
     aliases: [`hackban`, "hban", "uban"],
-    description: `Bans a User from the Guild, just by adding the ID. He does not need to be in your Guild...`,
+    description: `Bans a Usuario from the Guild, just by adding the ID. He does not need to be in your Guild...`,
     usage: `useridban <ID> [Reason]`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -16,7 +16,7 @@ module.exports = {
         let ls = client.settings.get(message.guild.id, "language");
 
         try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BAN_MEMBERS]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BanMembers]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -47,7 +47,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -65,7 +65,7 @@ module.exports = {
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
                             .setFooter(client.getFooter(es))
-                            .setTitle("❌ Please add a USERID")
+                            .setTitle("❌ Por favor add a USERID")
                             .setDescription(`Usage: \`${prefix}useridban <ID> [REASON]\``),
                     ],
                 });
@@ -88,7 +88,7 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setTitle(`${allEmojis.msg.SUCCESS} Banned ${ban.tag || user}`)
+                            .setTitle(`${allEmojis.msg.SUCCESS} Baneado ${ban.tag || user}`)
                             .setDescription(`**Reason**: ${reason}`),
                     ],
                 });
@@ -121,25 +121,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({
-                                        dynamic: true,
-                                    })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable14"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],
@@ -164,10 +153,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

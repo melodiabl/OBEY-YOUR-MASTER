@@ -43,6 +43,9 @@ module.exports = async client => {
             Date.now() - messageIds.get(message.id) <= data.ghost_ping_detector_max_time
         ) {
             if (autowarn.ghost_ping_detector) {
+                const guildSettings = client.settings.get(message.guild.id) || {};
+                let es = guildSettings.embed || { color: '#fffff9', wrongcolor: '#e01e01', thumb: false, footertext: '', footericon: '' };
+                let ls = guildSettings.language && client.la[guildSettings.language] ? guildSettings.language : 'es';
                 client.userProfiles.ensure(message.author.id, {
                     id: message.author.id,
                     guild: message.guild.id,
@@ -50,8 +53,8 @@ module.exports = async client => {
                     warnings: [],
                     kicks: [],
                 });
-                const newActionId = client.modActions.autonum;
-                client.modActions.set(newActionId, {
+                const newActionId = Date.now().toString();
+                client.userProfiles.push(message.author.id, {
                     user: message.author.id,
                     guild: message.guild.id,
                     type: "warning",
@@ -59,27 +62,22 @@ module.exports = async client => {
                     reason: "Ghost-Ping-Detector Autowarn",
                     when: new Date().toLocaleString(`de`),
                     oldhighesrole: message.member.roles ? message.member.roles.highest : `Had No Roles`,
-                    oldthumburl: message.author.displayAvatarURL({
-                        dynamic: true,
-                    }),
-                });
-                // Push the action to the user's warnings
-                client.userProfiles.push(message.author.id, newActionId, "warnings");
+                    oldthumburl: message.author.displayAvatarURL(),
+                }, "warnings");
                 client.userProfiles.inc(message.author.id, "totalActions");
                 client.stats.push(message.guild.id + message.author.id, new Date().getTime(), "warn");
-                const warnIDs = client.userProfiles.get(message.author.id, "warnings");
-                const warnData = warnIDs.map(id => client.modActions.get(id));
-                let warnings = warnData.filter(v => v.guild == message.guild.id);
+                const warnIDs = client.userProfiles.get(message.author.id, "warnings") || [];
+                let warnings = warnIDs.filter(v => v && v.guild == message.guild.id);
                 message.channel.send({
                     embeds: [
                         new EmbedBuilder()
                             .setAuthor(
-                                client.getAuthor(message.author.tag, message.member.displayAvatarURL({ dynamic: true }))
+                                client.getAuthor(message.author.username, message.member.displayAvatarURL())
                             )
                             .setColor("#E67E22")
                             .setFooter(client.getFooter(
                                     "ID: " + message.author.id,
-                                    message.author.displayAvatarURL({ dynamic: true })
+                                    message.author.displayAvatarURL()
                                 )
                             )
                             .setDescription(
@@ -88,7 +86,6 @@ module.exports = async client => {
                     ],
                 });
                 let warnsettings = client.settings.get(message.guild.id, "warnsettings");
-                if (warnsettings.kick && warnsettings.kick == warnings.length) {
                     if (!message.member.kickable)
                         message.channel.send({
                             embeds: [
@@ -170,8 +167,7 @@ module.exports = async client => {
                             });
                         }
                     }
-                }
-                if (warnsettings.ban && warnsettings.ban == warnings.length) {
+                    if (warnsettings.ban && warnsettings.ban == warnings.length) {
                     if (!message.member.bannable)
                         message.channel.send({
                             embeds: [
@@ -270,13 +266,13 @@ module.exports = async client => {
                         new EmbedBuilder()
                             .setFooter(client.getFooter(
                                     "ID:" + message.author.id,
-                                    message.member.displayAvatarURL({ dynamic: true })
+                                    message.member.displayAvatarURL()
                                 )
                             )
                             .setColor("#E67E22")
-                            .setTitle("GHOST-PING-DETECTED")
+                            .setTitle("MENCIÓN FANTASMA DETECTADA")
                             .setDescription(
-                                `**Message-Author:**\n> ${message.author} | ${message.author.tag} (\`${message.author.id}\`)\n**Channel:**\n> ${message.channel} | ${message.channel.name} (\`${message.channel.id}\`)\n**Time-for-Deletion:**\n> \`${Math.floor((Date.now() - messageIds.get(message.id)) / 1000)} Seconds\`\n\n**[${message.mentions.users.size}] Ping${message.mentions.users.size == 1 ? "" : "s"}:**\n> ${message.mentions.users.map(p => `${p}`).join(", ")}`.substring(
+                                `**Mensaje-Author:**\n> ${message.author} | ${message.author.username} (\`${message.author.id}\`)\n**Channel:**\n> ${message.channel} | ${message.channel.name} (\`${message.channel.id}\`)\n**Time-for-Deletion:**\n> \`${Math.floor((Date.now() - messageIds.get(message.id)) / 1000)} Seconds\`\n\n**[${message.mentions.users.size}] Ping${message.mentions.users.size == 1 ? "" : "s"}:**\n> ${message.mentions.users.map(p => `${p}`).join(", ")}`.substring(
                                     0,
                                     2048
                                 )

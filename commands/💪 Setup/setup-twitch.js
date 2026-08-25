@@ -13,7 +13,7 @@ module.exports = {
     cooldown: 5,
     usage: "setup-twitch  -->  Follow Steps",
     description: "Manage the Twitch logger, temp role, ping role, adduser, removeuser, etc.",
-    memberpermissions: ["ADMINISTRATOR"],
+    memberpermissions: ['Administrador'],
     type: "fun",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -30,22 +30,22 @@ module.exports = {
                     },
                     {
                         value: "New Channel",
-                        description: `Add a New Twitch Channel`,
+                        description: `Add a New Twitch Canal`,
                         emoji: allEmojis.msg.UPVOTE,
                     },
                     {
                         value: "Discord Channel",
-                        description: `Set a Discord Channel for Posting Messages`,
+                        description: `Set a Discord Canal for Posting Messages`,
                         emoji: allEmojis.msg.channel,
                     },
                     {
                         value: "Active Live Role",
-                        description: `Set a Role to add for current live Streamers`,
+                        description: `Set a Rol to add for current live Streamers`,
                         emoji: allEmojis.msg.roles,
                     },
                     {
                         value: "Ghost Ping Role",
-                        description: `Set a Ghost Ping Role.`,
+                        description: `Set a Ghost Ping Rol.`,
                         emoji: "👻",
                     },
                     {
@@ -55,7 +55,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Twitch-Logger-Setup!`,
+                        description: `Cancelar and stop the Twitch-Logger-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -64,7 +64,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Twitch-Logger")
+                    .setPlaceholder("¡Haz clic para configurar the Twitch-Logger")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -80,11 +80,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Twitch-Logger",
-                        "https://cdn.discordapp.com/emojis/720391959746969710.gif?size=160",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Twitch-Logger", iconURL: "https://cdn.discordapp.com/emojis/720391959746969710.gif?size=160", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -108,14 +104,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -205,12 +201,8 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor(
-                                    "Twitch-Poster",
-                                    "https://cdn.discordapp.com/emojis/720391959746969710.gif?size=160",
-                                    "https://discord.gg/milrato"
-                                )
-                                .setDescription("Select all Twitch Channels you want to remove!");
+                                .setAuthor({ name: "Twitch-Poster", iconURL: "https://cdn.discordapp.com/emojis/720391959746969710.gif?size=160", url: "https://github.com/melodiabl" })
+                                .setDescription("Seleccionar all Twitch Channels you want to remove!");
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
@@ -236,14 +228,14 @@ module.exports = {
                                     menu?.reply(`✅ **Successfully removed ${menu?.values.length} Twitch Accounts!**`);
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                     components: [],
                                     content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                 });
@@ -380,7 +372,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.wrongcolor)
                                                                         .setDescription(
-                                                                            `Cancelled the Operation!`.substring(0, 2000)
+                                                                            `¡Operación Cancelada!`.substring(0, 2000)
                                                                         )
                                                                         .setFooter(client.getFooter(es)),
                                                                 ],
@@ -403,7 +395,7 @@ module.exports = {
                                                                 )
                                                             )
                                                             .setColor(es.wrongcolor)
-                                                            .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                             .setFooter(client.getFooter(es)),
                                                     ],
                                                 });
@@ -419,7 +411,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable15"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -497,7 +489,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        throw "you didn't ping a valid Channel";
+                                        throw "you no mencionaste un Channel";
                                     }
                                 })
                                 .catch(e => {
@@ -507,7 +499,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable23"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -585,7 +577,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        throw "you didn't ping a valid Channel";
+                                        throw "you no mencionaste un Channel";
                                     }
                                 })
                                 .catch(e => {
@@ -595,7 +587,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable30"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -673,7 +665,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        throw "you didn't ping a valid Channel";
+                                        throw "you no mencionaste un Channel";
                                     }
                                 })
                                 .catch(e => {
@@ -683,7 +675,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable37"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -708,10 +700,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

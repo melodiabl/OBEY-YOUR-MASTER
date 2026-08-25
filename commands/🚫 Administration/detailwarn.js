@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -7,8 +7,8 @@ module.exports = {
     name: `detailwarn`,
     category: `🚫 Administration`,
     aliases: [`warninfo`, `snipe`, `infowarn`, `infowarning`, `detailwarning`, `warninginfo`],
-    description: `Shows details about one warn Command of a Member`,
-    usage: `detailwarn @User [Reason]`,
+    description: `Shows details about one warn Comando of a Miembro`,
+    usage: `detailwarn @Usuario [Reason]`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -84,7 +84,7 @@ module.exports = {
 
                 let warning = warnData[parseInt(args[1])];
                 let warned_by = message.guild.members.cache.get(warning.moderator)
-                    ? `${message.guild.members.cache.get(warning.moderator).user.tag} (${warning.moderator})`
+                    ? `${message.guild.members.cache.get(warning.moderator).user.username} (${warning.moderator})`
                     : warning.moderator;
                 let warned_in = client.guilds.cache.get(warning.guild)
                     ? `${client.guilds.cache.get(warning.guild).name} (${warning.guild})`
@@ -103,23 +103,17 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setAuthor(
-                                `Warn from ${warnmember.user.tag}`,
-                                warnmember.user.displayAvatarURL({
-                                    dynamic: true,
-                                })
-                            )
+                            .setAuthor({ name: `Warn from ${warnmember.user.username}`, iconURL: warnmember.user.displayAvatarURL() })
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["detailwarn"]["variable8"]))
-                            .addField(`Warn:`, `\`${parseInt(args[1]) + 1}\` out of **${warnIDs.length} Warns**`, true)
-                            .addField(`Warned by:`, `\`${warned_by}\``, true)
-                            .addField(`Warned at:`, `\`${warning.when}\``, true)
-                            .addField(`Warned in:`, `\`${warned_in}\``, true)
-                            .addField(`Old Thumbnail URL`, `[\`Click here\`](${warning.oldthumburl})`, true)
-                            .addField(
-                                `Old Highest Role:`,
-                                `${message.guild.roles.cache.get(warning.oldhighesrole.id) ? `<@&` + message.guild.roles.cache.get(warning.oldhighesrole.id) + `>` : `\`${warning.oldhighesrole.name} (${warning.oldhighesrole.id})\``}`,
-                                true
-                            ),
+                            .addFields({ name: `Warn:`, value: `\`${parseInt(args[1]) + 1}\` out of **${warnIDs.length} Warns**`, inline: true })
+                            .addFields({ name: `Warned by:`, value: `\`${warned_by}\``, inline: true })
+                            .addFields({ name: `Warned at:`, value: `\`${warning.when}\``, inline: true })
+                            .addFields({ name: `Warned in:`, value: `\`${warned_in}\``, inline: true })
+                            .addFields({ name: `Old Thumbnail URL`, value: `[\`Click here\`](${warning.oldthumburl})`, inline: true })
+                            .addFields({ name: `Old Highest Role`,
+                                value: `${message.guild.roles.cache.get(warning.oldhighesrole.id) ? `<@&` + message.guild.roles.cache.get(warning.oldhighesrole.id) + `>` : `\`${warning.oldhighesrole.name} (${warning.oldhighesrole.id})\``}`,
+                                inline: true
+                            }),
                     ],
                 });
             } catch (e) {
@@ -150,10 +144,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

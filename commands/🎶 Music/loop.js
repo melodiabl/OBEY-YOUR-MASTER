@@ -1,129 +1,22 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { fx, err, E } = require('../../handlers/music/responses')
 module.exports = {
-    name: `loop`,
-    category: `🎶 Music`,
-    aliases: [`repeat`, `l`],
-    description: `Repeats the current song`,
-    usage: `loopsong`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    type: "queuesong",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //if no args send error
-            if (!args[0])
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(client.la[ls].cmds.music.loop.errortitle)
-                            .setDescription(client.la[ls].cmds.music.loop.errordescription),
-                    ],
-                });
-            //if arg is somehow song / track
-            if (
-                args[0].toLowerCase() === `song` ||
-                args[0].toLowerCase() === `track` ||
-                args[0].toLowerCase() === `s` ||
-                args[0].toLowerCase() === `t`
-            ) {
-                //Create the Embed
-                let embed = new EmbedBuilder()
-                    .setTitle(
-                        player.trackRepeat
-                            ? client.la[ls].cmds.music.loop.track.disabled
-                            : client.la[ls].cmds.music.loop.track.enabled
-                    )
-                    .setColor(es.color);
-
-                //If Queue loop is enabled add embed info + disable it
-                if (player.queueRepeat) {
-                    embed.setDescription(client.la[ls].cmds.music.loop.andqueue);
-                    player.setQueueRepeat(false);
-                }
-                //toggle track repeat to the reverse old mode
-                player.setTrackRepeat(!player.trackRepeat);
-                //Send Success Message
-                return message.reply({ embeds: [embed] });
-            }
-            //if input is queue
-            else if (args[0].toLowerCase() === `queue` || args[0].toLowerCase() === `qu` || args[0].toLowerCase() === `q`) {
-                //Create the Embed
-                let embed = new EmbedBuilder()
-                    .setTitle(
-                        player.queueRepeat
-                            ? client.la[ls].cmds.music.loop.queue.disabled
-                            : client.la[ls].cmds.music.loop.queue.enabled
-                    )
-                    .setColor(es.color);
-
-                //If Track loop is enabled add embed info + disable it
-                if (player.trackRepeat) {
-                    embed.setDescription(client.la[ls].cmds.music.loop.andsong);
-                    player.setTrackRepeat(false);
-                }
-                //toggle queue repeat to the reverse old mode
-                player.setQueueRepeat(!player.queueRepeat);
-                //Send Success Message
-                return message.reply({ embeds: [embed] });
-            } else if (args[0].toLowerCase() === `off` || args[0].toLowerCase() === `stop`) {
-                //Create the Embed
-                let embed = new EmbedBuilder()
-                    .setTitle(client.la[ls].cmds.music.loop.queue.disabled)
-                    .setColor(es.color)
-                    .setDescription(client.la[ls].cmds.music.loop.andsong);
-                player.setTrackRepeat(false);
-                player.setQueueRepeat(false);
-                return message.reply({ embeds: [embed] });
-            }
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setTitle(client.la[ls].cmds.music.loop.errortitle)
-                        .setDescription(client.la[ls].cmds.music.loop.errordescription),
-                ],
-            });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["loop"]["variable1"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'loop', category: '🎶 Music',
+  aliases: ['repeat', 'l'],
+  description: 'Activa el loop: song | queue | off',
+  usage: 'loop <song|queue|off>',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  run: async (client, message, args) => {
+    const guildId = message.guild.id
+    const mstate  = client.music?.getState(guildId)
+    if (!mstate?.currentTrack) return message.reply({ embeds: [err('No hay música reproduciéndose.')] }).catch(() => {})
+    const arg = (args[0] || '').toLowerCase()
+    let mode = 'none'
+    if (['song','track','s','t'].includes(arg))  mode = 'track'
+    else if (['queue','q','qu'].includes(arg))   mode = 'queue'
+    else if (['off','stop','none'].includes(arg)) mode = 'none'
+    else return message.reply({ embeds: [err('Uso: `loop song` | `loop queue` | `loop off`')] }).catch(() => {})
+    client.music.setLoop(guildId, mode)
+    const labels = { none: 'Loop desactivado', track: 'Loop de **canción** activado', queue: 'Loop de **cola** activado' }
+    return message.reply({ embeds: [fx(E.loop, labels[mode])] }).catch(() => {})
+  },
+}

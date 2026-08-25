@@ -1,82 +1,22 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { createBar, format } = require(`${process.cwd()}/handlers/functions`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
+function fmtMs(ms){const s=Math.floor((ms||0)/1000);return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 module.exports = {
-    name: `forward`,
-    description: `Seeks a specific amount of Seconds forwards`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    options: [{ Integer: { name: "seconds", description: "How many Seconds do you want to forward?", required: true } }],
-    run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
-        //let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return interaction?.reply({
-                ephemeral: true,
-                embed: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            let args = [interaction?.options.getInteger("seconds")];
-            //if no args available, return error
-            if (!args[0])
-                return interaction?.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(
-                                handlemsg(client.la[ls].cmds.music.forward.allowed, {
-                                    duration: player.queue.current.duration,
-                                })
-                            ),
-                    ],
-                });
-            //get the seektime variable of the user input
-            let seektime = Number(player.position) + Number(args[0]) * 1000;
-            //if the userinput is smaller then 0, then set the seektime to just the player.position
-            if (Number(args[0]) <= 0) seektime = Number(player.position);
-            //if the seektime is too big, then set it 1 sec earlier
-            if (Number(seektime) >= player.queue.current.duration) seektime = player.queue.current.duration - 1000;
-            //seek to the new Seek position
-            player.seek(Number(seektime));
-            //Send Success Message
-            return interaction?.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(client.la[ls].cmds.music.forward.title)
-                        .setDescription(
-                            handlemsg(client.la[ls].cmds.music.forward.description, {
-                                amount: args[0],
-                                time: format(Number(player.position)),
-                            })
-                        )
-                        .addField(client.la[ls].cmds.music.forward.field, createBar(player))
-                        .setColor(es.color),
-                ],
-            });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'forward', description: 'Avanza la cancion X segundos',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  options: [{ Integer: { name: 'segundos', description: 'Segundos a avanzar (default 30)', required: false } }],
+  run: async (client, interaction) => {
+    if (!interaction.member?.voice?.channel)
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
+    await interaction.deferReply()
+    try {
+      const sec = Math.max(1, interaction.options.getInteger('segundos') || 30)
+      const player = client.shoukaku?.players?.get(interaction.guild.id)
+      if (!player) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay reproductor activo.')] })
+      const newPos = (player.position || 0) + sec * 1000
+      await player.seekTo(newPos)
+      await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
+        .setTitle('⏩ Avanzado')
+        .setDescription(`**+${sec}s** → \`${fmtMs(newPos)}\``)] })
+    } catch (e) { await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ ${e.message}`)] }) }
+  },
+}

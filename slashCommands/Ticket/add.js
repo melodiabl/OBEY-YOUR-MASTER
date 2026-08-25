@@ -1,4 +1,4 @@
-const { PermissionFlagsBits, OverwriteType } = require('discord.js')
+const { PermissionFlagsBits, OverwriteType, EmbedBuilder } = require('discord.js')
 const Ticket = require('../../database/schemas/TicketSchema')
 module.exports = {
   name: 'add',
@@ -8,19 +8,22 @@ module.exports = {
     { User: { name: 'usuario', description: 'Usuario a agregar', required: true } },
   ],
   run: async (client, interaction) => {
+    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
+    const ok  = d => new EmbedBuilder().setColor(0x5865F2).setDescription(d)
+
     const target = interaction.options.getUser('usuario')
     const member = await interaction.guild.members.fetch(target.id).catch(() => null)
-    if (!member) return interaction.reply({ content: '❌ Usuario no encontrado en este servidor.', ephemeral: true })
+    if (!member) return interaction.reply({ embeds: [err('❌ Usuario no encontrado en este servidor.')], ephemeral: true })
 
     const ticket = await Ticket.findOne({ channelId: interaction.channel.id })
     if (!ticket && !interaction.channel.name?.includes('ticket'))
-      return interaction.reply({ content: '❌ Este canal no parece ser un ticket.', ephemeral: true })
+      return interaction.reply({ embeds: [err('❌ Este canal no parece ser un ticket.')], ephemeral: true })
 
     await interaction.channel.permissionOverwrites.edit(member, {
       ViewChannel: true,
       SendMessages: true,
       ReadMessageHistory: true,
     })
-    await interaction.reply({ content: `✅ ${target} fue agregado al ticket.` })
+    await interaction.reply({ embeds: [ok(`✅ ${target} fue **agregado** al ticket.`)] })
   },
 }

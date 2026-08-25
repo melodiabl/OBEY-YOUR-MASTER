@@ -28,7 +28,7 @@ module.exports = {
         }
         await GuessTheNumber({
             interaction: message,
-            embed: {
+            embeds: [{
                 footer: {
                     text: es.footertext,
                 },
@@ -36,7 +36,7 @@ module.exports = {
                 description: "You have **{{time}}** to guess the number. (1-100)",
                 color: es.color,
                 timestamp: new Date(),
-            },
+            }],
             publicGame: true,
             number: Math.floor(Math.random() * 100) + 1,
             time: 60000,

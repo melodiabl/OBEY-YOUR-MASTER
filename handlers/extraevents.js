@@ -1,4 +1,6 @@
-const { EmbedBuilder, ActionRowBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder,
+    ChannelType
+} = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const { simple_databasing } = require(`./functions`);
 module.exports = client => {
@@ -32,7 +34,7 @@ module.exports = client => {
 
         let text = embedData.footertext;
         let iconURL = embedData.footericon;
-        if (!text || text.length < 1) text = `${client.user.username} | By: Tomato#6966`;
+        if (!text || text.length < 1) text = `${client.user.username}`;
         if (!iconURL || iconURL.length < 1) iconURL = `${client.user.displayAvatarURL()}`;
 
         //Change the lengths
@@ -53,16 +55,16 @@ module.exports = client => {
         let iconURL = authoricon;
         let url = authorurl;
 
-        if (!name || name.length < 1) name = `${client.user.username} | By: Tomato#6966`;
+        if (!name || name.length < 1) name = `${client.user.username}`;
         if (!iconURL || iconURL.length < 1) iconURL = `${client.user.displayAvatarURL()}`;
-        if (!url || url.length < 1) url = `https://discord.gg/milrato`;
+        if (!url || url.length < 1) url = `https://github.com/melodiabl`;
 
         //Change the lengths
         iconURL = iconURL.trim();
         name = name.trim().substring(0, 2048);
 
         //verify the iconURL
-        if (!url.startsWith("https://") && !url.startsWith("http://")) url = `https://discord.gg/milrato`;
+        if (!url.startsWith("https://") && !url.startsWith("http://")) url = `https://github.com/melodiabl`;
         if (!iconURL.startsWith("https://") && !iconURL.startsWith("http://")) iconURL = client.user.displayAvatarURL();
         if (![".png", ".jpg", ".wpeg", ".webm", ".gif"].some(d => iconURL.toLowerCase().endsWith(d)))
             iconURL = client.user.displayAvatarURL();
@@ -93,7 +95,7 @@ module.exports = client => {
     client.on("messageCreate", message => {
         if (!message.guild || message.guild.available === false) return;
         if (message.guild && message.author.id == client.user.id && message.embeds.length > 0) {
-            if (message.channel.type == "GUILD_NEWS") {
+            if (message.channel.type == ChannelType.GuildAnnouncement) {
                 setTimeout(() => {
                     if (message.crosspostable) {
                         message
@@ -156,24 +158,14 @@ module.exports = client => {
         let ls = client.settings.get(guild.id, "language");
         let embed = new EmbedBuilder()
             .setColor("#57F287")
-            .setTitle(`<a:Join_vc:863876115584385074> Joined a New Server`)
-            .addField("Guild Info", `>>> \`\`\`${guild.name} (${guild.id})\`\`\``)
-            .addField(
-                "Owner Info",
-                `>>> \`\`\`${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`}\`\`\``
-            )
-            .addField("Member Count", `>>> \`\`\`${guild.memberCount}\`\`\``)
-            .addField("Servers Bot is in", `>>> \`\`\`${client.guilds.cache.size}\`\`\``)
-            .addField("Leave Server:", `>>> \`\`\`${config.prefix}leaveserver ${guild.id}\`\`\``)
-            .setThumbnail(guild.iconURL({ dynamic: true }));
+            .setTitle(`<a:Join_vc:863876115584385074> Se unió a New Servidor`)
+            .addFields({ name: "Guild Info", value: `>>> \`\`\`${guild.name} (${guild.id})\`\`\`` })
+            .addFields({ name: "Owner Info", value: `>>> \`\`\`${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`}\`\`\`` })
+            .addFields({ name: "Member Count", value: `>>> \`\`\`${guild.memberCount}\`\`\`` })
+            .addFields({ name: "Servers Bot is in", value: `>>> \`\`\`${client.guilds.cache.size}\`\`\`` })
+            .addFields({ name: "Leave Server:", value: `>>> \`\`\`${config.prefix}leaveserver ${guild.id}\`\`\`` })
+            .setThumbnail(guild.iconURL());
         for (const owner of config.ownerIDS) {
-            //If the Owner is Tomato, and the Bot is in not a Milrato Development, Public Bot, then dont send information!
-            if (owner == "1087034447825735741") {
-                let milratoGuild = client.guilds.cache.get("773668217163218944");
-                if (milratoGuild && !milratoGuild.me.roles.cache.has("779021235790807050")) {
-                    continue;
-                }
-            }
             client.users
                 .fetch(owner)
                 .then(user => {
@@ -234,23 +226,13 @@ module.exports = client => {
             .catch(() => {});
         let embed = new EmbedBuilder()
             .setColor("#ED4245")
-            .setTitle(`<:leaves:866356598356049930> Left a Server`)
-            .addField("Guild Info", `>>> \`\`\`${guild.name} (${guild.id})\`\`\``)
-            .addField(
-                "Owner Info",
-                `>>> \`\`\`${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`}\`\`\``
-            )
-            .addField("Member Count", `>>> \`\`\`${guild.memberCount}\`\`\``)
-            .addField("Servers Bot is in", `>>> \`\`\`${client.guilds.cache.size}\`\`\``)
-            .setThumbnail(guild.iconURL({ dynamic: true }));
+            .setTitle(`<:leaves:866356598356049930> Salió a Servidor`)
+            .addFields({ name: "Guild Info", value: `>>> \`\`\`${guild.name} (${guild.id})\`\`\`` })
+            .addFields({ name: "Owner Info", value: `>>> \`\`\`${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`}\`\`\`` })
+            .addFields({ name: "Member Count", value: `>>> \`\`\`${guild.memberCount}\`\`\`` })
+            .addFields({ name: "Servers Bot is in", value: `>>> \`\`\`${client.guilds.cache.size}\`\`\`` })
+            .setThumbnail(guild.iconURL());
         for (const owner of config.ownerIDS) {
-            //If the Owner is Tomato, and the Bot is in not a Milrato Development, Public Bot, then dont send information!
-            if (owner == "1087034447825735741") {
-                let milratoGuild = client.guilds.cache.get("773668217163218944");
-                if (milratoGuild && !milratoGuild.me.roles.cache.has("779021235790807050")) {
-                    continue;
-                }
-            }
             client.users
                 .fetch(owner)
                 .then(user => {

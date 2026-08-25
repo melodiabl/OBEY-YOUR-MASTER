@@ -1,6 +1,7 @@
 require('dotenv').config()
 require('colors')
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js')
+const { Agent } = require('undici')
 
 // Polyfill: splitMessage fue removido en discord.js v14
 ;(function patchDiscordJs() {
@@ -58,6 +59,11 @@ const client = new Client({
   ],
   allowedMentions: { parse: ['roles', 'users'], repliedUser: false },
   failIfNotExists: false,
+  rest: {
+    timeout: 60_000,
+    retries: 5,
+    agent: new Agent({ pipelining: 0 }),
+  },
 })
 // 27+ handlers registran eventos — aumentar límite para evitar el warning
 client.setMaxListeners(50)
@@ -92,22 +98,72 @@ mongoose.connect(MONGO_URL).then(() => {
 
 // ─── Shoukaku (reemplaza erela.js) ────────────────────────────────────────────
 
-const lavalinkNodes = (config.clientsettings?.nodes || []).map(n => ({
+const configuredNodes = config.clientsettings?.nodes || []
+const envLavalinkHost = process.env.LAVALINK_HOST
+const lavalinkNodes = (envLavalinkHost ? [{
+  identifier: process.env.LAVALINK_IDENTIFIER || 'Main Lavalink',
+  host: envLavalinkHost,
+  port: Number(process.env.LAVALINK_PORT || 2333),
+  password: process.env.LAVALINK_PASSWORD,
+  secure: String(process.env.LAVALINK_SECURE || 'false').toLowerCase() === 'true',
+}] : configuredNodes).map(n => ({
   name: n.identifier || n.host || 'Main',
   url: (n.host || '127.0.0.1') + ':' + (n.port || 2333),
-  auth: n.password || 'youshallnotpass',
-  secure: !!n.secure,
+  auth: n.password || process.env.LAVALINK_PASSWORD || 'youshallnotpass',
+  secure: typeof n.secure === 'string' ? n.secure.toLowerCase() === 'true' : Boolean(n.secure),
 }))
 
 if (lavalinkNodes.length) {
   client.shoukaku = new Shoukaku(new Connectors.DiscordJS(client), lavalinkNodes, {
     resume: true, resumeTimeout: 60,
-    reconnectTries: 10, reconnectInterval: 5000,
+    reconnectTries: 1, reconnectInterval: 1,
     moveOnDisconnect: true,
   })
-  client.shoukaku.on('ready', n => console.log('[Lavalink] Nodo "' + n + '" conectado'.green))
-  client.shoukaku.on('error', (n, e) => console.error('[Lavalink] Error en "' + n + '":'.red, e?.message))
-  client.shoukaku.on('disconnect', n => console.warn('[Lavalink] "' + n + '" desconectado'.yellow))
+
+  // Track pending re-add timers per node name
+  const _reconnectTimers = new Map()
+
+  function scheduleNodeReconnect(name) {
+    if (_reconnectTimers.has(name)) return
+    const timer = setTimeout(() => {
+      _reconnectTimers.delete(name)
+      const node = client.shoukaku.nodes.get(name)
+      if (node?.state === 1) return
+      if (node) client.shoukaku.nodes.delete(name)
+      const cfg = lavalinkNodes.find(n => n.name === name)
+      if (!cfg) return
+      try {
+        client.shoukaku.addNode(cfg)
+      } catch (error) {
+        console.warn(('[Lavalink] Fallo al re-agregar nodo "' + name + '": ' + (error?.message || error)).red)
+        scheduleNodeReconnect(name)
+      }
+    }, 5_000)
+    _reconnectTimers.set(name, timer)
+  }
+
+  client.shoukaku.on('ready', name => {
+    console.log(('[Lavalink] Nodo "' + name + '" conectado').green)
+    // Cancel any pending re-add timer — already back online
+    if (_reconnectTimers.has(name)) {
+      clearTimeout(_reconnectTimers.get(name))
+      _reconnectTimers.delete(name)
+    }
+    const node = client.shoukaku.nodes.get(name)
+    if (node) {
+      console.log(('[Lavalink] Nodo "' + name + '" conectado').green)
+    }
+  })
+
+  client.shoukaku.on('error', (name, e) => {
+    console.error(('[Lavalink] Error en "' + name + '": ' + (e?.message || e)).red)
+    scheduleNodeReconnect(name)
+  })
+
+  client.shoukaku.on('disconnect', name => {
+    console.warn(('[Lavalink] "' + name + '" desconectado — reconectando en 5s...').yellow)
+    scheduleNodeReconnect(name)
+  })
 }
 
 // ─── Handlers ─────────────────────────────────────────────────────────────────
@@ -120,7 +176,7 @@ const coreHandlers = [
   'ghost_ping_detector','antiselfbot','jointocreate','reactionrole',
   'ranking','timedmessages','membercount','autoembed','suggest',
   'validcode','dailyfact','autonsfw','aichat','mute','automeme','counter',
-  'extraevents','giveaway','invitetracking',
+  'extraevents','giveaway','invitetracking','birthdayScheduler',
 ]
 
 for (const name of coreHandlers) {
@@ -138,6 +194,8 @@ const token = process.env.token || process.env.BOT_TOKEN || config.token
 if (!token) { console.error('[Bot] BOT_TOKEN no configurado'.red); process.exit(1) }
 
 client.login(token).then(() => {
-  require('./dashboard/index')(client).catch(e => console.warn('[Dashboard] Error:', e.message))
+  client.once('dbReady', () => {
+    require('./dashboard/index')(client).catch(e => console.warn('[Dashboard] Error:', e.message))
+  })
 })
 module.exports = client

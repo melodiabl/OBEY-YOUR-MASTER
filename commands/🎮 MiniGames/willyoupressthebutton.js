@@ -28,7 +28,7 @@ module.exports = {
         }
         await WillYouPressTheButton({
             interaction: message,
-            embed: {
+            embeds: [{
                 title: "Will you press the button?",
                 description: "```{{statement1}}```\n**but**\n\n```{{statement2}}```",
                 color: es.color,
@@ -36,7 +36,7 @@ module.exports = {
                     text: es.footertext,
                 },
                 timestamp: new Date(),
-            },
+            }],
             button: { yes: "Yes", no: "No" },
         });
     },

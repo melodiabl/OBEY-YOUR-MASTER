@@ -33,22 +33,22 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: `Add Owner`,
-                        description: `Add another Owner to the Bot!`,
+                        description: `Add another Propietario to the Bot!`,
                         emoji: allEmojis.react.SUCCESS,
                     },
                     {
                         value: `Remove Owner`,
-                        description: `Remove an Owner from the Bot! (Only Original Owner is allowed to do so)`,
+                        description: `Remove an Propietario from the Bot! (Only Original Propietario is allowed to do so)`,
                         emoji: allEmojis.react.ERROR,
                     },
                     {
                         value: "Settings",
-                        description: `Show the current Settings`,
+                        description: `Show the current Ajustes`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Advertisement Setup!`,
+                        description: `Cancelar and stop the Advertisement Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -73,11 +73,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Owner Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Owner Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable4"]));
                 let used1 = false;
                 //send the menu msg
@@ -97,6 +93,8 @@ module.exports = {
                 }
                 //Event
                 client.on("interactionCreate", menu => {
+    if (!menu?.isStringSelectMenu() && !menu?.isButton()) return;
+
                     if (menu?.message.id === menumsg.id) {
                         if (menu?.user.id === cmduser.id) {
                             if (used1)
@@ -229,7 +227,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable15"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`Cancelado the Operation!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -255,7 +253,7 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Remove Owner")
+                                        .setTitle("Remove Propietario")
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -265,7 +263,7 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setDescription("Please Ping the Owner you want to remove")
+                                        .setDescription("Por favor Ping the Propietario you want to remove")
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -284,7 +282,7 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle("This User isn't a Bot Owner..")
+                                                        .setTitle("This Usuario isn't a Bot Propietario..")
                                                         .setColor(es.wrongcolor)
                                                         .setFooter(client.getFooter(es)),
                                                 ],
@@ -349,7 +347,7 @@ module.exports = {
                                                                     .setFooter(client.getFooter(es))
                                                                     .setColor(es.color)
                                                                     .setTitle(
-                                                                        `Successfully removed ${user.tag} from the Ownerlist!`
+                                                                        `Successfully removed ${user.username} from the Ownerlist!`
                                                                     ),
                                                             ],
                                                         });
@@ -361,7 +359,7 @@ module.exports = {
                                                         new EmbedBuilder()
                                                             .setFooter(client.getFooter(es))
                                                             .setColor(es.wrongcolor)
-                                                            .setTitle(`Could not find the User`),
+                                                            .setTitle(`Could not find the Usuario`),
                                                     ],
                                                 });
                                             }
@@ -390,7 +388,7 @@ module.exports = {
                                             new Discord.EmbedBuilder()
                                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable15"]))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`Cancelado the Operation!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -412,14 +410,11 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .addField(`__Original Owner__:`, `<@${originalOwner}>`.substring(0, 1024))
-                                .addField(
-                                    `__Other Owner${config.ownerIDS.filter(id => id != originalOwner).length > 1 ? "s" : ""}__:`,
-                                    `${config.ownerIDS
+                                .addFields({ name: `__Original Owner__:`, value: `<@${originalOwner}>`.substring(0, 1024) })
+                                .addFields({ name: `__Other Owner${config.ownerIDS.filter(id => id != originalOwner).length > 1 ? "s" : ""}__:`, value: `${config.ownerIDS
                                         .filter(id => id != originalOwner)
                                         .map(id => `<@${id}>`)
-                                        .join("︲")}`.substring(0, 1024)
-                                )
+                                        .join("︲")}`.substring(0, 1024) })
                                 .setFooter(client.getFooter(es));
                             return message.reply({ embeds: [embed] });
                         }
@@ -442,10 +437,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -13,7 +13,7 @@ module.exports = {
     cooldown: 5,
     usage: "setup-advertise  -->  Follow the Steps",
     type: "bot",
-    description: "Changes if the Advertisement of BERO-HOST.de Should be there or NOT",
+    description: "Changes if the Advertisement of github.com/melodiabl Should be there or NOT",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -33,17 +33,17 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: `${client.ad.enabled ? "Disable" : "Enable"} Advertisement`,
-                        description: `${client.ad.enabled ? "Disables the Ads from Bero-Host and Milrato" : "Enables the Ads from Bero-Host and Milrato"}`,
+                        description: `${client.ad.enabled ? "Disables the Ads from Bero-Host and melodia" : "Enables the Ads from Bero-Host and melodia"}`,
                         emoji: client.ad.enabled ? emoji?.react.ERROR : emoji?.react.SUCCESS,
                     },
                     {
                         value: "Settings",
-                        description: `Show the current Settings`,
+                        description: `Show the current Ajustes`,
                         emoji: allEmojis.msg.list,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Advertisement Setup!`,
+                        description: `Cancelar and stop the Advertisement Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -68,11 +68,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Advertising Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Advertising Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable4"]));
                 let used1 = false;
                 //send the menu msg
@@ -92,6 +88,8 @@ module.exports = {
                 }
                 //Event
                 client.on("interactionCreate", menu => {
+    if (!menu?.isStringSelectMenu() && !menu?.isButton()) return;
+
                     if (menu?.message.id === menumsg.id) {
                         if (menu?.user.id === cmduser.id) {
                             if (used1)
@@ -169,7 +167,7 @@ module.exports = {
                                         : null
                                 )
                                 .setDescription(
-                                    `**Enabled:** ${d2p2(client.ad.enabled)}\n**Statusad:** \`${client.ad.statusad.name}\`\n**Textad:** \`${client.ad.textad}\`\n**Space Dot:** \`${client.ad.spacedot}\``.substring(
+                                    `**Activado:** ${d2p2(client.ad.enabled)}\n**Statusad:** \`${client.ad.statusad.name}\`\n**Textad:** \`${client.ad.textad}\`\n**Space Dot:** \`${client.ad.spacedot}\``.substring(
                                         0,
                                         2048
                                     )
@@ -199,10 +197,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

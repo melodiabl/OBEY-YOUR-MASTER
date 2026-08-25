@@ -19,9 +19,9 @@ module.exports = {
         "setupsuggest",
     ],
     cooldown: 5,
-    usage: "setup-suggestion  -->  Follow the Steps",
-    description: "Manage the Suggestions System, messages, emojis and Enable/Disable",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-suggestion --> Sigue los Pasos",
+    description: "Gestiona el Sistema de Sugerencias, mensajes, emojis y Activar/Desactivar",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -32,12 +32,12 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Enable Suggestion System",
-                        description: `Define the Suggestion System Channel`,
+                        description: `Define the Sugerencia System Canal`,
                         emoji: allEmojis.msg.SUCCESS,
                     },
                     {
                         value: "Disable Suggestion System",
-                        description: `Disable the Suggestion System`,
+                        description: `Disable the Sugerencia System`,
                         emoji: allEmojis.msg.ERROR,
                     },
                     {
@@ -82,7 +82,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Suggestion System!`,
+                        description: `Cancelar and stop the Sugerencia System!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -91,7 +91,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
-                    .setPlaceholder("Click me to setup the Suggestion System")
+                    .setPlaceholder("¡Haz clic para configurar the Suggestion System")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -107,11 +107,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Suggestion System",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/light-bulb_1f4a1.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Suggestion System", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/light-bulb_1f4a1.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -135,14 +131,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -206,7 +202,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Start writing in there, to write a Suggestion, to accept/deny them use the: \`${prefix}suggest <approve/deny/maybe> <MESSAGEID> [REASON]\` command`.substring(
+                                                            `Start writing in there, to write a Sugerencia, to accept/deny them use the: \`${prefix}suggest <approve/deny/maybe> <MESSAGEID> [REASON]\` command`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -239,7 +235,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't ping a valid Channel");
+                                        message.reply("¡no mencionaste un Canal válido!");
                                     }
                                 })
                                 .catch(e => {
@@ -251,7 +247,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable9"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -264,7 +260,7 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Successfully disabled the Suggestion System")
+                                        .setTitle("Successfully disabled the Sugerencia System")
                                         .setColor(es.color)
                                         .setFooter(client.getFooter(es)),
                                 ],
@@ -336,7 +332,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't Send a valid Text");
+                                        message.reply("no enviaste un texto válido");
                                     }
                                 })
                                 .catch(e => {
@@ -348,7 +344,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable9"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -419,7 +415,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't Send a valid Text");
+                                        message.reply("no enviaste un texto válido");
                                     }
                                 })
                                 .catch(e => {
@@ -431,7 +427,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable9"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -503,7 +499,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't Send a valid Text");
+                                        message.reply("no enviaste un texto válido");
                                     }
                                 })
                                 .catch(e => {
@@ -515,7 +511,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable9"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -586,7 +582,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't Send a valid Text");
+                                        message.reply("no enviaste un texto válido");
                                     }
                                 })
                                 .catch(e => {
@@ -598,7 +594,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable9"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -610,9 +606,9 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("What should be the new SOON Message?")
+                                        .setTitle("What should be the new SOON Mensaje?")
                                         .setColor(es.color)
-                                        .setDescription("Please send it now!")
+                                        .setDescription("Por favor send it now!")
                                         .setFooter(client.getFooter(es)),
                                 ],
                             });
@@ -662,7 +658,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't Send a valid Text");
+                                        message.reply("no enviaste un texto válido");
                                     }
                                 })
                                 .catch(e => {
@@ -674,7 +670,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable9"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -746,7 +742,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't Send a valid Text");
+                                        message.reply("no enviaste un texto válido");
                                     }
                                 })
                                 .catch(e => {
@@ -758,7 +754,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable9"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -869,7 +865,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't reacted with a valid Emoji");
+                                        message.reply("no reaccionaste con un emoji válido");
                                     }
                                 })
                                 .catch(e => {
@@ -881,7 +877,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable50"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -992,7 +988,7 @@ module.exports = {
                                             });
                                         }
                                     } else {
-                                        message.reply("you didn't reacted with a valid Emoji");
+                                        message.reply("no reaccionaste con un emoji válido");
                                     }
                                 })
                                 .catch(e => {
@@ -1004,7 +1000,7 @@ module.exports = {
                                                     eval(client.la[ls]["cmds"]["setup"]["setup-suggestion"]["variable61"])
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelled the Operation!`.substring(0, 2000))
+                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
                                                 .setFooter(client.getFooter(es)),
                                         ],
                                     });
@@ -1029,10 +1025,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
@@ -7,7 +7,7 @@ module.exports = {
     name: `idban`,
     category: `🚫 Administration`,
     aliases: [`idbanhammer`, "idban"],
-    description: `Bans a Member from a Guild`,
+    description: `Bans a Miembro from a Guild`,
     usage: `idban <userid> [Reason]`,
     type: "member",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -15,7 +15,7 @@ module.exports = {
         let ls = client.settings.get(message.guild.id, "language");
 
         try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BAN_MEMBERS]))
+            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BanMembers]))
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -45,7 +45,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message
                     .reply({
@@ -65,7 +65,7 @@ module.exports = {
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
                                 .setFooter(client.getFooter(es))
-                                .setTitle("❌ Invalid Command Usage")
+                                .setTitle("❌ No válido Comando Usage")
                                 .setDescription(
                                     `Usage: \`${prefix}idban <USER-ID>\`\nExample: \`${prefix}idban 917827695453286410\``
                                 ),
@@ -85,7 +85,7 @@ module.exports = {
                                 new EmbedBuilder()
                                     .setColor(es.color)
                                     .setFooter(client.getFooter(es))
-                                    .setTitle(`✅ Banned ${ban.tag || `Unkown User with id: \`${banuser}\``}`)
+                                    .setTitle(`✅ Baneado ${ban.tag || `Unkown Usuario with id: \`${banuser}\``}`)
                                     .setDescription(`**Reason**: ${reason ? reason : "No Reason"}`),
                             ],
                         })
@@ -120,10 +120,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

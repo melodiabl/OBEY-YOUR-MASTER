@@ -1,4 +1,4 @@
-const { EmbedBuilder, Permissions } = require(`discord.js`);
+const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -8,7 +8,7 @@ module.exports = {
     name: `suggest`,
     aliases: [`suggestion`, "feedback"],
     category: `🚫 Administration`,
-    description: `Approves, Denies or even Maybies a Suggestion from your SETUP!`,
+    description: `Approves, Denies or even Maybies a Sugerencia from your SETUP!`,
     usage: `suggest <approve/deny/maybe/soon/duplicate> <Suggestion_id> [REASON]`,
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
@@ -36,7 +36,7 @@ module.exports = {
                 !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
                 !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
                 ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-                !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+                !message.member.permissions.has([PermissionFlagsBits.Administrator])
             )
                 return message.reply({
                     embeds: [
@@ -300,7 +300,7 @@ module.exports = {
             }
 
             const embed = new EmbedBuilder()
-                .setAuthor(oldEmbed.author.name, oldEmbed.author.iconURL)
+                .setAuthor({ name: oldEmbed.author.name, iconURL: oldEmbed.author.iconURL })
                 .setDescription(oldEmbed.description)
                 .setColor(color)
                 .setFooter(client.getFooter(
@@ -309,13 +309,10 @@ module.exports = {
                 );
 
             if (embed.fields[2]) {
-                embed.fields[2].name == `<:arrow:832598861813776394> __Reason by **${message.author.tag}**:__`;
+                embed.fields[2].name == `<:arrow:832598861813776394> __Reason by **${message.author.username}**:__`;
                 embed.fields[2].value == `>>> ${String(reason).substring(0, 1000)}`;
             } else {
-                embed.addField(
-                    `<:arrow:832598861813776394> __Reason by **${message.author.tag}**__`,
-                    `>>> ${String(reason).substring(0, 1000)}`
-                );
+                embed.addFields({ name: `<:arrow:832598861813776394> __Reason by **${message.author.username}**__`, value: `>>> ${String(reason).substring(0, 1000)}` });
             }
             targetMessage.edit({ embeds: [embed] });
             try {
@@ -324,7 +321,7 @@ module.exports = {
                 if (!member) member = await message.guild.members.fetch(SuggestionsData.user).catch(() => {});
                 if (member) {
                     member.send({
-                        content: `Your Suggestion in **${message.guild.name}** got an Status Update!\n> https://discord.com/channels/${message.guild.id}/${channel.id}/${targetMessage.id}`,
+                        content: `Your Sugerencia in **${message.guild.name}** got an Status Update!\n> https://discord.com/channels/${message.guild.id}/${channel.id}/${targetMessage.id}`,
                         embeds: [embed],
                     });
                 }
@@ -348,23 +345,14 @@ module.exports = {
                                         : null
                                 )
                                 .setFooter(client.getFooter(es))
-                                .setAuthor(
-                                    `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                    message.author.displayAvatarURL({ dynamic: true })
-                                )
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable26"]))
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                                )
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                    eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                                )
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
                                 .setFooter(client.getFooter(
                                         "ID: " + message.author.id,
-                                        message.author.displayAvatarURL({ dynamic: true })
+                                        message.author.displayAvatarURL()
                                     )
                                 ),
                         ],

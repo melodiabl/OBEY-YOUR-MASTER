@@ -5,12 +5,15 @@
 const config = require(`${process.cwd()}/botconfig/config.json`); //loading config file with token and prefix, and settings
 const ee = require(`${process.cwd()}/botconfig/embed.json`); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
-const { EmbedBuilder } = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
+const { EmbedBuilder,
+    PermissionFlagsBits
+} = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 const { escapeRegex, delay, simple_databasing, databasing, handlemsg, check_if_dj } = require(
     `${process.cwd()}/handlers/functions`
 ); //Loading all needed functions
 //here the event starts
 module.exports = async (client, message) => {
+    console.log(`[EVENT-FIRE] messageCreate triggered — author: ${message?.author?.tag} | guild: ${message?.guild?.name} | content: "${message?.content?.substring(0, 80)}"`);
     try {
         //if the message is not in a guild (aka in dms), return aka ignore the inputs
         if (!message.guild || message.guild.available === false || !message.channel || message.webhookId) return;
@@ -20,12 +23,19 @@ module.exports = async (client, message) => {
         //ensure all databases for this server/user from the databasing function
         simple_databasing(client, message.guild.id, message.author.id);
         var not_allowed = false;
-        const guild_settings = client.settings.get(message.guild.id);
-        let es = guild_settings.embed;
-        let ls = guild_settings.language;
-        let { prefix, botchannel, unkowncmdmessage } = guild_settings;
+        const guild_settings = client.settings.get(message.guild.id) || {};
+        let es = guild_settings.embed || { color: '#fffff9', wrongcolor: '#e01e01', thumb: false, footertext: '', footericon: '' };
+        let ls = guild_settings.language && client.la[guild_settings.language] ? guild_settings.language : 'es';
+        let prefix = guild_settings.prefix || config.prefix;
+        let botchannel = guild_settings.botchannel || [];
+        let unkowncmdmessage = guild_settings.unkowncmdmessage ?? false;
         // if the message  author is a bot, return aka ignore the inputs
         if (message.author.bot) return;
+        // Canal de peticiones de música (Setup v2): cualquier mensaje = reproducir
+        try {
+            const _setup = require('../../handlers/music/setup');
+            if (_setup.isSetupChannel(message.guild.id, message.channel.id)) return _setup.handleSetupMessage(client, message);
+        } catch {}
         //if not in the database for some reason use the default prefix
         if (prefix === null) prefix = config.prefix;
         //the prefix can be a Mention of the Bot / The defined Prefix of the Bot
@@ -34,22 +44,17 @@ module.exports = async (client, message) => {
         if (!prefixRegex.test(message.content)) return;
         //now define the right prefix either ping or not ping
         const [, matchedPrefix] = message.content.match(prefixRegex);
-        //CHECK PERMISSIONS
-        if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.USE_EXTERNAL_EMOJIS))
-            return message.reply(`❌ **I am missing the Permission to USE EXTERNAL EMOJIS**`).catch(() => {});
-        if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.EMBED_LINKS))
+        //CHECK PERMISSIONS — only EmbedLinks is critical
+        if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.EmbedLinks)) {
             return message
-                .reply(`<:no:833101993668771842> **I am missing the Permission to EMBED LINKS (Sending Embeds)**`)
+                .reply(`No tengo el permiso de **Insertar Enlaces**. ¡Por favor, pide a un administrador que lo otorgue!`)
                 .catch(() => {});
-        if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.ADD_REACTIONS))
-            return message
-                .reply(`<:no:833101993668771842> **I am missing the Permission to ADD REACTIONS**`)
-                .catch(() => {});
+        }
 
         //CHECK IF IN A BOT CHANNEL OR NOT
         if (botchannel.toString() !== "") {
             //if its not in a BotChannel, and user not an ADMINISTRATOR
-            if (!botchannel.includes(message.channel.id) && !message.member.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
+            if (!botchannel.includes(message.channel.id) && !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
                 for (const channelId of botchannel) {
                     let channel = message.guild.channels.cache.get(channelId);
                     if (!channel) {
@@ -87,7 +92,7 @@ module.exports = async (client, message) => {
         //creating the cmd argument by shifting the args by 1
         const cmd = args.shift()?.toLowerCase();
         //if no cmd added return error
-        if (cmd.length === 0) {
+        if (!cmd || cmd.length === 0) {
             if (matchedPrefix.includes(client.user.id))
                 return message
                     .reply({
@@ -104,8 +109,12 @@ module.exports = async (client, message) => {
         let command = client.commands.get(cmd);
         //if the command does not exist, try to get it by his alias
         if (!command) command = client.commands.get(client.aliases.get(cmd));
+        // DEBUG: trace command lookup
+        if (!command && !message.author.bot) {
+            console.log(`[CMD] NOT FOUND: "${cmd}" | guild: ${message.guild.id} | channel: ${message.channel.id}`);
+        }
         var customcmd = false;
-        var cuc = client.customcommands.get(message.guild.id, "commands");
+        var cuc = client.customcommands.get(message.guild.id, "commands") || [];
         for (const cmd of cuc) {
             if (cmd.name.toLowerCase() === message.content.slice(prefix.length).split(" ")[0]) {
                 customcmd = true;
@@ -135,7 +144,7 @@ module.exports = async (client, message) => {
             var musicData = client.musicsettings.get(message.guild.id);
             if (musicData.channel && musicData.channel == message.channel.id) {
                 return message
-                    .reply("<:no:833101993668771842> **Please use a Command Somewhere else!**")
+                    .reply("<:no:833101993668771842> **¡Por favor usa un comando en otro lugar!**")
                     .then(msg => {
                         setTimeout(() => {
                             try {
@@ -211,7 +220,9 @@ module.exports = async (client, message) => {
                 client.stats.inc("global", "commands"); //counting our Database Stats for GLOBA
                 //if Command has specific permission return error
                 if (command.memberpermissions) {
-                    if (!message.member.permissions.has(command.memberpermissions)) {
+                    const permMap = { 'Administrador': 'Administrator' };
+                    const resolvedPerms = command.memberpermissions.map(p => permMap[p] || p);
+                    if (!message.member.permissions.has(resolvedPerms)) {
                         not_allowed = true;
                         try {
                             message.react("833101993668771842").catch(() => {});
@@ -246,151 +257,69 @@ module.exports = async (client, message) => {
                 ///////////////////////////////
 
                 const player = client.shoukaku?.players?.get(message.guild.id) ?? null;
+                const mstate = player ? (client.music?.getState(message.guild.id) ?? null) : null;
 
-                if (player && player.node && !player.node.connected) player.node.connect();
+                if (player?.node && !player.node.connected) player.node.connect();
 
-                if (message.guild.members.me.voice.channel && player) {
-                    //destroy the player if there is no one
-                    if (!player.queue) await player.destroy();
-                    await delay(350);
-                }
-
-                ///////////////////////////////
-                ///////////////////////////////
-                ///////////////////////////////
-                ///////////////////////////////
                 if (command.parameters) {
                     if (command.parameters.type == "music") {
-                        //get the channel instance
                         const { channel } = message.member.voice;
                         const mechannel = message.guild.members.me.voice.channel;
-                        //if not in a voice Channel return error
+
                         if (!channel) {
                             not_allowed = true;
-                            return message
-                                .reply({
-                                    embeds: [
-                                        new EmbedBuilder()
-                                            .setColor(es.wrongcolor)
-                                            .setFooter(client.getFooter(es))
-                                            .setTitle(client.la[ls].common.join_vc),
-                                    ],
-                                })
-                                .catch(() => {});
+                            return message.reply({
+                                embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es)).setTitle(client.la[ls].common.join_vc)],
+                            }).catch(() => {});
                         }
-                        //If there is no player, then kick the bot out of the channel, if connected to
+
                         if (!player && mechannel) {
-                            await message.guild.members.me.voice.disconnect().catch(e => {});
+                            await message.guild.members.me.voice.disconnect().catch(() => {});
                             await delay(350);
                         }
-                        if (player && player.queue && player.queue.current && command.parameters.check_dj) {
-                            if (check_if_dj(client, message.member, player.queue.current)) {
-                                return message
-                                    .reply({
-                                        embeds: [
-                                            new EmbedBuilder()
-                                                .setColor(ee.wrongcolor)
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(
-                                                    `<:no:833101993668771842> **You are not a DJ and not the Song Requester!**`
-                                                )
-                                                .setDescription(
-                                                    `**DJ-ROLES:**\n${check_if_dj(client, message.member, player.queue.current)}`
-                                                ),
-                                        ],
-                                    })
-                                    .catch(() => {});
+
+                        if (mstate?.currentTrack && command.parameters.check_dj) {
+                            const djResult = check_if_dj(client, message.member, mstate.currentTrack?.info || mstate.currentTrack);
+                            if (djResult) {
+                                return message.reply({
+                                    embeds: [new EmbedBuilder().setColor(ee.wrongcolor).setFooter(client.getFooter(es))
+                                        .setTitle(`<:no:833101993668771842> **¡No eres DJ ni el solicitante de la canción!**`)
+                                        .setDescription(`**ROLES DE DJ:**\n${djResult}`)],
+                                }).catch(() => {});
                             }
                         }
 
-                        //if no player available return error | aka not playing anything
                         if (command.parameters.activeplayer) {
-                            if (!player) {
+                            if (!player || !mstate?.currentTrack) {
                                 not_allowed = true;
-                                return message
-                                    .reply({
-                                        embeds: [
-                                            new EmbedBuilder()
-                                                .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(client.la[ls].common.nothing_playing),
-                                        ],
-                                    })
-                                    .catch(() => {});
+                                return message.reply({
+                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es)).setTitle(client.la[ls].common.nothing_playing)],
+                                }).catch(() => {});
                             }
                             if (!mechannel) {
-                                if (player)
-                                    try {
-                                        await player.destroy();
-                                        await delay(350);
-                                    } catch {}
+                                try { await client.shoukaku?.leaveVoiceChannel(message.guild.id); await delay(350); } catch {}
                                 not_allowed = true;
-                                return message
-                                    .reply({
-                                        embeds: [
-                                            new EmbedBuilder()
-                                                .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(client.la[ls].common.not_connected),
-                                        ],
-                                    })
-                                    .catch(() => {});
-                            }
-                            if (!player.queue || !player.queue.current) {
-                                return message
-                                    .reply({
-                                        embeds: [
-                                            new EmbedBuilder()
-                                                .setColor(es.wrongcolor)
-                                                .setTitle("❌ There is no current Queue / Song Playing!"),
-                                        ],
-                                    })
-                                    .catch(() => {});
+                                return message.reply({
+                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es)).setTitle(client.la[ls].common.not_connected)],
+                                }).catch(() => {});
                             }
                         }
-                        //if no previoussong
+
                         if (command.parameters.previoussong) {
-                            if (!player.queue.previous || player.queue.previous === null) {
+                            if (!mstate?.history?.length) {
                                 not_allowed = true;
-                                return message
-                                    .reply({
-                                        embeds: [
-                                            new EmbedBuilder()
-                                                .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(client.la[ls].common.nothing_playing),
-                                        ],
-                                    })
-                                    .catch(() => {});
+                                return message.reply({
+                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es)).setTitle(client.la[ls].common.nothing_playing)],
+                                }).catch(() => {});
                             }
                         }
-                        //if not in the same channel --> return
-                        if (player && channel.id !== player.voiceChannel && !command.parameters.notsamechannel) {
-                            return message
-                                .reply({
-                                    embeds: [
-                                        new EmbedBuilder()
-                                            .setColor(es.wrongcolor)
-                                            .setFooter(client.getFooter(es))
-                                            .setTitle(client.la[ls].common.wrong_vc)
-                                            .setDescription(`Channel: <#${player.voiceChannel}>`),
-                                    ],
-                                })
-                                .catch(() => {});
-                        }
-                        //if not in the same channel --> return
-                        if (mechannel && channel.id !== mechannel.id && !command.parameters.notsamechannel) {
-                            return message
-                                .reply({
-                                    embeds: [
-                                        new EmbedBuilder()
-                                            .setColor(es.wrongcolor)
-                                            .setFooter(client.getFooter(es))
-                                            .setTitle(client.la[ls].common.wrong_vc)
-                                            .setDescription(`Channel: <#${player.voiceChannel}>`),
-                                    ],
-                                })
-                                .catch(() => {});
+
+                        const vcId = mstate?.voiceChannelId || mechannel?.id;
+                        if (vcId && channel.id !== vcId && !command.parameters.notsamechannel) {
+                            return message.reply({
+                                embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es))
+                                    .setTitle(client.la[ls].common.wrong_vc).setDescription(`Canal: <#${vcId}>`)],
+                            }).catch(() => {});
                         }
                     }
                 }
@@ -459,7 +388,7 @@ module.exports = async (client, message) => {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("#ED4245")
-                        .setTitle("❌ An error occurred")
+                        .setTitle("❌ Ocurrió un error")
                         .setDescription(`\`\`\`${e.message ? e.message : String(e).grey.substring(0, 2000)}\`\`\``),
                 ],
             })
@@ -468,10 +397,10 @@ module.exports = async (client, message) => {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

@@ -28,6 +28,6 @@ module.exports = {
                     )
             );
         }
-        return message.reply("**Due to legal Reasons, This Command got disabled!** :cry:");
+        return message.reply("**Due to legal Reasons, This Comando got disabled!** :cry:");
     },
 };

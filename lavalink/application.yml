@@ -1,0 +1,166 @@
+server:
+  port: ${LAVALINK_PORT:2333}
+  address: 0.0.0.0
+  http2:
+    enabled: false
+
+lavalink:
+  pluginsDir: "./plugins"
+  plugins:
+    - dependency: "dev.lavalink.youtube:youtube-plugin:${YOUTUBE_PLUGIN_VERSION:1.18.1}"
+      repository: "https://repo1.maven.org/maven2"
+
+    - dependency: "com.github.topi314.sponsorblock:sponsorblock-plugin:3.0.1"
+      repository: "https://repo1.maven.org/maven2"
+    # 1.7.1 crashea (NoClassDefFoundError GetyarnAudioSourceManager) — mantener 1.7.0
+    - dependency: "com.dunctebot:skybot-lavalink-plugin:1.7.0"
+      repository: "https://repo1.maven.org/maven2"
+    - dependency: "me.duncte123:java-lyrics-plugin:1.6.6"
+      repository: "https://repo1.maven.org/maven2"
+    - dependency: "com.github.esmBot:lava-xm-plugin:0.2.8"
+      repository: "https://repo1.maven.org/maven2"
+    - dependency: "com.github.devoxin:LavaDSPX-Plugin:0.0.4"
+      repository: "https://repo1.maven.org/maven2"
+    - dependency: "com.github.ItzRandom23:PulseLink:1.6.0"
+      repository: "https://repo1.maven.org/maven2"
+
+  server:
+    password: "${LAVALINK_PASSWORD}"
+    sources:
+      youtube: false
+      bandcamp: true
+      soundcloud: false
+      twitch: true
+      vimeo: true
+      nico: true
+      http: true
+      local: false
+    filters:
+      volume: true
+      equalizer: true
+      karaoke: true
+      timescale: true
+      tremolo: true
+      vibrato: true
+      distortion: true
+      rotation: true
+      channelMix: true
+      lowPass: true
+    nonAllocatingFrameBuffer: false
+    bufferDurationMs: 400
+    frameBufferDurationMs: 5000
+    opusEncodingQuality: 10
+    resamplingQuality: LOW
+    trackStuckThresholdMs: 10000
+    useSeekGhosting: true
+    youtubePlaylistLoadLimit: 8
+    playerUpdateInterval: 5
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: false
+    soundcloudFilterOutPreviewTracks: true
+    gc-warnings: true
+    timeouts:
+      connectTimeoutMs: 3000
+      connectionRequestTimeoutMs: 3000
+      socketTimeoutMs: 10000
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    clients:
+      - MUSIC
+      - TV
+      - ANDROID_VR
+      - WEB
+      - WEBEMBEDDED
+    oauth:
+      enabled: true
+      refreshToken: "${YOUTUBE_REFRESH_TOKEN:}"
+      skipInitialization: true
+    pot:
+      token: "${YOUTUBE_PO_TOKEN:}"
+      visitorData: "${YOUTUBE_VISITOR_DATA:}"
+    remoteCipher:
+      url: "${YOUTUBE_REMOTE_CIPHER_URL:http://127.0.0.1:8001}"
+      password: "${YOUTUBE_REMOTE_CIPHER_PASSWORD:}"
+      userAgent: "obey-lavalink"
+
+  lyrics:
+    countryCode: us
+
+  dunctebot:
+    ttsLanguage: "es-ES"
+    sources:
+      getyarn: true
+      clypit: true
+      tts: true
+      pornhub: true
+      reddit: true
+      ocremix: true
+      tiktok: true
+      mixcloud: true
+      soundgasm: true
+      pixeldrain: true
+
+  pulselink:
+    providers:
+      - ytsearch:%QUERY%
+    sources:
+      spotify: true
+      amazonmusic: false
+      applemusic: true
+      deezer: false
+      yandexmusic: false
+      vkmusic: false
+      tidal: false
+      qobuz: false
+      ytdlp: false
+      jiosaavn: true
+      audiomack: false
+      gaana: false
+      shazam: false
+      pandora: false
+      flowerytts: false
+      youtube: false
+    lyrics-sources:
+      deezer: false
+      youtube: true
+      yandexmusic: false
+      vkmusic: false
+      lrcLib: true
+    spotify:
+      countryCode: "US"
+      playlistLoadLimit: 10
+      albumLoadLimit: 10
+      resolveArtistsInSearch: true
+      localFiles: false
+      anonymousTokenUrl: "http://140.245.242.153:8082/api/token"
+
+metrics:
+  prometheus:
+    enabled: false
+    endpoint: /metrics
+
+sentry:
+  dsn: ""
+
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
+    dev.lavalink.youtube: INFO
+    dev.lavalink.youtube.http.YoutubeOauth2Handler: INFO
+    dev.lavalink.youtube.http.YoutubeAccessTokenTracker: WARN
+    dev.lavalink.youtube.plugin.YoutubePluginLoader: INFO
+    com.github.itzrandom23.pulselink: DEBUG
+  request:
+    enabled: true
+    includeClientInfo: true
+    includeHeaders: false
+    includeQueryString: false
+    includePayload: false
+    maxPayloadLength: 10000
+    beforeRequest: false

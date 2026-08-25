@@ -1,4 +1,6 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder,
+    PermissionFlagsBits
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -11,9 +13,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupautobackup", "setup-backup", "setupbackup", "autobackup-setup", "autobackupsetup"],
     cooldown: 5,
-    usage: "setup-autobackup  -->  Follow the Steps",
-    description: "Enable / Disable Automated Backups of this Server (One Backup / 2 Days)",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-autobackup --> Sigue los Pasos",
+    description: "Habilitar / Deshabilitar copias de seguridad automáticas de este servidor (una copia de seguridad / 2 días)",
+    memberpermissions: ['Administrador'],
     type: "security",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -23,14 +25,14 @@ module.exports = {
             ///////////////////////////////////////
             ///////////////////////////////////////
 
-            if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
-                return message.reply("<:no:833101993668771842> **I am missing the ADMINISTRATOR Permission!**");
+            if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
+                return message.reply("<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso!**");
             }
             let owner = await message.guild.fetchOwner().catch(e => {
                 return message.reply("Could not get owner of target guild");
             });
             if (owner.id != cmduser.id) {
-                return message.reply(`<:no:833101993668771842> **You need to be the Owner of this Server!**`);
+                return message.reply(`<:no:833101993668771842> **You need to be the Propietario of this Servidor!**`);
             }
             //function to handle true/false
             const d2p = bool => (bool ? "`✔️ Enabled`" : "`❌ Disabled`");
@@ -53,12 +55,12 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Anti-Caps-Setup!`,
+                        description: `Cancelar and stop the Anti-Caps-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("Click me to setup the Anti Caps System!")
+                    .setPlaceholder("¡Haz clic para configurar the Anti Caps System!")
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -76,11 +78,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Auto-Backup System Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/floppy-disk_1f4be.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Auto-Backup System Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/floppy-disk_1f4be.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-anticaps"]["variable1"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -123,14 +121,14 @@ module.exports = {
                         });
                     }
                     menu?.reply({
-                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                         ephemeral: true,
                     });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -156,10 +154,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

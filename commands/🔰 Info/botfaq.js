@@ -16,9 +16,9 @@ module.exports = {
         let ls = client.settings.get(message.guild.id, "language");
 
         try {
-            let milratodc = client.guilds.cache.get("773668217163218944");
-            let milratomembers = await milratodc.members.fetch().catch(() => {});
-            let partnercount = milratomembers.filter(m => m.roles.cache.has("823150244509515807"));
+            let devServer = client.guilds.cache.get("773668217163218944");
+            let devMembers = await devServer.members.fetch().catch(() => {});
+            let partnercount = devMembers.filter(m => m.roles.cache.has("823150244509515807"));
             partnercount = partnercount.map(m => m.id).length;
 
             let menuoptions = [
@@ -77,7 +77,7 @@ module.exports = {
                     description: client.la[ls].cmds.info.botfaq.menuoptions[6].description,
                     replymsg: handlemsg(client.la[ls].cmds.info.botfaq.menuoptions[6].replymsg, {
                         prefix: prefix,
-                        clientusertag: client.user.tag,
+                        clientusertag: client.user.username,
                     }),
                     emoji: client.la[ls].cmds.info.botfaq.menuoptions[6].emoji, //optional
                 },
@@ -103,11 +103,7 @@ module.exports = {
             //define the embed
             let MenuEmbed = new Discord.EmbedBuilder()
                 .setColor(es.color)
-                .setAuthor(
-                    client.la[ls].cmds.info.botfaq.menuembed.title,
-                    client.user.displayAvatarURL(),
-                    "https://discord.gg/milrato"
-                )
+                .setAuthor({ name: client.la[ls].cmds.info.botfaq.menuembed.title, iconURL: client.user.displayAvatarURL(), url: "https://github.com/melodiabl" })
                 .setDescription(client.la[ls].cmds.info.botfaq.menuembed.description);
             //send the menu msg
             let menumsg = await message.reply({ embeds: [MenuEmbed], components: [Selection] });
@@ -118,11 +114,7 @@ module.exports = {
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor(
-                                client.la[ls].cmds.info.botfaq.menuembed.title,
-                                client.user.displayAvatarURL(),
-                                "https://discord.gg/milrato"
-                            )
+                            .setAuthor({ name: client.la[ls].cmds.info.botfaq.menuembed.title, iconURL: client.user.displayAvatarURL(), url: "https://github.com/melodiabl" })
                             .setDescription(menuoptiondata.replymsg),
                     ],
                     ephemeral: true,
@@ -158,10 +150,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

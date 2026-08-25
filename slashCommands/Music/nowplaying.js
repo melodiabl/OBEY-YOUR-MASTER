@@ -1,81 +1,17 @@
-const { EmbedBuilder, AttachmentBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { createBar, format } = require(`${process.cwd()}/handlers/functions`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { EmbedBuilder } = require('discord.js')
 module.exports = {
-    name: `nowplaying`,
-    description: `Shows detailled information about the current Song`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        previoussong: false,
-    },
-    run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
-        //let es = client.settings.get(message.guild.id, "embed");let ls = client.settings.get(message.guild.id, "language")
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return interaction?.reply({
-                ephemeral: true,
-                embed: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //if no current song return error
-            if (!player.queue.current)
-                return interaction?.reply({
-                    ephemeral: true,
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["nowplaying"]["variable1"])),
-                    ],
-                });
-            const embed = new EmbedBuilder()
-                .setAuthor(
-                    `Current song playing:`,
-                    message.guild.iconURL({
-                        dynamic: true,
-                    })
-                )
-                .setThumbnail(`https://img.youtube.com/vi/${player.queue.current.identifier}/mqdefault.jpg`)
-                .setURL(player.queue.current.uri)
-                .setColor(es.color)
-                .setTitle(eval(client.la[ls]["cmds"]["music"]["nowplaying"]["variable2"]))
-                .addField(`${emoji?.msg.time} Progress: `, createBar(player))
-                .addField(
-                    `${emoji?.msg.time} Duration: `,
-                    `\`${format(player.queue.current.duration).split(" | ")[0]}\` | \`${format(player.queue.current.duration).split(" | ")[1]}\``,
-                    true
-                )
-                .addField(`${emoji?.msg.song_by} Song By: `, `\`${player.queue.current.author}\``, true)
-                .addField(`${emoji?.msg.repeat_mode} Queue length: `, `\`${player.queue.length} Songs\``, true)
-                .setFooter(client.getFooter(
-                        `Requested by: ${player.queue.current.requester.tag}`,
-                        player.queue.current.requester.displayAvatarURL({
-                            dynamic: true,
-                        })
-                    )
-                );
-            //Send Now playing Message
-            return interaction?.reply({ embeds: [embed] });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'nowplaying', description: 'Muestra la cancion que se esta reproduciendo ahora',
+  parameters: { type: 'music', activeplayer: false, previoussong: false }, options: [],
+  run: async (client, interaction) => {
+    await interaction.deferReply()
+    const state = client.music?.getState(interaction.guild.id)
+    if (!state?.currentTrack)
+      return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x4f545c).setDescription('❌ No hay música reproduciéndose ahora mismo.')] })
+    // Trigger a fresh NP panel in the music channel
+    await client.music.sendNowPlaying(interaction.guild.id, state.currentTrack)
+    // Confirm with ephemeral embed
+    const info = state.currentTrack?.info || state.currentTrack
+    await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
+      .setDescription(`🎵 Panel de **${info?.title || '?'}** actualizado en el canal de música.`)] })
+  },
+}

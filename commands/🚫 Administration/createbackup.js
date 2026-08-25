@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const { EmbedBuilder, Permissions } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits,
+    ButtonStyle
+} = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require("ms");
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
@@ -9,18 +11,18 @@ module.exports = {
     name: "createbackup",
     aliases: ["create-backup", "cbackup", "backup"],
     category: "🚫 Administration",
-    description: "Create a Backup of the Server",
+    description: "Create a Backup of the Servidor",
     usage: "createbackup",
     type: "server",
     run: async (client, message, args, cmduser, text, prefix) => {
-        if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
-            return message.reply("<:no:833101993668771842> **I am missing the ADMINISTRATOR Permission!**");
+        if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
+            return message.reply("<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso!**");
         }
         let owner = await message.guild.fetchOwner().catch(e => {
             return message.reply("Could not get owner of target guild");
         });
         if (owner.id != cmduser.id) {
-            return message.reply(`<:no:833101993668771842> **You need to be the Owner of this Server!**`);
+            return message.reply(`<:no:833101993668771842> **You need to be the Propietario of this Servidor!**`);
         }
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -45,7 +47,7 @@ module.exports = {
             !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
             !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
             ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
-            !message.member.permissions.has([PermissionFlagsBits.ADMINISTRATOR])
+            !message.member.permissions.has([PermissionFlagsBits.Administrator])
         )
             return message.reply({
                 embeds: [
@@ -64,7 +66,7 @@ module.exports = {
                 content: `⚠️ **THIS WILL SAVE ALL DATA** ⚠️\n> If there are more then 6 Backups, the oldest one will get deleted!\n\n> *Have you tried: \`${prefix}setup-autobackup\`, to enable auto backups?*`,
                 components: [
                     new Discord.ActionRowBuilder().addComponents([
-                        new Discord.ButtonBuilder().setStyle(Discord.ButtonStyle.Danger).setLabel("Continue").setCustomId("verified"),
+                        new Discord.ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel("Continue").setCustomId("verified"),
                     ]),
                 ],
             })
@@ -141,23 +143,14 @@ module.exports = {
                                     : null
                             )
                             .setFooter(client.getFooter(es))
-                            .setAuthor(
-                                `${require("path").parse(__filename).name} | ${message.author.tag}`,
-                                message.author.displayAvatarURL({ dynamic: true })
-                            )
+                            .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]))
-                            .addField(
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]),
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"])
-                            )
-                            .addField(
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]),
-                                eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"])
-                            )
+                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                            .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                             .setTimestamp()
                             .setFooter(client.getFooter(
                                     "ID: " + message.author.id,
-                                    message.author.displayAvatarURL({ dynamic: true })
+                                    message.author.displayAvatarURL()
                                 )
                             ),
                     ],

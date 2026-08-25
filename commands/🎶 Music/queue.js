@@ -1,159 +1,105 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { format, delay, swap_pages, swap_pages2 } = require(`${process.cwd()}/handlers/functions`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
-module.exports = {
-    name: `queue`,
-    category: `🎶 Music`,
-    aliases: [`qu`, `que`, `queu`, `list`],
-    description: `Shows the Queue`,
-    usage: `queue`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        previoussong: false,
-    },
-    type: "queue",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //get the right tracks of the current tracks
-            const tracks = player.queue;
-            //if there are no other tracks, information
-            if (!tracks.length)
-                return message
-                    .reply({
-                        embeds: [
-                            new EmbedBuilder()
-                                .setAuthor(
-                                    `Queue for ${message.guild.name}  -  [ ${player.queue.length} Tracks ]`,
-                                    message.guild.iconURL({
-                                        dynamic: true,
-                                    })
-                                )
-                                .setColor(es.color)
-                                .addField(
-                                    eval(client.la[ls]["cmds"]["music"]["queue"]["variablex_1"]),
-                                    eval(client.la[ls]["cmds"]["music"]["queue"]["variable1"])
-                                )
-                                .setDescription(eval(client.la[ls]["cmds"]["music"]["queue"]["variable2"])),
-                        ],
-                    })
-                    .then(msg => {
-                        setTimeout(() => {
-                            try {
-                                msg.delete().catch(() => {});
-                            } catch {}
-                        }, 5000);
-                    });
-            //if not too big send queue in channel
-            if (tracks.length < 15)
-                return message
-                    .reply({
-                        embeds: [
-                            new EmbedBuilder()
-                                .setAuthor(
-                                    `Queue for ${message.guild.name}  -  [ ${player.queue.length} Tracks ]`,
-                                    message.guild.iconURL({
-                                        dynamic: true,
-                                    })
-                                )
-                                .addField(
-                                    `**\` 0. \` __CURRENT TRACK__**`,
-                                    `**${player.queue.current.uri ? `[${player.queue.current.title.substring(0, 60).replace(/\[/giu, "\\[").replace(/\]/giu, "\\]")}](${player.queue.current.uri})` : player.queue.current.title}** - \`${player.queue.current.isStream ? `LIVE STREAM` : format(player.queue.current.duration).split(` | `)[0]}\`\n> *Requested by: __${player.queue.current.requester.tag}__*`
-                                )
-                                .setColor(es.color)
-                                .setDescription(
-                                    tracks
-                                        .map(
-                                            (track, index) =>
-                                                `**\` ${++index}. \`${track.uri ? `[${track.title.substring(0, 60).replace(/\[/giu, "\\[").replace(/\]/giu, "\\]")}](${track.uri})` : track.title}** - \`${track.isStream ? `LIVE STREAM` : format(track.duration).split(` | `)[0]}\`\n> *Requested by: __${track.requester.tag}__*`
-                                        )
-                                        .join(`\n`)
-                                ),
-                        ],
-                    })
-                    .then(msg => {
-                        setTimeout(() => {
-                            try {
-                                msg.delete().catch(() => {});
-                            } catch {}
-                        }, 5000);
-                    });
-            //get an array of quelist where 15 tracks is one index in the array
-            let quelist = [];
-            var maxTracks = 10; //tracks / Queue Page
-            for (let i = 0; i < tracks.length; i += maxTracks) {
-                let songs = tracks.slice(i, i + maxTracks);
-                quelist.push(
-                    songs
-                        .map(
-                            (track, index) =>
-                                `**\` ${i + ++index}. \`${track.uri ? `[${track.title.substring(0, 60).replace(/\[/giu, "\\[").replace(/\]/giu, "\\]")}](${track.uri})` : track.title}** - \`${track.isStream ? `LIVE STREAM` : format(track.duration).split(` | `)[0]}\`\n> *Requested by: __${track.requester.tag}__*`
-                        )
-                        .join(`\n`)
-                );
-            }
-            let limit = quelist.length <= 5 ? quelist.length : 5;
-            let embeds = [];
-            for (let i = 0; i < limit; i++) {
-                let desc = String(quelist[i]).substring(0, 2048);
-                await embeds.push(
-                    new EmbedBuilder()
-                        .setAuthor(
-                            `Queue for ${message.guild.name}  -  [ ${player.queue.length} Tracks ]`,
-                            message.guild.iconURL({
-                                dynamic: true,
-                            })
-                        )
-                        .addField(
-                            `**\` N. \` *${player.queue.length > maxTracks ? player.queue.length - maxTracks : player.queue.length} other Tracks ...***`,
-                            `\u200b`
-                        )
-                        .setColor(es.color)
-                        .addField(
-                            `**\` 0. \` __CURRENT TRACK__**`,
-                            `**${player.queue.current.uri ? `[${player.queue.current.title.substring(0, 60).replace(/\[/giu, "\\[").replace(/\]/giu, "\\]")}](${player.queue.current.uri})` : player.queue.current.title}** - \`${player.queue.current.isStream ? `LIVE STREAM` : format(player.queue.current.duration).split(` | `)[0]}\`\n> *Requested by: __${player.queue.current.requester.tag}__*`
-                        )
-                        .setDescription(desc)
-                );
-            }
-            //return susccess message
-            return swap_pages2(client, message, embeds);
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["queue"]["variable5"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+function fmtMs(ms) {
+  const s = Math.floor((ms || 0) / 1000), m = Math.floor(s / 60), sec = s % 60
+  return `${m}:${String(sec).padStart(2, '0')}`
+}
+
+const PER_PAGE = 10
+
+function buildPage(state, page) {
+  const q    = state.queue
+  const cur  = state.currentTrack
+  const ci   = cur?.info || cur
+  const pages = Math.max(1, Math.ceil(q.length / PER_PAGE))
+  const p    = Math.min(Math.max(1, page), pages)
+  const slice = q.slice((p - 1) * PER_PAGE, p * PER_PAGE)
+  const totalMs = q.reduce((a, t) => a + (t.info?.length || 0), 0)
+
+  const lines = []
+  if (ci) lines.push(`🎵 **Ahora:** [${(ci?.title || '?').substring(0, 55)}](${ci?.uri || ''}) — \`${fmtMs(ci?.length)}\`\n`)
+  if (!slice.length && !ci) {
+    lines.push('_La cola está vacía._')
+  } else {
+    slice.forEach((t, i) => {
+      const info = t.info || t
+      lines.push(`\`${(p - 1) * PER_PAGE + i + 1}.\` [${(info?.title || '?').substring(0, 50)}](${info?.uri || ''}) — \`${fmtMs(info?.length)}\``)
+    })
+    if (q.length) lines.push(`\n**${q.length}** pistas en cola · duración total: \`${fmtMs(totalMs)}\``)
+  }
+
+  const embed = new EmbedBuilder()
+    .setColor(0x5865F2)
+    .setTitle(`📋 Cola de ${state._guildName || 'reproducción'}`)
+    .setDescription(lines.join('\n') || '​')
+    .setFooter({ text: `Página ${p}/${pages}` })
+
+  return { embed, page: p, pages }
+}
+
+function buildPageRow(page, pages) {
+  return new ActionRowBuilder().addComponents(
+    new ButtonBuilder().setCustomId('pq_prev').setEmoji('◀️').setStyle(ButtonStyle.Secondary).setDisabled(page <= 1),
+    new ButtonBuilder().setCustomId('pq_close').setLabel('Cerrar').setStyle(ButtonStyle.Danger),
+    new ButtonBuilder().setCustomId('pq_next').setEmoji('▶️').setStyle(ButtonStyle.Secondary).setDisabled(page >= pages),
+  )
+}
+
+module.exports = {
+  name: 'queue',
+  category: '🎶 Music',
+  aliases: ['qu', 'que', 'queu', 'list'],
+  description: 'Muestra la cola de reproducción',
+  usage: 'queue [página]',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+
+  run: async (client, message, args) => {
+    const es = client.settings.get(message.guild.id, 'embed')
+    const ls = client.settings.get(message.guild.id, 'language')
+
+    if (!client.settings.get(message.guild.id, 'MUSIC')) {
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(client.la[ls].common.disabled.title)] })
+    }
+
+    const state = client.music?.getState(message.guild.id)
+    if (!state?.currentTrack) {
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle('❌ No hay música reproduciéndose.')] })
+    }
+
+    // attach guild name for embed title
+    state._guildName = message.guild.name
+
+    let page = parseInt(args[0]) || 1
+    const { embed, page: p, pages } = buildPage(state, page)
+    const reply = await message.reply({ embeds: [embed], components: pages > 1 ? [buildPageRow(p, pages)] : [] })
+
+    if (pages <= 1) return
+
+    const collector = reply.createMessageComponentCollector({
+      filter: i => i.user.id === message.author.id,
+      time:   120_000,
+    })
+
+    let currentPage = p
+    collector.on('collect', async i => {
+      await i.deferUpdate()
+      if (i.customId === 'pq_close') {
+        collector.stop('closed')
+        return reply.edit({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription('📋 Cola cerrada.')], components: [] })
+      }
+      currentPage += i.customId === 'pq_next' ? 1 : -1
+      const freshState = client.music?.getState(message.guild.id)
+      if (!freshState) return
+      freshState._guildName = message.guild.name
+      const { embed: newEmbed, page: newP, pages: newPages } = buildPage(freshState, currentPage)
+      currentPage = newP
+      await reply.edit({ embeds: [newEmbed], components: [buildPageRow(newP, newPages)] })
+    })
+
+    collector.on('end', (_, reason) => {
+      if (reason !== 'closed') {
+        reply.edit({ components: [] }).catch(() => {})
+      }
+    })
+  },
+}

@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder,
+    PermissionFlagsBits
+} = require("discord.js");
 const path = require("path");
 const fs = require("fs");
 const CmdName = path.parse(__filename).name;
@@ -35,27 +37,27 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("<:no:833101993668771842> You need to join a voice channel")
+                        .setTitle("<:no:833101993668771842> Necesitas unirte a un canal de voz")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
                 ],
             });
         }
-        if (!channel.permissionsFor(message.guild.members.me).has("CONNECT")) {
+        if (!channel.permissionsFor(message.guild.members.me).has(PermissionFlagsBits.Connect)) {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("❌ I'm missing the Permission to join your Voice Channel")
+                        .setTitle("❌ Me falta el permiso para unirme a tu canal de voz")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
                 ],
             });
         }
-        if (!channel.permissionsFor(message.guild.members.me).has("SPEAK")) {
+        if (!channel.permissionsFor(message.guild.members.me).has(PermissionFlagsBits.Speak)) {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("❌ I'm missing the Permission to speak in your Voice Channel")
+                        .setTitle("❌ Me falta el permiso para hablar en tu canal de voz")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
                 ],
@@ -65,7 +67,7 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("❌ Your Voice Channel is full!")
+                        .setTitle("❌ ¡Tu canal de voz está lleno!")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
                 ],
@@ -97,7 +99,7 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("❌ Could not find the AUDIO")
+                        .setTitle("❌ No se pudo encontrar el audio")
                         .setColor(es.wrongcolor)
                         .setFooter(client.getFooter(es)),
                 ],
@@ -125,10 +127,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

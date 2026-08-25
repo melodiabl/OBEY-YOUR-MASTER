@@ -1,73 +1,16 @@
-const { EmbedBuilder } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
-const { createBar, format } = require(`${process.cwd()}/handlers/functions`);
-const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
+const { fx, err, E } = require('../../handlers/music/responses')
 module.exports = {
-    name: `resume`,
-    category: `🎶 Music`,
-    aliases: [`r`],
-    description: `Resumes the Current paused Song`,
-    usage: `resume`,
-    parameters: {
-        type: "music",
-        activeplayer: true,
-        check_dj: true,
-        previoussong: false,
-    },
-    type: "song",
-    run: async (client, message, args, cmduser, text, prefix, player) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        if (!client.settings.get(message.guild.id, "MUSIC")) {
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(handlemsg(client.la[ls].common.disabled.description, { prefix: prefix })),
-                ],
-            });
-        }
-        try {
-            //if its playing then return error
-            if (player.playing)
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-
-                            .setTitle(eval(client.la[ls]["cmds"]["music"]["resume"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["music"]["resume"]["variable2"])),
-                    ],
-                });
-            //pause the player
-            player.pause(false);
-            //send success message
-            message.react(emoji?.react.SUCCESS).catch(() => {});
-            message.react("▶️").catch(() => {});
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["music"]["resume"]["variable3"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention Him / Milrato Development, when using this Code!
- * @INFO
- */
+  name: 'resume', category: '🎶 Music',
+  aliases: ['unpause', 'continue'],
+  description: 'Reanuda la reproducción',
+  usage: 'resume',
+  parameters: { type: 'music', activeplayer: true, previoussong: false },
+  run: async (client, message) => {
+    const guildId = message.guild.id
+    const mstate  = client.music?.getState(guildId)
+    if (!mstate?.currentTrack) return message.reply({ embeds: [err('No hay música reproduciéndose.')] }).catch(() => {})
+    if (!mstate.paused) return message.reply({ embeds: [err('La música ya está reproduciéndose.')] }).catch(() => {})
+    await client.music.pause(guildId).catch(() => {})
+    return message.reply({ embeds: [fx(E.play, 'Reproducción reanudada')] }).catch(() => {})
+  },
+}

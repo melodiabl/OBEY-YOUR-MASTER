@@ -35,7 +35,7 @@ module.exports = {
                 client,
                 message,
                 guilds_in,
-                `${handlemsg(client.la[ls].cmds.info.servers.title, { guildsin: guilds_in.length, bottag: client.user.tag })}`
+                `${handlemsg(client.la[ls].cmds.info.servers.title, { guildsin: guilds_in.length, bottag: client.user.username })}`
             );
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
@@ -53,10 +53,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

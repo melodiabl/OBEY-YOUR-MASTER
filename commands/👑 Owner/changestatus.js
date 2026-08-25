@@ -59,7 +59,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Ai-Chat-Setup!`,
+                        description: `Cancelar and stop the Ai-Chat-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -84,11 +84,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Change Status",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -117,7 +113,7 @@ module.exports = {
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -134,14 +130,12 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable7"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `Example: \`${prefix}help | ${client.user.username.split(" ")[0]} | by: milrato.eu\`
+                                            `Example: \`${prefix}help | ${client.user.username.split(" ")[0]} | by: github.com/melodiabl\`
 
               *Enter the text now!*`
                                         )
                                         .setFooter(client.getFooter(es))
-                                        .addField(
-                                            "KEYWORDS which get replaced:",
-                                            `\`{guildcount}\` .. Shows all guilds
+                                        .addFields({ name: "KEYWORDS which get replaced:", value: `\`{guildcount}\` .. Shows all guilds
               \`{prefix}\` .. Shows the default Prefix
               \`{membercount}\` .. Shows all Members
               \`{created}\` .. Shows when the Bot was Created
@@ -151,8 +145,7 @@ module.exports = {
               \`{tag}\` ... Shows Bot Name#1234
               \`{commands}\` .. Shows all Commands
               \`{usedcommands}\` .. Shows Amount of Used Commands
-              \`{songsplayed}\` .. Shows Amount of Played Songs`
-                                        ),
+              \`{songsplayed}\` .. Shows Amount of Played Songs` }),
                                 ],
                             });
                             await tempmsg.channel
@@ -178,7 +171,7 @@ module.exports = {
                                         .replace("{created}", moment(client.user.createdTimestamp).format("DD/MM/YYYY"))
                                         .replace("{createdime}", moment(client.user.createdTimestamp).format("HH:mm:ss"))
                                         .replace("{name}", client.user.username)
-                                        .replace("{tag}", client.user.tag)
+                                        .replace("{tag}", client.user.username)
                                         .replace("{commands}", client.commands.size)
                                         .replace(
                                             "{usedcommands}",
@@ -264,14 +257,12 @@ module.exports = {
                                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable7"]))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `Example: \`${prefix}help | ${client.user.username.split(" ")[0]} | by: milrato.eu\`
+                                            `Example: \`${prefix}help | ${client.user.username.split(" ")[0]} | by: github.com/melodiabl\`
 
               *Enter the text now!*`
                                         )
                                         .setFooter(client.getFooter(es))
-                                        .addField(
-                                            "KEYWORDS which get replaced:",
-                                            `\`{guildcount}\` .. Shows all guilds
+                                        .addFields({ name: "KEYWORDS which get replaced:", value: `\`{guildcount}\` .. Shows all guilds
               \`{prefix}\` .. Shows the default Prefix
               \`{membercount}\` .. Shows all Members
               \`{created}\` .. Shows when the Bot was Created
@@ -281,8 +272,7 @@ module.exports = {
               \`{tag}\` ... Shows Bot Name#1234
               \`{commands}\` .. Shows all Commands
               \`{usedcommands}\` .. Shows Amount of Used Commands
-              \`{songsplayed}\` .. Shows Amount of Played Songs`
-                                        ),
+              \`{songsplayed}\` .. Shows Amount of Played Songs` }),
                                 ],
                             });
                             await tempmsg.channel
@@ -308,7 +298,7 @@ module.exports = {
                                         .replace("{created}", moment(client.user.createdTimestamp).format("DD/MM/YYYY"))
                                         .replace("{createdime}", moment(client.user.createdTimestamp).format("HH:mm:ss"))
                                         .replace("{name}", client.user.username)
-                                        .replace("{tag}", client.user.tag)
+                                        .replace("{tag}", client.user.username)
                                         .replace("{commands}", client.commands.size)
                                         .replace(
                                             "{usedcommands}",
@@ -413,7 +403,7 @@ module.exports = {
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Ai-Chat-Setup!`,
+                                        description: `Cancelar and stop the Ai-Chat-Configuración!`,
                                         emoji: allEmojis.msg.cancel,
                                     },
                                 ];
@@ -440,11 +430,7 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Change Status",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -519,7 +505,7 @@ module.exports = {
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -654,7 +640,7 @@ module.exports = {
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Ai-Chat-Setup!`,
+                                        description: `Cancelar and stop the Ai-Chat-Configuración!`,
                                         emoji: allEmojis.msg.cancel,
                                     },
                                 ];
@@ -681,11 +667,7 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Change Status",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -727,7 +709,7 @@ module.exports = {
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -753,10 +735,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

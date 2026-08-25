@@ -1,4 +1,4 @@
-var { EmbedBuilder, MessageMentions } = require(`discord.js`);
+var { EmbedBuilder, MessageMentions, ChannelType } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -11,9 +11,9 @@ module.exports = {
     category: "💪 Setup",
     aliases: ["setupjoinvc", "joinvc-setup"],
     cooldown: 5,
-    usage: "setup-joinvc  --> Follow the Steps",
-    description: "Define a Channel where every message is replaced with an EMBED or disable this feature",
-    memberpermissions: ["ADMINISTRATOR"],
+    usage: "setup-joinvc --> Sigue los Pasos",
+    description: "Define un Canal donde cada mensaje se reemplaza con un EMBED o desactiva esta función",
+    memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -44,17 +44,17 @@ module.exports = {
                 let menuoptions = [
                     {
                         value: "Send Message in a Channel",
-                        description: `Send a Message on Join, and edit it on leave`,
+                        description: `Send a Mensaje on Join, and edit it on leave`,
                         emoji: allEmojis.msg.channel,
                     },
                     {
                         value: "Add / Remove Role",
-                        description: `Add a Role on Join, Remove it on Leave.`,
+                        description: `Add a Rol on Join, Remove it on Leave.`,
                         emoji: allEmojis.msg.roles,
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Setup!`,
+                        description: `Cancelar and stop the Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -63,7 +63,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Join VC System")
+                    .setPlaceholder("¡Haz clic para configurar the Join VC System")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -79,20 +79,10 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Join VC System",
-                        "https://cdn.discordapp.com/emojis/834052497492410388.gif?size=96",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Join VC System", iconURL: "https://cdn.discordapp.com/emojis/834052497492410388.gif?size=96", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]))
-                    .addField(
-                        "Send Message in a Channel",
-                        `If a User joins a specific Channel, it will send a define able Message (e.g. Ping for Role(s)) in a defined Channel.\nThis is useful if you have a Waitingroomchannel, and it's needed to check if a user joins it or not with pings!\n*After leaving the Channel, the sent message get's edited and removes the ping*`
-                    )
-                    .addField(
-                        "Add / Remove Role",
-                        `If a User joins a VC he/she will get a specific Role, this Role will get removed again, if he/she leaves the vc again!`
-                    );
+                    .addFields({ name: "Send Message in a Channel", value: `If a User joins a specific Channel, it will send a define able Message (e.g. Ping for Role(s)) in a defined Channel.\nThis is useful if you have a Waitingroomchannel, and it's needed to check if a user joins it or not with pings!\n*After leaving the Channel, the sent message get's edited and removes the ping*` })
+                    .addFields({ name: "Add / Remove Role", value: `If a User joins a VC he/she will get a specific Role, this Role will get removed again, if he/she leaves the vc again!` });
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -114,14 +104,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -136,12 +126,12 @@ module.exports = {
                                 let menuoptions = [
                                     {
                                         value: "Add a VC",
-                                        description: `Add a Vc Channel and Message to send.`,
+                                        description: `Add a Vc Canal and Mensaje to send.`,
                                         emoji: allEmojis.msg.SUCCESS,
                                     },
                                     {
                                         value: "Remove a VC",
-                                        description: `Remove an already added VC-Channel.`,
+                                        description: `Remove an already added VC-Canal.`,
                                         emoji: allEmojis.msg.ERROR,
                                     },
                                     {
@@ -151,7 +141,7 @@ module.exports = {
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Setup!`,
+                                        description: `Cancelar and stop the Configuración!`,
                                         emoji: allEmojis.msg.cancel,
                                     },
                                 ];
@@ -160,7 +150,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to setup the Join VC System")
+                                    .setPlaceholder("¡Haz clic para configurar the Join VC System")
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -178,11 +168,7 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new Discord.EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Join VC System",
-                                        "https://cdn.discordapp.com/emojis/834052497492410388.gif?size=96",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({ name: "Join VC System", iconURL: "https://cdn.discordapp.com/emojis/834052497492410388.gif?size=96", url: "https://github.com/melodiabl" })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -207,14 +193,14 @@ module.exports = {
                                         handle_the_picks2(menu?.values[0], menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -227,10 +213,10 @@ module.exports = {
                                             let tempmsg = await message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle(`**Which Channel do you wanna add?**`)
+                                                        .setTitle(`**Which Canal do you wanna add?**`)
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Please Ping the **VOICE CHANNEL** now! / Send the **ID** the **Talk**!\nAnd add the **LOG_CHANNEL** in VIA ID / PING afterwards!\nAnd then add the Message at the end!\n\n**Examples:**\n> \`#VoiceChannel #TextChannel @Voice-Support Someone joined the Voice Support, check the Embed!\`\n> \`901905221851156552 901904924709908540 @Voice-Support Someone joined the Voice Support, check the Embed!\``
+                                                            `Por favor Ping the **VOICE CHANNEL** now! / Send the **ID** the **Talk**!\nAnd add the **LOG_CHANNEL** in VIA ID / PING afterwards!\nAnd then add the Mensaje at the end!\n\n**Examples:**\n> \`#VoiceChannel #TextChannel @Voice-Support Someone joined the Voice Support, check the Embed!\`\n> \`901905221851156552 901904924709908540 @Voice-Support Someone joined the Voice Support, check the Embed!\``
                                                         )
                                                         .setFooter(client.getFooter(es)),
                                                 ],
@@ -264,7 +250,7 @@ module.exports = {
                                                     if (
                                                         !Voicechannel ||
                                                         !Textchannel ||
-                                                        Voicechannel.type != "GUILD_VOICE" ||
+                                                        Voicechannel.type != ChannelType.GuildVoice ||
                                                         Textchannel.type != "GUILD_TEXT"
                                                     )
                                                         return message.reply(
@@ -295,7 +281,7 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            `<:no:833101993668771842> This Channel is already Setupped!`
+                                                                            `<:no:833101993668771842> This Canal is already Setupped!`
                                                                         )
                                                                         .setDescription(
                                                                             `Remove it first with \`${prefix}setup-joinvc\` --> Then Pick VC Messages --> Then Pick Remove!`
@@ -363,7 +349,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -408,13 +394,13 @@ module.exports = {
                                                             .filter(
                                                                 ch =>
                                                                     ch.guild.id == message.guild.id &&
-                                                                    ch.type == "GUILD_VOICE"
+                                                                    ch.type == ChannelType.GuildVoice
                                                             )
                                                             .first() ||
                                                         message.guild.channels.cache.get(
                                                             message.content.trim().split(" ")[0]
                                                         );
-                                                    if (!Voicechannel || Voicechannel.type != "GUILD_VOICE")
+                                                    if (!Voicechannel || Voicechannel.type != ChannelType.GuildVoice)
                                                         return message.reply(
                                                                 `${allEmojis.msg.ERROR} **Check the example in the Embed, wrong input type!**`
                                                         );
@@ -443,7 +429,7 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            `<:no:833101993668771842> This Channel has not been Setup yet!`
+                                                                            `<:no:833101993668771842> This Canal has not been Configuración yet!`
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setFooter(client.getFooter(es)),
@@ -458,7 +444,7 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        `${allEmojis.msg.SUCCESS} Successfully removed **${Voicechannel.name}** out of the Setup!`
+                                                                        `${allEmojis.msg.SUCCESS} Successfully removed **${Voicechannel.name}** out of the Configuración!`
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setFooter(client.getFooter(es)),
@@ -502,7 +488,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -535,10 +521,10 @@ module.exports = {
                                             message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle(`📑 Settings of the Join Vc-Messages System`)
+                                                        .setTitle(`📑 Ajustes of the Join Vc-Messages System`)
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `**VCS Where a Message is sent:**\n${a.map(d => `<#${d.channelId}> [Send in: <#${d.textChannelId}>]`).join("\n")}`.substring(
+                                                            `**VCS Where a Mensaje is sent:**\n${a.map(d => `<#${d.channelId}> [Send in: <#${d.textChannelId}>]`).join("\n")}`.substring(
                                                                 0,
                                                                 2000
                                                             )
@@ -559,12 +545,12 @@ module.exports = {
                                 let menuoptions = [
                                     {
                                         value: "Add a VC",
-                                        description: `Add a Vc Channel and Role to add/remove.`,
+                                        description: `Add a Vc Canal and Rol to add/remove.`,
                                         emoji: allEmojis.msg.SUCCESS,
                                     },
                                     {
                                         value: "Remove a VC",
-                                        description: `Remove an already added VC-Channel.`,
+                                        description: `Remove an already added VC-Canal.`,
                                         emoji: allEmojis.msg.ERROR,
                                     },
                                     {
@@ -574,7 +560,7 @@ module.exports = {
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Setup!`,
+                                        description: `Cancelar and stop the Configuración!`,
                                         emoji: allEmojis.msg.cancel,
                                     },
                                 ];
@@ -583,7 +569,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to setup the Join VC System")
+                                    .setPlaceholder("¡Haz clic para configurar the Join VC System")
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -601,11 +587,7 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new Discord.EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Join VC System",
-                                        "https://cdn.discordapp.com/emojis/834052497492410388.gif?size=96",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({ name: "Join VC System", iconURL: "https://cdn.discordapp.com/emojis/834052497492410388.gif?size=96", url: "https://github.com/melodiabl" })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -630,14 +612,14 @@ module.exports = {
                                         handle_the_picks2(menu?.values[0], menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -650,10 +632,10 @@ module.exports = {
                                             let tempmsg = await message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle(`**Which Channel do you wanna add?**`)
+                                                        .setTitle(`**Which Canal do you wanna add?**`)
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Please Ping the **VOICE CHANNEL** now! / Send the **ID** the **Talk**!\nAnd add the **RIKE** in VIA ID / PING afterwards!\n\n**Examples:**\n> \`#VoiceChannel @Role-For-VoiceChannel\``
+                                                            `Por favor Ping the **VOICE CHANNEL** now! / Send the **ID** the **Talk**!\nAnd add the **RIKE** in VIA ID / PING afterwards!\n\n**Examples:**\n> \`#VoiceChannel @Rol-For-VoiceChannel\``
                                                         )
                                                         .setFooter(client.getFooter(es)),
                                                 ],
@@ -672,7 +654,7 @@ module.exports = {
                                                             .filter(
                                                                 ch =>
                                                                     ch.guild.id == message.guild.id &&
-                                                                    ch.type == "GUILD_VOICE"
+                                                                    ch.type == ChannelType.GuildVoice
                                                             )
                                                             .first() ||
                                                         message.guild.channels.cache.get(
@@ -695,7 +677,7 @@ module.exports = {
                                                                     .setColor(es.wrongcolor)
                                                                     .setFooter(client.getFooter(es))
                                                                     .setTitle(
-                                                                        "I can't give/remove this Role, because it's higher/equal to my highest Role"
+                                                                        "I can't give/remove this Rol, because it's higher/equal to my highest Rol"
                                                                     ),
                                                             ],
                                                         });
@@ -724,7 +706,7 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            `<:no:833101993668771842> This Channel is already Setupped!`
+                                                                            `<:no:833101993668771842> This Canal is already Setupped!`
                                                                         )
                                                                         .setDescription(
                                                                             `Remove it first with \`${prefix}setup-joinvc\` --> Then Pick VC ROLES --> Then Pick Remove!`
@@ -742,7 +724,7 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        `${allEmojis.msg.SUCCESS} I will now Add the Role \`${Role.name}\` when someone joins the VC **${Discord.VoiceChannel.name}**`
+                                                                        `${allEmojis.msg.SUCCESS} I will now Add the Rol \`${Rol.name}\` when someone joins the VC **${Discord.VoiceChannel.name}**`
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setFooter(client.getFooter(es)),
@@ -786,7 +768,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -831,13 +813,13 @@ module.exports = {
                                                             .filter(
                                                                 ch =>
                                                                     ch.guild.id == message.guild.id &&
-                                                                    ch.type == "GUILD_VOICE"
+                                                                    ch.type == ChannelType.GuildVoice
                                                             )
                                                             .first() ||
                                                         message.guild.channels.cache.get(
                                                             message.content.trim().split(" ")[0]
                                                         );
-                                                    if (!Voicechannel || Voicechannel.type != "GUILD_VOICE")
+                                                    if (!Voicechannel || Voicechannel.type != ChannelType.GuildVoice)
                                                         return message.reply(
                                                             `${allEmojis.msg.ERROR} **Check the example in the Embed, wrong input type!**`
                                                         );
@@ -866,7 +848,7 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            `<:no:833101993668771842> This Channel has not been Setup yet!`
+                                                                            `<:no:833101993668771842> This Canal has not been Configuración yet!`
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setFooter(client.getFooter(es)),
@@ -881,7 +863,7 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        `${allEmojis.msg.SUCCESS} Successfully removed **${Voicechannel.name}** out of the Setup!`
+                                                                        `${allEmojis.msg.SUCCESS} Successfully removed **${Voicechannel.name}** out of the Configuración!`
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setFooter(client.getFooter(es)),
@@ -925,7 +907,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -958,10 +940,10 @@ module.exports = {
                                             message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle(`📑 Settings of the Join Vc-Role System`)
+                                                        .setTitle(`📑 Ajustes of the Join Vc-Rol System`)
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `**VCS Where I add a Role:**\n${a.map(d => `<#${d.channelId}> [Role: <@&${d.roleId}>]`).join("\n")}`.substring(
+                                                            `**VCS Where I add a Rol:**\n${a.map(d => `<#${d.channelId}> [Rol: <@&${d.roleId}>]`).join("\n")}`.substring(
                                                                 0,
                                                                 2000
                                                             )
@@ -993,10 +975,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

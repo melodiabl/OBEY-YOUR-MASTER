@@ -28,7 +28,7 @@ module.exports = client => {
             var guild = client.guilds.cache.get(guildid);
             //if no guild, return
             if (!guild) return;
-            if (!guild.members.me.permissions.has(Discord.PermissionFlagsBits.ADMINISTRATOR)) {
+            if (!guild.members.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
                 return;
             }
             client.backupDB.ensure(guild.id, {

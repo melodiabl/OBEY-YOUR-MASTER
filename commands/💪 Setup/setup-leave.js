@@ -1,4 +1,6 @@
-var { EmbedBuilder } = require(`discord.js`);
+var { EmbedBuilder,
+    ButtonStyle
+} = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -12,8 +14,8 @@ module.exports = {
     aliases: ["setupleave"],
     cooldown: 5,
     usage: "setup-leave --> and follow the steps",
-    description: "Manage the Leave Message System",
-    memberpermissions: ["ADMINISTRATOR"],
+    description: "Gestiona el Sistema de Mensaje de Salida",
+    memberpermissions: ['Administrador'],
     type: "info",
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
@@ -40,7 +42,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancel and stop the Leave-Setup!`,
+                        description: `Cancelar and stop the Leave-Configuración!`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];
@@ -49,7 +51,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Leave-System")
+                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -65,11 +67,7 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(
-                        "Leave Setup",
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                        "https://discord.gg/milrato"
-                    )
+                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -93,14 +91,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                         components: [],
                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                     });
@@ -126,22 +124,22 @@ module.exports = {
                                     },
                                     {
                                         value: "Manage the Image",
-                                        description: `Manage the Leave Image for the Message`,
+                                        description: `Manage the Leave Image for the Mensaje`,
                                         emoji: "🖼️",
                                     },
                                     {
                                         value: "Edit the Message",
-                                        description: `Edit the Leave Message ...`,
-                                        emoji: "877653386747605032",
+                                        description: `Edit the Leave Mensaje ...`,
+                                        emoji: "👋",
                                     },
                                     {
                                         value: `${client.settings.get(message.guild.id, "leave.invite") ? "Disable InviteInformation" : "Enable Invite Information"}`,
                                         description: `${client.settings.get(message.guild.id, "leave.invite") ? "No longer show Information who invited him/her" : "Show Information about who invited him/her"}`,
-                                        emoji: "877653386747605032",
+                                        emoji: "👋",
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Leave-Setup!`,
+                                        description: `Cancelar and stop the Leave-Configuración!`,
                                         emoji: allEmojis.msg.cancel,
                                     },
                                 ];
@@ -150,7 +148,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to setup the Leave-System")
+                                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -168,11 +166,7 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Leave Setup",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -198,14 +192,14 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -258,7 +252,7 @@ module.exports = {
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setDescription(
-                                                                        `If Someone joins this Server, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
+                                                                        `If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
                                                                             0,
                                                                             2048
                                                                         )
@@ -267,7 +261,7 @@ module.exports = {
                                                             ],
                                                         });
                                                     }
-                                                    return message.reply("you didn't ping a valid channel");
+                                                    return message.reply("you no mencionaste un channel");
                                                 })
                                                 .catch(e => {
                                                     console.log(e.stack ? String(e.stack).grey : String(e).grey);
@@ -283,7 +277,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -302,7 +296,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Server, no message will be sent into a Channel!\nSet a Channel with: \`${prefix}setup-leave\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
+                                                            `If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-leave\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -325,7 +319,7 @@ module.exports = {
                                                     {
                                                         value: "Enable auto Image",
                                                         description: `I will generate an Image with the Userdata`,
-                                                        emoji: "865962151649869834",
+                                                        emoji: "👋",
                                                     },
                                                     {
                                                         value: "Set Image Background",
@@ -374,7 +368,7 @@ module.exports = {
                                                     },
                                                     {
                                                         value: "Cancel",
-                                                        description: `Cancel and stop the Leave-Setup!`,
+                                                        description: `Cancelar and stop the Leave-Configuración!`,
                                                         emoji: allEmojis.msg.cancel,
                                                     },
                                                 ];
@@ -383,7 +377,7 @@ module.exports = {
                                                     .setCustomId("MenuSelection")
                                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                                    .setPlaceholder("Click me to setup the Leave-System")
+                                                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
                                                     .addOptions(
                                                         menuoptions.map(option => {
                                                             let Obj = {
@@ -401,11 +395,7 @@ module.exports = {
                                                 //define the embed
                                                 let MenuEmbed = new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setAuthor(
-                                                        "Leave Setup",
-                                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                                        "https://discord.gg/milrato"
-                                                    )
+                                                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
                                                     .setDescription(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"])
                                                     );
@@ -442,7 +432,7 @@ module.exports = {
                                                         handle_the_picks_3(menu?.values[0], SetupNumber, menuoptiondata);
                                                     } else
                                                         menu?.reply({
-                                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                             ephemeral: true,
                                                         });
                                                 });
@@ -450,7 +440,7 @@ module.exports = {
                                                 collector.on("end", collected => {
                                                     menumsg.edit({
                                                         embeds: [
-                                                            menumsg.embeds[0].setDescription(
+                                                            EmbedBuilder.from(menumsg.embeds[0]).setDescription(
                                                                 `~~${menumsg.embeds[0].description}~~`
                                                             ),
                                                         ],
@@ -480,7 +470,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with__out__ an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with__out__ an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -692,7 +682,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `Cancelled the Operation!`.substring(
+                                                                                    `¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
                                                                                     )
@@ -723,7 +713,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -893,7 +883,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `Cancelled the Operation!`.substring(
+                                                                                    `¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
                                                                                     )
@@ -924,7 +914,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -957,7 +947,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -987,7 +977,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1017,7 +1007,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1047,7 +1037,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1061,44 +1051,44 @@ module.exports = {
                                                         {
                                                             let row1 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FFFFF9")
                                                                     .setEmoji("⬜")
                                                                     .setLabel("#FFFFF9"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FAFA25")
                                                                     .setEmoji("🟨")
                                                                     .setLabel("#FAFA25"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA9E25")
                                                                     .setEmoji("🟧")
                                                                     .setLabel("#FA9E25"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA2525")
                                                                     .setEmoji("🟥")
                                                                     .setLabel("#FA2525"),
                                                             ]);
                                                             let row2 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#25FA6C")
                                                                     .setEmoji("🟩")
                                                                     .setLabel("#25FA6C"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#3A98F0")
                                                                     .setEmoji("🟦")
                                                                     .setLabel("#3A98F0"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#8525FA")
                                                                     .setEmoji("🟪")
                                                                     .setLabel("#8525FA"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#030303")
                                                                     .setEmoji("⬛")
                                                                     .setLabel("#030303"),
@@ -1134,7 +1124,7 @@ module.exports = {
                                                             collector.on("end", collected => {
                                                                 message.reply({
                                                                     embeds: [
-                                                                        tempmsg.embeds[0].setDescription(
+                                                                        tempEmbedBuilder.from(msg.embeds[0]).setDescription(
                                                                             `~~${tempmsg.embeds[0].description}~~`
                                                                         ),
                                                                     ],
@@ -1163,7 +1153,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(color)
                                                                                 .setDescription(
-                                                                                    `If Someone leaves this Server, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                    `If Someone leaves this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                         0,
                                                                                         2048
                                                                                     )
@@ -1173,7 +1163,7 @@ module.exports = {
                                                                     });
                                                                 }
                                                                 button?.reply(
-                                                                    `${allEmojis.msg.ERROR} **Only the Command Executor is allowed to react!**`
+                                                                    `${allEmojis.msg.ERROR} **Only the Comando Executor is allowed to react!**`
                                                                 );
                                                             });
                                                         }
@@ -1219,7 +1209,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `If Someone joins this Server, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", message.author)}`.substring(
+                                                                    `If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", message.author)}`.substring(
                                                                         0,
                                                                         2048
                                                                     )
@@ -1242,7 +1232,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -1265,7 +1255,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Server, a message with Invite Information will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
+                                                            `If Someone joins this Servidor, a message with Invite Information will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -1291,22 +1281,22 @@ module.exports = {
                                     },
                                     {
                                         value: "Manage the Image",
-                                        description: `Manage the Leave Image for the Message`,
+                                        description: `Manage the Leave Image for the Mensaje`,
                                         emoji: "🖼️",
                                     },
                                     {
                                         value: "Edit the Message",
-                                        description: `Edit the Leave Message ...`,
-                                        emoji: "877653386747605032",
+                                        description: `Edit the Leave Mensaje ...`,
+                                        emoji: "👋",
                                     },
                                     {
                                         value: `${client.settings.get(message.guild.id, "leave.invitedm") ? "Disable InviteInformation" : "Enable Invite Information"}`,
                                         description: `${client.settings.get(message.guild.id, "leave.invitedm") ? "No longer show Information who invited him/her" : "Show Information about who invited him/her"}`,
-                                        emoji: "877653386747605032",
+                                        emoji: "👋",
                                     },
                                     {
                                         value: "Cancel",
-                                        description: `Cancel and stop the Leave-Setup!`,
+                                        description: `Cancelar and stop the Leave-Configuración!`,
                                         emoji: allEmojis.msg.cancel,
                                     },
                                 ];
@@ -1315,7 +1305,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to setup the Leave-System")
+                                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -1333,11 +1323,7 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor(
-                                        "Leave Setup",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                        "https://discord.gg/milrato"
-                                    )
+                                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
                                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
                                 //send the menu msg
                                 let menumsg = await message.reply({
@@ -1363,14 +1349,14 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [menumsg.embeds[0].setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
                                         components: [],
                                         content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
                                     });
@@ -1423,7 +1409,7 @@ module.exports = {
                                                     {
                                                         value: "Enable auto Image",
                                                         description: `I will generate an Image with the Userdata`,
-                                                        emoji: "865962151649869834",
+                                                        emoji: "👋",
                                                     },
                                                     {
                                                         value: "Set Image Background",
@@ -1472,7 +1458,7 @@ module.exports = {
                                                     },
                                                     {
                                                         value: "Cancel",
-                                                        description: `Cancel and stop the Leave-Setup!`,
+                                                        description: `Cancelar and stop the Leave-Configuración!`,
                                                         emoji: allEmojis.msg.cancel,
                                                     },
                                                 ];
@@ -1481,7 +1467,7 @@ module.exports = {
                                                     .setCustomId("MenuSelection")
                                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                                    .setPlaceholder("Click me to setup the Leave-System")
+                                                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
                                                     .addOptions(
                                                         menuoptions.map(option => {
                                                             let Obj = {
@@ -1499,11 +1485,7 @@ module.exports = {
                                                 //define the embed
                                                 let MenuEmbed = new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setAuthor(
-                                                        "Leave Setup",
-                                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                                                        "https://discord.gg/milrato"
-                                                    )
+                                                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
                                                     .setDescription(
                                                         eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"])
                                                     );
@@ -1540,7 +1522,7 @@ module.exports = {
                                                         handle_the_picks_3(menu?.values[0], SetupNumber, menuoptiondata);
                                                     } else
                                                         menu?.reply({
-                                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                             ephemeral: true,
                                                         });
                                                 });
@@ -1548,7 +1530,7 @@ module.exports = {
                                                 collector.on("end", collected => {
                                                     menumsg.edit({
                                                         embeds: [
-                                                            menumsg.embeds[0].setDescription(
+                                                            EmbedBuilder.from(menumsg.embeds[0]).setDescription(
                                                                 `~~${menumsg.embeds[0].description}~~`
                                                             ),
                                                         ],
@@ -1578,7 +1560,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with__out__ an image** will be sent into There Dms`.substring(
+                                                                            `If Someone joins this Servidor, a message **with__out__ an image** will be sent into There Dms`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1790,7 +1772,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `Cancelled the Operation!`.substring(
+                                                                                    `¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
                                                                                     )
@@ -1821,7 +1803,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -1991,7 +1973,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `Cancelled the Operation!`.substring(
+                                                                                    `¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
                                                                                     )
@@ -2022,7 +2004,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2055,7 +2037,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2088,7 +2070,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2118,7 +2100,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2148,7 +2130,7 @@ module.exports = {
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Server, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
                                                                             )
@@ -2162,44 +2144,44 @@ module.exports = {
                                                         {
                                                             let row1 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FFFFF9")
                                                                     .setEmoji("⬜")
                                                                     .setLabel("#FFFFF9"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FAFA25")
                                                                     .setEmoji("🟨")
                                                                     .setLabel("#FAFA25"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA9E25")
                                                                     .setEmoji("🟧")
                                                                     .setLabel("#FA9E25"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA2525")
                                                                     .setEmoji("🟥")
                                                                     .setLabel("#FA2525"),
                                                             ]);
                                                             let row2 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#25FA6C")
                                                                     .setEmoji("🟩")
                                                                     .setLabel("#25FA6C"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#3A98F0")
                                                                     .setEmoji("🟦")
                                                                     .setLabel("#3A98F0"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#8525FA")
                                                                     .setEmoji("🟪")
                                                                     .setLabel("#8525FA"),
                                                                 new ButtonBuilder()
-                                                                    .setStyle(Discord.ButtonStyle.Secondary)
+                                                                    .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#030303")
                                                                     .setEmoji("⬛")
                                                                     .setLabel("#030303"),
@@ -2235,7 +2217,7 @@ module.exports = {
                                                             collector.on("end", collected => {
                                                                 message.reply({
                                                                     embeds: [
-                                                                        tempmsg.embeds[0].setDescription(
+                                                                        tempEmbedBuilder.from(msg.embeds[0]).setDescription(
                                                                             `~~${tempmsg.embeds[0].description}~~`
                                                                         ),
                                                                     ],
@@ -2264,7 +2246,7 @@ module.exports = {
                                                                                 )
                                                                                 .setColor(color)
                                                                                 .setDescription(
-                                                                                    `If Someone leaves this Server, a message **with an automated image** will be sent into DMS`.substring(
+                                                                                    `If Someone leaves this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                         0,
                                                                                         2048
                                                                                     )
@@ -2274,7 +2256,7 @@ module.exports = {
                                                                     });
                                                                 }
                                                                 button?.reply(
-                                                                    `${allEmojis.msg.ERROR} **Only the Command Executor is allowed to react!**`
+                                                                    `${allEmojis.msg.ERROR} **Only the Comando Executor is allowed to react!**`
                                                                 );
                                                             });
                                                         }
@@ -2320,7 +2302,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `If Someone joins this Server, this message will be sent into DMS!\n\n${message.content.replace("{user}", message.author)}`.substring(
+                                                                    `If Someone joins this Servidor, this message will be sent into DMS!\n\n${message.content.replace("{user}", message.author)}`.substring(
                                                                         0,
                                                                         2048
                                                                     )
@@ -2343,7 +2325,7 @@ module.exports = {
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `Cancelled the Operation!`.substring(0, 2000)
+                                                                    `¡Operación Cancelada!`.substring(0, 2000)
                                                                 )
                                                                 .setFooter(client.getFooter(es)),
                                                         ],
@@ -2366,7 +2348,7 @@ module.exports = {
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Server, a message with Invite Information will be sent into DMS!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
+                                                            `If Someone joins this Servidor, a message with Invite Information will be sent into DMS!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
                                                                 0,
                                                                 2048
                                                             )
@@ -2398,10 +2380,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */

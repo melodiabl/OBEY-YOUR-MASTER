@@ -203,7 +203,7 @@ git clone https://github.com/melodiabl/OBEY-YOUR-MASTER.git
 cd OBEY-YOUR-MASTER
 
 # 2. Configurar variables de entorno
-cp .env.example .env
+cp example.env .env
 nano .env   # Edita con tus datos
 
 # 3. Iniciar con Docker Compose
@@ -258,46 +258,35 @@ pm2 save && pm2 startup
 <details>
 <summary>🎵 Click para expandir</summary>
 
-1. Descargar [Lavalink.jar](https://github.com/lavalink-devs/Lavalink/releases/latest)
+El repositorio incluye [`lavalink/application.yml`](lavalink/application.yml) con Lavalink 4, YouTube Source, [LavaSrc](https://github.com/topi314/LavaSrc) y [LavaSearch](https://github.com/topi314/LavaSearch). Esta combinación permite buscar pistas, álbumes y playlists como entidades separadas.
 
-2. Crear `application.yml` en la misma carpeta:
+1. Configurar `.env`:
 
-```yaml
-server:
-  port: 2333
-  address: 0.0.0.0
-
-lavalink:
-  server:
-    password: "tu_password_aqui"
-    sources:
-      youtube: true
-      soundcloud: true
-      bandcamp: true
-      twitch: true
-      vimeo: true
-      http: true
-      local: false
-
-logging:
-  level:
-    root: INFO
-    lavalink: INFO
-```
-
-3. Ejecutar Lavalink:
-```bash
-java -jar Lavalink.jar
-```
-
-4. Configurar en `.env`:
 ```env
 LAVALINK_HOST=127.0.0.1
 LAVALINK_PORT=2333
 LAVALINK_PASSWORD=tu_password_aqui
+LAVALINK_SECURE=false
+
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_MARKET=US
+
+YOUTUBE_PO_TOKEN=
+YOUTUBE_VISITOR_DATA=
 ```
 
-> **YouTube:** Para evitar bloqueos, configura `YOUTUBE_PO_TOKEN` en el `.env`. Obtenerlo siguiendo la guía de [yt-dlp](https://github.com/yt-dlp/yt-dlp/wiki/PO-Token-Guide).
+2. Iniciar Lavalink y el bot:
+
+```bash
+docker compose --profile managed-lavalink up -d lavalink bot
+```
+
+Si ya existe un Lavalink externo en `LAVALINK_HOST`, inicia solo `docker compose up -d bot`.
+
+El bot sincroniza las credenciales Spotify con LavaSrc al conectar. Apple Music, Deezer, Tidal, Qobuz, Yandex y JioSaavn están soportados por el código, pero sus fuentes deben habilitarse en `lavalink/application.yml` y requieren las credenciales propias de cada servicio.
+
+> **YouTube:** para evitar bloqueos, configura `YOUTUBE_PO_TOKEN` y `YOUTUBE_VISITOR_DATA` siguiendo la documentación de [youtube-source](https://github.com/lavalink-devs/youtube-source#using-a-potoken).
 
 </details>
 

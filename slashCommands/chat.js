@@ -5,9 +5,9 @@ const settings = require("../botconfig/settings.json");
 const fetch = require("node-fetch");
 module.exports = {
     name: "chat", //the command name for the Slash Command
-    description: "Chat with the Bot", //the command description for Slash Command Overview
+    description: "Chatea con el Bot", //the command description for Slash Command Overview
     cooldown: 5,
-    options: [{ String: { name: "chat_text", description: "Wanna Chat with me?", required: false } }],
+    options: [{ String: { name: "chat_text", description: "¿Quieres chatear conmigo?", required: false } }],
     run: async (client, interaction, cmduser, es, ls, prefix, player, message) => {
         try {
             //console.log(interaction, StringOption)
@@ -36,7 +36,7 @@ module.exports = {
                         if (!data.cnt) {
                             interaction
                                 ?.editReply({
-                                    content: ":cry: **Sorry I am clueless... I can't connect to the API!**",
+                                    content: ":cry: **Lo siento, no tengo idea... No puedo conectarme a la API!**",
                                     ephemeral: true,
                                 })
                                 .catch(e => console.log("CHATBOT:".underline.red + " :: " + e.stack.toString().grey));
@@ -48,7 +48,7 @@ module.exports = {
                     });
             } catch (e) {
                 interaction
-                    ?.editReply({ content: ":cry: **Sorry I am clueless... I can't connect to the API!**", ephemeral: true })
+                    ?.editReply({ content: ":cry: **Lo siento, no tengo idea... No puedo conectarme a la API!**", ephemeral: true })
                     .catch(e => console.log("CHATBOT:".underline.red + " :: " + e.stack.toString().grey));
             }
         } catch (e) {
@@ -58,10 +58,10 @@ module.exports = {
 };
 /**
  * @INFO
- * Bot Coded by Tomato#6966 | https://github?.com/Tomato6966/Discord-Js-Handler-Template
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Work for Milrato Development | https://milrato.eu
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
- * Please mention Him / Milrato Development, when using this Code!
+ * Desarrollado por Melodia | https://github.com/melodiabl
  * @INFO
  */
