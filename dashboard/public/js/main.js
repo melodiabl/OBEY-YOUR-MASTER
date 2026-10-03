@@ -29,16 +29,6 @@ function toast(msg, type = 'ok') {
   }, 3200)
 }
 
-// ── TOGGLE LABELS (accessibility) ───────────────────────────────────────────
-document.querySelectorAll('.toggle-item').forEach(item => {
-  item.addEventListener('click', e => {
-    if (e.target.tagName === 'INPUT') return
-    const inp = item.querySelector('input[type=checkbox]')
-    if (inp) inp.checked = !inp.checked
-    inp?.dispatchEvent(new Event('change', { bubbles: true }))
-  })
-})
-
 // ── FORM FEEDBACK ───────────────────────────────────────────────────────────
 document.querySelectorAll('form').forEach(form => {
   form.addEventListener('submit', () => {

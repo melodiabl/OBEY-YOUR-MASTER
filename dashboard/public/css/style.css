@@ -220,3 +220,69 @@ input:checked+.tslider::before{transform:translateX(18px);background:var(--p);bo
   .page-hd{flex-wrap:wrap}
   .page-actions{margin-left:0;width:100%}
 }
+
+/* Panel interior: una base común para servidores, ajustes, biblioteca y estadísticas. */
+:root{
+  --bg:#0a1019;--surf:#111a26;--surf2:#182333;--surf3:#233146;
+  --border:rgba(183,205,237,.12);--p:#8293ff;--purple:#b39af5;
+  --pink:#f184bd;--green:#66d9b0;--yellow:#f7cf75;
+  --text:#f3f6fd;--muted:#a3b0c4;--glow:rgba(96,116,240,.16)
+}
+body{line-height:1.5}
+.sidebar{background:#101925}
+.sidebar-brand{padding:23px 18px 20px}
+.brand-logo{width:38px;height:38px;background:#6175ea}
+.brand-name{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:0}
+.brand-sub{font-size:11px}
+.sidebar-nav{padding:16px 12px}
+.nav-sec{font-size:11px;letter-spacing:.03em;text-transform:none;padding:12px 11px 7px}
+.nav-link{min-height:41px;font-size:13px;border-radius:9px;color:#bbc6d8}
+.nav-link.active{background:#263554;color:#e7edff}
+.nav-link.active i{color:#aab7ff}
+.topbar{background:rgba(12,20,31,.96);padding:0 32px}
+.topbar-bc{min-width:0}
+.topbar-bc .cur{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.page{max-width:1240px;margin:0 auto;padding:34px 38px 80px}
+.page-hd{gap:16px;margin-bottom:28px}
+.page-ico{width:48px;height:48px;border-radius:12px;font-size:19px}
+.page-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(25px,3vw,32px);font-weight:700;letter-spacing:-.035em;line-height:1.2;margin:0}
+.page-sub{font-size:14px;line-height:1.45;margin-top:5px}
+.page-actions{flex-wrap:wrap}
+.card,.guild-hd,.settings-nav,.stat-card,.guild-card{border-color:var(--border);border-radius:12px}
+.card-head{padding:17px 20px}.card-body{padding:20px;gap:16px}
+.card-title{font-size:15px}.card-desc,.form-help{font-size:12px;line-height:1.4}
+.stat-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.stat-card{padding:19px}
+.stat-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.04em}
+.stat-lbl{font-size:11px;letter-spacing:.02em}
+.guild-grid{grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:14px}
+.guild-card{padding:22px 18px;gap:11px}
+.guild-card.out{opacity:1}
+.g-name{font-size:15px}.g-meta{font-size:12px}
+.guild-hd{padding:21px 22px;margin-bottom:20px}.gh-name{font-size:20px}
+.settings-layout{grid-template-columns:210px minmax(0,1fr);gap:20px}
+.settings-nav{padding:10px;gap:3px}.stab{font-size:13px;min-height:40px;padding:9px 12px}
+.stab.active{background:#263554;color:#edf1ff}
+.section-panel{gap:16px}
+.form-label{font-size:13px}.form-input,.form-select,.form-textarea{min-height:41px;border-color:rgba(183,205,237,.18)}
+.toggle-item{padding:14px 16px;min-height:62px}.ti-label{font-size:13px}.ti-desc{font-size:12px;line-height:1.35}
+.save-bar{padding:13px 38px;box-shadow:0 -10px 30px rgba(0,0,0,.2)}
+.charts-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:16px}
+.lib-tab{font:inherit;min-height:42px;border-radius:9px!important;background:var(--surf2)!important;border:1px solid var(--border)!important;color:var(--muted)!important}
+.lib-tab.active{background:#263554!important;border-color:#5269b9!important;color:var(--text)!important}
+:is(a,button,input,select,textarea):focus-visible{outline:2px solid #a9b6ff;outline-offset:3px}
+@media(max-width:880px){
+  .topbar{padding-left:56px}.page{padding:24px 20px 70px}
+  .settings-layout{grid-template-columns:1fr}.settings-nav{position:static;overflow-x:auto;flex-direction:row;scrollbar-width:thin}
+  .stab{width:auto;flex:none;white-space:nowrap}
+  .charts-grid{grid-template-columns:1fr}
+  .save-bar{padding:12px 20px}
+}
+@media(max-width:560px){
+  .page{padding:20px 16px 78px}.page-hd{align-items:flex-start}
+  .page-actions{width:100%;margin-left:0}.page-actions .btn{flex:1;justify-content:center}
+  .guild-grid{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gh-actions{width:100%;margin-left:0;flex-wrap:wrap}.gh-actions .btn{flex:1;justify-content:center}
+  .save-bar{gap:8px;flex-wrap:wrap}.sb-msg{flex-basis:100%}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}

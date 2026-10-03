@@ -7,8 +7,8 @@ server:
 lavalink:
   pluginsDir: "./plugins"
   plugins:
-    - dependency: "dev.lavalink.youtube:youtube-plugin:${YOUTUBE_PLUGIN_VERSION:1.18.1}"
-      repository: "https://repo1.maven.org/maven2"
+    - dependency: "dev.lavalink.youtube:youtube-plugin:${YOUTUBE_PLUGIN_VERSION:1.18.2}"
+      repository: "https://maven.lavalink.dev/releases"
 
     - dependency: "com.github.topi314.sponsorblock:sponsorblock-plugin:3.0.1"
       repository: "https://repo1.maven.org/maven2"
@@ -72,6 +72,8 @@ plugins:
     allowDirectPlaylistIds: true
     clients:
       - MUSIC
+      - MWEB
+      - TVHTML5_SIMPLY
       - TV
       - ANDROID_VR
       - WEB

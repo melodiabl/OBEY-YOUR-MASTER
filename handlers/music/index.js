@@ -8,8 +8,23 @@ const { buildNPEmbed, buildControls, buildQueueEmbed, buildQueueRows } = require
 const { toggleLike, buildLikeEmbed } = require('./likes')
 const { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate } = require('./liveupdate')
 
-// Search priority: Spotify (PulseLink token) → YouTube Music → YouTube
 const SEARCH_PREFIXES = ['spsearch', 'ytmsearch', 'ytsearch']
+
+function normalizedSongText(value) {
+  return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/\([^)]*(official|video|lyrics|audio)[^)]*\)/g, '')
+    .replace(/\[[^\]]*(official|video|lyrics|audio)[^\]]*\]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ').trim()
+}
+
+function sameSong(a, b) {
+  const title = normalizedSongText(a?.title)
+  const candidateTitle = normalizedSongText(b?.title)
+  const artist = normalizedSongText(a?.author).split(' feat ')[0]
+  const candidateArtist = normalizedSongText(b?.author)
+  return Boolean(title && artist && candidateArtist && title === candidateTitle &&
+    (candidateArtist === artist || candidateArtist.includes(artist) || artist.includes(candidateArtist)))
+}
 
 // SponsorBlock: segmentos a saltar automáticamente en tracks de YouTube
 // (music_offtopic = partes sin música en videoclips; sponsor/selfpromo = anuncios)
@@ -309,6 +324,20 @@ module.exports = client => {
       const info = failed.info || failed
       try {
         const node = getNode()
+        // JioSaavn ofrece audio directo cuando YouTube bloquea la carga del vídeo.
+        // Solo se usa si título y artista coinciden para evitar otra grabación.
+        if (info.sourceName === 'youtube' || info.sourceName === 'spotify') {
+          const direct = await node.rest.resolve(`jssearch:${info.title || ''} ${info.author || ''}`).catch(() => null)
+          const replacement = tracksFromResolve(direct).find(t => t.encoded && t.info?.sourceName === 'jiosaavn' && sameSong(info, t.info))
+          if (replacement) {
+            replacement.info.requester = info.requester || 'Fallback'
+            replacement._fallbackAttempted = true
+            state.currentTrack = replacement; state.startedAt = Date.now(); state.lastPosition = 0; state.paused = false
+            await player.playTrack({ track: { encoded: replacement.encoded } })
+            emitState(guildId)
+            return
+          }
+        }
         const res  = await node.rest.resolve(`ytsearch:${info.title || ''} ${info.author || ''}`)
         const fallback = tracksFromResolve(res).find(t => t.encoded && t.info?.uri !== info.uri)
         if (fallback) {
@@ -483,21 +512,18 @@ module.exports = client => {
       const state = getState(guildId)
       if (!state.textChannelId) return
 
-      // Si el guild tiene canal de peticiones (Setup), el panel ÚNICO actúa de reproductor
+      // El mensaje fijado del canal de peticiones muestra la pista y el progreso.
       const setup = require('../music/setup')
       const setupChId = setup.getChannelId(guildId)
-      const setupMsgId = setup.getMessageId(guildId)
-      if (setupChId && setupMsgId) {
-        const sch = client.channels.cache.get(setupChId)
-        const sm  = sch && await sch.messages.fetch(setupMsgId).catch(() => null)
+      if (setupChId) {
+        const sm = await setup.updatePanel(client, guildId, { embeds: [buildNPEmbed(client, guildId, state, 0)], components: buildControls(state) })
         if (sm) {
           const old = liveMessages.get(guildId)
           if (old && old.messageId !== sm.id) {
             const oc = client.channels.cache.get(old.channelId)
             oc?.messages.fetch(old.messageId).then(m => m.delete().catch(() => {})).catch(() => {})
           }
-          await sm.edit({ embeds: [buildNPEmbed(client, guildId, state, 0)], components: buildControls(state) }).catch(() => {})
-          liveMessages.set(guildId, { messageId: sm.id, channelId: sch.id, isSetup: true })
+          liveMessages.set(guildId, { messageId: sm.id, channelId: setupChId, isSetup: true })
           startLiveUpdate(client, guildId)
           return
         }

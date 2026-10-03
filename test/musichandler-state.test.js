@@ -288,3 +288,34 @@ test('skip advances the queue even when the player is paused', async () => {
   assert.equal(state.currentTrack.info.title, 'Next')
   assert.equal(state.queue.length, 0)
 })
+
+test('a blocked YouTube track falls back only to the matching JioSaavn recording', async () => {
+  const client = new EventEmitter()
+  const played = []
+  const queries = []
+  const player = { playTrack: async payload => played.push(payload.track.encoded) }
+  const node = { rest: { resolve: async query => {
+    queries.push(query)
+    return { loadType: 'search', data: [
+      { encoded: 'remix', info: { title: 'Shape of You (Remix)', author: 'Ed Sheeran', sourceName: 'jiosaavn' } },
+      { encoded: 'match', info: { title: 'Shape of You', author: 'Ed Sheeran', sourceName: 'jiosaavn' } },
+    ] }
+  } } }
+  client.shoukaku = {
+    players: new Map([['guild-fallback', player]]),
+    nodes: new Map([['main', node]]),
+    options: { nodeResolver: nodes => nodes.get('main') },
+  }
+  client.channels = { cache: new Map() }
+  require('../handlers/musichandler')(client)
+  const state = client.music.getState('guild-fallback')
+  state.currentTrack = { encoded: 'blocked', info: {
+    title: 'Shape of You (Official Video)', author: 'Ed Sheeran', sourceName: 'youtube',
+  } }
+
+  await client.music._recoverFailedTrack('guild-fallback', player, 'Sign in to confirm')
+
+  assert.deepEqual(queries, ['jssearch:Shape of You (Official Video) Ed Sheeran'])
+  assert.deepEqual(played, ['match'])
+  assert.equal(state.currentTrack.info.sourceName, 'jiosaavn')
+})

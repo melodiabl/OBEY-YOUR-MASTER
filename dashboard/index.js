@@ -656,7 +656,7 @@ module.exports = async client => {
         case 'shuffle':  await music.shuffle(guildId);               break
         case 'autoplay': music.setAutoplay(guildId);                  break
         case 'loop':     music.setLoop(guildId, value || 'none');    break
-        case 'volume':   await music.setVolume(guildId, parseInt(value) || 100); break
+        case 'volume':   await music.setVolume(guildId, Number.isFinite(Number(value)) ? Number(value) : 100); break
         case 'remove':   await music.remove(guildId, parseInt(value));           break
         case 'jump':     await music.jump(guildId, parseInt(value));             break
         case 'move':     await music.move(guildId, parseInt(value?.from), parseInt(value?.to)); break

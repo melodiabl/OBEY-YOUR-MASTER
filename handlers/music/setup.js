@@ -33,7 +33,7 @@ function idlePanel(client) {
   const embed = new EmbedBuilder()
     .setColor(config.color.primary)
     .setTitle(`${E.music} Canal de Música`)
-    .setDescription('**Escribe el nombre o el enlace de una canción aquí para reproducirla.**\n\n🟢 YouTube · 🟢 Spotify · 🟢 SoundCloud · 🟢 Apple Music')
+    .setDescription('**Escribe el nombre o el enlace de una canción aquí para reproducirla.**\n\n🟢 YouTube · 🟢 Spotify · 🟢 Apple Music')
     .setImage(client.user.displayAvatarURL({ size: 512 }))
     .setFooter({ text: 'Sin música reproduciéndose' })
   const row1 = new ActionRowBuilder().addComponents(
@@ -55,16 +55,39 @@ function idlePanel(client) {
 
 // Vuelve el panel al estado "sin música"
 async function resetToIdle(client, guildId) {
-  const chId = setupChannels.get(guildId), msgId = setupMessages.get(guildId)
-  if (!chId || !msgId) return
-  const ch = client.channels.cache.get(chId)
-  const m  = ch && await ch.messages.fetch(msgId).catch(() => null)
-  if (m) m.edit(idlePanel(client)).catch(() => {})
+  if (!setupChannels.has(guildId)) return
+  await updatePanel(client, guildId, idlePanel(client))
+}
+
+// Mantiene un único mensaje de setup aunque el original se haya borrado.
+async function updatePanel(client, guildId, payload) {
+  const chId = setupChannels.get(guildId)
+  const ch = chId && client.channels.cache.get(chId)
+  if (!ch) return null
+  const msgId = setupMessages.get(guildId)
+  const existing = msgId && await ch.messages.fetch(msgId).catch(() => null)
+  if (existing) {
+    const edited = await existing.edit(payload).catch(() => null)
+    if (edited) {
+      if (!edited.pinned && typeof edited.pin === 'function') await edited.pin().catch(() => {})
+      return edited
+    }
+  }
+  const replacement = await ch.send(payload).catch(() => null)
+  if (!replacement) return null
+  await replacement.pin().catch(() => {})
+  setupMessages.set(guildId, replacement.id)
+  await database.createSetup(guildId, chId, replacement.id)
+  return replacement
 }
 
 async function create(client, guild) {
   const existing = await database.getSetup(guild.id)
-  if (existing) { setupChannels.set(guild.id, existing.channelId); return { ok: false, reason: 'exists', channelId: existing.channelId } }
+  if (existing) {
+    setupChannels.set(guild.id, existing.channelId)
+    if (existing.messageId) setupMessages.set(guild.id, existing.messageId)
+    return { ok: false, reason: 'exists', channelId: existing.channelId }
+  }
   const channel = await guild.channels.create({
     name: '🎧・música',
     type: ChannelType.GuildText,
@@ -77,6 +100,7 @@ async function create(client, guild) {
   if (!channel) return { ok: false, reason: 'no_perms' }
   const msg = await channel.send(idlePanel(client)).catch(() => null)
   if (!msg) return { ok: false, reason: 'send_fail' }
+  await msg.pin().catch(() => {})
   await database.createSetup(guild.id, channel.id, msg.id)
   setupChannels.set(guild.id, channel.id)
   setupMessages.set(guild.id, msg.id)
@@ -114,4 +138,4 @@ async function handleSetupMessage(client, message) {
   } catch { return flash(config.color.no, '❌ Error al reproducir.') }
 }
 
-module.exports = { load, isSetupChannel, getChannelId, getMessageId, create, remove, handleSetupMessage, idlePanel, resetToIdle }
+module.exports = { load, isSetupChannel, getChannelId, getMessageId, create, remove, handleSetupMessage, idlePanel, resetToIdle, updatePanel }

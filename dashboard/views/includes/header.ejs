@@ -21,15 +21,12 @@
     <div class="brand-logo"><i class="fas fa-robot"></i></div>
     <div>
       <div class="brand-name">OBEY YOUR MASTER</div>
-      <div class="brand-sub">Dashboard v14</div>
+      <div class="brand-sub">Centro de control</div>
     </div>
   </a>
 
   <nav class="sidebar-nav">
-    <span class="nav-sec">Navegación</span>
-    <a href="/" class="nav-link">
-      <i class="fas fa-house"></i> Inicio
-    </a>
+    <span class="nav-sec">Espacio de trabajo</span>
     <% if (user) { %>
     <a href="/panel" class="nav-link <%= (typeof activePage !== 'undefined' && activePage === 'home') ? 'active' : '' %>">
       <i class="fas fa-gauge-high"></i> Panel
@@ -41,23 +38,12 @@
     <% } %>
 
     <div class="nav-sep"></div>
-    <span class="nav-sec">Música</span>
-    <a href="/dashboard" class="nav-link" id="nav-player-link" style="display:none">
-      <i class="fas fa-music"></i> Player Web
-    </a>
-    <div class="nav-sep"></div>
-    <span class="nav-sec">Recursos</span>
+    <span class="nav-sec">Ayuda</span>
     <a href="https://github.com/melodiabl/OBEY-YOUR-MASTER" target="_blank" class="nav-link">
       <i class="fab fa-github"></i> GitHub
     </a>
     <a href="https://discord.gg/QJeavgKU" target="_blank" class="nav-link">
       <i class="fab fa-discord"></i> Soporte
-    </a>
-    <a href="https://www.skyultraplus.com/" target="_blank" class="nav-link">
-      <i class="fas fa-cloud"></i> SkyUltraPlus
-    </a>
-    <a href="https://dash.swallox.com/" target="_blank" class="nav-link">
-      <i class="fas fa-server"></i> Swallox
     </a>
   </nav>
 

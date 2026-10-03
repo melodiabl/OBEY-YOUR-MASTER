@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Carátula no disponible">
+  <defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#263b79"/><stop offset="1" stop-color="#182136"/></linearGradient></defs>
+  <rect width="320" height="320" rx="28" fill="url(#g)"/>
+  <circle cx="160" cy="160" r="76" fill="#7285ff" opacity=".13"/>
+  <path d="M187 95v118a31 31 0 1 1-17-28v-66l61-14v93a31 31 0 1 1-17-28V93z" fill="#b7c3ff"/>
+</svg>

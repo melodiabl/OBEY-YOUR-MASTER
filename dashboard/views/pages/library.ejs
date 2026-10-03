@@ -7,7 +7,7 @@
 <div class="page-hd">
   <div class="page-ico ico-p"><i class="fas fa-compact-disc"></i></div>
   <div>
-    <div class="page-title">MI BIBLIOTECA</div>
+    <h1 class="page-title">Mi biblioteca</h1>
     <div class="page-sub"><%= guild.name %> · tus favoritos, playlists y más</div>
   </div>
   <div class="page-actions">
@@ -44,10 +44,10 @@
 </style>
 
 <div class="lib-tabs">
-  <div class="lib-tab active" data-pane="fav"><i class="fas fa-heart" style="color:#ED4245"></i> Favoritos</div>
-  <div class="lib-tab" data-pane="pl"><i class="fas fa-folder" style="color:#FAA61A"></i> Playlists</div>
-  <div class="lib-tab" data-pane="rec"><i class="fas fa-clock" style="color:#5865F2"></i> Recientes</div>
-  <div class="lib-tab" data-pane="top"><i class="fas fa-chart-line" style="color:#1DB954"></i> Top del servidor</div>
+  <button type="button" class="lib-tab active" data-pane="fav"><i class="fas fa-heart" style="color:#ED4245"></i> Favoritos</button>
+  <button type="button" class="lib-tab" data-pane="pl"><i class="fas fa-folder" style="color:#FAA61A"></i> Playlists</button>
+  <button type="button" class="lib-tab" data-pane="rec"><i class="fas fa-clock" style="color:#5865F2"></i> Recientes</button>
+  <button type="button" class="lib-tab" data-pane="top"><i class="fas fa-chart-line" style="color:#1DB954"></i> Top del servidor</button>
 </div>
 
 <div class="lib-pane active" id="pane-fav"><div class="lib-loading">Cargando favoritos…</div></div>
@@ -59,26 +59,26 @@
 const GID = '<%= guild.id %>'
 const esc = s => String(s ?? '').replace(/[&<>"'`\\]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;','\\':'&#92;'}[c]))
 const fmt = ms => { const s = Math.floor((ms||0)/1000); return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}` }
-const toast = (m, ok=true) => { const t=document.getElementById('toasts'); if(!t)return alert(m); const d=document.createElement('div'); d.textContent=m; d.style.cssText=`background:${ok?'#1DB954':'#ED4245'};color:#fff;padding:10px 16px;border-radius:10px;margin-top:8px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4)`; t.appendChild(d); setTimeout(()=>d.remove(),3500) }
+const libToast = (m, ok=true) => { const t=document.getElementById('toasts'); if(!t)return alert(m); const d=document.createElement('div'); d.textContent=m; d.style.cssText=`background:${ok?'#1DB954':'#ED4245'};color:#fff;padding:10px 16px;border-radius:10px;margin-top:8px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.4)`; t.appendChild(d); setTimeout(()=>d.remove(),3500) }
 
-async function api(url, opts){ const r = await fetch(url, opts); const j = await r.json().catch(()=>({})); return { ok:r.ok, j } }
+async function api(url, opts){ try { const r = await fetch(url, opts); const j = await r.json().catch(()=>({})); return { ok:r.ok, j } } catch { return { ok:false, j:{} } } }
 
 async function play(uri){
   const { ok, j } = await api(`/api/player/${GID}/add`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ uri }) })
-  if (ok && j.ok !== false) toast('🎵 Añadido a la cola')
-  else toast(j.error === 'no_voice_channel' ? 'Inicia la reproducción desde un canal de voz primero' : 'No se pudo reproducir', false)
+  if (ok && j.ok === true) libToast('🎵 Añadido a la cola')
+  else libToast(j.error === 'no_voice_channel' ? 'Elige un canal de voz desde Música para iniciar la reproducción' : 'No se pudo reproducir', false)
 }
 async function unlike(trackId, el){
   const { ok } = await api('/api/music/like', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ trackId }) })
-  if (ok){ el.closest('.lib-row')?.remove(); toast('💔 Quitado de favoritos') } else toast('Error', false)
+  if (ok){ el.closest('.lib-row')?.remove(); libToast('💔 Quitado de favoritos') } else libToast('No se pudo quitar', false)
 }
 
 function rowHtml(t, i, { rm, count } = {}){
-  const art = t.artworkUrl || t.artwork || `https://placehold.co/48?text=♪`
+  const art = /^https?:\/\//i.test(t.artworkUrl || t.artwork || '') ? (t.artworkUrl || t.artwork) : '/img/music-placeholder.svg'
   const dur = t.isStream ? 'LIVE' : (t.length ? fmt(t.length) : (count ? `${count} ▶` : ''))
   return `<div class="lib-row" data-uri="${esc(t.uri||'')}" data-trackid="${esc(t.trackId||'')}">
     <div class="lib-num">${i+1}</div>
-    <img class="lib-art" src="${esc(art)}" onerror="this.src='https://placehold.co/48?text=♪'">
+    <img class="lib-art" src="${esc(art)}" onerror="this.onerror=null;this.src='/img/music-placeholder.svg'">
     <div class="lib-meta"><div class="lib-title">${esc(t.title||'?')}</div><div class="lib-sub">${esc(t.author||'?')} ${dur?'· '+dur:''}</div></div>
     <div class="lib-act">
       <button class="ib js-play" title="Reproducir"><i class="fas fa-play"></i></button>
@@ -98,24 +98,28 @@ document.addEventListener('click', e => {
 async function loadFav(){
   const { ok, j } = await api('/api/music/liked')
   const el = document.getElementById('pane-fav')
-  if (!ok || !j.data?.length) return el.innerHTML = empty('fa-heart', 'No tienes canciones favoritas. Usa ❤️ en el bot.')
+  if (!ok) return el.innerHTML = empty('fa-triangle-exclamation', 'No se pudieron cargar los favoritos. Recarga la página.')
+  if (!j.data?.length) return el.innerHTML = empty('fa-heart', 'No tienes canciones favoritas. Usa ❤️ en el bot.')
   el.innerHTML = j.data.map((t,i)=>rowHtml(t,i,{rm:true})).join('')
 }
 async function loadRec(){
   const { ok, j } = await api('/api/music/recent')
   const el = document.getElementById('pane-rec')
-  if (!ok || !j.data?.length) return el.innerHTML = empty('fa-clock', 'No hay reproducciones recientes todavía.')
+  if (!ok) return el.innerHTML = empty('fa-triangle-exclamation', 'No se pudieron cargar las reproducciones recientes.')
+  if (!j.data?.length) return el.innerHTML = empty('fa-clock', 'No hay reproducciones recientes todavía.')
   el.innerHTML = j.data.map((t,i)=>rowHtml(t,i,{count:t.playCount})).join('')
 }
 async function loadPl(){
   const { ok, j } = await api('/api/playlist/list')
   const el = document.getElementById('pane-pl')
-  if (!ok || !j.data?.length) return el.innerHTML = empty('fa-folder-open', 'No tienes playlists todavía.')
-  el.innerHTML = '<div class="lib-grid">' + j.data.map(p=>`<div class="pl-card"><h4>📂 ${esc(p.name)}</h4><div class="lib-sub">${(p.tracks||[]).length} pistas</div></div>`).join('') + '</div>'
+  if (!ok) return el.innerHTML = empty('fa-triangle-exclamation', 'No se pudieron cargar las playlists.')
+  if (!j.data?.length) return el.innerHTML = empty('fa-folder-open', 'No tienes playlists todavía.')
+  el.innerHTML = '<div class="lib-grid">' + j.data.map(p=>`<a class="pl-card" href="/music/${GID}#playlist=${encodeURIComponent(p._id)}"><h4>📂 ${esc(p.name)}</h4><div class="lib-sub">${(p.tracks||[]).length} pistas</div></a>`).join('') + '</div>'
 }
 async function loadTop(){
   const el = document.getElementById('pane-top')
   const [tr, us] = await Promise.all([ api(`/api/top/tracks?guildId=${GID}&limit=10`), api(`/api/top/users?guildId=${GID}&limit=5`) ])
+  if (!tr.ok || !us.ok) return el.innerHTML = empty('fa-triangle-exclamation', 'No se pudo cargar el top del servidor.')
   let html = '<h3 style="margin:6px 0 10px"><i class="fas fa-music" style="color:#1DB954"></i> Canciones más reproducidas</h3>'
   html += (tr.j.data?.length ? tr.j.data.map((t,i)=>rowHtml({...t, artworkUrl:t.artwork},i,{count:t.playCount})).join('') : empty('fa-music','Aún no hay datos. ¡Reproduce música!'))
   html += '<h3 style="margin:22px 0 10px"><i class="fas fa-headphones" style="color:#5865F2"></i> Oyentes más activos</h3>'
