@@ -65,8 +65,8 @@ const config = {
   lyricsLines: 7,           // ventana de líneas del karaoke (Soundy: config.lyricsLines)
 
   // ⚠️ Parche VPS: Soundy usaba "spotify" (bloqueado). Cadena real de OBEY:
-  defaultSearchPlatform: 'ytmsearch',
-  searchChain: ['spsearch', 'ytmsearch', 'ytsearch'],
+  defaultSearchPlatform: 'ytsearch',
+  searchChain: ['spsearch', 'ytsearch'],
 }
 
 module.exports = { config, emoji, color }

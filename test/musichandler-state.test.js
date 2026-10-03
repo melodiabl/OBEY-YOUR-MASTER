@@ -88,7 +88,7 @@ test('plain text searches try spsearch first and return its list result', async 
   assert.equal(result.tracks[0].info.requester, 'Tester')
 })
 
-test('a single spsearch track is kept as fallback while ytmsearch provides the list', async () => {
+test('a single spsearch track is kept as fallback while ytsearch provides the list', async () => {
   const client = new EventEmitter()
   const identifiers = []
   const node = {
@@ -134,7 +134,7 @@ test('a single spsearch track is kept as fallback while ytmsearch provides the l
   require('../handlers/musichandler')(client)
   const result = await client.music.search('test song', 'Tester')
 
-  assert.deepEqual(identifiers, ['spsearch:test song', 'ytmsearch:test song'])
+  assert.deepEqual(identifiers, ['spsearch:test song', 'ytsearch:test song'])
   assert.equal(result.loadType, 'search')
   assert.equal(result.tracks[0].info.title, 'YTM song')
 })

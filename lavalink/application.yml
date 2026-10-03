@@ -119,7 +119,7 @@ plugins:
       vkmusic: false
       tidal: false
       qobuz: false
-      ytdlp: false
+      ytdlp: true
       jiosaavn: true
       audiomack: false
       gaana: false
@@ -133,6 +133,11 @@ plugins:
       yandexmusic: false
       vkmusic: false
       lrcLib: true
+    ytdlp:
+      path: /usr/local/bin/yt-dlp
+      searchLimit: 5
+      customLoadArgs: ["-q", "--no-warnings", "--flat-playlist", "--skip-download", "-J", "--proxy", "socks5://127.0.0.1:41081"]
+      customPlaybackArgs: ["-q", "--no-warnings", "-f", "bestaudio", "-J", "--proxy", "socks5://127.0.0.1:41081"]
     spotify:
       countryCode: "US"
       playlistLoadLimit: 10
@@ -157,7 +162,7 @@ logging:
     dev.lavalink.youtube.http.YoutubeOauth2Handler: INFO
     dev.lavalink.youtube.http.YoutubeAccessTokenTracker: WARN
     dev.lavalink.youtube.plugin.YoutubePluginLoader: INFO
-    com.github.itzrandom23.pulselink: DEBUG
+    com.github.itzrandom23.pulselink: INFO
   request:
     enabled: true
     includeClientInfo: true

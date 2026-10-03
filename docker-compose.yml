@@ -1,7 +1,8 @@
 services:
   lavalink:
     profiles: ["managed-lavalink"]
-    image: ghcr.io/lavalink-devs/lavalink:4.2.2-alpine
+    build: ./lavalink
+    image: localhost/obey-lavalink-warp:4.2.2
     container_name: obey_lavalink
     restart: unless-stopped
     network_mode: "host"

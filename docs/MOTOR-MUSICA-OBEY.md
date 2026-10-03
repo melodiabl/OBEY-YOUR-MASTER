@@ -41,7 +41,7 @@ El motor vive en `handlers/music/` y se expone como **`client.music`** (iniciali
 
 | Método | Qué hace |
 |---|---|
-| `search(query, requester)` | Resuelve vía Lavalink. **Orden: `spsearch` → `ytmsearch` → `ytsearch`**. URLs pasan directas. `spsearch` devuelve 1 track (loadType:track) → se guarda como fallback y sigue buscando lista |
+| `search(query, requester)` | Resuelve vía Lavalink. **Orden: `spsearch` → `ytsearch`**. URLs pasan directas. `spsearch` devuelve 1 track (loadType:track) → se guarda como fallback y sigue buscando lista |
 | `play(guildId, vc, tc, query, requester)` | join + search + encola; si no hay track actual, `_playNext` |
 | `joinChannel(guildId, vc, tc)` | Une al canal de voz (Shoukaku). Re-bindea eventos y **aplica SponsorBlock** |
 | `_playNext(guildId, player)` | Avanza la cola. Maneja loop track/queue, shuffle, **autoplay**, **resolución lazy** de tracks sin `encoded`, y stop si vacío |
@@ -87,7 +87,7 @@ El motor vive en `handlers/music/` y se expone como **`client.music`** (iniciali
 > **Esta es la sección más importante del porte.** Si el nuevo motor no re-implementa esto, la música puede dejar de sonar.
 
 1. **Spotify bloquea la IP del VPS** → búsqueda usa `spsearch` vía **PulseLink** (token de servicio externo `140.245.242.153:8082`, LEO API `:8081`). NO volver a la API oficial de Spotify.
-2. **Orden de búsqueda** `spsearch → ytmsearch → ytsearch`; `spsearch` devuelve 1 solo track → conservar como fallback y continuar a ytmsearch para listas.
+2. **Orden de búsqueda** `spsearch → ytsearch`; `spsearch` devuelve 1 solo track → conservar como fallback y continuar a ytsearch para listas.
 3. **`spotify:album:{id}` da `loadType: empty`** → usar `https://open.spotify.com/album/{id}`.
 4. **Catálogo** (`discordmusiccatalog.js`): tracks sin `encoded` se resuelven vía `_mirrorYouTubeTrack()` (ytsearch); el URI original queda en `info.catalogUri` / `info.catalogSourceName`. `platform()` debe mirar primero `catalogSourceName` (el URI ya es de YouTube tras el mirror).
 5. **Resolución lazy**: tracks de playlists guardadas vienen sin `encoded` → se resuelven en `_playNext`.
@@ -95,7 +95,7 @@ El motor vive en `handlers/music/` y se expone como **`client.music`** (iniciali
 7. **Lyrics**: plugin `java-lyrics-plugin:1.6.6` da vacío para YouTube desde el VPS (bloqueo IP) → **fallback LRCLib** (la fuente que funciona).
 8. **Lavalink requiere IPv6** (`preferIPv6Addresses=true` en docker-compose).
 9. **Filtros LavaDSPX** (`normalizar`/`eco`/`radio`) usan `pluginFilters`; `FILTER_RESET` debe incluir `pluginFilters: {}`.
-10. **Autoplay** busca por **artista** (`ytmsearch:author`), NO por título (evita bucle de la misma canción); excluye URIs/títulos ya reproducidos.
+10. **Autoplay** busca por **artista** (`ytsearch:author`), NO por título (evita bucle de la misma canción); excluye URIs/títulos ya reproducidos.
 
 ---
 
@@ -139,7 +139,7 @@ El motor vive en `handlers/music/` y se expone como **`client.music`** (iniciali
 
 ## 11. Checklist para el porte del motor de Soundy
 
-- [ ] Resolución `spsearch→ytmsearch→ytsearch` con fallback de track único
+- [ ] Resolución `spsearch→ytsearch` con fallback de track único
 - [ ] Catálogo + mirror YouTube (`catalogUri`/`catalogSourceName`)
 - [ ] Resolución lazy de tracks sin `encoded`
 - [ ] `_recoverFailedTrack` (reintento ytsearch)

@@ -8,7 +8,7 @@ const { buildNPEmbed, buildControls, buildQueueEmbed, buildQueueRows } = require
 const { toggleLike, buildLikeEmbed } = require('./likes')
 const { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate } = require('./liveupdate')
 
-const SEARCH_PREFIXES = ['spsearch', 'ytmsearch', 'ytsearch']
+const SEARCH_PREFIXES = ['spsearch', 'ytsearch']
 
 function normalizedSongText(value) {
   return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
@@ -141,7 +141,7 @@ module.exports = client => {
     playerStates,
     liveMessages,
 
-    // ── Search via Lavalink: spsearch → ytmsearch → ytsearch ──────────────
+    // ── Search via Lavalink: Spotify fallback, then yt-dlp/YouTube ───────
     async search(query, requester) {
       const node  = getNode()
       if (!node) throw new Error('No hay nodos Lavalink disponibles.')
@@ -260,8 +260,8 @@ module.exports = client => {
             const node = getNode()
             // Buscar por artista (no por título: devolvería la misma canción en bucle)
             const queries = [
-              `ytmsearch:${seed.author || seed.title}`,
-              `ytmsearch:${seed.title} ${seed.author || ''} mix`,
+              `ytsearch:${seed.author || seed.title}`,
+              `ytsearch:${seed.title} ${seed.author || ''} mix`,
             ]
             let candidates = []
             for (const q of queries) {
