@@ -150,8 +150,8 @@ module.exports = client => {
             singleFallback = { loadType: res.loadType, tracks, playlistName: null }
             continue
           }
-          // Spotify PREFERENTE (estilo Soundy): si hubo resultado de Spotify, va primero
-          const merged = singleFallback ? [singleFallback.tracks[0], ...tracks] : tracks
+          // Mantener el resultado único de Spotify como alternativa a la lista.
+          const merged = singleFallback ? [...tracks, singleFallback.tracks[0]] : tracks
           return { loadType: res.loadType, tracks: merged, playlistName: res.data?.info?.name || null }
         } catch {}
       }
@@ -199,6 +199,17 @@ module.exports = client => {
       const state  = getState(guildId)
       state.voiceChannelId = voiceChannelId
       state.textChannelId  = textChannelId
+      const autoplay = client.settings?.get?.(guildId, 'autoplay')
+      if (typeof autoplay === 'boolean') state.autoplay = autoplay
+      const defaultVolume = Number(client.settings?.get?.(guildId, 'defaultVolume'))
+      if (defaultVolume >= 1 && defaultVolume <= 200 && typeof player.setGlobalVolume === 'function') {
+        try {
+          await player.setGlobalVolume(defaultVolume)
+          state.volume = defaultVolume
+        } catch (error) {
+          console.warn('[Music] No se pudo aplicar el volumen por defecto:', error?.message || error)
+        }
+      }
       this._bindPlayerEvents(player, guildId)
       applySponsorBlock(player, guildId)
       return player

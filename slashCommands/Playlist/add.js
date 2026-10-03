@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
+const { exactPlaylistName } = require('../../handlers/music/playlist-name')
 
 const MAX_TRACKS = 100
 
@@ -19,7 +20,7 @@ module.exports = {
 
     await interaction.deferReply({ ephemeral: true })
 
-    const playlist = await Playlist.findOne({ userId, name: { $regex: new RegExp(`^${plName}$`, 'i') } })
+    const playlist = await Playlist.findOne({ userId, name: exactPlaylistName(plName) })
     if (!playlist)
       return interaction.editReply({
         embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ No tienes una playlist llamada **${plName}**. Usa \`/playlist create\` primero.`)],

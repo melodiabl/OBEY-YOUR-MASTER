@@ -6,6 +6,7 @@ const { onCoolDown, escapeRegex, delay, simple_databasing, databasing, handlemsg
     `${process.cwd()}/handlers/functions`
 );
 const Discord = require("discord.js");
+const { executeSlashCommand } = require('../../handlers/command-execution');
 module.exports = async (client, interaction) => {
     console.log(`[EVENT-FIRE] interactionCreate triggered — type: ${interaction?.type} | user: ${interaction?.user?.tag} | guild: ${interaction?.guild?.name}`);
     // Autocomplete handler
@@ -259,6 +260,8 @@ module.exports = async (client, interaction) => {
             guildId: interaction?.guildId,
         };
         //Execute the Command
-        command.run(client, interaction, interaction?.member.user, es, ls, prefix, player, message);
+        await executeSlashCommand(interaction, () =>
+            command.run(client, interaction, interaction?.member.user, es, ls, prefix, player, message)
+        );
     }
 };

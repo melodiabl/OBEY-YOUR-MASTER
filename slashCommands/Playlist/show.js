@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
+const { exactPlaylistName } = require('../../handlers/music/playlist-name')
 
 function fmtMs(ms) {
   const s = Math.floor((ms || 0) / 1000)
@@ -29,7 +30,7 @@ module.exports = {
 
     const playlist = await Playlist.findOne({
       userId: targetUser.id,
-      name:   { $regex: new RegExp(`^${name}$`, 'i') },
+      name: exactPlaylistName(name),
     }).lean().catch(() => null)
 
     if (!playlist)

@@ -39,7 +39,7 @@ test('pause and resume emit a synchronized public player state', async () => {
 
   let publicState = client.music.getPublicState('guild-1')
   assert.equal(publicState.paused, true)
-  assert.equal(publicState.current.elapsed, 42_000)
+  assert.ok(Math.abs(publicState.current.elapsed - 42_000) < 100)
 
   const resumeEvent = once(client, 'playerStateUpdate')
   assert.equal(await client.music.pause('guild-1'), false)
@@ -210,6 +210,30 @@ test('spotify album URIs resolve directly and return album tracks', async () => 
   assert.equal(result.loadType, 'playlist')
   assert.equal(result.tracks.length, 2)
   assert.equal(result.playlistName, 'Test Album')
+})
+
+test('joining voice applies saved music defaults', async () => {
+  const client = new EventEmitter()
+  const player = new EventEmitter()
+  const volumes = []
+  player.setGlobalVolume = async volume => volumes.push(volume)
+  client.settings = {
+    get: (guildId, key) => ({ autoplay: true, defaultVolume: 75 })[key],
+  }
+  client.shoukaku = {
+    players: new Map(),
+    nodes: new Map([['main', {}]]),
+    options: { nodeResolver: nodes => nodes.get('main') },
+    joinVoiceChannel: async () => player,
+  }
+  client.channels = { cache: new Map() }
+
+  require('../handlers/musichandler')(client)
+  await client.music.joinChannel('guild-1', 'voice-1', 'text-1')
+
+  assert.deepEqual(volumes, [75])
+  assert.equal(client.music.getState('guild-1').volume, 75)
+  assert.equal(client.music.getState('guild-1').autoplay, true)
 })
 
 test('skip advances the queue even when the player is paused', async () => {

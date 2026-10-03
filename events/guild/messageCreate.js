@@ -334,7 +334,7 @@ module.exports = async (client, message) => {
                     databasing(client, message.guild.id, message.author.id);
                 }
                 //Execute the Command
-                command.run(client, message, args, message.member, args.join(" "), prefix, player);
+                await command.run(client, message, args, message.member, args.join(" "), prefix, player);
             } catch (e) {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 return message

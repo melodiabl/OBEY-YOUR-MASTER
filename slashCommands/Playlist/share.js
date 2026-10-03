@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
+const { exactPlaylistName } = require('../../handlers/music/playlist-name')
 
 module.exports = {
   name: 'share',
@@ -24,7 +25,7 @@ module.exports = {
     await interaction.deferReply({ ephemeral: true })
 
     const playlist = await Playlist.findOneAndUpdate(
-      { userId: interaction.user.id, name: { $regex: new RegExp(`^${name}$`, 'i') } },
+      { userId: interaction.user.id, name: exactPlaylistName(name) },
       { isPublic: visibility === 'public' },
       { new: true },
     ).catch(() => null)

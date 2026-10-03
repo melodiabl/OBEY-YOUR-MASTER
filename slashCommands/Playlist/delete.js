@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
+const { exactPlaylistName } = require('../../handlers/music/playlist-name')
 
 module.exports = {
   name: 'delete',
@@ -13,7 +14,7 @@ module.exports = {
 
     const playlist = await Playlist.findOneAndDelete({
       userId: interaction.user.id,
-      name:   { $regex: new RegExp(`^${name}$`, 'i') },
+      name: exactPlaylistName(name),
     }).catch(() => null)
 
     if (!playlist)

@@ -6,6 +6,7 @@ const axios      = require('axios')
 const http       = require('http')
 const crypto     = require('crypto')
 const { Server } = require('socket.io')
+const { freshGuildPermissions } = require('./permissions')
 
 module.exports = async client => {
   const app    = express()
@@ -13,7 +14,7 @@ module.exports = async client => {
 
   const DISCORD_CLIENT_ID     = process.env.DISCORD_CLIENT_ID     || config.clientid
   const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET
-  const SESSION_SECRET        = process.env.SESSION_SECRET        || 'obey-dashboard-secret'
+  const SESSION_SECRET        = process.env.SESSION_SECRET
   const BASE_URL              = process.env.DASHBOARD_BASE_URL    || 'http://localhost:3000'
   const PORT                  = parseInt(process.env.DASHBOARD_PORT || '3002', 10)
   const MONGO_URL             = process.env.MONGO_URL || process.env.mongourl || config.mongourl
@@ -21,6 +22,10 @@ module.exports = async client => {
 
   if (!DISCORD_CLIENT_SECRET) {
     console.warn('[Dashboard] DISCORD_CLIENT_SECRET no configurado, dashboard desactivado.'.yellow)
+    return
+  }
+  if (!SESSION_SECRET) {
+    console.warn('[Dashboard] SESSION_SECRET no configurado, dashboard desactivado.'.yellow)
     return
   }
 
@@ -104,6 +109,13 @@ module.exports = async client => {
       return false
     }
   }
+
+  const requireFreshGuildPermissions = freshGuildPermissions(async accessToken => {
+    const response = await axios.get('https://discord.com/api/users/@me/guilds', {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+    return response.data
+  })
 
   // ─── Public routes ────────────────────────────────────────────────────────
 
@@ -364,7 +376,7 @@ module.exports = async client => {
 
   // ─── Guild settings POST ──────────────────────────────────────────────────
 
-  app.post('/dashboard/:guildId', requireAuth, async (req, res) => {
+  app.post('/dashboard/:guildId', requireAuth, requireFreshGuildPermissions, async (req, res) => {
     const guild = client.guilds.cache.get(req.params.guildId)
     if (!guild) return res.status(404).json({ error: 'Guild not found' })
 
@@ -481,6 +493,9 @@ module.exports = async client => {
 
     if (patch.musicChannel !== undefined && client.musicsettings)
       client.musicsettings.set(gid, patch.musicChannel || null, 'channel')
+    if (patch.defaultVolume !== undefined) s.set(gid, patch.defaultVolume, 'defaultVolume')
+    s.set(gid, patch.autoplay, 'autoplay')
+    client.music?.setAutoplay?.(gid, patch.autoplay)
 
     if (patch.djRole !== undefined) s.set(gid, patch.djRole ? [patch.djRole] : [], 'djroles')
     if (patch.autoEmbed !== undefined) s.set(gid, patch.autoEmbed ? (s.get(gid, 'autoembed') || []) : [], 'autoembed')
@@ -621,7 +636,7 @@ module.exports = async client => {
     res.json(music.getPublicState?.(req.params.guildId) || { active: false })
   })
 
-  app.post('/api/player/:guildId/action', requireAuth, async (req, res) => {
+  app.post('/api/player/:guildId/action', requireAuth, requireFreshGuildPermissions, async (req, res) => {
     const guildId   = req.params.guildId
     const guild     = client.guilds.cache.get(guildId)
     if (!guild) return res.json({ ok: false, error: 'guild_not_found' })
@@ -695,7 +710,7 @@ module.exports = async client => {
     res.json({ channels: [...channels.values()] })
   })
 
-  app.post('/api/player/:guildId/preview', requireAuth, async (req, res) => {
+  app.post('/api/player/:guildId/preview', requireAuth, requireFreshGuildPermissions, async (req, res) => {
     const guildId   = req.params.guildId
     if (!canManageGuild(req.session.user, guildId))
       return res.json({ ok: false, error: 'no_permission' })
@@ -742,7 +757,7 @@ module.exports = async client => {
     }
   })
 
-  app.post('/api/player/:guildId/search', requireAuth, async (req, res) => {
+  app.post('/api/player/:guildId/search', requireAuth, requireFreshGuildPermissions, async (req, res) => {
     const guildId   = req.params.guildId
     if (!canManageGuild(req.session.user, guildId))
       return res.json({ results: [], error: 'no_permission' })
@@ -787,7 +802,7 @@ module.exports = async client => {
     }
   })
 
-  app.post('/api/player/:guildId/add', requireAuth, async (req, res) => {
+  app.post('/api/player/:guildId/add', requireAuth, requireFreshGuildPermissions, async (req, res) => {
     const guildId   = req.params.guildId
     const guild     = client.guilds.cache.get(guildId)
     if (!guild) return res.json({ ok: false, error: 'guild_not_found' })

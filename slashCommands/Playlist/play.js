@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
+const { exactPlaylistName } = require('../../handlers/music/playlist-name')
 const { toQueueTrack } = require('../../handlers/discordmusiccatalog')
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
     const name    = interaction.options.getString('nombre').trim()
     const guildId = interaction.guild.id
 
-    const playlist = await Playlist.findOne({ userId, name: { $regex: new RegExp(`^${name}$`, 'i') } })
+    const playlist = await Playlist.findOne({ userId, name: exactPlaylistName(name) })
       .catch(() => null)
 
     if (!playlist || !playlist.tracks.length)

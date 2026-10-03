@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
+const { exactPlaylistName } = require('../../handlers/music/playlist-name')
 
 const MAX_PLAYLISTS = 10
 const NAME_RE       = /^[\w\s\-]{1,32}$/
@@ -29,7 +30,7 @@ module.exports = {
         embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ Ya tienes **${MAX_PLAYLISTS}** playlists. Elimina una antes de crear otra.`)],
       })
 
-    const exists = await Playlist.findOne({ userId, name: { $regex: new RegExp(`^${name}$`, 'i') } })
+    const exists = await Playlist.findOne({ userId, name: exactPlaylistName(name) })
     if (exists)
       return interaction.editReply({
         embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ Ya tienes una playlist llamada **${name}**.`)],
