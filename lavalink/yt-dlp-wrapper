@@ -1,3 +1,0 @@
-#!/bin/sh
-# yt-dlp uses its own SOCKS proxy; keep proxychains output out of its JSON.
-exec env -u LD_PRELOAD /usr/local/bin/yt-dlp-real "$@"

@@ -63,6 +63,9 @@ lavalink:
       connectTimeoutMs: 3000
       connectionRequestTimeoutMs: 3000
       socketTimeoutMs: 10000
+    httpConfig:
+      proxyHost: 127.0.0.1
+      proxyPort: 41081
 
 plugins:
   youtube:
@@ -136,8 +139,9 @@ plugins:
     ytdlp:
       path: /usr/local/bin/yt-dlp
       searchLimit: 5
-      customLoadArgs: ["-q", "--no-warnings", "--flat-playlist", "--skip-download", "-J", "--proxy", "socks5://127.0.0.1:41081"]
-      customPlaybackArgs: ["-q", "--no-warnings", "-f", "bestaudio", "-J", "--proxy", "socks5://127.0.0.1:41081"]
+      userAgent: &youtube-user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+      customLoadArgs: ["-q", "--no-warnings", "--flat-playlist", "--skip-download", "-J", "--user-agent", *youtube-user-agent, "--proxy", "socks5://127.0.0.1:41081"]
+      customPlaybackArgs: ["-q", "--no-warnings", "-f", "bestaudio", "-J", "--user-agent", *youtube-user-agent, "--proxy", "socks5://127.0.0.1:41081"]
     spotify:
       countryCode: "US"
       playlistLoadLimit: 10

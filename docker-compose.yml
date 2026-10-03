@@ -8,7 +8,7 @@ services:
     network_mode: "host"
     env_file: .env
     environment:
-      - _JAVA_OPTIONS=-Xms256M -Xmx768M -Djava.net.preferIPv6Addresses=true -Djava.net.preferIPv4Stack=false
+      - _JAVA_OPTIONS=-Xms256M -Xmx768M -Djava.net.preferIPv4Stack=true
     volumes:
       - ./lavalink/application.yml:/opt/Lavalink/application.yml:ro
       - ./lavalink/plugins:/opt/Lavalink/plugins:ro
