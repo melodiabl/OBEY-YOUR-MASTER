@@ -16,3 +16,11 @@ test('unauthorized Discord members cannot read Architect snapshots',async()=>{
  await command.run({architect:{read:assert.fail}},{member:{permissions:{has:()=>false}},reply:async payload=>{reply=payload}})
  assert.equal(reply.ephemeral,true)
 })
+test('Discord schedules the same persistent analysis with an interaction idempotency key',async()=>{
+ let submitted,reply
+ const member={permissions:{has:()=>true}}
+ const interaction={id:'123',member,user:{id:'u'},options:{getString:()=> 'analizar'},guild:{id:'g',members:{fetch:async()=>member}},async deferReply(){},async editReply(payload){reply=payload}}
+ await command.run({architect:{read:assert.fail},jobs:{available:()=>true,submit:async input=>{submitted=input;return {id:'job',status:'queued'}}}},interaction)
+ assert.deepEqual(submitted,{guildId:'g',actorId:'u',type:'architect.snapshot',idempotencyKey:'discord-123'})
+ assert.equal(reply.content.includes('encolado'),true)
+})

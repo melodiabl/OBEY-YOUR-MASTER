@@ -7,6 +7,12 @@
   </div>
   <p id="architect-status" class="architect-status" role="status">Leyendo la estructura del servidor…</p>
   <div class="architect-notice" id="architect-notice" hidden></div>
+  <section class="architect-pane architect-review" aria-labelledby="jobs-title">
+    <div class="architect-pane-heading architect-jobs-heading"><h2 id="jobs-title">Análisis de estructura</h2><button type="button" class="btn btn-sec" id="architect-analyze" disabled>Analizar en segundo plano</button></div>
+    <p id="architect-jobs-status" class="architect-empty" role="status">Comprobando disponibilidad…</p>
+    <div id="architect-jobs"></div>
+    <p class="architect-review-note">El análisis lee canales y roles. Su resultado no reemplaza la propuesta que estás editando.</p>
+  </section>
   <div class="architect-toolbar" aria-label="Acciones de la propuesta">
     <span id="architect-draft-status">Sin propuesta cargada</span>
     <button type="button" class="btn btn-sec" id="architect-undo" disabled>Deshacer</button>
@@ -54,4 +60,5 @@
 </section>
 <script src="/js/architect-state.js"></script>
 <script src="/js/architect-editor.js"></script>
+<script src="/js/architect-jobs.js"></script>
 <%- include('../includes/footer') %>
