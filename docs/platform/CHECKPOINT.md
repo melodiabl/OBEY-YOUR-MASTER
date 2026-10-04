@@ -2,6 +2,8 @@
 
 Fecha: 2026-10-04. Base confirmada local y en GitHub: `feat/motor-soundy` / `b8bee2d657d5194b3febcbf96de06764e532b17b`. Rama de trabajo: `feature/obey-platform-foundations`; worktree `/home/obey-platform-work`. El checkout original `/home/OBEY-YOUR-MASTER` conserva su estado inicial y el paquete sin versionar. No hubo merge, deploy, login del bot, cambios en guilds, restauración ni upload de emojis.
 
+PR en borrador: [#2 — Integra recursos OBEY y corrige letras completas de Discord](https://github.com/melodiabl/OBEY-YOUR-MASTER/pull/2), hacia `feat/motor-soundy`.
+
 ## Entregado
 
 - Auditoría estática completa del alcance y fuentes: `AUDIT.md`, 148 bloques/29 secciones del maestro en `requirements.json` e inventario por comando. Los siete antecedentes quedan conservados íntegros en git. La matriz mantiene los requisitos aún no implementados.
