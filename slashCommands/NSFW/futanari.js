@@ -1,4 +1,4 @@
-const client = require("nekos.life");
+const client = require('../../handlers/neko-provider');
 const Discord = require("discord.js");
 const neko = new client();
 const config = require(`${process.cwd()}/botconfig/config.json`);

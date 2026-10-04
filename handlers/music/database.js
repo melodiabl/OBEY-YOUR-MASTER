@@ -7,7 +7,7 @@ const MusicGuild  = require('../../database/schemas/MusicGuildSchema')
 const TrackStats  = require('../../database/schemas/TrackStatsSchema')
 const UserStats   = require('../../database/schemas/UserStatsSchema')
 const UserVote    = require('../../database/schemas/UserVoteSchema')
-const Playlist    = require('../../database/schemas/MusicPlaylistSchema')
+const Playlist    = require('../../database/schemas/PlaylistSchema')
 const LikedSongs  = require('../../database/schemas/LikedSongsSchema')
 
 const DEFAULT_LOCALE = process.env.LANGUAGE || 'es-ES'
@@ -191,16 +191,14 @@ class MusicDatabase {
   }
 
   async addTracksToPlaylist(playlistId, tracks) {
-    const docs = (Array.isArray(tracks) ? tracks : [tracks]).map(t => ({
-      url: t.url || t.uri || (t.info?.uri) || '', info: t.info || t || null,
-    })).filter(t => t.url)
-    await Playlist.updateOne({ _id: playlistId }, { $push: { tracks: { $each: docs } } }).catch(() => {})
+    const docs = (Array.isArray(tracks) ? tracks : [tracks]).map(require('./playlist-repository').canonicalTrack).filter(Boolean)
+    await Playlist.updateOne({ _id: playlistId }, { $push: { tracks: { $each: docs } } })
     return docs.length
   }
 
   async removeSong(playlistId, trackId) {
     await Playlist.updateOne({ _id: playlistId },
-      { $pull: { tracks: { _id: trackId } } }).catch(() => {})
+      { $pull: { tracks: { _id: trackId } } })
   }
 
   async getTracksFromPlaylist(playlistId) {

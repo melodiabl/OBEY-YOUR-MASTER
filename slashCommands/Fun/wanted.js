@@ -43,7 +43,7 @@ module.exports = {
         //get the memer image
         client.memer.wanted(avatar).then(image => {
             //make an attachment
-            var attachment = new AttachmentBuilder(image, "wanted.png");
+            var attachment = new AttachmentBuilder(image, { name: "wanted.png" });
             //send new Message
             interaction
                 ?.editReply({

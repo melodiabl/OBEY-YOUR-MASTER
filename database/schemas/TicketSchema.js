@@ -8,5 +8,5 @@ const TicketSchema = new Schema({
   claimedBy: String,
   topic: String,
   transcript: [{ author: String, content: String, timestamp: Date }],
-}, { timestamps: true })
+}, { timestamps: true, strict: false })
 module.exports = model('Ticket', TicketSchema)

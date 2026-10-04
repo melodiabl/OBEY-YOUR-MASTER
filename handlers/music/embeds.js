@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
-const { fmtMs, progressBar, platform, loopEmoji, volEmoji, filterLabel, MUSIC_ICON } = require('./utils')
+const { trackArtwork, fmtMs, progressBar, platform, loopEmoji, volEmoji, filterLabel, MUSIC_ICON } = require('./utils')
 const { config } = require('../music/config')
 const E = config.emoji
 
@@ -24,7 +24,7 @@ function buildNPEmbed(client, guildId, state, positionMs = null) {
 
   const linkUri = /^https?:\/\//i.test(info.catalogUri || '') ? info.catalogUri
                 : /^https?:\/\//i.test(info.uri || '')        ? info.uri : null
-  const art = info.artworkUrl || info.thumbnail || plug.artworkUrl || plug.thumbnail || null
+  const art = trackArtwork(track)
   const req = info.requester  || 'Desconocido'
   const dur = info.length     || 0
 

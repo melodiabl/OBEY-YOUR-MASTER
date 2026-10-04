@@ -33,6 +33,6 @@ EOF
       localhost/obey-lavalink-warp:4.2.2 \
       -Xms64M -Xmx256M -Dlogback.configurationFile=/probe/probe-logback.xml \
       -cp '/probe/classes:/probe/BOOT-INF/lib/*:/config/plugins/PulseLink-v1.6.0.jar:/config/plugins/obey-ytdlp-warp-proxy.jar' \
-      AudioStreamProbe /config/application.yml "$video_id"
+      AudioStreamProbe /config/application.yml "$video_id" "${OBEY_PROBE_SECONDS:-3}"
   done
 fi

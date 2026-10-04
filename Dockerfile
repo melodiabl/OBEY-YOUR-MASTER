@@ -7,8 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --omit=dev && \
-    npm install --no-save @napi-rs/canvas-linux-x64-gnu
+RUN npm ci --omit=dev
 
 COPY . .
 RUN chown -R node:node /app

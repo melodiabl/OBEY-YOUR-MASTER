@@ -99,8 +99,7 @@ async function enqueueCatalogItem(client, message, voiceChannel, item) {
   }
 
   const wasIdle = !state.currentTrack
-  for (const track of tracks) state.queue.push(track)
-  if (wasIdle) await client.music._playNext(message.guild.id, player)
+  await client.music.enqueue(message.guild.id, tracks)
 
   return { added: tracks.length, isNow: wasIdle, state }
 }

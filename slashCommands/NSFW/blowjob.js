@@ -1,8 +1,6 @@
-const client = require("nekos.life");
 const Discord = require("discord.js");
-const neko = new client();
+const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
-const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 var superagent = require("superagent");
 module.exports = {
     name: "blowjob",
@@ -33,11 +31,16 @@ module.exports = {
             });
         }
         ////////if (!message.channel.nsfw) return interaction?.reply({content:eval(client.la[ls]["cmds"]["nsfw"]["anal"]["variable2"]), empheral: true})
-        superagent.get("https://nekos.life/api/v2/img/blowjob").end((err, response) => {
-            interaction?.reply({
-                content: `${response.body.url}`,
-                ephemeral: true,
+        superagent
+            .get("https://nekobot.xyz/api/image")
+            .query({
+                type: "blowjob",
+            })
+            .end((err, response) => {
+                interaction?.reply({
+                    content: `${response.body.message}`,
+                    ephemeral: true,
+                });
             });
-        });
     },
 };

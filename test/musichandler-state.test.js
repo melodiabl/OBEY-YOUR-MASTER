@@ -319,3 +319,62 @@ test('a blocked YouTube track falls back only to the matching JioSaavn recording
   assert.deepEqual(played, ['match'])
   assert.equal(state.currentTrack.info.sourceName, 'jiosaavn')
 })
+
+function volumeClient(id, player) {
+  const client = new EventEmitter()
+  client.shoukaku = { players: new Map([[id, player]]), nodes: new Map(), options: { nodeResolver: () => null } }
+  client.channels = { cache: new Map() }
+  require('../handlers/musichandler')(client)
+  client.music.getState(id).currentTrack = { info: { title: 'Volume test', length: 180000 } }
+  return client
+}
+
+test('volume remains at the requested value during a delayed acknowledgement', async () => {
+  let release
+  const client = volumeClient('volume-delayed', { volume: 100, setGlobalVolume: () => new Promise(resolve => { release = resolve }) })
+  const pending = client.music.setVolume('volume-delayed', 0)
+  await new Promise(resolve => setImmediate(resolve))
+  assert.equal(client.music.getPublicState('volume-delayed').volume, 0)
+  release()
+  await pending
+  assert.equal(client.music.getPublicState('volume-delayed').volume, 0)
+})
+
+test('rapid volume changes reach Lavalink in order and restore confirmed volume on failure', async () => {
+  const calls = []
+  const client = volumeClient('volume-order', { volume: 100, setGlobalVolume: async value => {
+    calls.push(value)
+    if (value === 30) throw new Error('node unavailable')
+  } })
+  await Promise.all([client.music.setVolume('volume-order', 10), client.music.setVolume('volume-order', 20)])
+  assert.deepEqual(calls, [10, 20])
+  assert.equal(client.music.getPublicState('volume-order').volume, 20)
+  await assert.rejects(client.music.setVolume('volume-order', 30), /node unavailable/)
+  assert.equal(client.music.getPublicState('volume-order').volume, 20)
+  await assert.rejects(client.music.setVolume('volume-order', NaN), /volumen/i)
+})
+
+test('queue editing rejects invalid positions and clearing keeps the playing song', async () => {
+  const client = volumeClient('queue-invalid', {})
+  const state = client.music.getState('queue-invalid')
+  const current = state.currentTrack
+  state.queue = [{ info: { title: 'Next' } }]
+  for (const position of [NaN, 0, 1.5]) {
+    await assert.rejects(client.music.remove('queue-invalid', position), /Posición/)
+    await assert.rejects(client.music.jump('queue-invalid', position), /Posición/)
+  }
+  await assert.rejects(client.music.move('queue-invalid', NaN, 1), /Posición/)
+  assert.equal(state.queue.length, 1)
+  assert.equal(client.music.clearQueue('queue-invalid'), 1)
+  assert.equal(state.currentTrack, current)
+  assert.equal(state.queue.length, 0)
+})
+
+test('changing audio presets clears previous effects', async () => {
+  const calls = []
+  const client = volumeClient('filter-reset', { setFilters: async value => calls.push(value) })
+  await client.music.setFilter('filter-reset', 'nightcore')
+  await client.music.setFilter('filter-reset', 'bassboost')
+  assert.equal(calls[1].timescale, null)
+  assert.deepEqual(calls[1].pluginFilters, {})
+})

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta name="csrf-token" content="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
+<script src="/js/dashboard-session.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%= title || 'OBEY YOUR MASTER — Dashboard' %></title>
@@ -9,9 +11,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/internal-theme.css">
 </head>
 <body>
-<button class="menu-btn" id="menuBtn" aria-label="Menú"><i class="fas fa-bars"></i></button>
+<button class="menu-btn" id="menuBtn" aria-label="Menú" aria-controls="sidebar" aria-expanded="false"><i class="fas fa-bars"></i></button>
 <div class="overlay" id="overlay"></div>
 <div class="layout">
 
@@ -39,10 +42,10 @@
 
     <div class="nav-sep"></div>
     <span class="nav-sec">Ayuda</span>
-    <a href="https://github.com/melodiabl/OBEY-YOUR-MASTER" target="_blank" class="nav-link">
+    <a href="https://github.com/melodiabl/OBEY-YOUR-MASTER" target="_blank" rel="noopener noreferrer" class="nav-link">
       <i class="fab fa-github"></i> GitHub
     </a>
-    <a href="https://discord.gg/QJeavgKU" target="_blank" class="nav-link">
+    <a href="https://discord.gg/QJeavgKU" target="_blank" rel="noopener noreferrer" class="nav-link">
       <i class="fab fa-discord"></i> Soporte
     </a>
   </nav>
@@ -55,7 +58,7 @@
         <% } else { %><%= (user.username || '?')[0].toUpperCase() %><% } %>
       </div>
       <div class="su-name"><%= user.global_name || user.username || 'Usuario' %></div>
-      <a href="/logout" class="su-logout" title="Cerrar sesión"><i class="fas fa-right-from-bracket"></i></a>
+      <form method="POST" action="/logout"><button type="submit" class="su-logout" aria-label="Cerrar sesión" title="Cerrar sesión" style="background:none;border:0;cursor:pointer"><i class="fas fa-right-from-bracket"></i></button></form>
     <% } else { %>
       <a href="/login" class="btn btn-discord btn-sm" style="width:100%;justify-content:center"><i class="fab fa-discord"></i> Iniciar sesión</a>
     <% } %>

@@ -13,7 +13,7 @@ const { escapeRegex, delay, simple_databasing, databasing, handlemsg, check_if_d
 ); //Loading all needed functions
 //here the event starts
 module.exports = async (client, message) => {
-    console.log(`[EVENT-FIRE] messageCreate triggered — author: ${message?.author?.tag} | guild: ${message?.guild?.name} | content: "${message?.content?.substring(0, 80)}"`);
+    if (!client._dbReady) return;
     try {
         //if the message is not in a guild (aka in dms), return aka ignore the inputs
         if (!message.guild || message.guild.available === false || !message.channel || message.webhookId) return;
@@ -259,7 +259,9 @@ module.exports = async (client, message) => {
                 const player = client.shoukaku?.players?.get(message.guild.id) ?? null;
                 const mstate = player ? (client.music?.getState(message.guild.id) ?? null) : null;
 
-                if (player?.node && !player.node.connected) player.node.connect();
+
+                const musicDenial = require('../../handlers/music/permissions').commandDenial(client, message.member, command.name, mstate?.currentTrack);
+                if (musicDenial) return message.reply({ content: musicDenial, allowedMentions: { parse: [] } });
 
                 if (command.parameters) {
                     if (command.parameters.type == "music") {

@@ -54,8 +54,7 @@ module.exports = {
       ))
 
       const wasIdle = !state.currentTrack
-      for (const track of tracks) state.queue.push(track)
-      if (wasIdle) await client.music._playNext(guildId, player)
+      await client.music.enqueue(guildId, tracks)
 
       await interaction.editReply({
         embeds: [

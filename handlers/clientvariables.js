@@ -4,6 +4,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const radios = require("../botconfig/radiostations.json");
 module.exports = client => {
+    client.memer = require('./meme-service').createMemeService(process.env.IMAGE_SERVICE_URL || 'http://127.0.0.1:3203');
     /**
      * @INFO
      * This will be all of our CLIENT VARIABLES for the commands as well as a cooldown system for each cmd!

@@ -64,7 +64,7 @@ module.exports = {
 function check_if_dj(client, member, song) {
     //if no message added return
     if (!client) return false;
-    var roleid = client.settings.get(member.guild.id, `djroles`);
+    var roleid = client.settings.get(member.guild.id, `djroles`) || [];
     if (String(roleid) == "") return false;
     var isdj = false;
     for (const djRole of roleid) {
@@ -74,7 +74,7 @@ function check_if_dj(client, member, song) {
         }
         if (member.roles.cache.has(djRole)) isdj = true;
     }
-    if (!isdj && !member.permissions.has(Discord.PermissionFlagsBits.Administrator) && song?.requester?.id != member.id)
+    if (!isdj && !member.permissions.has(Discord.PermissionFlagsBits.Administrator) && (song?.requesterId || song?.requester?.id) != member.id)
         return roleid.map(i => `<@&${i}>`).join(", ");
     return false;
 }

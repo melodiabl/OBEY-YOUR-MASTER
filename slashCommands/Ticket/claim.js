@@ -9,7 +9,7 @@ module.exports = {
     const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
     const ok  = d => new EmbedBuilder().setColor(0x5865F2).setDescription(d)
 
-    const ticket = await Ticket.findOne({ channelId: interaction.channel.id, status: 'open' })
+    const ticket = await Ticket.findOne({ channelId: interaction.channelId, status: 'open' })
     if (!ticket && !interaction.channel.name?.includes('ticket'))
       return interaction.reply({ embeds: [err('❌ Este canal no es un ticket.')], ephemeral: true })
 

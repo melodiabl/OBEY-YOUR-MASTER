@@ -1,0 +1,323 @@
+const { EmbedBuilder, Collection, AttachmentBuilder, PermissionFlagsBits, ChannelType,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
+const config = require(`${process.cwd()}/botconfig/config.json`);
+var ee = require(`${process.cwd()}/botconfig/embed.json`);
+const moment = require("moment");
+const fs = require("fs");
+const { databasing, delay, create_transcript, GetUser, GetRole } = require(`${process.cwd()}/handlers/functions`);
+const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
+module.exports = {
+    name: "instantclose",
+    category: "Administration",
+    aliases: [
+        "instantclose",
+        "instantcl",
+        "fastclose",
+        "fastcl",
+        "quickclose",
+        "quickcl",
+        "iclose",
+        "fclose",
+        "forceclose",
+        "forcecl",
+    ],
+    cooldown: 2,
+    usage: "instantclose",
+    description: "Instant Closes the Ticket",
+    type: "channel",
+    run: async (client, message, args, cmduser, text, prefix) => {
+        const guild = message.guild;
+        let es = client.settings.get(message.guild.id, "embed");
+        let ls = client.settings.get(message.guild.id, "language");
+        try {
+            let adminroles = client.settings.get(message.guild.id, "adminroles");
+            let cmdroles = client.settings.get(message.guild.id, "cmdadminroles.ticket");
+            let cmdroles2 = client.settings.get(message.guild.id, "cmdadminroles.close");
+            try {
+                for (const r of cmdroles2) cmdroles.push(r);
+            } catch {}
+
+            var cmdrole = [];
+            if (cmdroles.length > 0) {
+                for (const r of cmdroles) {
+                    if (message.guild.roles.cache.get(r)) {
+                        cmdrole.push(` | <@&${r}>`);
+                    } else if (message.guild.members.cache.get(r)) {
+                        cmdrole.push(` | <@${r}>`);
+                    } else {
+                        //console.log(r)
+                        try {
+                            client.settings.remove(message.guild.id, r, `cmdadminroles.ticket`);
+                        } catch {}
+                        try {
+                            client.settings.remove(message.guild.id, r, `cmdadminroles.close`);
+                        } catch {}
+                    }
+                }
+            }
+            if (!client.setups.has(message.channel.id) || !client.setups.has(message.channel.id, "ticketdata"))
+                return message.reply({ content: eval(client.la[ls]["cmds"]["administration"]["close"]["variable2"]) });
+            let Ticketdata = client.setups.get(message.channel.id, "ticketdata");
+            if (!Ticketdata)
+                return message.reply({ content: eval(client.la[ls]["cmds"]["administration"]["close"]["variable2"]) });
+            let ticketSystemNumber = String(Ticketdata.type).split("-");
+            ticketSystemNumber = ticketSystemNumber[ticketSystemNumber.length - 1];
+            let ticket = client.setups.get(
+                message.guild.id,
+                `${String(Ticketdata.type).includes("menu") ? "menu" : ""}ticketsystem${ticketSystemNumber}`
+            );
+            let closedParent = ticket;
+            if (String(Ticketdata.type).includes("menu") && Ticketdata.menutickettype && Ticketdata.menutickettype > 0) {
+                closedParent = client[`menuticket${Ticketdata.menutickettype}`].get(guild.id, "closedParent");
+            }
+            if (
+                [...message.member.roles.cache.values()] &&
+                !message.member.roles.cache.some(r => cmdroles.includes(r.id)) &&
+                !cmdroles.includes(message.author.id) && [...message.member.roles.cache.values()] &&
+                !message.member.roles.cache.some(r => adminroles.includes(r ? r.id : r)) &&
+                ![message.guild.ownerId, config.ownerid].includes(message.author.id) &&
+                !message.member.permissions.has([PermissionFlagsBits.Administrator]) &&
+                !message.member.roles.cache.some(r => ticket.adminroles.includes(r ? r.id : r))
+            )
+                return message.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setColor(es.wrongcolor)
+                            .setFooter(client.getFooter(es))
+                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable3"]))
+                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["close"]["variable4"])),
+                    ],
+                });
+            let data = client.setups.get(message.channel.id, "ticketdata");
+            let buttonuser = cmduser.user;
+            if (data.state === "closed") {
+                return message.reply({
+                    content: `<@${buttonuser.id}>`,
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable5"]))
+                            .setColor(es.wrongcolor),
+                    ],
+                });
+            }
+            let button_ticket_verify = new ButtonBuilder()
+                .setStyle(ButtonStyle.Success)
+                .setCustomId("ticket_verify")
+                .setLabel("Verify this Step")
+                .setEmoji("✅");
+            message
+                .reply({
+                    content: `<@${buttonuser.id}>`,
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable6"]))
+                            .setColor(es.color),
+                    ],
+                    components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
+                })
+                .then(async msg => {
+                    const collector = msg.createMessageComponentCollector( { filter:bb => !bb?.user.bot,
+                        time: 30000,
+                    }); //collector for 5 seconds
+                    collector.on("collect", async b => {
+                        if (b?.user.id !== buttonuser.id)
+                            return b?.reply(
+                                `<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`,
+                                true
+                            );
+
+                        //page forward
+                        if (b?.customId == "ticket_verify") {
+                            edited = true;
+                            msg.edit({
+                                content: `<@${buttonuser.id}>`,
+                                embeds: [new Discord.EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
+                                components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
+                            }).catch(e => {
+                                console.log(String(e).grey);
+                            });
+                            let index = String(data.type).slice(-1);
+
+                            if (data.type.includes("apply")) {
+                                client.setups.remove("TICKETS", data.user, `applytickets${index}`);
+                                client.setups.remove("TICKETS", data.channel, `applytickets${index}`);
+                            } else if (data.type.includes("menu")) {
+                                client.setups.remove("TICKETS", data.user, `menutickets${index}`);
+                                client.setups.remove("TICKETS", data.channel, `menutickets${index}`);
+                            } else {
+                                client.setups.remove("TICKETS", data.user, `tickets${index}`);
+                                client.setups.remove("TICKETS", data.channel, `tickets${index}`);
+                            }
+                            client.setups.set(msg.channel.id, "closed", "ticketdata.state");
+                            data = client.setups.get(msg.channel.id, "ticketdata");
+
+                            if (closedParent) {
+                                let ticketCh = msg.guild.channels.cache.get(closedParent);
+                                if (ticketCh && ticketCh.type == ChannelType.GuildCategory) {
+                                    if (ticketCh.children.size < 50) {
+                                        await msg.channel
+                                            .setParent(ticketCh.id, { lockPermissions: false })
+                                            .catch(async e => {
+                                                await msg.channel
+                                                    .send(
+                                                        `Can't move to: ${ticketCh.name} (\`${ticketCh.id}\`) because an Error occurred:\n> \`\`\`${String(e.message ? e.message : e).substring(0, 100)}\`\`\``
+                                                    )
+                                                    .catch(() => {});
+                                            });
+                                    } else {
+                                        await msg.channel
+                                            .send(
+                                                `Ticket Category ${ticketCh.name} (\`${ticketCh.id}\`) is full, can't move!`
+                                            )
+                                            .catch(() => {});
+                                    }
+                                } else {
+                                    await msg.channel.send(`Could not find ${closedParent} as a parent`).catch(() => {});
+                                }
+                            }
+
+                            if (msg.channel.permissionsFor(msg.channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
+                                await msg.channel.permissionOverwrites.edit(data.user, {
+                                    SEND_MESSAGES: false,
+                                    VIEW_CHANNEL: false,
+                                });
+                            }
+                            msg.channel.send({
+                                content: `<@${buttonuser.id}>`,
+                                embeds: [
+                                    new Discord.EmbedBuilder()
+                                        .setTitle(
+                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable7"])
+                                        )
+                                        .setColor(es.color)
+                                        .setThumbnail(
+                                            es.thumb
+                                                ? es.footericon &&
+                                                  (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                                                    ? es.footericon
+                                                    : client.user.displayAvatarURL()
+                                                : null
+                                        )
+                                        .setDescription(
+                                            `Closed the Ticket of <@${data.user}> and removed him from the Canal!`.substring(
+                                                0,
+                                                2000
+                                            )
+                                        )
+                                        .addFields({ name: "User: ", value: `<@${data.user}>` })
+                                        .addFields({ name: eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variablex_8"]), value: eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable8"]) })
+                                        .addFields({ name: "State: ", value: `${data.state}` })
+                                        .setFooter(client.getFooter(es)),
+                                ],
+                            });
+                            try {
+                                msg.channel
+                                    .setName(String(msg.channel.name).replace("ticket", "closed").substring(0, 32))
+                                    .catch(e => {
+                                        console.log(e);
+                                    });
+                            } catch (e) {
+                                console.log(e);
+                            }
+                            if (client.settings.get(guild.id, `adminlog`) != "no") {
+                                let message = msg; //NEEDED FOR THE EVALUATION!
+                                try {
+                                    var adminchannel = guild.channels.cache.get(client.settings.get(guild.id, `adminlog`));
+                                    if (!adminchannel) return client.settings.set(guild.id, "no", `adminlog`);
+                                    adminchannel.send({
+                                        embeds: [
+                                            new EmbedBuilder()
+                                                .setColor(es.color)
+                                                .setThumbnail(
+                                                    es.thumb
+                                                        ? es.footericon &&
+                                                          (es.footericon.includes("http://") ||
+                                                              es.footericon.includes("https://"))
+                                                            ? es.footericon
+                                                            : client.user.displayAvatarURL()
+                                                        : null
+                                                )
+                                                .setFooter(client.getFooter(es))
+                                                .setAuthor({ name: `ticket --> LOG | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                                .setDescription(
+                                                    eval(
+                                                        client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
+                                                            "variable9"
+                                                        ]
+                                                    )
+                                                )
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
+                                                .setTimestamp()
+                                                .setFooter(client.getFooter(
+                                                        "ID: " + message.author.id,
+                                                        message.author.displayAvatarURL()
+                                                    )
+                                                ),
+                                        ],
+                                    });
+                                } catch (e) {
+                                    console.log(e.stack ? String(e.stack).grey : String(e).grey);
+                                }
+                            }
+                        } else {
+                            edited = true;
+                            msg.edit({
+                                content: `<@${buttonuser.id}>`,
+                                embeds: [new Discord.EmbedBuilder().setTitle("Cancelado!").setColor(es.wrongcolor)],
+                                components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
+                            }).catch(e => {
+                                console.log(String(e).grey);
+                            });
+                        }
+                    });
+                    let endedembed = new Discord.EmbedBuilder()
+                        .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable12"]))
+                        .setColor(es.wrongcolor);
+                    collector.on("end", collected => {
+                        if (!edited) {
+                            edited = true;
+                            msg.edit({
+                                content: `<@${buttonuser.id}>`,
+                                embeds: [endedembed],
+                                components: [
+                                    new ActionRowBuilder().addComponents(
+                                        button_ticket_verify
+                                            .setDisabled(true)
+                                            .setLabel("FAILED TO VERIFY")
+                                            .setEmoji("❌")
+                                            .setStyle(ButtonStyle.Danger)
+                                    ),
+                                ],
+                            }).catch(e => {
+                                console.log(String(e).grey);
+                            });
+                        }
+                    });
+                });
+        } catch (e) {
+            console.log(String(e.stack).grey.bgRed);
+            return message.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor(es.wrongcolor)
+                        .setFooter(client.getFooter(es))
+                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable6"]))
+                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["close"]["variable7"])),
+                ],
+            });
+        }
+    },
+};
+
+/**
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ */

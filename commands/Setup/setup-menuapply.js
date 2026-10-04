@@ -1,0 +1,830 @@
+var { EmbedBuilder,
+    ButtonStyle
+} = require(`discord.js`);
+var Discord = require(`discord.js`);
+var config = require(`${process.cwd()}/botconfig/config.json`);
+var ee = require(`${process.cwd()}/botconfig/embed.json`);
+var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var { databasing } = require(`${process.cwd()}/handlers/functions`);
+const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
+const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
+module.exports = {
+    name: "setup-menuapply",
+    category: "Setup",
+    aliases: ["setupmenuapply", "menuapply-setup", "menuapplysetup", "menuapplysystem"],
+    cooldown: 5,
+    usage: "setup-menuapply --> Follow Steps",
+    description: "Configuración de un Menú que te permite iniciar uno de los 25 Sistemas de Solicitud",
+    memberpermissions: ['Administrador'],
+    type: "system",
+    run: async (client, message, args, cmduser, text, prefix) => {
+        let es = client.settings.get(message.guild.id, "embed");
+        let ls = client.settings.get(message.guild.id, "language");
+        try {
+            var theDB = client.menuapply;
+            let pre;
+            //setup-menuapply
+            const defaultEmoji = "👍";
+            const NumberEmojis = getNumberEmojis();
+            first_layer();
+            async function first_layer() {
+                let menuoptions = [];
+                for (let i = 1; i <= 100; i++) {
+                    const emoji = NumberEmojis[i];
+                    menuoptions.push({
+                        value: `${i}. Menu Apply`,
+                        description: `Manage/Edit the ${i}. Menu Apply Configuración`,
+                        ...(emoji ? { emoji } : {}),
+                    });
+                }
+
+                let row1 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
+                        .setCustomId("MenuSelection")
+                        .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                        .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                        .addOptions(
+                            menuoptions.slice(0, 25).map(option => {
+                                let Obj = {
+                                    label: option.label ? option.label.substring(0, 50) : option.value.substring(0, 50),
+                                    value: option.value.substring(0, 50),
+                                    description: option.description.substring(0, 50),
+                                };
+                                if (option.emoji) Obj.emoji = option.emoji;
+                                return Obj;
+                            })
+                        )
+                );
+                let row2 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
+                        .setCustomId("MenuSelection2")
+                        .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                        .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                        .addOptions(
+                            menuoptions.slice(25, 50).map(option => {
+                                let Obj = {
+                                    label: option.label ? option.label.substring(0, 50) : option.value.substring(0, 50),
+                                    value: option.value.substring(0, 50),
+                                    description: option.description.substring(0, 50),
+                                };
+                                if (option.emoji) Obj.emoji = option.emoji;
+                                return Obj;
+                            })
+                        )
+                );
+                let row3 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
+                        .setCustomId("MenuSelection3")
+                        .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                        .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                        .addOptions(
+                            menuoptions.slice(50, 75).map(option => {
+                                let Obj = {
+                                    label: option.label ? option.label.substring(0, 50) : option.value.substring(0, 50),
+                                    value: option.value.substring(0, 50),
+                                    description: option.description.substring(0, 50),
+                                };
+                                if (option.emoji) Obj.emoji = option.emoji;
+                                return Obj;
+                            })
+                        )
+                );
+                let row4 = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
+                        .setCustomId("MenuSelection4")
+                        .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                        .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                        .addOptions(
+                            menuoptions.slice(75, 100).map(option => {
+                                let Obj = {
+                                    label: option.label ? option.label.substring(0, 50) : option.value.substring(0, 50),
+                                    value: option.value.substring(0, 50),
+                                    description: option.description.substring(0, 50),
+                                };
+                                if (option.emoji) Obj.emoji = option.emoji;
+                                return Obj;
+                            })
+                        )
+                );
+
+                let MenuEmbed = new Discord.EmbedBuilder()
+                    .setColor(es.color)
+                    .setAuthor(client.getAuthor(
+                            "Menu Apply Setup",
+                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png",
+                            "https://github.com/melodiabl"
+                        ))
+                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+
+                //send the menu msg
+                let menumsg = await message.reply({
+                    embeds: [MenuEmbed],
+                    components: [
+                        row1,
+                        row2,
+                        row3,
+                        row4,
+                        new ActionRowBuilder().addComponents(
+                            new ButtonBuilder()
+                                .setStyle(ButtonStyle.Link)
+                                .setURL("https://youtu.be/QGESDc31d4U")
+                                .setLabel("Tutorial Video")
+                                .setEmoji(allEmojis.msg.youtube)
+                        ),
+                    ],
+                });
+                //Create the collector
+                const collector = menumsg.createMessageComponentCollector({
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    time: 90000,
+                    errors: ["time"],
+                });
+                //Menu Collections
+                collector.on("collect", menu => {
+                    if (menu?.user.id === cmduser.id) {
+                        collector.stop();
+                        let menuoptiondata = menuoptions.find(v => v.value == menu?.values[0]);
+                        if (menu?.values[0] == "Cancel")
+                            return menu?.reply(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable3"]));
+                        menu?.deferUpdate();
+                        let SetupNumber = menu?.values[0].split(".")[0];
+                        pre = `menuapply${SetupNumber}`;
+                        theDB = client.menuapply; //change to the right database
+                        second_layer();
+                    } else
+                        menu?.reply({
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            ephemeral: true,
+                        });
+                });
+                //Once the Collections ended edit the menu message
+                collector.on("end", collected => {
+                    menumsg.edit({
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        components: [],
+                        content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`,
+                    });
+                });
+            }
+            async function second_layer() {
+                theDB.ensure(
+                    message.guild.id,
+                    {
+                        messageId: "",
+                        channelId: "",
+                        data: [
+                            /*
+              {
+                value: "",
+                description: "",
+                category: null,
+                replyMsg: "{user} Welcome to the Support!"
+              }
+            */
+                        ],
+                    },
+                    pre
+                );
+                let menuoptions = [
+                    {
+                        value: "Send the Config	Message",
+                        description: `(Re) Send the Menu Apply Mensaje`,
+                        emoji: "👍",
+                    },
+                    {
+                        value: "Add Apply Option",
+                        description: `Add up to 25 different start-Apply-Option`,
+                        emoji: "📤",
+                    },
+                    {
+                        value: "Remove Apply Option",
+                        description: `Remove a open-Apply-Option`,
+                        emoji: "🗑",
+                    },
+                ];
+                //define the selection
+                let Selection = new StringSelectMenuBuilder()
+                    .setCustomId("MenuSelection")
+                    .setMaxValues(1)
+                    .setMinValues(1)
+                    .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                    .addOptions(
+                        menuoptions.map(option => {
+                            let Obj = {
+                                label: option.label ? option.label.substring(0, 50) : option.value.substring(0, 50),
+                                value: option.value.substring(0, 50),
+                                description: option.description.substring(0, 50),
+                            };
+                            if (option.emoji) Obj.emoji = option.emoji;
+                            return Obj;
+                        })
+                    );
+                //define the embed
+                let MenuEmbed = new Discord.EmbedBuilder()
+                    .setColor(es.color)
+                    .setAuthor({ name: "Menu Apply Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png", url: "https://github.com/melodiabl" })
+                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+
+                //send the menu msg
+                let menumsg = await message.reply({
+                    embeds: [MenuEmbed],
+                    components: [
+                        new ActionRowBuilder().addComponents(Selection),
+                        new ActionRowBuilder().addComponents(
+                            new ButtonBuilder()
+                                .setStyle(ButtonStyle.Link)
+                                .setURL("https://youtu.be/QGESDc31d4U")
+                                .setLabel("Tutorial Video")
+                                .setEmoji(allEmojis.msg.youtube)
+                        ),
+                    ],
+                });
+                //Create the collector
+                const collector = menumsg.createMessageComponentCollector({
+                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                    time: 90000,
+                    errors: ["time"],
+                });
+                //Menu Collections
+                collector.on("collect", menu => {
+                    if (menu?.user.id === cmduser.id) {
+                        collector.stop();
+                        let menuoptiondata = menuoptions.find(v => v.value == menu?.values[0]);
+                        if (menu?.values[0] == "Cancel")
+                            return menu?.reply(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable3"]));
+                        menu?.deferUpdate();
+                        handle_the_picks(menu?.values[0], menuoptiondata);
+                    } else
+                        menu?.reply({
+                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            ephemeral: true,
+                        });
+                });
+                //Once the Collections ended edit the menu message
+                collector.on("end", collected => {
+                    menumsg.edit({
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        components: [],
+                        content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`,
+                    });
+                });
+            }
+            async function handle_the_picks(optionhandletype, menuoptiondata) {
+                switch (optionhandletype) {
+                    case "Send the Config	Message":
+                        {
+                            let data = theDB.get(message.guild.id, pre + ".data");
+                            let settings = theDB.get(message.guild.id, pre);
+                            if (!data || data.length < 1) {
+                                return message.reply(
+                                    "<:no:833101993668771842> **Necesitas añadir al menos 1 opción de solicitud abierta**"
+                                );
+                            }
+                            let tempmsg = await message.reply({
+                                embeds: [
+                                    new EmbedBuilder()
+                                        .setColor(es.color)
+                                        .setTitle("What should be the Text to display in the Embed?")
+                                        .setDescription(
+                                            `For Example:\n> \`\`\`Seleccionar for what you want to apply for!\`\`\``
+                                        ),
+                                ],
+                            });
+
+                            let collected = await tempmsg.channel.awaitMessages({
+                                filter: m => m.author.id == cmduser.id,
+                                max: 1,
+                                time: 90000,
+                                errors: ["time"],
+                            });
+                            if (collected && collected.first().content) {
+                                let tempmsg = await message.reply({
+                                    embeds: [
+                                        new EmbedBuilder()
+                                            .setColor(es.color)
+                                            .setTitle("In where should I send the Open a New Apply Mensaje?")
+                                            .setDescription(
+                                                `Por favor Ping the Canal now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`
+                                            ),
+                                    ],
+                                });
+
+                                let collected2 = await tempmsg.channel.awaitMessages({
+                                    filter: m => m.author.id == cmduser.id,
+                                    max: 1,
+                                    time: 90000,
+                                    errors: ["time"],
+                                });
+                                if (collected2 && collected2.first().mentions.channels.size > 0) {
+                                    let data = theDB.get(message.guild.id, pre + ".data");
+                                    let channel = collected2.first().mentions.channels.first();
+                                    let msgContent = collected.first().content;
+                                    let embed = new EmbedBuilder()
+                                        .setColor(es.color)
+                                        .setThumbnail(
+                                            es.thumb
+                                                ? es.footericon &&
+                                                  (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                                                    ? es.footericon
+                                                    : client.user.displayAvatarURL()
+                                                : null
+                                        )
+                                        .setFooter(client.getFooter(es))
+                                        .setDescription(msgContent)
+                                        .setTitle("📋 Apply");
+                                    //define the selection
+                                    let Selection = new StringSelectMenuBuilder()
+                                        .setCustomId("MenuSelection")
+                                        .setMaxValues(1)
+                                        .setMinValues(1)
+                                        .setPlaceholder("Click me to Access the Menu-Apply System!")
+                                        .addOptions(
+                                            data.map((option, index) => {
+                                                let Obj = {
+                                                    label: option.value.substring(0, 50),
+                                                    value: option.value.substring(0, 50),
+                                                    description: option.description.substring(0, 50),
+                                                    emoji: isEmoji(client, message, option.emoji)
+                                                        ? option.emoji
+                                                        : NumberEmojis[index + 1],
+                                                };
+                                                if (!Obj.emoji) delete Obj.emoji;
+                                                return Obj;
+                                            })
+                                        );
+                                    channel
+                                        .send({
+                                            embeds: [embed],
+                                            components: [new ActionRowBuilder().addComponents([Selection])],
+                                        })
+                                        .catch(() => {
+                                            //define the selection
+                                            let Selection = new StringSelectMenuBuilder()
+                                                .setCustomId("MenuSelection")
+                                                .setMaxValues(1)
+                                                .setMinValues(1)
+                                                .setPlaceholder("Click me to Access the Menu-Apply System!")
+                                                .addOptions(
+                                                    data.map((option, index) => {
+                                                        let Obj = {
+                                                            label: option.value.substring(0, 50),
+                                                            value: option.value.substring(0, 50),
+                                                            description: option.description.substring(0, 50),
+                                                            emoji: NumberEmojis[index + 1],
+                                                        };
+                                                        if (!Obj.emoji) delete Obj.emoji;
+                                                        return Obj;
+                                                    })
+                                                );
+                                            channel
+                                                .send({
+                                                    embeds: [embed],
+                                                    components: [new ActionRowBuilder().addComponents([Selection])],
+                                                })
+                                                .then(msg => {
+                                                    theDB.set(message.guild.id, msg.id, pre + ".messageId");
+                                                    theDB.set(message.guild.id, channel.id, pre + ".channelId");
+                                                    message.reply(
+                                                        `Successfully Setupped the Menu-Apply in <#${channel.id}>`
+                                                    );
+                                                });
+                                        })
+                                        .then(msg => {
+                                            theDB.set(message.guild.id, msg.id, pre + ".messageId");
+                                            theDB.set(message.guild.id, channel.id, pre + ".channelId");
+                                            message.reply(`Successfully Setupped the Menu-Apply in <#${channel.id}>`);
+                                        });
+                                } else {
+                                    return message.reply("<:no:833101993668771842> **¡No mencionaste un canal válido!**");
+                                }
+                            } else {
+                                return message.reply(
+                                    "<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"
+                                );
+                            }
+                        }
+                        break;
+                    case "Add Apply Option":
+                        {
+                            let data = theDB.get(message.guild.id, pre + ".data");
+                            if (data.length >= 25) {
+                                return message.reply(
+                                    "<:no:833101993668771842> **¡Alcanzaste el límite de 25 opciones diferentes!** Elimina otra opción primero"
+                                );
+                            }
+                            //ask for value and description
+                            let tempmsg = await message.reply({
+                                embeds: [
+                                    new EmbedBuilder()
+                                        .setColor(es.color)
+                                        .setTitle("What should be the VALUE and DESCRIPTION of the Menu-Option?")
+                                        .setDescription(
+                                            `**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`Staff Apply++If you want to become a Team member!\`\`\`Other Example:\n> \`\`\`Partner Apply++If you want to partner with us!\`\`\``
+                                        ),
+                                ],
+                            });
+                            let collected = await tempmsg.channel.awaitMessages({
+                                filter: m => m.author.id == cmduser.id,
+                                max: 1,
+                                time: 90000,
+                                errors: ["time"],
+                            });
+                            if (collected && collected.first().content) {
+                                if (!collected.first().content.includes("++"))
+                                    return message.reply(
+                                        "<:no:833101993668771842> **¡Uso no válido! Por favor sigue el uso y revisa el ejemplo**"
+                                    );
+                                let value = collected.first().content.split("++")[0].trim().substring(0, 25);
+                                let index = data.findIndex(v => v.value == value);
+                                if (index >= 0) {
+                                    return message.reply(
+                                        "<:no:833101993668771842> **¡Las opciones no pueden tener el MISMO VALOR!** Ya hay una opción con ese valor"
+                                    );
+                                }
+                                let description = collected.first().content.split("++")[1].trim().substring(0, 50);
+
+                                let menuoptions = [];
+                                for (let i = 1; i <= 100; i++) {
+                                    const emoji = NumberEmojis[i];
+                                    menuoptions.push({
+                                        value: `${i} Apply System`,
+                                        description: `Manage/Edit the ${i} Apply Configuración`,
+                                        ...(emoji ? { emoji } : {}),
+                                    });
+                                }
+
+                                let row1 = new ActionRowBuilder().addComponents(
+                                    new StringSelectMenuBuilder()
+                                        .setCustomId("MenuSelection")
+                                        .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                                        .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                                        .addOptions(
+                                            menuoptions.slice(0, 25).map(option => {
+                                                let Obj = {
+                                                    label: option.label
+                                                        ? option.label.substring(0, 50)
+                                                        : option.value.substring(0, 50),
+                                                    value: option.value.substring(0, 50),
+                                                    description: option.description.substring(0, 50),
+                                                };
+                                                if (option.emoji) Obj.emoji = option.emoji;
+                                                return Obj;
+                                            })
+                                        )
+                                );
+                                let row2 = new ActionRowBuilder().addComponents(
+                                    new StringSelectMenuBuilder()
+                                        .setCustomId("MenuSelection2")
+                                        .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                                        .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                                        .addOptions(
+                                            menuoptions.slice(25, 50).map(option => {
+                                                let Obj = {
+                                                    label: option.label
+                                                        ? option.label.substring(0, 50)
+                                                        : option.value.substring(0, 50),
+                                                    value: option.value.substring(0, 50),
+                                                    description: option.description.substring(0, 50),
+                                                };
+                                                if (option.emoji) Obj.emoji = option.emoji;
+                                                return Obj;
+                                            })
+                                        )
+                                );
+                                let row3 = new ActionRowBuilder().addComponents(
+                                    new StringSelectMenuBuilder()
+                                        .setCustomId("MenuSelection3")
+                                        .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                                        .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                                        .addOptions(
+                                            menuoptions.slice(50, 75).map(option => {
+                                                let Obj = {
+                                                    label: option.label
+                                                        ? option.label.substring(0, 50)
+                                                        : option.value.substring(0, 50),
+                                                    value: option.value.substring(0, 50),
+                                                    description: option.description.substring(0, 50),
+                                                };
+                                                if (option.emoji) Obj.emoji = option.emoji;
+                                                return Obj;
+                                            })
+                                        )
+                                );
+                                let row4 = new ActionRowBuilder().addComponents(
+                                    new StringSelectMenuBuilder()
+                                        .setCustomId("MenuSelection4")
+                                        .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                                        .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                                        .addOptions(
+                                            menuoptions.slice(75, 100).map(option => {
+                                                let Obj = {
+                                                    label: option.label
+                                                        ? option.label.substring(0, 50)
+                                                        : option.value.substring(0, 50),
+                                                    value: option.value.substring(0, 50),
+                                                    description: option.description.substring(0, 50),
+                                                };
+                                                if (option.emoji) Obj.emoji = option.emoji;
+                                                return Obj;
+                                            })
+                                        )
+                                );
+                                //define the embed
+                                let MenuEmbed = new Discord.EmbedBuilder()
+                                    .setColor(es.color)
+                                    .setAuthor(client.getAuthor(
+                                            "Menu Apply Setup",
+                                            "https://cdn.discordapp.com/emojis/877653386747605032.png?size=96",
+                                            "https://github.com/melodiabl"
+                                        ))
+                                    .setDescription("Seleccionar which Application System should be started with this Option");
+                                //send the menu msg
+                                let menumsg = await message.reply({
+                                    embeds: [MenuEmbed],
+                                    components: [row1, row2, row3, row4],
+                                });
+                                //Create the collector
+                                const collector = menumsg.createMessageComponentCollector({
+                                    filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                    time: 90000,
+                                });
+                                //Menu Collections
+                                collector.on("collect", menu => {
+                                    if (menu?.user.id === cmduser.id) {
+                                        collector.stop();
+                                        if (menu?.values[0] == "Cancel")
+                                            return menu?.reply(
+                                                eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable3"])
+                                            );
+                                        menu?.deferUpdate();
+                                        let applySystemExecution = menu?.values[0].split(" ")[0];
+                                        let index = data.findIndex(v => v.applySystemExecution == applySystemExecution);
+                                        if (index >= 0) {
+                                            return message.reply(
+                                                "<:no:833101993668771842> **¡Las opciones no pueden iniciar el mismo sistema de solicitud!** Ya hay una opción con ese sistema de aplicación"
+                                            );
+                                        }
+
+                                        let applypre = `apply${applySystemExecution}`;
+                                        var apply_for_here = client.apply;
+                                        if (
+                                            !apply_for_here.has(message.guild.id) ||
+                                            !apply_for_here.has(message.guild.id, applypre) ||
+                                            !apply_for_here.has(message.guild.id, applypre + ".QUESTIONS") ||
+                                            apply_for_here.get(message.guild.id, applypre + ".QUESTIONS").length < 1
+                                        )
+                                            return message.reply(
+                                                `<:no:833101993668771842> **The ${applySystemExecution}. Apply System is not setupped / has no Questions, create it first with: \`${prefix}setup-apply\`**`
+                                            );
+
+                                        var rermbed = new EmbedBuilder()
+                                            .setColor(es.color)
+                                            .setTitle("What should be the EMOJI to be displayed?")
+                                            .setDescription(
+                                                `React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`
+                                            );
+
+                                        var emoji = NumberEmojis[data.length] || defaultEmoji;
+                                        message.reply({ embeds: [rermbed] }).then(async msg => {
+                                            await msg.react(emoji).catch(console.warn);
+                                            msg.awaitReactions({
+                                                filter: (reaction, user) => user.id == cmduser.id,
+                                                max: 1,
+                                                time: 180e3,
+                                            })
+                                                .then(async collected => {
+                                                    await msg.reactions.removeAll().catch(console.warn);
+                                                    if (
+                                                        collected.first().emoji?.id &&
+                                                        collected.first().emoji?.id.length > 2
+                                                    ) {
+                                                        emoji = collected.first().emoji?.id;
+                                                        if (collected.first().emoji?.animated)
+                                                            emojiMsg =
+                                                                "<" +
+                                                                "a:" +
+                                                                collected.first().emoji?.name +
+                                                                ":" +
+                                                                collected.first().emoji?.id +
+                                                                ">";
+                                                        else
+                                                            emojiMsg =
+                                                                "<" +
+                                                                ":" +
+                                                                collected.first().emoji?.name +
+                                                                ":" +
+                                                                collected.first().emoji?.id +
+                                                                ">";
+                                                    } else if (collected.first().emoji?.name) {
+                                                        emoji = collected.first().emoji?.name;
+                                                        emojiMsg = collected.first().emoji?.name;
+                                                    } else {
+                                                        message.reply(`${allEmojis.msg.ERROR} **No valid emoji added, using default EMOJI**`);
+                                                        emoji = null;
+                                                        emojiMsg = NumberEmojis[data.length] || defaultEmoji;
+                                                    }
+
+                                                    try {
+                                                        await msg.react(emoji);
+                                                        if (NumberEmojis.includes(collected.first().emoji?.id)) {
+                                                            emoji = null;
+                                                            emojiMsg = NumberEmojis[data.length] || defaultEmoji;
+                                                        }
+                                                    } catch (e) {
+                                                        console.log(e);
+                                                        message.reply(
+                                                            `${allEmojis.msg.ERROR} **Could not use the CUSTOM EMOJI you added, as I can't access it / use it as a reaction/emoji for the menu**\nUsing default emoji!`
+                                                        );
+                                                        emoji = null;
+                                                        emojiMsg = NumberEmojis[data.length] || defaultEmoji;
+                                                    }
+                                                    finished();
+                                                })
+                                                .catch(() => {
+                                                    message.reply(`${allEmojis.msg.ERROR} **No valid emoji added, using default EMOJI**`);
+                                                    emoji = null;
+                                                    emojiMsg = NumberEmojis[data.length] || defaultEmoji;
+                                                    finished();
+                                                });
+                                        });
+                                        function finished() {
+                                            theDB.push(
+                                                message.guild.id,
+                                                {
+                                                    value,
+                                                    description,
+                                                    applySystemExecution,
+                                                    emoji,
+                                                },
+                                                pre + ".data"
+                                            );
+                                            message.reply({
+                                                embeds: [
+                                                    new EmbedBuilder()
+                                                        .setColor(es.color)
+                                                        .setTitle("Successfully added the New Data to the List!")
+                                                        .setDescription(
+                                                            `Make sure to re-send the Mensaje, so that it's also updating it!\n> \`${prefix}setup-menuapply\` --> Send Config Mensaje`
+                                                        ),
+                                                ],
+                                            });
+                                        }
+                                    } else
+                                        menu?.reply({
+                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                            ephemeral: true,
+                                        });
+                                });
+                                //Once the Collections ended edit the menu message
+                                collector.on("end", collected => {
+                                    menumsg.edit({
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        components: [],
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                    });
+                                });
+                            } else {
+                                return message.reply(
+                                    "<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"
+                                );
+                            }
+                        }
+                        break;
+                    case "Remove Apply Option":
+                        {
+                            let data = theDB.get(message.guild.id, pre + ".data");
+                            if (!data || data.length < 1) {
+                                return message.reply(
+                                    "<:no:833101993668771842> **No hay opciones de solicitud abierta para eliminar**"
+                                );
+                            }
+                            let embed = new EmbedBuilder()
+                                .setColor(es.color)
+                                .setThumbnail(
+                                    es.thumb
+                                        ? es.footericon &&
+                                          (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                                            ? es.footericon
+                                            : client.user.displayAvatarURL()
+                                        : null
+                                )
+                                .setFooter(client.getFooter(es))
+                                .setDescription("Just pick the Options you want to remove!")
+                                .setTitle("Which Option Do you want to remove?");
+                            //define the selection
+                            let Selection = new StringSelectMenuBuilder()
+                                .setCustomId("MenuSelection")
+                                .setMaxValues(data.length)
+                                .setMinValues(1)
+                                .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                                .addOptions(
+                                    data.map((option, index) => {
+                                        let Obj = {
+                                            label: option.value.substring(0, 50),
+                                            value: option.value.substring(0, 50),
+                                            description: option.description.substring(0, 50),
+                                            emoji: isEmoji(client, message, option.emoji)
+                                                ? option.emoji
+                                                : NumberEmojis[index + 1],
+                                        };
+                                        if (!Obj.emoji) delete Obj.emoji;
+                                        return Obj;
+                                    })
+                                );
+                            //send the menu msg
+                            let menumsg;
+                            menumsg = await message
+                                .reply({
+                                    embeds: [embed],
+                                    components: [new ActionRowBuilder().addComponents([Selection])],
+                                })
+                                .catch(async () => {
+                                    let Selection = new StringSelectMenuBuilder()
+                                        .setCustomId("MenuSelection")
+                                        .setMaxValues(data.length)
+                                        .setMinValues(1)
+                                        .setPlaceholder("¡Haz clic para configurar the Menu Apply System!")
+                                        .addOptions(
+                                            data.map((option, index) => {
+                                                let Obj = {
+                                                    label: option.value.substring(0, 50),
+                                                    value: option.value.substring(0, 50),
+                                                    description: option.description.substring(0, 50),
+                                                    emoji: NumberEmojis[index + 1],
+                                                };
+                                                if (!Obj.emoji) delete Obj.emoji;
+                                                return Obj;
+                                            })
+                                        );
+                                    menumsg = await message.reply({
+                                        embeds: [embed],
+                                        components: [new ActionRowBuilder().addComponents([Selection])],
+                                    });
+                                });
+                            //Create the collector
+                            const collector = menumsg.createMessageComponentCollector({
+                                filter: i => i?.isStringSelectMenu() && i?.message.author.id == client.user.id && i?.user,
+                                time: 90000,
+                                errors: ["time"],
+                            });
+                            //Menu Collections
+                            collector.on("collect", async menu => {
+                                if (menu?.user.id === cmduser.id) {
+                                    collector.stop();
+                                    for (const value of menu?.values) {
+                                        let index = data.findIndex(v => v.value == value);
+                                        data.splice(index, 1);
+                                    }
+                                    theDB.set(message.guild.id, data, pre + ".data");
+                                    message.reply(
+                                        `**Successfully removed:**\n>>> ${menu?.values.map(i => `\`${i}\``).join(", ")}\n\nDon't forget to resend the Apply Config-Message!`
+                                    );
+                                } else
+                                    menu?.reply({
+                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                        ephemeral: true,
+                                    });
+                            });
+                            //Once the Collections ended edit the menu message
+                            collector.on("end", collected => {
+                                menumsg.edit({
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    components: [],
+                                    content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected.first().values[0]}\`**`,
+                                });
+                            });
+                        }
+                        break;
+                }
+            }
+        } catch (e) {
+            console.log(String(e.stack).grey.bgRed);
+            return message.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor(es.wrongcolor)
+                        .setFooter(client.getFooter(es))
+                        .setTitle(client.la[ls].common.erroroccur)
+                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable39"])),
+                ],
+            });
+        }
+    },
+};
+/**
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ */

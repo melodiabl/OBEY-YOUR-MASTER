@@ -3,5 +3,5 @@ const StatsSchema = new Schema({
   guildId: { type: String, required: true },
   commands: { type: Object, default: {} },
   messages: { type: Number, default: 0 },
-}, { timestamps: true })
+}, { timestamps: true, strict: false })
 module.exports = model('Stats', StatsSchema)

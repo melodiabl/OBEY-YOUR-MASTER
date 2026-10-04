@@ -8,7 +8,7 @@ const { onCoolDown, escapeRegex, delay, simple_databasing, databasing, handlemsg
 const Discord = require("discord.js");
 const { executeSlashCommand } = require('../../handlers/command-execution');
 module.exports = async (client, interaction) => {
-    console.log(`[EVENT-FIRE] interactionCreate triggered — type: ${interaction?.type} | user: ${interaction?.user?.tag} | guild: ${interaction?.guild?.name}`);
+    if (!client._dbReady) return;
     // Autocomplete handler
     if (interaction?.isAutocomplete()) {
         const CategoryName = interaction?.commandName
@@ -138,7 +138,9 @@ module.exports = async (client, interaction) => {
         const player = client.shoukaku?.players?.get(guild.id) ?? null;
         const mstate = client.music?.getState(guild.id) ?? null;
 
-        if (player?.node && !player.node.connected) player.node.connect();
+
+        const musicDenial = require('../../handlers/music/permissions').commandDenial(client, member, command.name, mstate?.currentTrack);
+        if (musicDenial) return interaction.reply({ content: musicDenial, ephemeral: true });
 
         if (command.parameters) {
             if (command.parameters.type == "music") {

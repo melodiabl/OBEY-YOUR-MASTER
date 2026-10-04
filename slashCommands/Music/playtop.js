@@ -16,7 +16,7 @@ module.exports = {
       const state = client.music.getState(interaction.guild.id)
       // Insert at front of queue
       if (state.currentTrack) {
-        state.queue.unshift(track)
+        await client.music.enqueue(interaction.guild.id, [track], { front: true })
         const info = track.info||track
         const embed = new EmbedBuilder().setColor(0x5865F2)
           .setTitle('⬆️ Añadida al inicio de la cola')
@@ -27,9 +27,8 @@ module.exports = {
       } else {
         // No current track — join and play directly
         const vc = interaction.member.voice.channel
-        await client.music.joinChannel(interaction.guild.id, vc.id, interaction.channel.id)
-        state.queue.unshift(track)
-        await client.music._playNext(interaction.guild.id, client.shoukaku?.players?.get(interaction.guild.id))
+        await client.music.joinChannel(interaction.guild.id, vc.id, interaction.channelId)
+        await client.music.enqueue(interaction.guild.id, [track], { front: true })
         return interaction.editReply({ content: `▶️ Reproduciendo **${track.info?.title||query}**` })
       }
     } catch (e) { await interaction.editReply({ content: `❌ ${e.message}` }) }

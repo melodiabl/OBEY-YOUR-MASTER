@@ -21,9 +21,9 @@ module.exports = {
       const tracks = mix?.tracks?.slice(0, 10) || []
       if (!tracks.length) return interaction.editReply({ embeds: [err('❌ No se pudo generar la mezcla.')] })
       const vc = interaction.member.voice.channel
-      await client.music.joinChannel(interaction.guild.id, vc.id, interaction.channel.id)
+      await client.music.joinChannel(interaction.guild.id, vc.id, interaction.channelId)
       const state = client.music.getState(interaction.guild.id)
-      for (const t of tracks) state.queue.push(t)
+      await client.music.enqueue(interaction.guild.id, tracks)
       if (!state.currentTrack) {
         const player = client.shoukaku?.players?.get(interaction.guild.id)
         await client.music._playNext(interaction.guild.id, player)

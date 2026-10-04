@@ -1,8 +1,6 @@
-const client = require("nekos.life");
-const Discord = require("discord.js");
-const neko = new client();
-const config = require(`${process.cwd()}/botconfig/config.json`);
 const { EmbedBuilder } = require("discord.js");
+const config = require(`${process.cwd()}/botconfig/config.json`);
+const booru = require("booru");
 module.exports = {
     name: "waifu",
     description: "Obtén un hentai temático de waifu",
@@ -31,7 +29,20 @@ module.exports = {
 
         //////////if (!message.channel.nsfw) return interaction?.reply({content:eval(client.la[ls]["cmds"]["nsfw"]["2danal"]["variable1"]), empheral: true})
 
-        let owo = await neko.sfw.waifu();
-        interaction?.reply({ content: `${owo.url}`, ephemeral: true });
+        try {
+            const images = await booru.search("rule34", ["waifu"], {
+                nsfw: true,
+                limit: 1,
+                random: true,
+            });
+            const image = booru.commonfy(images)[0];
+            if (image) {
+                interaction?.reply({ content: `${image.common.file_url}`, ephemeral: true });
+            } else {
+                interaction?.reply({ content: "No se encontró imagen de waifu", ephemeral: true });
+            }
+        } catch (err) {
+            interaction?.reply({ content: "Error al buscar waifu", ephemeral: true });
+        }
     },
 };

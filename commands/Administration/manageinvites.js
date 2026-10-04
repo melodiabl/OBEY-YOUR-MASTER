@@ -1,0 +1,288 @@
+const config = require(`${process.cwd()}/botconfig/config.json`);
+const ms = require(`ms`);
+var ee = require(`${process.cwd()}/botconfig/embed.json`);
+const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const { EmbedBuilder, PermissionFlagsBits, StringSelectMenuBuilder, ButtonBuilder, ActionRowBuilder } = require(`discord.js`);
+const { allEmojis } = require("../../botconfig/emojiFunctions");
+const { databasing, GetUser } = require(`${process.cwd()}/handlers/functions`);
+module.exports = {
+    name: `manageinvites`,
+    category: "Administration",
+    cooldown: 4,
+    usage: `manageinvites @USER --> Follow the Steps`,
+    description: `Manages the Invites of a Usuario`,
+    memberpermissions: ['Administrador'],
+    type: "member",
+    run: async (client, message, args, cmduser, text, prefix) => {
+        let es = client.settings.get(message.guild.id, "embed");
+        let ls = client.settings.get(message.guild.id, "language");
+        try {
+            var user;
+            if (args[0]) {
+                try {
+                    user = await GetUser(message, args);
+                } catch (e) {
+                    if (!e) return message.reply({ content: client.la[ls].common.usernotfound });
+                    return message.reply({ content: e });
+                }
+            } else {
+                user = message.author;
+            }
+            if (!user || user == null || user.id == null || !user.id)
+                return message.reply({ content: client.la[ls].common.usernotfound });
+
+            let menuoptions = [
+                {
+                    value: "Add Joins",
+                    description: "Add a specific Number of Joins to: " + user.username,
+                    replymsg: "Please Send the Number of Invites (Joins) you want to add to him/her!",
+                    emoji: "📨", //optional
+                },
+                {
+                    value: "Remove Joins",
+                    description: "Remove a specific Number of Joins to: " + user.username,
+                    replymsg: "Please Send the Number of Invites (Joins) you want to remove to him/her!",
+                    emoji: "📨", //optional
+                },
+                {
+                    value: "Add Fakes",
+                    description: "Add a specific Number of Fakes to: " + user.username,
+                    replymsg: "Please Send the Number of Fake-Invites you want to add to him/her!",
+                    emoji: "❌", //optional
+                },
+                {
+                    value: "Remove Fakes",
+                    description: "Remove a specific Number of Fakes to: " + user.username,
+                    replymsg: "Please Send the Number of Fake-Invites you want to remove to him/her!",
+                    emoji: "❌", //optional
+                },
+                {
+                    value: "Add Leaves",
+                    description: "Add a specific Number of Leaves to: " + user.username,
+                    replymsg: "Please Send the Number of Leaves you want to add to him/her!",
+                    emoji: "📩", //optional
+                },
+                {
+                    value: "Remove Leaves",
+                    description: "Remove a specific Number of Leaves to: " + user.username,
+                    replymsg: "Please Send the Number of Leaves you want to remove to him/her!",
+                    emoji: "📩", //optional
+                },
+                {
+                    value: "Cancel",
+                    description: `Cancelar and stop the Ticket-Configuración!`,
+                    emoji: allEmojis.msg.cancel,
+                },
+            ];
+            //define the selection
+            let Selection = new StringSelectMenuBuilder()
+                .setCustomId("MenuSelection")
+                .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
+                .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
+                .setPlaceholder(client.la[ls].cmds.info.botfaq.placeholder) //message in the content placeholder
+                .addOptions(
+                    menuoptions.map(option => {
+                        let Obj = {
+                            label: option.label ? option.label.substring(0, 50) : option.value.substring(0, 50),
+                            value: option.value.substring(0, 50),
+                            description: option.description.substring(0, 50),
+                        };
+                        if (option.emoji) Obj.emoji = option.emoji;
+                        return Obj;
+                    })
+                );
+            // Fetch guild and member data from the db
+            client.invitesdb?.ensure(message.guild.id + user.id, {
+                /* REQUIRED */
+                id: user.id, // Discord ID of the user
+                guildId: message.guild.id,
+                /* STATS */
+                fake: 0,
+                leaves: 0,
+                invites: 0,
+                /* INVITES DATA */
+                invited: [],
+                left: [],
+                /* INVITER */
+                invitedBy: "",
+                usedInvite: {},
+                joinData: {
+                    type: "unknown",
+                    invite: null,
+                }, // { type: "normal" || "oauth" || "unknown" || "vanity", invite: inviteData || null }
+                messagesCount: 0,
+                /* BOT */
+                bot: user.bot || false,
+            });
+            let memberData = client.invitesdb?.get(message.guild.id + user.id);
+            let { invites, fake, leaves } = memberData;
+            let realinvites = invites - fake - leaves;
+            //define the embed
+            let MenuEmbed = new EmbedBuilder()
+                .setColor(es.color)
+                .setAuthor({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable1"]) })
+                .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable2"]))
+                .addFields({ name: "**CURRENT INVITES:**", value: `<:Like:857334024087011378> ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!` })
+                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variablex_3"]), value: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable3"]) });
+            //send the menu msg
+            let menumsg = await message.reply({
+                embeds: [MenuEmbed],
+                components: [new ActionRowBuilder().addComponents(Selection)],
+            });
+            //function to handle the menuselection
+            async function menuselection(menu) {
+                let menuoptiondata = menuoptions.find(v => v.value == menu?.values[0]);
+                let index = menuoptions.findIndex(v => v.value == menu?.values[0]);
+                if (menu?.values[0] == "Cancel")
+                    return menu?.reply({
+                        content: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable4"]),
+                    });
+                await menu?.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setColor(es.color)
+                            .setAuthor({ name: client.la[ls].cmds.info.botfaq.menuembed.title, iconURL: client.user.displayAvatarURL(), url: "https://github.com/melodiabl" })
+                            .setDescription(menuoptiondata.replymsg),
+                    ],
+                });
+                await message.channel
+                    .awaitMessages({ filter: m => m.author.id == cmduser.id, max: 1, time: 60e3, errors: ["time"] })
+                    .then(collected => {
+                        let AddNumber = collected.first().content;
+                        if (isNaN(AddNumber)) {
+                            return message.reply({
+                                content: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable5"]),
+                            });
+                        }
+                        if (AddNumber < 0) AddNumber *= 1;
+                        switch (index) {
+                            //add joins
+                            case 0:
+                                {
+                                    client.invitesdb?.math(message.guild.id + user.id, "+", Number(AddNumber), "invites");
+                                }
+                                break;
+                            //remove joins
+                            case 1:
+                                {
+                                    client.invitesdb?.math(message.guild.id + user.id, "-", Number(AddNumber), "invites");
+                                }
+                                break;
+                            //add fakes
+                            case 2:
+                                {
+                                    client.invitesdb?.math(message.guild.id + user.id, "+", Number(AddNumber), "fake");
+                                }
+                                break;
+                            //remove fakes
+                            case 3:
+                                {
+                                    client.invitesdb?.math(message.guild.id + user.id, "-", Number(AddNumber), "fake");
+                                }
+                                break;
+                            //add leaves
+                            case 4:
+                                {
+                                    client.invitesdb?.math(message.guild.id + user.id, "+", Number(AddNumber), "leaves");
+                                }
+                                break;
+                            //remove leaves
+                            case 5:
+                                {
+                                    client.invitesdb?.math(message.guild.id + user.id, "-", Number(AddNumber), "leaves");
+                                }
+                                break;
+                        }
+                        memberData = client.invitesdb?.get(message.guild.id + user.id);
+                        let { invites, fake, leaves } = memberData;
+                        realinvites = invites - fake - leaves;
+                        message.reply({
+                            embeds: [
+                                new EmbedBuilder()
+                                    .setAuthor({ name: `New Invites of: ${user.username}`, iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" })
+                                    .setColor(es.color)
+                                    .setThumbnail(
+                                        es.thumb
+                                            ? es.footericon &&
+                                              (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                                                ? es.footericon
+                                                : client.user.displayAvatarURL()
+                                            : null
+                                    )
+                                    .addFields({ name: "\u200b", value: `<:Like:857334024087011378> ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!` })
+                                    .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variablex_6"]), value: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable6"]) })
+                                    .setFooter(client.getFooter(es)),
+                            ],
+                        });
+                    });
+            }
+            //Event
+            client.on("interactionCreate", menu => {
+    if (!menu?.isStringSelectMenu() && !menu?.isButton()) return;
+
+                if (menu?.message.id === menumsg.id) {
+                    if (menu?.user.id === cmduser.id) menuselection(menu);
+                    else
+                        menu?.reply({
+                            content: handlemsg(client.la[ls].cmds.info.botfaq.notallowed, { cmduserid: cmduser.id }),
+                            ephemeral: true,
+                        });
+                }
+            });
+
+            if (client.settings.get(message.guild.id, `adminlog`) != "no") {
+                try {
+                    var channel = message.guild.channels.cache.get(client.settings.get(message.guild.id, `adminlog`));
+                    if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
+                    channel.send({
+                        embeds: [
+                            new EmbedBuilder()
+                                .setColor(es.color)
+                                .setThumbnail(
+                                    es.thumb
+                                        ? es.footericon &&
+                                          (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                                            ? es.footericon
+                                            : client.user.displayAvatarURL()
+                                        : null
+                                )
+                                .setFooter(client.getFooter(es))
+                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable7"]))
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
+                                .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
+                                .setTimestamp()
+                                .setFooter(client.getFooter(
+                                        "ID: " + message.author.id,
+                                        message.author.displayAvatarURL()
+                                    )
+                                ),
+                        ],
+                    });
+                } catch (e) {
+                    console.log(e.stack ? String(e.stack).grey : String(e).grey);
+                }
+            }
+        } catch (e) {
+            console.log(String(e.stack).grey.bgRed);
+            return message.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor(es.wrongcolor)
+                        .setFooter(client.getFooter(es))
+                        .setTitle(client.la[ls].common.erroroccur)
+                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable10"])),
+                ],
+            });
+        }
+    },
+};
+/**
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ */

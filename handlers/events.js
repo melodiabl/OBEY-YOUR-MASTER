@@ -13,7 +13,12 @@ module.exports = client => {
                     if (eventName == "message") continue;
                     allevents.push(eventName);
                     console.log(`[EVENT-REG] Registering event: ${eventName}`);
-                    client.on(eventName, event.bind(null, client));
+                    client.on(eventName, (...args) => {
+                        if (dir === 'guild' && !client._dbReady) return;
+                        Promise.resolve().then(() => event(client, ...args)).catch(error => {
+                            console.error(`[EVENT] ${eventName} failed:`, error.message);
+                        });
+                    });
                 } catch (e) {
                     console.log(String(e.stack).grey.bgRed);
                 }

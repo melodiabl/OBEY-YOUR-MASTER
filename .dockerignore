@@ -3,3 +3,7 @@ node_modules
 .env
 *.log
 databases/
+
+image-service
+docs/audit
+__pycache__

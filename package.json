@@ -44,7 +44,7 @@
     "request-promise-native": "^1.0.9",
     "rss-parser": "^3.13.0",
     "searchtify": "^2.0.1",
-    "serialize-javascript": "^7.0.5",
+    "serialize-javascript": "7.1.2",
     "shoukaku": "^4.3.0",
     "socket.io": "^4.8.3",
     "socket.io-client": "^4.8.3",
@@ -54,7 +54,8 @@
     "translatte": "^3.0.1",
     "twit": "^2.2.11",
     "utf-8-validate": "^6.0.5",
-    "weather-js": "^2.0.0"
+    "weather-js": "^2.0.0",
+    "undici": "7.29.1"
   },
   "scripts": {
     "start": "node index.js",
@@ -62,5 +63,12 @@
     "test": "node --test test/*.test.js"
   },
   "author": "Tomato6966 (updated by OBEY team)",
-  "license": "MIT"
+  "license": "MIT",
+  "overrides": {
+    "form-data": "4.0.6",
+    "tar": "7.5.22",
+    "mathjs": "15.2.0",
+    "deepmerge-ts": "8.0.2",
+    "serialize-javascript": "$serialize-javascript"
+  }
 }

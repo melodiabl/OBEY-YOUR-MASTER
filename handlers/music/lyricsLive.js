@@ -60,6 +60,7 @@ async function start(client, guildId) {
   const lines  = result?.lines || []
   if (!lines.length) return { ok: false, reason: result?.plain ? 'no_sync' : 'not_found', plain: result?.plain }
 
+  if (trackKey((state.currentTrack?.info || state.currentTrack)) !== trackKey(info)) return { ok: false, reason: 'track_changed' }
   stop(guildId, client)
   const channel = client.channels.cache.get(state.textChannelId)
   if (!channel) return { ok: false, reason: 'no_channel' }
@@ -71,6 +72,8 @@ async function start(client, guildId) {
   sessions.set(guildId, sess)
 
   sess.timer = setInterval(async () => {
+    if (sess.busy || sessions.get(guildId) !== sess) return
+    sess.busy = true
     try {
       const st = client.music?.getState(guildId)
       // Sin música AHORA: no borrar (puede ser transitorio); deja el último estado.
@@ -78,12 +81,17 @@ async function start(client, guildId) {
       const cur = st.currentTrack.info || st.currentTrack
       // Cambió de canción → recargar letras en el MISMO mensaje (no borrar)
       if (trackKey(cur) !== sess.trackKey) {
-        sess.trackKey = trackKey(cur)
+        const requestedKey = trackKey(cur)
         const r = await fetchLyrics(cur.title, cur.author).catch(() => null)
+        const latest = client.music?.getState(guildId)?.currentTrack
+        if (sessions.get(guildId) !== sess || trackKey(latest?.info || latest) !== requestedKey) return
+        sess.trackKey = requestedKey
         sess.lines = r?.lines || []
       }
+      if (sessions.get(guildId) !== sess) return
       await msg.edit({ embeds: [renderEmbed(cur, sess.lines, livePos(st))] }).catch(() => {})
-    } catch { /* nunca dejar caer el intervalo */ }
+    } catch (error) { console.warn('[Music] Lyrics update:', error.message) }
+    finally { sess.busy = false }
   }, TICK_MS)
 
   return { ok: true }

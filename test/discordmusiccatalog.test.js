@@ -59,7 +59,7 @@ test('selecting a collection queues all of its resolved tracks', async () => {
           { encoded: 'e2', info: { title: 'Two', author: 'Artist', uri: 'u2', isrc: 'TWO' } },
         ],
       }),
-      _playNext: async () => { played = true },
+      enqueue: async (_, tracks) => { state.queue.push(...tracks); played = true },
     },
   }
   const message = {
@@ -87,7 +87,7 @@ test('a real Lavalink track is queued as-is with the requester set', async () =>
       joinChannel: async () => ({ id: 'player' }),
       getState: () => state,
       search: async () => { throw new Error('should not search for encoded tracks') },
-      _playNext: async () => { throw new Error('should not play when busy') },
+      enqueue: async (_, tracks) => { state.queue.push(...tracks) },
     },
   }
   const message = { guild: { id: 'g' }, channel: { id: 't' }, author: { username: 'Tester' } }

@@ -1,3 +1,4 @@
+const { randomUUID } = require('node:crypto')
 // Guild music state management
 const playerStates = new Map()   // guildId → state object
 const liveMessages = new Map()   // guildId → { messageId, channelId }
@@ -6,6 +7,9 @@ const liveTimers   = new Map()   // guildId → intervalId
 function getState(guildId) {
   if (!playerStates.has(guildId)) {
     playerStates.set(guildId, {
+      sessionId:      randomUUID(),
+      revision:       0,
+      status:         'disconnected',
       queue:          [],
       currentTrack:   null,
       history:        [],   // in-memory last 10 tracks

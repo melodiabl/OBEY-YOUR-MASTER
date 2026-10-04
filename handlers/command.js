@@ -19,8 +19,7 @@ module.exports = async client => {
                         //console.log(`    | ${file} :: error -> missing a help.name,or help.name is not a string.`.brightRed)
                         continue;
                     }
-                    if (pull.aliases && Array.isArray(pull.aliases))
-                        pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
+
                 } catch (e) {
                     console.log(String(e.stack).grey.bgRed);
                 }
@@ -29,6 +28,10 @@ module.exports = async client => {
     } catch (e) {
         console.log(String(e.stack).grey.bgRed);
     }
+
+    const registry = require('./command-registry').buildAliases(client.commands)
+    client.aliases = new Map(registry.aliases)
+    client.commandAliasConflicts = registry.conflicts
 
     // backupDB: inicializado en loaddb.js como EnmapLike
     if (!client.backupDB) { const EnmapLike = require('./enmap-like'); client.backupDB = new EnmapLike() }

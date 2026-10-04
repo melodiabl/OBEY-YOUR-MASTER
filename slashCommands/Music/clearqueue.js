@@ -8,8 +8,7 @@ module.exports = {
     await interaction.deferReply()
     const state = client.music?.getState(interaction.guild.id)
     if (!state) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay música activa.')] })
-    const count = state.queue.length
-    state.queue = []
+    const count = client.music.clearQueue(interaction.guild.id)
     await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
       .setTitle('🗑️ Cola limpiada')
       .setDescription(count > 0 ? `**${count}** pista${count !== 1 ? 's' : ''} eliminada${count !== 1 ? 's' : ''} de la cola.` : 'La cola ya estaba vacía.')] })

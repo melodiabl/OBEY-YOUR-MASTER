@@ -78,7 +78,7 @@ El motor vive en `handlers/music/` y se expone como **`client.music`** (iniciali
 | `end` | Ignora `replaced`/`stopped`; `loadFailed` → `_recoverFailedTrack`; resto → `_playNext` |
 | `update` | Actualiza `lastPosition` y recalibra `startedAt` (clave para la barra de progreso) |
 | `exception` | `_recoverFailedTrack` |
-| `closed` | Limpia estado, para live update, emite |
+| `closed` | Conserva canción/posición, detiene las actualizaciones y marca recuperación |
 
 ---
 

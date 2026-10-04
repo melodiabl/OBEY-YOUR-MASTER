@@ -5,5 +5,5 @@ const UserProfileSchema = new Schema({
   bio: { type: String, default: '' },
   rep: { type: Number, default: 0 },
   daily: { type: Number, default: 0 },
-}, { timestamps: true })
+}, { timestamps: true, strict: false })
 module.exports = model('UserProfile', UserProfileSchema)

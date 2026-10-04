@@ -10,6 +10,13 @@ const { freshGuildPermissions } = require('./permissions')
 
 module.exports = async client => {
   const app    = express()
+  for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
+    const register = app[method].bind(app)
+    app[method] = (route, ...handlers) => {
+      if (!handlers.length) return register(route)
+      return register(route, ...handlers.map(handler => handler.constructor.name === 'AsyncFunction' ? (req, res, next) => Promise.resolve(handler(req, res, next)).catch(next) : handler))
+    }
+  }
   const config = client.config
 
   const DISCORD_CLIENT_ID     = process.env.DISCORD_CLIENT_ID     || config.clientid
@@ -51,9 +58,10 @@ module.exports = async client => {
     store: MongoStore.create({ mongoUrl: MONGO_URL, collectionName: 'dashboard_sessions' }),
   })
   app.use(sessionMiddleware)
+  app.use(require('./security').csrfProtection(BASE_URL))
 
   // Endpoints REST de música (port de Soundy api/) — tras la sesión, para poder autenticar (evita IDOR)
-  try { require('../handlers/music/apiRoutes')(app, client) } catch (e) { console.warn('[Music] apiRoutes no montados:', e?.message) }
+  try { require('../handlers/music/apiRoutes')(app, client, { canManageGuild }) } catch (e) { console.warn('[Music] apiRoutes no montados:', e?.message) }
 
   // ─── OAuth2 helpers ───────────────────────────────────────────────────────
 
@@ -119,6 +127,14 @@ module.exports = async client => {
 
   // ─── Public routes ────────────────────────────────────────────────────────
 
+  app.get('/health', (req, res) => {
+    const database = client._dbReady && require('mongoose').connection.readyState === 1
+    const node = client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)
+    const music = Boolean(node && node.state === 1)
+    const healthy = database && music && !client._shuttingDown
+    res.status(healthy ? 200 : 503).json({ status: healthy ? 'ok' : 'degraded', database: Boolean(database), music, uptime: Math.floor(process.uptime()) })
+  })
+
   app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')))
 
   app.get('/login', (req, res) => {
@@ -174,7 +190,7 @@ module.exports = async client => {
     }
   })
 
-  app.get('/logout', (req, res) => {
+  app.post('/logout', (req, res) => {
     // Revoke Discord token before destroying session
     const token = req.session?.user?.access_token
     if (token) {
@@ -271,7 +287,7 @@ module.exports = async client => {
           guildName:   guild.name,
           trackTitle:  info.title  || '?',
           trackAuthor: info.author || '',
-          thumbnail:   info.artworkUrl || info.thumbnail || null,
+          thumbnail:   require('../handlers/music/utils').trackArtwork(track),
           uri:         info.uri || null,
         })
       }
@@ -422,7 +438,11 @@ module.exports = async client => {
 
     // Music
     if (b.musicChannel  !== undefined) patch.musicChannel  = b.musicChannel  || null
-    if (b.defaultVolume)               patch.defaultVolume = Math.max(1, Math.min(200, parseInt(b.defaultVolume) || 100))
+    if (b.defaultVolume !== undefined) {
+      const volume = Number(b.defaultVolume)
+      if (!Number.isInteger(volume) || volume < 0 || volume > 200) return res.status(400).json({ error: 'invalid_volume' })
+      patch.defaultVolume = volume
+    }
     patch.autoplay = b.autoplay === 'on'
 
     // DJ role + birthday
@@ -462,9 +482,10 @@ module.exports = async client => {
 
     await Guild.findOneAndUpdate({ guildId: guild.id }, { $set: { ...patch, ...botPatch } }, { upsert: true })
 
-    // Sync in-memory cache
+    // Keep every saved field coherent with commands, including nested module settings.
     const gid = guild.id
     const s   = client.settings
+    for (const [key, value] of Object.entries({ ...patch, ...botPatch })) s.set(gid, value, key)
 
     if (patch.prefix   !== undefined) s.set(gid, patch.prefix,   'prefix')
     if (patch.language !== undefined) s.set(gid, patch.language, 'language')
@@ -508,6 +529,7 @@ module.exports = async client => {
     if (patch['logChannels.voice']      !== undefined) s.set(gid, patch['logChannels.voice'],      'logChannels.voice')
     if (patch['logChannels.server']     !== undefined) s.set(gid, patch['logChannels.server'],     'logChannels.server')
 
+    await client.settings.flush()
     const tab = b._activeTab ? `&tab=${encodeURIComponent(b._activeTab)}` : ''
     res.redirect(`/dashboard/${guild.id}?saved=1${tab}`)
   })
@@ -630,7 +652,8 @@ module.exports = async client => {
 
   app.get('/api/player/:guildId', requireAuth, (req, res) => {
     const guild = client.guilds.cache.get(req.params.guildId)
-    if (!guild) return res.json({ error: 'guild_not_found' })
+    if (!guild) return res.status(404).json({ error: 'guild_not_found' })
+    if (!canManageGuild(req.session.user, guild.id)) return res.status(403).json({ error: 'no_permission' })
     const music = client.music
     if (!music) return res.json({ active: false })
     res.json(music.getPublicState?.(req.params.guildId) || { active: false })
@@ -656,14 +679,16 @@ module.exports = async client => {
         case 'shuffle':  await music.shuffle(guildId);               break
         case 'autoplay': music.setAutoplay(guildId);                  break
         case 'loop':     music.setLoop(guildId, value || 'none');    break
-        case 'volume':   await music.setVolume(guildId, Number.isFinite(Number(value)) ? Number(value) : 100); break
+        case 'volume':   await music.setVolume(guildId, value === null || value === '' || value === undefined ? NaN : Number(value)); break
+        case 'clearqueue': music.clearQueue(guildId); break
+        case 'filter': await music.setFilter(guildId, value); break
         case 'remove':   await music.remove(guildId, parseInt(value));           break
         case 'jump':     await music.jump(guildId, parseInt(value));             break
         case 'move':     await music.move(guildId, parseInt(value?.from), parseInt(value?.to)); break
         case 'seek':     await music.seek(guildId, parseInt(value) || 0); break
         default: return res.json({ ok: false, error: 'unknown_action' })
       }
-      res.json({ ok: true })
+      res.json({ ok: true, state: music.getPublicState(guildId) })
     } catch (e) {
       res.json({ ok: false, error: e.message || String(e) })
     }
@@ -844,6 +869,13 @@ module.exports = async client => {
   })
 
   // ─── Socket.IO — Player state en tiempo real ────────────────────
+  app.use((error, req, res, next) => {
+    console.error('[Dashboard] Request failed:', req.path, error.message)
+    if (res.headersSent) return next(error)
+    if (req.path.startsWith('/api/')) return res.status(500).json({ ok: false, error: 'internal_error' })
+    res.status(500).send('No se pudo completar la solicitud. Inténtalo de nuevo.')
+  })
+
   const server = http.createServer(app)
   const io = new Server(server, {
     cors: { origin: BASE_URL, credentials: true },

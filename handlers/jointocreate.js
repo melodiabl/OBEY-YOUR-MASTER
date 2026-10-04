@@ -112,7 +112,7 @@ module.exports = function (client) {
                                                 `The VC-OWNER \`${oldState.member.user.username}\` left the VC! A new Random Propietario got picked!`
                                             )
                                             .addFields({ name: `You now have access to all \`voice Commands\``, value: `> ${client.commands
-                                                    .filter(cmd => cmd.category === "🎤 Voice")
+                                                    .filter(cmd => cmd.category === "Voice")
                                                     .first()
                                                     .extracustomdesc.split(",")
                                                     .map(i => i?.trim())
@@ -196,7 +196,7 @@ module.exports = function (client) {
                                                     `The VC-OWNER \`${oldState.member.user.username}\` left the VC! A new Random Propietario got picked!`
                                                 )
                                                 .addFields({ name: `You now have access to all \`voice Commands\``, value: `> ${client.commands
-                                                        .filter(cmd => cmd.category === "🎤 Voice")
+.filter(cmd => cmd.category === "Voice")
                                                         .first()
                                                         .extracustomdesc.split(",")
                                                         .map(i => i?.trim())

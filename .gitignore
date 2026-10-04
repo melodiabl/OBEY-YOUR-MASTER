@@ -1,5 +1,4 @@
 node_modules/
-package-lock.json
 .env
 .env.*
 !.env.example
@@ -10,3 +9,5 @@ package-lock.json
 *.bak
 backups/
 invidious-companion/
+__pycache__/
+*.pyc

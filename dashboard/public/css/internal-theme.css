@@ -1,0 +1,19 @@
+@font-face{font-family:Genta;src:url('/fonts/Genta.ttf') format('truetype');font-display:swap}
+@font-face{font-family:DMSans;src:url('/fonts/DMSans-Regular.ttf') format('truetype');font-display:swap;font-weight:400}
+@font-face{font-family:DMSans;src:url('/fonts/DMSans-Bold.ttf') format('truetype');font-display:swap;font-weight:700}
+:root{--bg:#080810;--surf:#0d0d1a;--surf2:#141428;--surf3:#1c1c35;--surface:#0d0d1a;--surface2:#141428;--accent:#5865f2;--accent2:#57f287;--txt:#e8e8f4;--txt2:#b6b6ce;--txt3:#9999b9;--muted:#9999b9;--line:rgba(255,255,255,.09);--border:rgba(255,255,255,.09)}
+body{font-family:DMSans,sans-serif;background:var(--bg)}
+h1,h2,.page-title,.sidebar-brand .brand-name,.vtitle{font-family:Genta,DMSans,sans-serif;font-weight:700;letter-spacing:-.025em}
+button,a,input,select,textarea{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #9ea6ff;outline-offset:3px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.card,.guild-card,.stat-card{box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.settings-nav{border-radius:16px}.settings-content .card{border-radius:16px}.card-head{padding:20px 24px}.card-body{padding:20px 24px}
+.form-input,.form-select,.form-textarea{background:var(--surf2);border-radius:10px;font-size:14px}
+.form-help,.card-desc{color:var(--muted)}
+.stab{border-radius:10px;min-height:44px}.stab.active{background:rgba(88,101,242,.17);color:#d7dbff}
+output{font-size:12px;min-width:3.5em;font-variant-numeric:tabular-nums;color:var(--text,var(--txt));white-space:nowrap}
+.music-settings{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 0}.music-settings label{font-size:13px;color:var(--txt2)}.music-settings select{background:var(--surface2);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:9px 12px;min-height:40px}
+.connection-status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.connection-status::before{content:'';width:7px;height:7px;background:var(--green,#57f287);border-radius:50%}.connection-status[data-status="offline"]::before{background:#fee75c}
+@media(max-width:600px){.card-head,.card-body{padding:16px}.topbar-bc{min-width:0;flex-wrap:wrap}.topbar-right{flex-shrink:0}.music-settings{gap:8px}.music-settings select{max-width:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

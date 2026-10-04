@@ -15,7 +15,7 @@ module.exports = {
     const member = await interaction.guild.members.fetch(target.id).catch(() => null)
     if (!member) return interaction.reply({ embeds: [err('❌ Usuario no encontrado en este servidor.')], ephemeral: true })
 
-    const ticket = await Ticket.findOne({ channelId: interaction.channel.id })
+    const ticket = await Ticket.findOne({ channelId: interaction.channelId })
     if (!ticket && !interaction.channel.name?.includes('ticket'))
       return interaction.reply({ embeds: [err('❌ Este canal no parece ser un ticket.')], ephemeral: true })
 

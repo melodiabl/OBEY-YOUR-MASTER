@@ -4,10 +4,12 @@ const TrackSchema = new Schema({
   title:      { type: String, required: true },
   author:     { type: String, default: 'Artista desconocido' },
   uri:        { type: String, required: true },
+  url: String,
+  info: Schema.Types.Mixed,
   artworkUrl: String,
   duration:   { type: Number, default: 0 },
   sourceName: { type: String, default: 'spotify' },
-}, { _id: false })
+}, { _id: true })
 
 const PlaylistSchema = new Schema({
   userId:   { type: String, required: true },

@@ -1,0 +1,97 @@
+const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
+const config = require(`${process.cwd()}/botconfig/config.json`);
+var ee = require(`${process.cwd()}/botconfig/embed.json`);
+const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
+module.exports = {
+    name: "avatar",
+    aliases: ["av"],
+    category: "Info",
+    description: "Get the Avatar of an user",
+    usage: "avatar [@USER] [global/guild]",
+    type: "user",
+    run: async (client, message, args, cmduser, text, prefix) => {
+        let es = client.settings.get(message.guild.id, "embed");
+        let ls = client.settings.get(message.guild.id, "language");
+        try {
+            //"HELLO"
+            var user;
+            let customavatar = false;
+            try {
+                if (args[1] && args[1].toLowerCase() == "global") {
+                    args.pop();
+                    user = await GetGlobalUser(message, args);
+                } else {
+                    user = await GetUser(message, args);
+                }
+            } catch (e) {
+                return message.reply({
+                    content: String("```" + e.message ? String(e.message).substring(0, 1900) : String(e) + "```"),
+                });
+            }
+            try {
+                let member = message.guild.members.cache.get(user.id);
+                if (!member) (await message.guild.members.fetch(user.id).catch(() => {})) || false;
+                if (member && member.avatar) {
+                    customavatar = member.displayAvatarURL({
+                        size: 4096,
+                    });
+                }
+            } catch (e) {
+                console.log(String(e.stack).grey.bgRed);
+            }
+            let embed = new EmbedBuilder()
+                .setAuthor({ name: handlemsg(client.la[ls].cmds.info.avatar.author, {
+                        usertag: user.username,
+                    }), iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" })
+                .setColor(es.color)
+                .setThumbnail(
+                    es.thumb
+                        ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                            ? es.footericon
+                            : client.user.displayAvatarURL()
+                        : null
+                )
+                .addFields({ name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                .addFields({ name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                .setURL(
+                    user.displayAvatarURL()
+                )
+                .setFooter(client.getFooter(es))
+                .setImage(
+                    user.displayAvatarURL({
+                        size: 4096,
+                    })
+                );
+            if (customavatar)
+                embed.setDescription(
+                    `**This Usuario has a Personalizado Avatar too!**\n\n> [**\`Click here to get the LINK of it\`**](${customavatar})\n\n> **There is also:** \`${prefix}customavatar [@User]\``
+                );
+            message.reply({
+                embeds: [embed],
+            });
+        } catch (e) {
+            console.log(String(e.stack).grey.bgRed);
+            return message.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor(es.wrongcolor)
+                        .setFooter(client.getFooter(es))
+                        .setTitle(client.la[ls].common.erroroccur)
+                        .setDescription(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"])),
+                ],
+            });
+        }
+    },
+};
+/*
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ */

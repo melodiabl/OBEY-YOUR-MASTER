@@ -68,6 +68,17 @@ function trackInfo(track) {
   return { info, pluginInfo }
 }
 
+function trackArtwork(track) {
+  const info = track?.info || track || {}
+  const plug = track?.pluginInfo || {}
+  const supplied = info.artworkUrl || info.thumbnail || plug.artworkUrl || plug.thumbnail
+  if (supplied && /^https?:\/\//i.test(supplied)) return supplied
+  const uri = String(info.uri || '')
+  const match = uri.match(/(?:youtube\.com\/watch\?.*?v=|youtu\.be\/|youtube\.com\/shorts\/)([\w-]{11})(?:[^\w-]|$)/)
+  const id = match?.[1] || (/youtube|ytdlp/i.test(info.sourceName || '') && /^[\w-]{11}$/.test(info.identifier || '') ? info.identifier : null)
+  return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null
+}
+
 function normalizePublicTrack(track, extra = {}) {
   const { info, pluginInfo } = trackInfo(track)
   const sourceName = cleanText(
@@ -76,7 +87,7 @@ function normalizePublicTrack(track, extra = {}) {
   ).toLowerCase()
   const uri = cleanText(info.catalogUri || info.uri || info.url || pluginInfo.uri || pluginInfo.url)
   const artworkUrl = cleanText(
-    info.artworkUrl || info.thumbnail || pluginInfo.artworkUrl || pluginInfo.thumbnail || extra.artworkUrl,
+    info.artworkUrl || info.thumbnail || pluginInfo.artworkUrl || pluginInfo.thumbnail || extra.artworkUrl || trackArtwork(track),
   ) || null
 
   return {
@@ -109,7 +120,7 @@ function tracksFromResolve(res) {
   return []
 }
 
-module.exports = {
+module.exports = { trackArtwork,
   cleanText, clampMs, fmtMs, progressBar, platform,
   loopEmoji, volEmoji, filterLabel, trackInfo,
   normalizePublicTrack, tracksFromResolve, MUSIC_ICON,

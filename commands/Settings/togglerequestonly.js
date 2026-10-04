@@ -1,0 +1,1 @@
+module.exports = require('../../handlers/music/command-settings')({ name: 'togglerequestonly', aliases: ['requestonly', 'setrequestonly', 'addrequestonly'], key: 'requestonlycmds', label: 'Solo solicitante' })

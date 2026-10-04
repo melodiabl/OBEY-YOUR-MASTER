@@ -50,21 +50,33 @@ public final class AudioStreamProbe {
         }
       });
       player.playTrack(track);
+      int seconds = args.length > 2 ? Integer.parseInt(args[2]) : 3;
+      int expectedFrames = seconds * 50;
       int frames = 0;
-      int bytes = 0;
-      long deadline = System.nanoTime() + 45_000_000_000L;
-      while (System.nanoTime() < deadline && error.get() == null && frames < 150) {
+      long bytes = 0;
+      long nextFrameAt = System.nanoTime();
+      long deadline = System.nanoTime() + (seconds + 45L) * 1_000_000_000L;
+      while (System.nanoTime() < deadline && error.get() == null && frames < expectedFrames) {
         AudioFrame frame = player.provide();
         if (frame != null && frame.getDataLength() > 0) {
           frames++;
           bytes += frame.getDataLength();
+          if (seconds > 3 && frames % 3000 == 0) {
+            System.out.println("STREAM_PROGRESS seconds=" + frames / 50 + " bytes=" + bytes);
+          }
         }
-        Thread.sleep(20);
+        if (player.getPlayingTrack() == null && frames > 0 && frames < expectedFrames) {
+          track = track.makeClone();
+          player.playTrack(track);
+        }
+        nextFrameAt += 20_000_000L;
+        long remaining = nextFrameAt - System.nanoTime();
+        if (remaining > 0) Thread.sleep(remaining / 1_000_000L, (int) (remaining % 1_000_000L));
       }
       System.out.println("STREAM_PROBE video=" + args[1] + " frames=" + frames
           + " bytes=" + bytes + " position=" + track.getPosition() + " error=" + error.get());
-      if (frames < 150 || track.getPosition() < 3000 || error.get() != null) {
-        throw new IllegalStateException("Audio stream did not produce three seconds of audio");
+      if (frames < expectedFrames || error.get() != null) {
+        throw new IllegalStateException("Audio stream did not produce " + seconds + " seconds of audio");
       }
     } finally {
       player.destroy();

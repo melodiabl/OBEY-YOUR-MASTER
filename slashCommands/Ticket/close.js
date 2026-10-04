@@ -8,7 +8,7 @@ module.exports = {
   ],
   run: async (client, interaction) => {
     const reason = interaction.options.getString('razon') || 'Sin razón'
-    const ticket = await Ticket.findOne({ channelId: interaction.channel.id, status: 'open' })
+    const ticket = await Ticket.findOne({ channelId: interaction.channelId, status: 'open' })
 
     if (!ticket) {
       // Check if it looks like a ticket channel from the Enmap system

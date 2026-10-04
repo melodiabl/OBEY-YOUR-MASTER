@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta name="csrf-token" content="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
+<script src="/js/dashboard-session.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title><%= guild.name %> — Player · OBEY YOUR MASTER</title>
@@ -468,6 +470,7 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
   .alb-card{width:116px}.alb-art,.alb-art-ph{width:98px;height:98px}
 }
 </style>
+<link rel="stylesheet" href="/css/internal-theme.css">
 </head>
 <body>
 <div class="app">
@@ -672,8 +675,9 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
         <button class="mp-queue-toggle" onclick="ctrl('autoplay')" id="mc-ap" title="Autoplay"><i class="fas fa-dice"></i></button>
         <button class="mp-stop" onclick="ctrl('stop')" title="Detener [X]"><i class="fas fa-stop"></i></button>
         <i class="fas fa-volume-low mp-vol-ico" id="mp-vol-ico"></i>
-        <input type="range" class="mp-vslider" id="mp-vol" min="0" max="200" value="100"
+        <input type="range" class="mp-vslider" id="mp-vol" min="0" max="200" value="100" aria-label="Volumen"
           oninput="onVolInput(this.value)" onchange="setVol(this.value)">
+        <output id="mp-vol-value" for="mp-vol" style="min-width:3.5em;font-variant-numeric:tabular-nums">100%</output>
       </div>
     </div>
 
@@ -739,9 +743,11 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
 </div>
 <div id="toast-wrap"></div>
 
+<script src="/js/player-volume.js"></script>
+<script src="/js/player-state.js"></script>
 <script>
 const GID = '<%= guild.id %>'
-let st = null, elapsed = 0, progTimer = null, dirty = false, playerLoadBusy = false
+let st = null, elapsed = 0, progTimer = null, playerLoadBusy = false
 // Tick suave con requestAnimationFrame
 let _rafId = null, _syncAt = 0, _syncElapsed = 0, _syncLength = 0, _playing = false, _rafUri = null
 function _startRaf(e, len) {
@@ -1283,10 +1289,7 @@ function render(d) {
     ).join('')
   }
 
-  if (!dirty) {
-    document.getElementById('mp-vol').value = d.volume
-    setVolIco(d.volume)
-  }
+  volumeControl.receive(d.volume)
 
   document.getElementById('mc-loop').className    = 'mc-btn' + (d.loop !== 'none' ? ' lit' : '')
   document.getElementById('mc-shuffle').className = 'mc-btn' + (d.shuffle ? ' lit' : '')
@@ -1493,19 +1496,35 @@ async function ctrl(act, val) {
   try {
     const r = await fetch(`/api/player/${GID}/action`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json())
     if (!r.ok) { toast(r.error||'Error','err'); return }
-    setTimeout(loadPlayer, 180)
+    if (r.state) { st = r.state; render(st) }
+    else loadPlayer()
   } catch { toast('Error de red','err') }
 }
 function cycleLoop() {
   ctrl('loop', (st?.loop||'none')==='none' ? 'track' : st?.loop==='track' ? 'queue' : 'none')
 }
-async function clearQueue() { if(!confirm('¿Limpiar la cola?')) return; ctrl('stop') }
-let vDeb
-function onVolInput(v) {
-  dirty = true; setVolIco(+v)
-  clearTimeout(vDeb); vDeb = setTimeout(() => setVol(v), 400)
-}
-function setVol(v) { dirty = false; ctrl('volume', v) }
+async function clearQueue() { if(!confirm('¿Limpiar la cola?')) return; ctrl('clearqueue') }
+const volumeControl = createVolumeControl({
+  display(v) {
+    const input = document.getElementById('mp-vol')
+    input.value = v
+    input.setAttribute('aria-valuetext', `${v}%`)
+    document.getElementById('mp-vol-value').value = `${v}%`
+    setVolIco(v)
+  },
+  async send(value) {
+    const response = await fetch(`/api/player/${GID}/action`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'volume', value }),
+    })
+    const result = await response.json()
+    if (!response.ok || !result.ok) throw new Error(result.error || 'No se pudo cambiar el volumen')
+    return result.state?.volume ?? value
+  },
+  onError(error) { toast(error.message || 'Error de red', 'err'); loadPlayer() },
+})
+function onVolInput(v) { volumeControl.input(v) }
+function setVol(v) { volumeControl.input(v, true) }
 function setVolIco(v) {
   document.getElementById('mp-vol-ico').className =
     `fas ${v==0?'fa-volume-xmark':v<60?'fa-volume-low':'fa-volume-high'} mp-vol-ico`
@@ -1584,7 +1603,8 @@ socket.on('connect', () => {
   socket.emit('join', GID)
   loadPlayer()
 })
-socket.on('player:state', d => { st = d; render(d) })
+const receivePlayerState = createPlayerStateReceiver(d => { st = d; render(d) })
+socket.on('player:state', receivePlayerState)
 socket.on('player:tick',  d => {
   if (!st?.active || st?.paused || !_playing) return
   // Solo re-sincroniza si hay deriva real (>2s) — evita saltos por lag de red normal

@@ -290,7 +290,7 @@
           <div class="form-group">
             <label class="form-label">Volumen por defecto</label>
             <span class="form-help">Valor entre 1 y 200 (100 = normal)</span>
-            <input type="number" name="defaultVolume" value="<%= settings.defaultVolume || 100 %>" min="1" max="200" class="form-input sm">
+            <input type="number" name="defaultVolume" value="<%= settings.defaultVolume ?? 100 %>" min="0" max="200" class="form-input sm">
           </div>
           <div class="toggle-group">
             <label class="toggle-item">

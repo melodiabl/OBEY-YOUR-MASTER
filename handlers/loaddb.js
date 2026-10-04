@@ -31,203 +31,7 @@ const RosterSchema        = require('../database/schemas/RosterSchema')
 const QueueSavesSchema    = require('../database/schemas/QueueSavesSchema')
 
 // ─── Helpers para dot-notation path ──────────────────────────────────────────
-function getPath(obj, path) {
-  if (!path || typeof path !== 'string') return obj
-  return path.split('.').reduce((o, k) => (o != null && typeof o === 'object' ? o[k] : undefined), obj)
-}
-function setPath(obj, path, value) {
-  if (!path || typeof path !== 'string') return value
-  const keys = path.split('.')
-  const last = keys.pop()
-  let cur = obj
-  for (const k of keys) { if (cur[k] == null || typeof cur[k] !== 'object') cur[k] = {}; cur = cur[k] }
-  cur[last] = value
-  return obj
-}
-function hasPath(obj, path) {
-  if (!path) return obj != null
-  return getPath(obj, path) !== undefined
-}
-
-// ─── SyncMap: API 100% sincrónica + persistencia MongoDB en background ────────
-class SyncMap {
-  constructor(model, guildKey = 'guildId') {
-    this.model    = model
-    this.guildKey = guildKey
-    this._cache   = new Map()
-  }
-
-  // Precargar todos los docs desde MongoDB (llamar en ready)
-  async preload() {
-    try {
-      const docs = await this.model.find().lean()
-      for (const doc of docs) {
-        const key = doc[this.guildKey]
-        if (key) this._cache.set(String(key), doc)
-      }
-    } catch (e) { /* si falla, arranca con cache vacío */ }
-  }
-
-  // Enmap API: ensure(key, defaultValue, path?)
-  ensure(key, defaultValue, path) {
-    key = String(key)
-    if (!this._cache.has(key)) {
-      // Nuevo guild: crear con los defaults
-      const obj = typeof defaultValue === 'object' && defaultValue !== null
-        ? { [this.guildKey]: key, ...JSON.parse(JSON.stringify(defaultValue)) }
-        : { [this.guildKey]: key }
-      this._cache.set(key, obj)
-      this.model.findOneAndUpdate({ [this.guildKey]: key }, { $setOnInsert: defaultValue || {} }, { upsert: true }).catch(() => {})
-    } else if (!path && typeof defaultValue === 'object' && defaultValue !== null) {
-      // Guild existente: merge de campos faltantes (ej. "embed", "suggest", etc.)
-      const doc = this._cache.get(key)
-      const toSet = {}
-      for (const [k, v] of Object.entries(defaultValue)) {
-        if (doc[k] === undefined) {
-          doc[k] = typeof v === 'object' ? JSON.parse(JSON.stringify(v)) : v
-          toSet[k] = v
-        }
-      }
-      if (Object.keys(toSet).length > 0) {
-        this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: toSet }).catch(() => {})
-      }
-    }
-    if (path) {
-      const doc = this._cache.get(key)
-      if (doc && !hasPath(doc, path)) {
-        const val = typeof defaultValue === 'object' ? JSON.parse(JSON.stringify(defaultValue)) : defaultValue
-        setPath(doc, path, val)
-        this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: val } }).catch(() => {})
-      }
-    }
-    return this._cache.get(key)
-  }
-
-  // Enmap API: get(key, path?)
-  get(key, path) {
-    if (!key) return null
-    key = String(key)
-    const doc = this._cache.get(key)
-    if (!doc) return null
-    if (path) return getPath(doc, path) ?? null
-    return doc
-  }
-
-  // Enmap API: set(key, value, path?)  ← value BEFORE path (Enmap order)
-  set(key, value, path) {
-    key = String(key)
-    this.ensure(key, {})
-    const doc = this._cache.get(key)
-    if (path) {
-      setPath(doc, path, value)
-      this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: value } }, { upsert: true }).catch(() => {})
-    } else if (typeof value === 'object' && value !== null) {
-      Object.assign(doc, value)
-      this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: value }, { upsert: true }).catch(() => {})
-    } else {
-      this._cache.set(key, { [this.guildKey]: key, value })
-      this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { value } }, { upsert: true }).catch(() => {})
-    }
-  }
-
-  // Enmap API: has(key, path?)
-  has(key, path) {
-    key = String(key)
-    const doc = this._cache.get(key)
-    if (!doc) return false
-    if (!path) return true
-    return hasPath(doc, path)
-  }
-
-  // Enmap API: delete(key)
-  delete(key) {
-    key = String(key)
-    this._cache.delete(key)
-    this.model.deleteOne({ [this.guildKey]: key }).catch(() => {})
-  }
-
-  // Enmap API: remove(key, val, path?) — removes val from array at path
-  remove(key, val, path) {
-    key = String(key)
-    const doc = this._cache.get(key)
-    if (!doc) return
-    const arr = path ? getPath(doc, path) : doc
-    if (!Array.isArray(arr)) return
-    const fn = typeof val === 'function' ? val : v => v === val
-    const filtered = arr.filter(v => !fn(v))
-    if (path) {
-      setPath(doc, path, filtered)
-      this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: filtered } }).catch(() => {})
-    }
-  }
-
-  // Enmap API: math — supports both (key, op, path, value) and (key, op, value, path)
-  math(key, op, arg3, arg4) {
-    key = String(key)
-    this.ensure(key, {})
-    const doc = this._cache.get(key)
-    // detect arg order: if arg3 is a string it's the path, else it's the value
-    const path   = typeof arg3 === 'string' ? arg3 : arg4
-    const amount = typeof arg3 === 'string' ? arg4 : arg3
-    const n = getPath(doc, path) || 0
-    const result = (op === 'add' || op === '+') ? n + amount
-      : (op === 'subtract' || op === '-') ? Math.max(0, n - amount)
-      : (op === 'multiply' || op === '*') ? n * amount
-      : n
-    setPath(doc, path, result)
-    this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: result } }).catch(() => {})
-  }
-
-  // Enmap API: inc(key, path)
-  inc(key, path) { this.math(String(key), 'add', path, 1) }
-
-  // Enmap API: push(key, value, path?)
-  push(key, value, path) {
-    key = String(key)
-    this.ensure(key, {})
-    const doc = this._cache.get(key)
-    if (path) {
-      const arr = getPath(doc, path) || []
-      arr.push(value)
-      setPath(doc, path, arr)
-      this.model.findOneAndUpdate({ [this.guildKey]: key }, { $push: { [path]: value } }, { upsert: true }).catch(() => {})
-    }
-  }
-
-  // Enmap API: find(fn) / findKey(fn)
-  find(fn) {
-    for (const v of this._cache.values()) { try { if (fn(v)) return v } catch {} }
-    return null
-  }
-
-  findKey(fn) {
-    for (const [k, v] of this._cache) { try { if (fn(v)) return k } catch {} }
-    return null
-  }
-
-  // Enmap API: filter(fn) — returns { keyArray() }
-  filter(fn) {
-    const keys = [], vals = []
-    for (const [k, v] of this._cache) { try { if (fn(v)) { keys.push(k); vals.push(v) } } catch {} }
-    return { _keys: keys, _vals: vals, keyArray() { return this._keys }, array() { return this._vals }, filterArray(f) { return this._vals.filter(f) } }
-  }
-
-  // Enmap API: filterArray(fn) — returns array of matching values
-  filterArray(fn) {
-    const vals = []
-    for (const [, v] of this._cache) { try { if (fn(v)) vals.push(v) } catch {} }
-    return vals
-  }
-
-  // Enmap API: array() — returns all values as array
-  array() { return [...this._cache.values()] }
-
-  keyArray() { return [...this._cache.keys()] }
-  entries()  { return this._cache.entries() }
-  forEach(fn) { this._cache.forEach(fn) }
-  each(fn)    { this._cache.forEach(fn) }
-  get size()  { return this._cache.size }
-}
+const SyncMap = require('./sync-map')
 
 // EnmapLike importado desde ./enmap-like.js (solo para snipes y jointocreatemap ephemeral)
 
@@ -239,10 +43,10 @@ module.exports = async client => {
 
   // SyncMap: wraps MongoDB con acceso sincrónico vía cache
   client.settings      = new SyncMap(GuildSchema)
-  client.setups        = new SyncMap(GuildSchema)
-  client.musicsettings = new SyncMap(GuildSchema)
-  client.reactionrole  = new SyncMap(GuildSchema)
-  client.social_log    = new SyncMap(GuildSchema)
+  client.setups        = client.settings
+  client.musicsettings = client.settings
+  client.reactionrole  = client.settings
+  client.social_log    = client.settings
   client.keyword        = new SyncMap(KeywordSchema)
   client.customcommands = new SyncMap(CustomCommandSchema)
   client.premium        = new SyncMap(PremiumSchema)
@@ -286,41 +90,31 @@ module.exports = async client => {
   client.upsertGuild = (guildId, data) => GuildSchema.findOneAndUpdate({ guildId }, { $set: data }, { upsert: true, new: true })
   client.upsertUser  = (userId, guildId, data) => UserSchema.findOneAndUpdate({ userId, guildId }, { $set: data }, { upsert: true, new: true })
 
-  // Precargar guilds en el evento ready
-  client.once('ready', async () => {
-    console.log('[DB] Precargando datos de guilds desde MongoDB...'.cyan)
-    await Promise.all([
-      client.settings.preload(),
-      client.setups.preload(),
-      client.musicsettings.preload(),
-      client.reactionrole.preload(),
-      client.social_log.preload(),
-      client.keyword.preload(),
-      client.customcommands.preload(),
-      client.premium.preload(),
-      client.mutes.preload(),
-      client.afkDB.preload(),
-      client.stats.preload(),
-      client.blacklist.preload(),
-      client.economy.preload(),
-      client.userProfiles.preload(),
-      client.invitesdb.preload(),
-      client.jtcsettings.preload(),
-      client.jtcsettings2.preload(),
-      client.jtcsettings3.preload(),
-      client.backupDB.preload(),
-      client.notes.preload(),
-      client.roster.preload(),
-      client.tiktok.preload(),
-      client.youtube_log.preload(),
-      client.joinvc.preload(),
-      client.queuesaves.preload(),
-      client.points.preload(),
-    ])
-    console.log(`[DB] Precarga completa: ${client.settings.size} guilds en cache`.green)
-    client._dbReady = true
-    client.emit('dbReady')
-  })
+  const stores = [...new Set(Object.values(client).filter(value => value instanceof SyncMap))]
+  let initializing = false
+  let retryTimer
+  async function initializeDatabase() {
+    if (initializing || client._dbReady || client._shuttingDown) return
+    initializing = true
+    try {
+      await Promise.all(stores.map(store => store.preload()))
+      const migrated = await require('./music/playlist-repository').migratePlaylists(require('../database/schemas/PlaylistSchema'), require('../database/schemas/MusicPlaylistSchema'))
+      console.log(`[DB] Ready: ${client.settings.size} guilds, ${migrated} playlists reconciled`)
+      client._dbReady = true
+      client._dbError = null
+      client.emit('dbReady')
+    } catch (error) {
+      client._dbReady = false
+      client._dbError = error
+      console.error('[DB] Initialization failed:', error.message)
+      clearTimeout(retryTimer)
+      retryTimer = setTimeout(initializeDatabase, 10000)
+      retryTimer.unref?.()
+    } finally { initializing = false }
+  }
+  client.once('ready', initializeDatabase)
+  client.stopDatabaseInitialization = () => clearTimeout(retryTimer)
+  client.flushDatabase = () => Promise.all([...new Set(Object.values(client).filter(value => value instanceof SyncMap))].map(store => store.flush()))
 
   console.log(`[DB] Listo en ${Date.now() - start}ms`.green)
 }

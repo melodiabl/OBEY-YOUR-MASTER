@@ -8,7 +8,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 const { database } = require('./database')
 
-module.exports = (app, client) => {
+module.exports = (app, client, { canManageGuild = () => false } = {}) => {
   const music = () => client.music
   const ok  = (res, data) => res.json({ success: true, data })
   const bad = (res, code, msg) => res.status(code).json({ success: false, error: msg })
@@ -21,23 +21,25 @@ module.exports = (app, client) => {
   // ── Público (sin datos personales) ───────────────────────────────────────────
   app.get('/api/music/health', (req, res) => res.json({ status: 'ok', uptime: Math.floor(process.uptime()) }))
 
-  app.get('/api/music/status/:guildId', (req, res) =>
-    ok(res, music()?.getPublicState?.(req.params.guildId) || { active: false }))
+  app.get('/api/music/status/:guildId', apiAuth, (req, res) => {
+    if (!canManageGuild(req.session.user, req.params.guildId)) return bad(res, 403, 'no_permission')
+    ok(res, music()?.getPublicState?.(req.params.guildId) || { active: false })
+  })
 
   app.get('/api/music/search', wrap(async (req, res) => {
     const q = req.query.q
     if (!q) return bad(res, 400, 'missing q')
     const r = await music().search(String(q), 'WebAPI')
-    ok(res, (r?.tracks || []).map(t => t.info || t))
+    ok(res, (r?.tracks || []).map(t => require('./utils').normalizePublicTrack(t)))
   }))
 
-  app.get('/api/top/tracks', wrap(async (req, res) => ok(res, await database.getTopTracks(req.query.guildId, Number(req.query.limit) || 10))))
-  app.get('/api/top/users',  wrap(async (req, res) => ok(res, await database.getTopUsers(req.query.guildId, Number(req.query.limit) || 10))))
-  app.get('/api/top/guilds', wrap(async (req, res) => ok(res, await database.getTopGuilds(Number(req.query.limit) || 10))))
+  app.get('/api/top/tracks', wrap(async (req, res) => ok(res, await database.getTopTracks(req.query.guildId, Math.max(1, Math.min(100, Number(req.query.limit) || 10))))))
+  app.get('/api/top/users',  wrap(async (req, res) => ok(res, await database.getTopUsers(req.query.guildId, Math.max(1, Math.min(100, Number(req.query.limit) || 10))))))
+  app.get('/api/top/guilds', wrap(async (req, res) => ok(res, await database.getTopGuilds(Math.max(1, Math.min(100, Number(req.query.limit) || 10))))))
 
   // ── Privado (userId SIEMPRE de la sesión) ────────────────────────────────────
   app.get('/api/music/liked',  apiAuth, wrap(async (req, res) => ok(res, await database.getLikedSongs(uid(req)))))
-  app.get('/api/music/recent', apiAuth, wrap(async (req, res) => ok(res, await database.getRecentlyPlayed(uid(req), Number(req.query.limit) || 20))))
+  app.get('/api/music/recent', apiAuth, wrap(async (req, res) => ok(res, await database.getRecentlyPlayed(uid(req), Math.max(1, Math.min(100, Number(req.query.limit) || 20))))))
 
   app.post('/api/music/like', apiAuth, wrap(async (req, res) => {
     const userId = uid(req)                       // ← de la sesión, NO del body

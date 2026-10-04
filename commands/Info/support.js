@@ -1,0 +1,74 @@
+const { EmbedBuilder, ActionRowBuilder,
+    ButtonStyle
+} = require("discord.js");
+const Discord = require("discord.js");
+const config = require(`${process.cwd()}/botconfig/config.json`);
+var ee = require(`${process.cwd()}/botconfig/embed.json`);
+const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const { ButtonBuilder } = require("discord.js");
+module.exports = {
+    name: "support",
+    category: "Info",
+    usage: "invite",
+    description: "Sends you the Support Servidor Link",
+    type: "bot",
+    run: async (client, message, args, cmduser, text, prefix) => {
+        let es = client.settings.get(message.guild.id, "embed");
+        let ls = client.settings.get(message.guild.id, "language");
+        try {
+            let button_public_invite = new ButtonBuilder()
+                .setStyle(ButtonStyle.Link)
+                .setLabel("Invite Public Bot")
+                .setURL(
+                    "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
+                );
+            let button_support_dc = new ButtonBuilder()
+                .setStyle(ButtonStyle.Link)
+                .setLabel("Support Server")
+                .setURL("https://github.com/melodiabl");
+            let button_invite = new ButtonBuilder()
+                .setStyle(ButtonStyle.Link)
+                .setLabel("Invite this Bot")
+                .setURL(
+                    `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`
+                );
+            //array of all buttons
+            const allbuttons = [
+                new ActionRowBuilder().addComponents([button_public_invite, button_support_dc, button_invite]),
+            ];
+            message.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor(ee.color)
+                        .setTitle(client.la[ls].cmds.info.support.title)
+                        .setDescription(eval(client.la[ls]["cmds"]["info"]["support"]["variable1"]))
+                        .setFooter({ text: "Clan Bot | powered by github.com/melodiabl", iconURL: "https://imgur.com/jPItIw0.gif" })
+                        .setURL(
+                            "https://discord.com/api/oauth2/authorize?client_id=784364932149280778&permissions=8&scope=bot%20applications.commands"
+                        ),
+                ],
+                components: allbuttons,
+            });
+        } catch (e) {
+            console.log(String(e.stack).grey.bgRed);
+            return message.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor(es.wrongcolor)
+                        .setFooter(client.getFooter(es))
+                        .setTitle(client.la[ls].common.erroroccur)
+                        .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
+                ],
+            });
+        }
+    },
+};
+/**
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ * Desarrollado por Melodia | https://github.com/melodiabl
+ * @INFO
+ */

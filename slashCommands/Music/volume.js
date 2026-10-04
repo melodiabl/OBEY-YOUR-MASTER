@@ -7,8 +7,8 @@ module.exports = {
     if (!interaction.member?.voice?.channel)
       return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
     await interaction.deferReply()
-    const vol = Math.max(0, Math.min(200, interaction.options.getInteger('volumen') || 100))
-    const prev = client.music?.getState(interaction.guild.id)?.volume || 100
+    const vol = Math.max(0, Math.min(200, interaction.options.getInteger('volumen') ?? 100))
+    const prev = client.music?.getState(interaction.guild.id)?.volume ?? 100
     await client.music?.setVolume(interaction.guild.id, vol)
     const emoji = vol === 0 ? '🔇' : vol < 40 ? '🔉' : '🔊'
     const bar = '▰'.repeat(Math.round(vol / 10)) + '▱'.repeat(20 - Math.round(vol / 10))

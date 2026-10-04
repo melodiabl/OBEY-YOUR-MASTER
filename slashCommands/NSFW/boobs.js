@@ -43,7 +43,7 @@ module.exports = {
                 });
             })
             .then(function (res) {
-                let attachment = new AttachmentBuilder(res, "file.png");
+                let attachment = new AttachmentBuilder(res, { name: "file.png" });
                 interaction?.reply({
                     files: [attachment],
                     ephemeral: true,

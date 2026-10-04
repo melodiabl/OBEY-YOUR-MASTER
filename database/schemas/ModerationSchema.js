@@ -8,5 +8,5 @@ const ModerationSchema = new Schema({
   duration: Number,
   active: { type: Boolean, default: true },
   caseId: Number,
-}, { timestamps: true })
+}, { timestamps: true, strict: false })
 module.exports = model('Moderation', ModerationSchema)

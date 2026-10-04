@@ -1,0 +1,125 @@
+[
+  {
+    "route": "/panel",
+    "width": 390,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/dashboard",
+    "width": 390,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/dashboard/123456",
+    "width": 390,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/music/123456",
+    "width": 390,
+    "errors": [],
+    "overflow": false,
+    "immediateVolume": "0%",
+    "confirmedVolume": "0%",
+    "coverFallback": true,
+    "coverTransition": true,
+    "liveTitle": "Siguiente canción"
+  },
+  {
+    "route": "/library/123456",
+    "width": 390,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/stats/123456",
+    "width": 390,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/panel",
+    "width": 768,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/dashboard",
+    "width": 768,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/dashboard/123456",
+    "width": 768,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/music/123456",
+    "width": 768,
+    "errors": [],
+    "overflow": false,
+    "immediateVolume": "0%",
+    "confirmedVolume": "0%",
+    "coverFallback": true,
+    "coverTransition": true,
+    "liveTitle": "Siguiente canción"
+  },
+  {
+    "route": "/library/123456",
+    "width": 768,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/stats/123456",
+    "width": 768,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/panel",
+    "width": 1440,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/dashboard",
+    "width": 1440,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/dashboard/123456",
+    "width": 1440,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/music/123456",
+    "width": 1440,
+    "errors": [],
+    "overflow": false,
+    "immediateVolume": "0%",
+    "confirmedVolume": "0%",
+    "coverFallback": true,
+    "coverTransition": true,
+    "liveTitle": "Siguiente canción"
+  },
+  {
+    "route": "/library/123456",
+    "width": 1440,
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "route": "/stats/123456",
+    "width": 1440,
+    "errors": [],
+    "overflow": false
+  }
+]

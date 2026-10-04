@@ -31,13 +31,11 @@ module.exports = {
         const player = await client.music.joinChannel(interaction.guild.id, voiceChannel.id, interaction.channelId)
         const state  = client.music.getState(interaction.guild.id)
         if (result.loadType === 'playlist' && result.tracks.length > 1) {
-          for (const t of result.tracks) state.queue.push(t)
-          if (!state.currentTrack) await client.music._playNext(interaction.guild.id, player)
+          await client.music.enqueue(interaction.guild.id, result.tracks)
           return interaction.editReply({ embeds: [playlistAdded(result, query, interaction.user.id)] }).catch(() => {})
         }
-        const track = result.tracks[0]; state.queue.push(track)
+        const track = result.tracks[0]; await client.music.enqueue(interaction.guild.id, [track])
         const wasEmpty = !state.currentTrack
-        if (wasEmpty) await client.music._playNext(interaction.guild.id, player)
         return interaction.editReply({ embeds: [addedEmbed(track.info || track, { isNow: wasEmpty, added: 1 }, interaction.user.id)] }).catch(() => {})
       } catch (e) {
         return interaction.editReply({ embeds: [err(e.message || String(e))] }).catch(() => {})

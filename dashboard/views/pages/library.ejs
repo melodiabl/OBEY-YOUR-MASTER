@@ -55,6 +55,7 @@
 <div class="lib-pane" id="pane-rec"><div class="lib-loading">Cargando recientes…</div></div>
 <div class="lib-pane" id="pane-top"><div class="lib-loading">Cargando top…</div></div>
 
+<script src="/js/track-artwork.js"></script>
 <script>
 const GID = '<%= guild.id %>'
 const esc = s => String(s ?? '').replace(/[&<>"'`\\]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;','\\':'&#92;'}[c]))
@@ -74,7 +75,7 @@ async function unlike(trackId, el){
 }
 
 function rowHtml(t, i, { rm, count } = {}){
-  const art = /^https?:\/\//i.test(t.artworkUrl || t.artwork || '') ? (t.artworkUrl || t.artwork) : '/img/music-placeholder.svg'
+  const art = trackArtwork.url(t)
   const dur = t.isStream ? 'LIVE' : (t.length ? fmt(t.length) : (count ? `${count} ▶` : ''))
   return `<div class="lib-row" data-uri="${esc(t.uri||'')}" data-trackid="${esc(t.trackId||'')}">
     <div class="lib-num">${i+1}</div>

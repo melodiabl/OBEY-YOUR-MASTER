@@ -115,9 +115,9 @@ const lavalinkNodes = (envLavalinkHost ? [{
 
 if (lavalinkNodes.length) {
   client.shoukaku = new Shoukaku(new Connectors.DiscordJS(client), lavalinkNodes, {
-    resume: true, resumeTimeout: 60,
+    resume: true, resumeTimeout: 60, resumeByLibrary: false,
     reconnectTries: 1, reconnectInterval: 1,
-    moveOnDisconnect: true,
+    moveOnDisconnect: false,
   })
 
   // Track pending re-add timers per node name
@@ -180,7 +180,12 @@ const coreHandlers = [
 ]
 
 for (const name of coreHandlers) {
-  try { require('./handlers/' + name)(client) }
+  try {
+    const initialize = require('./handlers/' + name)
+    const core = ['clientvariables', 'command', 'loaddb', 'events', 'slashCommands', 'musichandler', 'logger'].includes(name)
+    const initialized = core ? initialize(client) : require('./handlers/feature-registration').registerFeature(client, name, initialize)
+    Promise.resolve(initialized).catch(error => console.error('[Handler] ' + name + ': ' + error.message))
+  }
   catch (e) { console.warn('[Handler] ' + name + ': ' + e.message) }
 }
 
@@ -193,9 +198,35 @@ for (const name of ['livelog','youtube']) {
 const token = process.env.token || process.env.BOT_TOKEN || config.token
 if (!token) { console.error('[Bot] BOT_TOKEN no configurado'.red); process.exit(1) }
 
-client.login(token).then(() => {
-  client.once('dbReady', () => {
-    require('./dashboard/index')(client).catch(e => console.warn('[Dashboard] Error:', e.message))
-  })
+client.once('dbReady', () => {
+  require('./dashboard/index')(client).catch(error => console.warn('[Dashboard] Error:', error.message))
+  if (process.env.OBEY_RELEASE_CHECK) {
+    setTimeout(() => {
+      require('./scripts/live-music-check')(client, process.env.OBEY_RELEASE_CHECK, process.env.OBEY_CHECK_STATE_FILE)
+        .catch(error => console.error('[LIVE_CHECK] failed:', error.message))
+    }, 30000).unref()
+  }
 })
+client.login(token).catch(error => { console.error('[Bot] Login failed:', error.message); process.exitCode = 1 })
+let shuttingDown = false
+async function shutdown() {
+  if (shuttingDown) return
+  shuttingDown = true
+  client._shuttingDown = true
+  client.stopDatabaseInitialization?.()
+  const timeout = setTimeout(() => process.exit(1), 20000)
+  timeout.unref()
+  try {
+    await client.music?.flushSessions?.()
+    await client.flushDatabase?.()
+    await Promise.allSettled([...client.shoukaku.players.keys()].map(id => client.shoukaku.leaveVoiceChannel(id)))
+    client.destroy()
+    await mongoose.disconnect()
+    clearTimeout(timeout)
+    process.exit(0)
+  } catch (error) { console.error('[Bot] Shutdown failed:', error.message); process.exit(1) }
+}
+process.once('SIGTERM', shutdown)
+process.once('SIGINT', shutdown)
+
 module.exports = client
