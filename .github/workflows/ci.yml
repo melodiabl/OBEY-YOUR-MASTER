@@ -1,0 +1,35 @@
+name: Platform checks
+
+on:
+  pull_request:
+    branches: [feat/motor-soundy]
+  push:
+    branches: [feature/obey-main-implementation]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: obey-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install native Canvas build requirements
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev python3
+      - run: npm ci
+      - run: npm test
+      - run: node scripts/obey-assets.js
+      - run: node scripts/validate-commands.js
+      - name: Build runtime image without starting services
+        run: docker build -t obey-platform-check .
