@@ -258,8 +258,8 @@ module.exports = {
       const es   = client.settings.get(gid, 'embed') || {}
       const rawC = es.color
       const color = typeof rawC === 'number' ? rawC : parseInt(String(rawC||'').replace('#',''), 16) || 0x5865F2
-      const msg = (require('../../handlers/config-service').welcomeMessage(client.settings, gid) || '¡Bienvenido {user}!')
-        .replace('{user}', `${member.user}`).replace('{username}', member.user.username)
+      const msg = require('../../handlers/welcome-message').renderWelcomeMessage(
+        require('../../handlers/config-service').welcomeMessage(client.settings, gid) || '¡Bienvenido {user}!', member.user, interaction.guild)
 
       const form = new FormData()
       form.append('files[0]', buf, { filename: 'tarjeta-bienvenida.png', contentType: 'image/png' })

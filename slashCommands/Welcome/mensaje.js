@@ -23,10 +23,7 @@ module.exports = {
       return interaction.reply({ embeds: [err('❌ No se pudo guardar el mensaje de bienvenida. Inténtalo de nuevo.')], ephemeral: true })
     }
 
-    const preview = msg
-      .replace('{user}', `${interaction.user}`)
-      .replace('{username}', interaction.user.username)
-      .replace('{guild}', interaction.guild.name)
+    const preview = require('../../handlers/welcome-message').renderWelcomeMessage(msg, interaction.user, interaction.guild)
 
     await interaction.reply({
       embeds: [

@@ -1196,10 +1196,7 @@ module.exports = client => {
                     })
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable7"]))
                     .setDescription(
-                        (require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!")
-                            .replace("{user}", `${member.user}`)
-                            .replace("{username}", `${member.user.username}`)
-                            .replace("{usertag}", `${member.user.username}`)
+                        require("./welcome-message").renderWelcomeMessage(require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!", member.user, member.guild)
                     )
                     .addFields({ name: eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variablex_8"]), value: eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable8"]) });
 
@@ -1312,10 +1309,7 @@ module.exports = client => {
                     })
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable11"]))
                     .setDescription(
-                        (require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!")
-                            .replace("{user}", `${member.user}`)
-                            .replace("{username}", `${member.user.username}`)
-                            .replace("{usertag}", `${member.user.username}`)
+                        require("./welcome-message").renderWelcomeMessage(require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!", member.user, member.guild)
                     )
                     .setImage(client.settings.get(member.guild.id, "welcome.custom"));
                 if (client.settings.get(member.guild.id, "welcome.invite"))
@@ -1427,10 +1421,7 @@ module.exports = client => {
                         })
                         .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable13"]))
                         .setDescription(
-                            (require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!")
-                                .replace("{user}", `${member.user}`)
-                                .replace("{username}", `${member.user.username}`)
-                                .replace("{usertag}", `${member.user.username}`)
+                            require("./welcome-message").renderWelcomeMessage(require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!", member.user, member.guild)
                         );
                     if (client.settings.get(member.guild.id, "welcome.invite"))
                         welcomeembed.addFields({ name: "\u200b", value: `${invitemessage}` });

@@ -91,10 +91,7 @@ module.exports = {
       const rawC    = es.color
       const color   = typeof rawC === 'number' ? rawC : parseInt(String(rawC || '').replace('#', ''), 16) || 0x5865F2
       const rawMsg  = require('../../handlers/config-service').welcomeMessage(client.settings, guildId) || '¡Bienvenido {user} al servidor!'
-      const description = rawMsg
-        .replace('{user}', `${member.user}`)
-        .replace('{username}', member.user.username)
-        .replace('{usertag}', member.user.username)
+      const description = require('../../handlers/welcome-message').renderWelcomeMessage(rawMsg, member.user, interaction.guild)
 
       const form = new FormData()
       form.append('files[0]', buf, { filename: 'welcome-preview.png', contentType: 'image/png' })
