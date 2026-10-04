@@ -1,32 +1,22 @@
 # Tareas y checkpoints de OBEY
 
-Estado inicial: todo pendiente de aceptación integral, incluyendo código preexistente. Evidencia parcial registrada en AUDIT; no implica aceptación Discord. Mantener este archivo actualizado sin borrar alcance.
+Estado del checkpoint: T01 completa como auditoría estática; T02–T04 implementadas localmente, aceptación Discord pendiente; T19 parcial (Discord implementado; web pendiente). Consultar docs/platform/CHECKPOINT.md. Mantener todos los requisitos pendientes sin borrarlos.
 
 ## T01
 
-- [ ] Auditoría y matriz íntegra (fase 0).
+- [x] Auditoría y matriz íntegra (fase 0).
 
-**Descripción:** 29 secciones conservadas; origen/current/cambio/fase/interfaces/permisos/persistencia/pruebas/estado; fuentes completas y conteo roots/subcommands separado.
+**Aceptación cumplida:** 29 secciones/148 bloques íntegros conservados; entradas, inventarios de comandos y permisos, páginas/endpoints, infraestructura, persistencia, deps, deuda, clasificación y plan por dependencias.
 
-**Aceptación:**
-
-- [ ] Flujo indicado conectado a datos, permisos, errores y persistencia adecuados; requisitos de esa sección del maestro conservados.
-- [ ] Discord y web comparten servicio y estado donde aplica, sin duplicación ni datos simulados.
-- [ ] Criterios específicos: 29 secciones conservadas; origen/current/cambio/fase/interfaces/permisos/persistencia/pruebas/estado; fuentes completas y conteo roots/subcommands separado.
-
-**Verificación:**
-
-- [ ] Tests focalizados con `node --test test/<archivo-del-slice>.test.js` cubren conducta y fallos de estos criterios.
-- [ ] `git diff --check` y schemas/build apropiados; si hay UI, inspección renderizada loading/empty/error/denied/disconnected/long text/móvil/teclado.
-- [ ] Registrar resultado exacto y estado pendiente del entorno real; nunca iniciar bot ni registrar comandos para un audit offline.
+**Verificación:** JSON parseado; IDs únicos y textos de requisitos idénticos al maestro; lectura completa de siete antecedentes; conteos mediante loaders sin REST/login; paths auditados y estado git. Evidencia: `docs/platform/AUDIT.md` y `docs/platform/requirements.json`.
 
 **Dependencias:** Ninguna.
 
-**Archivos previstos:** `docs/platform/AUDIT.md`, `docs/platform/requirements.json`.
-
-**Scope:** Pequeño.
+**Scope:** Pequeño de código; documentos/inventario generados grandes por alcance completo.
 
 ## T02
+
+**Checkpoint:** Implementado local: registry, rutas seguras, hashes/mapas y validación real de 89 PNG; 8 pruebas en test/obey-assets.test.js. Paths reales en CHECKPOINT.
 
 - [ ] Asset Registry y validación offline (fase 1).
 
@@ -52,6 +42,8 @@ Estado inicial: todo pendiente de aceptación integral, incluyendo código preex
 
 ## T03
 
+**Checkpoint:** Pipeline preparado: dry-run sin red; aplicación explícita, reutilización/hash, checkpoint atómico, respuesta perdida y preservación de emojis ajenos. Upload real pendiente; no se cargaron emojis.
+
 - [ ] Sincronización idempotente de emojis (fase 1).
 
 **Descripción:** Planificar create/update por nombre/hash sin duplicados; IDs solo reales; token entorno sin log y dry run por defecto; recuperación fallo parcial.
@@ -75,6 +67,8 @@ Estado inicial: todo pendiente de aceptación integral, incluyendo código preex
 **Scope:** Medio.
 
 ## T04
+
+**Checkpoint:** Builders activos y setup vacío comparten doce controles, etiquetas y estados. Tests y preview navegador pasan; canary Discord pendiente.
 
 - [ ] Fallbacks en doce controles activos (fase 1).
 
@@ -453,6 +447,8 @@ Estado inicial: todo pendiente de aceptación integral, incluyendo código preex
 **Scope:** Medio.
 
 ## T19
+
+**Checkpoint:** Discord: texto completo paginado, owner/guild/message/TTL, proveedor compartido y guards tardíos, 27 regresiones. Falta UI/eventos/estado compartido web y prueba canary.
 
 - [ ] Letras completas y estado compartido (fase 3).
 
@@ -1459,4 +1455,3 @@ Estado inicial: todo pendiente de aceptación integral, incluyendo código preex
 - [ ] Tests focalizados y contratos/schemas pertinentes pasan; mantener startup/producción separados.
 - [ ] Revisión de integración concreta, UI/render si aplica y aislamiento/permisos/fallo comprobados.
 - [ ] Actualizar matriz/AUDIT/ADR con evidencia, archivos, restricciones de credenciales y siguiente tarea con dependencias.
-

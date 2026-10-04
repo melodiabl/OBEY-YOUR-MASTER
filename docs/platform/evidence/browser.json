@@ -1,0 +1,16 @@
+{
+  "tool": "Playwright 1.62.0 with isolated headless Chromium (existing local tool)",
+  "page": "offline builder approximation",
+  "emojiFont": "Noto Color Emoji, local preview only",
+  "desktop": {
+    "sections": 5,
+    "buttons": 60,
+    "disabled": 17,
+    "overflow": false
+  },
+  "mobile": {
+    "overflow": false,
+    "labels": true
+  },
+  "errors": []
+}

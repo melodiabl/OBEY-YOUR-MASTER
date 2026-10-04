@@ -520,9 +520,10 @@
       "current": {
         "evidence": [
           "scripts/audit-commands.js",
-          "handlers/slashCommands.js"
+          "handlers/slashCommands.js",
+          "docs/platform/AUDIT.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Actualizar inventario/matriz con evidencia por checkpoint.",
       "phase": 0,
@@ -532,10 +533,12 @@
       "persistence": "docs/platform",
       "tests": {
         "required": "Carga local de schemas sin registro remoto",
-        "evidence": [],
+        "evidence": [
+          "Inventario local 645 prefijos; slash 19 raíces, 165 subcomandos, 1 standalone. Sin login/registro/producción."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "completado_estatico"
     },
     {
       "id": "OBEY-04-02",
@@ -559,9 +562,11 @@
       "current": {
         "evidence": [
           "scripts/audit-commands.js",
-          "handlers/slashCommands.js"
+          "handlers/slashCommands.js",
+          "docs/platform/AUDIT.md",
+          "tasks/plan.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Actualizar inventario/matriz con evidencia por checkpoint.",
       "phase": 0,
@@ -571,10 +576,12 @@
       "persistence": "docs/platform",
       "tests": {
         "required": "Carga local de schemas sin registro remoto",
-        "evidence": [],
+        "evidence": [
+          "Mapa de entradas, endpoints, jobs, permisos, configuración y deps lock/instaladas."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "completado_estatico"
     },
     {
       "id": "OBEY-04-03",
@@ -598,9 +605,10 @@
       "current": {
         "evidence": [
           "scripts/audit-commands.js",
-          "handlers/slashCommands.js"
+          "handlers/slashCommands.js",
+          "docs/platform/AUDIT.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Actualizar inventario/matriz con evidencia por checkpoint.",
       "phase": 0,
@@ -610,10 +618,12 @@
       "persistence": "docs/platform",
       "tests": {
         "required": "Carga local de schemas sin registro remoto",
-        "evidence": [],
+        "evidence": [
+          "Clasificaciones con evidencia por subsistema."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "completado_estatico"
     },
     {
       "id": "OBEY-04-04",
@@ -637,9 +647,10 @@
       "current": {
         "evidence": [
           "scripts/audit-commands.js",
-          "handlers/slashCommands.js"
+          "handlers/slashCommands.js",
+          "docs/platform/requirements.json"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Actualizar inventario/matriz con evidencia por checkpoint.",
       "phase": 0,
@@ -649,10 +660,12 @@
       "persistence": "docs/platform",
       "tests": {
         "required": "Carga local de schemas sin registro remoto",
-        "evidence": [],
+        "evidence": [
+          "148 IDs únicos; cobertura exacta de 29 secciones del maestro."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "completado_estatico"
     },
     {
       "id": "OBEY-04-05",
@@ -676,9 +689,12 @@
       "current": {
         "evidence": [
           "scripts/audit-commands.js",
-          "handlers/slashCommands.js"
+          "handlers/slashCommands.js",
+          "tasks/plan.md",
+          "tasks/todo.md",
+          "docs/platform/CHECKPOINT.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Actualizar inventario/matriz con evidencia por checkpoint.",
       "phase": 0,
@@ -688,10 +704,12 @@
       "persistence": "docs/platform",
       "tests": {
         "required": "Carga local de schemas sin registro remoto",
-        "evidence": [],
+        "evidence": [
+          "Checkpoint ejecutable; fases pendientes conservadas."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "en_curso"
     },
     {
       "id": "OBEY-05-01",
@@ -3481,9 +3499,12 @@
           "handlers/music/embeds.js",
           "handlers/music/index.js",
           "handlers/canvasUtils.js",
-          "Dockerfile"
+          "Dockerfile",
+          "handlers/assets/registry.js",
+          "handlers/assets/emoji-pipeline.js",
+          "scripts/obey-assets.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Registry/pipeline reproducible con fallback en flujo activo; preview y renderer seguro.",
       "phase": 1,
@@ -3493,10 +3514,12 @@
       "persistence": "Mapa real de IDs/hash/rutas",
       "tests": {
         "required": "Dimensiones/peso/no duplicados/sin token/fallback",
-        "evidence": [],
+        "evidence": [
+          "test/obey-assets.test.js: 8 regresiones; validación 89 PNG; upload real pendiente."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "implementado_local"
     },
     {
       "id": "OBEY-18-03",
@@ -3522,9 +3545,11 @@
           "handlers/music/embeds.js",
           "handlers/music/index.js",
           "handlers/canvasUtils.js",
-          "Dockerfile"
+          "Dockerfile",
+          "handlers/assets/registry.js",
+          "scripts/preview-music-controls.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Registry/pipeline reproducible con fallback en flujo activo; preview y renderer seguro.",
       "phase": 1,
@@ -3534,10 +3559,12 @@
       "persistence": "Mapa real de IDs/hash/rutas",
       "tests": {
         "required": "Dimensiones/peso/no duplicados/sin token/fallback",
-        "evidence": [],
+        "evidence": [
+          "Carga solo mapa seleccionado; preview pequeño local; legibilidad real Discord pendiente."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-18-04",
@@ -3563,9 +3590,11 @@
           "handlers/music/embeds.js",
           "handlers/music/index.js",
           "handlers/canvasUtils.js",
-          "Dockerfile"
+          "Dockerfile",
+          "assets/obey/assets/fonts",
+          "assets/obey/assets/templates"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Registry/pipeline reproducible con fallback en flujo activo; preview y renderer seguro.",
       "phase": 1,
@@ -3575,10 +3604,12 @@
       "persistence": "Mapa real de IDs/hash/rutas",
       "tests": {
         "required": "Dimensiones/peso/no duplicados/sin token/fallback",
-        "evidence": [],
+        "evidence": [
+          "Recursos incluidos vía COPY; renderer seguro/unificado y build Docker pendientes."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-18-05",
@@ -3604,9 +3635,11 @@
           "handlers/music/embeds.js",
           "handlers/music/index.js",
           "handlers/canvasUtils.js",
-          "Dockerfile"
+          "Dockerfile",
+          "scripts/preview-music-controls.js",
+          "docs/platform/evidence/browser.json"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Registry/pipeline reproducible con fallback en flujo activo; preview y renderer seguro.",
       "phase": 1,
@@ -3616,10 +3649,12 @@
       "persistence": "Mapa real de IDs/hash/rutas",
       "tests": {
         "required": "Dimensiones/peso/no duplicados/sin token/fallback",
-        "evidence": [],
+        "evidence": [
+          "5 estados, escritorio/móvil sin overflow; aún faltan tarjetas/loading/error/textos largos."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-19-01",
@@ -3894,9 +3929,11 @@
           "handlers/music/embeds.js",
           "handlers/music/liveupdate.js",
           "handlers/music/sessions.js",
-          "handlers/music/saved-queues.js"
+          "handlers/music/saved-queues.js",
+          "handlers/music/controls.js",
+          "handlers/music/setup.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Preservar flujo activo/12 controles; completar colecciones, historial y operaciones masivas.",
       "phase": 3,
@@ -3906,10 +3943,12 @@
       "persistence": "MusicSession/History/Playlist/SavedQueues",
       "tests": {
         "required": "Cola única, guards, serialización y ambos clientes",
-        "evidence": [],
+        "evidence": [
+          "12 custom IDs preservados; estados/fallbacks en tests; canary Discord pendiente."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "implementado_local"
     },
     {
       "id": "OBEY-20-04",
@@ -3980,7 +4019,7 @@
           "handlers/music/sessions.js",
           "handlers/music/saved-queues.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Preservar flujo activo/12 controles; completar colecciones, historial y operaciones masivas.",
       "phase": 3,
@@ -3990,10 +4029,12 @@
       "persistence": "MusicSession/History/Playlist/SavedQueues",
       "tests": {
         "required": "Cola única, guards, serialización y ambos clientes",
-        "evidence": [],
+        "evidence": [
+          "Flujo activo importa builders adaptados; test real del handler mp_lyrics con provider fake."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "completado_estatico"
     },
     {
       "id": "OBEY-20-06",
@@ -4020,9 +4061,12 @@
           "handlers/music/embeds.js",
           "handlers/music/liveupdate.js",
           "handlers/music/sessions.js",
-          "handlers/music/saved-queues.js"
+          "handlers/music/saved-queues.js",
+          "handlers/music/lyrics.js",
+          "handlers/music/lyrics-http.js",
+          "slashCommands/Music/lyrics.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Preservar flujo activo/12 controles; completar colecciones, historial y operaciones masivas.",
       "phase": 3,
@@ -4032,10 +4076,12 @@
       "persistence": "MusicSession/History/Playlist/SavedQueues",
       "tests": {
         "required": "Cola única, guards, serialización y ambos clientes",
-        "evidence": [],
+        "evidence": [
+          "Slash/karaoke comparten proveedor/cache; demás adapters pendientes."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-20-07",
@@ -4145,9 +4191,10 @@
           "slashCommands/Music/lyrics.js",
           "handlers/music/lyrics.js",
           "handlers/music/lyricsLive.js",
-          "handlers/music/index.js"
+          "handlers/music/index.js",
+          "handlers/music/lyrics-pagination.js"
         ],
-        "assessment": "Primera página sin controles en slashCommands/Music/lyrics.js:84–88 y fallback truncado 1800 en handlers/music/index.js:740; ambos siguen vigentes. Resto de aceptación pendiente."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Sigue vigente primera página sin navegación; paginar todo y sincronizar web sin respuestas viejas.",
       "phase": 3,
@@ -4157,10 +4204,12 @@
       "persistence": "Estado temporal por sesión; caché limitado",
       "tests": {
         "required": "Todas las páginas, seeks, cambio tardío y proveedor caído",
-        "evidence": [],
+        "evidence": [
+          "Recortes corregidos y guards de playback añadidos. Tests locales; canary pausa/seek/posición pendiente."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "implementado_local"
     },
     {
       "id": "OBEY-21-02",
@@ -4186,9 +4235,10 @@
           "slashCommands/Music/lyrics.js",
           "handlers/music/lyrics.js",
           "handlers/music/lyricsLive.js",
-          "handlers/music/index.js"
+          "handlers/music/index.js",
+          "handlers/music/lyrics-pagination.js"
         ],
-        "assessment": "Primera página sin controles en slashCommands/Music/lyrics.js:84–88 y fallback truncado 1800 en handlers/music/index.js:740; ambos siguen vigentes. Resto de aceptación pendiente."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Sigue vigente primera página sin navegación; paginar todo y sincronizar web sin respuestas viejas.",
       "phase": 3,
@@ -4198,10 +4248,12 @@
       "persistence": "Estado temporal por sesión; caché limitado",
       "tests": {
         "required": "Todas las páginas, seeks, cambio tardío y proveedor caído",
-        "evidence": [],
+        "evidence": [
+          "13 regresiones de navegación/Unicode/owner/guild/message/TTL/dedup/serialización."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "implementado_local"
     },
     {
       "id": "OBEY-21-03",
@@ -4227,9 +4279,12 @@
           "slashCommands/Music/lyrics.js",
           "handlers/music/lyrics.js",
           "handlers/music/lyricsLive.js",
-          "handlers/music/index.js"
+          "handlers/music/index.js",
+          "handlers/music/lyrics-http.js",
+          "test/lyrics-command.test.js",
+          "test/lyrics-live-lookup.test.js"
         ],
-        "assessment": "Primera página sin controles en slashCommands/Music/lyrics.js:84–88 y fallback truncado 1800 en handlers/music/index.js:740; ambos siguen vigentes. Resto de aceptación pendiente."
+        "assessment": "Evidencia de checkpoint local; pendientes y límites en docs/platform/CHECKPOINT.md."
       },
       "change": "Sigue vigente primera página sin navegación; paginar todo y sincronizar web sin respuestas viejas.",
       "phase": 3,
@@ -4239,10 +4294,12 @@
       "persistence": "Estado temporal por sesión; caché limitado",
       "tests": {
         "required": "Todas las páginas, seeks, cambio tardío y proveedor caído",
-        "evidence": [],
+        "evidence": [
+          "Lookup/envío tardío/replay/session/cancelación/transporte protegidos. Web lyrics y realtime pendientes."
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-22-01",
@@ -13784,5 +13841,12 @@
       "@napi-rs/canvas": "0.1.100",
       "@sentry/node": "8.55.2"
     }
+  },
+  "statusDefinitions": {
+    "pendiente": "Sin implementación nueva aceptada; evidencia preexistente no certifica flujo completo.",
+    "completado_estatico": "Criterio de lectura/documentación cumplido; no certifica runtime.",
+    "implementado_local": "Flujo/servicio implementado y probado offline; real Discord/integraciones pendientes.",
+    "parcial": "Parte del bloque implementada; no declarar dominio ni fase completos.",
+    "en_curso": "Contrato continuo durante las fases."
   }
 }
