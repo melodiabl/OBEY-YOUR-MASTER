@@ -1,39 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
-const https = require('node:https')
-
-function fetchLyrics(title, artist) {
-  return new Promise((resolve, reject) => {
-    const params = new URLSearchParams({ track_name: title, artist_name: artist || '' })
-    const req = https.get(`https://lrclib.net/api/get?${params}`, { headers: { 'User-Agent': 'OBEY-Bot/1.0' } }, res => {
-      let data = ''
-      res.on('data', c => data += c)
-      res.on('end', () => {
-        try {
-          const json = JSON.parse(data)
-          resolve(json.plainLyrics || json.syncedLyrics || null)
-        } catch { resolve(null) }
-      })
-    })
-    req.on('error', reject)
-    req.setTimeout(8000, () => { req.destroy(); reject(new Error('timeout')) })
-  })
-}
-
-function paginate(text, maxLen = 1800) {
-  const lines = text.split('\n')
-  const pages = []
-  let current = ''
-  for (const line of lines) {
-    if ((current + '\n' + line).length > maxLen) {
-      if (current) pages.push(current.trim())
-      current = line
-    } else {
-      current += (current ? '\n' : '') + line
-    }
-  }
-  if (current) pages.push(current.trim())
-  return pages
-}
+const lyricsProvider = require('../../handlers/music/lyrics')
+const { showLyrics } = require('../../handlers/music/lyrics-pagination')
 
 module.exports = {
   name: 'lyrics',
@@ -54,6 +21,7 @@ module.exports = {
     await interaction.deferReply()
 
     let title, artist
+    let isCurrent = () => true
     const query = interaction.options.getString('cancion')
 
     if (query) {
@@ -64,6 +32,11 @@ module.exports = {
       const state = client.music?.getState(interaction.guild.id)
       const track = state?.currentTrack
       if (!track) return interaction.editReply({ embeds: [err('❌ No hay música reproduciéndose. Usa `/lyrics cancion: nombre` para buscar.')] })
+      const playbackId = state.playbackId, sessionId = state.sessionId
+      isCurrent = () => {
+        const latest = client.music?.getState(interaction.guild.id)
+        return latest?.currentTrack === track && latest.playbackId === playbackId && latest.sessionId === sessionId
+      }
       const info = track.info || track
       title  = info.title  || track.title  || ''
       artist = info.author || track.author || ''
@@ -73,20 +46,14 @@ module.exports = {
     if (!title) return interaction.editReply({ embeds: [err('❌ No se pudo obtener el título de la canción.')] })
 
     let lyrics = null
-    try { lyrics = await fetchLyrics(title, artist) } catch {}
-    if (!lyrics) { try { lyrics = await fetchLyrics(title, '') } catch {} }
+    try { lyrics = await lyricsProvider.fetchLyrics(title, artist) } catch {}
+    if (!lyrics) { try { lyrics = await lyricsProvider.fetchLyrics(title, '') } catch {} }
 
     if (!lyrics) {
       return interaction.editReply({ embeds: [err(`❌ No se encontraron letras para **${title}**${artist ? ` — ${artist}` : ''}.`)] })
     }
 
-    const pages = paginate(lyrics)
-    const footer = pages.length > 1 ? `\n\n_Página 1/${pages.length} — usa el comando de nuevo para más_` : ''
-    const embed = new EmbedBuilder()
-      .setColor(0x5865F2)
-      .setTitle(`🎵 ${title}${artist ? ` — ${artist}` : ''}`)
-      .setDescription(pages[0] + footer)
-
-    await interaction.editReply({ embeds: [embed] })
+    const text = lyrics.plain || lyrics.lines?.map(line => line.text).join('\n')
+    await showLyrics(interaction, { text, title, artist, isCurrent })
   },
 }

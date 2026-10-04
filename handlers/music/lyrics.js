@@ -2,6 +2,7 @@
 // con fallback a lrclib.net (free, no auth)
 const https = require('https')
 const http  = require('http')
+const { requestJson } = require('./lyrics-http')
 
 const LAVALINK = {
   host: process.env.LAVALINK_HOST || '127.0.0.1',
@@ -10,16 +11,8 @@ const LAVALINK = {
 }
 
 function lavalinkGet(path) {
-  return new Promise((resolve, reject) => {
-    http.get({ host: LAVALINK.host, port: LAVALINK.port, path, headers: { Authorization: LAVALINK.auth }, timeout: 8000 }, res => {
-      let body = ''
-      res.on('data', d => body += d)
-      res.on('end', () => {
-        if (res.statusCode !== 200) return reject(new Error(`HTTP ${res.statusCode}`))
-        try { resolve(JSON.parse(body)) } catch { reject(new Error('invalid JSON')) }
-      })
-    }).on('error', reject).on('timeout', () => reject(new Error('timeout')))
-  })
+  const secure = String(process.env.LAVALINK_SECURE || 'false').toLowerCase() === 'true'
+  return requestJson(secure ? https : http, { host: LAVALINK.host, port: LAVALINK.port, path, headers: { Authorization: LAVALINK.auth } })
 }
 
 // java-timed-lyrics: GET /v4/lyrics/search?query=… → { lines: [{line, range:{start,end}}], text }
@@ -40,16 +33,7 @@ const CACHE = new Map()   // `${title}::${artist}` → { lines, fetchedAt }
 const CACHE_TTL = 1000 * 60 * 30  // 30 min
 
 function httpsGet(url) {
-  return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'OBEY-Bot/1.0' } }, res => {
-      let body = ''
-      res.on('data', d => body += d)
-      res.on('end', () => {
-        if (res.statusCode !== 200) return reject(new Error(`HTTP ${res.statusCode}`))
-        try { resolve(JSON.parse(body)) } catch { reject(new Error('invalid JSON')) }
-      })
-    }).on('error', reject)
-  })
+  return requestJson(https, { ...require('node:url').urlToHttpOptions(new URL(url)), headers: { 'User-Agent': 'OBEY-Bot/1.0' } })
 }
 
 // Parse LRC format: [mm:ss.xx] text
@@ -89,6 +73,7 @@ async function fetchLyrics(title, artist) {
     } catch {}
   }
 
+  if (CACHE.size >= 256 && !CACHE.has(cacheKey)) CACHE.delete(CACHE.keys().next().value)
   CACHE.set(cacheKey, { data: result || null, fetchedAt: Date.now() })
   return result || null
 }
