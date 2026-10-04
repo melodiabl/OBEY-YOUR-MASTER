@@ -42,6 +42,6 @@ Referencias de la biblioteca actual: [permisos y overwrites de discord.js](https
 
 ## Continuación del plan
 
-T25/T26/T30 quedan parciales: existe el flujo de propuesta y borrador, con entrada Discord y web. Falta wizard de comunidades, plantillas, inspector de permisos, preflight completo y sincronización del explorador mediante eventos. T23/T24/T27/T28/T29 siguen pendientes: cola durable, locks/checkpoints, puntos de restauración, confirmación ligada a revisión, apply con remapeo/idempotencia, validación y rollback limitado. IA, temas y conexión portable de módulos conservan el alcance del maestro.
+T25/T26/T30 quedan parciales: existe el flujo de propuesta y borrador, con entrada Discord y web. Falta wizard de comunidades, plantillas, inspector de permisos, preflight completo y sincronización del explorador mediante eventos. T23/T24 ahora incluyen cola, estado privado y recuperación de análisis de lectura; ver [JOBS.md](JOBS.md). Siguen pendientes locks/checkpoints de efectos, puntos de restauración, confirmación ligada a revisión, apply con remapeo/idempotencia, validación y rollback limitado. IA, temas y conexión portable de módulos conservan el alcance del maestro.
 
 No se inició el bot, publicó el comando, conectó Discord real, usó Mongo de producción ni modificó estructura de servidores. El editor no presenta un botón de aplicación funcional mientras esa ruta no esté implementada.

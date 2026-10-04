@@ -328,6 +328,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T14
 
+**Checkpoint de jobs:** Solicitud y outbox de entrega en un mismo documento Mongo; dispatcher repara queued/running con jobId estable y consumidor deduplica/checkpoint. Outbox general de otros módulos pendiente; tarea parcial. Ver docs/platform/JOBS.md.
+
 - [ ] Outbox y consumidores idempotentes (fase 2).
 
 **Descripción:** No perder evento crítico tras guardar; no asumir transacciones Mongo deployment; consumidor deduplica/reintenta seguro y mantiene backlog tras reinicio.
@@ -560,6 +562,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T23
 
+**Checkpoint activo:** BullMQ 5.81.5, registro Mongo privado/idempotente, estados/pasos/resultados reales, worker `architect.snapshot`, reintentos, cancelación y cierre; web y `/config architect accion:analizar` conectados. Mongo/Redis aislados verifican reinicio/entrega/checkpoint/fencing. Otros trabajos, scheduler, retención y canary pendientes; tarea parcial. Ver docs/platform/adr/001-jobs.md.
+
 - [ ] Cola durable y lifecycle worker (fase 4).
 
 **Descripción:** BullMQ si no hay alternativa tras ADR; actor/guild/type/status/progress/steps/result/error/correlation; estados reales y shutdown/checkpoint.
@@ -583,6 +587,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 **Scope:** Medio.
 
 ## T24
+
+**Checkpoint activo:** Snapshot/checkpoint y tokens evitan repetir lecturas guardadas o aceptar writes antiguos; reanudación de cancelación y entregas ausentes verificada. Exclusión estructural por guild, reconciliación de creaciones, rate limits y pasos de apply pendientes; tarea parcial.
 
 - [ ] Reanudación y exclusión estructural (fase 4).
 

@@ -1,0 +1,18 @@
+{
+  "scope": "Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider",
+  "states": [
+    "submit",
+    "measured steps",
+    "completed result",
+    "reload",
+    "second tab",
+    "cancel",
+    "queue unavailable",
+    "permission revoked",
+    "late authorized response rejected"
+  ],
+  "desktop": 1365,
+  "mobile": 390,
+  "overflow": false,
+  "errors": []
+}

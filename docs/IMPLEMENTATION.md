@@ -55,3 +55,4 @@ El workspace activo es `/home/OBEY-YOUR-MASTER`, rama `feature/obey-main-impleme
 Tiempo real musical: autorización de sesión almacenada por envío, permisos con TTL 15 s y fail closed, logout local y snapshots al reconectar. Suite actual: 125 tests en 31 archivos; instalación limpia y build Docker completados. Alcance y límites en docs/platform/CHECKPOINT.md.
 
 Architect añade lectura fresca de estructura, editor web/preview y borradores Mongo privados con revisión; `/config architect` consulta el mismo servicio. Alcance actual y continuación del plan en docs/platform/ARCHITECT.md.
+Jobs de análisis Architect: BullMQ 5.81.5 y registro Mongo con outbox de entrega, idempotencia, checkpoint, fencing y cancelación. Web y `/config architect accion:analizar` comparten servicio; workers requieren habilitación y Redis explícitos. Ver `docs/platform/JOBS.md` y ADR 001. Apply, locks estructurales y backups permanecen pendientes.

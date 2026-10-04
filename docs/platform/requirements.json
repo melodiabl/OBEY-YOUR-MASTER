@@ -1561,10 +1561,17 @@
       "persistence": "Jobs Mongo; BullMQ/Redis tras ADR",
       "tests": {
         "required": "Reinicio, timeout, respuesta perdida y cancelación",
-        "evidence": [],
+        "evidence": [
+          "test/jobs.test.js",
+          "test/jobs-api.test.js",
+          "test/architect-command.test.js",
+          "scripts/verify-jobs-runtime.js",
+          "docs/platform/evidence/jobs-runtime.json",
+          "docs/platform/evidence/jobs-browser.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-09-02",
@@ -1601,10 +1608,17 @@
       "persistence": "Jobs Mongo; BullMQ/Redis tras ADR",
       "tests": {
         "required": "Reinicio, timeout, respuesta perdida y cancelación",
-        "evidence": [],
+        "evidence": [
+          "test/jobs.test.js",
+          "test/jobs-api.test.js",
+          "test/architect-command.test.js",
+          "scripts/verify-jobs-runtime.js",
+          "docs/platform/evidence/jobs-runtime.json",
+          "docs/platform/evidence/jobs-browser.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-09-03",
@@ -1641,10 +1655,17 @@
       "persistence": "Jobs Mongo; BullMQ/Redis tras ADR",
       "tests": {
         "required": "Reinicio, timeout, respuesta perdida y cancelación",
-        "evidence": [],
+        "evidence": [
+          "test/jobs.test.js",
+          "test/jobs-api.test.js",
+          "test/architect-command.test.js",
+          "scripts/verify-jobs-runtime.js",
+          "docs/platform/evidence/jobs-runtime.json",
+          "docs/platform/evidence/jobs-browser.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-09-04",
@@ -1681,10 +1702,17 @@
       "persistence": "Jobs Mongo; BullMQ/Redis tras ADR",
       "tests": {
         "required": "Reinicio, timeout, respuesta perdida y cancelación",
-        "evidence": [],
+        "evidence": [
+          "test/jobs.test.js",
+          "test/jobs-api.test.js",
+          "test/architect-command.test.js",
+          "scripts/verify-jobs-runtime.js",
+          "docs/platform/evidence/jobs-runtime.json",
+          "docs/platform/evidence/jobs-browser.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-10-01",
@@ -13942,8 +13970,9 @@
       "T56 CI inicial",
       "T15 realtime musical con revocación parcial",
       "T19 panel web de letras conectado al proveedor y estado musical",
-      "T25/T26/T30 Architect snapshot/blueprint/diff/preflight parcial/editor/borrador privado/consulta Discord"
+      "T25/T26/T30 Architect snapshot/blueprint/diff/preflight parcial/editor/borrador privado/consulta Discord",
+      "T14/T23/T24 outbox de entrega/cola BullMQ/registro privado/worker de lectura/checkpoint/fencing/cancelación web y Discord parciales"
     ],
-    "verification": "159 tests/41 archivos; Chromium Architect con Express/EJS/CSRF/servicio reales desktop/mobile, conflictos y drift; MongoDB7 aislado verifica CAS/index/privacidad; apply/jobs/canary pendientes"
+    "verification": "172 tests/43 archivos; Chromium con Express/EJS/CSRF y Mongo/Redis/BullMQ reales en entorno aislado, segunda pestaña/cancelación/revocación/respuesta tardía; recuperación de checkpoint/entrega y fencing; apply/locks/canary pendientes"
   }
 }

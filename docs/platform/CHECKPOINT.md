@@ -8,7 +8,7 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 - T05 parcial: registry inmutable, manifest musical con inventario de los comandos cargados y referencia al mismo `client.music`. Habilitación por guild, manifests de otros módulos y metadata completa siguen pendientes. Sin segundo servicio/cola/sesión.
 - T06/T07 parciales: política común `canManageGuild`, autenticación HTTP común con refresh y respuestas JSON para API; login rota y guarda sesión antes del redirect. `/api/top/tracks`, `/api/top/users`, `/api/top/guilds` y status comprueban permisos actualizados. Ranking de guilds filtra antes de agregar en Mongo. `/api/nowplaying` devuelve cero pistas al público y solo servidores administrables para sesiones válidas. Landing sin modificaciones.
 - T12 parcial: mensaje de bienvenida común entre web/slash/evento/previews. Precedencia `welcome.msg` → `welcome.message` → `welcomeMessage`, con nullish para conservar cadena vacía. Nuevos guardados sincronizan las tres claves y esperan `SyncMap.flush`. El dashboard lee el cache canónico y dejó de escribir directamente a Guild antes de repetir writes por SyncMap. No es todavía una migración global, revisión optimista ni transacción; los writers legacy y recuperación de caché tras fallos siguen pendientes.
-- T56 adelantada parcialmente: CI para PR hacia la base, instalación desde lock, tests, validación de assets/schemas y build Docker sin arrancar servicios. Actions fijadas por SHA, permisos read-only y credenciales no persistidas. El CI previo de música pasó y Docker ya fue verificado; este incremento añade una comprobación Mongo aislada a CI.
+- T56 adelantada parcialmente: CI para PR hacia la base, instalación desde lock, tests, validación de assets/schemas y build Docker sin arrancar servicios. Actions fijadas por SHA, permisos read-only y credenciales no persistidas. El CI previo de música pasó y Docker ya fue verificado; CI verifica también borradores y jobs con MongoDB/Redis aislados.
 
 ## Referencias técnicas
 
@@ -21,11 +21,13 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 
 - T19 web: Letras conectado al reproductor EJS, paginación íntegra, texto plain y líneas sincronizadas, pausa/seek desde estado compartido, guards por sesión/playback y borrado por denegación. Proveedor distingue ausencia/caída y agrupa consultas simultáneas Discord/web.
 
-- T25/T26/T30 parciales: Architect lee estructura fresca, valida blueprints/revisiones, muestra diff y preflight parcial, y guarda borradores privados en Mongo con CAS. Editor web con árbol/inspector, crear/mover/nombres/colores, undo/redo y protección; `/config architect` comparte servicio y propuesta. Apply/jobs/backup/rollback/IA permanecen pendientes. Contratos y límites en `ARCHITECT.md`.
+- T25/T26/T30 parciales: Architect lee estructura fresca, valida blueprints/revisiones, muestra diff y preflight parcial, y guarda borradores privados en Mongo con CAS. Editor web con árbol/inspector, crear/mover/nombres/colores, undo/redo y protección; `/config architect` comparte servicio y propuesta. Apply/backup/rollback/IA permanecen pendientes; jobs de lectura se describen abajo. Contratos y límites en `ARCHITECT.md`.
+
+- T14/T23/T24 parciales: solicitud/outbox en un documento Mongo, BullMQ 5.81.5, worker snapshot, pasos/resultados privados, checkpoints, fencing, reintentos y cancelación. Web/Discord usan el mismo servicio. Workers desactivados por defecto; requieren flag/URI explícitas. Locks estructurales, otros jobs y canary pendientes. Contratos/ADR en `JOBS.md`.
 
 ## Evidencia local
 
-- `npm test`: 159 pruebas pasan en 41 archivos, 0 fallos, Node 22.23.2. Resultado del runner TAP actual: 159 tests, 0 fallos.
+- `npm test`: 172 pruebas pasan en 43 archivos, 0 fallos, Node 22.23.2. Resultado del runner TAP actual: 172 tests, 0 fallos.
 - `node --test test/module-registry.test.js`: registro real de música, mismo estado y 25 subcomandos musicales/19 raíces, sin publicación.
 - `node --test test/dashboard-auth.test.js test/music-api-access.test.js`: sesiones inválidas/expiradas, refresh fallido, rotación/storage, denegaciones por guild y consulta inválida antes de DB.
 - `node --test test/music-realtime.test.js`: 7 pruebas; Socket.IO real local con dos pestañas, reconexión/revisión actual, sesión eliminada, no filtración. Pruebas deterministas para permisos perdidos, proveedor caído, eventos agrupados y cancelación pendiente.
@@ -34,6 +36,8 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 - `node scripts/obey-assets.js`: 89 PNG válidos, dry run sin red/upload.
 - `node scripts/validate-commands.js`: carga/schema local, sin Gateway/REST.
 - Architect: 23 pruebas focalizadas (incluida protección de scopes contra inyección antes de DB), Chromium con Express/EJS/CSRF/servicio reales, dos pestañas, drift y mobile sin overflow/JS errors. MongoDB 7 aislado verifica índice único, CAS y recuperación; fixtures/contenedor eliminados.
+- Jobs: 172 tests/43 archivos totales; MongoDB/Redis/BullMQ reales aislados verificaron idempotencia concurrente, privacy, checkpoint/reinicio/entrega, fencing y cancelación. Chromium prueba web/CSRF/DB/worker, dos pestañas, móvil, revocación y respuesta tardía; 0 JS errors y sin overflow. Contenedores/fixtures eliminados.
+- Reinstalación desde lock tras añadir BullMQ: `npm ci --ignore-scripts` (602 paquetes) y rebuild de bindings nativos; suite completa pasa. Docker construye desde lock con scripts nativos habilitados. No se cambiaron dependencias directas existentes.
 - `git diff --check`: implementación limpia.
 - Primera instalación limpia falló: Canvas 2.11.2 sin binario Node 22 y `pkg-config` ausente. Se añadieron requisitos nativos a CI/Docker y al entorno local autorizado; repetición de `npm ci` aislado completada (588 paquetes). Suite completa pasa también en esa instalación; lockfile sin cambios. Imagen `localhost/obey-platform-check` compilada con Podman, sin ejecutar bot ni servicios.
 - Chromium aislado: plantilla EJS real con fixtures en escritorio 1120 y móvil 390, valor Unicode/HTML conservado en textarea y 0 errores JavaScript. Evidencia `evidence/welcome-settings-browser.json` y capturas `welcome-settings-*.png`. No es prueba de OAuth/Mongo/Discord. Chrome DevTools no arrancó como root; Playwright necesitó ejecución fuera del sandbox por bloqueo de Chromium.
@@ -45,7 +49,7 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 3. T07/T15: completar concurrencia/refresh OAuth, realtime de otros módulos y transporte entre procesos. La música ya revalida la sesión y usa permisos con TTL de 15 s; no declarar cerrada seguridad transversal.
 4. T12: servicio de configuración con revisiones, migraciones explícitas, atomicidad acorde a Mongo y recuperación de cache tras fallo. Migrar writers legacy sin borrar sus defaults.
 5. T19: panel web implementado localmente con proveedor compartido, HTTP inicial, posición del realtime y reconexión; verificar canary antes de aceptación integral.
-6. Continuar Architect con T23/T24 jobs/locks/checkpoints, T27 restore points y T28 confirmación/apply idempotente; snapshot/draft/diff/editor ya tienen flujo local. Completar T25/T26/T30 y themes/templates según sus dependencias. Conservar T35–T57 y todos los requisitos centrales.
+6. Continuar Architect con locks/checkpoints para efectos T24, T27 restore points y T28 confirmación/apply idempotente; snapshot/draft/diff/editor y jobs de análisis ya tienen flujo local. Completar T25/T26/T30 y themes/templates según sus dependencias. Conservar T35–T57 y todos los requisitos centrales.
 
 No se ha iniciado bot/Compose, publicado comandos, cargado emojis, usado sesiones/DB de producción, aplicado cambios a guilds ni desplegado. Plataforma y fases completas siguen pendientes.
 

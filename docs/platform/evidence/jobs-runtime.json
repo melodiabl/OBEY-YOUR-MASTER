@@ -1,0 +1,14 @@
+{
+  "scope": "isolated MongoDB and Redis/BullMQ; fixture Discord provider",
+  "concurrentIdempotency": true,
+  "privateScopes": true,
+  "realStepsAndResult": true,
+  "cancellation": true,
+  "boundedRetries": true,
+  "staleWorkerFenced": true,
+  "persistedCheckpointRecovery": true,
+  "dispatchRecoveryAfterRestart": true,
+  "missingRunningDeliveryRecovery": true,
+  "permissionRevocation": true,
+  "fixtureCleanup": true
+}

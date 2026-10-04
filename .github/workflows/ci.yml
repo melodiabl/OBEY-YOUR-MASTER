@@ -33,12 +33,18 @@ jobs:
       - run: node scripts/validate-commands.js
       - name: Build runtime image without starting services
         run: docker build -t obey-platform-check .
-      - name: Verify Architect drafts in isolated MongoDB
+      - name: Verify Architect storage and jobs in isolated services
         run: |
-          trap 'docker rm -f obey-architect-test-mongo >/dev/null 2>&1 || true' EXIT
+          trap 'docker rm -f obey-jobs-test-redis obey-architect-test-mongo >/dev/null 2>&1 || true' EXIT
           docker run -d --name obey-architect-test-mongo --network none mongo:7 --bind_ip 127.0.0.1 --port 27017
           for architect_attempt in $(seq 1 20); do
             if docker exec obey-architect-test-mongo mongosh --quiet --eval 'db.adminCommand({ping:1})' >/dev/null 2>&1; then break; fi
             sleep 1
           done
           docker run --rm --network container:obey-architect-test-mongo -e OBEY_ARCHITECT_TEST_MONGO_URL=mongodb://127.0.0.1:27017/obey_architect_test --entrypoint node obey-platform-check scripts/verify-architect-storage.js
+          docker run -d --name obey-jobs-test-redis --network container:obey-architect-test-mongo redis:7-alpine redis-server --bind 127.0.0.1 --appendonly yes --appendfsync always --save ''
+          for jobs_attempt in $(seq 1 20); do
+            if docker exec obey-jobs-test-redis redis-cli ping >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          docker run --rm --network container:obey-architect-test-mongo -e OBEY_JOBS_TEST_MONGO_URL=mongodb://127.0.0.1:27017/obey_jobs_test -e OBEY_JOBS_TEST_REDIS_URL=redis://127.0.0.1:6379/15 --entrypoint node obey-platform-check scripts/verify-jobs-runtime.js
