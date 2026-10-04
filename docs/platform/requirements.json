@@ -1720,10 +1720,17 @@
       "persistence": "Snapshots/blueprints/changesets/jobs versionados",
       "tests": {
         "required": "Idempotencia, fallo parcial, zonas protegidas",
-        "evidence": [],
+        "evidence": [
+          "test/architect-preview.test.js",
+          "test/architect-service.test.js",
+          "test/architect-api.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-browser.json",
+          "docs/platform/evidence/architect-storage.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-10-02",
@@ -1759,10 +1766,17 @@
       "persistence": "Snapshots/blueprints/changesets/jobs versionados",
       "tests": {
         "required": "Idempotencia, fallo parcial, zonas protegidas",
-        "evidence": [],
+        "evidence": [
+          "test/architect-preview.test.js",
+          "test/architect-service.test.js",
+          "test/architect-api.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-browser.json",
+          "docs/platform/evidence/architect-storage.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-10-03",
@@ -1837,10 +1851,17 @@
       "persistence": "Snapshots/blueprints/changesets/jobs versionados",
       "tests": {
         "required": "Idempotencia, fallo parcial, zonas protegidas",
-        "evidence": [],
+        "evidence": [
+          "test/architect-preview.test.js",
+          "test/architect-service.test.js",
+          "test/architect-api.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-browser.json",
+          "docs/platform/evidence/architect-storage.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-10-05",
@@ -1993,10 +2014,17 @@
       "persistence": "Snapshots/blueprints/changesets/jobs versionados",
       "tests": {
         "required": "Idempotencia, fallo parcial, zonas protegidas",
-        "evidence": [],
+        "evidence": [
+          "test/architect-preview.test.js",
+          "test/architect-service.test.js",
+          "test/architect-api.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-browser.json",
+          "docs/platform/evidence/architect-storage.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-10-09",
@@ -2032,10 +2060,17 @@
       "persistence": "Snapshots/blueprints/changesets/jobs versionados",
       "tests": {
         "required": "Idempotencia, fallo parcial, zonas protegidas",
-        "evidence": [],
+        "evidence": [
+          "test/architect-preview.test.js",
+          "test/architect-service.test.js",
+          "test/architect-api.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-browser.json",
+          "docs/platform/evidence/architect-storage.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-10-10",
@@ -2148,10 +2183,17 @@
       "persistence": "Snapshot, revisión e inversas",
       "tests": {
         "required": "Cambio concurrente y rollback limitado",
-        "evidence": [],
+        "evidence": [
+          "test/architect-preview.test.js",
+          "test/architect-service.test.js",
+          "test/architect-api.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-browser.json",
+          "docs/platform/evidence/architect-storage.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-11-02",
@@ -2186,10 +2228,17 @@
       "persistence": "Snapshot, revisión e inversas",
       "tests": {
         "required": "Cambio concurrente y rollback limitado",
-        "evidence": [],
+        "evidence": [
+          "test/architect-preview.test.js",
+          "test/architect-service.test.js",
+          "test/architect-api.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-browser.json",
+          "docs/platform/evidence/architect-storage.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-11-03",
@@ -13892,8 +13941,9 @@
       "T12 compatibilidad bienvenida parcial",
       "T56 CI inicial",
       "T15 realtime musical con revocación parcial",
-      "T19 panel web de letras conectado al proveedor y estado musical"
+      "T19 panel web de letras conectado al proveedor y estado musical",
+      "T25/T26/T30 Architect snapshot/blueprint/diff/preflight parcial/editor/borrador privado/consulta Discord"
     ],
-    "verification": "136 tests/34 archivos; Chromium letras EJS desktop/mobile con sincronización/paginación/denegación sin errores; aceptación canary pendiente"
+    "verification": "159 tests/41 archivos; Chromium Architect con Express/EJS/CSRF/servicio reales desktop/mobile, conflictos y drift; MongoDB7 aislado verifica CAS/index/privacidad; apply/jobs/canary pendientes"
   }
 }

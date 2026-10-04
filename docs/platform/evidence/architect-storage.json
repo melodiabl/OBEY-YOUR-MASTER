@@ -1,0 +1,11 @@
+{
+  "scope": "MongoDB 7 in an isolated container network namespace with no external network; current repository/schema loaded in Node 22 runtime image",
+  "database": "obey_architect_test",
+  "insert": true,
+  "reload": true,
+  "concurrentWriteConflict": true,
+  "guildAndActorIsolation": true,
+  "duplicateInsertDenied": true,
+  "fixtureDataRemoved": true,
+  "fixtureContainerRemoved": true
+}

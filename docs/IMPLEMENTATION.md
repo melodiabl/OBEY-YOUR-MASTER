@@ -53,3 +53,5 @@ El chequeo de voz `scripts/live-music-check.js` solo se habilita con variables d
 El workspace activo es `/home/OBEY-YOUR-MASTER`, rama `feature/obey-main-implementation`. Recursos/controles/letras de la entrega anterior están incorporados; registry musical, OAuth/API y compatibilidad de bienvenida tienen avances locales. La fuente de estado actual es `docs/platform/CHECKPOINT.md`; la matriz y todas las tareas centrales permanecen en `docs/platform/requirements.json` y `tasks/todo.md`. CI incorpora requisitos de compilación Canvas para Node 22 y verifica código/assets/schemas/build sin iniciar servicios. No equivale a despliegue ni plataforma terminada.
 
 Tiempo real musical: autorización de sesión almacenada por envío, permisos con TTL 15 s y fail closed, logout local y snapshots al reconectar. Suite actual: 125 tests en 31 archivos; instalación limpia y build Docker completados. Alcance y límites en docs/platform/CHECKPOINT.md.
+
+Architect añade lectura fresca de estructura, editor web/preview y borradores Mongo privados con revisión; `/config architect` consulta el mismo servicio. Alcance actual y continuación del plan en docs/platform/ARCHITECT.md.

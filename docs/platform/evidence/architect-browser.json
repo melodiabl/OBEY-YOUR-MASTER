@@ -1,0 +1,21 @@
+{
+  "scope": "Real Express, EJS, CSRF, Architect service/validation/diff and browser; fixture Discord REST and isolated memory draft repository",
+  "states": [
+    "edit",
+    "create",
+    "move",
+    "undo",
+    "redo",
+    "preview",
+    "save",
+    "reload",
+    "two-tab conflict",
+    "source drift",
+    "safe topic",
+    "denied"
+  ],
+  "desktop": 1365,
+  "mobile": 390,
+  "overflow": false,
+  "errors": []
+}

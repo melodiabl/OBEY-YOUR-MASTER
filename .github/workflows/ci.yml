@@ -33,3 +33,12 @@ jobs:
       - run: node scripts/validate-commands.js
       - name: Build runtime image without starting services
         run: docker build -t obey-platform-check .
+      - name: Verify Architect drafts in isolated MongoDB
+        run: |
+          trap 'docker rm -f obey-architect-test-mongo >/dev/null 2>&1 || true' EXIT
+          docker run -d --name obey-architect-test-mongo --network none mongo:7 --bind_ip 127.0.0.1 --port 27017
+          for architect_attempt in $(seq 1 20); do
+            if docker exec obey-architect-test-mongo mongosh --quiet --eval 'db.adminCommand({ping:1})' >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          docker run --rm --network container:obey-architect-test-mongo -e OBEY_ARCHITECT_TEST_MONGO_URL=mongodb://127.0.0.1:27017/obey_architect_test --entrypoint node obey-platform-check scripts/verify-architect-storage.js

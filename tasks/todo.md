@@ -100,7 +100,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T05
 
-**Checkpoint activo:** Registry y manifest musical conectados en el proyecto principal; tres tests específicos pasan. Habilitación persistida/enforcement por guild y registro de los demás módulos pendientes; T05 sigue abierta.
+**Checkpoint activo:** Registry y manifests de music/architect conectados en el proyecto principal; tres tests específicos pasan. Habilitación persistida/enforcement por guild y registro de los demás módulos pendientes; T05 sigue abierta.
 
 - [ ] Manifest y registro incremental (fase 1).
 
@@ -614,6 +614,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T25
 
+**Checkpoint activo:** Snapshot fresco con alcance structure_only y blueprint versionado/IDs lógicos; borradores privados persistidos con revisión CAS. Modelos de ejecución y portabilidad/configuración completa pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
+
 - [ ] Snapshot y blueprint versionados (fase 4).
 
 **Descripción:** Captura recursos Discord reales/config OBEY; logical IDs→real maps; validation y presets gaming/community/anime/music/creative/dev/study/roleplay/support/custom.
@@ -637,6 +639,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 **Scope:** Medio.
 
 ## T26
+
+**Checkpoint activo:** Diff create/update/move/overwrites con antes/después y drift de origen. Preflight verifica miembros frescos, permisos, jerarquía y grants; límites/capacidades/acceso efectivo/plan de ejecución completos pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
 
 - [ ] Diff y preflight (fase 4).
 
@@ -739,6 +743,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [ ] Actualizar matriz/AUDIT/ADR con evidencia, archivos, restricciones de credenciales y siguiente tarea con dependencias.
 
 ## T30
+
+**Checkpoint activo:** Editor web conectado: árbol/inspector, crear y mover, nombres/colores, undo/redo, protección, preview y guardar/recuperar borrador. Discord consulta la misma propuesta. Wizard, permisos, eventos y apply/progreso durable pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
 
 - [ ] Editor Architect visual conectado (fase 4).
 
