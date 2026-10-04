@@ -733,11 +733,17 @@ module.exports = client => {
           interaction.followUp({ content: '🔇 Letras en vivo desactivadas.', ephemeral: true }).catch(() => {})
           return
         }
+        const requestedTrack = state.currentTrack, playbackId = state.playbackId, sessionId = state.sessionId
+        const isCurrent = () => {
+          const latest = getState(guildId)
+          return latest.currentTrack === requestedTrack && latest.playbackId === playbackId && latest.sessionId === sessionId
+        }
         const r = await live.start(client, guildId)
         if (r.ok) {
           interaction.followUp({ content: '🎤 Letras en vivo activadas — se sincronizan solas con la canción.', ephemeral: true }).catch(() => {})
         } else if (r.reason === 'no_sync' && r.plain) {
-          interaction.followUp({ content: `🎤 Sin letras sincronizadas, aquí el texto:\n${r.plain.slice(0, 1800)}`, ephemeral: true }).catch(() => {})
+          const info = requestedTrack?.info || requestedTrack || {}
+          await require('./lyrics-pagination').showLyrics(interaction, { text: r.plain, title: info.title, artist: info.author, isCurrent }, 'followUp')
         } else {
           interaction.followUp({ content: r.reason === 'no_track' ? '❌ No hay música reproduciéndose.' : '🔇 No encontré letras sincronizadas para esta canción.', ephemeral: true }).catch(() => {})
         }

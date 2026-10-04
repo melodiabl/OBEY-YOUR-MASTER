@@ -10,6 +10,7 @@ const { config } = require('./config')
 
 const DISK = 'https://cdn.darrennathanael.com/icons/spinning_disk.gif'
 const TICK_MS = 2500
+const pendingStarts = new Map()
 const sessions = new Map() // guildId -> { messageId, channelId, lines, timer, trackKey }
 
 function trackKey(info) { return info?.identifier || info?.uri || info?.title || '' }
@@ -37,9 +38,13 @@ function renderEmbed(info, lines, pos) {
   return e.setDescription(body || '♪').setFooter({ text: `Línea ${idx + 1}/${lines.length} · sincronizado` })
 }
 
-function isActive(guildId) { return sessions.has(guildId) }
+function isActive(guildId) { return sessions.has(guildId) || pendingStarts.has(guildId) }
 
 function stop(guildId, client) {
+  pendingStarts.delete(guildId)
+  clearSession(guildId, client)
+}
+function clearSession(guildId, client) {
   const sess = sessions.get(guildId)
   if (!sess) return
   clearInterval(sess.timer)
@@ -52,49 +57,63 @@ function stop(guildId, client) {
 
 // Devuelve { ok, reason?, plain? }
 async function start(client, guildId) {
-  const state = client.music?.getState(guildId)
-  if (!state?.currentTrack || !state.textChannelId) return { ok: false, reason: 'no_track' }
-  const info = state.currentTrack.info || state.currentTrack
+  const request = Symbol('lyrics lookup')
+  pendingStarts.set(guildId, request)
+  try {
+    const state = client.music?.getState(guildId)
+    if (!state?.currentTrack || !state.textChannelId) return { ok: false, reason: 'no_track' }
+    const requestedTrack = state.currentTrack
+    const playbackId = state.playbackId, sessionId = state.sessionId, channelId = state.textChannelId
+    const info = requestedTrack.info || requestedTrack
+    const isCurrent = () => {
+      const latest = client.music?.getState(guildId)
+      return pendingStarts.get(guildId) === request && latest?.currentTrack === requestedTrack && latest.playbackId === playbackId && latest.sessionId === sessionId && latest.textChannelId === channelId
+    }
+    const result = await fetchLyrics(info.title, info.author).catch(() => null)
+    const lines = result?.lines || []
+    if (!isCurrent()) return { ok: false, reason: 'track_changed' }
+    if (!lines.length) return { ok: false, reason: result?.plain ? 'no_sync' : 'not_found', plain: result?.plain }
 
-  const result = await fetchLyrics(info.title, info.author).catch(() => null)
-  const lines  = result?.lines || []
-  if (!lines.length) return { ok: false, reason: result?.plain ? 'no_sync' : 'not_found', plain: result?.plain }
+    clearSession(guildId, client)
+    const channel = client.channels.cache.get(channelId)
+    if (!channel) return { ok: false, reason: 'no_channel' }
+    const msg = await channel.send({ embeds: [renderEmbed(info, lines, livePos(state))], allowedMentions: { parse: [] } }).catch(() => null)
+    if (!msg) return { ok: false, reason: 'send_fail' }
+    if (!isCurrent()) {
+      await msg.delete().catch(() => {})
+      return { ok: false, reason: 'track_changed' }
+    }
 
-  if (trackKey((state.currentTrack?.info || state.currentTrack)) !== trackKey(info)) return { ok: false, reason: 'track_changed' }
-  stop(guildId, client)
-  const channel = client.channels.cache.get(state.textChannelId)
-  if (!channel) return { ok: false, reason: 'no_channel' }
+    const sess = { messageId: msg.id, channelId: channel.id, lines, timer: null, trackKey: trackKey(info) }
+    sessions.set(guildId, sess)
 
-  const msg = await channel.send({ embeds: [renderEmbed(info, lines, livePos(state))] }).catch(() => null)
-  if (!msg) return { ok: false, reason: 'send_fail' }
+    sess.timer = setInterval(async () => {
+      if (sess.busy || sessions.get(guildId) !== sess) return
+      sess.busy = true
+      try {
+        const st = client.music?.getState(guildId)
+        // Sin música AHORA: no borrar (puede ser transitorio); deja el último estado.
+        if (!st?.currentTrack) return
+        const cur = st.currentTrack.info || st.currentTrack
+        // Cambió de canción → recargar letras en el MISMO mensaje (no borrar)
+        if (trackKey(cur) !== sess.trackKey) {
+          const requestedKey = trackKey(cur), requestedTrack = st.currentTrack, playbackId = st.playbackId
+          const r = await fetchLyrics(cur.title, cur.author).catch(() => null)
+          const latest = client.music?.getState(guildId)?.currentTrack
+          if (sessions.get(guildId) !== sess || latest !== requestedTrack || client.music?.getState(guildId)?.playbackId !== playbackId) return
+          sess.trackKey = requestedKey
+          sess.lines = r?.lines || []
+        }
+        if (sessions.get(guildId) !== sess) return
+        await msg.edit({ embeds: [renderEmbed(cur, sess.lines, livePos(st))] }).catch(() => {})
+      } catch (error) { console.warn('[Music] Lyrics update:', error.message) }
+      finally { sess.busy = false }
+    }, TICK_MS)
 
-  const sess = { messageId: msg.id, channelId: channel.id, lines, timer: null, trackKey: trackKey(info) }
-  sessions.set(guildId, sess)
-
-  sess.timer = setInterval(async () => {
-    if (sess.busy || sessions.get(guildId) !== sess) return
-    sess.busy = true
-    try {
-      const st = client.music?.getState(guildId)
-      // Sin música AHORA: no borrar (puede ser transitorio); deja el último estado.
-      if (!st?.currentTrack) return
-      const cur = st.currentTrack.info || st.currentTrack
-      // Cambió de canción → recargar letras en el MISMO mensaje (no borrar)
-      if (trackKey(cur) !== sess.trackKey) {
-        const requestedKey = trackKey(cur)
-        const r = await fetchLyrics(cur.title, cur.author).catch(() => null)
-        const latest = client.music?.getState(guildId)?.currentTrack
-        if (sessions.get(guildId) !== sess || trackKey(latest?.info || latest) !== requestedKey) return
-        sess.trackKey = requestedKey
-        sess.lines = r?.lines || []
-      }
-      if (sessions.get(guildId) !== sess) return
-      await msg.edit({ embeds: [renderEmbed(cur, sess.lines, livePos(st))] }).catch(() => {})
-    } catch (error) { console.warn('[Music] Lyrics update:', error.message) }
-    finally { sess.busy = false }
-  }, TICK_MS)
-
-  return { ok: true }
+    return { ok: true }
+  } finally {
+    if (pendingStarts.get(guildId) === request) pendingStarts.delete(guildId)
+  }
 }
 
 module.exports = { start, stop, isActive }
