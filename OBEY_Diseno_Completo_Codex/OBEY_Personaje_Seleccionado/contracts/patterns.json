@@ -1,0 +1,1092 @@
+[
+  {
+    "id": "music_playing",
+    "module": "music",
+    "title": "Horizonte",
+    "lines": [
+      "Horizonte · Artista de ejemplo",
+      "Alex · Volumen 65 % · Cola: 4 pistas"
+    ],
+    "buttons": [
+      "Mezclar",
+      "Anterior",
+      "Pausar",
+      "Saltar",
+      "Repetir",
+      "Letras",
+      "Vol −",
+      "Detener",
+      "Vol +",
+      "Cola",
+      "Me gusta",
+      "Autoplay"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "music",
+    "runtimeVerified": "static-source-audit",
+    "svg": "design/screens/svg/music_playing.svg",
+    "png": "design/screens/png/music_playing.png"
+  },
+  {
+    "id": "music_paused",
+    "module": "music",
+    "title": "Reproducción pausada",
+    "lines": [
+      "Horizonte · Artista de ejemplo",
+      "La cola se conserva durante la pausa."
+    ],
+    "buttons": [
+      "Mezclar",
+      "Anterior",
+      "Pausar",
+      "Saltar",
+      "Repetir",
+      "Letras",
+      "Vol −",
+      "Detener",
+      "Vol +",
+      "Cola",
+      "Me gusta",
+      "Autoplay"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "music",
+    "runtimeVerified": "static-source-audit",
+    "svg": "design/screens/svg/music_paused.svg",
+    "png": "design/screens/png/music_paused.png"
+  },
+  {
+    "id": "music_search",
+    "module": "music",
+    "title": "Elegí una canción",
+    "lines": [
+      "Resultados para «Horizonte»",
+      "1 · Horizonte — Artista de ejemplo · 03:48"
+    ],
+    "buttons": [
+      "Anterior",
+      "Siguiente"
+    ],
+    "select": "Select a track",
+    "kind": "message",
+    "icon": "music",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/music_search.svg",
+    "png": "design/screens/png/music_search.png"
+  },
+  {
+    "id": "music_queue",
+    "module": "music",
+    "title": "Cola de reproducción",
+    "lines": [
+      "1 · Horizonte · Reproduciendo",
+      "2 · Amanecer · 04:20 · Página 1 de 3"
+    ],
+    "buttons": [
+      "Anterior",
+      "Siguiente",
+      "Vaciar cola"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "music",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/music_queue.svg",
+    "png": "design/screens/png/music_queue.png"
+  },
+  {
+    "id": "music_filters",
+    "module": "music",
+    "title": "Ajustes de reproducción",
+    "lines": [
+      "Filtro: predeterminado · Volumen: 65 %",
+      "Los filtros se aplican a esta sesión."
+    ],
+    "buttons": [
+      "Restablecer",
+      "Guardar"
+    ],
+    "select": "Select a filter preset",
+    "kind": "message",
+    "icon": "music",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/music_filters.svg",
+    "png": "design/screens/png/music_filters.png"
+  },
+  {
+    "id": "music_collections",
+    "module": "music",
+    "title": "Colecciones guardadas",
+    "lines": [
+      "Viaje nocturno · 18 pistas",
+      "Concentración · 12 pistas"
+    ],
+    "buttons": [
+      "Reproducir",
+      "Crear colección"
+    ],
+    "select": "Choose a collection",
+    "kind": "message",
+    "icon": "music",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/music_collections.svg",
+    "png": "design/screens/png/music_collections.png"
+  },
+  {
+    "id": "music_unavailable",
+    "module": "music",
+    "title": "Servicio de audio no disponible",
+    "lines": [
+      "La cola permanece guardada.",
+      "Reintentá después de la reconexión."
+    ],
+    "buttons": [
+      "Reintentar",
+      "Cola"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "warning",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/music_unavailable.svg",
+    "png": "design/screens/png/music_unavailable.png"
+  },
+  {
+    "id": "moderation_cases",
+    "module": "moderation",
+    "title": "Historial de casos",
+    "lines": [
+      "#1042 · Advertencia · Spam reiterado",
+      "#1043 · Timeout · 10 minutos"
+    ],
+    "buttons": [
+      "Anterior",
+      "Siguiente",
+      "Ver caso"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "shield",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/moderation_cases.svg",
+    "png": "design/screens/png/moderation_cases.png"
+  },
+  {
+    "id": "moderation_confirm",
+    "module": "moderation",
+    "title": "¿Banear a este miembro?",
+    "lines": [
+      "Miembro: Alex · Motivo: acoso reiterado",
+      "Revisá el usuario y el alcance antes de confirmar."
+    ],
+    "buttons": [
+      "Cancelar",
+      "Banear"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "ban",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/moderation_confirm.svg",
+    "png": "design/screens/png/moderation_confirm.png"
+  },
+  {
+    "id": "moderation_reason_modal",
+    "module": "moderation",
+    "title": "Motivo de moderación",
+    "lines": [
+      "Motivo obligatorio",
+      "Enlace de evidencia opcional"
+    ],
+    "buttons": [
+      "Cancelar",
+      "Enviar"
+    ],
+    "select": null,
+    "kind": "modal",
+    "icon": "shield",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/moderation_reason_modal.svg",
+    "png": "design/screens/png/moderation_reason_modal.png"
+  },
+  {
+    "id": "moderation_case_detail",
+    "module": "moderation",
+    "title": "Caso #1043",
+    "lines": [
+      "Acción: timeout de 10 minutos · Moderador: Alex",
+      "Motivo y evidencia disponibles según permisos."
+    ],
+    "buttons": [
+      "Evidencia",
+      "Apelar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "shield",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/moderation_case_detail.svg",
+    "png": "design/screens/png/moderation_case_detail.png"
+  },
+  {
+    "id": "automod_settings",
+    "module": "moderation",
+    "title": "Protección contra spam",
+    "lines": [
+      "Sensibilidad: equilibrada",
+      "Reincidencia: timeout de 5 minutos"
+    ],
+    "buttons": [
+      "Vista previa",
+      "Guardar"
+    ],
+    "select": "Choose sensitivity",
+    "kind": "message",
+    "icon": "shield",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/automod_settings.svg",
+    "png": "design/screens/png/automod_settings.png"
+  },
+  {
+    "id": "security_alert",
+    "module": "security",
+    "title": "Actividad de entrada inusual",
+    "lines": [
+      "24 entradas en 60 segundos",
+      "Revisá la actividad antes de aplicar restricciones."
+    ],
+    "buttons": [
+      "Revisar",
+      "Restringir"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "raid",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/security_alert.svg",
+    "png": "design/screens/png/security_alert.png"
+  },
+  {
+    "id": "security_lockdown",
+    "module": "security",
+    "title": "¿Activar restricciones temporales?",
+    "lines": [
+      "Limitar mensajes nuevos durante 10 minutos",
+      "Registrar permisos previos antes de modificar."
+    ],
+    "buttons": [
+      "Cancelar",
+      "Activar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "lock",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/security_lockdown.svg",
+    "png": "design/screens/png/security_lockdown.png"
+  },
+  {
+    "id": "security_recovery",
+    "module": "security",
+    "title": "Restricciones activas",
+    "lines": [
+      "Tiempo restante: 08:42 · 12 canales afectados",
+      "Restaurar solo los permisos modificados."
+    ],
+    "buttons": [
+      "Ver cambios",
+      "Finalizar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "raid",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/security_recovery.svg",
+    "png": "design/screens/png/security_recovery.png"
+  },
+  {
+    "id": "verification_panel",
+    "module": "security",
+    "title": "Verificá tu acceso",
+    "lines": [
+      "Leé las reglas antes de continuar.",
+      "Los requisitos los define este servidor."
+    ],
+    "buttons": [
+      "Ver reglas",
+      "Verificar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "verify",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/verification_panel.svg",
+    "png": "design/screens/png/verification_panel.png"
+  },
+  {
+    "id": "verification_complete",
+    "module": "security",
+    "title": "Verificación completada",
+    "lines": [
+      "Tu acceso a la comunidad está habilitado.",
+      "Podés explorar los canales disponibles."
+    ],
+    "buttons": [
+      "Explorar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "success",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/verification_complete.svg",
+    "png": "design/screens/png/verification_complete.png"
+  },
+  {
+    "id": "ticket_panel",
+    "module": "tickets",
+    "title": "¿Cómo podemos ayudarte?",
+    "lines": [
+      "Elegí la categoría de tu solicitud.",
+      "Visible para vos y el equipo de soporte."
+    ],
+    "buttons": [
+      "Abrir ticket"
+    ],
+    "select": "Choose a support category",
+    "kind": "message",
+    "icon": "ticket",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/ticket_panel.svg",
+    "png": "design/screens/png/ticket_panel.png"
+  },
+  {
+    "id": "ticket_open",
+    "module": "tickets",
+    "title": "Ticket #1042",
+    "lines": [
+      "Estado: esperando atención · Categoría: ayuda técnica",
+      "Describí el problema y adjuntá evidencia."
+    ],
+    "buttons": [
+      "Atender",
+      "Cerrar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "ticket",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/ticket_open.svg",
+    "png": "design/screens/png/ticket_open.png"
+  },
+  {
+    "id": "ticket_claimed",
+    "module": "tickets",
+    "title": "Alex está atendiendo tu solicitud",
+    "lines": [
+      "Ticket #1042 · Abierto hace 12 minutos",
+      "La conversación permanece en este canal."
+    ],
+    "buttons": [
+      "Transferir",
+      "Cerrar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "claim",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/ticket_claimed.svg",
+    "png": "design/screens/png/ticket_claimed.png"
+  },
+  {
+    "id": "ticket_close_confirm",
+    "module": "tickets",
+    "title": "¿Cerrar este ticket?",
+    "lines": [
+      "Explicá la resolución antes de cerrar.",
+      "Crear transcripción cuando esté habilitada."
+    ],
+    "buttons": [
+      "Cancelar",
+      "Cerrar ticket"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "ticket",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/ticket_close_confirm.svg",
+    "png": "design/screens/png/ticket_close_confirm.png"
+  },
+  {
+    "id": "ticket_closed",
+    "module": "tickets",
+    "title": "Ticket cerrado",
+    "lines": [
+      "Resolución registrada.",
+      "Transcripción visible según permisos del servidor."
+    ],
+    "buttons": [
+      "Transcripción",
+      "Reabrir"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "ticket",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/ticket_closed.svg",
+    "png": "design/screens/png/ticket_closed.png"
+  },
+  {
+    "id": "ticket_rating",
+    "module": "tickets",
+    "title": "Calificá la atención",
+    "lines": [
+      "Elegí una puntuación del 1 al 5.",
+      "El comentario es opcional."
+    ],
+    "buttons": [
+      "Enviar"
+    ],
+    "select": "Choose a rating",
+    "kind": "message",
+    "icon": "ticket",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/ticket_rating.svg",
+    "png": "design/screens/png/ticket_rating.png"
+  },
+  {
+    "id": "architect_preview",
+    "module": "architect",
+    "title": "Revisá los cambios propuestos",
+    "lines": [
+      "Crear: 4 canales · Actualizar: 2 roles · Eliminar: 0",
+      "Requiere copia previa y revisión de permisos."
+    ],
+    "buttons": [
+      "Ver diferencias",
+      "Aplicar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "architect",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/architect_preview.svg",
+    "png": "design/screens/png/architect_preview.png"
+  },
+  {
+    "id": "architect_diff",
+    "module": "architect",
+    "title": "Detalle de cambios",
+    "lines": [
+      "Cambio: nombre y permisos del canal #general",
+      "Revisá los valores anteriores y propuestos."
+    ],
+    "buttons": [
+      "Volver",
+      "Confirmar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "architect",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/architect_diff.svg",
+    "png": "design/screens/png/architect_diff.png"
+  },
+  {
+    "id": "architect_progress",
+    "module": "architect",
+    "title": "Aplicando · 3 de 6",
+    "lines": [
+      "Aplicando cambios: 3 de 6",
+      "El estado pertenece a una tarea verificable."
+    ],
+    "buttons": [
+      "Ver tarea"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "progress",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/architect_progress.svg",
+    "png": "design/screens/png/architect_progress.png"
+  },
+  {
+    "id": "architect_partial_failure",
+    "module": "architect",
+    "title": "Fallaron 2 operaciones",
+    "lines": [
+      "Completadas: 4 · Fallidas: 2",
+      "Revisá cada fallo antes de reintentar."
+    ],
+    "buttons": [
+      "Ver fallos",
+      "Recuperación"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "warning",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/architect_partial_failure.svg",
+    "png": "design/screens/png/architect_partial_failure.png"
+  },
+  {
+    "id": "architect_restore",
+    "module": "architect",
+    "title": "Revisá la recuperación",
+    "lines": [
+      "Restaurar estructura y permisos disponibles",
+      "No reconstruye historial de mensajes eliminado."
+    ],
+    "buttons": [
+      "Cancelar",
+      "Restaurar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "restore",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/architect_restore.svg",
+    "png": "design/screens/png/architect_restore.png"
+  },
+  {
+    "id": "backup_list",
+    "module": "architect",
+    "title": "Copias del servidor",
+    "lines": [
+      "Copia #1042 · Estructura del servidor",
+      "Elegí una copia y revisá su alcance."
+    ],
+    "buttons": [
+      "Crear copia",
+      "Restaurar"
+    ],
+    "select": "Choose a backup",
+    "kind": "message",
+    "icon": "backup",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/backup_list.svg",
+    "png": "design/screens/png/backup_list.png"
+  },
+  {
+    "id": "templates_gallery",
+    "module": "templates",
+    "title": "Elegí una plantilla",
+    "lines": [
+      "Comunidad anime · Soporte · Equipo",
+      "Vista previa antes de aplicar la estructura."
+    ],
+    "buttons": [
+      "Vista previa"
+    ],
+    "select": "Choose a template",
+    "kind": "message",
+    "icon": "template",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/templates_gallery.svg",
+    "png": "design/screens/png/templates_gallery.png"
+  },
+  {
+    "id": "decoration_preview",
+    "module": "templates",
+    "title": "Vista previa de nombres",
+    "lines": [
+      "Nombres y símbolos propuestos para canales",
+      "Revisá longitud y legibilidad antes de aplicar."
+    ],
+    "buttons": [
+      "Editar",
+      "Aplicar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "decoration",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/decoration_preview.svg",
+    "png": "design/screens/png/decoration_preview.png"
+  },
+  {
+    "id": "setup_start",
+    "module": "setup",
+    "title": "Bienvenido a OBEY",
+    "lines": [
+      "Configurá OBEY para tu comunidad.",
+      "Elegí funciones y verificá los permisos."
+    ],
+    "buttons": [
+      "Continuar"
+    ],
+    "select": "Community / Gaming / Support / Custom",
+    "kind": "message",
+    "icon": "setup",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/setup_start.svg",
+    "png": "design/screens/png/setup_start.png"
+  },
+  {
+    "id": "setup_modules",
+    "module": "setup",
+    "title": "Elegí los módulos",
+    "lines": [
+      "Música · Soporte · Comunidad · Moderación",
+      "Activá los módulos que necesita tu servidor."
+    ],
+    "buttons": [
+      "Volver",
+      "Continuar"
+    ],
+    "select": "Choose modules",
+    "kind": "message",
+    "icon": "setup",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/setup_modules.svg",
+    "png": "design/screens/png/setup_modules.png"
+  },
+  {
+    "id": "setup_permissions",
+    "module": "setup",
+    "title": "Revisá los permisos",
+    "lines": [
+      "Comprobá permisos y jerarquía de roles.",
+      "Las funciones activadas determinan los requisitos."
+    ],
+    "buttons": [
+      "Volver",
+      "Comprobar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "warning",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/setup_permissions.svg",
+    "png": "design/screens/png/setup_permissions.png"
+  },
+  {
+    "id": "setup_complete",
+    "module": "setup",
+    "title": "Configuración guardada",
+    "lines": [
+      "La configuración del servidor fue guardada.",
+      "Podés volver a editarla desde el panel."
+    ],
+    "buttons": [
+      "Configuración",
+      "Panel web"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "success",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/setup_complete.svg",
+    "png": "design/screens/png/setup_complete.png"
+  },
+  {
+    "id": "help_home",
+    "module": "help",
+    "title": "¿Qué querés administrar?",
+    "lines": [
+      "Música · Soporte · Comunidad · Configuración",
+      "Elegí una categoría o buscá un comando."
+    ],
+    "buttons": [
+      "Panel web",
+      "Buscar comando"
+    ],
+    "select": "Choose a module",
+    "kind": "message",
+    "icon": "help",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/help_home.svg",
+    "png": "design/screens/png/help_home.png"
+  },
+  {
+    "id": "help_command",
+    "module": "help",
+    "title": "Música / Reproducir",
+    "lines": [
+      "Reproducir una canción o una lista",
+      "El acceso depende de la configuración musical."
+    ],
+    "buttons": [
+      "Volver",
+      "Panel web"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "music",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/help_command.svg",
+    "png": "design/screens/png/help_command.png"
+  },
+  {
+    "id": "role_menu",
+    "module": "community",
+    "title": "Elegí tus roles",
+    "lines": [
+      "Elegí tus intereses para acceder a los canales.",
+      "Solo se ofrecen roles autorizados."
+    ],
+    "buttons": [
+      "Guardar"
+    ],
+    "select": "Choose interests",
+    "kind": "message",
+    "icon": "role",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/role_menu.svg",
+    "png": "design/screens/png/role_menu.png"
+  },
+  {
+    "id": "welcome_message",
+    "module": "welcome",
+    "title": "¡Bienvenido, Alex!",
+    "lines": [
+      "Alex · Comunidad Aurora · Miembros actuales: 248",
+      "Leé las reglas y elegí tus roles."
+    ],
+    "buttons": [
+      "Ver reglas",
+      "Elegir roles"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "welcome",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/welcome_message.svg",
+    "png": "design/screens/png/welcome_message.png"
+  },
+  {
+    "id": "profile_card",
+    "module": "profile",
+    "title": "Tu perfil",
+    "lines": [
+      "Alex · Nivel 12 · Experiencia: 8.420",
+      "La privacidad depende de la configuración."
+    ],
+    "buttons": [
+      "Clasificación",
+      "Privacidad"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "user",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/profile_card.svg",
+    "png": "design/screens/png/profile_card.png"
+  },
+  {
+    "id": "levels_leaderboard",
+    "module": "community",
+    "title": "Clasificación de la comunidad",
+    "lines": [
+      "1 · Alex · Nivel 12",
+      "2 · Sam · Nivel 11 · Página 1 de 3"
+    ],
+    "buttons": [
+      "Anterior",
+      "Siguiente"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "level",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/levels_leaderboard.svg",
+    "png": "design/screens/png/levels_leaderboard.png"
+  },
+  {
+    "id": "economy_wallet",
+    "module": "community",
+    "title": "Tu billetera",
+    "lines": [
+      "Saldo: 1.250 créditos del servidor",
+      "Revisá el destinatario antes de transferir."
+    ],
+    "buttons": [
+      "Historial",
+      "Transferir"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "wallet",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/economy_wallet.svg",
+    "png": "design/screens/png/economy_wallet.png"
+  },
+  {
+    "id": "giveaway_panel",
+    "module": "community",
+    "title": "Sorteo de la comunidad",
+    "lines": [
+      "Premio: rol especial · Finaliza mañana",
+      "Reglas definidas por el servidor."
+    ],
+    "buttons": [
+      "Participar",
+      "Reglas"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "gift",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/giveaway_panel.svg",
+    "png": "design/screens/png/giveaway_panel.png"
+  },
+  {
+    "id": "suggestion_panel",
+    "module": "community",
+    "title": "Noche de juegos",
+    "lines": [
+      "Propuesta: noche de juegos semanal",
+      "Votá y revisá los detalles de la actividad."
+    ],
+    "buttons": [
+      "A favor",
+      "En contra",
+      "Detalles"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "suggestion",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/suggestion_panel.svg",
+    "png": "design/screens/png/suggestion_panel.png"
+  },
+  {
+    "id": "starboard_post",
+    "module": "community",
+    "title": "Destacado de la comunidad",
+    "lines": [
+      "Mensaje destacado por la comunidad",
+      "Abrí el mensaje original para ver el contexto."
+    ],
+    "buttons": [
+      "Ver mensaje"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "star",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/starboard_post.svg",
+    "png": "design/screens/png/starboard_post.png"
+  },
+  {
+    "id": "voice_controls",
+    "module": "community",
+    "title": "Tu sala de voz",
+    "lines": [
+      "Sala de Alex · Límite: 5 participantes",
+      "Cambios sujetos a permisos de la sala."
+    ],
+    "buttons": [
+      "Bloquear",
+      "Renombrar",
+      "Límite"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "voice",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/voice_controls.svg",
+    "png": "design/screens/png/voice_controls.png"
+  },
+  {
+    "id": "automation_rules",
+    "module": "automation",
+    "title": "Automatizaciones",
+    "lines": [
+      "Regla: bienvenida y asignación de rol",
+      "Consultá el registro de actividad."
+    ],
+    "buttons": [
+      "Crear regla",
+      "Actividad"
+    ],
+    "select": "Choose a rule",
+    "kind": "message",
+    "icon": "automation",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/automation_rules.svg",
+    "png": "design/screens/png/automation_rules.png"
+  },
+  {
+    "id": "automation_preview",
+    "module": "automation",
+    "title": "Revisá la automatización",
+    "lines": [
+      "Disparador: entrada de un miembro",
+      "Acción propuesta: asignar rol autorizado."
+    ],
+    "buttons": [
+      "Volver",
+      "Activar regla"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "automation",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/automation_preview.svg",
+    "png": "design/screens/png/automation_preview.png"
+  },
+  {
+    "id": "analytics_overview",
+    "module": "community",
+    "title": "Actividad del servidor",
+    "lines": [
+      "Miembros activos: 248 · Período: 7 días",
+      "Datos de ejemplo; verificar disponibilidad real."
+    ],
+    "buttons": [
+      "Detalles",
+      "Panel web"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "analytics",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/analytics_overview.svg",
+    "png": "design/screens/png/analytics_overview.png"
+  },
+  {
+    "id": "status_success",
+    "module": "help",
+    "title": "Cambios guardados",
+    "lines": [
+      "Los cambios fueron guardados.",
+      "Revisá la configuración cuando lo necesites."
+    ],
+    "buttons": [
+      "Ver ajustes"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "success",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/status_success.svg",
+    "png": "design/screens/png/status_success.png"
+  },
+  {
+    "id": "status_warning",
+    "module": "help",
+    "title": "Revisá antes de continuar",
+    "lines": [
+      "La acción puede modificar el servidor.",
+      "Comprobá alcance y destinatario."
+    ],
+    "buttons": [
+      "Cancelar",
+      "Revisar"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "warning",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/status_warning.svg",
+    "png": "design/screens/png/status_warning.png"
+  },
+  {
+    "id": "status_error",
+    "module": "help",
+    "title": "Acción bloqueada",
+    "lines": [
+      "La acción no se pudo completar.",
+      "Consultá el motivo antes de reintentar."
+    ],
+    "buttons": [
+      "Cómo resolver"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "error",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/status_error.svg",
+    "png": "design/screens/png/status_error.png"
+  },
+  {
+    "id": "status_empty",
+    "module": "help",
+    "title": "Todavía no hay contenido",
+    "lines": [
+      "Todavía no hay elementos en esta vista.",
+      "Creá el primer elemento para comenzar."
+    ],
+    "buttons": [
+      "Crear"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "plus",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/status_empty.svg",
+    "png": "design/screens/png/status_empty.png"
+  },
+  {
+    "id": "status_loading",
+    "module": "help",
+    "title": "Procesando tu solicitud",
+    "lines": [
+      "Tu solicitud está en proceso.",
+      "Consultá el estado de la tarea."
+    ],
+    "buttons": [
+      "Ver tarea"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "loading",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/status_loading.svg",
+    "png": "design/screens/png/status_loading.png"
+  },
+  {
+    "id": "status_expired",
+    "module": "help",
+    "title": "La interacción expiró",
+    "lines": [
+      "Este control ya no está activo.",
+      "Abrí un panel nuevo para continuar."
+    ],
+    "buttons": [
+      "Abrir panel"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "expired",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/status_expired.svg",
+    "png": "design/screens/png/status_expired.png"
+  },
+  {
+    "id": "status_permission",
+    "module": "help",
+    "title": "Permiso requerido",
+    "lines": [
+      "Tu rol no permite esta acción.",
+      "Consultá con la administración del servidor."
+    ],
+    "buttons": [
+      "Ayuda"
+    ],
+    "select": null,
+    "kind": "message",
+    "icon": "lock",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/status_permission.svg",
+    "png": "design/screens/png/status_permission.png"
+  },
+  {
+    "id": "farewell_message",
+    "module": "welcome",
+    "title": "Hasta pronto, Alex",
+    "lines": [
+      "Alex salió de Comunidad Aurora.",
+      "Gracias por compartir con nosotros."
+    ],
+    "buttons": [],
+    "select": null,
+    "kind": "message",
+    "icon": "farewell",
+    "runtimeVerified": "proposal-requires-code-review",
+    "svg": "design/screens/svg/farewell_message.svg",
+    "png": "design/screens/png/farewell_message.png"
+  }
+]

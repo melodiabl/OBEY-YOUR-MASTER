@@ -3,16 +3,15 @@
 // Crea un canal dedicado con un PANEL ÚNICO que actúa de reproductor: escribir el
 // nombre de una canción la reproduce y el panel se actualiza (idle ↔ now playing).
 // ─────────────────────────────────────────────────────────────────────────────
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, PermissionFlagsBits } = require('discord.js')
+const { EmbedBuilder, ChannelType, PermissionFlagsBits } = require('discord.js')
 const { config } = require('./config')
 const { database } = require('./database')
 const MusicGuild = require('../../database/schemas/MusicGuildSchema')
+const { buildControls } = require('./controls')
 const E = config.emoji
 
 const setupChannels = new Map() // guildId -> channelId
 const setupMessages = new Map() // guildId -> messageId
-
-function pe(m) { const x = /^<(a?):(\w+):(\d+)>$/.exec(String(m)); return x ? { animated: !!x[1], name: x[2], id: x[3] } : m }
 
 async function load(client) {
   try {
@@ -36,21 +35,7 @@ function idlePanel(client) {
     .setDescription('**Escribe el nombre o el enlace de una canción aquí para reproducirla.**\n\n🟢 YouTube · 🟢 Spotify · 🟢 Apple Music')
     .setImage(client.user.displayAvatarURL({ size: 512 }))
     .setFooter({ text: 'Sin música reproduciéndose' })
-  const row1 = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId('mp_shuffle').setEmoji(pe(E.shuffle)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-    new ButtonBuilder().setCustomId('mp_prev').setEmoji(pe(E.previous)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-    new ButtonBuilder().setCustomId('mp_toggle').setEmoji(pe(E.pause)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-    new ButtonBuilder().setCustomId('mp_skip').setEmoji(pe(E.skip)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-    new ButtonBuilder().setCustomId('mp_loop').setEmoji(pe(E.loop)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-  )
-  const row2 = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId('mp_lyrics').setEmoji(pe(E.list)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-    new ButtonBuilder().setCustomId('mp_voldown').setEmoji(pe(E.volDown)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-    new ButtonBuilder().setCustomId('mp_stop').setEmoji(pe(E.stop)).setStyle(ButtonStyle.Danger).setDisabled(true),
-    new ButtonBuilder().setCustomId('mp_volup').setEmoji(pe(E.volUp)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-    new ButtonBuilder().setCustomId('mp_queue').setEmoji(pe(E.folder)).setStyle(ButtonStyle.Secondary).setDisabled(true),
-  )
-  return { embeds: [embed], components: [row1, row2] }
+  return { embeds: [embed], components: buildControls({ loop: 'none', paused: false }, { idle: true }) }
 }
 
 // Vuelve el panel al estado "sin música"

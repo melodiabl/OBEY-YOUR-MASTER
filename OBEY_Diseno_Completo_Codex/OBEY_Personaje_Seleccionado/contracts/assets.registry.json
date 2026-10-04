@@ -1,0 +1,1039 @@
+{
+  "version": 2,
+  "direction": "character-navy-gold",
+  "icons": {
+    "play": {
+      "svg": "assets/emojis/svg/obey_play.svg",
+      "png": "assets/emojis/png/obey_play.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "pause": {
+      "svg": "assets/emojis/svg/obey_pause.svg",
+      "png": "assets/emojis/png/obey_pause.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "skip": {
+      "svg": "assets/emojis/svg/obey_skip.svg",
+      "png": "assets/emojis/png/obey_skip.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "shield": {
+      "svg": "assets/emojis/svg/obey_shield.svg",
+      "png": "assets/emojis/png/obey_shield.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "architect": {
+      "svg": "assets/emojis/svg/obey_architect.svg",
+      "png": "assets/emojis/png/obey_architect.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "ticket": {
+      "svg": "assets/emojis/svg/obey_ticket.svg",
+      "png": "assets/emojis/png/obey_ticket.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "back": {
+      "svg": "assets/emojis/svg/obey_back.svg",
+      "png": "assets/emojis/png/obey_back.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "stop": {
+      "svg": "assets/emojis/svg/obey_stop.svg",
+      "png": "assets/emojis/png/obey_stop.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "queue": {
+      "svg": "assets/emojis/svg/obey_queue.svg",
+      "png": "assets/emojis/png/obey_queue.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "shuffle": {
+      "svg": "assets/emojis/svg/obey_shuffle.svg",
+      "png": "assets/emojis/png/obey_shuffle.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "repeat": {
+      "svg": "assets/emojis/svg/obey_repeat.svg",
+      "png": "assets/emojis/png/obey_repeat.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "volume": {
+      "svg": "assets/emojis/svg/obey_volume.svg",
+      "png": "assets/emojis/png/obey_volume.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "music": {
+      "svg": "assets/emojis/svg/obey_music.svg",
+      "png": "assets/emojis/png/obey_music.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "lyrics",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "search": {
+      "svg": "assets/emojis/svg/obey_search.svg",
+      "png": "assets/emojis/png/obey_search.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "home": {
+      "svg": "assets/emojis/svg/obey_home.svg",
+      "png": "assets/emojis/png/obey_home.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "previous": {
+      "svg": "assets/emojis/svg/obey_previous.svg",
+      "png": "assets/emojis/png/obey_previous.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "next": {
+      "svg": "assets/emojis/svg/obey_next.svg",
+      "png": "assets/emojis/png/obey_next.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "close": {
+      "svg": "assets/emojis/svg/obey_close.svg",
+      "png": "assets/emojis/png/obey_close.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "farewell",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "success": {
+      "svg": "assets/emojis/svg/obey_success.svg",
+      "png": "assets/emojis/png/obey_success.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "like",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "plus": {
+      "svg": "assets/emojis/svg/obey_plus.svg",
+      "png": "assets/emojis/png/obey_plus.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "minus": {
+      "svg": "assets/emojis/svg/obey_minus.svg",
+      "png": "assets/emojis/png/obey_minus.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "edit": {
+      "svg": "assets/emojis/svg/obey_edit.svg",
+      "png": "assets/emojis/png/obey_edit.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "delete": {
+      "svg": "assets/emojis/svg/obey_delete.svg",
+      "png": "assets/emojis/png/obey_delete.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "settings": {
+      "svg": "assets/emojis/svg/obey_settings.svg",
+      "png": "assets/emojis/png/obey_settings.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "lock": {
+      "svg": "assets/emojis/svg/obey_lock.svg",
+      "png": "assets/emojis/png/obey_lock.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "unlock": {
+      "svg": "assets/emojis/svg/obey_unlock.svg",
+      "png": "assets/emojis/png/obey_unlock.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "warning": {
+      "svg": "assets/emojis/svg/obey_warning.svg",
+      "png": "assets/emojis/png/obey_warning.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "error": {
+      "svg": "assets/emojis/svg/obey_error.svg",
+      "png": "assets/emojis/png/obey_error.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "info": {
+      "svg": "assets/emojis/svg/obey_info.svg",
+      "png": "assets/emojis/png/obey_info.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "loading": {
+      "svg": "assets/emojis/svg/obey_loading.svg",
+      "png": "assets/emojis/png/obey_loading.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "live": {
+      "svg": "assets/emojis/svg/obey_live.svg",
+      "png": "assets/emojis/png/obey_live.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "lyrics",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "user": {
+      "svg": "assets/emojis/svg/obey_user.svg",
+      "png": "assets/emojis/png/obey_user.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "claim": {
+      "svg": "assets/emojis/svg/obey_claim.svg",
+      "png": "assets/emojis/png/obey_claim.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "transfer": {
+      "svg": "assets/emojis/svg/obey_transfer.svg",
+      "png": "assets/emojis/png/obey_transfer.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "reopen": {
+      "svg": "assets/emojis/svg/obey_reopen.svg",
+      "png": "assets/emojis/png/obey_reopen.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "star": {
+      "svg": "assets/emojis/svg/obey_star.svg",
+      "png": "assets/emojis/png/obey_star.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "like",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "channel": {
+      "svg": "assets/emojis/svg/obey_channel.svg",
+      "png": "assets/emojis/png/obey_channel.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "category": {
+      "svg": "assets/emojis/svg/obey_category.svg",
+      "png": "assets/emojis/png/obey_category.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "role": {
+      "svg": "assets/emojis/svg/obey_role.svg",
+      "png": "assets/emojis/png/obey_role.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "template": {
+      "svg": "assets/emojis/svg/obey_template.svg",
+      "png": "assets/emojis/png/obey_template.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "backup": {
+      "svg": "assets/emojis/svg/obey_backup.svg",
+      "png": "assets/emojis/png/obey_backup.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "restore": {
+      "svg": "assets/emojis/svg/obey_restore.svg",
+      "png": "assets/emojis/png/obey_restore.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "apply": {
+      "svg": "assets/emojis/svg/obey_apply.svg",
+      "png": "assets/emojis/png/obey_apply.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "like",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "diff": {
+      "svg": "assets/emojis/svg/obey_diff.svg",
+      "png": "assets/emojis/png/obey_diff.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "progress": {
+      "svg": "assets/emojis/svg/obey_progress.svg",
+      "png": "assets/emojis/png/obey_progress.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "ban": {
+      "svg": "assets/emojis/svg/obey_ban.svg",
+      "png": "assets/emojis/png/obey_ban.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "timeout": {
+      "svg": "assets/emojis/svg/obey_timeout.svg",
+      "png": "assets/emojis/png/obey_timeout.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "kick": {
+      "svg": "assets/emojis/svg/obey_kick.svg",
+      "png": "assets/emojis/png/obey_kick.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "case": {
+      "svg": "assets/emojis/svg/obey_case.svg",
+      "png": "assets/emojis/png/obey_case.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "evidence": {
+      "svg": "assets/emojis/svg/obey_evidence.svg",
+      "png": "assets/emojis/png/obey_evidence.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "help": {
+      "svg": "assets/emojis/svg/obey_help.svg",
+      "png": "assets/emojis/png/obey_help.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "globe": {
+      "svg": "assets/emojis/svg/obey_globe.svg",
+      "png": "assets/emojis/png/obey_globe.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "link": {
+      "svg": "assets/emojis/svg/obey_link.svg",
+      "png": "assets/emojis/png/obey_link.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "heart": {
+      "svg": "assets/emojis/svg/obey_heart.svg",
+      "png": "assets/emojis/png/obey_heart.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "like",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "gift": {
+      "svg": "assets/emojis/svg/obey_gift.svg",
+      "png": "assets/emojis/png/obey_gift.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "poll": {
+      "svg": "assets/emojis/svg/obey_poll.svg",
+      "png": "assets/emojis/png/obey_poll.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "voice": {
+      "svg": "assets/emojis/svg/obey_voice.svg",
+      "png": "assets/emojis/png/obey_voice.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "lyrics",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "bell": {
+      "svg": "assets/emojis/svg/obey_bell.svg",
+      "png": "assets/emojis/png/obey_bell.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "calendar": {
+      "svg": "assets/emojis/svg/obey_calendar.svg",
+      "png": "assets/emojis/png/obey_calendar.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "analytics": {
+      "svg": "assets/emojis/svg/obey_analytics.svg",
+      "png": "assets/emojis/png/obey_analytics.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "automation": {
+      "svg": "assets/emojis/svg/obey_automation.svg",
+      "png": "assets/emojis/png/obey_automation.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "wallet": {
+      "svg": "assets/emojis/svg/obey_wallet.svg",
+      "png": "assets/emojis/png/obey_wallet.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "like",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "level": {
+      "svg": "assets/emojis/svg/obey_level.svg",
+      "png": "assets/emojis/png/obey_level.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "like",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "download": {
+      "svg": "assets/emojis/svg/obey_download.svg",
+      "png": "assets/emojis/png/obey_download.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "upload": {
+      "svg": "assets/emojis/svg/obey_upload.svg",
+      "png": "assets/emojis/png/obey_upload.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "history": {
+      "svg": "assets/emojis/svg/obey_history.svg",
+      "png": "assets/emojis/png/obey_history.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "lyrics": {
+      "svg": "assets/emojis/svg/obey_lyrics.svg",
+      "png": "assets/emojis/png/obey_lyrics.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "lyrics",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "collection": {
+      "svg": "assets/emojis/svg/obey_collection.svg",
+      "png": "assets/emojis/png/obey_collection.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "filter": {
+      "svg": "assets/emojis/svg/obey_filter.svg",
+      "png": "assets/emojis/png/obey_filter.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "report": {
+      "svg": "assets/emojis/svg/obey_report.svg",
+      "png": "assets/emojis/png/obey_report.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "raid": {
+      "svg": "assets/emojis/svg/obey_raid.svg",
+      "png": "assets/emojis/png/obey_raid.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "verify": {
+      "svg": "assets/emojis/svg/obey_verify.svg",
+      "png": "assets/emojis/png/obey_verify.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "like",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "welcome": {
+      "svg": "assets/emojis/svg/obey_welcome.svg",
+      "png": "assets/emojis/png/obey_welcome.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "suggestion": {
+      "svg": "assets/emojis/svg/obey_suggestion.svg",
+      "png": "assets/emojis/png/obey_suggestion.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "decoration": {
+      "svg": "assets/emojis/svg/obey_decoration.svg",
+      "png": "assets/emojis/png/obey_decoration.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "server": {
+      "svg": "assets/emojis/svg/obey_server.svg",
+      "png": "assets/emojis/png/obey_server.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "welcome",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "document": {
+      "svg": "assets/emojis/svg/obey_document.svg",
+      "png": "assets/emojis/png/obey_document.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "eye": {
+      "svg": "assets/emojis/svg/obey_eye.svg",
+      "png": "assets/emojis/png/obey_eye.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "muted": {
+      "svg": "assets/emojis/svg/obey_muted.svg",
+      "png": "assets/emojis/png/obey_muted.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "expired": {
+      "svg": "assets/emojis/svg/obey_expired.svg",
+      "png": "assets/emojis/png/obey_expired.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "farewell",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "refresh": {
+      "svg": "assets/emojis/svg/obey_refresh.svg",
+      "png": "assets/emojis/png/obey_refresh.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "setup": {
+      "svg": "assets/emojis/svg/obey_setup.svg",
+      "png": "assets/emojis/png/obey_setup.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "save": {
+      "svg": "assets/emojis/svg/obey_save.svg",
+      "png": "assets/emojis/png/obey_save.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "help",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "logout": {
+      "svg": "assets/emojis/svg/obey_logout.svg",
+      "png": "assets/emojis/png/obey_logout.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "farewell",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "currency": {
+      "svg": "assets/emojis/svg/obey_currency.svg",
+      "png": "assets/emojis/png/obey_currency.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "like",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "farewell": {
+      "svg": "assets/emojis/svg/obey_farewell.svg",
+      "png": "assets/emojis/png/obey_farewell.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "farewell",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "autoplay": {
+      "svg": "assets/emojis/svg/obey_autoplay.svg",
+      "png": "assets/emojis/png/obey_autoplay.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "vol_up": {
+      "svg": "assets/emojis/svg/obey_vol_up.svg",
+      "png": "assets/emojis/png/obey_vol_up.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    },
+    "vol_down": {
+      "svg": "assets/emojis/svg/obey_vol_down.svg",
+      "png": "assets/emojis/png/obey_vol_down.png",
+      "applicationEmojiId": null,
+      "size": 128,
+      "portrait": "autoplay",
+      "requiresLabel": true,
+      "status": "exported-not-uploaded"
+    }
+  },
+  "banners": {
+    "music": {
+      "svg": "assets/banners/svg/obey_music.svg",
+      "png": "assets/banners/png/obey_music.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "moderation": {
+      "svg": "assets/banners/svg/obey_moderation.svg",
+      "png": "assets/banners/png/obey_moderation.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "security": {
+      "svg": "assets/banners/svg/obey_security.svg",
+      "png": "assets/banners/png/obey_security.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "tickets": {
+      "svg": "assets/banners/svg/obey_tickets.svg",
+      "png": "assets/banners/png/obey_tickets.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "architect": {
+      "svg": "assets/banners/svg/obey_architect.svg",
+      "png": "assets/banners/png/obey_architect.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "community": {
+      "svg": "assets/banners/svg/obey_community.svg",
+      "png": "assets/banners/png/obey_community.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "help": {
+      "svg": "assets/banners/svg/obey_help.svg",
+      "png": "assets/banners/png/obey_help.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "setup": {
+      "svg": "assets/banners/svg/obey_setup.svg",
+      "png": "assets/banners/png/obey_setup.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "templates": {
+      "svg": "assets/banners/svg/obey_templates.svg",
+      "png": "assets/banners/png/obey_templates.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "automation": {
+      "svg": "assets/banners/svg/obey_automation.svg",
+      "png": "assets/banners/png/obey_automation.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "profile": {
+      "svg": "assets/banners/svg/obey_profile.svg",
+      "png": "assets/banners/png/obey_profile.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "welcome": {
+      "svg": "assets/banners/svg/obey_welcome.svg",
+      "png": "assets/banners/png/obey_welcome.png",
+      "size": [
+        1200,
+        360
+      ]
+    },
+    "farewell": {
+      "svg": "assets/banners/svg/obey_farewell.svg",
+      "png": "assets/banners/png/obey_farewell.png",
+      "size": [
+        1200,
+        360
+      ]
+    }
+  },
+  "templates": {
+    "welcome": {
+      "svg": "assets/templates/svg/obey_welcome_base.svg",
+      "png": "assets/templates/png/obey_welcome_base.png",
+      "size": [
+        1772,
+        633
+      ],
+      "dynamicTextBaked": false,
+      "avatarSlot": {
+        "x": 74,
+        "y": 162,
+        "size": 308
+      }
+    },
+    "farewell": {
+      "svg": "assets/templates/svg/obey_farewell_base.svg",
+      "png": "assets/templates/png/obey_farewell_base.png",
+      "size": [
+        1772,
+        633
+      ],
+      "dynamicTextBaked": false,
+      "avatarSlot": {
+        "x": 74,
+        "y": 162,
+        "size": 308
+      }
+    },
+    "music": {
+      "svg": "assets/templates/svg/obey_music_base.svg",
+      "png": "assets/templates/png/obey_music_base.png",
+      "size": [
+        1772,
+        633
+      ],
+      "dynamicTextBaked": false,
+      "avatarSlot": null
+    }
+  },
+  "musicControls": [
+    {
+      "customId": "mp_shuffle",
+      "assetKey": "shuffle",
+      "label": "Mezclar",
+      "row": 1,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_prev",
+      "assetKey": "previous",
+      "label": "Anterior",
+      "row": 1,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_toggle",
+      "assetKey": "pause",
+      "label": "Pausar",
+      "row": 1,
+      "alternateAsset": "play"
+    },
+    {
+      "customId": "mp_skip",
+      "assetKey": "skip",
+      "label": "Saltar",
+      "row": 1,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_loop",
+      "assetKey": "repeat",
+      "label": "Repetir",
+      "row": 1,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_lyrics",
+      "assetKey": "lyrics",
+      "label": "Letras",
+      "row": 2,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_voldown",
+      "assetKey": "vol_down",
+      "label": "Vol −",
+      "row": 2,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_stop",
+      "assetKey": "stop",
+      "label": "Detener",
+      "row": 2,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_volup",
+      "assetKey": "vol_up",
+      "label": "Vol +",
+      "row": 2,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_queue",
+      "assetKey": "queue",
+      "label": "Cola",
+      "row": 2,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_like",
+      "assetKey": "heart",
+      "label": "Me gusta",
+      "row": 3,
+      "alternateAsset": null
+    },
+    {
+      "customId": "mp_autoplay",
+      "assetKey": "autoplay",
+      "label": "Autoplay",
+      "row": 3,
+      "alternateAsset": null
+    }
+  ]
+}
