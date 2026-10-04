@@ -130,6 +130,8 @@ body.idle .kick .d{animation:none;background:var(--txt3);box-shadow:none}
 button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
 :is(a,button,input,[role="button"]):focus-visible{outline:2px solid #b9c3ff;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.lyrics-panel{padding:22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface2);margin:18px 0}
+.lyrics-panel[hidden]{display:none}.lyrics-head,.lyrics-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.lyrics-head{justify-content:space-between;margin-bottom:16px}.lyrics-controls{margin-top:16px}.lyrics-controls button,.lyrics-toggle{padding:9px 14px;border:1px solid var(--line);border-radius:9px;background:var(--hover)}.lyrics-toggle{margin-top:12px}.lyrics-panel button:disabled{opacity:.4;cursor:default}.lyrics-panel button:focus-visible,.lyrics-toggle:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}.lyrics-body{max-height:min(42dvh,480px);overflow:auto;overflow-wrap:anywhere;line-height:1.9}.lyric-line{color:var(--txt2);padding:4px 8px;border-radius:6px;white-space:pre-wrap}.lyric-line.active{color:var(--txt);background:rgba(88,101,242,.2);font-weight:700}.lyrics-status{font-size:13px;color:var(--txt2);margin-bottom:12px}
 </style>
 <link rel="stylesheet" href="/css/internal-theme.css">
 </head>
@@ -178,6 +180,16 @@ button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
                 <button class="gb" id="b-loop" data-loop aria-label="Cambiar repetición"><i class="fas fa-repeat"></i></button>
               </div>
             </div>
+          </div>
+        </section>
+        <button type="button" class="lyrics-toggle" id="lyrics-toggle" aria-controls="lyrics-panel" aria-expanded="false" disabled>Letras</button>
+        <section class="lyrics-panel" id="lyrics-panel" aria-labelledby="lyrics-title" hidden>
+          <div class="lyrics-head"><h2 id="lyrics-title">Letras</h2><button type="button" id="lyrics-close" aria-label="Cerrar letras">Cerrar</button></div>
+          <p class="lyrics-status" id="lyrics-status" role="status"></p>
+          <div class="lyrics-body" id="lyrics-body" tabindex="0" aria-label="Texto de la canción"></div>
+          <div class="lyrics-controls">
+            <button type="button" id="lyrics-prev" aria-label="Página anterior">Anterior</button><span id="lyrics-page"></span><button type="button" id="lyrics-next" aria-label="Página siguiente">Siguiente</button>
+            <button type="button" id="lyrics-follow">Seguir reproducción</button><button type="button" id="lyrics-text">Texto completo</button><button type="button" id="lyrics-retry">Reintentar</button>
           </div>
         </section>
         <section class="sec"><div class="sec-h"><h2>Recientes <span class="em">en este servidor</span></h2></div><div class="grid" id="g-rec"><div class="empty">Cargando…</div></div></section>
@@ -281,6 +293,7 @@ button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/player-volume.js"></script>
 <script src="/js/player-state.js"></script>
+<script src="/js/player-lyrics.js"></script>
 <script src="/js/track-artwork.js"></script>
 <script>
 const GID='<%= guild.id %>'; const PREFIX=<%- JSON.stringify(prefix).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029') %>; const H={'Content-Type':'application/json'};
@@ -364,6 +377,8 @@ function applyState(s){
   CURRENT=cur; updateHeart();
   $$('button[data-act],button[data-loop],#bar-like,#ov-like').forEach(button=>{button.disabled=!cur});
   renderQueue(s);
+  $('#lyrics-toggle').disabled=!cur;
+  lyricsControl.receive(s);
 }
 function renderQueue(s){
   const q=(s&&s.queue)?s.queue.slice(1):[];$('#q-count').textContent=q.length?`${q.length} en cola`:'';
@@ -374,6 +389,26 @@ function renderQueue(s){
 function tick(){let pos=ELAPSED+(PAUSED?0:Date.now()-SYNC);if(LEN>0)pos=Math.min(pos,LEN);const pct=LEN>0?(pos/LEN*100):0;
   ['#hero-prog','#ov-prog'].forEach(x=>$(x).firstElementChild.style.width=pct+'%');$('.ptrack .bar i').style.width=pct+'%';
   ['#hero-cur','#np-cur','#ov-cur'].forEach(x=>$(x).textContent=fmt(pos));['#hero-tot','#np-tot','#ov-tot'].forEach(x=>$(x).textContent=fmt(LEN));}
+let lyricsPage=0, lyricsOpened=false;
+const lyricsMessages={loading:'Buscando letras…',idle:'Reproduce una canción para ver sus letras.',stream:'Las emisiones en directo no tienen letras disponibles.',missing:'No hay letras disponibles para esta canción.',unavailable:'No se pudieron cargar las letras. Puedes reintentar.',track_changed:'La canción cambió mientras se cargaban las letras. Reintenta.',denied:'No tienes acceso a las letras de este servidor.'};
+const lyricsControl=createPlayerLyrics({
+  async load(){const response=await fetch(`/api/music/lyrics/${GID}`);if(!response.ok){const error=new Error('lyrics_failed');if(response.status===401||response.status===403)error.code='denied';throw error}const body=await response.json();if(!body.success)throw new Error('lyrics_failed');return body.data},
+  render(view){
+    lyricsPage=view.page;lyricsOpened=view.open;
+    $('#lyrics-panel').hidden=!view.open;$('#lyrics-toggle').setAttribute('aria-expanded',String(view.open));
+    $('#lyrics-status').textContent=view.status==='ready'?(view.mode==='synced'&&!view.fullText?'Letras sincronizadas':'Texto completo')+(!view.connected?' · reproducción desconectada':''):(lyricsMessages[view.status]||'Letras no disponibles.');
+    const body=$('#lyrics-body');body.replaceChildren();view.rows.forEach((text,index)=>{const line=document.createElement('div');line.className='lyric-line'+(view.page*20+index===view.activeLine?' active':'');line.textContent=text;body.appendChild(line)});
+    $('#lyrics-page').textContent=view.status==='ready'?`${view.page+1} / ${view.total}`:'';
+    $('#lyrics-prev').disabled=view.status!=='ready'||view.page===0;$('#lyrics-next').disabled=view.status!=='ready'||view.page>=view.total-1;
+    $('#lyrics-follow').hidden=view.mode!=='synced'||view.status!=='ready';$('#lyrics-follow').disabled=view.follow&&!view.fullText;
+    $('#lyrics-text').hidden=view.mode!=='synced'||view.status!=='ready';$('#lyrics-text').textContent=view.fullText?'Líneas sincronizadas':'Texto completo';
+    $('#lyrics-retry').hidden=!['unavailable','missing','track_changed'].includes(view.status);
+  }
+});
+$('#lyrics-toggle').addEventListener('click',()=>{if(lyricsOpened)lyricsControl.close();else lyricsControl.open()});
+$('#lyrics-close').addEventListener('click',()=>{lyricsControl.close();$('#lyrics-toggle').focus()});
+$('#lyrics-prev').addEventListener('click',()=>lyricsControl.page(lyricsPage-1));$('#lyrics-next').addEventListener('click',()=>lyricsControl.page(lyricsPage+1));
+$('#lyrics-follow').addEventListener('click',()=>lyricsControl.follow());$('#lyrics-text').addEventListener('click',()=>lyricsControl.text());$('#lyrics-retry').addEventListener('click',()=>lyricsControl.retry());
 const receiveState=createPlayerStateReceiver(applyState);
 let refreshing=false;
 async function refresh(){if(refreshing)return;refreshing=true;try{const{ok,j}=await api(`/api/player/${GID}`);if(ok)receiveState(j)}finally{refreshing=false}}
@@ -432,12 +467,12 @@ function loadGenres(){const c=$('#genres');if(!c)return;c.innerHTML='';GENRES.fo
 async function loadRadar(){const{j}=await api(`/api/music/search?q=${encodeURIComponent('top global hits 2026')}`);render('g-radar',(j.data||[]).slice(0,12),{icon:'fa-compass',empty:'No disponible ahora'})}
 const realtime=io({transports:['websocket','polling']});
 realtime.on('connect',()=>{$('#connection-status').textContent='Verificando acceso…';$('#connection-status').dataset.status='offline';realtime.emit('join',GID);refresh()});
-realtime.on('player:state',state=>{if(state.guildId&&state.guildId!==GID)return;$('#connection-status').textContent='Conectado · en vivo';$('#connection-status').dataset.status='online';receiveState(state)});
-realtime.on('player:error',()=>{$('#connection-status').textContent='No se pudo verificar el acceso · datos sin actualizar';$('#connection-status').dataset.status='offline'});
-realtime.on('disconnect',()=>{$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
-realtime.on('connect_error',()=>{$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
+realtime.on('player:state',state=>{if(state.guildId&&state.guildId!==GID)return;$('#connection-status').textContent='Conectado · en vivo';$('#connection-status').dataset.status='online';if(receiveState(state))lyricsControl.connection(true)});
+realtime.on('player:error',()=>{lyricsControl.deny();lyricsControl.connection(false);$('#connection-status').textContent='No se pudo verificar el acceso · datos sin actualizar';$('#connection-status').dataset.status='offline'});
+realtime.on('disconnect',()=>{lyricsControl.connection(false);$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
+realtime.on('connect_error',()=>{lyricsControl.connection(false);$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
 window.addEventListener('online',refresh);
-loadGenres();loadRadar();loadLists();refresh();setInterval(()=>{if(!document.hidden)refresh()},10000);setInterval(tick,500);
+loadGenres();loadRadar();loadLists();refresh();setInterval(()=>{if(!document.hidden)refresh()},10000);setInterval(()=>{tick();if(!document.hidden)lyricsControl.tick()},500);
 </script>
 </body>
 </html>

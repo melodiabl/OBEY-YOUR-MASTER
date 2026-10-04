@@ -113,6 +113,7 @@ module.exports = client => {
     return {
       active:         true,
       sessionId:      state.sessionId,
+      playbackId:     state.playbackId,
       revision:       state.revision,
       status:         state.paused ? 'paused' : state.status,
       paused:         Boolean(state.paused),

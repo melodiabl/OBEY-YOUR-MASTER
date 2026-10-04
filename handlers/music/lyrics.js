@@ -52,13 +52,14 @@ function parseLrc(lrc) {
 
 // Devuelve { lines: [{ms, text}], plain: 'raw text' } o null.
 // Orden: plugin Lavalink (sincronizadas) → lrclib.net
-async function fetchLyrics(title, artist) {
+async function lookupLyrics(title, artist) {
   if (!title) return null
 
   const cacheKey = `${title.toLowerCase()}::${artist?.toLowerCase() || ''}`
   const cached = CACHE.get(cacheKey)
-  if (cached && Date.now() - cached.fetchedAt < CACHE_TTL) return cached.data
+  if (cached && Date.now() - cached.fetchedAt < (cached.ttl || CACHE_TTL)) return cached.data
 
+  let unavailable = false
   let result = await fetchLavalinkLyrics(title, artist).catch(() => null)
 
   if (!result?.lines?.length) {
@@ -70,12 +71,28 @@ async function fetchLyrics(title, artist) {
       const lrclib = lines.length ? { lines, plain } : plain ? { lines: [], plain } : null
       // Preferir el que tenga líneas sincronizadas; si ninguno, el que tenga texto
       if (lrclib?.lines?.length || !result) result = lrclib || result
-    } catch {}
+    } catch (error) { unavailable = !/^lyrics HTTP 404$/.test(error.message) }
   }
 
   if (CACHE.size >= 256 && !CACHE.has(cacheKey)) CACHE.delete(CACHE.keys().next().value)
-  CACHE.set(cacheKey, { data: result || null, fetchedAt: Date.now() })
+  CACHE.set(cacheKey, { data: result || null, status: result ? 'ready' : unavailable ? 'unavailable' : 'missing', ttl: unavailable && !result ? 10000 : CACHE_TTL, fetchedAt: Date.now() })
   return result || null
+}
+
+const pendingLookups = new Map()
+async function fetchLyrics(title, artist) {
+  if (!title) return null
+  const key = `${title.toLowerCase()}::${artist?.toLowerCase() || ''}`
+  if (!pendingLookups.has(key)) {
+    const pending = lookupLyrics(title, artist).finally(() => pendingLookups.delete(key))
+    pendingLookups.set(key, pending)
+  }
+  return pendingLookups.get(key)
+}
+async function fetchLyricsResult(title, artist) {
+  const data = await fetchLyrics(title, artist)
+  const key = `${title?.toLowerCase() || ''}::${artist?.toLowerCase() || ''}`
+  return { data, status: data ? 'ready' : CACHE.get(key)?.status || 'missing' }
 }
 
 // Get the current line + context (prev, current, next) based on position
@@ -107,4 +124,4 @@ function formatLyricsEmbed(lines, positionMs) {
   }).join('\n')
 }
 
-module.exports = { fetchLyrics, getLyricContext, formatLyricsEmbed, parseLrc }
+module.exports = { fetchLyrics, fetchLyricsResult, getLyricContext, formatLyricsEmbed, parseLrc }

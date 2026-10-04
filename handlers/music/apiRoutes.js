@@ -13,6 +13,7 @@ module.exports = (app, client, {
   requireAuth = (req, res) => res.status(401).json({ error: 'not_authenticated' }),
   requireFreshGuildPermissions = (req, res) => res.status(503).json({ error: 'permissions_unavailable' }),
   database: repository = database,
+  getCurrentLyrics = require('./web-lyrics').getCurrentLyrics,
 } = {}) => {
   const music = () => client.music
   const ok  = (res, data) => res.json({ success: true, data })
@@ -37,6 +38,9 @@ module.exports = (app, client, {
     if (!canManageGuild(req.session.user, req.params.guildId)) return bad(res, 403, 'no_permission')
     ok(res, music()?.getPublicState?.(req.params.guildId) || { active: false })
   })
+
+  app.get('/api/music/lyrics/:guildId', apiAuth, requireFreshGuildPermissions, guildAccess,
+    wrap(async (req, res) => ok(res, await getCurrentLyrics(music(), req.params.guildId))))
 
   app.get('/api/music/search', wrap(async (req, res) => {
     const q = req.query.q

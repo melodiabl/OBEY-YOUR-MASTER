@@ -6,7 +6,7 @@ La letra plana deja de recortarse y todas sus páginas son accesibles con Anteri
 
 Para canción actual se captura referencia de pista, playbackId y sessionId antes de consultar. Se rechaza una respuesta vieja antes/después de publicar y al navegar. El karaoke añade guards equivalentes en lookup/envío, generación por lookup y cancelación de consulta pendiente. Una nueva consulta invalida una anterior; un envío tardío se elimina sin instalar intervalo. El toggle reconoce también consultas pendientes. Las recargas del karaoke mantienen guard de sesión/pista tras consultar. Se conservan pausa, seek, tiempos, ventanas y cadencias originales.
 
-El adaptador HTTP compartido tiene deadline de ocho segundos, límite de respuesta de 512 KiB y cierre de requests al fallar; el cache de proveedor está limitado a 256 entradas. No se cambian proveedores ni engine. Los fallos esperados retornan ausencia de letras; no se imprimen credenciales de Lavalink.
+El adaptador HTTP compartido tiene deadline de ocho segundos, límite de respuesta de 512 KiB y cierre de requests al fallar; el cache de proveedor está limitado a 256 entradas. No se cambian proveedores ni engine. Los fallos esperados conservan el contrato anterior de Discord (`null`), y `fetchLyricsResult` distingue ausencia (404) de caída/timeout; una caída se cachea solo 10 segundos. Consultas simultáneas Discord/web de la misma canción comparten una promesa; no se imprimen credenciales de Lavalink.
 
 ## Verificación reproducible
 
@@ -19,4 +19,10 @@ Regresiones: 13 de paginación, 5 de command/router real con proveedores simulad
 
 ## Pendiente explícito
 
-No se probó en un servidor real ni con APIs musicales reales. El estado de letras aún no se transporta a la web: T19 y OBEY-21-03 siguen parciales hasta servicio/eventos/UI web compartidos y las pruebas de sincronización. No se declara terminada fase 3 ni plataforma. Las cadencias conservadas necesitan el canary indicado en el plan para comprobar pausa/seek/cambio de canción desde Discord.
+La web ya incluye panel Letras en el reproductor real. `GET /api/music/lyrics/:guildId` exige sesión y permisos actuales antes de consultar el proveedor compartido. Captura sesión/playback/pista y descarta resultados tardíos. La proyección pública añade `playbackId` para distinguir repeticiones de una misma canción.
+
+El panel carga al abrirse, cambiar de reproducción, reconectar o reintentar; no consulta proveedores con cada tick. Todas las páginas, anterior/siguiente y contador están disponibles; sincronización sigue la posición/pausa del mismo estado HTTP/Socket.IO. Leer otra página desactiva seguimiento hasta pulsar Seguir reproducción. Texto completo conserva el fallback plain aunque difiera del texto sincronizado. Desconexión congela extrapolación; denegación borra el texto. Contenido del proveedor se inserta con textContent.
+
+Regresiones web/proveedor: paginación completa, última página, respuestas fuera de orden, misma pista reproducida otra vez, nueva sesión, pausa/seek, desconexión, ausencia/stream/error, retry y permisos antes de lookup. Chromium usa EJS real y fixtures aislados; capturas/report `evidence/lyrics-web-*`.
+
+No se probó en un servidor real ni con APIs musicales reales. T19 sigue parcial para aceptación canary de pausa/seek/cambio desde Discord. No se declara terminada fase 3 ni plataforma.

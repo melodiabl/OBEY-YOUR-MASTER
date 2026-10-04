@@ -17,11 +17,11 @@ function fixture() {
   }
   const client = { guilds: { cache: new Map([['allowed', { name: 'A' }], ['private', { name: 'P' }]]) },
     music: { playerStates: new Map(['allowed', 'private'].map(id => [id, { currentTrack: { info: { title: id } } }])) } }
-  const options = { canManageGuild, requireAuth: auth, requireFreshGuildPermissions: fresh, database: repository }
+  const options = { canManageGuild, requireAuth: auth, requireFreshGuildPermissions: fresh, database: repository, getCurrentLyrics: async (_, guild) => { reads.push({ lyricsGuild: guild }); return { status: 'idle' } } }
   mount(app, client, options)
   visible(app, client, options)
-  async function request(path, user, query = {}) {
-    const req = { path, query, params: {}, session: { user } }
+  async function request(path, user, query = {}, params = {}) {
+    const req = { path, query, params, session: { user } }
     const res = { code: 200, set() {}, status(code) { this.code = code; return this }, json(body) { this.body = body } }
     const handlers = routes.get(path)
     let i = 0
@@ -65,4 +65,14 @@ test('administration requires real permission bits and rejects invalid values', 
   }
   for (const permissions of ['8', '32']) assert.equal(canManageGuild({ guilds: [{ id: 'g', permissions }] }, 'g'), true)
   assert.equal(canManageGuild({ guilds: [{ id: 'g', owner: true }] }, 'g'), true)
+})
+
+
+test('lyrics lookup is protected before calling the shared provider', async () => {
+ const f=fixture(), route='/api/music/lyrics/:guildId'
+ assert.equal((await f.request(route,undefined,{}, {guildId:'allowed'})).code,401)
+ assert.equal((await f.request(route,admin(),{}, {guildId:'private'})).code,403)
+ assert.equal(f.reads.length,0)
+ assert.equal((await f.request(route,admin(),{}, {guildId:'allowed'})).body.data.status,'idle')
+ assert.deepEqual(f.reads,[{lyricsGuild:'allowed'}])
 })

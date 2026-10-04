@@ -4227,11 +4227,15 @@
       "tests": {
         "required": "Todas las páginas, seeks, cambio tardío y proveedor caído",
         "evidence": [
-          "Recortes corregidos y guards de playback añadidos. Tests locales; canary pausa/seek/posición pendiente."
+          "Recortes corregidos y guards de playback añadidos. Tests locales; canary pausa/seek/posición pendiente.",
+          "test/music-web-lyrics.test.js",
+          "test/player-lyrics.test.js",
+          "test/lyrics-provider-status.test.js",
+          "docs/platform/evidence/lyrics-web-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "implementado_local"
+      "status": "parcial"
     },
     {
       "id": "OBEY-21-02",
@@ -4271,11 +4275,15 @@
       "tests": {
         "required": "Todas las páginas, seeks, cambio tardío y proveedor caído",
         "evidence": [
-          "13 regresiones de navegación/Unicode/owner/guild/message/TTL/dedup/serialización."
+          "13 regresiones de navegación/Unicode/owner/guild/message/TTL/dedup/serialización.",
+          "test/music-web-lyrics.test.js",
+          "test/player-lyrics.test.js",
+          "test/lyrics-provider-status.test.js",
+          "docs/platform/evidence/lyrics-web-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "implementado_local"
+      "status": "parcial"
     },
     {
       "id": "OBEY-21-03",
@@ -4317,7 +4325,11 @@
       "tests": {
         "required": "Todas las páginas, seeks, cambio tardío y proveedor caído",
         "evidence": [
-          "Lookup/envío tardío/replay/session/cancelación/transporte protegidos. Web lyrics y realtime pendientes."
+          "Lookup/envío tardío/replay/session/cancelación/transporte protegidos. Web lyrics y realtime pendientes.",
+          "test/music-web-lyrics.test.js",
+          "test/player-lyrics.test.js",
+          "test/lyrics-provider-status.test.js",
+          "docs/platform/evidence/lyrics-web-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -13879,8 +13891,9 @@
       "T07 OAuth/API parcial",
       "T12 compatibilidad bienvenida parcial",
       "T56 CI inicial",
-      "T15 realtime musical con revocación parcial"
+      "T15 realtime musical con revocación parcial",
+      "T19 panel web de letras conectado al proveedor y estado musical"
     ],
-    "verification": "125 tests/31 archivos pasan; npm ci limpio y suite pasan; Docker build correcto; Chromium settings/music desktop/mobile sin errores; Discord real y DB/jobs pendientes"
+    "verification": "136 tests/34 archivos; Chromium letras EJS desktop/mobile con sincronización/paginación/denegación sin errores; aceptación canary pendiente"
   }
 }

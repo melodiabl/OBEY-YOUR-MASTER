@@ -107,4 +107,4 @@ Pruebas Discord Gateway/REST/OAuth real, browser, DB/Redis/worker y Docker se ej
 
 ## Checkpoint de trabajo activo
 
-El agente principal prepara registry/pipeline/fallbacks de controles y paginación de letras. Carga real de emojis, previews y pruebas Discord permanecen pendientes; no se marca fase 1 completa. Registrar la evidencia exacta al cerrar el slice, manteniendo requisitos pendientes si falta aceptación integral. El entorno node_modules por symlink difiere del lock (djs14.26.4 vs14.27.0): repetir checks con instalación aislada reproducible antes del PR.
+Desarrollo en el proyecto principal: assets/controles, registry musical, autorización HTTP/Socket.IO y bienvenida compartida implementados en incrementos verificables. T19 web añade un flujo visible completo de letras conectado al proveedor y estado actuales. Continuar T05/T06/T12 y T16–T18 según pendientes exactos; Architect/jobs y módulos restantes conservan su alcance integral. Instalación limpia y Docker ya comprobados; aceptación de proveedores/Discord real permanece pendiente.

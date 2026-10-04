@@ -456,7 +456,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T19
 
-**Checkpoint:** Discord: texto completo paginado, owner/guild/message/TTL, proveedor compartido y guards tardíos, 27 regresiones. Falta UI/eventos/estado compartido web y prueba canary.
+**Checkpoint:** Discord: texto completo paginado, owner/guild/message/TTL, proveedor compartido y guards tardíos, 27 regresiones. Web implementada localmente: endpoint autorizado, proveedor/cache compartido, panel Letras paginado/sincronizado, guards por sesión/playback, pausa/seek/reconexión y evidencia Chromium. Pendiente prueba canary.
 
 - [ ] Letras completas y estado compartido (fase 3).
 

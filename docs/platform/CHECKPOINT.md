@@ -19,9 +19,11 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 
 - T15 musical parcial: sesión recargada desde el store antes de enviar, permisos Discord con TTL de 15 s por socket y timeout de 5 s, rooms `guild:<id>:music`, logout desconecta pestañas de la sesión en el proceso actual. Pérdida de permisos/error del proveedor revoca la suscripción al siguiente envío; sesión eliminada/expirada desconecta. En idle no se promete detección activa sin eventos. Snapshots actuales al reconectar y envíos pendientes agrupados evitan acumulación. El socket no renueva ni guarda tokens; la renovación sigue siendo HTTP. Multi-proceso y heartbeat de revocación pendientes.
 
+- T19 web: Letras conectado al reproductor EJS, paginación íntegra, texto plain y líneas sincronizadas, pausa/seek desde estado compartido, guards por sesión/playback y borrado por denegación. Proveedor distingue ausencia/caída y agrupa consultas simultáneas Discord/web.
+
 ## Evidencia local
 
-- `npm test`: 125 pruebas pasan en 31 archivos, 0 fallos, Node 22.23.2. Resultado del runner TAP actual: 125 tests, 0 fallos.
+- `npm test`: 136 pruebas pasan en 34 archivos, 0 fallos, Node 22.23.2. Resultado del runner TAP actual: 136 tests, 0 fallos.
 - `node --test test/module-registry.test.js`: registro real de música, mismo estado y 25 subcomandos musicales/19 raíces, sin publicación.
 - `node --test test/dashboard-auth.test.js test/music-api-access.test.js`: sesiones inválidas/expiradas, refresh fallido, rotación/storage, denegaciones por guild y consulta inválida antes de DB.
 - `node --test test/music-realtime.test.js`: 7 pruebas; Socket.IO real local con dos pestañas, reconexión/revisión actual, sesión eliminada, no filtración. Pruebas deterministas para permisos perdidos, proveedor caído, eventos agrupados y cancelación pendiente.
@@ -39,7 +41,7 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 2. Completar T06 RBAC compartido por acción/recurso, integración de controles Discord y web y restricciones reales de Discord.
 3. T07/T15: completar concurrencia/refresh OAuth, realtime de otros módulos y transporte entre procesos. La música ya revalida la sesión y usa permisos con TTL de 15 s; no declarar cerrada seguridad transversal.
 4. T12: servicio de configuración con revisiones, migraciones explícitas, atomicidad acorde a Mongo y recuperación de cache tras fallo. Migrar writers legacy sin borrar sus defaults.
-5. T19 web: mismo proveedor/sesión, HTTP inicial, realtime, lyrics y reconexión.
+5. T19: panel web implementado localmente con proveedor compartido, HTTP inicial, posición del realtime y reconexión; verificar canary antes de aceptación integral.
 6. T23–T34: jobs/snapshot/diff/Architect/backups/themes/templates; conectar módulos según disponibilidad real. Conservar T35–T57 y todos los requisitos centrales.
 
 No se ha iniciado bot/Compose, publicado comandos, cargado emojis, usado sesiones/DB de producción, aplicado cambios a guilds ni desplegado. Plataforma y fases completas siguen pendientes.

@@ -22,7 +22,7 @@ module.exports = client => ({
   jobs: [], // Session checkpoint timers exist; no durable worker is implemented.
   api: ['GET /api/player/:guildId', 'POST /api/player/:guildId/action',
     'POST /api/player/:guildId/add', 'POST /api/player/:guildId/search',
-    'GET /api/music/status/:guildId'],
+    'GET /api/music/status/:guildId', 'GET /api/music/lyrics/:guildId'],
   realtime: { emitted: ['player:state', 'player:tick'], consumed: ['join', 'leave'] },
   dependencies: ['shoukaku', 'mongoose', 'socket.io'],
   capabilities: {

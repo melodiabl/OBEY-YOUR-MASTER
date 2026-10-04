@@ -1,0 +1,14 @@
+{
+  "scope": "Real EJS and browser scripts; simulated transport events and isolated API fixtures; real Socket.IO integration separately in tests",
+  "states": [
+    "synced current line",
+    "all three pages",
+    "last verse",
+    "safe provider text",
+    "manual and follow",
+    "full text",
+    "disconnected",
+    "denied"
+  ],
+  "errors": []
+}
