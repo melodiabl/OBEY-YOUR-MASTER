@@ -17,8 +17,11 @@ module.exports = {
       return interaction.reply({ embeds: [err('❌ El mensaje no puede superar 500 caracteres.')], ephemeral: true })
 
     const gid = interaction.guild.id
-    client.settings.ensure(gid, { welcome: { channel: 'nochannel' } }, 'welcome')
-    client.settings.set(gid, msg, 'welcome.msg')
+    try {
+      await require('../../handlers/config-service').saveWelcomeMessage(client.settings, gid, msg)
+    } catch {
+      return interaction.reply({ embeds: [err('❌ No se pudo guardar el mensaje de bienvenida. Inténtalo de nuevo.')], ephemeral: true })
+    }
 
     const preview = msg
       .replace('{user}', `${interaction.user}`)

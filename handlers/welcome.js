@@ -1196,7 +1196,7 @@ module.exports = client => {
                     })
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable7"]))
                     .setDescription(
-                        (client.settings.get(member.guild.id, "welcome.msg") || "{user} ¡Bienvenido a este servidor!")
+                        (require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!")
                             .replace("{user}", `${member.user}`)
                             .replace("{username}", `${member.user.username}`)
                             .replace("{usertag}", `${member.user.username}`)
@@ -1312,7 +1312,7 @@ module.exports = client => {
                     })
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable11"]))
                     .setDescription(
-                        (client.settings.get(member.guild.id, "welcome.msg") || "{user} ¡Bienvenido a este servidor!")
+                        (require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!")
                             .replace("{user}", `${member.user}`)
                             .replace("{username}", `${member.user.username}`)
                             .replace("{usertag}", `${member.user.username}`)
@@ -1427,7 +1427,7 @@ module.exports = client => {
                         })
                         .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable13"]))
                         .setDescription(
-                            (client.settings.get(member.guild.id, "welcome.msg") || "{user} ¡Bienvenido a este servidor!")
+                            (require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!")
                                 .replace("{user}", `${member.user}`)
                                 .replace("{username}", `${member.user.username}`)
                                 .replace("{usertag}", `${member.user.username}`)

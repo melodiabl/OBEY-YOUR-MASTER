@@ -258,7 +258,7 @@ module.exports = {
       const es   = client.settings.get(gid, 'embed') || {}
       const rawC = es.color
       const color = typeof rawC === 'number' ? rawC : parseInt(String(rawC||'').replace('#',''), 16) || 0x5865F2
-      const msg = (client.settings.get(gid, 'welcome.msg') || '¡Bienvenido {user}!')
+      const msg = (require('../../handlers/config-service').welcomeMessage(client.settings, gid) || '¡Bienvenido {user}!')
         .replace('{user}', `${member.user}`).replace('{username}', member.user.username)
 
       const form = new FormData()

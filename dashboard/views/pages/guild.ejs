@@ -240,7 +240,7 @@
           <div class="form-group">
             <label class="form-label">Mensaje de bienvenida</label>
             <span class="form-help">Variables: <code class="font-mono">{user}</code> mención · <code class="font-mono">{server}</code> nombre del servidor · <code class="font-mono">{count}</code> nº de miembros</span>
-            <textarea name="welcomeMessage" class="form-textarea" placeholder="¡Bienvenido {user} a {server}! 🎉"><%= settings.welcome?.msg||settings.welcome?.message||settings.welcomeMessage||'' %></textarea>
+            <textarea name="welcomeMessage" class="form-textarea" placeholder="¡Bienvenido {user} a {server}! 🎉"><%= settings.welcomeMessage ?? '' %></textarea>
           </div>
         </div>
       </div>

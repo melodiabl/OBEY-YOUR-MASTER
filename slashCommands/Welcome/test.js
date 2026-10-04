@@ -90,7 +90,7 @@ module.exports = {
       const es      = client.settings.get(guildId, 'embed') || {}
       const rawC    = es.color
       const color   = typeof rawC === 'number' ? rawC : parseInt(String(rawC || '').replace('#', ''), 16) || 0x5865F2
-      const rawMsg  = client.settings.get(guildId, 'welcome.msg') || '¡Bienvenido {user} al servidor!'
+      const rawMsg  = require('../../handlers/config-service').welcomeMessage(client.settings, guildId) || '¡Bienvenido {user} al servidor!'
       const description = rawMsg
         .replace('{user}', `${member.user}`)
         .replace('{username}', member.user.username)
