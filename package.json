@@ -16,6 +16,7 @@
     "axios": "^1.11.0",
     "booru": "^2.8.1",
     "bufferutil": "^4.0.9",
+    "bullmq": "5.81.5",
     "canvacord": "^6.0.4",
     "captcha-canvas": "^3.1.0",
     "cheerio": "^1.1.2",
@@ -53,9 +54,9 @@
     "superagent": "^10.2.3",
     "translatte": "^3.0.1",
     "twit": "^2.2.11",
+    "undici": "7.29.1",
     "utf-8-validate": "^6.0.5",
-    "weather-js": "^2.0.0",
-    "undici": "7.29.1"
+    "weather-js": "^2.0.0"
   },
   "scripts": {
     "start": "node index.js",
