@@ -3,7 +3,7 @@ const schema = new Schema({
   _id: { type: String, required: true },
   schemaVersion: { type: Number, default: 1, required: true },
   guildId: { type: String, required: true }, actorId: { type: String, required: true },
-  type: { type: String, enum: ['architect.snapshot'], required: true },
+  type: { type: String, enum: ['architect.snapshot', 'architect.backup'], required: true },
   idempotencyKey: { type: String, required: true }, correlationId: { type: String, required: true },
   status: { type: String, enum: ['queued', 'running', 'completed', 'failed', 'cancelled'], default: 'queued' },
   dispatchPending: { type: Boolean, default: true }, cancelRequested: { type: Boolean, default: false },

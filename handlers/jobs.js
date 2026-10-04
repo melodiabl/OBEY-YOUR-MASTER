@@ -16,7 +16,10 @@ module.exports = client => {
       const actor = await guild(record).members.fetch({ user: record.actorId, force: true })
       if (!actor.permissions.has(PermissionFlagsBits.ManageGuild)) throw new JobError('Permission denied', 'permission_denied')
     },
-    handlers: { 'architect.snapshot': record => require('./architect/snapshot').snapshotGuild(guild(record)) },
+    handlers: {
+      'architect.snapshot': record => require('./architect/snapshot').snapshotGuild(guild(record)),
+      'architect.backup': (record, lease) => client.restorePoints.create(guild(record), record.actorId, record._id, lease),
+    },
     onError: code => console.warn('[Jobs]', code),
   })
   let retryTimer, initializing = false

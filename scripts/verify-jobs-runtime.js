@@ -14,20 +14,31 @@ async function until(check) {
   throw new Error('Timed out waiting for fixture job')
 }
 async function main() {
-  let runtime, queue, model, release
-  let reads = 0, permitted = true
+  let runtime, queue, model, restoreModel, release
+  let reads = 0, backupReads = 0, permitted = true
   try {
     await mongoose.connect(mongoUrl, { serverSelectionTimeoutMS: 3000 })
     model = require('../database/schemas/JobSchema')
     const repository = createJobRepository(model)
     const snapshot = { revision: 'fixture_structure', capturedAt: new Date().toISOString(), channels: [], roles: [] }
+    restoreModel = require('../database/schemas/ArchitectRestorePointSchema')
+    const restorePoints = require('../handlers/architect/restore-points').createRestorePointService({
+      repository: require('../handlers/architect/restore-point-repository').createRestorePointRepository(restoreModel),
+      snapshot: async guild => { backupReads++; return { ...snapshot, schemaVersion: 1, guildId: guild.id, name: 'Fixture',
+        revision: require('../handlers/architect/snapshot').structureRevision([], []) } },
+    })
+    let interruptedBackup = false
     const options = { repository, redisUrl, queueName,
       authorize: async () => { if (!permitted) throw new JobError('Permission denied', 'permission_denied') },
       handlers: { 'architect.snapshot': async record => {
         reads++
         if (record.idempotencyKey === 'fail') throw new Error('private provider URL')
-        if (record.idempotencyKey === 'cancel') await new Promise(resolve => { release = resolve })
+        if (['cancel', 'lock_holder'].includes(record.idempotencyKey)) await new Promise(resolve => { release = resolve })
         return snapshot
+      }, 'architect.backup': async (record, lease) => {
+        const point = await restorePoints.create({ id: record.guildId }, record.actorId, record._id, lease)
+        if (record.idempotencyKey === 'backup_interrupted' && !interruptedBackup) { interruptedBackup = true; throw new Error('fixture interrupted after persistence') }
+        return point
       } },
     }
     runtime = createJobsRuntime(options); await runtime.start()
@@ -81,14 +92,47 @@ async function main() {
     await until(async () => (await get(revoked.id)).status === 'failed')
     assert.equal((await get(revoked.id)).error.code, 'permission_denied')
     assert.equal((await repository.getById(revoked.id)).attempts, 1)
+    permitted = true; release = null
+    const holder = await submit('lock_holder'); await until(() => release)
+    const waiting = await runtime.submit({ guildId, actorId, type: 'architect.backup', idempotencyKey: 'backup_waiting' })
+    await until(async () => (await queue.getJob(waiting.id))?.getState().then(state => state === 'delayed'))
+    assert.equal((await get(waiting.id)).status, 'queued'); assert.equal(backupReads, 0)
+    assert.equal((await queue.getJob(waiting.id)).attemptsMade, 0)
+    const otherGuild = await runtime.submit({ guildId: 'other_jobs_fixture', actorId, type: 'architect.snapshot', idempotencyKey: 'parallel' })
+    await until(async () => (await runtime.get(otherGuild.id, 'other_jobs_fixture', actorId)).status === 'completed')
+    release(); release = null; await completed(holder.id)
+    const saved = await completed(waiting.id)
+    assert.equal(saved.steps[0].id, 'restore_point'); assert.equal(saved.result.completeness, 'structure_only')
+    assert.equal(backupReads, 1)
+    assert.equal(await restorePoints.get(saved.result.id, guildId, 'other_actor'), null)
+    const backup = await runtime.submit({ guildId, actorId, type: 'architect.backup', idempotencyKey: 'backup_interrupted' })
+    const restored = await completed(backup.id)
+    assert.equal((await repository.getById(backup.id)).attempts, 2)
+    assert.equal(backupReads, 2); assert.equal((await restorePoints.list(guildId, actorId)).length, 2)
+    assert.equal((await restorePoints.get(restored.result.id, guildId, actorId)).snapshot.guildId, guildId)
+    const client = await queue.client
+    const locks = require('../handlers/jobs/guild-lock').createGuildLock({ client: () => client, prefix: `${queueName}:lease-check`, ttl: 600 })
+    await locks.run('renew', async lease => {
+      await new Promise(resolve => setTimeout(resolve, 800)); await lease.assertOwned()
+      assert.ok(await client.pttl(`${queueName}:lease-check:renew`) > 0)
+    })
+    const replacement = `${queueName}:lease-check:replacement`
+    await assert.rejects(locks.run('replacement', async lease => {
+      await client.set(replacement, 'new-owner', 'PX', 5000)
+      await lease.assertOwned()
+    }), error => error.code === 'guild_lock_lost')
+    assert.equal(await client.get(replacement), 'new-owner'); await client.del(replacement)
     return { scope: 'isolated MongoDB and Redis/BullMQ; fixture Discord provider', concurrentIdempotency: true,
       privateScopes: true, realStepsAndResult: true, cancellation: true, boundedRetries: true,
-      staleWorkerFenced: true, persistedCheckpointRecovery: true, dispatchRecoveryAfterRestart: true, missingRunningDeliveryRecovery: true, permissionRevocation: true }
+      staleWorkerFenced: true, persistedCheckpointRecovery: true, dispatchRecoveryAfterRestart: true, missingRunningDeliveryRecovery: true, permissionRevocation: true,
+      guildExclusion: true, contentionDelayedWithoutFailureRetry: true, otherGuildParallel: true, leaseRenewal: true, replacementLeaseProtected: true,
+      immutablePrivateRestorePoints: true, restorePointRecoveryAfterPersistence: true }
   } finally {
     release?.()
     await runtime?.close()
     if (queue) { await queue.obliterate({ force: true }); await queue.close() }
-    if (model) await model.deleteMany({ guildId, actorId })
+    if (model) await model.deleteMany({ guildId: { $in: [guildId, 'other_jobs_fixture'] }, actorId })
+    if (restoreModel) await restoreModel.deleteMany({ guildId, actorId })
     await mongoose.disconnect()
   }
 }

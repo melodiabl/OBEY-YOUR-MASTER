@@ -22,10 +22,10 @@ function createJobProcessor({ repository, handlers, authorize = async () => {} }
       const finished = await repository.finish(id, token, 'completed')
       return { status: finished?.status }
     } catch (error) {
-      const finalAttempt = error instanceof JobError || (job.attemptsMade || 0) + 1 >= (job.opts?.attempts || 1)
+      const finalAttempt = error.code !== 'guild_locked' && (error instanceof JobError || (job.attemptsMade || 0) + 1 >= (job.opts?.attempts || 1))
       const failed = await repository.finish(id, token, finalAttempt ? 'failed' : 'queued', {
-        code: error instanceof JobError ? error.code : 'snapshot_unavailable',
-        message: error.code === 'permission_denied' ? 'Ya no tienes permiso para analizar este servidor.' : 'No se pudo completar el análisis de estructura.',
+        code: error instanceof JobError ? error.code : ['guild_locked', 'guild_lock_lost'].includes(error.code) ? error.code : 'snapshot_unavailable',
+        message: error.code === 'permission_denied' ? 'Ya no tienes permiso para trabajar con este servidor.' : error.code === 'guild_locked' ? 'Otro trabajo está usando este servidor. Reintenta al terminar.' : 'No se pudo completar el trabajo de estructura.',
       })
       if (failed?.status === 'cancelled') return { status: 'cancelled' }
       throw error

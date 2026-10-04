@@ -28,6 +28,7 @@ function createJobsRuntime({ repository, handlers, authorize, redisUrl, storageR
     },
   }
   const service = createJobsService({ repository, transport, storageReady })
+  const locks = require('./guild-lock').createGuildLock({ client: () => redisClient, prefix: `${queueName}:guild-lock` })
   async function repair() {
     if (repairing) return repairing
     if (closing) return
@@ -38,16 +39,31 @@ function createJobsRuntime({ repository, handlers, authorize, redisUrl, storageR
     if (starting) return starting
     if (closing || worker) return
     starting = (async () => {
-      const { Queue, Worker, UnrecoverableError } = require('bullmq')
+      const { Queue, Worker, UnrecoverableError, DelayedError } = require('bullmq')
       const connection = connectionOptions(redisUrl)
       try {
         queue = new Queue(queueName, { connection: { ...connection, maxRetriesPerRequest: 1, enableOfflineQueue: false, commandTimeout: 3000 } })
         queue.on('error', () => onError('redis_unavailable'))
         redisClient = await readyWithin(queue.waitUntilReady())
-        const processJob = createJobProcessor({ repository, handlers, authorize })
-        worker = new Worker(queueName, async job => {
+        const guardedHandlers = Object.fromEntries(Object.entries(handlers).map(([type, handler]) => [type, record => locks.run(record.guildId, async lease => {
+          const assertOwned = async () => {
+            await lease.assertOwned()
+            const current = await repository.getById(record._id)
+            if (current?.token !== record.token || current.cancelRequested) throw new JobError('Job no longer active', 'job_cancelled')
+          }
+          await assertOwned()
+          const result = await handler(record, { assertOwned })
+          await assertOwned()
+          return result
+        })]))
+        const processJob = createJobProcessor({ repository, handlers: guardedHandlers, authorize })
+        worker = new Worker(queueName, async (job, token) => {
           try { return await processJob(job) }
-          catch (error) { if (error instanceof JobError) throw new UnrecoverableError(error.code); throw new Error('snapshot_unavailable') }
+          catch (error) {
+            if (error.code === 'guild_locked') { await job.moveToDelayed(Date.now() + 1000, token); throw new DelayedError() }
+            if (error instanceof JobError) throw new UnrecoverableError(error.code)
+            throw new Error('job_unavailable')
+          }
         }, { connection: { ...connection, maxRetriesPerRequest: null }, concurrency: 2, autorun: false })
         worker.on('error', () => onError('worker_unavailable'))
         worker.on('failed', job => {

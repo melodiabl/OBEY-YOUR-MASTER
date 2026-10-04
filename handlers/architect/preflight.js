@@ -25,7 +25,7 @@ async function preflight(guild, blueprint, diff, actorId) {
     add(`hierarchy_${role.id}`, !bot || !actor ? 'unknown' : belowBot && belowActor ? 'passed' : 'failed', `El rol ${role.name} debe estar por debajo del rol de OBEY y del administrador.`)
   }
   add('deletions', 'passed', 'Esta propuesta conserva todos los recursos existentes.')
-  add('execution', 'unknown', 'La aplicación, las copias previas y los jobs todavía no están habilitados.')
+  add('execution', 'unknown', 'La aplicación a Discord todavía no está habilitada.')
   return { checks, status: checks.some(check => check.status === 'failed') ? 'blocked' : checks.some(check => check.status === 'unknown') ? 'incomplete' : 'passed',
     warning: 'Los permisos y la estructura pueden cambiar después de esta comprobación.' }
 }

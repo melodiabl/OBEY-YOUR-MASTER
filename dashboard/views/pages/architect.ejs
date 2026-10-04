@@ -8,10 +8,13 @@
   <p id="architect-status" class="architect-status" role="status">Leyendo la estructura del servidor…</p>
   <div class="architect-notice" id="architect-notice" hidden></div>
   <section class="architect-pane architect-review" aria-labelledby="jobs-title">
-    <div class="architect-pane-heading architect-jobs-heading"><h2 id="jobs-title">Análisis de estructura</h2><button type="button" class="btn btn-sec" id="architect-analyze" disabled>Analizar en segundo plano</button></div>
+    <div class="architect-pane-heading architect-jobs-heading"><h2 id="jobs-title">Trabajos de estructura</h2><button type="button" class="btn btn-sec" id="architect-analyze" disabled>Analizar en segundo plano</button><button type="button" class="btn btn-sec" id="architect-backup" disabled>Guardar punto de restauración</button></div>
     <p id="architect-jobs-status" class="architect-empty" role="status">Comprobando disponibilidad…</p>
     <div id="architect-jobs"></div>
     <p class="architect-review-note">El análisis lee canales y roles. Su resultado no reemplaza la propuesta que estás editando.</p>
+    <h3>Tus puntos de restauración</h3>
+    <p class="architect-review-note">Copias privadas de canales, roles y permisos. No incluyen mensajes ni configuración de módulos. La restauración a Discord aún está pendiente.</p>
+    <div id="architect-restore-points"></div>
   </section>
   <div class="architect-toolbar" aria-label="Acciones de la propuesta">
     <span id="architect-draft-status">Sin propuesta cargada</span>
@@ -55,7 +58,7 @@
     <div class="architect-pane-heading"><h2 id="review-title">Cambios propuestos</h2><span id="architect-change-count">Sin revisar</span></div>
     <div id="architect-diff" class="architect-empty">Pulsa Revisar cambios para comparar la propuesta con el servidor actual.</div>
     <div id="architect-preflight" class="architect-empty"></div>
-    <p class="architect-review-note">El borrador se guarda en OBEY. La aplicación a Discord, los puntos de restauración y el modo IA están pendientes de implementación.</p>
+    <p class="architect-review-note">El borrador se guarda en OBEY. La aplicación a Discord, la restauración y el modo IA están pendientes de implementación.</p>
   </section>
 </section>
 <script src="/js/architect-state.js"></script>

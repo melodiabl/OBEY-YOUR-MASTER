@@ -7,6 +7,7 @@ function createJobRepository(model = require('../../database/schemas/JobSchema')
       scope(input._id, input.guildId, input.actorId); identifier(input.idempotencyKey, 'idempotency key')
       await model.init()
       const record = Object.fromEntries(['_id', 'guildId', 'actorId', 'type', 'idempotencyKey', 'correlationId'].map(key => [key, input[key]]))
+      if (input.type === 'architect.backup') record.steps = [{ id: 'restore_point', status: 'pending' }]
       try { return (await model.create(record)).toObject() }
       catch (error) {
         if (error.code !== 11000) throw error
@@ -30,10 +31,13 @@ function createJobRepository(model = require('../../database/schemas/JobSchema')
     },
     async checkpoint(id, token, result) {
       identifier(id, 'job ID'); identifier(token, 'worker token')
+      const current = await model.findOne({ _id: id, token, status: 'running', cancelRequested: false }).select('type').lean()
+      if (!current) return false
+      const backup = current.type === 'architect.backup'
       const written = await model.updateOne({ _id: id, token, status: 'running', cancelRequested: false }, { $set: {
-        result, resultSummary: { revision: result.revision, capturedAt: result.capturedAt,
+        result, resultSummary: backup ? result : { revision: result.revision, capturedAt: result.capturedAt,
           channelCount: result.channels?.length || 0, roleCount: result.roles?.length || 0 },
-        progress: { completed: 1, total: 1 }, steps: [{ id: 'snapshot', status: 'completed' }],
+        progress: { completed: 1, total: 1 }, steps: [{ id: backup ? 'restore_point' : 'snapshot', status: 'completed' }],
       } })
       return written.matchedCount === 1
     },
@@ -41,7 +45,7 @@ function createJobRepository(model = require('../../database/schemas/JobSchema')
       identifier(id, 'job ID'); identifier(token, 'worker token')
       if (!['completed', 'queued', 'failed'].includes(status)) throw new Error('Invalid job transition')
       return model.findOneAndUpdate({ _id: id, token, status: 'running' }, [
-        { $set: { status: { $cond: ['$cancelRequested', 'cancelled', status] }, error, dispatchPending: false,
+        { $set: { status: { $cond: ['$cancelRequested', 'cancelled', status] }, error: { $cond: ['$cancelRequested', null, { $literal: error }] }, dispatchPending: false,
           finishedAt: { $cond: [{ $or: ['$cancelRequested', { $ne: [status, 'queued'] }] }, '$$NOW', '$$REMOVE'] } } },
         { $unset: 'token' },
       ], { new: true }).lean()
@@ -60,7 +64,7 @@ function createJobRepository(model = require('../../database/schemas/JobSchema')
       identifier(id, 'job ID')
       await model.updateOne({ _id: id, status: { $in: ['queued', 'running'] } }, [
         { $set: { status: { $cond: ['$cancelRequested', 'cancelled', 'failed'] }, dispatchPending: false, finishedAt: '$$NOW',
-          error: { code: 'worker_unavailable', message: 'El worker no pudo terminar el análisis.' } } },
+          error: { code: 'worker_unavailable', message: 'El worker no pudo terminar el trabajo.' } } },
         { $unset: 'token' },
       ])
     },

@@ -43,6 +43,24 @@ module.exports = (app, client, {
     if (!client.jobs) throw new JobError('Jobs unavailable', 'jobs_unavailable')
     return client.jobs
   }
+  const restorePoints = () => {
+    if (!client.restorePoints) throw new JobError('Restore storage unavailable', 'storage_unavailable')
+    return client.restorePoints
+  }
+  app.get('/api/architect/:guildId/restore-points', ...guarded, wrap(async (req, res) => {
+    res.json({ ok: true, points: await restorePoints().list(req.architectGuild.id, req.session.user.id) })
+  }))
+  app.get('/api/architect/:guildId/restore-points/:pointId', ...guarded, wrap(async (req, res) => {
+    const point = await restorePoints().get(req.params.pointId, req.architectGuild.id, req.session.user.id)
+    if (!point) return res.status(404).json({ error: 'restore_point_not_found' })
+    res.json({ ok: true, point })
+  }))
+  app.post('/api/architect/:guildId/restore-points', ...guarded, wrap(async (req, res) => {
+    if (!req.body || typeof req.body !== 'object' || Object.keys(req.body).some(key => key !== 'idempotencyKey')) throw new JobError('Invalid restore point request')
+    const job = await jobs().submit({ guildId: req.architectGuild.id, actorId: req.session.user.id,
+      type: 'architect.backup', idempotencyKey: req.body.idempotencyKey })
+    res.status(202).json({ ok: true, job })
+  }))
   app.get('/api/architect/:guildId/jobs', ...guarded, wrap(async (req, res) => {
     const service = jobs()
     res.json({ ok: true, available: service.available(), jobs: await service.list(req.architectGuild.id, req.session.user.id) })

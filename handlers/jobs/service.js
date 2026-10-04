@@ -30,7 +30,7 @@ function createJobsService({ repository, transport, storageReady = () => true })
       if (!input || typeof input !== 'object' || Array.isArray(input)) throw new JobError('Invalid job')
       for (const key of Object.keys(input)) if (!['guildId', 'actorId', 'type', 'idempotencyKey'].includes(key)) throw new JobError('Unknown job field')
       identifier(input.guildId, 'guild'); identifier(input.actorId, 'actor'); identifier(input.idempotencyKey, 'idempotency key')
-      if (input.type !== 'architect.snapshot') throw new JobError('Unsupported job type')
+      if (!['architect.snapshot', 'architect.backup'].includes(input.type)) throw new JobError('Unsupported job type')
       if (!available()) throw new JobError('Jobs unavailable', 'jobs_unavailable')
       const record = await repository.ensure({ _id: randomUUID(), guildId: input.guildId, actorId: input.actorId,
         type: input.type, idempotencyKey: input.idempotencyKey, correlationId: randomUUID() })

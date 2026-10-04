@@ -122,3 +122,9 @@ test('a recovered delivery settles a cancellation left by an interrupted worker'
   await run({ data: { recordId: job.id }, opts: { attempts: 3 } })
   assert.equal((await f.service.get(job.id, 'g', 'u')).status, 'cancelled')
 })
+test('guild contention stays queued without consuming the last failure retry', async () => {
+  const f = fixture(), job = await f.service.submit(input())
+  const run = createJobProcessor({ repository: f.repository, handlers: { 'architect.snapshot': () => { throw new (require('../handlers/jobs/guild-lock').GuildLockError)('guild_locked') } } })
+  await assert.rejects(run({ data: { recordId: job.id }, attemptsMade: 2, opts: { attempts: 3 } }), error => error.code === 'guild_locked')
+  assert.equal((await f.service.get(job.id, 'g', 'u')).status, 'queued')
+})

@@ -24,3 +24,11 @@ test('Discord schedules the same persistent analysis with an interaction idempot
  assert.deepEqual(submitted,{guildId:'g',actorId:'u',type:'architect.snapshot',idempotencyKey:'discord-123'})
  assert.equal(reply.content.includes('encolado'),true)
 })
+test('Discord creates a structural restore point through the shared jobs service',async()=>{
+ let submitted,reply
+ const member={permissions:{has:()=>true}}
+ const interaction={id:'copy123',member,user:{id:'u'},options:{getString:()=> 'copia'},guild:{id:'g',members:{fetch:async()=>member}},async deferReply(){},async editReply(payload){reply=payload}}
+ await command.run({architect:{read:assert.fail},jobs:{available:()=>true,submit:async input=>{submitted=input;return {id:'copy-job',status:'queued'}}}},interaction)
+ assert.deepEqual(submitted,{guildId:'g',actorId:'u',type:'architect.backup',idempotencyKey:'discord-copy123'})
+ assert.match(reply.content,/no incluye mensajes/)
+})
