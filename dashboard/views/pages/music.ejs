@@ -157,6 +157,7 @@ button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
       <div class="user"><% if(muser.avatarUrl){ %><img src="<%= muser.avatarUrl %>" alt="" onerror="this.hidden=true"><% } else { %><i class="fas fa-user" aria-hidden="true"></i><% } %><b><%= muser.username %></b></div>
     </div>
     <div class="content">
+      <div class="connection-status" id="connection-status" role="status" style="margin-bottom:12px">Conectando…</div>
       <!-- VISTA INICIO -->
       <div class="view active" id="view-home">
         <section class="hero">
@@ -194,7 +195,6 @@ button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
             <option value="bassboost">Bass Boost</option><option value="nightcore">Nightcore</option><option value="8d">8D</option>
             <option value="lofi">Lo-Fi</option><option value="vaporwave">Vaporwave</option><option value="eco">Eco</option>
           </select>
-          <div class="connection-status" id="connection-status" role="status">Conectando…</div>
         </div>
       </div>
 
@@ -431,8 +431,9 @@ const GENRES=[
 function loadGenres(){const c=$('#genres');if(!c)return;c.innerHTML='';GENRES.forEach(g=>{const d=document.createElement('button');d.type='button';d.className='genre';d.style.background=g.g;d.innerHTML=`<i class="fas ${g.i}"></i>${S(g.l)}`;d.addEventListener('click',()=>{setView('search');$('#bq').value=g.l;doSearch(g.q)});c.appendChild(d)})}
 async function loadRadar(){const{j}=await api(`/api/music/search?q=${encodeURIComponent('top global hits 2026')}`);render('g-radar',(j.data||[]).slice(0,12),{icon:'fa-compass',empty:'No disponible ahora'})}
 const realtime=io({transports:['websocket','polling']});
-realtime.on('connect',()=>{$('#connection-status').textContent='Conectado · en vivo';$('#connection-status').dataset.status='online';realtime.emit('join',GID);refresh()});
-realtime.on('player:state',receiveState);
+realtime.on('connect',()=>{$('#connection-status').textContent='Verificando acceso…';$('#connection-status').dataset.status='offline';realtime.emit('join',GID);refresh()});
+realtime.on('player:state',state=>{if(state.guildId&&state.guildId!==GID)return;$('#connection-status').textContent='Conectado · en vivo';$('#connection-status').dataset.status='online';receiveState(state)});
+realtime.on('player:error',()=>{$('#connection-status').textContent='No se pudo verificar el acceso · datos sin actualizar';$('#connection-status').dataset.status='offline'});
 realtime.on('disconnect',()=>{$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
 realtime.on('connect_error',()=>{$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
 window.addEventListener('online',refresh);

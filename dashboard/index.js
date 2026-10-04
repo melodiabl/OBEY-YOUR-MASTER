@@ -7,6 +7,7 @@ const http       = require('http')
 const crypto     = require('crypto')
 const { Server } = require('socket.io')
 const { freshGuildPermissions } = require('./permissions')
+const { createMusicRealtime, createSocketAuthorizer } = require('./music-realtime')
 const { canManageGuild } = require('../handlers/permissions')
 const { sessionAuth, establishSession } = require('./auth')
 const { welcomeMessage, saveWelcomeMessage } = require('../handlers/config-service')
@@ -91,12 +92,14 @@ module.exports = async client => {
   // Auth middleware — validates session + refreshes Discord token if near expiry
   const requireAuth = sessionAuth(refreshDiscordToken)
 
-  const requireFreshGuildPermissions = freshGuildPermissions(async accessToken => {
+  const fetchDiscordGuilds = async accessToken => {
     const response = await axios.get('https://discord.com/api/users/@me/guilds', {
       headers: { Authorization: `Bearer ${accessToken}` },
+      timeout: 5000,
     })
     return response.data
-  })
+  }
+  const requireFreshGuildPermissions = freshGuildPermissions(fetchDiscordGuilds)
 
   require('../handlers/music/apiRoutes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./music-visibility')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
@@ -176,6 +179,7 @@ module.exports = async client => {
         token,
       }), { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).catch(() => {})
     }
+    realtime.disconnectSession(req.sessionID)
     req.session.destroy(() => res.redirect('/'))
   })
 
@@ -834,26 +838,11 @@ module.exports = async client => {
 
   io.engine.use(sessionMiddleware)
 
-  // Auth: usar exactamente la misma sesión validada por Express.
+  const authorizeSocket = createSocketAuthorizer(fetchDiscordGuilds)
   io.use((socket, next) => {
-    if (!socket.request?.session?.user) return next(new Error('Unauthorized'))
-    next()
+    authorizeSocket(socket).then(() => next(), () => next(new Error('Unauthorized')))
   })
-
-  io.on('connection', socket => {
-    socket.on('join', guildId => {
-      if (!guildId) return
-      if (!canManageGuild(socket.request.session?.user, guildId)) {
-        socket.emit('player:error', { error: 'no_permission' })
-        return
-      }
-      socket.join(guildId)
-      socket.emit('player:state', client.music?.getPublicState?.(guildId) || { active: false })
-    })
-    socket.on('leave', guildId => {
-      if (guildId) socket.leave(guildId)
-    })
-  })
+  const realtime = createMusicRealtime(io, client, authorizeSocket)
 
   // Escuchar cambios de estado del player y emitir por Socket.IO
   client.on('playerStateUpdate', guildId => {
@@ -861,7 +850,7 @@ module.exports = async client => {
     if (!guild) return
     const music = client.music
     if (!music) return
-    io.to(guildId).emit('player:state', music.getPublicState?.(guildId) || { active: false })
+    realtime.publish(guildId, 'player:state', () => music.getPublicState?.(guildId) || { guildId, active: false })
   })
 
   // Tick de posición cada 2s — solo guilds con reproductores activos y sin pausa
@@ -870,17 +859,19 @@ module.exports = async client => {
     if (!music?.playerStates) return
     for (const [guildId, state] of music.playerStates) {
       if (!state.currentTrack || state.paused) continue
-      const rooms = io.sockets.adapter.rooms.get(guildId)
+      const rooms = io.sockets.adapter.rooms.get(`guild:${guildId}:music`)
       if (!rooms?.size) continue
-      const player = client.shoukaku?.players?.get(guildId)
-      const info   = state.currentTrack?.info || state.currentTrack
-      const len    = Number(info?.length || 0)
-      // startedAt se mantiene sincronizado con Lavalink vía el evento 'update' del player;
-      // player.position es un snapshot stale (hasta ~5s viejo) y hace rebotar la barra
-      const elapsed = state.startedAt
-        ? Math.min(len, Date.now() - state.startedAt)
-        : Math.min(len, Number(player?.position ?? state.lastPosition ?? 0))
-      io.to(guildId).emit('player:tick', { elapsed, length: len })
+      realtime.publish(guildId, 'player:tick', () => {
+        const current = music.playerStates.get(guildId)
+        if (!current?.currentTrack || current.paused) return null
+        const player = client.shoukaku?.players?.get(guildId)
+        const info = current.currentTrack.info || current.currentTrack
+        const len = Number(info.length || 0)
+        const elapsed = current.startedAt
+          ? Math.min(len, Date.now() - current.startedAt)
+          : Math.min(len, Number(player?.position ?? current.lastPosition ?? 0))
+        return { guildId, sessionId: current.sessionId, revision: current.revision, elapsed, length: len }
+      })
     }
   }, 2000)
 
