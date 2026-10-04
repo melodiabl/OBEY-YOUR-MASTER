@@ -1,0 +1,179 @@
+;(function () {
+  const app = document.getElementById('architect-app')
+  if (!app) return
+  const $ = id => document.getElementById(id)
+  const base = `/api/architect/${encodeURIComponent(app.dataset.guildId)}`
+  let source = null, editor = null, selected = null, busy = false, storageAvailable = false, draftRevision = 0, savedValue = '', hasSavedDraft = false
+  const order = (a, b) => a.position - b.position || a.id.localeCompare(b.id)
+  const labels = { name: 'Nombre', topic: 'Tema', color: 'Color', permissions: 'Permisos', overwrites: 'Permisos del canal', nsfw: 'Contenido restringido', hoist: 'Mostrar rol separado', mentionable: 'Rol mencionable' }
+  function status(text, error = false) { $('architect-status').textContent = text; $('architect-status').dataset.state = error ? 'error' : 'ready' }
+  function buttons() {
+    $('architect-workspace').disabled = busy || !editor
+    $('architect-refresh').disabled = busy
+    $('architect-preview').disabled = busy || !editor
+    $('architect-save').disabled = busy || !editor || !storageAvailable
+    $('architect-undo').disabled = busy || !editor?.canUndo
+    $('architect-redo').disabled = busy || !editor?.canRedo
+  }
+  async function request(path = '', options) {
+    const response = await fetch(base + path, options)
+    const body = await response.json().catch(() => ({}))
+    if (!response.ok || !body.ok) {
+      const messages = { revision_conflict: 'La estructura de Discord cambió. Actualiza el servidor antes de revisar o guardar.',
+        draft_conflict: 'Otra pestaña guardó este borrador. Actualiza para recuperar la versión guardada.',
+        no_permission: 'No tienes permiso para administrar este servidor.', not_authenticated: 'Tu sesión caducó. Inicia sesión de nuevo.',
+        storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
+        architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.' }
+      throw new Error(messages[body.error] || 'No se pudo completar la solicitud.')
+    }
+    return body
+  }
+  const post = (path, body) => request(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+  function changed() {
+    $('architect-draft-status').textContent = JSON.stringify(editor.current()) === savedValue ? (hasSavedDraft ? `Borrador guardado · revisión ${draftRevision}` : 'Propuesta inicial · sin cambios') : 'Propuesta con cambios sin guardar'
+    $('architect-change-count').textContent = 'Sin revisar'
+    $('architect-preflight').replaceChildren()
+    $('architect-diff').className = 'architect-empty'
+    $('architect-diff').textContent = 'Revisa de nuevo para comparar esta versión de la propuesta.'
+    render()
+  }
+  function resourceButton(resource, kind) {
+    const item = document.createElement('li'), button = document.createElement('button'), symbol = document.createElement('span'), text = document.createElement('span')
+    button.type = 'button'; button.className = 'architect-resource'; button.dataset.resourceId = resource.id
+    button.setAttribute('aria-pressed', String(selected?.id === resource.id))
+    button.setAttribute('aria-label', `${kind === 'roles' ? 'Rol' : resource.type === 4 ? 'Categoría' : resource.type === 2 ? 'Canal de voz' : 'Canal'}: ${resource.name}${editor.protected(resource.id) ? ', protegido' : ''}`)
+    symbol.className = 'architect-resource-symbol'; symbol.textContent = kind === 'roles' ? '●' : resource.type === 4 ? '▤' : resource.type === 2 ? '♪' : '#'
+    text.textContent = resource.name
+    button.append(symbol, text)
+    if (resource.id.startsWith('local:') || editor.protected(resource.id)) {
+      const tag = document.createElement('span'); tag.className = 'architect-resource-tag'; tag.textContent = editor.protected(resource.id) ? 'Protegido' : 'Nuevo'; button.append(tag)
+    }
+    button.addEventListener('click', () => { selected = { id: resource.id, kind }; render() })
+    item.append(button)
+    return item
+  }
+  function render() {
+    const draft = editor.current(), tree = $('architect-tree')
+    tree.replaceChildren()
+    const list = document.createElement('ul'), categories = draft.channels.filter(channel => channel.type === 4).sort(order)
+    for (const category of categories) {
+      const item = resourceButton(category, 'channels'), children = document.createElement('ul')
+      for (const child of draft.channels.filter(channel => channel.parentId === category.id).sort(order)) children.append(resourceButton(child, 'channels'))
+      if (children.children.length) item.append(children)
+      list.append(item)
+    }
+    for (const channel of draft.channels.filter(channel => channel.type !== 4 && !channel.parentId).sort(order)) list.append(resourceButton(channel, 'channels'))
+    tree.append(list)
+    const roleHeading = document.createElement('h3'); roleHeading.className = 'architect-subtitle'; roleHeading.textContent = 'Roles'; tree.append(roleHeading)
+    const roles = document.createElement('ul')
+    for (const role of [...draft.roles].sort((a, b) => b.position - a.position || a.id.localeCompare(b.id))) roles.append(resourceButton(role, 'roles'))
+    tree.append(roles)
+    if (!draft.channels.length && !draft.roles.length) { const empty = document.createElement('p'); empty.className = 'architect-empty'; empty.textContent = 'Todavía no hay recursos. Añade una categoría o un canal.'; tree.append(empty) }
+    $('architect-resource-count').textContent = `${draft.channels.length + draft.roles.length} recursos`
+    const resource = selected && draft[selected.kind].find(item => item.id === selected.id)
+    $('architect-inspector').hidden = !resource; $('architect-select-hint').hidden = Boolean(resource)
+    if (resource) {
+      const role = selected.kind === 'roles', category = resource.type === 4, locked = editor.protected(resource.id)
+      $('architect-selection-kind').textContent = role ? 'Rol' : category ? 'Categoría' : resource.type === 2 ? 'Voz' : 'Canal'
+      $('architect-name').value = resource.name; $('architect-name').disabled = locked
+      $('architect-channel-fields').hidden = role
+      const parent = $('architect-parent'); parent.replaceChildren(new Option('Sin categoría', ''))
+      for (const item of categories) parent.append(new Option(item.name, item.id))
+      parent.value = resource.parentId || ''; parent.disabled = locked || category
+      $('architect-topic').value = resource.topic || ''; $('architect-topic').disabled = locked || resource.type !== 0
+      $('architect-role-fields').hidden = !role; $('architect-color').value = '#' + Number(resource.color || 0).toString(16).padStart(6, '0'); $('architect-color').disabled = locked
+      $('architect-protected').checked = locked
+      $('architect-protected').disabled = resource.id.startsWith('local:') || (role && (resource.managed || resource.id === source.guildId)) || (!role && ![0, 2, 4].includes(resource.type))
+      $('architect-locked').hidden = !locked; $('architect-edit').disabled = locked
+      $('architect-up').disabled = locked; $('architect-down').disabled = locked
+      $('architect-remove').hidden = !resource.id.startsWith('local:'); $('architect-remove').disabled = locked
+    } else $('architect-selection-kind').textContent = ''
+    buttons()
+  }
+  async function load() {
+    if (editor && JSON.stringify(editor.current()) !== savedValue && !confirm('Actualizar descartará los cambios locales sin guardar. ¿Continuar?')) return
+    busy = true; buttons(); status('Leyendo categorías, canales y roles de Discord…')
+    try {
+      const body = await request()
+      source = body.snapshot; storageAvailable = body.storageAvailable; draftRevision = body.draft?.draftRevision || 0
+      const draft = body.draft && !body.draftStale ? body.draft.blueprint : null
+      editor = createArchitectEditorState(source, draft); selected = null; savedValue = JSON.stringify(editor.current()); hasSavedDraft = Boolean(draft)
+      const notices = [...source.warnings]
+      if (body.draftStale) notices.unshift('El borrador guardado pertenece a una estructura anterior. Se ha abierto la estructura actual; el borrador anterior permanece guardado hasta que lo reemplaces.')
+      if (!storageAvailable) notices.push('El almacenamiento no está disponible; puedes editar y revisar, pero aún no guardar.')
+      $('architect-notice').textContent = notices.join(' '); $('architect-notice').hidden = !notices.length
+      status(`Estructura consultada a las ${new Date(source.capturedAt).toLocaleTimeString()}`)
+      changed()
+    } catch (error) { status(error.message, true) }
+    finally { busy = false; buttons() }
+  }
+  function format(value, draft) {
+    if (value == null) return 'No existe'
+    if (typeof value === 'object') {
+      if (value.name) return value.name + (value.parentId ? ` · Categoría: ${draft.channels.find(channel => channel.id === value.parentId)?.name || value.parentId}` : '')
+      if ('position' in value) return `Orden: ${value.position}` + ('parentId' in value ? ` · Categoría: ${draft.channels.find(channel => channel.id === value.parentId)?.name || 'Sin categoría'}` : '')
+      return JSON.stringify(value, null, 2)
+    }
+    if (typeof value === 'boolean') return value ? 'Sí' : 'No'
+    return String(value) || '(vacío)'
+  }
+  function review(body) {
+    const target = $('architect-diff'); target.replaceChildren(); target.className = ''
+    $('architect-change-count').textContent = `${body.diff.changes.length} cambios`
+    const checks = $('architect-preflight'); checks.replaceChildren()
+    if (body.preflight) for (const check of body.preflight.checks) { const line = document.createElement('p'); line.textContent = `${({passed:'✓',failed:'Bloqueado:',unknown:'Pendiente:'})[check.status]} ${check.detail}`; checks.append(line) }
+    if (!body.diff.changes.length) { target.className = 'architect-empty'; target.textContent = 'La propuesta coincide con la estructura actual.'; return }
+    for (const change of body.diff.changes) {
+      const item = document.createElement('div'), title = document.createElement('strong'), details = document.createElement('dl')
+      const name = body.blueprint[change.kind].find(resource => resource.id === change.id)?.name || change.id
+      item.className = 'architect-change'
+      title.textContent = `${({ create: 'Crear', update: 'Actualizar', move: 'Mover', overwrites: 'Cambiar permisos' })[change.operation]} ${name}` + (change.field ? ` · ${labels[change.field] || change.field}` : '')
+      for (const [label, value] of [['Antes', change.before], ['Después', change.after]]) {
+        const term = document.createElement('dt'), description = document.createElement('dd'); term.textContent = label; description.textContent = format(value, label === 'Antes' ? source : body.blueprint); details.append(term, description)
+      }
+      item.append(title, details); target.append(item)
+    }
+  }
+  async function submit(save) {
+    if (!editor) return
+    busy = true; buttons(); status(save ? 'Validando y guardando el borrador…' : 'Comprobando la estructura actual y calculando cambios…')
+    try {
+      const body = await post(save ? '/draft' : '/preview', { blueprint: editor.current(), expectedRevision: draftRevision })
+      review(body)
+      if (save) { draftRevision = body.draftRevision; hasSavedDraft = true; savedValue = JSON.stringify(editor.current()); $('architect-draft-status').textContent = `Borrador guardado · revisión ${draftRevision}` }
+      status(save ? 'Borrador guardado. Puedes recuperarlo al volver a Architect.' : 'Cambios revisados sobre la estructura actual del servidor.')
+    } catch (error) { status(error.message, true) }
+    finally { busy = false; buttons() }
+  }
+  $('architect-add').addEventListener('submit', event => {
+    event.preventDefault()
+    const name = $('architect-new-name').value.trim(), kind = $('architect-new-kind').value, id = 'local:' + crypto.randomUUID()
+    if (!name) return
+    const role = kind === 'role', resource = role ? { id, name, position: 1, permissions: '0', color: 0, hoist: false, mentionable: false, managed: false }
+      : { id, name, type: Number(kind), parentId: null, position: 0, topic: '', nsfw: false, bitrate: kind === '2' ? 64000 : null, userLimit: kind === '2' ? 0 : null, rateLimitPerUser: 0, overwrites: [] }
+    editor.change(draft => {
+      const list = role ? draft.roles : draft.channels
+      resource.position = Math.max(role ? 0 : -1, ...list.map(item => item.position)) + 1
+      if (!role && resource.type !== 4 && selected?.kind === 'channels' && draft.channels.find(item => item.id === selected.id)?.type === 4) resource.parentId = selected.id
+      list.push(resource)
+    })
+    selected = { id, kind: role ? 'roles' : 'channels' }; $('architect-new-name').value = ''; changed()
+  })
+  $('architect-inspector').addEventListener('submit', event => {
+    event.preventDefault(); if (!selected || editor.protected(selected.id)) return
+    const name = $('architect-name').value.trim(), parent = $('architect-parent').value || null, topic = $('architect-topic').value, color = parseInt($('architect-color').value.slice(1), 16)
+    editor.change(draft => { const resource = draft[selected.kind].find(item => item.id === selected.id); resource.name = name; if (selected.kind === 'roles') resource.color = color; else { if (resource.type !== 4) resource.parentId = parent; if (resource.type === 0) resource.topic = topic } }); changed()
+  })
+  function move(direction) {
+    if (!selected || editor.protected(selected.id)) return
+    if (editor.move(selected.kind, selected.id, direction)) changed()
+    else status('No se puede mover en esa dirección sin alterar un recurso protegido o su orden.', true)
+  }
+  $('architect-up').addEventListener('click', () => move(-1)); $('architect-down').addEventListener('click', () => move(1))
+  $('architect-protected').addEventListener('change', () => { editor.change(draft => { draft.protectedIds = draft.protectedIds.filter(id => id !== selected.id); if ($('architect-protected').checked) draft.protectedIds.push(selected.id) }); changed() })
+  $('architect-remove').addEventListener('click', () => { if (editor.remove(selected.id)) { selected = null; changed() } else status('Quita primero los recursos nuevos que dependen de este recurso.', true) })
+  $('architect-undo').addEventListener('click', () => { editor.undo(); changed() }); $('architect-redo').addEventListener('click', () => { editor.redo(); changed() })
+  $('architect-refresh').addEventListener('click', load); $('architect-preview').addEventListener('click', () => submit(false)); $('architect-save').addEventListener('click', () => submit(true))
+  window.addEventListener('beforeunload', event => { if (editor && JSON.stringify(editor.current()) !== savedValue) { event.preventDefault(); event.returnValue = '' } })
+  load()
+})()

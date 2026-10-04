@@ -40,7 +40,8 @@ function toast(msg, type = 'ok') {
 
 // ── FORM FEEDBACK ───────────────────────────────────────────────────────────
 document.querySelectorAll('form').forEach(form => {
-  form.addEventListener('submit', () => {
+  form.addEventListener('submit', event => {
+    if (event.defaultPrevented) return
     const btn = form.querySelector('[type=submit]')
     if (btn) {
       btn.disabled = true

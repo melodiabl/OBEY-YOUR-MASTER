@@ -1,0 +1,57 @@
+<%- include('../includes/header', { title: guild.name + ' — Architect', user, activePage: 'architect', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Architect' }] }) %>
+<link rel="stylesheet" href="/css/architect.css">
+<section id="architect-app" data-guild-id="<%= guild.id %>">
+  <div class="architect-heading">
+    <div><a class="architect-back" href="/dashboard/<%= guild.id %>">← <%= guild.name %></a><h1>Server Architect</h1><p>Diseña la estructura de tu servidor y revisa cada cambio.</p></div>
+    <button type="button" class="btn btn-sec" id="architect-refresh">Actualizar estructura</button>
+  </div>
+  <p id="architect-status" class="architect-status" role="status">Leyendo la estructura del servidor…</p>
+  <div class="architect-notice" id="architect-notice" hidden></div>
+  <div class="architect-toolbar" aria-label="Acciones de la propuesta">
+    <span id="architect-draft-status">Sin propuesta cargada</span>
+    <button type="button" class="btn btn-sec" id="architect-undo" disabled>Deshacer</button>
+    <button type="button" class="btn btn-sec" id="architect-redo" disabled>Rehacer</button>
+    <button type="button" class="btn btn-sec" id="architect-preview" disabled>Revisar cambios</button>
+    <button type="button" class="btn btn-p" id="architect-save" disabled>Guardar borrador</button>
+  </div>
+  <fieldset id="architect-workspace" disabled>
+    <legend class="sr-only">Editor de estructura</legend>
+    <div class="architect-grid">
+      <section class="architect-pane" aria-labelledby="structure-title">
+        <div class="architect-pane-heading"><h2 id="structure-title">Estructura propuesta</h2><span id="architect-resource-count"></span></div>
+        <div class="architect-tree" id="architect-tree"></div>
+        <form id="architect-add" class="architect-add">
+          <h3>Añadir recurso</h3>
+          <label for="architect-new-kind">Tipo</label><select id="architect-new-kind"><option value="4">Categoría</option><option value="0">Canal de texto</option><option value="2">Canal de voz</option><option value="role">Rol</option></select>
+          <label for="architect-new-name">Nombre</label><input id="architect-new-name" maxlength="100" required placeholder="Nombre del recurso">
+          <button type="submit" class="btn btn-sec">Añadir a la propuesta</button>
+        </form>
+      </section>
+      <section class="architect-pane" aria-labelledby="inspector-title">
+        <div class="architect-pane-heading"><h2 id="inspector-title">Inspector</h2><span id="architect-selection-kind"></span></div>
+        <p class="architect-empty" id="architect-select-hint">Selecciona un canal, una categoría o un rol para editarlo.</p>
+        <form id="architect-inspector" hidden>
+          <p id="architect-locked" class="architect-notice" hidden>Este recurso está protegido.</p>
+          <label for="architect-name">Nombre</label><input id="architect-name" maxlength="100" required>
+          <div id="architect-channel-fields">
+            <label for="architect-parent">Categoría</label><select id="architect-parent"></select>
+            <label for="architect-topic">Tema</label><textarea id="architect-topic" maxlength="1024" rows="3"></textarea>
+          </div>
+          <div id="architect-role-fields" hidden><label for="architect-color">Color del rol</label><input type="color" id="architect-color" value="#000000"></div>
+          <div class="architect-position"><button type="button" class="btn btn-sec" id="architect-up">Subir</button><button type="button" class="btn btn-sec" id="architect-down">Bajar</button></div>
+          <label class="architect-protect"><input type="checkbox" id="architect-protected"> Proteger este recurso</label>
+          <div class="architect-inspector-actions"><button type="submit" class="btn btn-p" id="architect-edit">Actualizar propuesta</button><button type="button" class="btn btn-sec" id="architect-remove" hidden>Quitar recurso nuevo</button></div>
+        </form>
+      </section>
+    </div>
+  </fieldset>
+  <section class="architect-pane architect-review" aria-labelledby="review-title">
+    <div class="architect-pane-heading"><h2 id="review-title">Cambios propuestos</h2><span id="architect-change-count">Sin revisar</span></div>
+    <div id="architect-diff" class="architect-empty">Pulsa Revisar cambios para comparar la propuesta con el servidor actual.</div>
+    <div id="architect-preflight" class="architect-empty"></div>
+    <p class="architect-review-note">El borrador se guarda en OBEY. La aplicación a Discord, los puntos de restauración y el modo IA están pendientes de implementación.</p>
+  </section>
+</section>
+<script src="/js/architect-state.js"></script>
+<script src="/js/architect-editor.js"></script>
+<%- include('../includes/footer') %>

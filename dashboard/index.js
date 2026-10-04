@@ -40,6 +40,7 @@ module.exports = async client => {
     return
   }
 
+  app.use('/api/architect', express.json({ limit: '1mb' }))
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
   app.use(express.static(path.join(__dirname, 'public')))
@@ -103,6 +104,7 @@ module.exports = async client => {
 
   require('../handlers/music/apiRoutes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./music-visibility')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
+  require('./architect-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
 
   // ─── Public routes ────────────────────────────────────────────────────────
 

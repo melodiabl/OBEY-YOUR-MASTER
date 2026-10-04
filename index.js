@@ -169,7 +169,7 @@ if (lavalinkNodes.length) {
 // ─── Handlers ─────────────────────────────────────────────────────────────────
 
 const coreHandlers = [
-  'clientvariables','command','loaddb','events','slashCommands','musichandler',
+  'clientvariables','command','loaddb','events','slashCommands','musichandler','architect',
   'logger','anti_nuke','antidiscord','antilinks','anticaps','antispam',
   'blacklist','keyword','antimention','autobackup','apply','ticket',
   'ticketevent','roster','joinvc','boostlog','welcome','leave',
@@ -182,7 +182,7 @@ const coreHandlers = [
 for (const name of coreHandlers) {
   try {
     const initialize = require('./handlers/' + name)
-    const core = ['clientvariables', 'command', 'loaddb', 'events', 'slashCommands', 'musichandler', 'logger'].includes(name)
+    const core = ['clientvariables', 'command', 'loaddb', 'events', 'slashCommands', 'musichandler', 'architect', 'logger'].includes(name)
     const initialized = core ? initialize(client) : require('./handlers/feature-registration').registerFeature(client, name, initialize)
     Promise.resolve(initialized).catch(error => console.error('[Handler] ' + name + ': ' + error.message))
   }
