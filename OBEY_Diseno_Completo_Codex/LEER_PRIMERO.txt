@@ -1,0 +1,1 @@
+Adjunta este ZIP a Codex y pide que lea OBEY_Prompt_Maestro_Integral.md antes de implementar. El prompt maestro reemplaza las instrucciones anteriores de alcance. Los diseños y recursos aprobados están en OBEY_Personaje_Seleccionado/.

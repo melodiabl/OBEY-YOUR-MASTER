@@ -1,0 +1,7 @@
+{
+  "scope": "Real EJS settings template, isolated fixtures, no OAuth/DB/Discord or network",
+  "textareaMatches": true,
+  "desktop": 1120,
+  "mobile": 390,
+  "errors": []
+}

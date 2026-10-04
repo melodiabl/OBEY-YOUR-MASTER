@@ -46,3 +46,10 @@ Backup previo: `/home/backups/obey-releases/2026-10-03T19-37-34-463Z` (privado).
 Ante una regresión: detener el bot con plazo de 30 segundos, guardar los logs de forma privada, recuperar los archivos Compose/configuración originales del backup y recrear con las imágenes de rollback. La migración es aditiva; no restaurar MongoDB automáticamente porque borraría cambios posteriores de usuarios. Si una restauración de datos resulta necesaria, detener escrituras primero y usar el archivo privado `mongo.archive.gz`.
 
 El chequeo de voz `scripts/live-music-check.js` solo se habilita con variables de entorno explícitas, en un canal vacío donde el bot ya estaba conectado. El volumen se mantiene en cero durante los tramos de audio y las variables de chequeo se retiran al finalizar.
+
+
+## Plataforma OBEY — continuación en el proyecto principal
+
+El workspace activo es `/home/OBEY-YOUR-MASTER`, rama `feature/obey-main-implementation`. Recursos/controles/letras de la entrega anterior están incorporados; registry musical, OAuth/API y compatibilidad de bienvenida tienen avances locales. La fuente de estado actual es `docs/platform/CHECKPOINT.md`; la matriz y todas las tareas centrales permanecen en `docs/platform/requirements.json` y `tasks/todo.md`. CI incorpora requisitos de compilación Canvas para Node 22 y verifica código/assets/schemas/build sin iniciar servicios. No equivale a despliegue ni plataforma terminada.
+
+Tiempo real musical: autorización de sesión almacenada por envío, permisos con TTL 15 s y fail closed, logout local y snapshots al reconectar. Suite actual: 125 tests en 31 archivos; instalación limpia y build Docker completados. Alcance y límites en docs/platform/CHECKPOINT.md.

@@ -1,0 +1,60 @@
+{
+  "status": "master-assets-for-figma-and-compositing",
+  "note": "Original PNGs. Export smaller emoji variants and validate Discord upload size and legibility before use. No application emoji IDs assigned.",
+  "assets": {
+    "welcome": {
+      "path": "assets/character/png/obey_welcome_master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 2184521,
+      "applicationEmojiId": null
+    },
+    "farewell": {
+      "path": "assets/character/png/obey_farewell_master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 2006797,
+      "applicationEmojiId": null
+    },
+    "lyrics": {
+      "path": "assets/character/png/obey_lyrics_master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 1896616,
+      "applicationEmojiId": null
+    },
+    "like": {
+      "path": "assets/character/png/obey_like_master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 1815597,
+      "applicationEmojiId": null
+    },
+    "autoplay": {
+      "path": "assets/character/png/obey_autoplay_master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 2005686,
+      "applicationEmojiId": null
+    },
+    "help": {
+      "path": "assets/character/png/obey_help_master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "bytes": 1982148,
+      "applicationEmojiId": null
+    }
+  }
+}

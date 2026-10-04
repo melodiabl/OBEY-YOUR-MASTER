@@ -1,0 +1,11 @@
+{
+  "scope": "Real EJS and browser scripts; simulated transport events and isolated API fixtures; real Socket.IO integration separately in tests",
+  "states": [
+    "verifying",
+    "foreign guild rejected",
+    "authorized snapshot",
+    "denied",
+    "disconnected"
+  ],
+  "errors": []
+}

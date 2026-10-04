@@ -1,0 +1,16 @@
+{
+  "emoji_variants": 89,
+  "individual_illustration_masters": 6,
+  "banners": 13,
+  "dynamic_bases": 3,
+  "svg_patterns": 59,
+  "canvas_example_renders": 4,
+  "emoji_dimensions": "128x128",
+  "emoji_rgba_alpha_checked": true,
+  "emoji_max_bytes": 29560,
+  "svg_xml_checked": true,
+  "javascript_syntax_checked": true,
+  "canvas_render_executed": true,
+  "discord_runtime_tested": false,
+  "github_modified": false
+}
