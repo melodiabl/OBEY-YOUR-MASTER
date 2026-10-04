@@ -8,20 +8,32 @@
 // ─────────────────────────────────────────────────────────────────────────────
 const { database } = require('./database')
 
-module.exports = (app, client, { canManageGuild = () => false } = {}) => {
+module.exports = (app, client, {
+  canManageGuild = () => false,
+  requireAuth = (req, res) => res.status(401).json({ error: 'not_authenticated' }),
+  requireFreshGuildPermissions = (req, res) => res.status(503).json({ error: 'permissions_unavailable' }),
+  database: repository = database,
+} = {}) => {
   const music = () => client.music
   const ok  = (res, data) => res.json({ success: true, data })
   const bad = (res, code, msg) => res.status(code).json({ success: false, error: msg })
-  const wrap = fn => (req, res) => Promise.resolve(fn(req, res)).catch(e => bad(res, 500, e?.message || 'error'))
+  const wrap = fn => (req, res) => Promise.resolve(fn(req, res)).catch(() => bad(res, 500, 'internal_error'))
 
   // Requiere sesión del dashboard (OAuth Discord). Devuelve 401 JSON si no.
-  const apiAuth = (req, res, next) => (req.session?.user?.id ? next() : bad(res, 401, 'No autenticado'))
+  const apiAuth = requireAuth
   const uid = req => req.session.user.id
+  const guildAccess = (req, res, next) => {
+    const guildId = req.params.guildId || req.query.guildId
+    if (typeof guildId !== 'string' || !guildId) return bad(res, 400, 'missing_or_invalid_guild')
+    if (!client.guilds.cache.has(guildId) || !canManageGuild(req.session.user, guildId)) return bad(res, 403, 'no_permission')
+    res.set('Cache-Control', 'private, no-store')
+    return next()
+  }
 
   // ── Público (sin datos personales) ───────────────────────────────────────────
   app.get('/api/music/health', (req, res) => res.json({ status: 'ok', uptime: Math.floor(process.uptime()) }))
 
-  app.get('/api/music/status/:guildId', apiAuth, (req, res) => {
+  app.get('/api/music/status/:guildId', apiAuth, requireFreshGuildPermissions, guildAccess, (req, res) => {
     if (!canManageGuild(req.session.user, req.params.guildId)) return bad(res, 403, 'no_permission')
     ok(res, music()?.getPublicState?.(req.params.guildId) || { active: false })
   })
@@ -33,9 +45,16 @@ module.exports = (app, client, { canManageGuild = () => false } = {}) => {
     ok(res, (r?.tracks || []).map(t => require('./utils').normalizePublicTrack(t)))
   }))
 
-  app.get('/api/top/tracks', wrap(async (req, res) => ok(res, await database.getTopTracks(req.query.guildId, Math.max(1, Math.min(100, Number(req.query.limit) || 10))))))
-  app.get('/api/top/users',  wrap(async (req, res) => ok(res, await database.getTopUsers(req.query.guildId, Math.max(1, Math.min(100, Number(req.query.limit) || 10))))))
-  app.get('/api/top/guilds', wrap(async (req, res) => ok(res, await database.getTopGuilds(Math.max(1, Math.min(100, Number(req.query.limit) || 10))))))
+  app.get('/api/top/tracks', apiAuth, requireFreshGuildPermissions, guildAccess,
+    wrap(async (req, res) => ok(res, await repository.getTopTracks(req.query.guildId, Math.max(1, Math.min(100, Number(req.query.limit) || 10))))))
+  app.get('/api/top/users', apiAuth, requireFreshGuildPermissions, guildAccess,
+    wrap(async (req, res) => ok(res, await repository.getTopUsers(req.query.guildId, Math.max(1, Math.min(100, Number(req.query.limit) || 10))))))
+  app.get('/api/top/guilds', apiAuth, requireFreshGuildPermissions, wrap(async (req, res) => {
+    res.set('Cache-Control', 'private, no-store')
+    const guildIds = (req.session.user.guilds || []).filter(guild => client.guilds.cache.has(guild.id)
+      && canManageGuild(req.session.user, guild.id)).map(guild => guild.id)
+    ok(res, await repository.getTopGuilds(Math.max(1, Math.min(100, Number(req.query.limit) || 10)), guildIds))
+  }))
 
   // ── Privado (userId SIEMPRE de la sesión) ────────────────────────────────────
   app.get('/api/music/liked',  apiAuth, wrap(async (req, res) => ok(res, await database.getLikedSongs(uid(req)))))

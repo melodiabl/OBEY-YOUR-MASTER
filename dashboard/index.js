@@ -7,6 +7,8 @@ const http       = require('http')
 const crypto     = require('crypto')
 const { Server } = require('socket.io')
 const { freshGuildPermissions } = require('./permissions')
+const { canManageGuild } = require('../handlers/permissions')
+const { sessionAuth, establishSession } = require('./auth')
 
 module.exports = async client => {
   const app    = express()
@@ -60,9 +62,6 @@ module.exports = async client => {
   app.use(sessionMiddleware)
   app.use(require('./security').csrfProtection(BASE_URL))
 
-  // Endpoints REST de música (port de Soundy api/) — tras la sesión, para poder autenticar (evita IDOR)
-  try { require('../handlers/music/apiRoutes')(app, client, { canManageGuild }) } catch (e) { console.warn('[Music] apiRoutes no montados:', e?.message) }
-
   // ─── OAuth2 helpers ───────────────────────────────────────────────────────
 
   async function refreshDiscordToken(session) {
@@ -89,34 +88,7 @@ module.exports = async client => {
   }
 
   // Auth middleware — validates session + refreshes Discord token if near expiry
-  const requireAuth = async (req, res, next) => {
-    if (!req.session?.user) return res.redirect('/login?reason=not_logged_in')
-    const user = req.session.user
-    // If token expires within 1 hour, refresh proactively
-    if (user.expires_at && Date.now() > user.expires_at - 3600_000) {
-      try {
-        await refreshDiscordToken(req.session)
-      } catch {
-        // Discord revoked access — force re-login
-        req.session.destroy(() => {})
-        return res.redirect('/login?reason=session_expired')
-      }
-    }
-    next()
-  }
-
-  function canManageGuild(user, guildId) {
-    const guild = user?.guilds?.find(item => item.id === guildId)
-    if (!guild) return false
-    if (guild.owner) return true
-    try {
-      const permissions = BigInt(guild.permissions || 0)
-      return (permissions & BigInt(0x8)) === BigInt(0x8)
-        || (permissions & BigInt(0x20)) === BigInt(0x20)
-    } catch {
-      return false
-    }
-  }
+  const requireAuth = sessionAuth(refreshDiscordToken)
 
   const requireFreshGuildPermissions = freshGuildPermissions(async accessToken => {
     const response = await axios.get('https://discord.com/api/users/@me/guilds', {
@@ -124,6 +96,9 @@ module.exports = async client => {
     })
     return response.data
   })
+
+  require('../handlers/music/apiRoutes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
+  require('./music-visibility')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
 
   // ─── Public routes ────────────────────────────────────────────────────────
 
@@ -176,14 +151,14 @@ module.exports = async client => {
         axios.get('https://discord.com/api/users/@me',        { headers: { Authorization: `Bearer ${access_token}` } }),
         axios.get('https://discord.com/api/users/@me/guilds', { headers: { Authorization: `Bearer ${access_token}` } }),
       ])
-      req.session.user = {
+      await establishSession(req, {
         ...userRes.data,
         guilds:        guildsRes.data,
         access_token,
         refresh_token,
         expires_at:    Date.now() + expires_in * 1000,
         logged_in_at:  Date.now(),
-      }
+      })
       res.redirect('/dashboard')
     } catch (e) {
       res.redirect('/?error=auth_failed')
@@ -272,27 +247,6 @@ module.exports = async client => {
   app.get('/api/stats', (req, res) => {
     const stats = computeStats()
     res.json({ ...stats, uptime: process.uptime() })
-  })
-
-  app.get('/api/nowplaying', (req, res) => {
-    const tracks = []
-    if (client.music?.playerStates) {
-      for (const [guildId, state] of client.music.playerStates) {
-        const track = state?.currentTrack
-        const guild = client.guilds.cache.get(guildId)
-        if (!track || !guild) continue
-        const info = track.info || track
-        tracks.push({
-          guildId,
-          guildName:   guild.name,
-          trackTitle:  info.title  || '?',
-          trackAuthor: info.author || '',
-          thumbnail:   require('../handlers/music/utils').trackArtwork(track),
-          uri:         info.uri || null,
-        })
-      }
-    }
-    res.json({ tracks })
   })
 
   // ─── Invite leaderboard ───────────────────────────────────────────────────

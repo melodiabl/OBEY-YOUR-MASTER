@@ -142,8 +142,9 @@ class MusicDatabase {
     return UserStats.find({ guildId }).sort({ playCount: -1 }).limit(limit).lean().catch(() => [])
   }
 
-  async getTopGuilds(limit = 10) {
+  async getTopGuilds(limit = 10, guildIds = null) {
     return UserStats.aggregate([
+      ...(guildIds === null ? [] : [{ $match: { guildId: { $in: guildIds } } }]),
       { $group: { _id: '$guildId', playCount: { $sum: '$playCount' } } },
       { $sort: { playCount: -1 } }, { $limit: limit },
     ]).catch(() => [])
