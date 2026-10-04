@@ -1,0 +1,6 @@
+# Optional bot override for a future authorized deployment. Does not start Redis.
+services:
+  bot:
+    env_file:
+      - .env
+      - .env.jobs

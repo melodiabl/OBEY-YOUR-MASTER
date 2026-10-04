@@ -1,6 +1,7 @@
 const { PermissionFlagsBits } = require('discord.js')
 const { JobError } = require('./jobs/service')
 module.exports = client => {
+  require('./jobs/config').loadJobsConfiguration()
   const storageReady = () => Boolean(client._dbReady && require('mongoose').connection.readyState === 1)
   const enabled = process.env.OBEY_JOBS_ENABLED === 'true'
   const guild = record => {

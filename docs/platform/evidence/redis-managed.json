@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-05",
+  "endpoint": "127.0.0.1:6380/0",
+  "container": "obey_redis",
+  "authenticated": true,
+  "unauthenticatedDenied": true,
+  "aof": true,
+  "noEviction": true,
+  "persistedAcrossRestart": true,
+  "bullmqConnected": true,
+  "existingRedisUntouched": true,
+  "botRestarted": false,
+  "productionMongoAccessed": false
+}

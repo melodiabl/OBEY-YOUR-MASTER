@@ -7,6 +7,7 @@ node_modules/
 *.db
 *.log
 *.bak
+.runtime/
 backups/
 invidious-companion/
 __pycache__/

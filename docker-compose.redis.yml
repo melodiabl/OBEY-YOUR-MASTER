@@ -1,0 +1,26 @@
+services:
+  redis:
+    image: docker.io/library/redis:7-alpine
+    container_name: obey_redis
+    restart: unless-stopped
+    network_mode: host
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./.runtime/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - obey_redis_data:/data
+    mem_limit: 512m
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD-SHELL", "REDISCLI_AUTH=$$(sed -n 's/^requirepass //p' /usr/local/etc/redis/redis.conf) redis-cli -h 127.0.0.1 -p 6380 ping | grep -qx PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+volumes:
+  obey_redis_data:
+    name: obey_redis_data
