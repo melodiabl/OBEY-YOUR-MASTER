@@ -3,11 +3,7 @@ const { trackArtwork, fmtMs, progressBar, platform, loopEmoji, volEmoji, filterL
 const { config } = require('../music/config')
 const E = config.emoji
 
-// Convierte "<a:name:id>" en {animated,name,id} para setEmoji (custom emojis de la app)
-function pe(markup) {
-  const m = /^<(a?):(\w+):(\d+)>$/.exec(String(markup))
-  return m ? { animated: !!m[1], name: m[2], id: m[3] } : markup
-}
+const { buildControls } = require('./controls')
 
 function buildNPEmbed(client, guildId, state, positionMs = null) {
   const track = state.currentTrack
@@ -73,41 +69,10 @@ function buildNPEmbed(client, guildId, state, positionMs = null) {
   return embed
 }
 
-function buildRow1(state) {
-  const loopStyle = state.loop === 'none'  ? ButtonStyle.Secondary
-                  : state.loop === 'track' ? ButtonStyle.Success
-                  :                          ButtonStyle.Primary
-  return new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId('mp_shuffle').setEmoji(pe(E.shuffle)).setStyle(state.shuffle ? ButtonStyle.Success : ButtonStyle.Secondary),
-    new ButtonBuilder().setCustomId('mp_prev').setEmoji(pe(E.previous)).setStyle(ButtonStyle.Secondary).setDisabled(!state.history?.length),
-    new ButtonBuilder().setCustomId('mp_toggle').setEmoji(pe(state.paused ? E.play : E.pause)).setStyle(state.paused ? ButtonStyle.Success : ButtonStyle.Primary),
-    new ButtonBuilder().setCustomId('mp_skip').setEmoji(pe(E.skip)).setStyle(ButtonStyle.Secondary),
-    new ButtonBuilder().setCustomId('mp_loop').setEmoji(pe(E.loop)).setStyle(loopStyle),
-  )
-}
-
-function buildRow2(state) {
-  const vol = state.volume ?? 100
-  return new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId('mp_lyrics').setEmoji(pe(E.list)).setStyle(ButtonStyle.Secondary),
-    new ButtonBuilder().setCustomId('mp_voldown').setEmoji(pe(E.volDown)).setStyle(ButtonStyle.Secondary).setDisabled(vol <= 0),
-    new ButtonBuilder().setCustomId('mp_stop').setEmoji(pe(E.stop)).setStyle(ButtonStyle.Danger),
-    new ButtonBuilder().setCustomId('mp_volup').setEmoji(pe(E.volUp)).setStyle(ButtonStyle.Secondary).setDisabled(vol >= 200),
-    new ButtonBuilder().setCustomId('mp_queue').setEmoji(pe(E.folder)).setStyle(ButtonStyle.Secondary),
-  )
-}
-
-function buildRow3(state) {
-  return new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId('mp_like').setEmoji(pe(E.heart)).setStyle(ButtonStyle.Secondary),
-    new ButtonBuilder().setCustomId('mp_autoplay').setEmoji(pe(E.music)).setStyle(state.autoplay ? ButtonStyle.Success : ButtonStyle.Secondary),
-  )
-}
-
-// Conjunto completo de filas de control del Now Playing
-function buildControls(state) {
-  return [buildRow1(state), buildRow2(state), buildRow3(state)]
-}
+// Keep the row helpers for existing callers; every view uses the same control contract.
+const buildRow1 = state => buildControls(state)[0]
+const buildRow2 = state => buildControls(state)[1]
+const buildRow3 = state => buildControls(state)[2]
 
 function buildQueueEmbed(state, page = 1) {
   const PER_PAGE = 10

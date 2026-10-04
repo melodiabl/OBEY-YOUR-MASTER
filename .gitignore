@@ -11,3 +11,11 @@ backups/
 invidious-companion/
 __pycache__/
 *.pyc
+
+# Local dependency link and operator-generated emoji IDs/checkpoints.
+node_modules
+assets/obey/application-emojis.json*
+# Original visual proposals are retained locally; approved runtime assets live in assets/obey.
+OBEY_Diseno_Completo_Codex/OBEY_Personaje_Seleccionado/assets/
+OBEY_Diseno_Completo_Codex/OBEY_Personaje_Seleccionado/design/
+OBEY_Diseno_Completo_Codex/OBEY_Personaje_Seleccionado/preview/
