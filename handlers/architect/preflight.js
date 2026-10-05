@@ -1,5 +1,5 @@
 const { PermissionFlagsBits } = require('discord.js')
-async function preflight(guild, blueprint, diff, actorId, { executionAvailable = false, idMap = {} } = {}) {
+async function preflight(guild, blueprint, diff, actorId, { executionAvailable = false, idMap = {}, observed } = {}) {
   const checks = []
   const add = (code, status, detail) => checks.push({ code, status, detail })
   let actor, bot
@@ -10,7 +10,7 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
     } catch { add('members', 'unknown', 'No se pudieron verificar los permisos actuales del administrador y de OBEY.') }
   }
   for (const [kind, flag, label] of [['channels', PermissionFlagsBits.ManageChannels, 'Administrar canales'], ['roles', PermissionFlagsBits.ManageRoles, 'Administrar roles']]) {
-    if (!diff.changes.some(change => change.kind === kind)) continue
+    if (!diff.changes.some(change => change.kind === kind || (kind === 'roles' && change.operation === 'overwrites'))) continue
     for (const [name, member] of [['actor', actor], ['bot', bot]]) {
       add(`${name}_${kind}`, member ? (member.permissions.has(flag) ? 'passed' : 'failed') : 'unknown', `${name === 'bot' ? 'OBEY' : 'Tu cuenta'} necesita ${label}.`)
     }
@@ -26,10 +26,25 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
     add(`hierarchy_${role.id}`, !bot || !actor ? 'unknown' : belowBot && belowActor ? 'passed' : 'failed', `El rol ${role.name} debe estar por debajo del rol de OBEY y del administrador.`)
   }
   add('deletions', 'passed', 'Esta propuesta conserva todos los recursos existentes.')
+  const permissionChanges = diff.changes.filter(change => change.operation === 'overwrites' || (change.kind === 'roles' && change.field === 'permissions'))
+  if (permissionChanges.length) {
+    if (executionAvailable) add('permission_transport', typeof guild.client?.rest?.options?.makeRequest === 'function' ? 'passed' : 'unknown', 'El servicio debe impedir reintentos de cambios de permisos con resultado incierto.')
+    for (const change of permissionChanges.filter(change => change.operation === 'overwrites')) {
+      const removedDenies = (change.before || []).reduce((bits, overwrite) => {
+        const next = change.after.find(target => target.id === overwrite.id && target.type === overwrite.type)
+        return bits | (BigInt(overwrite.deny) & ~BigInt(next?.deny || '0'))
+      }, 0n)
+      const requested = change.after.reduce((bits, overwrite) => bits | BigInt(overwrite.allow) | BigInt(overwrite.deny), removedDenies)
+      for (const [name, member] of [['actor', actor], ['bot', bot]]) add(`${name}_overwrite_grant_${change.id}`, member ? member.permissions.has(requested) ? 'passed' : 'failed' : 'unknown', `${name === 'bot' ? 'OBEY' : 'Tu cuenta'} debe tener los permisos que propone permitir o denegar en el canal.`)
+    }
+    try {
+      checks.push(...require('./permissions').checkPermissionPlan({ snapshot: observed, operations: require('./application').compileEdits(diff), members: { actor, bot }, ownerId: guild.ownerId, idMap }))
+    } catch { add('permission_projection', 'unknown', 'No se pudo verificar el acceso después de cada cambio de permisos; hacen falta estructura y roles de los miembros actuales.') }
+  }
   if (executionAvailable) {
     if (diff.changes.length) add('actor_guild', actor ? (actor.permissions.has(PermissionFlagsBits.ManageGuild) ? 'passed' : 'failed') : 'unknown', 'Tu cuenta necesita Administrar servidor durante la aplicación.')
-    try { if (diff.changes.length) require('./application').compileEdits(diff); add('execution', 'passed', 'Aplicación confirmada de ediciones y creaciones básicas disponible en este canary.') }
-    catch { add('execution', 'failed', 'Solo se aplican nombres, temas y colores existentes, roles nuevos sin permisos y canales básicos sin sobrescrituras ni posiciones personalizadas.') }
+    try { if (diff.changes.length) require('./application').compileEdits(diff); add('execution', 'passed', 'Aplicación confirmada de ediciones, creaciones básicas y permisos de recursos existentes disponible en este canary.') }
+    catch { add('execution', 'failed', 'Solo se aplican ediciones, creaciones básicas y permisos de roles/canales de texto o voz. Movimientos y permisos de categorías siguen pendientes.') }
     const creations = diff.changes.filter(change => change.operation === 'create')
     if (creations.length) {
       add('capacity', (blueprint.roles?.length <= 250 && blueprint.channels?.length <= 500 && blueprint.channels.every(parent => parent.type !== 4 || blueprint.channels.filter(channel => channel.parentId === parent.id).length <= 50)) ? 'passed' : 'failed', 'La propuesta debe respetar 250 roles, 500 canales y 50 canales por categoría.')
@@ -54,7 +69,8 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
         let allowed
         try {
           const permissions = channel ? channel.permissionsFor(member) : creation && (!parent || parent.id.startsWith('local:')) ? member?.permissions : undefined
-          allowed = member && permissions?.has(creation ? [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ViewChannel] : PermissionFlagsBits.ManageChannels)
+          const overwriteChange = permissionChanges.some(change => change.operation === 'overwrites' && change.id === id)
+          allowed = member && permissions?.has(overwriteChange ? [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageRoles, PermissionFlagsBits.ViewChannel] : creation ? [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ViewChannel] : PermissionFlagsBits.ManageChannels)
         } catch {}
         add(`${name}_channel_${id}`, allowed === undefined ? 'unknown' : allowed ? 'passed' : 'failed', `${name === 'bot' ? 'OBEY' : 'Tu cuenta'} necesita Administrar canales efectivo${creation ? ' y conservar acceso al canal nuevo' : ' en el canal que se editará'}.`)
       }

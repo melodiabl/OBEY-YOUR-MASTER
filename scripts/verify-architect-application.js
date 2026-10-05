@@ -25,10 +25,11 @@ async function main() {
     const roles = [{ id: guildId, name: '@everyone', position: 0, permissions: new PermissionsBitField(0n) },
       { id: 'staff', name: 'Staff', position: 1, permissions: new PermissionsBitField(0n), color: 0, colors: { primaryColor: 0, secondaryColor: null, tertiaryColor: null } },
       { id: 'bot_role', name: 'OBEY', position: 10, permissions: new PermissionsBitField(8n), managed: true }]
-    const member = id => ({ id, permissions: new PermissionsBitField(permitted ? 8n : 0n), roles: { highest: { position: 10 } } })
+    const member = id => ({ id, permissions: new PermissionsBitField(permitted ? 8n : 0n), roles: { highest: { position: 10 }, cache: new Map(roles.filter(role => role.id === guildId || role.id === 'bot_role').map(role => [role.id, role])) } })
     const guild = { id: guildId, name: 'Fixture', ownerId: actorId,
       members: { fetch: async ({ user }) => member(user), fetchMe: async () => member('bot') },
       channels: { cache: new Map([[channel.id, channel]]), fetch: async () => new Map(guild.channels.cache), edit: async (id, patch) => {
+        if (patch.permissionOverwrites !== undefined) return sdkGuild.channels.edit(id, patch)
         edits++; assert.equal(id, channel.id); if (patch.name !== undefined) channel.name = patch.name; if (patch.topic !== undefined) channel.topic = patch.topic
         if (loseResponse) throw new Error('fixture response lost after mutation')
       } },
@@ -42,9 +43,19 @@ async function main() {
     const roleData = role => ({ ...role, permissions: role.permissions.bitfield.toString(),
       ...(role.colors ? { colors: { primary_color: role.colors.primaryColor, secondary_color: role.colors.secondaryColor, tertiary_color: role.colors.tertiaryColor } } : {}) })
     for (const role of roles) sdkGuild.roles._add(roleData(role))
+    sdkClient.channels._add({ id: channel.id, guild_id: guildId, type: 0, name: channel.name, position: 0, permission_overwrites: [] })
     sdkClient.rest.patch = async (route, { body }) => {
-      edits++; const role = roles.find(role => role.id === route.split('/').at(-1)); assert.ok(role)
-      assert.equal(body.permissions, undefined); assert.equal(body.color, undefined)
+      edits++; body = JSON.parse(JSON.stringify(body))
+      if (route.startsWith('/channels/')) {
+        const target = guild.channels.cache.get(route.split('/').at(-1)); assert.ok(target)
+        assert.ok(Array.isArray(body.permission_overwrites)); assert.equal(body.position, undefined)
+        target.permissionOverwrites.cache = new Map(body.permission_overwrites.map(overwrite => [overwrite.id, { ...overwrite, allow: new PermissionsBitField(BigInt(overwrite.allow)), deny: new PermissionsBitField(BigInt(overwrite.deny)) }]))
+        return { ...body, id: target.id, guild_id: guildId, type: target.type, name: target.name, position: target.rawPosition, parent_id: target.parentId, topic: target.topic,
+          nsfw: target.nsfw, bitrate: target.bitrate, user_limit: target.userLimit, rate_limit_per_user: target.rateLimitPerUser }
+      }
+      const role = roles.find(role => role.id === route.split('/').at(-1)); assert.ok(role)
+      if (body.permissions !== undefined) { assert.equal(typeof body.permissions, 'string'); role.permissions = new PermissionsBitField(BigInt(body.permissions)) }
+      assert.equal(body.color, undefined)
       if (body.colors) {
         assert.equal(body.colors.secondary_color, null); assert.equal(body.colors.tertiary_color, null)
         role.colors = { primaryColor: body.colors.primary_color, secondaryColor: body.colors.secondary_color, tertiaryColor: body.colors.tertiary_color }
@@ -84,7 +95,7 @@ async function main() {
     guild.roles.create = options => sdkGuild.roles.create(options)
     guild.channels.create = options => sdkGuild.channels.create(options)
     let cancelledEdits = 0
-    const cancelChannel = { ...channel, id: 'cancel_chat', name: 'before cancellation' }
+    const cancelChannel = { ...channel, id: 'cancel_chat', name: 'before cancellation', permissionOverwrites: { cache: new Map() } }
     const cancelGuild = { ...guild, id: 'apply_cancel_fixture',
       channels: { cache: new Map([[cancelChannel.id, cancelChannel]]), fetch: async () => new Map([[cancelChannel.id, cancelChannel]]), edit: async (id, patch) => {
         assert.equal(id, cancelChannel.id); await new Promise(resolve => { cancelRelease = resolve }); cancelledEdits++; cancelChannel.name = patch.name
@@ -139,11 +150,13 @@ async function main() {
     creationBlueprint.channels.push({ ...template, id: 'local:category', name: 'Community', type: 4 },
       { ...template, id: 'local:text', name: 'new-chat', parentId: 'local:category' },
       { ...template, id: 'local:voice', name: 'Voice', type: 2, parentId: 'local:category', bitrate: 64000, userLimit: 0 })
+    creationBlueprint.channels[0].overwrites = [{ id: 'local:member', type: 0, allow: '1024', deny: '0' }]
     const creationPlan = await applications.prepare(guild, actorId, creationBlueprint)
     assert.equal(creates, 0); loseCreation = true
     const creationJob = await applications.confirm(guild, actorId, creationPlan), created = await completed(creationJob.id)
-    assert.equal(creates, 4); assert.equal(created.result.creates, 4); assert.equal(created.result.edits, 0)
-    assert.deepEqual(created.progress, { completed: 5, total: 5 })
+    assert.equal(creates, 4); assert.equal(created.result.creates, 4); assert.equal(created.result.edits, 1); assert.equal(created.result.permissionChanges, 1)
+    assert.deepEqual(created.progress, { completed: 6, total: 6 })
+    assert.equal(channel.permissionOverwrites.cache.get(created.result.idMap['local:member']).allow.bitfield, 1024n)
     assert.equal(created.result.channelCount, 4); assert.equal(created.result.roleCount, 4)
     assert.equal(guild.channels.cache.get(created.result.idMap['local:text']).parentId, created.result.idMap['local:category'])
     assert.equal(guild.channels.cache.get(created.result.idMap['local:voice']).parentId, created.result.idMap['local:category'])
@@ -152,13 +165,30 @@ async function main() {
     assert.equal(created.executionSnapshot, undefined); assert.equal(created.executionIdMap, undefined)
     await applications.confirm(guild, actorId, creationPlan); assert.equal(creates, 4)
     assert.equal(await guardModel.countDocuments({ _id: guildId }), 0)
+    const permissionBlueprint = await proposal()
+    permissionBlueprint.roles.find(role => role.id === 'staff').permissions = '2048'
+    permissionBlueprint.channels.find(target => target.id === channel.id).overwrites = [{ id: 'staff', type: 0, allow: '2048', deny: '0' }]
+    permissionBlueprint.channels.find(target => target.id === created.result.idMap['local:voice']).overwrites = [{ id: 'staff', type: 0, allow: '1048576', deny: '0' }]
+    const permissionPlan = await applications.prepare(guild, actorId, permissionBlueprint)
+    assert.equal(edits, 3); assert.equal(permissionPlan.permissionChanges, 3)
+    const permissionJob = await applications.confirm(guild, actorId, permissionPlan), permissionsApplied = await completed(permissionJob.id)
+    assert.equal(permissionsApplied.result.permissionChanges, 3); assert.equal(permissionsApplied.result.edits, 3)
+    assert.deepEqual(permissionsApplied.progress, { completed: 4, total: 4 })
+    assert.equal(roles.find(role => role.id === 'staff').permissions.bitfield, 2048n)
+    assert.equal(channel.permissionOverwrites.cache.get('staff').allow.bitfield, 2048n)
+    assert.equal(guild.channels.cache.get(created.result.idMap['local:voice']).permissionOverwrites.cache.get('staff').allow.bitfield, 1048576n)
+    const permissionPoint = await restorePoints.get(permissionsApplied.result.restorePointId, guildId, actorId)
+    assert.equal(permissionPoint.snapshot.roles.find(role => role.id === 'staff').permissions, '0')
+    assert.deepEqual(permissionPoint.snapshot.channels.find(target => target.id === channel.id).overwrites, [{ id: created.result.idMap['local:member'], type: 0, allow: '1024', deny: '0' }])
+    await applications.confirm(guild, actorId, permissionPlan); assert.equal(edits, 6)
+    const editedBeforeFailure = edits
     const driftPlan = await applications.prepare(guild, actorId, await proposal('stale'))
     channel.topic = 'manual external change'
     await assert.rejects(applications.confirm(guild, actorId, driftPlan), error => error.code === 'revision_conflict')
-    assert.equal(edits, 2)
+    assert.equal(edits, editedBeforeFailure)
     const revoked = await applications.prepare(guild, actorId, await proposal('revoked'))
     permitted = false; const denied = await applications.confirm(guild, actorId, revoked)
-    assert.equal((await failed(denied.id)).error.code, 'permission_denied'); assert.equal(edits, 2)
+    assert.equal((await failed(denied.id)).error.code, 'permission_denied'); assert.equal(edits, editedBeforeFailure)
     permitted = true
     const cancelPlan = await applications.prepare(cancelGuild, actorId, await proposal('may finish after cancellation', undefined, cancelGuild))
     const cancellation = await applications.confirm(cancelGuild, actorId, cancelPlan)
@@ -172,12 +202,12 @@ async function main() {
     loseResponse = true; const uncertainJob = await applications.confirm(guild, actorId, uncertain)
     const stopped = await failed(uncertainJob.id)
     assert.equal(stopped.error.code, 'application_needs_review'); assert.equal(stopped.steps[1].status, 'executing')
-    assert.equal(edits, 3); assert.equal(channel.name, 'uncertain')
+    assert.equal(edits, editedBeforeFailure + 1); assert.equal(channel.name, 'uncertain')
     assert.equal((await guardModel.findById(guildId).lean()).jobId, uncertainJob.id)
     loseResponse = false
     const blockedPlan = await applications.prepare(guild, actorId, await proposal('must-not-apply'))
     const blockedJob = await applications.confirm(guild, actorId, blockedPlan)
-    assert.equal((await failed(blockedJob.id)).error.code, 'application_needs_review'); assert.equal(edits, 3)
+    assert.equal((await failed(blockedJob.id)).error.code, 'application_needs_review'); assert.equal(edits, editedBeforeFailure + 1)
     const confirmedPayload = await applications.payload(blockedPlan.id, guildId, actorId)
     const fenced = await repository.ensure({ _id: randomUUID(), guildId: 'apply_fencing_fixture', actorId, type: 'architect.apply', applicationId: blockedPlan.id,
       payload: confirmedPayload, idempotencyKey: 'fencing', correlationId: randomUUID() })
@@ -191,7 +221,8 @@ async function main() {
       measuredCheckpoints: true, duplicateDeliverySafe: true, revisionDriftRejected: true, permissionRevocation: true,
       ambiguousResponseStopsReplay: true, persistentGuildGuardBlocksAnotherApplication: true, staleAbortFenced: true,
       cancellationDuringRESTKeepsDurableGuard: true, actualSDKCreationSerialization: true, orderedRoleCategoryTextVoiceCreation: true,
-      durableLogicalToRealIdMap: true, lostCreationResponseReconciledWithoutReplay: true }
+      durableLogicalToRealIdMap: true, lostCreationResponseReconciledWithoutReplay: true, confirmedRoleTextVoicePermissions: true,
+      actualSDKPermissionSerialization: true, permissionRestorePointAndCheckpoints: true, overwriteTargetUsesCreatedRoleRealId: true }
   } finally {
     cancelRelease?.(); await runtime?.close(); await sdkClient?.destroy()
     if (queue) { await queue.obliterate({ force: true }); await queue.close() }

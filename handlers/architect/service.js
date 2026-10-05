@@ -13,7 +13,7 @@ function createArchitectService({ snapshot = snapshotGuild, repository, storageR
       const current = await snapshot(guild)
       const blueprint = validateBlueprint(input, current)
       const diff = diffBlueprint(current, blueprint)
-      return { snapshot: current, blueprint, diff, preflight: await preflight(guild, blueprint, diff, actorId, { executionAvailable: Boolean(applyAvailable(guild)) }) }
+      return { snapshot: current, blueprint, diff, preflight: await preflight(guild, blueprint, diff, actorId, { executionAvailable: Boolean(applyAvailable(guild)), observed: current }) }
     },
     async save(guild, actorId, input, expectedRevision) {
       if (!Number.isSafeInteger(expectedRevision) || expectedRevision < 0) throw new BlueprintError('Invalid draft revision')

@@ -37,7 +37,7 @@ test('a stale, expired, disabled or unsupported application cannot be confirmed'
   const disabled = fixture(); disabled.disable()
   await assert.rejects(disabled.service.prepare({ id: 'g' }, 'u', {}), error => error.code === 'apply_unavailable')
   assert.throws(() => compileEdits({ changes: [{ kind: 'channels', operation: 'create', id: 'local:new' }] }), /supported/)
-  assert.throws(() => compileEdits({ changes: [{ kind: 'roles', operation: 'update', id: 'role', field: 'permissions', after: '8' }] }), /supported/)
+  assert.throws(() => compileEdits({ changes: [{ kind: 'roles', operation: 'update', id: 'role', field: 'hoist', after: true }] }), /supported/)
 })
 test('an expired or unconfirmed plan cannot supply a job payload', async () => {
   const f = fixture(), plan = await f.service.prepare({ id: 'g' }, 'u', {})

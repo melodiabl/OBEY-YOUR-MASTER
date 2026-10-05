@@ -1,7 +1,7 @@
 const { test } = require('node:test')
 const assert = require('node:assert/strict')
 const { compileEdits } = require('../handlers/architect/application')
-const { installCreationRetryGuard, verifyCreation, creationOptions, reconcileCreation } = require('../handlers/architect/creations')
+const { installArchitectRetryGuard, verifyCreation, creationOptions, reconcileCreation } = require('../handlers/architect/creations')
 const { REST } = require('discord.js')
 const role = { id: 'local:role', name: 'Member', position: 1, permissions: '0', color: 123, hoist: false, mentionable: false, managed: false }
 const category = { id: 'local:category', name: 'Community', type: 4, parentId: null, position: 0, topic: '', nsfw: false, bitrate: null, userLimit: null, rateLimitPerUser: 0, overwrites: [] }
@@ -21,7 +21,7 @@ test('creation HTTP transport does not retry ambiguous 5xx or network failure bu
   for (const network of [false, true]) {
     let calls = 0
     const rest = new REST({ retries: 3, makeRequest: async () => { calls++; if (network) throw Object.assign(new Error('lost'), { code: 'ECONNRESET' }); return new Response('{}', { status: 500 }) } }).setToken('fixture')
-    installCreationRetryGuard(rest); installCreationRetryGuard(rest)
+    installArchitectRetryGuard(rest); installArchitectRetryGuard(rest)
     await assert.rejects(rest.post('/guilds/123456789012345678/channels', { body: { name: 'test' }, reason: 'OBEY Architect fixture / create-1' }), /uncertain/)
     assert.equal(calls, 1)
     await assert.rejects(rest.get('/guilds/123456789012345678/channels'))
@@ -45,9 +45,16 @@ test('definitive rate limit rejection keeps the shared SDK bucket retry', async 
   const rest = new REST({ retries: 3, makeRequest: async () => ++calls === 1
     ? new Response(JSON.stringify({ message: 'Rate limited', retry_after: 0.001, global: false }), { status: 429, headers: { 'Content-Type': 'application/json', 'Retry-After': '0.001' } })
     : new Response(JSON.stringify({ id: '123456789012345678' }), { status: 201, headers: { 'Content-Type': 'application/json' } }) }).setToken('fixture')
-  installCreationRetryGuard(rest)
+  installArchitectRetryGuard(rest)
   assert.equal((await rest.post('/guilds/123456789012345678/roles', { body: { name: 'test' }, reason: 'OBEY Architect fixture / create-1' })).id, '123456789012345678')
   assert.equal(calls, 2)
+})
+test('Architect permission PATCH cannot replay an ambiguous response', async () => {
+  let calls = 0
+  const rest = new REST({ retries: 3, makeRequest: async () => { calls++; return new Response('{}', { status: 500 }) } }).setToken('fixture')
+  installArchitectRetryGuard(rest)
+  await assert.rejects(rest.patch('/channels/123456789012345678', { body: { permission_overwrites: [] }, reason: 'OBEY Architect fixture / permissions-1' }), /uncertain/)
+  assert.equal(calls, 1)
 })
 test('lost creation responses need unique audit evidence from this bot and exact job reason; names alone are insufficient', async () => {
   const operation = compileEdits({ changes: [create('channels', category)] })[0]

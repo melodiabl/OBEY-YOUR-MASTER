@@ -1,0 +1,6 @@
+#architect-permission-fields { border: 1px solid var(--border, #30313b); border-radius: 8px; margin: 18px 0; padding: 12px; min-width: 0; }
+#architect-permission-fields legend { font-size: 13px; padding: 0 6px; }
+#architect-permission-fields:disabled #architect-permission-controls { opacity: .55; }
+#architect-permission-controls .architect-permission-control { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 10px 0; font-size: 12px; }
+#architect-permission-controls input[type=checkbox] { width: 18px; height: 18px; flex-shrink: 0; }
+#architect-permission-controls select { width: 110px; flex-shrink: 0; }

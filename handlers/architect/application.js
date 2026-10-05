@@ -11,13 +11,18 @@ function compileEdits(diff) {
       operations.set(`${change.kind}:${change.id}`, { id: `create-${operations.size + 1}`, action: 'create', kind: change.kind, resourceId: change.id, fields: structuredClone(change.after) })
       continue
     }
+    if ((change.kind === 'roles' && change.operation === 'update' && change.field === 'permissions') || (change.kind === 'channels' && change.operation === 'overwrites' && [0, 2].includes(change.resourceType))) {
+      operations.set(`${change.kind}:${change.id}:permissions`, { id: `permissions-${operations.size + 1}`, action: 'permissions', kind: change.kind, resourceId: change.id,
+        fields: change.kind === 'roles' ? { permissions: change.after } : { overwrites: structuredClone(change.after) } })
+      continue
+    }
     const allowed = { channels: ['name', 'topic'], roles: ['name', 'color'] }
     if (change.operation !== 'update' || !allowed[change.kind]?.includes(change.field)) throw new JobError('Only existing resource name/topic/color edits are supported', 'application_unsupported')
     const id = `${change.kind}:${change.id}`
     if (!operations.has(id)) operations.set(id, { id: `edit-${operations.size + 1}`, kind: change.kind, resourceId: change.id, fields: {} })
     operations.get(id).fields[change.field] = change.after
   }
-  const rank = operation => operation.kind === 'roles' ? 0 : operation.action === 'create' && operation.fields.type === 4 ? 1 : 2
+  const rank = operation => operation.action === 'permissions' ? operation.kind === 'roles' ? 3 : 4 : operation.kind === 'roles' ? 0 : operation.action === 'create' && operation.fields.type === 4 ? 1 : 2
   return [...operations.values()].sort((a, b) => rank(a) - rank(b))
 }
 function createApplicationService({ repository, preview, jobs, enabled = () => false, snapshot = snapshotGuild, storageReady = () => true }) {
@@ -37,7 +42,8 @@ function createApplicationService({ repository, preview, jobs, enabled = () => f
       const id = randomUUID(), confirmation = randomBytes(32).toString('hex'), expiresAt = new Date(Date.now() + 15 * 60 * 1000)
       await repository.create({ _id: id, guildId: guild.id, actorId, confirmationDigest: hash(confirmation).toString('hex'), expiresAt,
         payload: { schemaVersion: 1, snapshot: proposal.snapshot, blueprint: proposal.blueprint, operations, revision: proposal.diff.revision, expiresAt } })
-      return { id, confirmation, revision: proposal.diff.revision, expiresAt, edits: operations.filter(operation => operation.action !== 'create').length,
+      return { id, confirmation, revision: proposal.diff.revision, expiresAt, edits: new Set(operations.filter(operation => operation.action !== 'create').map(operation => `${operation.kind}:${operation.resourceId}`)).size,
+        permissionChanges: operations.filter(operation => operation.action === 'permissions').length,
         creates: operations.filter(operation => operation.action === 'create').length, changes: proposal.diff.changes.length,
         review: { blueprint: proposal.blueprint, diff: proposal.diff, preflight: proposal.preflight } }
     },

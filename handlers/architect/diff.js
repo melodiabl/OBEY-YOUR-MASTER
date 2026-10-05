@@ -10,6 +10,7 @@ function diffBlueprint(source, blueprint) {
         if (['id', 'parentId', 'position'].includes(field)) continue
         if (JSON.stringify(before[field]) !== JSON.stringify(resource[field])) changes.push({
           operation: field === 'overwrites' ? 'overwrites' : 'update', kind, id: resource.id, field, before: before[field], after: resource[field],
+          ...(field === 'overwrites' ? { resourceType: resource.type } : {}),
         })
       }
       if (before.parentId !== resource.parentId || before.position !== resource.position) changes.push({

@@ -5,10 +5,11 @@ const { validateBlueprint } = require('../handlers/architect/blueprint')
 const { diffBlueprint } = require('../handlers/architect/diff')
 const { compileEdits } = require('../handlers/architect/application')
 const { preflight } = require('../handlers/architect/preflight')
-const { creationOptions, installCreationRetryGuard, verifyCreation, reconcileCreation, reasonFor } = require('../handlers/architect/creations')
+const { creationOptions, installArchitectRetryGuard, verifyCreation, reconcileCreation, reasonFor } = require('../handlers/architect/creations')
 function createEditExecutor({ repository, restorePoints, guildOperations, snapshot = snapshotGuild, check = preflight, enabled = () => false }) {
   function result(record) {
-    return { applicationId: record.applicationId, restorePointId: record.restorePointId, edits: record.payload.operations.filter(op => op.action !== 'create').length,
+    return { applicationId: record.applicationId, restorePointId: record.restorePointId, edits: new Set(record.payload.operations.filter(op => op.action !== 'create').map(op => `${op.kind}:${op.resourceId}`)).size,
+      permissionChanges: record.payload.operations.filter(op => op.action === 'permissions').length,
       creates: record.payload.operations.filter(op => op.action === 'create').length, idMap: { ...(record.executionIdMap || {}) },
       revision: record.executionRevision, capturedAt: new Date(record.updatedAt || Date.now()).toISOString(),
       channelCount: (record.executionSnapshot || record.payload.snapshot).channels.length, roleCount: (record.executionSnapshot || record.payload.snapshot).roles.length }
@@ -41,7 +42,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         const realId = await reconcileCreation(guild, operation, record._id)
         const applied = await snapshot(guild), idMap = { ...(current.executionIdMap || {}), [operation.resourceId]: realId }
         if (!realId || !verifyCreation(before, applied, operation, realId, current.executionIdMap || {})) throw new JobError('Creation evidence incomplete', 'application_needs_review')
-        if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap })).status !== 'passed') throw new JobError('Creation permissions changed', 'application_needs_review')
+        if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap, observed: applied })).status !== 'passed') throw new JobError('Creation permissions changed', 'application_needs_review')
         await lease.assertOwned()
         if ((await snapshot(guild)).revision !== applied.revision || !await repository.completeEdit(record._id, record.token, index, applied.revision, undefined, { snapshot: applied, idMap })) throw new JobError('Creation checkpoint unavailable', 'application_needs_review')
       }
@@ -59,7 +60,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         current = await repository.getById(record._id)
         const observed = await snapshot(guild)
         if (observed.revision !== current.executionRevision) throw new JobError('Snapshot changed', 'revision_conflict')
-        if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap: current.executionIdMap || {} })).status !== 'passed') throw new JobError('Preflight blocked', 'application_blocked')
+        if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap: current.executionIdMap || {}, observed })).status !== 'passed') throw new JobError('Preflight blocked', 'application_blocked')
         await lease.assertOwned()
         if ((await snapshot(guild)).revision !== observed.revision) throw new JobError('Snapshot changed', 'revision_conflict')
         return observed
@@ -76,7 +77,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         if (current.steps[index].status === 'completed') continue
         if (operation.action === 'create') {
           // Install on the shared REST manager so its rate buckets stay authoritative.
-          installCreationRetryGuard(guild.client?.rest)
+          installArchitectRetryGuard(guild.client?.rest)
           const options = creationOptions(operation, current.executionIdMap || {}, reasonFor(record._id, operation))
           if (!await repository.startEdit(record._id, record.token, index)) throw new JobError('Job no longer active', 'job_cancelled')
           try {
@@ -84,7 +85,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
             const resource = await guild[operation.kind].create(options)
             const applied = await snapshot(guild), idMap = { ...(current.executionIdMap || {}), [operation.resourceId]: resource?.id }
             if (!verifyCreation(observed, applied, operation, resource?.id, current.executionIdMap || {})) throw new Error('Unexpected structure after creation')
-            if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap })).status !== 'passed') throw new Error('Creation permissions changed')
+            if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap, observed: applied })).status !== 'passed') throw new Error('Creation permissions changed')
             await lease.assertOwned()
             if ((await snapshot(guild)).revision !== applied.revision) throw new Error('Structure changed after creation')
             if (!await repository.completeEdit(record._id, record.token, index, applied.revision, undefined, { snapshot: applied, idMap })) throw new Error('Checkpoint not acknowledged')
@@ -96,7 +97,10 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         }
         const expected = structuredClone(observed), target = expected[operation.kind].find(resource => resource.id === operation.resourceId)
         if (!target) throw new JobError('Resource missing', 'revision_conflict')
-        Object.assign(target, operation.fields)
+        const fields = structuredClone(operation.fields)
+        if (operation.action === 'permissions' && operation.kind === 'channels') fields.overwrites = fields.overwrites.map(overwrite => ({ ...overwrite, id: current.executionIdMap?.[overwrite.id] || overwrite.id })).sort((a, b) => a.id.localeCompare(b.id))
+        if (operation.action === 'permissions') installArchitectRetryGuard(guild.client?.rest)
+        Object.assign(target, fields)
         if (operation.kind === 'roles' && Object.hasOwn(operation.fields, 'color') && expected.roleColors?.[operation.resourceId]) expected.roleColors[operation.resourceId].primaryColor = operation.fields.color
         const revision = structureRevision(expected.channels, expected.roles, expected.roleColors)
         if (!await repository.startEdit(record._id, record.token, index)) throw new JobError('Job no longer active', 'job_cancelled')
@@ -104,14 +108,20 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         // Write-ahead state precedes REST. Any error after this point keeps the durable guild guard.
         try {
           await lease.assertOwned()
-          const patch = { ...operation.fields, reason: reasonFor(record._id, operation) }
+          const patch = { ...fields, reason: reasonFor(record._id, operation) }
+          if (operation.action === 'permissions') {
+            if (operation.kind === 'roles') patch.permissions = BigInt(patch.permissions)
+            else { patch.permissionOverwrites = patch.overwrites.map(overwrite => ({ ...overwrite, allow: BigInt(overwrite.allow), deny: BigInt(overwrite.deny) })); delete patch.overwrites }
+          }
           if (operation.kind === 'roles' && Object.hasOwn(patch, 'color')) {
             patch.colors = { primaryColor: patch.color, secondaryColor: null, tertiaryColor: null }; delete patch.color
           }
           await guild[operation.kind].edit(operation.resourceId, patch)
           const applied = await snapshot(guild)
           if (applied.revision !== revision) throw new Error('Unexpected structure after edit')
+          if (operation.action === 'permissions' && (await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap: current.executionIdMap || {}, observed: applied })).status !== 'passed') throw new Error('Permissions changed after application')
           await lease.assertOwned()
+          if (operation.action === 'permissions' && (await snapshot(guild)).revision !== revision) throw new Error('Structure changed after permission check')
           if (!await repository.completeEdit(record._id, record.token, index, revision, undefined, current.executionSnapshot ? { snapshot: applied, idMap: current.executionIdMap || {} } : undefined)) throw new Error('Checkpoint not acknowledged')
         } catch { throw new JobError('Edit outcome needs review', 'application_needs_review') }
       }

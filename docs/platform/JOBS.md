@@ -1,6 +1,6 @@
 # Trabajos persistentes de Architect
 
-`architect.snapshot` consulta canales/roles y conserva el resultado privado del administrador. `architect.backup` guarda puntos de restauración de estructura. `architect.apply` ejecuta ediciones confirmadas de nombres, temas de texto y colores existentes y creaciones básicas con IDs reales, limitado a guilds canary habilitadas. Web y `/config architect` comparten `client.jobs`, scope e historial; Discord solicita análisis/copias y la confirmación de ediciones se realiza en la web. Restauración, movimientos, permisos y módulos conservan sus pendientes.
+`architect.snapshot` consulta canales/roles y conserva el resultado privado del administrador. `architect.backup` guarda puntos de restauración de estructura. `architect.apply` ejecuta ediciones confirmadas de nombres, temas de texto y colores existentes y creaciones básicas con IDs reales y permisos de roles/texto/voz existentes, limitado a guilds canary habilitadas. Web y `/config architect` comparten `client.jobs`, scope e historial; Discord solicita análisis/copias y la confirmación de ediciones se realiza en la web. Restauración, movimientos, permisos de categorías y módulos conservan sus pendientes.
 
 ## Persistencia y entrega
 
@@ -12,7 +12,7 @@ BullMQ 5.81.5 está fijado en el lock. La cola conserva hasta 1000 entregas comp
 
 ## Worker y recuperación
 
-Estados implementados: queued, running, completed, failed y cancelled. Snapshot y backup tienen un paso real; las aplicaciones tienen copia previa y un paso por recurso editado o creado. El contador cambia solo al persistir checkpoints. Un apply fallido/cancelado puede conservar pasos completados y un paso executing incierto; el error/guard explican la revisión pendiente. No se inventó un estado partially_failed para operaciones aún no implementadas.
+Estados implementados: queued, running, completed, failed y cancelled. Snapshot y backup tienen un paso real; las aplicaciones tienen copia previa y un paso por operación estructural o de permisos; el resultado cuenta recursos editados distintos. El contador cambia solo al persistir checkpoints. Un apply fallido/cancelado puede conservar pasos completados y un paso executing incierto; el error/guard explican la revisión pendiente. No se inventó un estado partially_failed para operaciones aún no implementadas.
 
 Antes de leer o recuperar un checkpoint, el worker vuelve a consultar al miembro con `force: true` y exige ManageGuild. Un token por ejecución impide writes de un worker anterior. Una reentrega reutiliza el checkpoint guardado; un registro terminal no repite la lectura.
 
@@ -51,3 +51,5 @@ Tests: `node --test test/jobs.test.js test/jobs-api.test.js test/architect-comma
 `scripts/verify-jobs-browser.js` reproduce la verificación de Chromium con Express/EJS, sesión/CSRF, Mongo y BullMQ reales; Discord es una fixture. Requiere las mismas URI de test y un driver Playwright disponible en el entorno de pruebas (resuelto por Node, opcionalmente mediante NODE_PATH). El driver no es dependencia del runtime ni se instala al arrancar el bot. La regresión retiene una respuesta autorizada y la entrega después de revocar permisos: el historial debe permanecer vacío. Evidencia en `evidence/jobs-browser.json` y capturas; incluye segunda pestaña, recarga, cancelación e indisponibilidad. Fixtures y contenedores eliminados tras verificar.
 
 Redis dedicado configurado por petición del usuario (`REDIS.md`). Contratos de puntos de restauración y aplicación confirmada en `RESTORE-POINTS.md` y `APPLICATIONS.md`. T13/T14/T23/T24/T27/T28 siguen parciales: auditoría/eventos generales, outbox de otros cambios, configuración portable, templates/transcripts, scheduler, retención, aplicación completa y aceptación canary pendientes. Ver [ADR de cola](adr/001-jobs.md).
+
+Verificación aislada: los scripts de jobs/aplicación/navegador comparten la colección/outbox de `obey_jobs_test` y usan nombres de cola distintos; ejecutarlos secuencialmente. No son independientes dentro de la misma DB. CI ya los secuencia. En una instalación compartida, todos los productores/workers del outbox deben usar la misma cola canónica y registry de tipos; una topología de colas por dominio queda pendiente.

@@ -16,5 +16,9 @@
   "actualSDKCreationSerialization": true,
   "orderedRoleCategoryTextVoiceCreation": true,
   "durableLogicalToRealIdMap": true,
-  "lostCreationResponseReconciledWithoutReplay": true
+  "lostCreationResponseReconciledWithoutReplay": true,
+  "confirmedRoleTextVoicePermissions": true,
+  "actualSDKPermissionSerialization": true,
+  "permissionRestorePointAndCheckpoints": true,
+  "overwriteTargetUsesCreatedRoleRealId": true
 }

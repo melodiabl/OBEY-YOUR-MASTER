@@ -5,6 +5,8 @@
   const base = `/api/architect/${encodeURIComponent(app.dataset.guildId)}`
   let source = null, editor = null, selected = null, busy = false, storageAvailable = false, draftRevision = 0, savedValue = '', hasSavedDraft = false
   let applyAvailable = false, applicationPlan = null
+  let permissionRoleId = ''
+  const { permissionOptions, setRolePermission, setOverwritePermission, formatPermissions } = architectPermissions
   const order = (a, b) => a.position - b.position || a.id.localeCompare(b.id)
   const labels = { name: 'Nombre', topic: 'Tema', color: 'Color', permissions: 'Permisos', overwrites: 'Permisos del canal', nsfw: 'Contenido restringido', hoist: 'Mostrar rol separado', mentionable: 'Rol mencionable' }
   function status(text, error = false) { $('architect-status').textContent = text; $('architect-status').dataset.state = error ? 'error' : 'ready' }
@@ -28,7 +30,7 @@
         no_permission: 'No tienes permiso para administrar este servidor.', not_authenticated: 'Tu sesión caducó. Inicia sesión de nuevo.',
         storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
         architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.' }
-      Object.assign(messages, { application_unsupported: 'Puedes aplicar nombres, temas y colores, crear roles sin permisos y canales básicos sin sobrescrituras. Movimientos y permisos siguen pendientes.',
+      Object.assign(messages, { application_unsupported: 'Puedes aplicar ediciones y permisos de roles/canales de texto o voz, y creaciones básicas. Movimientos y permisos de categorías siguen pendientes.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
         jobs_unavailable: 'Los trabajos no están disponibles. El plan aún no se ha enviado.', application_not_found: 'El plan ya no está disponible. Prepara uno nuevo.' })
@@ -63,6 +65,36 @@
     item.append(button)
     return item
   }
+  function renderPermissions(resource, role, locked, draft) {
+    const available = !locked && !resource.id.startsWith('local:') && (role || [0, 2].includes(resource.type))
+    $('architect-permission-fields').disabled = !available
+    $('architect-permission-note').textContent = resource.id.startsWith('local:') ? 'Los recursos nuevos se crean sin permisos personalizados. Configúralos después de aplicar.' : !role && resource.type === 4 ? 'Los permisos de categorías aún no se aplican.' : 'Revisa estos cambios antes de confirmarlos. Los demás permisos y destinos guardados se conservan.'
+    $('architect-overwrite-target').hidden = role
+    const target = $('architect-permission-role'); target.replaceChildren()
+    for (const item of draft.roles) target.append(new Option(item.name, item.id))
+    if (!draft.roles.some(item => item.id === permissionRoleId)) permissionRoleId = source.guildId
+    target.value = permissionRoleId
+    const overwrite = !role && resource.overwrites.find(item => item.id === permissionRoleId && item.type === 0)
+    const controls = $('architect-permission-controls'); controls.replaceChildren()
+    for (const option of permissionOptions.filter(option => role || !['Administrator', 'ManageGuild', 'ViewAuditLog'].includes(option.key))) {
+      const label = document.createElement('label'), input = document.createElement(role ? 'input' : 'select')
+      label.className = 'architect-permission-control'; label.textContent = option.label; input.dataset.permissionKey = option.key
+      if (role) { input.type = 'checkbox'; input.checked = Boolean(BigInt(resource.permissions) & BigInt(option.bit)) }
+      else {
+        input.append(new Option('Heredar', 'inherit'), new Option('Permitir', 'allow'), new Option('Denegar', 'deny'))
+        input.value = BigInt(overwrite?.allow || '0') & BigInt(option.bit) ? 'allow' : BigInt(overwrite?.deny || '0') & BigInt(option.bit) ? 'deny' : 'inherit'
+      }
+      input.addEventListener('change', () => {
+        if (!available) return
+        editor.change(next => {
+          const item = next[selected.kind].find(value => value.id === selected.id)
+          if (role) item.permissions = setRolePermission(item.permissions, option.bit, input.checked)
+          else item.overwrites = setOverwritePermission(item.overwrites, permissionRoleId, option.bit, input.value)
+        }); changed()
+      })
+      label.append(input); controls.append(label)
+    }
+  }
   function render() {
     const draft = editor.current(), tree = $('architect-tree')
     tree.replaceChildren()
@@ -93,6 +125,7 @@
       parent.value = resource.parentId || ''; parent.disabled = locked || category
       $('architect-topic').value = resource.topic || ''; $('architect-topic').disabled = locked || resource.type !== 0
       $('architect-role-fields').hidden = !role; $('architect-color').value = '#' + Number(resource.color || 0).toString(16).padStart(6, '0'); $('architect-color').disabled = locked
+      renderPermissions(resource, role, locked, draft)
       $('architect-protected').checked = locked
       $('architect-protected').disabled = resource.id.startsWith('local:') || (role && (resource.managed || resource.id === source.guildId)) || (!role && ![0, 2, 4].includes(resource.type))
       $('architect-locked').hidden = !locked; $('architect-edit').disabled = locked
@@ -141,7 +174,10 @@
       item.className = 'architect-change'
       title.textContent = `${({ create: 'Crear', update: 'Actualizar', move: 'Mover', overwrites: 'Cambiar permisos' })[change.operation]} ${name}` + (change.field ? ` · ${labels[change.field] || change.field}` : '')
       for (const [label, value] of [['Antes', change.before], ['Después', change.after]]) {
-        const term = document.createElement('dt'), description = document.createElement('dd'); term.textContent = label; description.textContent = format(value, label === 'Antes' ? source : body.blueprint); details.append(term, description)
+        const term = document.createElement('dt'), description = document.createElement('dd'), draft = label === 'Antes' ? source : body.blueprint
+        term.textContent = label
+        description.textContent = change.field === 'permissions' ? formatPermissions(value) : change.operation === 'overwrites' ? value.map(overwrite => `${draft.roles.find(role => role.id === overwrite.id)?.name || `Miembro ${overwrite.id}`}: permitir ${formatPermissions(overwrite.allow)}; denegar ${formatPermissions(overwrite.deny)}`).join(' · ') || 'Sin sobrescrituras' : format(value, draft)
+        details.append(term, description)
       }
       item.append(title, details); target.append(item)
     }
@@ -164,7 +200,7 @@
       const body = await post('/applications', { blueprint: editor.current() })
       applicationPlan = body.plan; review(applicationPlan.review)
       $('architect-confirm-application').textContent = `Confirmar ${applicationPlan.changes} ${applicationPlan.changes === 1 ? 'cambio' : 'cambios'}`
-      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los roles nuevos se crean bajo los existentes y los canales en la posición predeterminada de Discord. El orden personalizado sigue pendiente.' : ''}`
+      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los roles nuevos se crean bajo los existentes y los canales en la posición predeterminada de Discord. El orden personalizado sigue pendiente.' : ''}${applicationPlan.permissionChanges ? ' Incluye cambios de permisos: revisa a quién conceden o quitan acceso.' : ''}`
     } catch (error) { $('architect-application-status').textContent = error.message }
     finally { busy = false; buttons() }
   })
@@ -206,6 +242,7 @@
   $('architect-up').addEventListener('click', () => move(-1)); $('architect-down').addEventListener('click', () => move(1))
   $('architect-protected').addEventListener('change', () => { editor.change(draft => { draft.protectedIds = draft.protectedIds.filter(id => id !== selected.id); if ($('architect-protected').checked) draft.protectedIds.push(selected.id) }); changed() })
   $('architect-remove').addEventListener('click', () => { if (editor.remove(selected.id)) { selected = null; changed() } else status('Quita primero los recursos nuevos que dependen de este recurso.', true) })
+  $('architect-permission-role').addEventListener('change', () => { permissionRoleId = $('architect-permission-role').value; render() })
   $('architect-undo').addEventListener('click', () => { editor.undo(); changed() }); $('architect-redo').addEventListener('click', () => { editor.redo(); changed() })
   $('architect-refresh').addEventListener('click', load); $('architect-preview').addEventListener('click', () => submit(false)); $('architect-save').addEventListener('click', () => submit(true))
   window.addEventListener('beforeunload', event => { if (editor && JSON.stringify(editor.current()) !== savedValue) { event.preventDefault(); event.returnValue = '' } })

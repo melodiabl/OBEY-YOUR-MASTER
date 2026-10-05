@@ -1,5 +1,6 @@
 <%- include('../includes/header', { title: guild.name + ' — Architect', user, activePage: 'architect', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Architect' }] }) %>
 <link rel="stylesheet" href="/css/architect.css">
+<link rel="stylesheet" href="/css/architect-permissions.css">
 <section id="architect-app" data-guild-id="<%= guild.id %>">
   <div class="architect-heading">
     <div><a class="architect-back" href="/dashboard/<%= guild.id %>">← <%= guild.name %></a><h1>Server Architect</h1><p>Diseña la estructura de tu servidor y revisa cada cambio.</p></div>
@@ -47,6 +48,11 @@
             <label for="architect-topic">Tema</label><textarea id="architect-topic" maxlength="1024" rows="3"></textarea>
           </div>
           <div id="architect-role-fields" hidden><label for="architect-color">Color del rol</label><input type="color" id="architect-color" value="#000000"></div>
+          <fieldset id="architect-permission-fields"><legend>Permisos</legend>
+            <p id="architect-permission-note" class="architect-review-note"></p>
+            <div id="architect-overwrite-target"><label for="architect-permission-role">Rol del canal</label><select id="architect-permission-role"></select></div>
+            <div id="architect-permission-controls"></div>
+          </fieldset>
           <div class="architect-position"><button type="button" class="btn btn-sec" id="architect-up">Subir</button><button type="button" class="btn btn-sec" id="architect-down">Bajar</button></div>
           <label class="architect-protect"><input type="checkbox" id="architect-protected"> Proteger este recurso</label>
           <div class="architect-inspector-actions"><button type="submit" class="btn btn-p" id="architect-edit">Actualizar propuesta</button><button type="button" class="btn btn-sec" id="architect-remove" hidden>Quitar recurso nuevo</button></div>
@@ -58,13 +64,14 @@
     <div class="architect-pane-heading"><h2 id="review-title">Cambios propuestos</h2><span id="architect-change-count">Sin revisar</span></div>
     <div id="architect-diff" class="architect-empty">Pulsa Revisar cambios para comparar la propuesta con el servidor actual.</div>
     <div id="architect-preflight" class="architect-empty"></div>
-    <p class="architect-review-note">Puedes aplicar nombres, temas y colores, crear roles sin permisos y categorías/canales de texto o voz sin sobrescrituras. Las creaciones usan el orden predeterminado de Discord. Movimientos, permisos, restauración y modo IA siguen pendientes.</p>
+    <p class="architect-review-note">Puedes aplicar nombres, temas, colores y permisos de roles y canales de texto/voz existentes. También crear roles sin permisos y categorías/canales sin sobrescrituras, con orden predeterminado de Discord. Movimientos, permisos de categorías, restauración y modo IA siguen pendientes.</p>
     <p id="architect-application-status" class="architect-empty" role="status">La aplicación requiere un servidor canary habilitado.</p>
     <button type="button" class="btn btn-sec" id="architect-prepare-application" disabled>Preparar aplicación</button>
     <button type="button" class="btn btn-p" id="architect-confirm-application" hidden disabled>Confirmar aplicación</button>
   </section>
 </section>
 <script src="/js/architect-state.js"></script>
+<script src="/js/architect-permission-state.js"></script>
 <script src="/js/architect-editor.js"></script>
 <script src="/js/architect-jobs.js"></script>
 <%- include('../includes/footer') %>
