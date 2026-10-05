@@ -7,12 +7,14 @@
   let applyAvailable = false, applicationPlan = null
   let permissionRoleId = ''
   let decorationUI = null
+  let templateUI = null
   const { permissionOptions, setRolePermission, setOverwritePermission, formatPermissions } = architectPermissions
   const order = (a, b) => a.type - b.type || a.position - b.position || a.id.localeCompare(b.id)
   const labels = { name: 'Nombre', topic: 'Tema', color: 'Color', permissions: 'Permisos', overwrites: 'Permisos del canal', nsfw: 'Contenido restringido', hoist: 'Mostrar rol separado', mentionable: 'Rol mencionable' }
   function status(text, error = false) { $('architect-status').textContent = text; $('architect-status').dataset.state = error ? 'error' : 'ready' }
   function buttons() {
     decorationUI?.update()
+    templateUI?.update()
     $('architect-wizard-fields').disabled = busy || !editor
     $('architect-workspace').disabled = busy || !editor
     $('architect-refresh').disabled = busy
@@ -36,11 +38,12 @@
         invalid_wizard: 'Revisa las opciones del asistente. Una categoría existente privada o protegida requiere edición explícita para añadir canales.' }
       messages.invalid_decoration = 'Revisa el tema y el alcance de decoración seleccionados.'
       messages.decoration_name_limit = 'La decoración supera los 100 caracteres de un nombre. Acorta ese nombre o elige menos decoración.'
+      Object.assign(messages,{invalid_template:'El archivo o los datos no corresponden a una plantilla OBEY válida.',template_unsupported:'La selección incluye miembros, tipos avanzados o estilos/referencias de roles que aún no se pueden trasladar. Guarda una selección de recursos nuevos compatibles.',template_conflict:'Un recurso del destino tiene el mismo nombre con atributos diferentes, o la categoría está protegida. Revisa esa estructura antes de añadir la plantilla.',template_not_found:'La plantilla no está disponible para tu cuenta.'})
       Object.assign(messages, { application_unsupported: 'Separa el orden de creaciones o cambios de categoría del mismo tipo. Revisa una categoría y sus hijos sincronizados por aplicación, sin creaciones, cambios de padre ni otros permisos de canales.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
         jobs_unavailable: 'Los trabajos no están disponibles. El plan aún no se ha enviado.', application_not_found: 'El plan ya no está disponible. Prepara uno nuevo.' })
-      if ([401, 403, 404].includes(response.status)) { applicationPlan = null; applyAvailable = false; buttons() }
+      if ([401, 403].includes(response.status) || response.status===404 && body.error!=='template_not_found') { if([401,403].includes(response.status))templateUI?.clear();applicationPlan = null; applyAvailable = false; buttons() }
       throw new Error(messages[body.error] || 'No se pudo completar la solicitud.')
     }
     return body
@@ -49,6 +52,7 @@
   decorationUI = initArchitectDecoration({ post, state: () => ({ blueprint: editor?.current(), selected, busy }),
     accept: body => { editor.change(next => Object.assign(next, body.blueprint)); changed(); review(body) },
     setBusy: value => { busy = value; if (value) applicationPlan = null; buttons() } })
+  templateUI=initArchitectTemplates({request,post,state:()=>({blueprint:editor?.current(),busy}),accept:body=>{editor.change(next=>Object.assign(next,body.blueprint));changed();review(body)},setBusy:value=>{busy=value;if(value)applicationPlan=null;buttons()}})
   function changed() {
     applicationPlan = null
     $('architect-application-status').textContent = applyAvailable ? 'Puedes preparar las ediciones compatibles. Se guardará una copia antes de aplicar.' : 'La aplicación requiere un servidor canary habilitado.'
@@ -160,6 +164,7 @@
       $('architect-notice').textContent = notices.join(' '); $('architect-notice').hidden = !notices.length
       status(`Estructura consultada a las ${new Date(source.capturedAt).toLocaleTimeString()}`)
       changed()
+      await templateUI.refresh()
     } catch (error) { status(error.message, true) }
     finally { busy = false; buttons() }
   }

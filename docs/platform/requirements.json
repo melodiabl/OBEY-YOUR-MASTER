@@ -2836,9 +2836,15 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "database/schemas/BackupSchema.js"
+          "database/schemas/BackupSchema.js",
+          "handlers/templates/format.js",
+          "handlers/templates/merge.js",
+          "handlers/templates/service.js",
+          "database/schemas/TemplateSchema.js",
+          "dashboard/public/js/architect-templates.js",
+          "docs/platform/TEMPLATES.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Biblioteca oficial/privada y formato OBEY v1 structure_only: referencias lógicas, roles/overwrites íntegros, propiedad Mongo, búsqueda sobre últimas 50, capture/export/import/preview entre guilds, conflictos/protecciones y creación básica confirmada/copia/checkpoints/IDs. Módulos/configuración portable, permisos de creación completos, nativos, versiones/favoritos/paginación/comunidad/ratings y aceptación real pendientes."
       },
       "change": "Esquema portable, instalación Architect y biblioteca; comunidad explícita en fase 7.",
       "phase": 5,
@@ -2851,7 +2857,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-14-02",
@@ -2874,9 +2880,15 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "database/schemas/BackupSchema.js"
+          "database/schemas/BackupSchema.js",
+          "handlers/templates/format.js",
+          "handlers/templates/merge.js",
+          "handlers/templates/service.js",
+          "database/schemas/TemplateSchema.js",
+          "dashboard/public/js/architect-templates.js",
+          "docs/platform/TEMPLATES.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Biblioteca oficial/privada y formato OBEY v1 structure_only: referencias lógicas, roles/overwrites íntegros, propiedad Mongo, búsqueda sobre últimas 50, capture/export/import/preview entre guilds, conflictos/protecciones y creación básica confirmada/copia/checkpoints/IDs. Módulos/configuración portable, permisos de creación completos, nativos, versiones/favoritos/paginación/comunidad/ratings y aceptación real pendientes."
       },
       "change": "Esquema portable, instalación Architect y biblioteca; comunidad explícita en fase 7.",
       "phase": 5,
@@ -2889,7 +2901,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-14-03",
@@ -2912,9 +2924,15 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "database/schemas/BackupSchema.js"
+          "database/schemas/BackupSchema.js",
+          "handlers/templates/format.js",
+          "handlers/templates/merge.js",
+          "handlers/templates/service.js",
+          "database/schemas/TemplateSchema.js",
+          "dashboard/public/js/architect-templates.js",
+          "docs/platform/TEMPLATES.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Biblioteca oficial/privada y formato OBEY v1 structure_only: referencias lógicas, roles/overwrites íntegros, propiedad Mongo, búsqueda sobre últimas 50, capture/export/import/preview entre guilds, conflictos/protecciones y creación básica confirmada/copia/checkpoints/IDs. Módulos/configuración portable, permisos de creación completos, nativos, versiones/favoritos/paginación/comunidad/ratings y aceptación real pendientes."
       },
       "change": "Esquema portable, instalación Architect y biblioteca; comunidad explícita en fase 7.",
       "phase": 5,
@@ -2927,7 +2945,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-14-04",
@@ -2950,9 +2968,15 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "database/schemas/BackupSchema.js"
+          "database/schemas/BackupSchema.js",
+          "handlers/templates/format.js",
+          "handlers/templates/merge.js",
+          "handlers/templates/service.js",
+          "database/schemas/TemplateSchema.js",
+          "dashboard/public/js/architect-templates.js",
+          "docs/platform/TEMPLATES.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Biblioteca oficial/privada y formato OBEY v1 structure_only: referencias lógicas, roles/overwrites íntegros, propiedad Mongo, búsqueda sobre últimas 50, capture/export/import/preview entre guilds, conflictos/protecciones y creación básica confirmada/copia/checkpoints/IDs. Módulos/configuración portable, permisos de creación completos, nativos, versiones/favoritos/paginación/comunidad/ratings y aceptación real pendientes."
       },
       "change": "Esquema portable, instalación Architect y biblioteca; comunidad explícita en fase 7.",
       "phase": 5,
@@ -2965,7 +2989,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-14-05",
@@ -2988,9 +3012,15 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "database/schemas/BackupSchema.js"
+          "database/schemas/BackupSchema.js",
+          "handlers/templates/format.js",
+          "handlers/templates/merge.js",
+          "handlers/templates/service.js",
+          "database/schemas/TemplateSchema.js",
+          "dashboard/public/js/architect-templates.js",
+          "docs/platform/TEMPLATES.md"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Biblioteca oficial/privada y formato OBEY v1 structure_only: referencias lógicas, roles/overwrites íntegros, propiedad Mongo, búsqueda sobre últimas 50, capture/export/import/preview entre guilds, conflictos/protecciones y creación básica confirmada/copia/checkpoints/IDs. Módulos/configuración portable, permisos de creación completos, nativos, versiones/favoritos/paginación/comunidad/ratings y aceptación real pendientes."
       },
       "change": "Esquema portable, instalación Architect y biblioteca; comunidad explícita en fase 7.",
       "phase": 5,
@@ -3003,7 +3033,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-15-01",
@@ -14129,8 +14159,8 @@
       "T14/T23/T24 cola/registro/outbox, leases por guild, checkpoints/journal/guard de efectos y cancelación parciales",
       "Redis dedicado autenticado/AOF/noeviction configurado y verificado por petición expresa",
       "T27 puntos privados/inmutables de estructura con inspección, incompletitud explícita y recuperación",
-      "T31 decoración por alcance de recursos existentes con siete presets, preview, conservación y confirmación; T30 asistente de estructura con bases/temas/idioma/tamaño/decoración/editor/diff/undo/borrador privado; T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascadas múltiples/módulos pendientes"
+      "T34 biblioteca oficial/privada portable v1 con export/import/preview e instalación básica; T31 decoración por alcance de recursos existentes con siete presets, preview, conservación y confirmación; T30 asistente de estructura con bases/temas/idioma/tamaño/decoración/editor/diff/undo/borrador privado; T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascadas múltiples/módulos pendientes"
     ],
-    "verification": "243 tests/56 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. Cascada categoría/hijos sincronizados con SDK, revisión/confirmación/copia/checkpoint/Connect, protección y canales personalizados preservados. No canary real; planes mixtos/cascadas múltiples/configuración/revisión manual/restore/rollback pendientes."
+    "verification": "251 tests/59 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. Cascada categoría/hijos sincronizados con SDK, revisión/confirmación/copia/checkpoint/Connect, protección y canales personalizados preservados. No canary real; planes mixtos/cascadas múltiples/configuración/revisión manual/restore/rollback pendientes."
   }
 }

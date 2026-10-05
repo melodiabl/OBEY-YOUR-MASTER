@@ -4,6 +4,16 @@ const { diffBlueprint } = require('./diff')
 const { preflight } = require('./preflight')
 function createArchitectService({ snapshot = snapshotGuild, repository, storageReady = () => true, applyAvailable = () => false } = {}) {
   return {
+    async captureTemplate(guild,input,metadata){
+      const current=await snapshot(guild),blueprint=validateBlueprint(input,current)
+      return require('../templates/format').captureTemplate(blueprint,current,metadata)
+    },
+    async fromTemplate(guild,actorId,input,definition){
+      const current=await snapshot(guild),initial=validateBlueprint(input,current)
+      const result=require('../templates/merge').mergeTemplate(initial,current,definition)
+      const blueprint=validateBlueprint(result.blueprint,current),diff=diffBlueprint(current,blueprint)
+      return{snapshot:current,blueprint,diff,template:result.template,preflight:await preflight(guild,blueprint,diff,actorId,{executionAvailable:Boolean(applyAvailable(guild)),observed:current})}
+    },
     catalog: () => require('./wizard').wizardCatalog(),
     async decorate(guild, actorId, input, choices) {
       const current = await snapshot(guild), initial = validateBlueprint(input, current)

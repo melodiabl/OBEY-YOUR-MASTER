@@ -8,6 +8,9 @@ module.exports = client => {
   const { createArchitectService } = require('./architect/service')
   const { createDraftRepository } = require('./architect/repository')
   client.architect = createArchitectService({ repository: createDraftRepository(), storageReady, applyAvailable })
+  client.architectTemplates = require('./templates/service').createTemplateService({
+    repository: require('./templates/repository').createTemplateRepository(), architect: client.architect, storageReady,
+  })
   client.architectApplications = require('./architect/application').createApplicationService({
     repository: require('./architect/application-repository').createApplicationRepository(), storageReady,
     preview: (...args) => client.architect.preview(...args), jobs: () => client.jobs, enabled: applyAvailable,
@@ -20,11 +23,13 @@ module.exports = client => {
   client.modules.register({
     id: 'architect', version: '1.0.0', defaults: { preserveExisting: true }, permissions: { read: 'ManageGuild', draft: 'ManageGuild' },
     commands: { slash: ['config.architect'], prefix: [] }, interactions: [], events: { consumed: [], emitted: [] }, jobs: ['architect.snapshot', 'architect.backup', 'architect.apply'],
-    api: ['GET /api/architect/:guildId', 'POST /api/architect/:guildId/generate', 'POST /api/architect/:guildId/decorate', 'POST /api/architect/:guildId/preview', 'POST /api/architect/:guildId/draft',
+    api: ['GET /api/architect/:guildId', 'GET /api/architect/:guildId/templates', 'POST /api/architect/:guildId/templates', 'POST /api/architect/:guildId/templates/import',
+      'GET /api/architect/:guildId/templates/:templateId', 'POST /api/architect/:guildId/templates/:templateId/preview', 'POST /api/architect/:guildId/templates/:templateId/delete',
+      'POST /api/architect/:guildId/generate', 'POST /api/architect/:guildId/decorate', 'POST /api/architect/:guildId/preview', 'POST /api/architect/:guildId/draft',
       'GET /api/architect/:guildId/jobs', 'POST /api/architect/:guildId/jobs', 'GET /api/architect/:guildId/jobs/:jobId', 'POST /api/architect/:guildId/jobs/:jobId/cancel',
       'GET /api/architect/:guildId/restore-points', 'GET /api/architect/:guildId/restore-points/:pointId', 'POST /api/architect/:guildId/restore-points',
       'POST /api/architect/:guildId/applications', 'POST /api/architect/:guildId/applications/confirm'],
     realtime: { consumed: [], emitted: [] }, dependencies: ['mongoose', 'discord.js'],
-    capabilities: { snapshot: 'available', wizard: 'partial', decoration: 'partial', preview: 'available', drafts: 'available', restorePoints: 'available', apply: 'partial', applyFields: ['name', 'topic', 'color'], ai: 'unavailable', rollback: 'unavailable' },
+    capabilities: { snapshot: 'available', wizard: 'partial', decoration: 'partial', templates: 'partial', preview: 'available', drafts: 'available', restorePoints: 'available', apply: 'partial', applyFields: ['name', 'topic', 'color'], ai: 'unavailable', rollback: 'unavailable' },
   }, client.architect)
 }

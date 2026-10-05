@@ -22,10 +22,10 @@ module.exports = (app, client, {
     catch (error) {
       const code = error.code
       if (['revision_conflict', 'draft_conflict', 'job_conflict', 'application_conflict', 'application_expired', 'application_blocked'].includes(code)) return res.status(409).json({ error: code })
-      if (code === 'application_not_found') return res.status(404).json({ error: code })
+      if (['application_not_found','template_not_found'].includes(code)) return res.status(404).json({ error: code })
       if (code === 'application_unsupported') return res.status(400).json({ error: code })
       if (error instanceof JobError && code === 'invalid_job') return res.status(400).json({ error: code })
-      if (error instanceof BlueprintError && ['invalid_blueprint', 'invalid_wizard', 'invalid_decoration', 'decoration_name_limit'].includes(code)) return res.status(400).json({ error: code, detail: error.message })
+      if (error instanceof BlueprintError && ['invalid_blueprint', 'invalid_wizard', 'invalid_decoration', 'decoration_name_limit','invalid_template','template_unsupported','template_conflict'].includes(code)) return res.status(400).json({ error: code, detail: error.message })
       return res.status(503).json({ error: ['storage_unavailable', 'jobs_unavailable', 'apply_unavailable'].includes(code) ? code : 'architect_unavailable' })
     }
   }
@@ -34,6 +34,24 @@ module.exports = (app, client, {
   }))
   app.get('/api/architect/:guildId', ...guarded, wrap(async (req, res) => {
     res.json({ ok: true, ...(await service.read(req.architectGuild, req.session.user.id)) })
+  }))
+  const templates=()=>{if(!client.architectTemplates)throw new BlueprintError('Template storage unavailable','storage_unavailable');return client.architectTemplates}
+  const fields=(body,allowed)=>{if(!body||typeof body!=='object'||Array.isArray(body)||Object.keys(body).some(key=>!allowed.includes(key)))throw new BlueprintError('Invalid template request','invalid_template')}
+  app.get('/api/architect/:guildId/templates',...guarded,wrap(async(req,res)=>res.json({ok:true,...await templates().list(req.session.user.id)})))
+  app.get('/api/architect/:guildId/templates/:templateId',...guarded,wrap(async(req,res)=>res.json({ok:true,template:(await templates().get(req.params.templateId,req.session.user.id)).definition})))
+  app.post('/api/architect/:guildId/templates',...guarded,wrap(async(req,res)=>{
+    fields(req.body,['blueprint','name','description','selection'])
+    const {blueprint,...metadata}=req.body
+    res.status(201).json({ok:true,template:await templates().capture(req.architectGuild,req.session.user.id,blueprint,metadata)})
+  }))
+  app.post('/api/architect/:guildId/templates/import',...guarded,wrap(async(req,res)=>{
+    fields(req.body,['template']);res.status(201).json({ok:true,template:await templates().import(req.session.user.id,req.body.template)})
+  }))
+  app.post('/api/architect/:guildId/templates/:templateId/preview',...guarded,wrap(async(req,res)=>{
+    fields(req.body,['blueprint']);res.json({ok:true,...await templates().preview(req.architectGuild,req.session.user.id,req.body.blueprint,req.params.templateId)})
+  }))
+  app.post('/api/architect/:guildId/templates/:templateId/delete',...guarded,wrap(async(req,res)=>{
+    fields(req.body,[]);await templates().remove(req.params.templateId,req.session.user.id);res.json({ok:true})
   }))
   app.post('/api/architect/:guildId/preview', ...guarded, wrap(async (req, res) => {
     res.json({ ok: true, ...(await service.preview(req.architectGuild, req.body?.blueprint, req.session.user.id)) })

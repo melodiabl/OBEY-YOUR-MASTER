@@ -29,6 +29,27 @@
       <p id="architect-wizard-status" role="status">Cargando las bases disponibles…</p>
     </form>
   </section>
+  <details class="architect-pane architect-wizard architect-template-library" id="architect-template-library">
+    <summary>Biblioteca de plantillas</summary>
+    <div class="architect-template-content">
+      <fieldset id="architect-template-fields" disabled><legend class="sr-only">Plantillas disponibles</legend>
+        <label for="architect-template-search">Buscar en las plantillas disponibles</label><input id="architect-template-search" type="search" placeholder="Nombre o descripción">
+        <label for="architect-template-choice">Plantilla</label><select id="architect-template-choice"></select>
+        <p id="architect-template-description" class="architect-wizard-note"></p>
+        <div class="architect-inspector-actions"><button type="button" class="btn btn-p" id="architect-template-preview" disabled>Añadir a la propuesta</button><button type="button" class="btn btn-sec" id="architect-template-export" disabled>Exportar OBEY</button><button type="button" class="btn btn-sec" id="architect-template-delete" disabled>Eliminar privada</button></div>
+      </fieldset>
+      <form id="architect-template-save-form"><fieldset id="architect-template-save-fields" disabled>
+        <legend>Guardar como plantilla privada</legend>
+        <label for="architect-template-name">Nombre</label><input id="architect-template-name" maxlength="100" required placeholder="Mi base de comunidad">
+        <label for="architect-template-note">Descripción</label><textarea id="architect-template-note" maxlength="500" rows="2"></textarea>
+        <label for="architect-template-selection">Recursos a guardar</label><select id="architect-template-selection"><option value="new">Recursos nuevos de la propuesta y sus dependencias</option><option value="all">Estructura completa de la propuesta</option></select>
+        <button type="submit" class="btn btn-sec">Guardar plantilla privada</button>
+      </fieldset></form>
+      <label for="architect-template-import">Importar una plantilla OBEY</label><input id="architect-template-import" type="file" accept="application/json,.json" disabled>
+      <p class="architect-wizard-note">Este formato guarda estructura, roles y sobrescrituras de roles. Conserva referencias lógicas propias; al reutilizarlo se revisa el destino. La configuración de módulos, permisos globales de @everyone, roles administrados y protecciones del origen quedan fuera. La aplicación de permisos en recursos nuevos puede requerir completar pasos aún no disponibles; la revisión mostrará los bloqueos. Las posiciones nuevas usan el orden predeterminado de Discord.</p>
+      <p id="architect-template-status" class="architect-wizard-note" role="status">Cargando la biblioteca…</p>
+    </div>
+  </details>
   <div class="architect-toolbar" aria-label="Acciones de la propuesta">
     <span id="architect-draft-status">Sin propuesta cargada</span>
     <button type="button" class="btn btn-sec" id="architect-undo" disabled>Deshacer</button>
@@ -113,6 +134,7 @@
 <script src="/js/architect-state.js"></script>
 <script src="/js/architect-permission-state.js"></script>
 <script src="/js/architect-decoration.js"></script>
+<script src="/js/architect-templates.js"></script>
 <script src="/js/architect-editor.js"></script>
 <script src="/js/architect-jobs.js"></script>
 <%- include('../includes/footer') %>

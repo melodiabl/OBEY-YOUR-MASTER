@@ -1,6 +1,15 @@
 {
   "scope": "Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider",
   "states": [
+    "private template preview confirmed into actual creation job",
+    "template creation checkpoints and real ID map",
+    "private portable template capture in actual Mongo",
+    "other actor cannot read/delete private template",
+    "OBEY export and private import",
+    "template repeat reuses resources",
+    "cross-guild template preview with logical destination refs",
+    "private copy deletion",
+    "templates mobile without overflow",
     "category decoration scope and before/after",
     "server decoration and protected roles reported",
     "resource decoration of channel and role",

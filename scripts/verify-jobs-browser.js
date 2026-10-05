@@ -10,7 +10,7 @@ const {randomUUID}=require('node:crypto'),http=require('node:http'),fs=require('
 const {csrfProtection}=require(root+'/dashboard/security'),{sessionAuth}=require(root+'/dashboard/auth'),{canManageGuild}=require(root+'/handlers/permissions')
 const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime')
 ;(async()=>{
- let browser,server,runtime,queue,model,draftModel,restoreModel,planModel,guardModel,sdkClient,release,allowed=true,block=false,reads=0,edits=0,creates=0,loseCreation=true
+ let browser,server,runtime,queue,model,draftModel,templateModel,restoreModel,planModel,guardModel,sdkClient,release,allowed=true,block=false,reads=0,edits=0,creates=0,loseCreation=true
  const queueName='obey-browser-'+randomUUID()
  try{
   await mongoose.connect(mongoUrl,{serverSelectionTimeoutMS:3000})
@@ -63,6 +63,11 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
    handlers:{'architect.snapshot':async()=>{reads++;if(block)await new Promise(resolve=>release=resolve);return require(root+'/handlers/architect/snapshot').snapshotGuild(guild)},'architect.backup':(record,lease)=>restorePoints.create(guild,record.actorId,record._id,lease),'architect.apply':(record,lease)=>execute(guild,record,lease)}})
   draftModel=require(root+'/database/schemas/ArchitectDraftSchema')
   const service=require(root+'/handlers/architect/service').createArchitectService({applyAvailable:()=>true,repository:require(root+'/handlers/architect/repository').createDraftRepository(draftModel)})
+  templateModel=require(root+'/database/schemas/TemplateSchema')
+  const templates=require(root+'/handlers/templates/service').createTemplateService({repository:require(root+'/handlers/templates/repository').createTemplateRepository(templateModel),architect:service})
+  const otherRoles=[{id:'destination_guild',name:'@everyone',position:0,permissions:new PermissionsBitField(1024n),color:0,managed:false},{id:'destination_bot',name:'OBEY',position:50,permissions:new PermissionsBitField(8n),color:0,managed:true}]
+  const otherMember=id=>({id,permissions:new PermissionsBitField(8n),roles:{highest:{position:51},cache:new Map(otherRoles.map(role=>[role.id,role]))}})
+  const otherGuild={id:'destination_guild',name:'Destino de prueba',ownerId:'browser_actor',client:sdkClient,maximumBitrate:96000,channels:{cache:new Map(),fetch:async()=>new Map()},roles:{cache:new Map(otherRoles.map(role=>[role.id,role])),fetch:async()=>new Map(otherRoles.map(role=>[role.id,role]))},members:{fetch:async()=>otherMember('browser_actor'),fetchMe:async()=>otherMember('destination_bot')}}
   planModel=require(root+'/database/schemas/ArchitectApplicationPlanSchema');guardModel=require(root+'/database/schemas/ArchitectGuildOperationSchema')
   applications=require(root+'/handlers/architect/application').createApplicationService({repository:require(root+'/handlers/architect/application-repository').createApplicationRepository(planModel),preview:(...args)=>service.preview(...args),jobs:()=>runtime,enabled:()=>true})
   execute=require(root+'/workers/architect-edits').createEditExecutor({repository,restorePoints,guildOperations:require(root+'/handlers/architect/application-repository').createGuildOperationRepository(guardModel),enabled:()=>true})
@@ -74,8 +79,8 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   app.set('views',root+'/dashboard/views');app.set('view engine','ejs');app.use(express.static(root+'/dashboard/public'))
   app.get('/fixture-login',(req,res)=>{req.session.user={id:'browser_actor',username:'Prueba',expires_at:Date.now()+7200000,guilds:[{id:guild.id,permissions:'32'}]};res.redirect('/architect/'+guild.id)})
   app.get('/api/stats',(req,res)=>res.json({guilds:1}))
-  require(root+'/dashboard/architect-routes')(app,{architect:service,architectApplications:applications,jobs:runtime,restorePoints,guilds:{cache:new Map([[guild.id,guild]])}},
-   {canManageGuild,requireAuth:sessionAuth(async()=>{throw Error('expired')}),requireFreshGuildPermissions:(req,res,next)=>{req.session.user.guilds=[{id:guild.id,permissions:allowed?'32':'0'}];next()}})
+  require(root+'/dashboard/architect-routes')(app,{architect:service,architectTemplates:templates,architectApplications:applications,jobs:runtime,restorePoints,guilds:{cache:new Map([[guild.id,guild],[otherGuild.id,otherGuild]])}},
+   {canManageGuild,requireAuth:sessionAuth(async()=>{throw Error('expired')}),requireFreshGuildPermissions:(req,res,next)=>{req.session.user.guilds=[{id:guild.id,permissions:allowed?'32':'0'},{id:otherGuild.id,permissions:allowed?'32':'0'}];next()}})
   browser=await chromium.launch({headless:true});const errors=[]
   const context=await browser.newContext({viewport:{width:1365,height:1000}})
   await context.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.fulfill({body:'',contentType:'text/css'}))
@@ -103,6 +108,33 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   const savedWizard=await draftModel.findOne({guildId:guild.id,actorId:'browser_actor'}).lean()
   if(savedWizard.blueprint.channels.length!==generated.blueprint.channels.length)throw Error('Wizard proposal was not persisted')
   await second.reload();await second.waitForFunction(()=>document.querySelector('#architect-tree').textContent.includes('✨・games'))
+  await page.locator('#architect-template-library>summary').click();await page.locator('#architect-template-name').fill('Base Gaming privada');await page.locator('#architect-template-note').fill('Mi estructura reutilizable')
+  await page.locator('#architect-template-save-form button').click();await page.waitForFunction(()=>document.querySelector('#architect-template-status').textContent.includes('Plantilla privada guardada'))
+  const savedTemplate=await templateModel.findOne({ownerId:'browser_actor'}).lean()
+  if(!savedTemplate||savedTemplate.definition.channels.length!==generated.wizard.addedChannels||JSON.stringify(savedTemplate.definition).includes('browser_guild'))throw Error('Template did not persist portable structure')
+  try{await templates.get(savedTemplate._id,'other_actor');throw Error('Foreign actor read a private template')}catch(error){if(error.code!=='template_not_found')throw error}
+  try{await templates.remove(savedTemplate._id,'other_actor');throw Error('Foreign actor deleted a private template')}catch(error){if(error.code!=='template_not_found')throw error}
+  await page.locator('#architect-template-choice').selectOption(savedTemplate._id)
+  const downloadPromise=page.waitForEvent('download');await page.locator('#architect-template-export').click();const download=await downloadPromise
+  const exported=JSON.parse(fs.readFileSync(await download.path(),'utf8'));if(exported.format!=='obey-template')throw Error('Wrong export format')
+  await page.waitForFunction(()=>!document.querySelector('#architect-template-import').disabled)
+  await page.locator('#architect-template-import').setInputFiles({name:'base-obey.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(exported))})
+  await page.waitForFunction(()=>document.querySelector('#architect-template-status').textContent.includes('importada como copia privada'))
+  if(await templateModel.countDocuments({ownerId:'browser_actor'})!==2)throw Error('Template import did not create a private copy')
+  await page.locator('#architect-template-choice').selectOption(savedTemplate._id);await page.locator('#architect-template-preview').click();await page.waitForFunction(()=>document.querySelector('#architect-template-status').textContent.includes('0 canales/categorías y 0 roles añadidos'))
+  const targetPage=await context.newPage();await targetPage.goto(origin+'/architect/'+otherGuild.id);await targetPage.waitForFunction(()=>!document.querySelector('#architect-template-fields').disabled)
+  await targetPage.locator('#architect-template-library>summary').click();await targetPage.locator('#architect-template-choice').selectOption(savedTemplate._id)
+  const targetResponse=targetPage.waitForResponse(response=>response.url().endsWith('/preview')&&response.url().includes('/templates/'));await targetPage.locator('#architect-template-preview').click();const targetBody=await (await targetResponse).json()
+  if(!targetBody.ok||targetBody.template.addedChannels!==generated.wizard.addedChannels||targetBody.blueprint.roles.some(role=>['browser_guild','staff','browser_bot_role'].includes(role.id))||targetBody.blueprint.channels.some(channel=>!channel.id.startsWith('local:tpl-')||channel.parentId&&!channel.parentId.startsWith('local:tpl-')))throw Error('Cross-guild template transported active origin IDs')
+  await targetPage.waitForFunction(()=>document.querySelector('#architect-tree').textContent.includes('✨・games'))
+  await targetPage.evaluate(()=>window.scrollTo(0,0));await targetPage.screenshot({path:root+'/docs/platform/evidence/templates-desktop.png',fullPage:true})
+  await targetPage.setViewportSize({width:390,height:844});await targetPage.waitForFunction(()=>document.querySelector('#sidebar').getBoundingClientRect().right<=0);await targetPage.screenshot({path:root+'/docs/platform/evidence/templates-mobile.png',fullPage:true})
+  if(await targetPage.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1))throw Error('Templates overflow on mobile')
+  if(edits||creates)throw Error('Template preview caused provider effects');await targetPage.close()
+  const importedTemplate=await templateModel.findOne({ownerId:'browser_actor',_id:{$ne:savedTemplate._id}}).lean();await page.locator('#architect-template-choice').selectOption(importedTemplate._id)
+  page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-template-delete').click();await page.waitForFunction(()=>document.querySelector('#architect-template-status').textContent.includes('Plantilla privada eliminada'))
+  if(await templateModel.countDocuments({ownerId:'browser_actor'})!==1)throw Error('Template delete affected the wrong records')
+  await page.locator('#architect-template-library>summary').click()
   await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:root+'/docs/platform/evidence/architect-wizard-desktop.png',fullPage:true})
   await page.setViewportSize({width:390,height:844});await page.waitForFunction(()=>document.querySelector('#sidebar').getBoundingClientRect().right<=0)
   await page.screenshot({path:root+'/docs/platform/evidence/architect-wizard-mobile.png',fullPage:true})
@@ -152,6 +184,12 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   await add('role','Visitante nuevo');await add('4','Comunidad nueva')
   const categoryId=await page.getByRole('button',{name:'Categoría: Comunidad nueva',exact:true}).getAttribute('data-resource-id')
   for(const [kind,name] of [['0','chat-nuevo'],['2','Voz nueva']]){await add(kind,name);await page.locator('#architect-parent').selectOption(categoryId);await page.locator('#architect-edit').click()}
+  await page.locator('#architect-template-library>summary').click();await page.locator('#architect-template-name').fill('Base de instalación');await page.locator('#architect-template-save-form button').click();await page.waitForFunction(()=>document.querySelector('#architect-template-status').textContent.includes('Plantilla privada guardada'))
+  const installTemplate=await templateModel.findOne({ownerId:'browser_actor','definition.name':'Base de instalación'}).lean()
+  if(installTemplate.definition.channels.length!==3||installTemplate.definition.roles.length!==1)throw Error('Installation template did not capture the chosen new resources')
+  page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-refresh').click();await page.waitForFunction(()=>!document.querySelector('#architect-refresh').disabled)
+  await page.locator('#architect-template-choice').selectOption(installTemplate._id);await page.locator('#architect-template-preview').click();await page.waitForFunction(()=>document.querySelector('#architect-template-status').textContent.includes('3 canales/categorías y 1 roles añadidos'))
+  await page.locator('#architect-template-library>summary').click()
   const creationResponse=page.waitForResponse(response=>response.url().endsWith('/applications')&&response.request().method()==='POST')
   await page.locator('#architect-prepare-application').click();const preparation=await creationResponse
   if(!preparation.ok())throw Error(`Creation preparation rejected: ${(await preparation.json()).error}; ${await page.locator('#architect-application-status').textContent()}`)
@@ -251,12 +289,12 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(await second.locator('#architect-jobs').textContent()!=='')throw Error('Revocation left a private job visible')
   if(await second.locator('#architect-restore-points').textContent()!=='')throw Error('Revocation left a private restore point visible')
   if(reads!==before)throw Error('Unauthorized source read')
-  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['category decoration scope and before/after','server decoration and protected roles reported','resource decoration of channel and role','decoration repeat without stacked prefix','decoration undo','confirmed decoration and prior copy','decoration mobile without overflow','community wizard','language/theme/size/decoration affect proposal','generated resources in editor and diff','private draft persisted','second tab recovers wizard proposal','wizard repeat without duplicates','wizard undo','wizard mobile without overflow','submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','category move review and confirmation','move preserves ID/order/permissions','move checkpoint and prior copy','role/channel reorder from inspector','reorder confirmation and batch checkpoints','protected/voice positions preserved','reorder prior copy','role/channel permission inspector','readable permission review','confirmed permissions and prior copy','category inspector and child impact','category review lists each synced child','category confirmation and single write','category prior copy and checkpoint','custom child permissions preserved','bot access loss blocked before effects','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
+  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['private template preview confirmed into actual creation job','template creation checkpoints and real ID map','private portable template capture in actual Mongo','other actor cannot read/delete private template','OBEY export and private import','template repeat reuses resources','cross-guild template preview with logical destination refs','private copy deletion','templates mobile without overflow','category decoration scope and before/after','server decoration and protected roles reported','resource decoration of channel and role','decoration repeat without stacked prefix','decoration undo','confirmed decoration and prior copy','decoration mobile without overflow','community wizard','language/theme/size/decoration affect proposal','generated resources in editor and diff','private draft persisted','second tab recovers wizard proposal','wizard repeat without duplicates','wizard undo','wizard mobile without overflow','submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','category move review and confirmation','move preserves ID/order/permissions','move checkpoint and prior copy','role/channel reorder from inspector','reorder confirmation and batch checkpoints','protected/voice positions preserved','reorder prior copy','role/channel permission inspector','readable permission review','confirmed permissions and prior copy','category inspector and child impact','category review lists each synced child','category confirmation and single write','category prior copy and checkpoint','custom child permissions preserved','bot access loss blocked before effects','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
   if(errors.length)throw Error(errors.join('; '))
   fs.writeFileSync(root+'/docs/platform/evidence/jobs-browser.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result))
  }finally{
   release?.();await browser?.close();if(server)await new Promise(resolve=>server.close(resolve));await runtime?.close();await sdkClient?.destroy()
   if(queue){await queue.obliterate({force:true});await queue.close()}
-  if(model)await model.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(draftModel)await draftModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(restoreModel)await restoreModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(planModel)await planModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(guardModel)await guardModel.deleteMany({_id:'browser_guild'});await mongoose.disconnect()
+  if(model)await model.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(draftModel)await draftModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(templateModel)await templateModel.deleteMany({ownerId:'browser_actor'});if(restoreModel)await restoreModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(planModel)await planModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(guardModel)await guardModel.deleteMany({_id:'browser_guild'});await mongoose.disconnect()
  }
 })().catch(error=>{console.error(error);process.exitCode=1})

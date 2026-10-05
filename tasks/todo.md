@@ -860,6 +860,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T34
 
+**Checkpoint activo:** Biblioteca dentro de Architect: diez bases oficiales/privadas, propiedad Mongo, formato OBEY v1 con referencias lógicas y permisos de roles íntegros, capture/export/import/preview entre guilds/reutilización sin duplicados y creación básica confirmada por motor existente. API/CSRF/owner scopes, DB real y Chromium verifican privacidad, persistencia, import/export, otra guild, copia/checkpoints/IDs y móvil. Módulos portables, permisos completos de creación, formatos nativos, favoritos/paginación/versiones/comunidad y aceptación real pendientes; tarea parcial. Ver docs/platform/TEMPLATES.md.
+
 - [ ] Templates oficiales/privadas e instalación (fase 5).
 
 **Descripción:** Formato versionado/logical refs/theme/modules portable; preview/install Architect idempotente con permisos; ownership/visibilidad; import/export OBEY vs capacidades nativas verificadas.
