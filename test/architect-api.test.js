@@ -6,7 +6,8 @@ function fixture() {
  const routes=new Map(),reads=[]
  const app={get:(path,...handlers)=>routes.set(`GET ${path}`,handlers),post:(path,...handlers)=>routes.set(`POST ${path}`,handlers)}
  const client={guilds:{cache:new Map([['g',{id:'g',name:'Guild'}]])}}
- const service={async read(guild,actor){reads.push({guild:guild.id,actor});return {snapshot:{revision:'r'}}},async generate(guild,actor,blueprint,choices){reads.push({guild:guild.id,actor});return {blueprint,choices}},async preview(){throw Object.assign(new Error('changed'),{code:'revision_conflict'})},async save(){throw new Error('private connection string')}}
+ const propose=async(guild,actor,blueprint,choices)=>{reads.push({guild:guild.id,actor});return {blueprint,choices}}
+ const service={async read(guild,actor){reads.push({guild:guild.id,actor});return {snapshot:{revision:'r'}}},generate:propose,decorate:propose,async preview(){throw Object.assign(new Error('changed'),{code:'revision_conflict'})},async save(){throw new Error('private connection string')}}
  mount(app,client,{service,canManageGuild,requireAuth:(req,res,next)=>req.session.user?next():res.status(401).json({error:'not_authenticated'}),requireFreshGuildPermissions:(req,res,next)=>next()})
  async function request(method,path,user,body={},guildId='g') {
   const req={params:{guildId},session:{user},body},res={code:200,set(){},status(code){this.code=code;return this},json(body){this.body=body},render(){}}
@@ -41,5 +42,15 @@ test('wizard generation uses the shared service and rejects unauthorized or inje
  assert.equal(f.reads.length,0)
  const generated=await f.request('POST',path,admin,body)
  assert.equal(generated.code,200);assert.deepEqual(generated.body.blueprint,body.blueprint)
+ assert.deepEqual(f.reads,[{guild:'g',actor:'u'}])
+})
+test('decoration uses the shared service and rejects unauthorized/injected requests before any proposal',async()=>{
+ const f=fixture(),path='/api/architect/:guildId/decorate',body={blueprint:{baseRevision:'r'},choices:{theme:'obey',scope:'server'}}
+ assert.equal((await f.request('POST',path,null,body)).code,401)
+ assert.equal((await f.request('POST',path,{id:'u',guilds:[{id:'g',permissions:'0'}]},body)).code,403)
+ assert.equal((await f.request('POST',path,admin,{...body,apply:true})).code,400)
+ assert.equal(f.reads.length,0)
+ const decorated=await f.request('POST',path,admin,body)
+ assert.equal(decorated.code,200);assert.deepEqual(decorated.body.blueprint,body.blueprint)
  assert.deepEqual(f.reads,[{guild:'g',actor:'u'}])
 })

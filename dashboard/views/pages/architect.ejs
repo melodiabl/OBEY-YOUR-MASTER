@@ -72,6 +72,24 @@
       </section>
     </div>
   </fieldset>
+  <section class="architect-pane architect-wizard" aria-labelledby="decoration-title">
+    <div class="architect-pane-heading"><div><h2 id="decoration-title">Decoración del servidor</h2><p>Compara un tema sobre tus recursos y decide qué cambios incorporar.</p></div></div>
+    <form id="architect-decoration-form" class="architect-decoration-form">
+      <fieldset id="architect-decoration-fields" disabled>
+        <legend class="sr-only">Tema y alcance de decoración</legend>
+        <div class="architect-wizard-grid">
+          <label>Tema<select id="architect-decoration-theme" required></select></label>
+          <label>Alcance<select id="architect-decoration-scope" required></select></label>
+          <label>Decoración<select id="architect-decoration-density" required></select></label>
+        </div>
+        <p id="architect-decoration-target" class="architect-wizard-note">Selecciona un recurso en el árbol.</p>
+        <p class="architect-wizard-note">Los recursos protegidos y los estilos especiales se conservan. El tema cambia nombres y colores; la estructura y los permisos se mantienen.</p>
+        <button type="submit" class="btn btn-sec" id="architect-decoration-preview" disabled>Previsualizar decoración</button>
+      </fieldset>
+      <p id="architect-decoration-status" class="architect-wizard-note" role="status">Elige un tema y su alcance para ver el antes y después.</p>
+      <ul id="architect-decoration-skipped" class="architect-wizard-note" aria-label="Recursos conservados"></ul>
+    </form>
+  </section>
   <section class="architect-pane architect-review" aria-labelledby="review-title">
     <div class="architect-pane-heading"><h2 id="review-title">Cambios propuestos</h2><span id="architect-change-count">Sin revisar</span></div>
     <div id="architect-diff" class="architect-empty">Pulsa Revisar cambios para comparar la propuesta con el servidor actual.</div>
@@ -94,6 +112,7 @@
 <script src="/js/architect-sync.js"></script>
 <script src="/js/architect-state.js"></script>
 <script src="/js/architect-permission-state.js"></script>
+<script src="/js/architect-decoration.js"></script>
 <script src="/js/architect-editor.js"></script>
 <script src="/js/architect-jobs.js"></script>
 <%- include('../includes/footer') %>

@@ -2656,9 +2656,14 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "commands/Administration/editembed.js"
+          "commands/Administration/editembed.js",
+          "handlers/architect/themes.js",
+          "handlers/architect/decoration.js",
+          "dashboard/public/js/architect-decoration.js",
+          "test/architect-decoration.test.js",
+          "docs/platform/evidence/architect-decoration-desktop.png"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Decoration Studio por recurso/categoría/roles/servidor con siete presets, antes/después, densidad, límites, protecciones/zonas/tipos avanzados y colores simples conocidos. Solo modifica nombres/colores en propuestas; undo/borrador privado/aplicación confirmada/copia previa con mismo motor verificados. Acceso directo/Discord y aceptación canary pendientes."
       },
       "change": "Theme Engine separado y Decoration Studio aplicado mediante diff.",
       "phase": 4,
@@ -2671,7 +2676,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-13-02",
@@ -2694,9 +2699,14 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "commands/Administration/editembed.js"
+          "commands/Administration/editembed.js",
+          "handlers/architect/themes.js",
+          "handlers/architect/decoration.js",
+          "dashboard/public/js/architect-decoration.js",
+          "test/architect-decoration.test.js",
+          "docs/platform/evidence/architect-decoration-desktop.png"
         ],
-        "assessment": "Asistente de estructura web conectado: diez bases, siete temas para nombres/rol de recursos nuevos, idioma/tamaño/decoración, espacios bienvenida/música, blueprint validado, editor/diff/preflight/undo y borrador privado. Configuración de módulos, temas sobre recursos existentes, wizard integral/templates y aceptación real pendientes.",
+        "assessment": "Decoration Studio por recurso/categoría/roles/servidor con siete presets, antes/después, densidad, límites, protecciones/zonas/tipos avanzados y colores simples conocidos. Solo modifica nombres/colores en propuestas; undo/borrador privado/aplicación confirmada/copia previa con mismo motor verificados. Acceso directo/Discord y aceptación canary pendientes.",
         "files": [
           "handlers/architect/wizard.js",
           "handlers/architect/service.js",
@@ -2740,9 +2750,14 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "commands/Administration/editembed.js"
+          "commands/Administration/editembed.js",
+          "handlers/architect/themes.js",
+          "handlers/architect/decoration.js",
+          "dashboard/public/js/architect-decoration.js",
+          "test/architect-decoration.test.js",
+          "docs/platform/evidence/architect-decoration-desktop.png"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Decoration Studio por recurso/categoría/roles/servidor con siete presets, antes/después, densidad, límites, protecciones/zonas/tipos avanzados y colores simples conocidos. Solo modifica nombres/colores en propuestas; undo/borrador privado/aplicación confirmada/copia previa con mismo motor verificados. Acceso directo/Discord y aceptación canary pendientes."
       },
       "change": "Theme Engine separado y Decoration Studio aplicado mediante diff.",
       "phase": 4,
@@ -2755,7 +2770,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-13-04",
@@ -2778,9 +2793,14 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "commands/Administration/editembed.js"
+          "commands/Administration/editembed.js",
+          "handlers/architect/themes.js",
+          "handlers/architect/decoration.js",
+          "dashboard/public/js/architect-decoration.js",
+          "test/architect-decoration.test.js",
+          "docs/platform/evidence/architect-decoration-desktop.png"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Decoration Studio por recurso/categoría/roles/servidor con siete presets, antes/después, densidad, límites, protecciones/zonas/tipos avanzados y colores simples conocidos. Solo modifica nombres/colores en propuestas; undo/borrador privado/aplicación confirmada/copia previa con mismo motor verificados. Acceso directo/Discord y aceptación canary pendientes."
       },
       "change": "Theme Engine separado y Decoration Studio aplicado mediante diff.",
       "phase": 4,
@@ -2793,7 +2813,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-14-01",
@@ -14109,8 +14129,8 @@
       "T14/T23/T24 cola/registro/outbox, leases por guild, checkpoints/journal/guard de efectos y cancelación parciales",
       "Redis dedicado autenticado/AOF/noeviction configurado y verificado por petición expresa",
       "T27 puntos privados/inmutables de estructura con inspección, incompletitud explícita y recuperación",
-      "T30 asistente de estructura con bases/temas/idioma/tamaño/decoración/editor/diff/undo/borrador privado; T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascadas múltiples/módulos pendientes"
+      "T31 decoración por alcance de recursos existentes con siete presets, preview, conservación y confirmación; T30 asistente de estructura con bases/temas/idioma/tamaño/decoración/editor/diff/undo/borrador privado; T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascadas múltiples/módulos pendientes"
     ],
-    "verification": "237 tests/55 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. Cascada categoría/hijos sincronizados con SDK, revisión/confirmación/copia/checkpoint/Connect, protección y canales personalizados preservados. No canary real; planes mixtos/cascadas múltiples/configuración/revisión manual/restore/rollback pendientes."
+    "verification": "243 tests/56 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. Cascada categoría/hijos sincronizados con SDK, revisión/confirmación/copia/checkpoint/Connect, protección y canales personalizados preservados. No canary real; planes mixtos/cascadas múltiples/configuración/revisión manual/restore/rollback pendientes."
   }
 }

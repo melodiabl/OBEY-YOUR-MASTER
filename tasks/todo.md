@@ -780,6 +780,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T31
 
+**Checkpoint activo:** Decoration Studio dentro de Architect: siete temas compartidos, alcance recurso/categoría y canales/roles/servidor, antes/después, densidad, límites de nombres, protecciones y colores simples conocidos. Preview, undo, borrador privado y motor confirmado existentes; navegador verifica nombre/color aplicados con copia previa sin cambiar permisos. Entrada Discord/acceso directo y aceptación real pendientes; tarea parcial. Ver docs/platform/ARCHITECT.md.
+
 - [ ] Theme Engine y Decoration Studio (fase 4).
 
 **Descripción:** Midnight/Minimal/Sakura/Nebula/Gaming/Luxury/OBEY; antes/después channel/category/roles/server; emoji none/low, naming válido/guild capabilities; sin alterar permisos/eliminar.

@@ -1,6 +1,13 @@
 {
   "scope": "Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider",
   "states": [
+    "category decoration scope and before/after",
+    "server decoration and protected roles reported",
+    "resource decoration of channel and role",
+    "decoration repeat without stacked prefix",
+    "decoration undo",
+    "confirmed decoration and prior copy",
+    "decoration mobile without overflow",
     "community wizard",
     "language/theme/size/decoration affect proposal",
     "generated resources in editor and diff",

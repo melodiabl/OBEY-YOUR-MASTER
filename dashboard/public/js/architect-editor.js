@@ -6,11 +6,13 @@
   let source = null, editor = null, selected = null, busy = false, storageAvailable = false, draftRevision = 0, savedValue = '', hasSavedDraft = false
   let applyAvailable = false, applicationPlan = null
   let permissionRoleId = ''
+  let decorationUI = null
   const { permissionOptions, setRolePermission, setOverwritePermission, formatPermissions } = architectPermissions
   const order = (a, b) => a.type - b.type || a.position - b.position || a.id.localeCompare(b.id)
   const labels = { name: 'Nombre', topic: 'Tema', color: 'Color', permissions: 'Permisos', overwrites: 'Permisos del canal', nsfw: 'Contenido restringido', hoist: 'Mostrar rol separado', mentionable: 'Rol mencionable' }
   function status(text, error = false) { $('architect-status').textContent = text; $('architect-status').dataset.state = error ? 'error' : 'ready' }
   function buttons() {
+    decorationUI?.update()
     $('architect-wizard-fields').disabled = busy || !editor
     $('architect-workspace').disabled = busy || !editor
     $('architect-refresh').disabled = busy
@@ -32,6 +34,8 @@
         storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
         architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.',
         invalid_wizard: 'Revisa las opciones del asistente. Una categoría existente privada o protegida requiere edición explícita para añadir canales.' }
+      messages.invalid_decoration = 'Revisa el tema y el alcance de decoración seleccionados.'
+      messages.decoration_name_limit = 'La decoración supera los 100 caracteres de un nombre. Acorta ese nombre o elige menos decoración.'
       Object.assign(messages, { application_unsupported: 'Separa el orden de creaciones o cambios de categoría del mismo tipo. Revisa una categoría y sus hijos sincronizados por aplicación, sin creaciones, cambios de padre ni otros permisos de canales.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
@@ -42,6 +46,9 @@
     return body
   }
   const post = (path, body) => request(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+  decorationUI = initArchitectDecoration({ post, state: () => ({ blueprint: editor?.current(), selected, busy }),
+    accept: body => { editor.change(next => Object.assign(next, body.blueprint)); changed(); review(body) },
+    setBusy: value => { busy = value; if (value) applicationPlan = null; buttons() } })
   function changed() {
     applicationPlan = null
     $('architect-application-status').textContent = applyAvailable ? 'Puedes preparar las ediciones compatibles. Se guardará una copia antes de aplicar.' : 'La aplicación requiere un servidor canary habilitado.'
@@ -143,6 +150,7 @@
       const body = await request()
       source = body.snapshot; storageAvailable = body.storageAvailable; draftRevision = body.draft?.draftRevision || 0
       loadWizard(body.wizardCatalog)
+      decorationUI.load(body.decorationCatalog)
       applyAvailable = Boolean(body.applyAvailable)
       const draft = body.draft && !body.draftStale ? body.draft.blueprint : null
       editor = createArchitectEditorState(source, draft); selected = null; savedValue = JSON.stringify(editor.current()); hasSavedDraft = Boolean(draft)

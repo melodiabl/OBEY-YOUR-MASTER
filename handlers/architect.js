@@ -20,11 +20,11 @@ module.exports = client => {
   client.modules.register({
     id: 'architect', version: '1.0.0', defaults: { preserveExisting: true }, permissions: { read: 'ManageGuild', draft: 'ManageGuild' },
     commands: { slash: ['config.architect'], prefix: [] }, interactions: [], events: { consumed: [], emitted: [] }, jobs: ['architect.snapshot', 'architect.backup', 'architect.apply'],
-    api: ['GET /api/architect/:guildId', 'POST /api/architect/:guildId/generate', 'POST /api/architect/:guildId/preview', 'POST /api/architect/:guildId/draft',
+    api: ['GET /api/architect/:guildId', 'POST /api/architect/:guildId/generate', 'POST /api/architect/:guildId/decorate', 'POST /api/architect/:guildId/preview', 'POST /api/architect/:guildId/draft',
       'GET /api/architect/:guildId/jobs', 'POST /api/architect/:guildId/jobs', 'GET /api/architect/:guildId/jobs/:jobId', 'POST /api/architect/:guildId/jobs/:jobId/cancel',
       'GET /api/architect/:guildId/restore-points', 'GET /api/architect/:guildId/restore-points/:pointId', 'POST /api/architect/:guildId/restore-points',
       'POST /api/architect/:guildId/applications', 'POST /api/architect/:guildId/applications/confirm'],
     realtime: { consumed: [], emitted: [] }, dependencies: ['mongoose', 'discord.js'],
-    capabilities: { snapshot: 'available', wizard: 'partial', preview: 'available', drafts: 'available', restorePoints: 'available', apply: 'partial', applyFields: ['name', 'topic', 'color'], ai: 'unavailable', rollback: 'unavailable' },
+    capabilities: { snapshot: 'available', wizard: 'partial', decoration: 'partial', preview: 'available', drafts: 'available', restorePoints: 'available', apply: 'partial', applyFields: ['name', 'topic', 'color'], ai: 'unavailable', rollback: 'unavailable' },
   }, client.architect)
 }
