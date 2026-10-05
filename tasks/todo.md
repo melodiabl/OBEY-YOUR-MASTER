@@ -646,7 +646,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T26
 
-**Checkpoint activo:** Diff create/update/move/overwrites con antes/después y drift de origen. Preflight verifica miembros frescos, permisos, jerarquía y grants; ejecución básica comprueba acceso efectivo, límites y bitrate y ordena dependencias roles/categorías/canales. Forecast de acceso resultante por cada paso, permisos de roles/texto/voz y grants incluidos (también retirada de denies). Límites/capacidades/cascada de categorías/plan de ejecución completos pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
+**Checkpoint activo:** Diff create/update/move/overwrites con antes/después y drift de origen. Preflight verifica miembros frescos, permisos, jerarquía y grants; ejecución básica comprueba acceso efectivo, límites y bitrate y ordena dependencias roles/categorías/canales. Forecast de acceso resultante por cada paso, permisos de roles/texto/voz y grants incluidos (también retirada de denies). Cascada explícita de una categoría y sus hijos sincronizados implementada; límites/capacidades/cascadas múltiples/plan de ejecución completos pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
 
 - [ ] Diff y preflight (fase 4).
 
@@ -698,7 +698,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T28
 
-**Checkpoint activo:** Plan privado versionado de 15 minutos, token/revisión/actor/guild, confirmación idempotente, drift/preflight fresco, copia previa, journal/CAS y guard duradero. Aplica nombres/temas de texto/colores existentes solo en canary habilitado; probado con Discord fixture y Mongo/Redis reales. Creaciones básicas con IDs reales y reconciliación positiva implementadas. Permisos existentes de roles/texto/voz con forecast de acceso por paso e inspector añadidos. Cambios de categoría de texto/voz conservando permisos y con capacidad por paso añadidos. Orden por lotes de canales/roles existentes con protección y jerarquía añadidos. Planes mixtos/permisos de categorías/configuración y recuperación/revisión manual completos pendientes. Ningún canary real habilitado; tarea parcial. Ver docs/platform/APPLICATIONS.md.
+**Checkpoint activo:** Plan privado versionado de 15 minutos, token/revisión/actor/guild, confirmación idempotente, drift/preflight fresco, copia previa, journal/CAS y guard duradero. Aplica nombres/temas de texto/colores existentes solo en canary habilitado; probado con Discord fixture y Mongo/Redis reales. Creaciones básicas con IDs reales y reconciliación positiva implementadas. Permisos existentes de roles/texto/voz con forecast de acceso por paso e inspector añadidos. Cambios de categoría de texto/voz conservando permisos y con capacidad por paso añadidos. Orden por lotes de canales/roles existentes con protección y jerarquía añadidos. Permisos de una categoría con cascada explícita añadidos. Planes mixtos/cascadas múltiples/configuración y recuperación/revisión manual completos pendientes. Ningún canary real habilitado; tarea parcial. Ver docs/platform/APPLICATIONS.md.
 
 - [ ] Apply Architect con confirmación de revisión (fase 4).
 
@@ -754,7 +754,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T30
 
-**Checkpoint activo:** Editor web conectado: árbol/inspector, crear y mover, nombres/colores, undo/redo, protección, preview y guardar/recuperar borrador. Discord consulta la misma propuesta. Preparación/confirmación web y progreso durable de edición compatible añadidos. Inspector de permisos de roles/texto/voz y revisión legible con acceso por paso añadidos. Cambios de categoría y orden de canales/roles existentes con confirmación/copia previa, controles y protección añadidos. Wizard, permisos de categorías/miembros, eventos y aplicación completa pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
+**Checkpoint activo:** Editor web conectado: árbol/inspector, crear y mover, nombres/colores, undo/redo, protección, preview y guardar/recuperar borrador. Discord consulta la misma propuesta. Preparación/confirmación web y progreso durable de edición compatible añadidos. Inspector de permisos de roles/texto/voz y revisión legible con acceso por paso añadidos. Cambios de categoría y orden de canales/roles existentes con confirmación/copia previa, controles y protección añadidos. Permisos de una categoría con cascada revisada añadidos. Wizard, permisos de miembros/cascadas múltiples, eventos y aplicación completa pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
 
 - [ ] Editor Architect visual conectado (fase 4).
 

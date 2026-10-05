@@ -27,5 +27,9 @@
   "voiceMoveToRootKeepsOverwrites": true,
   "roleChannelOrderBatches": true,
   "protectedPositionAndOverwritePreserved": true,
-  "reorderRestorePointAndCheckpoints": true
+  "reorderRestorePointAndCheckpoints": true,
+  "reviewedCategoryCascade": true,
+  "actualSDKCategoryPermissionSerialization": true,
+  "customChildPermissionsPreserved": true,
+  "categoryRestorePointAndCheckpoint": true
 }

@@ -20,6 +20,9 @@ function diffBlueprint(source, blueprint) {
       })
     }
   }
+  for (const change of changes.filter(change => change.operation === 'overwrites' && change.resourceType === 4)) {
+    Object.assign(change, require('./cascades').categoryCascade(source, blueprint, change))
+  }
   const revision = createHash('sha256').update(JSON.stringify(blueprint)).digest('hex')
   return { baseRevision: source.revision, revision, changes, counts: Object.fromEntries(['create', 'update', 'move', 'overwrites'].map(operation => [operation, changes.filter(change => change.operation === operation).length])) }
 }

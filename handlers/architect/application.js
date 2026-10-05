@@ -7,7 +7,15 @@ function compileEdits(diff) {
   if (!diff?.changes?.length) throw new JobError('Cannot apply an empty proposal', 'application_unsupported')
   const operations = new Map()
   const reorders = { roles: [], channels: [] }
+  const categories = diff.changes.filter(change => change.operation === 'overwrites' && change.resourceType === 4)
+  const category = categories[0]
+  if (category && (categories.length !== 1 || category.cascadeValid !== true || !Array.isArray(category.cascadeIds) ||
+      diff.changes.some(change => change.operation === 'create' || (change.operation === 'move' && change.kind === 'channels' && change.before.parentId !== change.after.parentId) ||
+        (change.operation === 'overwrites' && change.id !== category.id && !category.cascadeIds.includes(change.id))))) {
+    throw new JobError('Category cascade must be complete and applied separately from creations, parent moves and other channel permissions', 'application_unsupported')
+  }
   for (const change of diff.changes) {
+    if (category && change.operation === 'overwrites' && category.cascadeIds.includes(change.id)) continue
     if (change.operation === 'create') {
       if (!require('./creations').supportedCreation(change.kind, change.after)) throw new JobError('Creation options not supported', 'application_unsupported')
       operations.set(`${change.kind}:${change.id}`, { id: `create-${operations.size + 1}`, action: 'create', kind: change.kind, resourceId: change.id, fields: structuredClone(change.after) })
@@ -22,8 +30,9 @@ function compileEdits(diff) {
       operations.set(`${change.kind}:${change.id}:move`, { id: `move-${operations.size + 1}`, action: 'move', kind: 'channels', resourceId: change.id, fields: { parentId: change.after.parentId } })
       continue
     }
-    if ((change.kind === 'roles' && change.operation === 'update' && change.field === 'permissions') || (change.kind === 'channels' && change.operation === 'overwrites' && [0, 2].includes(change.resourceType))) {
+    if ((change.kind === 'roles' && change.operation === 'update' && change.field === 'permissions') || (change.kind === 'channels' && change.operation === 'overwrites' && [0, 2, 4].includes(change.resourceType))) {
       operations.set(`${change.kind}:${change.id}:permissions`, { id: `permissions-${operations.size + 1}`, action: 'permissions', kind: change.kind, resourceId: change.id,
+        ...(change.resourceType === 4 ? { cascadeIds: [...change.cascadeIds], resourceIds: [change.id, ...change.cascadeIds] } : {}),
         fields: change.kind === 'roles' ? { permissions: change.after } : { overwrites: structuredClone(change.after) } })
       continue
     }
@@ -63,6 +72,7 @@ function createApplicationService({ repository, preview, jobs, enabled = () => f
       return { id, confirmation, revision: proposal.diff.revision, expiresAt, edits: new Set(operations.filter(operation => operation.action !== 'create').flatMap(operation => affectedResources(operation).map(id => `${operation.kind}:${id}`))).size,
         reorders: operations.filter(operation => operation.action === 'reorder').reduce((count, operation) => count + operation.resourceIds.length, 0),
         permissionChanges: operations.filter(operation => operation.action === 'permissions').length,
+        cascadedChannels: operations.reduce((count, operation) => count + (operation.cascadeIds?.length || 0), 0),
         moves: operations.filter(operation => operation.action === 'move').length,
         creates: operations.filter(operation => operation.action === 'create').length, changes: proposal.diff.changes.length,
         review: { blueprint: proposal.blueprint, diff: proposal.diff, preflight: proposal.preflight } }

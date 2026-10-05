@@ -5,7 +5,7 @@ const { validateBlueprint } = require('../handlers/architect/blueprint')
 const { diffBlueprint } = require('../handlers/architect/diff')
 const { compileEdits } = require('../handlers/architect/application')
 const { createEditExecutor } = require('../workers/architect-edits')
-function fixture({ creations = false, permissions = false, moves = false, reorders = false } = {}) {
+function fixture({ creations = false, permissions = false, moves = false, reorders = false, cascades = false } = {}) {
   const source = { schemaVersion: 1, guildId: 'g', name: 'Fixture', capturedAt: new Date().toISOString(), channels: [{
     id: 'chat', name: 'old', type: 0, topic: '', position: 0, parentId: null, overwrites: [], nsfw: false, bitrate: null, userLimit: null, rateLimitPerUser: 0,
   }], roles: [] }
@@ -15,9 +15,17 @@ function fixture({ creations = false, permissions = false, moves = false, reorde
     source.roles.push(...[['g', 0, false], ['low', 1, false], ['high', 2, false], ['bot', 3, true]].map(([id, position, managed]) => ({ id, position, managed, name: id, permissions: '0', color: 0, hoist: false, mentionable: false })))
   }
   if (permissions) source.roles.push({ id: 'staff', name: 'Staff', position: 1, permissions: '0', color: 0, hoist: false, mentionable: false, managed: false })
+  if (cascades) {
+    source.roles.push({ id: 'g', name: '@everyone', position: 0, permissions: '0', color: 0, hoist: false, mentionable: false, managed: false })
+    source.channels[0].parentId = 'category'
+    source.channels.push({ ...source.channels[0], id: 'category', type: 4, parentId: null },
+      { ...source.channels[0], id: 'voice', type: 2, bitrate: 64000, userLimit: 0 },
+      { ...source.channels[0], id: 'custom', overwrites: [{ id: 'g', type: 0, allow: '2048', deny: '0' }] })
+  }
   source.revision = structureRevision(source.channels, source.roles)
   const input = { schemaVersion: 1, baseRevision: source.revision, channels: structuredClone(source.channels), roles: structuredClone(source.roles) }
-  if (reorders) { input.roles[1].position = 2; input.roles[2].position = 1; input.channels[0].position = 1; input.channels[1].position = 0 }
+  if (cascades) { for (const id of ['category', 'chat', 'voice']) input.channels.find(channel => channel.id === id).overwrites = [{ id: 'g', type: 0, allow: '0', deny: '2048' }] }
+  else if (reorders) { input.roles[1].position = 2; input.roles[2].position = 1; input.channels[0].position = 1; input.channels[1].position = 0 }
   else if (moves) input.channels[0].parentId = 'destination'
   else if (permissions) { input.roles[0].permissions = '2048'; input.channels[0].overwrites = [{ id: 'staff', type: 0, allow: '2048', deny: '0' }] }
   else if (!creations) input.channels[0].name = 'new'
@@ -43,14 +51,18 @@ function fixture({ creations = false, permissions = false, moves = false, reorde
   const guild = { id: 'g', channels: { async edit(id, patch) {
     edits++; if (patch.name !== undefined) current.channels[0].name = patch.name
     if (Object.hasOwn(patch, 'parent')) { assert.equal(patch.lockPermissions, false); assert.equal(patch.position, undefined); assert.equal(patch.permissionOverwrites, undefined); current.channels[0].parentId = patch.parent }
-    if (patch.permissionOverwrites) current.channels[0].overwrites = patch.permissionOverwrites.map(overwrite => ({ ...overwrite, allow: String(overwrite.allow), deny: String(overwrite.deny) }))
+    if (patch.permissionOverwrites) {
+      const target = current.channels.find(channel => channel.id === id)
+      const children = target.type === 4 ? current.channels.filter(channel => channel.parentId === id && JSON.stringify(channel.overwrites) === JSON.stringify(target.overwrites)) : []
+      for (const item of [target, ...children]) item.overwrites = patch.permissionOverwrites.map(overwrite => ({ ...overwrite, allow: String(overwrite.allow), deny: String(overwrite.deny) }))
+    }
     current.revision = structureRevision(current.channels, current.roles, current.roleColors); if (responseLost) throw new Error('fixture lost response')
   } } }
   if (permissions) {
     guild.client = { rest: { options: { makeRequest: async () => { throw new Error('Unexpected network') } } } }
     guild.roles = { async edit(id, patch) { assert.equal(typeof patch.permissions, 'bigint'); edits++; current.roles[0].permissions = String(patch.permissions); current.revision = structureRevision(current.channels, current.roles); if (responseLost) throw new Error('fixture lost permission response') } }
   }
-  if (moves) guild.client = { rest: { options: { makeRequest: async () => { throw new Error('Unexpected network') } } } }
+  if (moves || cascades) guild.client = { rest: { options: { makeRequest: async () => { throw new Error('Unexpected network') } } } }
   if (reorders) guild.client = { rest: { options: { makeRequest: async () => { throw new Error('Unexpected network') } }, async patch(route, { body, reason }) {
     edits++; assert.ok(reason.startsWith('OBEY Architect job / reorder-')); assert.ok(body.every(entry => Object.keys(entry).sort().join(',') === 'id,position'))
     const kind = route.endsWith('/roles') ? 'roles' : 'channels'
@@ -99,6 +111,24 @@ test('confirmed edits capture a prior point, checkpoint real progress and skip c
   assert.equal(f.points[0].channels[0].name, 'old'); assert.equal(result.restorePointId, 'point')
   assert.equal(f.edits(), 1); assert.equal(f.record.progress.completed, 2); assert.equal(f.guards.size, 0)
   await f.execute(); assert.equal(f.edits(), 1)
+})
+test('category permissions checkpoint all reviewed child effects from one write and preserve custom children', async () => {
+  const f = fixture({ cascades: true }), result = await f.execute()
+  assert.equal(f.edits(), 1); assert.equal(result.edits, 3); assert.equal(result.cascadedChannels, 2)
+  assert.deepEqual(f.record.progress, { completed: 2, total: 2 })
+  for (const id of ['category', 'chat', 'voice']) {
+    assert.deepEqual(f.points[0].channels.find(channel => channel.id === id).overwrites, [])
+    assert.equal(f.record.executionSnapshot.channels.find(channel => channel.id === id).overwrites[0].deny, '2048')
+  }
+  assert.equal(f.record.executionSnapshot.channels.find(channel => channel.id === 'custom').overwrites[0].allow, '2048')
+  await f.execute(); assert.equal(f.edits(), 1); assert.equal(f.guards.size, 0)
+})
+test('lost category response keeps its whole cascade executing and cannot replay', async () => {
+  const f = fixture({ cascades: true }); f.loseResponse()
+  await assert.rejects(f.execute(), error => error.code === 'application_needs_review')
+  assert.equal(f.record.steps[1].status, 'executing'); assert.equal(f.guards.get('g'), 'job')
+  await assert.rejects(f.execute(), error => error.code === 'application_needs_review')
+  assert.equal(f.edits(), 1)
 })
 test('creation persists real IDs before dependent channels and completed recovery never repeats POST', async () => {
   const f = fixture({ creations: true }), result = await f.execute()

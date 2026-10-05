@@ -1826,7 +1826,7 @@
           "handlers/architect/moves.js",
           "handlers/architect/reorders.js"
         ],
-        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía implementados detrás de canary. Planes mixtos/cascada/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía, permisos de una categoría con cascada revisada implementados detrás de canary. Planes mixtos/cascadas múltiples/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Implementar núcleo Architect visual y ejecución segura; IA fase 5.",
       "phase": 4,
@@ -2274,7 +2274,7 @@
           "handlers/architect/moves.js",
           "handlers/architect/reorders.js"
         ],
-        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía implementados detrás de canary. Planes mixtos/cascada/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía, permisos de una categoría con cascada revisada implementados detrás de canary. Planes mixtos/cascadas múltiples/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Diff, planner/preflight e inversas con conflictos y límites explícitos.",
       "phase": 4,
@@ -2333,7 +2333,7 @@
           "handlers/architect/moves.js",
           "handlers/architect/reorders.js"
         ],
-        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía implementados detrás de canary. Planes mixtos/cascada/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía, permisos de una categoría con cascada revisada implementados detrás de canary. Planes mixtos/cascadas múltiples/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Diff, planner/preflight e inversas con conflictos y límites explícitos.",
       "phase": 4,
@@ -14085,8 +14085,8 @@
       "T14/T23/T24 cola/registro/outbox, leases por guild, checkpoints/journal/guard de efectos y cancelación parciales",
       "Redis dedicado autenticado/AOF/noeviction configurado y verificado por petición expresa",
       "T27 puntos privados/inmutables de estructura con inspección, incompletitud explícita y recuperación",
-      "T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascada/módulos pendientes"
+      "T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascadas múltiples/módulos pendientes"
     ],
-    "verification": "226 tests/53 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. No canary real; planes mixtos/cascada/configuración/revisión manual/restore/rollback pendientes."
+    "verification": "232 tests/54 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. Cascada categoría/hijos sincronizados con SDK, revisión/confirmación/copia/checkpoint/Connect, protección y canales personalizados preservados. No canary real; planes mixtos/cascadas múltiples/configuración/revisión manual/restore/rollback pendientes."
   }
 }

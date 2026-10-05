@@ -54,7 +54,7 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
   if (executionAvailable) {
     if (diff.changes.length) add('actor_guild', actor ? (actor.permissions.has(PermissionFlagsBits.ManageGuild) ? 'passed' : 'failed') : 'unknown', 'Tu cuenta necesita Administrar servidor durante la aplicación.')
     try { if (diff.changes.length) require('./application').compileEdits(diff); add('execution', 'passed', 'Aplicación confirmada de ediciones, creaciones básicas y permisos de recursos existentes disponible en este canary.') }
-    catch { add('execution', 'failed', 'El orden de recursos existentes se aplica por separado de creaciones o cambios de categoría del mismo tipo. Permisos de categorías y planes mixtos de orden siguen pendientes.') }
+    catch { add('execution', 'failed', 'Separa el orden de creaciones o cambios de padre del mismo tipo. Los permisos de una categoría requieren incluir todos sus hijos sincronizados, sin recursos protegidos, creaciones, cambios de padre ni otros permisos de canales.') }
     const creations = diff.changes.filter(change => change.operation === 'create')
     if (creations.length) {
       add('capacity', (blueprint.roles?.length <= 250 && blueprint.channels?.length <= 500 && blueprint.channels.every(parent => parent.type !== 4 || blueprint.channels.filter(channel => channel.parentId === parent.id).length <= 50)) ? 'passed' : 'failed', 'La propuesta debe respetar 250 roles, 500 canales y 50 canales por categoría.')
@@ -68,7 +68,8 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
       const colors = guild.roles?.cache?.get(change.id)?.colors
       add(`color_style_${change.id}`, !colors ? 'unknown' : colors.secondaryColor == null && colors.tertiaryColor == null ? 'passed' : 'failed', 'Solo se editan colores simples; los degradados y estilos holográficos se conservan.')
     }
-    for (const id of new Set(diff.changes.filter(change => change.kind === 'channels').map(change => change.id))) {
+    const cascadeIds = permissionChanges.filter(change => change.resourceType === 4).flatMap(change => change.cascadeIds || [])
+    for (const id of new Set([...diff.changes.filter(change => change.kind === 'channels').map(change => change.id), ...cascadeIds])) {
       const creation = creations.find(change => change.kind === 'channels' && change.id === id)
       const proposed = creation?.after
       const parent = proposed?.parentId && blueprint.channels?.find(channel => channel.id === proposed.parentId)
@@ -79,8 +80,10 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
         let allowed
         try {
           const permissions = channel ? channel.permissionsFor(member) : creation && (!parent || parent.id.startsWith('local:')) ? member?.permissions : undefined
-          const overwriteChange = permissionChanges.some(change => change.operation === 'overwrites' && change.id === id)
-          allowed = member && permissions?.has(overwriteChange ? [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageRoles, PermissionFlagsBits.ViewChannel] : creation ? [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ViewChannel] : PermissionFlagsBits.ManageChannels)
+          const overwriteChange = cascadeIds.includes(id) || permissionChanges.some(change => change.operation === 'overwrites' && change.id === id)
+          const cascadeVoice = channel?.type === 2 && permissionChanges.some(change => change.resourceType === 4 && change.cascadeIds?.includes(id))
+          allowed = member && permissions?.has(overwriteChange ? [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageRoles, PermissionFlagsBits.ViewChannel,
+            ...(cascadeVoice ? [PermissionFlagsBits.Connect] : [])] : creation ? [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ViewChannel] : PermissionFlagsBits.ManageChannels)
         } catch {}
         add(`${name}_channel_${id}`, allowed === undefined ? 'unknown' : allowed ? 'passed' : 'failed', `${name === 'bot' ? 'OBEY' : 'Tu cuenta'} necesita Administrar canales efectivo${creation ? ' y conservar acceso al canal nuevo' : ' en el canal que se editará'}.`)
       }

@@ -52,13 +52,17 @@ function checkPermissionPlan({ snapshot, operations, members, ownerId, idMap = {
     }
     if (operation.action !== 'permissions') continue
     if (!target) throw new Error('Unknown permission resource')
-    Object.assign(target, structuredClone(operation.fields))
-    if (operation.kind === 'channels') target.overwrites = target.overwrites.map(overwrite => ({ ...overwrite, id: resolve(overwrite.id) }))
+    if (operation.cascadeIds) require('./cascades').projectCategoryPermissions(state, operation, idMap)
+    else {
+      Object.assign(target, structuredClone(operation.fields))
+      if (operation.kind === 'channels') target.overwrites = target.overwrites.map(overwrite => ({ ...overwrite, id: resolve(overwrite.id) }))
+    }
     for (const original of baseline) {
       const permissions = permissionCalculator(state, original.member, ownerId), current = permissions()
       let allowed = current.has(original.guild) && (original.name !== 'actor' || current.has(F.ManageGuild))
       for (const channel of state.channels) {
-        const required = (original.channels.get(channel.id) || 0n) | (operation.kind === 'channels' && channel.id === id ? channelManagement : 0n)
+        const affected = operation.resourceIds || [id]
+        const required = (original.channels.get(channel.id) || 0n) | (operation.kind === 'channels' && affected.includes(channel.id) ? channelManagement | (operation.cascadeIds && channel.type === 2 ? F.Connect : 0n) : 0n)
         if (required && !permissions(channel).has(required)) allowed = false
       }
       checks.push({ code: `${original.name}_access_${operation.id}`, status: allowed ? 'passed' : 'failed',

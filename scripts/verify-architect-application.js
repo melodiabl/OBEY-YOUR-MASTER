@@ -65,7 +65,11 @@ async function main() {
           target.parentId = body.parent_id
         } else {
           assert.ok(Array.isArray(body.permission_overwrites))
-          target.permissionOverwrites.cache = new Map(body.permission_overwrites.map(overwrite => [overwrite.id, { ...overwrite, allow: new PermissionsBitField(BigInt(overwrite.allow)), deny: new PermissionsBitField(BigInt(overwrite.deny)) }]))
+          // Determine synced children using the installed SDK, independently of the application projector.
+          for (const item of guild.channels.cache.values()) sdkClient.channels._add({ id: item.id, guild_id: guildId, type: item.type, name: item.name, parent_id: item.parentId,
+            permission_overwrites: [...item.permissionOverwrites.cache.values()].map(overwrite => ({ ...overwrite, allow: String(overwrite.allow.bitfield), deny: String(overwrite.deny.bitfield) })) })
+          const children = target.type === 4 ? [...guild.channels.cache.values()].filter(item => item.parentId === target.id && sdkClient.channels.cache.get(item.id).permissionsLocked) : []
+          for (const item of [target, ...children]) item.permissionOverwrites.cache = new Map(body.permission_overwrites.map(overwrite => [overwrite.id, { ...overwrite, allow: new PermissionsBitField(BigInt(overwrite.allow)), deny: new PermissionsBitField(BigInt(overwrite.deny)) }]))
         }
         return { ...body, id: target.id, guild_id: guildId, type: target.type, name: target.name, position: target.rawPosition, parent_id: target.parentId, topic: target.topic,
           nsfw: target.nsfw, bitrate: target.bitrate, user_limit: target.userLimit, rate_limit_per_user: target.rateLimitPerUser }
@@ -232,6 +236,18 @@ async function main() {
     assert.equal(orderPoint.snapshot.roles.find(role => role.id === 'staff').position, staffPosition)
     assert.equal(orderPoint.snapshot.channels.find(target => target.id === channel.id).position, chatPosition)
     await applications.confirm(guild, actorId, orderPlan); assert.equal(edits, 10)
+    const categoryBlueprint = await proposal(), categoryId = created.result.idMap['local:category']
+    for (const id of [categoryId, textId]) categoryBlueprint.channels.find(target => target.id === id).overwrites = [{ id: 'staff', type: 0, allow: '0', deny: '2048' }]
+    const categoryPlan = await applications.prepare(guild, actorId, categoryBlueprint)
+    assert.equal(edits, 10); assert.equal(categoryPlan.cascadedChannels, 1); assert.equal(categoryPlan.edits, 2)
+    const categoryJob = await applications.confirm(guild, actorId, categoryPlan), cascaded = await completed(categoryJob.id)
+    assert.equal(edits, 11); assert.equal(cascaded.result.cascadedChannels, 1); assert.deepEqual(cascaded.progress, { completed: 2, total: 2 })
+    for (const id of [categoryId, textId]) assert.equal(guild.channels.cache.get(id).permissionOverwrites.cache.get('staff').deny.bitfield, 2048n)
+    assert.equal(channel.permissionOverwrites.cache.get('staff').allow.bitfield, 2048n)
+    assert.equal(guild.channels.cache.get(voiceId).permissionOverwrites.cache.get('staff').allow.bitfield, 1048576n)
+    const categoryPoint = await restorePoints.get(cascaded.result.restorePointId, guildId, actorId)
+    for (const id of [categoryId, textId]) assert.deepEqual(categoryPoint.snapshot.channels.find(target => target.id === id).overwrites, [])
+    await applications.confirm(guild, actorId, categoryPlan); assert.equal(edits, 11)
     const editedBeforeFailure = edits
     const driftPlan = await applications.prepare(guild, actorId, await proposal('stale'))
     channel.topic = 'manual external change'
@@ -276,7 +292,8 @@ async function main() {
       actualSDKPermissionSerialization: true, permissionRestorePointAndCheckpoints: true, overwriteTargetUsesCreatedRoleRealId: true,
       moveUsesCreatedCategoryRealId: true, actualSDKMoveWithoutSyncOrReorder: true, moveRestorePointAndCheckpoints: true,
       voiceMoveToRootKeepsOverwrites: true, roleChannelOrderBatches: true, protectedPositionAndOverwritePreserved: true,
-      reorderRestorePointAndCheckpoints: true }
+      reorderRestorePointAndCheckpoints: true, reviewedCategoryCascade: true, actualSDKCategoryPermissionSerialization: true,
+      customChildPermissionsPreserved: true, categoryRestorePointAndCheckpoint: true }
   } finally {
     cancelRelease?.(); await runtime?.close(); await sdkClient?.destroy()
     if (queue) { await queue.obliterate({ force: true }); await queue.close() }

@@ -1,4 +1,5 @@
 (function (root) {
+  const { sameOverwrites, syncedChildren } = typeof module !== 'undefined' && module.exports ? require('./architect-sync') : root.architectSync
   function createEditorState(source, draft) {
     let value = structuredClone(draft || { schemaVersion: 1, baseRevision: source.revision,
       channels: source.channels, roles: source.roles, protectedIds: [] })
@@ -12,6 +13,13 @@
       change(edit) {
         const next = structuredClone(value)
         edit(next)
+        for (const category of value.channels.filter(channel => channel.type === 4)) {
+          const proposed = next.channels.find(channel => channel.id === category.id)
+          if (!proposed || sameOverwrites(category.overwrites, proposed.overwrites)) continue
+          for (const child of syncedChildren({ guildId: source.guildId, channels: value.channels }, category)) {
+            next.channels.find(channel => channel.id === child.id).overwrites = structuredClone(proposed.overwrites)
+          }
+        }
         for (const item of [...value.channels, ...value.roles]) {
           if (protectedResource(item.id) && JSON.stringify(item) !== JSON.stringify([...next.channels, ...next.roles].find(resource => resource.id === item.id))) return false
         }

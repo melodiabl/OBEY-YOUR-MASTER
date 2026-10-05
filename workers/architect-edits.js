@@ -12,6 +12,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
     return { applicationId: record.applicationId, restorePointId: record.restorePointId, edits: new Set(record.payload.operations.filter(op => op.action !== 'create').flatMap(op => affectedResources(op).map(id => `${op.kind}:${id}`))).size,
       reorders: record.payload.operations.filter(op => op.action === 'reorder').reduce((count, op) => count + op.resourceIds.length, 0),
       permissionChanges: record.payload.operations.filter(op => op.action === 'permissions').length,
+      cascadedChannels: record.payload.operations.reduce((count, op) => count + (op.cascadeIds?.length || 0), 0),
       moves: record.payload.operations.filter(op => op.action === 'move').length,
       creates: record.payload.operations.filter(op => op.action === 'create').length, idMap: { ...(record.executionIdMap || {}) },
       revision: record.executionRevision, capturedAt: new Date(record.updatedAt || Date.now()).toISOString(),
@@ -102,6 +103,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         const target = operation.action === 'reorder' ? null : expected[operation.kind].find(resource => resource.id === operation.resourceId)
         if (!target && operation.action !== 'reorder') throw new JobError('Resource missing', 'revision_conflict')
         const fields = structuredClone(operation.fields)
+        if (operation.cascadeIds) require('../handlers/architect/cascades').projectCategoryPermissions(expected, operation, current.executionIdMap || {})
         if (operation.action === 'move') fields.parentId = fields.parentId == null ? null : current.executionIdMap?.[fields.parentId] || fields.parentId
         if (operation.action === 'permissions' && operation.kind === 'channels') fields.overwrites = fields.overwrites.map(overwrite => ({ ...overwrite, id: current.executionIdMap?.[overwrite.id] || overwrite.id })).sort((a, b) => a.id.localeCompare(b.id))
         const postflight = ['permissions', 'move', 'reorder'].includes(operation.action)

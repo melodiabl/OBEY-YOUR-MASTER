@@ -64,12 +64,13 @@
     <div class="architect-pane-heading"><h2 id="review-title">Cambios propuestos</h2><span id="architect-change-count">Sin revisar</span></div>
     <div id="architect-diff" class="architect-empty">Pulsa Revisar cambios para comparar la propuesta con el servidor actual.</div>
     <div id="architect-preflight" class="architect-empty"></div>
-    <p class="architect-review-note">Puedes aplicar nombres, temas, colores, permisos, cambios de categoría y orden de recursos existentes. El orden conserva tipos, categorías y recursos protegidos; se aplica por separado de creaciones o cambios de categoría del mismo tipo. Permisos de categorías, restauración y modo IA siguen pendientes.</p>
+    <p class="architect-review-note">Puedes aplicar nombres, temas, colores, permisos, cambios de categoría y orden de recursos existentes. El orden conserva tipos, categorías y recursos protegidos; se aplica por separado de creaciones o cambios de categoría del mismo tipo. Los permisos de categorías incluyen a sus hijos sincronizados y se revisan por separado de creaciones, cambios de padre y otros permisos de canales. Restauración y modo IA siguen pendientes.</p>
     <p id="architect-application-status" class="architect-empty" role="status">La aplicación requiere un servidor canary habilitado.</p>
     <button type="button" class="btn btn-sec" id="architect-prepare-application" disabled>Preparar aplicación</button>
     <button type="button" class="btn btn-p" id="architect-confirm-application" hidden disabled>Confirmar aplicación</button>
   </section>
 </section>
+<script src="/js/architect-sync.js"></script>
 <script src="/js/architect-state.js"></script>
 <script src="/js/architect-permission-state.js"></script>
 <script src="/js/architect-editor.js"></script>

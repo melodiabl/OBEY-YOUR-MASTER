@@ -30,7 +30,7 @@
         no_permission: 'No tienes permiso para administrar este servidor.', not_authenticated: 'Tu sesión caducó. Inicia sesión de nuevo.',
         storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
         architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.' }
-      Object.assign(messages, { application_unsupported: 'Puedes ordenar recursos existentes. Separa el orden de creaciones o cambios de categoría del mismo tipo. Permisos de categorías y planes mixtos de orden siguen pendientes.',
+      Object.assign(messages, { application_unsupported: 'Separa el orden de creaciones o cambios de categoría del mismo tipo. Revisa una categoría y sus hijos sincronizados por aplicación, sin creaciones, cambios de padre ni otros permisos de canales.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
         jobs_unavailable: 'Los trabajos no están disponibles. El plan aún no se ha enviado.', application_not_found: 'El plan ya no está disponible. Prepara uno nuevo.' })
@@ -66,9 +66,9 @@
     return item
   }
   function renderPermissions(resource, role, locked, draft) {
-    const available = !locked && !resource.id.startsWith('local:') && (role || [0, 2].includes(resource.type))
+    const available = !locked && !resource.id.startsWith('local:') && (role || [0, 2, 4].includes(resource.type))
     $('architect-permission-fields').disabled = !available
-    $('architect-permission-note').textContent = resource.id.startsWith('local:') ? 'Los recursos nuevos se crean sin permisos personalizados. Configúralos después de aplicar.' : !role && resource.type === 4 ? 'Los permisos de categorías aún no se aplican.' : 'Revisa estos cambios antes de confirmarlos. Los demás permisos y destinos guardados se conservan.'
+    $('architect-permission-note').textContent = resource.id.startsWith('local:') ? 'Los recursos nuevos se crean sin permisos personalizados. Configúralos después de aplicar.' : !role && resource.type === 4 ? 'Estos permisos también cambiarán en los canales sincronizados. Revisa cada hijo en el análisis. Si alguno está protegido, se bloquea la edición completa. Los canales con permisos propios se conservan.' : 'Revisa estos cambios antes de confirmarlos. Los demás permisos y destinos guardados se conservan.'
     $('architect-overwrite-target').hidden = role
     const target = $('architect-permission-role'); target.replaceChildren()
     for (const item of draft.roles) target.append(new Option(item.name, item.id))
@@ -176,6 +176,7 @@
       const name = body.blueprint[change.kind].find(resource => resource.id === change.id)?.name || change.id
       item.className = 'architect-change'
       title.textContent = `${({ create: 'Crear', update: 'Actualizar', move: 'Mover', overwrites: 'Cambiar permisos' })[change.operation]} ${name}` + (change.field ? ` · ${labels[change.field] || change.field}` : '')
+      if (change.cascadeIds?.length) title.textContent += ` · Hijos sincronizados: ${change.cascadeIds.map(id => body.blueprint.channels.find(channel => channel.id === id)?.name || id).join(', ')}`
       for (const [label, value] of [['Antes', change.before], ['Después', change.after]]) {
         const term = document.createElement('dt'), description = document.createElement('dd'), draft = label === 'Antes' ? source : body.blueprint
         term.textContent = label
@@ -203,8 +204,8 @@
       const body = await post('/applications', { blueprint: editor.current() })
       applicationPlan = body.plan; review(applicationPlan.review)
       $('architect-confirm-application').textContent = `Confirmar ${applicationPlan.changes} ${applicationPlan.changes === 1 ? 'cambio' : 'cambios'}`
-      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los recursos nuevos usan la posición predeterminada de Discord; podrás ordenarlos en otra aplicación.' : ''}${applicationPlan.moves ? ' Los canales cambiarán de categoría conservando sus permisos; el movimiento no los cambiará.' : ''}${applicationPlan.reorders ? ' El orden se aplicará en lotes conservando IDs, permisos y recursos protegidos.' : ''}${applicationPlan.permissionChanges ? ' Incluye cambios de permisos: revisa a quién conceden o quitan acceso.' : ''}`
-    } catch (error) { $('architect-application-status').textContent = error.message }
+      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los recursos nuevos usan la posición predeterminada de Discord; podrás ordenarlos en otra aplicación.' : ''}${applicationPlan.moves ? ' Los canales cambiarán de categoría conservando sus permisos; el movimiento no los cambiará.' : ''}${applicationPlan.reorders ? ' El orden se aplicará en lotes conservando IDs, permisos y recursos protegidos.' : ''}${applicationPlan.cascadedChannels ? ` Incluye ${applicationPlan.cascadedChannels} canales sincronizados: sus permisos cambiarán junto con la categoría.` : ''}${applicationPlan.permissionChanges ? ' Incluye cambios de permisos: revisa a quién conceden o quitan acceso.' : ''}`
+    } catch (error) { applicationPlan = null; $('architect-application-status').textContent = error.message }
     finally { busy = false; buttons() }
   })
   $('architect-confirm-application').addEventListener('click', async () => {

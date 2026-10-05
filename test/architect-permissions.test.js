@@ -39,7 +39,7 @@ test('permission plans block access loss and unsafe intermediate states even whe
   f.members.bot.roles.cache = undefined
   assert.throws(() => report([allow]), /membership/)
 })
-test('permission operations follow structure and are limited to existing role grants and text/voice overwrites', () => {
+test('permission operations follow structure and reject category writes without a reviewed cascade', () => {
   const operations = compileEdits({ changes: [
     { kind: 'channels', id: 'chat', operation: 'overwrites', resourceType: 0, after: [] },
     { kind: 'roles', id: 'staff', operation: 'update', field: 'permissions', after: String(F.SendMessages) },
@@ -47,7 +47,7 @@ test('permission operations follow structure and are limited to existing role gr
   ] })
   assert.deepEqual(operations.map(operation => operation.action || 'edit'), ['edit', 'permissions', 'permissions'])
   assert.equal(operations[1].kind, 'roles')
-  assert.throws(() => compileEdits({ changes: [{ kind: 'channels', id: 'category', operation: 'overwrites', resourceType: 4, after: [] }] }), /supported/)
+  assert.throws(() => compileEdits({ changes: [{ kind: 'channels', id: 'category', operation: 'overwrites', resourceType: 4, after: [] }] }), /cascade/)
 })
 test('permission preflight requires known memberships, actual grants and continued actor/bot access', async () => {
   const f = fixture(), { preflight } = require('../handlers/architect/preflight')

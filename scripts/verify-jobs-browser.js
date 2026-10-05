@@ -26,6 +26,13 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
    channels:{cache:new Map(channels.map(item=>[item.id,item])),fetch:async()=>new Map(channels.map(item=>[item.id,item])),edit:async(id,patch)=>{edits++;const channel=channels.find(item=>item.id===id);if(patch.name!==undefined)channel.name=patch.name;if(patch.topic!==undefined)channel.topic=patch.topic;if(Object.hasOwn(patch,'parent')){if(patch.lockPermissions!==false||patch.position!==undefined||patch.permissionOverwrites!==undefined)throw Error('Move changed order or synchronized permissions');channel.parentId=patch.parent}if(patch.permissionOverwrites)channel.permissionOverwrites.cache=new Map(patch.permissionOverwrites.map(overwrite=>[overwrite.id,{...overwrite,allow:new PermissionsBitField(overwrite.allow),deny:new PermissionsBitField(overwrite.deny)}]))}},
    roles:{cache:new Map(roles.map(item=>[item.id,item])),fetch:async()=>new Map(roles.map(item=>[item.id,item])),edit:async(id,patch)=>{edits++;const role=roles.find(item=>item.id===id);if(patch.colors){role.colors=patch.colors;role.color=patch.colors.primaryColor}if(patch.name!==undefined)role.name=patch.name;if(patch.permissions!==undefined)role.permissions=new PermissionsBitField(patch.permissions)}}}
   sdkClient=new Client({intents:[]});sdkClient.user={id:'123456789012345600'};guild.client=sdkClient;guild.maximumBitrate=96000
+  const editChannel=guild.channels.edit
+  guild.channels.edit=async(id,patch)=>{
+   const category=channels.find(channel=>channel.id===id)
+   const children=category.type===4&&patch.permissionOverwrites?channels.filter(child=>child.parentId===id&&JSON.stringify([...child.permissionOverwrites.cache.values()])===JSON.stringify([...category.permissionOverwrites.cache.values()])):[]
+   await editChannel(id,patch)
+   for(const child of children)child.permissionOverwrites.cache=new Map(patch.permissionOverwrites.map(overwrite=>[overwrite.id,{...overwrite,allow:new PermissionsBitField(overwrite.allow),deny:new PermissionsBitField(overwrite.deny)}]))
+  }
   sdkClient.rest.patch=async(route,{body,reason})=>{
    if(!Array.isArray(body)||!reason.includes('reorder-')||body.some(entry=>Object.keys(entry).sort().join(',')!=='id,position'))throw Error('Invalid reorder batch')
    edits++
@@ -152,13 +159,30 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(!permissionJob||permissionJob.progress.completed!==3)throw Error('Permission checkpoints missing')
   const permissionCopy=await restorePoints.get(permissionJob.result.restorePointId,guild.id,'browser_actor')
   if(permissionCopy.snapshot.roles.find(role=>role.id==='staff').permissions!=='0'||permissionCopy.snapshot.channels.find(channel=>channel.id==='chat').overwrites.length)throw Error('Permission copy captured after mutation')
+  page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-refresh').click();await page.waitForFunction(()=>!document.querySelector('#architect-refresh').disabled)
+  await page.locator(`[data-resource-id="${category.id}"]`).click();await page.locator('#architect-permission-role').selectOption('staff');await page.locator('select[data-permission-key="SendMessages"]').selectOption('deny')
+  if(!await page.locator('#architect-permission-note').textContent().then(text=>text.includes('canales sincronizados')))throw Error('Category inspector omitted child impact')
+  await page.locator('#architect-prepare-application').click();await page.waitForFunction(()=>!document.querySelector('#architect-confirm-application').hidden)
+  if(edits!==7)throw Error('Preparing category permissions caused effects')
+  const categoryReview=await page.locator('#architect-diff').textContent()
+  if(!categoryReview.includes('Hijos sincronizados:'))throw Error('Category review omitted the explicit child list')
+  for(const name of ['Comunidad nueva','chat-nuevo','Voz nueva'])if(!categoryReview.includes(name))throw Error('Category review omitted '+name)
+  if(!await page.locator('#architect-application-status').textContent().then(text=>text.includes('2 canales sincronizados')))throw Error('Category confirmation omitted cascade count')
+  page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-confirm-application').click();await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('2 canales sincronizados'))
+  if(edits!==8)throw Error('Category permissions did not use one write')
+  for(const name of ['Comunidad nueva','chat-nuevo','Voz nueva'])if(channels.find(channel=>channel.name===name).permissionOverwrites.cache.get('staff')?.deny.bitfield!==2048n)throw Error('Category cascade missed '+name)
+  const categoryJob=(await runtime.list(guild.id,'browser_actor')).find(job=>job.result?.cascadedChannels===2)
+  if(!categoryJob||categoryJob.result.edits!==3||categoryJob.progress.completed!==2)throw Error('Category checkpoint missing')
+  const categoryCopy=await restorePoints.get(categoryJob.result.restorePointId,guild.id,'browser_actor')
+  for(const name of ['Comunidad nueva','chat-nuevo','Voz nueva'])if(categoryCopy.snapshot.channels.find(channel=>channel.name===name).overwrites.length)throw Error('Category copy captured after mutation')
+  if(channels.find(channel=>channel.id==='chat').permissionOverwrites.cache.get('staff').deny.bitfield!==2048n)throw Error('Category changed a custom child')
   roles.find(role=>role.id==='browser_bot_role').permissions=new PermissionsBitField(['ManageGuild','ManageRoles','ManageChannels','ViewChannel','SendMessages','ViewAuditLog'])
   page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-refresh').click();await page.waitForFunction(()=>!document.querySelector('#architect-refresh').disabled)
   await page.locator('[data-resource-id="chat"]').click();await page.locator('#architect-permission-role').selectOption(guild.id);await page.locator('select[data-permission-key="ViewChannel"]').selectOption('deny')
   await page.locator('#architect-preview').click();await page.waitForFunction(()=>document.querySelector('#architect-preflight').textContent.includes('Bloqueado'))
   const unsafeResponse=page.waitForResponse(response=>response.url().endsWith('/applications')&&response.request().method()==='POST')
   await page.locator('#architect-prepare-application').click();if((await (await unsafeResponse).json()).error!=='application_blocked')throw Error('Unsafe permission proposal not blocked')
-  if(edits!==7||!await page.locator('#architect-confirm-application').isHidden())throw Error('Unsafe proposal caused effects or kept confirmation')
+  if(edits!==8||!await page.locator('#architect-confirm-application').isHidden())throw Error('Unsafe proposal caused effects or kept confirmation')
   block=true;await page.locator('#architect-analyze').click();await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('Cancelar análisis'))
   await page.locator('#architect-jobs button').click();release();block=false
   await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('Cancelado'))
@@ -181,7 +205,7 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(await second.locator('#architect-jobs').textContent()!=='')throw Error('Revocation left a private job visible')
   if(await second.locator('#architect-restore-points').textContent()!=='')throw Error('Revocation left a private restore point visible')
   if(reads!==before)throw Error('Unauthorized source read')
-  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','category move review and confirmation','move preserves ID/order/permissions','move checkpoint and prior copy','role/channel reorder from inspector','reorder confirmation and batch checkpoints','protected/voice positions preserved','reorder prior copy','role/channel permission inspector','readable permission review','confirmed permissions and prior copy','bot access loss blocked before effects','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
+  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','category move review and confirmation','move preserves ID/order/permissions','move checkpoint and prior copy','role/channel reorder from inspector','reorder confirmation and batch checkpoints','protected/voice positions preserved','reorder prior copy','role/channel permission inspector','readable permission review','confirmed permissions and prior copy','category inspector and child impact','category review lists each synced child','category confirmation and single write','category prior copy and checkpoint','custom child permissions preserved','bot access loss blocked before effects','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
   if(errors.length)throw Error(errors.join('; '))
   fs.writeFileSync(root+'/docs/platform/evidence/jobs-browser.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result))
  }finally{
