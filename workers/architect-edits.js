@@ -10,6 +10,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
   function result(record) {
     return { applicationId: record.applicationId, restorePointId: record.restorePointId, edits: new Set(record.payload.operations.filter(op => op.action !== 'create').map(op => `${op.kind}:${op.resourceId}`)).size,
       permissionChanges: record.payload.operations.filter(op => op.action === 'permissions').length,
+      moves: record.payload.operations.filter(op => op.action === 'move').length,
       creates: record.payload.operations.filter(op => op.action === 'create').length, idMap: { ...(record.executionIdMap || {}) },
       revision: record.executionRevision, capturedAt: new Date(record.updatedAt || Date.now()).toISOString(),
       channelCount: (record.executionSnapshot || record.payload.snapshot).channels.length, roleCount: (record.executionSnapshot || record.payload.snapshot).roles.length }
@@ -98,8 +99,9 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         const expected = structuredClone(observed), target = expected[operation.kind].find(resource => resource.id === operation.resourceId)
         if (!target) throw new JobError('Resource missing', 'revision_conflict')
         const fields = structuredClone(operation.fields)
+        if (operation.action === 'move') fields.parentId = fields.parentId == null ? null : current.executionIdMap?.[fields.parentId] || fields.parentId
         if (operation.action === 'permissions' && operation.kind === 'channels') fields.overwrites = fields.overwrites.map(overwrite => ({ ...overwrite, id: current.executionIdMap?.[overwrite.id] || overwrite.id })).sort((a, b) => a.id.localeCompare(b.id))
-        if (operation.action === 'permissions') installArchitectRetryGuard(guild.client?.rest)
+        if (['permissions', 'move'].includes(operation.action)) installArchitectRetryGuard(guild.client?.rest)
         Object.assign(target, fields)
         if (operation.kind === 'roles' && Object.hasOwn(operation.fields, 'color') && expected.roleColors?.[operation.resourceId]) expected.roleColors[operation.resourceId].primaryColor = operation.fields.color
         const revision = structureRevision(expected.channels, expected.roles, expected.roleColors)
@@ -109,6 +111,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         try {
           await lease.assertOwned()
           const patch = { ...fields, reason: reasonFor(record._id, operation) }
+          if (operation.action === 'move') { patch.parent = patch.parentId; patch.lockPermissions = false; delete patch.parentId }
           if (operation.action === 'permissions') {
             if (operation.kind === 'roles') patch.permissions = BigInt(patch.permissions)
             else { patch.permissionOverwrites = patch.overwrites.map(overwrite => ({ ...overwrite, allow: BigInt(overwrite.allow), deny: BigInt(overwrite.deny) })); delete patch.overwrites }
@@ -119,9 +122,9 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
           await guild[operation.kind].edit(operation.resourceId, patch)
           const applied = await snapshot(guild)
           if (applied.revision !== revision) throw new Error('Unexpected structure after edit')
-          if (operation.action === 'permissions' && (await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap: current.executionIdMap || {}, observed: applied })).status !== 'passed') throw new Error('Permissions changed after application')
+          if (['permissions', 'move'].includes(operation.action) && (await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap: current.executionIdMap || {}, observed: applied })).status !== 'passed') throw new Error('Access changed after application')
           await lease.assertOwned()
-          if (operation.action === 'permissions' && (await snapshot(guild)).revision !== revision) throw new Error('Structure changed after permission check')
+          if (['permissions', 'move'].includes(operation.action) && (await snapshot(guild)).revision !== revision) throw new Error('Structure changed after access check')
           if (!await repository.completeEdit(record._id, record.token, index, revision, undefined, current.executionSnapshot ? { snapshot: applied, idMap: current.executionIdMap || {} } : undefined)) throw new Error('Checkpoint not acknowledged')
         } catch { throw new JobError('Edit outcome needs review', 'application_needs_review') }
       }

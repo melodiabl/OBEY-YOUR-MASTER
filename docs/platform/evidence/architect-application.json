@@ -20,5 +20,9 @@
   "confirmedRoleTextVoicePermissions": true,
   "actualSDKPermissionSerialization": true,
   "permissionRestorePointAndCheckpoints": true,
-  "overwriteTargetUsesCreatedRoleRealId": true
+  "overwriteTargetUsesCreatedRoleRealId": true,
+  "moveUsesCreatedCategoryRealId": true,
+  "actualSDKMoveWithoutSyncOrReorder": true,
+  "moveRestorePointAndCheckpoints": true,
+  "voiceMoveToRootKeepsOverwrites": true
 }

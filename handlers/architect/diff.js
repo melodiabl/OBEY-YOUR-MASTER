@@ -16,6 +16,7 @@ function diffBlueprint(source, blueprint) {
       if (before.parentId !== resource.parentId || before.position !== resource.position) changes.push({
         operation: 'move', kind, id: resource.id, before: kind === 'roles' ? { position: before.position } : { parentId: before.parentId ?? null, position: before.position },
         after: kind === 'roles' ? { position: resource.position } : { parentId: resource.parentId ?? null, position: resource.position },
+        ...(kind === 'channels' ? { resourceType: resource.type } : {}),
       })
     }
   }

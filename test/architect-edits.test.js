@@ -5,14 +5,16 @@ const { validateBlueprint } = require('../handlers/architect/blueprint')
 const { diffBlueprint } = require('../handlers/architect/diff')
 const { compileEdits } = require('../handlers/architect/application')
 const { createEditExecutor } = require('../workers/architect-edits')
-function fixture({ creations = false, permissions = false } = {}) {
+function fixture({ creations = false, permissions = false, moves = false } = {}) {
   const source = { schemaVersion: 1, guildId: 'g', name: 'Fixture', capturedAt: new Date().toISOString(), channels: [{
     id: 'chat', name: 'old', type: 0, topic: '', position: 0, parentId: null, overwrites: [], nsfw: false, bitrate: null, userLimit: null, rateLimitPerUser: 0,
   }], roles: [] }
+  if (moves) source.channels.push({ ...source.channels[0], id: 'destination', name: 'Community', type: 4 })
   if (permissions) source.roles.push({ id: 'staff', name: 'Staff', position: 1, permissions: '0', color: 0, hoist: false, mentionable: false, managed: false })
   source.revision = structureRevision(source.channels, source.roles)
   const input = { schemaVersion: 1, baseRevision: source.revision, channels: structuredClone(source.channels), roles: structuredClone(source.roles) }
-  if (permissions) { input.roles[0].permissions = '2048'; input.channels[0].overwrites = [{ id: 'staff', type: 0, allow: '2048', deny: '0' }] }
+  if (moves) input.channels[0].parentId = 'destination'
+  else if (permissions) { input.roles[0].permissions = '2048'; input.channels[0].overwrites = [{ id: 'staff', type: 0, allow: '2048', deny: '0' }] }
   else if (!creations) input.channels[0].name = 'new'
   else {
     input.roles.push({ id: 'local:member', name: 'Member', position: 1, permissions: '0', color: 123, hoist: false, mentionable: false, managed: false })
@@ -35,6 +37,7 @@ function fixture({ creations = false, permissions = false } = {}) {
   const guildOperations = { async claim(guild, job) { if (guards.has(guild) && guards.get(guild) !== job) return false; guards.set(guild, job); return true }, async release(guild, job) { if (guards.get(guild) === job) guards.delete(guild) } }
   const guild = { id: 'g', channels: { async edit(id, patch) {
     edits++; if (patch.name !== undefined) current.channels[0].name = patch.name
+    if (Object.hasOwn(patch, 'parent')) { assert.equal(patch.lockPermissions, false); assert.equal(patch.position, undefined); assert.equal(patch.permissionOverwrites, undefined); current.channels[0].parentId = patch.parent }
     if (patch.permissionOverwrites) current.channels[0].overwrites = patch.permissionOverwrites.map(overwrite => ({ ...overwrite, allow: String(overwrite.allow), deny: String(overwrite.deny) }))
     current.revision = structureRevision(current.channels, current.roles, current.roleColors); if (responseLost) throw new Error('fixture lost response')
   } } }
@@ -42,6 +45,7 @@ function fixture({ creations = false, permissions = false } = {}) {
     guild.client = { rest: { options: { makeRequest: async () => { throw new Error('Unexpected network') } } } }
     guild.roles = { async edit(id, patch) { assert.equal(typeof patch.permissions, 'bigint'); edits++; current.roles[0].permissions = String(patch.permissions); current.revision = structureRevision(current.channels, current.roles); if (responseLost) throw new Error('fixture lost permission response') } }
   }
+  if (moves) guild.client = { rest: { options: { makeRequest: async () => { throw new Error('Unexpected network') } } } }
   let createCalls = 0, loseCreate = false, auditVisible = true, revokeOnCreate = false
   const auditEntries = new Map()
   if (creations) {
@@ -146,5 +150,20 @@ test('uncertain permission mutations retain their journal and cannot be replayed
   await assert.rejects(f.execute(), error => error.code === 'application_needs_review')
   assert.equal(f.edits(), 1); assert.equal(f.record.steps[1].status, 'executing')
   assert.equal(f.guards.get('g'), 'job')
+  await assert.rejects(f.execute(), error => error.code === 'application_needs_review'); assert.equal(f.edits(), 1)
+})
+test('confirmed category changes preserve IDs, order and overwrites and skip completed moves on recovery', async () => {
+  const f = fixture({ moves: true }), result = await f.execute()
+  assert.equal(result.moves, 1); assert.equal(result.edits, 1); assert.equal(f.edits(), 1)
+  assert.equal(f.points[0].channels[0].parentId, null)
+  const chat = f.record.executionSnapshot.channels.find(channel => channel.id === 'chat')
+  assert.equal(chat.parentId, 'destination'); assert.equal(chat.position, 0); assert.deepEqual(chat.overwrites, [])
+  assert.equal(f.record.progress.completed, 2); assert.equal(f.guards.size, 0)
+  await f.execute(); assert.equal(f.edits(), 1)
+})
+test('an ambiguous move cannot replay and retains the durable guild guard', async () => {
+  const f = fixture({ moves: true }); f.loseResponse()
+  await assert.rejects(f.execute(), error => error.code === 'application_needs_review')
+  assert.equal(f.edits(), 1); assert.equal(f.record.steps[1].status, 'executing'); assert.equal(f.guards.get('g'), 'job')
   await assert.rejects(f.execute(), error => error.code === 'application_needs_review'); assert.equal(f.edits(), 1)
 })

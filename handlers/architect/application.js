@@ -11,6 +11,10 @@ function compileEdits(diff) {
       operations.set(`${change.kind}:${change.id}`, { id: `create-${operations.size + 1}`, action: 'create', kind: change.kind, resourceId: change.id, fields: structuredClone(change.after) })
       continue
     }
+    if (change.operation === 'move' && change.kind === 'channels' && [0, 2].includes(change.resourceType) && change.before.position === change.after.position && change.before.parentId !== change.after.parentId) {
+      operations.set(`${change.kind}:${change.id}:move`, { id: `move-${operations.size + 1}`, action: 'move', kind: 'channels', resourceId: change.id, fields: { parentId: change.after.parentId } })
+      continue
+    }
     if ((change.kind === 'roles' && change.operation === 'update' && change.field === 'permissions') || (change.kind === 'channels' && change.operation === 'overwrites' && [0, 2].includes(change.resourceType))) {
       operations.set(`${change.kind}:${change.id}:permissions`, { id: `permissions-${operations.size + 1}`, action: 'permissions', kind: change.kind, resourceId: change.id,
         fields: change.kind === 'roles' ? { permissions: change.after } : { overwrites: structuredClone(change.after) } })
@@ -22,7 +26,8 @@ function compileEdits(diff) {
     if (!operations.has(id)) operations.set(id, { id: `edit-${operations.size + 1}`, kind: change.kind, resourceId: change.id, fields: {} })
     operations.get(id).fields[change.field] = change.after
   }
-  const rank = operation => operation.action === 'permissions' ? operation.kind === 'roles' ? 3 : 4 : operation.kind === 'roles' ? 0 : operation.action === 'create' && operation.fields.type === 4 ? 1 : 2
+  if (operations.size > 1000) throw new JobError('Plans over 1000 operations are not supported', 'application_unsupported')
+  const rank = operation => operation.action === 'move' ? 3 : operation.action === 'permissions' ? operation.kind === 'roles' ? 4 : 5 : operation.kind === 'roles' ? 0 : operation.action === 'create' && operation.fields.type === 4 ? 1 : 2
   return [...operations.values()].sort((a, b) => rank(a) - rank(b))
 }
 function createApplicationService({ repository, preview, jobs, enabled = () => false, snapshot = snapshotGuild, storageReady = () => true }) {
@@ -44,6 +49,7 @@ function createApplicationService({ repository, preview, jobs, enabled = () => f
         payload: { schemaVersion: 1, snapshot: proposal.snapshot, blueprint: proposal.blueprint, operations, revision: proposal.diff.revision, expiresAt } })
       return { id, confirmation, revision: proposal.diff.revision, expiresAt, edits: new Set(operations.filter(operation => operation.action !== 'create').map(operation => `${operation.kind}:${operation.resourceId}`)).size,
         permissionChanges: operations.filter(operation => operation.action === 'permissions').length,
+        moves: operations.filter(operation => operation.action === 'move').length,
         creates: operations.filter(operation => operation.action === 'create').length, changes: proposal.diff.changes.length,
         review: { blueprint: proposal.blueprint, diff: proposal.diff, preflight: proposal.preflight } }
     },

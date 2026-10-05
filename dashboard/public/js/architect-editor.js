@@ -30,7 +30,7 @@
         no_permission: 'No tienes permiso para administrar este servidor.', not_authenticated: 'Tu sesión caducó. Inicia sesión de nuevo.',
         storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
         architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.' }
-      Object.assign(messages, { application_unsupported: 'Puedes aplicar ediciones y permisos de roles/canales de texto o voz, y creaciones básicas. Movimientos y permisos de categorías siguen pendientes.',
+      Object.assign(messages, { application_unsupported: 'Puedes aplicar ediciones, permisos y cambios de categoría de texto/voz, y creaciones básicas. Cambios de orden y permisos de categorías siguen pendientes.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
         jobs_unavailable: 'Los trabajos no están disponibles. El plan aún no se ha enviado.', application_not_found: 'El plan ya no está disponible. Prepara uno nuevo.' })
@@ -152,7 +152,10 @@
     } catch (error) { status(error.message, true) }
     finally { busy = false; buttons() }
   }
-  function format(value, draft) {
+  function format(value, draft, change) {
+    if (change?.field === 'permissions') return formatPermissions(value)
+    if (change?.operation === 'overwrites') return value.map(overwrite => `${draft.roles.find(role => role.id === overwrite.id)?.name || `Miembro ${overwrite.id}`}: permitir ${formatPermissions(overwrite.allow)}; denegar ${formatPermissions(overwrite.deny)}`).join(' · ') || 'Sin sobrescrituras'
+    if (change?.operation === 'move' && change.kind === 'channels' && change.before.position === change.after.position) return `Categoría: ${draft.channels.find(channel => channel.id === value.parentId)?.name || 'Sin categoría'}`
     if (value == null) return 'No existe'
     if (typeof value === 'object') {
       if (value.name) return value.name + (value.parentId ? ` · Categoría: ${draft.channels.find(channel => channel.id === value.parentId)?.name || value.parentId}` : '')
@@ -176,7 +179,7 @@
       for (const [label, value] of [['Antes', change.before], ['Después', change.after]]) {
         const term = document.createElement('dt'), description = document.createElement('dd'), draft = label === 'Antes' ? source : body.blueprint
         term.textContent = label
-        description.textContent = change.field === 'permissions' ? formatPermissions(value) : change.operation === 'overwrites' ? value.map(overwrite => `${draft.roles.find(role => role.id === overwrite.id)?.name || `Miembro ${overwrite.id}`}: permitir ${formatPermissions(overwrite.allow)}; denegar ${formatPermissions(overwrite.deny)}`).join(' · ') || 'Sin sobrescrituras' : format(value, draft)
+        description.textContent = format(value, draft, change)
         details.append(term, description)
       }
       item.append(title, details); target.append(item)
@@ -200,7 +203,7 @@
       const body = await post('/applications', { blueprint: editor.current() })
       applicationPlan = body.plan; review(applicationPlan.review)
       $('architect-confirm-application').textContent = `Confirmar ${applicationPlan.changes} ${applicationPlan.changes === 1 ? 'cambio' : 'cambios'}`
-      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los roles nuevos se crean bajo los existentes y los canales en la posición predeterminada de Discord. El orden personalizado sigue pendiente.' : ''}${applicationPlan.permissionChanges ? ' Incluye cambios de permisos: revisa a quién conceden o quitan acceso.' : ''}`
+      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los roles nuevos se crean bajo los existentes y los canales en la posición predeterminada de Discord. El orden personalizado sigue pendiente.' : ''}${applicationPlan.moves ? ' Los canales cambiarán de categoría conservando sus permisos; el movimiento no los cambiará.' : ''}${applicationPlan.permissionChanges ? ' Incluye cambios de permisos: revisa a quién conceden o quitan acceso.' : ''}`
     } catch (error) { $('architect-application-status').textContent = error.message }
     finally { busy = false; buttons() }
   })

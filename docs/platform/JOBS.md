@@ -1,6 +1,6 @@
 # Trabajos persistentes de Architect
 
-`architect.snapshot` consulta canales/roles y conserva el resultado privado del administrador. `architect.backup` guarda puntos de restauración de estructura. `architect.apply` ejecuta ediciones confirmadas de nombres, temas de texto y colores existentes y creaciones básicas con IDs reales y permisos de roles/texto/voz existentes, limitado a guilds canary habilitadas. Web y `/config architect` comparten `client.jobs`, scope e historial; Discord solicita análisis/copias y la confirmación de ediciones se realiza en la web. Restauración, movimientos, permisos de categorías y módulos conservan sus pendientes.
+`architect.snapshot` consulta canales/roles y conserva el resultado privado del administrador. `architect.backup` guarda puntos de restauración de estructura. `architect.apply` ejecuta ediciones confirmadas de nombres, temas de texto y colores existentes y creaciones básicas con IDs reales y permisos de roles/texto/voz existentes y cambios de categoría, limitado a guilds canary habilitadas. Web y `/config architect` comparten `client.jobs`, scope e historial; Discord solicita análisis/copias y la confirmación de ediciones se realiza en la web. Restauración, reordenamiento, permisos de categorías y módulos conservan sus pendientes.
 
 ## Persistencia y entrega
 

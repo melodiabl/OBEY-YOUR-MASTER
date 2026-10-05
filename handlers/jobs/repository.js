@@ -10,7 +10,7 @@ function createJobRepository(model = require('../../database/schemas/JobSchema')
       if (input.type === 'architect.backup') record.steps = [{ id: 'restore_point', status: 'pending' }]
       if (input.type === 'architect.apply') {
         record.applicationId = input.applicationId; record.payload = input.payload; record.executionRevision = input.payload.snapshot.revision
-        if (input.payload.operations.some(operation => ['create', 'permissions'].includes(operation.action))) record.executionSnapshot = input.payload.snapshot
+        if (input.payload.operations.some(operation => ['create', 'permissions', 'move'].includes(operation.action))) record.executionSnapshot = input.payload.snapshot
         record.steps = [{ id: 'restore_point', status: 'pending' }, ...input.payload.operations.map(operation => ({ id: operation.id, status: 'pending' }))]
         record.progress = { completed: 0, total: record.steps.length }
       }

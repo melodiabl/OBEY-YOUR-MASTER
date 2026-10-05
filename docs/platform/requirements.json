@@ -1822,9 +1822,10 @@
           "handlers/architect/creations.js",
           "workers/architect-edits.js",
           "handlers/architect/permissions.js",
-          "handlers/architect/preflight.js"
+          "handlers/architect/preflight.js",
+          "handlers/architect/moves.js"
         ],
-        "assessment": "Creaciones básicas/IDs reales/reconciliación positiva y permisos existentes de roles/texto/voz con grants, acceso por paso e inspector implementados detrás de canary. Movimientos/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones básicas/IDs reales/reconciliación, permisos existentes e inspector y cambios de categoría de texto/voz conservando permisos con acceso/capacidad por paso implementados detrás de canary. Reordenamiento/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Implementar núcleo Architect visual y ejecución segura; IA fase 5.",
       "phase": 4,
@@ -1848,7 +1849,8 @@
           "docs/platform/evidence/jobs-browser.json",
           "test/architect-creations.test.js",
           "test/architect-permissions.test.js",
-          "test/architect-permission-state.test.js"
+          "test/architect-permission-state.test.js",
+          "test/architect-moves.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2266,9 +2268,10 @@
           "handlers/architect/creations.js",
           "workers/architect-edits.js",
           "handlers/architect/permissions.js",
-          "handlers/architect/preflight.js"
+          "handlers/architect/preflight.js",
+          "handlers/architect/moves.js"
         ],
-        "assessment": "Creaciones básicas/IDs reales/reconciliación positiva y permisos existentes de roles/texto/voz con grants, acceso por paso e inspector implementados detrás de canary. Movimientos/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones básicas/IDs reales/reconciliación, permisos existentes e inspector y cambios de categoría de texto/voz conservando permisos con acceso/capacidad por paso implementados detrás de canary. Reordenamiento/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Diff, planner/preflight e inversas con conflictos y límites explícitos.",
       "phase": 4,
@@ -2292,7 +2295,8 @@
           "docs/platform/evidence/jobs-browser.json",
           "test/architect-creations.test.js",
           "test/architect-permissions.test.js",
-          "test/architect-permission-state.test.js"
+          "test/architect-permission-state.test.js",
+          "test/architect-moves.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2321,9 +2325,10 @@
         "evidence": [
           "commands/Administration/loadbackup.js",
           "handlers/architect/permissions.js",
-          "handlers/architect/preflight.js"
+          "handlers/architect/preflight.js",
+          "handlers/architect/moves.js"
         ],
-        "assessment": "Creaciones básicas/IDs reales/reconciliación positiva y permisos existentes de roles/texto/voz con grants, acceso por paso e inspector implementados detrás de canary. Movimientos/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones básicas/IDs reales/reconciliación, permisos existentes e inspector y cambios de categoría de texto/voz conservando permisos con acceso/capacidad por paso implementados detrás de canary. Reordenamiento/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Diff, planner/preflight e inversas con conflictos y límites explícitos.",
       "phase": 4,
@@ -2346,7 +2351,8 @@
           "docs/platform/evidence/architect-application.json",
           "docs/platform/evidence/jobs-browser.json",
           "test/architect-permissions.test.js",
-          "test/architect-permission-state.test.js"
+          "test/architect-permission-state.test.js",
+          "test/architect-moves.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -14073,8 +14079,8 @@
       "T14/T23/T24 cola/registro/outbox, leases por guild, checkpoints/journal/guard de efectos y cancelación parciales",
       "Redis dedicado autenticado/AOF/noeviction configurado y verificado por petición expresa",
       "T27 puntos privados/inmutables de estructura con inspección, incompletitud explícita y recuperación",
-      "T28/T26/T30 confirmación por revisión, creaciones básicas/IDs reales/reconciliación y permisos existentes de roles/texto/voz con acceso por paso e inspector, limitada a canary; movimientos/cascada de categorías/módulos pendientes"
+      "T28/T26/T30 confirmación, creaciones/IDs reales/reconciliación, permisos existentes y cambios de categoría de texto/voz con acceso/capacidad por paso e inspector, limitada a canary; reordenamiento/cascada de categorías/módulos pendientes"
     ],
-    "verification": "212 tests/51 archivos; Mongo/Redis/BullMQ aislados y Chromium prueban SDK real, creaciones y mapas/IDs de sobrescrituras, permisos de roles/texto/voz, forecast de acceso por paso, estados intermedios inseguros bloqueados, grants y retirada de denies, inspector y revisión legible, confirmación/copia/checkpoints, respuesta incierta sin replay, fencing/guard/cancelación, dos pestañas/revocación/móvil. No canary Discord real; movimientos/cascada de categorías/configuración/revisión manual/restore/rollback pendientes."
+    "verification": "219 tests/52 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK real, movimientos a categoría creada en el mismo job, conservación de ID/orden/permisos, raíz null, privacidad/acceso/capacidad por paso, límite de 1000 operaciones, revisión/confirmación/copia/checkpoint, creaciones/IDs y permisos con forecast, respuesta incierta sin replay, guard/fencing/cancelación/dos pestañas/revocación/móvil. No canary Discord real; reordenamiento/cascada/configuración/revisión manual/restore/rollback pendientes."
   }
 }
