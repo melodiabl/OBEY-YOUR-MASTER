@@ -754,7 +754,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T30
 
-**Checkpoint activo:** Editor web conectado: árbol/inspector, crear y mover, nombres/colores, undo/redo, protección, preview y guardar/recuperar borrador. Discord consulta la misma propuesta. Preparación/confirmación web y progreso durable de edición compatible añadidos. Inspector de permisos de roles/texto/voz y revisión legible con acceso por paso añadidos. Cambios de categoría y orden de canales/roles existentes con confirmación/copia previa, controles y protección añadidos. Permisos de una categoría con cascada revisada añadidos. Wizard, permisos de miembros/cascadas múltiples, eventos y aplicación completa pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
+**Checkpoint activo:** Editor web conectado: árbol/inspector, crear y mover, nombres/colores, undo/redo, protección, preview y guardar/recuperar borrador. Discord consulta la misma propuesta. Preparación/confirmación web y progreso durable de edición compatible añadidos. Inspector de permisos de roles/texto/voz y revisión legible con acceso por paso añadidos. Cambios de categoría y orden de canales/roles existentes con confirmación/copia previa, controles y protección añadidos. Permisos de una categoría con cascada revisada añadidos. Asistente de estructura con diez bases, siete temas para recursos nuevos, tamaño/idioma/decoración, diff, undo y borrador privado añadido. Conexión de módulos, wizard integral, permisos de miembros/cascadas múltiples, eventos y aplicación completa pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
 
 - [ ] Editor Architect visual conectado (fase 4).
 

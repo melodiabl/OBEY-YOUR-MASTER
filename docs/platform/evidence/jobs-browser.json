@@ -1,6 +1,14 @@
 {
   "scope": "Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider",
   "states": [
+    "community wizard",
+    "language/theme/size/decoration affect proposal",
+    "generated resources in editor and diff",
+    "private draft persisted",
+    "second tab recovers wizard proposal",
+    "wizard repeat without duplicates",
+    "wizard undo",
+    "wizard mobile without overflow",
     "submit",
     "measured steps",
     "completed result",

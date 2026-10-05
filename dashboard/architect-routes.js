@@ -25,7 +25,7 @@ module.exports = (app, client, {
       if (code === 'application_not_found') return res.status(404).json({ error: code })
       if (code === 'application_unsupported') return res.status(400).json({ error: code })
       if (error instanceof JobError && code === 'invalid_job') return res.status(400).json({ error: code })
-      if (error instanceof BlueprintError && code === 'invalid_blueprint') return res.status(400).json({ error: code, detail: error.message })
+      if (error instanceof BlueprintError && ['invalid_blueprint', 'invalid_wizard'].includes(code)) return res.status(400).json({ error: code, detail: error.message })
       return res.status(503).json({ error: ['storage_unavailable', 'jobs_unavailable', 'apply_unavailable'].includes(code) ? code : 'architect_unavailable' })
     }
   }
@@ -37,6 +37,10 @@ module.exports = (app, client, {
   }))
   app.post('/api/architect/:guildId/preview', ...guarded, wrap(async (req, res) => {
     res.json({ ok: true, ...(await service.preview(req.architectGuild, req.body?.blueprint, req.session.user.id)) })
+  }))
+  app.post('/api/architect/:guildId/generate', ...guarded, wrap(async (req, res) => {
+    if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body) || Object.keys(req.body).some(key => !['blueprint', 'choices'].includes(key))) throw new BlueprintError('Invalid wizard request', 'invalid_wizard')
+    res.json({ ok: true, ...(await service.generate(req.architectGuild, req.session.user.id, req.body.blueprint, req.body.choices)) })
   }))
   app.post('/api/architect/:guildId/draft', ...guarded, wrap(async (req, res) => {
     res.json({ ok: true, ...(await service.save(req.architectGuild, req.session.user.id, req.body?.blueprint, req.body?.expectedRevision)) })

@@ -1,6 +1,7 @@
 <%- include('../includes/header', { title: guild.name + ' — Architect', user, activePage: 'architect', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Architect' }] }) %>
 <link rel="stylesheet" href="/css/architect.css">
 <link rel="stylesheet" href="/css/architect-permissions.css">
+<link rel="stylesheet" href="/css/architect-wizard.css">
 <section id="architect-app" data-guild-id="<%= guild.id %>">
   <div class="architect-heading">
     <div><a class="architect-back" href="/dashboard/<%= guild.id %>">← <%= guild.name %></a><h1>Server Architect</h1><p>Diseña la estructura de tu servidor y revisa cada cambio.</p></div>
@@ -8,14 +9,25 @@
   </div>
   <p id="architect-status" class="architect-status" role="status">Leyendo la estructura del servidor…</p>
   <div class="architect-notice" id="architect-notice" hidden></div>
-  <section class="architect-pane architect-review" aria-labelledby="jobs-title">
-    <div class="architect-pane-heading architect-jobs-heading"><h2 id="jobs-title">Trabajos de estructura</h2><button type="button" class="btn btn-sec" id="architect-analyze" disabled>Analizar en segundo plano</button><button type="button" class="btn btn-sec" id="architect-backup" disabled>Guardar punto de restauración</button></div>
-    <p id="architect-jobs-status" class="architect-empty" role="status">Comprobando disponibilidad…</p>
-    <div id="architect-jobs"></div>
-    <p class="architect-review-note">El análisis lee canales y roles. Su resultado no reemplaza la propuesta que estás editando.</p>
-    <h3>Tus puntos de restauración</h3>
-    <p class="architect-review-note">Copias privadas de canales, roles y permisos. No incluyen mensajes ni configuración de módulos. La restauración a Discord aún está pendiente.</p>
-    <div id="architect-restore-points"></div>
+  <section class="architect-pane architect-wizard" aria-labelledby="wizard-title">
+    <div class="architect-pane-heading"><div><h2 id="wizard-title">Empieza con una base</h2><p>Elige tu comunidad y convierte su estructura en una propuesta editable.</p></div></div>
+    <form id="architect-wizard">
+      <fieldset id="architect-wizard-fields" disabled>
+        <legend class="sr-only">Opciones del asistente</legend>
+        <div class="architect-wizard-grid">
+          <label>Tipo de comunidad<select id="architect-wizard-community" required></select></label>
+          <label>Tema<select id="architect-wizard-theme" required></select></label>
+          <label>Tamaño<select id="architect-wizard-size" required></select></label>
+          <label>Idioma de los recursos<select id="architect-wizard-language" required></select></label>
+          <label>Decoración<select id="architect-wizard-decoration" required></select></label>
+          <label id="architect-wizard-title-label" hidden>Nombre de tu comunidad<input id="architect-wizard-title" maxlength="60" placeholder="Nombre de la comunidad"></label>
+        </div>
+        <fieldset class="architect-wizard-spaces"><legend>Espacios opcionales</legend><div id="architect-wizard-spaces"></div></fieldset>
+        <p class="architect-wizard-note">Añade los espacios que faltan y conserva tu estructura y tus ediciones. Deshacer revierte la base añadida. La configuración actual de módulos se conserva; su conexión automática está pendiente.</p>
+        <button type="submit" class="btn btn-p" id="architect-generate">Generar propuesta</button>
+      </fieldset>
+      <p id="architect-wizard-status" role="status">Cargando las bases disponibles…</p>
+    </form>
   </section>
   <div class="architect-toolbar" aria-label="Acciones de la propuesta">
     <span id="architect-draft-status">Sin propuesta cargada</span>
@@ -68,6 +80,15 @@
     <p id="architect-application-status" class="architect-empty" role="status">La aplicación requiere un servidor canary habilitado.</p>
     <button type="button" class="btn btn-sec" id="architect-prepare-application" disabled>Preparar aplicación</button>
     <button type="button" class="btn btn-p" id="architect-confirm-application" hidden disabled>Confirmar aplicación</button>
+  </section>
+  <section class="architect-pane architect-review" aria-labelledby="jobs-title">
+    <div class="architect-pane-heading architect-jobs-heading"><h2 id="jobs-title">Trabajos de estructura</h2><button type="button" class="btn btn-sec" id="architect-analyze" disabled>Analizar en segundo plano</button><button type="button" class="btn btn-sec" id="architect-backup" disabled>Guardar punto de restauración</button></div>
+    <p id="architect-jobs-status" class="architect-empty" role="status">Comprobando disponibilidad…</p>
+    <div id="architect-jobs"></div>
+    <p class="architect-review-note">El análisis lee canales y roles. Su resultado no reemplaza la propuesta que estás editando.</p>
+    <h3>Tus puntos de restauración</h3>
+    <p class="architect-review-note">Copias privadas de canales, roles y permisos. No incluyen mensajes ni configuración de módulos. La restauración a Discord aún está pendiente.</p>
+    <div id="architect-restore-points"></div>
   </section>
 </section>
 <script src="/js/architect-sync.js"></script>

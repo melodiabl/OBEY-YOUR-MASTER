@@ -1882,7 +1882,15 @@
           "commands/Administration/createbackup.js",
           "database/schemas/BackupSchema.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Asistente de estructura web conectado: diez bases, siete temas para nombres/rol de recursos nuevos, idioma/tamaño/decoración, espacios bienvenida/música, blueprint validado, editor/diff/preflight/undo y borrador privado. Configuración de módulos, temas sobre recursos existentes, wizard integral/templates y aceptación real pendientes.",
+        "files": [
+          "handlers/architect/wizard.js",
+          "handlers/architect/service.js",
+          "dashboard/public/js/architect-editor.js",
+          "dashboard/views/pages/architect.ejs",
+          "test/architect-wizard.test.js",
+          "docs/platform/evidence/architect-wizard-desktop.png"
+        ]
       },
       "change": "Implementar núcleo Architect visual y ejecución segura; IA fase 5.",
       "phase": 4,
@@ -1895,7 +1903,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-10-04",
@@ -1921,7 +1929,15 @@
           "commands/Administration/createbackup.js",
           "database/schemas/BackupSchema.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Asistente de estructura web conectado: diez bases, siete temas para nombres/rol de recursos nuevos, idioma/tamaño/decoración, espacios bienvenida/música, blueprint validado, editor/diff/preflight/undo y borrador privado. Configuración de módulos, temas sobre recursos existentes, wizard integral/templates y aceptación real pendientes.",
+        "files": [
+          "handlers/architect/wizard.js",
+          "handlers/architect/service.js",
+          "dashboard/public/js/architect-editor.js",
+          "dashboard/views/pages/architect.ejs",
+          "test/architect-wizard.test.js",
+          "docs/platform/evidence/architect-wizard-desktop.png"
+        ]
       },
       "change": "Implementar núcleo Architect visual y ejecución segura; IA fase 5.",
       "phase": 4,
@@ -2680,7 +2696,15 @@
         "evidence": [
           "commands/Administration/editembed.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Asistente de estructura web conectado: diez bases, siete temas para nombres/rol de recursos nuevos, idioma/tamaño/decoración, espacios bienvenida/música, blueprint validado, editor/diff/preflight/undo y borrador privado. Configuración de módulos, temas sobre recursos existentes, wizard integral/templates y aceptación real pendientes.",
+        "files": [
+          "handlers/architect/wizard.js",
+          "handlers/architect/service.js",
+          "dashboard/public/js/architect-editor.js",
+          "dashboard/views/pages/architect.ejs",
+          "test/architect-wizard.test.js",
+          "docs/platform/evidence/architect-wizard-desktop.png"
+        ]
       },
       "change": "Theme Engine separado y Decoration Studio aplicado mediante diff.",
       "phase": 4,
@@ -2693,7 +2717,7 @@
         "evidence": [],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-13-03",
@@ -14085,8 +14109,8 @@
       "T14/T23/T24 cola/registro/outbox, leases por guild, checkpoints/journal/guard de efectos y cancelación parciales",
       "Redis dedicado autenticado/AOF/noeviction configurado y verificado por petición expresa",
       "T27 puntos privados/inmutables de estructura con inspección, incompletitud explícita y recuperación",
-      "T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascadas múltiples/módulos pendientes"
+      "T30 asistente de estructura con bases/temas/idioma/tamaño/decoración/editor/diff/undo/borrador privado; T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascadas múltiples/módulos pendientes"
     ],
-    "verification": "232 tests/54 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. Cascada categoría/hijos sincronizados con SDK, revisión/confirmación/copia/checkpoint/Connect, protección y canales personalizados preservados. No canary real; planes mixtos/cascadas múltiples/configuración/revisión manual/restore/rollback pendientes."
+    "verification": "237 tests/55 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. Cascada categoría/hijos sincronizados con SDK, revisión/confirmación/copia/checkpoint/Connect, protección y canales personalizados preservados. No canary real; planes mixtos/cascadas múltiples/configuración/revisión manual/restore/rollback pendientes."
   }
 }

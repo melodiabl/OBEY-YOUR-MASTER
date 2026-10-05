@@ -11,6 +11,7 @@
   const labels = { name: 'Nombre', topic: 'Tema', color: 'Color', permissions: 'Permisos', overwrites: 'Permisos del canal', nsfw: 'Contenido restringido', hoist: 'Mostrar rol separado', mentionable: 'Rol mencionable' }
   function status(text, error = false) { $('architect-status').textContent = text; $('architect-status').dataset.state = error ? 'error' : 'ready' }
   function buttons() {
+    $('architect-wizard-fields').disabled = busy || !editor
     $('architect-workspace').disabled = busy || !editor
     $('architect-refresh').disabled = busy
     $('architect-preview').disabled = busy || !editor
@@ -29,7 +30,8 @@
         draft_conflict: 'Otra pestaña guardó este borrador. Actualiza para recuperar la versión guardada.',
         no_permission: 'No tienes permiso para administrar este servidor.', not_authenticated: 'Tu sesión caducó. Inicia sesión de nuevo.',
         storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
-        architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.' }
+        architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.',
+        invalid_wizard: 'Revisa las opciones del asistente. Una categoría existente privada o protegida requiere edición explícita para añadir canales.' }
       Object.assign(messages, { application_unsupported: 'Separa el orden de creaciones o cambios de categoría del mismo tipo. Revisa una categoría y sus hijos sincronizados por aplicación, sin creaciones, cambios de padre ni otros permisos de canales.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
@@ -140,6 +142,7 @@
     try {
       const body = await request()
       source = body.snapshot; storageAvailable = body.storageAvailable; draftRevision = body.draft?.draftRevision || 0
+      loadWizard(body.wizardCatalog)
       applyAvailable = Boolean(body.applyAvailable)
       const draft = body.draft && !body.draftStale ? body.draft.blueprint : null
       editor = createArchitectEditorState(source, draft); selected = null; savedValue = JSON.stringify(editor.current()); hasSavedDraft = Boolean(draft)
@@ -152,6 +155,41 @@
     } catch (error) { status(error.message, true) }
     finally { busy = false; buttons() }
   }
+  function loadWizard(catalog) {
+    for (const [field, key] of [['community', 'communities'], ['theme', 'themes'], ['size', 'sizes'], ['language', 'languages'], ['decoration', 'decorations']]) {
+      const select = $(`architect-wizard-${field}`), selectedValue = select.value
+      select.replaceChildren(...catalog[key].map(item => new Option(item.label, item.id)))
+      if (catalog[key].some(item => item.id === selectedValue)) select.value = selectedValue
+      else select.value = { community: 'community', theme: 'minimal', size: 'small', language: 'es', decoration: 'none' }[field]
+    }
+    const spaces = $('architect-wizard-spaces'), checked = new Set([...spaces.querySelectorAll('input:checked')].map(input => input.value))
+    spaces.replaceChildren()
+    for (const item of catalog.spaces) {
+      const label = document.createElement('label'), input = document.createElement('input')
+      input.type = 'checkbox'; input.value = item.id; input.checked = checked.has(item.id)
+      label.append(input, document.createTextNode(item.label)); spaces.append(label)
+    }
+    $('architect-wizard-status').textContent = 'Elige una base y revisa los recursos que propone.'
+  }
+  $('architect-wizard-community').addEventListener('change', () => {
+    const custom = $('architect-wizard-community').value === 'custom'
+    $('architect-wizard-title-label').hidden = !custom; $('architect-wizard-title').required = custom
+  })
+  $('architect-wizard').addEventListener('submit', async event => {
+    event.preventDefault(); if (!editor || busy) return
+    busy = true; buttons(); $('architect-wizard-status').textContent = 'Generando y comprobando la propuesta…'
+    let generated = false
+    try {
+      const choices = Object.fromEntries(['community', 'theme', 'size', 'language', 'decoration'].map(field => [field, $(`architect-wizard-${field}`).value]))
+      choices.spaces = [...$('architect-wizard-spaces').querySelectorAll('input:checked')].map(input => input.value)
+      if (choices.community === 'custom') choices.title = $('architect-wizard-title').value.trim()
+      const body = await post('/generate', { blueprint: editor.current(), choices })
+      editor.change(next => Object.assign(next, body.blueprint)); selected = null; changed(); review(body)
+      $('architect-wizard-status').textContent = `Propuesta lista: ${body.wizard.addedChannels} canales/categorías y ${body.wizard.addedRoles} roles añadidos. Edita los recursos y guarda el borrador cuando estés conforme.`
+      generated = true; $('architect-workspace').scrollIntoView({ behavior: 'auto', block: 'start' })
+    } catch (error) { $('architect-wizard-status').textContent = error.message }
+    finally { busy = false; buttons(); if (generated) $('architect-preview').focus({ preventScroll: true }) }
+  })
   function format(value, draft, change) {
     if (change?.field === 'permissions') return formatPermissions(value)
     if (change?.operation === 'overwrites') return value.map(overwrite => `${draft.roles.find(role => role.id === overwrite.id)?.name || `Miembro ${overwrite.id}`}: permitir ${formatPermissions(overwrite.allow)}; denegar ${formatPermissions(overwrite.deny)}`).join(' · ') || 'Sin sobrescrituras'
@@ -169,7 +207,15 @@
     const target = $('architect-diff'); target.replaceChildren(); target.className = ''
     $('architect-change-count').textContent = `${body.diff.changes.length} cambios`
     const checks = $('architect-preflight'); checks.replaceChildren()
-    if (body.preflight) for (const check of body.preflight.checks) { const line = document.createElement('p'); line.textContent = `${({passed:'✓',failed:'Bloqueado:',unknown:'Pendiente:'})[check.status]} ${check.detail}`; checks.append(line) }
+    if (body.preflight) {
+      const passed = body.preflight.checks.filter(check => check.status === 'passed'), details = document.createElement('details'), summary = document.createElement('summary')
+      summary.textContent = `${passed.length} comprobaciones correctas · Ver detalle`; details.append(summary)
+      for (const check of body.preflight.checks) {
+        const line = document.createElement('p'); line.textContent = `${({passed:'✓',failed:'Bloqueado:',unknown:'Pendiente:'})[check.status]} ${check.detail}`
+        if (check.status === 'passed') details.append(line); else checks.append(line)
+      }
+      if (passed.length) checks.append(details)
+    }
     if (!body.diff.changes.length) { target.className = 'architect-empty'; target.textContent = 'La propuesta coincide con la estructura actual.'; return }
     for (const change of body.diff.changes) {
       const item = document.createElement('div'), title = document.createElement('strong'), details = document.createElement('dl')

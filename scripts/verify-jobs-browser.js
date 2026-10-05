@@ -10,7 +10,7 @@ const {randomUUID}=require('node:crypto'),http=require('node:http'),fs=require('
 const {csrfProtection}=require(root+'/dashboard/security'),{sessionAuth}=require(root+'/dashboard/auth'),{canManageGuild}=require(root+'/handlers/permissions')
 const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime')
 ;(async()=>{
- let browser,server,runtime,queue,model,restoreModel,planModel,guardModel,sdkClient,release,allowed=true,block=false,reads=0,edits=0,creates=0,loseCreation=true
+ let browser,server,runtime,queue,model,draftModel,restoreModel,planModel,guardModel,sdkClient,release,allowed=true,block=false,reads=0,edits=0,creates=0,loseCreation=true
  const queueName='obey-browser-'+randomUUID()
  try{
   await mongoose.connect(mongoUrl,{serverSelectionTimeoutMS:3000})
@@ -61,7 +61,8 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   runtime=createJobsRuntime({repository,redisUrl,queueName,prepareApply:input=>applications.payload(input.applicationId,input.guildId,input.actorId),
    authorize:async()=>{if(!allowed)throw new(require(root+'/handlers/jobs/service').JobError)('Permission denied','permission_denied')},
    handlers:{'architect.snapshot':async()=>{reads++;if(block)await new Promise(resolve=>release=resolve);return require(root+'/handlers/architect/snapshot').snapshotGuild(guild)},'architect.backup':(record,lease)=>restorePoints.create(guild,record.actorId,record._id,lease),'architect.apply':(record,lease)=>execute(guild,record,lease)}})
-  const service=require(root+'/handlers/architect/service').createArchitectService({applyAvailable:()=>true})
+  draftModel=require(root+'/database/schemas/ArchitectDraftSchema')
+  const service=require(root+'/handlers/architect/service').createArchitectService({applyAvailable:()=>true,repository:require(root+'/handlers/architect/repository').createDraftRepository(draftModel)})
   planModel=require(root+'/database/schemas/ArchitectApplicationPlanSchema');guardModel=require(root+'/database/schemas/ArchitectGuildOperationSchema')
   applications=require(root+'/handlers/architect/application').createApplicationService({repository:require(root+'/handlers/architect/application-repository').createApplicationRepository(planModel),preview:(...args)=>service.preview(...args),jobs:()=>runtime,enabled:()=>true})
   execute=require(root+'/workers/architect-edits').createEditExecutor({repository,restorePoints,guildOperations:require(root+'/handlers/architect/application-repository').createGuildOperationRepository(guardModel),enabled:()=>true})
@@ -89,6 +90,30 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(!await page.locator('#architect-restore-points').textContent().then(text=>text.includes('No incluye mensajes')&&text.includes('@everyone')))throw Error('Restore point inspection omitted limits or actual structure')
   await page.reload();await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('Completado'))
   const second=await context.newPage();await second.goto(origin+'/architect/'+guild.id);await second.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('Completado'))
+  await page.locator('#architect-wizard-community').selectOption('gaming');await page.locator('#architect-wizard-theme').selectOption('nebula')
+  await page.locator('#architect-wizard-language').selectOption('en');await page.locator('#architect-wizard-size').selectOption('large');await page.locator('#architect-wizard-decoration').selectOption('expressive')
+  await page.locator('#architect-wizard-spaces input[value="welcome"]').check();await page.locator('#architect-wizard-spaces input[value="music"]').check()
+  const generation=page.waitForResponse(response=>response.url().endsWith('/generate')&&response.request().method()==='POST')
+  await page.locator('#architect-generate').click();const generated=await (await generation).json()
+  if(!generated.ok||generated.wizard.addedChannels<8||generated.wizard.configuresModules!==false)throw Error('Wizard did not generate the actual requested base')
+  await page.waitForFunction(()=>document.querySelector('#architect-tree').textContent.includes('✨・games'))
+  if(edits||creates||await draftModel.countDocuments({guildId:guild.id}))throw Error('Generating a base applied or saved without instruction')
+  const diffText=await page.locator('#architect-diff').textContent();if(!diffText.includes('✨・welcome')||!diffText.includes('✨・Voice room'))throw Error('Wizard did not connect to the actual review')
+  await page.locator('#architect-save').click();await page.waitForFunction(()=>document.querySelector('#architect-draft-status').textContent.includes('revisión 1'))
+  const savedWizard=await draftModel.findOne({guildId:guild.id,actorId:'browser_actor'}).lean()
+  if(savedWizard.blueprint.channels.length!==generated.blueprint.channels.length)throw Error('Wizard proposal was not persisted')
+  await second.reload();await second.waitForFunction(()=>document.querySelector('#architect-tree').textContent.includes('✨・games'))
+  await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:root+'/docs/platform/evidence/architect-wizard-desktop.png',fullPage:true})
+  await page.setViewportSize({width:390,height:844});await page.waitForFunction(()=>document.querySelector('#sidebar').getBoundingClientRect().right<=0)
+  await page.screenshot({path:root+'/docs/platform/evidence/architect-wizard-mobile.png',fullPage:true})
+  if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1))throw Error('Wizard overflow on mobile')
+  await page.setViewportSize({width:1365,height:1000})
+  const repeat=page.waitForResponse(response=>response.url().endsWith('/generate')&&response.request().method()==='POST')
+  await page.locator('#architect-generate').click();const repeated=await (await repeat).json()
+  if(repeated.wizard.addedChannels||repeated.wizard.addedRoles)throw Error('Repeating the wizard duplicated resources')
+  await page.waitForFunction(()=>document.querySelector('#architect-wizard-status').textContent.includes('0 canales/categorías'))
+  await page.locator('#architect-undo').click();await page.locator('#architect-save').click();await page.waitForFunction(()=>document.querySelector('#architect-draft-status').textContent.includes('revisión 2'))
+  if(await page.locator('[data-resource-id="local:setup-games"]').count())throw Error('Undo did not remove the generated base')
   await page.locator('[data-resource-id="chat"]').click();await page.locator('#architect-name').fill('nuevo-canal');await page.locator('#architect-edit').click()
   await page.locator('[data-resource-id="staff"]').click();await page.locator('#architect-color').fill('#123456');await page.locator('#architect-edit').click()
   await page.locator('#architect-prepare-application').click();await page.waitForFunction(()=>!document.querySelector('#architect-confirm-application').hidden)
@@ -205,12 +230,12 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(await second.locator('#architect-jobs').textContent()!=='')throw Error('Revocation left a private job visible')
   if(await second.locator('#architect-restore-points').textContent()!=='')throw Error('Revocation left a private restore point visible')
   if(reads!==before)throw Error('Unauthorized source read')
-  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','category move review and confirmation','move preserves ID/order/permissions','move checkpoint and prior copy','role/channel reorder from inspector','reorder confirmation and batch checkpoints','protected/voice positions preserved','reorder prior copy','role/channel permission inspector','readable permission review','confirmed permissions and prior copy','category inspector and child impact','category review lists each synced child','category confirmation and single write','category prior copy and checkpoint','custom child permissions preserved','bot access loss blocked before effects','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
+  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['community wizard','language/theme/size/decoration affect proposal','generated resources in editor and diff','private draft persisted','second tab recovers wizard proposal','wizard repeat without duplicates','wizard undo','wizard mobile without overflow','submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','category move review and confirmation','move preserves ID/order/permissions','move checkpoint and prior copy','role/channel reorder from inspector','reorder confirmation and batch checkpoints','protected/voice positions preserved','reorder prior copy','role/channel permission inspector','readable permission review','confirmed permissions and prior copy','category inspector and child impact','category review lists each synced child','category confirmation and single write','category prior copy and checkpoint','custom child permissions preserved','bot access loss blocked before effects','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
   if(errors.length)throw Error(errors.join('; '))
   fs.writeFileSync(root+'/docs/platform/evidence/jobs-browser.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result))
  }finally{
   release?.();await browser?.close();if(server)await new Promise(resolve=>server.close(resolve));await runtime?.close();await sdkClient?.destroy()
   if(queue){await queue.obliterate({force:true});await queue.close()}
-  if(model)await model.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(restoreModel)await restoreModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(planModel)await planModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(guardModel)await guardModel.deleteMany({_id:'browser_guild'});await mongoose.disconnect()
+  if(model)await model.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(draftModel)await draftModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(restoreModel)await restoreModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(planModel)await planModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(guardModel)await guardModel.deleteMany({_id:'browser_guild'});await mongoose.disconnect()
  }
 })().catch(error=>{console.error(error);process.exitCode=1})

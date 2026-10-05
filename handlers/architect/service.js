@@ -4,10 +4,20 @@ const { diffBlueprint } = require('./diff')
 const { preflight } = require('./preflight')
 function createArchitectService({ snapshot = snapshotGuild, repository, storageReady = () => true, applyAvailable = () => false } = {}) {
   return {
+    catalog: () => require('./wizard').wizardCatalog(),
+    async generate(guild, actorId, input, options) {
+      const current = await snapshot(guild)
+      const initial = validateBlueprint(input, current)
+      const generated = require('./wizard').generateProposal(initial, options)
+      const blueprint = validateBlueprint(generated.blueprint, current)
+      const diff = diffBlueprint(current, blueprint)
+      return { snapshot: current, blueprint, diff, wizard: generated.wizard,
+        preflight: await preflight(guild, blueprint, diff, actorId, { executionAvailable: Boolean(applyAvailable(guild)), observed: current }) }
+    },
     async read(guild, actorId) {
       const current = await snapshot(guild)
       const draft = repository && storageReady() ? await repository.get(guild.id, actorId) : null
-      return { snapshot: current, draft, draftStale: Boolean(draft && draft.blueprint.baseRevision !== current.revision), storageAvailable: Boolean(repository && storageReady()), applyAvailable: Boolean(applyAvailable(guild)) }
+      return { snapshot: current, draft, draftStale: Boolean(draft && draft.blueprint.baseRevision !== current.revision), storageAvailable: Boolean(repository && storageReady()), applyAvailable: Boolean(applyAvailable(guild)), wizardCatalog: require('./wizard').wizardCatalog() }
     },
     async preview(guild, input, actorId) {
       const current = await snapshot(guild)
