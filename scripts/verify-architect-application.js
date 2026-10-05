@@ -46,6 +46,17 @@ async function main() {
     sdkClient.channels._add({ id: channel.id, guild_id: guildId, type: 0, name: channel.name, position: 0, permission_overwrites: [] })
     sdkClient.rest.patch = async (route, { body }) => {
       edits++; body = JSON.parse(JSON.stringify(body))
+      if (Array.isArray(body)) {
+        assert.ok(body.every(entry => Object.keys(entry).sort().join(',') === 'id,position'))
+        if (route.endsWith('/roles')) {
+          for (const entry of body) { const role = roles.find(role => role.id === entry.id); assert.ok(role && !role.managed && role.id !== guildId); role.position = entry.position }
+          for (const role of roles) sdkGuild.roles._add(roleData(role))
+          return roles.map(roleData)
+        }
+        assert.equal(route, `/guilds/${guildId}/channels`)
+        for (const entry of body) { const target = guild.channels.cache.get(entry.id); assert.ok(target); target.rawPosition = entry.position }
+        return null
+      }
       if (route.startsWith('/channels/')) {
         const target = guild.channels.cache.get(route.split('/').at(-1)); assert.ok(target)
         assert.equal(body.position, undefined)
@@ -127,7 +138,7 @@ async function main() {
     async function proposal(name, color, targetGuild = guild) {
       const snapshot = (await architect.read(targetGuild, actorId)).snapshot
       const blueprint = { schemaVersion: 1, baseRevision: snapshot.revision, channels: structuredClone(snapshot.channels), roles: structuredClone(snapshot.roles), protectedIds: [] }
-      if (name !== undefined) blueprint.channels[0].name = name
+      if (name !== undefined) blueprint.channels.find(target => target.id === (targetGuild === guild ? channel.id : cancelChannel.id)).name = name
       if (color !== undefined) blueprint.roles.find(role => role.id === 'staff').color = color
       return blueprint
     }
@@ -202,6 +213,25 @@ async function main() {
     const rootPoint = await restorePoints.get(rooted.result.restorePointId, guildId, actorId)
     assert.equal(rootPoint.snapshot.channels.find(target => target.id === voiceId).parentId, created.result.idMap['local:category'])
     await applications.confirm(guild, actorId, rootPlan); assert.equal(edits, 8)
+    const orderBlueprint = await proposal(), memberRoleId = created.result.idMap['local:member'], textId = created.result.idMap['local:text']
+    const staffPosition = orderBlueprint.roles.find(role => role.id === 'staff').position
+    orderBlueprint.roles.find(role => role.id === 'staff').position = orderBlueprint.roles.find(role => role.id === memberRoleId).position
+    orderBlueprint.roles.find(role => role.id === memberRoleId).position = staffPosition
+    const chatPosition = orderBlueprint.channels.find(target => target.id === channel.id).position
+    orderBlueprint.channels.find(target => target.id === channel.id).position = orderBlueprint.channels.find(target => target.id === textId).position
+    orderBlueprint.channels.find(target => target.id === textId).position = chatPosition
+    const orderPlan = await applications.prepare(guild, actorId, orderBlueprint)
+    assert.equal(edits, 8); assert.equal(orderPlan.reorders, 4)
+    const orderJob = await applications.confirm(guild, actorId, orderPlan), ordered = await completed(orderJob.id)
+    assert.equal(ordered.result.reorders, 4); assert.equal(ordered.result.edits, 4); assert.equal(edits, 10)
+    assert.deepEqual(ordered.progress, { completed: 3, total: 3 })
+    assert.equal(roles.find(role => role.id === 'staff').position, 1); assert.equal(roles.find(role => role.id === 'bot_role').position, 11)
+    assert.equal(guild.channels.cache.get(textId).rawPosition, 0); assert.equal(channel.parentId, created.result.idMap['local:category'])
+    assert.equal(channel.permissionOverwrites.cache.get('staff').allow.bitfield, 2048n)
+    const orderPoint = await restorePoints.get(ordered.result.restorePointId, guildId, actorId)
+    assert.equal(orderPoint.snapshot.roles.find(role => role.id === 'staff').position, staffPosition)
+    assert.equal(orderPoint.snapshot.channels.find(target => target.id === channel.id).position, chatPosition)
+    await applications.confirm(guild, actorId, orderPlan); assert.equal(edits, 10)
     const editedBeforeFailure = edits
     const driftPlan = await applications.prepare(guild, actorId, await proposal('stale'))
     channel.topic = 'manual external change'
@@ -245,7 +275,8 @@ async function main() {
       durableLogicalToRealIdMap: true, lostCreationResponseReconciledWithoutReplay: true, confirmedRoleTextVoicePermissions: true,
       actualSDKPermissionSerialization: true, permissionRestorePointAndCheckpoints: true, overwriteTargetUsesCreatedRoleRealId: true,
       moveUsesCreatedCategoryRealId: true, actualSDKMoveWithoutSyncOrReorder: true, moveRestorePointAndCheckpoints: true,
-      voiceMoveToRootKeepsOverwrites: true }
+      voiceMoveToRootKeepsOverwrites: true, roleChannelOrderBatches: true, protectedPositionAndOverwritePreserved: true,
+      reorderRestorePointAndCheckpoints: true }
   } finally {
     cancelRelease?.(); await runtime?.close(); await sdkClient?.destroy()
     if (queue) { await queue.obliterate({ force: true }); await queue.close() }

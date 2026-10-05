@@ -13,7 +13,7 @@ function fixture() {
   const guild = { channels: { cache: new Map(observed.channels.map(channel => [channel.id, { permissionsFor: () => new PermissionsBitField(8n) }])) } }
   return { observed, blueprint, diff, guild, members: { actor: member, bot: member } }
 }
-test('parent moves follow channel creation and precede permissions; numeric reorder and role moves remain unsupported', () => {
+test('parent moves follow channel creation and precede permissions; combined parent/order and advanced moves are rejected', () => {
   const f = fixture(), change = f.diff.changes[0]
   const operations = compileEdits({ changes: [{ kind: 'roles', id: 'staff', operation: 'update', field: 'permissions', after: '0' }, change] })
   assert.deepEqual(operations.map(operation => operation.action), ['move', 'permissions'])

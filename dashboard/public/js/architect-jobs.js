@@ -34,7 +34,7 @@
       if (job.type === 'architect.apply') {
         const warning = document.createElement('p')
         const changes = job.result ? [job.result.edits ? `${job.result.edits} ${job.result.edits === 1 ? 'recurso editado' : 'recursos editados'}` : '', job.result.creates ? `${job.result.creates} ${job.result.creates === 1 ? 'recurso creado' : 'recursos creados'}` : ''].filter(Boolean).join(' · ') : ''
-        warning.textContent = job.result ? `${changes}${job.result.moves ? ` · ${job.result.moves} ${job.result.moves === 1 ? 'cambio de categoría' : 'cambios de categoría'}` : ''}${job.result.permissionChanges ? ` · ${job.result.permissionChanges} ${job.result.permissionChanges === 1 ? 'cambio de permisos' : 'cambios de permisos'}` : ''}. Actualiza la estructura para diseñar otra propuesta.` : 'La cancelación no revierte cambios ya realizados. Una operación incierta requiere revisar la copia antes de otra aplicación.'
+        warning.textContent = job.result ? `${changes}${job.result.reorders ? ` · ${job.result.reorders} ${job.result.reorders === 1 ? 'recurso ordenado' : 'recursos ordenados'}` : ''}${job.result.moves ? ` · ${job.result.moves} ${job.result.moves === 1 ? 'cambio de categoría' : 'cambios de categoría'}` : ''}${job.result.permissionChanges ? ` · ${job.result.permissionChanges} ${job.result.permissionChanges === 1 ? 'cambio de permisos' : 'cambios de permisos'}` : ''}. Actualiza la estructura para diseñar otra propuesta.` : 'La cancelación no revierte cambios ya realizados. Una operación incierta requiere revisar la copia antes de otra aplicación.'
         item.append(warning)
       }
       if (['queued', 'running'].includes(job.status)) {

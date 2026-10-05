@@ -55,6 +55,10 @@ test('Architect permission PATCH cannot replay an ambiguous response', async () 
   installArchitectRetryGuard(rest)
   await assert.rejects(rest.patch('/channels/123456789012345678', { body: { permission_overwrites: [] }, reason: 'OBEY Architect fixture / permissions-1' }), /uncertain/)
   assert.equal(calls, 1)
+  for (const kind of ['roles', 'channels']) {
+    await assert.rejects(rest.patch(`/guilds/123456789012345678/${kind}`, { body: [{ id: '123456789012345679', position: 1 }], reason: `OBEY Architect fixture / reorder-${kind}` }), /uncertain/)
+  }
+  assert.equal(calls, 3)
 })
 test('lost creation responses need unique audit evidence from this bot and exact job reason; names alone are insufficient', async () => {
   const operation = compileEdits({ changes: [create('channels', category)] })[0]

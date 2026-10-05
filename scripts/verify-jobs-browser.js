@@ -26,6 +26,11 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
    channels:{cache:new Map(channels.map(item=>[item.id,item])),fetch:async()=>new Map(channels.map(item=>[item.id,item])),edit:async(id,patch)=>{edits++;const channel=channels.find(item=>item.id===id);if(patch.name!==undefined)channel.name=patch.name;if(patch.topic!==undefined)channel.topic=patch.topic;if(Object.hasOwn(patch,'parent')){if(patch.lockPermissions!==false||patch.position!==undefined||patch.permissionOverwrites!==undefined)throw Error('Move changed order or synchronized permissions');channel.parentId=patch.parent}if(patch.permissionOverwrites)channel.permissionOverwrites.cache=new Map(patch.permissionOverwrites.map(overwrite=>[overwrite.id,{...overwrite,allow:new PermissionsBitField(overwrite.allow),deny:new PermissionsBitField(overwrite.deny)}]))}},
    roles:{cache:new Map(roles.map(item=>[item.id,item])),fetch:async()=>new Map(roles.map(item=>[item.id,item])),edit:async(id,patch)=>{edits++;const role=roles.find(item=>item.id===id);if(patch.colors){role.colors=patch.colors;role.color=patch.colors.primaryColor}if(patch.name!==undefined)role.name=patch.name;if(patch.permissions!==undefined)role.permissions=new PermissionsBitField(patch.permissions)}}}
   sdkClient=new Client({intents:[]});sdkClient.user={id:'123456789012345600'};guild.client=sdkClient;guild.maximumBitrate=96000
+  sdkClient.rest.patch=async(route,{body,reason})=>{
+   if(!Array.isArray(body)||!reason.includes('reorder-')||body.some(entry=>Object.keys(entry).sort().join(',')!=='id,position'))throw Error('Invalid reorder batch')
+   edits++
+   for(const entry of body){if(route.endsWith('/roles'))roles.find(role=>role.id===entry.id).position=entry.position;else channels.find(channel=>channel.id===entry.id).rawPosition=entry.position}
+  }
   const auditEntries=new Map();guild.fetchAuditLogs=async()=>({entries:auditEntries})
   for(const kind of ['roles','channels'])guild[kind].create=async options=>{
    creates++;const id=String(123456789012345678n+BigInt(creates))
@@ -99,7 +104,7 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(!preparation.ok())throw Error(`Creation preparation rejected: ${(await preparation.json()).error}; ${await page.locator('#architect-application-status').textContent()}`)
   await page.waitForFunction(()=>!document.querySelector('#architect-confirm-application').hidden)
   if(creates!==0)throw Error('Preparing a creation plan caused effects')
-  if(!await page.locator('#architect-application-status').textContent().then(text=>text.includes('orden personalizado')))throw Error('Creation review omitted ordering limits')
+  if(!await page.locator('#architect-application-status').textContent().then(text=>text.includes('otra aplicación')))throw Error('Creation review omitted ordering limits')
   page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-confirm-application').click()
   await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('4 recursos creados'))
   if(creates!==4)throw Error('Creation replay duplicated an effect')
@@ -119,16 +124,30 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(!moved||moved.progress.completed!==2)throw Error('Move checkpoint missing')
   const moveCopy=await restorePoints.get(moved.result.restorePointId,guild.id,'browser_actor')
   if(moveCopy.snapshot.channels.find(channel=>channel.id==='chat').parentId!=='cat')throw Error('Move copy captured after transfer')
+  const textPositionBeforeOrder=channels.find(channel=>channel.name==='chat-nuevo').rawPosition,voicePositionBeforeOrder=channels.find(channel=>channel.name==='Voz nueva').rawPosition
+  page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-refresh').click();await page.waitForFunction(()=>!document.querySelector('#architect-refresh').disabled)
+  await page.locator('[data-resource-id="staff"]').click();await page.locator('#architect-down').click()
+  await page.locator('[data-resource-id="chat"]').click();await page.locator('#architect-down').click()
+  await page.locator('#architect-prepare-application').click();await page.waitForFunction(()=>!document.querySelector('#architect-confirm-application').hidden)
+  if(edits!==3||roles.find(role=>role.id==='staff').position!==2||channels.find(channel=>channel.id==='chat').rawPosition!==1)throw Error('Preparing reorder caused effects')
+  if(!await page.locator('#architect-application-status').textContent().then(text=>text.includes('recursos protegidos')))throw Error('Reorder confirmation omitted protection')
+  page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-confirm-application').click();await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('4 recursos ordenados'))
+  const orderState={edits,staff:roles.find(role=>role.id==='staff').position,bot:roles.find(role=>role.id==='browser_bot_role').position,chat:channels.find(channel=>channel.id==='chat').rawPosition,voice:channels.find(channel=>channel.name==='Voz nueva').rawPosition}
+  if(orderState.edits!==5||orderState.staff!==1||orderState.bot!==51||orderState.chat!==textPositionBeforeOrder||orderState.voice!==voicePositionBeforeOrder||channels.find(channel=>channel.name==='chat-nuevo').rawPosition!==1)throw Error('Reorder changed protected/cross-type resources or missed desired order: '+JSON.stringify(orderState))
+  const ordered=(await runtime.list(guild.id,'browser_actor')).find(job=>job.result?.reorders===4)
+  if(!ordered||ordered.progress.completed!==3)throw Error('Reorder batch checkpoint missing')
+  const orderCopy=await restorePoints.get(ordered.result.restorePointId,guild.id,'browser_actor')
+  if(orderCopy.snapshot.roles.find(role=>role.id==='staff').position!==2||orderCopy.snapshot.channels.find(channel=>channel.id==='chat').position!==1)throw Error('Reorder copy captured after batches')
   page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-refresh').click();await page.waitForFunction(()=>!document.querySelector('#architect-refresh').disabled)
   await page.locator('[data-resource-id="staff"]').click();await page.locator('input[data-permission-key="SendMessages"]').check()
   await page.locator('[data-resource-id="chat"]').click();await page.locator('#architect-permission-role').selectOption('staff');await page.locator('select[data-permission-key="SendMessages"]').selectOption('deny')
   await page.locator('#architect-prepare-application').click();await page.waitForFunction(()=>!document.querySelector('#architect-confirm-application').hidden)
   if(!await page.locator('#architect-diff').textContent().then(text=>text.includes('Enviar mensajes')&&text.includes('Staff')))throw Error('Permission diff did not describe the actual role and grant/deny')
   if(!await page.locator('#architect-application-status').textContent().then(text=>text.includes('cambios de permisos')))throw Error('Confirmation omitted permission impact')
-  if(edits!==3)throw Error('Permission preparation caused effects')
+  if(edits!==5)throw Error('Permission preparation caused effects')
   page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-confirm-application').click()
   await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('2 cambios de permisos'))
-  if(edits!==5||roles.find(role=>role.id==='staff').permissions.bitfield!==2048n||channels.find(channel=>channel.id==='chat').permissionOverwrites.cache.get('staff').deny.bitfield!==2048n)throw Error('Confirmed permission effects missing')
+  if(edits!==7||roles.find(role=>role.id==='staff').permissions.bitfield!==2048n||channels.find(channel=>channel.id==='chat').permissionOverwrites.cache.get('staff').deny.bitfield!==2048n)throw Error('Confirmed permission effects missing')
   const permissionJob=(await runtime.list(guild.id,'browser_actor')).find(job=>job.result?.permissionChanges===2)
   if(!permissionJob||permissionJob.progress.completed!==3)throw Error('Permission checkpoints missing')
   const permissionCopy=await restorePoints.get(permissionJob.result.restorePointId,guild.id,'browser_actor')
@@ -139,7 +158,7 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   await page.locator('#architect-preview').click();await page.waitForFunction(()=>document.querySelector('#architect-preflight').textContent.includes('Bloqueado'))
   const unsafeResponse=page.waitForResponse(response=>response.url().endsWith('/applications')&&response.request().method()==='POST')
   await page.locator('#architect-prepare-application').click();if((await (await unsafeResponse).json()).error!=='application_blocked')throw Error('Unsafe permission proposal not blocked')
-  if(edits!==5||!await page.locator('#architect-confirm-application').isHidden())throw Error('Unsafe proposal caused effects or kept confirmation')
+  if(edits!==7||!await page.locator('#architect-confirm-application').isHidden())throw Error('Unsafe proposal caused effects or kept confirmation')
   block=true;await page.locator('#architect-analyze').click();await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('Cancelar análisis'))
   await page.locator('#architect-jobs button').click();release();block=false
   await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('Cancelado'))
@@ -162,7 +181,7 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(await second.locator('#architect-jobs').textContent()!=='')throw Error('Revocation left a private job visible')
   if(await second.locator('#architect-restore-points').textContent()!=='')throw Error('Revocation left a private restore point visible')
   if(reads!==before)throw Error('Unauthorized source read')
-  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','category move review and confirmation','move preserves ID/order/permissions','move checkpoint and prior copy','role/channel permission inspector','readable permission review','confirmed permissions and prior copy','bot access loss blocked before effects','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
+  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','category move review and confirmation','move preserves ID/order/permissions','move checkpoint and prior copy','role/channel reorder from inspector','reorder confirmation and batch checkpoints','protected/voice positions preserved','reorder prior copy','role/channel permission inspector','readable permission review','confirmed permissions and prior copy','bot access loss blocked before effects','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
   if(errors.length)throw Error(errors.join('; '))
   fs.writeFileSync(root+'/docs/platform/evidence/jobs-browser.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result))
  }finally{

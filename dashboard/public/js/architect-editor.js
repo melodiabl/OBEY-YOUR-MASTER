@@ -7,7 +7,7 @@
   let applyAvailable = false, applicationPlan = null
   let permissionRoleId = ''
   const { permissionOptions, setRolePermission, setOverwritePermission, formatPermissions } = architectPermissions
-  const order = (a, b) => a.position - b.position || a.id.localeCompare(b.id)
+  const order = (a, b) => a.type - b.type || a.position - b.position || a.id.localeCompare(b.id)
   const labels = { name: 'Nombre', topic: 'Tema', color: 'Color', permissions: 'Permisos', overwrites: 'Permisos del canal', nsfw: 'Contenido restringido', hoist: 'Mostrar rol separado', mentionable: 'Rol mencionable' }
   function status(text, error = false) { $('architect-status').textContent = text; $('architect-status').dataset.state = error ? 'error' : 'ready' }
   function buttons() {
@@ -30,7 +30,7 @@
         no_permission: 'No tienes permiso para administrar este servidor.', not_authenticated: 'Tu sesión caducó. Inicia sesión de nuevo.',
         storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
         architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.' }
-      Object.assign(messages, { application_unsupported: 'Puedes aplicar ediciones, permisos y cambios de categoría de texto/voz, y creaciones básicas. Cambios de orden y permisos de categorías siguen pendientes.',
+      Object.assign(messages, { application_unsupported: 'Puedes ordenar recursos existentes. Separa el orden de creaciones o cambios de categoría del mismo tipo. Permisos de categorías y planes mixtos de orden siguen pendientes.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
         jobs_unavailable: 'Los trabajos no están disponibles. El plan aún no se ha enviado.', application_not_found: 'El plan ya no está disponible. Prepara uno nuevo.' })
@@ -203,7 +203,7 @@
       const body = await post('/applications', { blueprint: editor.current() })
       applicationPlan = body.plan; review(applicationPlan.review)
       $('architect-confirm-application').textContent = `Confirmar ${applicationPlan.changes} ${applicationPlan.changes === 1 ? 'cambio' : 'cambios'}`
-      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los roles nuevos se crean bajo los existentes y los canales en la posición predeterminada de Discord. El orden personalizado sigue pendiente.' : ''}${applicationPlan.moves ? ' Los canales cambiarán de categoría conservando sus permisos; el movimiento no los cambiará.' : ''}${applicationPlan.permissionChanges ? ' Incluye cambios de permisos: revisa a quién conceden o quitan acceso.' : ''}`
+      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los recursos nuevos usan la posición predeterminada de Discord; podrás ordenarlos en otra aplicación.' : ''}${applicationPlan.moves ? ' Los canales cambiarán de categoría conservando sus permisos; el movimiento no los cambiará.' : ''}${applicationPlan.reorders ? ' El orden se aplicará en lotes conservando IDs, permisos y recursos protegidos.' : ''}${applicationPlan.permissionChanges ? ' Incluye cambios de permisos: revisa a quién conceden o quitan acceso.' : ''}`
     } catch (error) { $('architect-application-status').textContent = error.message }
     finally { busy = false; buttons() }
   })

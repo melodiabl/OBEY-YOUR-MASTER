@@ -31,7 +31,7 @@
         if (!['channels', 'roles'].includes(kind) || ![-1, 1].includes(direction) || protectedResource(id)) return false
         const item = value[kind].find(resource => resource.id === id)
         if (!item) return false
-        const siblings = value[kind].filter(resource => kind === 'roles' || resource.parentId === item.parentId)
+        const siblings = value[kind].filter(resource => kind === 'roles' || (resource.parentId === item.parentId && resource.type === item.type))
           .sort((a, b) => (kind === 'roles' ? b.position - a.position : a.position - b.position) || a.id.localeCompare(b.id))
         const index = siblings.indexOf(item), neighbor = siblings[index + direction]
         if (!neighbor || protectedResource(neighbor.id) || neighbor.position === item.position) return false

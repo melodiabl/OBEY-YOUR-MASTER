@@ -24,5 +24,8 @@
   "moveUsesCreatedCategoryRealId": true,
   "actualSDKMoveWithoutSyncOrReorder": true,
   "moveRestorePointAndCheckpoints": true,
-  "voiceMoveToRootKeepsOverwrites": true
+  "voiceMoveToRootKeepsOverwrites": true,
+  "roleChannelOrderBatches": true,
+  "protectedPositionAndOverwritePreserved": true,
+  "reorderRestorePointAndCheckpoints": true
 }

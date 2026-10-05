@@ -5,15 +5,20 @@ const { validateBlueprint } = require('../handlers/architect/blueprint')
 const { diffBlueprint } = require('../handlers/architect/diff')
 const { compileEdits } = require('../handlers/architect/application')
 const { createEditExecutor } = require('../workers/architect-edits')
-function fixture({ creations = false, permissions = false, moves = false } = {}) {
+function fixture({ creations = false, permissions = false, moves = false, reorders = false } = {}) {
   const source = { schemaVersion: 1, guildId: 'g', name: 'Fixture', capturedAt: new Date().toISOString(), channels: [{
     id: 'chat', name: 'old', type: 0, topic: '', position: 0, parentId: null, overwrites: [], nsfw: false, bitrate: null, userLimit: null, rateLimitPerUser: 0,
   }], roles: [] }
   if (moves) source.channels.push({ ...source.channels[0], id: 'destination', name: 'Community', type: 4 })
+  if (reorders) {
+    source.channels.push({ ...source.channels[0], id: 'second', name: 'second', position: 1 })
+    source.roles.push(...[['g', 0, false], ['low', 1, false], ['high', 2, false], ['bot', 3, true]].map(([id, position, managed]) => ({ id, position, managed, name: id, permissions: '0', color: 0, hoist: false, mentionable: false })))
+  }
   if (permissions) source.roles.push({ id: 'staff', name: 'Staff', position: 1, permissions: '0', color: 0, hoist: false, mentionable: false, managed: false })
   source.revision = structureRevision(source.channels, source.roles)
   const input = { schemaVersion: 1, baseRevision: source.revision, channels: structuredClone(source.channels), roles: structuredClone(source.roles) }
-  if (moves) input.channels[0].parentId = 'destination'
+  if (reorders) { input.roles[1].position = 2; input.roles[2].position = 1; input.channels[0].position = 1; input.channels[1].position = 0 }
+  else if (moves) input.channels[0].parentId = 'destination'
   else if (permissions) { input.roles[0].permissions = '2048'; input.channels[0].overwrites = [{ id: 'staff', type: 0, allow: '2048', deny: '0' }] }
   else if (!creations) input.channels[0].name = 'new'
   else {
@@ -46,6 +51,14 @@ function fixture({ creations = false, permissions = false, moves = false } = {})
     guild.roles = { async edit(id, patch) { assert.equal(typeof patch.permissions, 'bigint'); edits++; current.roles[0].permissions = String(patch.permissions); current.revision = structureRevision(current.channels, current.roles); if (responseLost) throw new Error('fixture lost permission response') } }
   }
   if (moves) guild.client = { rest: { options: { makeRequest: async () => { throw new Error('Unexpected network') } } } }
+  if (reorders) guild.client = { rest: { options: { makeRequest: async () => { throw new Error('Unexpected network') } }, async patch(route, { body, reason }) {
+    edits++; assert.ok(reason.startsWith('OBEY Architect job / reorder-')); assert.ok(body.every(entry => Object.keys(entry).sort().join(',') === 'id,position'))
+    const kind = route.endsWith('/roles') ? 'roles' : 'channels'
+    for (const entry of body) current[kind].find(resource => resource.id === entry.id).position = entry.position
+    current[kind].sort((a, b) => a.position - b.position || a.id.localeCompare(b.id))
+    current.revision = structureRevision(current.channels, current.roles)
+    if (responseLost) throw new Error('Lost reorder response')
+  } } }
   let createCalls = 0, loseCreate = false, auditVisible = true, revokeOnCreate = false
   const auditEntries = new Map()
   if (creations) {
@@ -163,6 +176,22 @@ test('confirmed category changes preserve IDs, order and overwrites and skip com
 })
 test('an ambiguous move cannot replay and retains the durable guild guard', async () => {
   const f = fixture({ moves: true }); f.loseResponse()
+  await assert.rejects(f.execute(), error => error.code === 'application_needs_review')
+  assert.equal(f.edits(), 1); assert.equal(f.record.steps[1].status, 'executing'); assert.equal(f.guards.get('g'), 'job')
+  await assert.rejects(f.execute(), error => error.code === 'application_needs_review'); assert.equal(f.edits(), 1)
+})
+test('role/channel reorder batches checkpoint once per kind and preserve protected resources on recovery', async () => {
+  const f = fixture({ reorders: true }), result = await f.execute()
+  assert.equal(result.reorders, 4); assert.equal(result.edits, 4); assert.equal(f.edits(), 2)
+  assert.equal(f.record.progress.completed, 3)
+  assert.deepEqual(f.record.executionSnapshot.roles.map(role => role.id), ['g', 'high', 'low', 'bot'])
+  assert.deepEqual(f.record.executionSnapshot.channels.map(channel => channel.id), ['second', 'chat'])
+  assert.equal(f.record.executionSnapshot.roles.find(role => role.id === 'bot').position, 3)
+  assert.deepEqual(f.points[0].roles.map(role => role.id), ['g', 'low', 'high', 'bot'])
+  await f.execute(); assert.equal(f.edits(), 2); assert.equal(f.guards.size, 0)
+})
+test('uncertain reorder batch does not repeat and blocks the next batch', async () => {
+  const f = fixture({ reorders: true }); f.loseResponse()
   await assert.rejects(f.execute(), error => error.code === 'application_needs_review')
   assert.equal(f.edits(), 1); assert.equal(f.record.steps[1].status, 'executing'); assert.equal(f.guards.get('g'), 'job')
   await assert.rejects(f.execute(), error => error.code === 'application_needs_review'); assert.equal(f.edits(), 1)

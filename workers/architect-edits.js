@@ -6,9 +6,11 @@ const { diffBlueprint } = require('../handlers/architect/diff')
 const { compileEdits } = require('../handlers/architect/application')
 const { preflight } = require('../handlers/architect/preflight')
 const { creationOptions, installArchitectRetryGuard, verifyCreation, reconcileCreation, reasonFor } = require('../handlers/architect/creations')
+const { affectedResources, projectReorder, applyReorder } = require('../handlers/architect/reorders')
 function createEditExecutor({ repository, restorePoints, guildOperations, snapshot = snapshotGuild, check = preflight, enabled = () => false }) {
   function result(record) {
-    return { applicationId: record.applicationId, restorePointId: record.restorePointId, edits: new Set(record.payload.operations.filter(op => op.action !== 'create').map(op => `${op.kind}:${op.resourceId}`)).size,
+    return { applicationId: record.applicationId, restorePointId: record.restorePointId, edits: new Set(record.payload.operations.filter(op => op.action !== 'create').flatMap(op => affectedResources(op).map(id => `${op.kind}:${id}`))).size,
+      reorders: record.payload.operations.filter(op => op.action === 'reorder').reduce((count, op) => count + op.resourceIds.length, 0),
       permissionChanges: record.payload.operations.filter(op => op.action === 'permissions').length,
       moves: record.payload.operations.filter(op => op.action === 'move').length,
       creates: record.payload.operations.filter(op => op.action === 'create').length, idMap: { ...(record.executionIdMap || {}) },
@@ -96,13 +98,15 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
           }
           continue
         }
-        const expected = structuredClone(observed), target = expected[operation.kind].find(resource => resource.id === operation.resourceId)
-        if (!target) throw new JobError('Resource missing', 'revision_conflict')
+        const expected = operation.action === 'reorder' ? projectReorder(observed, operation) : structuredClone(observed)
+        const target = operation.action === 'reorder' ? null : expected[operation.kind].find(resource => resource.id === operation.resourceId)
+        if (!target && operation.action !== 'reorder') throw new JobError('Resource missing', 'revision_conflict')
         const fields = structuredClone(operation.fields)
         if (operation.action === 'move') fields.parentId = fields.parentId == null ? null : current.executionIdMap?.[fields.parentId] || fields.parentId
         if (operation.action === 'permissions' && operation.kind === 'channels') fields.overwrites = fields.overwrites.map(overwrite => ({ ...overwrite, id: current.executionIdMap?.[overwrite.id] || overwrite.id })).sort((a, b) => a.id.localeCompare(b.id))
-        if (['permissions', 'move'].includes(operation.action)) installArchitectRetryGuard(guild.client?.rest)
-        Object.assign(target, fields)
+        const postflight = ['permissions', 'move', 'reorder'].includes(operation.action)
+        if (postflight) installArchitectRetryGuard(guild.client?.rest)
+        if (target) Object.assign(target, fields)
         if (operation.kind === 'roles' && Object.hasOwn(operation.fields, 'color') && expected.roleColors?.[operation.resourceId]) expected.roleColors[operation.resourceId].primaryColor = operation.fields.color
         const revision = structureRevision(expected.channels, expected.roles, expected.roleColors)
         if (!await repository.startEdit(record._id, record.token, index)) throw new JobError('Job no longer active', 'job_cancelled')
@@ -119,12 +123,13 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
           if (operation.kind === 'roles' && Object.hasOwn(patch, 'color')) {
             patch.colors = { primaryColor: patch.color, secondaryColor: null, tertiaryColor: null }; delete patch.color
           }
-          await guild[operation.kind].edit(operation.resourceId, patch)
+          if (operation.action === 'reorder') await applyReorder(guild, operation, patch.reason)
+          else await guild[operation.kind].edit(operation.resourceId, patch)
           const applied = await snapshot(guild)
           if (applied.revision !== revision) throw new Error('Unexpected structure after edit')
-          if (['permissions', 'move'].includes(operation.action) && (await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap: current.executionIdMap || {}, observed: applied })).status !== 'passed') throw new Error('Access changed after application')
+          if (postflight && (await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap: current.executionIdMap || {}, observed: applied })).status !== 'passed') throw new Error('Access changed after application')
           await lease.assertOwned()
-          if (['permissions', 'move'].includes(operation.action) && (await snapshot(guild)).revision !== revision) throw new Error('Structure changed after access check')
+          if (postflight && (await snapshot(guild)).revision !== revision) throw new Error('Structure changed after access check')
           if (!await repository.completeEdit(record._id, record.token, index, revision, undefined, current.executionSnapshot ? { snapshot: applied, idMap: current.executionIdMap || {} } : undefined)) throw new Error('Checkpoint not acknowledged')
         } catch { throw new JobError('Edit outcome needs review', 'application_needs_review') }
       }

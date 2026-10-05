@@ -31,6 +31,10 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
     if (executionAvailable) add('move_transport', typeof guild.client?.rest?.options?.makeRequest === 'function' ? 'passed' : 'unknown', 'El servicio debe impedir reintentos de movimientos con resultado incierto.')
     try { checks.push(...require('./moves').checkChannelMoves({ guild, observed, operations: require('./application').compileEdits(diff), members: { actor, bot }, idMap })) }
     catch { add('move_plan', 'unknown', 'El movimiento requiere verificar su secuencia completa; cambios de orden siguen pendientes.') }
+    if (moves.some(change => change.before.position !== change.after.position)) {
+      try { checks.push(...require('./reorders').checkReorders({ guild, observed, blueprint, operations: require('./application').compileEdits(diff), members: { actor, bot } })) }
+      catch { add('reorder_plan', 'unknown', 'No se pudo verificar la posición, protección y jerarquía del lote completo.') }
+    }
   }
   const permissionChanges = diff.changes.filter(change => change.operation === 'overwrites' || (change.kind === 'roles' && change.field === 'permissions'))
   if (permissionChanges.length) {
@@ -50,7 +54,7 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
   if (executionAvailable) {
     if (diff.changes.length) add('actor_guild', actor ? (actor.permissions.has(PermissionFlagsBits.ManageGuild) ? 'passed' : 'failed') : 'unknown', 'Tu cuenta necesita Administrar servidor durante la aplicación.')
     try { if (diff.changes.length) require('./application').compileEdits(diff); add('execution', 'passed', 'Aplicación confirmada de ediciones, creaciones básicas y permisos de recursos existentes disponible en este canary.') }
-    catch { add('execution', 'failed', 'Solo se aplican ediciones, creaciones básicas, permisos y cambios de categoría de texto/voz. Cambios de orden y permisos de categorías siguen pendientes.') }
+    catch { add('execution', 'failed', 'El orden de recursos existentes se aplica por separado de creaciones o cambios de categoría del mismo tipo. Permisos de categorías y planes mixtos de orden siguen pendientes.') }
     const creations = diff.changes.filter(change => change.operation === 'create')
     if (creations.length) {
       add('capacity', (blueprint.roles?.length <= 250 && blueprint.channels?.length <= 500 && blueprint.channels.every(parent => parent.type !== 4 || blueprint.channels.filter(channel => channel.parentId === parent.id).length <= 50)) ? 'passed' : 'failed', 'La propuesta debe respetar 250 roles, 500 canales y 50 canales por categoría.')

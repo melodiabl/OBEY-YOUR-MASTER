@@ -1823,9 +1823,10 @@
           "workers/architect-edits.js",
           "handlers/architect/permissions.js",
           "handlers/architect/preflight.js",
-          "handlers/architect/moves.js"
+          "handlers/architect/moves.js",
+          "handlers/architect/reorders.js"
         ],
-        "assessment": "Creaciones básicas/IDs reales/reconciliación, permisos existentes e inspector y cambios de categoría de texto/voz conservando permisos con acceso/capacidad por paso implementados detrás de canary. Reordenamiento/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía implementados detrás de canary. Planes mixtos/cascada/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Implementar núcleo Architect visual y ejecución segura; IA fase 5.",
       "phase": 4,
@@ -1850,7 +1851,8 @@
           "test/architect-creations.test.js",
           "test/architect-permissions.test.js",
           "test/architect-permission-state.test.js",
-          "test/architect-moves.test.js"
+          "test/architect-moves.test.js",
+          "test/architect-reorders.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2269,9 +2271,10 @@
           "workers/architect-edits.js",
           "handlers/architect/permissions.js",
           "handlers/architect/preflight.js",
-          "handlers/architect/moves.js"
+          "handlers/architect/moves.js",
+          "handlers/architect/reorders.js"
         ],
-        "assessment": "Creaciones básicas/IDs reales/reconciliación, permisos existentes e inspector y cambios de categoría de texto/voz conservando permisos con acceso/capacidad por paso implementados detrás de canary. Reordenamiento/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía implementados detrás de canary. Planes mixtos/cascada/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Diff, planner/preflight e inversas con conflictos y límites explícitos.",
       "phase": 4,
@@ -2296,7 +2299,8 @@
           "test/architect-creations.test.js",
           "test/architect-permissions.test.js",
           "test/architect-permission-state.test.js",
-          "test/architect-moves.test.js"
+          "test/architect-moves.test.js",
+          "test/architect-reorders.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2326,9 +2330,10 @@
           "commands/Administration/loadbackup.js",
           "handlers/architect/permissions.js",
           "handlers/architect/preflight.js",
-          "handlers/architect/moves.js"
+          "handlers/architect/moves.js",
+          "handlers/architect/reorders.js"
         ],
-        "assessment": "Creaciones básicas/IDs reales/reconciliación, permisos existentes e inspector y cambios de categoría de texto/voz conservando permisos con acceso/capacidad por paso implementados detrás de canary. Reordenamiento/cascada de categorías/módulos/revisión manual y aceptación integral pendientes."
+        "assessment": "Creaciones/IDs/reconciliación, permisos y cambios de categoría, orden por lote de recursos existentes con conjuntos de posiciones, protección y jerarquía implementados detrás de canary. Planes mixtos/cascada/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Diff, planner/preflight e inversas con conflictos y límites explícitos.",
       "phase": 4,
@@ -2352,7 +2357,8 @@
           "docs/platform/evidence/jobs-browser.json",
           "test/architect-permissions.test.js",
           "test/architect-permission-state.test.js",
-          "test/architect-moves.test.js"
+          "test/architect-moves.test.js",
+          "test/architect-reorders.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -14079,8 +14085,8 @@
       "T14/T23/T24 cola/registro/outbox, leases por guild, checkpoints/journal/guard de efectos y cancelación parciales",
       "Redis dedicado autenticado/AOF/noeviction configurado y verificado por petición expresa",
       "T27 puntos privados/inmutables de estructura con inspección, incompletitud explícita y recuperación",
-      "T28/T26/T30 confirmación, creaciones/IDs reales/reconciliación, permisos existentes y cambios de categoría de texto/voz con acceso/capacidad por paso e inspector, limitada a canary; reordenamiento/cascada de categorías/módulos pendientes"
+      "T28/T26/T30 confirmación, creaciones/IDs/reconciliación, permisos, categoría y orden por lotes de recursos existentes con protección/jerarquía/acceso, limitada a canary; planes mixtos/cascada/módulos pendientes"
     ],
-    "verification": "219 tests/52 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK real, movimientos a categoría creada en el mismo job, conservación de ID/orden/permisos, raíz null, privacidad/acceso/capacidad por paso, límite de 1000 operaciones, revisión/confirmación/copia/checkpoint, creaciones/IDs y permisos con forecast, respuesta incierta sin replay, guard/fencing/cancelación/dos pestañas/revocación/móvil. No canary Discord real; reordenamiento/cascada/configuración/revisión manual/restore/rollback pendientes."
+    "verification": "226 tests/53 archivos; Mongo/Redis/BullMQ y Chromium aislados prueban SDK, orden de roles/canales por lotes, conjuntos/anchors/jerarquía, recursos protegidos/voz preservados, copy/checkpoints/confirmación, respuesta incierta sin replay, creación/IDs/permisos/categorías/fencing/cancelación/privacidad/revocación/móvil. No canary real; planes mixtos/cascada/configuración/revisión manual/restore/rollback pendientes."
   }
 }

@@ -39,3 +39,11 @@ test('move follows the displayed role order and preserves protected positions an
  assert.equal(editor.current().roles.find(role=>role.id==='low').position,1)
  assert.equal(original.roles.find(role=>role.id==='low').position,1)
 })
+test('channel reorder skips other types and preserves categories and protected anchors',()=>{
+ const original=source();original.channels.push({id:'voice',name:'Voice',type:2,parentId:'cat',position:1},{id:'b',name:'second',type:0,parentId:'cat',position:2})
+ const editor=createEditorState(original)
+ assert.equal(editor.move('channels','a',1),true)
+ assert.equal(editor.current().channels.find(channel=>channel.id==='a').position,2)
+ assert.equal(editor.current().channels.find(channel=>channel.id==='b').position,0)
+ assert.equal(editor.current().channels.find(channel=>channel.id==='voice').position,1)
+})

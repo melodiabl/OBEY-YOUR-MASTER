@@ -1,14 +1,21 @@
 const { randomUUID, randomBytes, createHash, timingSafeEqual } = require('node:crypto')
 const { identifier, JobError } = require('../jobs/service')
 const { snapshotGuild } = require('./snapshot')
+const { affectedResources } = require('./reorders')
 const hash = value => createHash('sha256').update(value).digest()
 function compileEdits(diff) {
   if (!diff?.changes?.length) throw new JobError('Cannot apply an empty proposal', 'application_unsupported')
   const operations = new Map()
+  const reorders = { roles: [], channels: [] }
   for (const change of diff.changes) {
     if (change.operation === 'create') {
       if (!require('./creations').supportedCreation(change.kind, change.after)) throw new JobError('Creation options not supported', 'application_unsupported')
       operations.set(`${change.kind}:${change.id}`, { id: `create-${operations.size + 1}`, action: 'create', kind: change.kind, resourceId: change.id, fields: structuredClone(change.after) })
+      continue
+    }
+    if (change.operation === 'move' && change.before.position !== change.after.position &&
+        (change.kind === 'roles' || (change.kind === 'channels' && [0, 2, 4].includes(change.resourceType) && change.before.parentId === change.after.parentId))) {
+      reorders[change.kind].push({ id: change.id, position: change.after.position })
       continue
     }
     if (change.operation === 'move' && change.kind === 'channels' && [0, 2].includes(change.resourceType) && change.before.position === change.after.position && change.before.parentId !== change.after.parentId) {
@@ -26,8 +33,14 @@ function compileEdits(diff) {
     if (!operations.has(id)) operations.set(id, { id: `edit-${operations.size + 1}`, kind: change.kind, resourceId: change.id, fields: {} })
     operations.get(id).fields[change.field] = change.after
   }
+  for (const kind of ['roles', 'channels']) {
+    if (!reorders[kind].length) continue
+    if (diff.changes.some(change => change.kind === kind && change.operation === 'create') || (kind === 'channels' && [...operations.values()].some(operation => operation.action === 'move'))) throw new JobError('Mixed creation/parent movement and reorder not supported', 'application_unsupported')
+    const positions = reorders[kind].sort((a, b) => a.id.localeCompare(b.id))
+    operations.set(`${kind}:reorder`, { id: `reorder-${kind}-${operations.size + 1}`, action: 'reorder', kind, resourceIds: positions.map(entry => entry.id), fields: { positions } })
+  }
   if (operations.size > 1000) throw new JobError('Plans over 1000 operations are not supported', 'application_unsupported')
-  const rank = operation => operation.action === 'move' ? 3 : operation.action === 'permissions' ? operation.kind === 'roles' ? 4 : 5 : operation.kind === 'roles' ? 0 : operation.action === 'create' && operation.fields.type === 4 ? 1 : 2
+  const rank = operation => operation.action === 'reorder' ? operation.kind === 'roles' ? 0.5 : 3.5 : operation.action === 'move' ? 3 : operation.action === 'permissions' ? operation.kind === 'roles' ? 4 : 5 : operation.kind === 'roles' ? 0 : operation.action === 'create' && operation.fields.type === 4 ? 1 : 2
   return [...operations.values()].sort((a, b) => rank(a) - rank(b))
 }
 function createApplicationService({ repository, preview, jobs, enabled = () => false, snapshot = snapshotGuild, storageReady = () => true }) {
@@ -47,7 +60,8 @@ function createApplicationService({ repository, preview, jobs, enabled = () => f
       const id = randomUUID(), confirmation = randomBytes(32).toString('hex'), expiresAt = new Date(Date.now() + 15 * 60 * 1000)
       await repository.create({ _id: id, guildId: guild.id, actorId, confirmationDigest: hash(confirmation).toString('hex'), expiresAt,
         payload: { schemaVersion: 1, snapshot: proposal.snapshot, blueprint: proposal.blueprint, operations, revision: proposal.diff.revision, expiresAt } })
-      return { id, confirmation, revision: proposal.diff.revision, expiresAt, edits: new Set(operations.filter(operation => operation.action !== 'create').map(operation => `${operation.kind}:${operation.resourceId}`)).size,
+      return { id, confirmation, revision: proposal.diff.revision, expiresAt, edits: new Set(operations.filter(operation => operation.action !== 'create').flatMap(operation => affectedResources(operation).map(id => `${operation.kind}:${id}`))).size,
+        reorders: operations.filter(operation => operation.action === 'reorder').reduce((count, operation) => count + operation.resourceIds.length, 0),
         permissionChanges: operations.filter(operation => operation.action === 'permissions').length,
         moves: operations.filter(operation => operation.action === 'move').length,
         creates: operations.filter(operation => operation.action === 'create').length, changes: proposal.diff.changes.length,

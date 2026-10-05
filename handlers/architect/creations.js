@@ -29,7 +29,7 @@ function installArchitectRetryGuard(rest) {
   rest.options.makeRequest = async (url, options) => {
     const reason = options.headers?.['X-Audit-Log-Reason']
     const creation = options.method === 'POST' && /\/guilds\/\d+\/(?:roles|channels)(?:\?|$)/.test(String(url))
-    const edit = options.method === 'PATCH' && /\/(?:channels\/\d+|guilds\/\d+\/roles\/\d+)(?:\?|$)/.test(String(url))
+    const edit = options.method === 'PATCH' && /\/(?:channels\/\d+|guilds\/\d+\/roles\/\d+|guilds\/\d+\/(?:roles|channels))(?:\?|$)/.test(String(url))
     if ((!creation && !edit) || typeof reason !== 'string' || !reason.startsWith('OBEY%20Architect%20')) return request(url, options)
     // Keep the SDK's shared rate buckets and definitive 429 handling. Hide retryable
     // network error codes and throw before its automatic 5xx replay can duplicate POST.
