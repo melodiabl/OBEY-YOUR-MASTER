@@ -588,7 +588,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T24
 
-**Checkpoint activo:** Snapshot/checkpoint y tokens evitan repetir lecturas guardadas o aceptar writes antiguos; reanudación de cancelación y entregas ausentes verificada. Leases por guild, guard/journal Mongo y checkpoints de ediciones compatibles implementados; reconciliación de creaciones, dependencias y aceptación canary pendientes; tarea parcial.
+**Checkpoint activo:** Snapshot/checkpoint y tokens evitan repetir lecturas guardadas o aceptar writes antiguos; reanudación de cancelación y entregas ausentes verificada. Leases por guild, guard/journal Mongo y checkpoints de ediciones compatibles implementados; creaciones básicas con mapas de IDs reales y reconciliación positiva implementadas; revisión manual de jobs terminales, dependencias completas y aceptación canary pendientes; tarea parcial.
 
 - [ ] Reanudación y exclusión estructural (fase 4).
 
@@ -646,7 +646,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T26
 
-**Checkpoint activo:** Diff create/update/move/overwrites con antes/después y drift de origen. Preflight verifica miembros frescos, permisos, jerarquía y grants; límites/capacidades/acceso efectivo/plan de ejecución completos pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
+**Checkpoint activo:** Diff create/update/move/overwrites con antes/después y drift de origen. Preflight verifica miembros frescos, permisos, jerarquía y grants; ejecución básica comprueba acceso efectivo, límites y bitrate y ordena dependencias roles/categorías/canales. Límites/capacidades/acceso resultante/plan de ejecución completos pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
 
 - [ ] Diff y preflight (fase 4).
 
@@ -698,7 +698,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T28
 
-**Checkpoint activo:** Plan privado versionado de 15 minutos, token/revisión/actor/guild, confirmación idempotente, drift/preflight fresco, copia previa, journal/CAS y guard duradero. Aplica nombres/temas de texto/colores existentes solo en canary habilitado; probado con Discord fixture y Mongo/Redis reales. Creaciones/movimientos/permisos/configuración y recuperación/remapeo completos pendientes. Ningún canary real habilitado; tarea parcial. Ver docs/platform/APPLICATIONS.md.
+**Checkpoint activo:** Plan privado versionado de 15 minutos, token/revisión/actor/guild, confirmación idempotente, drift/preflight fresco, copia previa, journal/CAS y guard duradero. Aplica nombres/temas de texto/colores existentes solo en canary habilitado; probado con Discord fixture y Mongo/Redis reales. Creaciones básicas con IDs reales y reconciliación positiva implementadas. Movimientos/permisos/configuración y recuperación/revisión manual completos pendientes. Ningún canary real habilitado; tarea parcial. Ver docs/platform/APPLICATIONS.md.
 
 - [ ] Apply Architect con confirmación de revisión (fase 4).
 

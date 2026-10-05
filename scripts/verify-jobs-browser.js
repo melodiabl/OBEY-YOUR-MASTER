@@ -4,13 +4,13 @@ const mongoUrl=process.env.OBEY_JOBS_TEST_MONGO_URL
 const redisUrl=process.env.OBEY_JOBS_TEST_REDIS_URL
 if(!/^mongodb:\/\/127\.0\.0\.1:\d+\/obey_jobs_test$/.test(mongoUrl||'')||!/^redis:\/\/127\.0\.0\.1:\d+\/15$/.test(redisUrl||''))throw Error('Explicit isolated browser fixtures required')
 const express=require(root+'/node_modules/express'),session=require(root+'/node_modules/express-session'),mongoose=require(root+'/node_modules/mongoose')
-const {PermissionsBitField}=require(root+'/node_modules/discord.js'),{Queue}=require(root+'/node_modules/bullmq')
+const {PermissionsBitField,Client}=require(root+'/node_modules/discord.js'),{Queue}=require(root+'/node_modules/bullmq')
 const {chromium}=require('playwright')
 const {randomUUID}=require('node:crypto'),http=require('node:http'),fs=require('node:fs')
 const {csrfProtection}=require(root+'/dashboard/security'),{sessionAuth}=require(root+'/dashboard/auth'),{canManageGuild}=require(root+'/handlers/permissions')
 const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime')
 ;(async()=>{
- let browser,server,runtime,queue,model,restoreModel,planModel,guardModel,release,allowed=true,block=false,reads=0,edits=0
+ let browser,server,runtime,queue,model,restoreModel,planModel,guardModel,sdkClient,release,allowed=true,block=false,reads=0,edits=0,creates=0,loseCreation=true
  const queueName='obey-browser-'+randomUUID()
  try{
   await mongoose.connect(mongoUrl,{serverSelectionTimeoutMS:3000})
@@ -23,6 +23,22 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   const guild={id:'browser_guild',name:'Comunidad de prueba',ownerId:'browser_actor',members:{fetch:async({user})=>member(user),fetchMe:async()=>member('browser_bot')},
    channels:{cache:new Map(channels.map(item=>[item.id,item])),fetch:async()=>new Map(channels.map(item=>[item.id,item])),edit:async(id,patch)=>{edits++;const channel=channels.find(item=>item.id===id);if(patch.name!==undefined)channel.name=patch.name;if(patch.topic!==undefined)channel.topic=patch.topic}},
    roles:{cache:new Map(roles.map(item=>[item.id,item])),fetch:async()=>new Map(roles.map(item=>[item.id,item])),edit:async(id,patch)=>{edits++;const role=roles.find(item=>item.id===id);if(patch.colors){role.colors=patch.colors;role.color=patch.colors.primaryColor}if(patch.name!==undefined)role.name=patch.name}}}
+  sdkClient=new Client({intents:[]});sdkClient.user={id:'123456789012345600'};guild.client=sdkClient;guild.maximumBitrate=96000
+  const auditEntries=new Map();guild.fetchAuditLogs=async()=>({entries:auditEntries})
+  for(const kind of ['roles','channels'])guild[kind].create=async options=>{
+   creates++;const id=String(123456789012345678n+BigInt(creates))
+   if(kind==='roles'){
+    for(const role of roles)if(role.position>0)role.position++
+    const role={id,name:options.name,position:1,permissions:new PermissionsBitField(options.permissions),color:options.colors.primaryColor,colors:{primaryColor:options.colors.primaryColor,secondaryColor:null,tertiaryColor:null},managed:false,hoist:options.hoist,mentionable:options.mentionable}
+    roles.push(role);guild.roles.cache.set(id,role)
+   }else{
+    const channel={id,name:options.name,type:options.type,parentId:options.parent||null,rawPosition:channels.length,topic:options.topic||'',nsfw:Boolean(options.nsfw),bitrate:options.bitrate,userLimit:options.userLimit,rateLimitPerUser:options.rateLimitPerUser||0,permissionOverwrites:{cache:new Map()},permissionsFor:()=>new PermissionsBitField(allowed?8n:0n)}
+    channels.push(channel);guild.channels.cache.set(id,channel)
+   }
+   auditEntries.set(id,{action:kind==='roles'?30:10,executorId:sdkClient.user.id,targetId:id,reason:options.reason})
+   if(loseCreation){loseCreation=false;throw Error('Fixture lost creation response')}
+   return{id}
+  }
   restoreModel=require(root+'/database/schemas/ArchitectRestorePointSchema')
   const restorePoints=require(root+'/handlers/architect/restore-points').createRestorePointService({repository:require(root+'/handlers/architect/restore-point-repository').createRestorePointRepository(restoreModel)})
   const repository=require(root+'/handlers/jobs/repository').createJobRepository()
@@ -69,6 +85,25 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   const beforeApply=await restorePoints.get(prior.find(point=>point.origin==='before_apply').id,guild.id,'browser_actor')
   if(beforeApply.snapshot.channels.find(item=>item.id==='chat').name!=='conversación')throw Error('Prior point captured after the edit')
   if(beforeApply.snapshot.roleColors.staff.primaryColor!==0)throw Error('Prior point captured after the role color edit')
+  page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-refresh').click()
+  await page.waitForFunction(()=>!document.querySelector('#architect-refresh').disabled&&document.querySelector('#architect-tree').textContent.includes('nuevo-canal'))
+  async function add(kind,name){await page.locator('#architect-new-kind').selectOption(kind);await page.locator('#architect-new-name').fill(name);await page.locator('#architect-add button').click()}
+  await add('role','Visitante nuevo');await add('4','Comunidad nueva')
+  const categoryId=await page.getByRole('button',{name:'Categoría: Comunidad nueva',exact:true}).getAttribute('data-resource-id')
+  for(const [kind,name] of [['0','chat-nuevo'],['2','Voz nueva']]){await add(kind,name);await page.locator('#architect-parent').selectOption(categoryId);await page.locator('#architect-edit').click()}
+  const creationResponse=page.waitForResponse(response=>response.url().endsWith('/applications')&&response.request().method()==='POST')
+  await page.locator('#architect-prepare-application').click();const preparation=await creationResponse
+  if(!preparation.ok())throw Error(`Creation preparation rejected: ${(await preparation.json()).error}; ${await page.locator('#architect-application-status').textContent()}`)
+  await page.waitForFunction(()=>!document.querySelector('#architect-confirm-application').hidden)
+  if(creates!==0)throw Error('Preparing a creation plan caused effects')
+  if(!await page.locator('#architect-application-status').textContent().then(text=>text.includes('orden personalizado')))throw Error('Creation review omitted ordering limits')
+  page.once('dialog',dialog=>dialog.accept());await page.locator('#architect-confirm-application').click()
+  await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('4 recursos creados'))
+  if(creates!==4)throw Error('Creation replay duplicated an effect')
+  const category=channels.find(channel=>channel.name==='Comunidad nueva')
+  if(channels.find(channel=>channel.name==='chat-nuevo').parentId!==category.id||channels.find(channel=>channel.name==='Voz nueva').parentId!==category.id)throw Error('Dependent channels missed the real category ID')
+  const creationJob=(await runtime.list(guild.id,'browser_actor')).find(job=>job.result?.creates===4)
+  if(!creationJob||creationJob.progress.completed!==5||Object.keys(creationJob.result.idMap).length!==4)throw Error('Real creation checkpoints or ID map missing')
   block=true;await page.locator('#architect-analyze').click();await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('Cancelar análisis'))
   await page.locator('#architect-jobs button').click();release();block=false
   await page.waitForFunction(()=>document.querySelector('#architect-jobs').textContent.includes('Cancelado'))
@@ -91,11 +126,11 @@ const {createJobsRuntime,connectionOptions}=require(root+'/handlers/jobs/runtime
   if(await second.locator('#architect-jobs').textContent()!=='')throw Error('Revocation left a private job visible')
   if(await second.locator('#architect-restore-points').textContent()!=='')throw Error('Revocation left a private restore point visible')
   if(reads!==before)throw Error('Unauthorized source read')
-  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
+  const result={scope:'Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider',states:['submit','measured steps','completed result','create structural restore point','inspect actual copy and completeness limits','reload','second tab','prepare without effects','explicit confirmation','fixture edit and prior point','create role/category/text/voice','real ID dependency and checkpoints','lost creation response without duplicate','ordering limits reviewed','cancel','queue unavailable','permission revoked','late authorized response rejected'],desktop:1365,mobile:390,overflow:false,errors}
   if(errors.length)throw Error(errors.join('; '))
   fs.writeFileSync(root+'/docs/platform/evidence/jobs-browser.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result))
  }finally{
-  release?.();await browser?.close();if(server)await new Promise(resolve=>server.close(resolve));await runtime?.close()
+  release?.();await browser?.close();if(server)await new Promise(resolve=>server.close(resolve));await runtime?.close();await sdkClient?.destroy()
   if(queue){await queue.obliterate({force:true});await queue.close()}
   if(model)await model.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(restoreModel)await restoreModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(planModel)await planModel.deleteMany({guildId:'browser_guild',actorId:'browser_actor'});if(guardModel)await guardModel.deleteMany({_id:'browser_guild'});await mongoose.disconnect()
  }

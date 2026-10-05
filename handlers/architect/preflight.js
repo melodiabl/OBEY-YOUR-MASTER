@@ -1,5 +1,5 @@
 const { PermissionFlagsBits } = require('discord.js')
-async function preflight(guild, blueprint, diff, actorId, { executionAvailable = false } = {}) {
+async function preflight(guild, blueprint, diff, actorId, { executionAvailable = false, idMap = {} } = {}) {
   const checks = []
   const add = (code, status, detail) => checks.push({ code, status, detail })
   let actor, bot
@@ -17,8 +17,9 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
   }
   for (const role of blueprint.roles) {
     if (!diff.changes.some(change => change.kind === 'roles' && change.id === role.id)) continue
-    const belowBot = bot?.roles?.highest && role.position < bot.roles.highest.position
-    const belowActor = actor?.id === guild.ownerId || (actor?.roles?.highest && role.position < actor.roles.highest.position)
+    const position = guild.roles?.cache?.get(idMap[role.id] || role.id)?.position ?? role.position
+    const belowBot = bot?.roles?.highest && position < bot.roles.highest.position
+    const belowActor = actor?.id === guild.ownerId || (actor?.roles?.highest && position < actor.roles.highest.position)
     if (diff.changes.some(change => change.kind === 'roles' && change.id === role.id && (change.operation === 'create' || change.field === 'permissions'))) {
       for (const [name, member] of [['actor', actor], ['bot', bot]]) add(`${name}_grant_${role.id}`, member ? (member.permissions.has(BigInt(role.permissions)) ? 'passed' : 'failed') : 'unknown', `${name === 'bot' ? 'OBEY' : 'Tu cuenta'} debe tener los permisos que propone conceder al rol ${role.name}.`)
     }
@@ -27,18 +28,35 @@ async function preflight(guild, blueprint, diff, actorId, { executionAvailable =
   add('deletions', 'passed', 'Esta propuesta conserva todos los recursos existentes.')
   if (executionAvailable) {
     if (diff.changes.length) add('actor_guild', actor ? (actor.permissions.has(PermissionFlagsBits.ManageGuild) ? 'passed' : 'failed') : 'unknown', 'Tu cuenta necesita Administrar servidor durante la aplicación.')
-    try { if (diff.changes.length) require('./application').compileEdits(diff); add('execution', 'passed', 'Aplicación confirmada de nombres, temas de texto y colores de roles disponible en este canary.') }
-    catch { add('execution', 'failed', 'La aplicación actual admite nombres, temas de canales de texto y colores de roles existentes. Creaciones, movimientos y permisos siguen pendientes.') }
+    try { if (diff.changes.length) require('./application').compileEdits(diff); add('execution', 'passed', 'Aplicación confirmada de ediciones y creaciones básicas disponible en este canary.') }
+    catch { add('execution', 'failed', 'Solo se aplican nombres, temas y colores existentes, roles nuevos sin permisos y canales básicos sin sobrescrituras ni posiciones personalizadas.') }
+    const creations = diff.changes.filter(change => change.operation === 'create')
+    if (creations.length) {
+      add('capacity', (blueprint.roles?.length <= 250 && blueprint.channels?.length <= 500 && blueprint.channels.every(parent => parent.type !== 4 || blueprint.channels.filter(channel => channel.parentId === parent.id).length <= 50)) ? 'passed' : 'failed', 'La propuesta debe respetar 250 roles, 500 canales y 50 canales por categoría.')
+      add('creation_audit', bot ? (bot.permissions.has(PermissionFlagsBits.ViewAuditLog) ? 'passed' : 'failed') : 'unknown', 'OBEY necesita Ver registro de auditoría para verificar respuestas de creación perdidas.')
+      add('creation_transport', typeof guild.client?.rest?.options?.makeRequest === 'function' ? 'passed' : 'unknown', 'El transporte debe permitir impedir reintentos de creaciones inciertas.')
+      for (const change of creations.filter(change => change.kind === 'channels' && change.after?.type === 2)) {
+        add(`bitrate_${change.id}`, Number.isInteger(guild.maximumBitrate) ? change.after.bitrate <= guild.maximumBitrate ? 'passed' : 'failed' : 'unknown', 'El bitrate debe caber en la capacidad actual de voz del servidor.')
+      }
+    }
     for (const change of diff.changes.filter(change => change.kind === 'roles' && change.field === 'color')) {
       const colors = guild.roles?.cache?.get(change.id)?.colors
       add(`color_style_${change.id}`, !colors ? 'unknown' : colors.secondaryColor == null && colors.tertiaryColor == null ? 'passed' : 'failed', 'Solo se editan colores simples; los degradados y estilos holográficos se conservan.')
     }
     for (const id of new Set(diff.changes.filter(change => change.kind === 'channels').map(change => change.id))) {
-      const channel = guild.channels?.cache?.get(id)
+      const creation = creations.find(change => change.kind === 'channels' && change.id === id)
+      const proposed = creation?.after
+      const parent = proposed?.parentId && blueprint.channels?.find(channel => channel.id === proposed.parentId)
+      if (creation && parent) add(`parent_permissions_${id}`, parent.overwrites?.length === 0 ? 'passed' : 'failed', 'Los canales nuevos sin sobrescrituras solo se crean en categorías sin sobrescrituras; los permisos privados requieren una propuesta específica.')
+      const parentId = idMap[proposed?.parentId] || proposed?.parentId
+      const channel = guild.channels?.cache?.get(idMap[id] || id) || (creation && parentId && guild.channels?.cache?.get(parentId))
       for (const [name, member] of [['actor', actor], ['bot', bot]]) {
         let allowed
-        try { allowed = member && channel?.permissionsFor(member)?.has(PermissionFlagsBits.ManageChannels) } catch {}
-        add(`${name}_channel_${id}`, allowed === undefined ? 'unknown' : allowed ? 'passed' : 'failed', `${name === 'bot' ? 'OBEY' : 'Tu cuenta'} necesita Administrar canales efectivo en el canal que se editará.`)
+        try {
+          const permissions = channel ? channel.permissionsFor(member) : creation && (!parent || parent.id.startsWith('local:')) ? member?.permissions : undefined
+          allowed = member && permissions?.has(creation ? [PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ViewChannel] : PermissionFlagsBits.ManageChannels)
+        } catch {}
+        add(`${name}_channel_${id}`, allowed === undefined ? 'unknown' : allowed ? 'passed' : 'failed', `${name === 'bot' ? 'OBEY' : 'Tu cuenta'} necesita Administrar canales efectivo${creation ? ' y conservar acceso al canal nuevo' : ' en el canal que se editará'}.`)
       }
     }
   } else add('execution', 'unknown', 'La aplicación a Discord requiere habilitar un canary autorizado.')

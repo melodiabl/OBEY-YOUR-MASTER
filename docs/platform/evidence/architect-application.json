@@ -12,5 +12,9 @@
   "ambiguousResponseStopsReplay": true,
   "persistentGuildGuardBlocksAnotherApplication": true,
   "staleAbortFenced": true,
-  "cancellationDuringRESTKeepsDurableGuard": true
+  "cancellationDuringRESTKeepsDurableGuard": true,
+  "actualSDKCreationSerialization": true,
+  "orderedRoleCategoryTextVoiceCreation": true,
+  "durableLogicalToRealIdMap": true,
+  "lostCreationResponseReconciledWithoutReplay": true
 }

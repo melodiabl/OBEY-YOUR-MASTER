@@ -5,11 +5,13 @@ const { validateBlueprint } = require('../handlers/architect/blueprint')
 const { diffBlueprint } = require('../handlers/architect/diff')
 const { compileEdits } = require('../handlers/architect/application')
 const { preflight } = require('../handlers/architect/preflight')
+const { creationOptions, installCreationRetryGuard, verifyCreation, reconcileCreation, reasonFor } = require('../handlers/architect/creations')
 function createEditExecutor({ repository, restorePoints, guildOperations, snapshot = snapshotGuild, check = preflight, enabled = () => false }) {
   function result(record) {
-    return { applicationId: record.applicationId, restorePointId: record.restorePointId, edits: record.payload.operations.length,
+    return { applicationId: record.applicationId, restorePointId: record.restorePointId, edits: record.payload.operations.filter(op => op.action !== 'create').length,
+      creates: record.payload.operations.filter(op => op.action === 'create').length, idMap: { ...(record.executionIdMap || {}) },
       revision: record.executionRevision, capturedAt: new Date(record.updatedAt || Date.now()).toISOString(),
-      channelCount: record.payload.snapshot.channels.length, roleCount: record.payload.snapshot.roles.length }
+      channelCount: (record.executionSnapshot || record.payload.snapshot).channels.length, roleCount: (record.executionSnapshot || record.payload.snapshot).roles.length }
   }
   return async (guild, record, lease) => {
     if (!enabled(guild)) throw new JobError('Application unavailable', 'apply_unavailable')
@@ -30,14 +32,34 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
     if (!await guildOperations.claim(guild.id, record._id)) throw new JobError('Unresolved guild operation', 'application_needs_review')
     let releaseSafe = false
     try {
-      if (current.steps.some(step => step.status === 'executing')) throw new JobError('Interrupted edit outcome unknown', 'application_needs_review')
+      async function recoverCreation(index, operation) {
+        await lease.assertOwned()
+        current = await repository.getById(record._id)
+        if (current.steps[index].status === 'completed') return
+        const before = current.executionSnapshot
+        if (!before || before.revision !== current.executionRevision) throw new JobError('Creation baseline unavailable', 'application_needs_review')
+        const realId = await reconcileCreation(guild, operation, record._id)
+        const applied = await snapshot(guild), idMap = { ...(current.executionIdMap || {}), [operation.resourceId]: realId }
+        if (!realId || !verifyCreation(before, applied, operation, realId, current.executionIdMap || {})) throw new JobError('Creation evidence incomplete', 'application_needs_review')
+        if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap })).status !== 'passed') throw new JobError('Creation permissions changed', 'application_needs_review')
+        await lease.assertOwned()
+        if ((await snapshot(guild)).revision !== applied.revision || !await repository.completeEdit(record._id, record.token, index, applied.revision, undefined, { snapshot: applied, idMap })) throw new JobError('Creation checkpoint unavailable', 'application_needs_review')
+      }
+      for (let offset = 0; offset < payload.operations.length; offset++) {
+        if (current.steps[offset + 1].status !== 'executing') continue
+        const operation = payload.operations[offset]
+        if (operation.action !== 'create') throw new JobError('Interrupted edit outcome unknown', 'application_needs_review')
+        await recoverCreation(offset + 1, operation)
+        current = await repository.getById(record._id)
+      }
+      if (current.steps.every(step => step.status === 'completed')) { releaseSafe = true; return result(current) }
       if (new Date(payload.expiresAt).getTime() <= Date.now()) throw new JobError('Application expired', 'application_expired')
       async function verify() {
         await lease.assertOwned()
         current = await repository.getById(record._id)
         const observed = await snapshot(guild)
         if (observed.revision !== current.executionRevision) throw new JobError('Snapshot changed', 'revision_conflict')
-        if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true })).status !== 'passed') throw new JobError('Preflight blocked', 'application_blocked')
+        if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap: current.executionIdMap || {} })).status !== 'passed') throw new JobError('Preflight blocked', 'application_blocked')
         await lease.assertOwned()
         if ((await snapshot(guild)).revision !== observed.revision) throw new JobError('Snapshot changed', 'revision_conflict')
         return observed
@@ -52,6 +74,26 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         const index = offset + 1, operation = payload.operations[offset]
         const observed = await verify()
         if (current.steps[index].status === 'completed') continue
+        if (operation.action === 'create') {
+          // Install on the shared REST manager so its rate buckets stay authoritative.
+          installCreationRetryGuard(guild.client?.rest)
+          const options = creationOptions(operation, current.executionIdMap || {}, reasonFor(record._id, operation))
+          if (!await repository.startEdit(record._id, record.token, index)) throw new JobError('Job no longer active', 'job_cancelled')
+          try {
+            await lease.assertOwned()
+            const resource = await guild[operation.kind].create(options)
+            const applied = await snapshot(guild), idMap = { ...(current.executionIdMap || {}), [operation.resourceId]: resource?.id }
+            if (!verifyCreation(observed, applied, operation, resource?.id, current.executionIdMap || {})) throw new Error('Unexpected structure after creation')
+            if ((await check(guild, blueprint, diff, record.actorId, { executionAvailable: true, idMap })).status !== 'passed') throw new Error('Creation permissions changed')
+            await lease.assertOwned()
+            if ((await snapshot(guild)).revision !== applied.revision) throw new Error('Structure changed after creation')
+            if (!await repository.completeEdit(record._id, record.token, index, applied.revision, undefined, { snapshot: applied, idMap })) throw new Error('Checkpoint not acknowledged')
+          } catch {
+            // Positive provider evidence can finish a step; absence never permits a replay.
+            try { await recoverCreation(index, operation) } catch { throw new JobError('Creation outcome needs review', 'application_needs_review') }
+          }
+          continue
+        }
         const expected = structuredClone(observed), target = expected[operation.kind].find(resource => resource.id === operation.resourceId)
         if (!target) throw new JobError('Resource missing', 'revision_conflict')
         Object.assign(target, operation.fields)
@@ -62,7 +104,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
         // Write-ahead state precedes REST. Any error after this point keeps the durable guild guard.
         try {
           await lease.assertOwned()
-          const patch = { ...operation.fields, reason: `OBEY Architect ${record._id} / ${operation.id}` }
+          const patch = { ...operation.fields, reason: reasonFor(record._id, operation) }
           if (operation.kind === 'roles' && Object.hasOwn(patch, 'color')) {
             patch.colors = { primaryColor: patch.color, secondaryColor: null, tertiaryColor: null }; delete patch.color
           }
@@ -70,7 +112,7 @@ function createEditExecutor({ repository, restorePoints, guildOperations, snapsh
           const applied = await snapshot(guild)
           if (applied.revision !== revision) throw new Error('Unexpected structure after edit')
           await lease.assertOwned()
-          if (!await repository.completeEdit(record._id, record.token, index, revision)) throw new Error('Checkpoint not acknowledged')
+          if (!await repository.completeEdit(record._id, record.token, index, revision, undefined, current.executionSnapshot ? { snapshot: applied, idMap: current.executionIdMap || {} } : undefined)) throw new Error('Checkpoint not acknowledged')
         } catch { throw new JobError('Edit outcome needs review', 'application_needs_review') }
       }
       current = await repository.getById(record._id)

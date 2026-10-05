@@ -1711,9 +1711,11 @@
         "evidence": [
           "handlers/timedmessages.js",
           "handlers/autobackup.js",
-          "handlers/birthdayScheduler.js"
+          "handlers/birthdayScheduler.js",
+          "handlers/architect/creations.js",
+          "workers/architect-edits.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Creaciones básicas de roles/categorías/texto/voz, mapa lógico→real y reconciliación con auditoría/estructura implementados detrás de canary. Movimientos/permisos/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Cola durable y worker con checkpoint, lock por guild y progreso real.",
       "phase": 4,
@@ -1736,7 +1738,8 @@
           "test/architect-application.test.js",
           "test/architect-edits.test.js",
           "test/architect-preflight.test.js",
-          "docs/platform/evidence/architect-application.json"
+          "docs/platform/evidence/architect-application.json",
+          "test/architect-creations.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -1815,9 +1818,11 @@
       "current": {
         "evidence": [
           "commands/Administration/createbackup.js",
-          "database/schemas/BackupSchema.js"
+          "database/schemas/BackupSchema.js",
+          "handlers/architect/creations.js",
+          "workers/architect-edits.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Creaciones básicas de roles/categorías/texto/voz, mapa lógico→real y reconciliación con auditoría/estructura implementados detrás de canary. Movimientos/permisos/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Implementar núcleo Architect visual y ejecución segura; IA fase 5.",
       "phase": 4,
@@ -1838,7 +1843,8 @@
           "test/architect-edits.test.js",
           "test/jobs-api.test.js",
           "docs/platform/evidence/architect-application.json",
-          "docs/platform/evidence/jobs-browser.json"
+          "docs/platform/evidence/jobs-browser.json",
+          "test/architect-creations.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2252,9 +2258,11 @@
       "classification": "MISSING",
       "current": {
         "evidence": [
-          "commands/Administration/loadbackup.js"
+          "commands/Administration/loadbackup.js",
+          "handlers/architect/creations.js",
+          "workers/architect-edits.js"
         ],
-        "assessment": "Evidencia estática parcial; no equivale a aceptación del requisito completo."
+        "assessment": "Creaciones básicas de roles/categorías/texto/voz, mapa lógico→real y reconciliación con auditoría/estructura implementados detrás de canary. Movimientos/permisos/módulos/revisión manual y aceptación integral pendientes."
       },
       "change": "Diff, planner/preflight e inversas con conflictos y límites explícitos.",
       "phase": 4,
@@ -2275,7 +2283,8 @@
           "test/architect-edits.test.js",
           "test/jobs-api.test.js",
           "docs/platform/evidence/architect-application.json",
-          "docs/platform/evidence/jobs-browser.json"
+          "docs/platform/evidence/jobs-browser.json",
+          "test/architect-creations.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -14052,8 +14061,8 @@
       "T14/T23/T24 cola/registro/outbox, leases por guild, checkpoints/journal/guard de efectos y cancelación parciales",
       "Redis dedicado autenticado/AOF/noeviction configurado y verificado por petición expresa",
       "T27 puntos privados/inmutables de estructura con inspección, incompletitud explícita y recuperación",
-      "T28 preparación/confirmación por revisión y aplicación de nombres/temas/colores existentes limitada a canary; demás efectos pendientes"
+      "T28 preparación/confirmación por revisión, nombres/temas/colores y creaciones básicas con IDs reales y reconciliación positiva, limitada a canary; movimientos/permisos/módulos pendientes"
     ],
-    "verification": "193 tests/48 archivos; Redis dedicado autenticado verificado con reinicio; Mongo/Redis/BullMQ aislados y Chromium prueban copias, confirmación sin efectos previos, ediciones de fixture, checkpoints, fencing, respuesta perdida, guard persistente, cancelación durante REST, dos pestañas/revocación/móvil. No canary Discord real; creación/movimiento/permisos/configuración/restore/rollback siguen pendientes."
+    "verification": "204 tests/49 archivos; Mongo/Redis/BullMQ aislados y Chromium prueban copias, confirmación sin efectos previos, SDK de edición/creación, roles/categorías/texto/voz, IDs reales y dependencias, respuesta de creación perdida sin duplicación, transporte 5xx/red/429, checkpoints, fencing, guard persistente, cancelación durante REST, dos pestañas/revocación/móvil. No canary Discord real; movimientos/permisos/configuración/revisión manual/restore/rollback pendientes."
   }
 }

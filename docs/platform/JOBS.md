@@ -1,6 +1,6 @@
 # Trabajos persistentes de Architect
 
-`architect.snapshot` consulta canales/roles y conserva el resultado privado del administrador. `architect.backup` guarda puntos de restauración de estructura. `architect.apply` ejecuta ediciones confirmadas de nombres, temas de texto y colores existentes, limitado a guilds canary habilitadas. Web y `/config architect` comparten `client.jobs`, scope e historial; Discord solicita análisis/copias y la confirmación de ediciones se realiza en la web. Restauración, creaciones y demás efectos conservan sus pendientes.
+`architect.snapshot` consulta canales/roles y conserva el resultado privado del administrador. `architect.backup` guarda puntos de restauración de estructura. `architect.apply` ejecuta ediciones confirmadas de nombres, temas de texto y colores existentes y creaciones básicas con IDs reales, limitado a guilds canary habilitadas. Web y `/config architect` comparten `client.jobs`, scope e historial; Discord solicita análisis/copias y la confirmación de ediciones se realiza en la web. Restauración, movimientos, permisos y módulos conservan sus pendientes.
 
 ## Persistencia y entrega
 
@@ -12,7 +12,7 @@ BullMQ 5.81.5 está fijado en el lock. La cola conserva hasta 1000 entregas comp
 
 ## Worker y recuperación
 
-Estados implementados: queued, running, completed, failed y cancelled. Snapshot y backup tienen un paso real; las aplicaciones tienen copia previa y un paso por recurso editado. El contador cambia solo al persistir checkpoints. Un apply fallido/cancelado puede conservar pasos completados y un paso executing incierto; el error/guard explican la revisión pendiente. No se inventó un estado partially_failed para operaciones aún no implementadas.
+Estados implementados: queued, running, completed, failed y cancelled. Snapshot y backup tienen un paso real; las aplicaciones tienen copia previa y un paso por recurso editado o creado. El contador cambia solo al persistir checkpoints. Un apply fallido/cancelado puede conservar pasos completados y un paso executing incierto; el error/guard explican la revisión pendiente. No se inventó un estado partially_failed para operaciones aún no implementadas.
 
 Antes de leer o recuperar un checkpoint, el worker vuelve a consultar al miembro con `force: true` y exige ManageGuild. Un token por ejecución impide writes de un worker anterior. Una reentrega reutiliza el checkpoint guardado; un registro terminal no repite la lectura.
 
@@ -22,7 +22,7 @@ Cancelar queued impide leer. Para running se guarda la petición, se comprueba a
 
 Shutdown impide nuevas entregas, espera el dispatcher y cierra el worker antes de desconectar Mongo. El timeout global del bot sigue en 20 segundos; tras terminación forzada puede existir reentrega stalled. La verificación cubre reinicio del runtime y checkpoints persistidos; no se mató ni inició el bot real.
 
-Concurrencia dos, con lease adicional por guild y espera delayed sin consumir reintentos de fallo. Apply añade guard Mongo/journal de efectos, aborto duradero y tratamiento conservador de respuesta perdida. T24 sigue parcial: reconciliación de creaciones, dependencias completas y aceptación canary pendientes; contratos en `RESTORE-POINTS.md` y `APPLICATIONS.md`.
+Concurrencia dos, con lease adicional por guild y espera delayed sin consumir reintentos de fallo. Apply añade guard Mongo/journal de efectos, aborto duradero y tratamiento conservador de respuesta perdida. T24 sigue parcial: reconciliación positiva de creaciones implementada; revisión manual de jobs terminales, dependencias completas y aceptación canary pendientes; contratos en `RESTORE-POINTS.md` y `APPLICATIONS.md`.
 
 ## API y panel
 

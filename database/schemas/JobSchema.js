@@ -5,6 +5,7 @@ const schema = new Schema({
   guildId: { type: String, required: true }, actorId: { type: String, required: true },
   type: { type: String, enum: ['architect.snapshot', 'architect.backup', 'architect.apply'], required: true },
   applicationId: String, payload: Schema.Types.Mixed, executionRevision: String, restorePointId: String,
+  executionSnapshot: Schema.Types.Mixed, executionIdMap: { type: Schema.Types.Mixed, default: () => ({}) },
   executionAborted: { type: Boolean, default: false },
   idempotencyKey: { type: String, required: true }, correlationId: { type: String, required: true },
   status: { type: String, enum: ['queued', 'running', 'completed', 'failed', 'cancelled'], default: 'queued' },

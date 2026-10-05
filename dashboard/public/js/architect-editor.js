@@ -28,7 +28,7 @@
         no_permission: 'No tienes permiso para administrar este servidor.', not_authenticated: 'Tu sesión caducó. Inicia sesión de nuevo.',
         storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
         architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.' }
-      Object.assign(messages, { application_unsupported: 'Solo puedes aplicar nombres, temas de texto y colores de roles existentes. Otros cambios siguen pendientes.',
+      Object.assign(messages, { application_unsupported: 'Puedes aplicar nombres, temas y colores, crear roles sin permisos y canales básicos sin sobrescrituras. Movimientos y permisos siguen pendientes.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
         jobs_unavailable: 'Los trabajos no están disponibles. El plan aún no se ha enviado.', application_not_found: 'El plan ya no está disponible. Prepara uno nuevo.' })
@@ -77,7 +77,7 @@
     tree.append(list)
     const roleHeading = document.createElement('h3'); roleHeading.className = 'architect-subtitle'; roleHeading.textContent = 'Roles'; tree.append(roleHeading)
     const roles = document.createElement('ul')
-    for (const role of [...draft.roles].sort((a, b) => b.position - a.position || a.id.localeCompare(b.id))) roles.append(resourceButton(role, 'roles'))
+    for (const role of [...draft.roles].sort((a, b) => b.position - a.position || Number(a.id.startsWith('local:')) - Number(b.id.startsWith('local:')) || a.id.localeCompare(b.id))) roles.append(resourceButton(role, 'roles'))
     tree.append(roles)
     if (!draft.channels.length && !draft.roles.length) { const empty = document.createElement('p'); empty.className = 'architect-empty'; empty.textContent = 'Todavía no hay recursos. Añade una categoría o un canal.'; tree.append(empty) }
     $('architect-resource-count').textContent = `${draft.channels.length + draft.roles.length} recursos`
@@ -164,7 +164,7 @@
       const body = await post('/applications', { blueprint: editor.current() })
       applicationPlan = body.plan; review(applicationPlan.review)
       $('architect-confirm-application').textContent = `Confirmar ${applicationPlan.changes} ${applicationPlan.changes === 1 ? 'cambio' : 'cambios'}`
-      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.`
+      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.${applicationPlan.creates ? ' Los roles nuevos se crean bajo los existentes y los canales en la posición predeterminada de Discord. El orden personalizado sigue pendiente.' : ''}`
     } catch (error) { $('architect-application-status').textContent = error.message }
     finally { busy = false; buttons() }
   })
@@ -188,7 +188,6 @@
       : { id, name, type: Number(kind), parentId: null, position: 0, topic: '', nsfw: false, bitrate: kind === '2' ? 64000 : null, userLimit: kind === '2' ? 0 : null, rateLimitPerUser: 0, overwrites: [] }
     editor.change(draft => {
       const list = role ? draft.roles : draft.channels
-      resource.position = Math.max(role ? 0 : -1, ...list.map(item => item.position)) + 1
       if (!role && resource.type !== 4 && selected?.kind === 'channels' && draft.channels.find(item => item.id === selected.id)?.type === 4) resource.parentId = selected.id
       list.push(resource)
     })

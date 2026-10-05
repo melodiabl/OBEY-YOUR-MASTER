@@ -37,3 +37,21 @@ test('single-color application cannot overwrite a gradient or an unknown role st
  const unknown=await preflight(guild,{roles:[{id:'staff',name:'Staff',position:1}]},{changes:[{kind:'roles',id:'staff',operation:'update',field:'color',after:123}]},'u',{executionAvailable:true})
  assert.equal(unknown.status,'incomplete')
 })
+
+test('channel creations require audit capability, parent access, capacity and supported voice bitrate', async () => {
+ const { PermissionsBitField, Client } = require('discord.js')
+ const client = new Client({ intents: [] }), member = { id: 'u', permissions: new PermissionsBitField(8n), roles: { highest: { position: 10 } } }
+ const parent = { id: 'parent', type: 4, overwrites: [] }
+ const channel = { id: 'local:voice', name: 'Voice', type: 2, parentId: 'parent', position: 0, topic: '', nsfw: false, bitrate: 64000, userLimit: 0, rateLimitPerUser: 0, overwrites: [] }
+ const guild = { client, maximumBitrate: 96000, members: { fetch: async () => member, fetchMe: async () => member }, channels: { cache: new Map([['parent', { permissionsFor: () => new PermissionsBitField(8n) }]]) } }
+ const blueprint = { roles: [], channels: [parent, channel] }, diff = { changes: [{ kind: 'channels', id: channel.id, operation: 'create', after: channel }] }
+ try {
+  assert.equal((await preflight(guild, blueprint, diff, 'u', { executionAvailable: true })).status, 'passed')
+  channel.bitrate = 128000
+  assert.equal((await preflight(guild, blueprint, diff, 'u', { executionAvailable: true })).status, 'blocked')
+  channel.bitrate = 64000; parent.overwrites = [{ id: 'everyone', type: 0, allow: '0', deny: '1024' }]
+  assert.equal((await preflight(guild, blueprint, diff, 'u', { executionAvailable: true })).status, 'blocked')
+  parent.overwrites = []; blueprint.roles = Array.from({ length: 251 }, (_, index) => ({ id: `r${index}` }))
+  assert.equal((await preflight(guild, blueprint, diff, 'u', { executionAvailable: true })).status, 'blocked')
+ } finally { await client.destroy() }
+})

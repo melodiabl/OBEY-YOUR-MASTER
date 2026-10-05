@@ -6,13 +6,19 @@ function compileEdits(diff) {
   if (!diff?.changes?.length) throw new JobError('Cannot apply an empty proposal', 'application_unsupported')
   const operations = new Map()
   for (const change of diff.changes) {
+    if (change.operation === 'create') {
+      if (!require('./creations').supportedCreation(change.kind, change.after)) throw new JobError('Creation options not supported', 'application_unsupported')
+      operations.set(`${change.kind}:${change.id}`, { id: `create-${operations.size + 1}`, action: 'create', kind: change.kind, resourceId: change.id, fields: structuredClone(change.after) })
+      continue
+    }
     const allowed = { channels: ['name', 'topic'], roles: ['name', 'color'] }
     if (change.operation !== 'update' || !allowed[change.kind]?.includes(change.field)) throw new JobError('Only existing resource name/topic/color edits are supported', 'application_unsupported')
     const id = `${change.kind}:${change.id}`
     if (!operations.has(id)) operations.set(id, { id: `edit-${operations.size + 1}`, kind: change.kind, resourceId: change.id, fields: {} })
     operations.get(id).fields[change.field] = change.after
   }
-  return [...operations.values()].sort((a, b) => (a.kind === 'roles' ? 0 : 1) - (b.kind === 'roles' ? 0 : 1))
+  const rank = operation => operation.kind === 'roles' ? 0 : operation.action === 'create' && operation.fields.type === 4 ? 1 : 2
+  return [...operations.values()].sort((a, b) => rank(a) - rank(b))
 }
 function createApplicationService({ repository, preview, jobs, enabled = () => false, snapshot = snapshotGuild, storageReady = () => true }) {
   function requireEnabled(guild) {
@@ -25,13 +31,14 @@ function createApplicationService({ repository, preview, jobs, enabled = () => f
       identifier(guild?.id, 'guild'); identifier(actorId, 'actor'); requireEnabled(guild)
       const proposal = await preview(guild, blueprint, actorId)
       const operations = compileEdits(proposal.diff)
-      if (operations.some(operation => operation.kind === 'channels' && Object.hasOwn(operation.fields, 'topic') && proposal.snapshot.channels?.find(channel => channel.id === operation.resourceId)?.type !== 0)) throw new JobError('Only text channel topics supported', 'application_unsupported')
+      if (operations.some(operation => operation.action !== 'create' && operation.kind === 'channels' && Object.hasOwn(operation.fields, 'topic') && proposal.snapshot.channels?.find(channel => channel.id === operation.resourceId)?.type !== 0)) throw new JobError('Only text channel topics supported', 'application_unsupported')
       if (proposal.preflight.status !== 'passed') throw new JobError('Preflight incomplete', 'application_blocked')
       if (!jobs()?.available()) throw new JobError('Jobs unavailable', 'jobs_unavailable')
       const id = randomUUID(), confirmation = randomBytes(32).toString('hex'), expiresAt = new Date(Date.now() + 15 * 60 * 1000)
       await repository.create({ _id: id, guildId: guild.id, actorId, confirmationDigest: hash(confirmation).toString('hex'), expiresAt,
         payload: { schemaVersion: 1, snapshot: proposal.snapshot, blueprint: proposal.blueprint, operations, revision: proposal.diff.revision, expiresAt } })
-      return { id, confirmation, revision: proposal.diff.revision, expiresAt, edits: operations.length, changes: proposal.diff.changes.length,
+      return { id, confirmation, revision: proposal.diff.revision, expiresAt, edits: operations.filter(operation => operation.action !== 'create').length,
+        creates: operations.filter(operation => operation.action === 'create').length, changes: proposal.diff.changes.length,
         review: { blueprint: proposal.blueprint, diff: proposal.diff, preflight: proposal.preflight } }
     },
     async confirm(guild, actorId, input) {

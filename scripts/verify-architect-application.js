@@ -15,7 +15,7 @@ async function until(check) {
 }
 async function main() {
   const guildId = 'apply_fixture', actorId = 'apply_actor', queueName = `obey-apply-test-${randomUUID()}`
-  let runtime, queue, jobModel, planModel, pointModel, guardModel, sdkClient, cancelRelease, permitted = true, loseResponse = false, edits = 0
+  let runtime, queue, jobModel, planModel, pointModel, guardModel, sdkClient, cancelRelease, permitted = true, loseResponse = false, loseCreation = false, edits = 0, creates = 0
   try {
     await mongoose.connect(mongoUrl, { serverSelectionTimeoutMS: 3000 })
     jobModel = require('../database/schemas/JobSchema'); planModel = require('../database/schemas/ArchitectApplicationPlanSchema')
@@ -28,7 +28,7 @@ async function main() {
     const member = id => ({ id, permissions: new PermissionsBitField(permitted ? 8n : 0n), roles: { highest: { position: 10 } } })
     const guild = { id: guildId, name: 'Fixture', ownerId: actorId,
       members: { fetch: async ({ user }) => member(user), fetchMe: async () => member('bot') },
-      channels: { cache: new Map([[channel.id, channel]]), fetch: async () => new Map([[channel.id, channel]]), edit: async (id, patch) => {
+      channels: { cache: new Map([[channel.id, channel]]), fetch: async () => new Map(guild.channels.cache), edit: async (id, patch) => {
         edits++; assert.equal(id, channel.id); if (patch.name !== undefined) channel.name = patch.name; if (patch.topic !== undefined) channel.topic = patch.topic
         if (loseResponse) throw new Error('fixture response lost after mutation')
       } },
@@ -37,6 +37,8 @@ async function main() {
     // Use the installed RoleManager for serialization, with REST replaced before any call. No login/token.
     sdkClient = new Client({ intents: [] })
     const sdkGuild = new Guild(sdkClient, { id: guildId, name: 'Fixture', roles: [] })
+    sdkClient.guilds.cache.set(guildId, sdkGuild); sdkClient.user = { id: '123456789012345600' }
+    guild.client = sdkClient; guild.maximumBitrate = 96000
     const roleData = role => ({ ...role, permissions: role.permissions.bitfield.toString(),
       ...(role.colors ? { colors: { primary_color: role.colors.primaryColor, secondary_color: role.colors.secondaryColor, tertiary_color: role.colors.tertiaryColor } } : {}) })
     for (const role of roles) sdkGuild.roles._add(roleData(role))
@@ -52,6 +54,35 @@ async function main() {
       return roleData(role)
     }
     guild.roles.edit = (id, patch) => sdkGuild.roles.edit(id, patch)
+    const auditEntries = new Map()
+    guild.fetchAuditLogs = async () => ({ entries: auditEntries })
+    sdkClient.rest.post = async (route, { body, reason }) => {
+      creates++; body = JSON.parse(JSON.stringify(body))
+      assert.equal(body.position, undefined)
+      const id = String(123456789012345678n + BigInt(creates)), roleCreation = route.endsWith('/roles')
+      let data
+      if (roleCreation) {
+        assert.equal(body.permissions, '0'); assert.equal(body.color, undefined)
+        for (const existing of roles) if (existing.position > 0) existing.position++
+        const role = { id, name: body.name, position: 1, permissions: new PermissionsBitField(body.permissions), color: body.colors.primary_color,
+          colors: { primaryColor: body.colors.primary_color, secondaryColor: null, tertiaryColor: null }, hoist: body.hoist, mentionable: body.mentionable, managed: false }
+        roles.push(role); guild.roles.cache.set(id, role); data = roleData(role)
+        for (const existing of roles) sdkGuild.roles._add(roleData(existing))
+      } else {
+        assert.deepEqual(body.permission_overwrites, [])
+        const created = { id, name: body.name, type: body.type, parentId: body.parent_id || null,
+          rawPosition: Math.max(0, ...[...guild.channels.cache.values()].filter(item => item.type === body.type).map(item => item.rawPosition)) + 1,
+          topic: body.topic || '', nsfw: Boolean(body.nsfw), bitrate: body.bitrate, userLimit: body.user_limit, rateLimitPerUser: body.rate_limit_per_user || 0,
+          permissionOverwrites: { cache: new Map() }, permissionsFor: () => new PermissionsBitField(permitted ? 8n : 0n) }
+        guild.channels.cache.set(id, created)
+        data = { ...body, id, guild_id: guildId, position: created.rawPosition }
+      }
+      auditEntries.set(id, { action: roleCreation ? 30 : 10, executorId: sdkClient.user.id, targetId: id, reason })
+      if (loseCreation) { loseCreation = false; throw new Error('fixture create response lost after mutation') }
+      return data
+    }
+    guild.roles.create = options => sdkGuild.roles.create(options)
+    guild.channels.create = options => sdkGuild.channels.create(options)
     let cancelledEdits = 0
     const cancelChannel = { ...channel, id: 'cancel_chat', name: 'before cancellation' }
     const cancelGuild = { ...guild, id: 'apply_cancel_fixture',
@@ -102,6 +133,25 @@ async function main() {
     assert.equal(await runtime.get(first.id, guildId, 'another_actor'), null)
     assert.equal(await guardModel.countDocuments({ _id: guildId }), 0)
     await applications.confirm(guild, actorId, plan); assert.equal(edits, 2)
+    const creationBlueprint = await proposal()
+    const template = { ...creationBlueprint.channels[0], position: 0, topic: '', parentId: null }
+    creationBlueprint.roles.push({ id: 'local:member', name: 'Member', position: 1, permissions: '0', color: 0x654321, managed: false, hoist: false, mentionable: false })
+    creationBlueprint.channels.push({ ...template, id: 'local:category', name: 'Community', type: 4 },
+      { ...template, id: 'local:text', name: 'new-chat', parentId: 'local:category' },
+      { ...template, id: 'local:voice', name: 'Voice', type: 2, parentId: 'local:category', bitrate: 64000, userLimit: 0 })
+    const creationPlan = await applications.prepare(guild, actorId, creationBlueprint)
+    assert.equal(creates, 0); loseCreation = true
+    const creationJob = await applications.confirm(guild, actorId, creationPlan), created = await completed(creationJob.id)
+    assert.equal(creates, 4); assert.equal(created.result.creates, 4); assert.equal(created.result.edits, 0)
+    assert.deepEqual(created.progress, { completed: 5, total: 5 })
+    assert.equal(created.result.channelCount, 4); assert.equal(created.result.roleCount, 4)
+    assert.equal(guild.channels.cache.get(created.result.idMap['local:text']).parentId, created.result.idMap['local:category'])
+    assert.equal(guild.channels.cache.get(created.result.idMap['local:voice']).parentId, created.result.idMap['local:category'])
+    const journal = await repository.getById(creationJob.id)
+    assert.deepEqual(journal.executionIdMap, created.result.idMap); assert.equal(journal.executionSnapshot.revision, journal.executionRevision)
+    assert.equal(created.executionSnapshot, undefined); assert.equal(created.executionIdMap, undefined)
+    await applications.confirm(guild, actorId, creationPlan); assert.equal(creates, 4)
+    assert.equal(await guardModel.countDocuments({ _id: guildId }), 0)
     const driftPlan = await applications.prepare(guild, actorId, await proposal('stale'))
     channel.topic = 'manual external change'
     await assert.rejects(applications.confirm(guild, actorId, driftPlan), error => error.code === 'revision_conflict')
@@ -140,7 +190,8 @@ async function main() {
       noEffectsBeforeConfirmation: true, concurrentConfirmationIdempotent: true, actualFixtureEdits: true, priorStructuralRestorePoint: true,
       measuredCheckpoints: true, duplicateDeliverySafe: true, revisionDriftRejected: true, permissionRevocation: true,
       ambiguousResponseStopsReplay: true, persistentGuildGuardBlocksAnotherApplication: true, staleAbortFenced: true,
-      cancellationDuringRESTKeepsDurableGuard: true }
+      cancellationDuringRESTKeepsDurableGuard: true, actualSDKCreationSerialization: true, orderedRoleCategoryTextVoiceCreation: true,
+      durableLogicalToRealIdMap: true, lostCreationResponseReconciledWithoutReplay: true }
   } finally {
     cancelRelease?.(); await runtime?.close(); await sdkClient?.destroy()
     if (queue) { await queue.obliterate({ force: true }); await queue.close() }

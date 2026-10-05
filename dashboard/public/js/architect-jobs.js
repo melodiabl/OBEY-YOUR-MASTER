@@ -33,7 +33,8 @@
       if (job.error && job.status !== 'cancelled') { const error = document.createElement('p'); error.textContent = job.error.message; item.append(error) }
       if (job.type === 'architect.apply') {
         const warning = document.createElement('p')
-        warning.textContent = job.result ? `${job.result.edits} ${job.result.edits === 1 ? 'recurso editado' : 'recursos editados'}. Actualiza la estructura para diseñar otra propuesta.` : 'La cancelación no revierte cambios ya realizados. Una edición incierta requiere revisar la copia antes de otra aplicación.'
+        const changes = job.result ? [job.result.edits ? `${job.result.edits} ${job.result.edits === 1 ? 'recurso editado' : 'recursos editados'}` : '', job.result.creates ? `${job.result.creates} ${job.result.creates === 1 ? 'recurso creado' : 'recursos creados'}` : ''].filter(Boolean).join(' · ') : ''
+        warning.textContent = job.result ? `${changes}. Actualiza la estructura para diseñar otra propuesta.` : 'La cancelación no revierte cambios ya realizados. Una operación incierta requiere revisar la copia antes de otra aplicación.'
         item.append(warning)
       }
       if (['queued', 'running'].includes(job.status)) {
