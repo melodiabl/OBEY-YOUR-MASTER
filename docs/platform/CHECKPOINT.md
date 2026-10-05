@@ -21,13 +21,16 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 
 - T19 web: Letras conectado al reproductor EJS, paginación íntegra, texto plain y líneas sincronizadas, pausa/seek desde estado compartido, guards por sesión/playback y borrado por denegación. Proveedor distingue ausencia/caída y agrupa consultas simultáneas Discord/web.
 
-- T25/T26/T30 parciales: Architect lee estructura fresca, valida blueprints/revisiones, muestra diff y preflight parcial, y guarda borradores privados en Mongo con CAS. Editor web con árbol/inspector, crear/mover/nombres/colores, undo/redo y protección; `/config architect` comparte servicio y propuesta. Apply/backup/rollback/IA permanecen pendientes; jobs de lectura se describen abajo. Contratos y límites en `ARCHITECT.md`.
+- T25/T26/T30 parciales: Architect lee estructura fresca, valida blueprints/revisiones, muestra diff y preflight parcial, y guarda borradores privados en Mongo con CAS. Editor web con árbol/inspector, crear/mover/nombres/colores, undo/redo y protección; `/config architect` comparte servicio y propuesta. Copias de estructura y aplicación confirmada de nombres/temas/colores añadidas; creaciones/movimientos/permisos/configuración/restore/rollback/IA siguen pendientes. Aplicación limitada a canary, ninguno habilitado. Contratos y límites en `ARCHITECT.md`.
 
-- T14/T23/T24 parciales: solicitud/outbox en un documento Mongo, BullMQ 5.81.5, worker snapshot, pasos/resultados privados, checkpoints, fencing, reintentos y cancelación. Web/Discord usan el mismo servicio. Workers desactivados por defecto; requieren flag/URI explícitas. Locks estructurales, otros jobs y canary pendientes. Contratos/ADR en `JOBS.md`.
+- T14/T23/T24 parciales: solicitud/outbox en un documento Mongo, BullMQ 5.81.5, workers de lectura/copia/edición compatible, pasos/resultados privados, checkpoints, fencing, leases Redis y guard/journal Mongo, reintentos y cancelación. Web/Discord usan el mismo servicio. Workers desactivados por defecto; requieren flag/URI explícitas. Redis dedicado configurado por petición expresa. Reconciliación de creaciones, otros jobs, scheduler/retención y canary pendientes. T27/T28 parciales: ver `RESTORE-POINTS.md` y `APPLICATIONS.md`. Contratos/ADR en `JOBS.md`.
 
 ## Evidencia local
 
-- `npm test`: 172 pruebas pasan en 43 archivos, 0 fallos, Node 22.23.2. Resultado del runner TAP actual: 172 tests, 0 fallos.
+- Redis: autenticación/no-auth rechazado, AOF/noeviction, restart/persistencia y BullMQ reales; `evidence/redis-managed.json`.
+- Apply: Mongo/Redis reales y Discord fixture, confirmación concurrente, copia previa, edición/progreso, drift, revocación, respuesta perdida, guard bloqueando segunda aplicación, aborto antiguo rechazado y cancelación durante REST; `evidence/architect-application.json`. Chromium verifica preparación sin efectos y confirmación explícita. Ninguna guild canary real habilitada.
+
+- `npm test`: 193 pruebas pasan en 48 archivos, 0 fallos, Node 22.23.2. Resultado del runner TAP actual: 193 tests, 0 fallos.
 - `node --test test/module-registry.test.js`: registro real de música, mismo estado y 25 subcomandos musicales/19 raíces, sin publicación.
 - `node --test test/dashboard-auth.test.js test/music-api-access.test.js`: sesiones inválidas/expiradas, refresh fallido, rotación/storage, denegaciones por guild y consulta inválida antes de DB.
 - `node --test test/music-realtime.test.js`: 7 pruebas; Socket.IO real local con dos pestañas, reconexión/revisión actual, sesión eliminada, no filtración. Pruebas deterministas para permisos perdidos, proveedor caído, eventos agrupados y cancelación pendiente.
@@ -36,7 +39,7 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 - `node scripts/obey-assets.js`: 89 PNG válidos, dry run sin red/upload.
 - `node scripts/validate-commands.js`: carga/schema local, sin Gateway/REST.
 - Architect: 23 pruebas focalizadas (incluida protección de scopes contra inyección antes de DB), Chromium con Express/EJS/CSRF/servicio reales, dos pestañas, drift y mobile sin overflow/JS errors. MongoDB 7 aislado verifica índice único, CAS y recuperación; fixtures/contenedor eliminados.
-- Jobs: 172 tests/43 archivos totales; MongoDB/Redis/BullMQ reales aislados verificaron idempotencia concurrente, privacy, checkpoint/reinicio/entrega, fencing y cancelación. Chromium prueba web/CSRF/DB/worker, dos pestañas, móvil, revocación y respuesta tardía; 0 JS errors y sin overflow. Contenedores/fixtures eliminados.
+- Jobs: 193 tests/48 archivos totales; MongoDB/Redis/BullMQ reales aislados verificaron idempotencia concurrente, privacy, checkpoint/reinicio/entrega, fencing y cancelación. Chromium prueba web/CSRF/DB/worker, dos pestañas, móvil, revocación y respuesta tardía; 0 JS errors y sin overflow. Contenedores/fixtures eliminados.
 - Reinstalación desde lock tras añadir BullMQ: `npm ci --ignore-scripts` (602 paquetes) y rebuild de bindings nativos; suite completa pasa. Docker construye desde lock con scripts nativos habilitados. No se cambiaron dependencias directas existentes.
 - `git diff --check`: implementación limpia.
 - Primera instalación limpia falló: Canvas 2.11.2 sin binario Node 22 y `pkg-config` ausente. Se añadieron requisitos nativos a CI/Docker y al entorno local autorizado; repetición de `npm ci` aislado completada (588 paquetes). Suite completa pasa también en esa instalación; lockfile sin cambios. Imagen `localhost/obey-platform-check` compilada con Podman, sin ejecutar bot ni servicios.
@@ -49,9 +52,9 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 3. T07/T15: completar concurrencia/refresh OAuth, realtime de otros módulos y transporte entre procesos. La música ya revalida la sesión y usa permisos con TTL de 15 s; no declarar cerrada seguridad transversal.
 4. T12: servicio de configuración con revisiones, migraciones explícitas, atomicidad acorde a Mongo y recuperación de cache tras fallo. Migrar writers legacy sin borrar sus defaults.
 5. T19: panel web implementado localmente con proveedor compartido, HTTP inicial, posición del realtime y reconexión; verificar canary antes de aceptación integral.
-6. Continuar Architect con locks/checkpoints para efectos T24, T27 restore points y T28 confirmación/apply idempotente; snapshot/draft/diff/editor y jobs de análisis ya tienen flujo local. Completar T25/T26/T30 y themes/templates según sus dependencias. Conservar T35–T57 y todos los requisitos centrales.
+6. Continuar T24/T26/T28 con creaciones reconciliadas/IDs reales, movimientos/permisos, límites/dependencias y módulos. Leases/guard/journal, copias de estructura y confirmación/edición compatible ya tienen flujo local. Completar T27 import/export/retención/scheduler y T29 recuperación/rollback con conflictos. Completar T25/T26/T30 y themes/templates según sus dependencias. Conservar T35–T57 y todos los requisitos centrales.
 
-No se ha iniciado bot/Compose, publicado comandos, cargado emojis, usado sesiones/DB de producción, aplicado cambios a guilds ni desplegado. Plataforma y fases completas siguen pendientes.
+Redis dedicado `obey_redis` arrancado y verificado por petición explícita, sin tocar el Redis 6379 ni reiniciar el bot; config privada ignorada. No se ha iniciado/recreado el bot, publicado comandos, cargado emojis, usado sesiones/DB de producción, aplicado cambios a guilds ni desplegado la aplicación. Plataforma y fases completas siguen pendientes.
 
 Contrato de integración: se conservan `join`, `leave`, `player:state`, `player:tick`, `player:error`; ticks añaden guild/session/revision sin retirar campos. No hay emisiones directas que eviten la autorización. Referencias oficiales: [sesiones de Express con Socket.IO](https://socket.io/how-to/use-with-express-session) y [rooms](https://socket.io/docs/v4/rooms/).
 

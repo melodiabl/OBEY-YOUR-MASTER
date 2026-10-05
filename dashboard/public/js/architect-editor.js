@@ -4,6 +4,7 @@
   const $ = id => document.getElementById(id)
   const base = `/api/architect/${encodeURIComponent(app.dataset.guildId)}`
   let source = null, editor = null, selected = null, busy = false, storageAvailable = false, draftRevision = 0, savedValue = '', hasSavedDraft = false
+  let applyAvailable = false, applicationPlan = null
   const order = (a, b) => a.position - b.position || a.id.localeCompare(b.id)
   const labels = { name: 'Nombre', topic: 'Tema', color: 'Color', permissions: 'Permisos', overwrites: 'Permisos del canal', nsfw: 'Contenido restringido', hoist: 'Mostrar rol separado', mentionable: 'Rol mencionable' }
   function status(text, error = false) { $('architect-status').textContent = text; $('architect-status').dataset.state = error ? 'error' : 'ready' }
@@ -14,6 +15,9 @@
     $('architect-save').disabled = busy || !editor || !storageAvailable
     $('architect-undo').disabled = busy || !editor?.canUndo
     $('architect-redo').disabled = busy || !editor?.canRedo
+    $('architect-prepare-application').disabled = busy || !editor || !applyAvailable
+    $('architect-confirm-application').hidden = !applicationPlan
+    $('architect-confirm-application').disabled = busy || !applicationPlan
   }
   async function request(path = '', options) {
     const response = await fetch(base + path, options)
@@ -24,12 +28,19 @@
         no_permission: 'No tienes permiso para administrar este servidor.', not_authenticated: 'Tu sesión caducó. Inicia sesión de nuevo.',
         storage_unavailable: 'El almacenamiento de borradores no está disponible.', invalid_blueprint: 'La propuesta contiene nombres, referencias o permisos inválidos.',
         architect_unavailable: 'No se pudo leer o guardar la propuesta. Reintenta cuando el servicio esté disponible.' }
+      Object.assign(messages, { application_unsupported: 'Solo puedes aplicar nombres, temas de texto y colores de roles existentes. Otros cambios siguen pendientes.',
+        application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
+        application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
+        jobs_unavailable: 'Los trabajos no están disponibles. El plan aún no se ha enviado.', application_not_found: 'El plan ya no está disponible. Prepara uno nuevo.' })
+      if ([401, 403, 404].includes(response.status)) { applicationPlan = null; applyAvailable = false; buttons() }
       throw new Error(messages[body.error] || 'No se pudo completar la solicitud.')
     }
     return body
   }
   const post = (path, body) => request(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
   function changed() {
+    applicationPlan = null
+    $('architect-application-status').textContent = applyAvailable ? 'Puedes preparar las ediciones compatibles. Se guardará una copia antes de aplicar.' : 'La aplicación requiere un servidor canary habilitado.'
     $('architect-draft-status').textContent = JSON.stringify(editor.current()) === savedValue ? (hasSavedDraft ? `Borrador guardado · revisión ${draftRevision}` : 'Propuesta inicial · sin cambios') : 'Propuesta con cambios sin guardar'
     $('architect-change-count').textContent = 'Sin revisar'
     $('architect-preflight').replaceChildren()
@@ -96,6 +107,7 @@
     try {
       const body = await request()
       source = body.snapshot; storageAvailable = body.storageAvailable; draftRevision = body.draft?.draftRevision || 0
+      applyAvailable = Boolean(body.applyAvailable)
       const draft = body.draft && !body.draftStale ? body.draft.blueprint : null
       editor = createArchitectEditorState(source, draft); selected = null; savedValue = JSON.stringify(editor.current()); hasSavedDraft = Boolean(draft)
       const notices = [...source.warnings]
@@ -145,6 +157,29 @@
     } catch (error) { status(error.message, true) }
     finally { busy = false; buttons() }
   }
+  $('architect-prepare-application').addEventListener('click', async () => {
+    if (!editor || !applyAvailable) return
+    applicationPlan = null; busy = true; buttons()
+    try {
+      const body = await post('/applications', { blueprint: editor.current() })
+      applicationPlan = body.plan; review(applicationPlan.review)
+      $('architect-confirm-application').textContent = `Confirmar ${applicationPlan.changes} ${applicationPlan.changes === 1 ? 'cambio' : 'cambios'}`
+      $('architect-application-status').textContent = `Revisa el antes y después. La confirmación caduca a las ${new Date(applicationPlan.expiresAt).toLocaleTimeString()}. La copia previa incluirá estructura; no mensajes ni configuración de módulos.`
+    } catch (error) { $('architect-application-status').textContent = error.message }
+    finally { busy = false; buttons() }
+  })
+  $('architect-confirm-application').addEventListener('click', async () => {
+    if (!applicationPlan || !confirm(`¿Aplicar los ${applicationPlan.changes} cambios revisados a este servidor? Se guardará un punto de restauración de estructura. La cancelación no revierte cambios ya realizados.`)) return
+    busy = true; buttons()
+    try {
+      const { id, confirmation, revision } = applicationPlan
+      const body = await post('/applications/confirm', { id, confirmation, revision })
+      applicationPlan = null
+      $('architect-application-status').textContent = `Aplicación encolada. Consulta los pasos y el resultado en Trabajos de estructura. Referencia: ${body.job.id}`
+      document.dispatchEvent(new Event('obey:jobs-changed'))
+    } catch (error) { $('architect-application-status').textContent = error.message }
+    finally { busy = false; buttons() }
+  })
   $('architect-add').addEventListener('submit', event => {
     event.preventDefault()
     const name = $('architect-new-name').value.trim(), kind = $('architect-new-kind').value, id = 'local:' + crypto.randomUUID()

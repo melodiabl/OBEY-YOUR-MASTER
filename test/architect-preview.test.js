@@ -77,3 +77,13 @@ test('role moves describe order without an invented channel parent',async()=>{
  assert.deepEqual(diff.changes[0].before,{position:1})
  assert.deepEqual(diff.changes[0].after,{position:2})
 })
+test('role gradient colors participate in structural revision even if primary color stays the same',async()=>{
+ const fixture=guildFixture(),fetch=fixture.guild.roles.fetch
+ const colors={primaryColor:123,secondaryColor:456,tertiaryColor:null}
+ fixture.guild.roles.fetch=async()=>{const roles=await fetch();roles.get('role').colors={...colors};return roles}
+ const first=await snapshotGuild(fixture.guild)
+ assert.deepEqual(first.roleColors.role,colors)
+ colors.secondaryColor=789
+ const changed=await snapshotGuild(fixture.guild)
+ assert.notEqual(changed.revision,first.revision);assert.equal(changed.roles[1].color,first.roles[1].color)
+})

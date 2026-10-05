@@ -1567,7 +1567,14 @@
           "test/architect-command.test.js",
           "scripts/verify-jobs-runtime.js",
           "docs/platform/evidence/jobs-runtime.json",
-          "docs/platform/evidence/jobs-browser.json"
+          "docs/platform/evidence/jobs-browser.json",
+          "test/guild-lock.test.js",
+          "test/jobs-config.test.js",
+          "docs/platform/evidence/redis-managed.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-application.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -1614,7 +1621,14 @@
           "test/architect-command.test.js",
           "scripts/verify-jobs-runtime.js",
           "docs/platform/evidence/jobs-runtime.json",
-          "docs/platform/evidence/jobs-browser.json"
+          "docs/platform/evidence/jobs-browser.json",
+          "test/guild-lock.test.js",
+          "test/jobs-config.test.js",
+          "docs/platform/evidence/redis-managed.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-application.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -1661,7 +1675,14 @@
           "test/architect-command.test.js",
           "scripts/verify-jobs-runtime.js",
           "docs/platform/evidence/jobs-runtime.json",
-          "docs/platform/evidence/jobs-browser.json"
+          "docs/platform/evidence/jobs-browser.json",
+          "test/guild-lock.test.js",
+          "test/jobs-config.test.js",
+          "docs/platform/evidence/redis-managed.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-application.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -1708,7 +1729,14 @@
           "test/architect-command.test.js",
           "scripts/verify-jobs-runtime.js",
           "docs/platform/evidence/jobs-runtime.json",
-          "docs/platform/evidence/jobs-browser.json"
+          "docs/platform/evidence/jobs-browser.json",
+          "test/guild-lock.test.js",
+          "test/jobs-config.test.js",
+          "docs/platform/evidence/redis-managed.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/architect-preflight.test.js",
+          "docs/platform/evidence/architect-application.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -1754,7 +1782,12 @@
           "test/architect-api.test.js",
           "test/architect-preflight.test.js",
           "docs/platform/evidence/architect-browser.json",
-          "docs/platform/evidence/architect-storage.json"
+          "docs/platform/evidence/architect-storage.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/jobs-api.test.js",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -1800,7 +1833,12 @@
           "test/architect-api.test.js",
           "test/architect-preflight.test.js",
           "docs/platform/evidence/architect-browser.json",
-          "docs/platform/evidence/architect-storage.json"
+          "docs/platform/evidence/architect-storage.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/jobs-api.test.js",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -1885,7 +1923,12 @@
           "test/architect-api.test.js",
           "test/architect-preflight.test.js",
           "docs/platform/evidence/architect-browser.json",
-          "docs/platform/evidence/architect-storage.json"
+          "docs/platform/evidence/architect-storage.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/jobs-api.test.js",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2048,7 +2091,12 @@
           "test/architect-api.test.js",
           "test/architect-preflight.test.js",
           "docs/platform/evidence/architect-browser.json",
-          "docs/platform/evidence/architect-storage.json"
+          "docs/platform/evidence/architect-storage.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/jobs-api.test.js",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2094,7 +2142,12 @@
           "test/architect-api.test.js",
           "test/architect-preflight.test.js",
           "docs/platform/evidence/architect-browser.json",
-          "docs/platform/evidence/architect-storage.json"
+          "docs/platform/evidence/architect-storage.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/jobs-api.test.js",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2217,7 +2270,12 @@
           "test/architect-api.test.js",
           "test/architect-preflight.test.js",
           "docs/platform/evidence/architect-browser.json",
-          "docs/platform/evidence/architect-storage.json"
+          "docs/platform/evidence/architect-storage.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/jobs-api.test.js",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2262,7 +2320,12 @@
           "test/architect-api.test.js",
           "test/architect-preflight.test.js",
           "docs/platform/evidence/architect-browser.json",
-          "docs/platform/evidence/architect-storage.json"
+          "docs/platform/evidence/architect-storage.json",
+          "test/architect-application.test.js",
+          "test/architect-edits.test.js",
+          "test/jobs-api.test.js",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
         ],
         "discordRuntime": "no ejecutado"
       },
@@ -2380,10 +2443,15 @@
       "persistence": "Backups versionados y jobs",
       "tests": {
         "required": "Backup incompleto, import inválido y remapeo",
-        "evidence": [],
+        "evidence": [
+          "test/restore-points.test.js",
+          "docs/platform/evidence/jobs-runtime.json",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-12-02",
@@ -2421,10 +2489,15 @@
       "persistence": "Backups versionados y jobs",
       "tests": {
         "required": "Backup incompleto, import inválido y remapeo",
-        "evidence": [],
+        "evidence": [
+          "test/restore-points.test.js",
+          "docs/platform/evidence/jobs-runtime.json",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-12-03",
@@ -2462,10 +2535,15 @@
       "persistence": "Backups versionados y jobs",
       "tests": {
         "required": "Backup incompleto, import inválido y remapeo",
-        "evidence": [],
+        "evidence": [
+          "test/restore-points.test.js",
+          "docs/platform/evidence/jobs-runtime.json",
+          "docs/platform/evidence/architect-application.json",
+          "docs/platform/evidence/jobs-browser.json"
+        ],
         "discordRuntime": "no ejecutado"
       },
-      "status": "pendiente"
+      "status": "parcial"
     },
     {
       "id": "OBEY-12-04",
@@ -13971,8 +14049,11 @@
       "T15 realtime musical con revocación parcial",
       "T19 panel web de letras conectado al proveedor y estado musical",
       "T25/T26/T30 Architect snapshot/blueprint/diff/preflight parcial/editor/borrador privado/consulta Discord",
-      "T14/T23/T24 outbox de entrega/cola BullMQ/registro privado/worker de lectura/checkpoint/fencing/cancelación web y Discord parciales"
+      "T14/T23/T24 cola/registro/outbox, leases por guild, checkpoints/journal/guard de efectos y cancelación parciales",
+      "Redis dedicado autenticado/AOF/noeviction configurado y verificado por petición expresa",
+      "T27 puntos privados/inmutables de estructura con inspección, incompletitud explícita y recuperación",
+      "T28 preparación/confirmación por revisión y aplicación de nombres/temas/colores existentes limitada a canary; demás efectos pendientes"
     ],
-    "verification": "172 tests/43 archivos; Chromium con Express/EJS/CSRF y Mongo/Redis/BullMQ reales en entorno aislado, segunda pestaña/cancelación/revocación/respuesta tardía; recuperación de checkpoint/entrega y fencing; apply/locks/canary pendientes"
+    "verification": "193 tests/48 archivos; Redis dedicado autenticado verificado con reinicio; Mongo/Redis/BullMQ aislados y Chromium prueban copias, confirmación sin efectos previos, ediciones de fixture, checkpoints, fencing, respuesta perdida, guard persistente, cancelación durante REST, dos pestañas/revocación/móvil. No canary Discord real; creación/movimiento/permisos/configuración/restore/rollback siguen pendientes."
   }
 }

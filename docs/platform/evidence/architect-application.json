@@ -1,0 +1,16 @@
+{
+  "scope": "isolated Mongo/Redis/BullMQ and mutable Discord fixture; no Discord network",
+  "privateRevisionBoundConfirmation": true,
+  "noEffectsBeforeConfirmation": true,
+  "concurrentConfirmationIdempotent": true,
+  "actualFixtureEdits": true,
+  "priorStructuralRestorePoint": true,
+  "measuredCheckpoints": true,
+  "duplicateDeliverySafe": true,
+  "revisionDriftRejected": true,
+  "permissionRevocation": true,
+  "ambiguousResponseStopsReplay": true,
+  "persistentGuildGuardBlocksAnotherApplication": true,
+  "staleAbortFenced": true,
+  "cancellationDuringRESTKeepsDurableGuard": true
+}

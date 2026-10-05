@@ -11,13 +11,24 @@ function safeSnapshot(value, guildId) {
   const channels = value.channels.map(resource => pick(resource, ['id', 'name', 'type', 'parentId', 'position', 'topic', 'nsfw', 'bitrate', 'userLimit', 'rateLimitPerUser', 'overwrites']))
   for (const channel of channels) if (Array.isArray(channel.overwrites)) channel.overwrites = channel.overwrites.map(overwrite => pick(overwrite, ['id', 'type', 'allow', 'deny']))
   const roles = value.roles.map(resource => pick(resource, ['id', 'name', 'position', 'permissions', 'color', 'hoist', 'mentionable', 'managed']))
-  const revision = structureRevision(channels, roles)
+  const roleColors = {}
+  if (value.roleColors !== undefined) {
+    if (!value.roleColors || typeof value.roleColors !== 'object' || Array.isArray(value.roleColors)) throw new JobError('Invalid role colors')
+    for (const [id, colors] of Object.entries(value.roleColors).sort(([a], [b]) => a.localeCompare(b))) {
+      if (!roles.some(role => role.id === id) || !colors || typeof colors !== 'object') throw new JobError('Invalid role colors')
+      const parsed = pick(colors, ['primaryColor', 'secondaryColor', 'tertiaryColor'])
+      if (!Number.isInteger(parsed.primaryColor) || Object.values(parsed).some(color => color !== null && (!Number.isInteger(color) || color < 0 || color > 0xffffff))) throw new JobError('Invalid role colors')
+      Object.defineProperty(roleColors, id, { value: parsed, enumerable: true })
+    }
+  }
+  const revision = structureRevision(channels, roles, roleColors)
   if (revision !== value.revision) throw new JobError('Invalid restore snapshot revision')
   validateBlueprint({ schemaVersion: 1, baseRevision: revision, channels, roles }, { guildId, revision, channels, roles })
   return { schemaVersion: 1, guildId, name: value.name, capturedAt: value.capturedAt, completeness: 'structure_only',
     scope: ['guild_channels', 'roles', 'permission_overwrites'],
     warnings: ['No incluye mensajes, miembros, hilos ni configuración de módulos OBEY.',
-      'No restaura IDs eliminados, enlaces, mensajes ni recursos externos.'], channels, roles, revision }
+      'No restaura IDs eliminados, enlaces, mensajes ni recursos externos.'], channels, roles,
+    ...(Object.keys(roleColors).length ? { roleColors } : {}), revision }
 }
 function project(point, includeSnapshot = false) {
   if (!point) return null

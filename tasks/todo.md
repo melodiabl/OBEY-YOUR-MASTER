@@ -588,7 +588,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T24
 
-**Checkpoint activo:** Snapshot/checkpoint y tokens evitan repetir lecturas guardadas o aceptar writes antiguos; reanudación de cancelación y entregas ausentes verificada. Exclusión estructural por guild, reconciliación de creaciones, rate limits y pasos de apply pendientes; tarea parcial.
+**Checkpoint activo:** Snapshot/checkpoint y tokens evitan repetir lecturas guardadas o aceptar writes antiguos; reanudación de cancelación y entregas ausentes verificada. Leases por guild, guard/journal Mongo y checkpoints de ediciones compatibles implementados; reconciliación de creaciones, dependencias y aceptación canary pendientes; tarea parcial.
 
 - [ ] Reanudación y exclusión estructural (fase 4).
 
@@ -620,7 +620,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T25
 
-**Checkpoint activo:** Snapshot fresco con alcance structure_only y blueprint versionado/IDs lógicos; borradores privados persistidos con revisión CAS. Modelos de ejecución y portabilidad/configuración completa pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
+**Checkpoint activo:** Snapshot fresco con alcance structure_only y blueprint versionado/IDs lógicos; borradores privados persistidos con revisión CAS. Plan/journal de edición compatible incorporados; portabilidad/configuración completas y ejecución de otros efectos pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
 
 - [ ] Snapshot y blueprint versionados (fase 4).
 
@@ -672,6 +672,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T27
 
+**Checkpoint activo:** Puntos privados/inmutables structure_only, metadata/completitud/advertencias, hash de integridad, job backup y copia previa a edición, inspección web y solicitud Discord. Recuperación tras persistir sin checkpoint verificada con Mongo/Redis reales. Configuración portable/import/export/remapeo/scheduler/retención/restore pendientes; tarea parcial. Ver docs/platform/RESTORE-POINTS.md.
+
 - [ ] Backups e importación segura (fase 4).
 
 **Descripción:** Manual/scheduled/pre-destructive; schema/fecha/creador/alcance/completitud/warnings/retención; import validado, privado, sin tokens/sesiones.
@@ -695,6 +697,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 **Scope:** Medio.
 
 ## T28
+
+**Checkpoint activo:** Plan privado versionado de 15 minutos, token/revisión/actor/guild, confirmación idempotente, drift/preflight fresco, copia previa, journal/CAS y guard duradero. Aplica nombres/temas de texto/colores existentes solo en canary habilitado; probado con Discord fixture y Mongo/Redis reales. Creaciones/movimientos/permisos/configuración y recuperación/remapeo completos pendientes. Ningún canary real habilitado; tarea parcial. Ver docs/platform/APPLICATIONS.md.
 
 - [ ] Apply Architect con confirmación de revisión (fase 4).
 
@@ -750,7 +754,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T30
 
-**Checkpoint activo:** Editor web conectado: árbol/inspector, crear y mover, nombres/colores, undo/redo, protección, preview y guardar/recuperar borrador. Discord consulta la misma propuesta. Wizard, permisos, eventos y apply/progreso durable pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
+**Checkpoint activo:** Editor web conectado: árbol/inspector, crear y mover, nombres/colores, undo/redo, protección, preview y guardar/recuperar borrador. Discord consulta la misma propuesta. Preparación/confirmación web y progreso durable de edición compatible añadidos. Wizard, permisos, eventos y aplicación completa pendientes. Tarea todavía parcial; ver docs/platform/ARCHITECT.md.
 
 - [ ] Editor Architect visual conectado (fase 4).
 

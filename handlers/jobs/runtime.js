@@ -14,7 +14,7 @@ async function readyWithin(promise) {
   try { return await Promise.race([promise, new Promise((_, reject) => { timer = setTimeout(() => reject(new JobError('Jobs connection unavailable')), 5000) })]) }
   finally { clearTimeout(timer) }
 }
-function createJobsRuntime({ repository, handlers, authorize, redisUrl, storageReady = () => true, queueName = 'obey-jobs', onError = () => {} }) {
+function createJobsRuntime({ repository, handlers, authorize, prepareApply, redisUrl, storageReady = () => true, queueName = 'obey-jobs', onError = () => {} }) {
   let queue, worker, redisClient, timer, repairing, closing = false, starting
   const settlements = new Set()
   const transport = {
@@ -27,7 +27,7 @@ function createJobsRuntime({ repository, handlers, authorize, redisUrl, storageR
       if (await delivery.getState() === 'failed') await repository.deliveryFailed(record._id)
     },
   }
-  const service = createJobsService({ repository, transport, storageReady })
+  const service = createJobsService({ repository, transport, storageReady, prepareApply })
   const locks = require('./guild-lock').createGuildLock({ client: () => redisClient, prefix: `${queueName}:guild-lock` })
   async function repair() {
     if (repairing) return repairing

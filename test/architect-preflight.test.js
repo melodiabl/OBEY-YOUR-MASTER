@@ -22,3 +22,18 @@ test('role grants must be held by both the actor and OBEY',async()=>{
  assert.equal(report.checks.find(check=>check.code==='actor_grant_local:admin').status,'failed')
  assert.equal(report.status,'blocked')
 })
+test('enabled channel edits require effective permission on the target channel',async()=>{
+ const member={id:'u',permissions:{has:()=>true},roles:{highest:{position:10}}}
+ const guild={members:{fetch:async()=>member,fetchMe:async()=>member},channels:{cache:new Map([['chat',{permissionsFor:()=>({has:()=>false})}]])}}
+ const report=await preflight(guild,{roles:[]},{changes:[{kind:'channels',id:'chat',operation:'update',field:'name',after:'approved'}]},'u',{executionAvailable:true})
+ assert.equal(report.status,'blocked');assert.equal(report.checks.find(check=>check.code==='bot_channel_chat').status,'failed')
+})
+test('single-color application cannot overwrite a gradient or an unknown role style',async()=>{
+ const member={id:'u',permissions:{has:()=>true},roles:{highest:{position:10}}}
+ const guild={members:{fetch:async()=>member,fetchMe:async()=>member},roles:{cache:new Map([['staff',{colors:{primaryColor:1,secondaryColor:2,tertiaryColor:null}}]])}}
+ const report=await preflight(guild,{roles:[{id:'staff',name:'Staff',position:1}]},{changes:[{kind:'roles',id:'staff',operation:'update',field:'color',after:123}]},'u',{executionAvailable:true})
+ assert.equal(report.status,'blocked');assert.equal(report.checks.find(check=>check.code==='color_style_staff').status,'failed')
+ guild.roles.cache.clear()
+ const unknown=await preflight(guild,{roles:[{id:'staff',name:'Staff',position:1}]},{changes:[{kind:'roles',id:'staff',operation:'update',field:'color',after:123}]},'u',{executionAvailable:true})
+ assert.equal(unknown.status,'incomplete')
+})

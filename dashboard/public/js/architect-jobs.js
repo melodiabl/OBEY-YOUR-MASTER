@@ -22,7 +22,7 @@
     list.replaceChildren()
     for (const job of jobs) {
       const item = document.createElement('div'), title = document.createElement('strong'), detail = document.createElement('p')
-      item.className = 'architect-change'; title.textContent = `${job.type === 'architect.backup' ? 'Punto de restauración' : 'Análisis'} · ${labels[job.status] || 'Estado desconocido'}`
+      item.className = 'architect-change'; title.textContent = `${job.type === 'architect.apply' ? 'Aplicación' : job.type === 'architect.backup' ? 'Punto de restauración' : 'Análisis'} · ${labels[job.status] || 'Estado desconocido'}`
       detail.textContent = `Pasos completados: ${job.progress.completed} de ${job.progress.total}`
       item.append(title, detail)
       if (job.result) {
@@ -31,9 +31,14 @@
         item.append(result)
       }
       if (job.error && job.status !== 'cancelled') { const error = document.createElement('p'); error.textContent = job.error.message; item.append(error) }
+      if (job.type === 'architect.apply') {
+        const warning = document.createElement('p')
+        warning.textContent = job.result ? `${job.result.edits} ${job.result.edits === 1 ? 'recurso editado' : 'recursos editados'}. Actualiza la estructura para diseñar otra propuesta.` : 'La cancelación no revierte cambios ya realizados. Una edición incierta requiere revisar la copia antes de otra aplicación.'
+        item.append(warning)
+      }
       if (['queued', 'running'].includes(job.status)) {
         const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'btn btn-sec'
-        cancel.textContent = job.cancelRequested ? 'Cancelación solicitada' : job.type === 'architect.backup' ? 'Cancelar copia' : 'Cancelar análisis'; cancel.disabled = job.cancelRequested
+        cancel.textContent = job.cancelRequested ? 'Cancelación solicitada' : job.type === 'architect.apply' ? 'Detener aplicación' : job.type === 'architect.backup' ? 'Cancelar copia' : 'Cancelar análisis'; cancel.disabled = job.cancelRequested
         cancel.addEventListener('click', async () => {
           cancel.disabled = true
           try { await request(`/${encodeURIComponent(job.id)}/cancel`, {}); await load() }
@@ -89,6 +94,7 @@
   button.addEventListener('click', () => submit('snapshot', base))
   backup.addEventListener('click', () => submit('backup', `${api}/restore-points`))
   document.addEventListener('visibilitychange', () => { clearTimeout(timer); if (!document.hidden) load() })
+  document.addEventListener('obey:jobs-changed', load)
   window.addEventListener('pagehide', () => { stopped = true; sequence++; clearTimeout(timer) })
   window.addEventListener('pageshow', event => { if (event.persisted) { stopped = false; load() } })
   load()

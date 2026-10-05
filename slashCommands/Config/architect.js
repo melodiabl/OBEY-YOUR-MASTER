@@ -3,7 +3,7 @@ const { diffBlueprint } = require('../../handlers/architect/diff')
 module.exports = {
   name: 'architect', description: 'Analizar el servidor y consultar tu propuesta Architect', memberpermissions: ['ManageGuild'],
   options: [{ StringChoices: { name: 'accion', description: 'Consultar Architect o solicitar un análisis persistente', required: false,
-    choices: [['Consultar', 'consultar'], ['Analizar en segundo plano', 'analizar']] } }],
+    choices: [['Consultar', 'consultar'], ['Analizar en segundo plano', 'analizar'], ['Guardar punto de restauración', 'copia']] } }],
   run: async (client, interaction) => {
     const denied = 'Necesitas el permiso Administrar servidor para abrir Architect.'
     if (!interaction.member?.permissions.has(PermissionFlagsBits.ManageGuild)) return interaction.reply({ content: denied, ephemeral: true })
@@ -12,12 +12,13 @@ module.exports = {
       const member = await interaction.guild.members.fetch({ user: interaction.user.id, force: true })
       if (!member.permissions.has(PermissionFlagsBits.ManageGuild)) return interaction.editReply({ content: denied })
       if (!client.architect) return interaction.editReply({ content: 'Architect no está disponible en este momento.' })
-      if (interaction.options?.getString?.('accion') === 'analizar') {
+      const action = interaction.options?.getString?.('accion')
+      if (['analizar', 'copia'].includes(action)) {
         if (!client.jobs?.available()) return interaction.editReply({ content: 'Los trabajos no están disponibles. Puedes seguir consultando y editando Architect.' })
         const job = await client.jobs.submit({ guildId: interaction.guild.id, actorId: interaction.user.id,
-          type: 'architect.snapshot', idempotencyKey: `discord-${interaction.id}` })
+          type: action === 'copia' ? 'architect.backup' : 'architect.snapshot', idempotencyKey: `discord-${interaction.id}` })
         const status = { queued: 'encolado', running: 'en curso', completed: 'completado', failed: 'fallido', cancelled: 'cancelado' }[job.status]
-        return interaction.editReply({ content: `Análisis ${status}. Consulta su estado en Architect. Referencia: ${job.id}`, allowedMentions: { parse: [] } })
+        return interaction.editReply({ content: `${action === 'copia' ? 'Punto de restauración' : 'Análisis'} ${status}. Consulta su estado en Architect. Referencia: ${job.id}${action === 'copia' ? ' Copia de canales, roles y permisos; no incluye mensajes ni configuración de módulos.' : ''}`, allowedMentions: { parse: [] } })
       }
       const state = await client.architect.read(interaction.guild, interaction.user.id)
       const categories = state.snapshot.channels.filter(channel => channel.type === 4).length
@@ -29,12 +30,12 @@ module.exports = {
         embed.addFields({ name: `Tu borrador · revisión ${state.draft.draftRevision}`, value: `${diff.changes.length} cambios propuestos.${state.draftStale ? ' La estructura de Discord cambió desde ese borrador.' : ''}` })
       } else if (state.storageAvailable === false) embed.addFields({ name: 'Tu propuesta', value: 'El almacenamiento de borradores no está disponible. No se pudo consultar tu propuesta guardada.' })
       else embed.addFields({ name: 'Tu propuesta', value: 'Todavía no tienes un borrador guardado. Puedes diseñarlo desde el editor web.' })
-      embed.setDescription('Consulta categorías, canales y roles; edita una propuesta y revisa los cambios. La aplicación a Discord y las copias previas siguen pendientes.')
+      embed.setDescription('Consulta categorías, canales y roles; edita una propuesta, revisa cambios y guarda puntos de restauración de estructura. La aplicación de nombres, temas y colores desde la web requiere un canary habilitado. La restauración sigue pendiente.')
       if (client.jobs) {
         try {
           const jobs = await client.jobs.list(interaction.guild.id, interaction.user.id)
-          const labels = { queued: 'En cola', running: 'Leyendo estructura', completed: 'Completado', failed: 'Falló', cancelled: 'Cancelado' }
-          if (jobs.length) embed.addFields({ name: 'Tus análisis recientes', value: jobs.slice(0, 3).map(job => `${labels[job.status]} · ${job.progress.completed}/${job.progress.total} pasos`).join('\n') })
+          const labels = { queued: 'En cola', running: 'En curso', completed: 'Completado', failed: 'Falló', cancelled: 'Cancelado' }
+          if (jobs.length) embed.addFields({ name: 'Tus trabajos recientes', value: jobs.slice(0, 3).map(job => `${job.type === 'architect.apply' ? 'Aplicación' : job.type === 'architect.backup' ? 'Copia' : 'Análisis'} · ${labels[job.status]} · ${job.progress.completed}/${job.progress.total} pasos`).join('\n') })
         } catch { embed.addFields({ name: 'Tus análisis', value: 'No se pudo consultar el historial de trabajos.' }) }
       }
       const components = []

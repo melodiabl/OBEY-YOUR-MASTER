@@ -21,10 +21,12 @@ module.exports = (app, client, {
     try { await handler(req, res) }
     catch (error) {
       const code = error.code
-      if (['revision_conflict', 'draft_conflict', 'job_conflict'].includes(code)) return res.status(409).json({ error: code })
+      if (['revision_conflict', 'draft_conflict', 'job_conflict', 'application_conflict', 'application_expired', 'application_blocked'].includes(code)) return res.status(409).json({ error: code })
+      if (code === 'application_not_found') return res.status(404).json({ error: code })
+      if (code === 'application_unsupported') return res.status(400).json({ error: code })
       if (error instanceof JobError && code === 'invalid_job') return res.status(400).json({ error: code })
       if (error instanceof BlueprintError && code === 'invalid_blueprint') return res.status(400).json({ error: code, detail: error.message })
-      return res.status(503).json({ error: ['storage_unavailable', 'jobs_unavailable'].includes(code) ? code : 'architect_unavailable' })
+      return res.status(503).json({ error: ['storage_unavailable', 'jobs_unavailable', 'apply_unavailable'].includes(code) ? code : 'architect_unavailable' })
     }
   }
   app.get('/architect/:guildId', ...guarded, (req, res) => res.render('pages/architect', {
@@ -38,6 +40,16 @@ module.exports = (app, client, {
   }))
   app.post('/api/architect/:guildId/draft', ...guarded, wrap(async (req, res) => {
     res.json({ ok: true, ...(await service.save(req.architectGuild, req.session.user.id, req.body?.blueprint, req.body?.expectedRevision)) })
+  }))
+  app.post('/api/architect/:guildId/applications', ...guarded, wrap(async (req, res) => {
+    if (!req.body || typeof req.body !== 'object' || Object.keys(req.body).some(key => key !== 'blueprint')) throw new JobError('Invalid application request')
+    if (!client.architectApplications) throw new JobError('Application unavailable', 'apply_unavailable')
+    res.json({ ok: true, plan: await client.architectApplications.prepare(req.architectGuild, req.session.user.id, req.body.blueprint) })
+  }))
+  app.post('/api/architect/:guildId/applications/confirm', ...guarded, wrap(async (req, res) => {
+    if (!req.body || typeof req.body !== 'object' || Object.keys(req.body).some(key => !['id', 'confirmation', 'revision'].includes(key))) throw new JobError('Invalid application confirmation')
+    if (!client.architectApplications) throw new JobError('Application unavailable', 'apply_unavailable')
+    res.status(202).json({ ok: true, job: await client.architectApplications.confirm(req.architectGuild, req.session.user.id, req.body) })
   }))
   const jobs = () => {
     if (!client.jobs) throw new JobError('Jobs unavailable', 'jobs_unavailable')

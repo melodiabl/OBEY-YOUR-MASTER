@@ -48,3 +48,4 @@ jobs:
             sleep 1
           done
           docker run --rm --network container:obey-architect-test-mongo -e OBEY_JOBS_TEST_MONGO_URL=mongodb://127.0.0.1:27017/obey_jobs_test -e OBEY_JOBS_TEST_REDIS_URL=redis://127.0.0.1:6379/15 --entrypoint node obey-platform-check scripts/verify-jobs-runtime.js
+          docker run --rm --network container:obey-architect-test-mongo -e OBEY_JOBS_TEST_MONGO_URL=mongodb://127.0.0.1:27017/obey_jobs_test -e OBEY_JOBS_TEST_REDIS_URL=redis://127.0.0.1:6379/15 --entrypoint node obey-platform-check scripts/verify-architect-application.js

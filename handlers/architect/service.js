@@ -2,18 +2,18 @@ const { snapshotGuild } = require('./snapshot')
 const { validateBlueprint, BlueprintError } = require('./blueprint')
 const { diffBlueprint } = require('./diff')
 const { preflight } = require('./preflight')
-function createArchitectService({ snapshot = snapshotGuild, repository, storageReady = () => true } = {}) {
+function createArchitectService({ snapshot = snapshotGuild, repository, storageReady = () => true, applyAvailable = () => false } = {}) {
   return {
     async read(guild, actorId) {
       const current = await snapshot(guild)
       const draft = repository && storageReady() ? await repository.get(guild.id, actorId) : null
-      return { snapshot: current, draft, draftStale: Boolean(draft && draft.blueprint.baseRevision !== current.revision), storageAvailable: Boolean(repository && storageReady()) }
+      return { snapshot: current, draft, draftStale: Boolean(draft && draft.blueprint.baseRevision !== current.revision), storageAvailable: Boolean(repository && storageReady()), applyAvailable: Boolean(applyAvailable(guild)) }
     },
     async preview(guild, input, actorId) {
       const current = await snapshot(guild)
       const blueprint = validateBlueprint(input, current)
       const diff = diffBlueprint(current, blueprint)
-      return { snapshot: current, blueprint, diff, preflight: await preflight(guild, blueprint, diff, actorId) }
+      return { snapshot: current, blueprint, diff, preflight: await preflight(guild, blueprint, diff, actorId, { executionAvailable: Boolean(applyAvailable(guild)) }) }
     },
     async save(guild, actorId, input, expectedRevision) {
       if (!Number.isSafeInteger(expectedRevision) || expectedRevision < 0) throw new BlueprintError('Invalid draft revision')

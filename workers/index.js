@@ -15,7 +15,7 @@ function createJobProcessor({ repository, handlers, authorize = async () => {} }
       const current = await repository.getById(id)
       if (current?.token !== token) return { status: current?.status }
       if (current.cancelRequested) return { status: (await repository.finish(id, token, 'completed'))?.status }
-      if (record.steps[0].status !== 'completed') {
+      if (!record.steps.every(step => step.status === 'completed') || !record.result) {
         const result = await handlers[record.type](record)
         await repository.checkpoint(id, token, result)
       }
@@ -25,7 +25,13 @@ function createJobProcessor({ repository, handlers, authorize = async () => {} }
       const finalAttempt = error.code !== 'guild_locked' && (error instanceof JobError || (job.attemptsMade || 0) + 1 >= (job.opts?.attempts || 1))
       const failed = await repository.finish(id, token, finalAttempt ? 'failed' : 'queued', {
         code: error instanceof JobError ? error.code : ['guild_locked', 'guild_lock_lost'].includes(error.code) ? error.code : 'snapshot_unavailable',
-        message: error.code === 'permission_denied' ? 'Ya no tienes permiso para trabajar con este servidor.' : error.code === 'guild_locked' ? 'Otro trabajo está usando este servidor. Reintenta al terminar.' : 'No se pudo completar el trabajo de estructura.',
+        message: ({ permission_denied: 'Ya no tienes permiso para trabajar con este servidor.',
+          guild_locked: 'Otro trabajo está usando este servidor. Reintenta al terminar.',
+          application_needs_review: 'La aplicación se detuvo con un resultado incierto. Revisa la copia y los cambios parciales antes de otra aplicación.',
+          revision_conflict: 'La estructura cambió. La aplicación se detuvo para conservar los cambios externos.',
+          application_blocked: 'Los permisos actuales impiden continuar la aplicación.',
+          application_expired: 'El plan caducó antes de terminar. Prepara uno nuevo tras revisar los cambios.',
+          apply_unavailable: 'La aplicación no está habilitada para este servidor.' })[error.code] || 'No se pudo completar el trabajo de estructura.',
       })
       if (failed?.status === 'cancelled') return { status: 'cancelled' }
       throw error

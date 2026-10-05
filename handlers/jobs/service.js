@@ -14,7 +14,7 @@ function project(job, summary = false) {
     error: job.error || null, cancelRequested: Boolean(job.cancelRequested),
     createdAt: job.createdAt, updatedAt: job.updatedAt }
 }
-function createJobsService({ repository, transport, storageReady = () => true }) {
+function createJobsService({ repository, transport, storageReady = () => true, prepareApply }) {
   const available = () => Boolean(storageReady() && transport.available())
   async function deliver(record) {
     try {
@@ -28,13 +28,19 @@ function createJobsService({ repository, transport, storageReady = () => true })
     available,
     async submit(input) {
       if (!input || typeof input !== 'object' || Array.isArray(input)) throw new JobError('Invalid job')
-      for (const key of Object.keys(input)) if (!['guildId', 'actorId', 'type', 'idempotencyKey'].includes(key)) throw new JobError('Unknown job field')
+      for (const key of Object.keys(input)) if (!['guildId', 'actorId', 'type', 'idempotencyKey', 'applicationId'].includes(key)) throw new JobError('Unknown job field')
       identifier(input.guildId, 'guild'); identifier(input.actorId, 'actor'); identifier(input.idempotencyKey, 'idempotency key')
-      if (!['architect.snapshot', 'architect.backup'].includes(input.type)) throw new JobError('Unsupported job type')
+      const apply = input.type === 'architect.apply'
+      if (!['architect.snapshot', 'architect.backup'].includes(input.type) && !(apply && prepareApply)) throw new JobError('Unsupported job type')
+      if (apply) identifier(input.applicationId, 'application')
+      else if (input.applicationId !== undefined) throw new JobError('Unknown job field')
       if (!available()) throw new JobError('Jobs unavailable', 'jobs_unavailable')
+      const payload = apply ? await prepareApply(input) : undefined
+      if (apply && !payload) throw new JobError('Application not confirmed', 'application_conflict')
       const record = await repository.ensure({ _id: randomUUID(), guildId: input.guildId, actorId: input.actorId,
-        type: input.type, idempotencyKey: input.idempotencyKey, correlationId: randomUUID() })
-      if (record.type !== input.type) throw new JobError('Idempotency key reused', 'job_conflict')
+        type: input.type, idempotencyKey: input.idempotencyKey, correlationId: randomUUID(),
+        ...(apply ? { applicationId: input.applicationId, payload } : {}) })
+      if (record.type !== input.type || record.applicationId !== input.applicationId) throw new JobError('Idempotency key reused', 'job_conflict')
       if (record.status === 'queued') await deliver(record)
       return project(record)
     },
