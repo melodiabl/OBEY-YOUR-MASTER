@@ -390,7 +390,7 @@ module.exports = {
                                                     time: 90000,
                                                     errors: ["time"],
                                                 })
-                                                .then(collected => {
+                                                .then(async collected => {
                                                     var message = collected.first();
                                                     var channel =
                                                         message.mentions.channels
@@ -400,7 +400,8 @@ module.exports = {
                                                             message.content.trim().split(" ")[0]
                                                         );
                                                     if (channel) {
-                                                        client.settings.set(message.guild.id, channel.id, "welcome.channel");
+                                                        await require("../../handlers/welcome-access").assertWelcomeChannel(message.guild, message.author.id, channel.id);
+                                                        await require("../../handlers/config-service").saveWelcomeChannel(client.settings, message.guild.id, channel.id);
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
@@ -448,7 +449,7 @@ module.exports = {
                                         break;
                                     case `Disable Welcome`:
                                         {
-                                            client.settings.set(message.guild.id, "nochannel", "welcome.channel");
+                                            try { await require("../../handlers/config-service").saveWelcomeChannel(client.settings, message.guild.id, null); } catch { return message.reply({content:"No se pudo guardar la bienvenida. Inténtalo de nuevo."}); }
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
@@ -1366,9 +1367,9 @@ module.exports = {
                                                     time: 90000,
                                                     errors: ["time"],
                                                 })
-                                                .then(collected => {
+                                                .then(async collected => {
                                                     var message = collected.first();
-                                                    client.settings.set(message.guild.id, message.content, "welcome.msg");
+                                                    await require("../../handlers/config-service").saveWelcomeMessage(client.settings, message.guild.id, message.content);
                                                     return message.reply({
                                                         embeds: [
                                                             new Discord.EmbedBuilder()

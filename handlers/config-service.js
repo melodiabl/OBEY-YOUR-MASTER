@@ -5,12 +5,8 @@ function welcomeMessage(settings, guildId) {
 }
 
 async function saveWelcomeMessage(settings, guildId, message) {
-  if (typeof message !== 'string' || message.length > 500) throw new Error('El mensaje no puede superar 500 caracteres.')
-  settings.set(guildId, message, 'welcome.msg')
-  settings.set(guildId, message, 'welcome.message')
-  settings.set(guildId, message, 'welcomeMessage')
-  // No confirmation until the legacy store has persisted all three compatible keys.
-  await settings.flush()
+  return require('./welcome-configuration').welcomeConfiguration(settings).save(guildId,{message})
 }
+async function saveWelcomeChannel(settings,guildId,channelId){return require('./welcome-configuration').welcomeConfiguration(settings).save(guildId,{channelId:channelId==='nochannel'?null:channelId})}
 
-module.exports = { welcomeMessage, saveWelcomeMessage }
+module.exports = { welcomeMessage, saveWelcomeMessage, saveWelcomeChannel }

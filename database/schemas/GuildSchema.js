@@ -16,6 +16,8 @@ const GuildSchema = new Schema({
   // Welcome/Leave
   welcomeChannel: String,
   welcomeMessage: String,
+  welcomeConfigRevision: { type: Number, min: 0 },
+  welcomeConfigLastWrite: Schema.Types.Mixed,
   leaveChannel: String,
   leaveMessage: String,
   // Tickets

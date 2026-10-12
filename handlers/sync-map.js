@@ -33,6 +33,21 @@ class SyncMap {
       console.error(`[DB] ${this.model.modelName} write failed:`, error.message)
     })
   }
+  // Explicit writes join the same persistence queue, but expose their own result/error.
+  exclusive(operation) {
+    const result = this._writes.then(() => {
+      if (this._errors.length) throw new AggregateError(this._errors.splice(0), 'No se pudieron guardar los cambios')
+      return operation()
+    })
+    this._writes = result.then(() => undefined, () => undefined)
+    return result
+  }
+  patchCached(key, patch) {
+    key = String(key)
+    const doc = this._cache.get(key) || { [this.guildKey]: key }
+    for (const [path, value] of Object.entries(patch)) setPath(doc, path, structuredClone(value))
+    this._cache.set(key, doc)
+  }
 
   async flush() {
     await this._writes
