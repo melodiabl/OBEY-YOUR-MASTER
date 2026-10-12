@@ -1,122 +1,105 @@
-// Lógica compartida del Centro de Ayuda estilo Soundy (usada por prefix y slash help).
-// Navega client.commands por categoría (emoji unicode de la carpeta, en el label).
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
-
-const PRIMARY = 0x00ff33   // verde estilo Soundy
+const { createHash } = require('node:crypto')
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, escapeMarkdown } = require('discord.js')
+const { registry } = require('./assets/registry')
+const { helpService } = require('./help')
 const PER_PAGE = 5
+const token = category => createHash('sha256').update(category).digest('hex').slice(0, 20)
+const text = (value, limit) => escapeMarkdown(String(value || '').slice(0, limit)).slice(0, limit)
+const button = (id, label, icon, disabled = false) => new ButtonBuilder().setCustomId(id).setLabel(label).setEmoji(registry.emoji(icon)).setStyle(ButtonStyle.Secondary).setDisabled(disabled)
 
-function splitEmoji(cat) {
-  const parts = String(cat).trim().split(/\s+/)
-  const first = parts[0]
-  if (first && /\p{Extended_Pictographic}/u.test(first)) {
-    return { emoji: first, label: parts.slice(1).join(' ') || String(cat) }
+function buildHelpMessage(view, state = {}) {
+  const categories = view.categories, categoryPages = Math.max(1, Math.ceil(categories.length / 25))
+  const categoryPage = Math.max(0, Math.min(categoryPages - 1, state.categoryPage || 0))
+  const selected = categories.includes(state.category) ? state.category : null
+  const entries = selected ? view.commands.filter(entry => entry.category === selected) : []
+  const pages = Math.max(1, Math.ceil(entries.length / PER_PAGE)), page = Math.max(0, Math.min(pages - 1, state.page || 0))
+  const detail = state.detailId && view.commands.find(entry => entry.id === state.detailId)
+  const embed = new EmbedBuilder().setColor(0xFFD36F)
+  if (detail) {
+    embed.setTitle(text(detail.transport === 'prefix' ? view.prefix + detail.name : detail.invocation, 256)).setDescription(text(detail.description, 1500))
+      .addFields({ name: 'Categoría', value: text(detail.category, 100), inline: true }, { name: 'Espera entre usos', value: String(detail.cooldownSeconds) + ' s', inline: true },
+        { name: 'Uso', value: text((detail.transport === 'prefix' ? view.prefix : '') + detail.usage, 1000) })
+    if (detail.aliases.length) embed.addFields({ name: 'Alias', value: text(detail.aliases.join(', '), 1000) })
+    if (detail.permissions.length) embed.addFields({ name: 'Permisos', value: text(detail.permissions.join(', '), 1000) })
+  } else if (selected) {
+    const description = entries.slice(page * PER_PAGE, (page + 1) * PER_PAGE).map(entry => '**' + text(entry.transport === 'prefix' ? view.prefix + entry.name : entry.invocation, 120) + '**\n' + text(entry.description, 240)).join('\n\n')
+    embed.setTitle('Comandos de ' + text(selected, 200)).setDescription(description || 'No hay comandos disponibles en esta categoría.')
+      .setFooter({ text: 'Página ' + (page + 1) + '/' + pages + ' · ' + entries.length + ' comandos' })
+  } else {
+    embed.setTitle('Ayuda de OBEY').setDescription([
+      '¿Qué necesitas hacer? Elige una categoría para ver los comandos disponibles.',
+      view.counts.prefix + ' comandos de prefijo y ' + view.counts.slash + ' comandos slash disponibles en este contexto.',
+      view.query && !view.detail ? 'No encuentro ese comando disponible en este contexto.' : '',
+      categories.length ? categories.slice(categoryPage * 25, (categoryPage + 1) * 25).map(category => '• ' + text(category, 70)).join('\n') : 'No hay comandos disponibles con estos permisos y en este canal.',
+      'También puedes buscar: ' + text(view.prefix, 32) + 'help comando o /info help comando.',
+    ].filter(Boolean).join('\n\n')).setFooter({ text: 'Al ejecutar se comprueban también el destino y sus requisitos.' })
   }
-  return { emoji: '📂', label: String(cat) }
-}
-
-function getCategories(client) {
-  return [...new Set(client.commands.map(c => c.category).filter(Boolean))].sort()
-}
-
-function homeEmbed(client, userId, categories, prefix) {
-  const bot = client.user.username
-  const invite = `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`
-  const support = process.env.SUPPORT_SERVER || `https://discord.gg/`
-  return new EmbedBuilder()
-    .setColor(PRIMARY)
-    .setTitle(`Menú de Ayuda de ${bot}`)
-    .setDescription([
-      `**¡Hola <@${userId}>! Soy ${bot}, tu compañero musical 🎶**`,
-      '',
-      `**${bot} es un bot todo-en-uno: música, moderación, economía, niveles, diversión y mucho más. Con ${client.commands.size} comandos repartidos en ${categories.length} categorías.**`,
-      '',
-      categories.map(c => { const { emoji, label } = splitEmoji(c); return `${emoji} : **${label}**` }).join('\n'),
-      '',
-      '**Selecciona una categoría en el menú de abajo.**',
-      '',
-      `**[Invítame](${invite}) • [Servidor de Soporte](${support})**`,
-    ].join('\n'))
-    .setImage(client.user.displayAvatarURL({ size: 512 }))
-    .setFooter({ text: `¡Gracias por elegir ${bot}!`, iconURL: client.user.displayAvatarURL() })
-    .setTimestamp()
-}
-
-function buildMenu(categories) {
-  return new StringSelectMenuBuilder()
-    .setCustomId('hm_select')
-    .setPlaceholder('📂 Elige una categoría…')
-    .addOptions(categories.slice(0, 25).map(c => ({
-      label: String(c).slice(0, 95),
-      value: String(c).slice(0, 100),
-      description: 'Ver sus comandos',
-    })))
-}
-
-function buildPages(client, cat, prefix) {
-  const { emoji, label } = splitEmoji(cat)
-  const cmds = client.commands.filter(c => c.category === cat).map(c => c)
-    .sort((a, b) => a.name.localeCompare(b.name))
-  const totalPages = Math.max(1, Math.ceil(cmds.length / PER_PAGE))
-  const pages = []
-  for (let i = 0; i < cmds.length; i += PER_PAGE) {
-    const slice = cmds.slice(i, i + PER_PAGE)
-    const desc = slice.map(c =>
-      `**${prefix}${c.name}**\n\`\`\`${(c.description || 'Sin descripción').slice(0, 100)}\`\`\``
-    ).join('\n')
-    pages.push(new EmbedBuilder()
-      .setColor(PRIMARY)
-      .setTitle(`${emoji} Comandos de ${label}`)
-      .setDescription(desc || '_Sin comandos_')
-      .setThumbnail(client.user.displayAvatarURL())
-      .setFooter({ text: `Página ${Math.floor(i / PER_PAGE) + 1}/${totalPages} • ${cmds.length} comandos` })
-      .setTimestamp())
+  const components = []
+  if (categories.length) {
+    components.push(new ActionRowBuilder().addComponents(new StringSelectMenuBuilder().setCustomId('hm_select').setPlaceholder('Elige una categoría')
+      .addOptions(categories.slice(categoryPage * 25, (categoryPage + 1) * 25).map(category => ({ label: category.slice(0, 100), value: token(category), description: 'Ver comandos disponibles', default: category === selected })))))
+    if (categoryPages > 1) components.push(new ActionRowBuilder().addComponents(button('hm_categories_prev', 'Categorías anteriores', 'previous', categoryPage === 0), button('hm_categories_next', 'Más categorías', 'next', categoryPage === categoryPages - 1)))
+    if (selected || detail) components.push(new ActionRowBuilder().addComponents(button('hm_prev', 'Anterior', 'previous', page === 0 || Boolean(detail)), button('hm_home', 'Inicio', 'home'), button('hm_next', 'Siguiente', 'next', page === pages - 1 || Boolean(detail))))
   }
-  return pages.length ? pages : [new EmbedBuilder().setColor(PRIMARY).setDescription('_Sin comandos en esta categoría_')]
+  return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }
 }
 
-function navRows(menu, page, total) {
-  return [
-    new ActionRowBuilder().addComponents(menu),
-    new ActionRowBuilder().addComponents(
-      new ButtonBuilder().setCustomId('hm_prev').setEmoji('◀️').setStyle(ButtonStyle.Secondary).setDisabled(page <= 0),
-      new ButtonBuilder().setCustomId('hm_home').setEmoji('🏠').setLabel('Inicio').setStyle(ButtonStyle.Primary),
-      new ButtonBuilder().setCustomId('hm_next').setEmoji('▶️').setStyle(ButtonStyle.Secondary).setDisabled(page >= total - 1),
-    ),
-  ]
-}
-
-function commandDetail(client, cmd, prefix) {
-  const e = new EmbedBuilder()
-    .setColor(PRIMARY)
-    .setAuthor({ name: `Comando: ${cmd.name}`, iconURL: client.user.displayAvatarURL() })
-    .setDescription(`\`\`\`${cmd.description || 'Sin descripción'}\`\`\``)
-  if (cmd.category) e.addFields({ name: '📂 Categoría', value: `\`${cmd.category}\``, inline: true })
-  if (cmd.aliases?.length) e.addFields({ name: '🔁 Alias', value: cmd.aliases.map(a => `\`${a}\``).join(' '), inline: true })
-  if (cmd.usage) e.addFields({ name: '⌨️ Uso', value: `\`${prefix}${cmd.usage}\`` })
-  return e
-}
-
-// Conecta el collector de componentes a un mensaje (prefix o slash) para navegar.
-function attachCollector(client, msg, ownerId, prefix, home, menu) {
-  let pages = [], page = 0
-  const collector = msg.createMessageComponentCollector({ time: 180000 })
-  collector.on('collect', async i => {
-    if (i.user.id !== ownerId) return i.reply({ content: 'Este menú no es tuyo. Usa `' + prefix + 'help`.', ephemeral: true }).catch(() => {})
-    try {
-      if (i.isStringSelectMenu() && i.customId === 'hm_select') {
-        pages = buildPages(client, i.values[0], prefix); page = 0
-        return i.update({ embeds: [pages[0]], components: navRows(menu, 0, pages.length) }).catch(() => {})
+function attachCollector(reader, message, context, initialState) {
+  const state = { ...initialState }, collector = message.createMessageComponentCollector({ time: 180000 })
+  const controls = new Set(['hm_select', 'hm_home', 'hm_prev', 'hm_next', 'hm_categories_prev', 'hm_categories_next'])
+  let closed = false, queue = Promise.resolve()
+  collector.on('collect', async interaction => {
+    if (interaction.user.id !== context.actorId || interaction.guildId !== context.guildId || interaction.message?.id !== message.id || !controls.has(interaction.customId)) {
+      return interaction.reply({ content: 'Este control no está disponible para ti. Abre tu propia ayuda.', ephemeral: true }).catch(() => {})
+    }
+    let acknowledgement
+    try { acknowledgement = Promise.resolve(interaction.deferUpdate()).then(() => true, () => false) } catch { return }
+    queue = queue.then(async () => {
+      if (!await acknowledgement || closed) return
+      try {
+        const view = await reader.read(context)
+        if (closed) return
+        state.categoryPage = Math.max(0, Math.min(Math.max(0, Math.ceil(view.categories.length / 25) - 1), state.categoryPage || 0))
+        const currentPages = Math.max(1, Math.ceil(view.commands.filter(entry => entry.category === state.category).length / PER_PAGE))
+        state.page = Math.max(0, Math.min(currentPages - 1, state.page || 0))
+        if (interaction.customId === 'hm_select') {
+          state.category = view.categories.find(category => token(category) === interaction.values?.[0]) || null
+          state.page = 0; state.detailId = null
+        } else if (interaction.customId === 'hm_home') { state.category = null; state.detailId = null; state.page = 0 }
+        else if (interaction.customId.startsWith('hm_categories_')) { state.categoryPage = Math.max(0, (state.categoryPage || 0) + (interaction.customId.endsWith('next') ? 1 : -1)) }
+        else { state.page = Math.max(0, (state.page || 0) + (interaction.customId === 'hm_next' ? 1 : -1)) }
+        if (!view.categories.includes(state.category)) state.category = null
+        const pages = Math.max(1, Math.ceil(view.commands.filter(entry => entry.category === state.category).length / PER_PAGE))
+        state.page = Math.max(0, Math.min(pages - 1, state.page || 0))
+        state.categoryPage = Math.min(Math.max(0, Math.ceil(view.categories.length / 25) - 1), state.categoryPage || 0)
+        await interaction.editReply(buildHelpMessage(view, state))
+      } catch {
+        if (closed) return
+        closed = true
+        await interaction.editReply({ content: 'No pude comprobar tu acceso actual. Abre la ayuda de nuevo para reintentar.', embeds: [], components: [], allowedMentions: { parse: [] } }).catch(() => {})
+        collector.stop('unavailable')
       }
-      if (i.isButton()) {
-        if (i.customId === 'hm_home') return i.update({ embeds: [home], components: [new ActionRowBuilder().addComponents(menu)] }).catch(() => {})
-        page = i.customId === 'hm_next' ? Math.min(pages.length - 1, page + 1) : Math.max(0, page - 1)
-        return i.update({ embeds: [pages[page]], components: navRows(menu, page, pages.length) }).catch(() => {})
-      }
-    } catch {}
+    }).catch(() => {})
   })
-  collector.on('end', () => msg.edit({ components: [] }).catch(() => {}))
+  collector.on('end', () => { closed = true; message.edit({ components: [] }).catch(() => {}) })
+  return collector
 }
 
-module.exports = {
-  splitEmoji, getCategories, homeEmbed, buildMenu, buildPages, navRows, commandDetail, attachCollector,
+async function openHelp(client, origin, query = '', slash = false) {
+  if (slash) await origin.deferReply({ ephemeral: true })
+  const context = { guildId: origin.guild?.id, actorId: (origin.user || origin.author)?.id, channelId: origin.channelId || origin.channel?.id }
+  const reader = helpService(client)
+  try {
+    const view = await reader.read({ ...context, query }), state = { detailId: view.detail?.id, page: 0, categoryPage: 0 }
+    const payload = buildHelpMessage(view, state)
+    let message
+    if (slash) { await origin.editReply(payload); message = await origin.fetchReply() }
+    else message = await origin.reply(payload)
+    if (message && view.categories.length) attachCollector(reader, message, context, state)
+  } catch {
+    const payload = { content: 'No pude comprobar tu acceso a la ayuda. Inténtalo de nuevo.', embeds: [], components: [], allowedMentions: { parse: [] } }
+    if (slash) await origin.editReply(payload)
+    else await origin.reply(payload)
+  }
 }
+module.exports = { buildHelpMessage, attachCollector, openHelp }
