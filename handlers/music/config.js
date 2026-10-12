@@ -6,7 +6,9 @@
 
 // Approved character assets use application IDs only after a verified sync.
 const { registry, musicKeys } = require('../assets/registry')
-const emoji = Object.fromEntries(Object.keys(musicKeys).map(key => [key, registry.musicEmoji(key)]))
+const emoji = Object.defineProperties({}, Object.fromEntries(Object.keys(musicKeys).map(key => [key, {
+  enumerable: true, get: () => registry.musicEmoji(key),
+}])))
 
 const color = {
   primary:   0x00ff33,
