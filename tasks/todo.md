@@ -1470,6 +1470,13 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] C03: API autenticada y editor con vista previa, borrador, comparación y publicación. Verificados autorización, CSRF, conflicto, conservación de texto, teclado y 320/768/1024/1440 en Chromium. Dependencia: C02.
 - [x] Checkpoint local: suite 293/293, Mongo aislado, navegador sin errores de página, evidencia en `CONFIGURATION.md` y commits de la entrega. Discord real, resto de campos/módulos e historial de operaciones siguen pendientes.
 
+## Ayuda contextual · continuación T11/T53
+
+- [x] H01: Catálogo de prefijo/slash y aliases efectivos desde registros cargados; disponibilidad por contexto y metadatos acotados. Verificados nombres reales, permisos declarados, roles heredados, voz y contenido desactivado.
+- [x] H02: Consulta compartida; categorías/páginas completas, slash privado y revalidación de cada control. Verificados propietario/guild/mensaje, caducidad, acceso fallido, respuesta tardía y orden de clicks. Dependencia: H01.
+- [x] H03: Ayuda web autenticada sobre el mismo servicio, búsqueda/categoría/canal/detalle, paginación y recorrido en Chromium. Evidencia en `HELP.md` y `evidence/help`. Dependencia: H02.
+- [x] Checkpoint local: 306 tests pasan, builders del catálogo real, schemas/auditoría sin publicación y commits de entrega. Discord real y resto de T11/T53 permanecen pendientes; no se declara cerrado utilities.
+
 ## T57
 
 - [ ] Validación transversal y preparación PR (fase 8).

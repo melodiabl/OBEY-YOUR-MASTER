@@ -1,0 +1,19 @@
+{
+  "fixture": true,
+  "server": "real Express/EJS and shared help service; fixture handlers and Discord permissions",
+  "searchAndAliases": true,
+  "pagination": true,
+  "detail": true,
+  "emptyState": true,
+  "escapedContent": true,
+  "freshRoleFiltering": true,
+  "revocationClearsResults": true,
+  "keyboardFocus": true,
+  "breakpoints": [
+    320,
+    768,
+    1024,
+    1440
+  ],
+  "pageErrors": []
+}

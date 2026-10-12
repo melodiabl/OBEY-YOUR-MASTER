@@ -1,0 +1,18 @@
+<%- include('../includes/header', { title: guild.name + ' — Ayuda', user, activePage: 'servers', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Ayuda' }] }) %>
+<link rel="stylesheet" href="/css/help.css">
+<section id="help-app" data-guild-id="<%= guild.id %>">
+  <div class="help-heading"><div><a href="/dashboard/<%= guild.id %>">← <%= guild.name %></a><h1>Ayuda de OBEY</h1><p>Encuentra los comandos disponibles para tu cuenta y consulta sus requisitos.</p></div><button type="button" class="btn btn-sec" id="help-refresh">Actualizar permisos</button></div>
+  <form id="help-filters" class="card"><fieldset id="help-fields" disabled>
+    <label for="help-search">Buscar comando o alias<input id="help-search" type="search" maxlength="100" placeholder="Nombre, alias o descripción"></label>
+    <label for="help-category">Categoría<select id="help-category"><option value="">Todas las categorías</option></select></label>
+    <label for="help-channel">Contexto de canal<select id="help-channel"><option value="">Vista general del servidor</option></select></label>
+    <button type="submit" class="btn btn-p">Buscar</button>
+  </fieldset></form>
+  <p id="help-status" role="status" aria-live="polite">Comprobando tus permisos…</p>
+  <p class="help-note">La ayuda comprueba tus permisos al consultar. El destino y los requisitos específicos se verifican también al ejecutar el comando en Discord.</p>
+  <div id="help-list" class="help-list"></div>
+  <div class="help-pagination"><button type="button" class="btn btn-sec" id="help-prev" disabled>Anterior</button><span id="help-page"></span><button type="button" class="btn btn-sec" id="help-next" disabled>Siguiente</button></div>
+  <section id="help-detail" class="card" aria-labelledby="help-detail-title" hidden><div class="card-head"><h2 id="help-detail-title"></h2><button type="button" class="btn btn-sec" id="help-close">Cerrar detalle</button></div><div class="card-body"><p id="help-detail-description"></p><dl id="help-detail-fields"></dl></div></section>
+</section>
+<script src="/js/help.js"></script>
+<%- include('../includes/footer') %>

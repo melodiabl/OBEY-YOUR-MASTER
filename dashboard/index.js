@@ -108,6 +108,7 @@ module.exports = async client => {
   require('./architect-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./welcome-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./configuration-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
+  require('./help-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
 
   // ─── Public routes ────────────────────────────────────────────────────────
 
