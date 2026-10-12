@@ -3,6 +3,30 @@ const assert = require('node:assert/strict')
 const { EventEmitter } = require('node:events')
 const { createModuleRegistry } = require('../handlers/module-registry')
 
+test('logical capabilities normalize aliases and never grant a different module action', () => {
+  const registry = createModuleRegistry(), manifest = require('../handlers/music/manifest')({})
+  registry.register(manifest, {})
+  assert.deepEqual(registry.resolveCapability('music', 'read'), registry.resolveCapability('music', 'music.view'))
+  assert.equal(registry.resolveCapability('music', 'edit').id, 'music.configure')
+  assert.equal(registry.resolveCapability('music', 'manage').policy, 'ManageGuild')
+  assert.equal(registry.resolveCapability('music', 'tickets.configure'), null)
+  assert.equal(registry.resolveCapability('music', 'ban'), null)
+  assert.equal(registry.resolveCapability('tickets', 'configure'), null)
+})
+
+test('welcome registers its shared configuration without adding duplicate delivery handlers', () => {
+  const client = new EventEmitter()
+  client.settings = require('./helpers/module-settings').moduleSettingsFixture().store
+  const initialize = require('../handlers/configuration')
+  const first = initialize(client)
+  assert.equal(initialize(client), first)
+  assert.equal(client.modules.get('welcome').service, client.moduleConfiguration)
+  assert.equal(client.modules.list().length, 1)
+  assert.equal(client.listenerCount('guildMemberAdd'), 0)
+  assert.equal(client.modules.resolveCapability('welcome', 'configure').policy, 'ManageGuild')
+  assert.equal(client.modules.get('welcome').manifest.capabilities.cards, 'pending')
+})
+
 test('registry rejects duplicate identities and incomplete contracts', () => {
   const registry = createModuleRegistry()
   assert.throws(() => registry.register({ id: 'music' }), /manifest/i)

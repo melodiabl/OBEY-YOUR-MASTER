@@ -23,6 +23,17 @@ function createModuleRegistry() {
     },
     get: id => modules.get(id),
     list: () => [...modules.values()].map(entry => entry.manifest),
+    resolveCapability(id, name) {
+      const entry = modules.get(id)
+      if (!entry || typeof name !== 'string') return null
+      const parts = name.split('.')
+      if (parts.length > 2 || parts.length === 2 && parts[0] !== id) return null
+      const alias = parts.at(-1)
+      const action = ({ read: 'view', edit: 'configure', manage: 'configure' })[alias] || alias
+      const permission = action === 'view' ? 'read' : action
+      if (!Object.hasOwn(entry.manifest.permissions, permission)) return null
+      return Object.freeze({ id: `${id}.${action}`, policy: entry.manifest.permissions[permission] })
+    },
   }
 }
 
