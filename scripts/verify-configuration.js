@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict')
 const mongoose = require('mongoose')
 const { randomUUID } = require('node:crypto')
-const { createModuleConfiguration } = require('../handlers/module-configuration')
+const { createModuleConfiguration } = require('../handlers/configuration-service')
 const SyncMap = require('../handlers/sync-map')
 const url = process.env.OBEY_CONFIG_TEST_MONGO_URL || ''
 if (!/^mongodb:\/\/127\.0\.0\.1:\d+\/obey_configuration_test$/.test(url)) throw new Error('Use an isolated loopback database named obey_configuration_test')

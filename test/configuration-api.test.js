@@ -1,9 +1,9 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
 const { PermissionsBitField } = require('discord.js')
-const mount = require('../dashboard/module-configuration-routes')
+const mount = require('../dashboard/configuration-routes')
 const { canManageGuild } = require('../handlers/permissions')
-const { moduleSettingsFixture } = require('./helpers/module-settings')
+const { moduleSettingsFixture } = require('./helpers/configuration-settings')
 function fixture() {
   const f = moduleSettingsFixture(), routes = new Map()
   const app = Object.fromEntries(['get', 'put', 'post'].map(method => [method, (path, ...handlers) => routes.set(`${method.toUpperCase()} ${path}`, handlers)]))

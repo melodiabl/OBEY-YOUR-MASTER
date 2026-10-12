@@ -8,7 +8,7 @@ if (!/^http:\/\/127\.0\.0\.1:\d+$/.test(origin)) throw new Error('Use the isolat
   const probe = await fetch(origin + '/fixture-record').then(response => response.json())
   assert.equal(probe.fixture, true)
   assert.equal(probe.record.guildId, 'configuration-fixture')
-  const directory = path.resolve(__dirname, '../docs/platform/evidence/module-configuration')
+  const directory = path.resolve(__dirname, '../docs/platform/evidence/configuration')
   await fs.mkdir(directory, { recursive: true })
   const browser = await chromium.launch({ headless: true })
   const errors = []
@@ -60,7 +60,7 @@ if (!/^http:\/\/127\.0\.0\.1:\d+$/.test(origin)) throw new Error('Use the isolat
     for (const width of widths) {
       await page.setViewportSize({ width, height: 1000 })
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `overflow ${width}`)
-      const bounds = await page.evaluate(() => [...document.querySelectorAll('#module-configuration .card, #module-configuration p, #module-configuration pre, #config-form, #config-message, .module-config-heading')].filter(element => element.getClientRects().length).map(element => ({ element: element.id || element.className, right: element.getBoundingClientRect().right, viewport: innerWidth })))
+      const bounds = await page.evaluate(() => [...document.querySelectorAll('#configuration-editor .card, #configuration-editor p, #configuration-editor pre, #config-form, #config-message, .configuration-heading')].filter(element => element.getClientRects().length).map(element => ({ element: element.id || element.className, right: element.getBoundingClientRect().right, viewport: innerWidth })))
       assert.ok(bounds.every(entry => entry.right <= entry.viewport + 1), JSON.stringify(bounds))
       overflow.push({ width, horizontalOverflow: false })
     }

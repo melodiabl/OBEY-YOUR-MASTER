@@ -23,7 +23,7 @@
           <label id="architect-wizard-title-label" hidden>Nombre de tu comunidad<input id="architect-wizard-title" maxlength="60" placeholder="Nombre de la comunidad"></label>
         </div>
         <fieldset class="architect-wizard-spaces"><legend>Espacios opcionales</legend><div id="architect-wizard-spaces"></div></fieldset>
-        <p class="architect-wizard-note">Añade los espacios que faltan y conserva tu estructura y tus ediciones. Deshacer revierte la base añadida. La configuración actual de módulos se conserva; su conexión automática está pendiente.</p>
+        <p class="architect-wizard-note">Añade los espacios que faltan y conserva tu estructura y tus ediciones. Deshacer revierte la base añadida. La configuración actual del bot se conserva; su conexión automática está pendiente.</p>
         <button type="submit" class="btn btn-p" id="architect-generate">Generar propuesta</button>
       </fieldset>
       <p id="architect-wizard-status" role="status">Cargando las bases disponibles…</p>
@@ -46,7 +46,7 @@
         <button type="submit" class="btn btn-sec">Guardar plantilla privada</button>
       </fieldset></form>
       <label for="architect-template-import">Importar una plantilla OBEY</label><input id="architect-template-import" type="file" accept="application/json,.json" disabled>
-      <p class="architect-wizard-note">Este formato guarda estructura, roles y sobrescrituras de roles. Conserva referencias lógicas propias; al reutilizarlo se revisa el destino. La configuración de módulos, permisos globales de @everyone, roles administrados y protecciones del origen quedan fuera. La aplicación de permisos en recursos nuevos puede requerir completar pasos aún no disponibles; la revisión mostrará los bloqueos. Las posiciones nuevas usan el orden predeterminado de Discord.</p>
+      <p class="architect-wizard-note">Este formato guarda estructura, roles y sobrescrituras de roles. Conserva referencias lógicas propias; al reutilizarlo se revisa el destino. La configuración del bot, permisos globales de @everyone, roles administrados y protecciones del origen quedan fuera. La aplicación de permisos en recursos nuevos puede requerir completar pasos aún no disponibles; la revisión mostrará los bloqueos. Las posiciones nuevas usan el orden predeterminado de Discord.</p>
       <p id="architect-template-status" class="architect-wizard-note" role="status">Cargando la biblioteca…</p>
     </div>
   </details>
@@ -126,7 +126,7 @@
     <div id="architect-jobs"></div>
     <p class="architect-review-note">El análisis lee canales y roles. Su resultado no reemplaza la propuesta que estás editando.</p>
     <h3>Tus puntos de restauración</h3>
-    <p class="architect-review-note">Copias privadas de canales, roles y permisos. No incluyen mensajes ni configuración de módulos. La restauración a Discord aún está pendiente.</p>
+    <p class="architect-review-note">Copias privadas de canales, roles y permisos. No incluyen mensajes ni configuración del bot. La restauración a Discord aún está pendiente.</p>
     <div id="architect-restore-points"></div>
   </section>
 </section>

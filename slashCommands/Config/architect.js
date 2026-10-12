@@ -18,7 +18,7 @@ module.exports = {
         const job = await client.jobs.submit({ guildId: interaction.guild.id, actorId: interaction.user.id,
           type: action === 'copia' ? 'architect.backup' : 'architect.snapshot', idempotencyKey: `discord-${interaction.id}` })
         const status = { queued: 'encolado', running: 'en curso', completed: 'completado', failed: 'fallido', cancelled: 'cancelado' }[job.status]
-        return interaction.editReply({ content: `${action === 'copia' ? 'Punto de restauración' : 'Análisis'} ${status}. Consulta su estado en Architect. Referencia: ${job.id}${action === 'copia' ? ' Copia de canales, roles y permisos; no incluye mensajes ni configuración de módulos.' : ''}`, allowedMentions: { parse: [] } })
+        return interaction.editReply({ content: `${action === 'copia' ? 'Punto de restauración' : 'Análisis'} ${status}. Consulta su estado en Architect. Referencia: ${job.id}${action === 'copia' ? ' Copia de canales, roles y permisos; no incluye mensajes ni configuración del bot.' : ''}`, allowedMentions: { parse: [] } })
       }
       const state = await client.architect.read(interaction.guild, interaction.user.id)
       const categories = state.snapshot.channels.filter(channel => channel.type === 4).length

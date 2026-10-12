@@ -1,7 +1,7 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
-const { createModuleConfiguration } = require('../handlers/module-configuration')
-const { moduleSettingsFixture } = require('./helpers/module-settings')
+const { createModuleConfiguration } = require('../handlers/configuration-service')
+const { moduleSettingsFixture } = require('./helpers/configuration-settings')
 const { welcomeConfiguration } = require('../handlers/welcome-configuration')
 const config = { channelId: 'channel', message: 'Hola {user}' }
 function fixture() {

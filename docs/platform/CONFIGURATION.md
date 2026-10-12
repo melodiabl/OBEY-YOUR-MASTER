@@ -1,6 +1,8 @@
-# Configuración por módulo · bienvenida
+# Configuración del bot · bienvenida
 
 Entrega local del 12 de octubre de 2026. Sigue INICIAR_CODEX.md, contrato común y welcome.md del paquete consolidado. Integra la base de bienvenida previa sin revertir sus aliases, persistencia, tarjetas/DM o editores existentes. No se declara terminado el módulo welcome ni los 32 módulos.
+
+Convención vigente: archivos por función sin `module-` al inicio. Servicio en `handlers/configuration-service.js`, registro en `handlers/feature-registry.js` y editor en `configuration-editor.*`. En la interfaz se usan nombres directos, como Bienvenida y Tarjetas.
 
 ## Recorrido conectado
 
@@ -38,15 +40,15 @@ Suite completa: `npm test`, 293 tests pasan, cero fallos y cero skip. Esquemas d
 La suite también pasó desde una exportación limpia de los commits, reutilizando las dependencias locales y excluyendo los cambios pendientes de Architect. Los archivos que quedan sin confirmar pertenecen al trabajo previo; la entrega no depende de ellos.
 
 ```sh
-node --test test/module-configuration.test.js test/module-configuration-api.test.js test/module-registry.test.js test/welcome-configuration.test.js test/welcome-config.test.js
-OBEY_CONFIG_TEST_MONGO_URL=mongodb://127.0.0.1:27029/obey_configuration_test node scripts/verify-module-configuration.js
-node scripts/serve-module-configuration-fixture.js
-node scripts/verify-module-configuration-browser.js http://127.0.0.1:PUERTO /ruta/al/modulo/playwright
+node --test test/configuration-service.test.js test/configuration-api.test.js test/feature-registry.test.js test/welcome-configuration.test.js test/welcome-config.test.js
+OBEY_CONFIG_TEST_MONGO_URL=mongodb://127.0.0.1:27029/obey_configuration_test node scripts/verify-configuration.js
+node scripts/serve-configuration-fixture.js
+node scripts/verify-configuration-browser.js http://127.0.0.1:PUERTO /ruta/al/modulo/playwright
 ```
 
 El servidor imprime el puerto, usa solo fixtures en memoria y no inicia el bot. La prueba Mongo rechaza cualquier URL que no sea loopback con la base de pruebas exacta. Limpia únicamente registros de fixture creados en ese intento. Playwright es una herramienta de prueba disponible en este entorno; no se añadió una dependencia runtime. El MCP de Chrome no pudo iniciar como root y se usó Chromium aislado de Playwright.
 
-Evidencia de navegador en `docs/platform/evidence/module-configuration/`: desktop.png, mobile.png y browser.json. Recorridos: preview seguro, draft sin activar, recuperación, publicación, conflicto entre pestañas conservando texto, fallo de persistencia conservando texto, revocación de acceso, teclado y anchos 320/768/1024/1440. Mongo real: conflicto entre instancias, publicación/aliases atómicos, conservación de DM/cards, reintento y detección de edición legacy.
+Evidencia de navegador en `docs/platform/evidence/configuration/`: desktop.png, mobile.png y browser.json. Recorridos: preview seguro, draft sin activar, recuperación, publicación, conflicto entre pestañas conservando texto, fallo de persistencia conservando texto, revocación de acceso, teclado y anchos 320/768/1024/1440. Mongo real: conflicto entre instancias, publicación/aliases atómicos, conservación de DM/cards, reintento y detección de edición legacy.
 
 No se reinició producción, no se ejecutaron comandos del bot contra Discord ni se subieron recursos. Los permisos Discord usados por las pruebas son fixtures. La comprobación con un servidor real, los demás campos y módulos, historial/retención y sincronización realtime siguen pendientes.
 
@@ -54,4 +56,4 @@ No se reinició producción, no se ejecutaron comandos del bot contra Discord ni
 
 Revertir los commits propios de esta entrega conserva documentos legacy y borradores en Mongo; no eliminar datos nuevos. El lector antiguo ignora el campo adicional y sigue leyendo aliases publicados. Continuar con ayuda/contexto desde el registro y renderer de tarjetas/bienvenida; añadir adapters de configuración solo al conectar sus consumidores.
 
-Decisión de almacenamiento y límites: [ADR 002](adr/002-module-configuration.md).
+Decisión de almacenamiento y límites: [ADR 002](adr/002-configuration.md).

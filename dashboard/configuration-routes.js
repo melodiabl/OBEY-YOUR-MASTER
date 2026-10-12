@@ -34,7 +34,7 @@ module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canM
     configuration: manifest.configuration || null,
     permissions: Object.keys(manifest.permissions).map(name => client.modules.resolveCapability(manifest.id, name)),
   })) }))
-  app.get('/configuration/:guildId/:moduleId', ...guarded, (req, res) => res.render('pages/module-configuration', {
+  app.get('/configuration/:guildId/:moduleId', ...guarded, (req, res) => res.render('pages/configuration-editor', {
     user: req.session.user, guild: { id: req.configurationGuild.id, name: req.configurationGuild.name }, moduleId: req.params.moduleId,
   }))
   app.get('/api/guilds/:guildId/modules/:moduleId/config', ...guarded, wrap(async (req, res) => res.json(await service().read(req.params.guildId, req.params.moduleId))))

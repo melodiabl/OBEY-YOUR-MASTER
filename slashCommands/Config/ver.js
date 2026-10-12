@@ -33,7 +33,7 @@ module.exports = {
         { name: '🎭 Autoroles',  value: autoroles.length ? autoroles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : '*(ninguno)*', inline: true },
         { name: '👑 Roles admin', value: adminroles.length ? adminroles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : '*(ninguno)*', inline: false },
       )
-      .setFooter({ text: 'Usa /config <módulo> para cambiar ajustes' })
+      .setFooter({ text: 'Usa /config para consultar las opciones y cambiar ajustes' })
       .setTimestamp()
 
     await interaction.reply({ embeds: [embed], ephemeral: true })

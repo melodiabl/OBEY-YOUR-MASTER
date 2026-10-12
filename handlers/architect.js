@@ -19,7 +19,7 @@ module.exports = client => {
     repository: client.jobRepository, restorePoints: client.restorePoints,
     guildOperations: require('./architect/application-repository').createGuildOperationRepository(), enabled: applyAvailable,
   })
-  client.modules ||= require('./module-registry').createModuleRegistry()
+  client.modules ||= require('./feature-registry').createModuleRegistry()
   client.modules.register({
     id: 'architect', version: '1.0.0', defaults: { preserveExisting: true }, permissions: { read: 'ManageGuild', draft: 'ManageGuild' },
     commands: { slash: ['config.architect'], prefix: [] }, interactions: [], events: { consumed: [], emitted: [] }, jobs: ['architect.snapshot', 'architect.backup', 'architect.apply'],

@@ -26,7 +26,7 @@ function safeSnapshot(value, guildId) {
   validateBlueprint({ schemaVersion: 1, baseRevision: revision, channels, roles }, { guildId, revision, channels, roles })
   return { schemaVersion: 1, guildId, name: value.name, capturedAt: value.capturedAt, completeness: 'structure_only',
     scope: ['guild_channels', 'roles', 'permission_overwrites'],
-    warnings: ['No incluye mensajes, miembros, hilos ni configuración de módulos OBEY.',
+    warnings: ['No incluye mensajes, miembros, hilos ni configuración de OBEY.',
       'No restaura IDs eliminados, enlaces, mensajes ni recursos externos.'], channels, roles,
     ...(Object.keys(roleColors).length ? { roleColors } : {}), revision }
 }

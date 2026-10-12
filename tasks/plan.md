@@ -1,5 +1,7 @@
 # Plan de implementación de la plataforma OBEY
 
+Preferencia de nombres del usuario: archivos por función, sin el prefijo `module-` (por ejemplo, `cards.js`, `configuration-service.js`, `configuration-editor.js`, `feature-registry.js`). La interfaz nombra directamente Bienvenida, Tarjetas y cada función; evita «módulo» en títulos y mensajes. Las futuras entregas siguen esta convención.
+
 ## Renovación con el paquete consolidado (12 de octubre de 2026)
 
 Fuente vigente: `/home/OBEY_Documentacion/INICIAR_CODEX.md`, decisiones y contratos del paquete. Continuar el mismo proyecto y las tareas existentes; conservar todos los cambios locales de bienvenida/Architect. Primera entrega: integrar materiales seleccionados en el registro actual, resolver alias y fallbacks, y adaptar la sincronización PNG/GIF. Mantener el lector del mapa v1 y los doce controles `mp_*`; nuevos mapas v2 usan claves canónicas sin borrar recursos anteriores. No subir emojis ni arrancar producción durante esta entrega local. Siguientes dependencias: capacidades, configuración versionada, ayuda y tarjetas. Evidencia y límites por entrega en `docs/platform/REMODELACION.md`.

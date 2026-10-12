@@ -4,7 +4,7 @@ const session = require('express-session')
 const http = require('node:http')
 const path = require('node:path')
 const { PermissionsBitField } = require('discord.js')
-const { moduleSettingsFixture } = require('../test/helpers/module-settings')
+const { moduleSettingsFixture } = require('../test/helpers/configuration-settings')
 const { canManageGuild } = require('../handlers/permissions')
 const { sessionAuth } = require('../dashboard/auth')
 const { csrfProtection } = require('../dashboard/security')
@@ -44,7 +44,7 @@ server.listen(port, '127.0.0.1', () => {
   })
   app.get('/api/stats', (req, res) => res.json({ guilds: 1 }))
   app.get('/fixture-record', (req, res) => res.json({ fixture: true, record: f.records.get(guildId) }))
-  require('../dashboard/module-configuration-routes')(app, client, {
+  require('../dashboard/configuration-routes')(app, client, {
     canManageGuild, requireAuth: sessionAuth(async () => { throw new Error('fixture_expired') }),
     requireFreshGuildPermissions: (req, res, next) => { req.session.user.guilds = [{ id: guildId, permissions: allowed ? '32' : '0' }]; next() },
   })

@@ -1,7 +1,7 @@
 const { test } = require('node:test')
 const assert = require('node:assert/strict')
 const { EventEmitter } = require('node:events')
-const { createModuleRegistry } = require('../handlers/module-registry')
+const { createModuleRegistry } = require('../handlers/feature-registry')
 
 test('logical capabilities normalize aliases and never grant a different module action', () => {
   const registry = createModuleRegistry(), manifest = require('../handlers/music/manifest')({})
@@ -16,7 +16,7 @@ test('logical capabilities normalize aliases and never grant a different module 
 
 test('welcome registers its shared configuration without adding duplicate delivery handlers', () => {
   const client = new EventEmitter()
-  client.settings = require('./helpers/module-settings').moduleSettingsFixture().store
+  client.settings = require('./helpers/configuration-settings').moduleSettingsFixture().store
   const initialize = require('../handlers/configuration')
   const first = initialize(client)
   assert.equal(initialize(client), first)

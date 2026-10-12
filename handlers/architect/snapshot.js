@@ -28,7 +28,7 @@ async function snapshotGuild(guild) {
   }]))
   return { schemaVersion: 1, guildId: guild.id, name: guild.name, capturedAt: new Date().toISOString(),
     completeness: 'structure_only', scope: ['guild_channels', 'roles', 'permission_overwrites'],
-    warnings: ['No incluye mensajes, miembros, hilos ni configuración de módulos OBEY.',
+    warnings: ['No incluye mensajes, miembros, hilos ni configuración de OBEY.',
       ...(channels.some(channel => ![0, 2, 4].includes(channel.type)) ? ['Los tipos de canal avanzados se conservan y no se editan en esta versión.'] : [])],
     channels, roles, ...(Object.keys(roleColors).length ? { roleColors } : {}), revision: structureRevision(channels, roles, roleColors) }
 }

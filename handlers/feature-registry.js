@@ -15,8 +15,8 @@ function createModuleRegistry() {
       const arrays = ['interactions', 'jobs', 'api', 'dependencies']
       if (!manifest || !/^[a-z][a-z0-9-]*$/.test(manifest.id) || !/^\d+\.\d+\.\d+$/.test(manifest.version)
         || objects.some(key => !manifest[key] || typeof manifest[key] !== 'object' || Array.isArray(manifest[key]))
-        || arrays.some(key => !Array.isArray(manifest[key]))) throw new Error('Invalid module manifest')
-      if (modules.has(manifest.id)) throw new Error(`Duplicate module: ${manifest.id}`)
+        || arrays.some(key => !Array.isArray(manifest[key]))) throw new Error('Invalid feature manifest')
+      if (modules.has(manifest.id)) throw new Error(`Duplicate feature: ${manifest.id}`)
       const entry = Object.freeze({ manifest: freeze(structuredClone(manifest)), service })
       modules.set(manifest.id, entry)
       return entry

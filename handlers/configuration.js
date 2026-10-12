@@ -1,8 +1,8 @@
 const initialized = new WeakSet()
 module.exports = client => {
   if (initialized.has(client)) return client.moduleConfiguration
-  const service = require('./module-configuration').createModuleConfiguration(client.settings)
-  client.modules ||= require('./module-registry').createModuleRegistry()
+  const service = require('./configuration-service').createModuleConfiguration(client.settings)
+  client.modules ||= require('./feature-registry').createModuleRegistry()
   client.modules.register({
     id: 'welcome', version: '1.0.0', defaults: { channelId: null, message: '' },
     permissions: { read: 'ManageGuild', configure: 'ManageGuild' },

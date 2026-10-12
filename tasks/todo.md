@@ -120,7 +120,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 **Dependencias:** T01.
 
-**Archivos previstos:** `handlers/module-registry.js`, `handlers/feature-registration.js`, `handlers/command-registry.js`, `test/module-registry.test.js`.
+**Archivos previstos:** `handlers/feature-registry.js`, `handlers/feature-registration.js`, `handlers/command-registry.js`, `test/feature-registry.test.js`.
 
 **Scope:** Medio.
 
@@ -1468,7 +1468,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] C01: Nombres de capacidades normalizados desde permisos de manifests reales; welcome registrado sin reinicializar su handler. Verificados aislamiento de dominio y servicio único.
 - [x] C02: Borrador/publicación de canal y mensaje con schemaVersion, autor, revisión monotónica y CAS de valores publicados/legacy. Tarjetas/DM preservados. Verificados concurrencia entre instancias, reintento y fallo de persistencia con pruebas y Mongo real aislado. Dependencia: C01.
 - [x] C03: API autenticada y editor con vista previa, borrador, comparación y publicación. Verificados autorización, CSRF, conflicto, conservación de texto, teclado y 320/768/1024/1440 en Chromium. Dependencia: C02.
-- [x] Checkpoint local: suite 293/293, Mongo aislado, navegador sin errores de página, evidencia en `MODULE-CONFIGURATION.md` y commits de la entrega. Discord real, resto de campos/módulos e historial de operaciones siguen pendientes.
+- [x] Checkpoint local: suite 293/293, Mongo aislado, navegador sin errores de página, evidencia en `CONFIGURATION.md` y commits de la entrega. Discord real, resto de campos/módulos e historial de operaciones siguen pendientes.
 
 ## T57
 

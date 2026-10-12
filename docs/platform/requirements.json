@@ -867,9 +867,9 @@
       "tests": {
         "required": "Registro y delegación por guild",
         "evidence": [
-          "handlers/module-registry.js",
+          "handlers/feature-registry.js",
           "handlers/music/manifest.js",
-          "test/module-registry.test.js"
+          "test/feature-registry.test.js"
         ],
         "discordRuntime": "no ejecutado"
       },

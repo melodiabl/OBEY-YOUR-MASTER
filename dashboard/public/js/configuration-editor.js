@@ -1,5 +1,5 @@
 (function () {
-  const app = document.getElementById('module-configuration')
+  const app = document.getElementById('configuration-editor')
   if (!app) return
   const $ = name => document.getElementById(`config-${name}`)
   const base = `/api/guilds/${encodeURIComponent(app.dataset.guildId)}/modules/${encodeURIComponent(app.dataset.moduleId)}`

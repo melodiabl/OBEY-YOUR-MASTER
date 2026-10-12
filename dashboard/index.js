@@ -107,7 +107,7 @@ module.exports = async client => {
   require('./music-visibility')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./architect-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./welcome-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
-  require('./module-configuration-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
+  require('./configuration-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
 
   // ─── Public routes ────────────────────────────────────────────────────────
 
