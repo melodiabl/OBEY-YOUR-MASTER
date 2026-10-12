@@ -1035,5 +1035,4771 @@
       "row": 3,
       "alternateAsset": null
     }
-  ]
+  ],
+  "selected": {
+    "version": 1,
+    "assets": {
+      "icon.automation": {
+        "kind": "icon",
+        "fallback": "automation",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/ff8ac28b1b6cd3c406edaee53ad9c0516a102678c1c125682932aad0b9651327.png",
+            "bytes": 3060,
+            "sha256": "ff8ac28b1b6cd3c406edaee53ad9c0516a102678c1c125682932aad0b9651327",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_automation.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/79383e48f2b12d1f0b2588b1cec8f21e70a3dce7be2ce41c5a05abf9ca3dd8a8.svg",
+            "bytes": 381,
+            "sha256": "79383e48f2b12d1f0b2588b1cec8f21e70a3dce7be2ce41c5a05abf9ca3dd8a8",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_automation.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/9752f504e08c09842ed185577d7bdf11da7eaa01eaf7426b40065498700b1c05.svg",
+            "bytes": 381,
+            "sha256": "9752f504e08c09842ed185577d7bdf11da7eaa01eaf7426b40065498700b1c05",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_automation.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/880069ac316788099a801c2863db5467066dd7f162beb98517790bba88cc99a7.svg",
+            "bytes": 381,
+            "sha256": "880069ac316788099a801c2863db5467066dd7f162beb98517790bba88cc99a7",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_automation.svg"
+          }
+        }
+      },
+      "icon.autoplay": {
+        "kind": "icon",
+        "fallback": "autoplay",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/6600f8b46ebd5c248fd48c4e00dee75706113855d25474bbbd5cefb5669d46f3.png",
+            "bytes": 3280,
+            "sha256": "6600f8b46ebd5c248fd48c4e00dee75706113855d25474bbbd5cefb5669d46f3",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_autoplay.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/38d4e2e86e5081b40652e75751583f8ccbd09d5faf30a812ea7b0e39be11493e.svg",
+            "bytes": 312,
+            "sha256": "38d4e2e86e5081b40652e75751583f8ccbd09d5faf30a812ea7b0e39be11493e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_autoplay.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/34d1067d866fa835adb366b6ec249dad3d95a39887b4657c39b1e724cbe50d83.svg",
+            "bytes": 312,
+            "sha256": "34d1067d866fa835adb366b6ec249dad3d95a39887b4657c39b1e724cbe50d83",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_autoplay.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/2d122d9591846a8476588c31e5b0d120a1ead2019ff748f43a9125bf30214aed.svg",
+            "bytes": 312,
+            "sha256": "2d122d9591846a8476588c31e5b0d120a1ead2019ff748f43a9125bf30214aed",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_autoplay.svg"
+          }
+        }
+      },
+      "icon.bell": {
+        "kind": "icon",
+        "fallback": "bell",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/1d106d29ea6097982415065825cfa1ba9f25db5298ef92ecf25f093dd3d71ee9.png",
+            "bytes": 2791,
+            "sha256": "1d106d29ea6097982415065825cfa1ba9f25db5298ef92ecf25f093dd3d71ee9",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_bell.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/c5f2ac7a8d692014cb03b345c9af8c782ffbf2be1040f25a1c5fd3c920f505dc.svg",
+            "bytes": 318,
+            "sha256": "c5f2ac7a8d692014cb03b345c9af8c782ffbf2be1040f25a1c5fd3c920f505dc",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_bell.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/b1ed52db4be97680de1688a2f8fd95de08c36f909bcfc8c8e5267fc2d2487704.svg",
+            "bytes": 318,
+            "sha256": "b1ed52db4be97680de1688a2f8fd95de08c36f909bcfc8c8e5267fc2d2487704",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_bell.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/141b481ef117b737ce00f125112eb3fedce5e0410aa336417abbf4b1f12d75ed.svg",
+            "bytes": 318,
+            "sha256": "141b481ef117b737ce00f125112eb3fedce5e0410aa336417abbf4b1f12d75ed",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_bell.svg"
+          }
+        }
+      },
+      "icon.blueprint": {
+        "kind": "icon",
+        "fallback": "blueprint",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/6722209919f7ce848ea309ea69b88e19491c18b7e8167b8d2e9910539d4c04c1.png",
+            "bytes": 2769,
+            "sha256": "6722209919f7ce848ea309ea69b88e19491c18b7e8167b8d2e9910539d4c04c1",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_blueprint.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/93c156fa218054d21af1aaab2c748c8ab8c3b2fd6d2308eb714ccbe93e754260.svg",
+            "bytes": 355,
+            "sha256": "93c156fa218054d21af1aaab2c748c8ab8c3b2fd6d2308eb714ccbe93e754260",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_blueprint.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/e7c8fd5cfac0c2b6fe9d7f096540b339531e5659371fa5b2928ef26d569426ff.svg",
+            "bytes": 355,
+            "sha256": "e7c8fd5cfac0c2b6fe9d7f096540b339531e5659371fa5b2928ef26d569426ff",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_blueprint.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/956c88657ebd906ac42af7f89002750a5dfac371ff2559a36c07d4cab6b61d8c.svg",
+            "bytes": 355,
+            "sha256": "956c88657ebd906ac42af7f89002750a5dfac371ff2559a36c07d4cab6b61d8c",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_blueprint.svg"
+          }
+        }
+      },
+      "icon.brush": {
+        "kind": "icon",
+        "fallback": "brush",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/df0e78150865a97464b75266041338e85e5aaf206bd519a8edb62d1573b18f50.png",
+            "bytes": 3022,
+            "sha256": "df0e78150865a97464b75266041338e85e5aaf206bd519a8edb62d1573b18f50",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_brush.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/2433c33a2928fbea7b435ffddbce4586855a678236a43dcc56094f72ead0bdbd.svg",
+            "bytes": 329,
+            "sha256": "2433c33a2928fbea7b435ffddbce4586855a678236a43dcc56094f72ead0bdbd",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_brush.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/7aa264e5640a5cad3ce31edc9766fbf24fab2a133c0c5dbfe9efaafc8664edaa.svg",
+            "bytes": 329,
+            "sha256": "7aa264e5640a5cad3ce31edc9766fbf24fab2a133c0c5dbfe9efaafc8664edaa",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_brush.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/f1149c5aca887f04ddcb3a84ce7b796e176779990f153cb502f62d67c7623c36.svg",
+            "bytes": 329,
+            "sha256": "f1149c5aca887f04ddcb3a84ce7b796e176779990f153cb502f62d67c7623c36",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_brush.svg"
+          }
+        }
+      },
+      "icon.calendar": {
+        "kind": "icon",
+        "fallback": "calendar",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/16f3acf05b1f0ea3bcce938e0e069ae5b8b1e7a3ab3b0daa11619a7cdd39a8d9.png",
+            "bytes": 2637,
+            "sha256": "16f3acf05b1f0ea3bcce938e0e069ae5b8b1e7a3ab3b0daa11619a7cdd39a8d9",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_calendar.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/c69c65b17f2491b283766e37d52cb79655295cbb8ae56e5d866e411880f416a0.svg",
+            "bytes": 363,
+            "sha256": "c69c65b17f2491b283766e37d52cb79655295cbb8ae56e5d866e411880f416a0",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_calendar.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/5c0a5a4dd956ce29f661fe35f8cba2b0f8617affd54dfe1af879c594b8fa7fad.svg",
+            "bytes": 363,
+            "sha256": "5c0a5a4dd956ce29f661fe35f8cba2b0f8617affd54dfe1af879c594b8fa7fad",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_calendar.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/70b128e9213c224fffa50011945e743017d6031197680678dfea09183790c25c.svg",
+            "bytes": 363,
+            "sha256": "70b128e9213c224fffa50011945e743017d6031197680678dfea09183790c25c",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_calendar.svg"
+          }
+        }
+      },
+      "icon.case": {
+        "kind": "icon",
+        "fallback": "case",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/a65acc8f94cb94c53803457b388efc83c4aec9d0c77d19a89beb31b222aff69f.png",
+            "bytes": 2366,
+            "sha256": "a65acc8f94cb94c53803457b388efc83c4aec9d0c77d19a89beb31b222aff69f",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_case.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/ee91a2f78a6df4c8d57ba9f8a3e0e1c528beb0476ea65652b223232b1cecf6bb.svg",
+            "bytes": 352,
+            "sha256": "ee91a2f78a6df4c8d57ba9f8a3e0e1c528beb0476ea65652b223232b1cecf6bb",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_case.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/3da2e23ed04097ee5f994a4c5dd984128c07307fe6890d19c212863602065a22.svg",
+            "bytes": 352,
+            "sha256": "3da2e23ed04097ee5f994a4c5dd984128c07307fe6890d19c212863602065a22",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_case.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/c894edc99507ecc725015d7690dbdae1623b8e7069143e90b508a6e1ac3a3e42.svg",
+            "bytes": 352,
+            "sha256": "c894edc99507ecc725015d7690dbdae1623b8e7069143e90b508a6e1ac3a3e42",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_case.svg"
+          }
+        }
+      },
+      "icon.chart": {
+        "kind": "icon",
+        "fallback": "chart",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/f0d66a99f9527621842fbf9a50aff6abf9e35bfb9d325b7bbfa1a36599c6cd79.png",
+            "bytes": 2521,
+            "sha256": "f0d66a99f9527621842fbf9a50aff6abf9e35bfb9d325b7bbfa1a36599c6cd79",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_chart.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/d7c05b03bcdcb434952ed12803c03b2e73a43891681cb841e81dbdc915505120.svg",
+            "bytes": 299,
+            "sha256": "d7c05b03bcdcb434952ed12803c03b2e73a43891681cb841e81dbdc915505120",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_chart.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/2caa86526a42adb319f52183326b5ca9dde092f4ff4d348811b865da46496241.svg",
+            "bytes": 299,
+            "sha256": "2caa86526a42adb319f52183326b5ca9dde092f4ff4d348811b865da46496241",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_chart.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/deea10ca00b821175c3038d57f12fa8a42c8a65f8b9b5d6b1dc571cf9833a16a.svg",
+            "bytes": 299,
+            "sha256": "deea10ca00b821175c3038d57f12fa8a42c8a65f8b9b5d6b1dc571cf9833a16a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_chart.svg"
+          }
+        }
+      },
+      "icon.claim": {
+        "kind": "icon",
+        "fallback": "claim",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/c162029ed4e62ed3fe43ceafb6c794a8f41cdcc12e2d35a7b0443f276f76f3b5.png",
+            "bytes": 3068,
+            "sha256": "c162029ed4e62ed3fe43ceafb6c794a8f41cdcc12e2d35a7b0443f276f76f3b5",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_claim.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/573f54443519a7c51e6dbeb6e11e8bd3f311f895cd23ca43df659219b9177a56.svg",
+            "bytes": 336,
+            "sha256": "573f54443519a7c51e6dbeb6e11e8bd3f311f895cd23ca43df659219b9177a56",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_claim.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/ed2634217f7aa326e0e00f06bc933e873b4814fc45432858ee4495f47e057b72.svg",
+            "bytes": 336,
+            "sha256": "ed2634217f7aa326e0e00f06bc933e873b4814fc45432858ee4495f47e057b72",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_claim.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/d481a0a87cd6e51197a644ae0b6ae6f9bf96d36613e7b02e0d0712fef7ce1986.svg",
+            "bytes": 336,
+            "sha256": "d481a0a87cd6e51197a644ae0b6ae6f9bf96d36613e7b02e0d0712fef7ce1986",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_claim.svg"
+          }
+        }
+      },
+      "icon.close": {
+        "kind": "icon",
+        "fallback": "close",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/be6c8ad7787c71d0ba6c96973cf5cf8d57bf743152d7dfe6c745b9f79aad2d8c.png",
+            "bytes": 2189,
+            "sha256": "be6c8ad7787c71d0ba6c96973cf5cf8d57bf743152d7dfe6c745b9f79aad2d8c",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_close.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/f67a5a673441e8fdfe5a971ee6ec42dd97a38e905c510ddcb48f39450edc42c1.svg",
+            "bytes": 292,
+            "sha256": "f67a5a673441e8fdfe5a971ee6ec42dd97a38e905c510ddcb48f39450edc42c1",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_close.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/6b3b4522af574ee972fe0e993b6867d3bb45d726408cf7165cde59bec5d20ea2.svg",
+            "bytes": 292,
+            "sha256": "6b3b4522af574ee972fe0e993b6867d3bb45d726408cf7165cde59bec5d20ea2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_close.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/65520608aab22635eec44a059dd38bc63e32eb934e43a606dd0e0833e34eeee3.svg",
+            "bytes": 292,
+            "sha256": "65520608aab22635eec44a059dd38bc63e32eb934e43a606dd0e0833e34eeee3",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_close.svg"
+          }
+        }
+      },
+      "icon.edit": {
+        "kind": "icon",
+        "fallback": "edit",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/cd04c7f92611823426b665f2761c6fa79f3393cbb0e76d1b217ec57b5ee101c2.png",
+            "bytes": 2305,
+            "sha256": "cd04c7f92611823426b665f2761c6fa79f3393cbb0e76d1b217ec57b5ee101c2",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_edit.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/0f6116c744110d7db91e68c2fc747bb12ea40d20ae05bacc17774e509a4d47fb.svg",
+            "bytes": 305,
+            "sha256": "0f6116c744110d7db91e68c2fc747bb12ea40d20ae05bacc17774e509a4d47fb",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_edit.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/e6bb12d6972eb9f615ead1a51ab4c4bf12877e80e2e8234301497c5bbd55bc5e.svg",
+            "bytes": 305,
+            "sha256": "e6bb12d6972eb9f615ead1a51ab4c4bf12877e80e2e8234301497c5bbd55bc5e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_edit.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/78dab13845cf1ae3987da8e0d671511eefcb762f862955b58b7eb30b451dc818.svg",
+            "bytes": 305,
+            "sha256": "78dab13845cf1ae3987da8e0d671511eefcb762f862955b58b7eb30b451dc818",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_edit.svg"
+          }
+        }
+      },
+      "icon.error": {
+        "kind": "icon",
+        "fallback": "error",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/28ca2a5b18127b4365b4a0ab06fdf991cea97f2d97592d4a66186847f901d43a.png",
+            "bytes": 3861,
+            "sha256": "28ca2a5b18127b4365b4a0ab06fdf991cea97f2d97592d4a66186847f901d43a",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_error.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/52d932d194841c07ae5b1bff25d6a93cb53a47a8b5a4406b5d56d04298ec831d.svg",
+            "bytes": 320,
+            "sha256": "52d932d194841c07ae5b1bff25d6a93cb53a47a8b5a4406b5d56d04298ec831d",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_error.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/17e65e7b81bc2b63401d0ac847e0ef06456f5d1614ebb50e2ebf22ce134bd383.svg",
+            "bytes": 320,
+            "sha256": "17e65e7b81bc2b63401d0ac847e0ef06456f5d1614ebb50e2ebf22ce134bd383",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_error.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/ecdc5893d809c6e8ad83e1c21507441acf80be6aa17ab5e67e9ca62474060e00.svg",
+            "bytes": 320,
+            "sha256": "ecdc5893d809c6e8ad83e1c21507441acf80be6aa17ab5e67e9ca62474060e00",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_error.svg"
+          }
+        }
+      },
+      "icon.export": {
+        "kind": "icon",
+        "fallback": "export",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/353ce35b04beeee12f2f70062dbc37a3fcdf290f310fab6d64531d42b3278b7c.png",
+            "bytes": 2209,
+            "sha256": "353ce35b04beeee12f2f70062dbc37a3fcdf290f310fab6d64531d42b3278b7c",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_export.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/4e22a98e57597d65c37b308b1ab101849cef516d05a5173401896f3091c5fc0e.svg",
+            "bytes": 306,
+            "sha256": "4e22a98e57597d65c37b308b1ab101849cef516d05a5173401896f3091c5fc0e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_export.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/a4611eee2e987aa86e1bb41050ffcfcb960761efa6802bd558bdd514bcc27d8a.svg",
+            "bytes": 306,
+            "sha256": "a4611eee2e987aa86e1bb41050ffcfcb960761efa6802bd558bdd514bcc27d8a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_export.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/91711acba7b0c1c3d3de9abec1be04f75176a18a4f35ecf4a32da8ebac190be2.svg",
+            "bytes": 306,
+            "sha256": "91711acba7b0c1c3d3de9abec1be04f75176a18a4f35ecf4a32da8ebac190be2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_export.svg"
+          }
+        }
+      },
+      "icon.feed": {
+        "kind": "icon",
+        "fallback": "feed",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/5d1fed56090dcd9cc74cdb303e0f30dd5ed796aed811b13e4dcb5b4409cf97e7.png",
+            "bytes": 3111,
+            "sha256": "5d1fed56090dcd9cc74cdb303e0f30dd5ed796aed811b13e4dcb5b4409cf97e7",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_feed.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/1dcc0952ebe82c2a2f5f220d4fc94aaf854585b93012140bdf2fb3c408253812.svg",
+            "bytes": 343,
+            "sha256": "1dcc0952ebe82c2a2f5f220d4fc94aaf854585b93012140bdf2fb3c408253812",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_feed.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/312a9f8c1fc7c5c99ff9db10af6af1b53321d0530b363fe0da7c1969f7188231.svg",
+            "bytes": 343,
+            "sha256": "312a9f8c1fc7c5c99ff9db10af6af1b53321d0530b363fe0da7c1969f7188231",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_feed.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/c4ccdbc1d2b234d9106e812bcf1b2d8e5d23f683a860242cd058c75d7af73710.svg",
+            "bytes": 343,
+            "sha256": "c4ccdbc1d2b234d9106e812bcf1b2d8e5d23f683a860242cd058c75d7af73710",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_feed.svg"
+          }
+        }
+      },
+      "icon.game": {
+        "kind": "icon",
+        "fallback": "game",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/98c0c7c7150efb0235b5d862b8c04beb23357c7d85ced60b409a26900f70277f.png",
+            "bytes": 3074,
+            "sha256": "98c0c7c7150efb0235b5d862b8c04beb23357c7d85ced60b409a26900f70277f",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_game.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/97342e3b24b76588bfb945f87390111c14d3f6a07d6d75db55306f424782a9c5.svg",
+            "bytes": 345,
+            "sha256": "97342e3b24b76588bfb945f87390111c14d3f6a07d6d75db55306f424782a9c5",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_game.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/ab204e8665e8258d189fd207737d10816b23e1a0249eabd716f24d21f5c2ba2c.svg",
+            "bytes": 345,
+            "sha256": "ab204e8665e8258d189fd207737d10816b23e1a0249eabd716f24d21f5c2ba2c",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_game.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/b91664599cb6b1bb1d80fbd0ef03c52d875c711c2567feb560a5b8a10420f971.svg",
+            "bytes": 345,
+            "sha256": "b91664599cb6b1bb1d80fbd0ef03c52d875c711c2567feb560a5b8a10420f971",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_game.svg"
+          }
+        }
+      },
+      "icon.gift": {
+        "kind": "icon",
+        "fallback": "gift",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/9b1640207c542285a98e99c07c533b2cf4bb4b0bb40d9db24add66dfa8809550.png",
+            "bytes": 2833,
+            "sha256": "9b1640207c542285a98e99c07c533b2cf4bb4b0bb40d9db24add66dfa8809550",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_gift.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/4cdc34ea87824ac30b5329a7546f2ca25fc9c9449b0fb36db0c3ebdf537a4f2f.svg",
+            "bytes": 354,
+            "sha256": "4cdc34ea87824ac30b5329a7546f2ca25fc9c9449b0fb36db0c3ebdf537a4f2f",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_gift.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/ead16c24fb7de15407c035c1f0b61fcf4c43f6c9c8b2936ae8470756a4c9763f.svg",
+            "bytes": 354,
+            "sha256": "ead16c24fb7de15407c035c1f0b61fcf4c43f6c9c8b2936ae8470756a4c9763f",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_gift.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/6cd1b7b350d84fd9a933b25629760be9e46f421e334396a80042c022dcc03bda.svg",
+            "bytes": 354,
+            "sha256": "6cd1b7b350d84fd9a933b25629760be9e46f421e334396a80042c022dcc03bda",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_gift.svg"
+          }
+        }
+      },
+      "icon.help": {
+        "kind": "icon",
+        "fallback": "help",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/4259f92b31739b7d2fc4ac370e82576f2965e13f7254a631cd7a644051f85ad9.png",
+            "bytes": 2878,
+            "sha256": "4259f92b31739b7d2fc4ac370e82576f2965e13f7254a631cd7a644051f85ad9",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_help.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/29c6c84bba0972ea8f2eb5b4fa98faf5090f713bf544d90eb0497f1955721bfc.svg",
+            "bytes": 345,
+            "sha256": "29c6c84bba0972ea8f2eb5b4fa98faf5090f713bf544d90eb0497f1955721bfc",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_help.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/1c199fddec02552a942773eede2e1231eee22527190d485d45f9be7eb8166a9d.svg",
+            "bytes": 345,
+            "sha256": "1c199fddec02552a942773eede2e1231eee22527190d485d45f9be7eb8166a9d",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_help.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/d35b5625cea3368ce7d1e6938f008529c76d9222029630adfc9124c973d17018.svg",
+            "bytes": 345,
+            "sha256": "d35b5625cea3368ce7d1e6938f008529c76d9222029630adfc9124c973d17018",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_help.svg"
+          }
+        }
+      },
+      "icon.idea": {
+        "kind": "icon",
+        "fallback": "idea",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/4fcf0f0d33bdfa43b5d1a00b4f6c307ae93918eeff88f5c72c63e676a2fb442f.png",
+            "bytes": 3037,
+            "sha256": "4fcf0f0d33bdfa43b5d1a00b4f6c307ae93918eeff88f5c72c63e676a2fb442f",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_idea.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/689a70865217abdddf1644c2af392c5b173608b0eaec59d76321e77a6ea4c267.svg",
+            "bytes": 331,
+            "sha256": "689a70865217abdddf1644c2af392c5b173608b0eaec59d76321e77a6ea4c267",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_idea.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/9054821cd87b4249a7cc52703373543d773b3c1dcf2c91352a49a38c1bd3e558.svg",
+            "bytes": 331,
+            "sha256": "9054821cd87b4249a7cc52703373543d773b3c1dcf2c91352a49a38c1bd3e558",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_idea.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/5206afa4748cc8934fc52511f56eb7cebef0e9956ac15edc5d9a69a170f6596b.svg",
+            "bytes": 331,
+            "sha256": "5206afa4748cc8934fc52511f56eb7cebef0e9956ac15edc5d9a69a170f6596b",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_idea.svg"
+          }
+        }
+      },
+      "icon.image": {
+        "kind": "icon",
+        "fallback": "image",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/1dc1f216ab0e4a5f355db68a6164cd6430de900ef4c6d6d5c944ff35120cc31b.png",
+            "bytes": 3097,
+            "sha256": "1dc1f216ab0e4a5f355db68a6164cd6430de900ef4c6d6d5c944ff35120cc31b",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_image.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/2b82e1e50a539d145c072365ba2456e5f2b7f34c7960acdd3e8e3e3bb91f35fe.svg",
+            "bytes": 371,
+            "sha256": "2b82e1e50a539d145c072365ba2456e5f2b7f34c7960acdd3e8e3e3bb91f35fe",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_image.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/3fe981f1a37db6dbc56ffffc0c321b8531e4306b25e0d26cc897e6e8f4ff23ee.svg",
+            "bytes": 371,
+            "sha256": "3fe981f1a37db6dbc56ffffc0c321b8531e4306b25e0d26cc897e6e8f4ff23ee",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_image.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/0d78ca262f8ee66b2ebebf088acf497cff406ae87c72a4f1efa41b5621699917.svg",
+            "bytes": 371,
+            "sha256": "0d78ca262f8ee66b2ebebf088acf497cff406ae87c72a4f1efa41b5621699917",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_image.svg"
+          }
+        }
+      },
+      "icon.info": {
+        "kind": "icon",
+        "fallback": "info",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/92c364f357c06bd5230dd9f46cde38e20659714c63fb4d622040f28f5bcdab3f.png",
+            "bytes": 3609,
+            "sha256": "92c364f357c06bd5230dd9f46cde38e20659714c63fb4d622040f28f5bcdab3f",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_info.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/d7a92045158836a44c6419fe5c271b7b4a989f00468bac733d4fffd6ddf32576.svg",
+            "bytes": 319,
+            "sha256": "d7a92045158836a44c6419fe5c271b7b4a989f00468bac733d4fffd6ddf32576",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_info.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/4e4e43e4147676c2c80020b90f22130ef1f8d1ca66443468b7fbec5dfd52088d.svg",
+            "bytes": 319,
+            "sha256": "4e4e43e4147676c2c80020b90f22130ef1f8d1ca66443468b7fbec5dfd52088d",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_info.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/4d4990bca1e73c856b93d10890ac3738f0260369b950055157968e0b4398f99a.svg",
+            "bytes": 319,
+            "sha256": "4d4990bca1e73c856b93d10890ac3738f0260369b950055157968e0b4398f99a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_info.svg"
+          }
+        }
+      },
+      "icon.levels": {
+        "kind": "icon",
+        "fallback": "levels",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/2514d72cd82852a5933d8bc89dd5e43e28203f09c870c8c2f6e6ff96036538af.png",
+            "bytes": 2614,
+            "sha256": "2514d72cd82852a5933d8bc89dd5e43e28203f09c870c8c2f6e6ff96036538af",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_levels.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/ba0cb4eb384d43273bbed4d09cf0e1b425a71c3347fa66438125d0ee99ecac62.svg",
+            "bytes": 329,
+            "sha256": "ba0cb4eb384d43273bbed4d09cf0e1b425a71c3347fa66438125d0ee99ecac62",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_levels.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/88da51774e34ba043cb315862146c94d0ecd78a32bd98e58bec80b306ab6ba6d.svg",
+            "bytes": 329,
+            "sha256": "88da51774e34ba043cb315862146c94d0ecd78a32bd98e58bec80b306ab6ba6d",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_levels.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/0dd023bfdd3660680298db39ecfd315d83b429cc615855b23a3bd8292aaf160c.svg",
+            "bytes": 329,
+            "sha256": "0dd023bfdd3660680298db39ecfd315d83b429cc615855b23a3bd8292aaf160c",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_levels.svg"
+          }
+        }
+      },
+      "icon.like": {
+        "kind": "icon",
+        "fallback": "like",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/afe77ecb30e7040ecb3c21733ecee6cd11f449fb06bd869db330040c201cf0c1.png",
+            "bytes": 2639,
+            "sha256": "afe77ecb30e7040ecb3c21733ecee6cd11f449fb06bd869db330040c201cf0c1",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_like.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/81b35cb74440b5f439ba8ceb68aa6883370e50dfb97629b5405e106fa2e40d8d.svg",
+            "bytes": 324,
+            "sha256": "81b35cb74440b5f439ba8ceb68aa6883370e50dfb97629b5405e106fa2e40d8d",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_like.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/a0d9c1469b31ffdb42ea20ca4b550872767a77d99ca13644dcc7cfac224ca954.svg",
+            "bytes": 324,
+            "sha256": "a0d9c1469b31ffdb42ea20ca4b550872767a77d99ca13644dcc7cfac224ca954",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_like.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/d4c60e4eb1ca70cf843737391cf8ff129b2f238010272be92c01e64a367283f4.svg",
+            "bytes": 324,
+            "sha256": "d4c60e4eb1ca70cf843737391cf8ff129b2f238010272be92c01e64a367283f4",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_like.svg"
+          }
+        }
+      },
+      "icon.loading": {
+        "kind": "icon",
+        "fallback": "loading",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/6caa0944be86a06ea6871e03e651f1513830958e253cdaf7d90b07c213988d34.png",
+            "bytes": 3124,
+            "sha256": "6caa0944be86a06ea6871e03e651f1513830958e253cdaf7d90b07c213988d34",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_loading.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/4a8f9bf10671d052b9781a2390f1ecac2e79d4adf1d8903c3749ac6acd494193.svg",
+            "bytes": 295,
+            "sha256": "4a8f9bf10671d052b9781a2390f1ecac2e79d4adf1d8903c3749ac6acd494193",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_loading.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/f1463632a7a09550d5e9cc3b2e11bb69e75bde7581967654983acf5c72a14af2.svg",
+            "bytes": 295,
+            "sha256": "f1463632a7a09550d5e9cc3b2e11bb69e75bde7581967654983acf5c72a14af2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_loading.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/b61f9c9b9602c45a7e2963887d0f15b838d933743bbf96637ced545e5bce0a0b.svg",
+            "bytes": 295,
+            "sha256": "b61f9c9b9602c45a7e2963887d0f15b838d933743bbf96637ced545e5bce0a0b",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_loading.svg"
+          }
+        }
+      },
+      "icon.lock": {
+        "kind": "icon",
+        "fallback": "lock",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/c59eb2a143af6c6f5d09e1881c56c426af2292c8022ba18c5c959893cd8a694e.png",
+            "bytes": 2795,
+            "sha256": "c59eb2a143af6c6f5d09e1881c56c426af2292c8022ba18c5c959893cd8a694e",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_lock.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/a32226df63bcdc9cf8c4e2e4d4c9f2107a740123eff1006b069c027460a827ff.svg",
+            "bytes": 354,
+            "sha256": "a32226df63bcdc9cf8c4e2e4d4c9f2107a740123eff1006b069c027460a827ff",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_lock.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/4203dbc415ed1505d61151ac78e40211d02e58a50c61e831881086160c8a1710.svg",
+            "bytes": 354,
+            "sha256": "4203dbc415ed1505d61151ac78e40211d02e58a50c61e831881086160c8a1710",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_lock.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/2c7e9cab30a876f0be334b91589304616fa939d6cb7fab048b7fb02a1b66bb5e.svg",
+            "bytes": 354,
+            "sha256": "2c7e9cab30a876f0be334b91589304616fa939d6cb7fab048b7fb02a1b66bb5e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_lock.svg"
+          }
+        }
+      },
+      "icon.loop": {
+        "kind": "icon",
+        "fallback": "loop",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/adf56a41033a40c0a6d59536a00dc6cd9918db7419f832064a08427deea952dc.png",
+            "bytes": 3451,
+            "sha256": "adf56a41033a40c0a6d59536a00dc6cd9918db7419f832064a08427deea952dc",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_loop.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/1e53d56b67640e445855a428047d369a26d7581300e8cab1fa7e9037226aaab8.svg",
+            "bytes": 331,
+            "sha256": "1e53d56b67640e445855a428047d369a26d7581300e8cab1fa7e9037226aaab8",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_loop.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/83c63c12b12dd4f5c745626ddbb8153dbf1773819497f07b4cc047d5d132210b.svg",
+            "bytes": 331,
+            "sha256": "83c63c12b12dd4f5c745626ddbb8153dbf1773819497f07b4cc047d5d132210b",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_loop.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/ac9a6562da4f06a62041307c4677c20a5fe5c8a94a21a1f5cd14bc063e92f846.svg",
+            "bytes": 331,
+            "sha256": "ac9a6562da4f06a62041307c4677c20a5fe5c8a94a21a1f5cd14bc063e92f846",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_loop.svg"
+          }
+        }
+      },
+      "icon.lyrics": {
+        "kind": "icon",
+        "fallback": "lyrics",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/0f1cadfe9ae1680495d758725a25cfb241281bd9a3860342379ef150e0851e84.png",
+            "bytes": 2589,
+            "sha256": "0f1cadfe9ae1680495d758725a25cfb241281bd9a3860342379ef150e0851e84",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_lyrics.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/3e568027738207b14ece9437d507b18b28ce9d027fc8cd72eb71e2fdcf34b475.svg",
+            "bytes": 388,
+            "sha256": "3e568027738207b14ece9437d507b18b28ce9d027fc8cd72eb71e2fdcf34b475",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_lyrics.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/fa37c8000c87907252fdd728560982bf3c6cb4b08d780f18590f558eb8b3a0fd.svg",
+            "bytes": 388,
+            "sha256": "fa37c8000c87907252fdd728560982bf3c6cb4b08d780f18590f558eb8b3a0fd",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_lyrics.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/41142cedcbd17077f02b7e41bf8da5a7fe20cbe2f026f99f66c68c1f8c5ad681.svg",
+            "bytes": 388,
+            "sha256": "41142cedcbd17077f02b7e41bf8da5a7fe20cbe2f026f99f66c68c1f8c5ad681",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_lyrics.svg"
+          }
+        }
+      },
+      "icon.pause": {
+        "kind": "icon",
+        "fallback": "pause",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/7fae00b7a073cb0835749a073d4748ae54d993bf0d3e71f2f4a916530d25ce6a.png",
+            "bytes": 2239,
+            "sha256": "7fae00b7a073cb0835749a073d4748ae54d993bf0d3e71f2f4a916530d25ce6a",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_pause.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/6fff976aa365df13ad296125dba08bc645a445e3d8b9504945220c370b13680a.svg",
+            "bytes": 284,
+            "sha256": "6fff976aa365df13ad296125dba08bc645a445e3d8b9504945220c370b13680a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_pause.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/86d6d53dd37354f0d7a9fb97af2211e0b962bc53958bff89888a81f157c8387e.svg",
+            "bytes": 284,
+            "sha256": "86d6d53dd37354f0d7a9fb97af2211e0b962bc53958bff89888a81f157c8387e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_pause.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/cd4ef68eefad2b37395fa835d8564a96b36dbdb72f056c9ae89bd25a7f66121b.svg",
+            "bytes": 284,
+            "sha256": "cd4ef68eefad2b37395fa835d8564a96b36dbdb72f056c9ae89bd25a7f66121b",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_pause.svg"
+          }
+        }
+      },
+      "icon.play": {
+        "kind": "icon",
+        "fallback": "play",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/1f52bad956d50e5cf5b2fa0bee737e2081efce1e3589bc7191676ffe85654ace.png",
+            "bytes": 2063,
+            "sha256": "1f52bad956d50e5cf5b2fa0bee737e2081efce1e3589bc7191676ffe85654ace",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_play.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/0ee2fc40101ad2c86962705ca5c69af440fd5a858b1a7b4949204477951ca732.svg",
+            "bytes": 298,
+            "sha256": "0ee2fc40101ad2c86962705ca5c69af440fd5a858b1a7b4949204477951ca732",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_play.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/b7a9a56030c7501729a2526ea4e4fa7dd198c4bc2bd8976506cac3a81ee29622.svg",
+            "bytes": 298,
+            "sha256": "b7a9a56030c7501729a2526ea4e4fa7dd198c4bc2bd8976506cac3a81ee29622",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_play.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/587602a5fe719a853184ee9a4c358528e3f52c5c5e6a7cbd695a8b5f54552861.svg",
+            "bytes": 298,
+            "sha256": "587602a5fe719a853184ee9a4c358528e3f52c5c5e6a7cbd695a8b5f54552861",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_play.svg"
+          }
+        }
+      },
+      "icon.previous": {
+        "kind": "icon",
+        "fallback": "previous",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/2bb7427f99af84f618775fec9965a0c9ce57c9f6e19b107cc1b584c7b8298341.png",
+            "bytes": 2480,
+            "sha256": "2bb7427f99af84f618775fec9965a0c9ce57c9f6e19b107cc1b584c7b8298341",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_previous.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/5a382df0a3e1f4e722de1504d67b465474986100651c3fc69ac87872c79b0341.svg",
+            "bytes": 295,
+            "sha256": "5a382df0a3e1f4e722de1504d67b465474986100651c3fc69ac87872c79b0341",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_previous.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/13fbbf5fced411b7fd57451ff03ff17dc85b51ccd51208a7a37ea1f0850ec083.svg",
+            "bytes": 295,
+            "sha256": "13fbbf5fced411b7fd57451ff03ff17dc85b51ccd51208a7a37ea1f0850ec083",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_previous.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/7c7d49655c307cd25e93057d0396328376d9f16be5c918a98049abe42827cb2c.svg",
+            "bytes": 295,
+            "sha256": "7c7d49655c307cd25e93057d0396328376d9f16be5c918a98049abe42827cb2c",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_previous.svg"
+          }
+        }
+      },
+      "icon.profile": {
+        "kind": "icon",
+        "fallback": "profile",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/12007ca01159f358234825efae254532a5e674a527868a68dd0eabee6fe5158e.png",
+            "bytes": 3372,
+            "sha256": "12007ca01159f358234825efae254532a5e674a527868a68dd0eabee6fe5158e",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_profile.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/7a261411848e360f5048b9bf64d43eb700a2da7223dc9ead7d14d63730e4b82f.svg",
+            "bytes": 371,
+            "sha256": "7a261411848e360f5048b9bf64d43eb700a2da7223dc9ead7d14d63730e4b82f",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_profile.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/c4edf9a792617880f78c96179ff25be9e71e01ad0ab26b18dcacf1ae109a3bdf.svg",
+            "bytes": 371,
+            "sha256": "c4edf9a792617880f78c96179ff25be9e71e01ad0ab26b18dcacf1ae109a3bdf",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_profile.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/0425270ceb67b2d8f0187a95fe304c0bad77463352b1fd52d1211feec9cbeefc.svg",
+            "bytes": 371,
+            "sha256": "0425270ceb67b2d8f0187a95fe304c0bad77463352b1fd52d1211feec9cbeefc",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_profile.svg"
+          }
+        }
+      },
+      "icon.queue": {
+        "kind": "icon",
+        "fallback": "queue",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/234b0c98341383f882862d2dd53e956f307af2640c56962b43dc43d940d851e3.png",
+            "bytes": 2087,
+            "sha256": "234b0c98341383f882862d2dd53e956f307af2640c56962b43dc43d940d851e3",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_queue.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/83bee6273c2d7c720e58011f96ab1b0ae35a56867ca088e6d4f277ac65388831.svg",
+            "bytes": 330,
+            "sha256": "83bee6273c2d7c720e58011f96ab1b0ae35a56867ca088e6d4f277ac65388831",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_queue.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/ce7ab1f56ebf056040b217efc94b96347517a5ddfb3fbd82fd9f46b499116019.svg",
+            "bytes": 330,
+            "sha256": "ce7ab1f56ebf056040b217efc94b96347517a5ddfb3fbd82fd9f46b499116019",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_queue.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/46a70a62abad71cb0958e18fdd9745fe879ef03df0117dd2569bc2cd661680a6.svg",
+            "bytes": 330,
+            "sha256": "46a70a62abad71cb0958e18fdd9745fe879ef03df0117dd2569bc2cd661680a6",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_queue.svg"
+          }
+        }
+      },
+      "icon.reopen": {
+        "kind": "icon",
+        "fallback": "reopen",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/ad1e2d489f48e8aeb0fabc1ad2d5909fda941d9d8655e1f946e62e9b3dc1bb04.png",
+            "bytes": 3037,
+            "sha256": "ad1e2d489f48e8aeb0fabc1ad2d5909fda941d9d8655e1f946e62e9b3dc1bb04",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_reopen.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/be7c6449b67cec9b58abae5b2626f3e9cfb865f05fbc4ed88801862717f3cdb5.svg",
+            "bytes": 298,
+            "sha256": "be7c6449b67cec9b58abae5b2626f3e9cfb865f05fbc4ed88801862717f3cdb5",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_reopen.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/2cb80d54f70838357afe51cb5a09fbcc84834b021d6a30626b27db37350b8bda.svg",
+            "bytes": 298,
+            "sha256": "2cb80d54f70838357afe51cb5a09fbcc84834b021d6a30626b27db37350b8bda",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_reopen.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/be846e61147dcfc12f54dd1d9677dbfbfb0a5ad310b280b53565ad918f732935.svg",
+            "bytes": 298,
+            "sha256": "be846e61147dcfc12f54dd1d9677dbfbfb0a5ad310b280b53565ad918f732935",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_reopen.svg"
+          }
+        }
+      },
+      "icon.roles": {
+        "kind": "icon",
+        "fallback": "roles",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/db2101ae41f2fe7b42fd32fba5605f5e22acad62067343be04c0b387b9ebf68b.png",
+            "bytes": 3420,
+            "sha256": "db2101ae41f2fe7b42fd32fba5605f5e22acad62067343be04c0b387b9ebf68b",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_roles.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/462494de98b65c7f36de1c706205d424182aca2d96cc22fa05093020d1e99921.svg",
+            "bytes": 365,
+            "sha256": "462494de98b65c7f36de1c706205d424182aca2d96cc22fa05093020d1e99921",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_roles.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/64becb8bdba17d533df99fb52eeabfe62aa1788bcead417bca21d8329ee99867.svg",
+            "bytes": 365,
+            "sha256": "64becb8bdba17d533df99fb52eeabfe62aa1788bcead417bca21d8329ee99867",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_roles.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/40cfb1e4bd80a4ac6bd5f4b59ca1335944e1205bf17764b9b1d8a941f114aa80.svg",
+            "bytes": 365,
+            "sha256": "40cfb1e4bd80a4ac6bd5f4b59ca1335944e1205bf17764b9b1d8a941f114aa80",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_roles.svg"
+          }
+        }
+      },
+      "icon.save": {
+        "kind": "icon",
+        "fallback": "save",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/0c3c38cc276336b36a9d034811ec7b2e03264c0d2a11bb8866ea1a874bedac68.png",
+            "bytes": 2303,
+            "sha256": "0c3c38cc276336b36a9d034811ec7b2e03264c0d2a11bb8866ea1a874bedac68",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_save.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/fe12c26cc731bcb23146c6ec721b63b731ba829061769f5011bb2e6bfe4fb890.svg",
+            "bytes": 312,
+            "sha256": "fe12c26cc731bcb23146c6ec721b63b731ba829061769f5011bb2e6bfe4fb890",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_save.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/b1710f60437da7d2da7b8f8c21159bb28c8c0f7cdf2dc317f50578e9e948d741.svg",
+            "bytes": 312,
+            "sha256": "b1710f60437da7d2da7b8f8c21159bb28c8c0f7cdf2dc317f50578e9e948d741",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_save.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/ba4a2d82f20e1dedc3a17a27d74b8ddd6afa2f3a79d0e96f89e4c74d0cb06ba1.svg",
+            "bytes": 312,
+            "sha256": "ba4a2d82f20e1dedc3a17a27d74b8ddd6afa2f3a79d0e96f89e4c74d0cb06ba1",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_save.svg"
+          }
+        }
+      },
+      "icon.search": {
+        "kind": "icon",
+        "fallback": "search",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/9dff64f188f698607378a75152d3d155743a6b236f80d29b35b7088a678c511d.png",
+            "bytes": 3093,
+            "sha256": "9dff64f188f698607378a75152d3d155743a6b236f80d29b35b7088a678c511d",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_search.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/351629988ebe512328003d312d96245e2749f72fc1ae3fc1364c1c0fcd4626b2.svg",
+            "bytes": 313,
+            "sha256": "351629988ebe512328003d312d96245e2749f72fc1ae3fc1364c1c0fcd4626b2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_search.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/7b86f389b313be7850c2176ba27169f4c29a8153e38f5ab1f27c28b4d8715420.svg",
+            "bytes": 313,
+            "sha256": "7b86f389b313be7850c2176ba27169f4c29a8153e38f5ab1f27c28b4d8715420",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_search.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/d17e5c87faec603745ba125014b83e952ec5ae46775f2f0668b3dc27d5531978.svg",
+            "bytes": 313,
+            "sha256": "d17e5c87faec603745ba125014b83e952ec5ae46775f2f0668b3dc27d5531978",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_search.svg"
+          }
+        }
+      },
+      "icon.send": {
+        "kind": "icon",
+        "fallback": "send",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/1c015a925e6a0d22f51e4aa7745f845b57ce3481daad7145f251d8bee65958b6.png",
+            "bytes": 2481,
+            "sha256": "1c015a925e6a0d22f51e4aa7745f845b57ce3481daad7145f251d8bee65958b6",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_send.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/09e5cc565c43238f11c2a864395537fb642aa2770911bb9325b18d32e6a06953.svg",
+            "bytes": 302,
+            "sha256": "09e5cc565c43238f11c2a864395537fb642aa2770911bb9325b18d32e6a06953",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_send.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/7e57777d29e3668b2c39fff16fb8a827c40994b56c6845b6ac835097122b48b7.svg",
+            "bytes": 302,
+            "sha256": "7e57777d29e3668b2c39fff16fb8a827c40994b56c6845b6ac835097122b48b7",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_send.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/e85db089b59686c4ca3b449a06acbc41372977f5eee0d0b5cf996de8a43b5a54.svg",
+            "bytes": 302,
+            "sha256": "e85db089b59686c4ca3b449a06acbc41372977f5eee0d0b5cf996de8a43b5a54",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_send.svg"
+          }
+        }
+      },
+      "icon.settings": {
+        "kind": "icon",
+        "fallback": "settings",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/6494ae069de4d5e17933e3d6aa68d18824361fb287d8d9535ad2cf69580b2da8.png",
+            "bytes": 4221,
+            "sha256": "6494ae069de4d5e17933e3d6aa68d18824361fb287d8d9535ad2cf69580b2da8",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_settings.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/1a09a42e54c5544c7dcff16ac41145dcb384d95a0a630b6d66a6bbfb2ee76d40.svg",
+            "bytes": 400,
+            "sha256": "1a09a42e54c5544c7dcff16ac41145dcb384d95a0a630b6d66a6bbfb2ee76d40",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_settings.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/69ccbb0cc53e6b3d5a908cd0a639655ce48ea83073666eacf29d5588b90fefb2.svg",
+            "bytes": 400,
+            "sha256": "69ccbb0cc53e6b3d5a908cd0a639655ce48ea83073666eacf29d5588b90fefb2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_settings.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/b05108f3270264ee03396c30cad23a0a9dddcf01448710aa2bd14deca56680be.svg",
+            "bytes": 400,
+            "sha256": "b05108f3270264ee03396c30cad23a0a9dddcf01448710aa2bd14deca56680be",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_settings.svg"
+          }
+        }
+      },
+      "icon.shield": {
+        "kind": "icon",
+        "fallback": "shield",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/b656aad9134b8c9e2eefafc4471eaa1d4ed7e2fa149cf45898e6988e1fb2ae18.png",
+            "bytes": 3996,
+            "sha256": "b656aad9134b8c9e2eefafc4471eaa1d4ed7e2fa149cf45898e6988e1fb2ae18",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_shield.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/9a1334ac757c6f68633541cec9458dd39d6b53ba68fde66201ff9a263ec53956.svg",
+            "bytes": 330,
+            "sha256": "9a1334ac757c6f68633541cec9458dd39d6b53ba68fde66201ff9a263ec53956",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_shield.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/9e77c22b0e1b84f91fb272ba6c1ce710a99272542cd61f209989e037319180d5.svg",
+            "bytes": 330,
+            "sha256": "9e77c22b0e1b84f91fb272ba6c1ce710a99272542cd61f209989e037319180d5",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_shield.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/cadc04b8e89c0dcfed4835384d95109a95751c10d7c6c653b1af1b03ec45b6ad.svg",
+            "bytes": 330,
+            "sha256": "cadc04b8e89c0dcfed4835384d95109a95751c10d7c6c653b1af1b03ec45b6ad",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_shield.svg"
+          }
+        }
+      },
+      "icon.shuffle": {
+        "kind": "icon",
+        "fallback": "shuffle",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/ee8d441094253425f3569acc0292c3fa02517c8d60f550fc1b7a5f4d81377109.png",
+            "bytes": 2690,
+            "sha256": "ee8d441094253425f3569acc0292c3fa02517c8d60f550fc1b7a5f4d81377109",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_shuffle.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/29095bb9eebb10f39c2f6426868a6df9f390043adb7a22a7972b0b33f89f2cc3.svg",
+            "bytes": 325,
+            "sha256": "29095bb9eebb10f39c2f6426868a6df9f390043adb7a22a7972b0b33f89f2cc3",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_shuffle.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/75b29714841585796dd18b8a9b6b24f005dd30693fe0472ab37c9bf255b3e27c.svg",
+            "bytes": 325,
+            "sha256": "75b29714841585796dd18b8a9b6b24f005dd30693fe0472ab37c9bf255b3e27c",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_shuffle.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/db32c227b8bb5fd853b35ca7c6a307e7e7d79600c139252caee6b326e71d3a78.svg",
+            "bytes": 325,
+            "sha256": "db32c227b8bb5fd853b35ca7c6a307e7e7d79600c139252caee6b326e71d3a78",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_shuffle.svg"
+          }
+        }
+      },
+      "icon.skip": {
+        "kind": "icon",
+        "fallback": "skip",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/0158d45bc7ba690c562f2158edd40f4de05ab6f705d9ce340e52911466cf0381.png",
+            "bytes": 2228,
+            "sha256": "0158d45bc7ba690c562f2158edd40f4de05ab6f705d9ce340e52911466cf0381",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_skip.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/2e1bec1c05be3d1252fad116a3b6054cc20ca33c796aa2b7b3f0932c356da5ae.svg",
+            "bytes": 315,
+            "sha256": "2e1bec1c05be3d1252fad116a3b6054cc20ca33c796aa2b7b3f0932c356da5ae",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_skip.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/cd63bda307150da103600411c31a8447ce142b774d11d2584018e7e71a475cfa.svg",
+            "bytes": 315,
+            "sha256": "cd63bda307150da103600411c31a8447ce142b774d11d2584018e7e71a475cfa",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_skip.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/f53e6f0172668c42416a1f17662f76899388b68c39ea251f18f71a90a3e31cd4.svg",
+            "bytes": 315,
+            "sha256": "f53e6f0172668c42416a1f17662f76899388b68c39ea251f18f71a90a3e31cd4",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_skip.svg"
+          }
+        }
+      },
+      "icon.star": {
+        "kind": "icon",
+        "fallback": "star",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e.png",
+            "bytes": 3077,
+            "sha256": "ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_star.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/7e984bd64f2983b76e7bc559462efe132a3200c593533f6836555d8134b9e536.svg",
+            "bytes": 314,
+            "sha256": "7e984bd64f2983b76e7bc559462efe132a3200c593533f6836555d8134b9e536",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_star.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/4d58a3eef55a790308bbbfa2b74620da4815a0c01590f98ec8c89ce1f7f770c2.svg",
+            "bytes": 314,
+            "sha256": "4d58a3eef55a790308bbbfa2b74620da4815a0c01590f98ec8c89ce1f7f770c2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_star.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/364f4566e6dfbf142b93c0d9aaf132ce95bbd29bd5f7e5fc981af5904675fed6.svg",
+            "bytes": 314,
+            "sha256": "364f4566e6dfbf142b93c0d9aaf132ce95bbd29bd5f7e5fc981af5904675fed6",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_star.svg"
+          }
+        }
+      },
+      "icon.stop": {
+        "kind": "icon",
+        "fallback": "stop",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/449fa926f156219c95b1273f983a6d5c9fb6e28f6b047f956c854de3073eb055.png",
+            "bytes": 1950,
+            "sha256": "449fa926f156219c95b1273f983a6d5c9fb6e28f6b047f956c854de3073eb055",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_stop.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/fa89f1d4adfd4434cef49ec42403ccae0d000268043e82d4849ed23ae3274056.svg",
+            "bytes": 317,
+            "sha256": "fa89f1d4adfd4434cef49ec42403ccae0d000268043e82d4849ed23ae3274056",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_stop.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/2a9a429d90296b8ce28cc084d165c151624a89cd02de0c08da4b1ee629d87a0f.svg",
+            "bytes": 317,
+            "sha256": "2a9a429d90296b8ce28cc084d165c151624a89cd02de0c08da4b1ee629d87a0f",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_stop.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/8f843ebddb44d148b365e87253d224b7a35faae2ec5ec8c5f973d8af20859bd2.svg",
+            "bytes": 317,
+            "sha256": "8f843ebddb44d148b365e87253d224b7a35faae2ec5ec8c5f973d8af20859bd2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_stop.svg"
+          }
+        }
+      },
+      "icon.success": {
+        "kind": "icon",
+        "fallback": "success",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/b5c6e0de45970dee562558d690d24fb22fef01278ec0ae11f745bc73128f4bff.png",
+            "bytes": 3725,
+            "sha256": "b5c6e0de45970dee562558d690d24fb22fef01278ec0ae11f745bc73128f4bff",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_success.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/7f42826b6d614be8de6445ae95d9d9c3cd853ed0b183718d1eb389a87f1b1dac.svg",
+            "bytes": 317,
+            "sha256": "7f42826b6d614be8de6445ae95d9d9c3cd853ed0b183718d1eb389a87f1b1dac",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_success.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/136255854db1eab4c762527697b01fb8664e89ea6b220b203637e31186865661.svg",
+            "bytes": 317,
+            "sha256": "136255854db1eab4c762527697b01fb8664e89ea6b220b203637e31186865661",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_success.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/88930ac829ffa97d2bddd7c424b49dace25be670fc412695b6c2e2e2aab2c8fa.svg",
+            "bytes": 317,
+            "sha256": "88930ac829ffa97d2bddd7c424b49dace25be670fc412695b6c2e2e2aab2c8fa",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_success.svg"
+          }
+        }
+      },
+      "icon.template": {
+        "kind": "icon",
+        "fallback": "template",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/8600a24375134e2ace37a33c850cfe6cf66f74dcea0961cc71b06c620feb8a96.png",
+            "bytes": 2236,
+            "sha256": "8600a24375134e2ace37a33c850cfe6cf66f74dcea0961cc71b06c620feb8a96",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_template.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/481b4ef2cdce353cafbe830af3b5d0545cddb2415615c6a287173d0487314bfe.svg",
+            "bytes": 335,
+            "sha256": "481b4ef2cdce353cafbe830af3b5d0545cddb2415615c6a287173d0487314bfe",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_template.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/600c4d1ee1468fb27b9ba06ab9d7e74651be5409ce5690316ab05b8ed2354d10.svg",
+            "bytes": 335,
+            "sha256": "600c4d1ee1468fb27b9ba06ab9d7e74651be5409ce5690316ab05b8ed2354d10",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_template.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/e38954d6cbe40141d1f28f8f153fa47ea330ec1c04a1163d302394cadb73d73f.svg",
+            "bytes": 335,
+            "sha256": "e38954d6cbe40141d1f28f8f153fa47ea330ec1c04a1163d302394cadb73d73f",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_template.svg"
+          }
+        }
+      },
+      "icon.ticket": {
+        "kind": "icon",
+        "fallback": "ticket",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/7dea9c5fde6f2b9d2756a9b370db9e945c8034e9f636e318a24c2f27621acd0a.png",
+            "bytes": 2892,
+            "sha256": "7dea9c5fde6f2b9d2756a9b370db9e945c8034e9f636e318a24c2f27621acd0a",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_ticket.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/38f042a11c4bc8d2ba019b7c774a13282d845b21934c9a35d08a975e84079048.svg",
+            "bytes": 336,
+            "sha256": "38f042a11c4bc8d2ba019b7c774a13282d845b21934c9a35d08a975e84079048",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_ticket.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/a0b706627864e4fb9c198b8aec83451813aaa124853b6ad5515b694f33b63aee.svg",
+            "bytes": 336,
+            "sha256": "a0b706627864e4fb9c198b8aec83451813aaa124853b6ad5515b694f33b63aee",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_ticket.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/3ff3ada8977423b908e68fb0f5f5fc6b1bdd7fb2e3f45cff8e297299ede5f43f.svg",
+            "bytes": 336,
+            "sha256": "3ff3ada8977423b908e68fb0f5f5fc6b1bdd7fb2e3f45cff8e297299ede5f43f",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_ticket.svg"
+          }
+        }
+      },
+      "icon.transcript": {
+        "kind": "icon",
+        "fallback": "transcript",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/709bf89d22bb44721dd5f7728d55c97545b6a27ba39c9d673b7b70bed26ee7c1.png",
+            "bytes": 2239,
+            "sha256": "709bf89d22bb44721dd5f7728d55c97545b6a27ba39c9d673b7b70bed26ee7c1",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_transcript.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/5b43effbbe93a7a5fba204d16e056334203fbf51dd17c96e4aecbe64826b2119.svg",
+            "bytes": 318,
+            "sha256": "5b43effbbe93a7a5fba204d16e056334203fbf51dd17c96e4aecbe64826b2119",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_transcript.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/cc36227b2642b0c119ab536479a44db6b7a6e20e98d9730d78cb2e87bb183428.svg",
+            "bytes": 318,
+            "sha256": "cc36227b2642b0c119ab536479a44db6b7a6e20e98d9730d78cb2e87bb183428",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_transcript.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/35e9a790567cbe6d1d34d2f27dcd5dff365be3f3d893d6d4845554f4e39d0edc.svg",
+            "bytes": 318,
+            "sha256": "35e9a790567cbe6d1d34d2f27dcd5dff365be3f3d893d6d4845554f4e39d0edc",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_transcript.svg"
+          }
+        }
+      },
+      "icon.undo": {
+        "kind": "icon",
+        "fallback": "undo",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/9f8d221be3adb913a2fe945be4321c27f2ed76ff2672f90692a8e1ec54cc8d8f.png",
+            "bytes": 3162,
+            "sha256": "9f8d221be3adb913a2fe945be4321c27f2ed76ff2672f90692a8e1ec54cc8d8f",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_undo.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/333111832c58c007de1a6c107014c821ffe6b27e4d34b5feb48e72d8661c5303.svg",
+            "bytes": 299,
+            "sha256": "333111832c58c007de1a6c107014c821ffe6b27e4d34b5feb48e72d8661c5303",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_undo.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/4584b9f2d8c98b01bc14ceca6c2382b97c7c4580c225b16c2d42cc88b33f646b.svg",
+            "bytes": 299,
+            "sha256": "4584b9f2d8c98b01bc14ceca6c2382b97c7c4580c225b16c2d42cc88b33f646b",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_undo.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/1c82c380916068e29a0b7882ec0b2c1c789fcf32292251316c686a8a56b3b3e6.svg",
+            "bytes": 299,
+            "sha256": "1c82c380916068e29a0b7882ec0b2c1c789fcf32292251316c686a8a56b3b3e6",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_undo.svg"
+          }
+        }
+      },
+      "icon.verify": {
+        "kind": "icon",
+        "fallback": "verify",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/fb7115b166dbb64f7652a10a44c2f7a3d1c0780d25217b90a3523dd0d117ac4d.png",
+            "bytes": 3182,
+            "sha256": "fb7115b166dbb64f7652a10a44c2f7a3d1c0780d25217b90a3523dd0d117ac4d",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_verify.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/0f036094961b4abe6f54984f6810b45b120022f3b693b7931a1ef04bee8b7ed5.svg",
+            "bytes": 324,
+            "sha256": "0f036094961b4abe6f54984f6810b45b120022f3b693b7931a1ef04bee8b7ed5",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_verify.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/b2f9194f0670becacc2c644faa8f0e911b9b5694c83c9e20814695f7088f54c6.svg",
+            "bytes": 324,
+            "sha256": "b2f9194f0670becacc2c644faa8f0e911b9b5694c83c9e20814695f7088f54c6",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_verify.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/a6029b2a7927891f5ac995474998a55148137006a7f33f5ff603f27ed81c57fb.svg",
+            "bytes": 324,
+            "sha256": "a6029b2a7927891f5ac995474998a55148137006a7f33f5ff603f27ed81c57fb",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_verify.svg"
+          }
+        }
+      },
+      "icon.voice": {
+        "kind": "icon",
+        "fallback": "voice",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/e90ec587e40f99d7e9b2d79e73e9efeaf0dc3fc913873587afae3dd1f7ab29cf.png",
+            "bytes": 3218,
+            "sha256": "e90ec587e40f99d7e9b2d79e73e9efeaf0dc3fc913873587afae3dd1f7ab29cf",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_voice.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/0ef6b98a30f80661dea7057609beeaa00ec3f059b559470990689e0258de8aeb.svg",
+            "bytes": 360,
+            "sha256": "0ef6b98a30f80661dea7057609beeaa00ec3f059b559470990689e0258de8aeb",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_voice.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/3ce7b439cd845b2d3c9dab0d7742ca3dcc05ce048adc04e91385507fc0e1776e.svg",
+            "bytes": 360,
+            "sha256": "3ce7b439cd845b2d3c9dab0d7742ca3dcc05ce048adc04e91385507fc0e1776e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_voice.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/4bd8d0f47ea2ef135f7c5edb629dd47ad67d741a280bd604b8b2bac81b981ead.svg",
+            "bytes": 360,
+            "sha256": "4bd8d0f47ea2ef135f7c5edb629dd47ad67d741a280bd604b8b2bac81b981ead",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_voice.svg"
+          }
+        }
+      },
+      "icon.volume-down": {
+        "kind": "icon",
+        "fallback": "volume-down",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/7871f8aaec7d50931715d00d8570b35c010c34138f0bcbb05fcd4952f627b1f4.png",
+            "bytes": 2250,
+            "sha256": "7871f8aaec7d50931715d00d8570b35c010c34138f0bcbb05fcd4952f627b1f4",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_volume-down.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/d769d059a42da1667e6427cda4fe4d8ce5e90dec0cbaa6a9d4e35ff7d1d11555.svg",
+            "bytes": 301,
+            "sha256": "d769d059a42da1667e6427cda4fe4d8ce5e90dec0cbaa6a9d4e35ff7d1d11555",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_volume-down.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/31cbf1b5bb745a96cce6d8900ee0ec24b40f53f83b11f60ea6e454b5c9384a37.svg",
+            "bytes": 301,
+            "sha256": "31cbf1b5bb745a96cce6d8900ee0ec24b40f53f83b11f60ea6e454b5c9384a37",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_volume-down.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/8c6846fc285966a3fed1d25077101a3ef3c8974ca426caf9f444d7def7dfc903.svg",
+            "bytes": 301,
+            "sha256": "8c6846fc285966a3fed1d25077101a3ef3c8974ca426caf9f444d7def7dfc903",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_volume-down.svg"
+          }
+        }
+      },
+      "icon.volume-up": {
+        "kind": "icon",
+        "fallback": "volume-up",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/10c48e81142a5e09656fb6ebb275bab616274c680dbe6d42d2dfcd2c0e21337c.png",
+            "bytes": 2357,
+            "sha256": "10c48e81142a5e09656fb6ebb275bab616274c680dbe6d42d2dfcd2c0e21337c",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_volume-up.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/c2c18bec8b85b4f66a4ee549d2fa215ad6c08aab333af3144d055ef270189910.svg",
+            "bytes": 308,
+            "sha256": "c2c18bec8b85b4f66a4ee549d2fa215ad6c08aab333af3144d055ef270189910",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_volume-up.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/a5bb9c2f21537571e8639954cc3d63e5faf3fcd54fa9b29a08889b60f5a9b20a.svg",
+            "bytes": 308,
+            "sha256": "a5bb9c2f21537571e8639954cc3d63e5faf3fcd54fa9b29a08889b60f5a9b20a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_volume-up.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/9fcfbd5bb6ea3c08b25cfd1f6a795754ce047722d7e93032e69d58efa0e6bf73.svg",
+            "bytes": 308,
+            "sha256": "9fcfbd5bb6ea3c08b25cfd1f6a795754ce047722d7e93032e69d58efa0e6bf73",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_volume-up.svg"
+          }
+        }
+      },
+      "icon.volume": {
+        "kind": "icon",
+        "fallback": "volume",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/f91e8bc589e1130717b74964bd5bb9ad7fb61af109fe2c6d62206b8da139a72e.png",
+            "bytes": 2703,
+            "sha256": "f91e8bc589e1130717b74964bd5bb9ad7fb61af109fe2c6d62206b8da139a72e",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_volume.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/fdba54393c9cf8712008070592fc27788bf37101cdf51b60377a8d854267d0f9.svg",
+            "bytes": 346,
+            "sha256": "fdba54393c9cf8712008070592fc27788bf37101cdf51b60377a8d854267d0f9",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_volume.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/8f71935da63b3f86560c0e8ced7c02b4ef48d9f858d9f3e357a1f046aaccc5b8.svg",
+            "bytes": 346,
+            "sha256": "8f71935da63b3f86560c0e8ced7c02b4ef48d9f858d9f3e357a1f046aaccc5b8",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_volume.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/c3cb8e30f0792353d7c44eafa0d07eb9b999a512d199ecd1cd8d1359f81e5edd.svg",
+            "bytes": 346,
+            "sha256": "c3cb8e30f0792353d7c44eafa0d07eb9b999a512d199ecd1cd8d1359f81e5edd",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_volume.svg"
+          }
+        }
+      },
+      "icon.wallet": {
+        "kind": "icon",
+        "fallback": "wallet",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/0f29a86cf03d0860182b3a65cac3a8560f02f85fe6cf6bcd10d942a6e88e0dab.png",
+            "bytes": 2872,
+            "sha256": "0f29a86cf03d0860182b3a65cac3a8560f02f85fe6cf6bcd10d942a6e88e0dab",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_wallet.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/c6cccfdc98bc485aab0285c10ca9d960a3486418daa9df31f2b82806af8ca554.svg",
+            "bytes": 378,
+            "sha256": "c6cccfdc98bc485aab0285c10ca9d960a3486418daa9df31f2b82806af8ca554",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_wallet.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/28f28f7db3b9c457194ff9faf0e2fc64273851a249ce95c3f234f30e1b747f1a.svg",
+            "bytes": 378,
+            "sha256": "28f28f7db3b9c457194ff9faf0e2fc64273851a249ce95c3f234f30e1b747f1a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_wallet.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/0680b49bd8433904c4dbe6aea5b5c7f18304718da391d1ec50195a200553797c.svg",
+            "bytes": 378,
+            "sha256": "0680b49bd8433904c4dbe6aea5b5c7f18304718da391d1ec50195a200553797c",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_wallet.svg"
+          }
+        }
+      },
+      "icon.warning": {
+        "kind": "icon",
+        "fallback": "warning",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "selected/0085d3d241714a4a24df581de4daa7a00441af1db4f92dc0e53b98919261588e.png",
+            "bytes": 3007,
+            "sha256": "0085d3d241714a4a24df581de4daa7a00441af1db4f92dc0e53b98919261588e",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_warning.png"
+          },
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "selected/6a913f9c527233bfca0ef2e9ae9a0e8eddae301784c40547bdc0912d4b1cd142.svg",
+            "bytes": 299,
+            "sha256": "6a913f9c527233bfca0ef2e9ae9a0e8eddae301784c40547bdc0912d4b1cd142",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/oscuro/obey_warning.svg"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "selected/3c9f3b82df213cce701f6bdc72449063e63cd9d8e7358cd8b39af91dcb3d7af0.svg",
+            "bytes": 299,
+            "sha256": "3c9f3b82df213cce701f6bdc72449063e63cd9d8e7358cd8b39af91dcb3d7af0",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/claro/obey_warning.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/25fddd4aa009275b7ede5402674cddc5e31937e3acbc6270eb533dbc88c3ff41.svg",
+            "bytes": 299,
+            "sha256": "25fddd4aa009275b7ede5402674cddc5e31937e3acbc6270eb533dbc88c3ff41",
+            "sourcePath": "10_ENTREGA_CODEX/assets/iconos/atenuado/obey_warning.svg"
+          }
+        }
+      },
+      "emoji.ayuda": {
+        "kind": "character",
+        "fallback": "ayuda",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+            "bytes": 41168,
+            "sha256": "7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_ayuda.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/3a5c01d738e31ebbf470eda7cc290fd673eb91627fe11473ddc7a9a6e9a54d97.png",
+            "bytes": 137702,
+            "sha256": "3a5c01d738e31ebbf470eda7cc290fd673eb91627fe11473ddc7a9a6e9a54d97",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_ayuda.png"
+          }
+        }
+      },
+      "emoji.bienvenida": {
+        "kind": "character",
+        "fallback": "bienvenida",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/c9b81826cab7b9a053d1532e18660d88a4dfd73517034c5dbe399751d1278238.png",
+            "bytes": 40333,
+            "sha256": "c9b81826cab7b9a053d1532e18660d88a4dfd73517034c5dbe399751d1278238",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_bienvenida.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/9f6088998b81e73fe3976024f0c6d44260c96bf6fbc19d7d336ef804fc75b379.png",
+            "bytes": 134058,
+            "sha256": "9f6088998b81e73fe3976024f0c6d44260c96bf6fbc19d7d336ef804fc75b379",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_bienvenida.png"
+          }
+        }
+      },
+      "emoji.espera": {
+        "kind": "character",
+        "fallback": "espera",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3.png",
+            "bytes": 40601,
+            "sha256": "4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_espera.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/2e423ee50db749c52442bef7e1f256ef1028a6346b66d070d0997ab4e67045a0.png",
+            "bytes": 135415,
+            "sha256": "2e423ee50db749c52442bef7e1f256ef1028a6346b66d070d0997ab4e67045a0",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_espera.png"
+          }
+        }
+      },
+      "emoji.exito": {
+        "kind": "character",
+        "fallback": "exito",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe.png",
+            "bytes": 39906,
+            "sha256": "d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_exito.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/8678d2102d1fcb271cbff038a1b4cd1bcbbbaea5b652a3840e8431502d2174c2.png",
+            "bytes": 133389,
+            "sha256": "8678d2102d1fcb271cbff038a1b4cd1bcbbbaea5b652a3840e8431502d2174c2",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_exito.png"
+          }
+        }
+      },
+      "emoji.moderacion": {
+        "kind": "character",
+        "fallback": "moderacion",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45.png",
+            "bytes": 41083,
+            "sha256": "ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_moderacion.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/277c733f39c3bbfb318ae1575ded3cc65629967d1108b1e4a85e7ebc3deda1d2.png",
+            "bytes": 138038,
+            "sha256": "277c733f39c3bbfb318ae1575ded3cc65629967d1108b1e4a85e7ebc3deda1d2",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_moderacion.png"
+          }
+        }
+      },
+      "emoji.musica": {
+        "kind": "character",
+        "fallback": "musica",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/140bf3978577854a4d679ac693383572f5949a5e8cadf1c0f8d039d83594cf5b.png",
+            "bytes": 39335,
+            "sha256": "140bf3978577854a4d679ac693383572f5949a5e8cadf1c0f8d039d83594cf5b",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_musica.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/2c1aee992a53808b2de8fa14c851a59b28fa8c8226458ae13980a12ce307027e.png",
+            "bytes": 131266,
+            "sha256": "2c1aee992a53808b2de8fa14c851a59b28fa8c8226458ae13980a12ce307027e",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_musica.png"
+          }
+        }
+      },
+      "emoji.colecciones": {
+        "kind": "character",
+        "fallback": "colecciones",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/afbe4a4d7f5ee44c2fd3658b4baf30700e56c319f690aa9d96e15e88eb47e4ae.png",
+            "bytes": 40820,
+            "sha256": "afbe4a4d7f5ee44c2fd3658b4baf30700e56c319f690aa9d96e15e88eb47e4ae",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/personaje/colecciones-128.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/511f3f7ba21b8f14b0bef4f4d0f21ec2bf0fbf29281716556c2abfbcb2e9307a.png",
+            "bytes": 140810,
+            "sha256": "511f3f7ba21b8f14b0bef4f4d0f21ec2bf0fbf29281716556c2abfbcb2e9307a",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/personaje/colecciones-256.png"
+          }
+        }
+      },
+      "emoji.configuracion": {
+        "kind": "character",
+        "fallback": "configuracion",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+            "bytes": 41003,
+            "sha256": "551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/personaje/configuracion-128.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/c07cc0be095d436c6406975daf8ddb7931129482d4c7ea93dc0c6afe5094e4b6.png",
+            "bytes": 141678,
+            "sha256": "c07cc0be095d436c6406975daf8ddb7931129482d4c7ea93dc0c6afe5094e4b6",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/personaje/configuracion-256.png"
+          }
+        }
+      },
+      "emoji.sobre": {
+        "kind": "character",
+        "fallback": "sobre",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/b02aebd9c36a17b7e2bd5cabb4a397cc53df52d66ac99f11e9178a9f6cd2a762.png",
+            "bytes": 41819,
+            "sha256": "b02aebd9c36a17b7e2bd5cabb4a397cc53df52d66ac99f11e9178a9f6cd2a762",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/personaje/exports/sobre-128.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/8bd844a57ac076c66b43e9790a57aa4c03e53636eba70ee157527fe9c4eaa0ab.png",
+            "bytes": 144787,
+            "sha256": "8bd844a57ac076c66b43e9790a57aa4c03e53636eba70ee157527fe9c4eaa0ab",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/personaje/exports/sobre-256.png"
+          }
+        }
+      },
+      "emoji.gracias": {
+        "kind": "character",
+        "fallback": "gracias",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png128",
+          "thumbnailVariant": "png256",
+          "webVariant": "png256"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/16e8bd94978a17bb5312dba7ede94fa6435c764fbfe206fd38983ee757db80e7.png",
+            "bytes": 38483,
+            "sha256": "16e8bd94978a17bb5312dba7ede94fa6435c764fbfe206fd38983ee757db80e7",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/personaje/exports/gracias-128.png"
+          },
+          "png256": {
+            "variant": "png256",
+            "path": "selected/c2b1f0af7d635b76364bd7705f87f88e66a1259d7056686488effc4a5a4d7474.png",
+            "bytes": 133086,
+            "sha256": "c2b1f0af7d635b76364bd7705f87f88e66a1259d7056686488effc4a5a4d7474",
+            "width": 256,
+            "height": 256,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/personaje/exports/gracias-256.png"
+          }
+        }
+      },
+      "motion.cargando": {
+        "kind": "animation",
+        "fallback": "cargando",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/bc5d0145ff82d404c923a778bc27ae029a844cb607a8a119799a6644f23fa104.gif",
+            "bytes": 61258,
+            "sha256": "bc5d0145ff82d404c923a778bc27ae029a844cb607a8a119799a6644f23fa104",
+            "width": 128,
+            "height": 128,
+            "frames": 32,
+            "durationMs": 1920,
+            "distinctFrames": 32,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/cargando.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/bd69a135e13aecaba174fac245b54aea672c5c4b65954916e8c39bbe9b623928.png",
+            "bytes": 4890,
+            "sha256": "bd69a135e13aecaba174fac245b54aea672c5c4b65954916e8c39bbe9b623928",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/cargando.png"
+          }
+        }
+      },
+      "motion.carta-especial": {
+        "kind": "animation",
+        "fallback": "carta-especial",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/107ff9234fef6c4dc9e1456d0427401588583374665b9d4fa850eb121daf5d21.gif",
+            "bytes": 80478,
+            "sha256": "107ff9234fef6c4dc9e1456d0427401588583374665b9d4fa850eb121daf5d21",
+            "width": 128,
+            "height": 128,
+            "frames": 32,
+            "durationMs": 1920,
+            "distinctFrames": 32,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/carta-especial.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/03fa06d440011016101929cf141a793ef13c1e92844c6588fd63938bf70c1244.png",
+            "bytes": 5766,
+            "sha256": "03fa06d440011016101929cf141a793ef13c1e92844c6588fd63938bf70c1244",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/carta-especial.png"
+          }
+        }
+      },
+      "motion.exito": {
+        "kind": "animation",
+        "fallback": "exito",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/6ffcbc501c999e2a4f48ad51b193da9aa0e9b3d4c0d5330329c85089d13f189e.gif",
+            "bytes": 30449,
+            "sha256": "6ffcbc501c999e2a4f48ad51b193da9aa0e9b3d4c0d5330329c85089d13f189e",
+            "width": 128,
+            "height": 128,
+            "frames": 12,
+            "durationMs": 1920,
+            "distinctFrames": 12,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/exito.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/c6eeb8323f7df3e3b8f8b36207089f3f791f70895f8235028ec62c3a24c50b44.png",
+            "bytes": 7836,
+            "sha256": "c6eeb8323f7df3e3b8f8b36207089f3f791f70895f8235028ec62c3a24c50b44",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/exito.png"
+          }
+        }
+      },
+      "motion.favorito": {
+        "kind": "animation",
+        "fallback": "favorito",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/1bb961e675f370e3b7234f06cf568cac36f3b15eeee1f4b493efb4abb7892d46.gif",
+            "bytes": 24551,
+            "sha256": "1bb961e675f370e3b7234f06cf568cac36f3b15eeee1f4b493efb4abb7892d46",
+            "width": 128,
+            "height": 128,
+            "frames": 17,
+            "durationMs": 1920,
+            "distinctFrames": 11,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/favorito.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/74643f2e933eb4203ff882891b2f97c8146c39a4ab2ee9463fc813399c8753ee.png",
+            "bytes": 3835,
+            "sha256": "74643f2e933eb4203ff882891b2f97c8146c39a4ab2ee9463fc813399c8753ee",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/favorito.png"
+          }
+        }
+      },
+      "motion.reproduciendo": {
+        "kind": "animation",
+        "fallback": "reproduciendo",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/5b3b93c6e7db6438a78b4d5ad0aaa52e6008a7bdf8a26237baa641992d1fb7d3.gif",
+            "bytes": 42331,
+            "sha256": "5b3b93c6e7db6438a78b4d5ad0aaa52e6008a7bdf8a26237baa641992d1fb7d3",
+            "width": 128,
+            "height": 128,
+            "frames": 32,
+            "durationMs": 1920,
+            "distinctFrames": 32,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/reproduciendo.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/d32743a2dd51656c9238349650330004d6424092d765512124eb824c8d6c0bfe.png",
+            "bytes": 2479,
+            "sha256": "d32743a2dd51656c9238349650330004d6424092d765512124eb824c8d6c0bfe",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/movimiento/reproduciendo.png"
+          }
+        }
+      },
+      "motion.ticket-espera": {
+        "kind": "animation",
+        "fallback": "espera",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/47ebadbd8aaead9cecd837fe4cf7d1dd776bf7c0748527f7eca8bf486c01249f.gif",
+            "bytes": 46694,
+            "sha256": "47ebadbd8aaead9cecd837fe4cf7d1dd776bf7c0748527f7eca8bf486c01249f",
+            "width": 128,
+            "height": 128,
+            "frames": 30,
+            "durationMs": 2400,
+            "distinctFrames": 30,
+            "sourcePath": "08_TICKETS_VISUAL/animaciones/espera.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/adb96f01c4ee1577980821e3bf48835f8eb48583382d9b551d02293df0c15536.png",
+            "bytes": 3706,
+            "sha256": "adb96f01c4ee1577980821e3bf48835f8eb48583382d9b551d02293df0c15536",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/animaciones/espera-estatico.png"
+          }
+        }
+      },
+      "motion.ticket-atencion": {
+        "kind": "animation",
+        "fallback": "atencion",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/6ce0e34ed543014faa7deff0442951f4d7f095ddfcab56298c4725adcac00ed9.gif",
+            "bytes": 50831,
+            "sha256": "6ce0e34ed543014faa7deff0442951f4d7f095ddfcab56298c4725adcac00ed9",
+            "width": 128,
+            "height": 128,
+            "frames": 30,
+            "durationMs": 2400,
+            "distinctFrames": 30,
+            "sourcePath": "08_TICKETS_VISUAL/animaciones/atencion.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/2645321c3aea9daf0aabacfcb638933c41f5689f81e97482970fabbd3975f64d.png",
+            "bytes": 3812,
+            "sha256": "2645321c3aea9daf0aabacfcb638933c41f5689f81e97482970fabbd3975f64d",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/animaciones/atencion-estatico.png"
+          }
+        }
+      },
+      "motion.ticket-confirmado": {
+        "kind": "animation",
+        "fallback": "confirmado",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/abeae545e529a5e9c788edd3cf21ee6b0c29363d38135e0f8d269a0528e1ff63.gif",
+            "bytes": 48377,
+            "sha256": "abeae545e529a5e9c788edd3cf21ee6b0c29363d38135e0f8d269a0528e1ff63",
+            "width": 128,
+            "height": 128,
+            "frames": 30,
+            "durationMs": 2400,
+            "distinctFrames": 15,
+            "sourcePath": "08_TICKETS_VISUAL/animaciones/confirmado.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/fa96568bcb2fcc6dfcaa0816247f59e247d4d83fdaf6b61ed43d57f35ecf3add.png",
+            "bytes": 3948,
+            "sha256": "fa96568bcb2fcc6dfcaa0816247f59e247d4d83fdaf6b61ed43d57f35ecf3add",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/animaciones/confirmado-estatico.png"
+          }
+        }
+      },
+      "motion.character-sobre": {
+        "kind": "animation",
+        "fallback": "sobre",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/b7a86e371fe5d7f5a49eccaad9c1f9208c26673831339df1aea15333019fbf5f.gif",
+            "bytes": 45653,
+            "sha256": "b7a86e371fe5d7f5a49eccaad9c1f9208c26673831339df1aea15333019fbf5f",
+            "width": 128,
+            "height": 128,
+            "frames": 4,
+            "durationMs": 3040,
+            "distinctFrames": 2,
+            "sourcePath": "08_TICKETS_VISUAL/personaje/exports/sobre-128.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/b02aebd9c36a17b7e2bd5cabb4a397cc53df52d66ac99f11e9178a9f6cd2a762.png",
+            "bytes": 41819,
+            "sha256": "b02aebd9c36a17b7e2bd5cabb4a397cc53df52d66ac99f11e9178a9f6cd2a762",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/personaje/exports/sobre-128.png"
+          }
+        }
+      },
+      "motion.character-gracias": {
+        "kind": "animation",
+        "fallback": "gracias",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "gif128",
+          "reducedMotionVariant": "static128",
+          "webVariant": "gif128"
+        },
+        "files": {
+          "gif128": {
+            "variant": "gif128",
+            "path": "selected/dac30a71c6f756d6d9b6f71c0a6b590bdafa4e81a2005bc5f138bb7e589e52a3.gif",
+            "bytes": 32386,
+            "sha256": "dac30a71c6f756d6d9b6f71c0a6b590bdafa4e81a2005bc5f138bb7e589e52a3",
+            "width": 128,
+            "height": 128,
+            "frames": 3,
+            "durationMs": 3040,
+            "distinctFrames": 2,
+            "sourcePath": "08_TICKETS_VISUAL/personaje/exports/gracias-128.gif"
+          },
+          "static128": {
+            "variant": "static128",
+            "path": "selected/16e8bd94978a17bb5312dba7ede94fa6435c764fbfe206fd38983ee757db80e7.png",
+            "bytes": 38483,
+            "sha256": "16e8bd94978a17bb5312dba7ede94fa6435c764fbfe206fd38983ee757db80e7",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/personaje/exports/gracias-128.png"
+          }
+        }
+      },
+      "scene.vacio": {
+        "kind": "scene",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png512",
+          "webVariant": "png1024"
+        },
+        "files": {
+          "png512": {
+            "variant": "png512",
+            "path": "selected/90855648c6cf2a1805ad26974d1f4f5756cd4ff2b283afa24af95e405da93611.png",
+            "bytes": 251871,
+            "sha256": "90855648c6cf2a1805ad26974d1f4f5756cd4ff2b283afa24af95e405da93611",
+            "width": 512,
+            "height": 288,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/escenas/vacio-512.png"
+          },
+          "png1024": {
+            "variant": "png1024",
+            "path": "selected/26bc7c5b40806269459e5995c21a78e72284de912047a09aa11f5ef3fbfbfbcb.png",
+            "bytes": 922220,
+            "sha256": "26bc7c5b40806269459e5995c21a78e72284de912047a09aa11f5ef3fbfbfbcb",
+            "width": 1024,
+            "height": 576,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/escenas/vacio-1024.png"
+          }
+        }
+      },
+      "scene.sin-conexion": {
+        "kind": "scene",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png512",
+          "webVariant": "png1024"
+        },
+        "files": {
+          "png512": {
+            "variant": "png512",
+            "path": "selected/2d14b0d37e84cd0472e55f5a33b79e945e63671e52e1075413d2ffbe913dd526.png",
+            "bytes": 239848,
+            "sha256": "2d14b0d37e84cd0472e55f5a33b79e945e63671e52e1075413d2ffbe913dd526",
+            "width": 512,
+            "height": 288,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/escenas/sin-conexion-512.png"
+          },
+          "png1024": {
+            "variant": "png1024",
+            "path": "selected/a839ccf572d539c247f487a0fee082c1c934782c183ca02dc736c76db1557cc1.png",
+            "bytes": 869209,
+            "sha256": "a839ccf572d539c247f487a0fee082c1c934782c183ca02dc736c76db1557cc1",
+            "width": 1024,
+            "height": 576,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/escenas/sin-conexion-1024.png"
+          }
+        }
+      },
+      "scene.celebracion": {
+        "kind": "scene",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "png512",
+          "webVariant": "png1024"
+        },
+        "files": {
+          "png512": {
+            "variant": "png512",
+            "path": "selected/876d3fa0f91cc3b6056ae5421c09b4058fefdcf62892b36e1269aae2ad416f4a.png",
+            "bytes": 253358,
+            "sha256": "876d3fa0f91cc3b6056ae5421c09b4058fefdcf62892b36e1269aae2ad416f4a",
+            "width": 512,
+            "height": 288,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/escenas/celebracion-512.png"
+          },
+          "png1024": {
+            "variant": "png1024",
+            "path": "selected/9e08c3b701ac7d8f3cb2b0a7a9df0c86f9ba0ddc1524c2955c8dc7f50ec7a4dc.png",
+            "bytes": 912575,
+            "sha256": "9e08c3b701ac7d8f3cb2b0a7a9df0c86f9ba0ddc1524c2955c8dc7f50ec7a4dc",
+            "width": 1024,
+            "height": 576,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/escenas/celebracion-1024.png"
+          }
+        }
+      },
+      "fondos.bienvenida": {
+        "kind": "background",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "svg"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+            "bytes": 600,
+            "sha256": "93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934",
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/bienvenida.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c.png",
+            "bytes": 60447,
+            "sha256": "950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c",
+            "width": 1200,
+            "height": 400,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/bienvenida.png"
+          }
+        }
+      },
+      "fondos.despedida": {
+        "kind": "background",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "svg"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+            "bytes": 600,
+            "sha256": "93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934",
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/despedida.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c.png",
+            "bytes": 60447,
+            "sha256": "950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c",
+            "width": 1200,
+            "height": 400,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/despedida.png"
+          }
+        }
+      },
+      "fondos.evento": {
+        "kind": "background",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "svg"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+            "bytes": 600,
+            "sha256": "93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934",
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/evento.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c.png",
+            "bytes": 60447,
+            "sha256": "950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c",
+            "width": 1200,
+            "height": 400,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/evento.png"
+          }
+        }
+      },
+      "fondos.nivel": {
+        "kind": "background",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "svg"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/3c7d973b6546ad85a3061e678d3158cc55758df34a08a35252992096a58660be.svg",
+            "bytes": 598,
+            "sha256": "3c7d973b6546ad85a3061e678d3158cc55758df34a08a35252992096a58660be",
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/nivel.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/a89f6695f4fc062b019965a80daac1c53c8a30d9495fff825bd908962876279a.png",
+            "bytes": 46189,
+            "sha256": "a89f6695f4fc062b019965a80daac1c53c8a30d9495fff825bd908962876279a",
+            "width": 1000,
+            "height": 320,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/nivel.png"
+          }
+        }
+      },
+      "fondos.perfil": {
+        "kind": "background",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "svg"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/1d130561c908e3674ef35f75ef6d29601a1a24e84ca769ea08f388f677e5b4f1.svg",
+            "bytes": 598,
+            "sha256": "1d130561c908e3674ef35f75ef6d29601a1a24e84ca769ea08f388f677e5b4f1",
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/perfil.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/a931113dd115b8f9978fcf0ddc1f7556a0bef1181de68a958d7407bd81e6da65.png",
+            "bytes": 86867,
+            "sha256": "a931113dd115b8f9978fcf0ddc1f7556a0bef1181de68a958d7407bd81e6da65",
+            "width": 1000,
+            "height": 600,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/fondos/perfil.png"
+          }
+        }
+      },
+      "plantillas.bienvenida": {
+        "kind": "card-template",
+        "fallback": "",
+        "fixtureOnly": true,
+        "destinations": {
+          "rendererVariant": "svg",
+          "webVariant": "svg",
+          "previewFixtureVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/965f48ca785ef19a2de2edb9cc258c98c1a1a1179ea96850dc319d2cb820d025.svg",
+            "bytes": 628727,
+            "sha256": "965f48ca785ef19a2de2edb9cc258c98c1a1a1179ea96850dc319d2cb820d025",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/bienvenida.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/3b0b5e2e804caab7fcfc3e59586d9c113719d3253bdb2b691ac1b3906469da48.png",
+            "bytes": 254702,
+            "sha256": "3b0b5e2e804caab7fcfc3e59586d9c113719d3253bdb2b691ac1b3906469da48",
+            "width": 1200,
+            "height": 400,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/bienvenida.png"
+          }
+        }
+      },
+      "plantillas.despedida": {
+        "kind": "card-template",
+        "fallback": "",
+        "fixtureOnly": true,
+        "destinations": {
+          "rendererVariant": "svg",
+          "webVariant": "svg",
+          "previewFixtureVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/3a59e48ff32b605789fa28da0c539cc40d7480f39427c7ef9afd52dcfc2de778.svg",
+            "bytes": 628724,
+            "sha256": "3a59e48ff32b605789fa28da0c539cc40d7480f39427c7ef9afd52dcfc2de778",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/despedida.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/b522f6bc76b3b286778b1cd7143a5ecb0f766ec8a5cd24a3d4be936952272cca.png",
+            "bytes": 254968,
+            "sha256": "b522f6bc76b3b286778b1cd7143a5ecb0f766ec8a5cd24a3d4be936952272cca",
+            "width": 1200,
+            "height": 400,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/despedida.png"
+          }
+        }
+      },
+      "plantillas.evento": {
+        "kind": "card-template",
+        "fallback": "",
+        "fixtureOnly": true,
+        "destinations": {
+          "rendererVariant": "svg",
+          "webVariant": "svg",
+          "previewFixtureVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/9b414d972752f53310b8f66a3732ad173fda3c82709278b1fe9285071df4ca7a.svg",
+            "bytes": 628878,
+            "sha256": "9b414d972752f53310b8f66a3732ad173fda3c82709278b1fe9285071df4ca7a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/evento.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/b0d6f2db4383625d7ffbd4ce2197c76c285d0873048ef34f892d96163a19d1aa.png",
+            "bytes": 253113,
+            "sha256": "b0d6f2db4383625d7ffbd4ce2197c76c285d0873048ef34f892d96163a19d1aa",
+            "width": 1200,
+            "height": 400,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/evento.png"
+          }
+        }
+      },
+      "plantillas.nivel": {
+        "kind": "card-template",
+        "fallback": "",
+        "fixtureOnly": true,
+        "destinations": {
+          "rendererVariant": "svg",
+          "webVariant": "svg",
+          "previewFixtureVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/dc018154afa338761007e58054b2b5609bb3be089d4b71ecf4f94d692d4d19f7.svg",
+            "bytes": 628726,
+            "sha256": "dc018154afa338761007e58054b2b5609bb3be089d4b71ecf4f94d692d4d19f7",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/nivel.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/a4900fd1863880ed7c35f9735facc639a05138d7b4fbcc8d1bb95fe0746531b0.png",
+            "bytes": 209571,
+            "sha256": "a4900fd1863880ed7c35f9735facc639a05138d7b4fbcc8d1bb95fe0746531b0",
+            "width": 1000,
+            "height": 320,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/nivel.png"
+          }
+        }
+      },
+      "plantillas.perfil": {
+        "kind": "card-template",
+        "fallback": "",
+        "fixtureOnly": true,
+        "destinations": {
+          "rendererVariant": "svg",
+          "webVariant": "svg",
+          "previewFixtureVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/2a850708a3815a1f398e196b751ce5b3330f4e0eb382f237386d0b156846973a.svg",
+            "bytes": 629472,
+            "sha256": "2a850708a3815a1f398e196b751ce5b3330f4e0eb382f237386d0b156846973a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/perfil.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/621fb8604b922759a9380c359b70a5d1986938313c41de57ff63dd606d000872.png",
+            "bytes": 259725,
+            "sha256": "621fb8604b922759a9380c359b70a5d1986938313c41de57ff63dd606d000872",
+            "width": 1000,
+            "height": 600,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/perfil.png"
+          }
+        }
+      },
+      "colecciones.carta-muestra": {
+        "kind": "collection-frame",
+        "fallback": "",
+        "fixtureOnly": true,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/d9d426ee0ded8623c7442513f05f7addf430a973b3d84a801767c8744f251a54.svg",
+            "bytes": 661506,
+            "sha256": "d9d426ee0ded8623c7442513f05f7addf430a973b3d84a801767c8744f251a54",
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/carta-muestra.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/410d2ff8c3447facbb5959228a5b40d82d85283414e156f482dac3d0f14cd181.png",
+            "bytes": 628936,
+            "sha256": "410d2ff8c3447facbb5959228a5b40d82d85283414e156f482dac3d0f14cd181",
+            "width": 640,
+            "height": 896,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/carta-muestra.png"
+          }
+        }
+      },
+      "colecciones.marco-azul": {
+        "kind": "collection-frame",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/62ce3b11ecd9ed9ba39b4f359e5905ec5522cc5cded31fe9fb6ba690e8d9b3dd.svg",
+            "bytes": 675,
+            "sha256": "62ce3b11ecd9ed9ba39b4f359e5905ec5522cc5cded31fe9fb6ba690e8d9b3dd",
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/marco-azul.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/1fb12d3fdee6e1c54d58963210044036b02c342819f543302c86aba63d90e6f5.png",
+            "bytes": 11777,
+            "sha256": "1fb12d3fdee6e1c54d58963210044036b02c342819f543302c86aba63d90e6f5",
+            "width": 640,
+            "height": 896,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/marco-azul.png"
+          }
+        }
+      },
+      "colecciones.marco-base": {
+        "kind": "collection-frame",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/1f54d707dc2abe12320f2c8cdc97d44f69832a60c0661c0ea70d024b4e402139.svg",
+            "bytes": 593,
+            "sha256": "1f54d707dc2abe12320f2c8cdc97d44f69832a60c0661c0ea70d024b4e402139",
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/marco-base.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/3ad6901a005769c274d9f202ae9d89eaf56b1a7313ada62f57be09b3ef8bd7ce.png",
+            "bytes": 11487,
+            "sha256": "3ad6901a005769c274d9f202ae9d89eaf56b1a7313ada62f57be09b3ef8bd7ce",
+            "width": 640,
+            "height": 896,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/marco-base.png"
+          }
+        }
+      },
+      "colecciones.marco-dorado": {
+        "kind": "collection-frame",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/94908371462ba5fcb67cb5849929498793b3c0c06fb70ba57b8a6817ae67ee06.svg",
+            "bytes": 839,
+            "sha256": "94908371462ba5fcb67cb5849929498793b3c0c06fb70ba57b8a6817ae67ee06",
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/marco-dorado.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/5d2b119b22085284ca15d3fede383e00f687dc98a3fc306520955ecaf5e79eda.png",
+            "bytes": 11842,
+            "sha256": "5d2b119b22085284ca15d3fede383e00f687dc98a3fc306520955ecaf5e79eda",
+            "width": 640,
+            "height": 896,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/marco-dorado.png"
+          }
+        }
+      },
+      "colecciones.marco-violeta": {
+        "kind": "collection-frame",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/8c5379eb5e77aae32b32a0fe00bd49b32e4b9824c41f1f8c56dd789eb1603885.svg",
+            "bytes": 757,
+            "sha256": "8c5379eb5e77aae32b32a0fe00bd49b32e4b9824c41f1f8c56dd789eb1603885",
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/marco-violeta.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/fa6da3264f28e939e64b7ef21c251ac1bb1cc483c777870daed2d9d74c9415a9.png",
+            "bytes": 11717,
+            "sha256": "fa6da3264f28e939e64b7ef21c251ac1bb1cc483c777870daed2d9d74c9415a9",
+            "width": 640,
+            "height": 896,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/marco-violeta.png"
+          }
+        }
+      },
+      "colecciones.reverso": {
+        "kind": "collection-frame",
+        "fallback": "",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "svg",
+          "rendererRasterVariant": "png",
+          "webVariant": "png"
+        },
+        "files": {
+          "svg": {
+            "variant": "svg",
+            "path": "selected/fe9e6ad7372004fcd0c9089188fbe3bd87df882d7ffe70070af508cd33ffb753.svg",
+            "bytes": 513,
+            "sha256": "fe9e6ad7372004fcd0c9089188fbe3bd87df882d7ffe70070af508cd33ffb753",
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/reverso.svg"
+          },
+          "png": {
+            "variant": "png",
+            "path": "selected/82abfd42d97a6cf132a4a66137c97e7631ad9c628d455550902eb1e3716e3b5b.png",
+            "bytes": 46495,
+            "sha256": "82abfd42d97a6cf132a4a66137c97e7631ad9c628d455550902eb1e3716e3b5b",
+            "width": 640,
+            "height": 896,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/colecciones/reverso.png"
+          }
+        }
+      },
+      "badge.staff": {
+        "kind": "badge",
+        "fallback": "staff",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "png128",
+          "webVariant": "svg"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/7efe696ebc8495e0ee3f3619f97ed19144f5dfaa0457454db9239d6f00dc251d.png",
+            "bytes": 3034,
+            "sha256": "7efe696ebc8495e0ee3f3619f97ed19144f5dfaa0457454db9239d6f00dc251d",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/insignias/badge-staff-128.png"
+          },
+          "svg": {
+            "variant": "svg",
+            "path": "selected/9a07a9f81d4cd331b72b3c0cbc82637283b2e517b4941691dd57f48648b82a7b.svg",
+            "bytes": 300,
+            "sha256": "9a07a9f81d4cd331b72b3c0cbc82637283b2e517b4941691dd57f48648b82a7b",
+            "sourcePath": "06_ELEMENTOS/assets/insignias/badge-staff.svg"
+          }
+        }
+      },
+      "badge.supporter": {
+        "kind": "badge",
+        "fallback": "supporter",
+        "fixtureOnly": false,
+        "destinations": {
+          "rendererVariant": "png128",
+          "webVariant": "original_png"
+        },
+        "files": {
+          "png128": {
+            "variant": "png128",
+            "path": "selected/d2c6e5b5fdd269c3c09b1e92edfbb65623e01da9674efb86c5d58e9b1822c3f1.png",
+            "bytes": 17284,
+            "sha256": "d2c6e5b5fdd269c3c09b1e92edfbb65623e01da9674efb86c5d58e9b1822c3f1",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "06_ELEMENTOS/assets/insignias/badge-supporter-128.png"
+          },
+          "original_png": {
+            "variant": "original_png",
+            "path": "selected/87d8dc11a3a183b34220848f8f14045a9eb13780e04bf47f04818398065a42d3.png",
+            "width": 1254,
+            "height": 1254,
+            "frames": 1,
+            "bytes": 687323,
+            "sha256": "87d8dc11a3a183b34220848f8f14045a9eb13780e04bf47f04818398065a42d3",
+            "sourcePath": "06_ELEMENTOS/assets/insignias/badge-supporter-original.png"
+          }
+        }
+      },
+      "ticket.icon.abrir": {
+        "kind": "ticket-icon",
+        "fallback": "abrir",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "normal-128_png",
+          "webDarkVariant": "normal_svg",
+          "webLightVariant": "normal_svg",
+          "webSelectedVariant": "seleccionado_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "normal-128_png": {
+            "variant": "normal-128_png",
+            "path": "selected/9ff3925d47c4d222e7086b7397bc517828ac4aa62c133a15b40ad4f09886c122.png",
+            "bytes": 2833,
+            "sha256": "9ff3925d47c4d222e7086b7397bc517828ac4aa62c133a15b40ad4f09886c122",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/iconos/abrir-normal-128.png"
+          },
+          "normal_svg": {
+            "variant": "normal_svg",
+            "path": "selected/f223916d5c884b1e09839b2f2665aafe814a21e1b1c8933a64cc37e9cc4d8132.svg",
+            "bytes": 322,
+            "sha256": "f223916d5c884b1e09839b2f2665aafe814a21e1b1c8933a64cc37e9cc4d8132",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/abrir-normal.svg"
+          },
+          "seleccionado_svg": {
+            "variant": "seleccionado_svg",
+            "path": "selected/6b056daf5f2a48bb065554b9d5eb157f00feb6d90a17b84ddcaffc4926dada3d.svg",
+            "bytes": 322,
+            "sha256": "6b056daf5f2a48bb065554b9d5eb157f00feb6d90a17b84ddcaffc4926dada3d",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/abrir-seleccionado.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/e95395ae33426499d918cc1963350cf3d06745f6622621a9e6920a4a425e2a21.svg",
+            "bytes": 322,
+            "sha256": "e95395ae33426499d918cc1963350cf3d06745f6622621a9e6920a4a425e2a21",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/abrir-atenuado.svg"
+          }
+        }
+      },
+      "ticket.icon.ayuda": {
+        "kind": "ticket-icon",
+        "fallback": "ayuda",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "normal-128_png",
+          "webDarkVariant": "normal_svg",
+          "webLightVariant": "normal_svg",
+          "webSelectedVariant": "seleccionado_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "normal-128_png": {
+            "variant": "normal-128_png",
+            "path": "selected/1a5cd1f449a0faacc055494fcd30eb1df6c098bcc454ce979fb69550262ade9a.png",
+            "bytes": 3056,
+            "sha256": "1a5cd1f449a0faacc055494fcd30eb1df6c098bcc454ce979fb69550262ade9a",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/iconos/ayuda-normal-128.png"
+          },
+          "normal_svg": {
+            "variant": "normal_svg",
+            "path": "selected/f53314b39c4bf3873c46ba0ed56de3157d25165f3a49e6b9799a245cd41abe00.svg",
+            "bytes": 318,
+            "sha256": "f53314b39c4bf3873c46ba0ed56de3157d25165f3a49e6b9799a245cd41abe00",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/ayuda-normal.svg"
+          },
+          "seleccionado_svg": {
+            "variant": "seleccionado_svg",
+            "path": "selected/cc9181224f25cb43979148954d398636a7c0bc531935d8f28fac7b7e5302475a.svg",
+            "bytes": 318,
+            "sha256": "cc9181224f25cb43979148954d398636a7c0bc531935d8f28fac7b7e5302475a",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/ayuda-seleccionado.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/f2694e0af9fbdd9ec5bf6eb1e6c8aae7a8085d14292821fa524c76fd5b0543cb.svg",
+            "bytes": 318,
+            "sha256": "f2694e0af9fbdd9ec5bf6eb1e6c8aae7a8085d14292821fa524c76fd5b0543cb",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/ayuda-atenuado.svg"
+          }
+        }
+      },
+      "ticket.icon.tecnico": {
+        "kind": "ticket-icon",
+        "fallback": "tecnico",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "normal-128_png",
+          "webDarkVariant": "normal_svg",
+          "webLightVariant": "normal_svg",
+          "webSelectedVariant": "seleccionado_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "normal-128_png": {
+            "variant": "normal-128_png",
+            "path": "selected/529d9966331b09f22edeb7a22f12b32dbb37d401b638bf17ad34512cbc9d91f4.png",
+            "bytes": 3362,
+            "sha256": "529d9966331b09f22edeb7a22f12b32dbb37d401b638bf17ad34512cbc9d91f4",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/iconos/tecnico-normal-128.png"
+          },
+          "normal_svg": {
+            "variant": "normal_svg",
+            "path": "selected/90d22c1695056413048cd80e67b6e3fb0693c5abd6138117e092febb048a9ed7.svg",
+            "bytes": 303,
+            "sha256": "90d22c1695056413048cd80e67b6e3fb0693c5abd6138117e092febb048a9ed7",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/tecnico-normal.svg"
+          },
+          "seleccionado_svg": {
+            "variant": "seleccionado_svg",
+            "path": "selected/046fae124e3a4dc94ad7a5666fb8c53d656afd6fb1801ffffc8df85406ccc65d.svg",
+            "bytes": 303,
+            "sha256": "046fae124e3a4dc94ad7a5666fb8c53d656afd6fb1801ffffc8df85406ccc65d",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/tecnico-seleccionado.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/f4f04a9505822e9a9a9b173c999d15cb268bb98a082a031b5f864fdc4c383377.svg",
+            "bytes": 303,
+            "sha256": "f4f04a9505822e9a9a9b173c999d15cb268bb98a082a031b5f864fdc4c383377",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/tecnico-atenuado.svg"
+          }
+        }
+      },
+      "ticket.icon.reporte": {
+        "kind": "ticket-icon",
+        "fallback": "reporte",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "normal-128_png",
+          "webDarkVariant": "normal_svg",
+          "webLightVariant": "normal_svg",
+          "webSelectedVariant": "seleccionado_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "normal-128_png": {
+            "variant": "normal-128_png",
+            "path": "selected/8eb22d1a3207ea3c2a1230c6c7c860fbc33d589a8517ffd0a5af3c76530298d7.png",
+            "bytes": 3548,
+            "sha256": "8eb22d1a3207ea3c2a1230c6c7c860fbc33d589a8517ffd0a5af3c76530298d7",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/iconos/reporte-normal-128.png"
+          },
+          "normal_svg": {
+            "variant": "normal_svg",
+            "path": "selected/fb26aaada47d7e758c02d60da09e8ef5cbf93d72e659f9cc1ea095510861d480.svg",
+            "bytes": 327,
+            "sha256": "fb26aaada47d7e758c02d60da09e8ef5cbf93d72e659f9cc1ea095510861d480",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/reporte-normal.svg"
+          },
+          "seleccionado_svg": {
+            "variant": "seleccionado_svg",
+            "path": "selected/bc69d6c02fcdc3d5777115c30b0da95b90f44161f2ad913b4220972d187999f2.svg",
+            "bytes": 327,
+            "sha256": "bc69d6c02fcdc3d5777115c30b0da95b90f44161f2ad913b4220972d187999f2",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/reporte-seleccionado.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/714560dd9a0a9c11ea9c8261ad969145c6472c863b216b0d6726e9cb0937b597.svg",
+            "bytes": 327,
+            "sha256": "714560dd9a0a9c11ea9c8261ad969145c6472c863b216b0d6726e9cb0937b597",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/reporte-atenuado.svg"
+          }
+        }
+      },
+      "ticket.icon.atencion": {
+        "kind": "ticket-icon",
+        "fallback": "atencion",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "normal-128_png",
+          "webDarkVariant": "normal_svg",
+          "webLightVariant": "normal_svg",
+          "webSelectedVariant": "seleccionado_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "normal-128_png": {
+            "variant": "normal-128_png",
+            "path": "selected/eec33aff4d8952630b142f3bfb9209b33d550749888262a542601343b91d43d1.png",
+            "bytes": 3668,
+            "sha256": "eec33aff4d8952630b142f3bfb9209b33d550749888262a542601343b91d43d1",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/iconos/atencion-normal-128.png"
+          },
+          "normal_svg": {
+            "variant": "normal_svg",
+            "path": "selected/38f8be4c170f8f95101c9dcffbcb2ea1027e1e11e35276dda04c7fe23bbc25d3.svg",
+            "bytes": 410,
+            "sha256": "38f8be4c170f8f95101c9dcffbcb2ea1027e1e11e35276dda04c7fe23bbc25d3",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/atencion-normal.svg"
+          },
+          "seleccionado_svg": {
+            "variant": "seleccionado_svg",
+            "path": "selected/f9ac789767cb85cab822dc1aafeb0ed306d07ddc5f316b5806a2c59cd4e692e8.svg",
+            "bytes": 410,
+            "sha256": "f9ac789767cb85cab822dc1aafeb0ed306d07ddc5f316b5806a2c59cd4e692e8",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/atencion-seleccionado.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/204a1de3bb7176fe33ba905289e506254af497960daf771f3a4df72905adda1e.svg",
+            "bytes": 410,
+            "sha256": "204a1de3bb7176fe33ba905289e506254af497960daf771f3a4df72905adda1e",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/atencion-atenuado.svg"
+          }
+        }
+      },
+      "ticket.icon.espera": {
+        "kind": "ticket-icon",
+        "fallback": "espera",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "normal-128_png",
+          "webDarkVariant": "normal_svg",
+          "webLightVariant": "normal_svg",
+          "webSelectedVariant": "seleccionado_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "normal-128_png": {
+            "variant": "normal-128_png",
+            "path": "selected/1fe4dabb23288db3ee9a08a021270addeb7a592da245a9bea68d78a7fb638422.png",
+            "bytes": 3985,
+            "sha256": "1fe4dabb23288db3ee9a08a021270addeb7a592da245a9bea68d78a7fb638422",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/iconos/espera-normal-128.png"
+          },
+          "normal_svg": {
+            "variant": "normal_svg",
+            "path": "selected/b7e8fd13492913f5d57f2c8de8c513873060f13b217f8226ab693093465bd7f4.svg",
+            "bytes": 297,
+            "sha256": "b7e8fd13492913f5d57f2c8de8c513873060f13b217f8226ab693093465bd7f4",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/espera-normal.svg"
+          },
+          "seleccionado_svg": {
+            "variant": "seleccionado_svg",
+            "path": "selected/013509ade58d0c9055621da716a0fff6820064eb0385a1c4b670ce84180017f2.svg",
+            "bytes": 297,
+            "sha256": "013509ade58d0c9055621da716a0fff6820064eb0385a1c4b670ce84180017f2",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/espera-seleccionado.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/a89d9886eb5437990db25fdead17afbd9edf997f2f8243fe74814a538bb731d1.svg",
+            "bytes": 297,
+            "sha256": "a89d9886eb5437990db25fdead17afbd9edf997f2f8243fe74814a538bb731d1",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/espera-atenuado.svg"
+          }
+        }
+      },
+      "ticket.icon.cierre": {
+        "kind": "ticket-icon",
+        "fallback": "cierre",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "normal-128_png",
+          "webDarkVariant": "normal_svg",
+          "webLightVariant": "normal_svg",
+          "webSelectedVariant": "seleccionado_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "normal-128_png": {
+            "variant": "normal-128_png",
+            "path": "selected/056a89a67312da6aac911a342c477a8f6c5a002f46c99a1fddfd40bf72eafcc8.png",
+            "bytes": 3050,
+            "sha256": "056a89a67312da6aac911a342c477a8f6c5a002f46c99a1fddfd40bf72eafcc8",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/iconos/cierre-normal-128.png"
+          },
+          "normal_svg": {
+            "variant": "normal_svg",
+            "path": "selected/0295a04b1e5829aaff89b9199e83966cc5cfa6e5cb284a616192163e925226b4.svg",
+            "bytes": 320,
+            "sha256": "0295a04b1e5829aaff89b9199e83966cc5cfa6e5cb284a616192163e925226b4",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/cierre-normal.svg"
+          },
+          "seleccionado_svg": {
+            "variant": "seleccionado_svg",
+            "path": "selected/bd27024e0d6883782c14fd69456482f0cf53c8d9431b05e86340141a2b2965ef.svg",
+            "bytes": 320,
+            "sha256": "bd27024e0d6883782c14fd69456482f0cf53c8d9431b05e86340141a2b2965ef",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/cierre-seleccionado.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/98d2eeed2d431fd3350a201b08cdd95ca6f8dca4fc176a68afd2f7b980f44a63.svg",
+            "bytes": 320,
+            "sha256": "98d2eeed2d431fd3350a201b08cdd95ca6f8dca4fc176a68afd2f7b980f44a63",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/cierre-atenuado.svg"
+          }
+        }
+      },
+      "ticket.icon.valoracion": {
+        "kind": "ticket-icon",
+        "fallback": "valoracion",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "normal-128_png",
+          "webDarkVariant": "normal_svg",
+          "webLightVariant": "normal_svg",
+          "webSelectedVariant": "seleccionado_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "normal-128_png": {
+            "variant": "normal-128_png",
+            "path": "selected/c715667ec4c62aa87e819faabd8dc5fe8ce1a03f41bf386ef602d55c1a112037.png",
+            "bytes": 3287,
+            "sha256": "c715667ec4c62aa87e819faabd8dc5fe8ce1a03f41bf386ef602d55c1a112037",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "08_TICKETS_VISUAL/iconos/valoracion-normal-128.png"
+          },
+          "normal_svg": {
+            "variant": "normal_svg",
+            "path": "selected/7837c63f80e6e0cd50e0457893707045142e321ba7cbc2116f4d18b8177b2f27.svg",
+            "bytes": 288,
+            "sha256": "7837c63f80e6e0cd50e0457893707045142e321ba7cbc2116f4d18b8177b2f27",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/valoracion-normal.svg"
+          },
+          "seleccionado_svg": {
+            "variant": "seleccionado_svg",
+            "path": "selected/4305e2ed8bb795610a2fb8c46a4e802964d425bd7c46c39f511077670ca4353e.svg",
+            "bytes": 288,
+            "sha256": "4305e2ed8bb795610a2fb8c46a4e802964d425bd7c46c39f511077670ca4353e",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/valoracion-seleccionado.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "selected/31ee17cd528b2e710ea0865865ab8b1856e7910062d1b51bb1ae93d0f62e28b2.svg",
+            "bytes": 288,
+            "sha256": "31ee17cd528b2e710ea0865865ab8b1856e7910062d1b51bb1ae93d0f62e28b2",
+            "sourcePath": "08_TICKETS_VISUAL/iconos/valoracion-atenuado.svg"
+          }
+        }
+      }
+    },
+    "aliases": {
+      "analytics": "icon.chart",
+      "apply": "icon.save",
+      "architect": "icon.blueprint",
+      "automation": "icon.automation",
+      "autoplay": "icon.autoplay",
+      "back": "icon.previous",
+      "backup": "icon.export",
+      "ban": "icon.shield",
+      "bell": "icon.bell",
+      "calendar": "icon.calendar",
+      "case": "icon.case",
+      "category": "icon.template",
+      "channel": "icon.voice",
+      "claim": "icon.claim",
+      "close": "icon.close",
+      "collection": "icon.image",
+      "currency": "icon.wallet",
+      "decoration": "icon.brush",
+      "delete": "icon.close",
+      "diff": "icon.edit",
+      "document": "icon.transcript",
+      "download": "icon.export",
+      "edit": "icon.edit",
+      "error": "icon.error",
+      "evidence": "icon.transcript",
+      "expired": "icon.warning",
+      "eye": "icon.info",
+      "farewell": "icon.image",
+      "filter": "icon.search",
+      "gift": "icon.gift",
+      "globe": "icon.feed",
+      "heart": "icon.like",
+      "help": "icon.help",
+      "history": "icon.info",
+      "home": "icon.profile",
+      "info": "icon.info",
+      "kick": "icon.shield",
+      "level": "icon.levels",
+      "link": "icon.info",
+      "live": "icon.play",
+      "loading": "icon.loading",
+      "lock": "icon.lock",
+      "logout": "icon.close",
+      "lyrics": "icon.lyrics",
+      "minus": "icon.volume-down",
+      "music": "icon.lyrics",
+      "muted": "icon.volume-down",
+      "next": "icon.skip",
+      "pause": "icon.pause",
+      "play": "icon.play",
+      "plus": "icon.volume-up",
+      "poll": "icon.idea",
+      "previous": "icon.previous",
+      "progress": "icon.levels",
+      "queue": "icon.queue",
+      "raid": "icon.shield",
+      "refresh": "icon.search",
+      "reopen": "icon.reopen",
+      "repeat": "icon.loop",
+      "report": "icon.case",
+      "restore": "icon.undo",
+      "role": "icon.roles",
+      "save": "icon.save",
+      "search": "icon.search",
+      "server": "icon.blueprint",
+      "settings": "icon.edit",
+      "setup": "icon.edit",
+      "shield": "icon.shield",
+      "shuffle": "icon.shuffle",
+      "skip": "icon.skip",
+      "star": "icon.star",
+      "stop": "icon.stop",
+      "success": "icon.success",
+      "suggestion": "icon.idea",
+      "template": "icon.template",
+      "ticket": "icon.ticket",
+      "timeout": "icon.shield",
+      "transfer": "icon.voice",
+      "unlock": "icon.verify",
+      "upload": "icon.image",
+      "user": "icon.profile",
+      "verify": "icon.verify",
+      "voice": "icon.voice",
+      "vol_down": "icon.volume-down",
+      "vol_up": "icon.volume-up",
+      "volume": "icon.volume-up",
+      "wallet": "icon.wallet",
+      "warning": "icon.warning",
+      "welcome": "icon.image"
+    },
+    "uploadPlan": [
+      {
+        "key": "icon.automation",
+        "storageKey": "automation",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_automation_ff8ac28b",
+        "sha256": "ff8ac28b1b6cd3c406edaee53ad9c0516a102678c1c125682932aad0b9651327"
+      },
+      {
+        "key": "icon.autoplay",
+        "storageKey": "autoplay",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_autoplay_6600f8b4",
+        "sha256": "6600f8b46ebd5c248fd48c4e00dee75706113855d25474bbbd5cefb5669d46f3"
+      },
+      {
+        "key": "icon.bell",
+        "storageKey": "bell",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_bell_1d106d29",
+        "sha256": "1d106d29ea6097982415065825cfa1ba9f25db5298ef92ecf25f093dd3d71ee9"
+      },
+      {
+        "key": "icon.blueprint",
+        "storageKey": "blueprint",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_blueprint_67222099",
+        "sha256": "6722209919f7ce848ea309ea69b88e19491c18b7e8167b8d2e9910539d4c04c1"
+      },
+      {
+        "key": "icon.brush",
+        "storageKey": "brush",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_brush_df0e7815",
+        "sha256": "df0e78150865a97464b75266041338e85e5aaf206bd519a8edb62d1573b18f50"
+      },
+      {
+        "key": "icon.calendar",
+        "storageKey": "calendar",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_calendar_16f3acf0",
+        "sha256": "16f3acf05b1f0ea3bcce938e0e069ae5b8b1e7a3ab3b0daa11619a7cdd39a8d9"
+      },
+      {
+        "key": "icon.case",
+        "storageKey": "case",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_case_a65acc8f",
+        "sha256": "a65acc8f94cb94c53803457b388efc83c4aec9d0c77d19a89beb31b222aff69f"
+      },
+      {
+        "key": "icon.chart",
+        "storageKey": "chart",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_chart_f0d66a99",
+        "sha256": "f0d66a99f9527621842fbf9a50aff6abf9e35bfb9d325b7bbfa1a36599c6cd79"
+      },
+      {
+        "key": "icon.claim",
+        "storageKey": "claim",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_claim_c162029e",
+        "sha256": "c162029ed4e62ed3fe43ceafb6c794a8f41cdcc12e2d35a7b0443f276f76f3b5"
+      },
+      {
+        "key": "icon.close",
+        "storageKey": "close",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_close_be6c8ad7",
+        "sha256": "be6c8ad7787c71d0ba6c96973cf5cf8d57bf743152d7dfe6c745b9f79aad2d8c"
+      },
+      {
+        "key": "icon.edit",
+        "storageKey": "edit",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_edit_cd04c7f9",
+        "sha256": "cd04c7f92611823426b665f2761c6fa79f3393cbb0e76d1b217ec57b5ee101c2"
+      },
+      {
+        "key": "icon.error",
+        "storageKey": "error",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_error_28ca2a5b",
+        "sha256": "28ca2a5b18127b4365b4a0ab06fdf991cea97f2d97592d4a66186847f901d43a"
+      },
+      {
+        "key": "icon.export",
+        "storageKey": "export",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_export_353ce35b",
+        "sha256": "353ce35b04beeee12f2f70062dbc37a3fcdf290f310fab6d64531d42b3278b7c"
+      },
+      {
+        "key": "icon.feed",
+        "storageKey": "feed",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_feed_5d1fed56",
+        "sha256": "5d1fed56090dcd9cc74cdb303e0f30dd5ed796aed811b13e4dcb5b4409cf97e7"
+      },
+      {
+        "key": "icon.game",
+        "storageKey": "game",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_game_98c0c7c7",
+        "sha256": "98c0c7c7150efb0235b5d862b8c04beb23357c7d85ced60b409a26900f70277f"
+      },
+      {
+        "key": "icon.gift",
+        "storageKey": "gift",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_gift_9b164020",
+        "sha256": "9b1640207c542285a98e99c07c533b2cf4bb4b0bb40d9db24add66dfa8809550"
+      },
+      {
+        "key": "icon.help",
+        "storageKey": "help",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_help_4259f92b",
+        "sha256": "4259f92b31739b7d2fc4ac370e82576f2965e13f7254a631cd7a644051f85ad9"
+      },
+      {
+        "key": "icon.idea",
+        "storageKey": "idea",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_idea_4fcf0f0d",
+        "sha256": "4fcf0f0d33bdfa43b5d1a00b4f6c307ae93918eeff88f5c72c63e676a2fb442f"
+      },
+      {
+        "key": "icon.image",
+        "storageKey": "image",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_image_1dc1f216",
+        "sha256": "1dc1f216ab0e4a5f355db68a6164cd6430de900ef4c6d6d5c944ff35120cc31b"
+      },
+      {
+        "key": "icon.info",
+        "storageKey": "info",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_info_92c364f3",
+        "sha256": "92c364f357c06bd5230dd9f46cde38e20659714c63fb4d622040f28f5bcdab3f"
+      },
+      {
+        "key": "icon.levels",
+        "storageKey": "levels",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_levels_2514d72c",
+        "sha256": "2514d72cd82852a5933d8bc89dd5e43e28203f09c870c8c2f6e6ff96036538af"
+      },
+      {
+        "key": "icon.like",
+        "storageKey": "heart",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_heart_afe77ecb",
+        "sha256": "afe77ecb30e7040ecb3c21733ecee6cd11f449fb06bd869db330040c201cf0c1"
+      },
+      {
+        "key": "icon.loading",
+        "storageKey": "loading",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_loading_6caa0944",
+        "sha256": "6caa0944be86a06ea6871e03e651f1513830958e253cdaf7d90b07c213988d34"
+      },
+      {
+        "key": "icon.lock",
+        "storageKey": "lock",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_lock_c59eb2a1",
+        "sha256": "c59eb2a143af6c6f5d09e1881c56c426af2292c8022ba18c5c959893cd8a694e"
+      },
+      {
+        "key": "icon.loop",
+        "storageKey": "repeat",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_repeat_adf56a41",
+        "sha256": "adf56a41033a40c0a6d59536a00dc6cd9918db7419f832064a08427deea952dc"
+      },
+      {
+        "key": "icon.lyrics",
+        "storageKey": "lyrics",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_lyrics_0f1cadfe",
+        "sha256": "0f1cadfe9ae1680495d758725a25cfb241281bd9a3860342379ef150e0851e84"
+      },
+      {
+        "key": "icon.pause",
+        "storageKey": "pause",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_pause_7fae00b7",
+        "sha256": "7fae00b7a073cb0835749a073d4748ae54d993bf0d3e71f2f4a916530d25ce6a"
+      },
+      {
+        "key": "icon.play",
+        "storageKey": "play",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_play_1f52bad9",
+        "sha256": "1f52bad956d50e5cf5b2fa0bee737e2081efce1e3589bc7191676ffe85654ace"
+      },
+      {
+        "key": "icon.previous",
+        "storageKey": "previous",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_previous_2bb7427f",
+        "sha256": "2bb7427f99af84f618775fec9965a0c9ce57c9f6e19b107cc1b584c7b8298341"
+      },
+      {
+        "key": "icon.profile",
+        "storageKey": "profile",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_profile_12007ca0",
+        "sha256": "12007ca01159f358234825efae254532a5e674a527868a68dd0eabee6fe5158e"
+      },
+      {
+        "key": "icon.queue",
+        "storageKey": "queue",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_queue_234b0c98",
+        "sha256": "234b0c98341383f882862d2dd53e956f307af2640c56962b43dc43d940d851e3"
+      },
+      {
+        "key": "icon.reopen",
+        "storageKey": "reopen",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_reopen_ad1e2d48",
+        "sha256": "ad1e2d489f48e8aeb0fabc1ad2d5909fda941d9d8655e1f946e62e9b3dc1bb04"
+      },
+      {
+        "key": "icon.roles",
+        "storageKey": "roles",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_roles_db2101ae",
+        "sha256": "db2101ae41f2fe7b42fd32fba5605f5e22acad62067343be04c0b387b9ebf68b"
+      },
+      {
+        "key": "icon.save",
+        "storageKey": "save",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_save_0c3c38cc",
+        "sha256": "0c3c38cc276336b36a9d034811ec7b2e03264c0d2a11bb8866ea1a874bedac68"
+      },
+      {
+        "key": "icon.search",
+        "storageKey": "search",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_search_9dff64f1",
+        "sha256": "9dff64f188f698607378a75152d3d155743a6b236f80d29b35b7088a678c511d"
+      },
+      {
+        "key": "icon.send",
+        "storageKey": "send",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_send_1c015a92",
+        "sha256": "1c015a925e6a0d22f51e4aa7745f845b57ce3481daad7145f251d8bee65958b6"
+      },
+      {
+        "key": "icon.settings",
+        "storageKey": "settings",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_settings_6494ae06",
+        "sha256": "6494ae069de4d5e17933e3d6aa68d18824361fb287d8d9535ad2cf69580b2da8"
+      },
+      {
+        "key": "icon.shield",
+        "storageKey": "shield",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_shield_b656aad9",
+        "sha256": "b656aad9134b8c9e2eefafc4471eaa1d4ed7e2fa149cf45898e6988e1fb2ae18"
+      },
+      {
+        "key": "icon.shuffle",
+        "storageKey": "shuffle",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_shuffle_ee8d4410",
+        "sha256": "ee8d441094253425f3569acc0292c3fa02517c8d60f550fc1b7a5f4d81377109"
+      },
+      {
+        "key": "icon.skip",
+        "storageKey": "skip",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_skip_0158d45b",
+        "sha256": "0158d45bc7ba690c562f2158edd40f4de05ab6f705d9ce340e52911466cf0381"
+      },
+      {
+        "key": "icon.star",
+        "storageKey": "star",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_star_ccec2e16",
+        "sha256": "ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e"
+      },
+      {
+        "key": "icon.stop",
+        "storageKey": "stop",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_stop_449fa926",
+        "sha256": "449fa926f156219c95b1273f983a6d5c9fb6e28f6b047f956c854de3073eb055"
+      },
+      {
+        "key": "icon.success",
+        "storageKey": "success",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_success_b5c6e0de",
+        "sha256": "b5c6e0de45970dee562558d690d24fb22fef01278ec0ae11f745bc73128f4bff"
+      },
+      {
+        "key": "icon.template",
+        "storageKey": "template",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_template_8600a243",
+        "sha256": "8600a24375134e2ace37a33c850cfe6cf66f74dcea0961cc71b06c620feb8a96"
+      },
+      {
+        "key": "icon.ticket",
+        "storageKey": "ticket",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_ticket_7dea9c5f",
+        "sha256": "7dea9c5fde6f2b9d2756a9b370db9e945c8034e9f636e318a24c2f27621acd0a"
+      },
+      {
+        "key": "icon.transcript",
+        "storageKey": "transcript",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_transcript_709bf89d",
+        "sha256": "709bf89d22bb44721dd5f7728d55c97545b6a27ba39c9d673b7b70bed26ee7c1"
+      },
+      {
+        "key": "icon.undo",
+        "storageKey": "undo",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_undo_9f8d221b",
+        "sha256": "9f8d221be3adb913a2fe945be4321c27f2ed76ff2672f90692a8e1ec54cc8d8f"
+      },
+      {
+        "key": "icon.verify",
+        "storageKey": "verify",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_verify_fb7115b1",
+        "sha256": "fb7115b166dbb64f7652a10a44c2f7a3d1c0780d25217b90a3523dd0d117ac4d"
+      },
+      {
+        "key": "icon.voice",
+        "storageKey": "voice",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_voice_e90ec587",
+        "sha256": "e90ec587e40f99d7e9b2d79e73e9efeaf0dc3fc913873587afae3dd1f7ab29cf"
+      },
+      {
+        "key": "icon.volume-down",
+        "storageKey": "vol_down",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_vol_down_7871f8aa",
+        "sha256": "7871f8aaec7d50931715d00d8570b35c010c34138f0bcbb05fcd4952f627b1f4"
+      },
+      {
+        "key": "icon.volume-up",
+        "storageKey": "vol_up",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_vol_up_10c48e81",
+        "sha256": "10c48e81142a5e09656fb6ebb275bab616274c680dbe6d42d2dfcd2c0e21337c"
+      },
+      {
+        "key": "icon.volume",
+        "storageKey": "volume",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_volume_f91e8bc5",
+        "sha256": "f91e8bc589e1130717b74964bd5bb9ad7fb61af109fe2c6d62206b8da139a72e"
+      },
+      {
+        "key": "icon.wallet",
+        "storageKey": "wallet",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_wallet_0f29a86c",
+        "sha256": "0f29a86cf03d0860182b3a65cac3a8560f02f85fe6cf6bcd10d942a6e88e0dab"
+      },
+      {
+        "key": "icon.warning",
+        "storageKey": "warning",
+        "variant": "oscuro_png",
+        "animated": false,
+        "name": "obey_warning_0085d3d2",
+        "sha256": "0085d3d241714a4a24df581de4daa7a00441af1db4f92dc0e53b98919261588e"
+      },
+      {
+        "key": "emoji.ayuda",
+        "storageKey": "char_ayuda",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_ayuda_7903a247",
+        "sha256": "7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45"
+      },
+      {
+        "key": "emoji.bienvenida",
+        "storageKey": "char_bienvenida",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_bienvenida_c9b81826",
+        "sha256": "c9b81826cab7b9a053d1532e18660d88a4dfd73517034c5dbe399751d1278238"
+      },
+      {
+        "key": "emoji.espera",
+        "storageKey": "char_espera",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_espera_4d6ed1b9",
+        "sha256": "4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3"
+      },
+      {
+        "key": "emoji.exito",
+        "storageKey": "char_exito",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_exito_d31398db",
+        "sha256": "d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe"
+      },
+      {
+        "key": "emoji.moderacion",
+        "storageKey": "char_moderacion",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_moderacion_ab836ce9",
+        "sha256": "ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45"
+      },
+      {
+        "key": "emoji.musica",
+        "storageKey": "char_musica",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_musica_140bf397",
+        "sha256": "140bf3978577854a4d679ac693383572f5949a5e8cadf1c0f8d039d83594cf5b"
+      },
+      {
+        "key": "emoji.colecciones",
+        "storageKey": "char_colecciones",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_colecciones_afbe4a4d",
+        "sha256": "afbe4a4d7f5ee44c2fd3658b4baf30700e56c319f690aa9d96e15e88eb47e4ae"
+      },
+      {
+        "key": "emoji.configuracion",
+        "storageKey": "char_configuracion",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_configuracion_551d6873",
+        "sha256": "551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224"
+      },
+      {
+        "key": "emoji.sobre",
+        "storageKey": "char_sobre",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_sobre_b02aebd9",
+        "sha256": "b02aebd9c36a17b7e2bd5cabb4a397cc53df52d66ac99f11e9178a9f6cd2a762"
+      },
+      {
+        "key": "emoji.gracias",
+        "storageKey": "char_gracias",
+        "variant": "png128",
+        "animated": false,
+        "name": "obey_char_gracias_16e8bd94",
+        "sha256": "16e8bd94978a17bb5312dba7ede94fa6435c764fbfe206fd38983ee757db80e7"
+      },
+      {
+        "key": "motion.cargando",
+        "storageKey": "motion_cargando",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_cargando_bc5d0145",
+        "sha256": "bc5d0145ff82d404c923a778bc27ae029a844cb607a8a119799a6644f23fa104"
+      },
+      {
+        "key": "motion.carta-especial",
+        "storageKey": "motion_carta_espec",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_carta_espec_107ff923",
+        "sha256": "107ff9234fef6c4dc9e1456d0427401588583374665b9d4fa850eb121daf5d21"
+      },
+      {
+        "key": "motion.exito",
+        "storageKey": "motion_exito",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_exito_6ffcbc50",
+        "sha256": "6ffcbc501c999e2a4f48ad51b193da9aa0e9b3d4c0d5330329c85089d13f189e"
+      },
+      {
+        "key": "motion.favorito",
+        "storageKey": "motion_favorito",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_favorito_1bb961e6",
+        "sha256": "1bb961e675f370e3b7234f06cf568cac36f3b15eeee1f4b493efb4abb7892d46"
+      },
+      {
+        "key": "motion.reproduciendo",
+        "storageKey": "motion_reproducien",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_reproducien_5b3b93c6",
+        "sha256": "5b3b93c6e7db6438a78b4d5ad0aaa52e6008a7bdf8a26237baa641992d1fb7d3"
+      },
+      {
+        "key": "motion.ticket-espera",
+        "storageKey": "motion_ticket_espe",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_ticket_espe_47ebadbd",
+        "sha256": "47ebadbd8aaead9cecd837fe4cf7d1dd776bf7c0748527f7eca8bf486c01249f"
+      },
+      {
+        "key": "motion.ticket-atencion",
+        "storageKey": "motion_ticket_aten",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_ticket_aten_6ce0e34e",
+        "sha256": "6ce0e34ed543014faa7deff0442951f4d7f095ddfcab56298c4725adcac00ed9"
+      },
+      {
+        "key": "motion.ticket-confirmado",
+        "storageKey": "motion_ticket_conf",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_ticket_conf_abeae545",
+        "sha256": "abeae545e529a5e9c788edd3cf21ee6b0c29363d38135e0f8d269a0528e1ff63"
+      },
+      {
+        "key": "motion.character-sobre",
+        "storageKey": "motion_character_s",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_character_s_b7a86e37",
+        "sha256": "b7a86e371fe5d7f5a49eccaad9c1f9208c26673831339df1aea15333019fbf5f"
+      },
+      {
+        "key": "motion.character-gracias",
+        "storageKey": "motion_character_g",
+        "variant": "gif128",
+        "animated": true,
+        "name": "obey_motion_character_g_dac30a71",
+        "sha256": "dac30a71c6f756d6d9b6f71c0a6b590bdafa4e81a2005bc5f138bb7e589e52a3"
+      },
+      {
+        "key": "ticket.icon.abrir",
+        "storageKey": "ticket_abrir",
+        "variant": "normal-128_png",
+        "animated": false,
+        "name": "obey_ticket_abrir_9ff3925d",
+        "sha256": "9ff3925d47c4d222e7086b7397bc517828ac4aa62c133a15b40ad4f09886c122"
+      },
+      {
+        "key": "ticket.icon.ayuda",
+        "storageKey": "ticket_ayuda",
+        "variant": "normal-128_png",
+        "animated": false,
+        "name": "obey_ticket_ayuda_1a5cd1f4",
+        "sha256": "1a5cd1f449a0faacc055494fcd30eb1df6c098bcc454ce979fb69550262ade9a"
+      },
+      {
+        "key": "ticket.icon.tecnico",
+        "storageKey": "ticket_tecnico",
+        "variant": "normal-128_png",
+        "animated": false,
+        "name": "obey_ticket_tecnico_529d9966",
+        "sha256": "529d9966331b09f22edeb7a22f12b32dbb37d401b638bf17ad34512cbc9d91f4"
+      },
+      {
+        "key": "ticket.icon.reporte",
+        "storageKey": "ticket_reporte",
+        "variant": "normal-128_png",
+        "animated": false,
+        "name": "obey_ticket_reporte_8eb22d1a",
+        "sha256": "8eb22d1a3207ea3c2a1230c6c7c860fbc33d589a8517ffd0a5af3c76530298d7"
+      },
+      {
+        "key": "ticket.icon.atencion",
+        "storageKey": "ticket_atencion",
+        "variant": "normal-128_png",
+        "animated": false,
+        "name": "obey_ticket_atencion_eec33aff",
+        "sha256": "eec33aff4d8952630b142f3bfb9209b33d550749888262a542601343b91d43d1"
+      },
+      {
+        "key": "ticket.icon.espera",
+        "storageKey": "ticket_espera",
+        "variant": "normal-128_png",
+        "animated": false,
+        "name": "obey_ticket_espera_1fe4dabb",
+        "sha256": "1fe4dabb23288db3ee9a08a021270addeb7a592da245a9bea68d78a7fb638422"
+      },
+      {
+        "key": "ticket.icon.cierre",
+        "storageKey": "ticket_cierre",
+        "variant": "normal-128_png",
+        "animated": false,
+        "name": "obey_ticket_cierre_056a89a6",
+        "sha256": "056a89a67312da6aac911a342c477a8f6c5a002f46c99a1fddfd40bf72eafcc8"
+      },
+      {
+        "key": "ticket.icon.valoracion",
+        "storageKey": "ticket_valoracion",
+        "variant": "normal-128_png",
+        "animated": false,
+        "name": "obey_ticket_valoracion_c715667e",
+        "sha256": "c715667ec4c62aa87e819faabd8dc5fe8ce1a03f41bf386ef602d55c1a112037"
+      }
+    ]
+  }
 }
