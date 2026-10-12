@@ -1,0 +1,13 @@
+.module-config-heading{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.module-config-heading h1{margin:.5rem 0;font-size:2rem}.module-config-heading a,.module-config-note{color:var(--muted)}
+.module-config-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+#module-configuration .card{min-width:0}#module-configuration .card-head h2{font-size:1.125rem;margin:0}
+#module-configuration fieldset{border:0;padding:0;margin:0;min-width:0;display:grid;gap:.75rem}
+#module-configuration label{font-weight:600}#module-configuration select,#module-configuration textarea{width:100%;min-width:0;padding:.75rem;border-radius:.5rem;border:1px solid var(--border);background:var(--surf2);color:var(--text);font:inherit}
+.module-config-note{font-size:.875rem;line-height:1.6;margin:0 0 .5rem}.module-config-actions{display:flex;flex-wrap:wrap;gap:.75rem}
+#module-configuration pre,#config-diff dd{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.6}#config-diff{margin:0;display:grid;gap:.75rem}#config-diff dt{font-weight:600}#config-diff dd{margin:0 0 1rem}
+#config-status{min-height:1.5rem;margin-bottom:1rem}#config-status[data-state=error],#config-conflict{color:var(--red,#ff8e91)}
+#module-configuration [hidden]{display:none!important}#module-configuration button:disabled{opacity:.5;cursor:default}
+#module-configuration button:focus-visible,#module-configuration select:focus-visible,#module-configuration textarea:focus-visible{outline:2px solid var(--p);outline-offset:3px}
+#module-configuration .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(max-width:800px){.module-config-grid{grid-template-columns:1fr}.module-config-heading{align-items:flex-start;flex-direction:column}.module-config-actions .btn{flex:1;justify-content:center}}

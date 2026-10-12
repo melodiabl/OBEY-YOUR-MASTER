@@ -1,0 +1,10 @@
+{
+  "database": "isolated",
+  "draftDoesNotActivate": true,
+  "crossInstanceDraftConflict": true,
+  "crossInstancePublishConflict": true,
+  "atomicAliasesAndDraft": true,
+  "legacyDataPreserved": true,
+  "idempotentPublication": true,
+  "legacyDriftDetected": true
+}

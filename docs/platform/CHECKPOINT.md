@@ -8,6 +8,8 @@ Paquete consolidado en `/home/OBEY_Documentacion`. Primera entrega local: 103 cl
 
 ## Implementación actual
 
+- Segunda entrega consolidada: capacidades normalizadas y welcome como consumidor de configuración versionada; borrador/publicación de canal y mensaje, CAS compartido con writers legacy, vista previa del renderer actual y editor `/configuration/:guildId/welcome`. Suite 293/293; conflictos entre instancias confirmados en Mongo aislado; Chromium verifica publicación, CSRF, permisos, recuperación, texto seguro, teclado y cuatro anchos. Integra la base local previa de bienvenida; conserva cambios de Architect. Detalles y límites en [MODULE-CONFIGURATION.md](MODULE-CONFIGURATION.md). Configuración de otros módulos, retención/historial y Discord real pendientes. Siguiente: ayuda/utilities desde el registro y renderer de tarjetas.
+
 - Se trasladaron los recursos, controles y letras ya verificados desde la copia de trabajo al proyecto principal: T02–T04 locales y T19 Discord parcial.
 - T05 parcial: registry inmutable, manifest musical con inventario de los comandos cargados y referencia al mismo `client.music`. Habilitación por guild, manifests de otros módulos y metadata completa siguen pendientes. Sin segundo servicio/cola/sesión.
 - T06/T07 parciales: política común `canManageGuild`, autenticación HTTP común con refresh y respuestas JSON para API; login rota y guarda sesión antes del redirect. `/api/top/tracks`, `/api/top/users`, `/api/top/guilds` y status comprueban permisos actualizados. Ranking de guilds filtra antes de agregar en Mongo. `/api/nowplaying` devuelve cero pistas al público y solo servidores administrables para sesiones válidas. Landing sin modificaciones.

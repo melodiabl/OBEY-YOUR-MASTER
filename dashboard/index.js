@@ -10,7 +10,7 @@ const { freshGuildPermissions } = require('./permissions')
 const { createMusicRealtime, createSocketAuthorizer } = require('./music-realtime')
 const { canManageGuild } = require('../handlers/permissions')
 const { sessionAuth, establishSession } = require('./auth')
-const { welcomeMessage, saveWelcomeMessage } = require('../handlers/config-service')
+const { welcomeConfiguration } = require('../handlers/welcome-configuration')
 
 module.exports = async client => {
   const app    = express()
@@ -41,6 +41,7 @@ module.exports = async client => {
   }
 
   app.use('/api/architect', express.json({ limit: '1mb' }))
+  app.use('/api/config', express.json({ limit: '16kb' }))
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
   app.use(express.static(path.join(__dirname, 'public')))
@@ -105,6 +106,8 @@ module.exports = async client => {
   require('../handlers/music/apiRoutes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./music-visibility')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./architect-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
+  require('./welcome-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
+  require('./module-configuration-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
 
   // ─── Public routes ────────────────────────────────────────────────────────
 
@@ -333,7 +336,8 @@ module.exports = async client => {
     if (!canManageGuild(req.session.user, req.params.guildId))
       return res.redirect('/dashboard?error=no_permission')
 
-    const settings = { ...(client.settings.get(guild.id) || {}), welcomeMessage: welcomeMessage(client.settings, guild.id) }
+    const welcome=await welcomeConfiguration(client.settings).read(guild.id)
+    const settings = { ...(client.settings.get(guild.id) || {}), welcomeMessage: welcome.message, welcomeChannel:welcome.channelId, welcomeRevision:welcome.revision }
     const allCh    = [...guild.channels.cache.values()]
 
     res.render('pages/guild', {
@@ -390,8 +394,16 @@ module.exports = async client => {
     patch.antiSelfbot = b.antiSelfbot === 'on'
 
     // Welcome / leave
-    if (b.welcomeChannel !== undefined) patch.welcomeChannel = b.welcomeChannel || null
-    if (b.welcomeMessage !== undefined) patch.welcomeMessage = String(b.welcomeMessage || '').slice(0, 500)
+    const welcomePatch={}
+    if(b.welcomeChannel!==undefined)welcomePatch.channelId=b.welcomeChannel||null
+    if(b.welcomeMessage!==undefined)welcomePatch.message=b.welcomeMessage
+    if(Object.keys(welcomePatch).length){
+      try{
+        if(typeof b.welcomeRevision!=='string')return res.status(400).json({error:'invalid_configuration'})
+        if(Object.hasOwn(welcomePatch,'channelId'))await require('../handlers/welcome-access').assertWelcomeChannel(guild,req.session.user.id,welcomePatch.channelId)
+        await welcomeConfiguration(client.settings).save(guild.id,welcomePatch,b.welcomeRevision)
+      }catch(error){return res.status(error.code==='configuration_conflict'?409:error.code==='configuration_permissions'?403:error.code==='invalid_configuration'?400:503).json({error:error.code||'configuration_storage'})}
+    }
     if (b.leaveChannel   !== undefined) patch.leaveChannel   = b.leaveChannel   || null
     if (b.leaveMessage   !== undefined) patch.leaveMessage   = String(b.leaveMessage   || '').slice(0, 500)
 
@@ -422,7 +434,6 @@ module.exports = async client => {
     const botPatch = {}
     if (patch.prefix   !== undefined) botPatch.prefix   = patch.prefix
     if (patch.language !== undefined) botPatch.language = patch.language
-    if (patch.welcomeChannel !== undefined) botPatch['welcome.channel'] = patch.welcomeChannel || 'nochannel'
     if (patch.leaveChannel   !== undefined) botPatch['leave.channel']   = patch.leaveChannel   || 'nochannel'
     if (patch.leaveMessage   !== undefined) botPatch['leave.msg']       = patch.leaveMessage
     if (patch.muteRole       !== undefined) botPatch['mute.roleId']     = patch.muteRole       || null
@@ -445,8 +456,6 @@ module.exports = async client => {
 
     if (patch.prefix   !== undefined) s.set(gid, patch.prefix,   'prefix')
     if (patch.language !== undefined) s.set(gid, patch.language, 'language')
-    if (patch.welcomeChannel !== undefined) s.set(gid, patch.welcomeChannel || 'nochannel', 'welcome.channel')
-    if (patch.welcomeMessage !== undefined) await saveWelcomeMessage(s, gid, patch.welcomeMessage)
     if (patch.leaveChannel   !== undefined) s.set(gid, patch.leaveChannel   || 'nochannel', 'leave.channel')
     if (patch.leaveMessage   !== undefined) s.set(gid, patch.leaveMessage,   'leave.msg')
     if (patch.muteRole       !== undefined) s.set(gid, patch.muteRole        || null, 'mute.roleId')

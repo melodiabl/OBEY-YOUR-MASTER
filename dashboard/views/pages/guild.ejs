@@ -32,8 +32,9 @@
       <span><i class="fas fa-tag"></i> <%= roles.length %> roles</span>
     </div>
   </div>
-  <div class="gh-actions" style="display:flex;gap:8px">
+  <div class="gh-actions" style="display:flex;gap:8px;flex-wrap:wrap">
     <a href="/architect/<%= guild.id %>" class="btn btn-sec btn-sm">Architect</a>
+    <a href="/configuration/<%= guild.id %>/welcome" class="btn btn-sec btn-sm">Bienvenida</a>
     <a href="/music/<%= guild.id %>" class="btn btn-p btn-sm"><i class="fas fa-music"></i> Música</a>
     <a href="/stats/<%= guild.id %>" class="btn btn-sec btn-sm"><i class="fas fa-chart-line"></i> Estadísticas</a>
     <a href="/dashboard" class="btn btn-ghost btn-sm"><i class="fas fa-arrow-left"></i> Volver</a>
@@ -223,6 +224,7 @@
 
     <!-- ── BIENVENIDA ── -->
     <div class="section-panel" id="tab-welcome">
+      <input type="hidden" name="welcomeRevision" value="<%= settings.welcomeRevision %>">
       <div class="card">
         <div class="card-head">
           <div class="card-ico ico-green"><i class="fas fa-door-open"></i></div>
@@ -241,7 +243,7 @@
           <div class="form-group">
             <label class="form-label">Mensaje de bienvenida</label>
             <span class="form-help">Variables: <code class="font-mono">{user}</code> mención · <code class="font-mono">{server}</code> nombre del servidor · <code class="font-mono">{count}</code> nº de miembros</span>
-            <textarea name="welcomeMessage" class="form-textarea" placeholder="¡Bienvenido {user} a {server}! 🎉"><%= settings.welcomeMessage ?? '' %></textarea>
+            <textarea name="welcomeMessage" class="form-textarea" maxlength="500" placeholder="¡Bienvenido {user} a {server}! 🎉"><%= settings.welcomeMessage ?? '' %></textarea>
           </div>
         </div>
       </div>

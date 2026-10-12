@@ -1463,6 +1463,13 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] R03: Sincronizar las 82 entradas canónicas sin duplicar aliases, preservar checkpoints y recursos válidos ante fallo, adaptar MIME y mapa v2. Verificados PNG/GIF, reconciliación, borrado remoto, fallos parciales y hashes; suite completa 280/280 y auditoría/esquemas sin publicar. Dependencia: R02. Archivos: pipeline, CLI y pruebas.
 - [x] Checkpoint local: pruebas, revisión del diff, evidencia en `docs/platform/REMODELACION.md` y commits por incremento; disponibilidad real de emojis y recorridos Discord pendientes de entorno autorizado. Siguiente: capacidades/configuración versionada por módulo.
 
+## Configuración por módulo · continuación T05/T12
+
+- [x] C01: Nombres de capacidades normalizados desde permisos de manifests reales; welcome registrado sin reinicializar su handler. Verificados aislamiento de dominio y servicio único.
+- [x] C02: Borrador/publicación de canal y mensaje con schemaVersion, autor, revisión monotónica y CAS de valores publicados/legacy. Tarjetas/DM preservados. Verificados concurrencia entre instancias, reintento y fallo de persistencia con pruebas y Mongo real aislado. Dependencia: C01.
+- [x] C03: API autenticada y editor con vista previa, borrador, comparación y publicación. Verificados autorización, CSRF, conflicto, conservación de texto, teclado y 320/768/1024/1440 en Chromium. Dependencia: C02.
+- [x] Checkpoint local: suite 293/293, Mongo aislado, navegador sin errores de página, evidencia en `MODULE-CONFIGURATION.md` y commits de la entrega. Discord real, resto de campos/módulos e historial de operaciones siguen pendientes.
+
 ## T57
 
 - [ ] Validación transversal y preparación PR (fase 8).
