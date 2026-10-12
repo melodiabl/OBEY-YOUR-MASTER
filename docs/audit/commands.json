@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T04:14:51.698Z",
+  "generatedAt": "2026-10-12T19:43:03.198Z",
   "commands": [
     {
       "kind": "commands",
@@ -7897,6 +7897,16 @@
       "category": "Config",
       "file": "slashCommands/Config/adminrol.js",
       "name": "adminrol",
+      "aliases": [],
+      "runnable": true,
+      "status": "loaded",
+      "verification": "loading-only"
+    },
+    {
+      "kind": "slashCommands",
+      "category": "Config",
+      "file": "slashCommands/Config/architect.js",
+      "name": "architect",
       "aliases": [],
       "runnable": true,
       "status": "loaded",

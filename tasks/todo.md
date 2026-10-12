@@ -1456,6 +1456,13 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 **Scope:** Medio.
 
+## Renovación de recursos · continuación T02–T04 (paquete de octubre)
+
+- [x] R01: Importar solo variantes seleccionadas por destino al registro existente, con verificación de hashes y sin copiar documentación ni cambiar el perfil de aplicación. Verificado con pruebas de importación y modo `--check`: 103 claves/324 archivos. Dependencias: paquete descomprimido. Archivos: importador, pruebas y materiales generados.
+- [x] R02: Resolver las 103 claves y los 89 alias, rechazar mapas ajenos/obsoletos y mantener fallbacks y compatibilidad v1. Verificados alias/canónico, GIF, archivos ausentes, doce controles musicales, consulta de disponibilidad conectada al arranque y apagado. Dependencia: R01. Archivos: resolver, lifecycle, consumo musical y pruebas focalizadas.
+- [x] R03: Sincronizar las 82 entradas canónicas sin duplicar aliases, preservar checkpoints y recursos válidos ante fallo, adaptar MIME y mapa v2. Verificados PNG/GIF, reconciliación, borrado remoto, fallos parciales y hashes; suite completa 280/280 y auditoría/esquemas sin publicar. Dependencia: R02. Archivos: pipeline, CLI y pruebas.
+- [x] Checkpoint local: pruebas, revisión del diff, evidencia en `docs/platform/REMODELACION.md` y commits por incremento; disponibilidad real de emojis y recorridos Discord pendientes de entorno autorizado. Siguiente: capacidades/configuración versionada por módulo.
+
 ## T57
 
 - [ ] Validación transversal y preparación PR (fase 8).

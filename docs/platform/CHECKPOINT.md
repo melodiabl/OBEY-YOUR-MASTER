@@ -2,6 +2,10 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Renovación vigente · 12 de octubre de 2026
+
+Paquete consolidado en `/home/OBEY_Documentacion`. Primera entrega local: 103 claves seleccionadas/324 archivos, 89 aliases, pipeline de 82 emojis PNG/GIF con mapa v2 y lector v1, disponibilidad conectada a ClientReady/actualización periódica y fallbacks musicales actuales. `npm test`: 280/280. Auditoría: 811 comandos cargados; esquemas: 19 raíces y 166 subcomandos/grupos, sin publicación. Cambios locales de bienvenida/Architect preservados. Evidencia y límites en [REMODELACION.md](REMODELACION.md); continuar con capacidades/configuración versionada por módulo y después ayuda/tarjetas, según INICIAR_CODEX.md. No se reinició ni desplegó el bot y la integración real con Discord sigue pendiente.
+
 ## Implementación actual
 
 - Se trasladaron los recursos, controles y letras ya verificados desde la copia de trabajo al proyecto principal: T02–T04 locales y T19 Discord parcial.

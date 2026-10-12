@@ -2,15 +2,15 @@
 const fs = require('node:fs/promises')
 const path = require('node:path')
 const { REST, Routes } = require('discord.js')
-const { validateAssets, planEmojiSync, syncEmojis } = require('../handlers/assets/emoji-pipeline')
+const { validateSelectedAssets, planEmojiSync, syncEmojis } = require('../handlers/assets/emoji-pipeline')
 const { snowflake } = require('../handlers/assets/registry')
 async function main() {
   const args = process.argv.slice(2)
   if (args.some(arg => arg !== '--apply' && !arg.startsWith('--keys='))) throw new Error('Use --apply and/or --keys=play,pause,...')
   const keysArgument = args.find(arg => arg.startsWith('--keys='))
-  const assets = await validateAssets(keysArgument ? keysArgument.slice(7).split(',') : undefined)
+  const assets = await validateSelectedAssets(keysArgument ? keysArgument.slice(7).split(',') : undefined)
   if (!args.includes('--apply')) {
-    console.log(JSON.stringify({ mode: 'validate-only', count: assets.length, plan: planEmojiSync(assets, []).map(({ key, name, bytes, width, height, sha256, action }) => ({ key, name, bytes, width, height, sha256, action })) }, null, 2))
+    console.log(JSON.stringify({ mode: 'validate-only', count: assets.length, plan: planEmojiSync(assets, []).map(({ key, name, bytes, width, height, sha256, animated, mimeType, action }) => ({ key, name, bytes, width, height, sha256, animated, mimeType, action })) }, null, 2))
     return
   }
   const applicationId = process.env.DISCORD_CLIENT_ID
@@ -29,7 +29,7 @@ async function main() {
     const route = Routes.applicationEmojis(applicationId)
     const adapter = {
       list: async () => { const result = await rest.get(route); return result.items },
-      create: async (name, buffer) => rest.post(route, { body: { name, image: `data:image/png;base64,${buffer.toString('base64')}` } }),
+      create: async (name, buffer, asset) => rest.post(route, { body: { name, image: `data:${asset.mimeType};base64,${buffer.toString('base64')}` } }),
     }
     const save = async map => {
       temporary = `${file}.${process.pid}.tmp`
@@ -38,7 +38,9 @@ async function main() {
       temporary = null
     }
     const result = await syncEmojis({ assets, applicationId, adapter, save, previous })
-    console.log(JSON.stringify({ mode: 'applied', count: assets.length, mapped: Object.keys(result.emojis).length, file }, null, 2))
+    const failed = Object.keys(result.failures).filter(key => assets.some(asset => asset.key === key))
+    console.log(JSON.stringify({ mode: failed.length ? 'partial' : 'applied', count: assets.length, mapped: Object.keys(result.emojis).length, failed, file }, null, 2))
+    if (failed.length) process.exitCode = 1
   } finally {
     if (temporary) await fs.unlink(temporary).catch(() => {})
     await lock.close()

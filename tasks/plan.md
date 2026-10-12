@@ -1,5 +1,9 @@
 # Plan de implementación de la plataforma OBEY
 
+## Renovación con el paquete consolidado (12 de octubre de 2026)
+
+Fuente vigente: `/home/OBEY_Documentacion/INICIAR_CODEX.md`, decisiones y contratos del paquete. Continuar el mismo proyecto y las tareas existentes; conservar todos los cambios locales de bienvenida/Architect. Primera entrega: integrar materiales seleccionados en el registro actual, resolver alias y fallbacks, y adaptar la sincronización PNG/GIF. Mantener el lector del mapa v1 y los doce controles `mp_*`; nuevos mapas v2 usan claves canónicas sin borrar recursos anteriores. No subir emojis ni arrancar producción durante esta entrega local. Siguientes dependencias: capacidades, configuración versionada, ayuda y tarjetas. Evidencia y límites por entrega en `docs/platform/REMODELACION.md`.
+
 Workspace activo: `/home/OBEY-YOUR-MASTER`, rama `feature/obey-main-implementation`. La copia `/home/obey-platform-work` es histórica; continuar directamente en el proyecto principal según la corrección del usuario. Estado exacto en `docs/platform/CHECKPOINT.md`.
 
 El maestro integral gobierna los siete antecedentes y recursos aprobados. El trabajo autorizado comprende desarrollo incremental, documentación, pruebas y PR hacia `feat/motor-soundy`; no comprende merge/deploy, cambios sobre servidores reales de usuarios, restauraciones reales ni gasto externo. Landing conservado; identidad web existente y personaje aprobado dentro de Discord.
