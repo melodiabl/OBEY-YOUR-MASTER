@@ -26,6 +26,8 @@ client.guilds = { cache: new Collection([[guild.id, guild]]) }
 ;(async () => {
   const catalog = buildCommandCatalog(client)
   assert.equal(new Set(catalog.map(entry => entry.id)).size, catalog.length)
+  assert.equal(catalog.find(entry => entry.id === 'prefix:addmoney').category, 'Settings')
+  assert.ok(!catalog.some(entry => /[âï\uFFFD]/u.test(entry.category)), 'Catalog categories must have valid source metadata')
   const service = createHelpService(client), view = await service.read({ guildId: guild.id, actorId: member.id, channelId: channel.id })
   assert.ok(view.commands.some(entry => entry.id === 'slash:info.help'))
   assert.ok(!view.commands.some(entry => entry.category.toLowerCase().includes('owner') || entry.category.toLowerCase().includes('nsfw')))

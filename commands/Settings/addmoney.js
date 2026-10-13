@@ -5,7 +5,7 @@ const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
 const { parseMilliseconds, duration, GetUser } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "addmoney",
-    category: "âš™ï¸ Settings",
+    category: "Settings",
     aliases: ["ecoaddmoney"],
     description: "Adds Money to someone else!",
     usage: "addmoney <@USER> <Amount>",

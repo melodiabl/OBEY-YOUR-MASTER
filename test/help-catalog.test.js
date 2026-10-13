@@ -36,6 +36,15 @@ test('catalog uses actual slash invocations and only effective aliases', () => {
   assert.doesNotThrow(() => JSON.stringify(buildCommandCatalog(client)))
 })
 
+test('legacy addmoney metadata joins Settings without a corrupted category', () => {
+  const { client } = fixture()
+  for (const folder of ['Settings', 'Owner']) {
+    const command = require(`../commands/${folder}/addmoney`)
+    client.commands.set(command.name, command)
+    assert.equal(buildCommandCatalog(client).find(entry => entry.id === 'prefix:addmoney').category, 'Settings')
+  }
+})
+
 test('available help excludes privileged, disabled and voice-incompatible commands', () => {
   const { client, context } = fixture()
   const entries = availableCommands(client, context)

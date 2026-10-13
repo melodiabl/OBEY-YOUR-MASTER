@@ -47,6 +47,8 @@ Chromium aislado: Express/EJS y servicio reales, handlers/permisos de fixture. B
 
 ## Pendiente y continuación
 
+Corrección posterior: ambas copias heredadas de `addmoney` declaran `Settings` en UTF-8, sin el prefijo dañado `âš™ï¸`. La prueba carga esos archivos reales y el verificador comprueba todas las categorías del catálogo; no se recodifican mensajes ni nombres aportados por usuarios. Las ayudas ya enviadas y el proceso desplegado requieren la actualización del bot.
+
 Comprobación con Discord real y OAuth real; permisos de handlers legacy todavía sin metadata completa; preferencias de todas las utilidades, idiomas y habilitación persistida/enforced. El registro utilities declara esas capacidades pendientes. El inventario no se usa para inicializar otro handler ni otro bot. Configuración cacheada es la del mismo proceso; no se promete realtime entre instancias.
 
 Continuar con el renderer compartido de tarjetas y bienvenida según cards.md, conservando configuración/assets seleccionados. Reversión: revertir los commits de esta entrega, sin eliminar configuración, recursos o cambios locales anteriores; la ayuda no migra datos.
