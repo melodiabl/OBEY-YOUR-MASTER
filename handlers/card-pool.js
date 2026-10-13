@@ -94,7 +94,7 @@ function createCardPool({ concurrency = 1, maxQueue = 4, timeoutMs = 8000, queue
 
   function render(kind, source) {
     if (closed) return Promise.reject(failure('card_pool_closed'))
-    if (!['welcome', 'leave'].includes(kind)) return Promise.reject(failure('invalid_card_job'))
+    if (!['welcome', 'leave', 'background'].includes(kind)) return Promise.reject(failure('invalid_card_job'))
     if (active.size >= concurrency && queue.length >= maxQueue) return Promise.reject(failure('card_queue_full'))
     try { if (typeof source !== 'function') source = cardJob(kind, source) } catch { return Promise.reject(failure('invalid_card_job')) }
     return new Promise((resolve, reject) => {

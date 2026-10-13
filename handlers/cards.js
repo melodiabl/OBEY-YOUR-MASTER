@@ -1,5 +1,6 @@
 const { cardMedia } = require('./card-media')
 const { cardPool } = require('./card-pool')
+const { cardAssetsFor } = require('./card-assets')
 const drawNoise = (...args) => require('./card-renderer').drawNoise(...args)
 const drawCircularAvatar = (...args) => require('./card-renderer').drawCircularAvatar(...args)
 const fitCardText = (...args) => require('./card-renderer').fitCardText(...args)
@@ -10,7 +11,7 @@ function projectedCardData(member) {
   return { username: member.user.username, discriminator: member.user.discriminator,
     guildName: member.guild.name, memberCount: member.guild.memberCount }
 }
-async function renderConfiguredMembershipCard(settings, member, kind, { dm = false, media = cardMedia, renderer = cardPool() } = {}) {
+async function renderConfiguredMembershipCard(settings, member, kind, { dm = false, media = cardMedia, renderer = cardPool(), assets = cardAssetsFor(settings) } = {}) {
   const get = key => settings.get(member.guild.id, `${kind}.${key}${dm ? 'dm' : ''}`)
   const rawColor = get('framecolor')
   const frameColor = typeof rawColor === 'string' ? rawColor : '#3A98F0'
@@ -23,7 +24,9 @@ async function renderConfiguredMembershipCard(settings, member, kind, { dm = fal
   const background = get('background')
   const avatarURL = options.showAvatar ? member.user.displayAvatarURL({ extension: 'png', size: 512, forceStatic: true }) : null
   return renderer.render(kind, async () => {
-    const [avatarBuffer, backgroundBuffer] = await Promise.all([avatarURL ? media.optional(avatarURL) : null, background ? media.optional(background) : null])
+    const selection = assets ? await assets.background(member.guild.id, `${kind}${dm ? 'Dm' : ''}`) : { managed: false }
+    const [avatarBuffer, backgroundBuffer] = await Promise.all([avatarURL ? media.optional(avatarURL) : null,
+      selection.managed ? selection.buffer : background ? media.optional(background) : null])
     return { ...options, avatarBuffer, backgroundBuffer }
   })
 }

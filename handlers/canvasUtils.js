@@ -114,7 +114,14 @@ async function drawCardBg(ctx, W, H, opts = {}) {
   const { fc = '#5865F2', userBannerUrl, customBg, texture = true } = opts
 
   if (customBg && customBg !== 'transparent') {
-    try { ctx.drawImage(await Canvas.loadImage(customBg), 0, 0, W, H); return } catch {}
+    try {
+      const image = await Canvas.loadImage(customBg)
+      if (opts.fit === 'cover') {
+        const scale = Math.max(W / image.width, H / image.height)
+        ctx.drawImage(image, (W - image.width * scale) / 2, (H - image.height * scale) / 2, image.width * scale, image.height * scale)
+      } else ctx.drawImage(image, 0, 0, W, H)
+      return
+    } catch {}
   }
 
   // base.png as subtle texture

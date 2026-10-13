@@ -14,6 +14,11 @@ function record(value, allowed) {
 }
 
 function cardJob(kind, input) {
+  if (kind === 'background') {
+    const fields = record(input, ['backgroundBuffer'])
+    try { inspectCardImage(fields.backgroundBuffer) } catch { invalid() }
+    return { backgroundBuffer: Buffer.from(fields.backgroundBuffer) }
+  }
   if (!['welcome', 'leave'].includes(kind)) invalid()
   const fields = record(input, keys)
   const data = record(fields.data || {}, ['username', 'discriminator', 'guildName', 'memberCount'])

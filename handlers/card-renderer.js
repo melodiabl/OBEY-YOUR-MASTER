@@ -95,7 +95,7 @@ async function renderLeaveCard({ data, avatarBuffer, backgroundBuffer, accentCol
   const canvas = Canvas.createCanvas(1772, 720), ctx = canvas.getContext("2d");
   const W = 1772, H = 720, ACCENT = accentColor || "#5865F2";
   clipRounded(ctx, W, H, 28)
-  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false })
+  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false, fit: 'cover' })
   const cx = 80, cy = 110, cw = 930, ch = 500, cr = 36;
   ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.7)"; ctx.shadowBlur = 80; ctx.shadowOffsetY = 20;
   _roundRect(ctx, cx, cy, cw, ch, cr);
@@ -171,7 +171,7 @@ async function renderWelcomeCard({ data, avatarBuffer, backgroundBuffer, accentC
 
     // Background
     clipRounded(ctx, W, H, 28)
-    await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false })
+    await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false, fit: 'cover' })
 
     // Avatar BEFORE frame overlay (frame has transparent avatar slot)
     if (showAvatar) {
@@ -221,7 +221,7 @@ async function renderWelcomeCard({ data, avatarBuffer, backgroundBuffer, accentC
   const canvas = Canvas.createCanvas(W, H), ctx = canvas.getContext("2d");
 
   clipRounded(ctx, W, H, 28)
-  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false })
+  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false, fit: 'cover' })
   // Gamer: franjas diagonales morado de fondo
   ctx.save(); ctx.globalAlpha = 0.10; ctx.fillStyle = ACCENT; ctx.rotate(-0.5);
   for (let sx = -400; sx < W + 700; sx += 95) ctx.fillRect(sx, -500, 30, H + 1000);
