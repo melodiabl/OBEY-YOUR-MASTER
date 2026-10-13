@@ -1,0 +1,32 @@
+{
+  "productionAssets": true,
+  "templateAndDataFixture": true,
+  "authenticatedSession": false,
+  "productionPanelRendered": false,
+  "panelWithoutSession": 302,
+  "matchingPublishedAssets": 11,
+  "typography": {
+    "body": "\"DM Sans\", system-ui, sans-serif",
+    "title": "\"DM Sans\", system-ui, sans-serif",
+    "loaded": [
+      {
+        "family": "DM Sans",
+        "weight": "400"
+      },
+      {
+        "family": "DM Sans",
+        "weight": "700"
+      },
+      {
+        "family": "Font Awesome 6 Brands",
+        "weight": "400"
+      },
+      {
+        "family": "Font Awesome 6 Free",
+        "weight": "900"
+      }
+    ]
+  },
+  "pageErrors": [],
+  "consoleIssues": []
+}

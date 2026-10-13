@@ -2,7 +2,13 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
-## Despliegue actual · 13 de octubre de 2026
+## Rediseño del panel · 14 de octubre de 2026
+
+El usuario corrigió el alcance visual: tipografía legible y rediseño del panel completo, con referencias de otras webs. DM Sans local para interfaz/títulos, iconos y gráficas locales, tema grafito común, navegación por servidor y búsqueda/filtro del selector. Tarjetas prioriza preview; estadísticas acota gráficas; música conserva su recorrido con tipografía/superficies compartidas. Seis páginas verificadas en Chromium a 320/768/1024/1440, recursos externos bloqueados, teclado/foco/menú y estados vacíos/nombres largos; regresiones de Tarjetas/Bienvenida/Ayuda y 363 tests pasan. Detalles y capturas en [PANEL-DESIGN.md](PANEL-DESIGN.md).
+
+Desplegado snapshot 51ae2b27017faa98fb29cad5d815b2da7614d237, imagen dc6ceb625aeb741acbe1ee9f18b052715cdeecfd80b859075708cbbe6b467a55. Bot healthy, Mongo/música disponibles, 19 raíces slash, cero reinicios/errores de handlers; mapa de emojis conservado. Once recursos publicados coinciden por SHA-256 con el snapshot. Un template/datos de prueba con esos recursos HTTPS confirmó DM Sans regular/bold e iconos en Chromium; no se utilizó una sesión OAuth real ni se afirma navegación autenticada de producción. Solo se recreó obey_bot. Configuración de reversión `.runtime/bot-rollback-panel.yml` apunta a la imagen anterior `rollback-panel-20261014`; conservar logs de Compose privados. Las 16 entradas locales previas de Architect/evidencias siguen intactas y fuera del despliegue.
+
+## Despliegue de emojis · 13 de octubre de 2026
 
 Autorizado por el usuario: 82 emojis cargados en la aplicación 1460818547193417931, 72 estáticos y diez animados; 117 remotos en total, conservando los 35 anteriores. Bot desplegado desde el snapshot Git d840e4f, healthy y sin reinicios, con mapa persistente de solo lectura. Mongo/música disponibles; 19 raíces slash publicadas y `/info help` confirmado por API. El contenedor activo resuelve 82 claves y genera un PNG aislado; índices únicos/TTL de CardAssets verificados. Suite 363/363 y auditoría sin avisos altos/críticos, con 36 moderados heredados. Copias privadas de Mongo/configuración/mapa e imagen/configuración de rollback conservadas. Solo se recreó obey_bot; las 16 entradas locales de Architect/evidencias quedaron intactas y fuera del snapshot. Detalles y límites en [RELEASE-2026-10-13.md](RELEASE-2026-10-13.md). Pendientes OAuth con sesión real, recorridos visuales/eventos en Discord y los demás bloques del maestro.
 
