@@ -3,6 +3,7 @@ node_modules
 .env
 .env.*
 .runtime/
+assets/obey/application-emojis.json*
 *.log
 databases/
 

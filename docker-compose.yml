@@ -50,6 +50,10 @@ services:
       - images
     env_file: .env
     network_mode: "host"
+    environment:
+      OBEY_EMOJI_MAP_FILE: /app/runtime-emojis/application-emojis.json
+    volumes:
+      - ./.runtime/emojis:/app/runtime-emojis:ro
     mem_limit: 1200m
     memswap_limit: 1400m
     healthcheck:
