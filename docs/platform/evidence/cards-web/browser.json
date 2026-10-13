@@ -1,0 +1,22 @@
+{
+  "fixture": true,
+  "production": false,
+  "uploadsNormalized": true,
+  "uploadDoesNotActivate": true,
+  "privateGallery": true,
+  "malformedRejected": true,
+  "namesRenderedAsText": true,
+  "workerPreview": true,
+  "activateAndDelete": true,
+  "activeDeletionBlocked": true,
+  "longUnicodeName": true,
+  "keyboardFocus": true,
+  "revocationClearsPreview": true,
+  "breakpoints": [
+    320,
+    768,
+    1024,
+    1440
+  ],
+  "pageErrors": []
+}

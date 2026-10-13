@@ -1,0 +1,27 @@
+<%- include('../includes/header', { title: guild.name + ' — Tarjetas', user, activePage: 'servers', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Tarjetas' }] }) %>
+<link rel="stylesheet" href="/css/cards.css">
+<section id="cards-editor" data-guild-id="<%= guild.id %>">
+  <div class="cards-heading"><div><a href="/dashboard/<%= guild.id %>">← <%= guild.name %></a><h1>Tarjetas de tu comunidad</h1><p>Elige un fondo y comprueba la bienvenida o despedida antes de activarlo.</p></div><button id="cards-refresh" class="btn btn-sec" type="button">Actualizar</button></div>
+  <p id="cards-status" role="status" aria-live="polite">Cargando fondos del servidor…</p>
+  <div class="cards-layout">
+    <section class="card"><div class="card-head"><h2>Tus fondos</h2><span id="cards-quota"></span></div>
+      <p>Imágenes privadas de este servidor. Puedes guardar hasta 3 fondos; los que no estén en uso caducan a los 7 días. Los activos se mantienen con el bot conectado y pueden caducar tras 30 días sin conexión.</p>
+      <form id="cards-upload"><fieldset id="cards-upload-fields"><label for="cards-file">Subir imagen</label><input id="cards-file" type="file" accept="image/png,image/jpeg,image/webp" required aria-describedby="cards-file-help"><p id="cards-file-help">PNG, JPG o WebP estático · hasta 4 MiB. La subida conserva el fondo activo.</p><button class="btn btn-primary" type="submit">Subir fondo</button></fieldset></form>
+      <div id="cards-gallery" class="cards-gallery" aria-label="Fondos guardados"></div>
+      <p id="cards-empty" hidden>Aún no hay fondos guardados. Sube una imagen o prueba el fondo predeterminado.</p>
+      <div id="cards-delete-confirm" hidden><p>Se eliminará este fondo del servidor. No se puede recuperar desde este panel.</p><button id="cards-delete-yes" class="btn btn-danger" type="button">Eliminar fondo</button><button id="cards-delete-no" class="btn btn-sec" type="button">Cancelar</button></div>
+    </section>
+    <section class="card"><div class="card-head"><h2>Vista previa</h2><span class="cards-note">No envía mensajes</span></div>
+      <form id="cards-preview-form"><fieldset id="cards-preview-fields">
+        <label for="cards-slot">Tarjeta y destino</label><select id="cards-slot"><option value="welcome">Bienvenida · canal</option><option value="welcomeDm">Bienvenida · mensaje privado</option><option value="leave">Despedida · canal</option><option value="leaveDm">Despedida · mensaje privado</option></select>
+        <label for="cards-background">Fondo para probar</label><select id="cards-background"><option value="legacy">Fondo anterior del bot</option><option value="neutral">Fondo predeterminado</option></select>
+        <label for="cards-name">Nombre para la prueba</label><input id="cards-name" type="text" value="Miembro de ejemplo" maxlength="120" autocomplete="off">
+        <div class="cards-actions"><button class="btn btn-sec" type="submit">Ver tarjeta</button><button id="cards-apply" class="btn btn-primary" type="button">Usar este fondo</button></div>
+      </fieldset></form>
+      <p id="cards-active"></p><div class="cards-image"><img id="cards-preview-image" alt="Vista previa de la tarjeta" hidden><p id="cards-preview-placeholder">La vista previa usa la configuración actual del bot.</p></div>
+      <p id="cards-preview-text" class="cards-preview-text"></p>
+    </section>
+  </div>
+</section>
+<script src="/js/cards.js"></script>
+<%- include('../includes/footer') %>

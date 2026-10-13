@@ -1489,7 +1489,9 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] K07: Títulos de bienvenida/despedida automáticas sin eval; corregidos cuatro títulos españoles. Suite completa 335/335 y ocho renders conservados con los mismos hashes; no se publicó ni inició el bot. Destino de canal restringido a la guild del evento antes de render/red.
 - [x] K08: Procesos de una tarjeta con IPC/DTO acotados, CPU/DATA del kernel, vigilancia RSS, plazo transcurrido y cola FIFO; admisión antes de descargar. Bloqueo, crash, memoria, límites, env y recuperación verificados con hijos reales.
 - [x] K09: Worker usado en bienvenida/despedida y ambos slash; cierre único del servicio, preparación tardía y mensajes de apagado bloqueados. Suite completa 352/352, ocho hashes de render conservados y evidencia offline `isolation.json`; no se inició ni desplegó el bot.
-- [ ] Completar T18: uploads por guild, preview web y previews internos de setup legacy; verificación Discord real y medición de los presupuestos en producción. Continuar después con CARD-08 de ranking.
+- [x] K10: Uploads privados normalizados en worker, colección separada por guild, tres assets/4 MiB por asset, revisión generacional, selección y borrado protegidos. Caducidad no usados, concesión activa, TTL y limpieza/purga; Mongo aislado verifica concurrencia y bytes.
+- [x] K11: Galería y preview web con actor/OAuth frescos, CSRF, aislamiento, imagen sin mensajes, elección por destino y eliminación confirmada. Byte igualdad con render de Discord; Chromium móvil/escritorio/teclado/XSS/revocación pasa. Suite completa 363/363.
+- [ ] Completar T18: previews internos de setup legacy; verificación Discord real, despliegue y medición de los presupuestos en producción. Continuar después con CARD-08 de ranking. Carga remota de los 82 emojis de aplicación sigue pendiente.
 
 ## T57
 
