@@ -1,0 +1,86 @@
+{
+  "checkedAt": "2026-10-13 23:59:36 UTC",
+  "codeRevision": "ed915712d2bf36e2a41631feff55fa870245b661",
+  "imageId": "2baba0ef41847fe8b8d5c0255c039f265d9cb1ca53c368a95e221d6d4b87651c",
+  "imageTag": "localhost/obey-your-master_bot:release-no-nsfw-20261014",
+  "applicationId": "1460818547193417931",
+  "removed": {
+    "prefixCommands": 112,
+    "slashSubcommands": 25,
+    "datasets": 66,
+    "automaticSetup": true,
+    "automaticSender": true,
+    "dashboardToggleAndWriter": true
+  },
+  "localCommands": {
+    "loaded": 673,
+    "errors": 0,
+    "conflicts": 0,
+    "prefix": 532,
+    "slashInvocations": 142,
+    "catalog": 674,
+    "slashRoots": 18
+  },
+  "tests": {
+    "passed": 367,
+    "failed": 0,
+    "skipped": 0
+  },
+  "discord": {
+    "globalRootsBefore": 19,
+    "globalDeleted": 1,
+    "guildDeleted": 0,
+    "globalRootsAfter": 18,
+    "installedGuildsChecked": 4,
+    "guildCommandsPreserved": 98,
+    "restrictedGlobal": 0,
+    "restrictedGuild": 0,
+    "source": "Discord REST API after startup registration"
+  },
+  "imageSmoke": {
+    "network": "none",
+    "uid": 1000,
+    "envFilePresent": false,
+    "restrictedFilesAbsent": true,
+    "slashRoots": 18,
+    "mappedEmojiIds": 82,
+    "isolatedCard": {
+      "width": 1772,
+      "height": 720,
+      "bytes": 973568
+    }
+  },
+  "bot": {
+    "startedAt": "2026-10-13T23:58:06.40047725Z",
+    "health": "healthy",
+    "restarts": 0,
+    "clientReady": true,
+    "handlerErrors": 0,
+    "unhandledErrors": 0,
+    "assetsFallbackWarning": false,
+    "mapWarning": false,
+    "cardsWarning": false
+  },
+  "healthEndpoint": {
+    "http": 200,
+    "status": "ok",
+    "database": true,
+    "music": true
+  },
+  "web": {
+    "cardsWithoutSession": 302,
+    "cardsApiWithoutSession": 401,
+    "css": 200,
+    "js": 200,
+    "realOAuthSessionTested": false
+  },
+  "changedContainers": [
+    "obey_bot"
+  ],
+  "otherContainerStartsPreserved": true,
+  "preservedLocalStatusEntries": 16,
+  "legacyConfigurationPreservedAndInert": true,
+  "recoveryPinnedToRestrictedFreeImage": true,
+  "discordVerificationMessagesSent": 0,
+  "discoveryEnabledOrApproved": false
+}

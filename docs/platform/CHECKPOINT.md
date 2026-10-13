@@ -8,6 +8,8 @@ Petición del usuario: eliminar NSFW para descubrimiento de aplicaciones. Retira
 
 Las imágenes de rollback de entregas anteriores contienen NSFW: sus procedimientos de reversión quedan reemplazados por la política de recuperación de esta retirada.
 
+Desplegado snapshot `ed915712d2bf36e2a41631feff55fa870245b661`, imagen `2baba0ef41847fe8b8d5c0255c039f265d9cb1ca53c368a95e221d6d4b87651c`. Solo se recreó obey_bot: healthy, cero reinicios, Mongo/música disponibles y arranque sin errores de handlers. Discord confirma 18 raíces globales, cero NSFW y 98 registros ordinarios por servidor conservados en cuatro guilds. Las 16 entradas locales previas siguen fuera del snapshot. Recuperación fija esta versión sin NSFW mediante `.runtime/bot-recovery-no-nsfw.yml`; no usar los rollbacks antiguos. Descubrimiento no se ha activado/aprobado: requiere revisión de Discovery → Status y los demás requisitos del propietario.
+
 ## Rediseño del panel · 14 de octubre de 2026
 
 El usuario corrigió el alcance visual: tipografía legible y rediseño del panel completo, con referencias de otras webs. DM Sans local para interfaz/títulos, iconos y gráficas locales, tema grafito común, navegación por servidor y búsqueda/filtro del selector. Tarjetas prioriza preview; estadísticas acota gráficas; música conserva su recorrido con tipografía/superficies compartidas. Seis páginas verificadas en Chromium a 320/768/1024/1440, recursos externos bloqueados, teclado/foco/menú y estados vacíos/nombres largos; regresiones de Tarjetas/Bienvenida/Ayuda y 363 tests pasan. Detalles y capturas en [PANEL-DESIGN.md](PANEL-DESIGN.md).

@@ -22,11 +22,17 @@ Chromium con el template real y datos ficticios confirma la retirada del control
 
 Antes del cambio, la API de Discord devolvió 19 raíces globales, incluida `/nsfw` aunque su flag `nsfw` era falso. Se comprobaron los cuatro servidores del bot: 98 comandos registrados por servidor, ninguno identificado como NSFW. La limpieza remota solo elimina comandos restringidos; conserva los demás registros.
 
-La publicación se realiza desde un snapshot Git que excluye las 16 entradas locales previas de Architect/evidencias. Solo se recrea `obey_bot`, conservando el mapa de 82 emojis y los servicios de imágenes, Lavalink y Redis. Estado efectivo y comprobaciones posteriores se registrarán al finalizar el despliegue.
+Desplegado el snapshot `ed915712d2bf36e2a41631feff55fa870245b661`, imagen `localhost/obey-your-master_bot:release-no-nsfw-20261014`, ID `2baba0ef41847fe8b8d5c0255c039f265d9cb1ca53c368a95e221d6d4b87651c`. El archivo de Git excluyó las 16 entradas locales previas de Architect/evidencias, que permanecen pendientes. La prueba de imagen sin red confirmó ausencia de los archivos retirados, 18 raíces, usuario 1000, mapa con 82 IDs y PNG de tarjeta generado en proceso aislado (1772×720).
+
+Se eliminó directamente un registro global `/nsfw`; no había registros NSFW por servidor. Tras el arranque, la API confirma **18 raíces globales y cero comandos restringidos**, comprobando también los cuatro servidores: sus 98 registros ordinarios permanecen intactos. No se enviaron mensajes de prueba a Discord ni se afirmó aprobación del directorio.
+
+Solo se recreó `obey_bot`, iniciado a `2026-10-13T23:58:06.40047725Z` (14 de octubre en Berlin). Estado healthy, cero reinicios; `/health` devuelve 200 con Mongo y música disponibles. ClientReady y publicación global confirmados, sin errores de handlers/rechazos no controlados ni advertencias de tarjetas/mapa. Imágenes, Lavalink y Redis conservaron sus tiempos de arranque anteriores. Las rutas privadas siguen exigiendo sesión y los recursos públicos responden 200. Evidencia final: [nsfw-release.json](evidence/nsfw-release.json). Los logs de Compose se guardaron privados; no se exponen credenciales.
 
 ## Recuperación
 
 Las imágenes y archivos de rollback anteriores contienen la funcionalidad retirada. No deben usarse para recuperar producción después de esta entrega: volverían a publicar `/nsfw` y a iniciar el envío automático. Ante un fallo, corregir sobre este snapshot o construir una recuperación que mantenga la retirada y pasar los mismos controles antes de arrancar. No se necesita restaurar Mongo ni borrar canales/mensajes para esta entrega.
+
+La configuración privada `.runtime/bot-recovery-no-nsfw.yml` fija esta imagen verificada para recuperar el bot si cambia el tag `latest`; conserva el mapa y solo define el servicio bot. Es una recuperación de esta versión, no una reversión a imágenes con NSFW. Capturar cualquier salida de Compose en un archivo privado (umask 077) y comprobar salud/ClientReady/registro después de usarla.
 
 ## Descubrimiento
 

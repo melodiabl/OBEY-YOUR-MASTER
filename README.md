@@ -73,7 +73,7 @@ El bot centraliza en un solo lugar administración, música, sorteos, tickets, e
 | 📈 **Niveles/XP** | XP por mensajes y voz, cards canvas de level-up, recompensas por rol |
 | 💸 **Economía** | Wallet, banco, daily, work, shop, inventario completo |
 | 📋 **Logs** | Logs de moderación, social (YouTube/Twitch), mensajes eliminados/editados |
-| 🎭 **Fun/NSFW** | +200 comandos de entretenimiento, minijuegos, memes, anime |
+| 🎭 **Diversión** | Comandos de entretenimiento, minijuegos, memes y expresiones anime |
 | ⚙️ **Setup** | Sistema de configuración completo por servidor con 50+ opciones |
 | 🌐 **Dashboard** | Panel web Express + EJS + OAuth2 Discord para configurar el bot |
 
