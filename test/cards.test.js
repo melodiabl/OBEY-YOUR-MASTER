@@ -38,8 +38,8 @@ test('leave PNG keeps its avatar, text and background after the final texture', 
   ctx.fillStyle = '#ff0000'; ctx.fillRect(0, 0, 120, 40)
   ctx.fillStyle = '#00ff00'; ctx.fillRect(40, 0, 40, 40)
   const buffer = await renderLeaveCard({
-    member: { user: { username: 'Obey', discriminator: '0', displayAvatarURL: () => avatar.toBuffer('image/png') } },
-    guild: { name: 'Servidor', memberCount: 42 }, accentColor: '#5865F2',
+    data: { username: 'Obey', discriminator: '0', guildName: 'Servidor', memberCount: 42 },
+    avatarBuffer: avatar.toBuffer('image/png'), accentColor: '#5865F2',
     showAvatar: true, showMemberCount: true, showServerName: true, isLeave: true,
   })
   assert.deepEqual([...buffer.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10])
@@ -105,14 +105,24 @@ test('both slash previews return the exact configured event image', async () => 
 })
 
 test('failed optional images keep a readable neutral background', async () => {
-  const options = { member: { user: { username: 'Obey', displayAvatarURL: () => Buffer.from('invalid image') } },
-    guild: { name: 'Guild', memberCount: 10 }, showAvatar: true, showServerName: true,
-    background: Buffer.from('invalid image'), accentColor: '#5865F2', isLeave: true,
+  const options = { data: { username: 'Obey', guildName: 'Guild', memberCount: 10 }, showAvatar: true, showServerName: true,
+    avatarBuffer: Buffer.from('invalid image'), backgroundBuffer: Buffer.from('invalid image'), accentColor: '#5865F2', isLeave: true,
   }
   for (const render of [renderWelcomeCard, renderLeaveCard]) {
     const image = await loadImage(await render(options)), canvas = createCanvas(image.width, image.height), ctx = canvas.getContext('2d')
     ctx.drawImage(image, 0, 0)
     assert.equal(pixel(ctx, 1400, 360)[3], 255, 'Fallback background remains opaque')
+  }
+})
+
+test('pure renderers accept projected data and buffers without invoking a URL or SDK object', async () => {
+  for (const render of [renderWelcomeCard, renderLeaveCard]) {
+    const image = await loadImage(await render({ data: { username: 'Obey', guildName: 'Guild', memberCount: 10 },
+      member: { user: { displayAvatarURL: () => assert.fail('SDK cannot enter the renderer') } },
+      avatarBuffer: 'https://127.0.0.1/secret', backgroundBuffer: '/etc/passwd', showAvatar: true,
+      showMemberCount: true, showServerName: true,
+    }))
+    assert.equal(image.width, 1772)
   }
 })
 
@@ -133,4 +143,31 @@ test('modern emoji has a visible glyph instead of the missing-character box', ()
     return Buffer.from(ctx.getImageData(0, 0, 160, 120).data)
   }
   assert.ok(!pixels('🐱').equals(pixels('\u{10ffff}')), 'Emoji must differ from the missing glyph')
+})
+
+test('slash previews keep the configured message when native rendering fails', async () => {
+  const canvas = require('@napi-rs/canvas'), originalCanvas = canvas.createCanvas
+  const axios = require('axios'), originalPatch = axios.patch
+  const guild = { id: 'g', name: 'Guild', memberCount: 10 }
+  const user = { id: 'actor', username: 'Obey', discriminator: '0' }, member = { user, guild }
+  guild.members = { fetch: async () => member }
+  const values = { welcome: { channel: 'chat', msg: 'Mensaje personalizado' }, 'welcome.pb': false, 'welcome.frame': false }
+  const client = { settings: { get: (id, key) => key ? values[key] : values }, user: { id: 'app' } }
+  try {
+    canvas.createCanvas = () => { throw Error('native failure with private data') }
+    for (const name of ['tarjeta', 'test']) {
+      let sent = 0
+      axios.patch = async (endpoint, body) => {
+        assert.equal(body.getBuffer, undefined)
+        assert.equal(body.embeds[0].image, undefined)
+        assert.equal(body.embeds[0].description, 'Mensaje personalizado')
+        sent++; return { data: {} }
+      }
+      await require(`../slashCommands/Welcome/${name}`).run(client, {
+        guild, user, options: { getUser: () => null }, token: 'fixture-token',
+        deferReply: async () => {}, editReply: async () => assert.fail('Must deliver configured fallback'),
+      })
+      assert.equal(sent, 1)
+    }
+  } finally { canvas.createCanvas = originalCanvas; axios.patch = originalPatch }
 })

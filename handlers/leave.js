@@ -1,14 +1,14 @@
 //Import npm modules
 const Discord = require("discord.js");
-const FormData = require("form-data");
-const axios = require("axios");
 //require functions from files
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 //Create Variables
 let invitemessage = "\u200b";
 
-const { renderLeaveCard: _generateCard } = require('./cards');
+const { renderConfiguredLeaveCard } = require('./cards');
+const { sendMembershipCard } = require('./card-delivery');
+const { membershipTitle } = require('./membership-title');
 //Start the module
 module.exports = client => {
     client.on("guildMemberRemove", async member => {
@@ -236,44 +236,15 @@ module.exports = client => {
                             member.user.displayAvatarURL()
                         )
                     )
-                    .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable5"]))
+                    .setTitle(membershipTitle(client, ls, 'leave', member, 'variable5'))
                     .setDescription(
                         (client.settings.get(member.guild.id, "leave.dm_msg") || "{user} left this Server").replace("{user}", `${member.user}`)
                     );
                 if (client.settings.get(member.guild.id, "leave.invitedm")) leaveembed.addFields({ name: "\u200b", value: invitemessage });
 
-                const buf = await _generateCard({
-                    member,
-                    guild: member.guild,
-                    accentColor: (client.settings.get(member.guild.id, "leave.framecolordm") || "#5865F2").replace("WHITE", "#FFFFF9").replace("#FFFFFF", "#FFFFF9"),
-                    showAvatar: client.settings.get(member.guild.id, "leave.pbdm") || false,
-                    showDiscriminator: client.settings.get(member.guild.id, "leave.discriminatordm") || false,
-                    showMemberCount: client.settings.get(member.guild.id, "leave.membercountdm") || false,
-                    showServerName: client.settings.get(member.guild.id, "leave.servernamedm") || false,
-                    background: client.settings.get(member.guild.id, "leave.backgrounddm"),
-                    isLeave: true,
+                await sendMembershipCard({ client, recipientId: member.user.id, embed: leaveembed, kind: 'leave',
+                    render: () => renderConfiguredLeaveCard(client.settings, member, { dm: true }),
                 });
-
-                //send DM leave card (axios: bypass undici UND_ERR_SOCKET on file uploads)
-                try {
-                    leaveembed.setImage('attachment://leave-image.png');
-                    const dmRes = await axios.post(
-                        'https://discord.com/api/v10/users/@me/channels',
-                        { recipient_id: member.user.id },
-                        { headers: { 'Content-Type': 'application/json', Authorization: `Bot ${client.token}` } }
-                    );
-                    const form = new FormData();
-                    form.append('files[0]', buf, { filename: 'leave-image.png', contentType: 'image/png' });
-                    form.append('payload_json', JSON.stringify({
-                        embeds: [leaveembed.toJSON()],
-                        attachments: [{ id: 0, filename: 'leave-image.png' }],
-                    }));
-                    await axios.post(
-                        `https://discord.com/api/v10/channels/${dmRes.data.id}/messages`,
-                        form,
-                        { headers: { ...form.getHeaders(), Authorization: `Bot ${client.token}` } }
-                    );
-                } catch {}
                 //member roles add on leave every single role
             } catch {}
         }
@@ -299,35 +270,13 @@ module.exports = client => {
                             member.user.displayAvatarURL()
                         )
                     )
-                    .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable6"]))
+                    .setTitle(membershipTitle(client, ls, 'leave', member, 'variable6'))
                     .setDescription((client.settings.get(member.guild.id, "leave.msg") || "{user} left this Server").replace("{user}", `${member.user}`));
                 if (client.settings.get(member.guild.id, "leave.invite")) leaveembed.addFields({ name: "\u200b", value: invitemessage });
 
-                const buf = await _generateCard({
-                    member,
-                    guild: member.guild,
-                    accentColor: (client.settings.get(member.guild.id, "leave.framecolor") || "#5865F2").replace("WHITE", "#FFFFF9").replace("#FFFFFF", "#FFFFF9"),
-                    showAvatar: client.settings.get(member.guild.id, "leave.pb") || false,
-                    showDiscriminator: client.settings.get(member.guild.id, "leave.discriminator") || false,
-                    showMemberCount: client.settings.get(member.guild.id, "leave.membercount") || false,
-                    showServerName: client.settings.get(member.guild.id, "leave.servername") || false,
-                    background: client.settings.get(member.guild.id, "leave.background"),
-                    isLeave: true,
+                await sendMembershipCard({ client, channel, guildId: member.guild.id, embed: leaveembed, kind: 'leave',
+                    render: () => renderConfiguredLeaveCard(client.settings, member),
                 });
-
-                //send leave card (axios: bypass undici UND_ERR_SOCKET on file uploads)
-                leaveembed.setImage('attachment://leave-image.png');
-                const form = new FormData();
-                form.append('files[0]', buf, { filename: 'leave-image.png', contentType: 'image/png' });
-                form.append('payload_json', JSON.stringify({
-                    embeds: [leaveembed.toJSON()],
-                    attachments: [{ id: 0, filename: 'leave-image.png' }],
-                }));
-                axios.post(
-                    `https://discord.com/api/v10/channels/${channel.id}/messages`,
-                    form,
-                    { headers: { ...form.getHeaders(), Authorization: `Bot ${client.token}` } }
-                ).catch(() => {});
                 //member roles add on leave every single role
             } catch (e) {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);

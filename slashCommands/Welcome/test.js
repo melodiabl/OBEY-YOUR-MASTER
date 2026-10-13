@@ -2,6 +2,7 @@ const { EmbedBuilder } = require('discord.js')
 const FormData = require('form-data')
 const axios = require('axios')
 const { renderConfiguredWelcomeCard } = require('../../handlers/cards')
+const { deliverCardPayload } = require('../../handlers/card-delivery')
 
 module.exports = {
   name: 'test',
@@ -26,16 +27,13 @@ module.exports = {
     }
 
     try {
-      const buf = await renderConfiguredWelcomeCard(client.settings, member)
       const es      = client.settings.get(guildId, 'embed') || {}
       const rawC    = es.color
       const color   = typeof rawC === 'number' ? rawC : parseInt(String(rawC || '').replace('#', ''), 16) || 0x5865F2
       const rawMsg  = require('../../handlers/config-service').welcomeMessage(client.settings, guildId) || '¡Bienvenido {user} al servidor!'
       const description = require('../../handlers/welcome-message').renderWelcomeMessage(rawMsg, member.user, interaction.guild)
 
-      const form = new FormData()
-      form.append('files[0]', buf, { filename: 'welcome-preview.png', contentType: 'image/png' })
-      form.append('payload_json', JSON.stringify({
+      const previewPayload = {
         content: `${member.user} — **Vista previa de la tarjeta de bienvenida**`,
         embeds: [{
           color,
@@ -46,17 +44,23 @@ module.exports = {
           timestamp: new Date().toISOString(),
         }],
         attachments: [{ id: 0, filename: 'welcome-preview.png' }],
-      }))
-
-      const appId = client.user.id
-      await axios.patch(
-        `https://discord.com/api/v10/webhooks/${appId}/${interaction.token}/messages/@original`,
-        form,
-        { headers: { ...form.getHeaders() } }
-      )
+      }
+      await deliverCardPayload({
+        payload: previewPayload, filename: 'welcome-preview.png',
+        capabilities: async () => ({ send: true, embed: true, attach: true }),
+        render: () => renderConfiguredWelcomeCard(client.settings, member),
+        send: async ({ payload, buffer }) => {
+          const endpoint = `https://discord.com/api/v10/webhooks/${client.user.id}/${interaction.token}/messages/@original`
+          if (!buffer) return (await axios.patch(endpoint, payload, { timeout: 10000 })).data
+          const form = new FormData()
+          form.append('files[0]', buffer, { filename: 'welcome-preview.png', contentType: 'image/png' })
+          form.append('payload_json', JSON.stringify(payload))
+          return (await axios.patch(endpoint, form, { headers: form.getHeaders(), timeout: 10000 })).data
+        },
+      })
     } catch (e) {
-      console.error('[Welcome Test]', JSON.stringify(e?.response?.data, null, 2) || e.message)
-      await interaction.editReply({ embeds: [err(`❌ Error al generar la tarjeta: ${e.message || e}`)] })
+      console.error('[Welcome Test] No se pudo entregar la vista previa')
+      await interaction.editReply({ embeds: [err('❌ No se pudo entregar la vista previa. Inténtalo de nuevo.')] })
     }
   },
 }

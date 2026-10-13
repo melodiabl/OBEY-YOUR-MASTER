@@ -5471,8 +5471,8 @@
         "variable2": "`**${Miembro.Usuario.tag} Salió  ${Miembro.guild.name}**`",
         "variable3": "`**${Miembro.Usuario.tag} Salió  ${Miembro.guild.name}**`",
         "variable4": "`**${Miembro.Usuario.tag} Salió  ${Miembro.guild.name}**`",
-        "variable5": "`**${Miembro.Usuario.tag} Salió  ${Miembro.guild.name}**`",
-        "variable6": "`**${Miembro.Usuario.tag} Salió  ${Miembro.guild.name}**`"
+        "variable5": "`**${member.user.tag} salió de ${member.guild.name}**`",
+        "variable6": "`**${member.user.tag} salió de ${member.guild.name}**`"
       }
     },
     "mutejs": {
@@ -5817,8 +5817,8 @@
         "variable9": "`**Bienvenido to ${Miembro.guild.name}!**`",
         "variable10": "`**Bienvenido to ${Miembro.guild.name}!**`",
         "variable11": "`**Bienvenido to ${Miembro.guild.name}!**`",
-        "variable12": "`**Bienvenido to ${Miembro.guild.name}!**`",
-        "variable13": "`**Bienvenido to ${Miembro.guild.name}!**`"
+        "variable12": "`**Bienvenido a ${member.guild.name}!**`",
+        "variable13": "`**Bienvenido a ${member.guild.name}!**`"
       }
     }
   }

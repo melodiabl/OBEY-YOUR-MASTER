@@ -3,9 +3,9 @@ const Discord = require("discord.js");
 const { ChannelType,
     PermissionFlagsBits
 } = require("discord.js");
-const FormData = require("form-data");
-const axios = require("axios");
 const { renderConfiguredWelcomeCard } = require('./cards')
+const { sendMembershipCard } = require('./card-delivery')
+const { membershipTitle } = require('./membership-title')
 // require functions from files
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -1157,7 +1157,7 @@ module.exports = client => {
                             text: `ID: ${member.user.id}`,
                             iconURL: `${member.user.displayAvatarURL()}`,
                         })
-                        .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable12"]))
+                        .setTitle(membershipTitle(client, ls, 'welcome', member, 'variable12'))
                         .setDescription(
                             (client.settings.get(member.guild.id, "welcome.dm_msg") || "{user} ¡Bienvenido al servidor!")
                             .replace("{user}", `${member.user}`)
@@ -1167,29 +1167,10 @@ module.exports = client => {
                     if (client.settings.get(member.guild.id, "welcome.invitedm"))
                         welcomeembed.addFields({ name: "\u200b", value: `${invitemessage}` });
                     //member roles add on welcome every single role
-                    const buf = await renderConfiguredWelcomeCard(client.settings, member, { dm: true });
-
-                    //send DM with canvas (axios: bypass undici UND_ERR_SOCKET on file uploads)
-                    try {
-                        welcomeembed.setImage('attachment://welcome-image.png');
-                        const dmRes = await axios.post(
-                            'https://discord.com/api/v10/users/@me/channels',
-                            { recipient_id: member.user.id },
-                            { headers: { 'Content-Type': 'application/json', Authorization: `Bot ${client.token}` } }
-                        );
-                        const form = new FormData();
-                        form.append('files[0]', buf, { filename: 'welcome-image.png', contentType: 'image/png' });
-                        form.append('payload_json', JSON.stringify({
-                            content: `<@${member.user.id}>`,
-                            embeds: [welcomeembed.toJSON()],
-                            attachments: [{ id: 0, filename: 'welcome-image.png' }],
-                        }));
-                        await axios.post(
-                            `https://discord.com/api/v10/channels/${dmRes.data.id}/messages`,
-                            form,
-                            { headers: { ...form.getHeaders(), Authorization: `Bot ${client.token}` } }
-                        );
-                    } catch {}
+                    await sendMembershipCard({ client, recipientId: member.user.id, embed: welcomeembed,
+                        content: `<@${member.user.id}>`, kind: 'welcome',
+                        render: () => renderConfiguredWelcomeCard(client.settings, member, { dm: true }),
+                    });
                     //member roles add on welcome every single role
                 } catch {}
             }
@@ -1214,32 +1195,17 @@ module.exports = client => {
                             text: `ID: ${member.user.id}`,
                             iconURL: `${member.user.displayAvatarURL()}`,
                         })
-                        .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable13"]))
+                        .setTitle(membershipTitle(client, ls, 'welcome', member, 'variable13'))
                         .setDescription(
                             require("./welcome-message").renderWelcomeMessage(require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!", member.user, member.guild)
                         );
                     if (client.settings.get(member.guild.id, "welcome.invite"))
                         welcomeembed.addFields({ name: "\u200b", value: `${invitemessage}` });
                     try {
-                        const buf = await renderConfiguredWelcomeCard(client.settings, member);
-
-                        //send the welcome embed to there (axios: bypass undici UND_ERR_SOCKET on file uploads)
-                        if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SendMessages)) {
-                            welcomeembed.setImage('attachment://welcome-image.png');
-                            const hasEmbed = channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.EmbedLinks);
-                            const form = new FormData();
-                            form.append('files[0]', buf, { filename: 'welcome-image.png', contentType: 'image/png' });
-                            form.append('payload_json', JSON.stringify({
-                                content: `<@${member.user.id}>`,
-                                embeds: hasEmbed ? [welcomeembed.toJSON()] : [],
-                                attachments: [{ id: 0, filename: 'welcome-image.png' }],
-                            }));
-                            axios.post(
-                                `https://discord.com/api/v10/channels/${channel.id}/messages`,
-                                form,
-                                { headers: { ...form.getHeaders(), Authorization: `Bot ${client.token}` } }
-                            ).catch(() => {});
-                        }
+                        await sendMembershipCard({ client, channel, guildId: member.guild.id, recipientId: member.user.id, embed: welcomeembed,
+                            content: `<@${member.user.id}>`, kind: 'welcome',
+                            render: () => renderConfiguredWelcomeCard(client.settings, member),
+                        });
                     } catch (e) {
                         console.log(e.stack ? String(e.stack).grey : String(e).grey);
                     }

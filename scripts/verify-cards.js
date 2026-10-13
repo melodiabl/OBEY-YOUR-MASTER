@@ -18,19 +18,19 @@ async function main() {
   const transparent = createCanvas(400, 400), transparentCtx = transparent.getContext('2d')
   transparentCtx.fillStyle = '#23d1a1'; transparentCtx.beginPath(); transparentCtx.arc(200, 200, 140, 0, Math.PI * 2); transparentCtx.fill()
   const transparentBuffer = await transparent.encode('png')
-  const base = { member: { user: { username: 'Obey Master', discriminator: '0', displayAvatarURL: () => avatarBuffer } },
-    guild: { name: 'Comunidad OBEY', memberCount: 128 }, accentColor: '#3A98F0',
+  const base = { data: { username: 'Obey Master', discriminator: '0', guildName: 'Comunidad OBEY', memberCount: 128 },
+    avatarBuffer, accentColor: '#3A98F0',
     showAvatar: true, showServerName: true, showMemberCount: true, isLeave: false,
   }
   const cases = [
     ['welcome-frame', renderWelcomeCard, { frameColor: '#3A98F0' }],
-    ['welcome-transparent-avatar', renderWelcomeCard, { frameColor: '#3A98F0', member: { user: { ...base.member.user, displayAvatarURL: () => transparentBuffer } } }],
+    ['welcome-transparent-avatar', renderWelcomeCard, { frameColor: '#3A98F0', avatarBuffer: transparentBuffer }],
     ['welcome-without-avatar', renderWelcomeCard, { frameColor: 'WHITE', showAvatar: false }],
-    ['welcome-long-name', renderWelcomeCard, { frameColor: '#3A98F0', member: { user: { ...base.member.user, username: 'Obey 👨‍👩‍👧‍👦 comunidad '.repeat(12) } }, guild: { name: 'Servidor con un nombre muy largo 日本語 '.repeat(5), memberCount: 128 } }],
+    ['welcome-long-name', renderWelcomeCard, { frameColor: '#3A98F0', data: { ...base.data, username: 'Obey 👨‍👩‍👧‍👦 comunidad '.repeat(12), guildName: 'Servidor con un nombre muy largo 日本語 '.repeat(5) } }],
     ['welcome-without-frame', renderWelcomeCard, {}],
     ['leave-texture', renderLeaveCard, { isLeave: true }],
     ['leave-without-texture', renderLeaveCard, { isLeave: true, noiseIntensity: 0 }],
-    ['leave-invalid-images', renderLeaveCard, { isLeave: true, background: Buffer.from('invalid'), member: { user: { ...base.member.user, displayAvatarURL: () => Buffer.from('invalid') } } }],
+    ['leave-invalid-images', renderLeaveCard, { isLeave: true, backgroundBuffer: Buffer.from('invalid'), avatarBuffer: Buffer.from('invalid') }],
   ]
   const results = []
   for (const [name, render, overrides] of cases) {

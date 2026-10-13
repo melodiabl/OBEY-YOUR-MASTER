@@ -1484,7 +1484,10 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] K03: Extraer bienvenida a cards.js y conectar evento/DM y ambos slash; mismo render y flags, sin estilos exclusivos del preview. CARD-07 cubierto para estos consumidores Discord; web/DTO aún pendientes.
 - [x] K04: Omitir base de ranking en el fondo automático, fallback neutro al fallar imagen opcional, ocho renders reales offline inspeccionados y pruebas de regresión. Alternativa neutra de CARD-05; selección persistida de fondos por guild pendiente.
 - [x] Checkpoint local: suite completa 316/316, auditoría 811 comandos sin errores/conflictos y schemas 19 raíces/166 subcomandos, sin publicación. Evidencia y límites en `docs/platform/CARDS.md`.
-- [ ] Completar T18: validación de medios/DTO y límites de decode/red, uploads por guild, preview web y entrega sin tarjeta ante fallo total; verificación Discord real. Continuar después con CARD-08 de ranking.
+- [x] K05: Separar DTO/buffers del SDK; ingestión HTTPS acotada de CDN Discord y formatos/dimensiones antes de decode, sin rutas libres ni redirects. Verificados rechazo antes de red, bytes, plazo, stream truncado y PNG/JPEG/WebP reales.
+- [x] K06: Entrega compartida de texto ante fallo gráfico, falta de permisos de adjunto/embed o rechazo explícito; revalidación de permisos, nonce temporal, sin reintento de resultado incierto. Evento de despedida registrado y ambos slash verificados con transportes ficticios.
+- [x] K07: Títulos de bienvenida/despedida automáticas sin eval; corregidos cuatro títulos españoles. Suite completa 335/335 y ocho renders conservados con los mismos hashes; no se publicó ni inició el bot. Destino de canal restringido a la guild del evento antes de render/red.
+- [ ] Completar T18: worker de decode/render con presupuesto de CPU/memoria/concurrencia, uploads por guild, preview web y previews internos de setup legacy; verificación Discord real. Continuar después con CARD-08 de ranking.
 
 ## T57
 

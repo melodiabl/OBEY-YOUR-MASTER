@@ -1,6 +1,7 @@
 const Canvas = require('@napi-rs/canvas')
 const path = require('node:path')
 const { clipRounded, drawCardBg } = require('./canvasUtils')
+const { inspectCardImage, cardMedia } = require('./card-media')
 for (const [file, family] of [['DMSans-Bold.ttf', 'DM Sans'], ['Genta.ttf', 'Genta'], ['STIXGeneral.ttf', 'STIXGeneral'], ['UbuntuMono.ttf', 'UbuntuMono'], ['Arial.ttf', 'Arial'], ['ArialUnicode.ttf', 'ObeyUnicode'], ['AppleSymbol.ttf', 'ObeySymbols'], ['NotoEmoji.ttf', 'ObeyEmoji']]) {
   Canvas.GlobalFonts.registerFromPath(path.join(__dirname, '../assets/fonts', file), family)
 }
@@ -33,18 +34,37 @@ function fitCardText(ctx, raw, width, { maxSize, minSize, family }) {
   return { text, fontSize, width: ctx.measureText(text).width }
 }
 
-function renderConfiguredWelcomeCard(settings, member, { dm = false } = {}) {
-  const get = key => settings.get(member.guild.id, `welcome.${key}${dm ? 'dm' : ''}`)
+function projectedCardData(member) {
+  return { username: member.user.username, discriminator: member.user.discriminator,
+    guildName: member.guild.name, memberCount: member.guild.memberCount }
+}
+function normalizedCardData(data = {}) {
+  const text = (value, fallback) => typeof value === 'string' ? value.normalize('NFC').replace(/[\u0000-\u001f\u007f]/g, ' ') : fallback
+  return { username: text(data.username, 'Miembro'), discriminator: text(data.discriminator, '0'),
+    guildName: text(data.guildName, 'Tu comunidad'), memberCount: Number.isSafeInteger(data.memberCount) && data.memberCount >= 0 ? data.memberCount : 0 }
+}
+function safeRasterBuffer(buffer) {
+  try { inspectCardImage(buffer); return buffer } catch { return null }
+}
+async function renderConfiguredMembershipCard(settings, member, kind, { dm = false, media = cardMedia } = {}) {
+  const get = key => settings.get(member.guild.id, `${kind}.${key}${dm ? 'dm' : ''}`)
   const rawColor = get('framecolor')
   const frameColor = typeof rawColor === 'string' ? rawColor : '#3A98F0'
   const accentColor = /^(#[0-9a-f]{6}|white)$/i.test(frameColor) ? frameColor.replace(/^white$/i, '#FFFFF9') : '#5865F2'
-  return renderWelcomeCard({ member, guild: member.guild, accentColor,
-    frameColor: get('frame') === false ? null : frameColor,
-    showAvatar: get('pb') !== false, showDiscriminator: Boolean(get('discriminator')),
-    showMemberCount: Boolean(get('membercount')), showServerName: Boolean(get('servername')),
-    background: get('background'), isLeave: false,
-  })
+  const options = { data: projectedCardData(member), accentColor,
+    frameColor: kind === 'welcome' && get('frame') !== false ? frameColor : null,
+    showAvatar: kind === 'welcome' ? get('pb') !== false : Boolean(get('pb')),
+    showDiscriminator: Boolean(get('discriminator')), showMemberCount: Boolean(get('membercount')),
+    showServerName: Boolean(get('servername')), isLeave: kind === 'leave' }
+  const background = get('background')
+  const [avatarBuffer, backgroundBuffer] = await Promise.all([
+    options.showAvatar ? media.optional(member.user.displayAvatarURL({ extension: 'png', size: 512, forceStatic: true })) : null,
+    media.optional(background),
+  ])
+  return (kind === 'welcome' ? renderWelcomeCard : renderLeaveCard)({ ...options, avatarBuffer, backgroundBuffer })
 }
+const renderConfiguredWelcomeCard = (settings, member, options) => renderConfiguredMembershipCard(settings, member, 'welcome', options)
+const renderConfiguredLeaveCard = (settings, member, options) => renderConfiguredMembershipCard(settings, member, 'leave', options)
 
 function drawCircularAvatar(ctx, image, x, y, size) {
   const crop = Math.min(image.width, image.height)
@@ -94,11 +114,12 @@ function drawNoise(ctx, w, h, intensity = 6) {
   ctx.fillRect(0, 0, w, h)
   ctx.restore()
 }
-async function renderLeaveCard({ member, guild, accentColor, showAvatar, showDiscriminator, showMemberCount, showServerName, background, isLeave, noiseIntensity = 6 }) {
+async function renderLeaveCard({ data, avatarBuffer, backgroundBuffer, accentColor, showAvatar, showDiscriminator, showMemberCount, showServerName, isLeave, noiseIntensity = 6 }) {
+  data = normalizedCardData(data)
   const canvas = Canvas.createCanvas(1772, 720), ctx = canvas.getContext("2d");
   const W = 1772, H = 720, ACCENT = accentColor || "#5865F2";
   clipRounded(ctx, W, H, 28)
-  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: background, texture: false })
+  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false })
   const cx = 80, cy = 110, cw = 930, ch = 500, cr = 36;
   ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.7)"; ctx.shadowBlur = 80; ctx.shadowOffsetY = 20;
   _roundRect(ctx, cx, cy, cw, ch, cr);
@@ -112,7 +133,7 @@ async function renderLeaveCard({ member, guild, accentColor, showAvatar, showDis
   _roundRect(ctx, cx + 12, cy + 40, 5, ch - 80, 2.5); ctx.fillStyle = ga; ctx.fill(); ctx.restore();
   const asz = 194, ax = cx + 60, ay = cy + (ch - asz) / 2;
   if (showAvatar) { try {
-    const av = await Canvas.loadImage(member.user.displayAvatarURL({ extension: 'png', size: 256, forceStatic: true }));
+    const av = await Canvas.loadImage(safeRasterBuffer(avatarBuffer));
     ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.6); ctx.shadowBlur = 40; ctx.shadowOffsetY = 5;
     ctx.beginPath(); ctx.arc(ax + asz / 2, ay + asz / 2, asz / 2 + 8, 0, Math.PI * 2); ctx.closePath();
     const rg = ctx.createLinearGradient(ax, ay, ax + asz, ay + asz);
@@ -123,12 +144,12 @@ async function renderLeaveCard({ member, guild, accentColor, showAvatar, showDis
     drawCircularAvatar(ctx, av, ax, ay, asz); ctx.restore();
   } catch {} }
   const tx = cx + (showAvatar ? asz + 105 : 70), ty = cy + 180, mw = cw - (tx - cx) - 80;
-  const name = fitCardText(ctx, member.user.username, mw, { maxSize: 56, minSize: 26, family: '"DM Sans", Arial, sans-serif' });
+  const name = fitCardText(ctx, data.username, mw, { maxSize: 56, minSize: 26, family: '"DM Sans", Arial, sans-serif' });
   ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.4)"; ctx.shadowBlur = 15; ctx.shadowOffsetY = 3;
   ctx.fillStyle = "#FFFFFF"; ctx.fillText(name.text, tx, ty); ctx.restore();
   const nw = name.width;
-  if (showDiscriminator && member.user.discriminator && member.user.discriminator !== "0") {
-    ctx.font = '28px "DM Sans", "Arial", sans-serif'; ctx.fillStyle = "#9999AA"; ctx.fillText(`#${member.user.discriminator}`, tx + nw + 20, ty - 2);
+  if (showDiscriminator && data.discriminator && data.discriminator !== "0") {
+    ctx.font = '28px "DM Sans", "Arial", sans-serif'; ctx.fillStyle = "#9999AA"; ctx.fillText(`#${data.discriminator}`, tx + nw + 20, ty - 2);
   }
   const lY = ty + 45; ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.4); ctx.shadowBlur = 12;
   const ag = ctx.createLinearGradient(tx, lY, tx + 90, lY);
@@ -137,12 +158,12 @@ async function renderLeaveCard({ member, guild, accentColor, showAvatar, showDis
   let dY = lY + 55;
   if (showServerName) {
     ctx.font = '28px "DM Sans", "Arial", sans-serif'; ctx.fillStyle = ACCENT;
-    const msg = fitCardText(ctx, isLeave ? `Gracias por visitarnos, ${guild.name}` : `Te damos la bienvenida a ${guild.name}`, mw, { maxSize: 28, minSize: 28, family: '"DM Sans", Arial, sans-serif' });
+    const msg = fitCardText(ctx, isLeave ? `Gracias por visitarnos, ${data.guildName}` : `Te damos la bienvenida a ${data.guildName}`, mw, { maxSize: 28, minSize: 28, family: '"DM Sans", Arial, sans-serif' });
     ctx.fillText(msg.text, tx, dY); dY += 48;
   }
   if (showMemberCount) {
     ctx.font = '20px "DM Sans", "Arial", sans-serif'; ctx.fillStyle = "#8888AA";
-    ctx.fillText(`Miembros actuales: ${guild.memberCount}`, tx, dY);
+    ctx.fillText(`Miembros actuales: ${data.memberCount}`, tx, dY);
   }
   const bx = cx + cw - 28, by = cy + 36;
   ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.3); ctx.shadowBlur = 20;
@@ -155,14 +176,15 @@ async function renderLeaveCard({ member, guild, accentColor, showAvatar, showDis
 }
 
 function _resolveFrameColor(raw) {
-  if (!raw) return null;
+  if (typeof raw !== 'string' || !raw) return null;
   const up = raw.toUpperCase().trim();
   if (up === 'WHITE' || up === '#FFFFFF') return 'WHITE';
   if (FRAME_COLORS.includes(up)) return up;
   return null;
 }
 
-async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showDiscriminator, showMemberCount, showServerName, background, isLeave, frameColor }) {
+async function renderWelcomeCard({ data, avatarBuffer, backgroundBuffer, accentColor, showAvatar, showDiscriminator, showMemberCount, showServerName, isLeave, frameColor }) {
+  data = normalizedCardData(data)
   const ACCENT = accentColor || "#5865F2";
   const resolvedFrame = _resolveFrameColor(frameColor);
 
@@ -173,12 +195,12 @@ async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showD
 
     // Background
     clipRounded(ctx, W, H, 28)
-    await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: background, texture: false })
+    await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false })
 
     // Avatar BEFORE frame overlay (frame has transparent avatar slot)
     if (showAvatar) {
       try {
-        const av = await Canvas.loadImage(member.user.displayAvatarURL({ extension: 'png', size: 512, forceStatic: true }));
+        const av = await Canvas.loadImage(safeRasterBuffer(avatarBuffer));
         // Subtle glow behind avatar
         ctx.save(); ctx.shadowColor = ACCENT + "80"; ctx.shadowBlur = 45;
         ctx.beginPath(); ctx.arc(65 + 250, 66 + 250, 252, 0, Math.PI * 2); ctx.closePath();
@@ -188,7 +210,7 @@ async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showD
     }
 
     // Frame PNG overlay (defines chrome/frame around content)
-    const hasD = showDiscriminator && member.user.discriminator && member.user.discriminator !== "0";
+    const hasD = showDiscriminator && data.discriminator && data.discriminator !== "0";
     const hasS = showServerName;
     const fpName = hasD && hasS ? 'welcome3frame' : hasD ? 'welcome2frame_unten' : hasS ? 'welcome2frame_oben' : 'welcome1frame';
     try {
@@ -199,20 +221,20 @@ async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showD
     // Text (using accent/frame color so it matches the frame theme)
     ctx.fillStyle = resolvedFrame === 'WHITE' ? '#FFFFF9' : resolvedFrame.toLowerCase();
     ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    const uname = fitCardText(ctx, member.user.username, 1000, { maxSize: 150, minSize: 46, family: Fonts });
+    const uname = fitCardText(ctx, data.username, 1000, { maxSize: 150, minSize: 46, family: Fonts });
     ctx.fillText(uname.text, 720, 336);
     if (hasD) {
       ctx.font = `bold 40px ${wideFonts}`; ctx.fillStyle = "#999";
-      ctx.fillText(`#${member.user.discriminator}`, 720, 390);
+      ctx.fillText(`#${data.discriminator}`, 720, 390);
     }
     if (hasS) {
-      const gname = fitCardText(ctx, guild.name, 1000, { maxSize: 50, minSize: 24, family: wideFonts });
+      const gname = fitCardText(ctx, data.guildName, 1000, { maxSize: 50, minSize: 24, family: wideFonts });
       ctx.fillStyle = resolvedFrame === 'WHITE' ? '#FFFFF9' : resolvedFrame.toLowerCase();
       ctx.fillText(gname.text, 700, 166);
     }
     if (showMemberCount) {
       ctx.font = `bold 46px ${wideFonts}`; ctx.fillStyle = resolvedFrame === 'WHITE' ? '#FFFFF9' : resolvedFrame.toLowerCase();
-      ctx.fillText(`Miembros actuales: ${guild.memberCount}`, 750, 516);
+      ctx.fillText(`Miembros actuales: ${data.memberCount}`, 750, 516);
     }
 
     return canvas.encode('png');
@@ -223,7 +245,7 @@ async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showD
   const canvas = Canvas.createCanvas(W, H), ctx = canvas.getContext("2d");
 
   clipRounded(ctx, W, H, 28)
-  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: background, texture: false })
+  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: safeRasterBuffer(backgroundBuffer), texture: false })
   // Gamer: franjas diagonales morado de fondo
   ctx.save(); ctx.globalAlpha = 0.10; ctx.fillStyle = ACCENT; ctx.rotate(-0.5);
   for (let sx = -400; sx < W + 700; sx += 95) ctx.fillRect(sx, -500, 30, H + 1000);
@@ -241,7 +263,7 @@ async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showD
   _roundRect(ctx, cx + 12, cy + 40, 5, ch - 80, 2.5); ctx.fillStyle = ga; ctx.fill(); ctx.restore();
   const asz = 194, ax = cx + 60, ay = cy + (ch - asz) / 2;
   if (showAvatar) { try {
-    const av = await Canvas.loadImage(member.user.displayAvatarURL({ extension: 'png', size: 256, forceStatic: true }));
+    const av = await Canvas.loadImage(safeRasterBuffer(avatarBuffer));
     ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.6); ctx.shadowBlur = 40; ctx.shadowOffsetY = 5;
     ctx.beginPath(); ctx.arc(ax + asz / 2, ay + asz / 2, asz / 2 + 8, 0, Math.PI * 2); ctx.closePath();
     const rg = ctx.createLinearGradient(ax, ay, ax + asz, ay + asz);
@@ -252,12 +274,12 @@ async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showD
     drawCircularAvatar(ctx, av, ax, ay, asz); ctx.restore();
   } catch {} }
   const tx = cx + (showAvatar ? asz + 105 : 70), ty = cy + 180, mw = cw - (tx - cx) - 80;
-  const name = fitCardText(ctx, member.user.username, mw, { maxSize: 60, minSize: 26, family: 'Genta, "DM Sans", Arial, sans-serif' });
+  const name = fitCardText(ctx, data.username, mw, { maxSize: 60, minSize: 26, family: 'Genta, "DM Sans", Arial, sans-serif' });
   ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.4)"; ctx.shadowBlur = 15; ctx.shadowOffsetY = 3;
   ctx.fillStyle = "#FFFFFF"; ctx.fillText(name.text, tx, ty); ctx.restore();
   const nw = name.width;
-  if (showDiscriminator && member.user.discriminator && member.user.discriminator !== "0") {
-    ctx.font = '28px "DM Sans", Arial, sans-serif'; ctx.fillStyle = "#9999AA"; ctx.fillText(`#${member.user.discriminator}`, tx + nw + 20, ty - 2);
+  if (showDiscriminator && data.discriminator && data.discriminator !== "0") {
+    ctx.font = '28px "DM Sans", Arial, sans-serif'; ctx.fillStyle = "#9999AA"; ctx.fillText(`#${data.discriminator}`, tx + nw + 20, ty - 2);
   }
   const lY = ty + 45; ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.4); ctx.shadowBlur = 12;
   const ag = ctx.createLinearGradient(tx, lY, tx + 90, lY);
@@ -266,12 +288,12 @@ async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showD
   let dY = lY + 55;
   if (showServerName) {
     ctx.font = '28px "DM Sans", Arial, sans-serif'; ctx.fillStyle = ACCENT;
-    const msg = fitCardText(ctx, isLeave ? `Gracias por visitarnos, ${guild.name}` : `Te damos la bienvenida a ${guild.name}`, mw, { maxSize: 28, minSize: 28, family: '"DM Sans", Arial, sans-serif' });
+    const msg = fitCardText(ctx, isLeave ? `Gracias por visitarnos, ${data.guildName}` : `Te damos la bienvenida a ${data.guildName}`, mw, { maxSize: 28, minSize: 28, family: '"DM Sans", Arial, sans-serif' });
     ctx.fillText(msg.text, tx, dY); dY += 48;
   }
   if (showMemberCount) {
     ctx.font = '20px "DM Sans", Arial, sans-serif'; ctx.fillStyle = "#8888AA";
-    ctx.fillText(`Miembros actuales: ${guild.memberCount}`, tx, dY);
+    ctx.fillText(`Miembros actuales: ${data.memberCount}`, tx, dY);
   }
   const bx = cx + cw - 28, by = cy + 36;
   ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.3); ctx.shadowBlur = 20;
@@ -283,4 +305,4 @@ async function renderWelcomeCard({ member, guild, accentColor, showAvatar, showD
   return canvas.encode('png');
 }
 
-module.exports = { drawNoise, drawCircularAvatar, fitCardText, renderLeaveCard, renderWelcomeCard, renderConfiguredWelcomeCard }
+module.exports = { drawNoise, drawCircularAvatar, fitCardText, renderLeaveCard, renderWelcomeCard, renderConfiguredWelcomeCard, renderConfiguredLeaveCard }
