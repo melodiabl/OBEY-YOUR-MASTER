@@ -93,12 +93,6 @@ module.exports = {
                         emoji: "😳",
                         description: `${client.settings.get(message.guild.id, "ANIME") ? "❌ Desactivar ANIME" : "✅ Activar ANIME"}`,
                     },
-                    {
-                        label: "NSFW",
-                        value: "NSFW",
-                        emoji: "🔞",
-                        description: `${client.settings.get(message.guild.id, "NSFW") ? "❌ Desactivar NSFW" : "✅ Activar NSFW"}`,
-                    },
                 ];
             }
             function getMenuRowComponent() {

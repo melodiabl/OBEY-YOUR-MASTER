@@ -19,9 +19,8 @@ function availableCommands(client, context) {
       const roles = [...(settings.adminroles || []), ...(settings.cmdadminroles?.[entry.name] || [])]
       if (!roles.includes(member.id) && !roles.some(id => member.roles?.cache?.has(id))) return false
     }
-    if (category.includes('nsfw') && (!settings.NSFW || !channel?.nsfw)) return false
     if (category === 'fun' && settings.FUN === false || category === 'music' && settings.MUSIC === false) return false
-    if (!admin && settings.botchannel?.length && !category.includes('nsfw') && !settings.botchannel.includes(channel?.id)) return false
+    if (!admin && settings.botchannel?.length && !settings.botchannel.includes(channel?.id)) return false
     if (entry.transport === 'prefix' && settings.channel && channel?.id === settings.channel) return false
     if (commandDenial(client, member, entry.name, musicState?.currentTrack, { checkDj: Boolean(entry.parameters.check_dj) })) return false
     if (entry.parameters.type === 'music') {

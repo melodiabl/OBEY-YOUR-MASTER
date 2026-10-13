@@ -175,7 +175,7 @@ const coreHandlers = [
   'ticketevent','roster','joinvc','boostlog','welcome','leave',
   'ghost_ping_detector','antiselfbot','jointocreate','reactionrole',
   'ranking','timedmessages','membercount','autoembed','suggest',
-  'validcode','dailyfact','autonsfw','aichat','mute','automeme','counter',
+  'validcode','dailyfact','aichat','mute','automeme','counter',
   'extraevents','giveaway','invitetracking','birthdayScheduler',
 ]
 

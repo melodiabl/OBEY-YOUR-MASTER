@@ -1,6 +1,7 @@
 const { readdirSync, lstatSync } = require("fs");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const config = require(`${process.cwd()}/botconfig/config.json`);
+const { isRestrictedCommand } = require('./command-policy');
 const dirSetup = [
     {
         Folder: "Info",
@@ -16,11 +17,6 @@ const dirSetup = [
         Folder: "Admin",
         CmdName: "admin",
         CmdDescription: "Administrate the Server!",
-    },
-    {
-        Folder: "NSFW",
-        CmdName: "nsfw",
-        CmdDescription: "NSFW Content, NSFW CHANNELS only!",
     },
     {
         Folder: "Fun",
@@ -99,6 +95,7 @@ module.exports = client => {
         // client.slashCommands("normal" + "commandname") //each Command Data
         client.allCommands = []; //raw Slash Commands Data
         readdirSync("./slashCommands/").forEach(dir => {
+            if (isRestrictedCommand(null, dir)) return;
             if (lstatSync(`./slashCommands/${dir}`).isDirectory()) {
                 const groupName = dir;
                 const cmdSetup = dirSetup.find(d => d.Folder == dir);
@@ -112,6 +109,7 @@ module.exports = client => {
                     const slashCommands = readdirSync(`./slashCommands/${dir}/`).filter(file => file.endsWith(".js"));
                     for (let file of slashCommands) {
                         let pull = require(`../slashCommands/${dir}/${file}`);
+                        if (isRestrictedCommand(pull, dir)) continue;
                         if (pull.name && pull.description) {
                             subCommand.addSubcommand(subcommand => {
                                 subcommand
@@ -233,6 +231,7 @@ module.exports = client => {
                 }
             } else {
                 let pull = require(`../slashCommands/${dir}`);
+                if (isRestrictedCommand(pull)) return;
                 if (pull.name && pull.description) {
                     let Command = new SlashCommandBuilder()
                         .setName(String(pull.name).toLowerCase())

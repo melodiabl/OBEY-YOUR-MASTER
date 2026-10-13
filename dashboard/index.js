@@ -422,9 +422,6 @@ module.exports = async client => {
     if (b.djRole          !== undefined) patch.djRole          = b.djRole          || null
     if (b.birthdayChannel !== undefined) patch.birthdayChannel = b.birthdayChannel || null
 
-    // Misc
-    if (b.autoNsfwEnabled !== undefined) patch.autoNsfw = b.autoNsfwEnabled === 'on' ? 'enabled' : null
-
     // Log channels
     if (b['log_messages']   !== undefined) patch['logChannels.messages']   = b['log_messages']   || null
     if (b['log_members']    !== undefined) patch['logChannels.members']    = b['log_members']    || null

@@ -62,5 +62,6 @@ test('missing engine is unavailable and command inventory preserves the loaders'
   const music = loaded.allCommands.find(command => command.name === 'music')
   assert.deepEqual(manifest.commands.slash, music.options.map(option => `music.${option.name}`))
   assert.equal(music.options.length, 25)
-  assert.equal(loaded.allCommands.length, 19)
+  assert.equal(loaded.allCommands.length, 18)
+  assert.equal(loaded.allCommands.some(command => command.name === 'nsfw' || command.nsfw === true), false)
 })

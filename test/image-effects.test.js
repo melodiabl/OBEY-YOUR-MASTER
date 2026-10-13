@@ -20,8 +20,8 @@ test('avatar download rejects arbitrary destinations before making requests', as
   await assert.rejects(avatarData('http://127.0.0.1/private'),/avatar válido/)
   await assert.rejects(avatarData('https://example.com/image'),/avatar válido/)
 })
-test('retired provider endpoints report their actual availability', async () => {
+test('provider retains ordinary expressions without an adult namespace', () => {
   const neko=new Neko()
   assert.equal(typeof neko.hug,'function')
-  await assert.rejects(neko.nsfw.hentai(),/retiró/)
+  assert.equal(neko.nsfw,undefined)
 })

@@ -1,0 +1,19 @@
+{
+  "fixture": true,
+  "production": false,
+  "views": [
+    {
+      "width": 1440,
+      "removedControl": true,
+      "miscPreserved": true
+    },
+    {
+      "width": 320,
+      "removedControl": true,
+      "miscPreserved": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleIssues": [],
+  "failedAssets": []
+}

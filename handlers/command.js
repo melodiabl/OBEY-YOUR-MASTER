@@ -1,6 +1,7 @@
 const { readdirSync } = require("fs");
 const { EmbedBuilder } = require("discord.js");
 const serialize = require("serialize-javascript");
+const { isRestrictedCommand } = require('./command-policy');
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 console.log(`OBEY YOUR MASTER | By: Melodia (github.com/melodiabl)`.cyan);
 module.exports = async client => {
@@ -8,10 +9,12 @@ module.exports = async client => {
     console.log(`${String("[x] :: ".magenta)}Now loading the Commands ...`.brightGreen);
     try {
         readdirSync("./commands/").forEach(dir => {
+            if (isRestrictedCommand(null, dir)) return;
             const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
             for (let file of commands) {
                 try {
                     let pull = require(`../commands/${dir}/${file}`);
+                    if (isRestrictedCommand(pull, dir)) continue;
                     if (pull.name) {
                         client.commands.set(pull.name, pull);
                         //console.log(`    | ${file} :: Ready`.brightGreen)

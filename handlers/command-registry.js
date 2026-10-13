@@ -1,4 +1,5 @@
 // Command names always take precedence over aliases. Resolve legacy aliases once.
+const { isRestrictedCommand } = require('./command-policy')
 const PREFERRED_ALIASES = { awayfromkeyboard: 'afk', cmdlog: 'setup-admincmdlog', 'setup-caps': 'setup-anticaps', setupcaps: 'setup-anticaps', givemoney: 'pay', tobank: 'deposit', uinfo: 'userinfo', quickcl: 'instantclose', banhammer: 'ban', tempban: 'ban', ap: 'autoplay', p: 'play', mix: 'playmusicmix', prev: 'playprevious', slow: 'slowmode', pruning: 'togglepruning', toggleplaymsg: 'toggleplaymessage' }
 function buildAliases(commands) {
   const aliases = new Map(), conflicts = []
@@ -43,6 +44,7 @@ function buildCommandCatalog(client) {
       disabled: command.enabled === false || command.disabled === true }
   }
   for (const command of client.commands?.values?.() || []) {
+    if (isRestrictedCommand(command)) continue
     if (typeof command.run === 'function' && typeof command.name === 'string') {
       const entry = metadata(command, `prefix:${command.name}`, 'prefix', command.name, command.category)
       const key = command.name.toLowerCase()
@@ -51,12 +53,14 @@ function buildCommandCatalog(client) {
     }
   }
   for (const schema of client.allCommands || []) {
+    if (isRestrictedCommand(schema)) continue
     if (typeof schema.name !== 'string') continue
     function walk(options, path = []) {
       for (const option of options || []) {
         if (option.type === 2) walk(option.options, [...path, option.name])
         else if (option.type === 1) {
           const command = client.slashCommands?.get(schema.name + option.name)
+          if (isRestrictedCommand(command) || option.nsfw === true) continue
           if (typeof command?.run !== 'function') continue
           const parts = [schema.name, ...path, option.name]
           entries.push(metadata(command, `slash:${parts.join('.')}`, 'slash', '/' + parts.join(' '), command.category || schema.name[0].toUpperCase() + schema.name.slice(1), option.options))
@@ -66,6 +70,7 @@ function buildCommandCatalog(client) {
     if (schema.options?.some(option => [1, 2].includes(option.type))) walk(schema.options)
     else {
       const command = client.slashCommands?.get('normal' + schema.name)
+      if (isRestrictedCommand(command)) continue
       if (typeof command?.run === 'function') entries.push(metadata(command, `slash:${schema.name}`, 'slash', '/' + schema.name, command.category, schema.options))
     }
   }

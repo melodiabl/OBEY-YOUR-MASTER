@@ -30,6 +30,8 @@ Estos fixtures no utilizan sesiones, credenciales ni Mongo de producción. El re
 
 ## Despliegue · 14 de octubre de 2026 (Europe/Berlin)
 
+Nota posterior: la [retirada de NSFW](NSFW-RETIREMENT.md) reemplaza la política de reversión descrita al final. Las imágenes antiguas contienen comandos y envío automático NSFW y no deben restaurarse después de esa retirada.
+
 Snapshot `51ae2b27017faa98fb29cad5d815b2da7614d237`, imagen `localhost/obey-your-master_bot:release-panel-20261014`, ID `dc6ceb625aeb741acbe1ee9f18b052715cdeecfd80b859075708cbbe6b467a55`. Se construyó desde un archivo de Git. Prueba de imagen sin red: mapa legible con 82 IDs, usuario 1000, renderer aislado produce PNG y `.env` ausente. La plantilla guardada en Git de Architect renderizó dentro de la imagen con la navegación/fuentes comunes; su versión local pendiente quedó excluida.
 
 Solo se recreó `obey_bot`, iniciado a las `2026-10-13T22:52:03Z` (14 de octubre en Berlin). Estado healthy, cero reinicios, `/health` 200 con Mongo/música disponibles, ClientReady y 19 comandos raíz publicados. Sin errores de handlers ni advertencias del mapa de emojis. Imágenes, Lavalink y Redis mantuvieron sus arranques anteriores.

@@ -40,7 +40,7 @@ module.exports = {
                     },
                     {
                         value: "Cancel",
-                        description: `Cancelar y detener la Auto-Nsfw-Configuración`,
+                        description: `Cancelar y detener la configuración de Auto-Embed`,
                         emoji: allEmojis.msg.cancel,
                     },
                 ];

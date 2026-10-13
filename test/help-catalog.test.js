@@ -57,7 +57,7 @@ test('available help excludes privileged, disabled and voice-incompatible comman
   assert.ok(!admin.some(entry => entry.id === 'prefix:eval'))
 })
 
-test('legacy roles, bot channels, NSFW and DJ rules remain context-specific', () => {
+test('legacy roles, bot channels and DJ rules remain context-specific while NSFW stays retired', () => {
   const { client, context, settings } = fixture()
   settings.adminroles = ['staff']; context.member.roles.cache.set('staff', {})
   context.member.permissions = new PermissionsBitField(4n)
@@ -65,7 +65,7 @@ test('legacy roles, bot channels, NSFW and DJ rules remain context-specific', ()
   settings.botchannel = ['other']
   assert.equal(availableCommands(client, context).length, 0)
   settings.botchannel = []; settings.NSFW = true; context.channel.nsfw = true
-  assert.ok(availableCommands(client, context).some(entry => entry.name === 'adult'))
+  assert.ok(!availableCommands(client, context).some(entry => entry.name === 'adult'))
   context.member.voice.channelId = 'voice'; settings.djonlycmds = ['play']; settings.djroles = ['dj']
   assert.ok(!availableCommands(client, context).some(entry => entry.name === 'play'))
   context.member.roles.cache.set('dj', {})

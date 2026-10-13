@@ -2,6 +2,12 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Retirada de NSFW · 14 de octubre de 2026
+
+Petición del usuario: eliminar NSFW para descubrimiento de aplicaciones. Retirados 112 comandos de prefijo, 25 slash, 66 archivos de datos y el setup/envío automático. Cargadores y catálogo bloquean su regreso; menús y panel no ofrecen activación. Las claves antiguas de configuración quedan inertes. Suite 367/367, schemas con 18 raíces y catálogo de 674 invocaciones; Chromium comprueba ajustes en escritorio/móvil. Detalles y estado de despliegue en [NSFW-RETIREMENT.md](NSFW-RETIREMENT.md).
+
+Las imágenes de rollback de entregas anteriores contienen NSFW: sus procedimientos de reversión quedan reemplazados por la política de recuperación de esta retirada.
+
 ## Rediseño del panel · 14 de octubre de 2026
 
 El usuario corrigió el alcance visual: tipografía legible y rediseño del panel completo, con referencias de otras webs. DM Sans local para interfaz/títulos, iconos y gráficas locales, tema grafito común, navegación por servidor y búsqueda/filtro del selector. Tarjetas prioriza preview; estadísticas acota gráficas; música conserva su recorrido con tipografía/superficies compartidas. Seis páginas verificadas en Chromium a 320/768/1024/1440, recursos externos bloqueados, teclado/foco/menú y estados vacíos/nombres largos; regresiones de Tarjetas/Bienvenida/Ayuda y 363 tests pasan. Detalles y capturas en [PANEL-DESIGN.md](PANEL-DESIGN.md).
