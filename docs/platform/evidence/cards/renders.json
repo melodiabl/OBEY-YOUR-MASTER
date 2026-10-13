@@ -1,0 +1,64 @@
+{
+  "source": "handlers/cards.js",
+  "offline": true,
+  "published": false,
+  "fixtures": "Local synthetic avatars; no user media or guild data",
+  "cases": [
+    {
+      "name": "welcome-frame",
+      "width": 1772,
+      "height": 633,
+      "bytes": 241257,
+      "sha256": "db5784be2fbc3f6294bb4b51e07ec6257f04442ca1e6fc32892be4199cd50182"
+    },
+    {
+      "name": "welcome-transparent-avatar",
+      "width": 1772,
+      "height": 633,
+      "bytes": 268009,
+      "sha256": "5cba871be3cffca9e147f34d6a1f3d9cafe41a8731ce22fb622e56fd6a7caf9b"
+    },
+    {
+      "name": "welcome-without-avatar",
+      "width": 1772,
+      "height": 633,
+      "bytes": 154605,
+      "sha256": "6214fe7174210705ed3a6e46758e1bc5f147ee6c303d34a2c9b7e4bcebfb7b2e"
+    },
+    {
+      "name": "welcome-long-name",
+      "width": 1772,
+      "height": 633,
+      "bytes": 254815,
+      "sha256": "6314cb93f04b8d0cdc76806646ca736b0003aebaa9d2f7e72bbbd5a672c6007d"
+    },
+    {
+      "name": "welcome-without-frame",
+      "width": 1772,
+      "height": 720,
+      "bytes": 1062645,
+      "sha256": "cd70195a40842d0bf3dc94bd221ff7e2ad2b450c43792c8ed06d1717174196d4"
+    },
+    {
+      "name": "leave-texture",
+      "width": 1772,
+      "height": 720,
+      "bytes": 923313,
+      "sha256": "363329670b7547e57cae1b2b2ce46d265a3367c5d138707fd0de812014e65d25"
+    },
+    {
+      "name": "leave-without-texture",
+      "width": 1772,
+      "height": 720,
+      "bytes": 216869,
+      "sha256": "6784c4a3244636c0dd4637ca3ef39ddb9dce6af662cc5a8b6c520b8b86c171c2"
+    },
+    {
+      "name": "leave-invalid-images",
+      "width": 1772,
+      "height": 720,
+      "bytes": 901139,
+      "sha256": "a71d1eda2a02b1edf771b7ce843a91938cdb1e9c3b0918ef7ed74490e908c27d"
+    }
+  ]
+}

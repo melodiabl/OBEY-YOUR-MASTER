@@ -3,20 +3,9 @@ const Discord = require("discord.js");
 const { ChannelType,
     PermissionFlagsBits
 } = require("discord.js");
-const Canvas = require("@napi-rs/canvas");
-const canvacord = require("canvacord");
 const FormData = require("form-data");
 const axios = require("axios");
-const path = require("path");
-const { clipRounded, drawCardBg } = require('./canvasUtils')
-//Load fonts
-try {
-  Canvas.GlobalFonts.registerFromPath("./assets/fonts/Genta.ttf", "Genta");
-  Canvas.GlobalFonts.registerFromPath("./assets/fonts/UbuntuMono.ttf", "UbuntuMono");
-  Canvas.GlobalFonts.registerFromPath("./assets/fonts/DMSans-Bold.ttf", "DM Sans");
-  Canvas.GlobalFonts.registerFromPath("./assets/fonts/STIXGeneral.ttf", "STIXGeneral");
-  Canvas.GlobalFonts.registerFromPath("./assets/fonts/Arial.ttf", "Arial");
-} catch {}
+const { renderConfiguredWelcomeCard } = require('./cards')
 // require functions from files
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -24,189 +13,7 @@ const { delay, duration, simple_databasing } = require(`./functions`);
 const { Captcha } = require(`captcha-canvas`); //require package here
 const ms = require("ms");
 //Create Variables
-const Fonts = 'Genta, UbuntuMono, "DM Sans", STIXGeneral, Arial';
-const wideFonts = '"DM Sans", STIXGeneral, Arial';
-const WELCOME_ASSETS = path.join(process.cwd(), "assets", "welcome");
-const FRAME_COLORS = ['#030303', '#25FA6C', '#3A98F0', '#8525FA', '#FA2525', '#FA9E25', '#FAFA25', '#FFFFF9', 'WHITE'];
 let invitemessage = "\u200b";
-
-function _roundRect(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.lineTo(x + w - r, y);
-  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-  ctx.lineTo(x + w, y + h - r);
-  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-  ctx.lineTo(x + r, y + h);
-  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-  ctx.lineTo(x, y + r);
-  ctx.quadraticCurveTo(x, y, x + r, y);
-  ctx.closePath();
-}
-function _hexRgba(h, a) {
-  const r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${a})`;
-}
-function _drawAmbientGlow(ctx, cx, cy, radius, color, alphaMax) {
-  const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-  grd.addColorStop(0, _hexRgba(color, alphaMax || 0.2));
-  grd.addColorStop(0.5, _hexRgba(color, (alphaMax || 0.2) * 0.3));
-  grd.addColorStop(1, _hexRgba(color, 0));
-  ctx.fillStyle = grd;
-  ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
-}
-const _noiseCache = {}; // textura de ruido cacheada por tamaño (evita regenerar millones de px por render)
-function _drawNoise(ctx, w, h, intensity) {
-  // putImageData sobrescribe (no compone); generamos el ruido en un canvas aparte (1 vez por tamaño)
-  // y lo dibujamos con baja opacidad para un grano sutil sobre la tarjeta.
-  const key = w + "x" + h;
-  let tmp = _noiseCache[key];
-  if (!tmp) {
-    tmp = Canvas.createCanvas(w, h);
-    const tctx = tmp.getContext("2d");
-    const id = tctx.createImageData(w, h);
-    const d = id.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const v = (Math.random() * 256) | 0;
-      d[i] = v; d[i + 1] = v; d[i + 2] = v; d[i + 3] = 255;
-    }
-    tctx.putImageData(id, 0, 0);
-    _noiseCache[key] = tmp;
-  }
-  ctx.save(); ctx.globalAlpha = (intensity || 6) / 255; ctx.drawImage(tmp, 0, 0); ctx.restore();
-}
-function _resolveFrameColor(raw) {
-  if (!raw) return null;
-  const up = raw.toUpperCase().trim();
-  if (up === 'WHITE' || up === '#FFFFFF') return 'WHITE';
-  if (FRAME_COLORS.includes(up)) return up;
-  return null;
-}
-
-async function _generateCard({ member, guild, accentColor, showAvatar, showDiscriminator, showMemberCount, showServerName, background, isLeave, frameColor }) {
-  const ACCENT = accentColor || "#5865F2";
-  const resolvedFrame = _resolveFrameColor(frameColor);
-
-  // \u2500\u2500 FRAME-BASED MODE (uses welcome PNG overlay assets) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
-  if (resolvedFrame) {
-    const W = 1772, H = 633;
-    const canvas = Canvas.createCanvas(W, H), ctx = canvas.getContext("2d");
-
-    // Background
-    clipRounded(ctx, W, H, 28)
-    await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: background })
-
-    // Avatar BEFORE frame overlay (frame has transparent avatar slot)
-    if (showAvatar) {
-      try {
-        const av = await Canvas.loadImage(member.user.displayAvatarURL({ extension: 'png', size: 512, forceStatic: true }));
-        // Subtle glow behind avatar
-        ctx.save(); ctx.shadowColor = ACCENT + "80"; ctx.shadowBlur = 45;
-        ctx.beginPath(); ctx.arc(65 + 250, 66 + 250, 252, 0, Math.PI * 2); ctx.closePath();
-        ctx.fillStyle = "transparent"; ctx.fill(); ctx.restore();
-        ctx.drawImage(av, 65, 66, 500, 500);
-      } catch {}
-    }
-
-    // Frame PNG overlay (defines chrome/frame around content)
-    const hasD = showDiscriminator && member.user.discriminator && member.user.discriminator !== "0";
-    const hasS = showServerName;
-    const fpName = hasD && hasS ? 'welcome3frame' : hasD ? 'welcome2frame_unten' : hasS ? 'welcome2frame_oben' : 'welcome1frame';
-    try {
-      ctx.drawImage(await Canvas.loadImage(path.join(WELCOME_ASSETS, resolvedFrame, `${fpName}.png`)), 0, 0, W, H);
-      ctx.drawImage(await Canvas.loadImage(path.join(WELCOME_ASSETS, resolvedFrame, 'welcome1framepb.png')), 0, 0, W, H);
-    } catch {}
-
-    // Text (using accent/frame color so it matches the frame theme)
-    ctx.fillStyle = resolvedFrame === 'WHITE' ? '#FFFFF9' : resolvedFrame.toLowerCase();
-    ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    const uname = member.user.username;
-    if (uname.length >= 14) { ctx.font = `100px ${Fonts}`; ctx.fillText(uname, 720, 316); }
-    else                    { ctx.font = `150px ${Fonts}`; ctx.fillText(uname, 720, 336); }
-    if (hasD) {
-      ctx.font = `bold 40px ${wideFonts}`; ctx.fillStyle = "#999";
-      ctx.fillText(`#${member.user.discriminator}`, 720, 390);
-    }
-    if (hasS) {
-      const gname = guild.name.length > 22 ? guild.name.slice(0, 21) + "\u2026" : guild.name;
-      ctx.font = `bold 50px ${wideFonts}`; ctx.fillStyle = resolvedFrame === 'WHITE' ? '#FFFFF9' : resolvedFrame.toLowerCase();
-      ctx.fillText(gname, 700, 166);
-    }
-    if (showMemberCount) {
-      ctx.font = `bold 46px ${wideFonts}`; ctx.fillStyle = resolvedFrame === 'WHITE' ? '#FFFFF9' : resolvedFrame.toLowerCase();
-      ctx.fillText(isLeave ? `Miembro #${guild.memberCount}` : `Miembro #${guild.memberCount}`, 750, 516);
-    }
-
-    return canvas.encode('png');
-  }
-
-  // \u2500\u2500 PROGRAMMATIC MODE (no frame, fully designed background) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
-  const W = 1772, H = 720;
-  const canvas = Canvas.createCanvas(W, H), ctx = canvas.getContext("2d");
-
-  clipRounded(ctx, W, H, 28)
-  await drawCardBg(ctx, W, H, { fc: ACCENT, customBg: background })
-  // Gamer: franjas diagonales morado de fondo
-  ctx.save(); ctx.globalAlpha = 0.10; ctx.fillStyle = ACCENT; ctx.rotate(-0.5);
-  for (let sx = -400; sx < W + 700; sx += 95) ctx.fillRect(sx, -500, 30, H + 1000);
-  ctx.restore();
-  const cx = 80, cy = 110, cw = 930, ch = 500, cr = 36;
-  ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.7)"; ctx.shadowBlur = 80; ctx.shadowOffsetY = 20;
-  _roundRect(ctx, cx, cy, cw, ch, cr);
-  const gg = ctx.createRadialGradient(cx + 100, cy, 0, cx + cw / 2, cy + ch / 2, cw);
-  gg.addColorStop(0, _hexRgba(ACCENT, 0.06)); gg.addColorStop(0.5, "rgba(16,16,40,0.85)"); gg.addColorStop(1, "rgba(8,8,24,0.92)");
-  ctx.fillStyle = gg; ctx.fill(); ctx.restore();
-  _roundRect(ctx, cx, cy, cw, ch, cr); ctx.fillStyle = _hexRgba(ACCENT, 0.03); ctx.fill();
-  ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.4); ctx.shadowBlur = 20;
-  const ga = ctx.createLinearGradient(cx + 12, cy + 40, cx + 12, cy + ch - 40);
-  ga.addColorStop(0, ACCENT); ga.addColorStop(0.5, _hexRgba(ACCENT, 0.6)); ga.addColorStop(1, ACCENT);
-  _roundRect(ctx, cx + 12, cy + 40, 5, ch - 80, 2.5); ctx.fillStyle = ga; ctx.fill(); ctx.restore();
-  const asz = 194, ax = cx + 60, ay = cy + (ch - asz) / 2;
-  if (showAvatar) { try {
-    const av = await Canvas.loadImage(member.user.displayAvatarURL({ extension: 'png', size: 256, forceStatic: true }));
-    ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.6); ctx.shadowBlur = 40; ctx.shadowOffsetY = 5;
-    ctx.beginPath(); ctx.arc(ax + asz / 2, ay + asz / 2, asz / 2 + 8, 0, Math.PI * 2); ctx.closePath();
-    const rg = ctx.createLinearGradient(ax, ay, ax + asz, ay + asz);
-    rg.addColorStop(0, ACCENT); rg.addColorStop(0.5, _hexRgba(ACCENT, 0.4)); rg.addColorStop(1, ACCENT);
-    ctx.fillStyle = rg; ctx.fill(); ctx.restore();
-    ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.3)"; ctx.shadowBlur = 10;
-    ctx.beginPath(); ctx.arc(ax + asz / 2, ay + asz / 2, asz / 2, 0, Math.PI * 2); ctx.closePath(); ctx.clip();
-    ctx.drawImage(av, ax, ay, asz, asz); ctx.restore();
-  } catch {} }
-  const tx = cx + (showAvatar ? asz + 105 : 70), ty = cy + 180, mw = cw - (tx - cx) - 80;
-  let fs = 60; ctx.font = `${fs}px Genta, "DM Sans", Arial, sans-serif`;
-  while (ctx.measureText(member.user.username).width > mw && fs > 26) ctx.font = `${fs--}px Genta, "DM Sans", Arial, sans-serif`;
-  ctx.save(); ctx.shadowColor = "rgba(0,0,0,0.4)"; ctx.shadowBlur = 15; ctx.shadowOffsetY = 3;
-  ctx.fillStyle = "#FFFFFF"; ctx.fillText(member.user.username, tx, ty); ctx.restore();
-  const nw = ctx.measureText(member.user.username).width;
-  if (showDiscriminator && member.user.discriminator && member.user.discriminator !== "0") {
-    ctx.font = '28px "DM Sans", Arial, sans-serif'; ctx.fillStyle = "#9999AA"; ctx.fillText(`#${member.user.discriminator}`, tx + nw + 20, ty - 2);
-  }
-  const lY = ty + 45; ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.4); ctx.shadowBlur = 12;
-  const ag = ctx.createLinearGradient(tx, lY, tx + 90, lY);
-  ag.addColorStop(0, ACCENT); ag.addColorStop(0.6, _hexRgba(ACCENT, 0.5)); ag.addColorStop(1, "transparent");
-  ctx.fillStyle = ag; ctx.fillRect(tx, lY, 90, 4); ctx.restore();
-  let dY = lY + 55;
-  if (showServerName) {
-    ctx.font = '28px "DM Sans", Arial, sans-serif'; ctx.fillStyle = ACCENT;
-    let msg = isLeave ? `Gracias por visitarnos, ${guild.name}` : `Te damos la bienvenida a ${guild.name}`;
-    while (ctx.measureText(msg + "\u2026").width > mw && msg.length > 5) msg = msg.slice(0, -1);
-    if (msg.length < (isLeave ? `Gracias por visitarnos, ${guild.name}` : `Te damos la bienvenida a ${guild.name}`).length) msg += "\u2026";
-    ctx.fillText(msg, tx, dY); dY += 48;
-  }
-  if (showMemberCount) {
-    ctx.font = '20px "DM Sans", Arial, sans-serif'; ctx.fillStyle = "#8888AA";
-    ctx.fillText(isLeave ? `Fuiste el miembro #${guild.memberCount}` : `Eres el miembro #${guild.memberCount}`, tx, dY);
-  }
-  const bx = cx + cw - 28, by = cy + 36;
-  ctx.save(); ctx.shadowColor = _hexRgba(ACCENT, 0.3); ctx.shadowBlur = 20;
-  _roundRect(ctx, bx - 134, by, 134, 46, 23); ctx.fillStyle = _hexRgba(ACCENT, 0.12); ctx.fill(); ctx.restore();
-  ctx.save(); _roundRect(ctx, bx - 130, by + 2, 130, 42, 21); ctx.strokeStyle = _hexRgba(ACCENT, 0.25); ctx.lineWidth = 1; ctx.stroke(); ctx.restore();
-  ctx.font = '15px UbuntuMono'; ctx.fillStyle = ACCENT; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-  ctx.fillText(isLeave ? "HASTA PRONTO" : "NUEVO MIEMBRO", bx - 67, by + 23); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-  _drawNoise(ctx, W, H, 6);
-  return canvas.encode('png');
-}
 
 //Start the module
 module.exports = client => {
@@ -1360,19 +1167,7 @@ module.exports = client => {
                     if (client.settings.get(member.guild.id, "welcome.invitedm"))
                         welcomeembed.addFields({ name: "\u200b", value: `${invitemessage}` });
                     //member roles add on welcome every single role
-                    const rawFCdm = client.settings.get(member.guild.id, "welcome.framecolordm");
-                    const buf = await _generateCard({
-                        member,
-                        guild: member.guild,
-                        accentColor: (rawFCdm || "#5865F2").replace("WHITE", "#FFFFF9").replace("#FFFFFF", "#FFFFF9"),
-                        frameColor: rawFCdm || '#3A98F0',
-                        showAvatar: client.settings.get(member.guild.id, "welcome.pbdm") !== false,
-                        showDiscriminator: client.settings.get(member.guild.id, "welcome.discriminatordm") || false,
-                        showMemberCount: client.settings.get(member.guild.id, "welcome.membercountdm") || false,
-                        showServerName: client.settings.get(member.guild.id, "welcome.servernamedm") || false,
-                        background: client.settings.get(member.guild.id, "welcome.backgrounddm"),
-                        isLeave: false,
-                    });
+                    const buf = await renderConfiguredWelcomeCard(client.settings, member, { dm: true });
 
                     //send DM with canvas (axios: bypass undici UND_ERR_SOCKET on file uploads)
                     try {
@@ -1426,19 +1221,7 @@ module.exports = client => {
                     if (client.settings.get(member.guild.id, "welcome.invite"))
                         welcomeembed.addFields({ name: "\u200b", value: `${invitemessage}` });
                     try {
-                        const rawFC = client.settings.get(member.guild.id, "welcome.framecolor");
-                        const buf = await _generateCard({
-                            member,
-                            guild: member.guild,
-                            accentColor: (rawFC || "#5865F2").replace("WHITE", "#FFFFF9").replace("#FFFFFF", "#FFFFF9"),
-                            frameColor: rawFC || '#3A98F0',
-                            showAvatar: client.settings.get(member.guild.id, "welcome.pb") !== false,
-                            showDiscriminator: client.settings.get(member.guild.id, "welcome.discriminator") || false,
-                            showMemberCount: client.settings.get(member.guild.id, "welcome.membercount") || false,
-                            showServerName: client.settings.get(member.guild.id, "welcome.servername") || false,
-                            background: client.settings.get(member.guild.id, "welcome.background"),
-                            isLeave: false,
-                        });
+                        const buf = await renderConfiguredWelcomeCard(client.settings, member);
 
                         //send the welcome embed to there (axios: bypass undici UND_ERR_SOCKET on file uploads)
                         if (channel.permissionsFor(channel.guild.members.me).has(Discord.PermissionFlagsBits.SendMessages)) {

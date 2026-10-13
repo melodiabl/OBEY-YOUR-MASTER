@@ -109,17 +109,16 @@ function clipRounded(ctx, W, H, R = 24) {
 }
 
 // Full dark background: base.png texture + overlay + waves + sparkles
-// opts: { fc, userBannerUrl, customBg }
+// opts: { fc, userBannerUrl, customBg, texture }
 async function drawCardBg(ctx, W, H, opts = {}) {
-  const { fc = '#5865F2', userBannerUrl, customBg } = opts
+  const { fc = '#5865F2', userBannerUrl, customBg, texture = true } = opts
 
   if (customBg && customBg !== 'transparent') {
-    try { ctx.drawImage(await Canvas.loadImage(customBg), 0, 0, W, H) } catch {}
-    return
+    try { ctx.drawImage(await Canvas.loadImage(customBg), 0, 0, W, H); return } catch {}
   }
 
   // base.png as subtle texture
-  try {
+  if (texture) try {
     const base = await Canvas.loadImage(BASE_PNG)
     const scale = Math.max(W / base.width, H / base.height)
     const dW = base.width * scale, dH = base.height * scale
@@ -130,9 +129,9 @@ async function drawCardBg(ctx, W, H, opts = {}) {
 
   // Dark overlay
   const dark = ctx.createLinearGradient(0, 0, W, H)
-  dark.addColorStop(0, 'rgba(4,6,16,0.91)')
-  dark.addColorStop(0.5, 'rgba(7,9,22,0.85)')
-  dark.addColorStop(1, 'rgba(4,6,16,0.91)')
+  dark.addColorStop(0, texture ? 'rgba(4,6,16,0.91)' : '#040610')
+  dark.addColorStop(0.5, texture ? 'rgba(7,9,22,0.85)' : '#070916')
+  dark.addColorStop(1, texture ? 'rgba(4,6,16,0.91)' : '#040610')
   ctx.fillStyle = dark; ctx.fillRect(0, 0, W, H)
 
   // Wave corner accents

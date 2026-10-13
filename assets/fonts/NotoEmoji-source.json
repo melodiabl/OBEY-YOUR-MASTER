@@ -1,0 +1,13 @@
+{
+  "source": "https://github.com/google/fonts/tree/main/ofl/notoemoji",
+  "download": "https://raw.githubusercontent.com/google/fonts/main/ofl/notoemoji/NotoEmoji%5Bwght%5D.ttf",
+  "retrieved": "2026-10-13",
+  "file": "NotoEmoji.ttf",
+  "sha256": "de6c18832938afc99caf132b39d6a30a19bac7f2e812e28db2535b4608d27551",
+  "license": "SIL Open Font License 1.1",
+  "licenseFile": "NotoEmoji-OFL.txt",
+  "licenseSourceSha256": "500bb1ccf43df7bbb522112f9133a52b16e1c35e809632f5d8609b179152de5b",
+  "licenseSha256": "79d348cb5161481f603dcda564fb129a9b2c11d7012dcad820af045fed75c020",
+  "licenseFormatting": "One trailing space removed; license text unchanged",
+  "usage": "Local fallback for membership-card emoji glyphs; no runtime font downloads"
+}

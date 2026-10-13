@@ -1477,6 +1477,15 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] H03: Ayuda web autenticada sobre el mismo servicio, búsqueda/categoría/canal/detalle, paginación y recorrido en Chromium. Evidencia en `HELP.md` y `evidence/help`. Dependencia: H02.
 - [x] Checkpoint local: 306 tests pasan, builders del catálogo real, schemas/auditoría sin publicación y commits de entrega. Discord real y resto de T11/T53 permanecen pendientes; no se declara cerrado utilities.
 
+## Tarjetas y bienvenida · continuación T18
+
+- [x] K01: Corregir CARD-04 con textura compuesta y acotada, preservar contenido/clip, comprobar regiones de avatar y texto en PNG decodificado.
+- [x] K02: Recorte circular proporcional con transparencia, nombres medidos y elipsis por grafemas, fuentes locales para CJK/emoji y contador de miembros actuales. CARD-06 y semántica del contador verificados localmente.
+- [x] K03: Extraer bienvenida a cards.js y conectar evento/DM y ambos slash; mismo render y flags, sin estilos exclusivos del preview. CARD-07 cubierto para estos consumidores Discord; web/DTO aún pendientes.
+- [x] K04: Omitir base de ranking en el fondo automático, fallback neutro al fallar imagen opcional, ocho renders reales offline inspeccionados y pruebas de regresión. Alternativa neutra de CARD-05; selección persistida de fondos por guild pendiente.
+- [x] Checkpoint local: suite completa 316/316, auditoría 811 comandos sin errores/conflictos y schemas 19 raíces/166 subcomandos, sin publicación. Evidencia y límites en `docs/platform/CARDS.md`.
+- [ ] Completar T18: validación de medios/DTO y límites de decode/red, uploads por guild, preview web y entrega sin tarjeta ante fallo total; verificación Discord real. Continuar después con CARD-08 de ranking.
+
 ## T57
 
 - [ ] Validación transversal y preparación PR (fase 8).
