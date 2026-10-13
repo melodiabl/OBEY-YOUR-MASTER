@@ -4,7 +4,7 @@
   <div class="page-ico ico-p"><i class="fas fa-robot"></i></div>
   <div>
     <h1 class="page-title">Panel de control</h1>
-    <div class="page-sub">Estado del bot y actividad de tus servidores.</div>
+    <div class="page-sub">Gestiona tus comunidades y continúa con lo que está sonando.</div>
   </div>
   <div class="page-actions">
     <% if (user) { %>
@@ -19,7 +19,7 @@
 <div class="stat-grid" id="stat-grid">
   <div class="stat-card">
     <div class="stat-icon text-p"><i class="fas fa-server"></i></div>
-    <div class="stat-num" id="sc-guilds"><%= bot.guilds || '—' %></div>
+    <div class="stat-num" id="sc-guilds"><%= bot.guilds ?? '—' %></div>
     <div class="stat-lbl">Servidores</div>
   </div>
   <div class="stat-card">
@@ -34,18 +34,21 @@
   </div>
   <div class="stat-card">
     <div class="stat-icon" style="color:var(--yellow)"><i class="fas fa-terminal"></i></div>
-    <div class="stat-num"><%= bot.commands || '625' %>+</div>
+    <div class="stat-num"><%= bot.commands ?? '—' %></div>
     <div class="stat-lbl">Comandos</div>
   </div>
+  </div>
+
+  <details class="service-details"><summary>Estado del servicio</summary><div class="stat-grid">
   <div class="stat-card">
     <div class="stat-icon text-p"><i class="fas fa-clock"></i></div>
     <div class="stat-num font-mono" id="sc-uptime" style="font-size:18px;margin-top:8px">—</div>
-    <div class="stat-lbl">Uptime</div>
+    <div class="stat-lbl">Tiempo activo</div>
   </div>
   <div class="stat-card">
     <div class="stat-icon" style="color:var(--green)"><i class="fas fa-heartbeat"></i></div>
     <div class="stat-num font-mono" id="sc-ping" style="font-size:18px;margin-top:8px">—</div>
-    <div class="stat-lbl">Ping WS</div>
+    <div class="stat-lbl">Latencia</div>
   </div>
   <div class="stat-card">
     <div class="stat-icon" style="color:#EB459E"><i class="fas fa-microchip"></i></div>
@@ -57,7 +60,7 @@
     <div class="stat-num" id="sc-status" style="font-size:15px;margin-top:8px">EN LÍNEA</div>
     <div class="stat-lbl">Estado del bot</div>
   </div>
-</div>
+</div></details>
 
 <!-- Now playing -->
 <div class="card" style="margin-bottom:14px">

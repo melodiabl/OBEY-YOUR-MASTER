@@ -6,10 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title><%= guild.name %> — Player · OBEY YOUR MASTER</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
 <script src="/socket.io/socket.io.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -21,7 +19,7 @@
   --text:#e8e8f4;--muted:#6b6b8e;
   --glow:rgba(124,109,240,.3);
 }
-html,body{height:100%;overflow:hidden;font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text)}
+html,body{height:100%;overflow:hidden;font-family:var(--font-ui);background:var(--bg);color:var(--text)}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
 ::-webkit-scrollbar{width:5px;height:5px}
@@ -103,7 +101,7 @@ button{font-family:inherit;cursor:pointer}
 .qi:hover{background:rgba(255,255,255,.07)}
 .qi.active{background:rgba(30,215,96,.07)}
 .qi-nwrap{width:16px;height:16px;display:flex;align-items:center;justify-content:center;position:relative}
-.qi-num{font-size:13px;font-family:'JetBrains Mono',monospace;color:var(--muted)}
+.qi-num{font-size:13px;font-family:var(--font-ui);color:var(--muted)}
 .qi-play-ico{display:none;color:#fff;font-size:13px}
 .qi:hover:not(.active) .qi-num{display:none}
 .qi:hover:not(.active) .qi-play-ico{display:flex}
@@ -122,7 +120,7 @@ button{font-family:inherit;cursor:pointer}
 .qi-title{font-size:13px;font-weight:400;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .qi.active .qi-title{color:var(--green)}
 .qi-author{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-.qi-dur{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted)}
+.qi-dur{font-size:11px;font-family:var(--font-ui);color:var(--muted)}
 .qi-btns{display:flex;gap:1px;opacity:0;transition:opacity .12s}
 .qi:hover .qi-btns{opacity:1}
 .qi-btn{width:24px;height:24px;background:none;border:none;color:var(--muted);font-size:11px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .12s}
@@ -281,7 +279,7 @@ button{font-family:inherit;cursor:pointer}
 }
 .sp-tr:hover{background:rgba(255,255,255,.07)}
 .sp-nwrap{width:16px;height:16px;display:flex;align-items:center;justify-content:center}
-.sp-num{font-size:13px;font-family:'JetBrains Mono',monospace;color:var(--muted)}
+.sp-num{font-size:13px;font-family:var(--font-ui);color:var(--muted)}
 .sp-play-ico{display:none;color:#fff;font-size:13px}
 .sp-tr:hover .sp-num{display:none}
 .sp-tr:hover .sp-play-ico{display:flex}
@@ -289,7 +287,7 @@ button{font-family:inherit;cursor:pointer}
 .sp-info{min-width:0}
 .sp-title{font-size:13px;font-weight:400;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
 .sp-artist{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-.sp-dur{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);flex-shrink:0}
+.sp-dur{font-size:11px;font-family:var(--font-ui);color:var(--muted);flex-shrink:0}
 .sp-add{width:26px;height:26px;background:none;border:none;color:var(--muted);font-size:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .12s;opacity:0}
 .sp-tr:hover .sp-add{opacity:1}
 .sp-add:hover{color:var(--green);transform:scale(1.15)}
@@ -346,7 +344,7 @@ button{font-family:inherit;cursor:pointer}
 .mc-btn-play:hover{transform:scale(1.07)}
 /* Progress bar */
 .mp-prog{display:flex;align-items:center;gap:8px;width:100%}
-.mp-time{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);flex-shrink:0}
+.mp-time{font-size:10px;font-family:var(--font-ui);color:var(--muted);flex-shrink:0}
 .mp-prog-track{
   flex:1;height:4px;background:rgba(255,255,255,.12);
   border-radius:2px;cursor:pointer;position:relative;transition:height .15s;
@@ -404,7 +402,7 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
 .kb-box h3{font-size:16px;font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:9px}
 .kb-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
 .kb-row:last-of-type{border:none}
-.kk{background:var(--surf3);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 9px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--text)}
+.kk{background:var(--surf3);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:3px 9px;font-size:11px;font-family:var(--font-ui);color:var(--text)}
 .kb-close{margin-top:18px;width:100%;padding:10px;border-radius:9px;background:var(--surf2);border:1px solid var(--border);color:var(--text);font-size:13px;font-weight:600;transition:all .15s}
 .kb-close:hover{border-color:var(--p);color:var(--p2)}
 .vc-item{display:flex;align-items:center;gap:4px;padding:11px 14px;border-radius:9px;background:var(--surf3);border:1px solid transparent;color:var(--text);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;text-align:left}
@@ -429,13 +427,13 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
 .pr-tr{display:grid;grid-template-columns:28px 36px 1fr auto;align-items:center;gap:10px;padding:6px 14px;border-radius:4px;margin:0 4px;transition:background .1s;cursor:default}
 .pr-tr:hover{background:rgba(255,255,255,.07)}
 .pr-nwrap{width:16px;display:flex;align-items:center;justify-content:center}
-.pr-num{font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--muted)}
+.pr-num{font-size:12px;font-family:var(--font-ui);color:var(--muted)}
 .pr-thumb{width:36px;height:36px;border-radius:4px;object-fit:cover;background:var(--surf3);flex-shrink:0}
 .pr-info{min-width:0}
 .pr-title{font-size:12px;font-weight:400;color:var(--text);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .pr-author{font-size:10px;color:var(--muted);margin-top:1px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .pr-meta{font-size:9px;color:var(--muted);opacity:.72;margin-top:1px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.pr-dur{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);flex-shrink:0}
+.pr-dur{font-size:10px;font-family:var(--font-ui);color:var(--muted);flex-shrink:0}
 .pr-add{width:24px;height:24px;background:none;border:none;color:var(--muted);font-size:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .12s;opacity:0;cursor:pointer;flex-shrink:0}
 .pr-tr:hover .pr-add{opacity:1}
 .pr-add:hover{color:var(--green);transform:scale(1.15)}
@@ -470,7 +468,6 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
   .alb-card{width:116px}.alb-art,.alb-art-ph{width:98px;height:98px}
 }
 </style>
-<link rel="stylesheet" href="/css/internal-theme.css">
 </head>
 <body>
 <div class="app">
@@ -987,7 +984,7 @@ function renderCatalog(container, catalog) {
     <div class="top-result-title">${esc(top.title)}</div>
     <div class="top-result-sub">
       <span>${esc(top.author)}</span><span class="top-result-badge">${topType}</span>
-      <span style="margin-left:auto;font-size:11px;font-family:'JetBrains Mono',monospace">${topDetail}</span>
+      <span style="margin-left:auto;font-size:11px;font-family:var(--font-ui)">${topDetail}</span>
     </div>
     <div class="meta-chips" style="margin-bottom:12px">${metaChips(top, { limit: 4, isrc: true })}</div>
     <button class="btn-add-green"><i class="fas fa-circle-plus"></i> ${top.type === 'track' ? 'Añadir' : 'Ver pistas'}</button>`

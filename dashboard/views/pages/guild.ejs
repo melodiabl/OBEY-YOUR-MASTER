@@ -25,21 +25,12 @@
     <% } else { %><%= guild.name ? guild.name[0] : '?' %><% } %>
   </div>
   <div>
-    <div class="gh-name"><%= guild.name %></div>
+    <h1 class="gh-name"><%= guild.name %></h1>
     <div class="gh-meta">
       <span><i class="fas fa-users"></i> <%= (guild.memberCount||0).toLocaleString() %> miembros</span>
       <span><i class="fas fa-hashtag"></i> <%= channels.length %> canales</span>
       <span><i class="fas fa-tag"></i> <%= roles.length %> roles</span>
     </div>
-  </div>
-  <div class="gh-actions" style="display:flex;gap:8px;flex-wrap:wrap">
-    <a href="/architect/<%= guild.id %>" class="btn btn-sec btn-sm">Architect</a>
-    <a href="/configuration/<%= guild.id %>/welcome" class="btn btn-sec btn-sm">Bienvenida</a>
-    <a href="/help/<%= guild.id %>" class="btn btn-sec btn-sm">Ayuda</a>
-    <a href="/cards/<%= guild.id %>" class="btn btn-sec btn-sm">Tarjetas</a>
-    <a href="/music/<%= guild.id %>" class="btn btn-p btn-sm"><i class="fas fa-music"></i> Música</a>
-    <a href="/stats/<%= guild.id %>" class="btn btn-sec btn-sm"><i class="fas fa-chart-line"></i> Estadísticas</a>
-    <a href="/dashboard" class="btn btn-ghost btn-sm"><i class="fas fa-arrow-left"></i> Volver</a>
   </div>
 </div>
 
@@ -57,10 +48,10 @@
     <button type="button" class="stab" data-tab="levels"><i class="fas fa-chart-line"></i> Niveles</button>
     <button type="button" class="stab" data-tab="tickets"><i class="fas fa-ticket"></i> Tickets</button>
     <div class="stab-sep"></div>
-    <button type="button" class="stab" data-tab="logs"><i class="fas fa-scroll"></i> Logs</button>
+    <button type="button" class="stab" data-tab="logs"><i class="fas fa-scroll"></i> Registros</button>
     <button type="button" class="stab" data-tab="invites"><i class="fas fa-user-plus"></i> Invitaciones</button>
     <button type="button" class="stab" data-tab="social"><i class="fas fa-rss"></i> Social</button>
-    <button type="button" class="stab" data-tab="misc"><i class="fas fa-sliders"></i> Misc</button>
+    <button type="button" class="stab" data-tab="misc"><i class="fas fa-sliders"></i> Otros ajustes</button>
   </nav>
 
   <!-- Tab panels -->
@@ -84,8 +75,8 @@
               <label class="form-label">Idioma</label>
               <span class="form-help">Idioma del bot en este servidor</span>
               <select name="language" class="form-select">
-                <option value="es" <%= (settings.language||'es')==='es'?'selected':'' %>>🇪🇸 Español</option>
-                <option value="en" <%= settings.language==='en'?'selected':'' %>>🇺🇸 English</option>
+                <option value="es" <%= (settings.language||'es')==='es'?'selected':'' %>>Español</option>
+                <option value="en" <%= settings.language==='en'?'selected':'' %>>English</option>
               </select>
             </div>
           </div>

@@ -1,4 +1,4 @@
-<%- include('../includes/header', { title: guild.name + ' — Bienvenida', user, activePage: 'servers', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Bienvenida' }] }) %>
+<%- include('../includes/header', { title: guild.name + ' — Bienvenida', user, activePage: 'welcome', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Bienvenida' }] }) %>
 <link rel="stylesheet" href="/css/configuration-editor.css">
 <section id="configuration-editor" data-guild-id="<%= guild.id %>" data-module-id="<%= moduleId %>">
   <div class="configuration-heading"><div><a href="/dashboard/<%= guild.id %>">← <%= guild.name %></a><h1>Bienvenida</h1><p>Prepara el mensaje de entrada y revisa los cambios antes de publicarlos.</p></div><button type="button" class="btn btn-sec" id="config-refresh">Actualizar y comparar</button></div>

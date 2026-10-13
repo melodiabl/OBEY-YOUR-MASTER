@@ -22,6 +22,14 @@
   </div>
 </div>
 
+<% if (guilds.length) { %>
+<div class="server-tools">
+  <div class="form-group"><label for="servers-search" class="form-label">Buscar un servidor</label><input id="servers-search" type="search" class="form-input" placeholder="Nombre del servidor" autocomplete="off"></div>
+  <div class="form-group"><label for="servers-filter" class="form-label">Mostrar</label><select id="servers-filter" class="form-select"><option value="all">Todos mis servidores</option><option value="active">Con el bot instalado</option><option value="invite">Pendientes de conectar</option></select></div>
+</div>
+<p id="servers-results" class="server-results" role="status" aria-live="polite"><%= guilds.length %> servidores disponibles</p>
+<% } %>
+
 <% if (!guilds.length) { %>
   <div class="card">
     <div class="card-body">
@@ -38,7 +46,7 @@
 <% } else { %>
   <div class="guild-grid">
     <% guilds.forEach(guild => { %>
-      <div class="guild-card <%= guild.inBot ? '' : 'out' %>">
+      <div class="guild-card <%= guild.inBot ? '' : 'out' %>" data-server-name="<%= guild.name %>" data-installed="<%= String(Boolean(guild.inBot)) %>">
         <% if (guild.icon) { %>
           <img src="<%= guild.icon %>" alt="<%= guild.name %>" class="g-icon">
         <% } else { %>
@@ -64,8 +72,10 @@
       </div>
     <% }) %>
   </div>
+  <div id="servers-no-results" class="empty" hidden><i class="fas fa-magnifying-glass" aria-hidden="true"></i><h2>No hay coincidencias</h2><p>Prueba otro nombre o cambia el filtro de servidores.</p></div>
 <% } %>
 
+<script src="/js/servers.js"></script>
 <script>
 async function refreshGuilds() {
   const btn = document.getElementById('btn-refresh-guilds')

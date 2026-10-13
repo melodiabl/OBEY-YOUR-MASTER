@@ -1,0 +1,12 @@
+/* Music keeps its listening layout and shares the dashboard's type and surfaces. */
+:root { color-scheme:dark; --bg:#161923; --surface:#1e222e; --surface2:#252a37; --hover:#303747; --line:#353b4b; --line2:#454e63; --txt:#f1f3f9; --txt2:#aeb6c8; --txt3:#aeb6c8; --accent:#98a3ff; --accent2:#b1bbff; --r:12px; --rs:8px; }
+body,h1,h2,h3,.vtitle { font-family:var(--font-ui); }
+.brand .lg { background:#5865f2; color:white; }
+.brand small,.side-pl .h,.kick { text-transform:none; letter-spacing:0; font-size:12px; }
+.nav a,.nav button { font-size:14px; min-height:44px; }
+.hero .in { border-color:var(--line); }
+.card { box-shadow:none; }
+.queue:not(.open) { visibility:hidden; } .queue.open { visibility:visible; }
+.qsearch,.user,.bigsearch { border-radius:8px; }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }

@@ -1,4 +1,4 @@
-<%- include('../includes/header', { title: guild.name + ' — Ayuda', user, activePage: 'servers', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Ayuda' }] }) %>
+<%- include('../includes/header', { title: guild.name + ' — Ayuda', user, activePage: 'help', breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Ayuda' }] }) %>
 <link rel="stylesheet" href="/css/help.css">
 <section id="help-app" data-guild-id="<%= guild.id %>">
   <div class="help-heading"><div><a href="/dashboard/<%= guild.id %>">← <%= guild.name %></a><h1>Ayuda de OBEY</h1><p>Encuentra los comandos disponibles para tu cuenta y consulta sus requisitos.</p></div><button type="button" class="btn btn-sec" id="help-refresh">Actualizar permisos</button></div>

@@ -1,6 +1,7 @@
 <%- include('../includes/header', {
   title: guild.name + ' — Estadísticas',
   user,
+  activePage: 'stats',
   breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/'+guild.id }, { label: 'Estadísticas' }]
 }) %>
 
@@ -16,7 +17,7 @@
 </div>
 
 <!-- Stat cards top -->
-<div class="stat-grid" style="margin-bottom:20px">
+<div class="stat-grid stats-summary" style="margin-bottom:20px">
   <div class="stat-card">
     <div class="stat-icon text-p"><i class="fas fa-users"></i></div>
     <div class="stat-num"><%= guild.memberCount.toLocaleString() %></div>
@@ -28,9 +29,9 @@
     <div class="stat-lbl">En línea ahora</div>
   </div>
   <div class="stat-card">
-    <div class="stat-icon ico-pink" style="width:auto;height:auto;border-radius:0;padding:0"><i class="fas fa-gavel" style="color:var(--pink)"></i></div>
+    <div class="stat-icon"><i class="fas fa-gavel" style="color:var(--pink)"></i></div>
     <div class="stat-num"><%= guild.warnCount %></div>
-    <div class="stat-lbl">Warns activos</div>
+    <div class="stat-lbl">Avisos activos</div>
   </div>
   <div class="stat-card">
     <div class="stat-icon" style="color:var(--yellow)"><i class="fas fa-ticket"></i></div>
@@ -57,8 +58,8 @@
       <div class="card-ico ico-p"><i class="fas fa-users"></i></div>
       <div><div class="card-title">Distribución de miembros</div><div class="card-desc">Online · Ocupado · No molestar · Desconectado</div></div>
     </div>
-    <div class="card-body" style="align-items:center">
-      <canvas id="memberChart" height="200"></canvas>
+    <div class="card-body chart-body">
+      <canvas id="memberChart" role="img" aria-label="Distribución de miembros por estado"></canvas>
     </div>
   </div>
 
@@ -68,8 +69,8 @@
       <div class="card-ico ico-purple"><i class="fas fa-hashtag"></i></div>
       <div><div class="card-title">Tipos de canales</div><div class="card-desc">Texto · Voz · Categorías · Hilos</div></div>
     </div>
-    <div class="card-body" style="align-items:center">
-      <canvas id="channelChart" height="200"></canvas>
+    <div class="card-body chart-body">
+      <canvas id="channelChart" role="img" aria-label="Distribución de los tipos de canales"></canvas>
     </div>
   </div>
 </div>
@@ -95,7 +96,7 @@
   <div class="card-body" style="gap:8px;padding:12px 16px">
     <% topRoles.forEach((r, i) => { %>
     <div style="display:flex;align-items:center;gap:12px;padding:8px 10px;background:var(--surf2);border-radius:8px;border:1px solid var(--border)">
-      <span style="font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);width:18px">#<%= i+1 %></span>
+      <span style="font-size:11px;font-family:var(--font-ui);color:var(--muted);width:18px">#<%= i+1 %></span>
       <span style="width:10px;height:10px;border-radius:50%;background:<%= r.color || '#8888a0' %>;flex-shrink:0"></span>
       <span style="font-size:13px;font-weight:600;color:#fff;flex:1"><%= r.name %></span>
       <span style="font-size:12px;color:var(--muted)"><%= r.count %> miembros</span>
@@ -131,12 +132,13 @@
 </div>
 <% } %>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" integrity="sha384-e6nUZLBkQ86NJ6TVVKAeSaK8jWa3NhkYWZFomE39AvDbQWeie9PlQqM3pmYW5d1g" crossorigin="anonymous"></script>
+<script src="/vendor/chart/chart.umd.min.js" integrity="sha384-e6nUZLBkQ86NJ6TVVKAeSaK8jWa3NhkYWZFomE39AvDbQWeie9PlQqM3pmYW5d1g"></script>
 <script>
 const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
 
-Chart.defaults.color = '#8888a0'
-Chart.defaults.font.family = "'Space Grotesk', sans-serif"
+Chart.defaults.color = '#aeb6c8'
+Chart.defaults.font.family = getComputedStyle(document.body).fontFamily
+document.fonts.ready.then(() => {
 
 // Member presence donut
 new Chart(document.getElementById('memberChart'), {
@@ -145,12 +147,13 @@ new Chart(document.getElementById('memberChart'), {
     labels: ['Online', 'Ocupado', 'No molestar', 'Desconectado'],
     datasets: [{
       data: [<%=guild.onlineCount%>, <%=guild.idleCount%>, <%=guild.dndCount%>, <%=guild.offlineCount%>],
-      backgroundColor: ['#57F287','#FEE75C','#ED4245','#4f545c'],
+      backgroundColor: ['#7bddb5','#edcf87','#ffa1aa','#697188'],
       borderWidth: 0, hoverOffset: 6,
     }]
   },
   options: {
-    responsive: true, maintainAspectRatio: true,
+    responsive: true, maintainAspectRatio: false,
+    animation: matchMedia('(prefers-reduced-motion:reduce)').matches ? false : { duration: 400 },
     plugins: { legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
     cutout: '65%',
   }
@@ -163,15 +166,18 @@ new Chart(document.getElementById('channelChart'), {
     labels: ['Texto', 'Voz', 'Categorías', 'Foros/Otros'],
     datasets: [{
       data: [<%=guild.textChannels%>, <%=guild.voiceChannels%>, <%=guild.categories%>, <%=guild.otherChannels%>],
-      backgroundColor: ['#5865F2','#9B59B6','#EB459E','#4f545c'],
+      backgroundColor: ['#98a3ff','#7bddb5','#edcf87','#697188'],
       borderWidth: 0, hoverOffset: 6,
     }]
   },
   options: {
-    responsive: true, maintainAspectRatio: true,
+    responsive: true, maintainAspectRatio: false,
+    animation: matchMedia('(prefers-reduced-motion:reduce)').matches ? false : { duration: 400 },
     plugins: { legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } } },
     cutout: '65%',
   }
+})
+
 })
 
 // Now playing live

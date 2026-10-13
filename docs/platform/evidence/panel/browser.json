@@ -1,0 +1,208 @@
+{
+  "fixture": true,
+  "production": false,
+  "externalRequestsBlocked": true,
+  "localTypographyAndIcons": true,
+  "serverSearchAndFilter": true,
+  "emptyAndLongNames": true,
+  "contextualNavigation": true,
+  "mobileMenuInertAndFocusTrap": true,
+  "escapeAndBackdropRestoreFocus": true,
+  "skipLink": true,
+  "pages": [
+    {
+      "name": "home",
+      "route": "/panel",
+      "typography": {
+        "body": "\"DM Sans\", system-ui, sans-serif",
+        "heading": "\"DM Sans\", system-ui, sans-serif",
+        "loaded": [
+          {
+            "family": "DM Sans",
+            "weight": "400"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "700"
+          },
+          {
+            "family": "Font Awesome 6 Brands",
+            "weight": "400"
+          },
+          {
+            "family": "Font Awesome 6 Free",
+            "weight": "900"
+          }
+        ]
+      },
+      "breakpoints": [
+        320,
+        768,
+        1024,
+        1440
+      ]
+    },
+    {
+      "name": "servers",
+      "route": "/dashboard",
+      "typography": {
+        "body": "\"DM Sans\", system-ui, sans-serif",
+        "heading": "\"DM Sans\", system-ui, sans-serif",
+        "loaded": [
+          {
+            "family": "DM Sans",
+            "weight": "400"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "700"
+          },
+          {
+            "family": "Font Awesome 6 Brands",
+            "weight": "400"
+          },
+          {
+            "family": "Font Awesome 6 Free",
+            "weight": "900"
+          }
+        ]
+      },
+      "breakpoints": [
+        320,
+        768,
+        1024,
+        1440
+      ]
+    },
+    {
+      "name": "settings",
+      "route": "/dashboard/panel-fixture",
+      "typography": {
+        "body": "\"DM Sans\", system-ui, sans-serif",
+        "heading": "\"DM Sans\", system-ui, sans-serif",
+        "loaded": [
+          {
+            "family": "DM Sans",
+            "weight": "400"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "700"
+          },
+          {
+            "family": "Font Awesome 6 Brands",
+            "weight": "400"
+          },
+          {
+            "family": "Font Awesome 6 Free",
+            "weight": "900"
+          }
+        ]
+      },
+      "breakpoints": [
+        320,
+        768,
+        1024,
+        1440
+      ]
+    },
+    {
+      "name": "library",
+      "route": "/library/panel-fixture",
+      "typography": {
+        "body": "\"DM Sans\", system-ui, sans-serif",
+        "heading": "\"DM Sans\", system-ui, sans-serif",
+        "loaded": [
+          {
+            "family": "DM Sans",
+            "weight": "400"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "700"
+          },
+          {
+            "family": "Font Awesome 6 Brands",
+            "weight": "400"
+          },
+          {
+            "family": "Font Awesome 6 Free",
+            "weight": "900"
+          }
+        ]
+      },
+      "breakpoints": [
+        320,
+        768,
+        1024,
+        1440
+      ]
+    },
+    {
+      "name": "stats",
+      "route": "/stats/panel-fixture",
+      "typography": {
+        "body": "\"DM Sans\", system-ui, sans-serif",
+        "heading": "\"DM Sans\", system-ui, sans-serif",
+        "loaded": [
+          {
+            "family": "DM Sans",
+            "weight": "400"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "700"
+          },
+          {
+            "family": "Font Awesome 6 Brands",
+            "weight": "400"
+          },
+          {
+            "family": "Font Awesome 6 Free",
+            "weight": "900"
+          }
+        ]
+      },
+      "breakpoints": [
+        320,
+        768,
+        1024,
+        1440
+      ]
+    },
+    {
+      "name": "music",
+      "route": "/music/panel-fixture",
+      "typography": {
+        "body": "\"DM Sans\", system-ui, sans-serif",
+        "heading": "\"DM Sans\", system-ui, sans-serif",
+        "loaded": [
+          {
+            "family": "DM Sans",
+            "weight": "400"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "700"
+          },
+          {
+            "family": "Font Awesome 6 Free",
+            "weight": "400"
+          },
+          {
+            "family": "Font Awesome 6 Free",
+            "weight": "900"
+          }
+        ]
+      },
+      "breakpoints": [
+        320,
+        768,
+        1024,
+        1440
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "failedAssets": []
+}

@@ -6,42 +6,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%= title || 'OBEY YOUR MASTER — Dashboard' %></title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/internal-theme.css">
+<link rel="preload" href="/fonts/DMSans-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/fonts/DMSans-Bold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/css/style.css?v=panel-20261013">
 </head>
 <body>
-<button class="menu-btn" id="menuBtn" aria-label="Menú" aria-controls="sidebar" aria-expanded="false"><i class="fas fa-bars"></i></button>
-<div class="overlay" id="overlay"></div>
+<a class="skip-link" href="#main-content">Ir al contenido</a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir navegación" aria-controls="sidebar" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
+<button class="overlay" id="overlay" type="button" aria-label="Cerrar navegación" tabindex="-1"></button>
 <div class="layout">
 
 <!-- ── SIDEBAR ── -->
-<aside class="sidebar" id="sidebar">
-  <a href="/" class="sidebar-brand">
-    <div class="brand-logo"><i class="fas fa-robot"></i></div>
+<aside class="sidebar" id="sidebar" aria-label="Navegación del panel">
+  <a href="/panel" class="sidebar-brand">
+    <div class="brand-logo" aria-hidden="true">O</div>
     <div>
-      <div class="brand-name">OBEY YOUR MASTER</div>
-      <div class="brand-sub">Centro de control</div>
+      <div class="brand-name">OBEY <span>Your Master</span></div>
+      <div class="brand-sub">Panel de comunidad</div>
     </div>
   </a>
 
-  <nav class="sidebar-nav">
+  <% const selectedGuild = typeof guild !== 'undefined' && guild && guild.id ? guild : null;
+     const section = typeof activePage !== 'undefined' ? activePage : '';
+     const serverPath = selectedGuild ? encodeURIComponent(String(selectedGuild.id)) : ''; %>
+  <nav class="sidebar-nav" aria-label="Secciones del panel">
     <span class="nav-sec">Espacio de trabajo</span>
     <% if (user) { %>
-    <a href="/panel" class="nav-link <%= (typeof activePage !== 'undefined' && activePage === 'home') ? 'active' : '' %>">
+    <a href="/panel" class="nav-link <%= section === 'home' ? 'active' : '' %>" <%- section === 'home' ? 'aria-current="page"' : '' %>>
       <i class="fas fa-gauge-high"></i> Panel
     </a>
-    <a href="/dashboard" class="nav-link <%= (typeof activePage !== 'undefined' && activePage === 'servers') ? 'active' : '' %>">
-      <i class="fas fa-server"></i> Mis Servidores
+    <a href="/dashboard" class="nav-link <%= section === 'servers' && !selectedGuild ? 'active' : '' %>" <%- section === 'servers' && !selectedGuild ? 'aria-current="page"' : '' %>>
+      <i class="fas fa-server"></i> Mis servidores
       <% if (typeof guildCount !== 'undefined') { %><span class="nav-pill"><%= guildCount %></span><% } %>
     </a>
     <% } %>
 
+    <% if (user && selectedGuild) { %>
     <div class="nav-sep"></div>
-    <span class="nav-sec">Ayuda</span>
+    <div class="server-context">
+      <span class="server-avatar" aria-hidden="true"><%= (selectedGuild.name || '?')[0].toUpperCase() %></span>
+      <div><span class="server-context-label">Servidor seleccionado</span><strong title="<%= selectedGuild.name %>"><%= selectedGuild.name %></strong></div>
+      <a href="/dashboard" aria-label="Cambiar de servidor" title="Cambiar de servidor"><i class="fas fa-arrow-right-arrow-left" aria-hidden="true"></i></a>
+    </div>
+    <% [
+      ['settings', '/dashboard/', 'fa-sliders', 'Configuración'],
+      ['welcome', '/configuration/', 'fa-door-open', 'Bienvenida'],
+      ['cards', '/cards/', 'fa-image', 'Tarjetas'],
+      ['architect', '/architect/', 'fa-layer-group', 'Architect'],
+      ['music', '/music/', 'fa-music', 'Música'],
+      ['library', '/library/', 'fa-compact-disc', 'Mi biblioteca'],
+      ['stats', '/stats/', 'fa-chart-line', 'Estadísticas'],
+      ['help', '/help/', 'fa-book-open', 'Ayuda y comandos']
+    ].forEach(([id, route, icon, label]) => { %>
+      <a href="<%= route + serverPath + (id === 'welcome' ? '/welcome' : '') %>" class="nav-link <%= section === id ? 'active' : '' %>" <%- section === id ? 'aria-current="page"' : '' %>><i class="fas <%= icon %>" aria-hidden="true"></i><%= label %></a>
+    <% }) %>
+    <% } %>
+
+    <div class="nav-sep"></div>
+    <span class="nav-sec">Recursos</span>
     <a href="https://github.com/melodiabl/OBEY-YOUR-MASTER" target="_blank" rel="noopener noreferrer" class="nav-link">
       <i class="fab fa-github"></i> GitHub
     </a>
@@ -54,7 +78,7 @@
     <% if (user) { %>
       <div class="su-avatar">
         <% if (user.avatar) { %>
-          <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" onerror="this.parentNode.textContent='<%= (user.username||'?')[0].toUpperCase() %>'">
+          <span aria-hidden="true"><%= (user.username || '?')[0].toUpperCase() %></span><img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="" onerror="this.hidden=true">
         <% } else { %><%= (user.username || '?')[0].toUpperCase() %><% } %>
       </div>
       <div class="su-name"><%= user.global_name || user.username || 'Usuario' %></div>
@@ -66,13 +90,13 @@
 </aside>
 
 <!-- ── TOPBAR ── -->
-<header class="topbar">
+<header class="topbar" id="panel-topbar">
   <div class="topbar-bc">
-    <a href="/"><i class="fas fa-house" style="font-size:11px"></i></a>
+    <a href="/panel" aria-label="Panel de control"><i class="fas fa-house" aria-hidden="true"></i></a>
     <% if (typeof breadcrumb !== 'undefined' && breadcrumb && breadcrumb.length) { %>
       <% breadcrumb.forEach((bc, i) => { %>
         <span class="sep"><i class="fas fa-chevron-right" style="font-size:9px"></i></span>
-        <% if (bc.url && i < breadcrumb.length - 1) { %><a href="<%= bc.url %>"><%= bc.label %></a>
+        <% if (bc.url && i < breadcrumb.length - 1) { %><a href="<%= bc.url %>" title="<%= bc.label %>"><%= bc.label %></a>
         <% } else { %><span class="cur"><%= bc.label %></span><% } %>
       <% }) %>
     <% } %>
@@ -86,4 +110,4 @@
 </header>
 
 <!-- ── PAGE ── -->
-<main class="main"><div class="page">
+<main class="main" id="main-content" tabindex="-1"><div class="page">
