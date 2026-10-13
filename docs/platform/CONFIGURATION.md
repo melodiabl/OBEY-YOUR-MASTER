@@ -50,7 +50,7 @@ El servidor imprime el puerto, usa solo fixtures en memoria y no inicia el bot. 
 
 Evidencia de navegador en `docs/platform/evidence/configuration/`: desktop.png, mobile.png y browser.json. Recorridos: preview seguro, draft sin activar, recuperación, publicación, conflicto entre pestañas conservando texto, fallo de persistencia conservando texto, revocación de acceso, teclado y anchos 320/768/1024/1440. Mongo real: conflicto entre instancias, publicación/aliases atómicos, conservación de DM/cards, reintento y detección de edición legacy.
 
-No se reinició producción, no se ejecutaron comandos del bot contra Discord ni se subieron recursos. Los permisos Discord usados por las pruebas son fixtures. La comprobación con un servidor real, los demás campos y módulos, historial/retención y sincronización realtime siguen pendientes.
+Las pruebas de esta entrega usan fixtures de permisos Discord. El despliegue posterior del 13 de octubre reinició el bot y cargó sus emojis, según [registro de entrega](RELEASE-2026-10-13.md); no ejecutó cambios de configuración en servidores. La comprobación del editor con OAuth/servidor reales, los demás campos y módulos, historial/retención y sincronización realtime siguen pendientes.
 
 ## Reversión y continuación
 

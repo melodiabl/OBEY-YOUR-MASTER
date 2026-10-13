@@ -1,5 +1,7 @@
 # Remodelación OBEY · primera entrega local
 
+Este informe conserva la verificación del incremento inicial. La carga de los 82 emojis y el despliegue posterior del 13 de octubre están registrados en [RELEASE-2026-10-13.md](RELEASE-2026-10-13.md).
+
 Fuente: `/home/OBEY_Documentacion`, edición consolidada del 11 de octubre de 2026. Base de código: `9f11a85`, rama `feature/obey-main-implementation`. Los cambios locales previos de bienvenida, configuración, Architect y evidencias se conservaron y no forman parte de este incremento.
 
 ## R01–R03 · recursos y consumidores activos

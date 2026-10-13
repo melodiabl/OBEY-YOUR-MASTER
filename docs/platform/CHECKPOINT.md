@@ -2,13 +2,19 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
-## Renovación vigente · 12 de octubre de 2026
+## Despliegue actual · 13 de octubre de 2026
+
+Autorizado por el usuario: 82 emojis cargados en la aplicación 1460818547193417931, 72 estáticos y diez animados; 117 remotos en total, conservando los 35 anteriores. Bot desplegado desde el snapshot Git d840e4f, healthy y sin reinicios, con mapa persistente de solo lectura. Mongo/música disponibles; 19 raíces slash publicadas y `/info help` confirmado por API. El contenedor activo resuelve 82 claves y genera un PNG aislado; índices únicos/TTL de CardAssets verificados. Suite 363/363 y auditoría sin avisos altos/críticos, con 36 moderados heredados. Copias privadas de Mongo/configuración/mapa e imagen/configuración de rollback conservadas. Solo se recreó obey_bot; las 16 entradas locales de Architect/evidencias quedaron intactas y fuera del snapshot. Detalles y límites en [RELEASE-2026-10-13.md](RELEASE-2026-10-13.md). Pendientes OAuth con sesión real, recorridos visuales/eventos en Discord y los demás bloques del maestro.
+
+Las notas de entregas anteriores describen sus verificaciones en ese momento; el estado de despliegue vigente es el indicado arriba.
+
+## Renovación inicial · 12 de octubre de 2026
 
 Paquete consolidado en `/home/OBEY_Documentacion`. Primera entrega local: 103 claves seleccionadas/324 archivos, 89 aliases, pipeline de 82 emojis PNG/GIF con mapa v2 y lector v1, disponibilidad conectada a ClientReady/actualización periódica y fallbacks musicales actuales. `npm test`: 280/280. Auditoría: 811 comandos cargados; esquemas: 19 raíces y 166 subcomandos/grupos, sin publicación. Cambios locales de bienvenida/Architect preservados. Evidencia y límites en [REMODELACION.md](REMODELACION.md); continuar con capacidades/configuración versionada por módulo y después ayuda/tarjetas, según INICIAR_CODEX.md. No se reinició ni desplegó el bot y la integración real con Discord sigue pendiente.
 
 ## Implementación actual
 
-- Fondos privados y web (13 de octubre): colección separada por guild, tres PNG normalizados, cuota/revisión y selección atómicas, limpieza y TTL, referencias compartidas con Discord. Página Tarjetas con upload, prueba, activación por destino y eliminación protegida. 363 pruebas; Mongo aislado confirma concurrencia/buffers/retención y Chromium confirma flujo, permisos, nombres seguros, teclado y cuatro anchos sin errores. Detalles en [CARDS.md](CARDS.md) y [ADR 004](adr/004-private-card-backgrounds.md). Web preview y bot producen bytes iguales al usar el mismo fondo. Quedan setup legacy y Discord/OAuth real; las 82 entradas de emojis de aplicación siguen sin carga remota.
+- Fondos privados y web (13 de octubre): colección separada por guild, tres PNG normalizados, cuota/revisión y selección atómicas, limpieza y TTL, referencias compartidas con Discord. Página Tarjetas con upload, prueba, activación por destino y eliminación protegida. 363 pruebas; Mongo aislado confirma concurrencia/buffers/retención y Chromium confirma flujo, permisos, nombres seguros, teclado y cuatro anchos sin errores. Detalles en [CARDS.md](CARDS.md) y [ADR 004](adr/004-private-card-backgrounds.md). Web preview y bot producen bytes iguales al usar el mismo fondo. Desplegado junto a los emojis; quedan setup legacy y recorridos de usuario Discord/OAuth real.
 
 - Procesos de tarjetas (13 de octubre): supervisor acotado antes de ingestión, un hijo por render, DTO sin credenciales/rutas, CPU/DATA del kernel, plazo y vigilancia RSS. Timeout/crash/memoria/cola devuelven texto; cierre impide hijos o mensajes tardíos. Bootstrap y apagado conectados al mismo servicio. 352 pruebas pasan, once casos del supervisor y seis de integración real local; ocho PNG con hashes iguales. Evidencia en [CARDS.md](CARDS.md), [ADR 003](adr/003-card-process.md) e `evidence/cards/isolation.json`. T18 sigue abierto para uploads/preview web/setup legacy y Discord real. Dockerfile actualizado sin construir/desplegar contenedor.
 
@@ -128,7 +134,7 @@ Jobs/Architect/backups/templates/IA/tickets/security/community/automations/dashb
 
 ## Integraciones y acceso
 
-GitHub accesible para rama/PR. No se leyeron credenciales de producción ni se utilizaron sus sesiones/DB. Carga de emojis preparada, no ejecutada; modo IA/feeds/workers todavía por desarrollar, no conectados. Conservar los tokens en entorno y los mapas operativos fuera de git según ASSETS.md.
+GitHub accesible para rama/PR. La entrega del 13 de octubre utilizó el entorno privado autorizado para cargar emojis, respaldar Mongo y desplegar el bot; no se registraron tokens ni se usaron sesiones de usuarios como fixtures. Conservar tokens en entorno y mapas operativos fuera de git según ASSETS.md. Esta entrega no cierra las integraciones ni recorridos del resto del maestro.
 
 ## Prioridad corregida por el usuario
 

@@ -23,7 +23,9 @@ node scripts/import-obey-materials.js /home/OBEY_Documentacion --check
 
 El importador comprueba rutas reales, hashes, peso declarado, destinos, aliases y nombres antes de escribir. Solo incorpora las variantes seleccionadas en production-materials.json; conserva secciones existentes del registro. `selectedAsset(key, destination)` devuelve la variante concreta y sus metadatos, incluida `fixtureOnly`; no envía por sí mismo imágenes ni publica el paquete en el dashboard.
 
-## Carga explícita, pendiente de ejecución en Discord
+## Carga explícita y estado de Discord
+
+El 13 de octubre se cargaron las 82 entradas en la aplicación `1460818547193417931` (OBEY YOUR MASTER): 72 estáticas y diez animadas, cero fallos. Listados posteriores confirmaron 117 emojis en total y reutilización de las 82 entradas; los 35 recursos anteriores se conservaron. El contenedor activo resolvió las 82 claves tras contrastar el mapa con Discord. Evidencia y despliegue en [RELEASE-2026-10-13.md](RELEASE-2026-10-13.md).
 
 ```sh
 # Variables suministradas por el operador; nunca en git ni argumentos del proceso.
@@ -35,12 +37,12 @@ Sin `--keys` se seleccionan los 82 emojis. La carga lista los emojis de la aplic
 
 El mapa se escribe atómicamente después de cada recurso y permite reanudar. Un lock por archivo impide dos sincronizaciones locales simultáneas; no es coordinación distribuida: no ejecutar operadores en distintos hosts a la vez. Un proceso terminado a la fuerza puede dejar `.lock`; comprobar que no está activo antes de retirarlo. Tras cambios de imagen no se borra la versión anterior automáticamente.
 
-El mapa por defecto es `assets/obey/application-emojis.json`, ignorado por git. En Docker debe montarse persistente y legible por el usuario `node` (o configurar `OBEY_EMOJI_MAP_FILE`). Reiniciar el bot de prueba para recargarlo. El mapa v2 guarda claves canónicas; legacyEmojis conserva recursos v1 existentes hasta reemplazarlos. El resolver comprueba app ID, nombre, hash actual y tipo PNG/GIF; nunca acepta el hash anterior como el nuevo contenido. El mapa es un artefacto de operador de confianza; no se admite desde peticiones de usuarios. Sin mapa, con mapa corrupto o de otra aplicación utiliza Unicode.
+El mapa por defecto de la CLI es `assets/obey/application-emojis.json`, ignorado por git y excluido del contexto Docker. El despliegue actual usa `.runtime/emojis/application-emojis.json`, montado de solo lectura en `/app/runtime-emojis`; Compose fija `OBEY_EMOJI_MAP_FILE` a ese destino. Directorio 0750 y archivo 0640 con grupo 1000 permiten leerlo al usuario `node`. Una nueva ejecución de la CLI debe usar el destino del host; tras su escritura atómica con 0600 hay que restaurar grupo/lectura y reiniciar el bot para recargarlo. Existe copia privada del mapa junto al backup de la entrega. El mapa v2 guarda claves canónicas; legacyEmojis conserva recursos v1 existentes hasta reemplazarlos. El resolver comprueba app ID, nombre, hash actual y tipo PNG/GIF; nunca acepta el hash anterior como el nuevo contenido. El mapa es un artefacto de operador de confianza; no se admite desde peticiones de usuarios. Sin mapa, con mapa corrupto o de otra aplicación utiliza Unicode.
 
 El handler assets consulta la lista de la aplicación al recibir ClientReady y cada cinco minutos, con una única consulta pendiente. Antes de la primera comprobación, y ante un fallo, usa fallbacks. Un recurso borrado/renombrado/indisponible deja de resolverse al actualizar la lista. Los controles y textos musicales consultan el resolver actualizado; el apagado retira listener/timer y descarta respuestas tardías. La comprobación no reescribe el historial: paneles previamente enviados conservan su contenido hasta que el flujo normal los actualice. Puede haber hasta cinco minutos entre una eliminación remota y su detección; no se promete reparación inmediata de todos los mensajes.
 
 ## Evidencia y límites
 
-Ver [entrega de remodelación](REMODELACION.md) para pruebas y límites actuales. No se han cargado emojis, probado su legibilidad en el cliente Discord ni comprobado los controles en un servidor real. La composición de tarjetas, pipeline de previews y renderer unificado se mantienen pendientes; importar materiales no los implementa.
+Ver [entrega de remodelación](REMODELACION.md) para el incremento inicial y [despliegue actual](RELEASE-2026-10-13.md). La carga y resolución remotas están confirmadas. La inspección visual de emojis y controles dentro del cliente Discord sigue pendiente. El renderer compartido y los fondos/preview web ya están implementados y desplegados según [CARDS.md](CARDS.md); el resto del proyecto conserva sus criterios pendientes.
 
 Fuentes primarias verificadas el 2026-10-04: [Emoji Resource](https://docs.discord.com/developers/resources/emoji) (endpoints de aplicación, imagen y tamaño) y [Component Reference](https://docs.discord.com/developers/components/reference) (filas, botones y formato legacy). Este incremento conserva embeds+ActionRow; no mezcla Components V2 con embeds.

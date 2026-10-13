@@ -42,7 +42,7 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T03
 
-**Checkpoint:** Pipeline preparado: dry-run sin red; aplicación explícita, reutilización/hash, checkpoint atómico, respuesta perdida y preservación de emojis ajenos. Upload real pendiente; no se cargaron emojis.
+**Checkpoint:** Pipeline con dry-run sin red, aplicación explícita, reutilización/hash, checkpoint atómico, respuesta perdida y preservación de emojis ajenos. El 13 de octubre se cargaron 82 entradas; listados posteriores y el contenedor activo confirmaron resolución/reutilización de las 82 y conservación de 35 recursos anteriores. Mapa persistente y backup privado. Ver `docs/platform/RELEASE-2026-10-13.md`; los recorridos visuales Discord siguen pendientes.
 
 - [ ] Sincronización idempotente de emojis (fase 1).
 
@@ -1491,7 +1491,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] K09: Worker usado en bienvenida/despedida y ambos slash; cierre único del servicio, preparación tardía y mensajes de apagado bloqueados. Suite completa 352/352, ocho hashes de render conservados y evidencia offline `isolation.json`; no se inició ni desplegó el bot.
 - [x] K10: Uploads privados normalizados en worker, colección separada por guild, tres assets/4 MiB por asset, revisión generacional, selección y borrado protegidos. Caducidad no usados, concesión activa, TTL y limpieza/purga; Mongo aislado verifica concurrencia y bytes.
 - [x] K11: Galería y preview web con actor/OAuth frescos, CSRF, aislamiento, imagen sin mensajes, elección por destino y eliminación confirmada. Byte igualdad con render de Discord; Chromium móvil/escritorio/teclado/XSS/revocación pasa. Suite completa 363/363.
-- [ ] Completar T18: previews internos de setup legacy; verificación Discord real, despliegue y medición de los presupuestos en producción. Continuar después con CARD-08 de ranking. Carga remota de los 82 emojis de aplicación sigue pendiente.
+- [x] Entrega operativa (13 de octubre): 82 emojis cargados/resueltos, bot desplegado desde Git d840e4f, 19 raíces slash publicadas, health/Mongo/música y worker en contenedor verificados. Backup privado y rollback preparados; sin modificar cambios locales de Architect. Evidencia en `docs/platform/RELEASE-2026-10-13.md`.
+- [ ] Completar T18: previews internos de setup legacy; recorridos de usuario Discord/OAuth reales y medición de los presupuestos en producción. Continuar después con CARD-08 de ranking.
 
 ## T57
 

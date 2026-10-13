@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-13T20:56:39Z",
+  "codeRevision": "d840e4f646e897c5bd2f7576828106d0d9788f91",
+  "imageId": "8f07e682ad02f1b679e51e6dd781825ee656e79147d8c0abc1f8d3d6cef4b9fe",
+  "applicationId": "1460818547193417931",
+  "emojis": {"existingBefore":35,"created":82,"static":72,"animated":10,"remoteTotal":117,"failed":0,"reusePlan":82,"resolvedInContainer":82},
+  "map": {"persistent":true,"readOnlyMount":true,"readableByUid":1000},
+  "bot": {"startedAt":"2026-10-13T20:17:57Z","state":"running","health":"healthy","restarts":0,"clientReady":true,"handlerErrors":0,"unhandledErrors":0,"assetsFallbackWarning":false,"mapWarning":false},
+  "healthEndpoint": {"http":200,"status":"ok","database":true,"music":true},
+  "slashCommands": {"roots":19,"infoHelpPublished":true,"source":"GET application commands after startup registration"},
+  "cardIndexes": {"uniqueGuildId":true,"expiresAtTtlSeconds":0},
+  "isolatedCard": {"width":1772,"height":720,"bytes":973568,"verifiedInImage":true,"verifiedInActiveContainer":true},
+  "publicWebChecks": {"cardsPageWithoutSession":302,"cardsApiWithoutSession":401,"css":200,"js":200,"realOAuthSessionTested":false},
+  "tests": {"passed":363,"failed":0,"skipped":0},
+  "audit": {"critical":0,"high":0,"moderate":36,"proxyAddr":"2.0.8","httpCacheSemantics":"4.3.0"},
+  "backup": {"mongoArchiveBytes":58972948,"configuration":true,"emojiMap":true,"rollbackImage":true,"rollbackConfiguration":true},
+  "changedContainers": ["obey_bot"],
+  "preservedLocalStatusEntries":16,
+  "discordVerificationMessagesSent":0,
+  "realUserJourneysTested":false
+}

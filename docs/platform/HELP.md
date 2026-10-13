@@ -1,6 +1,6 @@
 # Ayuda contextual de OBEY
 
-Entrega local del 13 de octubre de 2026. La ayuda de prefijo y `/info help` consulta el mismo servicio que la página `/help/:guildId`. Se mantienen los comandos y aliases existentes. No se publicaron schemas ni se arrancó/reinició el bot.
+Entrega local del 13 de octubre de 2026. La ayuda de prefijo y `/info help` consulta el mismo servicio que la página `/help/:guildId`. Se mantienen los comandos y aliases existentes. En el despliegue posterior de ese día el bot publicó sus 19 raíces slash; un GET a Discord confirmó `/info help`. Ver [registro de entrega](RELEASE-2026-10-13.md); la ejecución interactiva por un usuario sigue pendiente.
 
 ## Qué está conectado
 
@@ -47,7 +47,7 @@ Chromium aislado: Express/EJS y servicio reales, handlers/permisos de fixture. B
 
 ## Pendiente y continuación
 
-Corrección posterior: ambas copias heredadas de `addmoney` declaran `Settings` en UTF-8, sin el prefijo dañado `âš™ï¸`. La prueba carga esos archivos reales y el verificador comprueba todas las categorías del catálogo; no se recodifican mensajes ni nombres aportados por usuarios. Las ayudas ya enviadas y el proceso desplegado requieren la actualización del bot.
+Corrección posterior: ambas copias heredadas de `addmoney` declaran `Settings` en UTF-8, sin el prefijo dañado `âš™ï¸`. La prueba carga esos archivos reales y el verificador comprueba todas las categorías del catálogo; no se recodifican mensajes ni nombres aportados por usuarios. El proceso desplegado del 13 de octubre incluye esta corrección; los mensajes antiguos conservan su contenido.
 
 Comprobación con Discord real y OAuth real; permisos de handlers legacy todavía sin metadata completa; preferencias de todas las utilidades, idiomas y habilitación persistida/enforced. El registro utilities declara esas capacidades pendientes. El inventario no se usa para inicializar otro handler ni otro bot. Configuración cacheada es la del mismo proceso; no se promete realtime entre instancias.
 
