@@ -4,7 +4,7 @@ Continúa T18 y los defectos CARD-04, CARD-05, CARD-06 y CARD-07 del paquete `/h
 
 ## Comportamiento
 
-`handlers/cards.js` concentra el render de bienvenida y despedida, el recorte de avatar, el ajuste de nombres y la textura. Sus renderizadores reciben `data` (username, discriminator, guildName, memberCount), `avatarBuffer` y `backgroundBuffer`; no reciben cliente, token, URL o ruta de medios. Los marcos y fuentes son recursos locales conocidos. Los adaptadores `renderConfiguredWelcomeCard(settings, member, { dm })` y `renderConfiguredLeaveCard` proyectan los datos y cargan los medios antes de invocar el renderer. Evento público/DM y ambos slash usan esos adaptadores. Una misma configuración y bytes de medios generan la misma imagen; no se promete igualdad cuando el avatar remoto cambia entre consultas.
+`handlers/cards.js` expone bienvenida/despedida a través del supervisor de procesos. El dibujo nativo vive en `handlers/card-renderer.js`, cargado por `card-worker.js`. Los renderizadores públicos reciben `data` (username, discriminator, guildName, memberCount), `avatarBuffer` y `backgroundBuffer`; no reciben cliente, token, URL o ruta de medios. Los marcos y fuentes son recursos locales conocidos. Los adaptadores `renderConfiguredWelcomeCard(settings, member, { dm })` y `renderConfiguredLeaveCard` proyectan los datos y reservan el cupo antes de descargar medios. Evento público/DM y ambos slash usan esos adaptadores. Una misma configuración y bytes de medios generan la misma imagen; no se promete igualdad cuando el avatar remoto cambia entre consultas.
 
 Se conservan los campos legacy `pb`, `frame`, `framecolor`, `discriminator`, `membercount`, `servername`, `background` y sus equivalentes con sufijo `dm`. Desactivar `frame` o `pb` se refleja también en el evento; no se reescribe configuración ni se toca canal, mensaje, roles, captcha o invitaciones. Los marcos existentes siguen disponibles. La vista previa deja de añadir un banner/presencia/estilo propio que el evento no generaba.
 
@@ -28,7 +28,7 @@ node scripts/validate-commands.js
 
 Evidencia en `evidence/cards/renders.json` y ocho PNG generados por los renderizadores usados en producción: avatar opaco/rectangular, avatar transparente, avatar oculto, nombre largo/CJK/emoji, ausencia de marco, despedida con/sin textura e imágenes inválidas. Se inspeccionaron los renders directamente. Los avatares son fixtures gráficos locales, sin datos personales.
 
-Resultado final de la continuación: 335 pruebas pasan, cero fallos y cero skip. El catálogo real sigue validando 812 invocaciones y sus builders. Schemas: 19 raíces, 166 subcomandos/grupos y un standalone; `published=false`. Node 22.23.2 y dependencias locales; la prueba Socket.IO requiere permiso de puerto local. Los ocho renders conservan sus hashes después de separar los datos y medios del SDK.
+Resultado final de la continuación: 352 pruebas pasan, cero fallos y cero skip. El catálogo real sigue validando 812 invocaciones y sus builders. Schemas: 19 raíces, 166 subcomandos/grupos y un standalone; `published=false`. Node 22.23.2 y dependencias locales; la prueba Socket.IO requiere permiso de puerto local. Los ocho renders conservan sus hashes después de separar los datos/medios del SDK y trasladar el dibujo a procesos hijos. La fuente del avatar sintético del verificador se registra explícitamente, sin depender del orden de carga del servicio.
 
 ## Ingestión y entrega
 
@@ -44,8 +44,20 @@ La prueba del handler registrado de despedida detectó que los títulos español
 
 Pruebas adicionales: `test/card-media.test.js` valida transporte acotado, rechazo antes de red, formatos reales de Canvas, timeout y stream truncado. `test/card-delivery.test.js` verifica fallo de render, rechazo de adjunto, falta/revocación de permisos, ausencia de reintento incierto, nonce y handler real registrado con REST ficticio. `test/cards.test.js` ejecuta ambos slash con fallo nativo y exige que conserve el mensaje. `test/membership-title.test.js` comprueba es/en y expresiones desconocidas sin ejecución.
 
+## Procesos y presupuestos
+
+`handlers/card-pool.js` admite un trabajo activo y cuatro esperando. El plazo de cola es dos segundos; preparar los medios tiene 5,5 segundos. Cada tarjeta usa un proceso de una sola operación. Los DTO se verifican en padre/hijo y se rechazan campos privados, funciones, getters, URLs, rutas y buffers mayores de 4 MiB antes de enviarlos. El hijo hereda únicamente LANG y los límites de threads, además de los datos internos del IPC; no hereda credenciales, NODE_OPTIONS o preload de Node.
+
+Linux `/usr/bin/prlimit` impone ocho segundos de CPU, 384 MiB de DATA y cero core dumps. V8 limita su old space a 96 MiB. El supervisor aplica ocho segundos de tiempo transcurrido y vigila RSS hasta 256 MiB; el RSS puede exceder ese valor entre muestras, y DATA no equivale a memoria residente total. Requisitos y distinciones en [ADR 003](adr/003-card-process.md). Docker incluye util-linux; no se construyó ni desplegó una imagen nueva en este incremento.
+
+El cupo se libera después de confirmar la salida del hijo. Timeout, crash, RSS, respuesta inválida o cola llena producen la entrega de texto existente, con un diagnóstico de una lista fija y sin mensajes privados del proceso. No se reintenta el render. Si el kernel no confirma exit tras un segundo de SIGKILL, falla la petición conservando el cupo; no se acumulan más procesos. No se usa un decoder en el bot como fallback de plataforma.
+
+`cards-runtime` inicializa la misma instancia una vez; `stopCards` se espera en el apagado. La preparación tardía no abre procesos después del cierre. Los envíos y las vistas previas no publican fallbacks ni errores tardíos cuando comienza el apagado. El hijo sale también al desconectarse su IPC; CPU/DATA son límites de sistema que permanecen si el padre desaparece.
+
+`test/card-pool.test.js` usa hijos reales para bloqueo, crash, memoria, límites del kernel, entorno, validación, FIFO, expiración, preparación y cierre. `test/card-runtime.test.js` comprueba que una API Canvas rota en el padre no impida el render, que la admisión preceda a la descarga y que un hijo bloqueado entregue texto una sola vez. El script `node scripts/verify-card-isolation.js` genera `evidence/cards/isolation.json`: PNG real, tics observados en el padre, recuperaciones y salida confirmada de los procesos propios. Ninguna llamada real a Discord, OAuth o DB.
+
 ## Continuación
 
-Verificación en Discord real y OAuth real; almacenamiento/retención y referencias de uploads con propietario por guild; worker/proceso de render con presupuesto de CPU/memoria y concurrencia, capaz de terminar un decode bloqueado. El plazo de descarga no es un plazo del decoder nativo. Los previews legacy internos de los comandos `setup-welcome`/`setup-leave` no se declaran migrados. Tampoco se añaden editor libre, templates declarativos, nuevo preview web, tarjetas de perfil/nivel/evento ni corrección CARD-08 de adjuntos de ranking. Esos criterios siguen pendientes.
+Verificación en Discord real y OAuth real, medición en producción para ajustar presupuestos, almacenamiento/retención y referencias de uploads con propietario por guild. No se afirma un sandbox de red/sistema de archivos: los hijos comparten UID y acceso a recursos locales con el bot. Los previews legacy internos de los comandos `setup-welcome`/`setup-leave` no se declaran migrados. Tampoco se añaden editor libre, templates declarativos, nuevo preview web, tarjetas de perfil/nivel/evento ni corrección CARD-08 de adjuntos de ranking. Esos criterios siguen pendientes.
 
 No se inició, reinició o desplegó el bot. Reversión: revertir el commit de este incremento junto con sus consumidores, conservando los cambios locales anteriores de Architect.

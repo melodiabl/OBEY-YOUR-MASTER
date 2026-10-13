@@ -3,11 +3,13 @@ const fs = require('node:fs/promises')
 const path = require('node:path')
 const assert = require('node:assert/strict')
 const { createHash } = require('node:crypto')
-const { createCanvas, loadImage } = require('@napi-rs/canvas')
+const { createCanvas, loadImage, GlobalFonts } = require('@napi-rs/canvas')
 const { renderWelcomeCard, renderLeaveCard } = require('../handlers/cards')
 const output = path.resolve(__dirname, '../docs/platform/evidence/cards')
 
 async function main() {
+  // Fixture avatar typography is explicit, independent of lazy worker startup.
+  GlobalFonts.registerFromPath(path.resolve(__dirname, '../assets/fonts/Arial.ttf'), 'Arial')
   await fs.mkdir(output, { recursive: true })
   const avatar = createCanvas(600, 400), ctx = avatar.getContext('2d')
   ctx.fillStyle = '#eb4050'; ctx.fillRect(0, 0, 600, 400)

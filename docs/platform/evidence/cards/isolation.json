@@ -1,0 +1,35 @@
+{
+  "offline": true,
+  "published": false,
+  "fixturesOnly": true,
+  "node": "v22.23.2",
+  "defaultLimits": {
+    "concurrency": 1,
+    "maxQueue": 4,
+    "queueMs": 2000,
+    "prepareMs": 5500,
+    "wallMs": 8000,
+    "cpuSeconds": 8,
+    "dataBytes": 402653184,
+    "oldSpaceMiB": 96,
+    "monitoredRssBytes": 268435456
+  },
+  "nativeImage": {
+    "type": "image/png",
+    "width": 1772,
+    "height": 633
+  },
+  "timings": {
+    "nativeMs": 402,
+    "timeoutMs": 615
+  },
+  "responsiveTicks": 56,
+  "timeoutRecovered": true,
+  "crashRecovered": true,
+  "nativeMemoryStopped": true,
+  "afterFailureSucceeded": true,
+  "textFallbackMessages": 1,
+  "fallbackDiagnostic": "card_worker_timeout",
+  "allChildrenReaped": true,
+  "poolsClosed": true
+}

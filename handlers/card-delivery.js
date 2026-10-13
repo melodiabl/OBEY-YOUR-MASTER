@@ -6,6 +6,8 @@ const { inspectCardImage } = require('./card-media')
 
 const failure = code => Object.assign(new Error(code), { code })
 const textLimit = value => String(value || '').slice(0, 2000).replace(/[\uD800-\uDBFF]$/, '')
+const renderCodes = new Set(['card_worker_timeout', 'card_worker_memory', 'card_worker_failed', 'card_worker_unavailable',
+  'card_queue_full', 'card_queue_timeout', 'card_prepare_timeout', 'card_pool_closed', 'invalid_card_job'])
 
 // Retry only an explicit rejection, never an uncertain create-message outcome.
 async function deliverCardPayload({ payload, filename, render, send, capabilities, mentionUserId }) {
@@ -19,12 +21,12 @@ async function deliverCardPayload({ payload, filename, render, send, capabilitie
   base.attachments = []
   const initial = await capabilities()
   if (!initial.send) throw failure('card_delivery_denied')
-  let buffer = null, reason = initial.attach ? null : 'attachments_unavailable'
+  let buffer = null, diagnostic, reason = initial.attach ? null : 'attachments_unavailable'
   if (initial.attach) {
     try {
       buffer = await render()
       if (inspectCardImage(buffer).type !== 'image/png') throw failure('invalid_card_image')
-    } catch { buffer = null; reason = 'render_failed' }
+    } catch (error) { buffer = null; reason = 'render_failed'; diagnostic = renderCodes.has(error?.code) ? error.code : undefined }
   }
   let lastHadImage = false
   async function attempt(image) {
@@ -42,7 +44,7 @@ async function deliverCardPayload({ payload, filename, render, send, capabilitie
     }
     lastHadImage = Boolean(image)
     const message = await send({ payload: output, buffer: image })
-    return { message, card: Boolean(image), reason }
+    return { message, card: Boolean(image), reason, diagnostic }
   }
   try { return await attempt(buffer) }
   catch (error) {
@@ -58,6 +60,7 @@ async function deliverCardPayload({ payload, filename, render, send, capabilitie
 }
 
 async function sendMembershipCard({ client, channel, guildId, recipientId, embed, content = '', kind = 'welcome', render }) {
+  if (client._shuttingDown) throw failure('card_delivery_denied')
   if (!['welcome', 'leave'].includes(kind)) throw failure('invalid_card_delivery')
   if (channel && (typeof guildId !== 'string' || channel.guild?.id !== guildId)) throw failure('card_delivery_denied')
   const headers = { Authorization: `Bot ${client.token}` }
@@ -71,6 +74,7 @@ async function sendMembershipCard({ client, channel, guildId, recipientId, embed
   if (!/^\d{16,20}$/.test(channelId || '')) throw failure('invalid_card_delivery')
   const filename = `${kind}-image.png`, nonce = randomBytes(12).toString('hex')
   const capabilities = async () => {
+    if (client._shuttingDown) return { send: false, embed: false, attach: false }
     if (!channel) return { send: true, embed: true, attach: true }
     try {
       const bot = await channel.guild.members.fetchMe({ force: true }), permissions = channel.permissionsFor(bot)
@@ -88,7 +92,7 @@ async function sendMembershipCard({ client, channel, guildId, recipientId, embed
   }
   const result = await deliverCardPayload({ payload: { content, embeds: [embed.toJSON()] }, filename, render, send, capabilities,
     mentionUserId: kind === 'welcome' ? recipientId : undefined })
-  if (result.reason) console.warn(`[Cards] ${kind}: ${result.reason}`)
+  if (result.reason) console.warn(`[Cards] ${kind}: ${result.reason}${result.diagnostic ? ` (${result.diagnostic})` : ''}`)
   return result
 }
 

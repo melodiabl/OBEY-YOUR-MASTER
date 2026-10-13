@@ -115,13 +115,14 @@ test('failed optional images keep a readable neutral background', async () => {
   }
 })
 
-test('pure renderers accept projected data and buffers without invoking a URL or SDK object', async () => {
+test('worker renderers reject SDK objects and URLs, and accept only projected data and buffers', async () => {
   for (const render of [renderWelcomeCard, renderLeaveCard]) {
-    const image = await loadImage(await render({ data: { username: 'Obey', guildName: 'Guild', memberCount: 10 },
+    await assert.rejects(render({ data: { username: 'Obey', guildName: 'Guild', memberCount: 10 },
       member: { user: { displayAvatarURL: () => assert.fail('SDK cannot enter the renderer') } },
       avatarBuffer: 'https://127.0.0.1/secret', backgroundBuffer: '/etc/passwd', showAvatar: true,
       showMemberCount: true, showServerName: true,
-    }))
+    }), error => error.code === 'invalid_card_job')
+    const image = await loadImage(await render({ data: { username: 'Obey', guildName: 'Guild', memberCount: 10 }, showAvatar: false, showMemberCount: true }))
     assert.equal(image.width, 1772)
   }
 })
@@ -145,8 +146,8 @@ test('modern emoji has a visible glyph instead of the missing-character box', ()
   assert.ok(!pixels('🐱').equals(pixels('\u{10ffff}')), 'Emoji must differ from the missing glyph')
 })
 
-test('slash previews keep the configured message when native rendering fails', async () => {
-  const canvas = require('@napi-rs/canvas'), originalCanvas = canvas.createCanvas
+test('slash previews keep the configured message when the render worker fails', async () => {
+  const pool = require('../handlers/card-pool').cardPool(), originalRender = pool.render
   const axios = require('axios'), originalPatch = axios.patch
   const guild = { id: 'g', name: 'Guild', memberCount: 10 }
   const user = { id: 'actor', username: 'Obey', discriminator: '0' }, member = { user, guild }
@@ -154,7 +155,7 @@ test('slash previews keep the configured message when native rendering fails', a
   const values = { welcome: { channel: 'chat', msg: 'Mensaje personalizado' }, 'welcome.pb': false, 'welcome.frame': false }
   const client = { settings: { get: (id, key) => key ? values[key] : values }, user: { id: 'app' } }
   try {
-    canvas.createCanvas = () => { throw Error('native failure with private data') }
+    pool.render = async () => { throw Error('worker failure with private data') }
     for (const name of ['tarjeta', 'test']) {
       let sent = 0
       axios.patch = async (endpoint, body) => {
@@ -169,5 +170,5 @@ test('slash previews keep the configured message when native rendering fails', a
       })
       assert.equal(sent, 1)
     }
-  } finally { canvas.createCanvas = originalCanvas; axios.patch = originalPatch }
+  } finally { pool.render = originalRender; axios.patch = originalPatch }
 })

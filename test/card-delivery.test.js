@@ -98,9 +98,9 @@ test('real channel adapter retains nonce, uses PNG multipart then JSON fallback,
   } finally { axios.post = original }
 })
 
-test('registered leave event delivers its configured message after a native render failure', async () => {
+test('registered leave event delivers its configured message after a worker failure', async () => {
   const axios = require('axios'), originalPost = axios.post
-  const canvas = require('@napi-rs/canvas'), originalCanvas = canvas.createCanvas
+  const pool = require('../handlers/card-pool').cardPool(), originalRender = pool.render
   const guild = { id: '34567890123456789', name: 'Fixture', memberCount: 42, members: { fetchMe: async () => ({}) } }
   const channel = { id: '12345678901234567', guild, permissionsFor: () => new PermissionsBitField(8n) }
   const member = { id: '23456789012345678', guild, user: { id: '23456789012345678', username: 'Obey', bot: false,
@@ -117,7 +117,7 @@ test('registered leave event delivers its configured message after a native rend
   let delivered
   const done = new Promise(resolve => { delivered = resolve })
   try {
-    canvas.createCanvas = () => { throw Error('native failure') }
+    pool.render = async () => { throw Error('worker failure') }
     axios.post = async (endpoint, body) => { messages.push(body); delivered(); return { data: { id: 'sent' } } }
     require('../handlers/leave')(client)
     await handlers.get('guildMemberRemove')(member)
@@ -129,7 +129,7 @@ test('registered leave event delivers its configured message after a native rend
     assert.equal(messages[0].getBuffer, undefined)
     assert.equal(messages[0].embeds[0].description, 'Gracias por visitarnos, <@23456789012345678>')
     assert.equal(messages[0].embeds[0].image, undefined)
-  } finally { axios.post = originalPost; canvas.createCanvas = originalCanvas }
+  } finally { axios.post = originalPost; pool.render = originalRender }
 })
 
 test('public delivery rejects a channel from another guild or a missing guild scope before rendering or posting', async () => {

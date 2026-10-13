@@ -33,7 +33,7 @@ module.exports = {
       }
       await deliverCardPayload({
         payload: previewPayload, filename: 'tarjeta-bienvenida.png',
-        capabilities: async () => ({ send: true, embed: true, attach: true }),
+        capabilities: async () => ({ send: !client._shuttingDown, embed: true, attach: true }),
         render: () => renderConfiguredWelcomeCard(client.settings, member),
         send: async ({ payload, buffer }) => {
           const endpoint = `https://discord.com/api/v10/webhooks/${client.user.id}/${interaction.token}/messages/@original`
@@ -45,6 +45,7 @@ module.exports = {
         },
       })
     } catch (e) {
+      if (client._shuttingDown) return
       console.error('[Tarjeta] No se pudo entregar la vista previa')
       await interaction.editReply({ embeds: [errEmbed('❌ No se pudo entregar la vista previa. Inténtalo de nuevo.')] })
     }

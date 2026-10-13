@@ -1487,7 +1487,9 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] K05: Separar DTO/buffers del SDK; ingestión HTTPS acotada de CDN Discord y formatos/dimensiones antes de decode, sin rutas libres ni redirects. Verificados rechazo antes de red, bytes, plazo, stream truncado y PNG/JPEG/WebP reales.
 - [x] K06: Entrega compartida de texto ante fallo gráfico, falta de permisos de adjunto/embed o rechazo explícito; revalidación de permisos, nonce temporal, sin reintento de resultado incierto. Evento de despedida registrado y ambos slash verificados con transportes ficticios.
 - [x] K07: Títulos de bienvenida/despedida automáticas sin eval; corregidos cuatro títulos españoles. Suite completa 335/335 y ocho renders conservados con los mismos hashes; no se publicó ni inició el bot. Destino de canal restringido a la guild del evento antes de render/red.
-- [ ] Completar T18: worker de decode/render con presupuesto de CPU/memoria/concurrencia, uploads por guild, preview web y previews internos de setup legacy; verificación Discord real. Continuar después con CARD-08 de ranking.
+- [x] K08: Procesos de una tarjeta con IPC/DTO acotados, CPU/DATA del kernel, vigilancia RSS, plazo transcurrido y cola FIFO; admisión antes de descargar. Bloqueo, crash, memoria, límites, env y recuperación verificados con hijos reales.
+- [x] K09: Worker usado en bienvenida/despedida y ambos slash; cierre único del servicio, preparación tardía y mensajes de apagado bloqueados. Suite completa 352/352, ocho hashes de render conservados y evidencia offline `isolation.json`; no se inició ni desplegó el bot.
+- [ ] Completar T18: uploads por guild, preview web y previews internos de setup legacy; verificación Discord real y medición de los presupuestos en producción. Continuar después con CARD-08 de ranking.
 
 ## T57
 
