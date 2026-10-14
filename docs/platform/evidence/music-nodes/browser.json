@@ -1,0 +1,18 @@
+{
+  "fixture": true,
+  "production": false,
+  "widths": [
+    320,
+    768,
+    1024,
+    1440
+  ],
+  "overflow": false,
+  "preferencePersists": true,
+  "offlineDisabled": true,
+  "csrf": true,
+  "revokedAccess": true,
+  "failedWritePreservesPreference": true,
+  "keyboard": true,
+  "pageErrors": []
+}

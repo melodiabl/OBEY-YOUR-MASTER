@@ -104,6 +104,7 @@ module.exports = async client => {
   const requireFreshGuildPermissions = freshGuildPermissions(fetchDiscordGuilds)
 
   require('../handlers/music/apiRoutes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
+  require('./nodes-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./music-visibility')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./architect-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./welcome-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
@@ -735,7 +736,7 @@ module.exports = async client => {
         return res.json({ ok: true, title: albumData.name || 'Álbum', tracks })
       }
 
-      const result = await music.search(uri, req.session.user.username)
+      const result = await music.search(uri, req.session.user.username, { guildId })
       if (!result || !['playlist', 'album'].includes(result.loadType) || !result.tracks?.length) {
         return res.json({ ok: false, error: 'not_a_collection' })
       }
@@ -768,7 +769,7 @@ module.exports = async client => {
       }
 
       const [result, albumsRaw] = await Promise.all([
-        music.search(query, req.session.user.username),
+        music.search(query, req.session.user.username, { guildId }),
         leoGet(`/api/search/albums?q=${encodeURIComponent(query)}&limit=10`),
       ])
 

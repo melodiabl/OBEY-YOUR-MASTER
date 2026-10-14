@@ -1,0 +1,13 @@
+<%- include('../includes/header', { title: guild.name + ' — Conexiones de música', user, activePage: 'nodes', breadcrumb: [{ label: 'Mis servidores', url: '/dashboard' }, { label: guild.name, url: '/dashboard/' + guild.id }, { label: 'Conexiones de música' }] }) %>
+<link rel="stylesheet" href="/css/nodes.css">
+<section id="music-nodes" data-guild-id="<%= guild.id %>">
+  <div class="nodes-heading"><div><h1>Conexiones de música</h1><p>Elige cómo se conecta la música de <%= guild.name %>.</p></div><a class="btn btn-sec" href="/music/<%= guild.id %>">Abrir reproductor</a></div>
+  <p id="nodes-status" role="status" aria-live="polite">Cargando conexiones…</p>
+  <section class="card nodes-settings"><h2>Preferencia del servidor</h2><p>Automático elige la conexión principal y usa un respaldo si hace falta. Puedes preferir una conexión pública disponible.</p>
+    <form id="nodes-form"><fieldset id="nodes-fields" disabled><label for="nodes-choice">Conexión preferida</label><select id="nodes-choice" aria-describedby="nodes-help"><option value="auto">Automático</option></select><p id="nodes-help">Al cambiar durante una canción, se conserva la cola, la pausa y el volumen. Puede haber una breve interrupción.</p><button class="btn btn-primary" type="submit">Guardar preferencia</button></fieldset></form>
+    <p id="nodes-current"></p>
+  </section>
+  <section class="nodes-public"><div class="nodes-heading"><h2>Conexiones públicas</h2><button class="btn btn-sec" id="nodes-refresh" type="button">Actualizar</button></div><p>Son servicios de terceros y su disponibilidad puede cambiar. Las búsquedas y la reproducción pasan por el proveedor elegido.</p><ul id="nodes-list" aria-label="Estado de las conexiones públicas"></ul></section>
+</section>
+<script src="/js/nodes.js"></script>
+<%- include('../includes/footer') %>
