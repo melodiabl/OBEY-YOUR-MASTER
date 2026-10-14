@@ -2,6 +2,16 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Nodo privado apagado y principal público · 14 de octubre de 2026
+
+Petición actual: apagar el nodo propio y usar un público seleccionado con respaldos funcionales. Contenedor Lavalink creado sin iniciar, `restart=no` y sin puerto 2333; archivos/configuración conservados y perfil manual. Bot excluye todos los privados con `LAVALINK_PRIVATE_ENABLED=false`; principal global Nazha y selección Nazha persistida en THZ. Serenetia/MilloHost son respaldos; Trinium sigue desactivado.
+
+Prueba de voz autorizada por el usuario en THZ: canal VC1 vacío disponible, volumen cero y sin mensajes de prueba. API nativa Lavalink confirmó conexión/progreso en Nazha (3060 ms) y después en Serenetia (4541 ms), con cola, pausa, mute y sesión conservados. Limpieza completada; THZ quedó sin pista/cola de prueba y volumen anterior 100. No se afirma escucha humana. Configuración temporal retirada del contenedor final.
+
+Desplegado código `f73d04dc`, imagen `74b4d1f893fc461c2e2aefaaea2ad98465132a19645480ae4962f977637c2310`. 392 tests y smoke aislado de comandos/emojis/tarjetas pasan. Salud 200, Mongo/música listos, 19 comandos, cero errores de arranque/reinicios. Los fallos REST también disparan recuperación y se continúa al siguiente respaldo; si todos fallan se conserva canción/cola/posición y se espera, sin vaciarla por eventos duplicados. Imágenes/Redis y las 16 entradas locales intactos. Recuperación fija `.runtime/bot-recovery-public-only.yml`; las configuraciones de recuperaciones anteriores describen entregas históricas y no deben reactivar privados.
+
+[Evidencia de voz](evidence/music-nodes/thz-public-only.json), [estado final](evidence/music-nodes/public-only-runtime.json), [operación](MUSIC-NODES.md). El ensordecimiento que consultó el usuario lo fuerzan dos listeners legacy de `handlers/extraevents.js`; solo se explicó su causa, no se modificó sin solicitud.
+
 ## Música sin WARP y nodos públicos · 14 de octubre de 2026
 
 Nuevo paquete verificado en `/home/OBEY_Documentacion_actualizada_2026-10-14`, ZIP eliminado tras extracción íntegra. Fuente actual incorpora Adaptación al servidor; no se declara concluido el maestro de 32 contratos.

@@ -1533,3 +1533,11 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] Conexiones de música en panel y `/nodes`, permisos/CSRF y estados accesibles; 387 tests y navegador aislado pasan.
 - [x] Desplegar bot/Lavalink y verificar tres públicos, salud, emojis, NSFW ausente y conservación de imágenes/Redis y 16 cambios locales. Evidencia: `docs/platform/evidence/music-nodes/runtime.json`.
 - [ ] Verificar audio audible en Discord y OAuth con sesión real; continuar las tareas pendientes del maestro y la adaptación compartida sin dar por terminados los 32 contratos.
+
+
+## Principal público y privado apagado (petición posterior, 14 de octubre)
+
+- [x] Privado apagado sin reinicio, excluido del bot y sin puerto abierto; archivos conservados.
+- [x] Nazha seleccionado, Serenetia/MilloHost respaldos y conservación de cola durante caída completa. 392 tests.
+- [x] Prueba de voz en THZ/VC1: progreso nativo en Nazha y Serenetia, pausa/cola/mute/sesión preservados y limpieza; selección persistida. Sin confirmación auditiva humana.
+- [x] Despliegue final sin bandera de prueba; salud/Mongo/música y 82 emojis; cambios locales previos, imágenes y Redis preservados. Ver checkpoint/evidencia public-only-runtime.

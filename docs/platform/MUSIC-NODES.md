@@ -53,3 +53,6 @@ Una regresión adicional comprueba controles simultáneos: durante la transició
 ## Despliegue final
 
 Código `4431bc9e`, imagen `f919bc076e9b4f7c485c091d63d807ddbc0cc0534a02840ca238aa1b19edc2ca`. Verificación en ejecución: nodo interno + tres públicos conectados, cada público con 20 pistas; salud 200, recursos JS/CSS publicados iguales al snapshot, página exige sesión y API devuelve 401 sin ella. WARP no instalado/no servicio/no listener de proxy. Solo bot y Lavalink recreados, imágenes/Redis conservados. [Evidencia](evidence/music-nodes/runtime.json). Recuperación mediante `.runtime/bot-recovery-nodes.yml` y `.runtime/lavalink-recovery-direct.yml`, conservando la configuración privada sin WARP ni fuentes adultas. No restaurar bases de datos automáticamente.
+
+
+Despliegue vigente exclusivamente público: código `f73d04dc`, imagen `74b4d1f893fc461c2e2aefaaea2ad98465132a19645480ae4962f977637c2310`. [Estado final](evidence/music-nodes/public-only-runtime.json). Recuperación `.runtime/bot-recovery-public-only.yml` conserva públicos, principal Nazha y privado excluido; no iniciar Lavalink ni restaurar los overrides antiguos con privados. La prueba temporal de voz quedó retirada y su resultado se mantiene privado en el servidor.
