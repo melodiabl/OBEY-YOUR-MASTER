@@ -1,0 +1,96 @@
+{
+  "checkedAt": "2026-10-14T00:24:07Z",
+  "codeRevision": "ee93d41a80e705ee3c57cffa70c842448bfafa50",
+  "images": {
+    "bot": {
+      "id": "2c9271d18273dca6b973be120e78ad03621b29feb6294137ea113a0b1c7185cb",
+      "tag": "localhost/obey-your-master_bot:release-fun-clean-20261014",
+      "startedAt": "2026-10-14T00:13:18.265347177Z",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "images": {
+      "id": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "tag": "localhost/obey-images:release-fun-clean-20261014",
+      "startedAt": "2026-10-14T00:12:54.386242902Z",
+      "health": "healthy",
+      "restarts": 0
+    }
+  },
+  "tests": {
+    "passed": 368,
+    "failed": 0,
+    "skipped": 0
+  },
+  "commands": {
+    "loaded": 671,
+    "loadErrors": 0,
+    "conflicts": 0,
+    "prefix": 530,
+    "slash": 142,
+    "catalog": 672,
+    "globalRoots": 18,
+    "funSubcommands": 22
+  },
+  "retirement": {
+    "nsfwFoldersAbsent": true,
+    "brazzersPrefixRemoved": true,
+    "profanePrefixRemoved": true,
+    "slashReplacement": "/fun facepalm",
+    "retiredMemeMethodsRemoved": true,
+    "imageGeneratorsAndAssetsRemoved": true,
+    "translationsCleaned": 5
+  },
+  "discord": {
+    "applicationId": "1460818547193417931",
+    "guildsChecked": 4,
+    "guildCommandsPreservedTotal": 98,
+    "restrictedGlobal": 0,
+    "restrictedGuild": 0,
+    "funNsfw": false,
+    "facepalm": true,
+    "retiredTermsInFunMetadata": 0,
+    "funLocalizationsStored": 0,
+    "registrationRenewed": true,
+    "previousFunId": "1517003173716561945",
+    "currentFunId": "1559723149858312272",
+    "customPermissionsBeforeRenewal": 0,
+    "accessDefaultsPreserved": true
+  },
+  "runtime": {
+    "clientReady": true,
+    "mongoConnected": true,
+    "healthHttp": 200,
+    "musicAvailable": true,
+    "handlerErrors": 0,
+    "unhandledErrors": 0,
+    "mapWarning": false,
+    "cardsWarning": false
+  },
+  "imageSmoke": {
+    "offline": true,
+    "mappedEmojiIds": 82,
+    "card": {
+      "width": 1772,
+      "height": 720,
+      "bytes": 973568
+    },
+    "ordinaryImage": {
+      "name": "wanted",
+      "width": 736,
+      "height": 959
+    },
+    "imageGeneratorCount": 43,
+    "retiredImageRoutesStatus": 404
+  },
+  "changedContainers": [
+    "obey_bot",
+    "obey_images"
+  ],
+  "lavalinkAndRedisStartsPreserved": true,
+  "preservedLocalStatusEntries": 16,
+  "discordMessagesSent": 0,
+  "discoveryApproved": false,
+  "portalNoticeBeforeRenewal": "User reported harmful/profane language notice for /fun persists",
+  "portalStatusAfterRenewal": "Awaiting user verification; not observable through the command API"
+}
