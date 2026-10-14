@@ -1,12 +1,13 @@
 const { snapshot } = require('./sessions')
 const { trackOnNode } = require('./node-search')
-async function switchSession(client, guildId, target, preference, { persist, playTrack, emitState, scheduleRestore }) {
+async function switchSession(client, guildId, target, preference, { persist, playTrack, emitState, scheduleRestore, settleVolume }) {
   const state = client.music.getState(guildId)
   const oldPreference = state.nodePreference || 'auto'
   const previousPlayer = client.shoukaku.players.get(guildId)
   const previousNode = previousPlayer?.node
   const oldStatus = state.status
   state.nodeTransition = true
+  await settleVolume?.(guildId)
   const saved = JSON.parse(JSON.stringify(snapshot(state)))
   const restoreState = () => Object.assign(state, { ...saved, nodePreference: oldPreference, status: oldStatus, lastPosition: saved.position, startedAt: saved.paused ? null : Date.now() - saved.position })
   async function resume(node, track) {

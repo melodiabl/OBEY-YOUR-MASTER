@@ -159,7 +159,7 @@ module.exports = client => {
       const target = client.nodePool.choose(guildId, { preference: nodeId })
       if (!target) throw new Error('node_unavailable')
       return require('./node-session').switchSession(client, guildId, target, nodeId, {
-        persist: sessions.save, playTrack, emitState, scheduleRestore,
+        persist: sessions.save, playTrack, emitState, scheduleRestore, settleVolume: id => volumeWrites.get(id)?.catch(() => {}),
       })
     },
 
@@ -354,7 +354,7 @@ module.exports = client => {
           const target = client.nodePool.choose(guildId, { exclude: [player.node.name] })
           if (target) {
             await require('./node-session').switchSession(client, guildId, target, state.nodePreference || 'auto', {
-              persist: sessions.save, playTrack, emitState, scheduleRestore,
+              persist: sessions.save, playTrack, emitState, scheduleRestore, settleVolume: id => volumeWrites.get(id)?.catch(() => {}),
             })
             return
           }
@@ -451,6 +451,7 @@ module.exports = client => {
     async setVolume(guildId, vol) {
       const player = client.shoukaku?.players?.get(guildId)
       const state  = getState(guildId)
+      if (state.nodeTransition) throw new Error('La conexión de música está cambiando. Reintenta en unos segundos.')
       if (state.status === 'stopping') throw new Error('El reproductor se está desconectando.')
       const v = Number(vol)
       if (!Number.isInteger(v) || v < 0 || v > 200) throw new Error('El volumen debe ser un entero entre 0 y 200.')
@@ -725,6 +726,14 @@ module.exports = client => {
       await interaction.followUp({ content: '❌ No se pudo aplicar el control. Inténtalo de nuevo.', ephemeral: true }).catch(() => {})
     }
   })
+
+  for (const name of ['setAutoplay', 'setLoop', 'setRadioMode', 'removeDuplicates', 'clearQueue']) {
+    const operation = client.music[name]
+    client.music[name] = function (guildId, ...args) {
+      if (getState(guildId).nodeTransition) throw new Error('La conexión de música está cambiando. Reintenta en unos segundos.')
+      return operation.call(this, guildId, ...args)
+    }
+  }
 
   for (const name of ['setNodePreference', 'enqueue', 'setAudioParameter', 'joinChannel', '_playNext', '_recoverFailedTrack', 'skip', 'previous', 'stop', 'pause', 'shuffle', 'jump', 'remove', 'move', 'seek', 'setFilter']) {
     const operation = client.music[name]

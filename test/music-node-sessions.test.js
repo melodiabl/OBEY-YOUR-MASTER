@@ -110,3 +110,19 @@ test('idle preferences reload after restart without joining a voice channel', as
   await client.music.restoreSessions()
   assert.equal(state.nodePreference, 'public-one'); assert.equal(client.shoukaku.players.size, 0)
 })
+test('controls cannot silently overwrite a session snapshot during a node change', async t => {
+  const id = 'nodes-concurrent-controls', { client, state, nodes } = setup(t, id)
+  Object.assign(state, { currentTrack: { encoded: 'old', info: { uri: 'https://www.youtube.com/watch?v=test' } }, queue: [{ info: { title: 'Next' } }], voiceChannelId: 'voice', volume: 0 })
+  await client.shoukaku.joinVoiceChannel({ guildId: id })
+  let release
+  const original = nodes.get('public-one').rest.resolve
+  nodes.get('public-one').rest.resolve = async query => { await new Promise(resolve => { release = resolve }); return original(query) }
+  const change = client.music.setNodePreference(id, 'public-one')
+  while (!release) await new Promise(resolve => setImmediate(resolve))
+  await assert.rejects(client.music.setVolume(id, 120), /cambiando/)
+  assert.throws(() => client.music.clearQueue(id), /cambiando/)
+  assert.throws(() => client.music.setLoop(id, 'track'), /cambiando/)
+  release(); await change
+  assert.equal(state.volume, 0); assert.equal(state.queue.length, 1); assert.equal(state.loop, 'none')
+  await client.music.setVolume(id, 120); assert.equal(state.volume, 120)
+})

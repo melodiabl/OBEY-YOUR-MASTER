@@ -32,6 +32,11 @@ TriniumHost y Nazha son servicios públicos de terceros. Se comprobaron `/v4/inf
 
 ## Verificación de código
 
-386 pruebas pasan. El navegador aislado verifica 320/768/1024/1440 px, teclado, persistencia tras recarga, error de guardado, permisos revocados, CSRF y opciones desconectadas. Evidencia en `evidence/music-nodes/`; usa fixtures declaradas y no representa audio audible en Discord. Auditoría de dependencias: 36 moderadas, cero altas/críticas, sin cambios de dependencias.
+387 pruebas pasan. El navegador aislado verifica 320/768/1024/1440 px, teclado, persistencia tras recarga, error de guardado, permisos revocados, CSRF y opciones desconectadas. Evidencia en `evidence/music-nodes/`; usa fixtures declaradas y no representa audio audible en Discord. Auditoría de dependencias: 36 moderadas, cero altas/críticas, sin cambios de dependencias.
 
 La sonda de audio directo encontró rechazo de YouTube por la IP del servidor («confirm you are not a bot»). No se registra como audio aprobado. El pool puede recuperar la URI por otro proveedor y mantener cola/volumen/pausa/posición; las pruebas de ese comportamiento se ejecutan con reproductores controlados. No se entró a un canal de voz real para probar audio.
+
+
+Actualización de proveedores: Trinium conectado pero búsqueda agotó plazos de 20 y 30 segundos; se conserva desactivado. Nazha queda primero entre los públicos. Serenetia y MilloHost añadidos tras verificar sesión WebSocket en `/v4/websocket` y 20 pistas de búsqueda por sus APIs v4. Sus versiones son snapshots (major 0), por lo que la compatibilidad se comprueba por protocolo/respuestas y no por un número semver supuesto. Los plugins opcionales se aplican solo si la inspección de capacidades los confirma. Registro privado con tres públicos activos y Trinium desactivado.
+
+Una regresión adicional comprueba controles simultáneos: durante la transición los setters inmediatos devuelven un error para reintentar; las operaciones serializadas esperan su turno. Se terminan escrituras de volumen aceptadas antes de tomar el snapshot. Así no se confirma un control para después perderlo al restaurar la sesión.

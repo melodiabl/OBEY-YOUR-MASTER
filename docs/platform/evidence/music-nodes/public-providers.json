@@ -1,0 +1,40 @@
+{
+  "protocolChecks": [
+    {
+      "id": "serenetia",
+      "version": "47c0c5fddc6d23f6a9503437c59d74e57a626630-SNAPSHOT",
+      "major": 0,
+      "websocket": {
+        "ready": true,
+        "hasSession": true
+      },
+      "searchHttp": 200,
+      "loadType": "search",
+      "tracks": 20,
+      "verified": false
+    },
+    {
+      "id": "millohost",
+      "version": "3d2748ed3186cd956146a78ef14edbb6a05c9046-SNAPSHOT",
+      "major": 0,
+      "websocket": {
+        "ready": true,
+        "hasSession": true
+      },
+      "searchHttp": 200,
+      "loadType": "search",
+      "tracks": 20,
+      "verified": false
+    }
+  ],
+  "snapshotVersionCompatibility": "Ready/session and v4 search shape verified; providers omit API version header and report major 0 for snapshot builds. Runtime selection uses Shoukaku v4 protocol, not semver.",
+  "trinium": {
+    "enabled": false,
+    "reason": "Search timeout twice at 20/30 seconds after an initial successful probe"
+  },
+  "sources": [
+    "https://github.com/AjieDev/Free-Lavalink",
+    "https://lavalink-list.darrennathanael.com/SSL/Lavalink-SSL/",
+    "https://github.com/knownasrazi/nazha-free-lavalink"
+  ]
+}
