@@ -2,6 +2,16 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Música sin WARP y nodos públicos · 14 de octubre de 2026
+
+Nuevo paquete verificado en `/home/OBEY_Documentacion_actualizada_2026-10-14`, ZIP eliminado tras extracción íntegra. Fuente actual incorpora Adaptación al servidor; no se declara concluido el maestro de 32 contratos.
+
+Desplegado código `4431bc9e`, imagen bot `f919bc076e9b4f7c485c091d63d807ddbc0cc0534a02840ca238aa1b19edc2ca`. WARP detenido, deshabilitado y desinstalado; proxy 41081 ausente. Lavalink propio 4.2.2 escucha en loopback con plugin directo, sin fuentes adultas y sin identidad/credenciales en vistas públicas. Automático usa nodo interno y respaldos; preferencias por guild desde panel y `/nodes`, con permisos frescos/CSRF/persistencia. Cambios/recuperación re-resuelven la pista en el destino y conservan cola, pausa, volumen cero, posición/filtros. Controles simultáneos protegidos durante la transición.
+
+Nazha, Serenetia y MilloHost conectados con búsquedas de 20 resultados cada uno. Trinium desactivado tras plazos agotados. Bot/Lavalink healthy, cero reinicios; imágenes y Redis no se recrearon. 387 tests, Chromium 320/768/1024/1440 y smoke aislado con 82 emojis/PNG real pasan. 19 raíces slash; Fun conserva sus 22 opciones y NSFW sigue retirado. Las 16 entradas locales previas se conservan intactas y fuera de la imagen. [Contrato, operación y límites](MUSIC-NODES.md), [evidencia de ejecución](evidence/music-nodes/runtime.json).
+
+YouTube rechaza la salida directa de este servidor. Las búsquedas y conexiones públicas verificadas no prueban audio audible en Discord; esa prueba queda pendiente. Tampoco se afirma navegación OAuth real ni aprobación de Discovery. Recuperación fija `.runtime/bot-recovery-nodes.yml` y `.runtime/lavalink-recovery-direct.yml`; no restaurar versiones antiguas con NSFW/WARP ni MongoDB automáticamente.
+
 ## Corrección de Fun · 14 de octubre de 2026
 
 El usuario transcribió el aviso de lenguaje malsonante de Discord para `/fun` y pidió conservar la categoría. Sustituido `/fun shit` por `/fun facepalm`, eliminado el prefijo adulto `brazzers`, los generadores/assets de ambos términos y las traducciones retiradas. Regresión red→green y suite 368/368; Fun conserva 22 subcomandos, 18 raíces globales y catálogo de 672 invocaciones. Solo bot e imágenes necesitan actualización; Lavalink y Redis se conservan. Detalles y estado final en [FUN-DISCOVERY.md](FUN-DISCOVERY.md).

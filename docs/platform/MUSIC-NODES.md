@@ -40,3 +40,8 @@ La sonda de audio directo encontró rechazo de YouTube por la IP del servidor (�
 Actualización de proveedores: Trinium conectado pero búsqueda agotó plazos de 20 y 30 segundos; se conserva desactivado. Nazha queda primero entre los públicos. Serenetia y MilloHost añadidos tras verificar sesión WebSocket en `/v4/websocket` y 20 pistas de búsqueda por sus APIs v4. Sus versiones son snapshots (major 0), por lo que la compatibilidad se comprueba por protocolo/respuestas y no por un número semver supuesto. Los plugins opcionales se aplican solo si la inspección de capacidades los confirma. Registro privado con tres públicos activos y Trinium desactivado.
 
 Una regresión adicional comprueba controles simultáneos: durante la transición los setters inmediatos devuelven un error para reintentar; las operaciones serializadas esperan su turno. Se terminan escrituras de volumen aceptadas antes de tomar el snapshot. Así no se confirma un control para después perderlo al restaurar la sesión.
+
+
+## Despliegue final
+
+Código `4431bc9e`, imagen `f919bc076e9b4f7c485c091d63d807ddbc0cc0534a02840ca238aa1b19edc2ca`. Verificación en ejecución: nodo interno + tres públicos conectados, cada público con 20 pistas; salud 200, recursos JS/CSS publicados iguales al snapshot, página exige sesión y API devuelve 401 sin ella. WARP no instalado/no servicio/no listener de proxy. Solo bot y Lavalink recreados, imágenes/Redis conservados. [Evidencia](evidence/music-nodes/runtime.json). Recuperación mediante `.runtime/bot-recovery-nodes.yml` y `.runtime/lavalink-recovery-direct.yml`, conservando la configuración privada sin WARP ni fuentes adultas. No restaurar bases de datos automáticamente.

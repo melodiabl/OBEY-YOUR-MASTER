@@ -1,0 +1,83 @@
+{
+  "privateNode": {
+    "version": "4.2.2",
+    "loopbackOnly": true,
+    "adultSourcesAbsent": true,
+    "directPlugin": true,
+    "proxyPluginAbsent": true
+  },
+  "publicNodes": [
+    {
+      "id": "trinium",
+      "status": "disabled"
+    },
+    {
+      "id": "nazha",
+      "version": "4.2.2",
+      "loadType": "search",
+      "musicTracks": 20
+    },
+    {
+      "id": "serenetia",
+      "version": "47c0c5fddc6d23f6a9503437c59d74e57a626630-SNAPSHOT",
+      "loadType": "search",
+      "musicTracks": 20
+    },
+    {
+      "id": "millohost",
+      "version": "3d2748ed3186cd956146a78ef14edbb6a05c9046-SNAPSHOT",
+      "loadType": "search",
+      "musicTracks": 20
+    }
+  ],
+  "readyConnections": [
+    "interna",
+    "nazha",
+    "millohost",
+    "serenetia"
+  ],
+  "warpActive": false,
+  "proxyListenerAbsent": true,
+  "healthHttp": 200,
+  "published": [
+    {
+      "route": "/nodes/1460818547193417931",
+      "status": 302
+    },
+    {
+      "route": "/api/player/1460818547193417931/nodes",
+      "status": 401
+    },
+    {
+      "route": "/js/nodes.js",
+      "status": 200
+    },
+    {
+      "route": "/css/nodes.css",
+      "status": 200
+    }
+  ],
+  "audibleDiscordVerified": false,
+  "verifiedAt": "2026-10-14T02:02:02.202141+00:00",
+  "deployedCode": "4431bc9e",
+  "botImage": "f919bc076e9b4f7c485c091d63d807ddbc0cc0534a02840ca238aa1b19edc2ca",
+  "tests": {
+    "passed": 387,
+    "failed": 0
+  },
+  "audit": {
+    "moderate": 36,
+    "high": 0,
+    "critical": 0
+  },
+  "warpPackageRemoved": true,
+  "imagesAndRedisUnchanged": true,
+  "originalLocalChangesPreserved": 16,
+  "offlineImage": {
+    "uid": 1000,
+    "mappedEmojis": 82,
+    "slashRoots": 19,
+    "cardWidth": 1772,
+    "cardHeight": 720
+  }
+}

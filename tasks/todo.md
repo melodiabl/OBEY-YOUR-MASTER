@@ -1523,3 +1523,13 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [ ] Tests focalizados y contratos/schemas pertinentes pasan; mantener startup/producción separados.
 - [ ] Revisión de integración concreta, UI/render si aplica y aislamiento/permisos/fallo comprobados.
 - [ ] Actualizar matriz/AUDIT/ADR con evidencia, archivos, restricciones de credenciales y siguiente tarea con dependencias.
+
+
+## Continuación autorizada · música y paquete actualizado (14 de octubre de 2026)
+
+- [x] Extraer/verificar paquete actualizado y eliminar ZIP; conservar entrega anterior y validar Adaptación al servidor.
+- [x] Retirar WARP del servidor y de Lavalink; loopback, plugin directo y fuentes adultas desactivadas.
+- [x] Pool privado/público, selección por guild, persistencia, recuperación y codecs por destino; cola/pausa/mute/filtros y controles concurrentes verificados.
+- [x] Conexiones de música en panel y `/nodes`, permisos/CSRF y estados accesibles; 387 tests y navegador aislado pasan.
+- [x] Desplegar bot/Lavalink y verificar tres públicos, salud, emojis, NSFW ausente y conservación de imágenes/Redis y 16 cambios locales. Evidencia: `docs/platform/evidence/music-nodes/runtime.json`.
+- [ ] Verificar audio audible en Discord y OAuth con sesión real; continuar las tareas pendientes del maestro y la adaptación compartida sin dar por terminados los 32 contratos.
