@@ -21,6 +21,29 @@ test('private environment credentials stay on the private node, alongside explic
   assert.equal(entries.find(entry => entry.visibility === 'public').auth, 'public-password')
   assert.throws(() => config().validateNodes([{ ...publicNode, password: '' }]), /credential/i)
 })
+test('public-only mode omits private environment and legacy nodes instead of attempting the stopped server', () => {
+  const legacy = [{ host: '127.0.0.1', password: 'private-secret', secure: false }]
+  const env = { LAVALINK_PRIVATE_ENABLED: 'false', LAVALINK_HOST: '127.0.0.1', LAVALINK_PASSWORD: 'private-secret', LAVALINK_NODES_FILE: '/registry' }
+  const readFile = () => JSON.stringify({ version: 1, nodes: [privateNode, publicNode, secondNode] })
+  const entries = config().loadNodeConfig({ env, legacyNodes: legacy, readFile })
+  assert.deepEqual(entries.map(entry => entry.id), ['public-one', 'public-two'])
+  assert.ok(entries.every(entry => entry.visibility === 'public' && entry.auth !== 'private-secret'))
+  delete env.LAVALINK_HOST
+  assert.deepEqual(config().loadNodeConfig({ env, legacyNodes: legacy, readFile }).map(entry => entry.id), ['public-one', 'public-two'])
+})
+test('an explicitly selected public default falls back through other publics and excludes failed or disconnected nodes', () => {
+  const entries = config().validateNodes([{ ...publicNode, priority: 20 }, { ...secondNode, priority: 10 }])
+  const manager = new EventEmitter(); manager.nodes = new Map(entries.map(entry => [entry.id, { name: entry.id, state: 1 }])); manager.players = new Map()
+  let now = 0
+  const pool = require('../handlers/music/nodes').createNodePool(entries, { defaultNodeId: 'public-one', now: () => now })
+  pool.attach(manager)
+  assert.equal(pool.choose('guild').name, 'public-one')
+  pool.fail('public-one'); assert.equal(pool.choose('guild').name, 'public-two')
+  manager.nodes.get('public-two').state = 3; assert.equal(pool.choose('guild'), undefined)
+  now = 30001; assert.equal(pool.choose('guild').name, 'public-one')
+  pool.dispose()
+  assert.throws(() => require('../handlers/music/nodes').createNodePool(entries, { defaultNodeId: 'private-primary' }), /default_node/)
+})
 test('node configuration rejects duplicate IDs, plaintext public transport and URLs in host fields', () => {
   for (const value of [
     [publicNode, publicNode], [{ ...publicNode, secure: false }], [{ ...publicNode, host: 'https://user:password@host/path' }],

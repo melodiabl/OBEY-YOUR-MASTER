@@ -44,9 +44,11 @@ function validateNodes(values) {
 }
 function loadNodeConfig({ env = process.env, legacyNodes = [], readFile = file => fs.readFileSync(file, 'utf8') } = {}) {
   const values = []
-  if (env.LAVALINK_HOST) values.push({ id: 'private-primary', label: 'Principal interno', host: env.LAVALINK_HOST, port: Number(env.LAVALINK_PORT || 2333), password: env.LAVALINK_PASSWORD,
+  const privateEnabled = String(env.LAVALINK_PRIVATE_ENABLED ?? 'true').toLowerCase()
+  if (!['true', 'false'].includes(privateEnabled)) throw new Error('invalid_private_node_setting')
+  if (privateEnabled === 'true' && env.LAVALINK_HOST) values.push({ id: 'private-primary', label: 'Principal interno', host: env.LAVALINK_HOST, port: Number(env.LAVALINK_PORT || 2333), password: env.LAVALINK_PASSWORD,
     secure: String(env.LAVALINK_SECURE || 'false').toLowerCase() === 'true', visibility: 'private', priority: 0 })
-  else for (const [index, node] of legacyNodes.entries()) values.push({ id: 'private-' + index, label: 'Interno', host: node.host, port: Number(node.port || 2333), password: node.password,
+  else if (privateEnabled === 'true') for (const [index, node] of legacyNodes.entries()) values.push({ id: 'private-' + index, label: 'Interno', host: node.host, port: Number(node.port || 2333), password: node.password,
     secure: typeof node.secure === 'string' ? node.secure.toLowerCase() === 'true' : Boolean(node.secure), visibility: 'private', priority: index })
   if (env.LAVALINK_NODES_FILE) {
     const text = readFile(env.LAVALINK_NODES_FILE)
@@ -55,6 +57,6 @@ function loadNodeConfig({ env = process.env, legacyNodes = [], readFile = file =
     if (registry.version !== 1 || !Array.isArray(registry.nodes)) throw new Error('invalid_node_registry_version')
     values.push(...registry.nodes)
   }
-  return validateNodes(values)
+  return validateNodes(privateEnabled === 'true' ? values : values.filter(node => node.visibility === 'public'))
 }
 module.exports = { validateNodes, loadNodeConfig, assertMusicQuery, allowedMusicTrack }

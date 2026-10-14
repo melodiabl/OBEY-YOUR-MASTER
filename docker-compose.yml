@@ -14,11 +14,11 @@ services:
       start_period: 20s
 
   lavalink:
-    profiles: ["managed-lavalink"]
+    profiles: ["manual-lavalink"]
     build: ./lavalink
     image: localhost/obey-lavalink-direct:4.2.2
     container_name: obey_lavalink
-    restart: unless-stopped
+    restart: "no"
     network_mode: "host"
     env_file: .env
     environment:
@@ -51,6 +51,8 @@ services:
     env_file: .env
     network_mode: "host"
     environment:
+      LAVALINK_PRIVATE_ENABLED: "false"
+      LAVALINK_DEFAULT_NODE: nazha
       LAVALINK_NODES_FILE: /app/runtime-nodes/nodes.json
       OBEY_EMOJI_MAP_FILE: /app/runtime-emojis/application-emojis.json
     volumes:

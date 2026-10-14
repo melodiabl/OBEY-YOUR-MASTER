@@ -1,5 +1,6 @@
-function createNodePool(entries, { preferenceFor = () => 'auto', now = Date.now } = {}) {
+function createNodePool(entries, { preferenceFor = () => 'auto', now = Date.now, defaultNodeId = 'auto' } = {}) {
   const registry = new Map(entries.map(entry => [entry.id, entry]))
+  if (defaultNodeId !== 'auto' && (!registry.get(defaultNodeId)?.enabled || registry.get(defaultNodeId)?.visibility !== 'public')) throw new Error('invalid_default_node')
   const cooldowns = new Map(), pins = new Map(), information = new Map()
   let manager, disposed = false
   const publicId = id => registry.get(id)?.visibility === 'public' ? id : 'auto'
@@ -7,7 +8,7 @@ function createNodePool(entries, { preferenceFor = () => 'auto', now = Date.now 
     return registry.get(name)?.enabled && manager?.nodes.get(name)?.state === 1 && (cooldowns.get(name) || 0) <= now()
   }
   function candidates(guildId, { preference = preferenceFor(guildId), exclude = [] } = {}) {
-    const preferred = pins.get(guildId) || preference
+    const preferred = pins.get(guildId) || (preference === 'auto' ? defaultNodeId : preference)
     return [...(manager?.nodes.values() || [])].filter(node => available(node.name) && !exclude.includes(node.name))
       .sort((a, b) => Number(b.name === preferred) - Number(a.name === preferred) ||
         Number(registry.get(a.name).visibility !== 'private') - Number(registry.get(b.name).visibility !== 'private') ||

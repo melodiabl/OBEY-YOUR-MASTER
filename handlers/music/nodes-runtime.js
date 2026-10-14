@@ -3,7 +3,7 @@ const { loadNodeConfig } = require('./nodes-config')
 const { createNodePool } = require('./nodes')
 function initializeNodes(client, config) {
   const entries = loadNodeConfig({ legacyNodes: config.clientsettings?.nodes || [] })
-  const pool = createNodePool(entries, { preferenceFor: guildId => guildId ? client.music?.getState(guildId)?.nodePreference || 'auto' : 'auto' })
+  const pool = createNodePool(entries, { defaultNodeId: process.env.LAVALINK_DEFAULT_NODE || 'auto', preferenceFor: guildId => guildId ? client.music?.getState(guildId)?.nodePreference || 'auto' : 'auto' })
   client.nodePool = pool
   const reconnect = new Map(), attempts = new Map()
   client.shoukaku = new Shoukaku(new Connectors.DiscordJS(client), entries.filter(entry => entry.enabled).map(entry => ({ name: entry.id, url: entry.url, auth: entry.auth, secure: entry.secure })), {

@@ -13,6 +13,7 @@ function setup(t, id) {
   const entries = validateNodes([
     { id: 'private-primary', label: 'Internal', visibility: 'private', host: '127.0.0.1', port: 2333, password: 'private-secret', secure: false, priority: 0 },
     { id: 'public-one', label: 'Public', visibility: 'public', host: 'music.example.com', port: 443, password: 'public-password', secure: true, priority: 1 },
+    { id: 'public-two', label: 'Second public', visibility: 'public', host: 'backup.example.com', port: 443, password: 'backup-password', secure: true, priority: 2 },
   ])
   const nodes = new Map(entries.map(entry => [entry.id, { name: entry.id, state: 1, ws: { readyState: 1 }, rest: { resolve: async query => {
     resolves.push({ node: entry.id, query })
@@ -102,6 +103,25 @@ test('a playback failure changes provider while keeping the recording, queue and
   assert.equal(client.shoukaku.players.get(id).node.name, 'public-one')
   assert.equal(state.queue.length, 1); assert.equal(state.volume, 0); assert.equal(state.lastPosition, 9000)
   assert.equal(state.nodePreference, 'auto')
+})
+test('a failed first backup does not prevent recovery on a second public backup', async t => {
+  const id = 'nodes-second-backup', { client, state, nodes } = setup(t, id)
+  nodes.get('public-one').rest.resolve = async () => { throw Error('provider unavailable') }
+  Object.assign(state, { currentTrack: { encoded: 'old', _resolvedNode: 'private-primary', info: { uri: 'https://www.youtube.com/watch?v=test', sourceName: 'youtube' } }, queue: [{ info: { title: 'Next' } }], voiceChannelId: 'voice', volume: 0, paused: true, lastPosition: 11000 })
+  const player = await client.shoukaku.joinVoiceChannel({ guildId: id })
+  await client.music._recoverFailedTrack(id, player, 'stream failed')
+  assert.equal(client.shoukaku.players.get(id).node.name, 'public-two')
+  assert.equal(state.queue.length, 1); assert.equal(state.lastPosition, 11000); assert.equal(state.volume, 0)
+})
+test('a rejected playback REST request also triggers recovery on a different node', async t => {
+  const id = 'nodes-play-request-failure', { client, state } = setup(t, id)
+  state.voiceChannelId = 'voice'; state.volume = 0
+  const player = await client.shoukaku.joinVoiceChannel({ guildId: id })
+  player.playTrack = async () => { throw Error('provider unavailable') }
+  const track = { encoded: 'original', _resolvedNode: 'private-primary', info: { uri: 'https://www.youtube.com/watch?v=test', sourceName: 'youtube', requesterId: 'owner' } }
+  await client.music.enqueue(id, [track])
+  assert.equal(client.shoukaku.players.get(id).node.name, 'public-one')
+  assert.equal(state.currentTrack.info.uri, track.info.uri); assert.equal(state.volume, 0)
 })
 test('idle preferences reload after restart without joining a voice channel', async t => {
   const id = 'nodes-preference-restart', { client, state } = setup(t, id)

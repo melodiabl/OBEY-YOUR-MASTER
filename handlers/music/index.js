@@ -52,6 +52,14 @@ module.exports = client => {
     return player.playTrack({ ...options, track: { encoded, userData: { obeyPlaybackId: state.playbackId } } })
   }
 
+  async function playQueuedTrack(guildId, player, state, encoded) {
+    try { await playTrack(player, state, encoded) }
+    catch (error) {
+      if (!client.nodePool) throw error
+      await client.music._recoverFailedTrack(guildId, player, 'play_request_failed')
+    }
+  }
+
   function emitState(guildId) {
     const state = playerStates.get(guildId)
     if (state) {
@@ -260,7 +268,7 @@ module.exports = client => {
 
       if (!failed && state.loop === 'track' && state.currentTrack?.encoded) {
         state.startedAt = Date.now(); state.lastPosition = 0; state.paused = false
-        await playTrack(player, state, state.currentTrack.encoded)
+        await playQueuedTrack(guildId, player, state, state.currentTrack.encoded)
         emitState(guildId)
         return
       }
@@ -301,7 +309,7 @@ module.exports = client => {
               state.history.unshift(state.currentTrack); if (state.history.length > 10) state.history.pop()
               state.currentTrack = pick; state.startedAt = Date.now(); state.lastPosition = 0; state.paused = false
               rememberTrack(guildId, pick)
-              await playTrack(player, state, pick.encoded)
+              await playQueuedTrack(guildId, player, state, pick.encoded)
               emitState(guildId)
               return
             }
@@ -336,7 +344,7 @@ module.exports = client => {
       state.currentTrack = next; state.startedAt = Date.now(); state.lastPosition = 0; state.paused = false
       rememberTrack(guildId, next)
       state.status = 'loading'
-      await playTrack(player, state, next.encoded)
+      await playQueuedTrack(guildId, player, state, next.encoded)
       emitState(guildId)
     },
 
@@ -348,17 +356,18 @@ module.exports = client => {
       if (!failed || failed._fallbackAttempted) { await this._playNext(guildId, player, { failed: true }); return }
       failed._fallbackAttempted = true
       const info = failed.info || failed
-      try {
-        if (client.nodePool && client._dbReady) {
-          client.nodePool.fail(player.node.name)
-          const target = client.nodePool.choose(guildId, { exclude: [player.node.name] })
-          if (target) {
+      if (client.nodePool && client._dbReady) {
+        client.nodePool.fail(player.node.name)
+        for (const target of client.nodePool.candidates(guildId, { exclude: [player.node.name] })) {
+          try {
             await require('./node-session').switchSession(client, guildId, target, state.nodePreference || 'auto', {
               persist: sessions.save, playTrack, emitState, scheduleRestore, settleVolume: id => volumeWrites.get(id)?.catch(() => {}),
             })
             return
-          }
+          } catch { client.nodePool.fail(target.name) }
         }
+      }
+      try {
         const node = getNode(guildId)
         // JioSaavn ofrece audio directo cuando YouTube bloquea la carga del vídeo.
         // Solo se usa si título y artista coinciden para evitar otra grabación.
