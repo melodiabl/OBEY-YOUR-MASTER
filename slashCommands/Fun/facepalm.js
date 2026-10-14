@@ -1,8 +1,8 @@
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
-  name: 'shit',
-  description: 'This is shit meme con tu texto',
+  name: 'facepalm',
+  description: 'Crea un meme de sorpresa o desconcierto con tu texto',
   options: [
     { String: { name: 'texto', description: 'Texto del meme', required: true } },
   ],

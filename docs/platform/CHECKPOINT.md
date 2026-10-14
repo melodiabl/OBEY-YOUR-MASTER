@@ -2,6 +2,10 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Corrección de Fun · 14 de octubre de 2026
+
+El usuario transcribió el aviso de lenguaje malsonante de Discord para `/fun` y pidió conservar la categoría. Sustituido `/fun shit` por `/fun facepalm`, eliminado el prefijo adulto `brazzers`, los generadores/assets de ambos términos y las traducciones retiradas. Regresión red→green y suite 368/368; Fun conserva 22 subcomandos, 18 raíces globales y catálogo de 672 invocaciones. Solo bot e imágenes necesitan actualización; Lavalink y Redis se conservan. Detalles y estado final en [FUN-DISCOVERY.md](FUN-DISCOVERY.md).
+
 ## Retirada de NSFW · 14 de octubre de 2026
 
 Petición del usuario: eliminar NSFW para descubrimiento de aplicaciones. Retirados 112 comandos de prefijo, 25 slash, 66 archivos de datos y el setup/envío automático. Cargadores y catálogo bloquean su regreso; menús y panel no ofrecen activación. Las claves antiguas de configuración quedan inertes. Suite 367/367, schemas con 18 raíces y catálogo de 674 invocaciones; Chromium comprueba ajustes en escritorio/móvil. Detalles y estado de despliegue en [NSFW-RETIREMENT.md](NSFW-RETIREMENT.md).

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T23:38:44.325Z",
+  "generatedAt": "2026-10-14T00:08:05.214Z",
   "commands": [
     {
       "kind": "commands",
@@ -2028,18 +2028,6 @@
     {
       "kind": "commands",
       "category": "Fun",
-      "file": "commands/Fun/brazzers.js",
-      "name": "brazzers",
-      "aliases": [
-        ""
-      ],
-      "runnable": true,
-      "status": "loaded",
-      "verification": "loading-only"
-    },
-    {
-      "kind": "commands",
-      "category": "Fun",
       "file": "commands/Fun/byemom.js",
       "name": "byemom",
       "aliases": [
@@ -2558,18 +2546,6 @@
       "category": "Fun",
       "file": "commands/Fun/sepia.js",
       "name": "sepia",
-      "aliases": [
-        ""
-      ],
-      "runnable": true,
-      "status": "loaded",
-      "verification": "loading-only"
-    },
-    {
-      "kind": "commands",
-      "category": "Fun",
-      "file": "commands/Fun/shit.js",
-      "name": "shit",
       "aliases": [
         ""
       ],
@@ -6960,6 +6936,16 @@
     {
       "kind": "slashCommands",
       "category": "Fun",
+      "file": "slashCommands/Fun/facepalm.js",
+      "name": "facepalm",
+      "aliases": [],
+      "runnable": true,
+      "status": "loaded",
+      "verification": "loading-only"
+    },
+    {
+      "kind": "slashCommands",
+      "category": "Fun",
       "file": "slashCommands/Fun/fact.js",
       "name": "fact",
       "aliases": [],
@@ -7072,16 +7058,6 @@
       "category": "Fun",
       "file": "slashCommands/Fun/sepia.js",
       "name": "sepia",
-      "aliases": [],
-      "runnable": true,
-      "status": "loaded",
-      "verification": "loading-only"
-    },
-    {
-      "kind": "slashCommands",
-      "category": "Fun",
-      "file": "slashCommands/Fun/shit.js",
-      "name": "shit",
       "aliases": [],
       "runnable": true,
       "status": "loaded",

@@ -1,5 +1,5 @@
 const { createCanvas } = require('@napi-rs/canvas')
-const names = ['abandon','affect','airpods','america','armor','bed','brazzers','byemom','cancer','changemymind','communism','corporate','cry','dab','delete','disability','door','drake','egg','emergencymeeting','excuseme','facts','failure','fakenews','floor','godwhy','hitler','ipad','jail','keepdistance','note','notstonks','obama','ohno','piccolo','roblox','satan','savehumanity','shit','stonks','stroke','tornado','trash','tweet','violence','walking','wanted','whodidthis','youtube']
+const names = ['abandon','affect','airpods','america','armor','bed','byemom','cancer','changemymind','communism','corporate','cry','dab','delete','disability','door','drake','egg','emergencymeeting','excuseme','facts','failure','fakenews','floor','godwhy','hitler','ipad','jail','keepdistance','note','notstonks','obama','ohno','piccolo','roblox','satan','savehumanity','stonks','stroke','tornado','trash','tweet','violence','walking','wanted','whodidthis','youtube']
 function native(name, text, second) {
   const canvas=createCanvas(800,500),ctx=canvas.getContext('2d')
   ctx.fillStyle='#0d0d1a';ctx.fillRect(0,0,800,500)

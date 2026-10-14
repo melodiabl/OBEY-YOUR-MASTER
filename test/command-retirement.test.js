@@ -12,6 +12,8 @@ const exportsByFile = {
   'flagged.js': { name: 'flagged', category: 'Info', description: 'Unavailable', nsfw: true, run },
   'category.js': { name: 'category', category: '🔞 NSFW', description: 'Unavailable', run },
   'retired.js': { name: 'setup-autonsfw', category: 'Setup', description: 'Unavailable', run },
+  'branded.js': { name: 'brazzers', category: 'Fun', description: 'Image', run },
+  'profane.js': { name: 'shit', category: 'Fun', description: 'Image', run },
 }
 function loader(file, kind) {
   const filename = path.join(root, 'handlers', file)
@@ -74,4 +76,21 @@ test('shipping trees and actual slash schemas contain no restricted commands or 
   assert.ok(client.allCommands.some(command => command.name === 'music'))
   assert.ok(client.allCommands.some(command => command.name === 'anime'))
   assert.ok(client.allCommands.every(command => command.nsfw !== true && !/nsfw/i.test(command.name)))
+})
+test('Fun retains ordinary memes without adult branding or profanity in published names and descriptions', () => {
+  const client = { slashCommands: new Map() }; require('../handlers/slashCommands')(client)
+  const fun = client.allCommands.find(command => command.name === 'fun')
+  assert.ok(fun && fun.nsfw !== true)
+  assert.ok(fun.options.some(option => option.name === 'facepalm'))
+  assert.ok(fun.options.some(option => option.name === 'stonks'))
+  assert.ok(fun.options.every(option => !/\b(shit|fuck|brazzers|porn|nsfw)\b/i.test(option.name + ' ' + option.description)))
+  const { names, createMemeService } = require('../handlers/meme-service')
+  assert.ok(names.includes('stonks'))
+  for (const name of ['brazzers', 'shit']) {
+    assert.equal(names.includes(name), false)
+    assert.equal(createMemeService()[name], undefined)
+    assert.equal(fs.existsSync(path.join(root, 'commands/Fun', name + '.js')), false)
+    assert.equal(fs.existsSync(path.join(root, 'image-service/upstream/endpoints', name + '.py')), false)
+    assert.equal(fs.existsSync(path.join(root, 'image-service/assets', name)), false)
+  }
 })

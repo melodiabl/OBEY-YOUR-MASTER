@@ -2,6 +2,8 @@
 
 El usuario pidió eliminar los comandos NSFW o impedir su registro para poder solicitar descubrimiento en el directorio de aplicaciones de Discord. Se retira la funcionalidad completa, sin un interruptor para reactivarla por servidor.
 
+Continuación posterior: el usuario señaló lenguaje malsonante en `/fun` y pidió conservar la categoría. La corrección de nombres, plantillas y traducciones se documenta en [FUN-DISCOVERY.md](FUN-DISCOVERY.md); su estado de despliegue reemplaza el snapshot inicial descrito aquí.
+
 ## Alcance
 
 - Eliminados 112 comandos de prefijo y 25 subcomandos slash, junto a sus 66 archivos de datos.
@@ -20,7 +22,7 @@ Chromium con el template real y datos ficticios confirma la retirada del control
 
 ## Registro y despliegue
 
-Antes del cambio, la API de Discord devolvió 19 raíces globales, incluida `/nsfw` aunque su flag `nsfw` era falso. Se comprobaron los cuatro servidores del bot: 98 comandos registrados por servidor, ninguno identificado como NSFW. La limpieza remota solo elimina comandos restringidos; conserva los demás registros.
+Antes del cambio, la API de Discord devolvió 19 raíces globales, incluida `/nsfw` aunque su flag `nsfw` era falso. Se comprobaron los cuatro servidores del bot: 98 registros de comandos de servidor en total, ninguno identificado como NSFW. La limpieza remota solo elimina comandos restringidos; conserva los demás registros.
 
 Desplegado el snapshot `ed915712d2bf36e2a41631feff55fa870245b661`, imagen `localhost/obey-your-master_bot:release-no-nsfw-20261014`, ID `2baba0ef41847fe8b8d5c0255c039f265d9cb1ca53c368a95e221d6d4b87651c`. El archivo de Git excluyó las 16 entradas locales previas de Architect/evidencias, que permanecen pendientes. La prueba de imagen sin red confirmó ausencia de los archivos retirados, 18 raíces, usuario 1000, mapa con 82 IDs y PNG de tarjeta generado en proceso aislado (1772×720).
 

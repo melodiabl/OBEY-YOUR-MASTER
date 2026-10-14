@@ -179,7 +179,7 @@
                 },
                 "overview": {
                     "title": ":gear: **__Command Category Overview__**",
-                    "desc": "> <a:yes:833101995723194437> ... **Overview**\n\n> 🔰 ... **Information**\n> 🎶 ... **Music Related**\n> ⚙ ... **Settings & 👑 Owner & ⌨️Programming**\n> 🎤 ... **Voice & 📈 Ranking**\n> 🎮 ... **Mini Games & 🕹️ Fun**\n> 🚫 ... **Administration & 💪 Setup**\n> 🔞 ... **NSFW**\n> 🦾 ... **Custom Commands**\n\n> *Click on the Button Emojis to jump to the Command Category*\n> *Use the Arrows to swap the Pages forward/backward/jump-back-home*"
+                    "desc": "> <a:yes:833101995723194437> ... **Overview**\n\n> 🔰 ... **Information**\n> 🎶 ... **Music Related**\n> ⚙ ... **Settings & 👑 Owner & ⌨️Programming**\n> 🎤 ... **Voice & 📈 Ranking**\n> 🎮 ... **Mini Games & 🕹️ Fun**\n> 🚫 ... **Administration & 💪 Setup**\n> 🦾 ... **Custom Commands**\n\n> *Click on the Button Emojis to jump to the Command Category*\n> *Use the Arrows to swap the Pages forward/backward/jump-back-home*"
                 },
                 "buttonerror": "❌ **Only the one who typed {prefix}help is allowed to react!**",
                 "timeended": "Time has ended type {prefix}help again!",
@@ -204,7 +204,6 @@
                 "variablex_19": "\"📈 **Ranking**\"", "variable19": "`>>> ${client.commands.filter((cmd) => cmd.category === \"📈 Ranking\").map((cmd) => `\\`${cmd.name}\\``).join(\"︲\")}`",
                 "variable20": "`🎮 Mini Games & Fun Commands 🕹️`",
                 "variable21": "`🕹️ **Fun**${settings.FUN ? \" | <a:yes:833101995723194437> ENABLED\" : \" | <:no:833101993668771842> DISABLED\"}\\n> ${client.commands.filter((cmd) => cmd.category === \"🕹️ Fun\").map((cmd) => `\\`${cmd.name}\\``).join(\"︲\")}`",
-                "variable22": "`> ${client.commands.filter((cmd) => cmd.category === \"🔞 NSFW\").map((cmd) => `\\`${cmd.name}\\``).join(\"︲\")}`",
                 "variable23": "\"🦾 Custom Commands\"",
                 "variable24": "`🦾 **Custom Commands [${cuc[0].includes(\"NO\") ? 0 : items.length}]**`",
                 "variable25": "\"<:Milrato:840259659163893820> Bot Creator Company Advertisment\"",
@@ -2121,21 +2120,6 @@
                 "variable11": "\"<:no:833101993668771842> ERROR | PLEASE CONTACT `Tomato#6966`\"",
                 "variable12": "`\\`\\`\\` ${e.message ? e.message : e.stack ? String(e.stack).substr(0, 2000) : String(e).substr(0, 2000)}\\`\\`\\``"
             },
-            "setup-autonsfw": {
-                "variable1": "\"What do you want to do? | AUTO NSFW\"",
-                "variable2": "`1️⃣ **== \\`✔️ Enable\\` / Set** Poster-Channel\\n\\n2️⃣ **== \\`❌ Disable\\`** AutoNsfw\\n\\n📑 ** == Show Settings**\\n\\n**Note:**\\n> *It will post only 1 Message every Minute*\\n\\n\\n\\n*React with the Right Emoji according to the Right action*`",
-                "variable3": "\"<:no:833101993668771842> ERROR | Missing Permissions to add Reactions\"",
-                "variable4": "\"<:no:833101993668771842> ERROR | Your Time ran out\"",
-                "variable5": "\"Which Channel do you wanna use?\"",
-                "variable6": "`*Just ping the channel with #channel in the Chat*`",
-                "variable7": "\"<:no:833101993668771842> ERROR | The Pinged Channel is not a NSFW Channel\"",
-                "variable8": "`<a:yes:833101995723194437> The Channel: \\`${channel.name}\\` is now registered as the Auto Nsfw Poster Channel`",
-                "variable9": "\"<:no:833101993668771842> ERROR | Your Time ran out\"",
-                "variable10": "`<a:yes:833101995723194437> Disabled the Auto Nsfw Poster Channel`",
-                "variable11": "`<a:yes:833101995723194437> Settings of the Auto Nsfw Poster Channel`",
-                "variable12": "\"<:no:833101993668771842> ERROR | PLEASE CONTACT `Tomato#6966`\"",
-                "variable13": "`\\`\\`\\` ${e.message ? e.message : e.stack ? String(e.stack).substr(0, 2000) : String(e).substr(0, 2000)}\\`\\`\\``"
-            },
             "setup-blacklist": {
                 "variable1": "\"What do you want to do?\"",
                 "variable2": "`1️⃣ **== Add** Word to the Blacklist\\n\\n2️⃣ **== Remove** Word from the Blacklist\\n\\n3️⃣ **== Show** all Blacklisted Words\\n\\n4️⃣ **== Reset** the Blacklisted Words\\n\\n*Note that ADMINISTRATORS, (general) are not checked if their messages are a part of the Blacklist*\\n\\n\\n\\n*React with the Right Emoji according to the Right action*`",
@@ -3594,170 +3578,6 @@
                 "variable2": "`<:no:833101993668771842> I am already connected in \\`${botchannel.name}\\``"
             }
         },
-        "nsfw": {
-            "2danal": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"2D Anal\""
-            },
-            "2dboobs": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"2D Boobs\""
-            },
-            "2dfeet": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"2D Feet\""
-            },
-            "2dtits": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"2D Tits\""
-            },
-            "2feetgif": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"2D Feet Gif\""
-            },
-            "anal": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "'You must use this command in an nsfw lounge!'",
-                "variable3": "`Please wait... `",
-                "variable4": "`:underage:\\n**[image not loading? click here](${response.body.message})**`"
-            },
-            "ass": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Ass\""
-            },
-            "bj": {
-                "variable1": "\":smirk: Blowjob\"",
-                "variable2": "`Tags: blowjob`"
-            },
-            "blowjob": {
-                "variable1": "\":smirk: Blowjob\"",
-                "variable2": "`Tags: blowjob`"
-            },
-            "boobs": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Boobs\""
-            },
-            "cumslut": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Cumslut\""
-            },
-            "danbooru": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "'That kind of stuff is not allowed! Not even in NSFW channels!'",
-                "variable3": "\"Danbooru:\"",
-                "variable4": "`Tags: danbooru ${query}`",
-                "variable5": "`No results found for **${query}**!`",
-                "variable6": "`No results found for **${query}**!`"
-            },
-            "ero": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Erotic\""
-            },
-            "erokitsune": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Erotic Kitsune\""
-            },
-            "eroyuri": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Erotic Yuri\""
-            },
-            "femdom": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Femdom\""
-            },
-            "futanari": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Futanari\""
-            },
-            "gasm": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Gasm\""
-            },
-            "gelbooru": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "'That kind of stuff is not allowed! Not even in NSFW channels!'",
-                "variable3": "\"Gelbooru:\"",
-                "variable4": "`Tags: Gelbooru ${query}`",
-                "variable5": "`No results found for **${query}**!`",
-                "variable6": "`No results found for **${query}**!`"
-            },
-            "hboobs": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "'You must use this command in an nsfw lounge!'",
-                "variable3": "`Please wait...`",
-                "variable4": "`:underage:\\n**[image not loading? click here](${response.body.message})**`"
-            },
-            "hentai": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Hentai\""
-            },
-            "hentaigif": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Hentai Gif\""
-            },
-            "holo": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Holo\""
-            },
-            "holoero": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Holo Ero\""
-            },
-            "keta": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Keta\""
-            },
-            "kitsune": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Kitsune\""
-            },
-            "kuni": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Kuni\""
-            },
-            "lewdneko": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"NSFW Neko\""
-            },
-            "lewdnekogif": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"NSFW Neko Gif\""
-            },
-            "nekoapiclassic": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Neko.Life API Classic Endpoint\""
-            },
-            "porn": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "`:underage:\\n**[image not loading? click here](${response.body.message})**`"
-            },
-            "pussy": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "'You must use this command in an nsfw lounge!'",
-                "variable3": "`Please wait... <a:Loading:592829210054098944>`",
-                "variable4": "`:underage:\\n**[image not loading? click here](${response.body.message})**`"
-            },
-            "r34": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "'That kind of stuff is not allowed! Not even in NSFW channels!'",
-                "variable3": "\"Rule34:\"",
-                "variable4": "`Tags: r34 ${query}`",
-                "variable5": "`No results found for **${query}**!`",
-                "variable6": "`No results found for **${query}**!`"
-            },
-            "spank": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "'Mention someone to hug'"
-            },
-            "trap": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Trap\""
-            },
-            "yuri": {
-                "variable1": "\"This Channel is not a NSFW Channel\"",
-                "variable2": "\"Yuri\""
-            }
-        },
         "fun": {
             "8ball": {
                 "variable1": "`<:no:833101993668771842> Please Add a Question`",
@@ -3811,11 +3631,6 @@
                 "variable2": "\"<:no:833101993668771842> I am unable to find that User...\"",
                 "variable3": "\"<:no:833101993668771842> I am unable to find that User...\"",
                 "variable4": "`\\`\\`\\` ${e.message ? e.message : e.stack ? String(e.stack).substr(0, 2000) : String(e).substr(0, 2000)}\\`\\`\\``"
-            },
-            "brazzers": {
-                "variable1": "-",
-                "variable2": "\"<:no:833101993668771842> I am unable to find that User...\"",
-                "variable3": "\"<:no:833101993668771842> I am unable to find that User...\""
             },
             "byemom": {
                 "variable1": "-",
@@ -4048,11 +3863,6 @@
                 "variable2": "\"<:no:833101993668771842> I am unable to find that User...\"",
                 "variable3": "\"<:no:833101993668771842> I am unable to find that User...\"",
                 "variable4": "`\\`\\`\\` ${e.message ? e.message : e.stack ? String(e.stack).substr(0, 2000) : String(e).substr(0, 2000)}\\`\\`\\``"
-            },
-            "shit": {
-                "variable1": "-",
-                "variable2": "\"<:no:833101993668771842> You did not enter a Valid Text!\"",
-                "variable3": "`Usage: \\`${prefix}shit <TEXT>\\``"
             },
             "stonks": {
                 "variable1": "-",
