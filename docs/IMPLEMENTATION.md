@@ -1,5 +1,7 @@
 # Implementación y verificación de OBEY
 
+Estado vigente de esta actualización: [nodos musicales sin WARP](platform/MUSIC-NODES.md) y [checkpoint](platform/CHECKPOINT.md). Las cifras, pruebas y recuperación antiguas de este documento son históricas; no restaurar imágenes antiguas con NSFW o WARP.
+
 Alcance: OBEY; MelodiaAPI queda fuera. Landing conservada. No se activó SoundCloud.
 
 ## Arquitectura aplicada
@@ -18,7 +20,7 @@ Alcance: OBEY; MelodiaAPI queda fuera. Landing conservada. No se activó SoundCl
 
 El bot instala mediante `npm ci --omit=dev` y un `package-lock.json` versionado. La imagen corre como `node`. Compose declara las imágenes del bot, Lavalink y el servicio local de imágenes; comprueba salud y concede 30 segundos de cierre al bot. `/health` devuelve 503 si MongoDB o Lavalink no están listos.
 
-El servicio de imágenes escucha solo en `127.0.0.1:3203`; incluye licencia y procedencia de sus recursos. Lavalink mantiene el proxy WARP aplicado a HTTP, sin interceptar la voz de Discord. Audio: Opus 10, remuestreo HIGH, actualizaciones de posición cada segundo; filtros opcionales y desactivados por defecto.
+El servicio de imágenes escucha solo en `127.0.0.1:3203`; incluye licencia y procedencia de sus recursos. Lavalink usa salida directa y un pool musical con nodo interno oculto y respaldos públicos; WARP se ha retirado. Audio: Opus 10, remuestreo HIGH, actualizaciones de posición cada segundo; filtros opcionales y desactivados por defecto.
 
 ## Evidencia obtenida
 
@@ -37,7 +39,7 @@ La carga de 810 comandos no demuestra su ejecución completa. Las pruebas web us
 
 Algunos endpoints NSFW de Nekos fueron retirados; conservar el comando no recupera ese proveedor. La auditoría de dependencias quedó en 0 avisos críticos, 3 altos y 32 moderados. Los altos restantes pertenecen a la cadena HTTP heredada de `random-puppy` y `translatte`; se requiere reemplazar esas integraciones para eliminarlos sin romper comandos. No se aplicaron actualizaciones forzadas que cambien sus contratos.
 
-WARP es gratuito, pero YouTube puede rechazar su salida. La prueba inicial encontró ese rechazo; tras renovar la conexión, los dos vídeos de prueba resolvieron y descargaron audio. No se garantiza que una salida permanezca aceptada. La segunda prueba larga decodificó 3558,54 segundos de audio sin excepción del proveedor, pero no alcanzó el requisito de 3600 segundos dentro del plazo; no se registra como prueba de continuidad aprobada.
+Historial anterior a la retirada de WARP: YouTube podía rechazar su salida. La prueba inicial encontró ese rechazo; tras renovar la conexión, los dos vídeos de prueba resolvieron y descargaron audio. No se garantiza que una salida permanezca aceptada. La segunda prueba larga decodificó 3558,54 segundos de audio sin excepción del proveedor, pero no alcanzó el requisito de 3600 segundos dentro del plazo; no se registra como prueba de continuidad aprobada.
 
 ## Recuperación del despliegue
 

@@ -11,7 +11,7 @@ import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
-import obey.proxy.YtdlpWarpProxy;
+import obey.direct.YtdlpDirect;
 import org.yaml.snakeyaml.Yaml;
 
 /** Exercises extraction, HTTP download and audio decoding without joining Discord. */
@@ -30,7 +30,6 @@ public final class AudioStreamProbe {
       config = new Yaml().load(input);
     }
     Map<?, ?> ytdlp = section(section(section(config, "plugins"), "pulselink"), "ytdlp");
-    Map<?, ?> proxy = section(section(section(config, "lavalink"), "server"), "httpConfig");
     DefaultAudioPlayerManager manager = new DefaultAudioPlayerManager();
     AudioPlayer player = manager.createPlayer();
     AtomicReference<String> error = new AtomicReference<>();
@@ -38,15 +37,14 @@ public final class AudioStreamProbe {
       manager.registerSourceManager(new YtdlpAudioSourceManager(
           ytdlp.get("path").toString(), 3,
           arguments(ytdlp, "customLoadArgs"), arguments(ytdlp, "customPlaybackArgs")));
-      new YtdlpWarpProxy(manager, proxy.get("proxyHost").toString(),
-          ((Number) proxy.get("proxyPort")).intValue(), ytdlp.get("userAgent").toString()).configure();
+      new YtdlpDirect(manager, ytdlp.get("userAgent").toString()).configure();
       AudioTrack track = (AudioTrack) manager.loadItemSync("https://www.youtube.com/watch?v=" + args[1]);
       player.addListener(new AudioEventAdapter() {
         @Override
         public void onTrackException(AudioPlayer ignored, AudioTrack failed, FriendlyException exception) {
           Throwable root = exception;
           while (root.getCause() != null) root = root.getCause();
-          error.set(root.getMessage());
+          error.set(root.getClass().getSimpleName());
         }
       });
       player.playTrack(track);

@@ -1,38 +1,34 @@
 server:
   port: ${LAVALINK_PORT:2333}
-  address: 0.0.0.0
+  address: 127.0.0.1
   http2:
     enabled: false
-
 lavalink:
-  pluginsDir: "./plugins"
+  pluginsDir: ./plugins
   plugins:
-    - dependency: "dev.lavalink.youtube:youtube-plugin:${YOUTUBE_PLUGIN_VERSION:1.18.2}"
-      repository: "https://maven.lavalink.dev/releases"
-
-    - dependency: "com.github.topi314.sponsorblock:sponsorblock-plugin:3.0.1"
-      repository: "https://repo1.maven.org/maven2"
-    # 1.7.1 crashea (NoClassDefFoundError GetyarnAudioSourceManager) — mantener 1.7.0
-    - dependency: "com.dunctebot:skybot-lavalink-plugin:1.7.0"
-      repository: "https://repo1.maven.org/maven2"
-    - dependency: "me.duncte123:java-lyrics-plugin:1.6.6"
-      repository: "https://repo1.maven.org/maven2"
-    - dependency: "com.github.esmBot:lava-xm-plugin:0.2.8"
-      repository: "https://repo1.maven.org/maven2"
-    - dependency: "com.github.devoxin:LavaDSPX-Plugin:0.0.4"
-      repository: "https://repo1.maven.org/maven2"
-    - dependency: "com.github.ItzRandom23:PulseLink:1.6.0"
-      repository: "https://repo1.maven.org/maven2"
-
+  - dependency: dev.lavalink.youtube:youtube-plugin:${YOUTUBE_PLUGIN_VERSION:1.18.2}
+    repository: https://maven.lavalink.dev/releases
+  - dependency: com.github.topi314.sponsorblock:sponsorblock-plugin:3.0.1
+    repository: https://repo1.maven.org/maven2
+  - dependency: com.dunctebot:skybot-lavalink-plugin:1.7.0
+    repository: https://repo1.maven.org/maven2
+  - dependency: me.duncte123:java-lyrics-plugin:1.6.6
+    repository: https://repo1.maven.org/maven2
+  - dependency: com.github.esmBot:lava-xm-plugin:0.2.8
+    repository: https://repo1.maven.org/maven2
+  - dependency: com.github.devoxin:LavaDSPX-Plugin:0.0.4
+    repository: https://repo1.maven.org/maven2
+  - dependency: com.github.ItzRandom23:PulseLink:1.6.0
+    repository: https://repo1.maven.org/maven2
   server:
-    password: "${LAVALINK_PASSWORD}"
+    password: ${LAVALINK_PASSWORD}
     sources:
       youtube: false
       bandcamp: true
       soundcloud: false
-      twitch: true
-      vimeo: true
-      nico: true
+      twitch: false
+      vimeo: false
+      nico: false
       http: true
       local: false
     filters:
@@ -63,10 +59,6 @@ lavalink:
       connectTimeoutMs: 3000
       connectionRequestTimeoutMs: 3000
       socketTimeoutMs: 10000
-    httpConfig:
-      proxyHost: 127.0.0.1
-      proxyPort: 41081
-
 plugins:
   youtube:
     enabled: true
@@ -74,45 +66,42 @@ plugins:
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
     clients:
-      - MUSIC
-      - MWEB
-      - TVHTML5_SIMPLY
-      - TV
-      - ANDROID_VR
-      - WEB
-      - WEBEMBEDDED
+    - MUSIC
+    - MWEB
+    - TVHTML5_SIMPLY
+    - TV
+    - ANDROID_VR
+    - WEB
+    - WEBEMBEDDED
     oauth:
       enabled: true
-      refreshToken: "${YOUTUBE_REFRESH_TOKEN:}"
+      refreshToken: ${YOUTUBE_REFRESH_TOKEN:}
       skipInitialization: true
     pot:
-      token: "${YOUTUBE_PO_TOKEN:}"
-      visitorData: "${YOUTUBE_VISITOR_DATA:}"
+      token: ${YOUTUBE_PO_TOKEN:}
+      visitorData: ${YOUTUBE_VISITOR_DATA:}
     remoteCipher:
-      url: "${YOUTUBE_REMOTE_CIPHER_URL:http://127.0.0.1:8001}"
-      password: "${YOUTUBE_REMOTE_CIPHER_PASSWORD:}"
-      userAgent: "obey-lavalink"
-
+      url: ${YOUTUBE_REMOTE_CIPHER_URL:http://127.0.0.1:8001}
+      password: ${YOUTUBE_REMOTE_CIPHER_PASSWORD:}
+      userAgent: obey-lavalink
   lyrics:
     countryCode: us
-
   dunctebot:
-    ttsLanguage: "es-ES"
+    ttsLanguage: es-ES
     sources:
-      getyarn: true
-      clypit: true
-      tts: true
-      pornhub: true
-      reddit: true
+      getyarn: false
+      clypit: false
+      tts: false
+      pornhub: false
+      reddit: false
       ocremix: true
-      tiktok: true
+      tiktok: false
       mixcloud: true
-      soundgasm: true
-      pixeldrain: true
-
+      soundgasm: false
+      pixeldrain: false
   pulselink:
     providers:
-      - ytsearch:%QUERY%
+    - ytsearch:%QUERY%
     sources:
       spotify: true
       amazonmusic: false
@@ -139,25 +128,39 @@ plugins:
     ytdlp:
       path: /usr/local/bin/yt-dlp
       searchLimit: 5
-      userAgent: &youtube-user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
-      customLoadArgs: ["-q", "--no-warnings", "--flat-playlist", "--skip-download", "-J", "--user-agent", *youtube-user-agent, "--proxy", "socks5://127.0.0.1:41081"]
-      customPlaybackArgs: ["-q", "--no-warnings", "-f", "bestaudio", "-J", "--user-agent", *youtube-user-agent, "--proxy", "socks5://127.0.0.1:41081"]
+      userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/147.0.0.0 Safari/537.36
+      customLoadArgs:
+      - -q
+      - --no-warnings
+      - --flat-playlist
+      - --skip-download
+      - -J
+      - --user-agent
+      - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/147.0.0.0 Safari/537.36
+      customPlaybackArgs:
+      - -q
+      - --no-warnings
+      - -f
+      - bestaudio
+      - -J
+      - --user-agent
+      - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/147.0.0.0 Safari/537.36
     spotify:
-      countryCode: "US"
+      countryCode: US
       playlistLoadLimit: 10
       albumLoadLimit: 10
       resolveArtistsInSearch: true
       localFiles: false
-      anonymousTokenUrl: "http://140.245.242.153:8082/api/token"
-
+      anonymousTokenUrl: http://140.245.242.153:8082/api/token
 metrics:
   prometheus:
     enabled: false
     endpoint: /metrics
-
 sentry:
-  dsn: ""
-
+  dsn: ''
 logging:
   level:
     root: INFO

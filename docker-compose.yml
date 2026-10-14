@@ -16,7 +16,7 @@ services:
   lavalink:
     profiles: ["managed-lavalink"]
     build: ./lavalink
-    image: localhost/obey-lavalink-warp:4.2.2
+    image: localhost/obey-lavalink-direct:4.2.2
     container_name: obey_lavalink
     restart: unless-stopped
     network_mode: "host"
@@ -51,8 +51,10 @@ services:
     env_file: .env
     network_mode: "host"
     environment:
+      LAVALINK_NODES_FILE: /app/runtime-nodes/nodes.json
       OBEY_EMOJI_MAP_FILE: /app/runtime-emojis/application-emojis.json
     volumes:
+      - ./.runtime/nodes:/app/runtime-nodes:ro
       - ./.runtime/emojis:/app/runtime-emojis:ro
     mem_limit: 1200m
     memswap_limit: 1400m
