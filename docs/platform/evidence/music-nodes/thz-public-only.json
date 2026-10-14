@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "requestedPublic": "nazha",
+  "audibleHumanConfirmed": false,
+  "voiceChannelName": "𝐕͟𝐂͟𝟏",
+  "primary": {
+    "nodeId": "nazha",
+    "voiceConnected": true,
+    "position": 3060,
+    "serverReportedAudioProgress": true
+  },
+  "backup": {
+    "nodeId": "serenetia",
+    "voiceConnected": true,
+    "position": 4541,
+    "queuePreserved": 1,
+    "pausePreserved": true,
+    "mutePreserved": true,
+    "sessionPreserved": true,
+    "serverReportedAudioProgress": true
+  },
+  "selectedPublic": "nazha",
+  "cleanup": true,
+  "finishedAt": "2026-10-14T02:37:04.967Z",
+  "guildLabel": "THZ"
+}

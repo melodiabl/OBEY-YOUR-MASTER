@@ -2,10 +2,18 @@
 
 Petición del usuario: retirar WARP de Lavalink/OBEY, añadir distintos nodos públicos y conservar su nodo como principal/respaldo interno oculto al público. Esta instrucción actualiza el backend permitido de Soundy; conserva el único servicio musical, sus sesiones, cola y los doce controles existentes.
 
+## Cambio vigente: solo públicos
+
+El usuario pidió apagar su nodo y elegir un principal público. `LAVALINK_PRIVATE_ENABLED=false` excluye todos los nodos privados, tanto de entorno como legacy/registro; sus credenciales se conservan sin reutilizarlas. `LAVALINK_DEFAULT_NODE=nazha` fija el principal para modo Automático; Serenetia/MilloHost respaldan y Trinium sigue desactivado. El contenedor propio queda creado sin iniciar, política `restart=no`, perfil manual y puerto 2333 cerrado. No se borraron configuración ni plugins.
+
+Las peticiones REST de reproducción fallidas también recuperan sesión; se prueban los siguientes respaldos si el primero falla. Si fallan todos, se conserva canción/cola/posición y se espera recuperación, incluso ante eventos duplicados. 392 tests pasan.
+
+La prueba autorizada por el usuario en THZ usó VC1 (canal vacío disponible), con volumen cero y sin publicar mensajes de prueba. Lavalink informó conexión de voz y progreso real: Nazha 3060 ms, respaldo Serenetia 4541 ms; pausa, cola de una pista, mute y sesión conservados. El estado anterior se restauró y quedó Nazha seleccionado. Esto verifica el flujo de audio del servidor; no es confirmación auditiva humana. [Evidencia](evidence/music-nodes/thz-public-only.json).
+
 ## Contrato de implementación
 
 - Credenciales/dirección del nodo privado exclusivamente en configuración del servidor. Los nodos públicos tienen credenciales separadas, HTTPS/WSS y registro aprobado por el operador; ninguna contraseña privada se reutiliza en un nodo público.
-- Automático prioriza el nodo interno y recurre a los públicos disponibles. Selección pública por guild, persistida y comprobada al ejecutar. IDs arbitrarios/privados y nodos desconectados se rechazan; el cliente no envía hosts ni contraseñas.
+- Con nodo privado habilitado, Automático puede priorizar el interno; en el despliegue vigente usa exclusivamente el público seleccionado y sus respaldos. Selección pública por guild, persistida y comprobada al ejecutar. IDs arbitrarios/privados y nodos desconectados se rechazan; el cliente no envía hosts ni contraseñas.
 - Listados/API/interfaz solo devuelven etiquetas, IDs públicos y disponibilidad. La conexión interna aparece como Automático sin su identidad/dirección. Errores no muestran URLs ni credenciales.
 - Búsqueda, unión a voz y recuperación utilizan el mismo pool. Una caída permite recuperar la sesión en otro nodo. Al cambiar, se resuelve la pista en el destino y se conservan cola, volumen (incluido cero), pausa, posición y filtros; fallo conserva/restaura estado, sin anunciar un éxito no persistido.
 - Una página de conexiones y comandos de nodos permiten elegir sin reemplazar el reproductor Soundy. Configure requiere ManageGuild actualizado; mismas barreras OAuth/CSRF/aislamiento de guild existentes.

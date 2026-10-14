@@ -78,6 +78,16 @@ module.exports = client => {
 
   function applySponsorBlock(player) { configureSponsorBlock(player, client.nodePool) }
 
+  function deferRecovery(guildId, state) {
+    state.lastPosition = elapsedForState(guildId, state)
+    state.startedAt = null
+    state.status = 'recovering'
+    state.reconnectVoice = true
+    stopLiveUpdate(guildId)
+    emitState(guildId)
+    scheduleRestore()
+  }
+
   function syncState(guildId, state) {
     const player = client.shoukaku?.players?.get(guildId)
     return player
@@ -353,7 +363,12 @@ module.exports = client => {
       state.status = 'recovering'
       emitState(guildId)
       const failed = state.currentTrack
-      if (!failed || failed._fallbackAttempted) { await this._playNext(guildId, player, { failed: true }); return }
+      if (!failed) { await this._playNext(guildId, player, { failed: true }); return }
+      if (failed._fallbackAttempted) {
+        if (client.nodePool) deferRecovery(guildId, state)
+        else await this._playNext(guildId, player, { failed: true })
+        return
+      }
       failed._fallbackAttempted = true
       const info = failed.info || failed
       if (client.nodePool && client._dbReady) {
@@ -366,6 +381,8 @@ module.exports = client => {
             return
           } catch { client.nodePool.fail(target.name) }
         }
+        deferRecovery(guildId, state)
+        return
       }
       try {
         const node = getNode(guildId)

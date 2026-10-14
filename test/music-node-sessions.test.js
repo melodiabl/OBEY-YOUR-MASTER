@@ -123,6 +123,18 @@ test('a rejected playback REST request also triggers recovery on a different nod
   assert.equal(client.shoukaku.players.get(id).node.name, 'public-one')
   assert.equal(state.currentTrack.info.uri, track.info.uri); assert.equal(state.volume, 0)
 })
+test('an outage of every provider preserves the song and queue while waiting for recovery', async t => {
+  const id = 'nodes-total-outage', { client, state, nodes } = setup(t, id)
+  Object.assign(state, { currentTrack: { encoded: 'old', _resolvedNode: 'private-primary', info: { uri: 'https://www.youtube.com/watch?v=test', sourceName: 'youtube' } }, queue: [{ encoded: 'next', info: { title: 'Next' } }], voiceChannelId: 'voice', volume: 0, paused: true, lastPosition: 12000 })
+  const player = await client.shoukaku.joinVoiceChannel({ guildId: id })
+  for (const node of nodes.values()) node.rest.resolve = async () => { throw Error('provider unavailable') }
+  await client.music._recoverFailedTrack(id, player, 'outage')
+  assert.equal(state.status, 'recovering'); assert.equal(state.currentTrack.info.uri, 'https://www.youtube.com/watch?v=test')
+  assert.equal(state.queue.length, 1); assert.equal(state.queue[0].encoded, 'next'); assert.equal(state.lastPosition, 12000)
+  assert.equal(state.reconnectVoice, true)
+  await client.music._recoverFailedTrack(id, player, 'duplicate outage event')
+  assert.equal(state.queue.length, 1); assert.equal(state.currentTrack.encoded, 'old')
+})
 test('idle preferences reload after restart without joining a voice channel', async t => {
   const id = 'nodes-preference-restart', { client, state } = setup(t, id)
   client.guilds.cache.set(id, {})
