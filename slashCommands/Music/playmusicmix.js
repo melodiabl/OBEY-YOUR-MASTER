@@ -12,12 +12,12 @@ module.exports = {
     if (!client.music) return interaction.reply({ embeds: [err('❌ Sistema de música no disponible.')], ephemeral: true })
     await interaction.deferReply()
     try {
-      const base = await client.music.search(query, interaction.user)
+      const base = await client.music.search(query, interaction.user, { guildId: interaction.guildId })
       if (!base?.tracks?.length) return interaction.editReply({ embeds: [err('❌ Sin resultados para la canción base.')] })
       const seed = base.tracks[0]
       const seedInfo = seed.info || seed
       const mixQuery = `ytsearch:${seedInfo.author || seedInfo.title} mix playlist`
-      const mix = await client.music.search(mixQuery, interaction.user)
+      const mix = await client.music.search(mixQuery, interaction.user, { guildId: interaction.guildId })
       const tracks = mix?.tracks?.slice(0, 10) || []
       if (!tracks.length) return interaction.editReply({ embeds: [err('❌ No se pudo generar la mezcla.')] })
       const vc = interaction.member.voice.channel

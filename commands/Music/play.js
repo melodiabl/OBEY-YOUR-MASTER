@@ -36,7 +36,7 @@ module.exports = {
     const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(`${E.music} Buscando **${query.slice(0, 60)}**…`)] }).catch(() => null)
     if (!loading) return
 
-    const results = await searchDiscordCatalog(client, query).catch(() => ({ tracks: [], albums: [] }))
+    const results = await searchDiscordCatalog(client, query, { guildId: message.guild.id }).catch(() => ({ tracks: [], albums: [] }))
     if (!(results.tracks?.length) && !(results.albums?.length)) {
       return loading.edit({ embeds: [err(`Sin resultados para **${query.slice(0, 60)}**`)] }).catch(() => {})
     }
@@ -79,7 +79,7 @@ module.exports = {
 async function handleUrl(client, message, voiceChannel, query) {
   const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(`${E.music} Cargando…`)] }).catch(() => null)
   if (!loading) return
-  const result = await client.music.search(query, message.author).catch(() => null)
+  const result = await client.music.search(query, message.author, { guildId: message.guild.id }).catch(() => null)
   if (!result?.tracks?.length) return loading.edit({ embeds: [err('No encontré resultados para esa URL.')] }).catch(() => {})
   try {
     const player = await client.music.joinChannel(message.guild.id, voiceChannel.id, message.channel.id)

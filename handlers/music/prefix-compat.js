@@ -6,7 +6,7 @@ async function related(client, message, args, add) {
   const seed = state.currentTrack?.info || state.currentTrack
   const query = args.join(' ') || seed?.author || seed?.title
   if (!query) throw new Error('Indica un artista o reproduce una canción primero.')
-  const result = await client.music.search(`ytsearch:${query}`, message.author)
+  const result = await client.music.search(`ytsearch:${query}`, message.author, { guildId: message.guild.id })
   const excluded = new Set([seed?.uri, ...state.queue.map(track => (track.info || track).uri)])
   const tracks = (result?.tracks || []).filter(track => !excluded.has((track.info || track).uri)).slice(0, 5)
   if (!tracks.length) throw new Error('No encontré otras canciones para esa búsqueda.')

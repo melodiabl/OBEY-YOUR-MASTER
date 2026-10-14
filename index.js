@@ -25,7 +25,6 @@ const { Agent } = require('undici')
   djs.Util = { ...(djs.Util || {}), splitMessage }
 })()
 const fs = require('fs')
-const { Shoukaku, Connectors } = require('shoukaku')
 const mongoose = require('mongoose')
 
 const config = require('./botconfig/config.json')
@@ -98,73 +97,7 @@ mongoose.connect(MONGO_URL).then(() => {
 
 // ─── Shoukaku (reemplaza erela.js) ────────────────────────────────────────────
 
-const configuredNodes = config.clientsettings?.nodes || []
-const envLavalinkHost = process.env.LAVALINK_HOST
-const lavalinkNodes = (envLavalinkHost ? [{
-  identifier: process.env.LAVALINK_IDENTIFIER || 'Main Lavalink',
-  host: envLavalinkHost,
-  port: Number(process.env.LAVALINK_PORT || 2333),
-  password: process.env.LAVALINK_PASSWORD,
-  secure: String(process.env.LAVALINK_SECURE || 'false').toLowerCase() === 'true',
-}] : configuredNodes).map(n => ({
-  name: n.identifier || n.host || 'Main',
-  url: (n.host || '127.0.0.1') + ':' + (n.port || 2333),
-  auth: n.password || process.env.LAVALINK_PASSWORD || 'youshallnotpass',
-  secure: typeof n.secure === 'string' ? n.secure.toLowerCase() === 'true' : Boolean(n.secure),
-}))
-
-if (lavalinkNodes.length) {
-  client.shoukaku = new Shoukaku(new Connectors.DiscordJS(client), lavalinkNodes, {
-    resume: true, resumeTimeout: 60, resumeByLibrary: false,
-    reconnectTries: 1, reconnectInterval: 1,
-    moveOnDisconnect: false,
-  })
-
-  // Track pending re-add timers per node name
-  const _reconnectTimers = new Map()
-
-  function scheduleNodeReconnect(name) {
-    if (_reconnectTimers.has(name)) return
-    const timer = setTimeout(() => {
-      _reconnectTimers.delete(name)
-      const node = client.shoukaku.nodes.get(name)
-      if (node?.state === 1) return
-      if (node) client.shoukaku.nodes.delete(name)
-      const cfg = lavalinkNodes.find(n => n.name === name)
-      if (!cfg) return
-      try {
-        client.shoukaku.addNode(cfg)
-      } catch (error) {
-        console.warn(('[Lavalink] Fallo al re-agregar nodo "' + name + '": ' + (error?.message || error)).red)
-        scheduleNodeReconnect(name)
-      }
-    }, 5_000)
-    _reconnectTimers.set(name, timer)
-  }
-
-  client.shoukaku.on('ready', name => {
-    console.log(('[Lavalink] Nodo "' + name + '" conectado').green)
-    // Cancel any pending re-add timer — already back online
-    if (_reconnectTimers.has(name)) {
-      clearTimeout(_reconnectTimers.get(name))
-      _reconnectTimers.delete(name)
-    }
-    const node = client.shoukaku.nodes.get(name)
-    if (node) {
-      console.log(('[Lavalink] Nodo "' + name + '" conectado').green)
-    }
-  })
-
-  client.shoukaku.on('error', (name, e) => {
-    console.error(('[Lavalink] Error en "' + name + '": ' + (e?.message || e)).red)
-    scheduleNodeReconnect(name)
-  })
-
-  client.shoukaku.on('disconnect', name => {
-    console.warn(('[Lavalink] "' + name + '" desconectado — reconectando en 5s...').yellow)
-    scheduleNodeReconnect(name)
-  })
-}
+require('./handlers/music/nodes-runtime').initializeNodes(client, config)
 
 // ─── Handlers ─────────────────────────────────────────────────────────────────
 
@@ -213,6 +146,7 @@ async function shutdown() {
   if (shuttingDown) return
   shuttingDown = true
   client._shuttingDown = true
+  client.stopNodes?.()
   client.stopAssets?.()
   client.stopDatabaseInitialization?.()
   const timeout = setTimeout(() => process.exit(1), 20000)

@@ -42,9 +42,9 @@ function leoGet(path) {
   })
 }
 
-async function searchDiscordCatalog(client, query) {
+async function searchDiscordCatalog(client, query, context) {
   const [result, albumsRaw] = await Promise.all([
-    client.music.search(query, 'Búsqueda').catch(() => null),
+    client.music.search(query, 'Búsqueda', context).catch(() => null),
     leoGet(`/api/search/albums?q=${encodeURIComponent(query)}&limit=10`),
   ])
 
@@ -81,7 +81,7 @@ async function enqueueCatalogItem(client, message, voiceChannel, item) {
   if (info.type === 'album' || info.type === 'playlist') {
     const identifier = info.playUri || info.uri
     const result = identifier
-      ? await client.music.search(identifier, message.author).catch(() => null)
+      ? await client.music.search(identifier, message.author, { guildId: message.guild.id }).catch(() => null)
       : null
     tracks = result?.tracks || []
     if (!tracks.length) throw new Error('No se pudieron cargar las pistas de esta colección.')
@@ -92,7 +92,7 @@ async function enqueueCatalogItem(client, message, voiceChannel, item) {
   } else {
     // Item plano sin encoded — resolver por URI o por título
     const q = info.uri || `${info.title || ''} ${info.author || ''}`.trim()
-    const result = await client.music.search(q, message.author).catch(() => null)
+    const result = await client.music.search(q, message.author, { guildId: message.guild.id }).catch(() => null)
     const first  = result?.tracks?.find(t => t.encoded)
     if (!first) throw new Error('No se pudo resolver esta pista.')
     tracks = [first]

@@ -236,6 +236,8 @@ module.exports = client => {
                     let Command = new SlashCommandBuilder()
                         .setName(String(pull.name).toLowerCase())
                         .setDescription(pull.description);
+                    if (pull.defaultMemberPermissions) Command.setDefaultMemberPermissions(pull.defaultMemberPermissions);
+                    if (pull.guildOnly) Command.setDMPermission(false);
                     if (pull.options && pull.options.length > 0) {
                         for (const option of pull.options) {
                             if (option.User && option.User.name && option.User.description) {

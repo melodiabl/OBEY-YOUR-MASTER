@@ -25,7 +25,7 @@ module.exports = {
 
     // URL directa
     if (isUrl(query)) {
-      const result = await client.music.search(query, interaction.user).catch(() => null)
+      const result = await client.music.search(query, interaction.user, { guildId: interaction.guildId }).catch(() => null)
       if (!result?.tracks?.length) return interaction.editReply({ embeds: [err('No encontré resultados para esa URL.')] }).catch(() => {})
       try {
         const player = await client.music.joinChannel(interaction.guild.id, voiceChannel.id, interaction.channelId)
@@ -43,7 +43,7 @@ module.exports = {
     }
 
     // Nombre → picker con pestañas
-    const results = await searchDiscordCatalog(client, query).catch(() => ({ tracks: [], albums: [] }))
+    const results = await searchDiscordCatalog(client, query, { guildId: interaction.guildId }).catch(() => ({ tracks: [], albums: [] }))
     if (!(results.tracks?.length) && !(results.albums?.length)) {
       return interaction.editReply({ embeds: [err(`Sin resultados para **${query}**`)] }).catch(() => {})
     }

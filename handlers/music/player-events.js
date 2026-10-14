@@ -3,6 +3,7 @@ const { stopLiveUpdate } = require('./liveupdate')
 module.exports = function bindPlayerEvents(client, player, guildId, { emitState, elapsedForState, requestRecovery }) {
   let events = Promise.resolve()
   const isCurrent = data => {
+    if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return false
     const eventId = data?.track?.userData?.obeyPlaybackId
     if (eventId && eventId !== getState(guildId).playbackId) return false
     const encoded = data?.track?.encoded || (typeof data?.track === 'string' ? data.track : null)
@@ -35,6 +36,7 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
       .catch(error => console.error(`[Music] Panel update failed (${guildId}):`, error.message))
   })
   player.on('update', data => {
+    if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return
     const state    = playerStates.get(guildId)
     const position = Number(data?.state?.position)
     if (!state?.currentTrack || !Number.isFinite(position) || !['playing', 'paused'].includes(state.status)) return
@@ -48,7 +50,7 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     if (!state.paused) state.startedAt = Date.now() - position
   })
   player.on('exception', data => {
-    console.error('[Music] Exception:', data?.exception?.message || 'Unknown playback error')
+    console.error('[Music] Error de reproducción; se intentará recuperar la pista')
     enqueueEvent(data, () => client.music._recoverFailedTrack(guildId, player, data?.exception?.message))
   })
   player.on('stuck', data => {
@@ -56,6 +58,8 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     enqueueEvent(data, () => client.music._recoverFailedTrack(guildId, player, 'trackStuck'))
   })
   player.on('closed', () => {
+    if (getState(guildId).nodeTransition) return
+    if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return
     stopLiveUpdate(guildId)
     const state = getState(guildId)
     state.status = 'recovering'

@@ -10,6 +10,7 @@ function getState(guildId) {
       sessionId:      randomUUID(),
       revision:       0,
       status:         'disconnected',
+      nodePreference: 'auto',
       queue:          [],
       currentTrack:   null,
       history:        [],   // in-memory last 10 tracks

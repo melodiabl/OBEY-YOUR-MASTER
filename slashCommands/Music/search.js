@@ -17,7 +17,7 @@ module.exports = {
     if (!client.music) return interaction.reply({ embeds: [err('Sistema de música no disponible.')], ephemeral: true })
 
     await interaction.deferReply()
-    const results = await searchDiscordCatalog(client, query).catch(() => ({ tracks: [], albums: [] }))
+    const results = await searchDiscordCatalog(client, query, { guildId: interaction.guildId }).catch(() => ({ tracks: [], albums: [] }))
     if (!(results.tracks?.length) && !(results.albums?.length)) {
       return interaction.editReply({ embeds: [err(`Sin resultados para **${query}**`)] }).catch(() => {})
     }

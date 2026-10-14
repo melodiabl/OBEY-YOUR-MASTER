@@ -1,4 +1,6 @@
-const http = require('http')
+const { configureSponsorBlock } = require('./nodes-runtime')
+const { searchNodes, trackOnNode } = require('./node-search')
+const { allowedMusicTrack } = require('./nodes-config')
 const MusicHistory = require('../../database/schemas/MusicHistorySchema')
 
 const { playerStates, liveMessages, liveTimers, getState, resetState } = require('./state')
@@ -7,8 +9,6 @@ const { FILTER_PRESETS, FILTER_RESET } = require('./filters')
 const { buildNPEmbed, buildControls, buildQueueEmbed, buildQueueRows } = require('./embeds')
 const { toggleLike, buildLikeEmbed } = require('./likes')
 const { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate } = require('./liveupdate')
-
-const SEARCH_PREFIXES = ['spsearch', 'ytsearch']
 
 function normalizedSongText(value) {
   return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
@@ -26,10 +26,6 @@ function sameSong(a, b) {
     (candidateArtist === artist || candidateArtist.includes(artist) || artist.includes(candidateArtist)))
 }
 
-// SponsorBlock: segmentos a saltar automáticamente en tracks de YouTube
-// (music_offtopic = partes sin música en videoclips; sponsor/selfpromo = anuncios)
-const SPONSORBLOCK_CATEGORIES = ['sponsor', 'selfpromo', 'interaction', 'intro', 'outro', 'preview', 'music_offtopic']
-
 module.exports = client => {
   if (!client.shoukaku) {
     console.warn('[Music] Shoukaku no inicializado'.yellow)
@@ -44,6 +40,11 @@ module.exports = client => {
   const panels = require('./action-queue').createActionQueue()
 
   async function playTrack(player, state, encoded, options = {}) {
+    if (!allowedMusicTrack(state.currentTrack)) throw new Error('source_not_allowed')
+    if (client.nodePool && state.currentTrack?._resolvedNode !== player.node.name) {
+      state.currentTrack = await trackOnNode(state.currentTrack, player.node)
+      encoded = state.currentTrack.encoded
+    }
     state.playbackId = require('node:crypto').randomUUID()
     state.playbackOptions = { position: options.position || 0, paused: Boolean(options.paused) }
     state.status = 'loading'
@@ -56,38 +57,18 @@ module.exports = client => {
     if (state) {
       state.revision++
       if (!state.currentTrack && state.status !== 'connecting') state.status = client.shoukaku?.players?.has(guildId) ? 'idle' : 'disconnected'
-      if (client._dbReady && !client._shuttingDown) sessions.save(guildId, state).catch(error => console.error('[Music] Session persistence:', error.message))
+      if (client._dbReady && !client._shuttingDown && !state.nodeTransition) sessions.save(guildId, state).catch(error => console.error('[Music] Session persistence:', error.message))
     }
     try { client?.emit?.('playerStateUpdate', guildId) } catch {}
   }
 
-  function getNode() {
-    return client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)
+  function getNode(guildId) {
+    const active = guildId && client.shoukaku.players.get(guildId)?.node
+    if (active?.state === 1 && !getState(guildId).reconnectVoice) return active
+    return client.nodePool ? client.nodePool.choose(guildId) : client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)
   }
 
-  // Activa SponsorBlock en el player (config por-player del plugin)
-  function applySponsorBlock(player, guildId) {
-    const sessionId = player?.node?.sessionId
-    if (!sessionId) return
-    const body = JSON.stringify(SPONSORBLOCK_CATEGORIES)
-    const req = http.request({
-      host: process.env.LAVALINK_HOST || '127.0.0.1',
-      port: Number(process.env.LAVALINK_PORT || 2333),
-      path: `/v4/sessions/${sessionId}/players/${guildId}/sponsorblock/categories`,
-      method: 'PUT',
-      headers: {
-        Authorization: process.env.LAVALINK_PASSWORD || '',
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(body),
-      },
-      timeout: 5000,
-    }, res => {
-      if (res.statusCode !== 204) console.warn(`[Music] SponsorBlock no aplicado (HTTP ${res.statusCode})`)
-      res.resume()
-    })
-    req.on('error', e => console.warn('[Music] SponsorBlock error:', e.message))
-    req.end(body)
-  }
+  function applySponsorBlock(player) { configureSponsorBlock(player, client.nodePool) }
 
   function syncState(guildId, state) {
     const player = client.shoukaku?.players?.get(guildId)
@@ -105,12 +86,13 @@ module.exports = client => {
 
   function serializeState(guildId, options = {}) {
     const state = playerStates.get(guildId)
-    if (!state?.currentTrack) return { active: false, status: state?.status || 'disconnected', sessionId: state?.sessionId || null, revision: state?.revision || 0, volume: state?.volume ?? 100, updatedAt: Date.now() }
+    if (!state?.currentTrack) return { node: client.nodePool?.view(guildId), active: false, status: state?.status || 'disconnected', sessionId: state?.sessionId || null, revision: state?.revision || 0, volume: state?.volume ?? 100, updatedAt: Date.now() }
     const queueLimit = Math.max(1, Math.min(100, Number(options.queueLimit || 50)))
     const elapsed    = elapsedForState(guildId, state)
     const current    = normalizePublicTrack(state.currentTrack, { pos: 0, elapsed })
     const queue      = (state.queue || []).slice(0, queueLimit).map((t, i) => normalizePublicTrack(t, { pos: i + 1 }))
     return {
+      node:           client.nodePool?.view(guildId),
       active:         true,
       sessionId:      state.sessionId,
       playbackId:     state.playbackId,
@@ -167,43 +149,18 @@ module.exports = client => {
     liveMessages,
 
     // ── Search via Lavalink: Spotify fallback, then yt-dlp/YouTube ───────
-    async search(query, requester) {
-      const node  = getNode()
-      if (!node) throw new Error('No hay nodos Lavalink disponibles.')
-      const rName = typeof requester === 'string' ? requester : requester?.username || requester?.tag || 'Unknown'
-      if (typeof query !== 'string' || !query.trim()) throw new Error('Indica una canción o enlace válido.')
-      query = query.trim()
-      if (/soundcloud\.com|^scsearch:|^soundcloud:/i.test(query)) throw new Error('SoundCloud está desactivado. Usa YouTube o un enlace compatible.')
-      const isUrl = /^https?:\/\//i.test(query) || /^(spotify|applemusic|deezer|ytsearch|ytmsearch|spsearch|amsearch|ytdlp):/i.test(query)
+    async search(query, requester, context) { return searchNodes(client, query, requester, context) },
 
-      const identifiers = isUrl
-        ? [query]
-        : SEARCH_PREFIXES.map(p => `${p}:${query}`)
-
-      let searchError = null
-      let singleFallback = null // spsearch devuelve 1 track; guardarlo y seguir buscando lista
-
-      for (const id of identifiers) {
-        try {
-          const res    = await node.rest.resolve(id)
-          const tracks = tracksFromResolve(res)
-          if (!tracks.length) continue
-          tracks.forEach(t => { if (t.info) { t.info.requester = rName; t.info.requesterId = (requester && typeof requester === 'object') ? requester.id : (t.info.requesterId || null) } })
-          // spsearch devuelve 1 pista (loadType:track): guardarla y seguir a por la lista
-          if (res.loadType === 'track' && !isUrl) {
-            singleFallback = { loadType: res.loadType, tracks, playlistName: null }
-            continue
-          }
-          // Mantener el resultado único de Spotify como alternativa a la lista.
-          const merged = singleFallback ? [...tracks, singleFallback.tracks[0]] : tracks
-          return { loadType: res.loadType, tracks: merged, playlistName: res.data?.info?.name || null }
-        } catch (error) { searchError = error }
-      }
-      if (!singleFallback && searchError) {
-        console.warn('[Music] Search failed:', /sign in|not a bot/i.test(searchError.message) ? 'YouTube rejected the network exit' : searchError.name)
-        throw new Error(/sign in|not a bot/i.test(searchError.message) ? 'YouTube está rechazando esta salida de red. Reintenta en unos minutos.' : 'No se pudo consultar el proveedor de música. Reintenta en unos minutos.')
-      }
-      return singleFallback
+    getNodes(guildId) { return client.nodePool?.view(guildId) },
+    async setNodePreference(guildId, nodeId) {
+      if (!client.nodePool || !client._dbReady || client._shuttingDown) throw new Error('nodes_unavailable')
+      client.nodePool.validateSelection(nodeId)
+      client.nodePool.unpin(guildId)
+      const target = client.nodePool.choose(guildId, { preference: nodeId })
+      if (!target) throw new Error('node_unavailable')
+      return require('./node-session').switchSession(client, guildId, target, nodeId, {
+        persist: sessions.save, playTrack, emitState, scheduleRestore,
+      })
     },
 
     // ── High-level play ────────────────────────────────────────────────────
@@ -211,7 +168,7 @@ module.exports = client => {
       const requestedState = getState(guildId)
       const requestEpoch = requestedState.requestEpoch || 0
       return playRequests.run(guildId, async () => {
-        const result = await this.search(query, requester)
+        const result = await this.search(query, requester, { guildId })
         if (!result?.tracks?.length) return null
         return actions.run(guildId, async () => {
           if (client._shuttingDown || getState(guildId) !== requestedState || (requestedState.requestEpoch || 0) !== requestEpoch) throw new Error('La solicitud se canceló al detener o vaciar el reproductor.')
@@ -225,6 +182,7 @@ module.exports = client => {
 
     async enqueue(guildId, tracks, { front = false, skip = false } = {}) {
       if (!Array.isArray(tracks) || !tracks.length) throw new Error('No hay pistas para añadir.')
+      if (tracks.some(track => !allowedMusicTrack(track))) throw new Error('source_not_allowed')
       const state = getState(guildId)
       if (front) state.queue.unshift(...tracks)
       else state.queue.push(...tracks)
@@ -263,7 +221,7 @@ module.exports = client => {
         if (textChannelId) current.textChannelId = textChannelId
         return existing
       }
-      const node = getNode()
+      const node = getNode(guildId)
       if (!node) throw new Error('No hay nodos Lavalink disponibles.')
       if (existing) {
         try { await client.shoukaku.leaveVoiceChannel(guildId) } catch {}
@@ -321,7 +279,7 @@ module.exports = client => {
           const playedUris   = new Set(recentTracks.map(t => t.uri).filter(Boolean))
           const playedTitles = new Set(recentTracks.map(t => norm(t.title)).filter(Boolean))
           try {
-            const node = getNode()
+            const node = getNode(guildId)
             // Buscar por artista (no por título: devolvería la misma canción en bucle)
             const queries = [
               `ytsearch:${seed.author || seed.title}`,
@@ -333,7 +291,7 @@ module.exports = client => {
               candidates.push(...tracksFromResolve(res))
             }
             candidates = candidates.filter(t =>
-              t.encoded && t.info?.uri &&
+              allowedMusicTrack(t) && t.encoded && t.info?.uri &&
               !playedUris.has(t.info.uri) &&
               !playedTitles.has(norm(t.info.title))
             )
@@ -367,7 +325,7 @@ module.exports = client => {
       if (!next.encoded) {
         const info = next.info || next
         const q    = info.uri || `${info.title || ''} ${info.author || ''}`.trim()
-        const resolved = q ? await this.search(q, info.requester || 'Playlist').catch(() => null) : null
+        const resolved = q ? await this.search(q, info.requester || 'Playlist', { guildId }).catch(() => null) : null
         const real = resolved?.tracks?.find(t => t.encoded)
         if (!real) return this._playNext(guildId, player, { failed: true }) // irrecuperable → siguiente
         if (real.info) { real.info.requester = info.requester || real.info.requester; real.info.requesterId = info.requesterId || real.info.requesterId }
@@ -391,12 +349,22 @@ module.exports = client => {
       failed._fallbackAttempted = true
       const info = failed.info || failed
       try {
-        const node = getNode()
+        if (client.nodePool && client._dbReady) {
+          client.nodePool.fail(player.node.name)
+          const target = client.nodePool.choose(guildId, { exclude: [player.node.name] })
+          if (target) {
+            await require('./node-session').switchSession(client, guildId, target, state.nodePreference || 'auto', {
+              persist: sessions.save, playTrack, emitState, scheduleRestore,
+            })
+            return
+          }
+        }
+        const node = getNode(guildId)
         // JioSaavn ofrece audio directo cuando YouTube bloquea la carga del vídeo.
         // Solo se usa si título y artista coinciden para evitar otra grabación.
         if (info.sourceName === 'youtube' || info.sourceName === 'spotify') {
           const direct = await node.rest.resolve(`jssearch:${info.title || ''} ${info.author || ''}`).catch(() => null)
-          const replacement = tracksFromResolve(direct).find(t => t.encoded && t.info?.sourceName === 'jiosaavn' && sameSong(info, t.info))
+          const replacement = tracksFromResolve(direct).find(t => allowedMusicTrack(t) && t.encoded && t.info?.sourceName === 'jiosaavn' && sameSong(info, t.info))
           if (replacement) {
             replacement.info.requester = info.requester || 'Fallback'
             replacement.info.requesterId = info.requesterId
@@ -408,7 +376,7 @@ module.exports = client => {
           }
         }
         const res  = await node.rest.resolve(`ytsearch:${info.title || ''} ${info.author || ''}`)
-        const fallback = tracksFromResolve(res).find(t => t.encoded && t.info?.uri !== info.uri)
+        const fallback = tracksFromResolve(res).find(t => allowedMusicTrack(t) && t.encoded && t.info?.uri !== info.uri)
         if (fallback) {
           if (fallback.info) { fallback.info.requester = info.requester || 'Fallback'; fallback.info.requesterId = info.requesterId; fallback._fallbackAttempted = true }
           state.currentTrack = fallback; state.startedAt = Date.now(); state.lastPosition = 0; state.paused = false
@@ -758,7 +726,7 @@ module.exports = client => {
     }
   })
 
-  for (const name of ['enqueue', 'setAudioParameter', 'joinChannel', '_playNext', '_recoverFailedTrack', 'skip', 'previous', 'stop', 'pause', 'shuffle', 'jump', 'remove', 'move', 'seek', 'setFilter']) {
+  for (const name of ['setNodePreference', 'enqueue', 'setAudioParameter', 'joinChannel', '_playNext', '_recoverFailedTrack', 'skip', 'previous', 'stop', 'pause', 'shuffle', 'jump', 'remove', 'move', 'seek', 'setFilter']) {
     const operation = client.music[name]
     if (typeof operation !== 'function') continue
     client.music[name] = function (guildId, ...args) {
@@ -771,7 +739,7 @@ module.exports = client => {
     return panels.run(guildId, () => sendNowPlaying.call(this, guildId, ...args))
   }
 
-  let restoring = false, restoreRetry = null
+  let restoring = false, restoreRetry = null, preferencesLoaded = false
   function scheduleRestore() {
     if (restoreRetry || client._shuttingDown) return
     restoreRetry = setTimeout(() => { restoreRetry = null; restoreSessions() }, 5000)
@@ -783,14 +751,22 @@ module.exports = client => {
     restoring = true
     try {
       await sessions.drain()
+      if (client.nodePool && !preferencesLoaded) {
+        for (const row of await sessions.preferences()) {
+          if (!client.guilds?.cache?.has(row.guildId)) continue
+          getState(row.guildId).nodePreference = row.nodePreference || 'auto'
+        }
+        preferencesLoaded = true
+      }
       const rows = await sessions.list()
       for (const saved of rows) {
         if (!client.guilds?.cache?.has(saved.guildId) || !client.channels.cache.has(saved.voiceChannelId)) continue
         const existing = client.shoukaku.players.get(saved.guildId)
-        if (existing && existing.node === getNode() && ['playing', 'paused'].includes(getState(saved.guildId).status) && !getState(saved.guildId).reconnectVoice) continue
+        if (existing && existing.node === getNode(saved.guildId) && ['playing', 'paused'].includes(getState(saved.guildId).status) && !getState(saved.guildId).reconnectVoice) continue
         try {
           await actions.run(saved.guildId, async () => {
             const state = getState(saved.guildId)
+            state.nodeTransition = true
             state.status = 'recovering'
             state.sessionId = saved.sessionId || state.sessionId
             state.revision = Math.max(state.revision, saved.revision || 0)
@@ -807,7 +783,7 @@ module.exports = client => {
               loop: saved.loop || 'none', autoplay: Boolean(saved.autoplay), shuffle: Boolean(saved.shuffle), radioMode: Boolean(saved.radioMode),
             })
             await player.setGlobalVolume(state.volume)
-            const result = await client.music.search(saved.currentTrack.info?.uri || saved.currentTrack.uri, 'Recuperación')
+            const result = await client.music.search(saved.currentTrack.info?.uri || saved.currentTrack.uri, 'Recuperación', { guildId: saved.guildId })
             const track = result?.tracks?.find(track => track.encoded)
             if (!track) throw new Error('La pista guardada no está disponible')
             const savedInfo = saved.currentTrack.info || saved.currentTrack
@@ -824,12 +800,14 @@ module.exports = client => {
             if (saved.filter === 'custom' && saved.customFilters) { await player.setFilters(saved.customFilters); state.filter = 'custom' }
             else if (saved.filter && !['none', 'off'].includes(saved.filter)) await client.music.setFilter(saved.guildId, saved.filter)
             await client.music.sendNowPlaying(saved.guildId, track)
+            state.nodeTransition = false
             emitState(saved.guildId)
             console.log(`[Music] Session restored: status=${state.status} volume=${state.volume} queue=${state.queue.length} position=${state.lastPosition}`)
           })
         } catch (error) {
           console.warn(`[Music] Session restore failed (${saved.guildId}):`, error.message)
           const state = getState(saved.guildId)
+          state.nodeTransition = false
           Object.assign(state, { currentTrack: saved.currentTrack, queue: saved.queue || [], history: saved.history || [], volume: saved.volume ?? 100, paused: Boolean(saved.paused), lastPosition: saved.position || 0, startedAt: null, voiceChannelId: saved.voiceChannelId, textChannelId: saved.textChannelId, status: 'recovering' })
           emitState(saved.guildId)
           scheduleRestore()
@@ -849,7 +827,7 @@ module.exports = client => {
   }
   const checkpoint = setInterval(() => {
     if (!client._dbReady) return
-    for (const [guildId, state] of playerStates) if (state.currentTrack && state.status !== 'recovering') {
+    for (const [guildId, state] of playerStates) if (state.currentTrack && state.status !== 'recovering' && !state.nodeTransition) {
       sessions.save(guildId, state).catch(error => console.error('[Music] Checkpoint:', error.message))
     }
   }, 5000)
@@ -873,9 +851,11 @@ module.exports = client => {
       state.lastPosition = elapsedForState(guildId, state)
       state.startedAt = null
       state.status = 'recovering'
+      state.reconnectVoice = true
       stopLiveUpdate(guildId)
       emitState(guildId)
     }
+    scheduleRestore()
   })
   client.shoukaku.on?.('ready', () => restoreSessions())
 

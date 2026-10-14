@@ -13,7 +13,7 @@ module.exports = {
     const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription('🔎 Buscando...')] })
     try {
       const player = await client.music.joinChannel(message.guild.id, voiceChannel.id, message.channel.id)
-      const result = await client.music.search(query, message.author)
+      const result = await client.music.search(query, message.author, { guildId: message.guild.id })
       if (!result?.tracks?.length) return loading.edit({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No se encontraron resultados.')] }).catch(() => {})
       const state  = client.music.getState(message.guild.id)
       const track  = result.tracks[0]

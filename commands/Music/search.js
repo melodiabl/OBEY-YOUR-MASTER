@@ -31,7 +31,7 @@ module.exports = {
     const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(`${E.music} Buscando **${query.slice(0, 60)}**…`)] }).catch(() => null)
     if (!loading) return
 
-    const results = await searchDiscordCatalog(client, query).catch(() => ({ tracks: [], albums: [] }))
+    const results = await searchDiscordCatalog(client, query, { guildId: message.guild.id }).catch(() => ({ tracks: [], albums: [] }))
     if (!(results.tracks?.length) && !(results.albums?.length)) {
       return loading.edit({ embeds: [err(`Sin resultados para **${query.slice(0, 60)}**`)] }).catch(() => {})
     }

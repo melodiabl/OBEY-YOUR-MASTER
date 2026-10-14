@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose')
 const schema = new Schema({
   guildId: { type: String, required: true, unique: true },
   sessionId: String, revision: { type: Number, default: 0 },
+  nodePreference: { type: String, default: 'auto' },
   voiceChannelId: String, textChannelId: String,
   currentTrack: Schema.Types.Mixed, queue: [Schema.Types.Mixed], history: [Schema.Types.Mixed],
   position: { type: Number, default: 0 }, paused: Boolean,

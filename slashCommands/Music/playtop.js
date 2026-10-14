@@ -10,7 +10,7 @@ module.exports = {
     if (!client.music) return interaction.reply({ content: '❌ Sistema de música no disponible.', ephemeral: true })
     await interaction.deferReply()
     try {
-      const result = await client.music.search(query, interaction.user)
+      const result = await client.music.search(query, interaction.user, { guildId: interaction.guildId })
       if (!result?.tracks?.length) return interaction.editReply({ content: '❌ Sin resultados.' })
       const track = result.tracks[0]
       const state = client.music.getState(interaction.guild.id)
