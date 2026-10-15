@@ -1,0 +1,18 @@
+{
+  "scope": "Existing Discord bot message and persisted settings; no new test messages or voice playback",
+  "active": false,
+  "panelPersisted": true,
+  "hasTextChannel": true,
+  "checkedMessages": 1,
+  "lyricsMessages": [
+    {
+      "messageHash": "fdb26c87af4b",
+      "createdAt": "2026-10-15T00:23:08.734000+00:00",
+      "editedAt": "2026-10-15T01:13:44.646000+00:00",
+      "hasHighlightedLine": false,
+      "lineNumber": 0,
+      "waiting": true
+    }
+  ],
+  "position": 0
+}

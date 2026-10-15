@@ -1,6 +1,6 @@
 {
   "at": "2026-10-15T00:50:11Z",
-  "scope": "obsolete OBEY temporary build/export/probe artifacts; active integration/incident tools retained",
+  "scope": "Superseded OBEY temporary files, build contexts, extraction and worktrees; current source, runtime, data, backups and previous user edits preserved",
   "removedCount": 486,
   "bytesRemoved": 4207506654,
   "protectedGitWorktreesOrSymlinks": [
@@ -493,5 +493,211 @@
     "obey-youtube-plugin-1.18.1.jar",
     "obey-youtube-plugin-1.18.2.jar",
     "obey-youtube-recheck.log"
-  ]
+  ],
+  "additionalCleanup": [
+    {
+      "path": "/home/OBEY_Documentacion_actualizada_2026-10-14",
+      "bytes": 79052779
+    },
+    {
+      "path": "/home/OBEY-YOUR-MASTER/.runtime/music-check",
+      "bytes": 1899
+    },
+    {
+      "path": "/home/OBEY-YOUR-MASTER/.runtime/fun-registration-before.json",
+      "bytes": 3943
+    }
+  ],
+  "totalBytesRemoved": 4534698674,
+  "latestSourceRetained": "/home/OBEY_Documentacion_actualizada_2026-10-15",
+  "retiredWorktrees": [
+    {
+      "path": "/tmp/obey-new-zip-integration",
+      "reason": "Latest patch integrated into active branch"
+    },
+    {
+      "path": "/home/obey-implementation",
+      "reason": "Superseded implementation; local changes preserved in Git stash"
+    },
+    {
+      "path": "/home/obey-platform-work",
+      "reason": "Superseded foundations; local changes preserved in Git stash"
+    }
+  ],
+  "retainedCurrentRuntime": ".runtime/bot-release.yml and .runtime/bot-recovery-public-only.yml",
+  "finalTemporaryCleanup": {
+    "at": "2026-10-15T01:42:48Z",
+    "removedCount": 41,
+    "bytesRemoved": 248133399,
+    "removed": [
+      {
+        "name": "obey-cleanup-images.cjs",
+        "bytes": 1062
+      },
+      {
+        "name": "obey-cleanup-unused.py",
+        "bytes": 1480
+      },
+      {
+        "name": "obey-deploy-release.cjs",
+        "bytes": 1162
+      },
+      {
+        "name": "obey-emoji-release.cjs",
+        "bytes": 716
+      },
+      {
+        "name": "obey-final-evidence.cjs",
+        "bytes": 959
+      },
+      {
+        "name": "obey-latest-package-bot-final-deploy-plan.log",
+        "bytes": 1829
+      },
+      {
+        "name": "obey-latest-package-bot-final-deploy.log",
+        "bytes": 2007
+      },
+      {
+        "name": "obey-latest-package-build-078a55b8",
+        "bytes": 247445462
+      },
+      {
+        "name": "obey-latest-package-build-context.json",
+        "bytes": 129
+      },
+      {
+        "name": "obey-latest-package-final-tests.log",
+        "bytes": 116391
+      },
+      {
+        "name": "obey-latest-package-old-image-tags.json",
+        "bytes": 735
+      },
+      {
+        "name": "obey-live-status.cjs",
+        "bytes": 1977
+      },
+      {
+        "name": "obey-lyrics-live-inspect.cjs",
+        "bytes": 2027
+      },
+      {
+        "name": "obey-lyrics-panel-migrate.cjs",
+        "bytes": 2094
+      },
+      {
+        "name": "obey-lyrics-recovery-tests.log",
+        "bytes": 97390
+      },
+      {
+        "name": "obey-music-final-status.cjs",
+        "bytes": 2514
+      },
+      {
+        "name": "obey-music-image-manifest.json",
+        "bytes": 132432
+      },
+      {
+        "name": "obey-music-image-verify.cjs",
+        "bytes": 505
+      },
+      {
+        "name": "obey-music-live-errors.cjs",
+        "bytes": 402
+      },
+      {
+        "name": "obey-music-provider-check.cjs",
+        "bytes": 2300
+      },
+      {
+        "name": "obey-naming-changes.json",
+        "bytes": 2443
+      },
+      {
+        "name": "obey-new-zip-full-tests.log",
+        "bytes": 116337
+      },
+      {
+        "name": "obey-new-zip-integration-apply.log",
+        "bytes": 62265
+      },
+      {
+        "name": "obey-new-zip-selected-tests.log",
+        "bytes": 12433
+      },
+      {
+        "name": "obey-new-zip-whitespace.log",
+        "bytes": 0
+      },
+      {
+        "name": "obey-public-only-live.cjs",
+        "bytes": 2023
+      },
+      {
+        "name": "obey-public-only-live.json",
+        "bytes": 1276
+      },
+      {
+        "name": "obey-public-selection.cjs",
+        "bytes": 903
+      },
+      {
+        "name": "obey-queue-finish-7b65997f",
+        "bytes": 14499
+      },
+      {
+        "name": "obey-queue-finish-bot-final-deploy-plan.log",
+        "bytes": 1834
+      },
+      {
+        "name": "obey-queue-finish-bot-final-deploy.log",
+        "bytes": 2012
+      },
+      {
+        "name": "obey-queue-finish-build-20261015.log",
+        "bytes": 619
+      },
+      {
+        "name": "obey-queue-finish-context.json",
+        "bytes": 99
+      },
+      {
+        "name": "obey-queue-finish-tests-20261015.log",
+        "bytes": 96765
+      },
+      {
+        "name": "obey-queue-incident-after.json",
+        "bytes": 548
+      },
+      {
+        "name": "obey-queue-incident-before.json",
+        "bytes": 547
+      },
+      {
+        "name": "obey-queue-incident.cjs",
+        "bytes": 1515
+      },
+      {
+        "name": "obey-queue-observe.cjs",
+        "bytes": 669
+      },
+      {
+        "name": "obey-queue-observed-events.json",
+        "bytes": 3
+      },
+      {
+        "name": "obey-queue-red-20261015.log",
+        "bytes": 292
+      },
+      {
+        "name": "obey-release-smoke.cjs",
+        "bytes": 2744
+      }
+    ],
+    "protectedSymlinksOrGitWorktrees": [
+      "obey-imgen"
+    ]
+  },
+  "byteAccounting": "Counts temporary/extracted file sizes; does not estimate worktree/image/shared Git space"
 }

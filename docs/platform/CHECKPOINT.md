@@ -2,6 +2,18 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## ZIP nuevo, recuperación de letras y limpieza · 15 de octubre de 2026
+
+Versión activa: código `078a55b86bebcf672f917eab6901380d67e6708a`, imagen `e37d538ea9840c2020ee1b10cb917f913c6c21af92649f2a677d5a296742d096`. Healthy, cero reinicios y errores de arranque; 19 raíces slash, Fun con 22 opciones, sin NSFW. Se verificaron los hashes de 1246 archivos de la imagen. Las 16 entradas locales previas siguen conservadas y excluidas del despliegue. Nazha seleccionado, Serenetia y MilloHost conectados; privado excluido, apagado, sin reinicio ni puerto 2333. Imágenes y Redis conservan sus contenedores. Las versiones que siguen abajo son antecedentes históricos, no instrucciones de recuperación vigentes.
+
+Integrado el parche backend del ZIP del 15/10, con sus materiales y traducciones, manteniendo los cambios posteriores del bot. Se excluyeron comandos ya retirados y el icono adulto; nombres nuevos sin prefijo `module-`. Registro ampliado a 301 materiales / 280 emojis de aplicación (270 PNG y diez GIF): todos sincronizados, sin fallos, con verificación de la aplicación al arrancar. No se sustituyó la tipografía local ni la protección del nodo privado. El cambio aislado de optimización PNG de `image-service/assets/godwhy/godwhy.png` está integrado en Git; el servicio de imágenes mantiene su imagen anterior porque su funcionamiento no cambia.
+
+494 pruebas aprobadas; Chromium verifica el panel musical con EJS y scripts reales, transporte simulado y sin errores. La consulta real al nodo/proveedor devuelve diez pistas, un candidato distinto de autoplay y 58 líneas sincronizadas. Se conservó la corrección del fin de pista: el identificador de reproducción es autoritativo aunque el proveedor cambie el encoding. Se ignoran eventos cleanup, se limita/cancela la espera de autoplay y se rechazan sustituciones musicales no relacionadas.
+
+El mensaje de letras existente en THZ volvió a editarse tras el despliegue y queda en espera de la próxima canción; su activación e identificadores ahora se guardan y recuperan después de reiniciar. La web mantiene visible el verso activo. No había reproducción activa en THZ en la comprobación final: la coincidencia audible entre verso y voz y una transición natural con recomendación siguen pendientes de una canción real; no se deducen de los tests ni de la conexión al nodo.
+
+Limpieza: 4.53 GB de temporales y extracción antigua, tres worktrees obsoletos y 17 etiquetas antiguas del bot retirados. Cambios de las dos copias antiguas conservados en stashes locales. Se conservan la fuente del ZIP del 15/10, datos/configuraciones activas y una imagen anterior para respaldo. Recuperación vigente: `.runtime/bot-recovery-public-only.yml`, fijada a la imagen nueva. [Detalle de integración y evidencia](LATEST-PACKAGE.md).
+
 ## Letras y autoplay · 15 de octubre de 2026
 
 Nuevo ZIP actualizado extraído íntegramente en `/home/OBEY_Documentacion_actualizada_2026-10-15`, SHA-256 `ca088d85cdf3a062216043dd87629de1297325dab7515b06b5eefac01c963668`, 4130 entradas / 152563722 bytes; comprimido eliminado. Su auditoría base del 10/10 es histórica y no sustituye el estado vigente ni cierra los 32 contratos.

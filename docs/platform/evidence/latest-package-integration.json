@@ -1,0 +1,32 @@
+{
+  "code": "078a55b86bebcf672f917eab6901380d67e6708a",
+  "zipSha256": "ca088d85cdf3a062216043dd87629de1297325dab7515b06b5eefac01c963668",
+  "zipEntries": 4130,
+  "source": "/home/OBEY_Documentacion_actualizada_2026-10-15/OBEY_Documentacion",
+  "patchBase": "9f11a850d68a558e32f76f54c725d8ccdc70fda4",
+  "integratedChangedFiles": 1252,
+  "syntaxCheckedJavaScriptFiles": 723,
+  "verifiedBotImageFiles": 1246,
+  "tests": {
+    "tests": 494,
+    "pass": 494,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "emojis": {
+    "mapped": 280,
+    "animated": 10,
+    "static": 270,
+    "failed": 0
+  },
+  "exclusions": [
+    "Previously removed NSFW commands and setup",
+    "Removed Fun generators and missing deleted files",
+    "Adult-themed decorative icon",
+    "Older implementations conflicting with public-node and playback-clock fixes"
+  ],
+  "preservedPriorLocalEntries": 16,
+  "liveVoicePlaybackTestedThisRelease": false
+}

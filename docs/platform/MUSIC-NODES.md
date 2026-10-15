@@ -22,7 +22,7 @@ La prueba autorizada por el usuario en THZ usó VC1 (canal vacío disponible), c
 
 ## Material actualizado
 
-ZIP SHA-256 `582121c92cf9454bdbc4c86326a47c8470ab5356d09abf0abfae3f847a8553ed`, 1368 archivos verificados en `/home/OBEY_Documentacion_actualizada_2026-10-14`; ZIP eliminado tras extracción/integridad. Validadores del paquete: 32 contratos, 492 referencias de archivos y 2149 enlaces locales correctos, más cobertura de Adaptación al servidor. La carpeta anterior se conserva; la actual guía la continuación. No se copió el paquete entero al dashboard ni se sustituyen datos del bot por sus fixtures.
+ZIP SHA-256 `582121c92cf9454bdbc4c86326a47c8470ab5356d09abf0abfae3f847a8553ed`, 1368 archivos verificados en `/home/OBEY_Documentacion_actualizada_2026-10-14`; ZIP eliminado tras extracción/integridad. Validadores del paquete: 32 contratos, 492 referencias de archivos y 2149 enlaces locales correctos, más cobertura de Adaptación al servidor. Esta extracción fue reemplazada por el ZIP del 15/10 y se eliminó durante la limpieza; la fuente vigente está descrita en LATEST-PACKAGE.md. No se copió el paquete entero al dashboard ni se sustituyen datos del bot por sus fixtures.
 
 La ampliación exige reutilizar recursos por ID/propósito, scopes y diagnóstico, sin apropiarse de canales/roles ajenos ni inventar integración con otros bots. Continúa sobre las bases compartidas y los consumidores actuales; las 16 entradas locales previas de Architect/evidencias permanecen fuera de esta entrega.
 

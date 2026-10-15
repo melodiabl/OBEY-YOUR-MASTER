@@ -1,0 +1,28 @@
+{
+  "scope": "Unused release tags belonging only to OBEY bot; current and previous release retained",
+  "removedCount": 17,
+  "removed": [
+    "localhost/obey-your-master_bot:release-music-final-20261015",
+    "localhost/obey-your-master_bot:release-music-acceptance-20261015",
+    "localhost/obey-your-master_bot:release-music-sync-final-20261015",
+    "localhost/obey-your-master_bot:release-music-sync-20261015",
+    "localhost/obey-your-master_bot:release-public-final-20261014",
+    "localhost/obey-your-master_bot:release-public-only-20261014",
+    "localhost/obey-your-master_bot:release-nodes-final-20261014",
+    "localhost/obey-your-master_bot:release-nodes-20261014",
+    "localhost/obey-your-master_bot:release-fun-clean-20261014",
+    "localhost/obey-your-master_bot:release-no-nsfw-20261014",
+    "localhost/obey-your-master_bot:release-panel-20261014",
+    "localhost/obey-your-master_bot:release-d840e4f",
+    "localhost/obey-your-master_bot:candidate-20261003",
+    "localhost/obey-your-master_bot:rollback-20261003",
+    "localhost/obey-your-master_bot:rollback-20261003-before-panel",
+    "localhost/obey-your-master_bot:rollback-20261013",
+    "localhost/obey-your-master_bot:rollback-panel-20261014"
+  ],
+  "preserved": [
+    "localhost/obey-your-master_bot:latest",
+    "localhost/obey-your-master_bot:release-package-20261015",
+    "localhost/obey-your-master_bot:release-queue-finish-20261015"
+  ]
+}
