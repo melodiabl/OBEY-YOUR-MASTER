@@ -90,3 +90,30 @@ test('changing timescale reanchors the clock without jumping and reports its rat
   assert.equal(client.music.getPublicState('events-timescale').current.elapsed, 3600)
   assert.equal(client.music.getPublicState('events-timescale').clockRunning, false)
 })
+
+test('a natural end with the current playback identity advances even if the public node rewrites the encoding', async () => {
+  const { client, player, state } = fixture('events-node-reencoding')
+  state.currentTrack = { encoded: 'submitted-encoding', info: { title: 'First', length: 10000 } }
+  state.playbackId = 'current-playback'
+  state.queue = [{ encoded: 'second', info: { title: 'Second', length: 10000 } }, { encoded: 'third', info: { title: 'Third', length: 10000 } }]
+  const ended = { reason: 'finished', track: { encoded: 'node-returned-encoding', userData: { obeyPlaybackId: 'current-playback' } } }
+  player.emit('end', ended)
+  await settle()
+  assert.equal(state.currentTrack.info.title, 'Second')
+  assert.equal(state.queue.length, 1)
+  player.emit('end', ended)
+  await settle()
+  assert.equal(state.currentTrack.info.title, 'Second')
+  assert.equal(state.queue[0].info.title, 'Third')
+})
+
+test('a late event with an old playback identity is rejected even when its encoding is identical', async () => {
+  const { player, state } = fixture('events-replay-identity')
+  state.currentTrack = { encoded: 'same-recording', info: { title: 'Replay', length: 10000 } }
+  state.playbackId = 'new-replay'
+  state.queue = [{ encoded: 'next', info: { title: 'Next', length: 10000 } }]
+  player.emit('end', { reason: 'finished', track: { encoded: 'same-recording', userData: { obeyPlaybackId: 'old-replay' } } })
+  await settle()
+  assert.equal(state.currentTrack.info.title, 'Replay')
+  assert.equal(state.queue.length, 1)
+})

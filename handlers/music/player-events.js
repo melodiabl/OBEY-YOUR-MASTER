@@ -5,7 +5,9 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
   const isCurrent = data => {
     if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return false
     const eventId = data?.track?.userData?.obeyPlaybackId
-    if (eventId && eventId !== getState(guildId).playbackId) return false
+    // Nodes may return a new encoding for the same playback (e.g. after resume).
+    // Our per-play UUID identifies it; encoding is only a fallback for legacy events.
+    if (eventId) return eventId === getState(guildId).playbackId
     const encoded = data?.track?.encoded || (typeof data?.track === 'string' ? data.track : null)
     return !encoded || encoded === getState(guildId).currentTrack?.encoded
   }
@@ -20,8 +22,11 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     if (['replaced', 'stopped'].includes(data?.reason)) return
     if (!isCurrent(data)) { console.warn('[Music] Ignored end event:', data?.reason, 'playbackMatches=', !data?.track?.userData?.obeyPlaybackId || data.track.userData.obeyPlaybackId === getState(guildId).playbackId, 'trackMatches=', data?.track?.encoded === getState(guildId).currentTrack?.encoded); return }
     enqueueEvent(data, async () => {
+      const before = getState(guildId), playbackId = before.playbackId, queuedBefore = before.queue.length
       if (data?.reason === 'loadFailed') await client.music._recoverFailedTrack(guildId, player, 'loadFailed')
       else await client.music._playNext(guildId, player)
+      const after = getState(guildId)
+      console.info('[Music] Playback transition:', JSON.stringify({ guildId, reason: data?.reason, queuedBefore, queuedAfter: after.queue.length, playbackChanged: after.playbackId !== playbackId, active: Boolean(after.currentTrack) }))
     })
   })
   player.on('start', data => {
@@ -31,6 +36,7 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     state.lastPosition = options.position || 0; state.paused = Boolean(options.paused)
     state.startedAt = state.paused ? null : Date.now() - state.lastPosition
     state.status = state.paused ? 'paused' : 'playing'
+    console.info('[Music] Playback started:', JSON.stringify({ guildId, queued: state.queue.length, resumed: state.lastPosition > 0 }))
     emitState(guildId)
     if (state.currentTrack) client.music.sendNowPlaying(guildId, state.currentTrack)
       .catch(error => console.error(`[Music] Panel update failed (${guildId}):`, error.message))
