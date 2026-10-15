@@ -37,8 +37,10 @@ module.exports = async (client, guildId, file) => {
     music.sendNowPlaying = (id, ...args) => id === guildId ? Promise.resolve() : oldSend.call(music, id, ...args)
     setup.resetToIdle = (c, id, ...args) => id === guildId ? Promise.resolve() : oldIdle(c, id, ...args)
     modified = true
+    report.phase = 'seed_search'
     const result = await music.search('ytsearch:Rick Astley Never Gonna Give You Up', { id: 'autoplay-release-check', username: 'Verificación' }, { guildId })
     assert.ok(result?.tracks?.[0]?.encoded, 'seed_unavailable')
+    report.phase = 'seed_playback'
     await music.joinChannel(guildId, channel.id, null)
     await music.setVolume(guildId, 0)
     music.setAutoplay(guildId, true)
@@ -46,14 +48,16 @@ module.exports = async (client, guildId, file) => {
     await until(native, value => value?.state?.connected && value.volume === 0 && value.state.position >= 2000)
     const seed = music.getState(guildId).currentTrack, info = seed.info || seed
     assert.ok(info.length > 10000 && !info.isStream, 'seed_not_seekable')
+    report.phase = 'natural_end'
     await music.seek(guildId, info.length - 1000)
-    const next = await until(native, value => value?.state?.connected && value.volume === 0 && value.state.position >= 2000 &&
+    const next = await until(native, value => value?.state?.connected && value.volume === 0 && value.state.position >= 2000 && value.track?.userData?.obeyPlaybackId === music.getState(guildId).playbackId && value.track?.info?.uri !== info.uri &&
       music.getState(guildId).currentTrack !== seed && music.getState(guildId).currentTrack?.info?.requester === 'Autoplay')
+    report.phase = 'new_recording_confirmed'
     assert.notEqual(next.track.info.uri, info.uri)
     assert.equal(music.getState(guildId).queue.length, 0)
     report.status = 'passed'; report.nodeId = client.shoukaku.players.get(guildId).node.name
     report.naturalEnd = true; report.newRecording = true; report.queueEmpty = true; report.position = next.state.position
-  } catch (error) { report.status = 'failed'; report.error = /^\w+$/.test(error.message) ? error.message : 'autoplay_live_check_failed' }
+  } catch (error) { report.status = 'failed'; report.errorCode = error.code || error.name; report.error = /^\w+$/.test(error.message) ? error.message : 'autoplay_live_check_failed' }
   finally {
     if (modified) {
       try {
