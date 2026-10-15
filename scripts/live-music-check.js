@@ -14,6 +14,7 @@ function emptyChannel(channel, botId) {
 }
 
 module.exports = async function liveMusicCheck(client, phase, stateFile) {
+  if (phase === 'autoplay') return require('./autoplay-music-check')(client, process.env.OBEY_CHECK_GUILD_ID, stateFile)
   if (phase === 'public-nodes') return require('./public-music-check')(client, process.env.OBEY_CHECK_GUILD_ID, stateFile)
   assert.ok(['prepare', 'finish'].includes(phase), 'Invalid release check phase')
   assert.ok(stateFile, 'Release check needs a private state file')

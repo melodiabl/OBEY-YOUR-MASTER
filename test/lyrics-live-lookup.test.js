@@ -96,3 +96,25 @@ test('only the latest simultaneous lookup can create a live session', async () =
     assert.equal(live.isActive(f.guildId), true)
   })
 })
+
+test('live lyrics follow the shared clock, keep introductions clear and avoid duplicate edits', async t => {
+  t.mock.timers.enable({ apis: ['Date', 'setInterval'], now: 10000 })
+  const f = fixture('live-replay-lookup'), edits = []
+  Object.assign(f.state, { status: 'playing', startedAt: 10000, lastPosition: 0 })
+  f.channel.send = async payload => {
+    f.sent.push(payload)
+    return { id: 'message', edit: async payload => edits.push(payload), delete: async () => {} }
+  }
+  await withLive(async () => ({ lines: [{ ms: 1000, text: 'First' }, { ms: 4000, text: 'Second' }] }), async live => {
+    assert.equal((await live.start(f.client, f.guildId)).ok, true)
+    assert.equal(f.sent[0].embeds[0].toJSON().description.includes('**➤'), false)
+    t.mock.timers.tick(1000); await flush()
+    assert.equal(edits.length, 1)
+    assert.ok(edits[0].embeds[0].toJSON().description.includes('**➤ First**'))
+    t.mock.timers.tick(1000); await flush(); assert.equal(edits.length, 1)
+    f.state.paused = true; f.state.lastPosition = 4000
+    t.mock.timers.tick(1000); await flush()
+    assert.ok(edits[1].embeds[0].toJSON().description.includes('**➤ Second**'))
+    t.mock.timers.tick(10000); await flush(); assert.equal(edits.length, 2)
+  })
+})

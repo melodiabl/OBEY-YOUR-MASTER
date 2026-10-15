@@ -20,7 +20,7 @@ module.exports = {
 
     await interaction.deferReply()
 
-    let title, artist
+    let title, artist, options = {}
     let isCurrent = () => true
     const query = interaction.options.getString('cancion')
 
@@ -37,17 +37,18 @@ module.exports = {
         const latest = client.music?.getState(interaction.guild.id)
         return latest?.currentTrack === track && latest.playbackId === playbackId && latest.sessionId === sessionId
       }
+      options = client.music.getLyricsOptions?.(interaction.guild.id) || { durationMs: (track.info || track).length }
       const info = track.info || track
       title  = info.title  || track.title  || ''
       artist = info.author || track.author || ''
-      title = title.replace(/\(Official\s*(Music|Audio|Video|Lyric\s*Video)?\s*\)/gi, '').replace(/\[.*?\]/g, '').trim()
+      title = title.replace(/\(Official\s*(Music|Audio|Video|Lyric\s*Video)?\s*\)/gi, '').trim()
     }
 
     if (!title) return interaction.editReply({ embeds: [err('❌ No se pudo obtener el título de la canción.')] })
 
     let lyrics = null
-    try { lyrics = await lyricsProvider.fetchLyrics(title, artist) } catch {}
-    if (!lyrics) { try { lyrics = await lyricsProvider.fetchLyrics(title, '') } catch {} }
+    try { lyrics = await lyricsProvider.fetchLyrics(title, artist, options) } catch {}
+    if (!lyrics) { try { lyrics = await lyricsProvider.fetchLyrics(title, '', options) } catch {} }
 
     if (!lyrics) {
       return interaction.editReply({ embeds: [err(`❌ No se encontraron letras para **${title}**${artist ? ` — ${artist}` : ''}.`)] })

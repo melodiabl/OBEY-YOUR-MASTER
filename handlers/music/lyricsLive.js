@@ -9,12 +9,13 @@ const { fetchLyrics, getLyricContext } = require('./lyrics')
 const { config } = require('./config')
 
 const DISK = 'https://cdn.darrennathanael.com/icons/spinning_disk.gif'
-const TICK_MS = 2500
+const TICK_MS = 500
+const clock = require('./playback-clock')
 const pendingStarts = new Map()
 const sessions = new Map() // guildId -> { messageId, channelId, lines, timer, trackKey }
 
 function trackKey(info) { return info?.identifier || info?.uri || info?.title || '' }
-function livePos(st) { return st?.startedAt && !st.paused ? Date.now() - st.startedAt : (st?.lastPosition || 0) }
+function livePos(state) { return clock.position(state) }
 
 function renderEmbed(info, lines, pos) {
   const e = new EmbedBuilder()
@@ -35,7 +36,7 @@ function renderEmbed(info, lines, pos) {
     const text = l.text || '♪'
     return active ? `**➤ ${text}**` : `​ ${text}`
   }).join('\n')
-  return e.setDescription(body || '♪').setFooter({ text: `Línea ${idx + 1}/${lines.length} · sincronizado` })
+  return e.setDescription(body || '♪').setFooter({ text: idx < 0 ? 'Introducción · sincronizado' : `Línea ${idx + 1}/${lines.length} · sincronizado` })
 }
 
 function isActive(guildId) { return sessions.has(guildId) || pendingStarts.has(guildId) }
@@ -69,7 +70,7 @@ async function start(client, guildId) {
       const latest = client.music?.getState(guildId)
       return pendingStarts.get(guildId) === request && latest?.currentTrack === requestedTrack && latest.playbackId === playbackId && latest.sessionId === sessionId && latest.textChannelId === channelId
     }
-    const result = await fetchLyrics(info.title, info.author).catch(() => null)
+    const result = await fetchLyrics(info.title, info.author, client.music?.getLyricsOptions?.(guildId) || { durationMs: info.length }).catch(() => null)
     const lines = result?.lines || []
     if (!isCurrent()) return { ok: false, reason: 'track_changed' }
     if (!lines.length) return { ok: false, reason: result?.plain ? 'no_sync' : 'not_found', plain: result?.plain }
@@ -77,14 +78,15 @@ async function start(client, guildId) {
     clearSession(guildId, client)
     const channel = client.channels.cache.get(channelId)
     if (!channel) return { ok: false, reason: 'no_channel' }
-    const msg = await channel.send({ embeds: [renderEmbed(info, lines, livePos(state))], allowedMentions: { parse: [] } }).catch(() => null)
+    const initialEmbed = renderEmbed(info, lines, livePos(state))
+    const msg = await channel.send({ embeds: [initialEmbed], allowedMentions: { parse: [] } }).catch(() => null)
     if (!msg) return { ok: false, reason: 'send_fail' }
     if (!isCurrent()) {
       await msg.delete().catch(() => {})
       return { ok: false, reason: 'track_changed' }
     }
 
-    const sess = { messageId: msg.id, channelId: channel.id, lines, timer: null, trackKey: trackKey(info) }
+    const sess = { messageId: msg.id, channelId: channel.id, lines, timer: null, trackKey: trackKey(info), lastPayload: JSON.stringify(initialEmbed.toJSON()), lastEditAt: Date.now() }
     sessions.set(guildId, sess)
 
     sess.timer = setInterval(async () => {
@@ -98,14 +100,18 @@ async function start(client, guildId) {
         // Cambió de canción → recargar letras en el MISMO mensaje (no borrar)
         if (trackKey(cur) !== sess.trackKey) {
           const requestedKey = trackKey(cur), requestedTrack = st.currentTrack, playbackId = st.playbackId
-          const r = await fetchLyrics(cur.title, cur.author).catch(() => null)
+          const r = await fetchLyrics(cur.title, cur.author, client.music?.getLyricsOptions?.(guildId) || { durationMs: cur.length }).catch(() => null)
           const latest = client.music?.getState(guildId)?.currentTrack
           if (sessions.get(guildId) !== sess || latest !== requestedTrack || client.music?.getState(guildId)?.playbackId !== playbackId) return
           sess.trackKey = requestedKey
           sess.lines = r?.lines || []
         }
         if (sessions.get(guildId) !== sess) return
-        await msg.edit({ embeds: [renderEmbed(cur, sess.lines, livePos(st))] }).catch(() => {})
+        const embed = renderEmbed(cur, sess.lines, livePos(st))
+        const payload = JSON.stringify(embed.toJSON())
+        if (payload === sess.lastPayload || Date.now() - sess.lastEditAt < 1000) return
+        await msg.edit({ embeds: [embed] })
+        sess.lastPayload = payload; sess.lastEditAt = Date.now()
       } catch (error) { console.warn('[Music] Lyrics update:', error.message) }
       finally { sess.busy = false }
     }, TICK_MS)

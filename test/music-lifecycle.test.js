@@ -62,3 +62,31 @@ test('paused player updates cannot erase the saved position with an initial zero
   player.emit('update', { state: { position: 0, time: Date.now() } })
   assert.equal(client.music.getPublicState('paused-update-offset').current.elapsed, 42000)
 })
+
+test('public nodes with a different wall clock can still correct the playback position after seek', () => {
+  const { client, player, state } = fixture('events-node-clock')
+  state.currentTrack = { encoded: 'track', info: { length: 180000 } }
+  Object.assign(state, { status: 'playing', startedAt: Date.now() - 10000, lastPosition: 10000, positionChangeAt: Date.now(), lastPlayerUpdateTime: 0 })
+  player.emit('update', { state: { position: 11000, time: Date.now() - 120000 } })
+  assert.equal(state.lastPosition, 11000)
+  player.emit('update', { state: { position: 100, time: state.lastPlayerUpdateTime - 1 } })
+  assert.equal(state.lastPosition, 11000)
+  assert.ok(client.music.getPublicState('events-node-clock').current.elapsed >= 11000)
+})
+
+test('changing timescale reanchors the clock without jumping and reports its rate to the web', async t => {
+  t.mock.timers.enable({ apis: ['Date'], now: 10000 })
+  const { client, player, state } = fixture('events-timescale')
+  state.currentTrack = { encoded: 'track', info: { length: 180000 } }
+  Object.assign(state, { status: 'playing', startedAt: 9000, lastPosition: 1000 })
+  player.setFilters = async () => {}
+  player.setPaused = async () => {}
+  await client.music.setFilter('events-timescale', 'nightcore')
+  t.mock.timers.tick(2000)
+  assert.equal(client.music.getPublicState('events-timescale').current.elapsed, 3600)
+  assert.equal(client.music.getPublicState('events-timescale').playbackRate, 1.3)
+  await client.music.pause('events-timescale')
+  t.mock.timers.tick(2000)
+  assert.equal(client.music.getPublicState('events-timescale').current.elapsed, 3600)
+  assert.equal(client.music.getPublicState('events-timescale').clockRunning, false)
+})

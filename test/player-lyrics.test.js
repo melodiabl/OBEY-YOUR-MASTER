@@ -34,3 +34,10 @@ test('closing, idle, provider failures and retry leave no stale lyrics',async()=
  controller.receive({active:false});assert.equal(view.status,'idle')
  controller.close();assert.equal(view.open,false)
 })
+test('the web lyrics clock respects playback rate and freezes while the player is recovering', async () => {
+ let now=0,view
+ const controller=create({load:async()=>({status:'ready',sessionId:'s',playbackId:1,mode:'synced',text:'a\nb',lines:[{ms:0,text:'a'},{ms:2500,text:'b'}]}),render:v=>{view=v},now:()=>now})
+ controller.receive({...state(),playbackRate:1.5,clockRunning:true});await controller.open()
+ now=2000;controller.tick();assert.equal(view.activeLine,1)
+ controller.receive({...state(1,1000),playbackRate:1.5,clockRunning:false});now=9000;controller.tick();assert.equal(view.activeLine,0)
+})

@@ -31,6 +31,7 @@ test('pause and resume emit a synchronized public player state', async () => {
       sourceName: 'youtube',
     },
   }
+  state.status = 'playing'
   state.startedAt = Date.now() - player.position
 
   const pauseEvent = once(client, 'playerStateUpdate')

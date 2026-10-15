@@ -1,0 +1,10 @@
+{
+  "scope": "Live public HTTP only; no Discord voice or messages",
+  "node": "nazha",
+  "searchTracks": 10,
+  "autoplayCandidate": true,
+  "differentRecording": true,
+  "lyricsStatus": "ready",
+  "syncedLines": 58,
+  "pluginSupported": true
+}

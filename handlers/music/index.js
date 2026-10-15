@@ -6,6 +6,7 @@ const MusicHistory = require('../../database/schemas/MusicHistorySchema')
 const { playerStates, liveMessages, liveTimers, getState, resetState } = require('./state')
 const { normalizePublicTrack, tracksFromResolve, clampMs } = require('./utils')
 const { FILTER_PRESETS, FILTER_RESET } = require('./filters')
+const clock = require('./playback-clock')
 const { buildNPEmbed, buildControls, buildQueueEmbed, buildQueueRows } = require('./embeds')
 const { toggleLike, buildLikeEmbed } = require('./likes')
 const { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate } = require('./liveupdate')
@@ -48,6 +49,8 @@ module.exports = client => {
     state.playbackId = require('node:crypto').randomUUID()
     state.playbackOptions = { position: options.position || 0, paused: Boolean(options.paused) }
     state.status = 'loading'
+    clock.anchor(state, options.position || 0)
+    state.lastPlayerUpdateTime = 0
     state.positionChangeAt = Date.now()
     return player.playTrack({ ...options, track: { encoded, userData: { obeyPlaybackId: state.playbackId } } })
   }
@@ -97,8 +100,7 @@ module.exports = client => {
     const player = syncState(guildId, state)
     const len = Number((state.currentTrack?.info || state.currentTrack)?.length || 0)
     if (positionMs !== null && Number.isFinite(Number(positionMs))) return clampMs(positionMs, len)
-    if (state.paused) return clampMs(state.lastPosition ?? player?.position ?? 0, len)
-    if (state.startedAt) return clampMs(Date.now() - state.startedAt, len)
+    if (state.startedAt || state.lastPosition != null) return clock.position(state)
     return clampMs(player?.position || 0, len)
   }
 
@@ -117,6 +119,8 @@ module.exports = client => {
       revision:       state.revision,
       status:         state.paused ? 'paused' : state.status,
       paused:         Boolean(state.paused),
+      playbackRate:   clock.rate(state),
+      clockRunning:   clock.running(state),
       loop:           state.loop || 'none',
       volume:         state.volume ?? 100,
       autoplay:       Boolean(state.autoplay),
@@ -163,6 +167,12 @@ module.exports = client => {
   client.music = {
     getState,
     getPublicState: serializeState,
+    getLyricsOptions(guildId) {
+      const track = getState(guildId).currentTrack
+      const info = track?.info || track
+      const node = client.shoukaku?.players?.get(guildId)?.node
+      return { node, encoded: track?.encoded, durationMs: info?.length, albumName: info?.albumName || track?.pluginInfo?.albumName, lyricsPlugin: client.nodePool?.supportsPlugin(node?.name, 'lavalyrics') }
+    },
     playerStates,
     liveMessages,
 
@@ -225,6 +235,7 @@ module.exports = client => {
         filters = { ...FILTER_RESET, timescale: { speed: 1, pitch: 1, rate: 1, ...player.filters?.timescale, [parameter]: value } }
       }
       await player.setFilters(filters)
+      clock.anchor(state, elapsedForState(guildId, state))
       state.filter = 'custom'
       state.customFilters = filters
       emitState(guildId)
@@ -291,42 +302,35 @@ module.exports = client => {
 
       if (!next) {
         if (state.autoplay && state.currentTrack) {
-          const seed = state.currentTrack?.info || state.currentTrack
-          const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9áéíóúñü]+/gi, ' ').trim()
-          const recentTracks = [state.currentTrack, ...state.history].map(t => t?.info || t).filter(Boolean)
-          const playedUris   = new Set(recentTracks.map(t => t.uri).filter(Boolean))
-          const playedTitles = new Set(recentTracks.map(t => norm(t.title)).filter(Boolean))
-          try {
-            const node = getNode(guildId)
-            // Buscar por artista (no por título: devolvería la misma canción en bucle)
-            const queries = [
-              `ytsearch:${seed.author || seed.title}`,
-              `ytsearch:${seed.title} ${seed.author || ''} mix`,
-            ]
-            let candidates = []
-            for (const q of queries) {
-              const res = await node.rest.resolve(q).catch(() => null)
-              candidates.push(...tracksFromResolve(res))
-            }
-            candidates = candidates.filter(t =>
-              allowedMusicTrack(t) && t.encoded && t.info?.uri &&
-              !playedUris.has(t.info.uri) &&
-              !playedTitles.has(norm(t.info.title))
-            )
-            const pick = candidates[Math.floor(Math.random() * Math.min(8, candidates.length))] || candidates[0]
-            if (pick) {
-              if (pick.info) pick.info.requester = state.radioMode ? 'Radio' : 'Autoplay'
-              state.history.unshift(state.currentTrack); if (state.history.length > 10) state.history.pop()
-              state.currentTrack = pick; state.startedAt = Date.now(); state.lastPosition = 0; state.paused = false
-              rememberTrack(guildId, pick)
-              await playQueuedTrack(guildId, player, state, pick.encoded)
-              emitState(guildId)
-              return
-            }
-            console.warn(`[Music] Autoplay sin candidatos para "${seed.title}" (${guildId})`)
-          } catch (e) {
-            console.error('[Music] Autoplay error:', e?.message || e)
+          const seed = state.currentTrack, playbackId = state.playbackId, stopEpoch = state.stopRequestEpoch || 0
+          const isCurrent = () => playerStates.get(guildId) === state && state.currentTrack === seed &&
+            state.playbackId === playbackId && (state.stopRequestEpoch || 0) === stopEpoch && state.status !== 'stopping' && !client._shuttingDown &&
+            client.shoukaku.players.get(guildId) === player
+          state.lastPosition = elapsedForState(guildId, state)
+          state.startedAt = null; state.status = 'loading'
+          emitState(guildId)
+          let pick
+          state.autoplaySearching = true
+          try { pick = await require('./autoplay').findAutoplayTrack(this, guildId, seed, state.history, () => isCurrent() && state.autoplay && !state.queue.length && !state.pendingEnqueues) }
+          finally { state.autoplaySearching = false }
+          if (!isCurrent()) return
+          if (state.pendingEnqueues) {
+            state.history.unshift(seed); if (state.history.length > 10) state.history.pop()
+            state.currentTrack = null; state.lastPosition = 0
+            emitState(guildId)
+            return
           }
+          if (state.queue.length) return this._playNext(guildId, player, { rotate: false })
+          if (pick && state.autoplay) {
+            pick.info.requester = state.radioMode ? 'Radio' : 'Autoplay'
+            state.history.unshift(seed); if (state.history.length > 10) state.history.pop()
+            state.currentTrack = pick; state.lastPosition = 0; state.paused = false
+            rememberTrack(guildId, pick)
+            await playQueuedTrack(guildId, player, state, pick.encoded)
+            emitState(guildId)
+            return
+          }
+          console.warn('[Music] Autoplay: no playable new candidates')
         }
 
         state.currentTrack = null; state.startedAt = null; state.lastPosition = 0; state.paused = false
@@ -360,6 +364,8 @@ module.exports = client => {
 
     async _recoverFailedTrack(guildId, player, errorMessage) {
       const state  = getState(guildId)
+      state.lastPosition = elapsedForState(guildId, state)
+      state.startedAt = null
       state.status = 'recovering'
       emitState(guildId)
       const failed = state.currentTrack
@@ -461,15 +467,10 @@ module.exports = client => {
       if (!player) return
       const state      = getState(guildId)
       const nextPaused = !state.paused
-      // player.position es un snapshot stale (Lavalink lo refresca cada ~5s);
-      // la posición viva es Date.now() - startedAt, mantenida por el evento 'update'
-      const position = nextPaused
-        ? (state.startedAt ? Date.now() - state.startedAt : Number(player.position || 0))
-        : Number(state.lastPosition || player.position || 0)
+      const position = elapsedForState(guildId, state)
       await player.setPaused(nextPaused)
       state.paused = nextPaused
-      if (nextPaused) state.lastPosition = position
-      else state.startedAt = Date.now() - position
+      clock.anchor(state, position)
       emitState(guildId)
       return state.paused
     },
@@ -611,13 +612,9 @@ module.exports = client => {
       const player = client.shoukaku?.players?.get(guildId)
       if (!player) throw new Error('No hay reproductor activo.')
       const state = getState(guildId)
-      if (preset === 'off' || FILTER_PRESETS[preset] === null) {
-        await player.setFilters(FILTER_RESET)
-        state.filter = 'off'
-      } else {
-        await player.setFilters({ ...FILTER_RESET, ...FILTER_PRESETS[preset] })
-        state.filter = preset
-      }
+      await player.setFilters({ ...FILTER_RESET, ...(FILTER_PRESETS[preset] || {}) })
+      clock.anchor(state, elapsedForState(guildId, state))
+      state.filter = preset
       emitState(guildId)
       return state.filter
     },
@@ -765,7 +762,15 @@ module.exports = client => {
     const operation = client.music[name]
     if (typeof operation !== 'function') continue
     client.music[name] = function (guildId, ...args) {
+      const state = getState(guildId)
+      if (name === 'stop') {
+        state.requestEpoch = (state.requestEpoch || 0) + 1
+        state.stopRequestEpoch = (state.stopRequestEpoch || 0) + 1
+      }
+      const waitingEnqueue = name === 'enqueue' && state.autoplaySearching && Array.isArray(args[0]) && args[0].length > 0 && args[0].every(allowedMusicTrack)
+      if (waitingEnqueue) state.pendingEnqueues = (state.pendingEnqueues || 0) + 1
       return actions.run(guildId, () => operation.call(this, guildId, ...args))
+        .finally(() => { if (waitingEnqueue) state.pendingEnqueues-- })
     }
   }
 

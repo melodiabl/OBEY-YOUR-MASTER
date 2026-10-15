@@ -875,13 +875,8 @@ module.exports = async client => {
       realtime.publish(guildId, 'player:tick', () => {
         const current = music.playerStates.get(guildId)
         if (!current?.currentTrack || current.paused) return null
-        const player = client.shoukaku?.players?.get(guildId)
-        const info = current.currentTrack.info || current.currentTrack
-        const len = Number(info.length || 0)
-        const elapsed = current.startedAt
-          ? Math.min(len, Date.now() - current.startedAt)
-          : Math.min(len, Number(player?.position ?? current.lastPosition ?? 0))
-        return { guildId, sessionId: current.sessionId, revision: current.revision, elapsed, length: len }
+        const snapshot = music.getPublicState(guildId)
+        return { ...snapshot, guildId, elapsed: snapshot.current?.elapsed || 0, length: snapshot.current?.length || 0 }
       })
     }
   }, 2000)

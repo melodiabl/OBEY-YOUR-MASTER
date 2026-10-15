@@ -1,3 +1,4 @@
+const clock = require('./playback-clock')
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { trackArtwork, fmtMs, progressBar, platform, loopEmoji, volEmoji, filterLabel, MUSIC_ICON } = require('./utils')
 const { config } = require('../music/config')
@@ -26,11 +27,7 @@ function buildNPEmbed(client, guildId, state, positionMs = null) {
 
   const plat = platform(info.catalogUri || info.uri || '', info.catalogSourceName || info.sourceName || '')
 
-  const pos = positionMs !== null
-    ? positionMs
-    : state.startedAt && !state.paused
-      ? Math.min(dur, Date.now() - state.startedAt)
-      : (state.lastPosition || 0)
+  const pos = positionMs !== null ? positionMs : clock.position(state)
 
   const bar    = progressBar(pos, dur)
   const active = filterLabel(state.filter)
@@ -43,7 +40,7 @@ function buildNPEmbed(client, guildId, state, positionMs = null) {
   if (state.radioMode) indicators.push('📻 Radio')
 
   const titleLine  = linkUri ? `[${title}](${linkUri})` : title
-  const finishText = isStream ? '🔴 LIVE' : `<t:${Math.floor((Date.now() + (dur - pos)) / 1000)}:R>`
+  const finishText = isStream ? '🔴 LIVE' : `<t:${Math.floor((Date.now() + (dur - pos) / clock.rate(state)) / 1000)}:R>`
 
   const embed = new EmbedBuilder()
     .setColor(state.paused ? 0x4f545c : plat.color)

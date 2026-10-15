@@ -42,8 +42,8 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     if (!state?.currentTrack || !Number.isFinite(position) || !['playing', 'paused'].includes(state.status)) return
     if (state.paused) return
     const timestamp = Number(data?.state?.time)
-    if (Number.isFinite(timestamp) && timestamp < Math.max(state.lastPlayerUpdateTime || 0, state.positionChangeAt || 0)) return
-    const expected = state.startedAt ? Date.now() - state.startedAt : state.lastPosition
+    if (Number.isFinite(timestamp) && timestamp < (state.lastPlayerUpdateTime || 0)) return
+    const expected = elapsedForState(guildId, state)
     if (state.positionChangeAt && Date.now() - state.positionChangeAt < 5000 && Math.abs(position - expected) > 5000) return
     if (Number.isFinite(timestamp)) state.lastPlayerUpdateTime = timestamp
     state.lastPosition = position
@@ -62,9 +62,9 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return
     stopLiveUpdate(guildId)
     const state = getState(guildId)
+    state.lastPosition = elapsedForState(guildId, state)
     state.status = 'recovering'
     state.reconnectVoice = true
-    state.lastPosition = elapsedForState(guildId, state)
     state.startedAt = null
     liveMessages.delete(guildId)
     emitState(guildId)

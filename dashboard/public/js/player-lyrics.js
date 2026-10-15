@@ -1,8 +1,8 @@
 (function (root) {
   function createPlayerLyrics({ load, render, now = Date.now }) {
     let opened = false, connected = true, denied = false, follow = true, fullText = false
-    let key = '', latest = null, result = null, generation = 0, status = 'idle', page = 0
-    let elapsed = 0, syncedAt = now(), paused = true, activeLine = -1
+    let key = '', latest = null, result = null, generation = 0, status = 'idle', page = 0, received = 0
+    let elapsed = 0, syncedAt = now(), paused = true, playbackRate = 1, activeLine = -1
     const identity = state => state?.active && state.current
       ? JSON.stringify([state.sessionId, state.playbackId, state.current.identifier || state.current.uri || state.current.title]) : ''
     function projection() {
@@ -15,7 +15,7 @@
     const draw = () => render(projection())
     function tick() {
       if (!opened || status !== 'ready' || result?.mode !== 'synced' || fullText) return
-      const position = elapsed + (!paused && connected ? now() - syncedAt : 0)
+      const position = elapsed + (!paused && connected ? (now() - syncedAt) * playbackRate : 0)
       let index = -1
       for (let i = 0; i < result.lines.length && result.lines[i].ms <= position; i++) index = i
       if (index === activeLine) return
@@ -24,7 +24,7 @@
       draw()
     }
     async function lookup() {
-      const request = ++generation, requestedKey = key
+      const request = ++generation, requestedKey = key, receivedAtStart = received
       result = null; activeLine = -1; page = 0
       if (!key) { status = 'idle'; draw(); return }
       if (denied) { status = 'denied'; draw(); return }
@@ -36,7 +36,14 @@
           status = 'track_changed'; draw(); return
         }
         status = response.status
-        if (status === 'ready') result = response
+        if (status === 'ready') {
+          result = response
+          if (received === receivedAtStart && Number.isFinite(response.elapsed)) {
+            elapsed = response.elapsed; syncedAt = now()
+            paused = Boolean(response.paused || response.clockRunning === false)
+            playbackRate = Number(response.playbackRate) > 0 ? Number(response.playbackRate) : playbackRate
+          }
+        }
       } catch (error) {
         if (request !== generation || !opened) return
         status = error.code === 'denied' ? 'denied' : 'unavailable'
@@ -45,8 +52,10 @@
     }
     return {
       receive(state) {
+        received++
         latest = state
-        elapsed = Number(state.current?.elapsed) || 0; syncedAt = now(); paused = Boolean(state.paused || !state.active)
+        elapsed = Number(state.current?.elapsed) || 0; syncedAt = now(); paused = Boolean(state.paused || !state.active || state.clockRunning === false)
+        playbackRate = Number(state.playbackRate) > 0 ? Number(state.playbackRate) : 1
         const next = identity(state), changed = next !== key
         key = next
         if (changed && opened) lookup()
@@ -60,7 +69,7 @@
       follow() { fullText = false; follow = true; activeLine = -1; tick(); draw() },
       connection(value) {
         if (connected === value) return
-        if (!value && !paused) elapsed += now() - syncedAt
+        if (!value && !paused) elapsed += (now() - syncedAt) * playbackRate
         syncedAt = now(); connected = value
         if (value) { denied = false; if (opened) lookup() }
         draw()

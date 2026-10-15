@@ -1,3 +1,4 @@
+const clock = require('./playback-clock')
 // ─────────────────────────────────────────────────────────────────────────────
 // OBEY — Motor de música v2: UI del Now Playing (port de Soundy SetupEmbed.ts).
 // Fusión: layout de Soundy (imagen grande, ## título, "termina en", botones
@@ -43,11 +44,10 @@ function buildNowPlaying(client, state, positionMs = null) {
   const plat   = platform(info.catalogUri || info.uri || '', info.catalogSourceName || info.sourceName || '')
 
   const pos = positionMs !== null ? positionMs
-            : state.startedAt && !state.paused ? Math.min(dur, Date.now() - state.startedAt)
-            : (state.lastPosition || 0)
+            : clock.position(state)
 
   const durationText = isStream ? '🔴 LIVE' : `\`${fmtMs(dur)}\``
-  const finishText   = isStream ? '—' : `<t:${Math.floor((Date.now() + (dur - pos)) / 1000)}:R>`
+  const finishText   = isStream ? '—' : `<t:${Math.floor((Date.now() + (dur - pos) / clock.rate(state)) / 1000)}:R>`
 
   const embed = new EmbedBuilder()
     .setColor(state.paused ? 0x4f545c : plat.color)

@@ -346,10 +346,10 @@ let searchSequence=0;
 async function doSearch(q){const sequence=++searchSequence;if(!q.trim()){$('#g-search').innerHTML='<div class="empty"><i class="fas fa-music"></i>Escribe para buscar</div>';return}$('#g-search').innerHTML='<div class="empty">Buscando…</div>';const{ok,j}=await api(`/api/music/search?q=${encodeURIComponent(q)}`);if(sequence!==searchSequence)return;if(!ok||j.success===false){$('#g-search').innerHTML='<div class="empty"><i class="fas fa-triangle-exclamation"></i>No se pudo buscar. Inténtalo de nuevo.</div>';return}render('g-search',j.data,{icon:'fa-magnifying-glass',empty:'Sin resultados'})}
 
 /* estado en vivo */
-let LEN=0,ELAPSED=0,SYNC=Date.now(),PAUSED=true,LOOP='none';
+let LEN=0,ELAPSED=0,SYNC=Date.now(),PAUSED=true,CLOCK=false,RATE=1,LIVE=true,LOOP='none';
 function applyState(s){
   const cur=(s&&s.active&&s.current)?s.current:null;
-  PAUSED=!cur||!!s.paused;LOOP=s?.loop||'none';
+  PAUSED=!cur||!!s.paused;CLOCK=!!cur&&!PAUSED&&s.clockRunning!==false;RATE=Number(s.playbackRate)>0?Number(s.playbackRate):1;LOOP=s?.loop||'none';
   $$('[data-act="pause"] i').forEach(i=>i.className='fas '+(PAUSED?'fa-play':'fa-pause'));
   $$('[data-loop]').forEach(b=>b.classList.toggle('on',LOOP!=='none'));
   $('#b-shuffle')?.classList.toggle('on',!!s?.shuffle);$('#ov-shuffle')?.classList.toggle('on',!!s?.shuffle);
@@ -386,7 +386,7 @@ function renderQueue(s){
   list.innerHTML='';
   q.forEach((t,d)=>{const pos=d+1;const art=trackArtwork.url(t);const row=document.createElement('div');row.className='qrow';row.innerHTML=`<img src="${S(art)}" onerror="this.onerror=null;this.src='/img/music-placeholder.svg'"><div class="qm"><b>${S(t.title||'?')}</b><span>${S(t.author||'?')}</span></div><div class="qa"><button title="Reproducir ahora"><i class="fas fa-play"></i></button><button class="del" title="Quitar"><i class="fas fa-xmark"></i></button></div>`;const b=row.querySelectorAll('.qa button');b[0].addEventListener('click',()=>action('jump',pos));b[1].addEventListener('click',()=>{action('remove',pos);row.remove()});list.appendChild(row)});
 }
-function tick(){let pos=ELAPSED+(PAUSED?0:Date.now()-SYNC);if(LEN>0)pos=Math.min(pos,LEN);const pct=LEN>0?(pos/LEN*100):0;
+function tick(){let pos=ELAPSED+(CLOCK&&LIVE?(Date.now()-SYNC)*RATE:0);if(LEN>0)pos=Math.min(pos,LEN);const pct=LEN>0?(pos/LEN*100):0;
   ['#hero-prog','#ov-prog'].forEach(x=>$(x).firstElementChild.style.width=pct+'%');$('.ptrack .bar i').style.width=pct+'%';
   ['#hero-cur','#np-cur','#ov-cur'].forEach(x=>$(x).textContent=fmt(pos));['#hero-tot','#np-tot','#ov-tot'].forEach(x=>$(x).textContent=fmt(LEN));}
 let lyricsPage=0, lyricsOpened=false;
@@ -465,12 +465,14 @@ const GENRES=[
 ];
 function loadGenres(){const c=$('#genres');if(!c)return;c.innerHTML='';GENRES.forEach(g=>{const d=document.createElement('button');d.type='button';d.className='genre';d.style.background=g.g;d.innerHTML=`<i class="fas ${g.i}"></i>${S(g.l)}`;d.addEventListener('click',()=>{setView('search');$('#bq').value=g.l;doSearch(g.q)});c.appendChild(d)})}
 async function loadRadar(){const{j}=await api(`/api/music/search?q=${encodeURIComponent('top global hits 2026')}`);render('g-radar',(j.data||[]).slice(0,12),{icon:'fa-compass',empty:'No disponible ahora'})}
+function connection(value){if(LIVE&&!value&&CLOCK)ELAPSED+=(Date.now()-SYNC)*RATE;SYNC=Date.now();LIVE=value;lyricsControl.connection(value)}
 const realtime=io({transports:['websocket','polling']});
 realtime.on('connect',()=>{$('#connection-status').textContent='Verificando acceso…';$('#connection-status').dataset.status='offline';realtime.emit('join',GID);refresh()});
-realtime.on('player:state',state=>{if(state.guildId&&state.guildId!==GID)return;$('#connection-status').textContent='Conectado · en vivo';$('#connection-status').dataset.status='online';if(receiveState(state))lyricsControl.connection(true)});
-realtime.on('player:error',()=>{lyricsControl.deny();lyricsControl.connection(false);$('#connection-status').textContent='No se pudo verificar el acceso · datos sin actualizar';$('#connection-status').dataset.status='offline'});
-realtime.on('disconnect',()=>{lyricsControl.connection(false);$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
-realtime.on('connect_error',()=>{lyricsControl.connection(false);$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
+realtime.on('player:state',state=>{if(state.guildId&&state.guildId!==GID)return;$('#connection-status').textContent='Conectado · en vivo';$('#connection-status').dataset.status='online';if(receiveState(state))connection(true)});
+realtime.on('player:tick',state=>{if(state.guildId!==GID)return;receiveState(state)});
+realtime.on('player:error',()=>{lyricsControl.deny();connection(false);$('#connection-status').textContent='No se pudo verificar el acceso · datos sin actualizar';$('#connection-status').dataset.status='offline'});
+realtime.on('disconnect',()=>{connection(false);$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
+realtime.on('connect_error',()=>{connection(false);$('#connection-status').textContent='Reconectando…';$('#connection-status').dataset.status='offline'});
 window.addEventListener('online',refresh);
 loadGenres();loadRadar();loadLists();refresh();setInterval(()=>{if(!document.hidden)refresh()},10000);setInterval(()=>{tick();if(!document.hidden)lyricsControl.tick()},500);
 </script>

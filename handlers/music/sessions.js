@@ -1,8 +1,9 @@
+const clock = require('./playback-clock')
 const { createActionQueue } = require('./action-queue')
 const { clampMs } = require('./utils')
 function snapshot(state) {
   const info = state.currentTrack?.info || state.currentTrack
-  const position = state.paused ? state.lastPosition : state.startedAt ? Date.now() - state.startedAt : state.lastPosition
+  const position = clock.position(state)
   return {
     sessionId: state.sessionId, revision: state.revision, voiceChannelId: state.voiceChannelId,
     nodePreference: state.nodePreference || 'auto',

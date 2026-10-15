@@ -20,8 +20,9 @@ test('Discord and web requests for one track share a single in-flight lookup',as
  let calls=0,release
  await fixture(()=>{calls++;return new Promise(resolve=>{release=resolve})},async provider=>{
   const discord=provider.fetchLyrics('same','artist'),web=provider.fetchLyricsResult('same','artist')
+  await new Promise(resolve=>setImmediate(resolve))
   assert.equal(calls,1)
-  release({lines:[{line:'complete',range:{start:1000}}],text:'complete'})
+  release({syncedLyrics:'[00:01.00]complete',plainLyrics:'complete'})
   assert.equal((await discord).plain,'complete');assert.equal((await web).status,'ready')
   assert.equal(calls,1)
  })

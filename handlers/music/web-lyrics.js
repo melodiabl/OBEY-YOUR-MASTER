@@ -1,6 +1,6 @@
 const { fetchLyricsResult } = require('./lyrics')
-async function sharedLookup(title, artist) {
-  const result = await fetchLyricsResult(title, artist)
+async function sharedLookup(title, artist, options) {
+  const result = await fetchLyricsResult(title, artist, options)
   if (result.status === 'unavailable') throw new Error('provider_unavailable')
   return result.data
 }
@@ -17,7 +17,7 @@ async function getCurrentLyrics(music, guildId, lookup = sharedLookup) {
   }
   if (info.isStream) return { ...identity, status: 'stream' }
   let result
-  try { result = await lookup(info.title, info.author) }
+  try { result = await lookup(info.title, info.author, music.getLyricsOptions?.(guildId) || { durationMs: info.length, albumName: info.albumName }) }
   catch { return current() ? { ...identity, status: 'unavailable' } : { guildId, status: 'track_changed' } }
   if (!current()) return { guildId, status: 'track_changed' }
   const lines = (Array.isArray(result?.lines) ? result.lines : [])
@@ -28,7 +28,7 @@ async function getCurrentLyrics(music, guildId, lookup = sharedLookup) {
   const publicState = music.getPublicState(guildId)
   return { ...identity, status: 'ready', mode: lines.length ? 'synced' : 'plain', text, lines,
     title: info.title, author: info.author, elapsed: publicState.current?.elapsed || 0,
-    paused: Boolean(publicState.paused), revision: publicState.revision }
+    paused: Boolean(publicState.paused), playbackRate: publicState.playbackRate, clockRunning: publicState.clockRunning, revision: publicState.revision }
 }
 
 module.exports = { getCurrentLyrics }
