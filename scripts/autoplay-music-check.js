@@ -1,4 +1,4 @@
-// Opt-in THZ release check: empty voice channel, muted audio, no text messages.
+// Opt-in THZ release check: idle existing bot connection or empty channel; muted, no messages.
 const assert = require('node:assert/strict'), fs = require('node:fs')
 const { PermissionFlagsBits, ChannelType } = require('discord.js')
 const { snapshot } = require('../handlers/music/sessions')
@@ -32,7 +32,8 @@ module.exports = async (client, guildId, file) => {
     const me = await guild.members.fetchMe()
     const candidates = [...guild.channels.cache.values()].filter(channel => channel.type === ChannelType.GuildVoice && channel.id !== guild.afkChannelId &&
       channel.permissionsFor(me)?.has([PermissionFlagsBits.Connect, PermissionFlagsBits.Speak]) && ![...channel.members.values()].some(member => !member.user.bot))
-    const channel = candidates.find(channel => channel.id === original.voiceChannelId) || candidates[0]
+    const existingChannel = hadPlayer && guild.channels.cache.get(original.voiceChannelId)
+    const channel = existingChannel || candidates[0]
     assert.ok(channel, 'no_empty_accessible_voice_channel')
     report.voiceChannelId = channel.id
     music.sendNowPlaying = (id, ...args) => id === guildId ? Promise.resolve() : oldSend.call(music, id, ...args)
@@ -42,7 +43,14 @@ module.exports = async (client, guildId, file) => {
     const result = await music.search('ytsearch:Rick Astley Never Gonna Give You Up', { id: 'autoplay-release-check', username: 'Verificación' }, { guildId })
     assert.ok(result?.tracks?.[0]?.encoded, 'seed_unavailable')
     report.phase = 'seed_playback'
-    await music.joinChannel(guildId, channel.id, null)
+    try { await music.joinChannel(guildId, channel.id, null) }
+    catch (error) {
+      const latest = music.getState(guildId)
+      if (!client.shoukaku.players.has(guildId) || latest.currentTrack || latest.queue.length || !latest.voiceChannelId || latest.voiceChannelId === channel.id) throw error
+      original = JSON.parse(JSON.stringify(snapshot(latest))); hadPlayer = true
+      report.voiceChannelId = latest.voiceChannelId
+      await music.joinChannel(guildId, latest.voiceChannelId, latest.textChannelId)
+    }
     report.phase = 'mute'
     await music.setVolume(guildId, 0)
     report.phase = 'enable_autoplay'
