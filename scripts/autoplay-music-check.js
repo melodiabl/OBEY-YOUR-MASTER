@@ -30,8 +30,9 @@ module.exports = async (client, guildId, file) => {
     if (state.currentTrack || state.queue.length) { report.status = 'skipped'; report.reason = 'existing_playback'; return }
     original = JSON.parse(JSON.stringify(snapshot(state))); hadPlayer = client.shoukaku.players.has(guildId)
     const me = await guild.members.fetchMe()
-    const channel = [...guild.channels.cache.values()].find(channel => channel.type === ChannelType.GuildVoice && channel.id !== guild.afkChannelId &&
+    const candidates = [...guild.channels.cache.values()].filter(channel => channel.type === ChannelType.GuildVoice && channel.id !== guild.afkChannelId &&
       channel.permissionsFor(me)?.has([PermissionFlagsBits.Connect, PermissionFlagsBits.Speak]) && ![...channel.members.values()].some(member => !member.user.bot))
+    const channel = candidates.find(channel => channel.id === original.voiceChannelId) || candidates[0]
     assert.ok(channel, 'no_empty_accessible_voice_channel')
     report.voiceChannelId = channel.id
     music.sendNowPlaying = (id, ...args) => id === guildId ? Promise.resolve() : oldSend.call(music, id, ...args)
@@ -42,9 +43,13 @@ module.exports = async (client, guildId, file) => {
     assert.ok(result?.tracks?.[0]?.encoded, 'seed_unavailable')
     report.phase = 'seed_playback'
     await music.joinChannel(guildId, channel.id, null)
+    report.phase = 'mute'
     await music.setVolume(guildId, 0)
+    report.phase = 'enable_autoplay'
     music.setAutoplay(guildId, true)
+    report.phase = 'seed_enqueue'
     await music.enqueue(guildId, [result.tracks[0]])
+    report.phase = 'seed_progress'
     await until(native, value => value?.state?.connected && value.volume === 0 && value.state.position >= 2000)
     const seed = music.getState(guildId).currentTrack, info = seed.info || seed
     assert.ok(info.length > 10000 && !info.isStream, 'seed_not_seekable')
@@ -57,7 +62,7 @@ module.exports = async (client, guildId, file) => {
     assert.equal(music.getState(guildId).queue.length, 0)
     report.status = 'passed'; report.nodeId = client.shoukaku.players.get(guildId).node.name
     report.naturalEnd = true; report.newRecording = true; report.queueEmpty = true; report.position = next.state.position
-  } catch (error) { report.status = 'failed'; report.errorCode = error.code || error.name; report.error = /^\w+$/.test(error.message) ? error.message : 'autoplay_live_check_failed' }
+  } catch (error) { report.status = 'failed'; report.errorCode = error.code || error.name; report.errorLocation = String(error.stack || '').split('\n').slice(1, 3); report.error = /^\w+$/.test(error.message) ? error.message : 'autoplay_live_check_failed' }
   finally {
     if (modified) {
       try {
