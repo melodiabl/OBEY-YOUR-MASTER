@@ -118,3 +118,39 @@ test('live lyrics follow the shared clock, keep introductions clear and avoid du
     t.mock.timers.tick(10000); await flush(); assert.equal(edits.length, 2)
   })
 })
+
+test('a persisted live panel resumes editing the same message after restart without sending another', async () => {
+  const f = fixture('live-replay-lookup'), edits = []
+  f.client.user = { id: 'bot' }
+  const message = { id: 'existing-panel', author: { id: 'bot' }, async edit(payload) { edits.push(payload); return this }, async delete() {} }
+  f.channel.messages = { fetch: async () => message }
+  await withLive(async () => ({ lines: [{ ms: 0, text: 'First' }, { ms: 4000, text: 'Now' }] }), async live => {
+    f.state.paused = true; f.state.lastPosition = 5000
+    await live.restore(f.client, [{ id: f.guildId, lyricsLiveEnabled: true, lyricsLiveMessageId: message.id, lyricsLiveChannelId: f.channel.id }])
+    assert.equal(live.isActive(f.guildId), true)
+    assert.equal(f.sent.length, 0)
+    assert.ok(edits.at(-1).embeds[0].toJSON().description.includes('**➤ Now**'))
+  })
+})
+
+test('activation is persisted and disabling after a restart stays disabled', async () => {
+  const model = require('../database/schemas/MusicGuildSchema'), original = model.updateOne
+  const f = fixture('live-replay-lookup'), edits = []
+  f.client._dbReady = true; f.client.user = { id: 'bot' }
+  let row
+  model.updateOne = async (query, update) => { row = { id: query.id, ...update.$set } }
+  const message = { id: 'stored', author: { id: 'bot' }, edit: async payload => { edits.push(payload) }, delete: async () => {} }
+  f.channel.send = async payload => { f.sent.push(payload); return message }; f.channel.messages = { fetch: async () => message }
+  try {
+    await withLive(async () => ({ lines: [{ ms: 0, text: 'First' }, { ms: 4000, text: 'Now' }] }), async live => {
+      await live.start(f.client, f.guildId)
+      assert.equal(row.lyricsLiveEnabled, true); assert.equal(row.lyricsLiveMessageId, message.id)
+      live.suspend(); assert.equal(live.isActive(f.guildId), false)
+      f.state.paused = true; f.state.lastPosition = 5000
+      await live.restore(f.client, [row])
+      assert.equal(f.sent.length, 1); assert.ok(edits.at(-1).embeds[0].toJSON().description.includes('**➤ Now**'))
+      await live.stop(f.guildId, f.client)
+      assert.equal(row.lyricsLiveEnabled, false); assert.equal(live.isActive(f.guildId), false)
+    })
+  } finally { model.updateOne = original }
+})

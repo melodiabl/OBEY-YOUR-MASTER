@@ -133,12 +133,7 @@ if (!token) { console.error('[Bot] BOT_TOKEN no configurado'.red); process.exit(
 
 client.once('dbReady', () => {
   require('./dashboard/index')(client).catch(error => console.warn('[Dashboard] Error:', error.message))
-  if (process.env.OBEY_RELEASE_CHECK) {
-    setTimeout(() => {
-      require('./scripts/live-music-check')(client, process.env.OBEY_RELEASE_CHECK, process.env.OBEY_CHECK_STATE_FILE)
-        .catch(error => console.error('[LIVE_CHECK] failed:', error.message))
-    }, 30000).unref()
-  }
+
 })
 client.login(token).catch(error => { console.error('[Bot] Login failed:', error.message); process.exitCode = 1 })
 let shuttingDown = false

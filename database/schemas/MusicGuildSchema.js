@@ -14,6 +14,10 @@ const schema = new Schema({
   // Setup (canal de peticiones de música)
   setupChannelId: { type: String, default: null },
   setupTextId:    { type: String, default: null },
+  // Panel de letras: recuperar el mensaje existente tras reiniciar.
+  lyricsLiveEnabled: { type: Boolean, default: false },
+  lyricsLiveMessageId: { type: String, default: null },
+  lyricsLiveChannelId: { type: String, default: null },
   // Estado de voz
   voiceStatus:    { type: Boolean, default: true },
 }, { timestamps: true })

@@ -36,6 +36,9 @@ const root = path.resolve(__dirname, '..'), ejs = require(root+'/node_modules/ej
   await emit('player:state',{...fixtureState,revision:4,paused:false,clockRunning:false,current:{...fixtureState.current,elapsed:3500},updatedAt:Date.now()})
   await page.waitForTimeout(1500)
   if(await page.locator('.lyric-line.active').textContent()!=='Verso 3 <texto literal>')throw Error('Recovery clock drift')
+  await emit('player:state',{...fixtureState,revision:5,current:{...fixtureState.current,elapsed:18500},clockRunning:false,updatedAt:Date.now()})
+  const followed=await page.locator('#lyrics-body').evaluate(body=>{const active=body.querySelector('.active'),a=active.getBoundingClientRect(),b=body.getBoundingClientRect();return a.top>=b.top&&a.bottom<=b.bottom+1})
+  if(!followed)throw Error('Follow mode leaves the active verse outside the lyrics viewport')
   await page.locator('#lyrics-next').click();await page.locator('#lyrics-next').click()
   if(await page.locator('#lyrics-page').textContent()!=='3 / 3')throw Error('Missing final lyrics page')
   if(!await page.locator('#lyrics-body').textContent().then(text=>text.includes('Verso 50')))throw Error('Last verse truncated')
@@ -52,7 +55,7 @@ const root = path.resolve(__dirname, '..'), ejs = require(root+'/node_modules/ej
   if(!await page.locator('#lyrics-status').textContent().then(text=>text.includes('desconectada')))throw Error('Missing disconnected state')
   await emit('player:error',{error:'no_permission'})
   if(await page.locator('#lyrics-body').textContent())throw Error('Lyrics survive denied access')
-  const report={scope:'Real EJS and browser scripts; simulated transport events and isolated API fixtures; real Socket.IO integration separately in tests',states:['synced current line','all three pages','last verse','safe provider text','realtime tick correction','stale tick rejected','timescale','recovery freeze','manual and follow','full text','disconnected','denied'],errors}
+  const report={scope:'Real EJS and browser scripts; simulated transport events and isolated API fixtures; real Socket.IO integration separately in tests',states:['synced current line','all three pages','last verse','safe provider text','realtime tick correction','stale tick rejected','timescale','recovery freeze','manual and follow','active verse remains visible','full text','disconnected','denied'],errors}
   fs.writeFileSync(root+'/docs/platform/evidence/lyrics-sync-browser.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));if(errors.length)throw Error(errors.join('; '))
  }finally{await browser.close()}
 })().catch(error=>{console.error(error);process.exitCode=1})

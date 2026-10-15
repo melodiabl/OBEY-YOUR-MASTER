@@ -337,7 +337,7 @@ module.exports = client => {
         await stopLiveUpdate(guildId)
         liveMessages.delete(guildId)
         await player.stopTrack()
-        try { require('../music/lyricsLive').stop(guildId, client) } catch {}
+        try { await require('../music/lyricsLive').stop(guildId, client) } catch {}
         try { await require('../music/setup').resetToIdle(client, guildId) } catch (error) { console.warn('[Music] Idle panel:', error.message) }
         emitState(guildId)
         return
@@ -457,7 +457,7 @@ module.exports = client => {
       playerStates.delete(guildId)
       confirmedVolumes.delete(guildId)
       liveMessages.delete(guildId)
-      try { require('../music/lyricsLive').stop(guildId, client) } catch {}
+      try { await require('../music/lyricsLive').stop(guildId, client) } catch {}
       try { await require('../music/setup').resetToIdle(client, guildId) } catch (error) { console.warn('[Music] Idle panel:', error.message) }
       emitState(guildId)
     },
@@ -722,7 +722,7 @@ module.exports = client => {
       case 'mp_lyrics': {
         const live = require('../music/lyricsLive')
         if (live.isActive(guildId)) {
-          live.stop(guildId, client)
+          await live.stop(guildId, client)
           interaction.followUp({ content: '🔇 Letras en vivo desactivadas.', ephemeral: true }).catch(() => {})
           return
         }
@@ -858,7 +858,8 @@ module.exports = client => {
   }
   client.music.restoreSessions = restoreSessions
   client.music.flushSessions = async () => {
-    if (client._shuttingDown) { clearInterval(checkpoint); clearTimeout(restoreRetry) }
+    if (client._shuttingDown) { clearInterval(checkpoint); clearTimeout(restoreRetry); require('./lyricsLive').suspend() }
+    await require('./lyricsLive').flush()
     await actions.drain()
     await Promise.allSettled([...volumeWrites.values()])
     await panels.drain()
@@ -875,6 +876,7 @@ module.exports = client => {
   client.once('dbReady', async () => {
     await require('./setup').load(client)
     await restoreSessions()
+    await require('./lyricsLive').restore(client)
     try {
       const rows = await require('./database').database.getAll247()
       for (const row of rows) {
