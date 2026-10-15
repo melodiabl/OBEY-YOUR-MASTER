@@ -1960,6 +1960,111 @@
       "sha256": "2d6e4b7d21506ba0706d3f2e0eab20d631f524d9632a6021e2736788883aeb9b",
       "animated": false,
       "fallback": "🅿️"
+    },
+    "brand.youtube": {
+      "file": "brand_youtube.png",
+      "name": "obey_brand_youtube_c4731068",
+      "sha256": "c4731068132cf460cd0ed93f52d576bc826556ca752fc40e2b6527f3758d3072",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.youtubemusic": {
+      "file": "brand_youtubemusic.png",
+      "name": "obey_brand_youtubemusic_e110a889",
+      "sha256": "e110a8895ec901c74da09676d4702200e3431074cbadcab5c7ba709dd028228e",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.spotify": {
+      "file": "brand_spotify.png",
+      "name": "obey_brand_spotify_9d7f197e",
+      "sha256": "9d7f197e282d5587c2cbad3212125472a6f66fc56a97e3905a0dc20cdd0edf1f",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.applemusic": {
+      "file": "brand_applemusic.png",
+      "name": "obey_brand_applemusic_bd778e01",
+      "sha256": "bd778e011a047ec14c13a7ef108c10646d2ce3b8c51e7cba2052ccb985313c16",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.soundcloud": {
+      "file": "brand_soundcloud.png",
+      "name": "obey_brand_soundcloud_0dbd85a0",
+      "sha256": "0dbd85a05ecd19375adf012ab9ce2de670021f091442a3d0d2f3d8ecd8d91cd0",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.deezer": {
+      "file": "brand_deezer.png",
+      "name": "obey_brand_deezer_2637a145",
+      "sha256": "2637a145b5e9e13661fbb8dd6bd2a00b7efe4e4c9925e54407ad84dd8cad02ac",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.jiosaavn": {
+      "file": "brand_jiosaavn.png",
+      "name": "obey_brand_jiosaavn_e1b23e24",
+      "sha256": "e1b23e242692aa47b584797e9c999d6301421e5b60b6937ea2bf89ea963664cd",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.twitch": {
+      "file": "brand_twitch.png",
+      "name": "obey_brand_twitch_263188c0",
+      "sha256": "263188c0d2261ad173340f049b6f628fc9508ef1ee6f8f128ff644ff30af5055",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.bandcamp": {
+      "file": "brand_bandcamp.png",
+      "name": "obey_brand_bandcamp_82de28a7",
+      "sha256": "82de28a77c188928daa6f206b8509df4a568430e9738bd01d04878407ba36217",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.discord": {
+      "file": "brand_discord.png",
+      "name": "obey_brand_discord_0079e93a",
+      "sha256": "0079e93aa4fe5414ca9a3844d78038dd9ff51c5c3a9ed82218cf775932f3278a",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.github": {
+      "file": "brand_github.png",
+      "name": "obey_brand_github_3acfc2c3",
+      "sha256": "3acfc2c3d1a7a01c30f182983f3d73f18fd263388a8662d84addc931a3bf488b",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.tiktok": {
+      "file": "brand_tiktok.png",
+      "name": "obey_brand_tiktok_ef99b15c",
+      "sha256": "ef99b15c42dd4cd12f2c650810f6ec5dea834099aac6a80471db560d82ba35c4",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.x": {
+      "file": "brand_x.png",
+      "name": "obey_brand_x_45818a1e",
+      "sha256": "45818a1ef0fc425e5e74262accf94ad7bb1108613e009a58306bae5990d684ae",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.paypal": {
+      "file": "brand_paypal.png",
+      "name": "obey_brand_paypal_bc1d836e",
+      "sha256": "bc1d836e9e5395d927a9d7089a39703ddc32d01999a51982eb810b7e0c701ef8",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "brand.patreon": {
+      "file": "brand_patreon.png",
+      "name": "obey_brand_patreon_d93b99b7",
+      "sha256": "d93b99b7eda3ad2a8ddc76567814b39eaa89f6f056c2f34833c9f6214d7d9aa6",
+      "animated": false,
+      "fallback": "🔗"
     }
   },
   "aliases": {

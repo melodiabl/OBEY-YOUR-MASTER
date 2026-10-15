@@ -9208,6 +9208,681 @@
             "height": 128
           }
         }
+      },
+      "brand.youtube": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/youtube.svg",
+            "bytes": 676,
+            "sha256": "20a2e0613406bd98082349469d3a3478d46bfffa909fc52baa9ebcfcde8987c1",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/youtube.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_youtube.png",
+            "bytes": 1735,
+            "sha256": "c4731068132cf460cd0ed93f52d576bc826556ca752fc40e2b6527f3758d3072",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/youtube.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/youtube.svg",
+            "bytes": 676,
+            "sha256": "20a2e0613406bd98082349469d3a3478d46bfffa909fc52baa9ebcfcde8987c1",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/youtube.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/youtube.svg",
+            "bytes": 698,
+            "sha256": "123e757441e345c759cff3aab2c49872f8f91cc6a5698a00e1519605bedaae4b",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/youtube.svg"
+          }
+        }
+      },
+      "brand.youtubemusic": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/youtubemusic.svg",
+            "bytes": 669,
+            "sha256": "b280ede863d4da404ede22978fd9c90e5dcbf55823612f56e132dc69afec6884",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/youtubemusic.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_youtubemusic.png",
+            "bytes": 3106,
+            "sha256": "e110a8895ec901c74da09676d4702200e3431074cbadcab5c7ba709dd028228e",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/youtubemusic.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/youtubemusic.svg",
+            "bytes": 669,
+            "sha256": "b280ede863d4da404ede22978fd9c90e5dcbf55823612f56e132dc69afec6884",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/youtubemusic.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/youtubemusic.svg",
+            "bytes": 691,
+            "sha256": "78cb7666f99f063329aad2a56acd64f644c0db0b4740764ea3b3dcd0cc5b1dc9",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/youtubemusic.svg"
+          }
+        }
+      },
+      "brand.spotify": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/spotify.svg",
+            "bytes": 872,
+            "sha256": "9ffcb9a8b2a6d44c8b60911f838473bb23fc9da986a6dcd7a6d2247e54c0dac7",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/spotify.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_spotify.png",
+            "bytes": 3053,
+            "sha256": "9d7f197e282d5587c2cbad3212125472a6f66fc56a97e3905a0dc20cdd0edf1f",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/spotify.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/spotify.svg",
+            "bytes": 872,
+            "sha256": "9ffcb9a8b2a6d44c8b60911f838473bb23fc9da986a6dcd7a6d2247e54c0dac7",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/spotify.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/spotify.svg",
+            "bytes": 894,
+            "sha256": "e9a090355243f6d9bbedd1af2af903ca89437a3c1b57fbf3f35e5a0ae02af0c5",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/spotify.svg"
+          }
+        }
+      },
+      "brand.applemusic": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/applemusic.svg",
+            "bytes": 1972,
+            "sha256": "a8b09c16702efaaf559f5d7454ac9e0b7f0524838bde563dcc12f19410f71760",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/applemusic.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_applemusic.png",
+            "bytes": 2120,
+            "sha256": "bd778e011a047ec14c13a7ef108c10646d2ce3b8c51e7cba2052ccb985313c16",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/applemusic.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/applemusic.svg",
+            "bytes": 1972,
+            "sha256": "a8b09c16702efaaf559f5d7454ac9e0b7f0524838bde563dcc12f19410f71760",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/applemusic.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/applemusic.svg",
+            "bytes": 1994,
+            "sha256": "01fde9e51566139c8ce25bbe6c6841c12384036117d49be9d58523d352fdf3ff",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/applemusic.svg"
+          }
+        }
+      },
+      "brand.soundcloud": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/soundcloud.svg",
+            "bytes": 1353,
+            "sha256": "6091e9a7c83cd91bf53412f123ab65e1ee018945495c6f372ad8c54af95967a2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/soundcloud.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_soundcloud.png",
+            "bytes": 2309,
+            "sha256": "0dbd85a05ecd19375adf012ab9ce2de670021f091442a3d0d2f3d8ecd8d91cd0",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/soundcloud.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/soundcloud.svg",
+            "bytes": 1353,
+            "sha256": "6091e9a7c83cd91bf53412f123ab65e1ee018945495c6f372ad8c54af95967a2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/soundcloud.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/soundcloud.svg",
+            "bytes": 1375,
+            "sha256": "04a3add58fa839227fd9b0769507e279eb604a2cd8e987f9701dfaa6b886cc15",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/soundcloud.svg"
+          }
+        }
+      },
+      "brand.deezer": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/deezer.svg",
+            "bytes": 1358,
+            "sha256": "996675c98f52e3ce9fc22b57d59e1dac555ddd41c51a642976f631cbe8c8d81e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/deezer.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_deezer.png",
+            "bytes": 3198,
+            "sha256": "2637a145b5e9e13661fbb8dd6bd2a00b7efe4e4c9925e54407ad84dd8cad02ac",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/deezer.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/deezer.svg",
+            "bytes": 1358,
+            "sha256": "996675c98f52e3ce9fc22b57d59e1dac555ddd41c51a642976f631cbe8c8d81e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/deezer.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/deezer.svg",
+            "bytes": 1380,
+            "sha256": "1b86cd054aef98dad5d6f0750da2a33a5316a63b2287bfdac8844a16ff9948f7",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/deezer.svg"
+          }
+        }
+      },
+      "brand.jiosaavn": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/jiosaavn.svg",
+            "bytes": 765,
+            "sha256": "ae9493047078a10b2c51a8893a1c4d37b4e756fe9dbb48e8b15beb25d8da1887",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/jiosaavn.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_jiosaavn.png",
+            "bytes": 3742,
+            "sha256": "e1b23e242692aa47b584797e9c999d6301421e5b60b6937ea2bf89ea963664cd",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/jiosaavn.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/jiosaavn.svg",
+            "bytes": 765,
+            "sha256": "ae9493047078a10b2c51a8893a1c4d37b4e756fe9dbb48e8b15beb25d8da1887",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/jiosaavn.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/jiosaavn.svg",
+            "bytes": 787,
+            "sha256": "39caf4a3e272a51d91a40f72ff55712868be678c89dbbef4e683607d3f4ae919",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/jiosaavn.svg"
+          }
+        }
+      },
+      "brand.twitch": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/twitch.svg",
+            "bytes": 467,
+            "sha256": "e4ba46e423b60b73285ed20f7987c5decec4fdc265418e2d97f50f8a9942c520",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/twitch.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_twitch.png",
+            "bytes": 1224,
+            "sha256": "263188c0d2261ad173340f049b6f628fc9508ef1ee6f8f128ff644ff30af5055",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/twitch.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/twitch.svg",
+            "bytes": 467,
+            "sha256": "e4ba46e423b60b73285ed20f7987c5decec4fdc265418e2d97f50f8a9942c520",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/twitch.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/twitch.svg",
+            "bytes": 489,
+            "sha256": "6c4d8145176927027198b9a492dc14a14540c1467a5d5b1a4a6b7e1f41d60381",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/twitch.svg"
+          }
+        }
+      },
+      "brand.bandcamp": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/bandcamp.svg",
+            "bytes": 324,
+            "sha256": "5be7c00dfe9506458be79ba0aca603590fefe08432ffa2c4ad12beee6e7fb566",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/bandcamp.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_bandcamp.png",
+            "bytes": 1050,
+            "sha256": "82de28a77c188928daa6f206b8509df4a568430e9738bd01d04878407ba36217",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/bandcamp.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/bandcamp.svg",
+            "bytes": 324,
+            "sha256": "5be7c00dfe9506458be79ba0aca603590fefe08432ffa2c4ad12beee6e7fb566",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/bandcamp.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/bandcamp.svg",
+            "bytes": 346,
+            "sha256": "df6a9e9e7648c25587cb357310a5965b4ceca4fa05b5815df8ee9151f3b373b1",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/bandcamp.svg"
+          }
+        }
+      },
+      "brand.discord": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/discord.svg",
+            "bytes": 1549,
+            "sha256": "36156cdac887cce55d2d1bdbda73a9d270248640b9d3c29f02795716332851c5",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/discord.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_discord.png",
+            "bytes": 2262,
+            "sha256": "0079e93aa4fe5414ca9a3844d78038dd9ff51c5c3a9ed82218cf775932f3278a",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/discord.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/discord.svg",
+            "bytes": 1549,
+            "sha256": "36156cdac887cce55d2d1bdbda73a9d270248640b9d3c29f02795716332851c5",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/discord.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/discord.svg",
+            "bytes": 1571,
+            "sha256": "a24475e047f756f07b86760fe50091acd9567e019f6b45b63d9520943116193e",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/discord.svg"
+          }
+        }
+      },
+      "brand.github": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/github.svg",
+            "bytes": 1064,
+            "sha256": "39063c628f0aaa6e0bd89201929eeab3ae68eecced8ea4dfb6e02cbe1bcb24f2",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/github.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_github.png",
+            "bytes": 3506,
+            "sha256": "3acfc2c3d1a7a01c30f182983f3d73f18fd263388a8662d84addc931a3bf488b",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/github.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/github.svg",
+            "bytes": 997,
+            "sha256": "8230cb7416430b62c5c0e0c3bad725a58a80c89d18e0a5443646f3047663438a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/github.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/github.svg",
+            "bytes": 1086,
+            "sha256": "f51d6cd914b41cf4fdb7a6ba538deb2e6f344e1d732b9f95c5ba83ba73a51106",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/github.svg"
+          }
+        }
+      },
+      "brand.tiktok": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/tiktok.svg",
+            "bytes": 949,
+            "sha256": "614a9faa2e4cca438a8a7aa97eecb70dd60d911e3f467b1303fe49ca043b5e14",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/tiktok.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_tiktok.png",
+            "bytes": 2837,
+            "sha256": "ef99b15c42dd4cd12f2c650810f6ec5dea834099aac6a80471db560d82ba35c4",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/tiktok.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/tiktok.svg",
+            "bytes": 882,
+            "sha256": "6b649dad0833c2f215105033625f546208ac68950d71199ca8171a41d20e0247",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/tiktok.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/tiktok.svg",
+            "bytes": 971,
+            "sha256": "53437230b753d59498f37db9505a4550e599a36db79dfb116640a6264ea5a149",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/tiktok.svg"
+          }
+        }
+      },
+      "brand.x": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/x.svg",
+            "bytes": 541,
+            "sha256": "737e4b80a4239f0eb57c299212bc269fe522f13cb4f5e1dbfa837f29c0010678",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/x.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_x.png",
+            "bytes": 3822,
+            "sha256": "45818a1ef0fc425e5e74262accf94ad7bb1108613e009a58306bae5990d684ae",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/x.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/x.svg",
+            "bytes": 474,
+            "sha256": "000ba7668e6925457b377ea2b7b901497c4d8a157d402d8e1d1ec10f0f459c3a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/x.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/x.svg",
+            "bytes": 563,
+            "sha256": "264f127b8834cc8c47af1408efb71eb67cdd41ea7cd3510424e518dc75a3a805",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/x.svg"
+          }
+        }
+      },
+      "brand.paypal": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/paypal.svg",
+            "bytes": 627,
+            "sha256": "ea9bb767eae36e165859a65002161484e378854d79f5cf09b075ee9241681390",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/paypal.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_paypal.png",
+            "bytes": 2243,
+            "sha256": "bc1d836e9e5395d927a9d7089a39703ddc32d01999a51982eb810b7e0c701ef8",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/paypal.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/paypal.svg",
+            "bytes": 627,
+            "sha256": "ea9bb767eae36e165859a65002161484e378854d79f5cf09b075ee9241681390",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/paypal.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/paypal.svg",
+            "bytes": 649,
+            "sha256": "8fca22fbb1b9bf4c025bbd4679cce2a58a8038f1eaffe11cabcd30ef1177e17a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/paypal.svg"
+          }
+        }
+      },
+      "brand.patreon": {
+        "kind": "icon",
+        "fallback": "link",
+        "fixtureOnly": false,
+        "origin": "third_party_brand_logo",
+        "destinations": {
+          "discordVariant": "oscuro_png",
+          "webDarkVariant": "oscuro_svg",
+          "webLightVariant": "claro_svg",
+          "webDisabledVariant": "atenuado_svg"
+        },
+        "files": {
+          "oscuro_svg": {
+            "variant": "oscuro_svg",
+            "path": "platforms/oscuro/patreon.svg",
+            "bytes": 611,
+            "sha256": "6fd1fea63b66a00e39a9f4061fb1aabb6e3c9f0ba4f3f939f48d1f62b3879f0a",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/patreon.svg"
+          },
+          "oscuro_png": {
+            "variant": "oscuro_png",
+            "path": "production/brand_patreon.png",
+            "bytes": 2645,
+            "sha256": "d93b99b7eda3ad2a8ddc76567814b39eaa89f6f056c2f34833c9f6214d7d9aa6",
+            "width": 128,
+            "height": 128,
+            "frames": 1,
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/oscuro/patreon.png"
+          },
+          "claro_svg": {
+            "variant": "claro_svg",
+            "path": "platforms/claro/patreon.svg",
+            "bytes": 544,
+            "sha256": "67a247662e65b3e7487404527d6585f95483558a60a904ececf855dce4ed57ba",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/claro/patreon.svg"
+          },
+          "atenuado_svg": {
+            "variant": "atenuado_svg",
+            "path": "platforms/atenuado/patreon.svg",
+            "bytes": 633,
+            "sha256": "0fc889752ba6c291a7c9e095ab34424196d1c0d8f59b993dbb23eccd8ccc02e0",
+            "sourcePath": "10_ENTREGA_CODEX/assets/plataformas/atenuado/patreon.svg"
+          }
+        }
       }
     },
     "aliases": {
@@ -11541,6 +12216,126 @@
         "animated": false,
         "name": "obey_letter_p_2d6e4b7d",
         "sha256": "2d6e4b7d21506ba0706d3f2e0eab20d631f524d9632a6021e2736788883aeb9b"
+      },
+      {
+        "key": "brand.youtube",
+        "name": "obey_brand_youtube_c4731068",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_youtube",
+        "sha256": "c4731068132cf460cd0ed93f52d576bc826556ca752fc40e2b6527f3758d3072"
+      },
+      {
+        "key": "brand.youtubemusic",
+        "name": "obey_brand_youtubemusic_e110a889",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_youtubemusic",
+        "sha256": "e110a8895ec901c74da09676d4702200e3431074cbadcab5c7ba709dd028228e"
+      },
+      {
+        "key": "brand.spotify",
+        "name": "obey_brand_spotify_9d7f197e",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_spotify",
+        "sha256": "9d7f197e282d5587c2cbad3212125472a6f66fc56a97e3905a0dc20cdd0edf1f"
+      },
+      {
+        "key": "brand.applemusic",
+        "name": "obey_brand_applemusic_bd778e01",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_applemusic",
+        "sha256": "bd778e011a047ec14c13a7ef108c10646d2ce3b8c51e7cba2052ccb985313c16"
+      },
+      {
+        "key": "brand.soundcloud",
+        "name": "obey_brand_soundcloud_0dbd85a0",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_soundcloud",
+        "sha256": "0dbd85a05ecd19375adf012ab9ce2de670021f091442a3d0d2f3d8ecd8d91cd0"
+      },
+      {
+        "key": "brand.deezer",
+        "name": "obey_brand_deezer_2637a145",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_deezer",
+        "sha256": "2637a145b5e9e13661fbb8dd6bd2a00b7efe4e4c9925e54407ad84dd8cad02ac"
+      },
+      {
+        "key": "brand.jiosaavn",
+        "name": "obey_brand_jiosaavn_e1b23e24",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_jiosaavn",
+        "sha256": "e1b23e242692aa47b584797e9c999d6301421e5b60b6937ea2bf89ea963664cd"
+      },
+      {
+        "key": "brand.twitch",
+        "name": "obey_brand_twitch_263188c0",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_twitch",
+        "sha256": "263188c0d2261ad173340f049b6f628fc9508ef1ee6f8f128ff644ff30af5055"
+      },
+      {
+        "key": "brand.bandcamp",
+        "name": "obey_brand_bandcamp_82de28a7",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_bandcamp",
+        "sha256": "82de28a77c188928daa6f206b8509df4a568430e9738bd01d04878407ba36217"
+      },
+      {
+        "key": "brand.discord",
+        "name": "obey_brand_discord_0079e93a",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_discord",
+        "sha256": "0079e93aa4fe5414ca9a3844d78038dd9ff51c5c3a9ed82218cf775932f3278a"
+      },
+      {
+        "key": "brand.github",
+        "name": "obey_brand_github_3acfc2c3",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_github",
+        "sha256": "3acfc2c3d1a7a01c30f182983f3d73f18fd263388a8662d84addc931a3bf488b"
+      },
+      {
+        "key": "brand.tiktok",
+        "name": "obey_brand_tiktok_ef99b15c",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_tiktok",
+        "sha256": "ef99b15c42dd4cd12f2c650810f6ec5dea834099aac6a80471db560d82ba35c4"
+      },
+      {
+        "key": "brand.x",
+        "name": "obey_brand_x_45818a1e",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_x",
+        "sha256": "45818a1ef0fc425e5e74262accf94ad7bb1108613e009a58306bae5990d684ae"
+      },
+      {
+        "key": "brand.paypal",
+        "name": "obey_brand_paypal_bc1d836e",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_paypal",
+        "sha256": "bc1d836e9e5395d927a9d7089a39703ddc32d01999a51982eb810b7e0c701ef8"
+      },
+      {
+        "key": "brand.patreon",
+        "name": "obey_brand_patreon_d93b99b7",
+        "variant": "oscuro_png",
+        "animated": false,
+        "storageKey": "brand_patreon",
+        "sha256": "d93b99b7eda3ad2a8ddc76567814b39eaa89f6f056c2f34833c9f6214d7d9aa6"
       }
     ]
   }

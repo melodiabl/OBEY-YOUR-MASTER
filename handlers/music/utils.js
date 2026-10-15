@@ -29,17 +29,7 @@ function progressBar(current, total, len = 17) {
   return '▰'.repeat(filled) + '▱'.repeat(len - filled)
 }
 
-function platform(uri = '', sourceName = '') {
-  const src = sourceName.toLowerCase()
-  if (src === 'spotify'    || /spotify/i.test(uri))                  return { name: 'Spotify',     color: 0x1DB954, emoji: obeyUi.owned('🟢') }
-  if (src === 'applemusic' || /applemusic|apple.?music/i.test(uri))  return { name: 'Apple Music', color: 0xFA243C, emoji: obeyUi.owned('🍎') }
-  if (src === 'soundcloud' || /soundcloud/i.test(uri))               return { name: 'SoundCloud',  color: 0xFF5500, emoji: obeyUi.owned('🟠') }
-  if (src === 'deezer'     || /deezer/i.test(uri))                   return { name: 'Deezer',      color: 0xEF5466, emoji: obeyUi.owned('🎵') }
-  if (src === 'jiosaavn'   || /jiosaavn/i.test(uri))                 return { name: 'JioSaavn',    color: 0x2BC5B4, emoji: obeyUi.owned('🎵') }
-  if (src === 'twitch'     || /twitch/i.test(uri))                   return { name: 'Twitch',      color: 0x9146FF, emoji: obeyUi.owned('🟣') }
-  if (src === 'bandcamp'   || /bandcamp/i.test(uri))                 return { name: 'Bandcamp',    color: 0x1da0c3, emoji: obeyUi.owned('🔵') }
-  return                                                                      { name: 'YouTube',    color: 0xFF0000, emoji: obeyUi.owned('🔴') }
-}
+const { platform } = require('./platforms')
 
 function loopEmoji(loop) {
   if (loop === 'track') return obeyUi.owned('🔂')
@@ -83,7 +73,7 @@ function normalizePublicTrack(track, extra = {}) {
   const { info, pluginInfo } = trackInfo(track)
   const sourceName = cleanText(
     info.catalogSourceName || info.sourceName || pluginInfo.sourceName || extra.sourceName,
-    'youtube',
+    'unknown',
   ).toLowerCase()
   const uri = cleanText(info.catalogUri || info.uri || info.url || pluginInfo.uri || pluginInfo.url)
   const artworkUrl = cleanText(

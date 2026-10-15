@@ -55,7 +55,7 @@ i.fa-database{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;v
 i.fa-database::before{content:none!important;}
 i.fa-dice{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_dice.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-dice::before{content:none!important;}
-i.fa-discord{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_conversation.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-discord{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/brand_discord.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-discord::before{content:none!important;}
 i.fa-door-closed{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_lock.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-door-closed::before{content:none!important;}
@@ -83,7 +83,7 @@ i.fa-gavel{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vert
 i.fa-gavel::before{content:none!important;}
 i.fa-gear{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_settings.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-gear::before{content:none!important;}
-i.fa-github{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_code.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-github{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/brand_github.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-github::before{content:none!important;}
 i.fa-guitar{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_guitar.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-guitar::before{content:none!important;}
@@ -155,7 +155,7 @@ i.fa-sliders{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;ve
 i.fa-sliders::before{content:none!important;}
 i.fa-spinner{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_loading.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-spinner::before{content:none!important;}
-i.fa-spotify{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_headphones.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-spotify{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/brand_spotify.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-spotify::before{content:none!important;}
 i.fa-star{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_star.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-star::before{content:none!important;}
@@ -169,13 +169,13 @@ i.fa-terminal{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;v
 i.fa-terminal::before{content:none!important;}
 i.fa-ticket{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_ticket.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-ticket::before{content:none!important;}
-i.fa-tiktok{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_microphone.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-tiktok{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/brand_tiktok.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-tiktok::before{content:none!important;}
 i.fa-trash-can{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_delete.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-trash-can::before{content:none!important;}
 i.fa-triangle-exclamation{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_warning.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-triangle-exclamation::before{content:none!important;}
-i.fa-twitch{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_video.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-twitch{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/brand_twitch.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-twitch::before{content:none!important;}
 i.fa-user{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_profile.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-user::before{content:none!important;}
@@ -197,11 +197,11 @@ i.fa-wand-magic-sparkles{display:inline-block;width:1.15em;height:1.15em;min-wid
 i.fa-wand-magic-sparkles::before{content:none!important;}
 i.fa-wave-square{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_wave.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-wave-square::before{content:none!important;}
-i.fa-x-twitter{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_feed.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-x-twitter{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/brand_x.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-x-twitter::before{content:none!important;}
 i.fa-xmark{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_error.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-xmark::before{content:none!important;}
-i.fa-youtube{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_music.png") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-youtube{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/brand_youtube.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
 i.fa-youtube::before{content:none!important;}
 @media(prefers-reduced-motion:reduce){i.fa-spin{animation:none!important;}}
 

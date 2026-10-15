@@ -1,0 +1,216 @@
+{
+  "scope": "Real panel EJS, local CSS/SVG and platform gallery in Chromium; no external services",
+  "observations": [
+    {
+      "width": 1280,
+      "images": [
+        {
+          "path": "/obey-icons/brand_youtube.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_youtubemusic.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_spotify.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_applemusic.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_soundcloud.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_deezer.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_jiosaavn.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_twitch.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_bandcamp.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_discord.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_github.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_tiktok.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_x.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_paypal.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_patreon.svg",
+          "loaded": true
+        }
+      ],
+      "mappings": [
+        {
+          "cls": "fa-discord",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_discord.svg\")"
+        },
+        {
+          "cls": "fa-spotify",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_spotify.svg\")"
+        },
+        {
+          "cls": "fa-headphones",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/icon_headphones.svg\")"
+        },
+        {
+          "cls": "fa-music",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/icon_music.png\")"
+        },
+        {
+          "cls": "fa-youtube",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_youtube.svg\")"
+        },
+        {
+          "cls": "fa-github",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_github.svg\")"
+        },
+        {
+          "cls": "fa-x-twitter",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_x.svg\")"
+        },
+        {
+          "cls": "fa-tiktok",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_tiktok.svg\")"
+        },
+        {
+          "cls": "fa-twitch",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_twitch.svg\")"
+        }
+      ],
+      "overflow": false,
+      "font": "\"DM Sans\", system-ui, sans-serif"
+    },
+    {
+      "width": 390,
+      "images": [
+        {
+          "path": "/obey-icons/brand_youtube.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_youtubemusic.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_spotify.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_applemusic.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_soundcloud.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_deezer.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_jiosaavn.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_twitch.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_bandcamp.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_discord.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_github.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_tiktok.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_x.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_paypal.svg",
+          "loaded": true
+        },
+        {
+          "path": "/obey-icons/brand_patreon.svg",
+          "loaded": true
+        }
+      ],
+      "mappings": [
+        {
+          "cls": "fa-discord",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_discord.svg\")"
+        },
+        {
+          "cls": "fa-spotify",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_spotify.svg\")"
+        },
+        {
+          "cls": "fa-headphones",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/icon_headphones.svg\")"
+        },
+        {
+          "cls": "fa-music",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/icon_music.png\")"
+        },
+        {
+          "cls": "fa-youtube",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_youtube.svg\")"
+        },
+        {
+          "cls": "fa-github",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_github.svg\")"
+        },
+        {
+          "cls": "fa-x-twitter",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_x.svg\")"
+        },
+        {
+          "cls": "fa-tiktok",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_tiktok.svg\")"
+        },
+        {
+          "cls": "fa-twitch",
+          "background": "url(\"http://127.0.0.1:35923/obey-icons/brand_twitch.svg\")"
+        }
+      ],
+      "overflow": false,
+      "font": "\"DM Sans\", system-ui, sans-serif"
+    }
+  ],
+  "errors": []
+}

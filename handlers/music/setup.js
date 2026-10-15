@@ -34,7 +34,7 @@ function idlePanel(client) {
   const embed = new EmbedBuilder()
     .setColor(config.color.primary)
     .setTitle(`${E.music} Canal de Música`)
-    .setDescription(obeyUi.owned('**Escribe el nombre o el enlace de una canción aquí para reproducirla.**\n\n🟢 YouTube · 🟢 Spotify · 🟢 Apple Music'))
+    .setDescription(`**Escribe el nombre o el enlace de una canción aquí para reproducirla.**\n\n${obeyUi.markup('brand.youtube')} YouTube · ${obeyUi.markup('brand.spotify')} Spotify · ${obeyUi.markup('brand.applemusic')} Apple Music`)
     .setImage(client.user.displayAvatarURL({ size: 512 }))
     .setFooter(obeyMeta.asFooter({ text: 'Sin música reproduciéndose' }))
   return { embeds: [embed], components: buildControls({ loop: 'none', paused: false }, { idle: true }) }

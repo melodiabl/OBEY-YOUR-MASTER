@@ -14,9 +14,9 @@ function adapterFixture() {
   } }
 }
 
-test('the selected plan validates exactly 280 PNG/GIF emojis with canonical names', async () => {
+test('the selected plan validates exactly 295 PNG/GIF emojis with canonical names', async () => {
   const assets = await validateSelectedAssets()
-  assert.equal(assets.length, 280)
+  assert.equal(assets.length, 295)
   assert.equal(assets.filter(asset => asset.animated).length, 10)
   assert.ok(assets.every(asset => asset.width === 128 && asset.height === 128 && asset.bytes <= 256 * 1024 && asset.name.length <= 32))
   assert.ok(assets.filter(asset => asset.animated).every(asset => asset.mimeType === 'image/gif'))
