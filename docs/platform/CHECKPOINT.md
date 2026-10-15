@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Correcciones de plataformas · 15 de octubre de 2026
+
+Fuente vigente `/home/OBEY_Documentacion_correcciones_2026-10-15/OBEY_Documentacion`, ZIP SHA-256 `857a2ceb27ca32710fe5ed6cb456088c34fd89161cdbc650b1f663b3b201bab6`, 4274 entradas. Extracción verificada, ZIP eliminado y extracción anterior reemplazada. Integrada solo la diferencia de identidad de plataformas: 15 logos, seis IDs históricos y siete clases web, con iconos funcionales propios conservados. 316 materiales / 295 emojis (285 PNG, diez GIF), todos sincronizados sin fallos.
+
+Código activo `881fa6b29294c6f237091f3c84b0f883a2c42e72`, imagen `789f1e1fdf1b17fbd90f16217392cca37ae644e593487f83454c1362415118c5`, etiqueta `release-platforms-20261015`. 501 pruebas pasan; Chromium verifica 15 logos y controles en 1280/390 px, EJS real y cero errores. Se comprobaron hashes de 103 archivos dentro de la imagen, incluidos reloj, letras, autoplay, eventos y configuración de nodos, y los 16 recursos web publicados. 19 raíces slash; Fun 22; NSFW no vuelve.
+
+Solo se recreó el bot: healthy, sin reinicios/errores de arranque. Imágenes/Redis conservados; Nazha principal, Serenetia/MilloHost conectados; privado apagado/excluido y sin 2333. Las 16 entradas locales previas permanecen idénticas y fuera de la imagen. Recuperación vigente `.runtime/bot-recovery-public-only.yml` fija esta versión; la imagen anterior del paquete se conserva como respaldo. El logo identifica el enlace/metadatos y no certifica audio nativo. Sin prueba de voz para este cambio visual. [Detalle y evidencia](PLATFORMS.md).
+
 ## ZIP nuevo, recuperación de letras y limpieza · 15 de octubre de 2026
 
 Versión activa: código `078a55b86bebcf672f917eab6901380d67e6708a`, imagen `e37d538ea9840c2020ee1b10cb917f913c6c21af92649f2a677d5a296742d096`. Healthy, cero reinicios y errores de arranque; 19 raíces slash, Fun con 22 opciones, sin NSFW. Se verificaron los hashes de 1246 archivos de la imagen. Las 16 entradas locales previas siguen conservadas y excluidas del despliegue. Nazha seleccionado, Serenetia y MilloHost conectados; privado excluido, apagado, sin reinicio ni puerto 2333. Imágenes y Redis conservan sus contenedores. Las versiones que siguen abajo son antecedentes históricos, no instrucciones de recuperación vigentes.

@@ -6,7 +6,7 @@ El contrato se conserva en `assets/obey/registry.json`; las claves musicales his
 
 ## Estado vigente · 15 de octubre de 2026
 
-El ZIP actualizado amplía el registro a 301 materiales y 280 emojis (270 PNG, diez GIF). Se sincronizaron los 280 con la aplicación sin errores y se verificaron dentro del bot desplegado. El icono adulto del paquete no forma parte de esta instalación. Los materiales iniciales y sus variantes siguen disponibles para tarjetas y compatibilidad. Ver [integración actual](LATEST-PACKAGE.md).
+El ZIP actualizado amplía el registro a 316 materiales y 295 emojis (285 PNG, diez GIF). Se sincronizaron los 295 con la aplicación sin errores y se verificaron dentro del bot desplegado. El icono adulto del paquete no forma parte de esta instalación. Los materiales iniciales y sus variantes siguen disponibles para tarjetas y compatibilidad. Los 15 recursos añadidos son logos de plataformas y no sustituyen los controles propios. Ver [integración actual](PLATFORMS.md).
 
 ## Validación sin credenciales ni llamadas externas
 
@@ -16,9 +16,9 @@ node scripts/obey-assets.js --keys=play,pause,queue
 node --test test/obey-assets.test.js test/setup-panel.test.js
 ```
 
-El primer comando valida los 280 recursos seleccionados: 270 PNG y diez GIF, firma, decodificación real, 128×128, peso ≤256 KiB, nombres válidos y hash SHA-256. El modo por defecto es exclusivamente local. Los nombres usan storageKey y hash del plan seleccionado; aliases como repeat/icon.loop no generan copias. `validateAssets()` conserva la validación de los 89 PNG anteriores para compatibilidad; la CLI usa `validateSelectedAssets()`.
+El primer comando valida los 295 recursos seleccionados: 285 PNG y diez GIF, firma, decodificación real, 128×128, peso ≤256 KiB, nombres válidos y hash SHA-256. El modo por defecto es exclusivamente local. Los nombres usan storageKey y hash del plan seleccionado; aliases como repeat/icon.loop no generan copias. `validateAssets()` conserva la validación de los 89 PNG anteriores para compatibilidad; la CLI usa `validateSelectedAssets()`.
 
-El registro ampliado y sus archivos están versionados en Git. El importador inicial `import-obey-materials.js` reproduce únicamente la selección histórica de 82 emojis: no debe ejecutarse sobre el registro ampliado. La CLI de validación/sincronización anterior es la entrada operativa actual y comprueba los 280 recursos antes de cargar.
+El registro ampliado y sus archivos están versionados en Git. El importador inicial `import-obey-materials.js` reproduce únicamente la selección histórica de 82 emojis: no debe ejecutarse sobre el registro ampliado. La CLI de validación/sincronización anterior es la entrada operativa actual y comprueba los 295 recursos antes de cargar.
 
 ## Carga explícita y estado de Discord
 
@@ -30,7 +30,7 @@ El 13 de octubre se cargaron las 82 entradas en la aplicación `1460818547193417
 node scripts/obey-assets.js --apply --keys=play,pause,skip
 ```
 
-Sin `--keys` se seleccionan los 280 emojis. La carga lista los emojis de la aplicación antes de crear; reutiliza los nombres de contenido ya existentes, rechaza ambigüedades/IDs renombrados y nunca elimina ni modifica emojis remotos. No usa endpoints de guild ni modifica servidores. Una respuesta perdida se reconcilia mediante listado, sin repetir el POST a ciegas. Si el listado confirma que no se creó, el mapa v2 registra upload_failed sin guardar detalles privados y continúa con otros recursos. La CLI devuelve estado parcial y código de salida 1 cuando hay fallos; un nuevo intento reutiliza los recursos confirmados. El REST adapter desactiva reintentos de errores del servidor para creaciones. Los rate limits del cliente REST siguen activos.
+Sin `--keys` se seleccionan los 295 emojis. La carga lista los emojis de la aplicación antes de crear; reutiliza los nombres de contenido ya existentes, rechaza ambigüedades/IDs renombrados y nunca elimina ni modifica emojis remotos. No usa endpoints de guild ni modifica servidores. Una respuesta perdida se reconcilia mediante listado, sin repetir el POST a ciegas. Si el listado confirma que no se creó, el mapa v2 registra upload_failed sin guardar detalles privados y continúa con otros recursos. La CLI devuelve estado parcial y código de salida 1 cuando hay fallos; un nuevo intento reutiliza los recursos confirmados. El REST adapter desactiva reintentos de errores del servidor para creaciones. Los rate limits del cliente REST siguen activos.
 
 El mapa se escribe atómicamente después de cada recurso y permite reanudar. Un lock por archivo impide dos sincronizaciones locales simultáneas; no es coordinación distribuida: no ejecutar operadores en distintos hosts a la vez. Un proceso terminado a la fuerza puede dejar `.lock`; comprobar que no está activo antes de retirarlo. Tras cambios de imagen no se borra la versión anterior automáticamente.
 

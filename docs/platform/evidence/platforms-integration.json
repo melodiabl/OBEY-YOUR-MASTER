@@ -1,0 +1,31 @@
+{
+  "zipSha256": "857a2ceb27ca32710fe5ed6cb456088c34fd89161cdbc650b1f663b3b201bab6",
+  "source": "/home/OBEY_Documentacion_correcciones_2026-10-15/OBEY_Documentacion",
+  "zipEntries": 4274,
+  "zipDeleted": true,
+  "deltaOnly": true,
+  "brandsAdded": 15,
+  "existingEmojisPreserved": 280,
+  "mappedEmojis": 295,
+  "failedUploads": 0,
+  "selectedMaterials": 316,
+  "animatedEmojis": 10,
+  "newRasterLogosVerifiedByHash": 15,
+  "existingGraphicsUnmodified": true,
+  "previousLocalFilesPreserved": 16,
+  "tests": {
+    "tests": 501,
+    "pass": 501,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "imageFilesVerified": 103,
+  "voicePlaybackPerformed": false,
+  "remoteApplication": {
+    "applicationTotal": 330,
+    "selectedMapped": 295,
+    "platformLogosMapped": 15,
+    "animatedSelected": 10
+  }
+}

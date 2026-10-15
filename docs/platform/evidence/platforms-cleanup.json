@@ -1,0 +1,16 @@
+{
+  "retiredExtraction": "/home/OBEY_Documentacion_actualizada_2026-10-15",
+  "bytesRemoved": 152563846,
+  "newSourceRetained": "/home/OBEY_Documentacion_correcciones_2026-10-15",
+  "zipDeleted": true,
+  "activeDataAndBaselinePreserved": true,
+  "removedOldImageTag": "localhost/obey-your-master_bot:release-queue-finish-20261015",
+  "retainedImageTags": [
+    "release-platforms-20261015",
+    "release-package-20261015",
+    "latest"
+  ],
+  "temporaryFilesRemoved": 111,
+  "temporaryBytesRemoved": 999514,
+  "temporaryDirectoryRemoved": "/tmp/obey-platform-corrections"
+}
