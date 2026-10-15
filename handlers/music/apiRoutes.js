@@ -7,6 +7,7 @@
 // Debe montarse DESPUÉS del middleware de sesión.
 // ─────────────────────────────────────────────────────────────────────────────
 const { database } = require('./database')
+const validURL = value => typeof value === 'string' && value.length <= 2048 && (() => { try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) && !u.username && !u.password } catch { return false } })()
 
 module.exports = (app, client, {
   canManageGuild = () => false,
@@ -61,19 +62,44 @@ module.exports = (app, client, {
   }))
 
   // ── Privado (userId SIEMPRE de la sesión) ────────────────────────────────────
-  app.get('/api/music/liked',  apiAuth, wrap(async (req, res) => ok(res, await database.getLikedSongs(uid(req)))))
+  app.get('/api/music/liked', apiAuth, wrap(async (req, res) => {
+    res.set('Cache-Control', 'private, no-store')
+    ok(res, await repository.getLikedSongs(uid(req)))
+  }))
   app.get('/api/music/recent', apiAuth, wrap(async (req, res) => ok(res, await database.getRecentlyPlayed(uid(req), Math.max(1, Math.min(100, Number(req.query.limit) || 20))))))
 
   app.post('/api/music/like', apiAuth, wrap(async (req, res) => {
     const userId = uid(req)                       // ← de la sesión, NO del body
-    const { trackId, title, author, uri, artwork, length, isStream } = req.body || {}
-    if (!trackId) return bad(res, 400, 'missing trackId')
-    if (await database.isTrackLiked(userId, trackId)) {
-      await database.removeFromLikedSongs(userId, trackId)
-      return ok(res, { liked: false })
-    }
-    await database.addToLikedSongs(userId, trackId, title, author, uri, artwork, length, isStream)
-    ok(res, { liked: true })
+    const { trackId, title, author, uri, artwork, length, isStream, sourceName, liked } = req.body || {}
+    if (typeof trackId !== 'string' || !trackId || trackId.length > 8192 ||
+        [title, author, sourceName].some(v => v !== undefined && (typeof v !== 'string' || v.length > 256)) ||
+        liked !== undefined && typeof liked !== 'boolean' ||
+        length !== undefined && (!Number.isFinite(length) || length < 0) ||
+        isStream !== undefined && typeof isStream !== 'boolean') return bad(res, 400, 'invalid_track')
+    if (uri !== undefined && !validURL(uri) || artwork != null && !validURL(artwork) || liked === true && !uri) return bad(res, 400, 'invalid_track')
+    const track = { trackId, info: { title, author, uri, artworkUrl: artwork, length, isStream, sourceName } }
+    if (uri && !require('./nodes-config').allowedMusicTrack(track)) return bad(res, 400, 'source_not_allowed')
+    const result = await repository.setLikedSong(userId, track, liked)
+    if (!result) return bad(res, 400, 'invalid_track')
+    ok(res, { liked: result.liked })
+  }))
+
+  app.post('/api/music/liked/play/:guildId', apiAuth, requireFreshGuildPermissions, guildAccess, wrap(async (req, res) => {
+    const guildId = req.params.guildId, guild = client.guilds.cache.get(guildId), player = music()
+    if (!player) return bad(res, 503, 'no_music')
+    const requested = req.body?.voiceChannelId
+    if (requested !== undefined && (typeof requested !== 'string' || guild.channels.cache.get(requested)?.type !== 2)) return bad(res, 400, 'invalid_voice_channel')
+    const voiceId = requested || player.getState(guildId)?.voiceChannelId
+    if (!voiceId) return bad(res, 400, 'no_voice_channel')
+    const songs = await repository.getLikedSongs(uid(req))
+    const tracks = songs.filter(song => validURL(song.uri)).map(song => ({
+      info: { title: song.title, author: song.author, uri: song.uri, artworkUrl: song.artworkUrl || song.artwork,
+        length: song.length, isStream: song.isStream, sourceName: song.sourceName || '' },
+    })).filter(require('./nodes-config').allowedMusicTrack)
+    if (!tracks.length) return bad(res, 400, 'empty_collection')
+    const added = await player.playCollection(guildId, voiceId, player.getState(guildId)?.textChannelId || guild.systemChannelId || '',
+      tracks, { id: uid(req), username: req.session.user.username })
+    ok(res, { added })
   }))
 
   // ── Playlist (privado, con verificación de propiedad) ────────────────────────

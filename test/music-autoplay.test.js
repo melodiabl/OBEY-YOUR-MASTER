@@ -42,3 +42,14 @@ test('a manually queued song takes priority over an autoplay result', async () =
   resolve({ tracks: [track('Automatic')] }); await Promise.all([next, queued])
   assert.deepEqual(f.played, ['Requested'])
 })
+test('a saved collection takes priority while autoplay is still searching', async () => {
+  const f = fixture('autoplay-collection'); let resolve
+  f.client.music.search = () => new Promise(done => { resolve = done })
+  f.client.music.joinChannel = async () => f.player
+  const next = f.client.music._playNext(f.id, f.player)
+  await new Promise(done => setImmediate(done))
+  const added = f.client.music.playCollection(f.id, 'voice', 'text', [track('Requested')], { id: 'u' })
+  resolve({ tracks: [track('Automatic')] })
+  await Promise.all([next, added])
+  assert.deepEqual(f.played, ['Requested'])
+})

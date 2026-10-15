@@ -1,0 +1,9 @@
+{
+  "scope": "Real MongoDB in a new disposable collection",
+  "legacyDeduplication": true,
+  "ownerIsolation": true,
+  "repeatedSave": true,
+  "persistedAcrossServiceRestart": true,
+  "removal": true,
+  "collectionRemoved": true
+}

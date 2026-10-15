@@ -2,8 +2,7 @@ const obeyMeta = require("../presentation/metadata")
 const obeyUi = require("../assets/system")
 const { registry } = require('../assets/registry')
 const { t } = require('../i18n')
-// Lógica compartida del sistema de favoritos ("liked songs"), replica exacta de Soundy.
-// Usada por prefix, slash y el botón ❤️ del Now Playing.
+// Colección personal compartida por comandos, botón de Discord y panel web.
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const LikedSongs = require('../../database/schemas/LikedSongsSchema')
 const { config } = require('../music/config')
@@ -24,51 +23,61 @@ function fmtDuration(ms, isStream) {
     : `${m}:${String(sec).padStart(2, '0')}`
 }
 
-// Clave única del track: encoded → identifier → uri (igual que Soundy: encoded || identifier)
+// The URI survives a node change; historical encoded/identifier keys remain readable.
 function trackKey(track) {
   const info = track?.info || track || {}
-  return track?.encoded || info.identifier || info.uri || null
+  return [info.catalogUri, info.uri, info.identifier, track?.trackId, track?.encoded].find(v => typeof v === 'string' && v.length > 0) || null
 }
 
 function trackMeta(track) {
   const info = track?.info || track || {}
   return {
-    uri:        info.uri || '',
+    uri:        [info.catalogUri, info.uri].find(v => typeof v === 'string' && v) || '',
     title:      info.title || 'Desconocido',
     author:     info.author || 'Desconocido',
     artworkUrl: info.artworkUrl || info.thumbnail || null,
     length:     info.length || info.duration || 0,
     isStream:   !!info.isStream,
-    sourceName: info.sourceName || info.catalogSourceName || '',
+    sourceName: info.catalogSourceName || info.sourceName || '',
   }
 }
 
-async function isTrackLiked(userId, track) {
-  const trackId = trackKey(track)
-  if (!userId || !trackId) return false
-  return !!(await LikedSongs.exists({ userId, trackId }).catch(() => false))
-}
-
-// Toggle: devuelve { liked: true|false, meta } o null si error/sin datos
-async function toggleLike(userId, track) {
-  const trackId = trackKey(track)
-  if (!userId || !trackId) return null
-  const meta = trackMeta(track)
-  const existing = await LikedSongs.findOne({ userId, trackId }).catch(() => null)
-  if (existing) {
-    await LikedSongs.deleteOne({ _id: existing._id }).catch(() => {})
-    return { liked: false, meta }
+function createLikedSongsService(store) {
+  const writes = require('./action-queue').createActionQueue()
+  function identity(userId, track) {
+    if (typeof userId !== 'string' || !userId || !trackKey(track)) return null
+    const info = track?.info || track || {}, uri = trackMeta(track).uri
+    const keys = [...new Set([trackKey(track), track?.trackId, track?.encoded, info.identifier].filter(v => typeof v === 'string' && v))]
+    return { userId, $or: [...keys.map(trackId => ({ trackId })), ...(uri ? [{ uri }] : [])] }
   }
-  await LikedSongs.create({ userId, trackId, ...meta }).catch(() => {})
-  return { liked: true, meta }
-}
-
-async function getLikedSongs(userId) {
-  return LikedSongs.find({ userId }).sort({ likedAt: -1 }).lean().catch(() => [])
-}
-
-async function getLikedSongsCount(userId) {
-  return LikedSongs.countDocuments({ userId }).catch(() => 0)
+  async function isTrackLiked(userId, track) {
+    const query = identity(userId, track)
+    return query ? Boolean(await store.findOne(query)) : false
+  }
+  async function setLiked(userId, track, desired) {
+    const query = identity(userId, track)
+    if (!query) return null
+    return writes.run(userId, async () => {
+      const existing = await store.findOne(query), meta = trackMeta(track)
+      const liked = typeof desired === 'boolean' ? desired : !existing
+      if (!liked) await store.deleteMany(query)
+      else if (!existing) {
+        await store.updateOne({ userId, trackId: trackKey(track) }, { $setOnInsert: meta }, { upsert: true })
+      }
+      return { liked, meta }
+    })
+  }
+  async function getLikedSongs(userId) {
+    if (typeof userId !== 'string' || !userId) return []
+    const rows = await store.find({ userId }).sort({ likedAt: -1 }).lean(), seen = new Set()
+    return rows.filter(row => {
+      const key = row.uri || row.trackId
+      if (!key || seen.has(key)) return false
+      seen.add(key); return true
+    })
+  }
+  return { isTrackLiked, setLiked, toggleLike: (userId, track) => setLiked(userId, track),
+    getLikedSongs, getLikedSongsCount: async userId => (await getLikedSongs(userId)).length }
 }
 
 // ── UI ──────────────────────────────────────────────────────────────────────
@@ -77,7 +86,7 @@ async function getLikedSongsCount(userId) {
 function buildLikeEmbed({ liked, meta }) {
   const embed = new EmbedBuilder()
     .setColor(liked ? PRIMARY : NEUTRAL)
-    .setTitle(obeyUi.limit(`${HEART} ${liked ? 'Añadida a favoritos' : 'Quitada de favoritos'}`, 256))
+    .setTitle(obeyUi.limit(`${HEART} ${liked ? 'Añadida a Tus Me gusta' : 'Quitada de Tus Me gusta'}`, 256))
     .setDescription(obeyUi.limit(`${obeyUi.markup("icon.music")} **[${meta.title}](${meta.uri})**\n${obeyUi.markup("icon.microphone")} \`${meta.author}\``, 4096))
     .setTimestamp()
   if (meta.artworkUrl) embed.setThumbnail(meta.artworkUrl)
@@ -121,6 +130,6 @@ function buildLikedRows(page, totalPages, locale = 'es') {
 }
 
 module.exports = {
-  trackKey, trackMeta, isTrackLiked, toggleLike, getLikedSongs, getLikedSongsCount,
+  trackKey, trackMeta, createLikedSongsService, ...createLikedSongsService(LikedSongs),
   buildLikeEmbed, buildLikedPages, buildLikedRows,
 }

@@ -1,0 +1,36 @@
+.liked-cover{display:grid!important;place-items:center;background:#5145a6!important;color:#fff!important}
+.liked-cover i{font-size:1.7rem}
+.liked-side-meta{display:flex;flex-direction:column;min-width:0;text-align:left}
+.side-pl button>div{display:flex;flex-direction:column;min-width:0;text-align:left}
+#side-liked[aria-current="page"]{background:var(--hover)}
+#liked-library{text-align:left}
+.playlist-header{display:flex;align-items:center;gap:16px;margin:8px 0 24px;flex-wrap:wrap}
+.playlist-heading{flex:1;min-width:140px}
+#pl-description{font-size:14px;color:var(--txt2);margin-top:8px}
+#pl-cover{width:88px;height:88px;border-radius:12px;flex:none}
+#pl-cover i{font-size:2.5rem}
+#pl-cover[hidden],#pl-play[hidden]{display:none!important}
+.playlist-play{min-height:44px;display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 22px;border-radius:24px;background:var(--accent);color:var(--bg);font-weight:700}
+.playlist-play:disabled{opacity:.45;cursor:default}
+.liked-track-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.liked-track{display:grid;grid-template-columns:24px minmax(0,1fr) 58px 44px;gap:12px;align-items:center;padding:10px 6px;border-bottom:1px solid var(--line);min-width:0}
+.liked-track-number,.liked-track-duration{color:var(--txt2);font-size:13px;text-align:center}
+.liked-track-play{display:flex;align-items:center;gap:14px;min-width:0;text-align:left;border-radius:6px;min-height:48px}
+.liked-track-play:hover b{color:var(--accent)}
+.liked-track-play img{width:44px;height:44px;object-fit:cover;border-radius:6px;flex:none}
+.liked-track-meta{display:flex;flex-direction:column;min-width:0;gap:4px}
+.liked-track-meta b,.liked-track-meta span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.liked-track-meta b{font-size:15px;font-weight:600}
+.liked-track-meta span{font-size:13px;color:var(--txt2)}
+.liked-track-remove{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--accent)}
+.liked-track-remove:hover{background:var(--hover)}
+.vrow{width:100%;text-align:left}
+@media(max-width:520px){
+  #pl-cover{width:64px;height:64px}
+  .playlist-header{gap:12px}
+  .playlist-heading{min-width:100px}
+  .playlist-heading .vtitle{font-size:22px}
+  .liked-track{grid-template-columns:minmax(0,1fr) 44px;gap:6px}
+  .liked-track-number,.liked-track-duration{display:none}
+  .playlist-play{width:100%}
+}

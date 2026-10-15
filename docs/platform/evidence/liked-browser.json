@@ -1,0 +1,18 @@
+{
+  "scope": "Real EJS and browser scripts, stateful isolated API fixtures; no live voice",
+  "states": [
+    "pinned personal collection",
+    "library playlist",
+    "play all",
+    "legacy key unlike",
+    "empty state",
+    "heart state",
+    "save again",
+    "reload",
+    "refresh from independent backend update",
+    "ordinary playlists preserved",
+    "desktop and mobile",
+    "safe provider text"
+  ],
+  "errors": []
+}

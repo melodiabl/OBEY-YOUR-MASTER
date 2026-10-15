@@ -208,6 +208,9 @@ class MusicDatabase {
   }
 
   // ── Liked songs (reusa LikedSongsSchema de OBEY) ───────────────────────────────
+  async setLikedSong(userId, track, liked) {
+    return require('./likes').setLiked(userId, track, liked)
+  }
   async addToLikedSongs(userId, trackId, title, author, uri, artwork, length, isStream) {
     try {
       await LikedSongs.create({ userId, trackId, title, author, uri,
@@ -226,9 +229,8 @@ class MusicDatabase {
   }
 
   async getLikedSongs(userId, limit = 0) {
-    const q = LikedSongs.find({ userId }).sort({ likedAt: -1 })
-    if (limit) q.limit(limit)
-    const rows = await q.lean().catch(() => [])
+    const songs = await require('./likes').getLikedSongs(userId)
+    const rows = limit ? songs.slice(0, limit) : songs
     // normalizar nombre de campo artwork para el código portado de Soundy
     return rows.map(r => ({ ...r, artwork: r.artworkUrl }))
   }

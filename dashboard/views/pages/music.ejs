@@ -134,6 +134,7 @@ button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
 .lyrics-panel[hidden]{display:none}.lyrics-head,.lyrics-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.lyrics-head{justify-content:space-between;margin-bottom:16px}.lyrics-controls{margin-top:16px}.lyrics-controls button,.lyrics-toggle{padding:9px 14px;border:1px solid var(--line);border-radius:9px;background:var(--hover)}.lyrics-toggle{margin-top:12px}.lyrics-panel button:disabled{opacity:.4;cursor:default}.lyrics-panel button:focus-visible,.lyrics-toggle:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}.lyrics-body{max-height:min(42dvh,480px);overflow:auto;overflow-wrap:anywhere;line-height:1.9}.lyric-line{color:var(--txt2);padding:4px 8px;border-radius:6px;white-space:pre-wrap}.lyric-line.active{color:var(--txt);background:rgba(88,101,242,.2);font-weight:700}.lyrics-status{font-size:13px;color:var(--txt2);margin-bottom:12px}
 </style>
 <link rel="stylesheet" href="/css/music-theme.css">
+<link rel="stylesheet" href="/css/liked-songs.css">
 </head>
 <body class="idle">
 <div class="scrim" id="scrim"></div>
@@ -148,7 +149,7 @@ button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
       <a href="/dashboard/<%= guild.id %>"><i class="fas fa-gear"></i> Configuración</a>
       <a href="/nodes/<%= guild.id %>"><i class="fas fa-network-wired"></i> Conexiones de música</a>
     </nav>
-    <div class="side-pl"><div class="h"><span>Tus Playlists</span></div><div id="side-pls"></div></div>
+    <div class="side-pl"><div class="h"><span>Tus playlists</span></div><button type="button" id="side-liked"><span class="c liked-cover"><i class="fas fa-heart" aria-hidden="true"></i></span><span class="liked-side-meta"><b>Tus Me gusta</b><span id="side-liked-count">Cargando…</span></span></button><div id="side-pls"></div></div>
     <div class="side-foot"><a href="/terms.html">Condiciones</a><a href="/privacy.html">Privacidad</a></div>
   </aside>
 
@@ -221,15 +222,16 @@ button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
       <!-- VISTA BIBLIOTECA -->
       <div class="view" id="view-library">
         <div class="vtitle"><i class="fas fa-compact-disc" style="color:var(--accent)"></i> Tu Biblioteca</div>
-        <section class="sec"><div class="sec-h"><h2><i class="fas fa-heart" style="color:var(--accent)"></i> Tus favoritos</h2></div><div class="grid" id="g-fav"><div class="empty">Cargando…</div></div></section>
         <section class="sec"><div class="sec-h"><h2><i class="fas fa-folder" style="color:var(--accent)"></i> Tus playlists</h2></div><div class="grid" id="g-pl"><div class="empty">Cargando…</div></div></section>
       </div>
 
       <!-- VISTA PLAYLIST (detalle) -->
       <div class="view" id="view-playlist">
-        <div style="display:flex;align-items:center;gap:12px;margin:8px 0 20px">
+        <div id="pl-header" class="playlist-header">
           <button class="gb" id="pl-back" style="width:42px;height:42px"><i class="fas fa-arrow-left"></i></button>
-          <div class="vtitle" id="pl-title" style="margin:0"><i class="fas fa-folder" style="color:var(--accent)"></i> Playlist</div>
+          <div id="pl-cover" class="liked-cover" hidden><i class="fas fa-heart" aria-hidden="true"></i></div>
+          <div class="playlist-heading"><h1 class="vtitle" id="pl-title" style="margin:0">Playlist</h1><p id="pl-description" aria-live="polite"></p></div>
+          <button type="button" class="playlist-play" id="pl-play" hidden><i class="fas fa-play" aria-hidden="true"></i> <span id="pl-play-label">Reproducir</span></button>
         </div>
         <div class="grid" id="g-pldetail"><div class="empty">Cargando…</div></div>
       </div>
@@ -296,6 +298,7 @@ button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none!important}
 <script src="/js/player-state.js"></script>
 <script src="/js/player-lyrics.js"></script>
 <script src="/js/track-artwork.js"></script>
+<script src="/js/liked-songs.js"></script>
 <script>
 const GID='<%= guild.id %>'; const PREFIX=<%- JSON.stringify(prefix).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029') %>; const H={'Content-Type':'application/json'};
 const S=s=>String(s??'').replace(/[&<>"'`]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'}[c]));
@@ -305,40 +308,35 @@ const fmt=ms=>{const t=Math.max(0,Math.floor((ms||0)/1000));return `${Math.floor
 function toast(m,ok=true){const d=document.createElement('div');d.textContent=m;d.style.cssText=`background:${ok?'#5865F2':'#ED4245'};color:#fff;padding:11px 16px;border-radius:11px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.4)`;$('#toasts').appendChild(d);setTimeout(()=>d.remove(),3200)}
 async function api(url,opts){try{const r=await fetch(url,opts);const j=await r.json().catch(()=>({}));return{ok:r.ok,j}}catch{return{ok:false,j:{}}}}
 
-let pendingUri=null;
+let pendingPlay=null;
 async function play(uri,vcId){if(!uri)return;const body=vcId?{uri,voiceChannelId:vcId}:{uri};const{ok,j}=await api(`/api/player/${GID}/add`,{method:'POST',headers:H,body:JSON.stringify(body)});if(ok&&j.ok===true){toast('🎵 Añadido a la cola');setTimeout(refresh,500)}else if(j.error==='no_voice_channel'){openVoice(uri)}else toast('No se pudo reproducir. Comprueba los permisos e inténtalo de nuevo.',false)}
-async function openVoice(uri){pendingUri=uri;const{j}=await api(`/api/player/${GID}/voice-channels`);const chans=j.channels||[];if(!chans.length){toast('No hay canales de voz disponibles',false);return}const list=$('#v-list');list.innerHTML='';chans.forEach(c=>{const r=document.createElement('div');r.className='vrow';r.innerHTML=`<i class="fas fa-volume-high"></i><span>${S(c.name)}</span><small>${c.members} 👥</small>`;r.addEventListener('click',()=>{$('#vmodal').classList.remove('open');play(pendingUri,c.id)});list.appendChild(r)});$('#vmodal').classList.add('open')}
-async function unlike(trackId,el){const{ok}=await api('/api/music/like',{method:'POST',headers:H,body:JSON.stringify({trackId})});if(ok){el.closest('.card')?.remove();toast('💔 Quitado de favoritos')}}
+async function openVoice(request){pendingPlay=typeof request==='function'?request:id=>play(request,id);const{j}=await api('/api/player/'+GID+'/voice-channels');const chans=j.channels||[];if(!chans.length){toast('No hay canales de voz disponibles',false);return}const list=$('#v-list');list.innerHTML='';chans.forEach(c=>{const row=document.createElement('button');row.type='button';row.className='vrow';const label=document.createElement('span');label.textContent=c.name;row.append(label);row.addEventListener('click',()=>{const proceed=pendingPlay;$('#vmodal').classList.remove('open');proceed(c.id)});list.append(row)});$('#vmodal').classList.add('open')}
+
 async function action(a,value){const{ok,j}=await api(`/api/player/${GID}/action`,{method:'POST',headers:H,body:JSON.stringify({action:a,value})});if(!ok||j.ok!==true){toast('No se pudo cambiar el reproductor. Inténtalo de nuevo.',false);return false}if(j.state)receiveState(j.state);else refresh();return true}
 
 function card(t,i,o={}){
   const art=trackArtwork.url(t);
   const sub=(t.author||'?')+(o.plays!=null?` · ${o.plays} ▶`:'');
   const el=document.createElement('article');el.className='card';el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label',`Reproducir ${t.title||'pista'}`);
-  el.innerHTML=`${o.rank?`<div class="rk">${i+1}</div>`:''}<div class="ph"><img loading="lazy" src="${S(art)}" onerror="this.onerror=null;this.src='/img/music-placeholder.svg'"><div class="pp"><i class="fas fa-play"></i></div>${o.rm?'<div class="rm" title="Quitar"><i class="fas fa-heart-broken"></i></div>':''}</div><b>${S(t.title||'?')}</b><span>${S(sub)}</span>`;
+  el.innerHTML=`${o.rank?`<div class="rk">${i+1}</div>`:''}<div class="ph"><img loading="lazy" src="${S(art)}" onerror="this.onerror=null;this.src='/img/music-placeholder.svg'"><div class="pp"><i class="fas fa-play"></i></div></div><b>${S(t.title||'?')}</b><span>${S(sub)}</span>`;
   el.querySelector('.pp').addEventListener('click',e=>{e.stopPropagation();play(t.uri)});
   el.addEventListener('click',()=>play(t.uri));
   el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play(t.uri)}});
-  if(o.rm)el.querySelector('.rm').addEventListener('click',e=>{e.stopPropagation();unlike(t.trackId,e.currentTarget)});
   return el;
 }
 function render(id,arr,o={}){const g=$('#'+id);if(!g)return;g.innerHTML='';if(!arr?.length){g.innerHTML=`<div class="empty"><i class="fas ${o.icon||'fa-music'}"></i>${o.empty||'Sin datos'}</div>`;return}arr.forEach((x,i)=>g.appendChild(card(x,i,typeof o.opt==='function'?o.opt(x,i):o.opt)))}
 
-let likedList=[], likedUris=new Set(), likedByUri={}, CURRENT=null;
-function rebuildLiked(){likedUris=new Set();likedByUri={};likedList.forEach(t=>{if(t.uri){likedUris.add(t.uri);likedByUri[t.uri]=t.trackId}});updateHeart()}
-function updateHeart(){const liked=CURRENT&&CURRENT.uri&&likedUris.has(CURRENT.uri);['#bar-like','#ov-like'].forEach(s=>{const b=$(s);if(!b)return;b.classList.toggle('liked',!!liked);const ic=b.querySelector('i');if(ic)ic.className=(liked?'fas':'far')+' fa-heart'})}
-async function toggleLike(){if(!CURRENT||!CURRENT.uri){toast('Nada sonando',false);return}const trackId=likedUris.has(CURRENT.uri)?(likedByUri[CURRENT.uri]||CURRENT.identifier||CURRENT.uri):(CURRENT.identifier||CURRENT.uri);const body={trackId,title:CURRENT.title,author:CURRENT.author,uri:CURRENT.uri,artwork:CURRENT.artworkUrl,length:CURRENT.length,isStream:CURRENT.isStream};const{ok,j}=await api('/api/music/like',{method:'POST',headers:H,body:JSON.stringify(body)});if(ok){toast(j.data?.liked?'❤️ Añadido a favoritos':'💔 Quitado de favoritos');const r=await api('/api/music/liked');likedList=r.j.data||[];rebuildLiked();render('g-fav',likedList,{opt:{rm:true},icon:'fa-heart',empty:'No tienes favoritos. Usa ❤️.'})}else toast('No se pudo',false)}
+let CURRENT=null;
+const likedSongs=createLikedSongs({api,headers:H,guildId:GID,current:()=>CURRENT,playTrack:uri=>play(uri),chooseVoice:openVoice,navigate:setView,toast,artwork:track=>trackArtwork.url(track),format:fmt});
 async function openPlaylist(id,name){setView('playlist');$('#pl-title').innerHTML=`<i class="fas fa-folder" style="color:var(--accent)"></i> ${S(name)}`;$('#g-pldetail').innerHTML='<div class="empty">Cargando…</div>';const{ok,j}=await api(`/api/playlist/view/${encodeURIComponent(id)}`);if(!ok){$('#g-pldetail').innerHTML='<div class="empty"><i class="fas fa-triangle-exclamation"></i>No se pudo cargar la playlist.</div>';return}const tracks=(j.data?.tracks||[]).map(t=>({title:(t.info&&t.info.title)||t.title||t.url,author:(t.info&&t.info.author)||t.author||'',uri:(t.info&&t.info.uri)||t.uri||t.url,artworkUrl:(t.info&&t.info.artworkUrl)||t.artworkUrl}));render('g-pldetail',tracks,{icon:'fa-folder-open',empty:'Esta playlist está vacía'})}
 async function loadLists(){
-  const[fav,rec,top,pl]=await Promise.all([api('/api/music/liked'),api('/api/music/recent'),api(`/api/top/tracks?guildId=${GID}&limit=12`),api('/api/playlist/list')]);
-  likedList=fav.j.data||[]; rebuildLiked();
-  render('g-fav',fav.j.data,{opt:{rm:true},icon:'fa-heart',empty:'No tienes favoritos. Usa ❤️ en el bot.'});
+  const[,rec,top,pl]=await Promise.all([likedSongs.reload(),api('/api/music/recent'),api(`/api/top/tracks?guildId=${GID}&limit=12`),api('/api/playlist/list')]);
   render('g-rec',rec.j.data,{opt:t=>({plays:t.playCount}),icon:'fa-clock',empty:'Sin reproducciones recientes.'});
   render('g-top',top.j.data,{opt:(t)=>({rank:true,plays:t.playCount,artworkUrl:t.artwork}),icon:'fa-chart-line',empty:'Aún no hay datos. ¡Reproduce música!'});
-  const pls=pl.j.data||[];$('#g-pl').innerHTML=pls.length?'':'<div class="empty"><i class="fas fa-folder-open"></i>No tienes playlists.</div>';$('#side-pls').innerHTML='';
+  const pls=Array.isArray(pl.j.data)?pl.j.data:[];$('#g-pl').replaceChildren(likedSongs.libraryCard());$('#side-pls').innerHTML='';
   pls.forEach(p=>{const c=document.createElement('button');c.type='button';c.className='card';c.innerHTML=`<div class="ph" style="display:grid;place-items:center;background:linear-gradient(135deg,#2b2b35,#16161c);color:var(--txt3);font-size:1.6rem"><i class="fas fa-folder"></i></div><b>${S(p.name)}</b><span>${(p.tracks||[]).length} pistas</span>`;$('#g-pl').appendChild(c);const a=document.createElement('button');a.type='button';a.innerHTML=`<span class="c"><i class="fas fa-folder"></i></span><div><b>${S(p.name)}</b><span>${(p.tracks||[]).length} pistas</span></div>`;$('#side-pls').appendChild(a);const open=()=>openPlaylist(p._id,p.name);c.addEventListener('click',open);a.addEventListener('click',open)});
   const requestedPlaylist=new URLSearchParams(location.hash.slice(1)).get('playlist');
-  if(requestedPlaylist){const selected=pls.find(p=>String(p._id)===requestedPlaylist);if(selected)openPlaylist(selected._id,selected.name)}
+  if(requestedPlaylist==='liked')likedSongs.show();else if(requestedPlaylist){const selected=pls.find(p=>String(p._id)===requestedPlaylist);if(selected)openPlaylist(selected._id,selected.name)}
 }
 
 /* búsqueda en la vista Buscar */
@@ -375,8 +373,8 @@ function applyState(s){
   volumeControl.receive(s?.volume);
   $('#audio-filter').value = !s?.filter || s.filter==='none' ? 'off' : s.filter;
   $('#audio-filter').disabled=!cur;
-  CURRENT=cur; updateHeart();
-  $$('button[data-act],button[data-loop],#bar-like,#ov-like').forEach(button=>{button.disabled=!cur});
+  CURRENT=cur; likedSongs.updateHeart();
+  $$('button[data-act],button[data-loop]').forEach(button=>{button.disabled=!cur});
   renderQueue(s);
   $('#lyrics-toggle').disabled=!cur;
   lyricsControl.receive(s);
@@ -423,7 +421,7 @@ const volumeControl=createVolumeControl({
 });
 
 /* navegación entre vistas */
-function setView(v){$$('.view').forEach(x=>x.classList.remove('active'));$('#view-'+v)?.classList.add('active');$$('[data-view]').forEach(a=>a.classList.toggle('on',a.dataset.view===v));window.scrollTo?.(0,0);$('.main').scrollTop=0;closeS();if(v==='search')setTimeout(()=>$('#bq').focus(),60)}
+function setView(v){likedSongs.leave();$$('.view').forEach(x=>x.classList.remove('active'));$('#view-'+v)?.classList.add('active');$$('[data-view]').forEach(a=>a.classList.toggle('on',a.dataset.view===v));window.scrollTo?.(0,0);$('.main').scrollTop=0;closeS();if(v==='search')setTimeout(()=>$('#bq').focus(),60)}
 $$('[data-view]').forEach(a=>a.addEventListener('click',()=>setView(a.dataset.view)));
 
 /* eventos de control */
@@ -449,8 +447,8 @@ $('#menu').addEventListener('click',()=>{sb.classList.add('open');sc.classList.a
 $('#q-toggle').addEventListener('click',()=>$('#queuep').classList.toggle('open'));
 $('#q-close').addEventListener('click',()=>$('#queuep').classList.remove('open'));
 $('#v-cancel').addEventListener('click',()=>$('#vmodal').classList.remove('open'));
-$('#bar-like').addEventListener('click',e=>{e.stopPropagation();toggleLike()});
-$('#ov-like').addEventListener('click',toggleLike);
+$('#bar-like').addEventListener('click',e=>{e.stopPropagation();likedSongs.toggle()});
+$('#ov-like').addEventListener('click',()=>likedSongs.toggle());
 $('#pl-back').addEventListener('click',()=>setView('library'));
 
 const GENRES=[

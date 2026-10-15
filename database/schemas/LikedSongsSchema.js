@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose')
 // Canciones marcadas como favoritas por cada usuario (sistema "like" estilo Soundy)
 const schema = new Schema({
   userId:     { type: String, required: true },
-  trackId:    { type: String, required: true }, // info.identifier (o uri como fallback)
+  trackId:    { type: String, required: true }, // URI for new saves; legacy identifiers/encodings stay readable.
   uri:        { type: String, default: '' },
   title:      { type: String, default: '' },
   author:     { type: String, default: '' },

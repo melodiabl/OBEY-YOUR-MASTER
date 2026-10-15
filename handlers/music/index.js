@@ -209,6 +209,23 @@ module.exports = client => {
       })
     },
 
+    async playCollection(guildId, voiceChannelId, textChannelId, tracks, requester) {
+      const state = getState(guildId), epoch = state.requestEpoch || 0
+      if (!Array.isArray(tracks) || !tracks.length || tracks.some(track => !allowedMusicTrack(track))) throw new Error('invalid_collection')
+      const waitingForAutoplay = Boolean(state.autoplaySearching)
+      if (waitingForAutoplay) state.pendingEnqueues = (state.pendingEnqueues || 0) + 1
+      return actions.run(guildId, async () => {
+        const current = () => !client._shuttingDown && getState(guildId) === state && (state.requestEpoch || 0) === epoch
+        if (!current()) throw new Error('collection_cancelled')
+        if (state.nodeTransition) throw new Error('node_transition')
+        await this.joinChannel(guildId, voiceChannelId, textChannelId)
+        if (!current()) throw new Error('collection_cancelled')
+        const rows = tracks.map(track => ({ ...track, info: { ...(track.info || track),
+          requester: requester?.username || 'Usuario', requesterId: requester?.id } }))
+        return this.enqueue(guildId, rows)
+      }).finally(() => { if (waitingForAutoplay) state.pendingEnqueues-- })
+    },
+
     async enqueue(guildId, tracks, { front = false, skip = false } = {}) {
       if (!Array.isArray(tracks) || !tracks.length) throw new Error('No hay pistas para añadir.')
       if (tracks.some(track => !allowedMusicTrack(track))) throw new Error('source_not_allowed')
