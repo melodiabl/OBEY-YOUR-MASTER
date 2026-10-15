@@ -1,3 +1,5 @@
+const obeyUi = require("../assets/system")
+const obeyMeta = require("../presentation/metadata")
 const clock = require('./playback-clock')
 // ─────────────────────────────────────────────────────────────────────────────
 // OBEY — Motor de música v2: UI del Now Playing (port de Soundy SetupEmbed.ts).
@@ -6,7 +8,7 @@ const clock = require('./playback-clock')
 // customIds con prefijo `m2_` para no chocar con el motor actual (`mp_`).
 // ─────────────────────────────────────────────────────────────────────────────
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
-const { fmtMs, progressBar, platform } = require('../music/utils')
+const { fmtMs, progressBar, platform, MUSIC_ICON } = require('../music/utils')
 const { config } = require('./config')
 
 const E = config.emoji
@@ -28,7 +30,7 @@ function buildNowPlaying(client, state, positionMs = null) {
   const track = state?.currentTrack
   if (!track) {
     return {
-      embeds: [new EmbedBuilder().setColor(0x2b2d31).setDescription(`${E.music} Sin música reproduciéndose.`)],
+      embeds: [new EmbedBuilder().setColor(0x2b2d31).setDescription(obeyUi.limit(`${E.music} Sin música reproduciéndose.`, 4096))],
       components: [],
     }
   }
@@ -51,8 +53,8 @@ function buildNowPlaying(client, state, positionMs = null) {
 
   const embed = new EmbedBuilder()
     .setColor(state.paused ? 0x4f545c : plat.color)
-    .setAuthor({ name: state.paused ? 'Pausado' : 'Reproduciendo ahora', iconURL: 'https://cdn.darrennathanael.com/icons/spinning_disk.gif' })
-    .setDescription(`## ${uri ? `[${title}](${uri})` : title}\n${progressBar(pos, dur)}  \`${fmtMs(pos)} / ${isStream ? 'LIVE' : fmtMs(dur)}\``)
+    .setAuthor(obeyMeta.asAuthor({ name: state.paused ? 'Pausado' : 'Reproduciendo ahora', iconURL: MUSIC_ICON }))
+    .setDescription(obeyUi.limit(`## ${uri ? `[${title}](${uri})` : title}\n${progressBar(pos, dur)}  \`${fmtMs(pos)} / ${isStream ? 'LIVE' : fmtMs(dur)}\``, 4096))
     .addFields(
       { name: `${E.artist} Artista`,  value: `\`${author}\``, inline: true },
       { name: `${E.clock} Duración`,  value: durationText,    inline: true },
@@ -65,7 +67,7 @@ function buildNowPlaying(client, state, positionMs = null) {
   if (art) embed.setImage(art)
 
   const b = (id, emo, style = ButtonStyle.Secondary, disabled = false) =>
-    new ButtonBuilder().setCustomId(id).setEmoji(emo).setStyle(style).setDisabled(disabled)
+    new ButtonBuilder().setCustomId(id).setEmoji(obeyUi.component(emo)).setStyle(style).setDisabled(disabled)
 
   const row1 = new ActionRowBuilder().addComponents(
     b('m2_shuffle',  E.shuffle, state.shuffle ? ButtonStyle.Success : ButtonStyle.Secondary),

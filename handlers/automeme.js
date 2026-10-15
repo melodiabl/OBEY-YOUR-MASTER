@@ -4,7 +4,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const request = require("request");
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 
 const fetch = require("node-fetch");
 var CronJob = require("cron").CronJob;

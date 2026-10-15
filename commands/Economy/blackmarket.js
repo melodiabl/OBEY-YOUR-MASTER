@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { parseMilliseconds, duration, GetUser, nFormatter, ensure_economy_user } = require(
     `${process.cwd()}/handlers/functions`
 );
@@ -19,7 +20,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable1"])),
                 ],
@@ -46,7 +47,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable4"])),
                     ],
@@ -59,7 +60,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable5"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable6"])),
                     ],
@@ -69,7 +70,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable7"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable8"])),
                     ],
@@ -79,7 +80,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable9"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable10"])),
                     ],
@@ -90,7 +91,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable11"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable12"])),
                     ],
@@ -100,7 +101,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable13"])),
                     ],
                 });
@@ -123,7 +124,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
+                        .setFooter(obeyMeta.asFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() }))
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable14"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable15"])),
                 ],
@@ -134,7 +135,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["blackmarket"]["variable16"])),
                 ],

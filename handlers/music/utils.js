@@ -1,8 +1,8 @@
+const obeyUi = require("../assets/system")
 // Shared utility functions for the music system
 
-// GIF animado de disco girando para el author de los embeds de música (estilo Lara/Beatra).
-// CDN directo — no auto-hospedado.
-const MUSIC_ICON = 'https://cdn.darrennathanael.com/icons/spinning_disk.gif'
+// Own application emoji URL after upload; omit the author image while no ID exists.
+const MUSIC_ICON = require('../assets/registry').registry.imageURL('motion.reproduciendo')
 
 function cleanText(value, fallback = '') {
   const text = String(value ?? '').trim()
@@ -31,26 +31,26 @@ function progressBar(current, total, len = 17) {
 
 function platform(uri = '', sourceName = '') {
   const src = sourceName.toLowerCase()
-  if (src === 'spotify'    || /spotify/i.test(uri))                  return { name: 'Spotify',     color: 0x1DB954, emoji: '🟢' }
-  if (src === 'applemusic' || /applemusic|apple.?music/i.test(uri))  return { name: 'Apple Music', color: 0xFA243C, emoji: '🍎' }
-  if (src === 'soundcloud' || /soundcloud/i.test(uri))               return { name: 'SoundCloud',  color: 0xFF5500, emoji: '🟠' }
-  if (src === 'deezer'     || /deezer/i.test(uri))                   return { name: 'Deezer',      color: 0xEF5466, emoji: '🎵' }
-  if (src === 'jiosaavn'   || /jiosaavn/i.test(uri))                 return { name: 'JioSaavn',    color: 0x2BC5B4, emoji: '🎵' }
-  if (src === 'twitch'     || /twitch/i.test(uri))                   return { name: 'Twitch',      color: 0x9146FF, emoji: '🟣' }
-  if (src === 'bandcamp'   || /bandcamp/i.test(uri))                 return { name: 'Bandcamp',    color: 0x1da0c3, emoji: '🔵' }
-  return                                                                      { name: 'YouTube',    color: 0xFF0000, emoji: '🔴' }
+  if (src === 'spotify'    || /spotify/i.test(uri))                  return { name: 'Spotify',     color: 0x1DB954, emoji: obeyUi.owned('🟢') }
+  if (src === 'applemusic' || /applemusic|apple.?music/i.test(uri))  return { name: 'Apple Music', color: 0xFA243C, emoji: obeyUi.owned('🍎') }
+  if (src === 'soundcloud' || /soundcloud/i.test(uri))               return { name: 'SoundCloud',  color: 0xFF5500, emoji: obeyUi.owned('🟠') }
+  if (src === 'deezer'     || /deezer/i.test(uri))                   return { name: 'Deezer',      color: 0xEF5466, emoji: obeyUi.owned('🎵') }
+  if (src === 'jiosaavn'   || /jiosaavn/i.test(uri))                 return { name: 'JioSaavn',    color: 0x2BC5B4, emoji: obeyUi.owned('🎵') }
+  if (src === 'twitch'     || /twitch/i.test(uri))                   return { name: 'Twitch',      color: 0x9146FF, emoji: obeyUi.owned('🟣') }
+  if (src === 'bandcamp'   || /bandcamp/i.test(uri))                 return { name: 'Bandcamp',    color: 0x1da0c3, emoji: obeyUi.owned('🔵') }
+  return                                                                      { name: 'YouTube',    color: 0xFF0000, emoji: obeyUi.owned('🔴') }
 }
 
 function loopEmoji(loop) {
-  if (loop === 'track') return '🔂'
-  if (loop === 'queue') return '🔁'
-  return '➡️'
+  if (loop === 'track') return obeyUi.owned('🔂')
+  if (loop === 'queue') return obeyUi.owned('🔁')
+  return obeyUi.owned('➡️')
 }
 
 function volEmoji(vol) {
-  if (vol === 0) return '🔇'
-  if (vol < 40)  return '🔉'
-  return '🔊'
+  if (vol === 0) return obeyUi.owned('🔇')
+  if (vol < 40)  return obeyUi.owned('🔉')
+  return obeyUi.owned('🔊')
 }
 
 function filterLabel(f) {

@@ -1,3 +1,4 @@
+const obeyMeta = require("./presentation/metadata")
 const Discord = require("discord.js");
 let url = "";
 module.exports = client => {
@@ -57,7 +58,7 @@ module.exports = client => {
                         );
                     embed.setTimestamp();
 
-                    if (oldEmbed.author) embed.setAuthor({ name: oldEmbed.author.name, iconURL: oldEmbed.author.iconURL, url: oldEmbed.author.url });
+                    if (oldEmbed.author) embed.setAuthor(obeyMeta.asAuthor({ name: oldEmbed.author.name, iconURL: oldEmbed.author.iconURL, url: oldEmbed.author.url }));
                     if (oldEmbed.image)
                         try {
                             embed.setImage(oldEmbed.image.url);
@@ -91,9 +92,9 @@ module.exports = client => {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
-                        .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL() });
+                        .setAuthor(obeyMeta.asAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL() }));
                     if (message.content) embed.setDescription(message.content);
 
                     let files = null;

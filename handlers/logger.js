@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 const Discord = require("discord.js");
 const { ChannelType } = Discord;
 const moment = require("moment");
@@ -111,7 +113,7 @@ module.exports = c => {
             .map((m, i) => `${i+1}) ${m.user} — \`${m.user.username}\` — \`${m.user.id}\``)
             .join("\n");
         send_log(c, guild, 'members', "#ED4245",
-            `⚠️ MEMBER CHUNK / RAID — [${members.size}] Members`,
+            `${obeyUi.markup("icon.warning")} MEMBER CHUNK / RAID — [${members.size}] Members`,
             list + (members.size > 20 ? `\n… ${members.size - 20} more` : ''));
     });
 
@@ -134,12 +136,12 @@ module.exports = c => {
     // ─── MODERATION EVENTS ────────────────────────────────────────────────────
     c.on("guildBanAdd", ban => {
         banMap.set(ban.user.id, true);
-        send_log(c, ban.guild, 'moderation', "#ED4245", "⚠️ Member BANNED",
+        send_log(c, ban.guild, 'moderation', "#ED4245", obeyUi.owned("⚠️ Member BANNED"),
             `${ban.user} (\`${ban.user.id}\`)  \`${ban.user.username}\`\n**Reason:** ${ban.reason || 'No reason provided'}`,
             ban.user.displayAvatarURL());
     });
     c.on("guildBanRemove", ban => {
-        send_log(c, ban.guild, 'moderation', "#E67E22", "⛔ Member UNBANNED",
+        send_log(c, ban.guild, 'moderation', "#E67E22", obeyUi.owned("⛔ Member UNBANNED"),
             `${ban.user} (\`${ban.user.id}\`)  \`${ban.user.username}\`\n**Reason was:** ${ban.reason || 'No reason provided'}`,
             ban.user.displayAvatarURL());
     });
@@ -197,7 +199,7 @@ function build_embed(c, guild, color, title, description, thumb) {
         .setTitle((title || '').substring(0, 256))
         .setDescription((description || '​').substring(0, 2048))
         .setThumbnail(thumb || guild?.iconURL() || undefined)
-        .setFooter({ text: `${guild?.name || ''} • OBEY YOUR MASTER`, iconURL: guild?.iconURL() || undefined })
+        .setFooter(obeyMeta.asFooter({ text: `${guild?.name || ''} • OBEY YOUR MASTER`, iconURL: guild?.iconURL() || undefined }))
         .setTimestamp();
 }
 

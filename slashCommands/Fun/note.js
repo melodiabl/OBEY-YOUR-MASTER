@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -10,7 +12,7 @@ module.exports = {
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'FUN'))
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de diversión no está activado.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de diversión no está activado.'), 4096))],
         ephemeral: true,
       })
 
@@ -21,7 +23,7 @@ module.exports = {
     await interaction.reply({
       embeds: [
         new EmbedBuilder().setColor(0x1e1e1e)
-          .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
+          .setAuthor(obeyMeta.asAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() }))
           .setImage(url),
       ],
     })

@@ -1,3 +1,5 @@
+const { localeFor } = require('../../handlers/i18n')
+const views = require('../../handlers/economy/messages')
 const { EmbedBuilder } = require('discord.js')
 const { ensure_economy_user, nFormatter } = require('../../handlers/functions')
 
@@ -10,42 +12,18 @@ module.exports = {
   ],
 
   run: async (client, interaction) => {
-    if (!client.settings.get(interaction.guild.id, 'ECONOMY'))
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de economía no está activado.')], ephemeral: true })
-
-    const target = interaction.options.getUser('usuario')
-    const amount = interaction.options.getInteger('cantidad')
-    const uid    = interaction.user.id
-    const gid    = interaction.guild.id
-
-    if (target.id === uid)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No puedes enviarte dinero a ti mismo.')], ephemeral: true })
-    if (target.bot)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Los bots no pueden recibir dinero.')], ephemeral: true })
-    if (amount < 1)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ La cantidad debe ser mayor a 0.')], ephemeral: true })
-
-    ensure_economy_user(client, gid, uid)
-    ensure_economy_user(client, gid, target.id)
-    const bal = client.economy.get(`${gid}-${uid}`, 'balance') ?? 0
-
-    if (bal < amount)
-      return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ No tienes suficiente dinero. Tienes **${nFormatter(bal)}** 🪙`)],
-        ephemeral: true,
-      })
-
-    client.economy.math(`${gid}-${uid}`, '-', amount, 'balance')
-    client.economy.math(`${gid}-${target.id}`, '+', amount, 'balance')
-
-    await interaction.reply({
-      embeds: [new EmbedBuilder().setColor(0x22C55E)
-        .setTitle('💸 Transferencia realizada')
-        .addFields(
-          { name: '📤 Enviado a',   value: `${target}`,                                                          inline: true },
-          { name: '💰 Cantidad',    value: `**${nFormatter(amount)}** 🪙`,                                       inline: true },
-          { name: '👛 Tu balance',  value: `**${nFormatter(client.economy.get(`${gid}-${uid}`, 'balance'))}** 🪙`, inline: true },
-        )],
-    })
+    const gid=interaction.guild.id, locale=localeFor(client,gid)
+    const fail=(key,vars)=>interaction.reply({embeds:[views.error(locale,key,vars)],ephemeral:true,allowedMentions:{parse:[]}})
+    if(!client.settings.get(gid,'ECONOMY'))return fail('disabled')
+    const target=interaction.options.getUser('usuario'),amount=interaction.options.getInteger('cantidad'),uid=interaction.user.id
+    if(target.id===uid)return fail('selfPay')
+    if(target.bot)return fail('bots')
+    if(!Number.isSafeInteger(amount)||amount<1)return fail('invalidAmount')
+    ensure_economy_user(client,gid,uid);ensure_economy_user(client,gid,target.id)
+    const key=`${gid}-${uid}`,available=client.economy.get(key,'balance')??0
+    if(available<amount)return fail('insufficientWallet',{amount:nFormatter(available)})
+    client.economy.math(key,'-',amount,'balance')
+    client.economy.math(`${gid}-${target.id}`,'+',amount,'balance')
+    return interaction.reply({embeds:[views.transaction(locale,'transfer',amount,client.economy.get(key),nFormatter,target)],allowedMentions:{parse:[]}})
   },
 }

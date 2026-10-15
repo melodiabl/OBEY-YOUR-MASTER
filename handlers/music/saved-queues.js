@@ -1,3 +1,4 @@
+const obeyUi = require("../assets/system")
 const { canonicalTrack } = require('./playlist-repository')
 const aliases = { removesong: 'removetrack', mix: 'shuffle', removeduplicates: 'removedupes', listall: 'showall', show: 'showall', queue: 'showall', list: 'showall', cs: 'createsave', save: 'createsave', remove: 'delete', del: 'delete', load: 'play', p: 'play', add: 'play', details: 'showdetails' }
 const names = ['create', 'addcurrenttrack', 'addcurrentqueue', 'removetrack', 'removedupes', 'showall', 'showdetails', 'createsave', 'delete', 'play', 'shuffle']
@@ -22,7 +23,7 @@ async function execute(client, context, args) {
   const action = aliases[String(args[0] || '').toLowerCase()] || String(args[0] || '').toLowerCase()
   if (!names.includes(action)) throw new Error(`Usa savedqueue ${names.join(' / ')} <nombre>.`)
   const store = client.queuesaves, userId = context.user.id
-  if (action === 'showall') return listNames(store.get(userId)).map(name => `📋 ${name}`).join('\n') || 'No tenés colas guardadas.'
+  if (action === 'showall') return listNames(store.get(userId)).map(name => `${obeyUi.markup("icon.queue")} ${name}`).join('\n') || 'No tenés colas guardadas.'
   const name = validateName(args[1])
   const existing = store.get(userId, name)
   const tracks = Array.isArray(existing) ? [...existing] : []

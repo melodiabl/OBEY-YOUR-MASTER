@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder, ChannelType } = require("discord.js");
 const config = require(`../../botconfig/config.json`);
 var ee = require(`../../botconfig/embed.json`);
-const emoji = require(`../../botconfig/emojis.json`);
+const emoji = require(`../../handlers/assets/legacy-config`);
 const moment = require("moment");
 const { swap_pages2, handlemsg } = require(`../../handlers/functions`);
 module.exports = {
@@ -48,11 +50,11 @@ module.exports = {
             if (boosts >= 7) maxbitrate = 256000;
             if (boosts >= 14) maxbitrate = 384000;
             let embed = new Discord.EmbedBuilder()
-                .setAuthor(client.getAuthor(
+                .setAuthor(obeyMeta.asAuthor(client.getAuthor(
                         client.la[ls].cmds.info.serverinfo.author + " " + message.guild.name,
                         message.guild.iconURL(),
                         "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
-                    ))
+                    )))
                 .setThumbnail(
                     es.thumb
                         ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
@@ -74,23 +76,23 @@ module.exports = {
                     moment(message.member.joinedTimestamp).format("hh:mm:ss") +
                     "`", inline: true });
 
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field4, value: "👁‍🗨 `" + message.guild.channels.cache.size + "`", inline: true });
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field5, value: "💬 `" + message.guild.channels.cache.filter(channel => channel.type == ChannelType.GuildText).size + "`", inline: true });
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field6, value: "🔈 `" + message.guild.channels.cache.filter(channel => channel.type == ChannelType.GuildVoice).size + "`", inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field4, value: obeyUi.owned("👁‍🗨 `") + message.guild.channels.cache.size + "`", inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field5, value: obeyUi.owned("💬 `") + message.guild.channels.cache.filter(channel => channel.type == ChannelType.GuildText).size + "`", inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field6, value: obeyUi.owned("🔈 `") + message.guild.channels.cache.filter(channel => channel.type == ChannelType.GuildVoice).size + "`", inline: true });
 
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field7, value: `😀 \`${message.guild.memberCount}\`/${message.guild.maximumMembers ? "100.000" : message.guild.maximumMembers}`, inline: true });
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field8, value: "👤 `" + message.guild.members.cache.filter(member => !member.user.bot).size + "`", inline: true });
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field9, value: "🤖 `" + message.guild.members.cache.filter(member => member.user.bot).size + "`", inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field7, value: `${obeyUi.markup("icon.face-smile")} \`${message.guild.memberCount}\`/${message.guild.maximumMembers ? "100.000" : message.guild.maximumMembers}`, inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field8, value: obeyUi.owned("👤 `") + message.guild.members.cache.filter(member => !member.user.bot).size + "`", inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field9, value: obeyUi.owned("🤖 `") + message.guild.members.cache.filter(member => member.user.bot).size + "`", inline: true });
 
-            embed.addFields({ name: "**<:arrow:832598861813776394> Rules Channel:**", value: `${message.guild.rulesChannel ? `<#${message.guild.rulesChannelId}>` : "<:no:833101993668771842> `No Channel`"}`, inline: true });
-            embed.addFields({ name: "**<:arrow:832598861813776394> Public Updates Channel:**", value: `${message.guild.publicUpdatesChannel ? `<#${message.guild.publicUpdatesChannelId}>` : "<:no:833101993668771842> `No Channel`"}`, inline: true });
-            embed.addFields({ name: "**<:arrow:832598861813776394> AFK Channel:**", value: `${message.guild.afkChannel ? `<#${message.guild.afkChannelId}>` : "<:no:833101993668771842> `No Channel`"}`, inline: true });
+            embed.addFields({ name: obeyUi.owned("**<:arrow:832598861813776394> Rules Channel:**"), value: `${message.guild.rulesChannel ? `<#${message.guild.rulesChannelId}>` : obeyUi.owned("<:no:833101993668771842> `No Channel`")}`, inline: true });
+            embed.addFields({ name: obeyUi.owned("**<:arrow:832598861813776394> Public Updates Channel:**"), value: `${message.guild.publicUpdatesChannel ? `<#${message.guild.publicUpdatesChannelId}>` : obeyUi.owned("<:no:833101993668771842> `No Channel`")}`, inline: true });
+            embed.addFields({ name: obeyUi.owned("**<:arrow:832598861813776394> AFK Channel:**"), value: `${message.guild.afkChannel ? `<#${message.guild.afkChannelId}>` : obeyUi.owned("<:no:833101993668771842> `No Channel`")}`, inline: true });
 
-            embed.addFields({ name: "**<:arrow:832598861813776394> NSFW Level:**", value: `\`${message.guild.nsfwLevel}\``, inline: true });
-            embed.addFields({ name: "**<:arrow:832598861813776394> Verifcation Level:**", value: `\`${message.guild.verificationLevel}\``, inline: true });
-            embed.addFields({ name: "**<:arrow:832598861813776394> Explicit Content Filter:**", value: `\`${message.guild.explicitContentFilter}\``, inline: true });
+            embed.addFields({ name: obeyUi.owned("**<:arrow:832598861813776394> NSFW Level:**"), value: `\`${message.guild.nsfwLevel}\``, inline: true });
+            embed.addFields({ name: obeyUi.owned("**<:arrow:832598861813776394> Verifcation Level:**"), value: `\`${message.guild.verificationLevel}\``, inline: true });
+            embed.addFields({ name: obeyUi.owned("**<:arrow:832598861813776394> Explicit Content Filter:**"), value: `\`${message.guild.explicitContentFilter}\``, inline: true });
 
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field10, value: "🟢 `" +
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field10, value: obeyUi.owned("🟢 `") +
                     message.guild.members.cache.filter(
                         member => member.presence && member.presence && member.presence.status != "offline"
                     ).size +
@@ -100,12 +102,12 @@ module.exports = {
                         member => !member.presence || (member.presence && member.presence.status == "offline")
                     ).size +
                     "`", inline: true });
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field12, value: "<a:nitro_logo:833402717950836806> `" + message.guild.premiumSubscriptionCount + "`", inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field12, value: obeyUi.owned("<a:nitro_logo:833402717950836806> `") + message.guild.premiumSubscriptionCount + "`", inline: true });
 
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field13, value: `<a:nitro:833402717506502707> \`${boostlevel}\``, inline: true });
-            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field14, value: "👾 `" + maxbitrate + " kbps`", inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field13, value: `${obeyUi.markup("icon.boost")} \`${boostlevel}\``, inline: true });
+            embed.addFields({ name: client.la[ls].cmds.info.serverinfo.field14, value: obeyUi.owned("👾 `") + maxbitrate + " kbps`", inline: true });
             if (boosts >= 14) {
-                embed.addFields({ name: `**<:arrow:832598861813776394> Vanity:**`, value: `${message.guild.vanityURLCode ? `https://discord.gg/${message.guild.vanityURLCode}` : "<:no:833101993668771842> No Vanity-Invite"}` });
+                embed.addFields({ name: `**${obeyUi.markup("icon.arrow-right")} Vanity:**`, value: `${message.guild.vanityURLCode ? `https://discord.gg/${message.guild.vanityURLCode}` : obeyUi.owned("<:no:833101993668771842> No Vanity-Invite")}` });
             }
 
             let embeds = [];
@@ -114,13 +116,13 @@ module.exports = {
             let embed_roles = new Discord.EmbedBuilder();
 
             //emoji
-            embed_emojis.setTitle(eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variablex_1"]));
-            embed_emojis.setDescription(eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variable1"]));
+            embed_emojis.setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variablex_1"]), 256));
+            embed_emojis.setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variable1"]), 4096));
             embeds.push(embed_emojis);
             //Roles
-            embed_roles.setTitle(eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variablex_2"]));
+            embed_roles.setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variablex_2"]), 256));
             embed_roles.setDescription(
-                `>>> ${
+                obeyUi.limit(`>>> ${
                     message.guild.roles.cache.size <= 40
                         ? [...message.guild.roles.cache.values()]
                               .sort((a, b) => b.rawPosition - a.rawPosition)
@@ -129,23 +131,23 @@ module.exports = {
                         : message.guild.roles.cache.size > 40
                           ? trimArray(message.guild.roles.cache)
                           : "None"
-                }`
+                }`, 4096)
             );
             embeds.push(embed_roles);
 
             if (message.guild.banner) {
                 let embed2 = new Discord.EmbedBuilder()
-                    .setTitle(`**<:arrow:832598861813776394> SERVER BANNER:**`)
+                    .setTitle(obeyUi.limit(`**${obeyUi.markup("icon.arrow-right")} SERVER BANNER:**`, 256))
                     .setDescription(
-                        `[Download Link](${message.guild.bannerURL({ size: 1024 })})${message.guild.discoverySplash ? ` | [Link of Discovery Splash Image](${message.guild.discoverySplashURL({ size: 4096 })})` : ""}\n> This is the Image which is shown on the Top left Corner of this Server, where you see the Channels!`
+                        obeyUi.limit(`[Download Link](${message.guild.bannerURL({ size: 1024 })})${message.guild.discoverySplash ? ` | [Link of Discovery Splash Image](${message.guild.discoverySplashURL({ size: 4096 })})` : ""}\n> This is the Image which is shown on the Top left Corner of this Server, where you see the Channels!`, 4096)
                     )
                     .setImage(message.guild.bannerURL({ size: 4096 }));
                 embeds.push(embed2);
             } else if (message.guild.discoverySplash) {
                 let embed2 = new Discord.EmbedBuilder()
-                    .setTitle(`**<:arrow:832598861813776394> SERVER DISCOVERY SPLASH:**`)
+                    .setTitle(obeyUi.limit(`**${obeyUi.markup("icon.arrow-right")} SERVER DISCOVERY SPLASH:**`, 256))
                     .setDescription(
-                        `[Download Link](${message.guild.discoverySplashURL({ size: 1024 })})${message.guild.banner ? ` | [Link of Discovery Splash Image](${message.guild.bannerURL({ size: 4096 })})` : ""}\nThis is the Image you see when you get invited to this Server on the official Discord Website!`
+                        obeyUi.limit(`[Download Link](${message.guild.discoverySplashURL({ size: 1024 })})${message.guild.banner ? ` | [Link of Discovery Splash Image](${message.guild.bannerURL({ size: 4096 })})` : ""}\nThis is the Image you see when you get invited to this Server on the official Discord Website!`, 4096)
                     )
                     .setImage(message.guild.discoverySplashURL({ size: 4096 }));
                 embeds.push(embed2);
@@ -158,10 +160,10 @@ module.exports = {
                     );
                 }
                 embed.setColor(es.color);
-                embed.setFooter(client.getFooter(
+                embed.setFooter(obeyMeta.asFooter(client.getFooter(
                         "ID: " + message.guild.id,
                         message.guild.iconURL()
-                    )
+                    ))
                 );
             });
             if (embeds.length == 1) return message.reply({ embeds });
@@ -172,9 +174,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"]), 4096)),
                 ],
             });
         }

@@ -1,3 +1,4 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { NeverHaveIEver } = require('../../handlers/games')
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -15,7 +16,7 @@ module.exports = {
         if(!client.settings.get(message.guild.id, "MINIGAMES")){
           return message.reply({ embeds: [new EmbedBuilder()
             .setColor(es.wrongcolor)
-            .setFooter(client.getFooter(es))
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
             .setTitle(client.la[ls].common.disabled.title)
             .setDescription(require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {prefix: prefix}))] }
           );

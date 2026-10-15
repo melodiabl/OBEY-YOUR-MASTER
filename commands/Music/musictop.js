@@ -1,3 +1,4 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 // Top/charts de música del servidor (canciones + oyentes), usando las stats v2.
 const { EmbedBuilder } = require('discord.js')
 const { database } = require('../../handlers/music/database')
@@ -24,12 +25,12 @@ module.exports = {
     const userLines = users.map((u, i) => `${medal(i)} <@${u.userId}> · \`${u.playCount}\``).join('\n') || '_Sin datos_'
 
     const embed = new EmbedBuilder().setColor(0x00ff33)
-      .setAuthor({ name: `Top de ${message.guild.name}`, iconURL: message.guild.iconURL() || undefined })
+      .setAuthor(obeyMeta.asAuthor({ name: `Top de ${message.guild.name}`, iconURL: message.guild.iconURL() || undefined }))
       .addFields(
         { name: `${E.music} Canciones más reproducidas`, value: trackLines.slice(0, 1024) },
         { name: `${E.user} Oyentes más activos`, value: userLines.slice(0, 1024) },
       )
-      .setFooter({ text: 'Estadísticas en tiempo real' })
+      .setFooter(obeyMeta.asFooter({ text: 'Estadísticas en tiempo real' }))
       .setTimestamp()
     message.reply({ embeds: [embed] }).catch(() => {})
   },

@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -42,9 +44,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["say"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["say"]["variable2"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["say"]["variable1"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["say"]["variable2"]), 4096)),
                     ],
                 });
 
@@ -54,8 +56,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`<:no:833101993668771842> **This Canal is a Thread u can't Lock it!**`),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **This Canal is a Thread u can't Lock it!**`, 256)),
                     ],
                 });
             if (channel.permissionOverwrites.cache.size < 1) {
@@ -75,10 +77,10 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(`<:no:833101993668771842> **This Canal is locked!**`)
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **This Canal is locked!**`, 256))
                                 .setDescription(
-                                    `This usually means, that the Canal **PERMISSIONS** are so defined, that __none__ of them are NOT ALLOWING to send a Mensaje!`
+                                    obeyUi.limit(`This usually means, that the Canal **PERMISSIONS** are so defined, that __none__ of them are NOT ALLOWING to send a Mensaje!`, 4096)
                                 ),
                         ],
                     });
@@ -111,8 +113,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(`${allEmojis.msg.SUCCESS} **Successfully locked \`${channel.name}\`**`),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(`${allEmojis.msg.SUCCESS} **Successfully locked \`${channel.name}\`**`, 256)),
                 ],
             });
             if (client.settings.get(message.guild.id, `adminlog`) != "no") {
@@ -131,16 +133,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["say"]["variable5"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["say"]["variable5"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -154,9 +156,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["say"]["variable8"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["say"]["variable8"]), 4096)),
                 ],
             });
         }

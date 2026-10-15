@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const User = require('../../database/schemas/UserSchema')
 module.exports = {
@@ -11,7 +13,7 @@ module.exports = {
       .limit(10)
 
     if (!top.length)
-      return interaction.editReply('📋 No hay datos de invitaciones aún en este servidor.')
+      return interaction.editReply(obeyUi.owned('📋 No hay datos de invitaciones aún en este servidor.'))
 
     const medals = ['🥇', '🥈', '🥉']
     const lines = top.map((u, i) => {
@@ -20,10 +22,10 @@ module.exports = {
     })
 
     const embed = new EmbedBuilder()
-      .setTitle('🏆 Top Invitadores')
+      .setTitle(obeyUi.limit(obeyUi.owned('🏆 Top Invitadores'), 256))
       .setColor('#FFD700')
-      .setDescription(lines.join('\n'))
-      .setFooter({ text: interaction.guild.name })
+      .setDescription(obeyUi.limit(lines.join('\n'), 4096))
+      .setFooter(obeyMeta.asFooter({ text: interaction.guild.name }))
       .setTimestamp()
 
     await interaction.editReply({ embeds: [embed] })

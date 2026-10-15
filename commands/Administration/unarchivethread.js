@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `unarchivethread`,
@@ -43,9 +45,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"]), 4096)),
                     ],
                 });
             let channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]) || message.channel;
@@ -54,8 +56,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`<:no:833101993668771842> **This Canal is not a Thread**`),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **This Canal is not a Thread**`, 256)),
                     ],
                 });
             await channel.setArchived(false);
@@ -63,8 +65,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(`${allEmojis.msg.SUCCESS} **Successfully unarchived \`${channel.name}\`**`),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(`${allEmojis.msg.SUCCESS} **Successfully unarchived \`${channel.name}\`**`, 256)),
                 ],
             });
             if (client.settings.get(message.guild.id, `adminlog`) != "no") {
@@ -83,16 +85,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["addrole"]["variable13"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["addrole"]["variable13"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -106,9 +108,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"]), 4096)),
                 ],
             });
         }

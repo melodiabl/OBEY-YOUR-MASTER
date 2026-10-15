@@ -1,3 +1,6 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
+const { asAuthor } = require("./presentation/metadata")
 const { readdirSync } = require("fs");
 const { EmbedBuilder } = require("discord.js");
 const serialize = require("serialize-javascript");
@@ -65,7 +68,7 @@ module.exports = async client => {
             botsCanWin: false,
             embedColor: ee.color,
             embedColorEnd: ee.wrongcolor,
-            reaction: "🎉",
+            reaction: obeyUi.owned("🎉"),
         },
     });
     // We now have a giveawaysManager property to access the manager everywhere!
@@ -81,13 +84,13 @@ module.exports = async client => {
                                 .setColor(ee.wrongcolor)
                                 .setThumbnail(member.guild.iconURL())
                                 .setAuthor(
-                                    `Missing the Requirements`,
-                                    `https://cdn.discordapp.com/emojis/906917501986820136.png?size=128`
+                                    asAuthor(`Missing the Requirements`,
+                                    obeyUi.image("icon.warning"))
                                 )
                                 .setDescription(
                                     `> **Your are not fullfilling the Requirements for [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}), please make sure to fullfill them!.**\n\n> Go back to the Channel: <#${giveaway.channelId}>`
                                 )
-                                .setFooter({ text: member.guild.name, iconURL: member.guild.iconURL() }),
+                                .setFooter(obeyMeta.asFooter({ text: member.guild.name, iconURL: member.guild.iconURL() })),
                         ],
                     })
                     .catch(() => {});
@@ -103,13 +106,13 @@ module.exports = async client => {
                             .setColor(ee.color)
                             .setThumbnail(member.guild.iconURL())
                             .setAuthor(
-                                `Giveaway Entry Confirmed`,
-                                `https://cdn.discordapp.com/emojis/833101995723194437.gif?size=128`
+                                asAuthor(`Giveaway Entry Confirmed`,
+                                obeyUi.image("icon.success"))
                             )
                             .setDescription(
                                 `> **Your entry for [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}) has been confirmed.**\n\n**Prize:**\n> ${giveaway.prize}\n\n**Winnersamount:**\n> \`${giveaway.winnerCount}\`\n\n**Your Bonus Entries**\n> \`${BonusEntries}\`\n\n> Go back to the Channel: <#${giveaway.channelId}>`
                             )
-                            .setFooter({ text: member.guild.name, iconURL: member.guild.iconURL() }),
+                            .setFooter(obeyMeta.asFooter({ text: member.guild.name, iconURL: member.guild.iconURL() })),
                     ],
                 })
                 .catch(() => {});
@@ -126,11 +129,11 @@ module.exports = async client => {
                         new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setThumbnail(member.guild.iconURL())
-                            .setAuthor({ name: `¡Sorteo abandonado!`, iconURL: `https://cdn.discordapp.com/emojis/833101995723194437.gif?size=128` })
+                            .setAuthor(obeyMeta.asAuthor({ name: `¡Sorteo abandonado!`, iconURL: obeyUi.image("icon.success") }))
                             .setDescription(
                                 `> **You left [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}) and aren't participating anymore.**\n\n> Go back to the Channel: <#${giveaway.channelId}>`
                             )
-                            .setFooter({ text: member.guild.name, iconURL: member.guild.iconURL() }),
+                            .setFooter(obeyMeta.asFooter({ text: member.guild.name, iconURL: member.guild.iconURL() })),
                     ],
                 })
                 .catch(() => {});
@@ -148,11 +151,11 @@ module.exports = async client => {
                         new EmbedBuilder()
                             .setColor(ee.color)
                             .setThumbnail(winner.guild.iconURL())
-                            .setAuthor({ name: `¡Sorteo ganado!`, iconURL: `https://cdn.discordapp.com/emojis/833101995723194437.gif?size=128` })
+                            .setAuthor(obeyMeta.asAuthor({ name: `¡Sorteo ganado!`, iconURL: obeyUi.image("icon.success") }))
                             .setDescription(
                                 `> **You won [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}), congrats!**\n\n> Go to the Channel: <#${giveaway.channelId}>\n\n**Prize:**\n> ${giveaway.prize}`
                             )
-                            .setFooter({ text: winner.guild.name, iconURL: winner.guild.iconURL() }),
+                            .setFooter(obeyMeta.asFooter({ text: winner.guild.name, iconURL: winner.guild.iconURL() })),
                     ],
                 })
                 .catch(() => {});
@@ -171,11 +174,11 @@ module.exports = async client => {
                         new EmbedBuilder()
                             .setColor(ee.wrongcolor)
                             .setThumbnail(winner.guild.iconURL())
-                            .setAuthor({ name: `¡Sorteo ganado!`, iconURL: `https://cdn.discordapp.com/emojis/833101995723194437.gif?size=128` })
+                            .setAuthor(obeyMeta.asAuthor({ name: `¡Sorteo ganado!`, iconURL: obeyUi.image("icon.success") }))
                             .setDescription(
                                 `> **You won [this Giveaway](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId}), congrats!**\n\n> Go to the Channel: <#${giveaway.channelId}>\n\n**Prize:**\n> ${giveaway.prize}`
                             )
-                            .setFooter({ text: winner.guild.name, iconURL: winner.guild.iconURL() }),
+                            .setFooter(obeyMeta.asFooter({ text: winner.guild.name, iconURL: winner.guild.iconURL() })),
                     ],
                 })
                 .catch(() => {});

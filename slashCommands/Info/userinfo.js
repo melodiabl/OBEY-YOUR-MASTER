@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder,
     PermissionFlagsBits
 } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 const flags = {
@@ -32,10 +34,10 @@ function trimArray(arr, maxLen = 25) {
     return arr.join(", ");
 }
 const statuses = {
-    online: "🟢",
-    idle: "🟠",
-    dnd: "🔴",
-    offline: "⚫️",
+    online: obeyUi.owned("🟢"),
+    idle: obeyUi.owned("🟠"),
+    dnd: obeyUi.owned("🔴"),
+    offline: obeyUi.owned("⚫️"),
 };
 module.exports = {
     name: "userinfo", //the command name for the Slash Command
@@ -126,9 +128,9 @@ module.exports = {
                         ? member.presence.activities[0]
                         : {
                               type: "CUSTOM",
-                              emoji: {
+                              emoji: obeyUi.component({
                                   name: "❌",
-                              },
+                              }),
                               state: "OFFLINE - No activity",
                           };
                     //create the EMBED
@@ -136,11 +138,11 @@ module.exports = {
                     embeduserinfo.setThumbnail(
                         customavatar ? customavatar : member.user.displayAvatarURL({ size: 512 })
                     );
-                    embeduserinfo.setAuthor({
+                    embeduserinfo.setAuthor(obeyMeta.asAuthor({
                         name: handlemsg(client.la[ls].cmds.info.userinfo.author, { usertag: member.user.username }),
                         iconURL: member.user.displayAvatarURL(),
                         url: "https://github.com/melodiabl"
-                    });
+                    }));
                     embeduserinfo.addFields(
                         { name: client.la[ls].cmds.info.userinfo.field1, value: `> <@${member.user.id}>\n\`${member.user.username}\``, inline: true },
                         { name: client.la[ls].cmds.info.userinfo.field2, value: `> \`${member.id}\``, inline: true },
@@ -150,7 +152,7 @@ module.exports = {
                         { name: client.la[ls].cmds.info.userinfo.field6, value: `> \`${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "None"}\``, inline: true },
                         { name: client.la[ls].cmds.info.userinfo.field7, value: `> \`${statuses[member.presence ? member.presence.status : "offline"]} ${member.presence ? member.presence.status : "offline"}\``, inline: true },
                         { name: client.la[ls].cmds.info.userinfo.field8, value: `> ${roles.size == 0 ? client.la[ls].cmds.info.userinfo.noroles : member.roles.highest.id === message.guild.id ? client.la[ls].cmds.info.userinfo.noroles : member.roles.highest}`, inline: true },
-                        { name: client.la[ls].cmds.info.userinfo.field9, value: `> \`${member.user.bot ? "✔️" : "❌"}\``, inline: true }
+                        { name: client.la[ls].cmds.info.userinfo.field9, value: `> \`${member.user.bot ? obeyUi.owned("✔️") : obeyUi.owned("❌")}\``, inline: true }
                     );
                     var userstatus = client.la[ls].cmds.info.userinfo.nostatus;
                     if (activity) {
@@ -167,7 +169,7 @@ module.exports = {
                         { name: handlemsg(client.la[ls].cmds.info.userinfo.field12, { rolesize: roles.cache.size }), value: roles.cache.size < 25 ? [...roles.cache.values()].sort((a, b) => b?.rawPosition - a.rawPosition).map(role => `<@&${role.id}>`).join(", ") : roles.cache.size > 25 ? trimArray(roles.cache) : client.la[ls].cmds.info.userinfo.noroles }
                     );
                     embeduserinfo.setColor(es.color);
-                    embeduserinfo.setFooter(client.getFooter(es));
+                    embeduserinfo.setFooter(obeyMeta.asFooter(client.getFooter(es)));
                     if (banner) embeduserinfo.setImage(banner);
                     //send the EMBED
                     interaction?.reply({ embeds: [embeduserinfo], ephemeral: true });
@@ -179,21 +181,21 @@ module.exports = {
                     embeduserinfo.setThumbnail(
                         customavatar ? customavatar : user.displayAvatarURL({ size: 512 })
                     );
-                    embeduserinfo.setAuthor({
+                    embeduserinfo.setAuthor(obeyMeta.asAuthor({
                         name: handlemsg(client.la[ls].cmds.info.userinfo.author, { usertag: user.username }),
                         iconURL: user.displayAvatarURL(),
                         url: "https://github.com/melodiabl"
-                    });
+                    }));
                     embeduserinfo.addFields(
                         { name: client.la[ls].cmds.info.userinfo.field1, value: `<@${user.id}>\n\`${user.username}\``, inline: true },
                         { name: client.la[ls].cmds.info.userinfo.field2, value: `\`${user.id}\``, inline: true },
                         { name: client.la[ls].cmds.info.userinfo.field3, value: `[\`Link to avatar\`](${user.displayAvatarURL()})`, inline: true },
                         { name: client.la[ls].cmds.info.userinfo.field4, value: "`" + moment(user.createdTimestamp).format("DD/MM/YYYY") + "`\n`" + moment(user.createdTimestamp).format("hh:mm:ss") + "`", inline: true },
                         { name: client.la[ls].cmds.info.userinfo.field6, value: `\`${userFlags.length ? userFlags.map(flag => flags[flag]).join(", ") : "None"}\``, inline: true },
-                        { name: client.la[ls].cmds.info.userinfo.field9, value: `\`${user.bot ? "✔️" : "❌"}\``, inline: true }
+                        { name: client.la[ls].cmds.info.userinfo.field9, value: `\`${user.bot ? obeyUi.owned("✔️") : obeyUi.owned("❌")}\``, inline: true }
                     );
                     embeduserinfo.setColor(es.color);
-                    embeduserinfo.setFooter(client.getFooter(es));
+                    embeduserinfo.setFooter(obeyMeta.asFooter(client.getFooter(es)));
                     if (banner) embeduserinfo.setImage(banner);
                     //send the EMBED
                     interaction?.reply({ embeds: [embeduserinfo], ephemeral: true });

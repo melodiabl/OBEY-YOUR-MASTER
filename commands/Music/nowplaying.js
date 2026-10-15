@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -13,12 +14,12 @@ module.exports = {
     const ls = client.settings.get(message.guild.id, 'language')
 
     if (!client.settings.get(message.guild.id, 'MUSIC')) {
-      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(client.la[ls].common.disabled.title)] })
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))] })
     }
 
     const state = client.music?.getState(message.guild.id)
     if (!state?.currentTrack) {
-      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle('❌ No hay música reproduciéndose.')] })
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(obeyUi.limit(obeyUi.owned('❌ No hay música reproduciéndose.'), 256))] })
     }
 
     // Envia el panel NP vivo con controles al canal de música
@@ -27,7 +28,7 @@ module.exports = {
     const info = state.currentTrack?.info || state.currentTrack
     return message.reply({
       embeds: [new EmbedBuilder().setColor(0x5865F2)
-        .setDescription(`🎵 Panel de **${(info?.title || '?').substring(0, 60)}** actualizado en el canal de música.`)],
+        .setDescription(obeyUi.limit(`${obeyUi.markup("icon.music")} Panel de **${(info?.title || '?').substring(0, 60)}** actualizado en el canal de música.`, 4096))],
     })
   },
 }

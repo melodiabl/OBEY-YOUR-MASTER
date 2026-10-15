@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const { asAuthor } = require("./presentation/metadata")
 //import the config.json file
 const Discord = require("discord.js");
 var { EmbedBuilder, AttachmentBuilder, PermissionFlagsBits, AuditLogEvent } = require(`discord.js`);
@@ -260,8 +262,8 @@ module.exports = async client => {
                                     new EmbedBuilder()
                                         .setColor("#FEE75C")
                                         .setAuthor(
-                                            "Esto es una advertencia",
-                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                            asAuthor("Esto es una advertencia",
+                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                         )
                                         .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable2"]))
                                         .setDescription(
@@ -298,8 +300,8 @@ module.exports = async client => {
                                             new EmbedBuilder()
                                                 .setColor("#FEE75C")
                                                 .setAuthor(
-                                                    "Esto es una advertencia",
-                                                    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                                    asAuthor("Esto es una advertencia",
+                                                    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                                 )
                                                 .setTitle(
                                                     eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable2"])
@@ -338,8 +340,8 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#FEE75C")
                                             .setAuthor(
-                                                "Esto es una advertencia",
-                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                                asAuthor("Esto es una advertencia",
+                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                             )
                                             .setTitle(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable5"])
@@ -372,16 +374,16 @@ module.exports = async client => {
                                             new EmbedBuilder()
                                                 .setColor("#fffff9")
                                                 .setAuthor(
-                                                    `ANTI ADD BOT - ${AddedMember.user.username}`,
-                                                    AddedMember.user.displayAvatarURL()
+                                                    asAuthor(`ANTI ADD BOT - ${AddedMember.user.username}`,
+                                                    AddedMember.user.displayAvatarURL())
                                                 )
                                                 .setDescription(
                                                     eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable7"])
                                                 )
-                                                .setFooter(client.getFooter(
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                         "ID: " + AddedUserID,
                                                         AddedMember.user.displayAvatarURL()
-                                                    )
+                                                    ))
                                                 ),
                                         ],
                                     }).catch(() => {});
@@ -409,16 +411,16 @@ module.exports = async client => {
                                             new EmbedBuilder()
                                                 .setColor("#fffff9")
                                                 .setAuthor(
-                                                    `ANTI ADD BOT - ${AddedMember.user.username}`,
-                                                    AddedMember.user.displayAvatarURL()
+                                                    asAuthor(`ANTI ADD BOT - ${AddedMember.user.username}`,
+                                                    AddedMember.user.displayAvatarURL())
                                                 )
                                                 .setDescription(
                                                     eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable8"])
                                                 )
-                                                .setFooter(client.getFooter(
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                         "ID: " + AddedUserID,
                                                         AddedMember.user.displayAvatarURL()
-                                                    )
+                                                    ))
                                                 ),
                                         ],
                                     }).catch(() => {});
@@ -442,16 +444,16 @@ module.exports = async client => {
                                             new EmbedBuilder()
                                                 .setColor("#fffff9")
                                                 .setAuthor(
-                                                    `ANTI ADD BOT - ${AddedMember.user.username}`,
-                                                    AddedMember.user.displayAvatarURL()
+                                                    asAuthor(`ANTI ADD BOT - ${AddedMember.user.username}`,
+                                                    AddedMember.user.displayAvatarURL())
                                                 )
                                                 .setDescription(
                                                     eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable9"])
                                                 )
-                                                .setFooter(client.getFooter(
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                         "ID: " + AddedUserID,
                                                         AddedMember.user.displayAvatarURL()
-                                                    )
+                                                    ))
                                                 ),
                                         ],
                                     }).catch(() => {});
@@ -478,16 +480,16 @@ module.exports = async client => {
                                             new EmbedBuilder()
                                                 .setColor("#fffff9")
                                                 .setAuthor(
-                                                    `ANTI ADD BOT - ${AddedMember.user.username}`,
-                                                    AddedMember.user.displayAvatarURL()
+                                                    asAuthor(`ANTI ADD BOT - ${AddedMember.user.username}`,
+                                                    AddedMember.user.displayAvatarURL())
                                                 )
                                                 .setDescription(
                                                     eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable10"])
                                                 )
-                                                .setFooter(client.getFooter(
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                         "ID: " + AddedUserID,
                                                         AddedMember.user.displayAvatarURL()
-                                                    )
+                                                    ))
                                                 ),
                                         ],
                                     }).catch(() => {});
@@ -512,16 +514,16 @@ module.exports = async client => {
                                             new EmbedBuilder()
                                                 .setColor("#fffff9")
                                                 .setAuthor(
-                                                    `ANTI ADD BOT - ${AddedMember.user.username}`,
-                                                    AddedMember.user.displayAvatarURL()
+                                                    asAuthor(`ANTI ADD BOT - ${AddedMember.user.username}`,
+                                                    AddedMember.user.displayAvatarURL())
                                                 )
                                                 .setDescription(
                                                     eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable11"])
                                                 )
-                                                .setFooter(client.getFooter(
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                         "ID: " + AddedUserID,
                                                         AddedMember.user.displayAvatarURL()
-                                                    )
+                                                    ))
                                                 ),
                                         ],
                                     }).catch(() => {});
@@ -548,16 +550,16 @@ module.exports = async client => {
                                             new EmbedBuilder()
                                                 .setColor("#fffff9")
                                                 .setAuthor(
-                                                    `ANTI ADD BOT - ${AddedMember.user.username}`,
-                                                    AddedMember.user.displayAvatarURL()
+                                                    asAuthor(`ANTI ADD BOT - ${AddedMember.user.username}`,
+                                                    AddedMember.user.displayAvatarURL())
                                                 )
                                                 .setDescription(
                                                     eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable12"])
                                                 )
-                                                .setFooter(client.getFooter(
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                         "ID: " + AddedUserID,
                                                         AddedMember.user.displayAvatarURL()
-                                                    )
+                                                    ))
                                                 ),
                                         ],
                                     }).catch(() => {});
@@ -612,8 +614,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#57F287")
                                                             .setAuthor(
-                                                                `ANTI BOT - I Kicked: ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                                asAuthor(`ANTI BOT - I Kicked: ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                             )
                                                             .setThumbnail(
                                                                 member.user.displayAvatarURL()
@@ -654,8 +656,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#57F287")
                                                             .setAuthor(
-                                                                `I Banned: ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                                asAuthor(`I Banned: ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                             )
                                                             .setThumbnail(
                                                                 member.user.displayAvatarURL()
@@ -723,8 +725,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#5865F2")
                                                             .setAuthor(
-                                                                `ANTI ADD BOT - Removed Roles of ${AddedMember.user.username} for adding ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png"
+                                                                asAuthor(`ANTI ADD BOT - Removed Roles of ${AddedMember.user.username} for adding ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png")
                                                             )
                                                             .setThumbnail(
                                                                 member.user.displayAvatarURL()
@@ -736,10 +738,10 @@ module.exports = async client => {
                                                                     ]
                                                                 )
                                                             )
-                                                            .setFooter(client.getFooter(
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                     "ID: " + AddedUserID,
                                                                     AddedMember.user.displayAvatarURL()
-                                                                )
+                                                                ))
                                                             ),
                                                     ],
                                                 }).catch(() => {});
@@ -808,8 +810,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#57F287")
                                                             .setAuthor(
-                                                                `ANTI BOT - I Kicked: ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                                asAuthor(`ANTI BOT - I Kicked: ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                             )
                                                             .setThumbnail(
                                                                 member.user.displayAvatarURL()
@@ -850,8 +852,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#57F287")
                                                             .setAuthor(
-                                                                `I Banned: ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                                asAuthor(`I Banned: ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                             )
                                                             .setThumbnail(
                                                                 member.user.displayAvatarURL()
@@ -904,8 +906,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#E67E22")
                                                             .setAuthor(
-                                                                `ANTI ADD BOT - Kicked ${AddedMember.user.username} for adding ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png"
+                                                                asAuthor(`ANTI ADD BOT - Kicked ${AddedMember.user.username} for adding ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png")
                                                             )
                                                             .setDescription(
                                                                 eval(
@@ -914,10 +916,10 @@ module.exports = async client => {
                                                                     ]
                                                                 )
                                                             )
-                                                            .setFooter(client.getFooter(
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                     "ID: " + AddedUserID,
                                                                     AddedMember.user.displayAvatarURL()
-                                                                )
+                                                                ))
                                                             ),
                                                     ],
                                                 }).catch(() => {});
@@ -972,8 +974,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#57F287")
                                                             .setAuthor(
-                                                                `ANTI BOT - I Kicked: ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                                asAuthor(`ANTI BOT - I Kicked: ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                             )
                                                             .setThumbnail(
                                                                 member.user.displayAvatarURL()
@@ -1014,8 +1016,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#57F287")
                                                             .setAuthor(
-                                                                `I Banned: ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                                asAuthor(`I Banned: ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                             )
                                                             .setThumbnail(
                                                                 member.user.displayAvatarURL()
@@ -1070,8 +1072,8 @@ module.exports = async client => {
                                                         new EmbedBuilder()
                                                             .setColor("#ED4245")
                                                             .setAuthor(
-                                                                `ANTI ADD BOT - Banned ${AddedMember.user.username} for adding ${member.user.username}`,
-                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png"
+                                                                asAuthor(`ANTI ADD BOT - Banned ${AddedMember.user.username} for adding ${member.user.username}`,
+                                                                "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png")
                                                             )
                                                             .setThumbnail(
                                                                 member.user.displayAvatarURL()
@@ -1083,10 +1085,10 @@ module.exports = async client => {
                                                                     ]
                                                                 )
                                                             )
-                                                            .setFooter(client.getFooter(
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                     "ID: " + AddedUserID,
                                                                     AddedMember.user.displayAvatarURL()
-                                                                )
+                                                                ))
                                                             ),
                                                     ],
                                                 }).catch(() => {});
@@ -1145,8 +1147,8 @@ module.exports = async client => {
                                 new EmbedBuilder()
                                     .setColor("#FEE75C")
                                     .setAuthor(
-                                        "Esto es una advertencia",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                        asAuthor("Esto es una advertencia",
+                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                     )
                                     .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable2"]))
                                     .setDescription(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable3"])),
@@ -1181,8 +1183,8 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#FEE75C")
                                             .setAuthor(
-                                                "Esto es una advertencia",
-                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                                asAuthor("Esto es una advertencia",
+                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                             )
                                             .setTitle(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable23"])
@@ -1223,8 +1225,8 @@ module.exports = async client => {
                                     new EmbedBuilder()
                                         .setColor("#FEE75C")
                                         .setAuthor(
-                                            "Esto es una advertencia",
-                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                            asAuthor("Esto es una advertencia",
+                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                         )
                                         .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable26"]))
                                         .setDescription(
@@ -1256,16 +1258,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI KICK - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI KICK - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable28"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1294,16 +1296,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI KICK - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI KICK - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable29"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1328,16 +1330,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI KICK - ${AddedMember.user.username} kicked ${member.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI KICK - ${AddedMember.user.username} kicked ${member.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable30"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1364,16 +1366,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI KICK - ${AddedMember.user.username} kicked ${member.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI KICK - ${AddedMember.user.username} kicked ${member.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable31"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1398,16 +1400,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI KICK - ${AddedMember.user.username} kicked ${member.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI KICK - ${AddedMember.user.username} kicked ${member.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable32"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1434,16 +1436,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI KICK - ${AddedMember.user.username} kicked ${member.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI KICK - ${AddedMember.user.username} kicked ${member.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable33"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1513,8 +1515,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#5865F2")
                                                         .setAuthor(
-                                                            `ANTI KICK - Removed Roles of ${AddedMember.user.username} for kicking ${member.user.username}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png"
+                                                            asAuthor(`ANTI KICK - Removed Roles of ${AddedMember.user.username} for kicking ${member.user.username}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png")
                                                         )
                                                         .setThumbnail(
                                                             member.user.displayAvatarURL()
@@ -1526,10 +1528,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -1600,8 +1602,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#E67E22")
                                                         .setAuthor(
-                                                            `ANTI KICK - Kicked ${AddedMember.user.username} for kicking ${member.user.username}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png"
+                                                            asAuthor(`ANTI KICK - Kicked ${AddedMember.user.username} for kicking ${member.user.username}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png")
                                                         )
                                                         .setThumbnail(
                                                             member.user.displayAvatarURL()
@@ -1613,10 +1615,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -1674,8 +1676,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#ED4245")
                                                         .setAuthor(
-                                                            `ANTI KICK - Banned ${AddedMember.user.username} for kicking ${member.user.username}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png"
+                                                            asAuthor(`ANTI KICK - Banned ${AddedMember.user.username} for kicking ${member.user.username}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png")
                                                         )
                                                         .setThumbnail(
                                                             member.user.displayAvatarURL()
@@ -1687,10 +1689,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -1748,8 +1750,8 @@ module.exports = async client => {
                                 new EmbedBuilder()
                                     .setColor("#FEE75C")
                                     .setAuthor(
-                                        "Esto es una advertencia",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                        asAuthor("Esto es una advertencia",
+                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                     )
                                     .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable2"]))
                                     .setDescription(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable3"])),
@@ -1784,8 +1786,8 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#FEE75C")
                                             .setAuthor(
-                                                "Esto es una advertencia",
-                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                                asAuthor("Esto es una advertencia",
+                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                             )
                                             .setTitle(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable38"])
@@ -1826,8 +1828,8 @@ module.exports = async client => {
                                     new EmbedBuilder()
                                         .setColor("#FEE75C")
                                         .setAuthor(
-                                            "Esto es una advertencia",
-                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                            asAuthor("Esto es una advertencia",
+                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                         )
                                         .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable41"]))
                                         .setDescription(
@@ -1859,16 +1861,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI BAN - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI BAN - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable43"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1897,16 +1899,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI BAN - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI BAN - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable44"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1931,16 +1933,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI BAN - ${AddedMember.user.username} kicked ${member.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI BAN - ${AddedMember.user.username} kicked ${member.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable45"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -1967,16 +1969,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI BAN - ${AddedMember.user.username} kicked ${member.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI BAN - ${AddedMember.user.username} kicked ${member.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable46"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2000,16 +2002,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI BAN - ${AddedMember.user.username} kicked ${member.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI BAN - ${AddedMember.user.username} kicked ${member.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable47"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2036,16 +2038,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI BAN - ${AddedMember.user.username} kicked ${member.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI BAN - ${AddedMember.user.username} kicked ${member.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable48"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2115,8 +2117,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#5865F2")
                                                         .setAuthor(
-                                                            `ANTI BAN - Removed Roles of ${AddedMember.user.username} for banning ${member.user.username}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png"
+                                                            asAuthor(`ANTI BAN - Removed Roles of ${AddedMember.user.username} for banning ${member.user.username}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png")
                                                         )
                                                         .setThumbnail(
                                                             member.user.displayAvatarURL()
@@ -2128,10 +2130,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -2202,8 +2204,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#E67E22")
                                                         .setAuthor(
-                                                            `ANTI BAN - Kicked ${AddedMember.user.username} for banning ${member.user.username}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png"
+                                                            asAuthor(`ANTI BAN - Kicked ${AddedMember.user.username} for banning ${member.user.username}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png")
                                                         )
                                                         .setThumbnail(
                                                             member.user.displayAvatarURL()
@@ -2215,10 +2217,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -2276,8 +2278,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#ED4245")
                                                         .setAuthor(
-                                                            `ANTI BAN - Banned ${AddedMember.user.username} for banning ${member.user.username}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png"
+                                                            asAuthor(`ANTI BAN - Banned ${AddedMember.user.username} for banning ${member.user.username}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png")
                                                         )
                                                         .setThumbnail(
                                                             member.user.displayAvatarURL()
@@ -2289,10 +2291,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -2386,8 +2388,8 @@ module.exports = async client => {
                                 new EmbedBuilder()
                                     .setColor("#FEE75C")
                                     .setAuthor(
-                                        "Esto es una advertencia",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                        asAuthor("Esto es una advertencia",
+                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                     )
                                     .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable2"]))
                                     .setDescription(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable3"])),
@@ -2422,8 +2424,8 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#FEE75C")
                                             .setAuthor(
-                                                "Esto es una advertencia",
-                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                                asAuthor("Esto es una advertencia",
+                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                             )
                                             .setTitle(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable53"])
@@ -2463,8 +2465,8 @@ module.exports = async client => {
                                     new EmbedBuilder()
                                         .setColor("#FEE75C")
                                         .setAuthor(
-                                            "Esto es una advertencia",
-                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                            asAuthor("Esto es una advertencia",
+                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                         )
                                         .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable56"]))
                                         .setDescription(
@@ -2496,16 +2498,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL CREATE - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL CREATE - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable58"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2534,16 +2536,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL CREATE - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL CREATE - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable59"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2568,16 +2570,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL CREATE - ${AddedMember.user.username} created ${channel.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL CREATE - ${AddedMember.user.username} created ${channel.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable60"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2604,16 +2606,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL CREATE - ${AddedMember.user.username} created ${channel.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL CREATE - ${AddedMember.user.username} created ${channel.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable61"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2637,16 +2639,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL CREATE - ${AddedMember.user.username} created ${channel.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL CREATE - ${AddedMember.user.username} created ${channel.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable62"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2673,16 +2675,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL CREATE - ${AddedMember.user.username} created ${channel.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL CREATE - ${AddedMember.user.username} created ${channel.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable63"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -2736,8 +2738,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#57F287")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL-CREATE - I Delete: ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                            asAuthor(`ANTI CHANNEL-CREATE - I Delete: ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -2798,8 +2800,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#5865F2")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL CREATE - Removed Roles of ${AddedMember.user.username} for creating ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png"
+                                                            asAuthor(`ANTI CHANNEL CREATE - Removed Roles of ${AddedMember.user.username} for creating ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -2808,10 +2810,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -2881,8 +2883,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#57F287")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL-CREATE - I Delete: ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                            asAuthor(`ANTI CHANNEL-CREATE - I Delete: ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -2928,8 +2930,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#E67E22")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL CREATE - Kicked ${AddedMember.user.username} for creating ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png"
+                                                            asAuthor(`ANTI CHANNEL CREATE - Kicked ${AddedMember.user.username} for creating ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -2938,10 +2940,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -2996,8 +2998,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#57F287")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL-CREATE - I Delete: ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                            asAuthor(`ANTI CHANNEL-CREATE - I Delete: ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -3045,8 +3047,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#ED4245")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL CREATE - Banned ${AddedMember.user.username} for creating ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png"
+                                                            asAuthor(`ANTI CHANNEL CREATE - Banned ${AddedMember.user.username} for creating ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -3055,10 +3057,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -3117,8 +3119,8 @@ module.exports = async client => {
                                 new EmbedBuilder()
                                     .setColor("#FEE75C")
                                     .setAuthor(
-                                        "Esto es una advertencia",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                        asAuthor("Esto es una advertencia",
+                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                     )
                                     .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable2"]))
                                     .setDescription(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable3"])),
@@ -3153,8 +3155,8 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#FEE75C")
                                             .setAuthor(
-                                                "Esto es una advertencia",
-                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                                asAuthor("Esto es una advertencia",
+                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                             )
                                             .setTitle(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable71"])
@@ -3194,8 +3196,8 @@ module.exports = async client => {
                                     new EmbedBuilder()
                                         .setColor("#FEE75C")
                                         .setAuthor(
-                                            "Esto es una advertencia",
-                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                            asAuthor("Esto es una advertencia",
+                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                         )
                                         .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable74"]))
                                         .setDescription(
@@ -3227,16 +3229,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL DELETE - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL DELETE - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable76"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3265,16 +3267,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL DELETE - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL DELETE - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable77"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3299,16 +3301,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL DELETE - ${AddedMember.user.username} delete ${channel.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL DELETE - ${AddedMember.user.username} delete ${channel.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable78"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3335,16 +3337,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL DELETE - ${AddedMember.user.username} delete ${channel.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL DELETE - ${AddedMember.user.username} delete ${channel.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable79"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3368,16 +3370,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL DELETE - ${AddedMember.user.username} delete ${channel.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL DELETE - ${AddedMember.user.username} delete ${channel.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable80"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3404,16 +3406,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI CHANNEL DELETE - ${AddedMember.user.username} delete ${channel.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI CHANNEL DELETE - ${AddedMember.user.username} delete ${channel.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable81"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3484,8 +3486,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#5865F2")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL DELETE - Removed Roles of ${AddedMember.user.username} for deleting ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png"
+                                                            asAuthor(`ANTI CHANNEL DELETE - Removed Roles of ${AddedMember.user.username} for deleting ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -3494,10 +3496,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -3568,8 +3570,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#E67E22")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL DELETE - Kicked ${AddedMember.user.username} for deleting ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png"
+                                                            asAuthor(`ANTI CHANNEL DELETE - Kicked ${AddedMember.user.username} for deleting ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -3578,10 +3580,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -3639,8 +3641,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#ED4245")
                                                         .setAuthor(
-                                                            `ANTI CHANNEL DELETE - Banned ${AddedMember.user.username} for deleting ${channel.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png"
+                                                            asAuthor(`ANTI CHANNEL DELETE - Banned ${AddedMember.user.username} for deleting ${channel.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -3649,10 +3651,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -3710,8 +3712,8 @@ module.exports = async client => {
                                 new EmbedBuilder()
                                     .setColor("#FEE75C")
                                     .setAuthor(
-                                        "Esto es una advertencia",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                        asAuthor("Esto es una advertencia",
+                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                     )
                                     .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable2"]))
                                     .setDescription(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable3"])),
@@ -3746,8 +3748,8 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#FEE75C")
                                             .setAuthor(
-                                                "Esto es una advertencia",
-                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                                asAuthor("Esto es una advertencia",
+                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                             )
                                             .setTitle(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable86"])
@@ -3787,8 +3789,8 @@ module.exports = async client => {
                                     new EmbedBuilder()
                                         .setColor("#FEE75C")
                                         .setAuthor(
-                                            "Esto es una advertencia",
-                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                            asAuthor("Esto es una advertencia",
+                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                         )
                                         .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable89"]))
                                         .setDescription(
@@ -3820,16 +3822,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE CREATE - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE CREATE - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable91"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3858,16 +3860,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE CREATE - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE CREATE - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable92"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3892,16 +3894,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE CREATE - ${AddedMember.user.username} created ${role.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE CREATE - ${AddedMember.user.username} created ${role.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable93"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3928,16 +3930,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE CREATE - ${AddedMember.user.username} created ${role.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE CREATE - ${AddedMember.user.username} created ${role.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable94"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3961,16 +3963,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE CREATE - ${AddedMember.user.username} created ${role.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE CREATE - ${AddedMember.user.username} created ${role.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable95"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -3997,16 +3999,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE CREATE - ${AddedMember.user.username} created ${role.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE CREATE - ${AddedMember.user.username} created ${role.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable96"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -4060,8 +4062,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#57F287")
                                                         .setAuthor(
-                                                            `ANTI ROLE CREATE - I Deleted: ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                            asAuthor(`ANTI ROLE CREATE - I Deleted: ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4122,8 +4124,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#5865F2")
                                                         .setAuthor(
-                                                            `ANTI ROLE CREATE - Removed Roles of ${AddedMember.user.username} for creating ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png"
+                                                            asAuthor(`ANTI ROLE CREATE - Removed Roles of ${AddedMember.user.username} for creating ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4132,10 +4134,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -4205,8 +4207,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#57F287")
                                                         .setAuthor(
-                                                            `ANTI ROLE CREATE - I Deleted: ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                            asAuthor(`ANTI ROLE CREATE - I Deleted: ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4252,8 +4254,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#E67E22")
                                                         .setAuthor(
-                                                            `ANTI ROLE CREATE - Kicked ${AddedMember.user.username} for creating ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png"
+                                                            asAuthor(`ANTI ROLE CREATE - Kicked ${AddedMember.user.username} for creating ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4262,10 +4264,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -4320,8 +4322,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#57F287")
                                                         .setAuthor(
-                                                            `ANTI ROLE CREATE - I Deleted: ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png"
+                                                            asAuthor(`ANTI ROLE CREATE - I Deleted: ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4369,8 +4371,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#ED4245")
                                                         .setAuthor(
-                                                            `ANTI ROLE CREATE - Banned ${AddedMember.user.username} for creating ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png"
+                                                            asAuthor(`ANTI ROLE CREATE - Banned ${AddedMember.user.username} for creating ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4379,10 +4381,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -4440,8 +4442,8 @@ module.exports = async client => {
                                 new EmbedBuilder()
                                     .setColor("#FEE75C")
                                     .setAuthor(
-                                        "Esto es una advertencia",
-                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                        asAuthor("Esto es una advertencia",
+                                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                     )
                                     .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable2"]))
                                     .setDescription(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable3"])),
@@ -4476,8 +4478,8 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#FEE75C")
                                             .setAuthor(
-                                                "Esto es una advertencia",
-                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                                asAuthor("Esto es una advertencia",
+                                                "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                             )
                                             .setTitle(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable104"])
@@ -4517,8 +4519,8 @@ module.exports = async client => {
                                     new EmbedBuilder()
                                         .setColor("#FEE75C")
                                         .setAuthor(
-                                            "Esto es una advertencia",
-                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png"
+                                            asAuthor("Esto es una advertencia",
+                                            "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/warning-sign_26a0.png")
                                         )
                                         .setTitle(eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable107"]))
                                         .setDescription(
@@ -4550,16 +4552,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE DELETE - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE DELETE - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable109"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -4588,16 +4590,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE DELETE - ${AddedMember.user.username}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE DELETE - ${AddedMember.user.username}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable110"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -4622,16 +4624,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE DELETE - ${AddedMember.user.username} delete ${role.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE DELETE - ${AddedMember.user.username} delete ${role.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable111"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -4658,16 +4660,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE DELETE - ${AddedMember.user.username} deleted ${role.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE DELETE - ${AddedMember.user.username} deleted ${role.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable112"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -4692,16 +4694,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE DELETE - ${AddedMember.user.username} delete ${role.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE DELETE - ${AddedMember.user.username} delete ${role.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable113"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -4728,16 +4730,16 @@ module.exports = async client => {
                                         new EmbedBuilder()
                                             .setColor("#fffff9")
                                             .setAuthor(
-                                                `ANTI ROLE DELETE - ${AddedMember.user.username} deleted ${role.name}`,
-                                                AddedMember.user.displayAvatarURL()
+                                                asAuthor(`ANTI ROLE DELETE - ${AddedMember.user.username} deleted ${role.name}`,
+                                                AddedMember.user.displayAvatarURL())
                                             )
                                             .setDescription(
                                                 eval(client.la[ls]["handlers"]["antinukejs"]["anti_nuke"]["variable114"])
                                             )
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     "ID: " + AddedUserID,
                                                     AddedMember.user.displayAvatarURL()
-                                                )
+                                                ))
                                             ),
                                     ],
                                 }).catch(() => {});
@@ -4808,8 +4810,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#5865F2")
                                                         .setAuthor(
-                                                            `ANTI ROLE DELETE - Removed Roles of ${AddedMember.user.username} for deleting ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png"
+                                                            asAuthor(`ANTI ROLE DELETE - Removed Roles of ${AddedMember.user.username} for deleting ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869664393783304212/869285770723217488.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4818,10 +4820,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -4892,8 +4894,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#E67E22")
                                                         .setAuthor(
-                                                            `ANTI ROLE DELETE - Kicked ${AddedMember.user.username} for deleting ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png"
+                                                            asAuthor(`ANTI ROLE DELETE - Kicked ${AddedMember.user.username} for deleting ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665099512688670/hammer_1f528.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4902,10 +4904,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});
@@ -4963,8 +4965,8 @@ module.exports = async client => {
                                                     new EmbedBuilder()
                                                         .setColor("#ED4245")
                                                         .setAuthor(
-                                                            `ANTI ROLE DELETE - Banned ${AddedMember.user.username} for deleting ${role.name}`,
-                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png"
+                                                            asAuthor(`ANTI ROLE DELETE - Banned ${AddedMember.user.username} for deleting ${role.name}`,
+                                                            "https://cdn.discordapp.com/attachments/820695790170275871/869665114373095514/811556437284749322.png")
                                                         )
                                                         .setDescription(
                                                             eval(
@@ -4973,10 +4975,10 @@ module.exports = async client => {
                                                                 ]
                                                             )
                                                         )
-                                                        .setFooter(client.getFooter(
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                 "ID: " + AddedUserID,
                                                                 AddedMember.user.displayAvatarURL()
-                                                            )
+                                                            ))
                                                         ),
                                                 ],
                                             }).catch(() => {});

@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -28,7 +30,7 @@ module.exports = {
                 if (!emoji) return message.reply(handlemsg(client.la[ls].cmds.info.emojiinfo.error2));
 
                 const authorFetch = await emoji?.fetchAuthor();
-                const checkOrCross = bool => (bool ? "✅" : "❌");
+                const checkOrCross = bool => (bool ? obeyUi.owned("✅") : obeyUi.owned("❌"));
                 const embed = new EmbedBuilder()
                     .setTitle(eval(client.la[ls]["cmds"]["info"]["emojiinfo"]["variable1"]))
                     .setColor(es.color)
@@ -52,7 +54,7 @@ module.exports = {
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[2])} \`${checkOrCross(emoji?.deleteable)}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[3])} \`${checkOrCross(emoji?.managed)}\``,
                         ].join("\n") })
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 message.reply({ embeds: [embed] });
             } else if ((emoji1 = animatedEmoteRegex.exec(message))) {
                 let url2 = "https://cdn.discordapp.com/emojis/" + emoji1[1] + ".gif?v=1";
@@ -61,7 +63,7 @@ module.exports = {
                 if (!emoji) return message.reply(handlemsg(client.la[ls].cmds.info.emojiinfo.error2));
 
                 const authorFetch = await emoji?.fetchAuthor();
-                const checkOrCross = bool => (bool ? "✅" : "❌");
+                const checkOrCross = bool => (bool ? obeyUi.owned("✅") : obeyUi.owned("❌"));
                 const embed = new EmbedBuilder()
                     .setTitle(eval(client.la[ls]["cmds"]["info"]["emojiinfo"]["variable2"]))
                     .setColor(es.color)
@@ -85,7 +87,7 @@ module.exports = {
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[2])} \`${checkOrCross(emoji?.deleteable)}\``,
                             `${handlemsg(client.la[ls].cmds.info.emojiinfo.embed.field2.value[3])} \`${checkOrCross(emoji?.managed)}\``,
                         ].join("\n") })
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 message.reply({ embeds: [embed] });
             } else {
                 return message.reply(handlemsg(client.la[ls].cmds.info.emojiinfo.error3));
@@ -96,7 +98,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

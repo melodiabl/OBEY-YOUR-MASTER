@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const { getLikedSongs, getLikedSongsCount, buildLikedPages, buildLikedRows } = require('../../handlers/music/likes')
 
@@ -13,7 +14,7 @@ module.exports = {
 
     if (!songs.length) {
       return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
-        .setDescription('🤍 Aún no tienes canciones favoritas.\nUsa `/favoritos like` mientras suena una canción para añadirla.')] })
+        .setDescription(obeyUi.limit(obeyUi.owned('🤍 Aún no tienes canciones favoritas.\nUsa `/favoritos like` mientras suena una canción para añadirla.'), 4096))] })
     }
 
     const pages = buildLikedPages(songs, total, interaction.user)

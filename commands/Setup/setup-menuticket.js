@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var {
   EmbedBuilder, ChannelType,
     ButtonStyle
@@ -5,7 +7,7 @@ var {
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var {
   databasing
 } = require(`${process.cwd()}/handlers/functions`);
@@ -52,7 +54,7 @@ module.exports = {
           .setCustomId('MenuSelection')
           .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
           .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-          .setPlaceholder('¡Haz clic para configurar the Menu Ticket System!')
+          .setPlaceholder(obeyUi.plain('¡Haz clic para configurar the Menu Ticket System!'))
           .addOptions(
             menuoptions.slice(0, 25).map(option => {
               let Obj = {
@@ -69,7 +71,7 @@ module.exports = {
           .setCustomId('MenuSelection2')
           .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
           .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-          .setPlaceholder('¡Haz clic para configurar the Menu Ticket System!')
+          .setPlaceholder(obeyUi.plain('¡Haz clic para configurar the Menu Ticket System!'))
           .addOptions(
             menuoptions.slice(25, 50).map(option => {
               let Obj = {
@@ -86,7 +88,7 @@ module.exports = {
           .setCustomId('MenuSelection3')
           .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
           .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-          .setPlaceholder('¡Haz clic para configurar the Menu Ticket System!')
+          .setPlaceholder(obeyUi.plain('¡Haz clic para configurar the Menu Ticket System!'))
           .addOptions(
             menuoptions.slice(50, 75).map(option => {
               let Obj = {
@@ -103,7 +105,7 @@ module.exports = {
           .setCustomId('MenuSelection4')
           .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
           .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-          .setPlaceholder('¡Haz clic para configurar the Menu Ticket System!')
+          .setPlaceholder(obeyUi.plain('¡Haz clic para configurar the Menu Ticket System!'))
           .addOptions(
             menuoptions.slice(75, 100).map(option => {
               let Obj = {
@@ -120,14 +122,14 @@ module.exports = {
         //define the embed
         let MenuEmbed = new Discord.EmbedBuilder()
           .setColor(es.color)
-.setAuthor(client.getAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://github.com/melodiabl'))
-                   .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]))
+.setAuthor(obeyMeta.asAuthor(client.getAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://github.com/melodiabl')))
+                   .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096))
 
                  //send the menu msg
                  let menumsg = await message.reply({
                    embeds: [MenuEmbed],
-                   components: [new ActionRowBuilder().addComponents(Selection), new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel("Tutorial Video")
-            .setEmoji(allEmojis.msg.youtube))]
+                   components: [new ActionRowBuilder().addComponents(Selection), new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel(obeyUi.plain("Tutorial Video"))
+            .setEmoji(obeyUi.component(allEmojis.msg.youtube)))]
         })
         //Create the collector
         const collector = menumsg.createMessageComponentCollector({
@@ -143,14 +145,14 @@ module.exports = {
             menu?.deferUpdate();
             handle_the_picks(menu?.values[0], menuoptiondata, SetupNumber)
           } else menu?.reply({
-            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
             ephemeral: true
           });
         });
         //Once the Collections ended edit the menu message
         collector.on('end', collected => {
           menumsg.edit({
-            embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+            embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
             components: [],
             content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`
           })
@@ -172,22 +174,22 @@ module.exports = {
               let menuoptions = [{
                 value: `${claimData.enabled ? "Disable Claim System" : "Enable Claim System"}`,
                 description: `${claimData.enabled ? "No need to claim the Tickets anymore" : "Make it so that Staff needs to claim the Ticket"}`,
-                emoji: `${claimData.enabled ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`
+                emoji: obeyUi.component(`${claimData.enabled ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`)
               },
               {
                 value: "Edit Open Message",
                 description: `Edit the Claim-Información-Mensaje when a Ticket opens`,
-                emoji: "🛠"
+                emoji: obeyUi.component("🛠")
               },
               {
                 value: "Edit Claim Message",
                 description: `Edit the Claim-Mensaje when a Staff claims it!`,
-                emoji: "😎"
+                emoji: obeyUi.component("😎")
               },
               {
                 value: "Cancel",
                 description: `Cancelar and stop the Ticket-Configuración!`,
-                emoji: allEmojis.msg.cancel
+                emoji: obeyUi.component(allEmojis.msg.cancel)
               }
               ]
               //define the selection
@@ -195,7 +197,7 @@ module.exports = {
                 .setCustomId('MenuSelection')
                 .setMaxValues(1)
                 .setMinValues(1)
-                .setPlaceholder(`Click me to manage the ${SetupNumber} Ticket System!\n\n**You've picked:**\n> Ticket Claim System`)
+                .setPlaceholder(obeyUi.plain(`Click me to manage the ${SetupNumber} Ticket System!\n\n**You've picked:**\n> Ticket Claim System`))
                 .addOptions(
                   menuoptions.map(option => {
                     let Obj = {
@@ -210,8 +212,8 @@ module.exports = {
               //define the embed
               let MenuEmbed = new Discord.EmbedBuilder()
                 .setColor(es.color)
-                .setAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" })
-                .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]))
+                .setAuthor(obeyMeta.asAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" }))
+                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]), 4096))
               //send the menu msg
               let menumsg = await message.reply({
                 embeds: [MenuEmbed],
@@ -237,16 +239,16 @@ module.exports = {
                   if (menu?.values[0] == "Cancel") return menu?.reply(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable3"]))
                   menuselection(menu)
                 } else menu?.reply({
-                  content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                  content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                   ephemeral: true
                 });
               });
               //Once the Collections ended edit the menu message
               collector.on('end', collected => {
                 menumsg.edit({
-                  embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                  embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                   components: [],
-                  content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`
+                  content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`
                 })
               });
             }
@@ -259,18 +261,18 @@ module.exports = {
                   return message.reply({
                     embeds: [
                       new EmbedBuilder().setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(`${claimData.enabled ? "Activado the Claim System" : "Desactivado the Claim System"}`)
-                        .setDescription(`${claimData.enabled ? "When a Usuario opens a Ticket, a Staff Miembro needs to claim it, before he can send something in there!\n> This is useful for Professionality and Information!\n> **NOTE:** Admins can always chat..." : "You now don't need to claim a Ticket anymore"}`)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(`${claimData.enabled ? "Activado the Claim System" : "Desactivado the Claim System"}`, 256))
+                        .setDescription(obeyUi.limit(`${claimData.enabled ? "When a Usuario opens a Ticket, a Staff Miembro needs to claim it, before he can send something in there!\n> This is useful for Professionality and Information!\n> **NOTE:** Admins can always chat..." : "You now don't need to claim a Ticket anymore"}`, 4096))
                     ]
                   });
                 } break;
                 case "Edit Open Message": {
                   var rembed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setFooter(client.getFooter(es))
-                    .setTitle("What should be the new Mensaje when a Usuario opens a Ticket?")
-                    .setDescription(String("{user} will be replaced with a USERPING\n\n**Current Mensaje:**\n>>> " + claimData.messageOpen.substring(0, 1900)))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                    .setTitle(obeyUi.limit("What should be the new Mensaje when a Usuario opens a Ticket?", 256))
+                    .setDescription(obeyUi.limit(String("{user} will be replaced with a USERPING\n\n**Current Mensaje:**\n>>> " + claimData.messageOpen.substring(0, 1900)), 4096))
                   message.reply({
                     embeds: [rembed]
                   }).then(msg => {
@@ -285,10 +287,10 @@ module.exports = {
                     }).catch(error => {
                       return message.reply({
                         embeds: [new Discord.EmbedBuilder()
-                          .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]))
+                          .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]), 256))
                           .setColor(es.wrongcolor)
-                          .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                          .setFooter(client.getFooter(es))
+                          .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                          .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         ]
                       });
                     })
@@ -297,9 +299,9 @@ module.exports = {
                 case "Edit Claim Message": {
                   var rembed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setFooter(client.getFooter(es))
-                    .setTitle("What should be the new Mensaje when a Staff claims a Ticket?")
-                    .setDescription(String("{user} will be replaced with a USERPING\n{claimer} will be replaced with a PING for WHO CLAIMED IT\n\n**Current Mensaje:**\n>>> " + claimData.messageClaim.substring(0, 1900)))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                    .setTitle(obeyUi.limit("What should be the new Mensaje when a Staff claims a Ticket?", 256))
+                    .setDescription(obeyUi.limit(String("{user} will be replaced with a USERPING\n{claimer} will be replaced with a PING for WHO CLAIMED IT\n\n**Current Mensaje:**\n>>> " + claimData.messageClaim.substring(0, 1900)), 4096))
                   message.reply({
                     embeds: [rembed]
                   }).then(msg => {
@@ -314,10 +316,10 @@ module.exports = {
                     }).catch(error => {
                       return message.reply({
                         embeds: [new Discord.EmbedBuilder()
-                          .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]))
+                          .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]), 256))
                           .setColor(es.wrongcolor)
-                          .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                          .setFooter(client.getFooter(es))
+                          .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                          .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         ]
                       });
                     })
@@ -331,14 +333,14 @@ module.exports = {
             let data = theDB.get(message.guild.id, pre + ".data");
             let settings = theDB.get(message.guild.id, pre);
             if (!data || data.length < 1) {
-              return message.reply("<:no:833101993668771842> **Necesitas añadir al menos 1 opción de ticket abierto**")
+              return message.reply(obeyUi.owned("<:no:833101993668771842> **Necesitas añadir al menos 1 opción de ticket abierto**"))
             }
             let tempmsg = await message.reply({
               embeds: [
                 new EmbedBuilder()
                   .setColor(es.color)
-                  .setTitle("What should be the Text to display in the Embed?")
-                  .setDescription(`For Example:\n> \`\`\`To Open a Ticket, select the Topic you need in the Selection down below!\`\`\``)
+                  .setTitle(obeyUi.limit("What should be the Text to display in the Embed?", 256))
+                  .setDescription(obeyUi.limit(`For Example:\n> \`\`\`To Open a Ticket, select the Topic you need in the Selection down below!\`\`\``, 4096))
               ]
             });
 
@@ -352,8 +354,8 @@ module.exports = {
                 embeds: [
                   new EmbedBuilder()
                     .setColor(es.color)
-                    .setTitle("In where should I send the Open a New Ticket Mensaje?")
-                    .setDescription(`Por favor Ping the Canal now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`)
+                    .setTitle(obeyUi.limit("In where should I send the Open a New Ticket Mensaje?", 256))
+                    .setDescription(obeyUi.limit(`Por favor Ping the Canal now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`, 4096))
                 ]
               });
 
@@ -369,22 +371,22 @@ module.exports = {
                 let embed = new EmbedBuilder()
                   .setColor(es.color)
                   .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
-                  .setFooter(client.getFooter(es))
-                  .setDescription(msgContent)
-                  .setTitle("📨 Open a Ticket")
+                  .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                  .setDescription(obeyUi.limit(msgContent, 4096))
+                  .setTitle(obeyUi.limit(obeyUi.owned("📨 Open a Ticket"), 256))
                 //define the selection
                 let Selection = new StringSelectMenuBuilder()
                   .setCustomId('MenuSelection')
                   .setMaxValues(1)
                   .setMinValues(1)
-                  .setPlaceholder('Click me to Access the Menu-Ticket System!')
+                  .setPlaceholder(obeyUi.plain('Click me to Access the Menu-Ticket System!'))
                   .addOptions(
                     data.map((option, index) => {
                       let Obj = {
                         label: option.value.substring(0, 50),
                         value: option.value.substring(0, 50),
                         description: option.description.substring(0, 50),
-                        emoji: isEmoji(client, message, option.emoji) ? option.emoji : NumberEmojis[index + 1]
+                        emoji: obeyUi.component(isEmoji(client, message, option.emoji) ? option.emoji : NumberEmojis[index + 1])
                       }
                       if(!Obj.emoji) delete Obj.emoji;
                       return Obj;
@@ -398,14 +400,14 @@ module.exports = {
                     .setCustomId('MenuSelection')
                     .setMaxValues(1)
                     .setMinValues(1)
-                    .setPlaceholder('Click me to Access the Menu-Ticket System!')
+                    .setPlaceholder(obeyUi.plain('Click me to Access the Menu-Ticket System!'))
                     .addOptions(
                       data.map((option, index) => {
                         let Obj = {
                           label: option.value.substring(0, 50),
                           value: option.value.substring(0, 50),
                           description: option.description.substring(0, 50),
-                        emoji: NumberEmojis[index + 1]
+                        emoji: obeyUi.component(NumberEmojis[index + 1])
                         }
                         if(!Obj.emoji) delete Obj.emoji;
                         return Obj;
@@ -426,25 +428,25 @@ module.exports = {
                   message.reply(`Successfully Setupped the Menu-Ticket in <#${channel.id}>`)
                 });
               } else {
-                return message.reply("<:no:833101993668771842> **¡No mencionaste un canal válido!**")
+                return message.reply(obeyUi.owned("<:no:833101993668771842> **¡No mencionaste un canal válido!**"))
               }
             } else {
-              return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
+              return message.reply(obeyUi.owned("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"))
             }
           }
             break;
           case "Add Ticket Option": {
             let data = theDB.get(message.guild.id, pre + ".data");
             if (data.length >= 25) {
-              return message.reply("<:no:833101993668771842> **¡Alcanzaste el límite de 25 opciones diferentes!** Elimina otra opción primero")
+              return message.reply(obeyUi.owned("<:no:833101993668771842> **¡Alcanzaste el límite de 25 opciones diferentes!** Elimina otra opción primero"))
             }
             //ask for value and description
             let tempmsg = await message.reply({
               embeds: [
                 new EmbedBuilder()
                   .setColor(es.color)
-                  .setTitle("What should be the VALUE and DESCRIPTION of the Menu-Option?")
-                  .setDescription(`**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`General Support++Get Help for anything you want!\`\`\``)
+                  .setTitle(obeyUi.limit("What should be the VALUE and DESCRIPTION of the Menu-Option?", 256))
+                  .setDescription(obeyUi.limit(`**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`General Support++Get Help for anything you want!\`\`\``, 4096))
               ]
             });
             let collected = await tempmsg.channel.awaitMessages({
@@ -453,11 +455,11 @@ module.exports = {
               time: 90000, errors: ["time"]
             });
             if (collected && collected.first().content) {
-              if (!collected.first().content.includes("++")) return message.reply("<:no:833101993668771842> **¡Uso no válido! Por favor sigue el uso y revisa el ejemplo**")
+              if (!collected.first().content.includes("++")) return message.reply(obeyUi.owned("<:no:833101993668771842> **¡Uso no válido! Por favor sigue el uso y revisa el ejemplo**"))
               let value = collected.first().content.split("++")[0].trim().substring(0, 25);
               let index = data.findIndex(v => v.value == value);
               if (index >= 0) {
-                return message.reply("<:no:833101993668771842> **Options can't have the SAME VALUE!** There is already an Option with that Value!");
+                return message.reply(obeyUi.owned("<:no:833101993668771842> **Options can't have the SAME VALUE!** There is already an Option with that Value!"));
               }
               let description = collected.first().content.split("++")[1].trim().substring(0, 50);
               //ask for category
@@ -465,8 +467,8 @@ module.exports = {
                 embeds: [
                   new EmbedBuilder()
                     .setColor(es.color)
-                    .setTitle("In Which Category should the new Tickets of this Option open?")
-                    .setDescription(`**This is suggested to fill it in, because there are settings for SYNCING to that Category!**\nJust send the ID of it, send \`no\` for no category!\nFor Example:\n> \`840332704494518292\``)
+                    .setTitle(obeyUi.limit("In Which Category should the new Tickets of this Option open?", 256))
+                    .setDescription(obeyUi.limit(`**This is suggested to fill it in, because there are settings for SYNCING to that Category!**\nJust send the ID of it, send \`no\` for no category!\nFor Example:\n> \`840332704494518292\``, 4096))
                 ]
               });
               let collected2 = await tempmsg.channel.awaitMessages({
@@ -484,8 +486,8 @@ module.exports = {
                   embeds: [
                     new EmbedBuilder()
                       .setColor(es.color)
-                      .setTitle("What should be the Reply Mensaje when someone Opens a Ticket?")
-                      .setDescription(`For Example:\n> \`\`\`{user} Bienvenido to the Support! Tell us what you need help with!\`\`\``)
+                      .setTitle(obeyUi.limit("What should be the Reply Mensaje when someone Opens a Ticket?", 256))
+                      .setDescription(obeyUi.limit(`For Example:\n> \`\`\`{user} Bienvenido to the Support! Tell us what you need help with!\`\`\``, 4096))
                   ]
                 });
                 let collected3 = await tempmsg.channel.awaitMessages({
@@ -495,13 +497,13 @@ module.exports = {
                 });
                 if (collected3 && collected3.first().content) {
                   let replyMsg = collected3.first().content;
-                  let defaultname = "🎫・{count}・{member}";
+                  let defaultname = obeyUi.owned("🎫・{count}・{member}");
                   let tempmsg = await message.reply({
                     embeds: [
                       new EmbedBuilder()
                         .setColor(es.color)
-                        .setTitle("What should be the new Default Ticket Name?")
-                        .setDescription(`Currently/Suggested it's: \`${defaultname}\` aka it will turn into: \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\`\n> \`{member}\` ... will get replaced with the ticket opening username\n> \`{count}\` ... Will get replaced with the TICKET ID (COUNT)\n**Send the Message now!**`)
+                        .setTitle(obeyUi.limit("What should be the new Default Ticket Name?", 256))
+                        .setDescription(obeyUi.limit(`Currently/Suggested it's: \`${defaultname}\` aka it will turn into: \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\`\n> \`{member}\` ... will get replaced with the ticket opening username\n> \`{count}\` ... Will get replaced with the TICKET ID (COUNT)\n**Send the Message now!**`, 4096))
                     ]
                   });
                   let collected4 = await tempmsg.channel.awaitMessages({
@@ -521,12 +523,12 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
 
                     var rermbed = new EmbedBuilder()
                       .setColor(es.color)
-                      .setTitle("What should be the EMOJI to be displayed?")
-                      .setDescription(`React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`)
+                      .setTitle(obeyUi.limit("What should be the EMOJI to be displayed?", 256))
+                      .setDescription(obeyUi.limit(`React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`, 4096))
 
                     var emoji = NumberEmojis[data.length + 1] || defaultEmoji, emojiMsg;
                     message.reply({ embeds: [rermbed] }).then(async msg => {
-                      await msg.react(emoji).catch(console.warn);
+                      await msg.react(obeyUi.reaction(emoji)).catch(console.warn);
                       msg.awaitReactions({
                         filter: (reaction, user) => user.id == cmduser.id,
                         max: 1,
@@ -547,7 +549,7 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                         }
 
                         try {
-                          await msg.react(emoji);
+                          await msg.react(obeyUi.reaction(emoji));
                           if (NumberEmojis.includes(collected.first().emoji?.id)) {
                             emoji = null;
                             emojiMsg = NumberEmojis[data.length] || defaultEmoji;
@@ -580,8 +582,8 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                         embeds: [
                           new EmbedBuilder()
                             .setColor(es.color)
-                            .setTitle("Successfully added the New Data to the List!")
-                            .setDescription(`Make sure to re-send the Mensaje, so that it's also updating it!\n> \`${prefix}setup-menuticket\` --> Send Config Mensaje`)
+                            .setTitle(obeyUi.limit("Successfully added the New Data to the List!", 256))
+                            .setDescription(obeyUi.limit(`Make sure to re-send the Mensaje, so that it's also updating it!\n> \`${prefix}setup-menuticket\` --> Send Config Mensaje`, 4096))
                             .addFields({ name: "Value:", value: `> ${value}`.substring(0, 1024), inline: true })
                             .addFields({ name: "Description:", value: `> ${description}`.substring(0, 1024), inline: true })
                             .addFields({ name: "Category:", value: `> <#${category}> (${category})`.substring(0, 1024), inline: true })
@@ -595,16 +597,16 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
 
 
                   } else {
-                    return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
+                    return message.reply(obeyUi.owned("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"))
                   }
                 } else {
-                  return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
+                  return message.reply(obeyUi.owned("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"))
                 }
               } else {
-                return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
+                return message.reply(obeyUi.owned("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"))
               }
             } else {
-              return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
+              return message.reply(obeyUi.owned("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"))
             }
           }
             break;
@@ -613,27 +615,27 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
 
             let data = theDB.get(message.guild.id, pre + ".data");
             if (!data || data.length < 1) {
-              return message.reply("<:no:833101993668771842> **No hay opciones de ticket abierto para eliminar**")
+              return message.reply(obeyUi.owned("<:no:833101993668771842> **No hay opciones de ticket abierto para eliminar**"))
             }
             let embed = new EmbedBuilder()
               .setColor(es.color)
               .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
-              .setFooter(client.getFooter(es))
-              .setDescription("Just pick the Options you want to edit!")
-              .setTitle("Which Option do you want to edit?")
+              .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+              .setDescription(obeyUi.limit("Just pick the Options you want to edit!", 4096))
+              .setTitle(obeyUi.limit("Which Option do you want to edit?", 256))
             //define the selection
             let Selection = new StringSelectMenuBuilder()
               .setCustomId('MenuSelection')
               .setMaxValues(1)
               .setMinValues(1)
-              .setPlaceholder('¡Haz clic para configurar the Menu-Ticket System!')
+              .setPlaceholder(obeyUi.plain('¡Haz clic para configurar the Menu-Ticket System!'))
               .addOptions(
                 data.map((option, index) => {
                   let Obj = {
                     label: option.value.substring(0, 50),
                     value: option.value.substring(0, 50),
                     description: option.description.substring(0, 50),
-                    emoji: isEmoji(client, message, option.emoji) ? option.emoji : NumberEmojis[index + 1]
+                    emoji: obeyUi.component(isEmoji(client, message, option.emoji) ? option.emoji : NumberEmojis[index + 1])
                   }
                   if(!Obj.emoji) delete Obj.emoji;
                   return Obj;
@@ -650,14 +652,14 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                 .setCustomId('MenuSelection')
                 .setMaxValues(1)
                 .setMinValues(1)
-                .setPlaceholder('Click me to Access the Menu-Ticket System!')
+                .setPlaceholder(obeyUi.plain('Click me to Access the Menu-Ticket System!'))
                 .addOptions(
                   data.map((option, index) => {
                     let Obj = {
                       label: option.value.substring(0, 50),
                       value: option.value.substring(0, 50),
                       description: option.description.substring(0, 50),
-                      emoji: isEmoji(client, message, option.emoji) ? option.emoji : NumberEmojis[index + 1]
+                      emoji: obeyUi.component(isEmoji(client, message, option.emoji) ? option.emoji : NumberEmojis[index + 1])
                     }
                     if(!Obj.emoji) delete Obj.emoji;
                     return Obj;
@@ -686,27 +688,27 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                 let menuoptions = [{
                   value: "Change Value&Description".substring(0, 25),
                   description: `Change the Value, etc. of the display-Option`,
-                  emoji: "✒️"
+                  emoji: obeyUi.component("✒️")
                 },
                 {
                   value: "Change Open Category",
                   description: `When Opening a Ticket, it will be moved to there`,
-                  emoji: "✂️"
+                  emoji: obeyUi.component("✂️")
                 },
                 {
                   value: "Change Default-Name",
                   description: `Change the Default Ticket Name`,
-                  emoji: "🎫"
+                  emoji: obeyUi.component("🎫")
                 },
                 {
                   value: "Change Emoji",
                   description: `Change the Default Emoji`,
-                  emoji: "👍"
+                  emoji: obeyUi.component("👍")
                 },
                 {
                   value: "Change Reply Message",
                   description: `Change the Mensaje when he opened the Ticket`,
-                  emoji: "✅"
+                  emoji: obeyUi.component("✅")
                 },
                 ]
                 //define the selection
@@ -714,7 +716,7 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                   .setCustomId('MenuSelection')
                   .setMaxValues(1)
                   .setMinValues(1)
-                  .setPlaceholder(`Click me to edit the ${index}. Option!`)
+                  .setPlaceholder(obeyUi.plain(`Click me to edit the ${index}. Option!`))
                   .addOptions(
                     menuoptions.map(option => {
                       let Obj = {
@@ -728,14 +730,14 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                   .setColor(es.color)
-.setAuthor(client.getAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://github.com/melodiabl'))
-                  .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]))
+.setAuthor(obeyMeta.asAuthor(client.getAuthor('Menu Ticket Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png', 'https://github.com/melodiabl')))
+                  .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096))
 
                 //send the menu msg
                 let menumsg = await message.reply({
                   embeds: [MenuEmbed],
-                  components: [new ActionRowBuilder().addComponents(Selection), new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel("Tutorial Video")
-                    .setEmoji(allEmojis.msg.youtube))]
+                  components: [new ActionRowBuilder().addComponents(Selection), new ActionRowBuilder().addComponents(new ButtonBuilder().setStyle(ButtonStyle.Link).setURL("https://youtu.be/QGESDc31d4U").setLabel(obeyUi.plain("Tutorial Video"))
+                    .setEmoji(obeyUi.component(allEmojis.msg.youtube)))]
                 })
                 //Create the collector
                 const collector = menumsg.createMessageComponentCollector({
@@ -751,14 +753,14 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                     menu?.deferUpdate();
                     handle_the_picks3(menu?.values[0], menuoptiondata, SetupNumber)
                   } else menu?.reply({
-                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                    content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                     ephemeral: true
                   });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on('end', collected => {
                   menumsg.edit({
-                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                     components: [],
                     content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`
                   })
@@ -772,8 +774,8 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                         embeds: [
                           new EmbedBuilder()
                             .setColor(es.color)
-                            .setTitle("What should be the VALUE and DESCRIPTION of the Menu-Option?")
-                            .setDescription(`**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`General Support++Get Help for anything you want!\`\`\``)
+                            .setTitle(obeyUi.limit("What should be the VALUE and DESCRIPTION of the Menu-Option?", 256))
+                            .setDescription(obeyUi.limit(`**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`General Support++Get Help for anything you want!\`\`\``, 4096))
                         ]
                       });
                       let collected = await tempmsg.channel.awaitMessages({
@@ -782,18 +784,18 @@ message.reply("El nombre del canal no puede tener más de 32 caracteres, usando 
                         time: 90000, errors: ["time"]
                       });
                       if (collected && collected.first().content) {
-                        if (!collected.first().content.includes("++")) return message.reply("<:no:833101993668771842> **¡Uso no válido! Por favor sigue el uso y revisa el ejemplo**")
+                        if (!collected.first().content.includes("++")) return message.reply(obeyUi.owned("<:no:833101993668771842> **¡Uso no válido! Por favor sigue el uso y revisa el ejemplo**"))
                         let value = collected.first().content.split("++")[0].trim().substring(0, 25);
                         let index2 = data.findIndex(v => v.value == value);
                         if (index2 >= 0 && index != index2) {
-return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener el MISMO VALOR!** Ya hay una opción con ese valor");
+return message.reply(obeyUi.owned("<:no:833101993668771842> **¡Las opciones no pueden tener el MISMO VALOR!** Ya hay una opción con ese valor"));
                         }
                         let description = collected.first().content.split("++")[1].trim().substring(0, 50);
                         data[index].value = value;
                         data[index].description = description;
                         return finished();
                       } else {
-                        return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
+                        return message.reply(obeyUi.owned("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"))
                       }
                     } break;
                     case `Change Open Category`: {
@@ -801,8 +803,8 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                         embeds: [
                           new EmbedBuilder()
                             .setColor(es.color)
-                            .setTitle("In Which Category should the new Tickets of this Option open?")
-                            .setDescription(`**This is suggested to fill it in, because there are settings for SYNCING to that Category!**\n\nJust send the ID of it, send \`no\` for no category!\nFor Example:\n> \`840332704494518292\``)
+                            .setTitle(obeyUi.limit("In Which Category should the new Tickets of this Option open?", 256))
+                            .setDescription(obeyUi.limit(`**This is suggested to fill it in, because there are settings for SYNCING to that Category!**\n\nJust send the ID of it, send \`no\` for no category!\nFor Example:\n> \`840332704494518292\``, 4096))
                         ]
                       });
                       let collected = await tempmsg.channel.awaitMessages({
@@ -816,16 +818,16 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                         data[index].category = category.id;
                         return finished();
                       }
-                      return message.reply("<:no:833101993668771842> **No válido Category-ID added**")
+                      return message.reply(obeyUi.owned("<:no:833101993668771842> **No válido Category-ID added**"))
                     } break;
                     case `Change Default-Name`: {
-                      let defaultname = "🎫・{count}・{member}";
+                      let defaultname = obeyUi.owned("🎫・{count}・{member}");
                       let tempmsg = await message.reply({
                         embeds: [
                           new EmbedBuilder()
                             .setColor(es.color)
-                            .setTitle("What should be the new Default Ticket Name?")
-                            .setDescription(`Currently/Suggested it's: \`${defaultname}\` aka it will turn into: \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\`\n> \`{member}\` ... will get replaced with the ticket opening username\n> \`{count}\` ... Will get replaced with the TICKET ID (COUNT)\n**Send the Message now!**`)
+                            .setTitle(obeyUi.limit("What should be the new Default Ticket Name?", 256))
+                            .setDescription(obeyUi.limit(`Currently/Suggested it's: \`${defaultname}\` aka it will turn into: \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\`\n> \`{member}\` ... will get replaced with the ticket opening username\n> \`{count}\` ... Will get replaced with the TICKET ID (COUNT)\n**Send the Message now!**`, 4096))
                         ]
                       });
                       let collected = await tempmsg.channel.awaitMessages({
@@ -845,12 +847,12 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                     case `Change Emoji`: {
                       var rermbed = new EmbedBuilder()
                         .setColor(es.color)
-                        .setTitle("What should be the EMOJI to be displayed?")
-                        .setDescription(`React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`)
+                        .setTitle(obeyUi.limit("What should be the EMOJI to be displayed?", 256))
+                        .setDescription(obeyUi.limit(`React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`, 4096))
 
                       var emoji = NumberEmojis[data.length] || defaultEmoji, emojiMsg;
                       message.reply({ embeds: [rermbed] }).then(async msg => {
-                        await msg.react(emoji).catch(console.warn);
+                        await msg.react(obeyUi.reaction(emoji)).catch(console.warn);
                         msg.awaitReactions({
                           filter: (reaction, user) => user.id == cmduser.id,
                           max: 1,
@@ -865,13 +867,13 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                             emoji = collected.first().emoji?.name;
                             emojiMsg = collected.first().emoji?.name;
                           } else {
-                            message.reply("❌ **No valid emoji added, using default EMOJI**");
+                            message.reply(obeyUi.owned("❌ **No valid emoji added, using default EMOJI**"));
                             data[index].emoji = null;
                             data[index].emojiMsg = NumberEmojis[data.length] || defaultEmoji;
                           }
 
                           try {
-                            await msg.react(emoji);
+                            await msg.react(obeyUi.reaction(emoji));
                             if (NumberEmojis.includes(collected.first().emoji?.id)) {
                               data[index].emoji = null;
                               data[index].emojiMsg = NumberEmojis[data.length] || defaultEmoji;
@@ -881,14 +883,14 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                             }
                           } catch (e) {
                             console.log(e)
-                            message.reply("❌ **Could not use the CUSTOM EMOJI you added, as I can't access it / use it as a reaction/emoji for the menu**\nUsing default emoji!");
+                            message.reply(obeyUi.owned("❌ **Could not use the CUSTOM EMOJI you added, as I can't access it / use it as a reaction/emoji for the menu**\nUsing default emoji!"));
                             data[index].emoji = null;
                             data[index].emojiMsg = NumberEmojis[data.length] || defaultEmoji;
                           }
                           finished();
                         }).catch((e) => {
                           console.log(e)
-                          message.reply("❌ **No valid emoji added, using default EMOJI**");
+                          message.reply(obeyUi.owned("❌ **No valid emoji added, using default EMOJI**"));
                           data[index].emoji = null;
                           data[index].emojiMsg = NumberEmojis[data.length] || defaultEmoji;
                           finished();
@@ -900,8 +902,8 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                         embeds: [
                           new EmbedBuilder()
                             .setColor(es.color)
-                            .setTitle("What should be the Reply Mensaje when someone Opens a Ticket?")
-                            .setDescription(`For Example:\n> \`\`\`{user} Bienvenido to the Support! Tell us what you need help with!\`\`\``)
+                            .setTitle(obeyUi.limit("What should be the Reply Mensaje when someone Opens a Ticket?", 256))
+                            .setDescription(obeyUi.limit(`For Example:\n> \`\`\`{user} Bienvenido to the Support! Tell us what you need help with!\`\`\``, 4096))
                         ]
                       });
                       let collected = await tempmsg.channel.awaitMessages({
@@ -913,7 +915,7 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                         data[index].replyMsg = collected.first().content;
                         return finished();
                       } else {
-                        return message.reply("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**")
+                        return message.reply(obeyUi.owned("<:no:833101993668771842> **¡No ingresaste un mensaje válido a tiempo! CANCELADO**"))
                       }
                     } break;
                   }
@@ -933,8 +935,8 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                     embeds: [
                       new EmbedBuilder()
                         .setColor(es.color)
-                        .setTitle("**Successfully edited:**")
-                        .setDescription(`>>> ${menu?.values.map(i => `\`${i}\``).join(", ")}\n\nDon't forget to resend the Ticket Config-Message!`)
+                        .setTitle(obeyUi.limit("**Successfully edited:**", 256))
+                        .setDescription(obeyUi.limit(`>>> ${menu?.values.map(i => `\`${i}\``).join(", ")}\n\nDon't forget to resend the Ticket Config-Message!`, 4096))
                         .addFields({ name: "Value:", value: `> ${value}`.substring(0, 1024), inline: true })
                         .addFields({ name: "Description:", value: `> ${description}`.substring(0, 1024), inline: true })
                         .addFields({ name: "Category:", value: `> <#${category}> (${category})`.substring(0, 1024), inline: true })
@@ -949,14 +951,14 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
 
 
               } else menu?.reply({
-                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                 ephemeral: true
               });
             });
             //Once the Collections ended edit the menu message
             collector.on('end', collected => {
               menumsg.edit({
-                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                 components: [],
                 content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected.size > 0 ? collected.first().values[0] : "NOTHING"}\`**`
               })
@@ -966,20 +968,20 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
           case "Remove Ticket Option": {
             let data = theDB.get(message.guild.id, pre + ".data");
             if (!data || data.length < 1) {
-              return message.reply("<:no:833101993668771842> **No hay opciones de ticket abierto para eliminar**")
+              return message.reply(obeyUi.owned("<:no:833101993668771842> **No hay opciones de ticket abierto para eliminar**"))
             }
             let embed = new EmbedBuilder()
               .setColor(es.color)
               .setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : undefined)
-              .setFooter(client.getFooter(es))
-              .setDescription("Just pick the Options you want to remove!")
-              .setTitle("Which Option Do you want to remove?")
+              .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+              .setDescription(obeyUi.limit("Just pick the Options you want to remove!", 4096))
+              .setTitle(obeyUi.limit("Which Option Do you want to remove?", 256))
             //define the selection
             let Selection = new StringSelectMenuBuilder()
               .setCustomId('MenuSelection')
               .setMaxValues(data.length)
               .setMinValues(1)
-              .setPlaceholder('¡Haz clic para configurar the Menu-Ticket System!')
+              .setPlaceholder(obeyUi.plain('¡Haz clic para configurar the Menu-Ticket System!'))
               .addOptions(
                 data.map((option, index) => {
                     const emoji = NumberEmojis[index + 1];
@@ -1002,7 +1004,7 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                 .setCustomId('MenuSelection')
                 .setMaxValues(1)
                 .setMinValues(1)
-                .setPlaceholder('Click me to Access the Menu-Ticket System!')
+                .setPlaceholder(obeyUi.plain('Click me to Access the Menu-Ticket System!'))
                 .addOptions(
                   data.map((option, index) => {
                     const emoji = NumberEmojis[index + 1];
@@ -1037,14 +1039,14 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
                 theDB.set(message.guild.id, data, pre + ".data");
                 message.reply(`**Successfully removed:**\n>>> ${menu?.values.map(i => `\`${i}\``).join(", ")}\n\nDon't forget to resend the Ticket Config-Message!`)
               } else menu?.reply({
-                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                 ephemeral: true
               });
             });
             //Once the Collections ended edit the menu message
             collector.on('end', collected => {
               menumsg.edit({
-                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                 components: [],
                 content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected.first().values[0]}\`**`
               })
@@ -1056,9 +1058,9 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
             let parent = parentId ? message.guild.channels.cache.get(parentId) : null;
             var rembed = new EmbedBuilder()
               .setColor(es.color)
-              .setFooter(client.getFooter(es))
-              .setTitle("What should be the new Closed Ticket Category?")
-              .setDescription(`Currently it's: \`${parentId ? "Not Setupped yet" : parent ? parent.name : `Canal not Found: ${parentId}`}\`!\nWhen closing a Ticket, it will be moved to there until it get's deleted!\n> **Send the new __PARENT ID__ now!**`)
+              .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+              .setTitle(obeyUi.limit("What should be the new Closed Ticket Category?", 256))
+              .setDescription(obeyUi.limit(`Currently it's: \`${parentId ? "Not Setupped yet" : parent ? parent.name : `Canal not Found: ${parentId}`}\`!\nWhen closing a Ticket, it will be moved to there until it get's deleted!\n> **Send the new __PARENT ID__ now!**`, 4096))
             message.reply({
               embeds: [rembed]
             }).then(msg => {
@@ -1084,10 +1086,10 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
               }).catch(error => {
                 return message.reply({
                   embeds: [new Discord.EmbedBuilder()
-                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]))
+                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]), 256))
                     .setColor(es.wrongcolor)
-                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                    .setFooter(client.getFooter(es))
+                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                   ]
                 });
               })
@@ -1099,8 +1101,8 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
               embeds: [
                 new EmbedBuilder()
                   .setColor(es.color)
-                  .setTitle("What Usuario(s) or Role(s) do you want to add/remove?")
-                  .setDescription(`Just ping them! If they are already added, they will get removed!`)
+                  .setTitle(obeyUi.limit("What Usuario(s) or Role(s) do you want to add/remove?", 256))
+                  .setDescription(obeyUi.limit(`Just ping them! If they are already added, they will get removed!`, 4096))
               ]
             });
 
@@ -1134,9 +1136,9 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
               for (const remove of toremove) {
                 theDB.remove(message.guild.id, remove, pre + ".access");
               }
-              message.reply(`👍 Successfully added \`${toadd.length} Users/Roles\` and removed \`${toremove.length} Users/Roles\`\n> They are now always able to see, write and manage stuff in the TICKETS ment for them!`)
+              message.reply(`${obeyUi.markup("icon.vote-up")} Successfully added \`${toadd.length} Users/Roles\` and removed \`${toremove.length} Users/Roles\`\n> They are now always able to see, write and manage stuff in the TICKETS ment for them!`)
             } else {
-              message.reply("❌ **You did not ping valid user(s)**")
+              message.reply(obeyUi.owned("❌ **You did not ping valid user(s)**"))
             }
           } break;
         }
@@ -1145,9 +1147,9 @@ return message.reply("<:no:833101993668771842> **¡Las opciones no pueden tener 
       console.log(String(e.stack).grey.bgRed)
       return message.reply({
         embeds: [new EmbedBuilder()
-          .setColor(es.wrongcolor).setFooter(client.getFooter(es))
-          .setTitle(client.la[ls].common.erroroccur)
-          .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable39"]))
+          .setColor(es.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es)))
+          .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+          .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable39"]), 4096))
         ]
       });
     }

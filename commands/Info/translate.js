@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const translate = require("translatte");
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -24,8 +25,8 @@ module.exports = {
                 .then(res => {
                     let embed = new EmbedBuilder()
                         .setColor(es.color)
-                        .setAuthor({ name: handlemsg(client.la[ls].cmds.info.translate.to, { to: args[1] }), iconURL: "https://imgur.com/0DQuCgg.png", url: "https://github.com/melodiabl" })
-                        .setFooter({ text: handlemsg(client.la[ls].cmds.info.translate.from, { from: args[0] }), iconURL: message.author.displayAvatarURL() })
+                        .setAuthor(obeyMeta.asAuthor({ name: handlemsg(client.la[ls].cmds.info.translate.to, { to: args[1] }), iconURL: "https://imgur.com/0DQuCgg.png", url: "https://github.com/melodiabl" }))
+                        .setFooter(obeyMeta.asFooter({ text: handlemsg(client.la[ls].cmds.info.translate.from, { from: args[0] }), iconURL: message.author.displayAvatarURL() }))
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["translate"]["variable1"]));
                     message.reply({ embeds: [embed] });
                 })
@@ -43,7 +44,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 
@@ -18,21 +20,21 @@ module.exports = {
     if (!playlists.length)
       return interaction.editReply({
         embeds: [new EmbedBuilder().setColor(0xED4245)
-          .setDescription('❌ No tienes ninguna playlist. Usa `/playlist create` para crear una.')],
+          .setDescription(obeyUi.limit(obeyUi.owned('❌ No tienes ninguna playlist. Usa `/playlist create` para crear una.'), 4096))],
       })
 
     const lines = playlists.map((p, i) => {
       const total = p.tracks.reduce((a, t) => a + (t.duration || 0), 0)
-      const dur   = total ? ` — ⏱ \`${fmtMs(total)}\`` : ''
-      const lock  = p.isPublic ? '🌐' : '🔒'
+      const dur   = total ? ` — ${obeyUi.markup("icon.clock")} \`${fmtMs(total)}\`` : ''
+      const lock  = p.isPublic ? obeyUi.owned('🌐') : obeyUi.owned('🔒')
       return `\`${i + 1}.\` ${lock} **${p.name}** — ${p.tracks.length} canciones${dur}`
     })
 
     await interaction.editReply({
       embeds: [new EmbedBuilder().setColor(0x5865F2)
-        .setTitle(`📋 Tus playlists (${playlists.length})`)
-        .setDescription(lines.join('\n'))
-        .setFooter({ text: '🔒 Privada  ·  🌐 Pública' })],
+        .setTitle(obeyUi.limit(`${obeyUi.markup("icon.queue")} Tus playlists (${playlists.length})`, 256))
+        .setDescription(obeyUi.limit(lines.join('\n'), 4096))
+        .setFooter(obeyMeta.asFooter({ text: obeyUi.owned('🔒 Privada  ·  🌐 Pública') }))],
     })
   },
 }

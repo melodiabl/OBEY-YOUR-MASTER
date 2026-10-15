@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `nickname`,
@@ -21,9 +23,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(
-                                `<:no:833101993668771842> **I am missing the Permiso to Manage Nicknames of others**`
+                                obeyUi.limit(`${obeyUi.markup("icon.error")} **I am missing the Permiso to Manage Nicknames of others**`, 256)
                             ),
                     ],
                 });
@@ -55,9 +57,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"]), 4096)),
                     ],
                 });
             let kickmember =
@@ -68,9 +70,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`<:no:833101993668771842> **You forgot to ping a Miembro**`)
-                            .setDescription(`Usage: \`${prefix}nickname @Usuario newnickname\``),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **You forgot to ping a Miembro**`, 256))
+                            .setDescription(obeyUi.limit(`Usage: \`${prefix}nickname @Usuario newnickname\``, 4096)),
                     ],
                 });
             if (!args[1])
@@ -78,9 +80,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`<:no:833101993668771842> **You forgot to add a Nickname**`)
-                            .setDescription(`Usage: \`${prefix}nickname @Usuario newnickname\``),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **You forgot to add a Nickname**`, 256))
+                            .setDescription(obeyUi.limit(`Usage: \`${prefix}nickname @Usuario newnickname\``, 4096)),
                     ],
                 });
             let nickname = args.slice(1).join(" ");
@@ -89,9 +91,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`<:no:833101993668771842> **The Nickname must have smaller then 32 Characters**`)
-                            .setDescription(`Usage: \`${prefix}nickname @Usuario newnickname\``),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **The Nickname must have smaller then 32 Characters**`, 256))
+                            .setDescription(obeyUi.limit(`Usage: \`${prefix}nickname @Usuario newnickname\``, 4096)),
                     ],
                 });
             kickmember
@@ -101,9 +103,9 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.color)
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setTitle(
-                                    `${allEmojis.msg.SUCCESS} **Successfully changed the username of \`${kickmember.user.username}\` to \`${nickname}\`**`
+                                    obeyUi.limit(`${allEmojis.msg.SUCCESS} **Successfully changed the username of \`${kickmember.user.username}\` to \`${nickname}\`**`, 256)
                                 ),
                         ],
                     });
@@ -114,9 +116,9 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"]), 4096)),
                         ],
                     });
                 });
@@ -126,9 +128,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"]), 4096)),
                 ],
             });
         }

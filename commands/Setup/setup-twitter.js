@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var fs = require("fs");
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const twitconfig = require("../../social_log/twitter.json");
@@ -28,32 +30,32 @@ module.exports = {
                     {
                         value: "Set Twitter Account",
                         description: `Define which Twitter Account to watch`,
-                        emoji: allEmojis.msg.twitter,
+                        emoji: obeyUi.component(allEmojis.msg.twitter),
                     },
                     {
                         value: "Set Poster Channel",
                         description: `Define a Canal to post the messages to!`,
-                        emoji: allEmojis.msg.channel,
+                        emoji: obeyUi.component(allEmojis.msg.channel),
                     },
                     {
                         value: "Set Posting Message",
                         description: `Show Ajustes of the Admin Commands Log`,
-                        emoji: allEmojis.msg.message,
+                        emoji: obeyUi.component(allEmojis.msg.message),
                     },
                     {
                         value: `${client.social_log.get(message.guild.id, `twitter.REETWET`) ? "Disable Retweets" : "Enable Retweets"}`,
                         description: `Show Ajustes of the Admin Commands Log`,
-                        emoji: `${client.social_log.get(message.guild.id, `twitter.REETWET`) ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`,
+                        emoji: obeyUi.component(`${client.social_log.get(message.guild.id, `twitter.REETWET`) ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`),
                     },
                     {
                         value: "Manual Setup",
                         description: `Force-Configuración the UName and ID if normal is invalid`,
-                        emoji: allEmojis.msg.info,
+                        emoji: obeyUi.component(allEmojis.msg.info),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Admin-Comando-Log-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -61,7 +63,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Admin-Command-Log")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Admin-Command-Log"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -77,8 +79,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Twitter Setup", iconURL: "https://cdn.discordapp.com/emojis/840255600851812393.png?size=96", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Twitter Setup", iconURL: obeyUi.image("icon.feed"), url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -101,16 +103,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -124,10 +126,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable10"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable10"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable11"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable11"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -160,10 +162,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable14"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable14"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
 
@@ -205,17 +207,17 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable17"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable17"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable18"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable18"]), 4096)
                                                     )
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-twitter"]["variablex_19"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable19"]) })
                                                     .setURL(`https://twitter.com/${TwitterName}`)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     } catch (e) {
@@ -223,13 +225,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable20"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable20"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable28"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable28"]), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -242,10 +244,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable22"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable22"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable23"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable23"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -272,15 +274,15 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable24"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable25"]
-                                                            )
+                                                            ), 4096)
                                                         )
                                                         .addFields({ name: eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"][
@@ -289,7 +291,7 @@ module.exports = {
                                                             ), value: eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable26"]
                                                             ) })
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -297,17 +299,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable27"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable36"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -321,11 +323,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable29"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable29"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -336,10 +338,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable30"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable30"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable31"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable31"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -361,16 +363,16 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable32"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable32"]), 256)
                                                     )
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable33"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable33"]), 4096)
                                                     )
                                                     .setColor(es.color)
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-twitter"]["variablex_34"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable34"]) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     } catch (e) {
@@ -378,13 +380,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable35"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable35"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable49"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable49"]), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -395,11 +397,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable37"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable37"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -416,11 +418,11 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable38"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable39"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable38"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable39"]), 4096))
                                         .setColor(es.color)
                                         .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variablex_40"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable40"]) })
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -430,11 +432,11 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable41"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable41"]), 256))
                                         .setColor(es.color)
                                         .setURL("https://tweeterid.com")
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable42"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable42"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -456,16 +458,16 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        `${allEmojis.msg.SUCCESS} Set the TWITTER USER ID TO: \`${collected.first().content}\``.substring(
+                                                        obeyUi.limit(`${allEmojis.msg.SUCCESS} Set the TWITTER USER ID TO: \`${collected.first().content}\``.substring(
                                                             0,
                                                             256
-                                                        )
+                                                        ), 256)
                                                     )
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable43"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable43"]), 4096)
                                                     )
                                                     .setColor(es.color)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
 
@@ -473,13 +475,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable44"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable44"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable45"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable45"]), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                         await tempmsg.channel
@@ -501,17 +503,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    `${allEmojis.msg.SUCCESS} Set the TWITTER USER Name TO: \`${collected.first().content}\``.substring(
+                                                                    obeyUi.limit(`${allEmojis.msg.SUCCESS} Set the TWITTER USER Name TO: \`${collected.first().content}\``.substring(
                                                                         0,
                                                                         256
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitter"][
                                                                             "variable46"
                                                                         ]
-                                                                    )
+                                                                    ), 4096)
                                                                 )
                                                                 .setColor(es.color)
                                                                 .addFields({ name: eval(
@@ -523,7 +525,7 @@ module.exports = {
                                                                             "variable47"
                                                                         ]
                                                                     ) })
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 } catch (e) {
@@ -531,21 +533,21 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitter"][
                                                                             "variable48"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitter"][
                                                                             "variable52"
                                                                         ]
-                                                                    )
+                                                                    ), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 }
@@ -556,15 +558,15 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-twitter"][
                                                                         "variable50"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setColor(es.wrongcolor)
-                                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                            .setFooter(client.getFooter(es)),
+                                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                     ],
                                                 });
                                             });
@@ -573,13 +575,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable51"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable51"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable55"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable55"]), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -590,11 +592,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable53"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitter"]["variable53"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -608,9 +610,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``, 4096)),
                 ],
             });
         }

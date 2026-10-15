@@ -1,8 +1,10 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 module.exports = client => {
     var { EmbedBuilder } = require(`discord.js`);
     let thumbs = {
-        join: "https://cdn.discordapp.com/emojis/866356465299488809.png?size=128",
-        leave: "https://cdn.discordapp.com/emojis/866356598356049930.png?size=128",
+        join: obeyUi.image("icon.join"),
+        leave: obeyUi.image("icon.leaf"),
     };
     //voice state update event to check joining/leaving channels
     client.on("voiceStateUpdate", async (oldState, newState) => {
@@ -73,10 +75,10 @@ module.exports = client => {
                                     embeds: [
                                         new EmbedBuilder()
                                             .setColor("#ED4245")
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     `ID: ${vcMember.id}`,
                                                     vcMember.displayAvatarURL()
-                                                )
+                                                ))
                                             )
                                             .setThumbnail(thumbs.leave)
                                             .setDescription(
@@ -95,10 +97,10 @@ module.exports = client => {
                                     embeds: [
                                         new EmbedBuilder()
                                             .setColor("#ED4245")
-                                            .setFooter(client.getFooter(
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                                     `ID: ${vcMember.id}`,
                                                     vcMember.displayAvatarURL()
-                                                )
+                                                ))
                                             )
                                             .setThumbnail(thumbs.leave)
                                             .setDescription(
@@ -160,7 +162,7 @@ module.exports = client => {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor("#57F287")
-                                    .setFooter(client.getFooter(`ID: ${vcMember.id}`, vcMember.displayAvatarURL())
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(`ID: ${vcMember.id}`, vcMember.displayAvatarURL()))
                                     )
                                     .setThumbnail(thumbs.join)
                                     .setDescription(

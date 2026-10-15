@@ -1,0 +1,19 @@
+{
+  "scope": "reviewed_static_catalog_expressions_only_no_user_template_rewrite",
+  "overrides": {
+    "${player.playing ? `▶` : `⏸`}": "${player.playing ? client.emojiAssets.owned(`▶`) : client.emojiAssets.owned(`⏸`)}",
+    "${player.get(`autoplay`) ? `✅ Enabled` : `❌ Disabled`}": "${player.get(`autoplay`) ? client.emojiAssets.owned(`✅ Enabled`) : client.emojiAssets.owned(`❌ Disabled`)}",
+    "${client.setups.get(message.guild.id, `membercount.enabled`) ? \"`❌ Disable`\" : \"`✔️ Enable`\"}": "${client.setups.get(message.guild.id, `membercount.enabled`) ? client.emojiAssets.owned(\"`❌ Disable`\") : client.emojiAssets.owned(\"`✔️ Enable`\")}",
+    "${warnsettings.kick ? warnsettings.kick + \" Warns\" : \"❌\"}": "${warnsettings.kick ? warnsettings.kick + \" Warns\" : client.emojiAssets.owned(\"❌\")}",
+    "${warnsettings.ban ? warnsettings.ban + \" Warns\" : \"❌\"}": "${warnsettings.ban ? warnsettings.ban + \" Warns\" : client.emojiAssets.owned(\"❌\")}",
+    "${player.playing ? \"▶️ Resumed\" : \"⏸ Paused\"}": "${player.playing ? client.emojiAssets.owned(\"▶️ Resumed\") : client.emojiAssets.owned(\"⏸ Paused\")}",
+    "${player.volume === 0 ? `🔇 Muted the Player` : `🔉 Unmuted the Player`}": "${player.volume === 0 ? client.emojiAssets.owned(`🔇 Muted the Player`) : client.emojiAssets.owned(`🔉 Unmuted the Player`)}",
+    "${player.get(\"autoplay\") ? `\\`✔️ Enabled\\`` : `\\`❌ Disabled\\``}": "${player.get(\"autoplay\") ? client.emojiAssets.owned(`\\`✔️ Enabled\\``) : client.emojiAssets.owned(`\\`❌ Disabled\\``)}",
+    "${player.playing ? \"▶\" : \"⏸\"}": "${player.playing ? client.emojiAssets.owned(\"▶\") : client.emojiAssets.owned(\"⏸\")}",
+    "${player.get(`autoplay`) ? `✅ Activado` : `❌ Desactivado`}": "${player.get(`autoplay`) ? client.emojiAssets.owned(`✅ Activado`) : client.emojiAssets.owned(`❌ Desactivado`)}",
+    "${client.setups.get(Mensaje.guild.id, `membercount.activado`) ? \"`❌ Disable`\" : \"`✔️ Enable`\"}": "${client.setups.get(Mensaje.guild.id, `membercount.activado`) ? client.emojiAssets.owned(\"`❌ Disable`\") : client.emojiAssets.owned(\"`✔️ Enable`\")}",
+    "${player.playing ? \"▶️ Reanudado\" : \"⏸ Pausado\"}": "${player.playing ? client.emojiAssets.owned(\"▶️ Reanudado\") : client.emojiAssets.owned(\"⏸ Pausado\")}",
+    "${player.Volumen === 0 ? `🔇 Silenciado the Player` : `🔉 Desilenciado the Player`}": "${player.Volumen === 0 ? client.emojiAssets.owned(`🔇 Silenciado the Player`) : client.emojiAssets.owned(`🔉 Desilenciado the Player`)}",
+    "${player.get(\"autoplay\") ? `\\`✔️ Activado\\`` : `\\`❌ Desactivado\\``}": "${player.get(\"autoplay\") ? client.emojiAssets.owned(`\\`✔️ Activado\\``) : client.emojiAssets.owned(`\\`❌ Desactivado\\``)}"
+  }
+}

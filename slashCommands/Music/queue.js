@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 function fmtMs(ms) { const s=Math.floor((ms||0)/1000),m=Math.floor(s/60),sec=s%60; return `${m}:${String(sec).padStart(2,'0')}` }
 module.exports = {
@@ -7,7 +9,7 @@ module.exports = {
   run: async (client, interaction) => {
     await interaction.deferReply({ ephemeral: true })
     const state = client.music?.getState(interaction.guild.id)
-    if (!state?.currentTrack) return interaction.editReply({ content: '❌ No hay música reproduciéndose.' })
+    if (!state?.currentTrack) return interaction.editReply({ content: obeyUi.owned('❌ No hay música reproduciéndose.') })
     const page = Math.max(1, interaction.options.getInteger('pagina') || 1)
     const PER = 10, q = state.queue
     const pages = Math.max(1, Math.ceil(q.length / PER))
@@ -24,8 +26,8 @@ module.exports = {
     ]
     if (!q.length) lines.splice(1,10,'\n_La cola está vacía_')
     const embed = new EmbedBuilder().setColor(0x5865F2)
-      .setTitle(`📋 Cola — página ${p}/${pages}`).setDescription(lines.join('\n'))
-      .setFooter({ text: `Página ${p}/${pages}` })
+      .setTitle(obeyUi.limit(`${obeyUi.markup("icon.queue")} Cola — página ${p}/${pages}`, 256)).setDescription(obeyUi.limit(lines.join('\n'), 4096))
+      .setFooter(obeyMeta.asFooter({ text: `Página ${p}/${pages}` }))
     await interaction.editReply({ embeds: [embed] })
   },
 }

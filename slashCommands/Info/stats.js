@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { getRandomInt, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "stats",
@@ -41,7 +42,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 .addFields({ name: client.la[ls].cmds.info.stats.field1.title, value: handlemsg(client.la[ls].cmds.info.stats.field1.value, {
                                 allcommands: Math.ceil((global.commands * [...client.guilds.cache.values()].length) / 10),
                             }), inline: true })

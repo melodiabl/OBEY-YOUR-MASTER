@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, DiscordAPIError, Message, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -41,9 +43,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable2"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable1"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable2"]), 4096)),
                     ],
                 });
             if (!args[0]) {
@@ -60,9 +62,9 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable3"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable4"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable3"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable4"]), 4096)),
                         ],
                     })
                     .then(msg => {
@@ -83,9 +85,9 @@ module.exports = {
                                         embeds: [
                                             new EmbedBuilder()
                                                 .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["administration"]["poll"]["variable5"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable5"]), 256)
                                                 ),
                                         ],
                                     });
@@ -104,17 +106,17 @@ module.exports = {
                                                             : client.user.displayAvatarURL()
                                                         : null
                                                 )
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable6"]))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable6"]), 256))
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["administration"]["poll"]["variable7"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable7"]), 4096)
                                                 ),
                                         ],
                                     })
                                     .then(msg => {
-                                        msg.react("1️⃣");
-                                        msg.react("2️⃣");
-                                        msg.react("3️⃣");
+                                        msg.react(obeyUi.reaction("1️⃣"));
+                                        msg.react(obeyUi.reaction("2️⃣"));
+                                        msg.react(obeyUi.reaction("3️⃣"));
                                         msg.awaitReactions({
                                             filter: (reaction, user) => user.id === message.author.id,
                                             max: 1,
@@ -122,7 +124,7 @@ module.exports = {
                                             errors: ["time"],
                                         }).then(collected => {
                                             let reaction = collected.first();
-                                            if (reaction.emoji?.name == "1️⃣") {
+                                            if (obeyUi.matchesReaction(reaction.emoji, "1️⃣")) {
                                                 message
                                                     .reply({
                                                         embeds: [
@@ -137,20 +139,20 @@ module.exports = {
                                                                             : client.user.displayAvatarURL()
                                                                         : null
                                                                 )
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["administration"]["poll"][
                                                                             "variable8"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["administration"]["poll"][
                                                                             "variable9"
                                                                         ]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     })
@@ -181,22 +183,22 @@ module.exports = {
                                                                                             : client.user.displayAvatarURL()
                                                                                         : null
                                                                                 )
-                                                                                .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
-                                                                                .setFooter(client.getFooter(
+                                                                                .setAuthor(obeyMeta.asAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" }))
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                                         `by: ${message.author.username}`,
                                                                                         message.author.displayAvatarURL()
-                                                                                    )
+                                                                                    ))
                                                                                 )
-                                                                                .setDescription(collected.first().content),
+                                                                                .setDescription(obeyUi.limit(collected.first().content, 4096)),
                                                                         ],
                                                                     })
                                                                     .then(msg => {
-                                                                        msg.react("✅");
-                                                                        msg.react("❌");
+                                                                        msg.react(obeyUi.reaction("✅"));
+                                                                        msg.react(obeyUi.reaction("❌"));
                                                                     });
                                                             });
                                                     });
-                                            } else if (reaction.emoji?.name == "2️⃣") {
+                                            } else if (obeyUi.matchesReaction(reaction.emoji, "2️⃣")) {
                                                 message
                                                     .reply({
                                                         embeds: [
@@ -211,20 +213,20 @@ module.exports = {
                                                                             : client.user.displayAvatarURL()
                                                                         : null
                                                                 )
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["administration"]["poll"][
                                                                             "variable10"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["administration"]["poll"][
                                                                             "variable11"
                                                                         ]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     })
@@ -255,22 +257,22 @@ module.exports = {
                                                                                             : client.user.displayAvatarURL()
                                                                                         : null
                                                                                 )
-                                                                                .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
-                                                                                .setFooter(client.getFooter(
+                                                                                .setAuthor(obeyMeta.asAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" }))
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                                         `by: ${message.author.username}`,
                                                                                         message.author.displayAvatarURL()
-                                                                                    )
+                                                                                    ))
                                                                                 )
-                                                                                .setDescription(collected.first().content),
+                                                                                .setDescription(obeyUi.limit(collected.first().content, 4096)),
                                                                         ],
                                                                     })
                                                                     .then(msg => {
-                                                                        msg.react("👍");
-                                                                        msg.react("👎");
+                                                                        msg.react(obeyUi.reaction("👍"));
+                                                                        msg.react(obeyUi.reaction("👎"));
                                                                     });
                                                             });
                                                     });
-                                            } else if (reaction.emoji?.name == "3️⃣") {
+                                            } else if (obeyUi.matchesReaction(reaction.emoji, "3️⃣")) {
                                                 var emojicounter = 0;
                                                 var emojicontent = [];
                                                 const emojis = [
@@ -303,20 +305,20 @@ module.exports = {
                                                                                 : client.user.displayAvatarURL()
                                                                             : null
                                                                     )
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["administration"]["poll"][
                                                                                 "variable12"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["administration"]["poll"][
                                                                                 "variable13"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     ),
                                                             ],
                                                         })
@@ -365,20 +367,20 @@ module.exports = {
                                                                                 : client.user.displayAvatarURL()
                                                                             : null
                                                                     )
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["administration"]["poll"][
                                                                                 "variable14"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["administration"]["poll"][
                                                                                 "variable15"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     ),
                                                             ],
                                                         })
@@ -402,21 +404,21 @@ module.exports = {
                                                                                     : client.user.displayAvatarURL()
                                                                                 : null
                                                                         )
-                                                                        .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
-                                                                        .setFooter(client.getFooter(
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" }))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                                 `by: ${message.author.username}`,
                                                                                 message.author.displayAvatarURL()
-                                                                            )
+                                                                            ))
                                                                         );
                                                                     if (collected.first().content.toLowerCase() != "no")
-                                                                        embed.setDescription(collected.first().content);
+                                                                        embed.setDescription(obeyUi.limit(collected.first().content, 4096));
 
                                                                     for (let i = 0; i < emojicontent.length; i++) {
                                                                         embed.addFields({ name: emojis[i] + " :", value: emojicontent[i] });
                                                                     }
                                                                     channel.send({ embeds: [embed] }).then(msg => {
                                                                         for (let i = 0; i < emojicounter; i++) {
-                                                                            msg.react(emojis[i]);
+                                                                            msg.react(obeyUi.reaction(emojis[i]));
                                                                         }
                                                                     });
                                                                 });
@@ -433,18 +435,18 @@ module.exports = {
                                                                             : client.user.displayAvatarURL()
                                                                         : null
                                                                 )
-                                                                .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
-                                                                .setFooter(client.getFooter(
+                                                                .setAuthor(obeyMeta.asAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" }))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                                         `by: ${message.author.username}`,
                                                                         message.author.displayAvatarURL()
-                                                                    )
+                                                                    ))
                                                                 );
                                                             for (let i = 0; i < emojicontent.length; i++) {
                                                                 embed.addFields({ name: emojis[i] + " :", value: emojicontent[i] });
                                                             }
                                                             channel.send({ embeds: [embed] }).then(msg => {
                                                                 for (let i = 0; i < emojicounter; i++) {
-                                                                    msg.react(emojis[i]);
+                                                                    msg.react(obeyUi.reaction(emojis[i]));
                                                                 }
                                                             });
                                                         });
@@ -454,13 +456,13 @@ module.exports = {
                                                     embeds: [
                                                         new EmbedBuilder()
                                                             .setColor(es.wrongcolor)
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["administration"]["poll"][
                                                                         "variable16"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             ),
                                                     ],
                                                 });
@@ -484,18 +486,18 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" })
-                                .setFooter(client.getFooter(
+                                .setAuthor(obeyMeta.asAuthor({ name: `${message.guild.name} | POLL`, iconURL: "https://images-ext-2.discordapp.net/external/QlX0Eh3_sIiPWIz9Xg_dgN4cwpvne8_ipgDGS43jDGc/https/emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/281/clipboard_1f4cb?.png", url: "https://discord.gg/fA8VGa4V" }))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         `by: ${message.author.username}`,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 )
-                                .setDescription(args.join(" ")),
+                                .setDescription(obeyUi.limit(args.join(" "), 4096)),
                         ],
                     })
                     .then(msg => {
-                        msg.react("👍");
-                        msg.react("👎");
+                        msg.react(obeyUi.reaction("👍"));
+                        msg.react(obeyUi.reaction("👎"));
                     });
             }
 
@@ -515,16 +517,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable17"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable17"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -538,9 +540,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable20"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["poll"]["variable20"]), 4096)),
                 ],
             });
         }

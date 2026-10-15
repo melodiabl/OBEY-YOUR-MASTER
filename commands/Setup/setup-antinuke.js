@@ -1,9 +1,11 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, PermissionFlagsBits, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing, delay } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "setup-antinuke",
@@ -246,33 +248,33 @@ module.exports = {
                     {
                         value: "Information",
                         description: `Show Information about the Anti Nuke System`,
-                        emoji: allEmojis.msg.info,
+                        emoji: obeyUi.component(allEmojis.msg.info),
                     },
                     {
                         value: "Manage Whitelist",
                         description: `Allow/Deny Roles/Users who should not get affected`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Manage Settings",
                         description: `Enable/Disable & Change the Anti Nuke Ajustes`,
-                        emoji: allEmojis.msg.settings,
+                        emoji: obeyUi.component(allEmojis.msg.settings),
                     },
                     {
                         value: "Suggested Settings",
                         description: `Use our suggested Ajustes!`,
-                        emoji: allEmojis.msg.builder,
+                        emoji: obeyUi.component(allEmojis.msg.builder),
                     },
                     {
                         value: "Sync Quarantine Role",
                         description: `Add Perm !VIEW_CH. to all Chans.for the Qu. Rol`,
-                        emoji: "🔒",
+                        emoji: obeyUi.component("🔒"),
                     },
 
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Anti-Nuke-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -280,7 +282,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Anti Nuke System!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Anti Nuke System!"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -296,8 +298,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Anti Nuke Setup", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable3"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Anti Nuke Setup", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable3"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -315,8 +317,8 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable5"]))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable5"]), 256))
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_6"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable6"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_7"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable7"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_8"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable8"]) })
@@ -324,15 +326,15 @@ module.exports = {
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_10"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable10"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_11"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable11"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_12"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable12"]) })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable13"])),
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable13"]), 4096)),
                             ],
                         });
                         return menu?.reply({
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es))
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable14"]))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable14"]), 4096))
                                     .addFields({ name: "**Other Security Systems:**", value: `\`${prefix}setup-antidiscord\` *... Enable/Disable & Adjust anti Discord Invite Links*\n\`${prefix}setup-antilink\` *... Enable/Disable & Adjust anti Links*\n\`${prefix}setup-anticaps\` *... Enable/Disable & Adjust anti Caps spamming*\n\`${prefix}setup-blacklist\` *... to add/remove Bad (blacklsited) Words*` }),
                             ],
                         });
@@ -342,42 +344,42 @@ module.exports = {
                             {
                                 value: "General Users/Roles",
                                 description: `Add/Remove General Users/Roles`,
-                                emoji: allEmojis.msg.builder,
+                                emoji: obeyUi.component(allEmojis.msg.builder),
                             },
                             {
                                 value: "Anti Bot Add Users/Roles",
                                 description: `Add/Remove Anti-Bot-Add Users/Roles`,
-                                emoji: allEmojis.msg.discord_robot,
+                                emoji: obeyUi.component(allEmojis.msg.discord_robot),
                             },
                             {
                                 value: "Anti Kick/Ban Users/Roles",
                                 description: `Add/Remove Anti-Kick/Ban Users/Roles`,
-                                emoji: allEmojis.msg.kick,
+                                emoji: obeyUi.component(allEmojis.msg.kick),
                             },
                             {
                                 value: "Anti Create Role Users/Roles",
                                 description: `Add/Remove Anti-Create-Rol Users/Roles`,
-                                emoji: allEmojis.msg.roles,
+                                emoji: obeyUi.component(allEmojis.msg.roles),
                             },
                             {
                                 value: "Anti Delete Role Users/Roles",
                                 description: `Add/Remove Anti-Delete-Rol Users/Roles`,
-                                emoji: allEmojis.msg.roles,
+                                emoji: obeyUi.component(allEmojis.msg.roles),
                             },
                             {
                                 value: "Anti Create Channel Users/Roles",
                                 description: `Add/Remove Anti-Create-Canal Users/Roles`,
-                                emoji: allEmojis.msg.channel,
+                                emoji: obeyUi.component(allEmojis.msg.channel),
                             },
                             {
                                 value: "Anti Delete Channel Users/Roles",
                                 description: `Add/Remove Anti-Delete-Canal Users/Roles`,
-                                emoji: allEmojis.msg.channel,
+                                emoji: obeyUi.component(allEmojis.msg.channel),
                             },
                             {
                                 value: "Cancel",
                                 description: `Cancelar and stop the Anti-Nuke-Configuración!`,
-                                emoji: allEmojis.msg.cancel,
+                                emoji: obeyUi.component(allEmojis.msg.cancel),
                             },
                         ];
                         //define the selection
@@ -385,7 +387,7 @@ module.exports = {
                             .setCustomId("MenuSelection")
                             .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                             .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                            .setPlaceholder("¡Haz clic para configurar the Anti Nuke Settings!")
+                            .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Anti Nuke Settings!"))
                             .addOptions(
                                 menuoptions.map(option => {
                                     let Obj = {
@@ -401,8 +403,8 @@ module.exports = {
                         //define the embed
                         let MenuEmbed = new Discord.EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor({ name: "Anti Nuke Settings", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" })
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable16"]));
+                            .setAuthor(obeyMeta.asAuthor({ name: "Anti Nuke Settings", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" }))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable16"]), 4096));
                         //send the menu msg
                         let menumsg = await message.reply({
                             embeds: [MenuEmbed],
@@ -423,12 +425,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable18"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable18"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable19"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable19"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -483,14 +485,14 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable20"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable20"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `**Removido [${removedroles.length}] Roles and [${removedusers.length}] Users from the __general__ Whitelist!**`.substring(
+                                                        obeyUi.limit(`**Removido [${removedroles.length}] Roles and [${removedusers.length}] Users from the __general__ Whitelist!**`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_21"]
@@ -498,7 +500,7 @@ module.exports = {
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_22"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable22"]) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     })
@@ -510,11 +512,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable23"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable23"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else if (String(index) == "1") {
@@ -523,12 +525,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable24"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable24"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable25"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable25"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -583,14 +585,14 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable26"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable26"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Bot add__ Whitelist (module)!**`.substring(
+                                                        obeyUi.limit(`${obeyUi.markup("icon.leaf")} **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Bot add__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_27"]
@@ -598,7 +600,7 @@ module.exports = {
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_28"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable28"]) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     })
@@ -610,11 +612,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable29"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable29"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else if (String(index) == "2") {
@@ -623,12 +625,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable30"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable30"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable31"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable31"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -702,14 +704,14 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable32"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable32"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Kick/Ban__ Whitelist (module)!**`.substring(
+                                                        obeyUi.limit(`${obeyUi.markup("icon.leaf")} **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Kick/Ban__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_33"]
@@ -717,7 +719,7 @@ module.exports = {
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_34"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable34"]) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     })
@@ -729,11 +731,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable35"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable35"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else if (String(index) == "3") {
@@ -742,12 +744,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable36"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable36"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable37"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable37"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -821,14 +823,14 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable38"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable38"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Create Role__ Whitelist (module)!**`.substring(
+                                                        obeyUi.limit(`${obeyUi.markup("icon.leaf")} **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Create Role__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_39"]
@@ -836,7 +838,7 @@ module.exports = {
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_40"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable40"]) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     })
@@ -848,11 +850,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable41"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable41"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else if (String(index) == "4") {
@@ -861,12 +863,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable42"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable42"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable43"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable43"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -940,14 +942,14 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable44"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable44"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Delete Role__ Whitelist (module)!**`.substring(
+                                                        obeyUi.limit(`${obeyUi.markup("icon.leaf")} **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Delete Role__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_45"]
@@ -955,7 +957,7 @@ module.exports = {
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_46"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable46"]) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     })
@@ -967,11 +969,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable47"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable47"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else if (String(index) == "5") {
@@ -980,12 +982,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable48"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable48"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable49"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable49"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -1059,14 +1061,14 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable50"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable50"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Canal Create__ Whitelist (module)!**`.substring(
+                                                        obeyUi.limit(`${obeyUi.markup("icon.leaf")} **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Canal Create__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_51"]
@@ -1074,7 +1076,7 @@ module.exports = {
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_52"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable52"]) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     })
@@ -1086,11 +1088,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable53"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable53"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else if (String(index) == "6") {
@@ -1099,12 +1101,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable54"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable54"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable55"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable55"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -1178,14 +1180,14 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable56"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable56"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `<:leaves:866356598356049930> **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Canal Delete__ Whitelist (module)!**`.substring(
+                                                        obeyUi.limit(`${obeyUi.markup("icon.leaf")} **Removido \`[${removedroles.length}] Roles\` and \`[${removedusers.length}] Users\` from the __Anti Canal Delete__ Whitelist (module)!**`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_57"]
@@ -1193,7 +1195,7 @@ module.exports = {
                                                     .addFields({ name: eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_58"]
                                                         ), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable58"]) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     })
@@ -1205,11 +1207,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable59"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable59"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else {
@@ -1230,16 +1232,16 @@ module.exports = {
                                 menuselection2(menu);
                             } else
                                 menu?.reply({
-                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                    content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                     ephemeral: true,
                                 });
                         });
                         //Once the Collections ended edit the menu message
                         collector.on("end", collected => {
                             menumsg.edit({
-                                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                 components: [],
-                                content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                             });
                         });
                     } else if (menu?.values[0] == "Manage Settings") {
@@ -1252,14 +1254,14 @@ module.exports = {
                                 description: client.Anti_Nuke_System.get(message.guild.id, "all.enabled")
                                     ? "I will not work anymore"
                                     : "I will be enabled",
-                                emoji: client.Anti_Nuke_System.get(message.guild.id, "all.enabled")
+                                emoji: obeyUi.component(client.Anti_Nuke_System.get(message.guild.id, "all.enabled")
                                     ? allEmojis.msg.ERROR
-                                    : allEmojis.msg.SUCCESS,
+                                    : allEmojis.msg.SUCCESS),
                             },
                             {
                                 value: "Set Logger",
                                 description: `Define a (new) Logger Canal`,
-                                emoji: allEmojis.msg.builder,
+                                emoji: obeyUi.component(allEmojis.msg.builder),
                             },
                             {
                                 value: client.Anti_Nuke_System.get(message.guild.id, "all.showwhitelistlog")
@@ -1268,49 +1270,49 @@ module.exports = {
                                 description: client.Anti_Nuke_System.get(message.guild.id, "all.showwhitelistlog")
                                     ? "I will not show when a whitelisted User makes smt"
                                     : "I will show when a whitelisted User makes smt (I won't do smt tho)",
-                                emoji: client.Anti_Nuke_System.get(message.guild.id, "all.showwhitelistlog")
+                                emoji: obeyUi.component(client.Anti_Nuke_System.get(message.guild.id, "all.showwhitelistlog")
                                     ? allEmojis.msg.ERROR
-                                    : allEmojis.msg.SUCCESS,
+                                    : allEmojis.msg.SUCCESS),
                             },
                             {
                                 value: "Modify Quarantine Role",
                                 description: "Eliminar/agregar el Rol de Cuarentena",
-                                emoji: allEmojis.msg.cleared,
+                                emoji: obeyUi.component(allEmojis.msg.cleared),
                             },
                             {
                                 value: "Anti Bot Add",
                                 description: `Adjust the Ajustes of the Anti Bot Add System`,
-                                emoji: allEmojis.msg.discord_robot,
+                                emoji: obeyUi.component(allEmojis.msg.discord_robot),
                             },
                             {
                                 value: "Anti Kick/Ban",
                                 description: `Adjust the Ajustes of the Anti Kick/Ban System`,
-                                emoji: allEmojis.msg.kick,
+                                emoji: obeyUi.component(allEmojis.msg.kick),
                             },
                             {
                                 value: "Anti Create Role",
                                 description: `Adjust the Ajustes of the Anti Create Rol System`,
-                                emoji: allEmojis.msg.roles,
+                                emoji: obeyUi.component(allEmojis.msg.roles),
                             },
                             {
                                 value: "Anti Delete Role",
                                 description: `Adjust the Ajustes of the Anti Delete Rol System`,
-                                emoji: allEmojis.msg.roles,
+                                emoji: obeyUi.component(allEmojis.msg.roles),
                             },
                             {
                                 value: "Anti Create Channel",
                                 description: `Adjust the Ajustes of the Anti Create Canal System`,
-                                emoji: allEmojis.msg.channel,
+                                emoji: obeyUi.component(allEmojis.msg.channel),
                             },
                             {
                                 value: "Anti Delete Channel",
                                 description: `Adjust the Ajustes of the Anti Delete Canal System`,
-                                emoji: allEmojis.msg.channel,
+                                emoji: obeyUi.component(allEmojis.msg.channel),
                             },
                             {
                                 value: "Cancel",
                                 description: `Cancelar and stop the Anti-Nuke-Configuración!`,
-                                emoji: allEmojis.msg.cancel,
+                                emoji: obeyUi.component(allEmojis.msg.cancel),
                             },
                         ];
                         //define the selection
@@ -1318,7 +1320,7 @@ module.exports = {
                             .setCustomId("MenuSelection")
                             .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                             .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                            .setPlaceholder("¡Haz clic para configurar the Anti Nuke Settings!")
+                            .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Anti Nuke Settings!"))
                             .addOptions(
                                 menuoptions.map(option => {
                                     let Obj = {
@@ -1334,8 +1336,8 @@ module.exports = {
                         //define the embed
                         let MenuEmbed = new Discord.EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor({ name: "Anti Nuke Settings", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" })
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable62"]));
+                            .setAuthor(obeyMeta.asAuthor({ name: "Anti Nuke Settings", iconURL: "https://cdn.discordapp.com/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" }))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable62"]), 4096));
                         //send the menu msg
                         let menumsg = await message.reply({
                             embeds: [MenuEmbed],
@@ -1359,7 +1361,7 @@ module.exports = {
                                 return menu?.reply({
                                     embeds: [
                                         new EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -1370,9 +1372,9 @@ module.exports = {
                                                         : client.user.displayAvatarURL()
                                                     : null
                                             )
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable64"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable64"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable65"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable65"]), 4096)
                                             )
                                             .addFields({ name: "\u200b", value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable66"]) }),
                                     ],
@@ -1383,12 +1385,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable67"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable67"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable68"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable68"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -1412,20 +1414,20 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-antinuke"][
                                                                             "variable69"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `**Here are some Infos:**\n>>> In the **FOOTER** (bottom), will be Informations (ID & AVATAR) of the EXECUTOR\nIn the **AUTHOR** (top), will be information about the **METHOD**\n\nIf there is a **Thumbnail**, it will be the **TARGET INFORMATION**\n\nEvery Embed, which is **GREEN**, is a security action from **ME**\nEvery Embed in **YELLOW** is a **WARN**\nEvery Embed in **ORANGE** is a **KICK**\nEvery Embed in **RED** is a **BAN**\nEvery Embed in **BLURPLE** is a **Remove Role**`.substring(
+                                                                    obeyUi.limit(`**Here are some Infos:**\n>>> In the **FOOTER** (bottom), will be Informations (ID & AVATAR) of the EXECUTOR\nIn the **AUTHOR** (top), will be information about the **METHOD**\n\nIf there is a **Thumbnail**, it will be the **TARGET INFORMATION**\n\nEvery Embed, which is **GREEN**, is a security action from **ME**\nEvery Embed in **YELLOW** is a **WARN**\nEvery Embed in **ORANGE** is a **KICK**\nEvery Embed in **RED** is a **BAN**\nEvery Embed in **BLURPLE** is a **Remove Role**`.substring(
                                                                         0,
                                                                         2048
-                                                                    )
+                                                                    ), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                             } catch (e) {
@@ -1436,20 +1438,20 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-antinuke"][
                                                                         "variable70"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setColor(es.color)
                                                             .setDescription(
-                                                                `**Here are some Infos:**\n>>> In the **FOOTER** (bottom), will be Informations (ID & AVATAR) of the EXECUTOR\nIn the **AUTHOR** (top), will be information about the **METHOD**\n\nIf there is a **Thumbnail**, it will be the **TARGET INFORMATION**\n\nEvery Embed, which is **GREEN**, is a security action from **ME**\nEvery Embed in **YELLOW** is a **WARN**\nEvery Embed in **ORANGE** is a **KICK**\nEvery Embed in **RED** is a **BAN**\nEvery Embed in **BLURPLE** is a **Remove Role**`.substring(
+                                                                obeyUi.limit(`**Here are some Infos:**\n>>> In the **FOOTER** (bottom), will be Informations (ID & AVATAR) of the EXECUTOR\nIn the **AUTHOR** (top), will be information about the **METHOD**\n\nIf there is a **Thumbnail**, it will be the **TARGET INFORMATION**\n\nEvery Embed, which is **GREEN**, is a security action from **ME**\nEvery Embed in **YELLOW** is a **WARN**\nEvery Embed in **ORANGE** is a **KICK**\nEvery Embed in **RED** is a **BAN**\nEvery Embed in **BLURPLE** is a **Remove Role**`.substring(
                                                                     0,
                                                                     2048
-                                                                )
+                                                                ), 4096)
                                                             )
-                                                            .setFooter(client.getFooter(es)),
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                     ],
                                                 });
                                             } catch (e) {
@@ -1466,20 +1468,20 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antinuke"][
                                                                     "variable71"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If some Anti-Nuke actions are needed to be executed, i will log them there!`.substring(
+                                                            obeyUi.limit(`If some Anti-Nuke actions are needed to be executed, i will log them there!`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -1493,11 +1495,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable72"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable72"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else if (String(index) == "2") {
@@ -1509,7 +1511,7 @@ module.exports = {
                                 return menu?.reply({
                                     embeds: [
                                         new EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
                                             .setThumbnail(
                                                 es.thumb
@@ -1520,9 +1522,9 @@ module.exports = {
                                                         : client.user.displayAvatarURL()
                                                     : null
                                             )
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable73"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable73"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable74"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable74"]), 4096)
                                             )
                                             .addFields({ name: "\u200b", value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable75"]) }),
                                     ],
@@ -1533,12 +1535,12 @@ module.exports = {
                                 let tempmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable76"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable76"]), 256))
                                             .setColor(es.color)
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable77"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable77"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await tempmsg.channel
@@ -1557,14 +1559,14 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antinuke"][
                                                                     "variable78"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -1579,20 +1581,20 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antinuke"][
                                                                     "variable79"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `This Rol will be added, if the Usuario gets the roles removed!\n> You can also ran a command in the \`${prefix}setup-antinuke\` to set all channels to not visible when having this Rol!`.substring(
+                                                            obeyUi.limit(`This Rol will be added, if the Usuario gets the roles removed!\n> You can also ran a command in the \`${prefix}setup-antinuke\` to set all channels to not visible when having this Rol!`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -1606,11 +1608,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable80"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable80"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                             } else {
@@ -1656,60 +1658,60 @@ module.exports = {
                                             description: client.Anti_Nuke_System.get(message.guild.id, `${thekey}.enabled`)
                                                 ? `${thename} will stop working`
                                                 : `${thename} will be working`,
-                                            emoji: client.Anti_Nuke_System.get(message.guild.id, `${thekey}.enabled`)
+                                            emoji: obeyUi.component(client.Anti_Nuke_System.get(message.guild.id, `${thekey}.enabled`)
                                                 ? allEmojis.msg.ERROR
-                                                : allEmojis.msg.SUCCESS,
+                                                : allEmojis.msg.SUCCESS),
                                         },
                                         {
                                             value: "Remove Roles / Day",
                                             description: `Amount of Actions / Day to remove the Roles`,
-                                            emoji: allEmojis.msg.roles,
+                                            emoji: obeyUi.component(allEmojis.msg.roles),
                                         },
                                         {
                                             value: "Remove Roles / Week",
                                             description: `Amount of Actions / Week to remove the Roles`,
-                                            emoji: allEmojis.msg.roles,
+                                            emoji: obeyUi.component(allEmojis.msg.roles),
                                         },
                                         {
                                             value: "Remove Roles / Month",
                                             description: `Amount of Actions / Month to remove the Roles`,
-                                            emoji: allEmojis.msg.roles,
+                                            emoji: obeyUi.component(allEmojis.msg.roles),
                                         },
                                         {
                                             value: "Kick / Day",
                                             description: `Amount of Actions / Day to Kick him`,
-                                            emoji: "⛔",
+                                            emoji: obeyUi.component("⛔"),
                                         },
                                         {
                                             value: "Kick / Week",
                                             description: `Amount of Actions / Week to Kick him`,
-                                            emoji: "⛔",
+                                            emoji: obeyUi.component("⛔"),
                                         },
                                         {
                                             value: "Kick / Month",
                                             description: `Amount of Actions / Month to Kick him`,
-                                            emoji: "⛔",
+                                            emoji: obeyUi.component("⛔"),
                                         },
                                         {
                                             value: "Ban / Day",
                                             description: `Amount of Actions / Day to Ban him`,
-                                            emoji: "🔨",
+                                            emoji: obeyUi.component("🔨"),
                                         },
                                         {
                                             value: "Ban / Week",
                                             description: `Amount of Actions / Week to Ban him`,
-                                            emoji: "🔨",
+                                            emoji: obeyUi.component("🔨"),
                                         },
                                         {
                                             value: "Ban / Month",
                                             description: `Amount of Actions / Month to Ban him`,
-                                            emoji: "🔨",
+                                            emoji: obeyUi.component("🔨"),
                                         },
 
                                         {
                                             value: "Cancel",
                                             description: `Cancelar and stop the Ticket-Configuración!`,
-                                            emoji: allEmojis.msg.cancel,
+                                            emoji: obeyUi.component(allEmojis.msg.cancel),
                                         },
                                     ];
                                     //define the selection
@@ -1717,7 +1719,7 @@ module.exports = {
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                        .setPlaceholder("¡Haz clic para configurar the Anti Nuke Settings!")
+                                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Anti Nuke Settings!"))
                                         .addOptions(
                                             menuoptions.map(option => {
                                                 let Obj = {
@@ -1735,8 +1737,8 @@ module.exports = {
                                     //define the embed
                                     let MenuEmbed = new Discord.EmbedBuilder()
                                         .setColor(es.color)
-                                        .setAuthor({ name: "Antinuke Setup", iconURL: "https://media.discordapp.net/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" })
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable2"]));
+                                        .setAuthor(obeyMeta.asAuthor({ name: "Antinuke Setup", iconURL: "https://media.discordapp.net/attachments/820695790170275871/869657327941324860/PS7lwz7HwAAAABJRU5ErkJggg.png", url: "https://github.com/melodiabl" }))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable2"]), 4096));
                                     let used33 = false;
                                     //send the menu msg
                                     let menumsg = await message.reply({
@@ -1753,7 +1755,7 @@ module.exports = {
                                             if (menu?.user.id === cmduser.id) {
                                                 if (used33)
                                                     return menu?.reply({
-                                                        content: `<:no:833101993668771842> You already selected something, this Selection is now disabled!`,
+                                                        content: `${obeyUi.markup("icon.error")} You already selected something, this Selection is now disabled!`,
                                                         ephemeral: true,
                                                     });
                                                 let menuoptiondata = menuoptions.find(v => v.value == menu?.values[0]);
@@ -1782,7 +1784,7 @@ module.exports = {
                                                 handle_the_picks_X(menuoptionindex - 1, menuoptiondata);
                                             } else
                                                 menu?.reply({
-                                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                                    content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                     ephemeral: true,
                                                 });
                                         }
@@ -1807,12 +1809,12 @@ module.exports = {
                                     tempmsg = await message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle("Enter the Amount now!")
+                                                .setTitle(obeyUi.limit("Enter the Amount now!", 256))
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `Por favor Enter the Needed Amount until the Punishment: \`${finalkey}\`\n\n\`0\` ... means no action`
+                                                    obeyUi.limit(`Por favor Enter the Needed Amount until the Punishment: \`${finalkey}\`\n\n\`0\` ... means no action`, 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                     await tempmsg.channel
@@ -1836,10 +1838,10 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            `\`${finalkey}\` Is now limited to **\`${thenumber} Actions\`**`
+                                                            obeyUi.limit(`\`${finalkey}\` Is now limited to **\`${thenumber} Actions\`**`, 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         })
@@ -1849,13 +1851,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable69"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -1874,16 +1876,16 @@ module.exports = {
                                 menuselection3(menu);
                             } else
                                 menu?.reply({
-                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                    content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                     ephemeral: true,
                                 });
                         });
                         //Once the Collections ended edit the menu message
                         collector.on("end", collected => {
                             menumsg.edit({
-                                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                 components: [],
-                                content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                             });
                         });
                     } else if (menu?.values[0] == "Suggested Settings") {
@@ -2085,8 +2087,8 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable82"]))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable82"]), 256))
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_83"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable83"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_84"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable84"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_85"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable85"]) })
@@ -2095,7 +2097,7 @@ module.exports = {
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_88"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable88"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_89"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable89"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variablex_90"]), value: eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable90"]) })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable91"])),
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable91"]), 4096)),
                             ],
                         });
                     } else if (menu?.values[0] == "Sync Quarantine Role") {
@@ -2152,16 +2154,16 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -2171,9 +2173,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable96"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antinuke"]["variable96"]), 4096)),
                 ],
             });
         }

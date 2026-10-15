@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
@@ -36,17 +37,17 @@ module.exports = {
     if (!playlist)
       return interaction.editReply({
         embeds: [new EmbedBuilder().setColor(0xED4245)
-          .setDescription(`❌ ${ownQuery ? 'No tienes una playlist' : `${targetUser.username} no tiene una playlist`} llamada **${name}**.`)],
+          .setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} ${ownQuery ? 'No tienes una playlist' : `${targetUser.username} no tiene una playlist`} llamada **${name}**.`, 4096))],
       })
 
     if (!ownQuery && !playlist.isPublic)
       return interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Esa playlist es privada.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Esa playlist es privada.'), 4096))],
       })
 
     if (!playlist.tracks.length)
       return interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xF59E0B).setDescription(`⚠️ La playlist **${name}** está vacía.`)],
+        embeds: [new EmbedBuilder().setColor(0xF59E0B).setDescription(obeyUi.limit(`${obeyUi.markup("icon.warning")} La playlist **${name}** está vacía.`, 4096))],
       })
 
     const PER_PAGE = 15
@@ -62,12 +63,12 @@ module.exports = {
 
     await interaction.editReply({
       embeds: [new EmbedBuilder().setColor(0x1DB954)
-        .setTitle(`📋 ${playlist.name}${owner}`)
-        .setDescription(lines.join('\n') + more)
+        .setTitle(obeyUi.limit(`${obeyUi.markup("icon.queue")} ${playlist.name}${owner}`, 256))
+        .setDescription(obeyUi.limit(lines.join('\n') + more, 4096))
         .addFields(
-          { name: '🎵 Canciones', value: String(playlist.tracks.length), inline: true },
-          { name: '⏱ Duración',  value: `\`${fmtMs(total)}\``,          inline: true },
-          { name: '🌐 Visibilidad', value: playlist.isPublic ? 'Pública' : 'Privada', inline: true },
+          { name: obeyUi.owned('🎵 Canciones'), value: String(playlist.tracks.length), inline: true },
+          { name: obeyUi.owned('⏱ Duración'),  value: `\`${fmtMs(total)}\``,          inline: true },
+          { name: obeyUi.owned('🌐 Visibilidad'), value: playlist.isPublic ? 'Pública' : 'Privada', inline: true },
         )],
     })
   },

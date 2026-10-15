@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const { GetUser, GetGlobalUser } = require(`${process.cwd()}/handlers/functions`);
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
@@ -42,7 +43,7 @@ module.exports = {
                 //create the EMBED
                 const embeduserinfo = new EmbedBuilder();
                 embeduserinfo.setThumbnail(member.user.displayAvatarURL({ size: 512 }));
-                embeduserinfo.setAuthor({ name: handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.username }), iconURL: member.user.displayAvatarURL() });
+                embeduserinfo.setAuthor(obeyMeta.asAuthor({ name: handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.username }), iconURL: member.user.displayAvatarURL() }));
                 embeduserinfo.addFields({ name: handlemsg(client.la[ls].cmds.info.permissions.from2), value: `${member.permissions
                         .toArray()
                         .map(p => `\`${p}\``)
@@ -56,7 +57,7 @@ module.exports = {
                                 : client.user.displayAvatarURL()
                             : null
                     );
-                embeduserinfo.setFooter(client.getFooter(es));
+                embeduserinfo.setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 //send the EMBED
                 interaction?.reply({ ephemeral: true, embeds: [embeduserinfo] });
             } catch (e) {
@@ -64,7 +65,7 @@ module.exports = {
                 //create the EMBED
                 const embeduserinfo = new EmbedBuilder();
                 embeduserinfo.setThumbnail(user.displayAvatarURL({ size: 512 }));
-                embeduserinfo.setAuthor({ name: handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.username }), iconURL: member.user.displayAvatarURL() });
+                embeduserinfo.setAuthor(obeyMeta.asAuthor({ name: handlemsg(client.la[ls].cmds.info.permissions.from, { usertag: member.user.username }), iconURL: member.user.displayAvatarURL() }));
                 embeduserinfo.addFields({ name: handlemsg(client.la[ls].cmds.info.permissions.from2), value: `${member.permissions
                         .toArray()
                         .map(p => `\`${p}\``)
@@ -78,7 +79,7 @@ module.exports = {
                                 : client.user.displayAvatarURL()
                             : null
                     );
-                embeduserinfo.setFooter(client.getFooter(es));
+                embeduserinfo.setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 //send the EMBED
                 interaction?.reply({ ephemeral: true, embeds: [embeduserinfo] });
             }

@@ -1,14 +1,19 @@
+const obeyUi = require("../assets/system")
+const obeyMeta = require("../presentation/metadata")
 const clock = require('./playback-clock')
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { trackArtwork, fmtMs, progressBar, platform, loopEmoji, volEmoji, filterLabel, MUSIC_ICON } = require('./utils')
 const { config } = require('../music/config')
+const { registry } = require('../assets/registry')
+const { t, localeFor } = require('../i18n')
 const E = config.emoji
 
 const { buildControls } = require('./controls')
 
 function buildNPEmbed(client, guildId, state, positionMs = null) {
+  const locale = localeFor(client, guildId)
   const track = state.currentTrack
-  if (!track) return new EmbedBuilder().setColor(0x2b2d31).setDescription('⏹️ Sin música reproduciendo.')
+  if (!track) return new EmbedBuilder().setColor(0x2b2d31).setDescription(obeyUi.limit(obeyUi.owned('⏹️ Sin música reproduciendo.'), 4096))
 
   const info = track.info || track
   const plug = track.pluginInfo || {}
@@ -34,25 +39,25 @@ function buildNPEmbed(client, guildId, state, positionMs = null) {
   const isStream = !!info.isStream
 
   const indicators = []
-  if (active)          indicators.push(`🎛️ ${active}`)
-  if (state.autoplay)  indicators.push(`${E.music} Autoplay`)
+  if (active)          indicators.push(`${obeyUi.markup("icon.settings")} ${active}`)
+  if (state.autoplay)  indicators.push(`${registry.markup('autoplay')} ${t(locale, 'music.autoplay')}`)
   if (state.shuffle)   indicators.push(`${E.shuffle} Mezclar`)
-  if (state.radioMode) indicators.push('📻 Radio')
+  if (state.radioMode) indicators.push(obeyUi.owned('📻 Radio'))
 
   const titleLine  = linkUri ? `[${title}](${linkUri})` : title
   const finishText = isStream ? '🔴 LIVE' : `<t:${Math.floor((Date.now() + (dur - pos) / clock.rate(state)) / 1000)}:R>`
 
   const embed = new EmbedBuilder()
     .setColor(state.paused ? 0x4f545c : plat.color)
-    .setAuthor({ name: state.paused ? 'Pausado' : 'Reproduciendo ahora', iconURL: MUSIC_ICON })
-    .setDescription(`## ${titleLine}\n${bar}  \`${fmtMs(pos)} / ${isStream ? 'LIVE' : fmtMs(dur)}\`${indicators.length ? `\n\n${indicators.join('  ·  ')}` : ''}`)
+    .setAuthor(obeyMeta.asAuthor({ name: t(locale, state.paused ? 'music.paused' : 'music.playingNow'), iconURL: MUSIC_ICON }))
+    .setDescription(obeyUi.limit(`## ${titleLine}\n${bar}  \`${fmtMs(pos)} / ${isStream ? 'LIVE' : fmtMs(dur)}\`${indicators.length ? `\n\n${indicators.join('  ·  ')}` : ''}`, 4096))
     .addFields(
-      { name: `${E.artist} Artista`,  value: `\`${artist.slice(0, 45)}\``,                inline: true },
-      { name: `${E.clock} Duración`,  value: isStream ? '🔴 LIVE' : `\`${fmtMs(dur)}\``,  inline: true },
-      { name: `${E.user} Pedido por`, value: `${req}`.slice(0, 40),                       inline: true },
-      { name: `${E.list} Volumen`,    value: `\`${state.volume ?? 100}%\``,               inline: true },
+      { name: `${E.artist} ${t(locale, 'music.artist')}`,  value: `\`${artist.slice(0, 45)}\``,                inline: true },
+      { name: `${E.clock} ${t(locale, 'music.duration')}`,  value: isStream ? obeyUi.owned('🔴 LIVE') : `\`${fmtMs(dur)}\``,  inline: true },
+      { name: `${E.user} ${t(locale, 'music.requestedBy')}`, value: `${req}`.slice(0, 40),                       inline: true },
+      { name: `${registry.markup('icon.volume')} ${t(locale, 'music.volume')}`,    value: `\`${state.volume ?? 100}%\``,               inline: true },
       { name: `${E.loop} Loop`,       value: `\`${state.loop === 'none' ? 'off' : state.loop === 'track' ? 'canción' : 'cola'}\``, inline: true },
-      { name: `${E.clock} Termina`,   value: finishText,                                 inline: true },
+      { name: `${E.clock} ${t(locale, 'music.ends')}`,   value: finishText,                                 inline: true },
     )
   if (art) embed.setImage(art)
 
@@ -100,7 +105,7 @@ function buildQueueEmbed(state, page = 1) {
   if (total === 0) {
     lines.push('_La cola está vacía_')
   } else {
-    lines.push(`**Cola — ${total} pista${total !== 1 ? 's' : ''}  ·  ⏱ \`${fmtMs(totalMs)}\`**`)
+    lines.push(`**Cola — ${total} pista${total !== 1 ? 's' : ''}  ·  ${obeyUi.markup("icon.clock")} \`${fmtMs(totalMs)}\`**`)
     lines.push('')
     for (const [i, t] of slice.entries()) {
       const info = t.info || t
@@ -115,19 +120,19 @@ function buildQueueEmbed(state, page = 1) {
 
   const embed = new EmbedBuilder()
     .setColor(curPlat.color)
-    .setAuthor({ name: 'Cola de reproducción', iconURL: MUSIC_ICON })
-    .setTitle(`${E.folder} Cola  ·  página ${p}/${pages}`)
-    .setDescription(lines.join('\n'))
-    .setFooter({ text: `Página ${p}/${pages}` })
+    .setAuthor(obeyMeta.asAuthor({ name: 'Cola de reproducción', iconURL: MUSIC_ICON }))
+    .setTitle(obeyUi.limit(`${E.folder} Cola  ·  página ${p}/${pages}`, 256))
+    .setDescription(obeyUi.limit(lines.join('\n'), 4096))
+    .setFooter(obeyMeta.asFooter({ text: `Página ${p}/${pages}` }))
   if (curArt) embed.setThumbnail(curArt)
   return embed
 }
 
-function buildQueueRows(page, totalPages) {
+function buildQueueRows(page, totalPages, locale = 'es') {
   return [new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId(`mq_prev:${page}`).setEmoji('◀️').setStyle(ButtonStyle.Secondary).setDisabled(page <= 1),
-    new ButtonBuilder().setCustomId('mq_close').setLabel('Cerrar').setStyle(ButtonStyle.Danger),
-    new ButtonBuilder().setCustomId(`mq_next:${page}`).setEmoji('▶️').setStyle(ButtonStyle.Secondary).setDisabled(page >= totalPages),
+    new ButtonBuilder().setCustomId(`mq_prev:${page}`).setEmoji(obeyUi.component(registry.emoji('icon.page-previous'))).setLabel(obeyUi.plain(t(locale, 'common.previous'))).setStyle(ButtonStyle.Secondary).setDisabled(page <= 1),
+    new ButtonBuilder().setCustomId('mq_close').setLabel(obeyUi.plain(t(locale, 'common.close'))).setEmoji(obeyUi.component(registry.emoji('icon.close'))).setStyle(ButtonStyle.Danger),
+    new ButtonBuilder().setCustomId(`mq_next:${page}`).setEmoji(obeyUi.component(registry.emoji('icon.page-next'))).setLabel(obeyUi.plain(t(locale, 'common.next'))).setStyle(ButtonStyle.Secondary).setDisabled(page >= totalPages),
   )]
 }
 

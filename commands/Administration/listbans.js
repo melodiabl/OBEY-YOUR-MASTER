@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { swap_pages, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "listbans",
@@ -22,7 +24,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"])),
                     ],
                 });
@@ -54,7 +56,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"])),
                     ],
@@ -64,7 +66,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"])),
                     ],
                 });
@@ -77,14 +79,14 @@ module.exports = {
                             `**${ban.user.username}**#${ban.user.discriminator} (\`${ban.user.id}\`)\n**Reason**:\n> ${ban.reason ? ban.reason : "No Reason"}\n`
                     )
                 );
-            swap_pages(client, message, allbans, `🔨 All Bans of **${message.guild.name}**`);
+            swap_pages(client, message, allbans, `${obeyUi.markup("icon.gavel")} All Bans of **${message.guild.name}**`);
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

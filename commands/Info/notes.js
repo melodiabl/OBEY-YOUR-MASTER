@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder,
     ButtonStyle
 } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg, delay } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
 module.exports = {
@@ -32,49 +34,49 @@ module.exports = {
             var button_forward = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_forwards")
-                .setEmoji("▶️")
-                .setLabel("Forwards");
+                .setEmoji(obeyUi.component("▶️"))
+                .setLabel(obeyUi.plain("Forwards"));
             var button_back = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_backwards")
-                .setEmoji("◀️")
-                .setLabel("Backwards");
+                .setEmoji(obeyUi.component("◀️"))
+                .setLabel(obeyUi.plain("Backwards"));
             var button_jump = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_jump")
-                .setLabel("Jump to Page")
-                .setEmoji("🔢");
+                .setLabel(obeyUi.plain("Jump to Page"))
+                .setEmoji(obeyUi.component("🔢"));
             var button_empty1 = new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
                 .setCustomId("notes_empty1")
-                .setLabel("\u200b")
+                .setLabel(obeyUi.plain("\u200b"))
                 .setDisabled(true);
             var button_list = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_list")
-                .setLabel("List Notes")
-                .setEmoji("📑");
+                .setLabel(obeyUi.plain("List Notes"))
+                .setEmoji(obeyUi.component("📑"));
 
             var button_create = new ButtonBuilder()
                 .setStyle(ButtonStyle.Success)
                 .setCustomId("notes_create")
-                .setEmoji("📋")
-                .setLabel("Create New Note");
+                .setEmoji(obeyUi.component("📋"))
+                .setLabel(obeyUi.plain("Create New Note"));
             var button_edit = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_edit")
-                .setEmoji("✏️")
-                .setLabel("Edit this Note");
+                .setEmoji(obeyUi.component("✏️"))
+                .setLabel(obeyUi.plain("Edit this Note"));
             var button_Delete = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("notes_delete")
-                .setEmoji("🗑")
-                .setLabel("Delete this Note");
+                .setEmoji(obeyUi.component("🗑"))
+                .setLabel(obeyUi.plain("Delete this Note"));
             var button_disable = new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
                 .setCustomId("notes_disable")
-                .setLabel("Stop the Buttons")
-                .setEmoji("❌");
+                .setLabel(obeyUi.plain("Stop the Buttons"))
+                .setEmoji(obeyUi.component("❌"));
 
             var embeds = [];
             var currentPage = 0;
@@ -82,9 +84,9 @@ module.exports = {
                 embeds.push(
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter({ text: message.author.username + ` Page | 0/0`, iconURL: message.author.displayAvatarURL() })
-                        .setTitle(`<:no:833101993668771842> No Notes created yet`)
-                        .setDescription(`To create your first Note click on the green Button "\`📋 Create New Note\`"`)
+                        .setFooter(obeyMeta.asFooter({ text: message.author.username + ` Page | 0/0`, iconURL: message.author.displayAvatarURL() }))
+                        .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} No Notes created yet`, 256))
+                        .setDescription(obeyUi.limit(`To create your first Note click on the green Button "\`${obeyUi.markup("icon.queue")} Create New Note\`"`, 4096))
                 );
                 button_forward.setDisabled(true);
                 button_back.setDisabled(true);
@@ -96,13 +98,13 @@ module.exports = {
                 embeds.push(
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
-                        .setTitle(`All of your Notes you can jump to!`)
+                        .setFooter(obeyMeta.asFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() }))
+                        .setTitle(obeyUi.limit(`All of your Notes you can jump to!`, 256))
                         .setDescription(
-                            `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
+                            obeyUi.limit(`${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
                                 0,
                                 2048
-                            )
+                            ), 4096)
                         )
                 );
                 let counter = 1;
@@ -111,13 +113,13 @@ module.exports = {
                     embeds.push(
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter({ text: message.author.username +
+                            .setFooter(obeyMeta.asFooter({ text: message.author.username +
                                     ` | Page: ${counter}/${notes.length + 1}` +
                                     ` | ${note.edited ? "Edited" : "Created"} at: `,
                                 iconURL: message.author.displayAvatarURL()
-                            })
-                            .setTitle(`${note.title}`)
-                            .setDescription(`${note.description}`)
+                            }))
+                            .setTitle(obeyUi.limit(`${note.title}`, 256))
+                            .setDescription(obeyUi.limit(`${note.description}`, 4096))
                             .setTimestamp(Date.now())
                     );
                 }
@@ -229,12 +231,12 @@ module.exports = {
                                             embeds.push(
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setFooter({ text: message.author.username + ` Page | 0/0`,
+                                                    .setFooter(obeyMeta.asFooter({ text: message.author.username + ` Page | 0/0`,
                                                         iconURL: message.author.displayAvatarURL()
-                                                    })
-                                                    .setTitle(`<:no:833101993668771842> No Notes created yet`)
+                                                    }))
+                                                    .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} No Notes created yet`, 256))
                                                     .setDescription(
-                                                        `To create your first Note click on the green Button "\`📋 Create New Note\`"`
+                                                        obeyUi.limit(`To create your first Note click on the green Button "\`${obeyUi.markup("icon.queue")} Create New Note\`"`, 4096)
                                                     )
                                             );
                                             button_forward.setDisabled(true);
@@ -247,15 +249,15 @@ module.exports = {
                                             embeds.push(
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setFooter({ text: message.author.username,
+                                                    .setFooter(obeyMeta.asFooter({ text: message.author.username,
                                                         iconURL: message.author.displayAvatarURL()
-                                                    })
-                                                    .setTitle(`All of your Notes you can jump to!`)
+                                                    }))
+                                                    .setTitle(obeyUi.limit(`All of your Notes you can jump to!`, 256))
                                                     .setDescription(
-                                                        `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
+                                                        obeyUi.limit(`${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
                                             );
                                             let counter = 1;
@@ -264,13 +266,13 @@ module.exports = {
                                                 embeds.push(
                                                     new EmbedBuilder()
                                                         .setColor(es.color)
-                                                        .setFooter({ text: message.author.username +
+                                                        .setFooter(obeyMeta.asFooter({ text: message.author.username +
                                                                 ` | Page: ${counter}/${notes.length + 1}` +
                                                                 ` | ${note.edited ? "Edited" : "Created"} at: `,
                                                             iconURL: message.author.displayAvatarURL()
-                                                        })
-                                                        .setTitle(`${note.title}`)
-                                                        .setDescription(`${note.description}`)
+                                                        }))
+                                                        .setTitle(obeyUi.limit(`${note.title}`, 256))
+                                                        .setDescription(obeyUi.limit(`${note.description}`, 4096))
                                                         .setTimestamp(Date.now())
                                                 );
                                             }
@@ -328,10 +330,10 @@ module.exports = {
                                         .reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setTitle("Your Time ran out!")
+                                                    .setTitle(obeyUi.limit("Your Time ran out!", 256))
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelado the Operation!`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`Cancelado the Operation!`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         })
                                         .catch(e => {
@@ -348,10 +350,10 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle("Your Time ran out!")
+                                            .setTitle(obeyUi.limit("Your Time ran out!", 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Cancelado the Operation!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`Cancelado the Operation!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 })
                                 .catch(e => {
@@ -541,7 +543,7 @@ module.exports = {
                             button_disable,
                         ]);
                         allbuttons = [buttonRow1, buttonRow2];
-                        await b?.reply("<:no:833101993668771842> **Desactivado the Buttons**", true);
+                        await b?.reply(obeyUi.owned("<:no:833101993668771842> **Desactivado the Buttons**"), true);
                         await notemsg
                             .edit({
                                 content: `***NOTE BUTTONS DISABLED***`,
@@ -577,7 +579,7 @@ module.exports = {
                                 }
                                 if (Page < 0 || Page > embeds.length - 1) {
                                     return message
-                                        .reply("<:no:833101993668771842> **Value out of Range!**")
+                                        .reply(obeyUi.owned("<:no:833101993668771842> **Value out of Range!**"))
                                         .then(msg => {
                                             setTimeout(() => {
                                                 try {
@@ -645,10 +647,10 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle("Your Time ran out!")
+                                            .setTitle(obeyUi.limit("Your Time ran out!", 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Cancelado the Operation!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`Cancelado the Operation!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 })
                                 .catch(e => {
@@ -658,7 +660,7 @@ module.exports = {
                     }
                     //Delete a note
                     if (b?.customId == "notes_delete") {
-                        await b?.reply("🗑 **Eliminado the Note**", true);
+                        await b?.reply(obeyUi.owned("🗑 **Eliminado the Note**"), true);
                         client.notes.remove(
                             message.author.id,
                             v =>
@@ -677,12 +679,12 @@ module.exports = {
                             embeds.push(
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter({ text: message.author.username + ` Page | 0/0`,
+                                    .setFooter(obeyMeta.asFooter({ text: message.author.username + ` Page | 0/0`,
                                         iconURL: message.author.displayAvatarURL()
-                                    })
-                                    .setTitle(`<:no:833101993668771842> No Notes created yet`)
+                                    }))
+                                    .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} No Notes created yet`, 256))
                                     .setDescription(
-                                        `To create your first Note click on the green Button "\`📋 Create New Note\`"`
+                                        obeyUi.limit(`To create your first Note click on the green Button "\`${obeyUi.markup("icon.queue")} Create New Note\`"`, 4096)
                                     )
                             );
                             button_forward.setDisabled(true);
@@ -695,13 +697,13 @@ module.exports = {
                             embeds.push(
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
-                                    .setTitle(`All of your Notes you can jump to!`)
+                                    .setFooter(obeyMeta.asFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() }))
+                                    .setTitle(obeyUi.limit(`All of your Notes you can jump to!`, 256))
                                     .setDescription(
-                                        `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
+                                        obeyUi.limit(`${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
                                             0,
                                             2048
-                                        )
+                                        ), 4096)
                                     )
                             );
                             let counter = 1;
@@ -710,13 +712,13 @@ module.exports = {
                                 embeds.push(
                                     new EmbedBuilder()
                                         .setColor(es.color)
-                                        .setFooter({ text: message.author.username +
+                                        .setFooter(obeyMeta.asFooter({ text: message.author.username +
                                                 ` | Page: ${counter}/${notes.length + 1}` +
                                                 ` | ${note.edited ? "Edited" : "Created"} at: `,
                                             iconURL: message.author.displayAvatarURL()
-                                        })
-                                        .setTitle(`${note.title}`)
-                                        .setDescription(`${note.description}`)
+                                        }))
+                                        .setTitle(obeyUi.limit(`${note.title}`, 256))
+                                        .setDescription(obeyUi.limit(`${note.description}`, 4096))
                                         .setTimestamp(Date.now())
                                 );
                             }
@@ -822,25 +824,25 @@ module.exports = {
                                             notes = client.notes.get(message.author.id, "notes");
                                             embeds[0] = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setFooter({ text: message.author.username,
+                                                .setFooter(obeyMeta.asFooter({ text: message.author.username,
                                                     iconURL: message.author.displayAvatarURL()
-                                                })
-                                                .setTitle(`All of your Notes you can jump to!`)
+                                                }))
+                                                .setTitle(obeyUi.limit(`All of your Notes you can jump to!`, 256))
                                                 .setDescription(
-                                                    `${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
+                                                    obeyUi.limit(`${notes.map((data, index) => `**\`Page: ${index + 2}/${notes.length + 1}\`:** ${String(data.title).substring(0, 80)}`).join("\n")}`.substring(
                                                         0,
                                                         2048
-                                                    )
+                                                    ), 4096)
                                                 );
                                             embeds[thenote + 1] = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setFooter({ text: message.author.username +
+                                                .setFooter(obeyMeta.asFooter({ text: message.author.username +
                                                         ` | Page: ${thenote + 2}/${embeds.length}` +
                                                         ` | ${newnote.edited ? "Edited" : "Created"} at: `,
                                                     iconURL: message.author.displayAvatarURL()
-                                                })
-                                                .setTitle(`${title}`)
-                                                .setDescription(`${description}`)
+                                                }))
+                                                .setTitle(obeyUi.limit(`${title}`, 256))
+                                                .setDescription(obeyUi.limit(`${description}`, 4096))
                                                 .setTimestamp(Date.now());
                                             var buttonRow1 = new ActionRowBuilder().addComponents([
                                                 button_back.setDisabled(false),
@@ -895,10 +897,10 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle("Your Time ran out!")
+                                                        .setTitle(obeyUi.limit("Your Time ran out!", 256))
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`Cancelado the Operation!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`Cancelado the Operation!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             })
                                             .catch(e => {
@@ -915,10 +917,10 @@ module.exports = {
                                     .reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle("Your Time ran out!")
+                                                .setTitle(obeyUi.limit("Your Time ran out!", 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelado the Operation!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`Cancelado the Operation!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     })
                                     .catch(e => {
@@ -975,9 +977,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"]), 4096)),
                 ],
             });
         }

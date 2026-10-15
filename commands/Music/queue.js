@@ -1,3 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
+const { localeFor } = require('../../handlers/i18n')
+const { registry } = require('../../handlers/assets/registry')
+const { t } = require('../../handlers/i18n')
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 
 function fmtMs(ms) {
@@ -17,7 +22,7 @@ function buildPage(state, page) {
   const totalMs = q.reduce((a, t) => a + (t.info?.length || 0), 0)
 
   const lines = []
-  if (ci) lines.push(`🎵 **Ahora:** [${(ci?.title || '?').substring(0, 55)}](${ci?.uri || ''}) — \`${fmtMs(ci?.length)}\`\n`)
+  if (ci) lines.push(`${obeyUi.markup("icon.music")} **Ahora:** [${(ci?.title || '?').substring(0, 55)}](${ci?.uri || ''}) — \`${fmtMs(ci?.length)}\`\n`)
   if (!slice.length && !ci) {
     lines.push('_La cola está vacía._')
   } else {
@@ -30,18 +35,18 @@ function buildPage(state, page) {
 
   const embed = new EmbedBuilder()
     .setColor(0x5865F2)
-    .setTitle(`📋 Cola de ${state._guildName || 'reproducción'}`)
-    .setDescription(lines.join('\n') || '​')
-    .setFooter({ text: `Página ${p}/${pages}` })
+    .setTitle(obeyUi.limit(`${obeyUi.markup("icon.queue")} Cola de ${state._guildName || 'reproducción'}`, 256))
+    .setDescription(obeyUi.limit(lines.join('\n') || '​', 4096))
+    .setFooter(obeyMeta.asFooter({ text: `Página ${p}/${pages}` }))
 
   return { embed, page: p, pages }
 }
 
-function buildPageRow(page, pages) {
+function buildPageRow(page, pages, locale = 'es') {
   return new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId('pq_prev').setEmoji('◀️').setStyle(ButtonStyle.Secondary).setDisabled(page <= 1),
-    new ButtonBuilder().setCustomId('pq_close').setLabel('Cerrar').setStyle(ButtonStyle.Danger),
-    new ButtonBuilder().setCustomId('pq_next').setEmoji('▶️').setStyle(ButtonStyle.Secondary).setDisabled(page >= pages),
+    new ButtonBuilder().setCustomId('pq_prev').setEmoji(obeyUi.component(registry.emoji('icon.page-previous'))).setLabel(obeyUi.plain(t(locale, 'common.previous'))).setStyle(ButtonStyle.Secondary).setDisabled(page <= 1),
+    new ButtonBuilder().setCustomId('pq_close').setLabel(obeyUi.plain(t(locale, 'common.close'))).setEmoji(obeyUi.component(registry.emoji('icon.close'))).setStyle(ButtonStyle.Danger),
+    new ButtonBuilder().setCustomId('pq_next').setEmoji(obeyUi.component(registry.emoji('icon.page-next'))).setLabel(obeyUi.plain(t(locale, 'common.next'))).setStyle(ButtonStyle.Secondary).setDisabled(page >= pages),
   )
 }
 
@@ -58,12 +63,12 @@ module.exports = {
     const ls = client.settings.get(message.guild.id, 'language')
 
     if (!client.settings.get(message.guild.id, 'MUSIC')) {
-      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(client.la[ls].common.disabled.title)] })
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))] })
     }
 
     const state = client.music?.getState(message.guild.id)
     if (!state?.currentTrack) {
-      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle('❌ No hay música reproduciéndose.')] })
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(obeyUi.limit(obeyUi.owned('❌ No hay música reproduciéndose.'), 256))] })
     }
 
     // attach guild name for embed title
@@ -71,7 +76,7 @@ module.exports = {
 
     let page = parseInt(args[0]) || 1
     const { embed, page: p, pages } = buildPage(state, page)
-    const reply = await message.reply({ embeds: [embed], components: pages > 1 ? [buildPageRow(p, pages)] : [] })
+    const reply = await message.reply({ embeds: [embed], components: pages > 1 ? [buildPageRow(p, pages, localeFor(client, message.guild.id))] : [] })
 
     if (pages <= 1) return
 
@@ -85,7 +90,7 @@ module.exports = {
       await i.deferUpdate()
       if (i.customId === 'pq_close') {
         collector.stop('closed')
-        return reply.edit({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription('📋 Cola cerrada.')], components: [] })
+        return reply.edit({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(obeyUi.owned('📋 Cola cerrada.'), 4096))], components: [] })
       }
       currentPage += i.customId === 'pq_next' ? 1 : -1
       const freshState = client.music?.getState(message.guild.id)
@@ -93,7 +98,7 @@ module.exports = {
       freshState._guildName = message.guild.name
       const { embed: newEmbed, page: newP, pages: newPages } = buildPage(freshState, currentPage)
       currentPage = newP
-      await reply.edit({ embeds: [newEmbed], components: [buildPageRow(newP, newPages)] })
+      await reply.edit({ embeds: [newEmbed], components: [buildPageRow(newP, newPages, localeFor(client, message.guild.id))] })
     })
 
     collector.on('end', (_, reason) => {

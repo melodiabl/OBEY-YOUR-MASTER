@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
 
     if (!guild.banner)
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Este servidor no tiene banner.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Este servidor no tiene banner.'), 4096))],
         ephemeral: true,
       })
 
@@ -17,8 +18,8 @@ module.exports = {
     await interaction.reply({
       embeds: [
         new EmbedBuilder().setColor(0x5865F2)
-          .setTitle(`🖼️ Banner de ${guild.name}`)
-          .setDescription(`[Descargar (4K)](${bannerURL})`)
+          .setTitle(obeyUi.limit(`🖼️ Banner de ${guild.name}`, 256))
+          .setDescription(obeyUi.limit(`[Descargar (4K)](${bannerURL})`, 4096))
           .setImage(bannerURL),
       ],
     })

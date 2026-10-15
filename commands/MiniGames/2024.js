@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder,
     ButtonStyle
 } = require("discord.js");
@@ -23,12 +25,12 @@ module.exports = {
             return message.reply({ embeds: [
                 new EmbedBuilder()
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es))
-                    .setTitle(client.la[ls].common.disabled.title)
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                    .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                     .setDescription(
-                        require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
+                        obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
                             prefix: prefix,
-                        })
+                        }), 4096)
                     )] }
             );
         }
@@ -95,18 +97,18 @@ class TwoZeroFourEight {
 
         const embed = new EmbedBuilder()
             .setColor(this.options.embed.color)
-            .setTitle(this.options.embed.title)
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
             .setImage("attachment://board.png")
             .addFields({ name: this.options.embed.curScore || "Score", value: this.score.toString() })
-            .setFooter(this.message.client.getFooter(
+            .setFooter(obeyMeta.asFooter(this.message.client.getFooter(
                     this.message.author.username + " | Aniket's Api",
                     this.message.author.displayAvatarURL()
-                ));
+                )));
 
-        const up = new ButtonBuilder().setEmoji(emojis.up).setStyle(ButtonStyle.Primary).setCustomId("2048_up");
-        const left = new ButtonBuilder().setEmoji(emojis.left).setStyle(ButtonStyle.Primary).setCustomId("2048_left");
-        const down = new ButtonBuilder().setEmoji(emojis.down).setStyle(ButtonStyle.Primary).setCustomId("2048_down");
-        const right = new ButtonBuilder().setEmoji(emojis.right).setStyle(ButtonStyle.Primary).setCustomId("2048_right");
+        const up = new ButtonBuilder().setEmoji(obeyUi.component(emojis.up)).setStyle(ButtonStyle.Primary).setCustomId("2048_up");
+        const left = new ButtonBuilder().setEmoji(obeyUi.component(emojis.left)).setStyle(ButtonStyle.Primary).setCustomId("2048_left");
+        const down = new ButtonBuilder().setEmoji(obeyUi.component(emojis.down)).setStyle(ButtonStyle.Primary).setCustomId("2048_down");
+        const right = new ButtonBuilder().setEmoji(obeyUi.component(emojis.right)).setStyle(ButtonStyle.Primary).setCustomId("2048_right");
 
         const row = new ActionRowBuilder().addComponents(up, left, down, right);
 
@@ -154,13 +156,13 @@ class TwoZeroFourEight {
             }
             const editEmbed = new EmbedBuilder()
                 .setColor(this.options.embed.color)
-                .setTitle(this.options.embed.title)
+                .setTitle(obeyUi.limit(this.options.embed.title, 256))
                 .setImage("attachment://board.png")
                 .addFields({ name: this.options.embed.curScore || "Score", value: this.score.toString() })
-                .setFooter(this.message.client.getFooter(
+                .setFooter(obeyMeta.asFooter(this.message.client.getFooter(
                         this.message.author.username + " | Aniket's Api",
                         this.message.author.displayAvatarURL()
-                    ));
+                    )));
 
             msg.edit({
                 embeds: [editEmbed],
@@ -180,13 +182,13 @@ class TwoZeroFourEight {
 
         const editEmbed = new EmbedBuilder()
             .setColor(this.options.embed.color)
-            .setTitle(this.options.embed.title)
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
             .setImage("attachment://board.png")
             .addFields({ name: overTitle, value: (this.options.embed.totalScore || "**Score:** ") + this.score })
-            .setFooter(this.message.client.getFooter(
+            .setFooter(obeyMeta.asFooter(this.message.client.getFooter(
                     this.message.author.username + " | Aniket's Api",
                     this.message.author.displayAvatarURL()
-                ));
+                )));
 
         msg.edit({
             embeds: [editEmbed],

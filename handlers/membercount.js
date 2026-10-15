@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 var CronJob = require("cron").CronJob;
 const { delay } = require(`./functions`);
 const { ChannelType } = require("discord.js");
@@ -61,7 +62,7 @@ module.exports = function (client, options) {
         let ensureobject = {};
         for (let i = 1; i <= 25; i++) {
             ensureobject[`channel${i}`] = "no";
-            ensureobject[`message${i}`] = "🗣 Members: {member}";
+            ensureobject[`message${i}`] = obeyUi.owned("🗣 Members: {member}");
         }
         client.setups.ensure(guildid, ensureobject, "membercount");
         //get the Guild

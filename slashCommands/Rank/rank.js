@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js')
 const Canvas = require('@napi-rs/canvas')
 const { clipRounded } = require('../../handlers/canvasUtils')
@@ -100,7 +102,7 @@ async function buildRankCard(user, member, data, rank) {
   if ((data.voicelevel ?? 1) > 1 || (data.voicepoints ?? 0) > 0) {
     ctx.fillStyle = '#888888'
     ctx.font      = '13px "DM Sans", sans-serif'
-    ctx.fillText(`🎙️ Voz: Nivel ${data.voicelevel ?? 1} · ${fmt(data.voicepoints ?? 0)} XP`, TX, AY + 60)
+    ctx.fillText(`${obeyUi.markup("icon.microphone")} Voz: Nivel ${data.voicelevel ?? 1} · ${fmt(data.voicepoints ?? 0)} XP`, TX, AY + 60)
   }
 
   return canvas.toBuffer('image/png')
@@ -117,7 +119,7 @@ module.exports = {
   run: async (client, interaction) => {
     const target = interaction.options.getUser('usuario') || interaction.user
     if (target.bot)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Los bots no tienen ranking.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Los bots no tienen ranking.'), 4096))], ephemeral: true })
 
     const gid = interaction.guild.id
     const key = `${gid}-${target.id}`
@@ -139,7 +141,7 @@ module.exports = {
 
     const data = client.points?.get(key)
     if (!data)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0x4f545c).setDescription('📊 No hay datos de ranking para ese usuario todavía.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0x4f545c).setDescription(obeyUi.limit(obeyUi.owned('📊 No hay datos de ranking para ese usuario todavía.'), 4096))], ephemeral: true })
 
     // calcular posición
     const all  = client.points.filter(p => p.guild === gid).map(p => p).sort((a, b) => (b.level - a.level) || (b.points - a.points))
@@ -157,16 +159,16 @@ module.exports = {
       // fallback embed si falla canvas
       await interaction.editReply({
         embeds: [new EmbedBuilder().setColor(0x5865F2)
-          .setAuthor({ name: target.username, iconURL: target.displayAvatarURL() })
-          .setTitle('📊 Tarjeta de Rango')
+          .setAuthor(obeyMeta.asAuthor({ name: target.username, iconURL: target.displayAvatarURL() }))
+          .setTitle(obeyUi.limit(obeyUi.owned('📊 Tarjeta de Rango'), 256))
           .addFields(
-            { name: '💬 Nivel',      value: `\`${data.level ?? 1}\``,       inline: true },
-            { name: '✨ XP',         value: `\`${fmt(data.points ?? 0)}\``, inline: true },
-            { name: '🎯 Necesita',   value: `\`${fmt(data.neededpoints ?? 400)}\``, inline: true },
-            { name: '🎙️ Nivel voz',  value: `\`${data.voicelevel ?? 1}\``,  inline: true },
-            { name: '🏆 Posición',   value: `\`#${rank}\``,                 inline: true },
+            { name: obeyUi.owned('💬 Nivel'),      value: `\`${data.level ?? 1}\``,       inline: true },
+            { name: obeyUi.owned('✨ XP'),         value: `\`${fmt(data.points ?? 0)}\``, inline: true },
+            { name: obeyUi.owned('🎯 Necesita'),   value: `\`${fmt(data.neededpoints ?? 400)}\``, inline: true },
+            { name: obeyUi.owned('🎙️ Nivel voz'),  value: `\`${data.voicelevel ?? 1}\``,  inline: true },
+            { name: obeyUi.owned('🏆 Posición'),   value: `\`#${rank}\``,                 inline: true },
           )
-          .setFooter({ text: interaction.guild.name })],
+          .setFooter(obeyMeta.asFooter({ text: interaction.guild.name }))],
       })
     }
   },

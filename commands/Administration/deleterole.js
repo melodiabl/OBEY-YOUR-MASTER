@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, PermissionFlagsBits,
     ButtonStyle
 } = require(`discord.js`);
@@ -21,8 +23,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable1"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable1"]), 256)),
                 ],
             });
         let es = client.settings.get(message.guild.id, "embed");
@@ -55,9 +57,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable2"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable3"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable2"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable3"]), 4096)),
                     ],
                 });
             let role =
@@ -68,13 +70,13 @@ module.exports = {
             let button_verify = new ButtonBuilder()
                 .setStyle(ButtonStyle.Success)
                 .setCustomId("deleterole_verify")
-                .setLabel("Verify this Step")
-                .setEmoji("✅");
+                .setLabel(obeyUi.plain("Verify this Step"))
+                .setEmoji(obeyUi.component("✅"));
             let msg = await message.channel.send({
                 content: `<@${message.author.id}>`,
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable6"]))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable6"]), 256))
                         .setColor(es.color),
                 ],
                 components: [new ActionRowBuilder().addComponents(button_verify)],
@@ -86,14 +88,14 @@ module.exports = {
             collector.on("collect", async b => {
                 if (b?.user.id !== message.author.id)
                     return b?.reply(
-                        `<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`,
+                        `${obeyUi.markup("icon.error")} **Only the one who typed ${prefix}help is allowed to react!**`,
                         true
                     );
 
                 edited = true;
                 msg.edit({
                     content: `<@${message.author.id}>`,
-                    embeds: [new EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
+                    embeds: [new EmbedBuilder().setTitle(obeyUi.limit("¡Verificado!", 256)).setColor(es.color)],
                     components: [new ActionRowBuilder().addComponents(button_verify.setDisabled(true))],
                 }).catch(e => {
                     console.log(String(e).grey);
@@ -116,8 +118,8 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setFooter(client.getFooter(es))
-                                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable8"])),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable8"]), 256)),
                                 ],
                             });
                             if (client.settings.get(message.guild.id, `adminlog`) != "no") {
@@ -139,18 +141,18 @@ module.exports = {
                                                             : client.user.displayAvatarURL()
                                                         : null
                                                 )
-                                                .setFooter(client.getFooter(es))
-                                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable9"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable9"]), 4096)
                                                 )
                                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                                 .setTimestamp()
-                                                .setFooter(client.getFooter(
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                                         "ID: " + message.author.id,
                                                         message.author.displayAvatarURL()
-                                                    )
+                                                    ))
                                                 ),
                                         ],
                                     });
@@ -165,15 +167,15 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable12"]))
-                                .setDescription(ge.message),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable12"]), 256))
+                                .setDescription(obeyUi.limit(ge.message, 4096)),
                         ],
                     });
                 }
             });
 
-            let endedembed = new EmbedBuilder().setTitle("Time ran out!").setColor(es.wrongcolor);
+            let endedembed = new EmbedBuilder().setTitle(obeyUi.limit("Time ran out!", 256)).setColor(es.wrongcolor);
             collector.on("end", collected => {
                 if (!edited) {
                     edited = true;
@@ -184,8 +186,8 @@ module.exports = {
                             new ActionRowBuilder().addComponents(
                                 button_verify
                                     .setDisabled(true)
-                                    .setLabel("FAILED TO VERIFY")
-                                    .setEmoji("❌")
+                                    .setLabel(obeyUi.plain("FAILED TO VERIFY"))
+                                    .setEmoji(obeyUi.component("❌"))
                                     .setStyle(ButtonStyle.Danger)
                             ),
                         ],
@@ -200,9 +202,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable14"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["deleterole"]["variable14"]), 4096)),
                 ],
             });
         }

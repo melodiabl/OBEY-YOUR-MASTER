@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -16,7 +18,7 @@ module.exports = {
         let server = client.guilds.cache.get(args[0]) || message.guild;
         if (!server.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
             return message.reply(
-                `<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso in ${server.name}!**`
+                `${obeyUi.markup("icon.error")} **I am missing the ADMINISTRATOR Permiso in ${server.name}!**`
             );
         }
 
@@ -49,9 +51,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable1"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable1"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable2"]), 4096)),
                 ],
             });
         client.backupDB.ensure(server.id, {
@@ -59,23 +61,23 @@ module.exports = {
         });
         let backups = client.backupDB.get(server.id, "backups");
         if (!backups || backups.length == 0) {
-            return message.reply(`<:no:833101993668771842> **There are no Backups in ${server.name}**`);
+            return message.reply(`${obeyUi.markup("icon.error")} **There are no Backups in ${server.name}**`);
         }
         message.reply({
             embeds: [
                 new EmbedBuilder()
                     .setColor(es.color)
-                    .setTitle(`Backups of ${server.name}`)
+                    .setTitle(obeyUi.limit(`Backups of ${server.name}`, 256))
                     .setThumbnail(server.iconURL())
-                    .setFooter(client.getFooter("ID: " + server.id, server.iconURL()))
+                    .setFooter(obeyMeta.asFooter(client.getFooter("ID: " + server.id, server.iconURL())))
                     .setDescription(
-                        backups
+                        obeyUi.limit(backups
                             .sort((a, b) => b?.createdTimestamp - a.createdTimestamp)
                             .map(
                                 (b, index) =>
                                     `> **Created at:** \`${moment(b?.createdTimestamp).format("DD/MM/YYYY HH:mm")}\`\n> **Roles:** \`${b?.roles.length}\`\n> **Channels:** \`${(b?.channels.categories && b?.channels.categories.length > 0 ? b?.channels.categories.map(c => c.children.length).reduce((a, b) => a + b) : 0) + b?.channels.categories.length + b?.channels.others.length}\`\n> **\`${prefix}loadbackup ${server.id} ${index + 1}\`**\n`
                             )
-                            .join("\n")
+                            .join("\n"), 4096)
                     ),
             ],
         });
@@ -96,16 +98,16 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]), 4096))
                             .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                             .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                             .setTimestamp()
-                            .setFooter(client.getFooter(
+                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                     "ID: " + message.author.id,
                                     message.author.displayAvatarURL()
-                                )
+                                ))
                             ),
                     ],
                 });

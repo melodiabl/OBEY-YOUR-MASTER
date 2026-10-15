@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -25,7 +26,7 @@ module.exports = client => {
         let ch = await client.channels.fetch("802914917874663454").catch(() => {});
         if (!ch) return `COULD NOT CREATE INVITE FOR: <#802914917874663454> in **${ch.guild.name}**`;
         if (!ch.permissionsFor(ch.guild.members.me).has(Discord.PermissionFlagsBits.CreateInstantInvite)) {
-            return `❌ **I am missing the CREATE_INSTANT_INVITE PERMISSION for \`${ch.name}\`**`;
+            return `${obeyUi.markup("icon.error")} **I am missing the CREATE_INSTANT_INVITE PERMISSION for \`${ch.name}\`**`;
         }
         let inv = await ch.createInvite();
         if (!inv) return `COULD NOT CREATE INVITE FOR: <#802914917874663454> in **${ch.guild.name}**`;

@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const { GetRole } = require(`${process.cwd()}/handlers/functions`);
 const { swap_pages, handlemsg } = require(`${process.cwd()}/handlers/functions`);
@@ -35,7 +37,7 @@ module.exports = {
             //create the EMBED
             const embeduserinfo = new EmbedBuilder();
             embeduserinfo.setThumbnail(message.guild.iconURL({ size: 512 }));
-            embeduserinfo.setAuthor({ name: client.la[ls].cmds.info.roleinfo.author + " " + role.name, iconURL: message.guild.iconURL(), url: "https://github.com/melodiabl" });
+            embeduserinfo.setAuthor(obeyMeta.asAuthor({ name: client.la[ls].cmds.info.roleinfo.author + " " + role.name, iconURL: message.guild.iconURL(), url: "https://github.com/melodiabl" }));
             embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field1, value: `\`${role.name}\``, inline: true });
             embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field2, value: `\`${role.id}\``, inline: true });
             embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field3, value: `\`${role.hexColor}\``, inline: true });
@@ -47,15 +49,15 @@ module.exports = {
                     "`", inline: true });
             embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field5, value: `\`${role.rawPosition}\` / \`${message.guild.roles.highest.rawPosition}\``, inline: true });
             embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field6, value: `\`${role.members.size} Members have it\``, inline: true });
-            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field7, value: `\`${role.hoist ? "✔️" : "❌"}\``, inline: true });
-            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field8, value: `\`${role.mentionable ? "✔️" : "❌"}\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field7, value: `\`${role.hoist ? obeyUi.owned("✔️") : obeyUi.owned("❌")}\``, inline: true });
+            embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field8, value: `\`${role.mentionable ? obeyUi.owned("✔️") : obeyUi.owned("❌")}\``, inline: true });
             embeduserinfo.addFields({ name: client.la[ls].cmds.info.roleinfo.field9, value: `${role.permissions
                     .toArray()
                     .map(p => `\`${p}\``)
                     .join(", ")}`
             });
             embeduserinfo.setColor(role.hexColor);
-            embeduserinfo.setFooter(client.getFooter(es));
+            embeduserinfo.setFooter(obeyMeta.asFooter(client.getFooter(es)));
             //send the EMBED
             message.reply({ embeds: [embeduserinfo] });
         } catch (e) {
@@ -64,9 +66,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"]), 4096)),
                 ],
             });
         }

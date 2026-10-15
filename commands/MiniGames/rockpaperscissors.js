@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder,
     ButtonStyle
 } = require("discord.js");
@@ -116,25 +118,25 @@ class RPSGame {
         const choice = { r: emojis.rock, p: emojis.paper, s: emojis.scissors };
 
         const embed = new EmbedBuilder()
-            .setTitle(this.options.embed.title)
-            .setDescription(this.options.embed.description)
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
+            .setDescription(obeyUi.limit(this.options.embed.description, 4096))
             .setColor(this.options.embed.color);
 
         const rock = new ButtonBuilder()
             .setCustomId("r_rps")
             .setStyle(ButtonStyle.Primary)
-            .setLabel(this.options.buttons.rock)
-            .setEmoji(emojis.rock);
+            .setLabel(obeyUi.plain(this.options.buttons.rock))
+            .setEmoji(obeyUi.component(emojis.rock));
         const paper = new ButtonBuilder()
             .setCustomId("p_rps")
             .setStyle(ButtonStyle.Primary)
-            .setLabel(this.options.buttons.paper)
-            .setEmoji(emojis.paper);
+            .setLabel(obeyUi.plain(this.options.buttons.paper))
+            .setEmoji(obeyUi.component(emojis.paper));
         const scissors = new ButtonBuilder()
             .setCustomId("s_rps")
             .setStyle(ButtonStyle.Primary)
-            .setLabel(this.options.buttons.scissors)
-            .setEmoji(emojis.scissors);
+            .setLabel(obeyUi.plain(this.options.buttons.scissors))
+            .setEmoji(obeyUi.component(emojis.scissors));
         const row = new ActionRowBuilder().addComponents(rock, paper, scissors);
 
         const msg = await this.sendMessage({ embeds: [embed], components: [row] });
@@ -183,9 +185,9 @@ class RPSGame {
         collector.on("end", async (c, r) => {
             if (r === "time" && this.inGame == true) {
                 const endEmbed = new EmbedBuilder()
-                    .setTitle(this.options.embed.title)
+                    .setTitle(obeyUi.limit(this.options.embed.title, 256))
                     .setColor(this.options.embed.color)
-                    .setDescription(this.options.gameEndMessage)
+                    .setDescription(obeyUi.limit(this.options.gameEndMessage, 4096))
                     .setTimestamp();
 
                 return msg.edit({ embeds: [endEmbed], components: disableButtons(msg.components) });
@@ -210,9 +212,9 @@ class RPSGame {
         }
 
         const finalEmbed = new EmbedBuilder()
-            .setTitle(this.options.embed.title)
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
             .setColor(this.options.embed.color)
-            .setDescription(result)
+            .setDescription(obeyUi.limit(result, 4096))
             .addFields({ name: this.message.author.username, value: challenger, inline: true })
             .addFields({ name: this.opponent.username, value: opponent, inline: true })
             .setTimestamp();
@@ -234,12 +236,12 @@ module.exports = {
             return message.reply({ embeds: [
                 new EmbedBuilder()
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es))
-                    .setTitle(client.la[ls].common.disabled.title)
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                    .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                     .setDescription(
-                        require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
+                        obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
                             prefix: prefix,
-                        })
+                        }), 4096)
                     )] }
             );
         }
@@ -284,20 +286,20 @@ async function verify(options) {
         const opponent = options.opponent;
 
         const askEmbed = new EmbedBuilder()
-            .setTitle(options.embed.askTitle || options.embed.title)
+            .setTitle(obeyUi.limit(options.embed.askTitle || options.embed.title, 256))
             .setDescription(
-                options.askMessage
+                obeyUi.limit(options.askMessage
                     .replace("{challenger}", message.author.toString())
-                    .replace("{opponent}", opponent.toString())
+                    .replace("{opponent}", opponent.toString()), 4096)
             )
             .setColor(options.colors?.green || options.embed.color);
 
         const btn1 = new ButtonBuilder()
-            .setLabel(options.buttons?.accept || "Accept")
+            .setLabel(obeyUi.plain(options.buttons?.accept || "Accept"))
             .setStyle(ButtonStyle.Success)
             .setCustomId("accept");
         const btn2 = new ButtonBuilder()
-            .setLabel(options.buttons?.reject || "Reject")
+            .setLabel(obeyUi.plain(options.buttons?.reject || "Reject"))
             .setStyle(ButtonStyle.Danger)
             .setCustomId("reject");
         const row = new ActionRowBuilder().addComponents(btn1, btn2);
@@ -327,19 +329,19 @@ async function verify(options) {
             }
 
             const cancelEmbed = new EmbedBuilder()
-                .setTitle(options.embed.cancelTitle || options.embed.title)
+                .setTitle(obeyUi.limit(options.embed.cancelTitle || options.embed.title, 256))
                 .setDescription(
-                    options.cancelMessage
+                    obeyUi.limit(options.cancelMessage
                         .replace("{challenger}", message.author.toString())
-                        .replace("{opponent}", opponent.toString())
+                        .replace("{opponent}", opponent.toString()), 4096)
                 )
                 .setColor(options.colors?.red || options.embed.color);
 
             if (r === "time") {
                 cancelEmbed.setDescription(
-                    options.timeEndMessage
+                    obeyUi.limit(options.timeEndMessage
                         .replace("{challenger}", message.author.toString())
-                        .replace("{opponent}", opponent.toString())
+                        .replace("{opponent}", opponent.toString()), 4096)
                 );
             }
 

@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var radios = require(`../../botconfig/radiostations.json`);
 var { stations, databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
@@ -53,11 +54,11 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: client.user.username,
+                            .setFooter(obeyMeta.asFooter({ text: client.user.username,
                                 iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                     ? es.footericon
                                     : client.user.displayAvatarURL()
-                            })
+                            }))
                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-radio"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-radio"]["variable3"])),
                     ],
@@ -69,11 +70,11 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: client.user.username,
+                            .setFooter(obeyMeta.asFooter({ text: client.user.username,
                                 iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                     ? es.footericon
                                     : client.user.displayAvatarURL()
-                            })
+                            }))
                             .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-radio"]["variable4"]))
                             .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-radio"]["variable5"])),
                     ],
@@ -198,7 +199,7 @@ module.exports = {
             //define an embed
             var embed = new EmbedBuilder()
                 .setColor(es.color)
-                .setFooter(client.getFooter(es))
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                 .setTitle(`Searching: ${emoji?.msg.search}` + song.title);
             try {
                 embed.setURL(song.url);
@@ -210,11 +211,11 @@ module.exports = {
                     .setColor("#7fafe3")
                     .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-radio"]["variable8"]))
                     .setURL(song.url)
-                    .setFooter({ text: client.user.username,
+                    .setFooter(obeyMeta.asFooter({ text: client.user.username,
                         iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                             ? es.footericon
                             : client.user.displayAvatarURL()
-                    })
+                    }))
             );
 
             client.settings.set(message.guild.id, channel.id, `channel`);
@@ -234,7 +235,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-radio"]["variable9"])),
                 ],

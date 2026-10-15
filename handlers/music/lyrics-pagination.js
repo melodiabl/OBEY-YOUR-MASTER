@@ -1,3 +1,5 @@
+const obeyMeta = require("../presentation/metadata")
+const obeyUi = require("../assets/system")
 const { randomUUID } = require('node:crypto')
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require('discord.js')
 
@@ -31,13 +33,13 @@ async function showLyrics(interaction, { text, title = 'Letras', artist = '', is
   const seen = new Set()
   const guildId = interaction.guildId || interaction.guild?.id
   const rows = disabled => [new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId(prefix + 'prev').setLabel('Anterior').setStyle(ButtonStyle.Secondary).setDisabled(disabled || page === 0),
-    new ButtonBuilder().setCustomId(prefix + 'next').setLabel('Siguiente').setStyle(ButtonStyle.Secondary).setDisabled(disabled || page === pages.length - 1),
-    new ButtonBuilder().setCustomId(prefix + 'close').setLabel('Cerrar').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+    new ButtonBuilder().setCustomId(prefix + 'prev').setLabel(obeyUi.plain('Anterior')).setStyle(ButtonStyle.Secondary).setDisabled(disabled || page === 0),
+    new ButtonBuilder().setCustomId(prefix + 'next').setLabel(obeyUi.plain('Siguiente')).setStyle(ButtonStyle.Secondary).setDisabled(disabled || page === pages.length - 1),
+    new ButtonBuilder().setCustomId(prefix + 'close').setLabel(obeyUi.plain('Cerrar')).setStyle(ButtonStyle.Secondary).setDisabled(disabled),
   )]
   const payload = () => ({ content: '', embeds: [new EmbedBuilder().setColor(0x5865F2)
-    .setTitle(paginate(`🎵 ${title}${artist ? ` — ${artist}` : ''}`, 256)[0])
-    .setDescription(pages[page]).setFooter({ text: `Página ${page + 1}/${pages.length}` })], components: pages.length > 1 ? rows(false) : [], allowedMentions })
+    .setTitle(obeyUi.limit(paginate(`${obeyUi.markup("icon.music")} ${title}${artist ? ` — ${artist}` : ''}`, 256)[0], 256))
+    .setDescription(obeyUi.limit(pages[page], 4096)).setFooter(obeyMeta.asFooter({ text: `Página ${page + 1}/${pages.length}` }))], components: pages.length > 1 ? rows(false) : [], allowedMentions })
   const response = await reply(payload())
   const message = response?.createMessageComponentCollector ? response : await interaction.fetchReply()
   if (!isCurrent()) return message.edit({ content: 'La canción cambió. Vuelve a solicitar sus letras.', embeds: [], components: [], allowedMentions })

@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, ChannelType,
     ButtonStyle
 } = require("discord.js");
 var Discord = require("discord.js");
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emojis = require("../../botconfig/emojis.json");
+var emojis = require("../../handlers/assets/legacy-config");
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
@@ -18,12 +20,12 @@ module.exports = {
     memberpermissions: ['Administrador'],
     type: "system",
     run: async (client, message, args, cmduser, text, prefix) => {
-        let theemoji = "📜";
+        let theemoji = obeyUi.owned("📜");
         let melodiaGuild = client.guilds.cache.get("773668217163218944");
         if (melodiaGuild) theemoji = "877653386747605032";
         let allbuttons = [
             new ActionRowBuilder().addComponents([
-                new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(theemoji).setCustomId("User_Apply").setLabel("Apply"),
+                new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(obeyUi.component(theemoji)).setCustomId("User_Apply").setLabel(obeyUi.plain("Apply")),
             ]),
         ];
         let es = client.settings.get(message.guild.id, "embed");
@@ -57,7 +59,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Application System(s)!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Application System(s)!"))
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -76,7 +78,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Application System(s)!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Application System(s)!"))
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -96,7 +98,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Application System(s)!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Application System(s)!"))
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -116,7 +118,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Application System(s)!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Application System(s)!"))
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -133,12 +135,12 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(client.getAuthor(
+                    .setAuthor(obeyMeta.asAuthor(client.getAuthor(
                             "Application Setup",
-                            "https://cdn.discordapp.com/emojis/877653386747605032.png?size=96",
+                            obeyUi.image("icon.document"),
                             "https://github.com/melodiabl"
-                        ))
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                        )))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -168,16 +170,16 @@ module.exports = {
                         second_layer(SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `<a:yes:929001012830806016> **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${obeyUi.markup("icon.success")} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             } catch (e) {
@@ -186,9 +188,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].common.erroroccur)
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable223"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable223"]), 4096)),
                     ],
                 });
             }
@@ -266,83 +268,83 @@ module.exports = {
                     {
                         value: "Create Apply-System",
                         description: `Create/Overwrite the ${SetupNumber} Apply System`,
-                        emoji: "⚙️",
+                        emoji: obeyUi.component("⚙️"),
                     },
                     {
                         value: "Edit Accept Message",
                         description: `Mensaje when a Apply gets accepted`,
-                        emoji: "🛠",
+                        emoji: obeyUi.component("🛠"),
                     },
                     {
                         value: "Edit Deny Message",
                         description: `Mensaje when a Apply gets denied`,
-                        emoji: "🛠",
+                        emoji: obeyUi.component("🛠"),
                     },
                     {
                         value: "Edit Ticket Message",
                         description: `Mensaje when a Apply gets redirected to a Ticket`,
-                        emoji: "🛠",
+                        emoji: obeyUi.component("🛠"),
                     },
                     {
                         value: "Define Accept Role",
                         description: `Rol to add when a Usuario get's accepted`,
-                        emoji: "🔘",
+                        emoji: obeyUi.component("🔘"),
                     },
                     {
                         value: "Define Temp Role",
                         description: `Rol to add when a Usuario applies`,
-                        emoji: "🔘",
+                        emoji: obeyUi.component("🔘"),
                     },
                     {
                         value: "Manage Emoji 1",
                         description: `Manage the Emoji Ajustes for that Emoji`,
-                        emoji: "1️⃣",
+                        emoji: obeyUi.component("1️⃣"),
                     },
                     {
                         value: "Manage Emoji 2",
                         description: `Manage the Emoji Ajustes for that Emoji`,
-                        emoji: "2️⃣",
+                        emoji: obeyUi.component("2️⃣"),
                     },
                     {
                         value: "Manage Emoji 3",
                         description: `Manage the Emoji Ajustes for that Emoji`,
-                        emoji: "3️⃣",
+                        emoji: obeyUi.component("3️⃣"),
                     },
                     {
                         value: "Manage Emoji 4",
                         description: `Manage the Emoji Ajustes for that Emoji`,
-                        emoji: "4️⃣",
+                        emoji: obeyUi.component("4️⃣"),
                     },
                     {
                         value: "Manage Emoji 5",
                         description: `Manage the Emoji Ajustes for that Emoji`,
-                        emoji: "5️⃣",
+                        emoji: obeyUi.component("5️⃣"),
                     },
 
                     {
                         value: "Edit a Question",
                         description: `Edit one of the Questions`,
-                        emoji: "🔴",
+                        emoji: obeyUi.component("🔴"),
                     },
                     {
                         value: "Add a Question",
                         description: `Add a Question to the Questions`,
-                        emoji: "🟣",
+                        emoji: obeyUi.component("🟣"),
                     },
                     {
                         value: "Remove a Question",
                         description: `Remove a Question from the Questions`,
-                        emoji: "🟡",
+                        emoji: obeyUi.component("🟡"),
                     },
                     {
                         value: "Set new Apply-Channel",
                         description: `Canal/Mensaje where the Application starts`,
-                        emoji: "🟢",
+                        emoji: obeyUi.component("🟢"),
                     },
                     {
                         value: "Set new Log-Channel",
                         description: `Canal where the applies are listed`,
-                        emoji: "🔵",
+                        emoji: obeyUi.component("🔵"),
                     },
                     {
                         value: apply_for_here.get(message.guild.id, `${pre}.last_verify`)
@@ -351,12 +353,12 @@ module.exports = {
                         description: apply_for_here.get(message.guild.id, `${pre}.last_verify`)
                             ? "Enabled Last Verification Message for the User"
                             : "Disabled Last Verification Message for the User",
-                        emoji: "✋",
+                        emoji: obeyUi.component("✋"),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ticket-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -365,7 +367,7 @@ module.exports = {
                     .setMaxValues(1)
                     .setMinValues(1)
                     .setPlaceholder(
-                        `Click me to manage the ${SetupNumber} Apply System!\n\n**You've picked:**\n> ${menuoptiondata.value}`
+                        obeyUi.plain(`Click me to manage the ${SetupNumber} Apply System!\n\n**You've picked:**\n> ${menuoptiondata.value}`)
                     )
                     .addOptions(
                         menuoptions.map(option => {
@@ -382,8 +384,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: SetupNumber + " Apply Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: SetupNumber + " Apply Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -406,16 +408,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `<a:yes:929001012830806016> **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${obeyUi.markup("icon.success")} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             } catch (e) {
@@ -424,9 +426,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].common.erroroccur)
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable223"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable223"]), 4096)),
                     ],
                 });
             }
@@ -459,18 +461,18 @@ module.exports = {
                             var desc;
                             var userid = cmduser.id;
                             let row = new ActionRowBuilder().addComponents([
-                                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("1").setEmoji("1️⃣"),
-                                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("2").setEmoji("2️⃣"),
+                                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("1").setEmoji(obeyUi.component("1️⃣")),
+                                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("2").setEmoji(obeyUi.component("2️⃣")),
                             ]);
                             var pickmsg = await message.reply({
                                 components: [row],
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setColor(es.color)
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable6"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable6_1"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable6"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable6_1"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             var collector = pickmsg.createMessageComponentCollector({
@@ -495,19 +497,19 @@ module.exports = {
                                 message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setAuthor({ name: "Setting up...", iconURL: "https://miro.medium.com/max/1600/1*e_Loq49BI4WmN7o9ItTADg.gif" })
-                                            .setFooter(client.getFooter(es)),
+                                            .setAuthor(obeyMeta.asAuthor({ name: "Setting up...", iconURL: "https://miro.medium.com/max/1600/1*e_Loq49BI4WmN7o9ItTADg.gif" }))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 message.guild.channels
-                                    .create("📋 | Applications", {
+                                    .create(obeyUi.owned("📋 | Applications"), {
                                         type: ChannelType.GuildCategory,
                                     })
                                     .then(ch => {
                                         ch.guild.channels
-                                            .create("✔️|finished-applies", {
+                                            .create(obeyUi.owned("✔️|finished-applies"), {
                                                 type: ChannelType.GuildText,
                                                 topic: "React to the Embed, to start the application process",
                                                 parent: ch.id,
@@ -523,7 +525,7 @@ module.exports = {
                                                 apply_for_here.set(ch.guild.id, ch.id, pre + ".f_channel_id");
                                             });
                                         ch.guild.channels
-                                            .create("✅|apply-here", {
+                                            .create(obeyUi.owned("✅|apply-here"), {
                                                 type: ChannelType.GuildText,
                                                 topic: "React to the Embed, to start the application process",
                                                 parent: ch.id,
@@ -541,26 +543,26 @@ module.exports = {
                                             })
                                             .then(ch => {
                                                 var embed = new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(es.color)
-                                                    .setFooter(client.getFooter(es));
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                                                 message
                                                     .reply({
                                                         embeds: [
                                                             embed
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                             "variable9"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                             "variable9_1"
                                                                         ]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     })
@@ -606,17 +608,17 @@ module.exports = {
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-apply"
                                                                                     ]["variable12"]
-                                                                                )
+                                                                                ), 256)
                                                                             )
                                                                             .setColor(es.wrongcolor)
                                                                             .setDescription(
-                                                                                `¡Operación Cancelada!`.substring(0, 2000)
+                                                                                obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                             )
-                                                                            .setFooter(client.getFooter(es)),
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                     ],
                                                                 });
                                                             })
@@ -626,18 +628,18 @@ module.exports = {
                                                                         embeds: [
                                                                             embed
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-apply"
                                                                                         ]["variable13"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-apply"
                                                                                         ]["variable13_1"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 ),
                                                                         ],
                                                                     })
@@ -652,17 +654,17 @@ module.exports = {
                                                                             .then(collected => {
                                                                                 desc = collected.first().content;
                                                                                 var setupembed = new Discord.EmbedBuilder()
-                                                                                    .setFooter(client.getFooter(es))
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                     .setColor(color)
-                                                                                    .setDescription(desc)
+                                                                                    .setDescription(obeyUi.limit(desc, 4096))
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-apply"
                                                                                             ]["variable14"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es));
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                                                                                 ch.send({
                                                                                     embeds: [setupembed],
                                                                                     components: allbuttons,
@@ -697,10 +699,10 @@ module.exports = {
                                                                                         message.reply({
                                                                                             embeds: [
                                                                                                 new Discord.EmbedBuilder()
-                                                                                                    .setFooter(client.getFooter(es)
+                                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))
                                                                                                     )
                                                                                                     .setColor("#ED4245")
-                                                                                                    .setAuthor({ name: "You reached the maximum amount of Questions!", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/cross-mark_274c.png" }),
+                                                                                                    .setAuthor(obeyMeta.asAuthor({ name: "You reached the maximum amount of Questions!", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/cross-mark_274c.png" })),
                                                                                             ],
                                                                                         });
                                                                                         return ask_addrole();
@@ -710,22 +712,22 @@ module.exports = {
                                                                                             embeds: [
                                                                                                 embed
                                                                                                     .setTitle(
-                                                                                                        eval(
+                                                                                                        obeyUi.limit(eval(
                                                                                                             client.la[ls][
                                                                                                                 "cmds"
                                                                                                             ]["setup"][
                                                                                                                 "setup-apply"
                                                                                                             ]["variable16"]
-                                                                                                        )
+                                                                                                        ), 256)
                                                                                                     )
                                                                                                     .setDescription(
-                                                                                                        eval(
+                                                                                                        obeyUi.limit(eval(
                                                                                                             client.la[ls][
                                                                                                                 "cmds"
                                                                                                             ]["setup"][
                                                                                                                 "setup-apply"
                                                                                                             ]["variable17"]
-                                                                                                        )
+                                                                                                        ), 4096)
                                                                                                     ),
                                                                                             ],
                                                                                         })
@@ -1031,7 +1033,7 @@ module.exports = {
                                                                                                         embeds: [
                                                                                                             new Discord.EmbedBuilder()
                                                                                                                 .setTitle(
-                                                                                                                    eval(
+                                                                                                                    obeyUi.limit(eval(
                                                                                                                         client
                                                                                                                             .la[
                                                                                                                             ls
@@ -1044,19 +1046,19 @@ module.exports = {
                                                                                                                         ][
                                                                                                                             "variable18"
                                                                                                                         ]
-                                                                                                                    )
+                                                                                                                    ), 256)
                                                                                                                 )
                                                                                                                 .setColor(
                                                                                                                     es.wrongcolor
                                                                                                                 )
                                                                                                                 .setDescription(
-                                                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                                                         0,
                                                                                                                         2000
-                                                                                                                    )
+                                                                                                                    ), 4096)
                                                                                                                 )
-                                                                                                                .setFooter(client.getFooter(
-                                                                                                                        es)
+                                                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(
+                                                                                                                        es))
                                                                                                                 ),
                                                                                                         ],
                                                                                                     });
@@ -1070,22 +1072,22 @@ module.exports = {
                                                                                             embeds: [
                                                                                                 embed
                                                                                                     .setTitle(
-                                                                                                        eval(
+                                                                                                        obeyUi.limit(eval(
                                                                                                             client.la[ls][
                                                                                                                 "cmds"
                                                                                                             ]["setup"][
                                                                                                                 "setup-apply"
                                                                                                             ]["variable19"]
-                                                                                                        )
+                                                                                                        ), 256)
                                                                                                     )
                                                                                                     .setDescription(
-                                                                                                        eval(
+                                                                                                        obeyUi.limit(eval(
                                                                                                             client.la[ls][
                                                                                                                 "cmds"
                                                                                                             ]["setup"][
                                                                                                                 "setup-apply"
                                                                                                             ]["variable20"]
-                                                                                                        )
+                                                                                                        ), 4096)
                                                                                                     ),
                                                                                             ],
                                                                                         })
@@ -1110,14 +1112,14 @@ module.exports = {
                                                                                                             {
                                                                                                                 embeds: [
                                                                                                                     new Discord.EmbedBuilder()
-                                                                                                                        .setFooter(client.getFooter(
-                                                                                                                                es)
+                                                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
+                                                                                                                                es))
                                                                                                                         )
                                                                                                                         .setColor(
                                                                                                                             es.color
                                                                                                                         )
                                                                                                                         .setTitle(
-                                                                                                                            eval(
+                                                                                                                            obeyUi.limit(eval(
                                                                                                                                 client
                                                                                                                                     .la[
                                                                                                                                     ls
@@ -1130,10 +1132,10 @@ module.exports = {
                                                                                                                                 ][
                                                                                                                                     "variable21"
                                                                                                                                 ]
-                                                                                                                            )
+                                                                                                                            ), 256)
                                                                                                                         )
                                                                                                                         .setDescription(
-                                                                                                                            eval(
+                                                                                                                            obeyUi.limit(eval(
                                                                                                                                 client
                                                                                                                                     .la[
                                                                                                                                     ls
@@ -1146,7 +1148,7 @@ module.exports = {
                                                                                                                                 ][
                                                                                                                                     "variable22"
                                                                                                                                 ]
-                                                                                                                            )
+                                                                                                                            ), 4096)
                                                                                                                         ),
                                                                                                                 ],
                                                                                                             }
@@ -1160,14 +1162,14 @@ module.exports = {
                                                                                                             {
                                                                                                                 embeds: [
                                                                                                                     new Discord.EmbedBuilder()
-                                                                                                                        .setFooter(client.getFooter(
-                                                                                                                                es)
+                                                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
+                                                                                                                                es))
                                                                                                                         )
                                                                                                                         .setColor(
                                                                                                                             es.color
                                                                                                                         )
                                                                                                                         .setTitle(
-                                                                                                                            eval(
+                                                                                                                            obeyUi.limit(eval(
                                                                                                                                 client
                                                                                                                                     .la[
                                                                                                                                     ls
@@ -1180,10 +1182,10 @@ module.exports = {
                                                                                                                                 ][
                                                                                                                                     "variable23"
                                                                                                                                 ]
-                                                                                                                            )
+                                                                                                                            ), 256)
                                                                                                                         )
                                                                                                                         .setDescription(
-                                                                                                                            eval(
+                                                                                                                            obeyUi.limit(eval(
                                                                                                                                 client
                                                                                                                                     .la[
                                                                                                                                     ls
@@ -1196,7 +1198,7 @@ module.exports = {
                                                                                                                                 ][
                                                                                                                                     "variable24"
                                                                                                                                 ]
-                                                                                                                            )
+                                                                                                                            ), 4096)
                                                                                                                         ),
                                                                                                                 ],
                                                                                                             }
@@ -1214,14 +1216,14 @@ module.exports = {
                                                                                                             {
                                                                                                                 embeds: [
                                                                                                                     new Discord.EmbedBuilder()
-                                                                                                                        .setFooter(client.getFooter(
-                                                                                                                                es)
+                                                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
+                                                                                                                                es))
                                                                                                                         )
                                                                                                                         .setColor(
-                                                                                                                            "RED"
+                                                                                                                            "Red"
                                                                                                                         )
                                                                                                                         .setDescription(
-                                                                                                                            eval(
+                                                                                                                            obeyUi.limit(eval(
                                                                                                                                 client
                                                                                                                                     .la[
                                                                                                                                     ls
@@ -1234,12 +1236,12 @@ module.exports = {
                                                                                                                                 ][
                                                                                                                                     "variable25"
                                                                                                                                 ]
-                                                                                                                            )
+                                                                                                                            ), 4096)
                                                                                                                         )
-                                                                                                                        .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL(
+                                                                                                                        .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL(
                                                                                                                                 {
                                                                                                                                 }
-                                                                                                                            ) }),
+                                                                                                                            ) })),
                                                                                                                 ],
                                                                                                             }
                                                                                                         );
@@ -1268,14 +1270,14 @@ module.exports = {
                                                                                                             {
                                                                                                                 embeds: [
                                                                                                                     new Discord.EmbedBuilder()
-                                                                                                                        .setFooter(client.getFooter(
-                                                                                                                                es)
+                                                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(
+                                                                                                                                es))
                                                                                                                         )
                                                                                                                         .setColor(
                                                                                                                             es.color
                                                                                                                         )
                                                                                                                         .setTitle(
-                                                                                                                            eval(
+                                                                                                                            obeyUi.limit(eval(
                                                                                                                                 client
                                                                                                                                     .la[
                                                                                                                                     ls
@@ -1288,10 +1290,10 @@ module.exports = {
                                                                                                                                 ][
                                                                                                                                     "variable27"
                                                                                                                                 ]
-                                                                                                                            )
+                                                                                                                            ), 256)
                                                                                                                         )
                                                                                                                         .setDescription(
-                                                                                                                            eval(
+                                                                                                                            obeyUi.limit(eval(
                                                                                                                                 client
                                                                                                                                     .la[
                                                                                                                                     ls
@@ -1304,7 +1306,7 @@ module.exports = {
                                                                                                                                 ][
                                                                                                                                     "variable28"
                                                                                                                                 ]
-                                                                                                                            )
+                                                                                                                            ), 4096)
                                                                                                                         ),
                                                                                                                 ],
                                                                                                             }
@@ -1318,14 +1320,14 @@ module.exports = {
                                                                                                     return message.reply({
                                                                                                         embeds: [
                                                                                                             new Discord.EmbedBuilder()
-                                                                                                                .setFooter(client.getFooter(
-                                                                                                                        es)
+                                                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(
+                                                                                                                        es))
                                                                                                                 )
                                                                                                                 .setColor(
                                                                                                                     es.color
                                                                                                                 )
                                                                                                                 .setTitle(
-                                                                                                                    eval(
+                                                                                                                    obeyUi.limit(eval(
                                                                                                                         client
                                                                                                                             .la[
                                                                                                                             ls
@@ -1338,10 +1340,10 @@ module.exports = {
                                                                                                                         ][
                                                                                                                             "variable29"
                                                                                                                         ]
-                                                                                                                    )
+                                                                                                                    ), 256)
                                                                                                                 )
                                                                                                                 .setDescription(
-                                                                                                                    eval(
+                                                                                                                    obeyUi.limit(eval(
                                                                                                                         client
                                                                                                                             .la[
                                                                                                                             ls
@@ -1354,7 +1356,7 @@ module.exports = {
                                                                                                                         ][
                                                                                                                             "variable30"
                                                                                                                         ]
-                                                                                                                    )
+                                                                                                                    ), 4096)
                                                                                                                 ),
                                                                                                         ],
                                                                                                     });
@@ -1365,7 +1367,7 @@ module.exports = {
                                                                                                         embeds: [
                                                                                                             new Discord.EmbedBuilder()
                                                                                                                 .setTitle(
-                                                                                                                    eval(
+                                                                                                                    obeyUi.limit(eval(
                                                                                                                         client
                                                                                                                             .la[
                                                                                                                             ls
@@ -1378,19 +1380,19 @@ module.exports = {
                                                                                                                         ][
                                                                                                                             "variable31"
                                                                                                                         ]
-                                                                                                                    )
+                                                                                                                    ), 256)
                                                                                                                 )
                                                                                                                 .setColor(
                                                                                                                     es.wrongcolor
                                                                                                                 )
                                                                                                                 .setDescription(
-                                                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                                                         0,
                                                                                                                         2000
-                                                                                                                    )
+                                                                                                                    ), 4096)
                                                                                                                 )
-                                                                                                                .setFooter(client.getFooter(
-                                                                                                                        es)
+                                                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(
+                                                                                                                        es))
                                                                                                                 ),
                                                                                                         ],
                                                                                                     });
@@ -1404,22 +1406,22 @@ module.exports = {
                                                                                     embeds: [
                                                                                         new Discord.EmbedBuilder()
                                                                                             .setTitle(
-                                                                                                eval(
+                                                                                                obeyUi.limit(eval(
                                                                                                     client.la[ls]["cmds"][
                                                                                                         "setup"
                                                                                                     ]["setup-apply"][
                                                                                                         "variable32"
                                                                                                     ]
-                                                                                                )
+                                                                                                ), 256)
                                                                                             )
                                                                                             .setColor(es.wrongcolor)
                                                                                             .setDescription(
-                                                                                                `¡Operación Cancelada!`.substring(
+                                                                                                obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                                     0,
                                                                                                     2000
-                                                                                                )
+                                                                                                ), 4096)
                                                                                             )
-                                                                                            .setFooter(client.getFooter(es)),
+                                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                     ],
                                                                                 });
                                                                             });
@@ -1437,13 +1439,13 @@ module.exports = {
                                 pickmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable33"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable33"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable33_1"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable33_1"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await pickmsg.channel
@@ -1466,20 +1468,20 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setColor("#ED4245")
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                         "variable34"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setDescription(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                         "variable35"
                                                                     ]
-                                                                )
+                                                                ), 4096)
                                                             ),
                                                     ],
                                                 })
@@ -1488,7 +1490,7 @@ module.exports = {
                                                         timeout: 7500,
                                                     })
                                                 );
-                                            throw "<:no:833101993668771842> ERROR";
+                                            throw obeyUi.owned("<:no:833101993668771842> ERROR");
                                         }
                                     })
                                     .catch(e => {
@@ -1500,11 +1502,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setColor("#ED4245")
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable36"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable36"]), 256)
                                                     )
-                                                    .setDescription(`\`\`\`${errored.message}\`\`\``),
+                                                    .setDescription(obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)),
                                             ],
                                         })
                                         .then(msg =>
@@ -1516,13 +1518,13 @@ module.exports = {
                                 pickmsg = await message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable37"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable37"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable37_1"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable37_1"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 await pickmsg.channel
@@ -1545,20 +1547,20 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setColor("#ED4245")
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                         "variable38"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setDescription(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                         "variable39"
                                                                     ]
-                                                                )
+                                                                ), 4096)
                                                             ),
                                                     ],
                                                 })
@@ -1567,7 +1569,7 @@ module.exports = {
                                                         timeout: 7500,
                                                     })
                                                 );
-                                            throw "<:no:833101993668771842> ERROR";
+                                            throw obeyUi.owned("<:no:833101993668771842> ERROR");
                                         }
                                     })
                                     .catch(e => {
@@ -1579,11 +1581,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setColor("#ED4245")
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable40"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable40"]), 256)
                                                     )
-                                                    .setDescription(`\`\`\`${errored.message}\`\`\``),
+                                                    .setDescription(obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)),
                                             ],
                                         })
                                         .then(msg =>
@@ -1595,24 +1597,24 @@ module.exports = {
                                 message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setAuthor({ name: "Setting up...", iconURL: "https://miro.medium.com/max/1600/1*e_Loq49BI4WmN7o9ItTADg.gif" })
-                                            .setFooter(client.getFooter(es)),
+                                            .setAuthor(obeyMeta.asAuthor({ name: "Setting up...", iconURL: "https://miro.medium.com/max/1600/1*e_Loq49BI4WmN7o9ItTADg.gif" }))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
 
                                 var embed = new Discord.EmbedBuilder()
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es));
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
 
                                 var msg = await message.reply({
                                     embeds: [
                                         embed
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable42"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable42"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable42_1"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable42_1"]), 4096)
                                             ),
                                     ],
                                 });
@@ -1655,11 +1657,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setColor("#ED4245")
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable45"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable45"]), 256)
                                                     )
-                                                    .setDescription(`\`\`\`${errored.message}\`\`\``),
+                                                    .setDescription(obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)),
                                             ],
                                         })
                                         .then(msg =>
@@ -1672,9 +1674,9 @@ module.exports = {
                                     .reply({
                                         embeds: [
                                             embed
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable46"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable46"]), 256))
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable46_1"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable46_1"]), 4096)
                                                 ),
                                         ],
                                     })
@@ -1689,13 +1691,13 @@ module.exports = {
                                             .then(collected => {
                                                 desc = collected.first().content;
                                                 var setupembed = new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(color)
-                                                    .setDescription(desc)
+                                                    .setDescription(obeyUi.limit(desc, 4096))
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable47"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable47"]), 256)
                                                     )
-                                                    .setFooter(client.getFooter(es));
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                                                 message.guild.channels.cache
                                                     .get(applychannel)
                                                     .send({
@@ -1729,9 +1731,9 @@ module.exports = {
                                                         message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#ED4245")
-                                                                    .setAuthor({ name: "You reached the maximum amount of Questions!", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/cross-mark_274c.png" }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "You reached the maximum amount of Questions!", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/cross-mark_274c.png" })),
                                                             ],
                                                         });
 
@@ -1742,18 +1744,18 @@ module.exports = {
                                                             embeds: [
                                                                 embed
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable49"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable50"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     ),
                                                             ],
                                                         })
@@ -2007,16 +2009,16 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setColor("#ED4245")
-                                                                                .setFooter(client.getFooter(es))
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-apply"
                                                                                         ]["variable51"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    `\`\`\`${errored.message}\`\`\``
+                                                                                    obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)
                                                                                 ),
                                                                         ],
                                                                     })
@@ -2034,18 +2036,18 @@ module.exports = {
                                                             embeds: [
                                                                 embed
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable52"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable53"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     ),
                                                             ],
                                                         })
@@ -2062,21 +2064,21 @@ module.exports = {
                                                                         return message.reply({
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
-                                                                                    .setFooter(client.getFooter(es))
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                     .setColor(es.color)
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-apply"
                                                                                             ]["variable54"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setDescription(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-apply"
                                                                                             ]["variable55"]
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     ),
                                                                             ],
                                                                         });
@@ -2086,21 +2088,21 @@ module.exports = {
                                                                         return message.reply({
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
-                                                                                    .setFooter(client.getFooter(es))
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                     .setColor(es.color)
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-apply"
                                                                                             ]["variable56"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setDescription(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-apply"
                                                                                             ]["variable57"]
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     ),
                                                                             ],
                                                                         });
@@ -2110,16 +2112,16 @@ module.exports = {
                                                                         return message.reply({
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
-                                                                                    .setFooter(client.getFooter(es))
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                     .setColor("#ED4245")
                                                                                     .setDescription(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-apply"
                                                                                             ]["variable58"]
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                                    .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                                             ],
                                                                         });
 
@@ -2135,21 +2137,21 @@ module.exports = {
                                                                         return message.reply({
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
-                                                                                    .setFooter(client.getFooter(es))
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                     .setColor(es.color)
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-apply"
                                                                                             ]["variable60"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setDescription(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-apply"
                                                                                             ]["variable61"]
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     ),
                                                                             ],
                                                                         });
@@ -2162,21 +2164,21 @@ module.exports = {
                                                                     return message.reply({
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
-                                                                                .setFooter(client.getFooter(es))
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                 .setColor(es.color)
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-apply"
                                                                                         ]["variable62"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-apply"
                                                                                         ]["variable63"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 ),
                                                                         ],
                                                                     });
@@ -2193,16 +2195,16 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setColor("#ED4245")
-                                                                                .setFooter(client.getFooter(es))
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-apply"
                                                                                         ]["variable64"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    `\`\`\`${errored.message}\`\`\``
+                                                                                    obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)
                                                                                 ),
                                                                         ],
                                                                     })
@@ -2224,15 +2226,15 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setColor("#ED4245")
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                         "variable65"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
-                                                            .setDescription(`\`\`\`${errored.message}\`\`\``),
+                                                            .setDescription(obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)),
                                                     ],
                                                 })
                                                 .then(msg =>
@@ -2250,9 +2252,9 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setAuthor({ name: "What should be the new accept message?", iconURL: message.author.displayAvatarURL() }),
+                                            .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept message?", iconURL: message.author.displayAvatarURL() })),
                                     ],
                                 })
                                 .then(msg => {
@@ -2268,9 +2270,9 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor("#57F287")
-                                                        .setAuthor({ name: "Successfully changed the ACCEPT MESSAGE!", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT MESSAGE!", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             });
                                         })
@@ -2279,11 +2281,11 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable68"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable68"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -2296,9 +2298,9 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted?", iconURL: message.author.displayAvatarURL() }),
+                                            .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted?", iconURL: message.author.displayAvatarURL() })),
                                     ],
                                 })
                                 .then(msg => {
@@ -2323,16 +2325,16 @@ module.exports = {
                                                 return message.reply({
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setColor("#ED4245")
                                                             .setDescription(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                         "variable70"
                                                                     ]
-                                                                )
+                                                                ), 4096)
                                                             )
-                                                            .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                            .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                     ],
                                                 });
 
@@ -2343,21 +2345,21 @@ module.exports = {
                                                 return message.reply({
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setColor("#57F287")
-                                                            .setAuthor({ name: "Successfully changed the ACCEPT ROLE!", iconURL: message.author.displayAvatarURL() }),
+                                                            .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT ROLE!", iconURL: message.author.displayAvatarURL() })),
                                                     ],
                                                 });
                                             }
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor("#ED4245")
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable71"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable71"]), 4096)
                                                         )
-                                                        .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             });
                                         })
@@ -2366,11 +2368,11 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable72"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable72"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -2383,9 +2385,9 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setAuthor({ name: "What should be the new deny message?", iconURL: message.author.displayAvatarURL() }),
+                                            .setAuthor(obeyMeta.asAuthor({ name: "What should be the new deny message?", iconURL: message.author.displayAvatarURL() })),
                                     ],
                                 })
                                 .then(msg => {
@@ -2401,9 +2403,9 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor("#57F287")
-                                                        .setAuthor({ name: "Successfully changed the DENY MESSAGE!", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the DENY MESSAGE!", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             });
                                         })
@@ -2412,11 +2414,11 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable73"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable73"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -2429,9 +2431,9 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setAuthor({ name: "What should be the new Ticket message? | {user} pings the User", iconURL: message.author.displayAvatarURL() }),
+                                            .setAuthor(obeyMeta.asAuthor({ name: "What should be the new Ticket message? | {user} pings the User", iconURL: message.author.displayAvatarURL() })),
                                     ],
                                 })
                                 .then(msg => {
@@ -2447,9 +2449,9 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor("#57F287")
-                                                        .setAuthor({ name: "Successfully changed the TICKET MESSAGE!", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the TICKET MESSAGE!", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             });
                                         })
@@ -2458,11 +2460,11 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable74"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable74"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -2476,31 +2478,31 @@ module.exports = {
                             tempmsg2 = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable75"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable75"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable76"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable76"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             try {
-                                tempmsg2.react("1️⃣");
-                                tempmsg2.react("2️⃣");
-                                tempmsg2.react("3️⃣");
-                                tempmsg2.react("4️⃣");
-                                tempmsg2.react("5️⃣");
+                                tempmsg2.react(obeyUi.reaction("1️⃣"));
+                                tempmsg2.react(obeyUi.reaction("2️⃣"));
+                                tempmsg2.react(obeyUi.reaction("3️⃣"));
+                                tempmsg2.react(obeyUi.reaction("4️⃣"));
+                                tempmsg2.react(obeyUi.reaction("5️⃣"));
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable77"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable77"]), 256))
                                             .setColor("#ED4245")
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable111"]).substring(
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable111"]).substring(
                                                     0,
                                                     2000
-                                                )
+                                                ), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             }
@@ -2514,11 +2516,11 @@ module.exports = {
                                 .then(collected => {
                                     var reaction = collected.first();
                                     reaction.users.remove(cmduser.id);
-                                    if (reaction.emoji?.name === "1️⃣") type = "message";
-                                    else if (reaction.emoji?.name === "2️⃣") type = "setrole";
-                                    else if (reaction.emoji?.name === "3️⃣") type = "delrole";
-                                    else if (reaction.emoji?.name === "4️⃣") type = "delimage";
-                                    else if (reaction.emoji?.name === "5️⃣") type = "setimage";
+                                    if (obeyUi.matchesReaction(reaction.emoji, "1️⃣")) type = "message";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "2️⃣")) type = "setrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "3️⃣")) type = "delrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "4️⃣")) type = "delimage";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "5️⃣")) type = "setimage";
                                     else throw "You reacted with a wrong emoji";
                                 })
                                 .catch(e => {
@@ -2529,10 +2531,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable78"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable78"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             switch (type) {
@@ -2542,9 +2544,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept message for emoji one?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept message for emoji one?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -2564,9 +2566,9 @@ module.exports = {
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#57F287")
-                                                                    .setAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji one!", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji one!", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -2575,17 +2577,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable79"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -2598,9 +2600,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji one?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji one?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -2627,16 +2629,16 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#ED4245")
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable81"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
 
@@ -2647,25 +2649,25 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#57F287")
-                                                                        .setAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji one!", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji one!", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
                                                         }
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#ED4245")
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable82"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -2674,17 +2676,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable83"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -2697,9 +2699,9 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor("#57F287")
-                                                    .setAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji one!", iconURL: message.author.displayAvatarURL() }),
+                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji one!", iconURL: message.author.displayAvatarURL() })),
                                             ],
                                         });
                                     }
@@ -2710,9 +2712,9 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setColor("#57F287")
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable84"])),
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable84"]), 256)),
                                         ],
                                     });
                                 }
@@ -2725,14 +2727,14 @@ module.exports = {
                                                     new Discord.EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable85"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable85"]), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable86"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable86"]), 4096)
                                                         )
-                                                        .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                        .setFooter(obeyMeta.asFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
                                                             iconURL: client.user.displayAvatarURL()
-                                                        })
+                                                        }))
                                                         .setThumbnail(client.user.displayAvatarURL()),
                                                 ],
                                             })
@@ -2760,14 +2762,14 @@ module.exports = {
                                                                 return message.reply({
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
-                                                                            .setFooter(client.getFooter(es))
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                             .setColor("#57F287")
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-apply"
                                                                                     ]["variable87"]
-                                                                                )
+                                                                                ), 256)
                                                                             ),
                                                                     ],
                                                                 });
@@ -2776,14 +2778,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable88"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor("#ED4245")
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         } else if (
@@ -2803,14 +2805,14 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#57F287")
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable89"]
-                                                                            )
+                                                                            ), 256)
                                                                         ),
                                                                 ],
                                                             });
@@ -2819,14 +2821,14 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable90"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor("#ED4245")
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
 
@@ -2853,13 +2855,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable91"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable91"]), 256)
                                                     )
                                                     .setColor("#ED4245")
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable130"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable130"]), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -2874,31 +2876,31 @@ module.exports = {
                             tempmsg2 = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable93"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable93"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable94"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable94"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             try {
-                                tempmsg2.react("1️⃣");
-                                tempmsg2.react("2️⃣");
-                                tempmsg2.react("3️⃣");
-                                tempmsg2.react("4️⃣");
-                                tempmsg2.react("5️⃣");
+                                tempmsg2.react(obeyUi.reaction("1️⃣"));
+                                tempmsg2.react(obeyUi.reaction("2️⃣"));
+                                tempmsg2.react(obeyUi.reaction("3️⃣"));
+                                tempmsg2.react(obeyUi.reaction("4️⃣"));
+                                tempmsg2.react(obeyUi.reaction("5️⃣"));
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable95"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable95"]), 256))
                                             .setColor("#ED4245")
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable151"]).substring(
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable151"]).substring(
                                                     0,
                                                     2000
-                                                )
+                                                ), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             }
@@ -2912,11 +2914,11 @@ module.exports = {
                                 .then(collected => {
                                     var reaction = collected.first();
                                     reaction.users.remove(cmduser.id);
-                                    if (reaction.emoji?.name === "1️⃣") type = "message";
-                                    else if (reaction.emoji?.name === "2️⃣") type = "setrole";
-                                    else if (reaction.emoji?.name === "3️⃣") type = "delrole";
-                                    else if (reaction.emoji?.name === "4️⃣") type = "delimage";
-                                    else if (reaction.emoji?.name === "5️⃣") type = "setimage";
+                                    if (obeyUi.matchesReaction(reaction.emoji, "1️⃣")) type = "message";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "2️⃣")) type = "setrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "3️⃣")) type = "delrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "4️⃣")) type = "delimage";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "5️⃣")) type = "setimage";
                                     else throw "You reacted with a wrong emoji";
                                 })
                                 .catch(e => {
@@ -2927,10 +2929,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable96"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable96"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             switch (type) {
@@ -2940,9 +2942,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept message for emoji two?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept message for emoji two?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -2962,9 +2964,9 @@ module.exports = {
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#57F287")
-                                                                    .setAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji two!", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji two!", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -2973,17 +2975,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable97"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -2996,9 +2998,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji two?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji two?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -3015,21 +3017,21 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor(es.color)
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable98"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable99"]
-                                                                            )
+                                                                            ), 4096)
                                                                         ),
                                                                 ],
                                                             });
@@ -3039,16 +3041,16 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#ED4245")
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable100"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
 
@@ -3059,25 +3061,25 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#57F287")
-                                                                        .setAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji two!", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji two!", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
                                                         }
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#ED4245")
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable101"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -3086,17 +3088,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable102"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -3109,9 +3111,9 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor("#57F287")
-                                                    .setAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji two!", iconURL: message.author.displayAvatarURL() }),
+                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji two!", iconURL: message.author.displayAvatarURL() })),
                                             ],
                                         });
                                     }
@@ -3123,10 +3125,10 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor("#57F287")
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable103"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable103"]), 256)
                                                     ),
                                             ],
                                         });
@@ -3142,22 +3144,22 @@ module.exports = {
                                                         new Discord.EmbedBuilder()
                                                             .setColor(es.color)
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                         "variable104"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setDescription(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                         "variable105"
                                                                     ]
-                                                                )
+                                                                ), 4096)
                                                             )
-                                                            .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                            .setFooter(obeyMeta.asFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
                                                                 iconURL: client.user.displayAvatarURL()
-                                                            })
+                                                            }))
                                                             .setThumbnail(client.user.displayAvatarURL()),
                                                     ],
                                                 })
@@ -3185,14 +3187,14 @@ module.exports = {
                                                                     return message.reply({
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
-                                                                                .setFooter(client.getFooter(es))
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                                 .setColor("#57F287")
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-apply"
                                                                                         ]["variable106"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 ),
                                                                         ],
                                                                     });
@@ -3201,14 +3203,14 @@ module.exports = {
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-apply"
                                                                                     ]["variable107"]
-                                                                                )
+                                                                                ), 256)
                                                                             )
                                                                             .setColor("#ED4245")
-                                                                            .setFooter(client.getFooter(es)),
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                     ],
                                                                 });
                                                             } else if (
@@ -3228,14 +3230,14 @@ module.exports = {
                                                                 return message.reply({
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
-                                                                            .setFooter(client.getFooter(es))
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                             .setColor("#57F287")
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-apply"
                                                                                     ]["variable108"]
-                                                                                )
+                                                                                ), 256)
                                                                             ),
                                                                     ],
                                                                 });
@@ -3244,14 +3246,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable109"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor("#ED4245")
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
 
@@ -3289,17 +3291,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable110"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor("#ED4245")
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable171"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -3315,31 +3317,31 @@ module.exports = {
                             tempmsg2 = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable112"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable112"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable113"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable113"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             try {
-                                tempmsg2.react("1️⃣");
-                                tempmsg2.react("2️⃣");
-                                tempmsg2.react("3️⃣");
-                                tempmsg2.react("4️⃣");
-                                tempmsg2.react("5️⃣");
+                                tempmsg2.react(obeyUi.reaction("1️⃣"));
+                                tempmsg2.react(obeyUi.reaction("2️⃣"));
+                                tempmsg2.react(obeyUi.reaction("3️⃣"));
+                                tempmsg2.react(obeyUi.reaction("4️⃣"));
+                                tempmsg2.react(obeyUi.reaction("5️⃣"));
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable114"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable114"]), 256))
                                             .setColor("#ED4245")
                                             .setDescription(
-                                                `\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``.substring(
+                                                obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``.substring(
                                                     0,
                                                     2000
-                                                )
+                                                ), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             }
@@ -3353,11 +3355,11 @@ module.exports = {
                                 .then(collected => {
                                     var reaction = collected.first();
                                     reaction.users.remove(cmduser.id);
-                                    if (reaction.emoji?.name === "1️⃣") type = "message";
-                                    else if (reaction.emoji?.name === "2️⃣") type = "setrole";
-                                    else if (reaction.emoji?.name === "3️⃣") type = "delrole";
-                                    else if (reaction.emoji?.name === "4️⃣") type = "delimage";
-                                    else if (reaction.emoji?.name === "5️⃣") type = "setimage";
+                                    if (obeyUi.matchesReaction(reaction.emoji, "1️⃣")) type = "message";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "2️⃣")) type = "setrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "3️⃣")) type = "delrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "4️⃣")) type = "delimage";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "5️⃣")) type = "setimage";
                                     else throw "You reacted with a wrong emoji";
                                 })
                                 .catch(e => {
@@ -3368,10 +3370,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable115"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable115"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             switch (type) {
@@ -3381,9 +3383,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept message for emoji three?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept message for emoji three?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -3403,9 +3405,9 @@ module.exports = {
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#57F287")
-                                                                    .setAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji three!", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji three!", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -3414,17 +3416,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable116"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -3437,9 +3439,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji three?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji three?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -3456,21 +3458,21 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor(es.color)
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable117"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable118"]
-                                                                            )
+                                                                            ), 4096)
                                                                         ),
                                                                 ],
                                                             });
@@ -3480,16 +3482,16 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#ED4245")
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable119"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
 
@@ -3504,25 +3506,25 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#57F287")
-                                                                        .setAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji three!", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji three!", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
                                                         }
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#ED4245")
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable120"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -3531,17 +3533,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable121"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -3554,9 +3556,9 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor("#57F287")
-                                                    .setAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji three!", iconURL: message.author.displayAvatarURL() }),
+                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji three!", iconURL: message.author.displayAvatarURL() })),
                                             ],
                                         });
                                     }
@@ -3567,10 +3569,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setColor("#57F287")
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable122"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable122"]), 256)
                                                 ),
                                         ],
                                     });
@@ -3584,18 +3586,18 @@ module.exports = {
                                                     new Discord.EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable123"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable124"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                        .setFooter(obeyMeta.asFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
                                                             iconURL: client.user.displayAvatarURL()
-                                                        })
+                                                        }))
                                                         .setThumbnail(client.user.displayAvatarURL()),
                                                 ],
                                             })
@@ -3623,14 +3625,14 @@ module.exports = {
                                                                 return message.reply({
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
-                                                                            .setFooter(client.getFooter(es))
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                             .setColor("#57F287")
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-apply"
                                                                                     ]["variable125"]
-                                                                                )
+                                                                                ), 256)
                                                                             ),
                                                                     ],
                                                                 });
@@ -3639,14 +3641,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable126"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor("#ED4245")
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         } else if (
@@ -3666,14 +3668,14 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#57F287")
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable127"]
-                                                                            )
+                                                                            ), 256)
                                                                         ),
                                                                 ],
                                                             });
@@ -3682,14 +3684,14 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable128"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor("#ED4245")
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
 
@@ -3716,13 +3718,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable129"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable129"]), 256)
                                                     )
                                                     .setColor("#ED4245")
                                                     .setDescription(
-                                                        `\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``
+                                                        obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``, 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -3733,9 +3735,9 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setColor("#ED4245")
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable131"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable131"]), 256))
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable132"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable132"]), 4096)
                                                 ),
                                         ],
                                     });
@@ -3750,31 +3752,31 @@ module.exports = {
                             tempmsg2 = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable133"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable133"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable134"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable134"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             try {
-                                tempmsg2.react("1️⃣");
-                                tempmsg2.react("2️⃣");
-                                tempmsg2.react("3️⃣");
-                                tempmsg2.react("4️⃣");
-                                tempmsg2.react("5️⃣");
+                                tempmsg2.react(obeyUi.reaction("1️⃣"));
+                                tempmsg2.react(obeyUi.reaction("2️⃣"));
+                                tempmsg2.react(obeyUi.reaction("3️⃣"));
+                                tempmsg2.react(obeyUi.reaction("4️⃣"));
+                                tempmsg2.react(obeyUi.reaction("5️⃣"));
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable135"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable135"]), 256))
                                             .setColor("#ED4245")
                                             .setDescription(
-                                                `\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``.substring(
+                                                obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``.substring(
                                                     0,
                                                     2000
-                                                )
+                                                ), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             }
@@ -3788,11 +3790,11 @@ module.exports = {
                                 .then(collected => {
                                     var reaction = collected.first();
                                     reaction.users.remove(cmduser.id);
-                                    if (reaction.emoji?.name === "1️⃣") type = "message";
-                                    else if (reaction.emoji?.name === "2️⃣") type = "setrole";
-                                    else if (reaction.emoji?.name === "3️⃣") type = "delrole";
-                                    else if (reaction.emoji?.name === "4️⃣") type = "delimage";
-                                    else if (reaction.emoji?.name === "5️⃣") type = "setimage";
+                                    if (obeyUi.matchesReaction(reaction.emoji, "1️⃣")) type = "message";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "2️⃣")) type = "setrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "3️⃣")) type = "delrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "4️⃣")) type = "delimage";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "5️⃣")) type = "setimage";
                                     else throw "You reacted with a wrong emoji";
                                 })
                                 .catch(e => {
@@ -3803,10 +3805,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable136"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable136"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             switch (type) {
@@ -3816,9 +3818,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept message for emoji four?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept message for emoji four?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -3838,9 +3840,9 @@ module.exports = {
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#57F287")
-                                                                    .setAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji four!", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji four!", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -3849,17 +3851,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable137"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -3872,9 +3874,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji four?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji four?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -3891,21 +3893,21 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor(es.color)
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable138"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable139"]
-                                                                            )
+                                                                            ), 4096)
                                                                         ),
                                                                 ],
                                                             });
@@ -3915,16 +3917,16 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#ED4245")
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable140"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
 
@@ -3939,25 +3941,25 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#57F287")
-                                                                        .setAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji four!", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji four!", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
                                                         }
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#ED4245")
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable141"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -3966,17 +3968,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable142"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -3989,9 +3991,9 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor("#57F287")
-                                                    .setAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji four!", iconURL: message.author.displayAvatarURL() }),
+                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji four!", iconURL: message.author.displayAvatarURL() })),
                                             ],
                                         });
                                     }
@@ -4002,10 +4004,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setColor("#57F287")
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable143"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable143"]), 256)
                                                 ),
                                         ],
                                     });
@@ -4019,18 +4021,18 @@ module.exports = {
                                                     new Discord.EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable144"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable145"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                        .setFooter(obeyMeta.asFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
                                                             iconURL: client.user.displayAvatarURL()
-                                                        })
+                                                        }))
                                                         .setThumbnail(client.user.displayAvatarURL()),
                                                 ],
                                             })
@@ -4058,14 +4060,14 @@ module.exports = {
                                                                 return message.reply({
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
-                                                                            .setFooter(client.getFooter(es))
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                             .setColor("#57F287")
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-apply"
                                                                                     ]["variable146"]
-                                                                                )
+                                                                                ), 256)
                                                                             ),
                                                                     ],
                                                                 });
@@ -4074,14 +4076,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable147"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor("#ED4245")
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         } else if (
@@ -4101,14 +4103,14 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#57F287")
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable148"]
-                                                                            )
+                                                                            ), 256)
                                                                         ),
                                                                 ],
                                                             });
@@ -4117,14 +4119,14 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable149"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor("#ED4245")
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
 
@@ -4151,13 +4153,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable150"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable150"]), 256)
                                                     )
                                                     .setColor("#ED4245")
                                                     .setDescription(
-                                                        `\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``
+                                                        obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``, 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -4168,9 +4170,9 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setColor("#ED4245")
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable152"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable152"]), 256))
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable153"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable153"]), 4096)
                                                 ),
                                         ],
                                     });
@@ -4186,31 +4188,31 @@ module.exports = {
                             tempmsg2 = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable154"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable154"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable155"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable155"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             try {
-                                tempmsg2.react("1️⃣");
-                                tempmsg2.react("2️⃣");
-                                tempmsg2.react("3️⃣");
-                                tempmsg2.react("4️⃣");
-                                tempmsg2.react("5️⃣");
+                                tempmsg2.react(obeyUi.reaction("1️⃣"));
+                                tempmsg2.react(obeyUi.reaction("2️⃣"));
+                                tempmsg2.react(obeyUi.reaction("3️⃣"));
+                                tempmsg2.react(obeyUi.reaction("4️⃣"));
+                                tempmsg2.react(obeyUi.reaction("5️⃣"));
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable156"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable156"]), 256))
                                             .setColor("#ED4245")
                                             .setDescription(
-                                                `\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``.substring(
+                                                obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``.substring(
                                                     0,
                                                     2000
-                                                )
+                                                ), 4096)
                                             )
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             }
@@ -4224,11 +4226,11 @@ module.exports = {
                                 .then(collected => {
                                     var reaction = collected.first();
                                     reaction.users.remove(cmduser.id);
-                                    if (reaction.emoji?.name === "1️⃣") type = "message";
-                                    else if (reaction.emoji?.name === "2️⃣") type = "setrole";
-                                    else if (reaction.emoji?.name === "3️⃣") type = "delrole";
-                                    else if (reaction.emoji?.name === "4️⃣") type = "delimage";
-                                    else if (reaction.emoji?.name === "5️⃣") type = "setimage";
+                                    if (obeyUi.matchesReaction(reaction.emoji, "1️⃣")) type = "message";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "2️⃣")) type = "setrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "3️⃣")) type = "delrole";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "4️⃣")) type = "delimage";
+                                    else if (obeyUi.matchesReaction(reaction.emoji, "5️⃣")) type = "setimage";
                                     else throw "You reacted with a wrong emoji";
                                 })
                                 .catch(e => {
@@ -4239,10 +4241,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable157"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable157"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             switch (type) {
@@ -4252,9 +4254,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept message for emoji five?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept message for emoji five?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -4274,9 +4276,9 @@ module.exports = {
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#57F287")
-                                                                    .setAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji five!", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT MESSAGE for emoji five!", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -4285,17 +4287,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable158"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -4308,9 +4310,9 @@ module.exports = {
                                             .reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
-                                                        .setAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji five?", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "What should be the new accept Role, which will be granted when the User got accepted for emoji five?", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             })
                                             .then(msg => {
@@ -4327,21 +4329,21 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor(es.color)
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable159"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable160"]
-                                                                            )
+                                                                            ), 4096)
                                                                         ),
                                                                 ],
                                                             });
@@ -4351,16 +4353,16 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#ED4245")
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable161"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
 
@@ -4375,25 +4377,25 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor("#57F287")
-                                                                        .setAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji five!", iconURL: message.author.displayAvatarURL() }),
+                                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the ACCEPT ROLE for emoji five!", iconURL: message.author.displayAvatarURL() })),
                                                                 ],
                                                             });
                                                         }
                                                         return message.reply({
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor("#ED4245")
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable162"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                                    .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                             ],
                                                         });
                                                     })
@@ -4402,17 +4404,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable163"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -4425,9 +4427,9 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor("#57F287")
-                                                    .setAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji five!", iconURL: message.author.displayAvatarURL() }),
+                                                    .setAuthor(obeyMeta.asAuthor({ name: "Successfully deleted the ACCEPT ROLE for emoji five!", iconURL: message.author.displayAvatarURL() })),
                                             ],
                                         });
                                     }
@@ -4438,9 +4440,9 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setColor("#57F287")
-                                                .setAuthor({ name: "Successfully deleted the ACCEPT IMAGE for emoji five!", iconURL: message.author.displayAvatarURL() }),
+                                                .setAuthor(obeyMeta.asAuthor({ name: "Successfully deleted the ACCEPT IMAGE for emoji five!", iconURL: message.author.displayAvatarURL() })),
                                         ],
                                     });
                                 }
@@ -4453,18 +4455,18 @@ module.exports = {
                                                     new Discord.EmbedBuilder()
                                                         .setColor(es.color)
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable164"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable165"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
+                                                        .setFooter(obeyMeta.asFooter({ text: "Pick the INDEX NUMBER / send the IMAGE URl",
                                                             iconURL: client.user.displayAvatarURL()
-                                                        })
+                                                        }))
                                                         .setThumbnail(client.user.displayAvatarURL()),
                                                 ],
                                             })
@@ -4492,15 +4494,15 @@ module.exports = {
                                                                 return message.reply({
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
-                                                                            .setFooter(client.getFooter(es))
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
                                                                             .setColor("#57F287")
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-apply"
                                                                                     ]["variable166"]
-                                                                                )
+                                                                                ), 256)
                                                                             ),
                                                                     ],
                                                                 });
@@ -4509,14 +4511,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable167"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor("#ED4245")
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         } else if (
@@ -4536,15 +4538,15 @@ module.exports = {
                                                             return message.reply({
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
                                                                         .setColor("#57F287")
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-apply"
                                                                                 ]["variable168"]
-                                                                            )
+                                                                            ), 256)
                                                                         ),
                                                                 ],
                                                             });
@@ -4553,14 +4555,14 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable169"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor("#ED4245")
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
 
@@ -4587,13 +4589,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable170"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable170"]), 256)
                                                     )
                                                     .setColor("#ED4245")
                                                     .setDescription(
-                                                        `\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``
+                                                        obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``, 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -4604,9 +4606,9 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setColor("#ED4245")
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable172"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable172"]), 256))
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable173"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable173"]), 4096)
                                                 ),
                                         ],
                                     });
@@ -4618,13 +4620,13 @@ module.exports = {
                         {
                             var Questions = apply_for_here.get(message.guild.id, pre + ".QUESTIONS");
                             var embed = new Discord.EmbedBuilder()
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
                                 .setColor(es.color)
-                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable174"])) //Melodia
-                                .setFooter({ text: "ADD THE INDEX TO EDIT THE MSG",
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable174"]), 256)) //Melodia
+                                .setFooter(obeyMeta.asFooter({ text: "ADD THE INDEX TO EDIT THE MSG",
                                     iconURL: message.guild.iconURL()
-                                })
+                                }))
                                 .setTimestamp();
 
                             for (var i = 0; i < Questions.length; i++) {
@@ -4640,11 +4642,11 @@ module.exports = {
                                     embeds: [
                                         embed,
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable175"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable175"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable176"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable176"]), 4096)
                                             ),
                                     ],
                                 })
@@ -4664,9 +4666,9 @@ module.exports = {
                                                     .reply({
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setColor(es.color)
-                                                                .setAuthor({ name: "What should be the new Question?", iconURL: message.author.displayAvatarURL() }),
+                                                                .setAuthor(obeyMeta.asAuthor({ name: "What should be the new Question?", iconURL: message.author.displayAvatarURL() })),
                                                         ],
                                                     })
                                                     .then(msg => {
@@ -4813,18 +4815,18 @@ module.exports = {
                                                                     pre + ".QUESTIONS"
                                                                 );
                                                                 var new_embed = new Discord.EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor(es.color)
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-apply"][
                                                                                 "variable177"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     ) //Melodia
-                                                                    .setFooter({ text: message.guild.name,
+                                                                    .setFooter(obeyMeta.asFooter({ text: message.guild.name,
                                                                         iconURL: message.guild.iconURL()
-                                                                    })
+                                                                    }))
                                                                     .setTimestamp();
                                                                 for (var i = 0; i < Questions.length; i++) {
                                                                     try {
@@ -4840,17 +4842,17 @@ module.exports = {
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-apply"
                                                                                     ]["variable178"]
-                                                                                )
+                                                                                ), 256)
                                                                             )
                                                                             .setColor(es.wrongcolor)
                                                                             .setDescription(
-                                                                                `¡Operación Cancelada!`.substring(0, 2000)
+                                                                                obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                             )
-                                                                            .setFooter(client.getFooter(es)),
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                     ],
                                                                 });
                                                             });
@@ -4859,9 +4861,9 @@ module.exports = {
                                                 message.reply({
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setColor("#ED4245")
-                                                            .setAuthor({ name: "It seems, that this Question does not exist! Please retry! Here are all Questions:", iconURL: message.author.displayAvatarURL() }),
+                                                            .setAuthor(obeyMeta.asAuthor({ name: "It seems, that this Question does not exist! Please retry! Here are all Questions:", iconURL: message.author.displayAvatarURL() })),
                                                     ],
                                                 });
                                                 return message.reply({
@@ -4874,13 +4876,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable179"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -4892,10 +4894,10 @@ module.exports = {
                             .reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setColor(es.color)
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable180"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable181"])),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable180"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable181"]), 4096)),
                                 ],
                             })
                             .then(msg => {
@@ -4918,14 +4920,14 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor("#ED4245")
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable183"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             });
 
@@ -4936,21 +4938,21 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor("#57F287")
-                                                        .setAuthor({ name: "Successfully changed the TEMP ROLE!", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully changed the TEMP ROLE!", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             });
                                         }
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor("#ED4245")
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable184"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable184"]), 4096)
                                                     )
-                                                    .setAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() }),
+                                                    .setAuthor(obeyMeta.asAuthor({ name: "<:no:833101993668771842> ERROR | Could not Access the Role", iconURL: message.author.displayAvatarURL() })),
                                             ],
                                         });
                                     })
@@ -4959,11 +4961,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable185"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable185"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -4975,11 +4977,11 @@ module.exports = {
                                 .reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable186"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable186"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable187"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable187"]), 4096)
                                             ),
                                     ],
                                 })
@@ -5120,19 +5122,19 @@ module.exports = {
                                             message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor("#57F287")
-                                                        .setAuthor({ name: "Successfully added your Question!", iconURL: message.author.displayAvatarURL() }),
+                                                        .setAuthor(obeyMeta.asAuthor({ name: "Successfully added your Question!", iconURL: message.author.displayAvatarURL() })),
                                                 ],
                                             });
                                             Questions = apply_for_here.get(message.guild.id, pre + ".QUESTIONS");
                                             var embed = new Discord.EmbedBuilder()
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setColor(es.color)
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable188"])) //Melodia
-                                                .setFooter({ text: message.guild.name,
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable188"]), 256)) //Melodia
+                                                .setFooter(obeyMeta.asFooter({ text: message.guild.name,
                                                     iconURL: message.guild.iconURL()
-                                                })
+                                                }))
                                                 .setTimestamp();
 
                                             for (var i = 0; i < Questions.length; i++) {
@@ -5151,13 +5153,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable189"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -5168,13 +5170,13 @@ module.exports = {
                         {
                             var Questions = apply_for_here.get(message.guild.id, pre + ".QUESTIONS");
                             var embed = new Discord.EmbedBuilder()
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
                                 .setColor(es.color)
-                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable190"])) //Melodia
-                                .setFooter({ text: "ADD THE INDEX TO EDIT THE MSG",
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable190"]), 256)) //Melodia
+                                .setFooter(obeyMeta.asFooter({ text: "ADD THE INDEX TO EDIT THE MSG",
                                     iconURL: message.guild.iconURL()
-                                })
+                                }))
                                 .setTimestamp();
 
                             for (var i = 0; i < Questions.length; i++) {
@@ -5190,12 +5192,12 @@ module.exports = {
                                     embeds: [
                                         embed,
                                         new Discord.EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
                                             .setColor(es.color)
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable191"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable191"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable192"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable192"]), 4096)
                                             ),
                                     ],
                                 })
@@ -5233,14 +5235,14 @@ module.exports = {
                                                 apply_for_here.set(message.guild.id, arr, pre + ".QUESTIONS");
                                                 Questions = apply_for_here.get(message.guild.id, pre + ".QUESTIONS");
                                                 var new_embed = new Discord.EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(es.color)
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable193"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable193"]), 256)
                                                     ) //Melodia
-                                                    .setFooter({ text: message.guild.name,
+                                                    .setFooter(obeyMeta.asFooter({ text: message.guild.name,
                                                         iconURL: message.guild.iconURL()
-                                                    })
+                                                    }))
                                                     .setTimestamp();
                                                 for (var i = 0; i < Questions.length; i++) {
                                                     try {
@@ -5254,9 +5256,9 @@ module.exports = {
                                                 message.reply({
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setColor("#ED4245")
-                                                            .setAuthor({ name: "It seems, that this Question does not exist! Please retry! Here are all Questions:", iconURL: message.author.displayAvatarURL() }),
+                                                            .setAuthor(obeyMeta.asAuthor({ name: "It seems, that this Question does not exist! Please retry! Here are all Questions:", iconURL: message.author.displayAvatarURL() })),
                                                     ],
                                                 });
                                                 return message.reply({
@@ -5269,13 +5271,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable194"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -5291,11 +5293,11 @@ module.exports = {
                             pickmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
                                         .setColor(es.color)
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable195"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable196"])),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable195"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable196"]), 4096)),
                                 ],
                             });
 
@@ -5319,16 +5321,16 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setColor("#ED4245")
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable197"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable198"]
-                                                            )
+                                                            ), 4096)
                                                         ),
                                                 ],
                                             })
@@ -5337,7 +5339,7 @@ module.exports = {
                                                     timeout: 7500,
                                                 })
                                             );
-                                        throw "<:no:833101993668771842> ERROR";
+                                        throw obeyUi.owned("<:no:833101993668771842> ERROR");
                                     }
                                 })
                                 .catch(e => {
@@ -5349,9 +5351,9 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setColor("#ED4245")
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable199"]))
-                                                .setDescription(`\`\`\`${errored.message}\`\`\``),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable199"]), 256))
+                                                .setDescription(obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)),
                                         ],
                                     })
                                     .then(msg =>
@@ -5363,22 +5365,22 @@ module.exports = {
                             message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setColor(es.color)
-                                        .setAuthor({ name: "Setting up...", iconURL: "https://miro.medium.com/max/1600/1*e_Loq49BI4WmN7o9ItTADg.gif" })
-                                        .setFooter(client.getFooter(es)),
+                                        .setAuthor(obeyMeta.asAuthor({ name: "Setting up...", iconURL: "https://miro.medium.com/max/1600/1*e_Loq49BI4WmN7o9ItTADg.gif" }))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             var embed = new Discord.EmbedBuilder()
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setColor(es.color)
-                                .setFooter(client.getFooter(es));
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                             var msg = await message.reply({
                                 embeds: [
                                     embed
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable201"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable201"]), 256))
                                         .setDescription(
-                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable201_1"])
+                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable201_1"]), 4096)
                                         ),
                                 ],
                             });
@@ -5419,9 +5421,9 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setColor("#ED4245")
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable204"]))
-                                                .setDescription(`\`\`\`${errored.message}\`\`\``),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable204"]), 256))
+                                                .setDescription(obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)),
                                         ],
                                     })
                                     .then(msg =>
@@ -5433,9 +5435,9 @@ module.exports = {
                             await message.reply({
                                 embeds: [
                                     embed
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable205"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable205"]), 256))
                                         .setDescription(
-                                            eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable205_1"])
+                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable205_1"]), 4096)
                                         ),
                                 ],
                             });
@@ -5449,11 +5451,11 @@ module.exports = {
                                 .then(collected => {
                                     desc = collected.first().content;
                                     var setupembed = new Discord.EmbedBuilder()
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setColor(color)
-                                        .setDescription(desc)
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable206"]))
-                                        .setFooter(client.getFooter(es));
+                                        .setDescription(obeyUi.limit(desc, 4096))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable206"]), 256))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)));
 
                                     message.guild.channels.cache
                                         .get(applychannel)
@@ -5470,11 +5472,11 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setColor(es.color)
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable207"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable207"]), 256))
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable208"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable208"]), 4096)
                                                 ),
                                         ],
                                     });
@@ -5488,9 +5490,9 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setColor("#ED4245")
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable209"]))
-                                                .setDescription(`\`\`\`${errored.message}\`\`\``),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable209"]), 256))
+                                                .setDescription(obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)),
                                         ],
                                     })
                                     .then(msg =>
@@ -5505,10 +5507,10 @@ module.exports = {
                                     embeds: [
                                         new Discord.EmbedBuilder()
                                             .setColor("#ED4245")
-                                            .setFooter(client.getFooter(es))
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable210"]))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable210"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable211"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable211"]), 4096)
                                             ),
                                     ],
                                 })
@@ -5528,11 +5530,11 @@ module.exports = {
                             pickmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setColor(es.color)
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable212"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable212_1"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable212"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable212_1"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
 
@@ -5556,16 +5558,16 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setColor("#ED4245")
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable213"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-apply"]["variable214"]
-                                                            )
+                                                            ), 4096)
                                                         ),
                                                 ],
                                             })
@@ -5574,7 +5576,7 @@ module.exports = {
                                                     timeout: 7500,
                                                 })
                                             );
-                                        throw "<:no:833101993668771842> ERROR";
+                                        throw obeyUi.owned("<:no:833101993668771842> ERROR");
                                     }
                                 })
                                 .catch(e => {
@@ -5586,9 +5588,9 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setColor("#ED4245")
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable215"]))
-                                                .setDescription(`\`\`\`${errored.message}\`\`\``),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable215"]), 256))
+                                                .setDescription(obeyUi.limit(`\`\`\`${errored.message}\`\`\``, 4096)),
                                         ],
                                     })
                                     .then(msg =>
@@ -5607,10 +5609,10 @@ module.exports = {
                                     embeds: [
                                         new Discord.EmbedBuilder()
                                             .setColor("#ED4245")
-                                            .setFooter(client.getFooter(es))
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable217"]))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable217"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable218"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable218"]), 4096)
                                             ),
                                     ],
                                 })
@@ -5629,10 +5631,10 @@ module.exports = {
                                 `${pre}.last_verify`
                             );
                             var embed = new Discord.EmbedBuilder()
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setColor(es.color)
-                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable219"])) //Melodia
-                                .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable220"])) //Melodia
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable219"]), 256)) //Melodia
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable220"]), 4096)) //Melodia
                                 .setTimestamp();
                             message.reply({
                                 embeds: [embed],
@@ -5646,9 +5648,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].common.erroroccur)
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable223"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-apply"]["variable223"]), 4096)),
                     ],
                 });
             }

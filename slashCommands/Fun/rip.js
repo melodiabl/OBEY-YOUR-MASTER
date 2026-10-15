@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js')
 const Canvas = require('@napi-rs/canvas')
 
@@ -62,7 +63,7 @@ async function buildRip(avatarURL, username) {
 
 module.exports = {
   name: 'rip',
-  description: 'Que descanse en paz un usuario 💀',
+  description: obeyUi.owned('Que descanse en paz un usuario 💀'),
   options: [
     { User: { name: 'usuario', description: 'Usuario (por defecto tú)', required: false } },
   ],
@@ -70,7 +71,7 @@ module.exports = {
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'FUN'))
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de diversión no está activado.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de diversión no está activado.'), 4096))],
         ephemeral: true,
       })
 
@@ -83,14 +84,14 @@ module.exports = {
       await interaction.editReply({
         embeds: [
           new EmbedBuilder().setColor(0x808080)
-            .setDescription(`*${user.username} descansa en paz* 🪦`)
+            .setDescription(obeyUi.limit(`*${user.username} descansa en paz* 🪦`, 4096))
             .setImage('attachment://rip.png'),
         ],
         files: [new AttachmentBuilder(buffer, { name: 'rip.png' })],
       })
     } catch {
       await interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Error al procesar la imagen.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Error al procesar la imagen.'), 4096))],
       })
     }
   },

@@ -28,7 +28,7 @@ const fs = require('fs')
 const mongoose = require('mongoose')
 
 const config = require('./botconfig/config.json')
-const emojis = require('./botconfig/emojis.json')
+const emojis = require('./handlers/assets/legacy-config')
 
 // ─── Client ───────────────────────────────────────────────────────────────────
 
@@ -77,9 +77,13 @@ client.emojis_       = emojis
 
 // ─── Languages ────────────────────────────────────────────────────────────────
 
+const { prepareLegacyCatalog } = require('./handlers/i18n/legacy')
+const legacyEnglish = require('./languages/en.json')
+client.presentation = require('./handlers/presentation/modules')
+client.emojiAssets = require('./handlers/assets/system')
 client.la = {}
 for (const lang of fs.readdirSync('./languages').filter(f => f.endsWith('.json'))) {
-  client.la[lang.replace('.json', '')] = require('./languages/' + lang)
+  client.la[lang.replace('.json', '')] = prepareLegacyCatalog(legacyEnglish, require('./languages/' + lang))
 }
 Object.freeze(client.la)
 

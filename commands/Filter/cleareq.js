@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 module.exports = {
   name: 'cleareq', category: 'Filter',
@@ -9,8 +10,8 @@ module.exports = {
     const guildId = message.guild.id
     const mstate  = client.music?.getState(guildId)
     if (!mstate?.currentTrack)
-      return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay música reproduciéndose.')] }).catch(() => {})
+      return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No hay música reproduciéndose.'), 4096))] }).catch(() => {})
     await client.music.setFilter(guildId, 'off').catch(() => {})
-    message.react('✅').catch(() => {})
+    message.react(obeyUi.reaction('✅')).catch(() => {})
   },
 }

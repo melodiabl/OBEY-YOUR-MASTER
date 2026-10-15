@@ -1,3 +1,5 @@
+const obeyUi = require("../../handlers/assets/system")
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -25,11 +27,11 @@ module.exports = {
                 ephemeral: true,
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setAuthor({
+                        .setAuthor(obeyMeta.asAuthor({
                             name: handlemsg(client.la[ls].cmds.info.serveravatar.author, { servername: guild.name }),
                             iconURL: guild.iconURL(),
                             url: "https://github.com/melodiabl"
-                        })
+                        }))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -39,14 +41,14 @@ module.exports = {
                                 : null
                         )
                         .addFields(
-                            { name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${guild.iconURL()})`, inline: true },
-                            { name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${guild.iconURL()})`, inline: true },
-                            { name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${guild.iconURL()})`, inline: true }
+                            { name: obeyUi.owned("<:arrow:832598861813776394> PNG"), value: `[\`LINK\`](${guild.iconURL()})`, inline: true },
+                            { name: obeyUi.owned("<:arrow:832598861813776394> JPEG"), value: `[\`LINK\`](${guild.iconURL()})`, inline: true },
+                            { name: obeyUi.owned("<:arrow:832598861813776394> WEBP"), value: `[\`LINK\`](${guild.iconURL()})`, inline: true }
                         )
                         .setURL(
                             guild.iconURL()
                         )
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setImage(
                             guild.iconURL({
                                 size: 256,

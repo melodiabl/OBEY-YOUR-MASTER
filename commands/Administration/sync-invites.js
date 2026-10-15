@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { EmbedBuilder, PermissionFlagsBits,
     ButtonStyle
 } = require(`discord.js`);
@@ -26,8 +28,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable1"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable1"]), 256)),
                     ],
                 });
             if (running.has(message.guild.id) && running.get(message.guild.id)) {
@@ -35,27 +37,27 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable2"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable2"]), 256)),
                     ],
                 });
             }
             let approve = new ButtonBuilder()
                 .setStyle(ButtonStyle.Success)
                 .setCustomId("1")
-                .setEmoji("✅")
-                .setLabel("¡SÍ HAZLO!");
+                .setEmoji(obeyUi.component("✅"))
+                .setLabel(obeyUi.plain("¡SÍ HAZLO!"));
             let deny = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("2")
-                .setEmoji("❌")
-                .setLabel("Cancelar");
+                .setEmoji(obeyUi.component("❌"))
+                .setLabel(obeyUi.plain("Cancelar"));
             let awaitedmsg = await message.reply({
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable3"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable3"]), 256)),
                 ],
                 buttons: [approve, deny],
             }); //create a collector for the thinggy
@@ -80,8 +82,8 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable4"])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable4"]), 256)),
                             ],
                         });
                     }
@@ -175,16 +177,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable6"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable6"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -198,9 +200,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable9"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["sync-invites"]["variable9"]), 4096)),
                 ],
             });
         }

@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, ChannelType,
     ButtonStyle
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { isValidSnowflakeId } = require("../../handlers/functions");
@@ -44,7 +46,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Ticket System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Ticket System!"))
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -62,7 +64,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Ticket System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Ticket System!"))
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -80,7 +82,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Ticket System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Ticket System!"))
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -98,7 +100,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Ticket System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Ticket System!"))
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -115,12 +117,12 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(client.getAuthor(
+                    .setAuthor(obeyMeta.asAuthor(client.getAuthor(
                             "Ticket Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png",
                             "https://github.com/melodiabl"
-                        ))
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                        )))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -152,16 +154,16 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -170,57 +172,57 @@ module.exports = {
                     {
                         value: "Create Ticket-System",
                         description: `Create/Overwrite the ${SetupNumber} Ticket System`,
-                        emoji: "⚙️",
+                        emoji: obeyUi.component("⚙️"),
                     },
                     {
                         value: "Edit Message",
                         description: `Edit the Mensaje when a Ticket opens`,
-                        emoji: "🛠",
+                        emoji: obeyUi.component("🛠"),
                     },
                     {
                         value: "Add Ticket Role",
                         description: `Add a Ticket Rol for managing the Tickets`,
-                        emoji: "😎",
+                        emoji: obeyUi.component("😎"),
                     },
                     {
                         value: "Remove Ticket Role",
                         description: `Remove a Ticket Rol from managing the Tickets`,
-                        emoji: "💩",
+                        emoji: obeyUi.component("💩"),
                     },
                     {
                         value: "Ticket Category",
                         description: `Define the Category where the Tickets are located`,
-                        emoji: "🔘",
+                        emoji: obeyUi.component("🔘"),
                     },
                     {
                         value: "Ticket Claim System",
                         description: `Manage the Claim System for this Ticket System.`,
-                        emoji: "✅",
+                        emoji: obeyUi.component("✅"),
                     },
                     {
                         value: "Log Channel",
                         description: `Define a Canal for Ticket Logs!`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Set Default Ticket Name",
                         description: `Define a Default Ticket Canal Name!`,
-                        emoji: "💬",
+                        emoji: obeyUi.component("💬"),
                     },
                     {
                         value: "Delete & Reset",
                         description: `Delete current setup, which allows you to resetup`,
-                        emoji: "🗑",
+                        emoji: obeyUi.component("🗑"),
                     },
                     {
                         value: "Closed Ticket Category",
                         description: `When Closing a Ticket, it will be moved to there`,
-                        emoji: "✂️",
+                        emoji: obeyUi.component("✂️"),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ticket-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -229,7 +231,7 @@ module.exports = {
                     .setMaxValues(1)
                     .setMinValues(1)
                     .setPlaceholder(
-                        `Click me to manage the ${SetupNumber} Ticket System!\n\n**You've picked:**\n> ${menuoptiondata.value}`
+                        obeyUi.plain(`Click me to manage the ${SetupNumber} Ticket System!\n\n**You've picked:**\n> ${menuoptiondata.value}`)
                     )
                     .addOptions(
                         menuoptions.map(option => {
@@ -246,8 +248,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -277,16 +279,16 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -299,10 +301,10 @@ module.exports = {
                             let parent = parentId ? message.guild.channels.cache.get(parentId) : null;
                             var rembed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setFooter(client.getFooter(es))
-                                .setTitle("What should be the new Closed Ticket Category?")
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit("What should be the new Closed Ticket Category?", 256))
                                 .setDescription(
-                                    `Currently it's: \`${parentId ? "Not Setupped yet" : parent ? parent.name : `Canal not Found: ${parentId}`}\`!\nWhen closing a Ticket, it will be moved to there until it get's deleted!\n> **Send the new __PARENT ID__ now!**`
+                                    obeyUi.limit(`Currently it's: \`${parentId ? "Not Setupped yet" : parent ? parent.name : `Canal not Found: ${parentId}`}\`!\nWhen closing a Ticket, it will be moved to there until it get's deleted!\n> **Send the new __PARENT ID__ now!**`, 4096)
                                 );
                             message
                                 .reply({
@@ -342,13 +344,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -360,10 +362,10 @@ module.exports = {
                             let defaultname = client.setups.get(message.guild.id, `ticketsystem${SetupNumber}.defaultname`);
                             var rembed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setFooter(client.getFooter(es))
-                                .setTitle("What should be the new Default Ticket Name?")
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit("What should be the new Default Ticket Name?", 256))
                                 .setDescription(
-                                    `Currently it's: \`${defaultname}\` aka it will turn into: \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\`\n> \`{member}\` ... will get replaced with the ticket opening username\n> \`{count}\` ... Will get replaced with the TICKET ID (COUNT)\n**Send the Message now!**`
+                                    obeyUi.limit(`Currently it's: \`${defaultname}\` aka it will turn into: \`${defaultname.replace("{member}", message.author.username).replace("{count}", 0)}\`\n> \`{member}\` ... will get replaced with the ticket opening username\n> \`{count}\` ... Will get replaced with the TICKET ID (COUNT)\n**Send the Message now!**`, 4096)
                                 );
                             message
                                 .reply({
@@ -400,13 +402,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -415,9 +417,9 @@ module.exports = {
                         break;
                     case "Create Ticket-System":
                         var msg11 = new EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable6"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable7"]))
-                            .setFooter(client.getFooter(es))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable6"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable7"]), 4096))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.color);
                         message
                             .reply({
@@ -441,19 +443,19 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable8"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable8"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         var msg6 = new EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable9"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable9"]), 256))
                                             .setDescription(
-                                                eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable10"])
+                                                obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable10"]), 4096)
                                             )
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color);
                                         message
                                             .reply({
@@ -489,8 +491,8 @@ module.exports = {
                                                             new ButtonBuilder()
                                                                 .setStyle(ButtonStyle.Success)
                                                                 .setCustomId("create_a_ticket")
-                                                                .setLabel("Create a Ticket")
-                                                                .setEmoji("📨"),
+                                                                .setLabel(obeyUi.plain("Create a Ticket"))
+                                                                .setEmoji(obeyUi.component("📨")),
                                                         ]);
 
                                                         channel
@@ -498,20 +500,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-ticket"
                                                                                 ]["variable11"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-ticket"
                                                                                 ]["variable12"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor(es.color),
                                                                 ],
                                                                 components: [button_open],
@@ -532,20 +534,20 @@ module.exports = {
                                                                 var themebd = new EmbedBuilder()
                                                                     .setColor(es.color)
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-ticket"][
                                                                                 "variable13"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setDescription(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-ticket"][
                                                                                 "variable14"
                                                                             ]
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es));
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
 
                                                                 message.reply({
                                                                     embeds: [themebd],
@@ -557,17 +559,17 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-ticket"][
                                                                                 "variable15"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.wrongcolor)
                                                                     .setDescription(
-                                                                        `¡Operación Cancelada!`.substring(0, 2000)
+                                                                        obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     });
@@ -578,11 +580,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable16"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable16"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -622,10 +624,10 @@ module.exports = {
                     case "Edit Message":
                         var rembed = new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable18"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable19"]));
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable18"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable19"]), 4096));
                         message
                             .reply({
                                 embeds: [rembed],
@@ -651,11 +653,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable21"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -664,10 +666,10 @@ module.exports = {
                     case "Add Ticket Role":
                         var rrembed = new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(client.getFooter("Pick the INDEX NUMBER", es.footericon))
+                            .setFooter(obeyMeta.asFooter(client.getFooter("Pick the INDEX NUMBER", es.footericon)))
 
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable22"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable23"]));
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable22"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable23"]), 4096));
                         message
                             .reply({
                                 embeds: [rrembed],
@@ -702,11 +704,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable26"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable26"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -715,10 +717,10 @@ module.exports = {
                     case "Remove Ticket Role":
                         var rrrembed = new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(client.getFooter("Pick the INDEX NUMBER", es.footericon))
+                            .setFooter(obeyMeta.asFooter(client.getFooter("Pick the INDEX NUMBER", es.footericon)))
 
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable27"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable28"]));
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable27"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable28"]), 4096));
                         message
                             .reply({
                                 embeds: [rrrembed],
@@ -761,11 +763,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable32"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable32"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -774,10 +776,10 @@ module.exports = {
                     case "Ticket Category":
                         var rembed = new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable33"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable34"]));
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable33"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable34"]), 4096));
                         message
                             .reply({
                                 embeds: [rembed],
@@ -818,11 +820,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable38"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable38"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -844,22 +846,22 @@ module.exports = {
                                     {
                                         value: `${claimData.enabled ? "Disable Claim System" : "Enable Claim System"}`,
                                         description: `${claimData.enabled ? "No need to claim the Tickets anymore" : "Make it so that Staff needs to claim the Ticket"}`,
-                                        emoji: `${claimData.enabled ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`,
+                                        emoji: obeyUi.component(`${claimData.enabled ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`),
                                     },
                                     {
                                         value: "Edit Open Message",
                                         description: `Edit the Claim-Información-Mensaje when a Ticket opens`,
-                                        emoji: allEmojis.msg.edit,
+                                        emoji: obeyUi.component(allEmojis.msg.edit),
                                     },
                                     {
                                         value: "Edit Claim Message",
                                         description: `Edit the Claim-Mensaje when a Staff claims it!`,
-                                        emoji: allEmojis.msg.edit,
+                                        emoji: obeyUi.component(allEmojis.msg.edit),
                                     },
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Ticket-Configuración!`,
-                                        emoji: allEmojis.msg.cancel,
+                                        emoji: obeyUi.component(allEmojis.msg.cancel),
                                     },
                                 ];
                                 //define the selection
@@ -868,7 +870,7 @@ module.exports = {
                                     .setMaxValues(1)
                                     .setMinValues(1)
                                     .setPlaceholder(
-                                        `Click me to manage the ${SetupNumber} Ticket System!\n\n**You've picked:**\n> Ticket Claim System`
+                                        obeyUi.plain(`Click me to manage the ${SetupNumber} Ticket System!\n\n**You've picked:**\n> Ticket Claim System`)
                                     )
                                     .addOptions(
                                         menuoptions.map(option => {
@@ -887,8 +889,8 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new Discord.EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
+                                    .setAuthor(obeyMeta.asAuthor({ name: SetupNumber + " Ticket Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/incoming-envelope_1f4e8.png", url: "https://github.com/melodiabl" }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -922,16 +924,16 @@ module.exports = {
                                         menuselection(menu);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -961,12 +963,12 @@ module.exports = {
                                                                     : client.user.displayAvatarURL()
                                                                 : null
                                                         )
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setTitle(
-                                                            `${claimData.enabled ? "Activado the Claim System" : "Desactivado the Claim System"}`
+                                                            obeyUi.limit(`${claimData.enabled ? "Activado the Claim System" : "Desactivado the Claim System"}`, 256)
                                                         )
                                                         .setDescription(
-                                                            `${claimData.enabled ? "When a Usuario opens a Ticket, a Staff Miembro needs to claim it, before he can send something in there!\n> This is useful for Professionality and Information!\n> **NOTE:** Admins can always chat..." : "You now don't need to claim a Ticket anymore"}`
+                                                            obeyUi.limit(`${claimData.enabled ? "When a Usuario opens a Ticket, a Staff Miembro needs to claim it, before he can send something in there!\n> This is useful for Professionality and Information!\n> **NOTE:** Admins can always chat..." : "You now don't need to claim a Ticket anymore"}`, 4096)
                                                         ),
                                                 ],
                                             });
@@ -976,13 +978,13 @@ module.exports = {
                                         {
                                             var rembed = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle("What should be the new Mensaje when a Usuario opens a Ticket?")
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                                .setTitle(obeyUi.limit("What should be the new Mensaje when a Usuario opens a Ticket?", 256))
                                                 .setDescription(
-                                                    String(
+                                                    obeyUi.limit(String(
                                                         "{user} will be replaced with a USERPING\n\n**Current Mensaje:**\n>>> " +
                                                             claimData.messageOpen.substring(0, 1900)
-                                                    )
+                                                    ), 4096)
                                                 );
                                             message
                                                 .reply({
@@ -1009,17 +1011,17 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-ticket"
                                                                                 ]["variable21"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.wrongcolor)
                                                                         .setDescription(
-                                                                            `¡Operación Cancelada!`.substring(0, 2000)
+                                                                            obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         });
@@ -1030,13 +1032,13 @@ module.exports = {
                                         {
                                             var rembed = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setFooter(client.getFooter(es))
-                                                .setTitle("What should be the new Mensaje when a Staff claims a Ticket?")
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                                .setTitle(obeyUi.limit("What should be the new Mensaje when a Staff claims a Ticket?", 256))
                                                 .setDescription(
-                                                    String(
+                                                    obeyUi.limit(String(
                                                         "{user} will be replaced with a USERPING\n{claimer} will be replaced with a PING for WHO CLAIMED IT\n\n**Current Mensaje:**\n>>> " +
                                                             claimData.messageClaim.substring(0, 1900)
-                                                    )
+                                                    ), 4096)
                                                 );
                                             message
                                                 .reply({
@@ -1063,17 +1065,17 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-ticket"
                                                                                 ]["variable21"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.wrongcolor)
                                                                         .setDescription(
-                                                                            `¡Operación Cancelada!`.substring(0, 2000)
+                                                                            obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         });
@@ -1088,12 +1090,12 @@ module.exports = {
                         //ticketlogid
                         var rembed = new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(
-                                "In What Canal do you want to send Logs of this Ticket-System (When a Ticket gets DELETED)"
+                                obeyUi.limit("In What Canal do you want to send Logs of this Ticket-System (When a Ticket gets DELETED)", 256)
                             )
                             .setDescription(
-                                `Ping the Canal / send \`no\` for disabeling Logs!\n\n*The Log will only be sent if the ticket gets __DELETED__ via the BUTTON (not the closing)*`
+                                obeyUi.limit(`Ping the Canal / send \`no\` for disabeling Logs!\n\n*The Log will only be sent if the ticket gets __DELETED__ via the BUTTON (not the closing)*`, 4096)
                             );
                         message
                             .reply({
@@ -1124,7 +1126,7 @@ module.exports = {
                                                 "",
                                                 `ticketsystem${SetupNumber}.ticketlogid`
                                             );
-                                            message.reply("❌ Desactivado the Log, because you did not send a valid channel");
+                                            message.reply(obeyUi.owned("❌ Desactivado the Log, because you did not send a valid channel"));
                                         }
                                     })
                                     .catch(error => {
@@ -1132,11 +1134,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable38"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable38"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -1158,9 +1160,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable39"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable39"]), 4096)),
                 ],
             });
         }

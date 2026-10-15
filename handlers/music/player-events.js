@@ -19,7 +19,7 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     }).catch(error => console.error(`[Music] Player event failed (${guildId}):`, error?.message || error))
   }
   player.on('end', data => {
-    if (['replaced', 'stopped'].includes(data?.reason)) return
+    if (!['finished', 'loadFailed'].includes(data?.reason)) return
     if (!isCurrent(data)) { console.warn('[Music] Ignored end event:', data?.reason, 'playbackMatches=', !data?.track?.userData?.obeyPlaybackId || data.track.userData.obeyPlaybackId === getState(guildId).playbackId, 'trackMatches=', data?.track?.encoded === getState(guildId).currentTrack?.encoded); return }
     enqueueEvent(data, async () => {
       const before = getState(guildId), playbackId = before.playbackId, queuedBefore = before.queue.length

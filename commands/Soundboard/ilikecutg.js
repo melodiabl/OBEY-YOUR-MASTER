@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder,
     PermissionFlagsBits
@@ -20,13 +22,13 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                         .setDescription(
-                            require(`${process.cwd()}/handlers/functions`).handlemsg(
+                            obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
                                 { prefix: prefix }
-                            )
+                            ), 4096)
                         ),
                 ],
             });
@@ -37,9 +39,9 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("<:no:833101993668771842> You need to join a voice channel")
+                        .setTitle(obeyUi.limit(obeyUi.owned("<:no:833101993668771842> You need to join a voice channel"), 256))
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es)),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             });
         }
@@ -47,9 +49,9 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("❌ I'm missing the Permiso to join your Voice Canal")
+                        .setTitle(obeyUi.limit(obeyUi.owned("❌ I'm missing the Permiso to join your Voice Canal"), 256))
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es)),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             });
         }
@@ -57,9 +59,9 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("❌ I'm missing the Permiso to speak in your Voice Canal")
+                        .setTitle(obeyUi.limit(obeyUi.owned("❌ I'm missing the Permiso to speak in your Voice Canal"), 256))
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es)),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             });
         }
@@ -67,9 +69,9 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("❌ Your Voice Canal is full!")
+                        .setTitle(obeyUi.limit(obeyUi.owned("❌ Your Voice Canal is full!"), 256))
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es)),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             });
         }
@@ -77,12 +79,12 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle(`<:no:833101993668771842> I am already connected in: \`${botchannel.name}\``)
-                        .setFooter(client.getFooter(es)),
+                        .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} I am already connected in: \`${botchannel.name}\``, 256))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             });
         }
-        const e = await message.react("🎙️").catch(e => console.log(String(e).grey));
+        const e = await message.react(obeyUi.reaction("🎙️")).catch(e => console.log(String(e).grey));
         let VoiceConnection = joinVoiceChannel({
             channelId: channel.id,
             guildId: channel.guild.id,
@@ -99,9 +101,9 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle("❌ Could not find the AUDIO")
+                        .setTitle(obeyUi.limit(obeyUi.owned("❌ Could not find the AUDIO"), 256))
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es)),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             });
         }

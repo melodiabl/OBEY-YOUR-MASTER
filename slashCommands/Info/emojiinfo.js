@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -51,7 +53,7 @@ module.exports = {
                     });
 
                 const authorFetch = await emoji?.fetchAuthor();
-                const checkOrCross = bool => (bool ? "✅" : "❌");
+                const checkOrCross = bool => (bool ? obeyUi.owned("✅") : obeyUi.owned("❌"));
                 const embed = new EmbedBuilder()
                     .setTitle(eval(client.la[ls]["cmds"]["info"]["emojiinfo"]["variable1"]))
                     .setColor(es.color)
@@ -83,7 +85,7 @@ module.exports = {
                             ].join("\n")
                         }
                     )
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 interaction?.reply({ ephemeral: true, embeds: [embed] });
             } else if ((emoji1 = animatedEmoteRegex.exec(emojiStr))) {
                 let url2 = "https://cdn.discordapp.com/emojis/" + emoji1[1] + ".gif?v=1";
@@ -96,7 +98,7 @@ module.exports = {
                     });
 
                 const authorFetch = await emoji?.fetchAuthor();
-                const checkOrCross = bool => (bool ? "✅" : "❌");
+                const checkOrCross = bool => (bool ? obeyUi.owned("✅") : obeyUi.owned("❌"));
                 const embed = new EmbedBuilder()
                     .setTitle(eval(client.la[ls]["cmds"]["info"]["emojiinfo"]["variable2"]))
                     .setColor(es.color)
@@ -128,7 +130,7 @@ module.exports = {
                             ].join("\n")
                         }
                     )
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 interaction?.reply({ ephemeral: true, embeds: [embed] });
             } else {
                 return interaction?.reply(handlemsg(client.la[ls].cmds.info.emojiinfo.error3));

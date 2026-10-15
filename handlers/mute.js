@@ -1,6 +1,7 @@
+const obeyMeta = require("./presentation/metadata")
 const Discord = require("discord.js"),
     CronJob = require("cron").CronJob;
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const ms = require("ms");
 const moment = require("moment");
 module.exports = async client => {
@@ -58,7 +59,7 @@ module.exports = async client => {
                                                         : client.user.displayAvatarURL()
                                                     : null
                                             )
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setTitle(eval(client.la[ls]["handlers"]["mutejs"]["mute"]["variable1"]))
                                             .setDescription(eval(client.la[ls]["handlers"]["mutejs"]["mute"]["variable2"])),
                                     ],
@@ -119,7 +120,7 @@ module.exports = async client => {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setTitle(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable12"]))
                                         .addFields({ name: eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variablex_13"]), value: eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable13"]) })
                                         .addFields({ name: "Created at:", value: `\`${at}\`` })
@@ -143,7 +144,7 @@ module.exports = async client => {
                                                             : client.user.displayAvatarURL()
                                                         : null
                                                 )
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setTitle(
                                                     eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable12"])
                                                 )

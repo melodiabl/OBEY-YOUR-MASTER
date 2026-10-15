@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 /**
  * @INFO
  * Loading all needed File Information Parameters
@@ -62,7 +64,7 @@ module.exports = async (client, message) => {
                     }
                 }
                 try {
-                    message.react("833101993668771842").catch(() => {});
+                    message.react(obeyUi.reaction("833101993668771842")).catch(() => {});
                 } catch {}
                 not_allowed = true;
                 return message
@@ -70,10 +72,10 @@ module.exports = async (client, message) => {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(client.la[ls].common.botchat.title)
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(client.la[ls].common.botchat.title, 256))
                                 .setDescription(
-                                    `${client.la[ls].common.botchat.description}\n> ${botchannel.map(c => `<#${c}>`).join(", ")}`
+                                    obeyUi.limit(`${client.la[ls].common.botchat.description}\n> ${botchannel.map(c => `<#${c}>`).join(", ")}`, 4096)
                                 ),
                         ],
                     })
@@ -99,7 +101,7 @@ module.exports = async (client, message) => {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.color)
-                                .setTitle(handlemsg(client.la[ls].common.ping, { prefix: prefix })),
+                                .setTitle(obeyUi.limit(handlemsg(client.la[ls].common.ping, { prefix: prefix }), 256)),
                         ],
                     })
                     .catch(() => {});
@@ -131,8 +133,8 @@ module.exports = async (client, message) => {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setDescription(cmd.output),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setDescription(obeyUi.limit(cmd.output, 4096)),
                         ],
                     });
                 }
@@ -144,7 +146,7 @@ module.exports = async (client, message) => {
             var musicData = client.musicsettings.get(message.guild.id);
             if (musicData.channel && musicData.channel == message.channel.id) {
                 return message
-                    .reply("<:no:833101993668771842> **¡Por favor usa un comando en otro lugar!**")
+                    .reply(obeyUi.owned("<:no:833101993668771842> **¡Por favor usa un comando en otro lugar!**"))
                     .then(msg => {
                         setTimeout(() => {
                             try {
@@ -161,10 +163,10 @@ module.exports = async (client, message) => {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(handlemsg(client.la[ls].common.unknowncmd.title, { prefix: prefix }))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(handlemsg(client.la[ls].common.unknowncmd.title, { prefix: prefix }), 256))
                                     .setDescription(
-                                        handlemsg(client.la[ls].common.unknowncmd.description, { prefix: prefix })
+                                        obeyUi.limit(handlemsg(client.la[ls].common.unknowncmd.description, { prefix: prefix }), 4096)
                                     ),
                             ],
                         })
@@ -202,10 +204,10 @@ module.exports = async (client, message) => {
                                     new Discord.EmbedBuilder()
                                         .setColor(es.wrongcolor)
                                         .setTitle(
-                                            handlemsg(client.la[ls].common.cooldown, {
+                                            obeyUi.limit(handlemsg(client.la[ls].common.cooldown, {
                                                 time: timeLeft.toFixed(1),
                                                 commandname: command.name,
-                                            })
+                                            }), 256)
                                         ),
                                 ],
                             })
@@ -225,17 +227,17 @@ module.exports = async (client, message) => {
                     if (!message.member.permissions.has(resolvedPerms)) {
                         not_allowed = true;
                         try {
-                            message.react("833101993668771842").catch(() => {});
+                            message.react(obeyUi.reaction("833101993668771842")).catch(() => {});
                         } catch {}
                         message
                             .reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setColor(es.wrongcolor)
-                                        .setFooter(client.getFooter(es))
-                                        .setTitle(client.la[ls].common.permissions.title)
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                        .setTitle(obeyUi.limit(client.la[ls].common.permissions.title, 256))
                                         .setDescription(
-                                            `${client.la[ls].common.permissions.description}\n> \`${command.memberpermissions.join("`, ``")}\``
+                                            obeyUi.limit(`${client.la[ls].common.permissions.description}\n> \`${command.memberpermissions.join("`, ``")}\``, 4096)
                                         ),
                                 ],
                             })
@@ -271,7 +273,7 @@ module.exports = async (client, message) => {
                         if (!channel) {
                             not_allowed = true;
                             return message.reply({
-                                embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es)).setTitle(client.la[ls].common.join_vc)],
+                                embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es))).setTitle(obeyUi.limit(client.la[ls].common.join_vc, 256))],
                             }).catch(() => {});
                         }
 
@@ -284,9 +286,9 @@ module.exports = async (client, message) => {
                             const djResult = check_if_dj(client, message.member, mstate.currentTrack?.info || mstate.currentTrack);
                             if (djResult) {
                                 return message.reply({
-                                    embeds: [new EmbedBuilder().setColor(ee.wrongcolor).setFooter(client.getFooter(es))
-                                        .setTitle(`<:no:833101993668771842> **¡No eres DJ ni el solicitante de la canción!**`)
-                                        .setDescription(`**ROLES DE DJ:**\n${djResult}`)],
+                                    embeds: [new EmbedBuilder().setColor(ee.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                        .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **¡No eres DJ ni el solicitante de la canción!**`, 256))
+                                        .setDescription(obeyUi.limit(`**ROLES DE DJ:**\n${djResult}`, 4096))],
                                 }).catch(() => {});
                             }
                         }
@@ -295,14 +297,14 @@ module.exports = async (client, message) => {
                             if (!player || !mstate?.currentTrack) {
                                 not_allowed = true;
                                 return message.reply({
-                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es)).setTitle(client.la[ls].common.nothing_playing)],
+                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es))).setTitle(obeyUi.limit(client.la[ls].common.nothing_playing, 256))],
                                 }).catch(() => {});
                             }
                             if (!mechannel) {
                                 try { await client.shoukaku?.leaveVoiceChannel(message.guild.id); await delay(350); } catch {}
                                 not_allowed = true;
                                 return message.reply({
-                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es)).setTitle(client.la[ls].common.not_connected)],
+                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es))).setTitle(obeyUi.limit(client.la[ls].common.not_connected, 256))],
                                 }).catch(() => {});
                             }
                         }
@@ -311,7 +313,7 @@ module.exports = async (client, message) => {
                             if (!mstate?.history?.length) {
                                 not_allowed = true;
                                 return message.reply({
-                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es)).setTitle(client.la[ls].common.nothing_playing)],
+                                    embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es))).setTitle(obeyUi.limit(client.la[ls].common.nothing_playing, 256))],
                                 }).catch(() => {});
                             }
                         }
@@ -319,8 +321,8 @@ module.exports = async (client, message) => {
                         const vcId = mstate?.voiceChannelId || mechannel?.id;
                         if (vcId && channel.id !== vcId && !command.parameters.notsamechannel) {
                             return message.reply({
-                                embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(client.getFooter(es))
-                                    .setTitle(client.la[ls].common.wrong_vc).setDescription(`Canal: <#${vcId}>`)],
+                                embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(client.la[ls].common.wrong_vc, 256)).setDescription(obeyUi.limit(`Canal: <#${vcId}>`, 4096))],
                             }).catch(() => {});
                         }
                     }
@@ -344,10 +346,10 @@ module.exports = async (client, message) => {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(client.la[ls].common.somethingwentwrong)
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(client.la[ls].common.somethingwentwrong, 256))
                                 .setDescription(
-                                    `\`\`\`${e.message ? e.message : e.stack ? String(e.stack).grey.substring(0, 2000) : String(e).grey.substring(0, 2000)}\`\`\``
+                                    obeyUi.limit(`\`\`\`${e.message ? e.message : e.stack ? String(e.stack).grey.substring(0, 2000) : String(e).grey.substring(0, 2000)}\`\`\``, 4096)
                                 ),
                         ],
                     })
@@ -367,9 +369,9 @@ module.exports = async (client, message) => {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(handlemsg(client.la[ls].common.unknowncmd.title, { prefix: prefix }))
-                                .setDescription(handlemsg(client.la[ls].common.unknowncmd.description, { prefix: prefix })),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(handlemsg(client.la[ls].common.unknowncmd.title, { prefix: prefix }), 256))
+                                .setDescription(obeyUi.limit(handlemsg(client.la[ls].common.unknowncmd.description, { prefix: prefix }), 4096)),
                         ],
                     })
                     .then(async msg => {
@@ -390,8 +392,8 @@ module.exports = async (client, message) => {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("#ED4245")
-                        .setTitle("❌ Ocurrió un error")
-                        .setDescription(`\`\`\`${e.message ? e.message : String(e).grey.substring(0, 2000)}\`\`\``),
+                        .setTitle(obeyUi.limit(obeyUi.owned("❌ Ocurrió un error"), 256))
+                        .setDescription(obeyUi.limit(`\`\`\`${e.message ? e.message : String(e).grey.substring(0, 2000)}\`\`\``, 4096)),
                 ],
             })
             .catch(() => {});

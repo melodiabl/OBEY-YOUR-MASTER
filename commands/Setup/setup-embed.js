@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder,
     ButtonStyle
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -23,16 +25,16 @@ module.exports = {
         try {
             var timeouterror = false;
             let row = new ActionRowBuilder().addComponents(
-                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("1").setEmoji("1️⃣"),
-                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("2").setEmoji("2️⃣"),
-                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("3").setEmoji("3️⃣"),
-                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("4").setEmoji("4️⃣")
+                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("1").setEmoji(obeyUi.component("1️⃣")),
+                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("2").setEmoji(obeyUi.component("2️⃣")),
+                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("3").setEmoji(obeyUi.component("3️⃣")),
+                new ButtonBuilder().setStyle(ButtonStyle.Secondary).setCustomId("4").setEmoji(obeyUi.component("4️⃣"))
             );
             var tempmsg = await message.reply({
                 components: [row],
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable1"]))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable1"]), 256))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -41,8 +43,8 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable2"]))
-                        .setFooter(client.getFooter(es)),
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable2"]), 4096))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             });
             //Create the collector
@@ -93,7 +95,7 @@ module.exports = {
                         tempmsg = await tempmsg.edit({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable5"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable5"]), 256))
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -106,7 +108,7 @@ module.exports = {
                                     .addFields({ name: `**Supported Colors:**`, value: `>>> **HTML/Hex-Colors** (\`#ffff00\`)\n\nColor-Names/Discord-Colors (\`FUCHSIA\`)\n\nHex-Notation Colors (\`0xffffff\`)` })
                                     .addFields({ name: `**Discord Supported Colors:**`, value: `>>> ${discordsupportedcolors.map(c => `\`${c}\``).join("︲")}` })
                                     .addFields({ name: `**Current Color:**`, value: `>>> \`${es.color}\`` })
-                                    .setFooter(client.getFooter(es)),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                         await tempmsg.channel
@@ -122,12 +124,12 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable7"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable7"]), 256))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable8"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable8"]), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 try {
@@ -147,9 +149,9 @@ module.exports = {
                                             embeds: [
                                                 new EmbedBuilder()
                                                     .setColor("#ED4245")
-                                                    .setTitle(`${allEmojis.msg.ERROR} INVALID COLOR ADDED`)
+                                                    .setTitle(obeyUi.limit(`${allEmojis.msg.ERROR} INVALID COLOR ADDED`, 256))
                                                     .setDescription(
-                                                        `\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``
+                                                        obeyUi.limit(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``, 4096)
                                                     ),
                                             ],
                                         });
@@ -159,7 +161,7 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable11"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable11"]), 256))
                                                 .setColor(es.color)
                                                 .setThumbnail(
                                                     es.thumb
@@ -170,19 +172,19 @@ module.exports = {
                                                             : client.user.displayAvatarURL()
                                                         : null
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 } catch (e) {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable12"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable12"]), 256))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable13"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable13"]), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 }
@@ -194,17 +196,17 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable14"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable14"]), 256))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                     } else if (button?.customId == "2") {
                         tempmsg = await tempmsg.edit({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable15"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable15"]), 256))
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -214,8 +216,8 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable16"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable16"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                         await tempmsg.channel
@@ -246,7 +248,7 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable17"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable17"]), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setThumbnail(
@@ -258,7 +260,7 @@ module.exports = {
                                                                     : client.user.displayAvatarURL()
                                                                 : null
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -266,13 +268,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable18"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable18"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable19"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable19"]), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -281,10 +283,10 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable20"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable20"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -299,9 +301,9 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable21"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable21"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 } else {
@@ -312,7 +314,7 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable22"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable22"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setThumbnail(
@@ -324,7 +326,7 @@ module.exports = {
                                                                 : client.user.displayAvatarURL()
                                                             : null
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     } catch (e) {
@@ -332,13 +334,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable23"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable23"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable24"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable24"]), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -351,17 +353,17 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable25"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable25"]), 256))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                     } else if (button?.customId == "3") {
                         tempmsg = await tempmsg.edit({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable26"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable26"]), 256))
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -371,8 +373,8 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable27"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable27"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                         await tempmsg.channel
@@ -391,10 +393,10 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    `${allEmojis.msg.SUCCESS} The new Embed Footer Text is:`.substring(
+                                                    obeyUi.limit(`${allEmojis.msg.SUCCESS} The new Embed Footer Text is:`.substring(
                                                         0,
                                                         256
-                                                    )
+                                                    ), 256)
                                                 )
                                                 .setColor(es.color)
                                                 .setThumbnail(
@@ -406,20 +408,20 @@ module.exports = {
                                                             : client.user.displayAvatarURL()
                                                         : null
                                                 )
-                                                .setDescription(es.footertext)
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(es.footertext, 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 } catch (e) {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable28"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable28"]), 256))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable29"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable29"]), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 }
@@ -431,10 +433,10 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable30"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable30"]), 256))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                     } else if (button?.customId == "4") {
@@ -448,8 +450,8 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable31"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable32"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable31"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable32"]), 4096))
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -459,33 +461,33 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         } catch (e) {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable33"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable33"]), 256))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable34"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable34"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
                     }
                 } else
                     button?.reply({
-                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                        content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                         ephemeral: true,
                     });
             });
             //Once the Collections ended edit the menu message
             collector.on("end", collected => {
                 tempmsg.edit({
-                    embeds: [tempEmbedBuilder.from(msg.embeds[0]).setDescription(`~~${tempmsg.embeds[0].description}~~`)],
+                    embeds: [tempEmbedBuilder.from(msg.embeds[0]).setDescription(obeyUi.limit(`~~${tempmsg.embeds[0].description}~~`, 4096))],
                     components: [],
-                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\`. Button**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\`. Button**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                 });
             });
         } catch (e) {
@@ -494,9 +496,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable36"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-embed"]["variable36"]), 4096)),
                 ],
             });
         }

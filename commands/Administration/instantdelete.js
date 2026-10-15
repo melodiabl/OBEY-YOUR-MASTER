@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, Collection, AttachmentBuilder, PermissionFlagsBits,
     ButtonStyle
 } = require("discord.js");
@@ -81,22 +83,22 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable3"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["close"]["variable4"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable3"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable4"]), 4096)),
                     ],
                 });
             let buttonuser = cmduser.user;
             let button_ticket_verify = new ButtonBuilder()
                 .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_verify")
-                .setLabel("Verify this Step")
-                .setEmoji("✅");
+                .setLabel(obeyUi.plain("Verify this Step"))
+                .setEmoji(obeyUi.component("✅"));
             let msg = await message.reply({
                 content: `<@${buttonuser.id}>`,
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable13"]))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable13"]), 256))
                         .setColor(es.color),
                 ],
                 components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
@@ -107,7 +109,7 @@ module.exports = {
             collector.on("collect", async b => {
                 if (b?.user.id !== buttonuser.id)
                     return b?.reply(
-                        `<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`,
+                        `${obeyUi.markup("icon.error")} **Only the one who typed ${prefix}help is allowed to react!**`,
                         true
                     );
 
@@ -116,7 +118,7 @@ module.exports = {
                     edited = true;
                     msg.edit({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
+                        embeds: [new Discord.EmbedBuilder().setTitle(obeyUi.limit("¡Verificado!", 256)).setColor(es.color)],
                         components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
@@ -179,28 +181,28 @@ module.exports = {
                                             //send the Transcript Into the Channel and then Deleting it again from the FOLDER
                                             let sendembed = new EmbedBuilder()
                                                 .setTitle(
-                                                    eval(
+                                                    obeyUi.limit(eval(
                                                         client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                             "variable20"
                                                         ]
-                                                    )
+                                                    ), 256)
                                                 )
                                                 .setColor(ee.color)
-                                                .setFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` });
+                                                .setFooter(obeyMeta.asFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` }));
                                             try {
                                                 let user = guild.members.cache.get(data.user);
                                                 sendembed.setDescription(
-                                                    eval(
+                                                    obeyUi.limit(eval(
                                                         client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                             "variable21"
                                                         ]
-                                                    )
+                                                    ), 4096)
                                                 );
                                                 sendembed.setThumbnail(
                                                     user.user.displayAvatarURL()
                                                 );
                                             } catch {
-                                                sendembed.setDescription(channel.topic);
+                                                sendembed.setDescription(obeyUi.limit(channel.topic, 4096));
                                             }
                                             await logChannel
                                                 .send({
@@ -232,7 +234,7 @@ module.exports = {
                     await msg.channel.send({
                         embeds: [
                             new Discord.EmbedBuilder()
-                                .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable14"]))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable14"]), 256))
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -243,12 +245,12 @@ module.exports = {
                                         : null
                                 )
                                 .setDescription(
-                                    `Deleting Ticket in less then **\`3 Seconds\`** ....\n\n*If not you can do it manually*`.substring(
+                                    obeyUi.limit(`Deleting Ticket in less then **\`3 Seconds\`** ....\n\n*If not you can do it manually*`.substring(
                                         0,
                                         2000
-                                    )
+                                    ), 4096)
                                 )
-                                .setFooter(client.getFooter(es)),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                     setTimeout(() => {
@@ -274,18 +276,18 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setFooter(client.getFooter(es))
-                                        .setAuthor({ name: `ticket --> LOG | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                        .setAuthor(obeyMeta.asAuthor({ name: `ticket --> LOG | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
                                         .setDescription(
-                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable15"])
+                                            obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable15"]), 4096)
                                         )
                                         .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                         .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                         .setTimestamp()
-                                        .setFooter(client.getFooter(
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                 "ID: " + message.author.id,
                                                 message.author.displayAvatarURL()
-                                            )
+                                            ))
                                         ),
                                 ],
                             });
@@ -297,7 +299,7 @@ module.exports = {
                     edited = true;
                     msg.edit({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.EmbedBuilder().setTitle("Cancelado!").setColor(es.wrongcolor)],
+                        embeds: [new Discord.EmbedBuilder().setTitle(obeyUi.limit("Cancelado!", 256)).setColor(es.wrongcolor)],
                         components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
@@ -305,7 +307,7 @@ module.exports = {
                 }
             });
             let endedembed = new Discord.EmbedBuilder()
-                .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable18"]))
+                .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable18"]), 256))
                 .setColor(es.wrongcolor);
             collector.on("end", collected => {
                 if (!edited) {
@@ -317,8 +319,8 @@ module.exports = {
                             new ActionRowBuilder().addComponents(
                                 button_ticket_verify
                                     .setDisabled(true)
-                                    .setLabel("FAILED TO VERIFY")
-                                    .setEmoji("❌")
+                                    .setLabel(obeyUi.plain("FAILED TO VERIFY"))
+                                    .setEmoji(obeyUi.component("❌"))
                                     .setStyle(ButtonStyle.Danger)
                             ),
                         ],
@@ -333,9 +335,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable6"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["close"]["variable7"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable6"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable7"]), 4096)),
                 ],
             });
         }

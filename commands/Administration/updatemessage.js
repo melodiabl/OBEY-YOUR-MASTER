@@ -1,3 +1,4 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder, Message, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -41,7 +42,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable1"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable2"])),
                     ],
@@ -56,7 +57,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable4"])),
                     ],
@@ -66,7 +67,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable5"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable6"])),
                     ],
@@ -82,20 +83,20 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable7"])),
                             ],
                         });
                     }
                     if (msg.embeds[0]) {
                         var embed = msg.embeds[0];
-                        embed.footer ? (embed.footer.text = es.footertext) : embed.setFooter(client.getFooter(es));
+                        embed.footer ? (embed.footer.text = es.footertext) : embed.setFooter(obeyMeta.asFooter(client.getFooter(es)));
                         embed.footer
                             ? (embed.footer.iconURL =
                                   es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                       ? es.footericon
                                       : client.user.displayAvatarURL())
-                            : embed.setFooter(client.getFooter(es));
+                            : embed.setFooter(obeyMeta.asFooter(client.getFooter(es)));
                         embed.thumbnail
                             ? (embed.thumbnail.url = es.thumb
                                   ? es.footericon &&
@@ -112,7 +113,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable8"]))
                                     .setDescription(
                                         eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable9"])
@@ -135,7 +136,7 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setTitle(client.la[ls].common.erroroccur)
                                 .setDescription(
                                     eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable10"])
@@ -160,16 +161,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable11"]))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -183,7 +184,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable14"]))
                         .setDescription(eval(client.la[ls]["cmds"]["administration"]["updatemessage"]["variable15"])),
                 ],

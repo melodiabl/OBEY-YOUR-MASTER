@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const moment = require("moment");
 let os = require("os");
 let cpuStat = require("cpu-stat");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { duration, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 const { connected } = require("process");
 module.exports = {
@@ -31,11 +33,11 @@ module.exports = {
                 embeds: [
                     new Discord.EmbedBuilder()
                         .setColor(es.color)
-                        .setAuthor({
+                        .setAuthor(obeyMeta.asAuthor({
                             name: client.la[ls].cmds.info.botinfo.loading,
-                            iconURL: "https://cdn.discordapp.com/emojis/756773010123522058.gif",
+                            iconURL: obeyUi.image("motion.cargando"),
                             url: "https://github.com/melodiabl"
-                        }),
+                        })),
                 ],
                 ephemeral: true,
             });
@@ -59,13 +61,13 @@ module.exports = {
                     createdTimestamp,
                 };
                 const botinfo = new Discord.EmbedBuilder()
-                    .setAuthor({
+                    .setAuthor(obeyMeta.asAuthor({
                         name: client.user.username + " Information",
                         iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                             ? es.footericon
                             : client.user.displayAvatarURL(),
                         url: `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`
-                    })
+                    }))
                     .setDescription(eval(client.la[ls]["cmds"]["info"]["botinfo"]["variable1"]))
                     .setColor(es.color)
                     .setThumbnail(
@@ -82,7 +84,7 @@ module.exports = {
                         { name: client.la[ls].cmds.info.botinfo.field4.title, value: `\`\`\`yml\nName: Melodia\nGitHub: melodiabl\`\`\``, inline: true },
                         { name: client.la[ls].cmds.info.botinfo.field5.title, value: handlemsg(client.la[ls].cmds.info.botinfo.field5.value, { invitelink: `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands` }) }
                     )
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 interaction?.editReply({ embeds: [botinfo], ephemeral: true });
             });
         } catch (e) {

@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { PermissionFlagsBits, EmbedBuilder } = require('discord.js')
 module.exports = {
   name: 'purge',
@@ -21,18 +22,18 @@ module.exports = {
     { User: { name: 'usuario', description: 'Solo mensajes de este usuario', required: false } },
   ],
   run: async (client, interaction) => {
-    const err = d => ({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(d)], ephemeral: true })
-    const ok  = d => ({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(d)], ephemeral: true })
+    const err = d => ({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(d, 4096))], ephemeral: true })
+    const ok  = d => ({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(d, 4096))], ephemeral: true })
 
     const amount = interaction.options.getInteger('cantidad')
     const filter = interaction.options.getString('filtro') || 'all'
     const targetUser = interaction.options.getUser('usuario')
 
     if (amount < 1 || amount > 99)
-      return interaction.reply(err('❌ La cantidad debe estar entre 1 y 99.'))
+      return interaction.reply(err(obeyUi.owned('❌ La cantidad debe estar entre 1 y 99.')))
 
     if (!interaction.channel.permissionsFor(interaction.guild.members.me).has(PermissionFlagsBits.ManageMessages))
-      return interaction.reply(err('❌ No tengo permisos para eliminar mensajes aquí.'))
+      return interaction.reply(err(obeyUi.owned('❌ No tengo permisos para eliminar mensajes aquí.')))
 
     await interaction.deferReply({ ephemeral: true })
 
@@ -54,12 +55,12 @@ module.exports = {
 
       const slice = [...toDelete.values()].slice(0, amount)
       if (!slice.length)
-        return interaction.editReply(err('❌ No se encontraron mensajes que coincidan.'))
+        return interaction.editReply(err(obeyUi.owned('❌ No se encontraron mensajes que coincidan.')))
 
       const deleted = await interaction.channel.bulkDelete(slice, true)
-      await interaction.editReply(ok(`🗑️ **${deleted.size}** mensaje(s) eliminado(s).`))
+      await interaction.editReply(ok(`${obeyUi.markup("icon.delete")} **${deleted.size}** mensaje(s) eliminado(s).`))
     } catch (e) {
-      await interaction.editReply(err(`❌ Error: ${e.message}`))
+      await interaction.editReply(err(`${obeyUi.markup("icon.error")} Error: ${e.message}`))
     }
   },
 }

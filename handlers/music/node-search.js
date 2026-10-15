@@ -1,6 +1,7 @@
+const { resolveWithTimeout } = require('./resolve-timeout')
 const { tracksFromResolve } = require('./utils')
 const { assertMusicQuery, allowedMusicTrack } = require('./nodes-config')
-async function searchNodes(client, raw, requester, { guildId } = {}) {
+async function searchNodes(client, raw, requester, { guildId, signal } = {}) {
   const query = assertMusicQuery(raw)
   const nodes = client.nodePool?.candidates(guildId) || [client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)].filter(Boolean)
   if (!nodes.length) throw new Error('No hay conexiones de música disponibles.')
@@ -12,7 +13,7 @@ async function searchNodes(client, raw, requester, { guildId } = {}) {
     let single = null, nodeFailed = false
     for (const identifier of identifiers) {
       try {
-        const response = await node.rest.resolve(identifier)
+        const response = await resolveWithTimeout(node, identifier, 8000, signal)
         if (response?.loadType === 'error') { failed = true; nodeFailed = true; continue }
         const tracks = tracksFromResolve(response).filter(allowedMusicTrack).map(track => ({ ...track, _resolvedNode: node.name,
           info: { ...track.info, requester: name, requesterId: typeof requester === 'object' ? requester.id : track.info?.requesterId || null } }))
@@ -20,7 +21,7 @@ async function searchNodes(client, raw, requester, { guildId } = {}) {
         if (response.loadType === 'track' && !url) { single = { loadType: response.loadType, tracks, playlistName: null }; continue }
         if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
         return { loadType: response.loadType, tracks: single ? [...tracks, single.tracks[0]] : tracks, playlistName: response.data?.info?.name || null }
-      } catch { failed = true; nodeFailed = true }
+      } catch (error) { if (signal?.aborted) throw error; failed = true; nodeFailed = true }
     }
     if (single) {
       if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)

@@ -1,3 +1,4 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 //Here the command starts
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -24,7 +25,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["programming"]["npm"]["variable1"]))
                             .setDescription(eval(client.la[ls]["cmds"]["programming"]["npm"]["variable2"])),
                     ],
@@ -57,9 +58,9 @@ module.exports = {
                     new EmbedBuilder()
                         .setTitle(eval(client.la[ls]["cmds"]["programming"]["npm"]["variable3"]))
                         .setColor(es.color)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setURL(`https://npmjs.com/package/${pkg}`)
-                        .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL({ size: 64 }) })
+                        .setAuthor(obeyMeta.asAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL({ size: 64 }) }))
                         .setDescription(
                             [
                                 body.description || "No Description.",
@@ -78,7 +79,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["programming"]["npm"]["variable4"])),
                 ],

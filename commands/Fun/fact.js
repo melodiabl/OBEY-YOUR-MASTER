@@ -1,3 +1,4 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const https = require("https");
 const path = require("path");
@@ -32,7 +33,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
             .setColor(es.wrongcolor)
-            .setFooter(client.getFooter(es))
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
             .setTitle(client.la[ls].common.disabled.title)
             .setDescription(
               require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -49,7 +50,7 @@ module.exports = {
         .setTitle(":postal_horn: **" + eval(client.la[ls]["cmds"]["fun"]["fact"]["variable1"]) + "**")
         .setDescription(">>> *" + (data.text || "Sin dato disponible") + "*")
         .setColor(es.color)
-        .setFooter(client.getFooter(es));
+        .setFooter(obeyMeta.asFooter(client.getFooter(es)));
       message.reply({ embeds: [fact] }).catch(() => {});
     } catch (e) {
       console.log(String(e.stack).grey.bgRed);
@@ -57,7 +58,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
             .setColor(es.wrongcolor)
-            .setFooter(client.getFooter(es))
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
             .setTitle(client.la[ls].common.erroroccur)
             .setDescription(eval(client.la[ls]["cmds"]["fun"]["fact"]["variable2"])),
         ],

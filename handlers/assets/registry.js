@@ -1,3 +1,4 @@
+const { entryFor } = require('./production')
 const fs = require('node:fs')
 const path = require('node:path')
 const { createHash } = require('node:crypto')
@@ -52,7 +53,7 @@ function createRegistry(map = {}, applicationId) {
   function emoji(key) {
     const canonical = canonicalKey(key)
     const plan = uploadPlans.get(canonical)
-    const candidate = matchingApplication && map.version === 2 && map.emojis && Object.hasOwn(map.emojis, canonical) && map.emojis[canonical]
+    const candidate = matchingApplication && map.emojis && Object.hasOwn(map.emojis, canonical) && map.emojis[canonical]
     if (candidate) {
       try {
         const file = selectedAsset(canonical)
@@ -78,7 +79,7 @@ function createRegistry(map = {}, applicationId) {
       }
     }
     const fallbackKey = selected.assets[canonical].fallback
-    return { name: fallbacks[key] || fallbacks[fallbackKey] || ({ loop: '🔁', like: '💛', 'volume-down': '🔉', 'volume-up': '🔊', cargando: '⏳', exito: '✅', error: '❌' }[fallbackKey]) || '▫️' }
+    return { name: entryFor(canonical)?.fallback || fallbacks[key] || fallbacks[fallbackKey] || ({ loop: '🔁', like: '💛', 'volume-down': '🔉', 'volume-up': '🔊', cargando: '⏳', exito: '✅', error: '❌' }[fallbackKey]) || '▫️' }
   }
   function markup(key) {
     const resolved = emoji(key)
@@ -93,7 +94,11 @@ function createRegistry(map = {}, applicationId) {
     }
     available = next
   }
-  return { emoji, markup, reconcile, musicEmoji: key => markup(musicKeys[key]) }
+  function imageURL(key) {
+    const resolved = emoji(key)
+    return resolved.id ? `https://cdn.discordapp.com/emojis/${resolved.id}.${resolved.animated ? 'gif' : 'png'}` : undefined
+  }
+  return { emoji, markup, reconcile, imageURL, musicEmoji: key => markup(musicKeys[key]) }
 }
 const configuredApplicationId = process.env.DISCORD_CLIENT_ID || require('../../botconfig/config.json').clientid
 function loadRegistry() {

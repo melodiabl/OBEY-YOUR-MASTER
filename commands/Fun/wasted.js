@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const imageEffects = require('../../handlers/image-effects');
 const Discord = require("discord.js");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
@@ -5,7 +7,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const request = require("request");
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 module.exports = {
     name: "wasted",
     aliases: [""],
@@ -21,7 +23,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -37,8 +39,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter(client.getFooter(es))
-                        .setAuthor({ name: "Obteniendo datos de imagen...", iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif" }),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setAuthor(obeyMeta.asAuthor({ name: "Obteniendo datos de imagen...", iconURL: obeyUi.image("motion.cargando") })),
                 ],
             });
             //find the USER
@@ -66,7 +68,7 @@ module.exports = {
                 .reply({
                     embeds: [
                         tempmsg.embeds[0]
-                            .setAuthor({ name: `Meme para: ${user.username}`, iconURL: avatar })
+                            .setAuthor(obeyMeta.asAuthor({ name: `Meme para: ${user.username}`, iconURL: avatar }))
                             .setColor(es.color)
                             .setImage("attachment://wasted.png"),
                     ],
@@ -80,7 +82,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["fun"]["wasted"]["variable4"])),
                 ],

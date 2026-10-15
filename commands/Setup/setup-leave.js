@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder,
     ButtonStyle
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -33,17 +35,17 @@ module.exports = {
                     {
                         value: "Channel Leave Messages",
                         description: `Manage Leave Messages in 1 CHANNEL`,
-                        emoji: allEmojis.msg.channel, //
+                        emoji: obeyUi.component(allEmojis.msg.channel), //
                     },
                     {
                         value: "Direct Leave Messages",
                         description: `Manage Leave Messages on DMS`,
-                        emoji: "😬",
+                        emoji: obeyUi.component("😬"),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Leave-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -51,7 +53,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Leave-System"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -67,8 +69,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -91,16 +93,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -115,32 +117,32 @@ module.exports = {
                                     {
                                         value: `${client.settings.get(message.guild.id, "leave.channel") == "nochannel" ? "Set Channel" : "Overwrite Channel"}`,
                                         description: `${client.settings.get(message.guild.id, "leave.channel") == "nochannel" ? "Set a Channel where the Leave Messages should be" : "Overwrite the current Channel with a new one"}`,
-                                        emoji: allEmojis.msg.channel, //
+                                        emoji: obeyUi.component(allEmojis.msg.channel), //
                                     },
                                     {
                                         value: "Disable Leave",
                                         description: `Disable the Leave Messages`,
-                                        emoji: "❌",
+                                        emoji: obeyUi.component("❌"),
                                     },
                                     {
                                         value: "Manage the Image",
                                         description: `Manage the Leave Image for the Mensaje`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: "Edit the Message",
                                         description: `Edit the Leave Mensaje ...`,
-                                        emoji: "👋",
+                                        emoji: obeyUi.component("👋"),
                                     },
                                     {
                                         value: `${client.settings.get(message.guild.id, "leave.invite") ? "Disable InviteInformation" : "Enable Invite Information"}`,
                                         description: `${client.settings.get(message.guild.id, "leave.invite") ? "No longer show Information who invited him/her" : "Show Information about who invited him/her"}`,
-                                        emoji: "👋",
+                                        emoji: obeyUi.component("👋"),
                                     },
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Leave-Configuración!`,
-                                        emoji: allEmojis.msg.cancel,
+                                        emoji: obeyUi.component(allEmojis.msg.cancel),
                                     },
                                 ];
                                 //define the selection
@@ -148,7 +150,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
+                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Leave-System"))
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -166,8 +168,8 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                    .setAuthor(obeyMeta.asAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -192,16 +194,16 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -213,13 +215,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable7"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable7"]), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable8"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable8"]), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -244,20 +246,20 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-leave"][
                                                                                 "variable9"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setDescription(
-                                                                        `If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
+                                                                        obeyUi.limit(`If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-leave  --> Pick ${obeyUi.markup("icon.ordinal-1")} --> Pick ${obeyUi.markup("icon.ordinal-4")}\``.substring(
                                                                             0,
                                                                             2048
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     }
@@ -269,17 +271,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable12"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -292,16 +294,16 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable13"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable13"]), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-leave\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
+                                                            obeyUi.limit(`If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-leave\` --> Pick ${obeyUi.markup("icon.ordinal-1")} --> Pick ${obeyUi.markup("icon.ordinal-1")}`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -314,62 +316,62 @@ module.exports = {
                                                     {
                                                         value: "Disable the Image",
                                                         description: `I won't attach any Images anymore`,
-                                                        emoji: "❌",
+                                                        emoji: obeyUi.component("❌"),
                                                     },
                                                     {
                                                         value: "Enable auto Image",
                                                         description: `I will generate an Image with the Userdata`,
-                                                        emoji: "👋",
+                                                        emoji: obeyUi.component("👋"),
                                                     },
                                                     {
                                                         value: "Set Image Background",
                                                         description: `Define the Background of the AUTO IMAGE`,
-                                                        emoji: "👍",
+                                                        emoji: obeyUi.component("👍"),
                                                     },
                                                     {
                                                         value: "Del Image Background",
                                                         description: `Reset the AUTO IMAGE Background to the default one`,
-                                                        emoji: "🗑",
+                                                        emoji: obeyUi.component("🗑"),
                                                     },
                                                     {
                                                         value: "Custom Image",
                                                         description: `Use a custom Image instead of the Background Image`,
-                                                        emoji: "🖼",
+                                                        emoji: obeyUi.component("🖼"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.frame") ? "Disable" : "Enable"} Frame`,
                                                         description: `${client.settings.get(message.guild.id, "leave.frame") ? "I won't show the Frame anymore" : "Let me display a colored Frame for highlighting"}`,
-                                                        emoji: "✏️",
+                                                        emoji: obeyUi.component("✏️"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.discriminator") ? "Disable" : "Enable"} User-Tag`,
                                                         description: `${client.settings.get(message.guild.id, "leave.discriminator") ? "I won't show the User-Tag anymore" : "Let me display a colored User-Tag (#1234)"}`,
-                                                        emoji: "🔢",
+                                                        emoji: obeyUi.component("🔢"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.membercount") ? "Disable" : "Enable"} Member Count`,
                                                         description: `${client.settings.get(message.guild.id, "leave.membercount") ? "I won't show the Member Count anymore" : "Let me display a colored MemberCount of the Server"}`,
-                                                        emoji: "📈",
+                                                        emoji: obeyUi.component("📈"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.servername") ? "Disable" : "Enable"} Server Name`,
                                                         description: `${client.settings.get(message.guild.id, "leave.servername") ? "I won't show the ServerName anymore" : "Let me display a colored ServerName"}`,
-                                                        emoji: "🗒",
+                                                        emoji: obeyUi.component("🗒"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.pb") ? "Disable" : "Enable"} User-Avatar`,
                                                         description: `${client.settings.get(message.guild.id, "leave.pb") ? "I won't show the User-Avatar anymore" : "Let me display the User-Avatar"}`,
-                                                        emoji: "💯",
+                                                        emoji: obeyUi.component("💯"),
                                                     },
                                                     {
                                                         value: "Frame Color",
                                                         description: `Change the Frame Color`,
-                                                        emoji: "⬜",
+                                                        emoji: obeyUi.component("⬜"),
                                                     },
                                                     {
                                                         value: "Cancel",
                                                         description: `Cancelar and stop the Leave-Configuración!`,
-                                                        emoji: allEmojis.msg.cancel,
+                                                        emoji: obeyUi.component(allEmojis.msg.cancel),
                                                     },
                                                 ];
                                                 //define the selection
@@ -377,7 +379,7 @@ module.exports = {
                                                     .setCustomId("MenuSelection")
                                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
+                                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Leave-System"))
                                                     .addOptions(
                                                         menuoptions.map(option => {
                                                             let Obj = {
@@ -395,9 +397,9 @@ module.exports = {
                                                 //define the embed
                                                 let MenuEmbed = new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
+                                                    .setAuthor(obeyMeta.asAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" }))
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096)
                                                     );
                                                 //send the menu msg
                                                 let menumsg = await message.reply({
@@ -432,7 +434,7 @@ module.exports = {
                                                         handle_the_picks_3(menu?.values[0], SetupNumber, menuoptiondata);
                                                     } else
                                                         menu?.reply({
-                                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                             ephemeral: true,
                                                         });
                                                 });
@@ -441,11 +443,11 @@ module.exports = {
                                                     menumsg.edit({
                                                         embeds: [
                                                             EmbedBuilder.from(menumsg.embeds[0]).setDescription(
-                                                                `~~${menumsg.embeds[0].description}~~`
+                                                                obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096)
                                                             ),
                                                         ],
                                                         components: [],
-                                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                                     });
                                                 });
                                             }
@@ -462,20 +464,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable18"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with__out__ an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with__out__ an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -487,20 +489,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable21"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -511,21 +513,21 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable24"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable25"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             await tempmsg.channel
@@ -557,22 +559,22 @@ module.exports = {
                                                                                 embeds: [
                                                                                     new Discord.EmbedBuilder()
                                                                                         .setTitle(
-                                                                                            eval(
+                                                                                            obeyUi.limit(eval(
                                                                                                 client.la[ls]["cmds"][
                                                                                                     "setup"
                                                                                                 ]["setup-leave"][
                                                                                                     "variable26"
                                                                                                 ]
-                                                                                            )
+                                                                                            ), 256)
                                                                                         )
                                                                                         .setColor(es.color)
                                                                                         .setDescription(
-                                                                                            `I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                                 0,
                                                                                                 2048
-                                                                                            )
+                                                                                            ), 4096)
                                                                                         )
-                                                                                        .setFooter(client.getFooter(es)),
+                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                 ],
                                                                             });
                                                                         }
@@ -580,14 +582,14 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-leave"
                                                                                             ]["variable27"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -607,20 +609,20 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-leave"
                                                                                             ]["variable28"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
                                                                                     .setDescription(
-                                                                                        `I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                        obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                             0,
                                                                                             2048
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -628,21 +630,21 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable29"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable30"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
                                                                                 .setColor(es.color)
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
 
@@ -674,20 +676,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable31"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 });
@@ -705,20 +707,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable32"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -729,14 +731,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable35"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             await tempmsg.channel
@@ -763,22 +765,22 @@ module.exports = {
                                                                                 embeds: [
                                                                                     new Discord.EmbedBuilder()
                                                                                         .setTitle(
-                                                                                            eval(
+                                                                                            obeyUi.limit(eval(
                                                                                                 client.la[ls]["cmds"][
                                                                                                     "setup"
                                                                                                 ]["setup-leave"][
                                                                                                     "variable36"
                                                                                                 ]
-                                                                                            )
+                                                                                            ), 256)
                                                                                         )
                                                                                         .setColor(es.color)
                                                                                         .setDescription(
-                                                                                            `I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                                 0,
                                                                                                 2048
-                                                                                            )
+                                                                                            ), 4096)
                                                                                         )
-                                                                                        .setFooter(client.getFooter(es)),
+                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                 ],
                                                                             });
                                                                         }
@@ -786,14 +788,14 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-leave"
                                                                                             ]["variable37"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -808,20 +810,20 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-leave"
                                                                                             ]["variable38"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
                                                                                     .setDescription(
-                                                                                        `I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                        obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                             0,
                                                                                             2048
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -829,21 +831,21 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable39"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable40"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
                                                                                 .setColor(es.color)
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
 
@@ -875,20 +877,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable41"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 });
@@ -906,20 +908,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable42"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -939,20 +941,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable45"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -969,20 +971,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable48"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -999,20 +1001,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable51"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1029,20 +1031,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable54"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1053,45 +1055,45 @@ module.exports = {
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FFFFF9")
-                                                                    .setEmoji("⬜")
-                                                                    .setLabel("#FFFFF9"),
+                                                                    .setEmoji(obeyUi.component("⬜"))
+                                                                    .setLabel(obeyUi.plain("#FFFFF9")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FAFA25")
-                                                                    .setEmoji("🟨")
-                                                                    .setLabel("#FAFA25"),
+                                                                    .setEmoji(obeyUi.component("🟨"))
+                                                                    .setLabel(obeyUi.plain("#FAFA25")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA9E25")
-                                                                    .setEmoji("🟧")
-                                                                    .setLabel("#FA9E25"),
+                                                                    .setEmoji(obeyUi.component("🟧"))
+                                                                    .setLabel(obeyUi.plain("#FA9E25")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA2525")
-                                                                    .setEmoji("🟥")
-                                                                    .setLabel("#FA2525"),
+                                                                    .setEmoji(obeyUi.component("🟥"))
+                                                                    .setLabel(obeyUi.plain("#FA2525")),
                                                             ]);
                                                             let row2 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#25FA6C")
-                                                                    .setEmoji("🟩")
-                                                                    .setLabel("#25FA6C"),
+                                                                    .setEmoji(obeyUi.component("🟩"))
+                                                                    .setLabel(obeyUi.plain("#25FA6C")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#3A98F0")
-                                                                    .setEmoji("🟦")
-                                                                    .setLabel("#3A98F0"),
+                                                                    .setEmoji(obeyUi.component("🟦"))
+                                                                    .setLabel(obeyUi.plain("#3A98F0")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#8525FA")
-                                                                    .setEmoji("🟪")
-                                                                    .setLabel("#8525FA"),
+                                                                    .setEmoji(obeyUi.component("🟪"))
+                                                                    .setLabel(obeyUi.plain("#8525FA")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#030303")
-                                                                    .setEmoji("⬛")
-                                                                    .setLabel("#030303"),
+                                                                    .setEmoji(obeyUi.component("⬛"))
+                                                                    .setLabel(obeyUi.plain("#030303")),
                                                             ]);
 
                                                             tempmsg = await message.reply({
@@ -1099,17 +1101,17 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable57"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `*React to the Color you want the Frame/Text to be like ;)*`
+                                                                            obeyUi.limit(`*React to the Color you want the Frame/Text to be like ;)*`, 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             //Create the collector
@@ -1125,11 +1127,11 @@ module.exports = {
                                                                 message.reply({
                                                                     embeds: [
                                                                         tempEmbedBuilder.from(msg.embeds[0]).setDescription(
-                                                                            `~~${tempmsg.embeds[0].description}~~`
+                                                                            obeyUi.limit(`~~${tempmsg.embeds[0].description}~~`, 4096)
                                                                         ),
                                                                     ],
                                                                     components: [],
-                                                                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\` Color**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                                                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\` Color**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                                                 });
                                                             });
                                                             //Menu Collections
@@ -1145,20 +1147,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable59"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(color)
                                                                                 .setDescription(
-                                                                                    `If Someone leaves this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                    obeyUi.limit(`If Someone leaves this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                         0,
                                                                                         2048
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 }
@@ -1178,13 +1180,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable64"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable64"]), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable65"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable65"]), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -1201,20 +1203,20 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-leave"][
                                                                             "variable66"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", message.author)}`.substring(
+                                                                    obeyUi.limit(`If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", message.author)}`.substring(
                                                                         0,
                                                                         2048
-                                                                    )
+                                                                    ), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 })
@@ -1224,17 +1226,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable69"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -1251,16 +1253,16 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable70"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable70"]), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Servidor, a message with Invite Information will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
+                                                            obeyUi.limit(`If Someone joins this Servidor, a message with Invite Information will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "leave.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-leave  --> Pick ${obeyUi.markup("icon.ordinal-1")} --> Pick ${obeyUi.markup("icon.ordinal-4")}\``.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -1277,27 +1279,27 @@ module.exports = {
                                     {
                                         value: `${!client.settings.get(message.guild.id, "leave.dm") ? "Enable Dm Messages" : "Disable Dm Messages"}`,
                                         description: `${!client.settings.get(message.guild.id, "leave.dm") ? "Send Dm Messages if the user leaves" : "Don't send any dms when he leaves"}`,
-                                        emoji: allEmojis.msg.channel, //
+                                        emoji: obeyUi.component(allEmojis.msg.channel), //
                                     },
                                     {
                                         value: "Manage the Image",
                                         description: `Manage the Leave Image for the Mensaje`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: "Edit the Message",
                                         description: `Edit the Leave Mensaje ...`,
-                                        emoji: "👋",
+                                        emoji: obeyUi.component("👋"),
                                     },
                                     {
                                         value: `${client.settings.get(message.guild.id, "leave.invitedm") ? "Disable InviteInformation" : "Enable Invite Information"}`,
                                         description: `${client.settings.get(message.guild.id, "leave.invitedm") ? "No longer show Information who invited him/her" : "Show Information about who invited him/her"}`,
-                                        emoji: "👋",
+                                        emoji: obeyUi.component("👋"),
                                     },
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Leave-Configuración!`,
-                                        emoji: allEmojis.msg.cancel,
+                                        emoji: obeyUi.component(allEmojis.msg.cancel),
                                     },
                                 ];
                                 //define the selection
@@ -1305,7 +1307,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
+                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Leave-System"))
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -1323,8 +1325,8 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                    .setAuthor(obeyMeta.asAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -1349,16 +1351,16 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -1372,14 +1374,14 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-leave"][
                                                                         "variable79"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setColor(es.color)
-                                                            .setFooter(client.getFooter(es)),
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                     ],
                                                 });
                                             }
@@ -1388,10 +1390,10 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable76"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable76"]), 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -1404,62 +1406,62 @@ module.exports = {
                                                     {
                                                         value: "Disable the Image",
                                                         description: `I won't attach any Images anymore`,
-                                                        emoji: "❌",
+                                                        emoji: obeyUi.component("❌"),
                                                     },
                                                     {
                                                         value: "Enable auto Image",
                                                         description: `I will generate an Image with the Userdata`,
-                                                        emoji: "👋",
+                                                        emoji: obeyUi.component("👋"),
                                                     },
                                                     {
                                                         value: "Set Image Background",
                                                         description: `Define the Background of the AUTO IMAGE`,
-                                                        emoji: "👍",
+                                                        emoji: obeyUi.component("👍"),
                                                     },
                                                     {
                                                         value: "Del Image Background",
                                                         description: `Reset the AUTO IMAGE Background to the default one`,
-                                                        emoji: "🗑",
+                                                        emoji: obeyUi.component("🗑"),
                                                     },
                                                     {
                                                         value: "Custom Image",
                                                         description: `Use a custom Image instead of the Background Image`,
-                                                        emoji: "🖼",
+                                                        emoji: obeyUi.component("🖼"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.framedm") ? "Disable" : "Enable"} Frame`,
                                                         description: `${client.settings.get(message.guild.id, "leave.framedm") ? "I won't show the Frame anymore" : "Let me display a colored Frame for highlighting"}`,
-                                                        emoji: "✏️",
+                                                        emoji: obeyUi.component("✏️"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.discriminatordm") ? "Disable" : "Enable"} User-Tag`,
                                                         description: `${client.settings.get(message.guild.id, "leave.discriminatordm") ? "I won't show the User-Tag anymore" : "Let me display a colored User-Tag (#1234)"}`,
-                                                        emoji: "🔢",
+                                                        emoji: obeyUi.component("🔢"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.membercountdm") ? "Disable" : "Enable"} Member Count`,
                                                         description: `${client.settings.get(message.guild.id, "leave.membercountdm") ? "I won't show the Member Count anymore" : "Let me display a colored MemberCount of the Server"}`,
-                                                        emoji: "📈",
+                                                        emoji: obeyUi.component("📈"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.servernamedm") ? "Disable" : "Enable"} Server Name`,
                                                         description: `${client.settings.get(message.guild.id, "leave.servernamedm") ? "I won't show the ServerName anymore" : "Let me display a colored ServerName"}`,
-                                                        emoji: "🗒",
+                                                        emoji: obeyUi.component("🗒"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "leave.pbdm") ? "Disable" : "Enable"} User-Avatar`,
                                                         description: `${client.settings.get(message.guild.id, "leave.pbdm") ? "I won't show the User-Avatar anymore" : "Let me display the User-Avatar"}`,
-                                                        emoji: "💯",
+                                                        emoji: obeyUi.component("💯"),
                                                     },
                                                     {
                                                         value: "Frame Color",
                                                         description: `Change the Frame Color`,
-                                                        emoji: "⬜",
+                                                        emoji: obeyUi.component("⬜"),
                                                     },
                                                     {
                                                         value: "Cancel",
                                                         description: `Cancelar and stop the Leave-Configuración!`,
-                                                        emoji: allEmojis.msg.cancel,
+                                                        emoji: obeyUi.component(allEmojis.msg.cancel),
                                                     },
                                                 ];
                                                 //define the selection
@@ -1467,7 +1469,7 @@ module.exports = {
                                                     .setCustomId("MenuSelection")
                                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                                    .setPlaceholder("¡Haz clic para configurar the Leave-System")
+                                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Leave-System"))
                                                     .addOptions(
                                                         menuoptions.map(option => {
                                                             let Obj = {
@@ -1485,9 +1487,9 @@ module.exports = {
                                                 //define the embed
                                                 let MenuEmbed = new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" })
+                                                    .setAuthor(obeyMeta.asAuthor({ name: "Leave Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png", url: "https://github.com/melodiabl" }))
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096)
                                                     );
                                                 //send the menu msg
                                                 let menumsg = await message.reply({
@@ -1522,7 +1524,7 @@ module.exports = {
                                                         handle_the_picks_3(menu?.values[0], SetupNumber, menuoptiondata);
                                                     } else
                                                         menu?.reply({
-                                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                             ephemeral: true,
                                                         });
                                                 });
@@ -1531,11 +1533,11 @@ module.exports = {
                                                     menumsg.edit({
                                                         embeds: [
                                                             EmbedBuilder.from(menumsg.embeds[0]).setDescription(
-                                                                `~~${menumsg.embeds[0].description}~~`
+                                                                obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096)
                                                             ),
                                                         ],
                                                         components: [],
-                                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                                     });
                                                 });
                                             }
@@ -1552,20 +1554,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable18"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with__out__ an image** will be sent into There Dms`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with__out__ an image** will be sent into There Dms`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1577,20 +1579,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable21"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
+                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1601,21 +1603,21 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable24"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable25"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             await tempmsg.channel
@@ -1647,22 +1649,22 @@ module.exports = {
                                                                                 embeds: [
                                                                                     new Discord.EmbedBuilder()
                                                                                         .setTitle(
-                                                                                            eval(
+                                                                                            obeyUi.limit(eval(
                                                                                                 client.la[ls]["cmds"][
                                                                                                     "setup"
                                                                                                 ]["setup-leave"][
                                                                                                     "variable26"
                                                                                                 ]
-                                                                                            )
+                                                                                            ), 256)
                                                                                         )
                                                                                         .setColor(es.color)
                                                                                         .setDescription(
-                                                                                            `I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
+                                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
                                                                                                 0,
                                                                                                 2048
-                                                                                            )
+                                                                                            ), 4096)
                                                                                         )
-                                                                                        .setFooter(client.getFooter(es)),
+                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                 ],
                                                                             });
                                                                         }
@@ -1670,14 +1672,14 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-leave"
                                                                                             ]["variable27"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -1697,20 +1699,20 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-leave"
                                                                                             ]["variable28"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
                                                                                     .setDescription(
-                                                                                        `I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
+                                                                                        obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
                                                                                             0,
                                                                                             2048
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -1718,21 +1720,21 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable29"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable30"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
                                                                                 .setColor(es.color)
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
 
@@ -1764,20 +1766,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable31"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 });
@@ -1795,20 +1797,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable32"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an image** will be sent into DMS`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1819,14 +1821,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable35"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             await tempmsg.channel
@@ -1853,22 +1855,22 @@ module.exports = {
                                                                                 embeds: [
                                                                                     new Discord.EmbedBuilder()
                                                                                         .setTitle(
-                                                                                            eval(
+                                                                                            obeyUi.limit(eval(
                                                                                                 client.la[ls]["cmds"][
                                                                                                     "setup"
                                                                                                 ]["setup-leave"][
                                                                                                     "variable36"
                                                                                                 ]
-                                                                                            )
+                                                                                            ), 256)
                                                                                         )
                                                                                         .setColor(es.color)
                                                                                         .setDescription(
-                                                                                            `I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
+                                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
                                                                                                 0,
                                                                                                 2048
-                                                                                            )
+                                                                                            ), 4096)
                                                                                         )
-                                                                                        .setFooter(client.getFooter(es)),
+                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                 ],
                                                                             });
                                                                         }
@@ -1876,14 +1878,14 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-leave"
                                                                                             ]["variable37"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -1898,20 +1900,20 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-leave"
                                                                                             ]["variable38"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
                                                                                     .setDescription(
-                                                                                        `I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
+                                                                                        obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "leave.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into DMS`.substring(
                                                                                             0,
                                                                                             2048
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -1919,21 +1921,21 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable39"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable40"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
                                                                                 .setColor(es.color)
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
 
@@ -1965,20 +1967,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable41"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 });
@@ -1996,20 +1998,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable42"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2029,20 +2031,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable45"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2062,20 +2064,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable48"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2092,20 +2094,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable51"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2122,20 +2124,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-leave"
                                                                                 ]["variable54"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2146,45 +2148,45 @@ module.exports = {
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FFFFF9")
-                                                                    .setEmoji("⬜")
-                                                                    .setLabel("#FFFFF9"),
+                                                                    .setEmoji(obeyUi.component("⬜"))
+                                                                    .setLabel(obeyUi.plain("#FFFFF9")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FAFA25")
-                                                                    .setEmoji("🟨")
-                                                                    .setLabel("#FAFA25"),
+                                                                    .setEmoji(obeyUi.component("🟨"))
+                                                                    .setLabel(obeyUi.plain("#FAFA25")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA9E25")
-                                                                    .setEmoji("🟧")
-                                                                    .setLabel("#FA9E25"),
+                                                                    .setEmoji(obeyUi.component("🟧"))
+                                                                    .setLabel(obeyUi.plain("#FA9E25")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA2525")
-                                                                    .setEmoji("🟥")
-                                                                    .setLabel("#FA2525"),
+                                                                    .setEmoji(obeyUi.component("🟥"))
+                                                                    .setLabel(obeyUi.plain("#FA2525")),
                                                             ]);
                                                             let row2 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#25FA6C")
-                                                                    .setEmoji("🟩")
-                                                                    .setLabel("#25FA6C"),
+                                                                    .setEmoji(obeyUi.component("🟩"))
+                                                                    .setLabel(obeyUi.plain("#25FA6C")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#3A98F0")
-                                                                    .setEmoji("🟦")
-                                                                    .setLabel("#3A98F0"),
+                                                                    .setEmoji(obeyUi.component("🟦"))
+                                                                    .setLabel(obeyUi.plain("#3A98F0")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#8525FA")
-                                                                    .setEmoji("🟪")
-                                                                    .setLabel("#8525FA"),
+                                                                    .setEmoji(obeyUi.component("🟪"))
+                                                                    .setLabel(obeyUi.plain("#8525FA")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#030303")
-                                                                    .setEmoji("⬛")
-                                                                    .setLabel("#030303"),
+                                                                    .setEmoji(obeyUi.component("⬛"))
+                                                                    .setLabel(obeyUi.plain("#030303")),
                                                             ]);
 
                                                             tempmsg = await message.reply({
@@ -2192,17 +2194,17 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable57"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `*React to the Color you want the Frame/Text to be like ;)*`
+                                                                            obeyUi.limit(`*React to the Color you want the Frame/Text to be like ;)*`, 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             //Create the collector
@@ -2218,11 +2220,11 @@ module.exports = {
                                                                 message.reply({
                                                                     embeds: [
                                                                         tempEmbedBuilder.from(msg.embeds[0]).setDescription(
-                                                                            `~~${tempmsg.embeds[0].description}~~`
+                                                                            obeyUi.limit(`~~${tempmsg.embeds[0].description}~~`, 4096)
                                                                         ),
                                                                     ],
                                                                     components: [],
-                                                                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\` Color**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                                                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\` Color**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                                                 });
                                                             });
                                                             //Menu Collections
@@ -2238,20 +2240,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-leave"
                                                                                         ]["variable59"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(color)
                                                                                 .setDescription(
-                                                                                    `If Someone leaves this Servidor, a message **with an automated image** will be sent into DMS`.substring(
+                                                                                    obeyUi.limit(`If Someone leaves this Servidor, a message **with an automated image** will be sent into DMS`.substring(
                                                                                         0,
                                                                                         2048
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 }
@@ -2271,13 +2273,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable64"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable64"]), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable65"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable65"]), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -2294,20 +2296,20 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-leave"][
                                                                             "variable66"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `If Someone joins this Servidor, this message will be sent into DMS!\n\n${message.content.replace("{user}", message.author)}`.substring(
+                                                                    obeyUi.limit(`If Someone joins this Servidor, this message will be sent into DMS!\n\n${message.content.replace("{user}", message.author)}`.substring(
                                                                         0,
                                                                         2048
-                                                                    )
+                                                                    ), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 })
@@ -2317,17 +2319,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable69"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -2344,16 +2346,16 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable70"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-leave"]["variable70"]), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Servidor, a message with Invite Information will be sent into DMS!\nEdit the message with: \`${prefix}setup-leave  --> Pick 1️⃣ --> Pick 4️⃣\``.substring(
+                                                            obeyUi.limit(`If Someone joins this Servidor, a message with Invite Information will be sent into DMS!\nEdit the message with: \`${prefix}setup-leave  --> Pick ${obeyUi.markup("icon.ordinal-1")} --> Pick ${obeyUi.markup("icon.ordinal-4")}\``.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -2370,9 +2372,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``, 4096)),
                 ],
             });
         }

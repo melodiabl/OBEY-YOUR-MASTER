@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing, edit_Roster_msg, send_roster_msg } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
@@ -56,7 +58,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Roster System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Roster System!"))
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -74,7 +76,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Roster System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Roster System!"))
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -92,7 +94,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Roster System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Roster System!"))
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -110,7 +112,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Roster System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Roster System!"))
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -127,12 +129,12 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(client.getAuthor(
+                    .setAuthor(obeyMeta.asAuthor(client.getAuthor(
                             "Server Roster Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/page-with-curl_1f4c3.png",
                             "https://github.com/melodiabl"
-                        ))
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                        )))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({ embeds: [MenuEmbed], components: [row1, row2, row3, row4] });
@@ -162,16 +164,16 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -180,58 +182,58 @@ module.exports = {
                     {
                         value: "Define Channel",
                         description: `Define the Canal for this Roster System`,
-                        emoji: allEmojis.msg.channel,
+                        emoji: obeyUi.component(allEmojis.msg.channel),
                     },
                     {
                         value: "Add Roster Role",
                         description: `Add a Roster Rol to the bottom to get displayed`,
-                        emoji: allEmojis.msg.SUCCESS,
+                        emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                     },
                     {
                         value: "Remove Roster Role",
                         description: `Removido a displayed Roster Rol of the List`,
-                        emoji: allEmojis.msg.ERROR,
+                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                     },
                     {
                         value: "Show Roster Roles",
                         description: `Show all Roster Roles of this Roster`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Edit Roster Style",
                         description: `Adjust the Display Style of this Roster`,
-                        emoji: allEmojis.msg.setup,
+                        emoji: obeyUi.component(allEmojis.msg.setup),
                     },
                     {
                         value: "Edit Emoji",
                         description: `Edit the Emoji/Text infront of the Names`,
-                        emoji: allEmojis.msg.edit,
+                        emoji: obeyUi.component(allEmojis.msg.edit),
                     },
                     {
                         value: "Set Title",
                         description: `Set the Embed Title of that Roster`,
-                        emoji: allEmojis.msg.title,
+                        emoji: obeyUi.component(allEmojis.msg.title),
                     },
                     {
                         value: `${thedb?.get(message.guild.id, pre + ".inline") ? "Disable Multiple Rows" : "Enable Roster Rows"}`,
                         description: `${thedb?.get(message.guild.id, pre + ".inline") ? "Disable that i inline all Fields" : "Enable that i inline all Fields"}`,
-                        emoji: "📰",
+                        emoji: obeyUi.component("📰"),
                     },
                     {
                         value: `${thedb?.get(message.guild.id, pre + ".showallroles") ? "Cut Members off" : "Show all members"}`,
                         description: `${thedb?.get(message.guild.id, pre + ".showallroles") ? "Cut Members off and show the rest amount" : "Don't cut Off, show all of them"}`,
-                        emoji: "📰",
+                        emoji: obeyUi.component("📰"),
                     },
 
                     {
                         value: "Delete & Reset",
                         description: `Delete current setup, which allows you to resetup`,
-                        emoji: "☠️",
+                        emoji: obeyUi.component("☠️"),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ticket-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -240,7 +242,7 @@ module.exports = {
                     .setMaxValues(1)
                     .setMinValues(1)
                     .setPlaceholder(
-                        `Click me to manage the ${SetupNumber} Roster System!\n\n**You've picked:**\n> ${menuoptiondata.value}`
+                        obeyUi.plain(`Click me to manage the ${SetupNumber} Roster System!\n\n**You've picked:**\n> ${menuoptiondata.value}`)
                     )
                     .addOptions(
                         menuoptions.map(option => {
@@ -257,8 +259,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: SetupNumber + " Server Roster Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/page-with-curl_1f4c3.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: SetupNumber + " Server Roster Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/65/page-with-curl_1f4c3.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -287,16 +289,16 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -308,10 +310,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable7"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable7"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable8"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable8"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -334,16 +336,16 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable9"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable9"]), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `To add Roles to the Roster type: \`${prefix}setup-roster\``.substring(
+                                                            obeyUi.limit(`To add Roles to the Roster type: \`${prefix}setup-roster\``.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -351,17 +353,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable10"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable20"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -374,10 +376,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable12"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable12"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -388,10 +390,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable13"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable13"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable14"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable14"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -413,17 +415,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable15"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable16"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         try {
@@ -433,17 +435,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable17"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable18"]
-                                                            )
+                                                            ), 4096)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -451,17 +453,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable19"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable29"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -474,10 +476,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable21"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable21"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -488,10 +490,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable22"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable22"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable23"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable23"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -513,17 +515,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable24"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable25"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         try {
@@ -533,17 +535,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable26"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable27"]
-                                                            )
+                                                            ), 4096)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -551,17 +553,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable28"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable49"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -574,10 +576,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable30"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable30"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -588,10 +590,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable31"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable31"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable32"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable32"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -601,14 +603,14 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable33"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable33"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable34"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable34"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             try {
-                                for (const emoji of ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣"]) tempmsg.react(emoji);
+                                for (const emoji of ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣"]) tempmsg.react(obeyUi.reaction(emoji));
                             } catch (e) {
                                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                             }
@@ -622,137 +624,137 @@ module.exports = {
                                 .then(collected => {
                                     var reaction = collected.first();
                                     reaction.users.remove(message.author.id);
-                                    if (reaction.emoji?.name === "1️⃣") {
+                                    if (obeyUi.matchesReaction(reaction.emoji, "1️⃣")) {
                                         thedb?.set(message.guild.id, "1", pre + ".rosterstyle");
                                         edit_Roster_msg(client, message.guild, thedb, pre);
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable35"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable35"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                        obeyUi.limit(`The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                             0,
                                                             2000
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
-                                    } else if (reaction.emoji?.name === "2️⃣") {
+                                    } else if (obeyUi.matchesReaction(reaction.emoji, "2️⃣")) {
                                         thedb?.set(message.guild.id, "2", pre + ".rosterstyle");
                                         edit_Roster_msg(client, message.guild, thedb, pre);
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable36"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable36"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                        obeyUi.limit(`The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                             0,
                                                             2000
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
-                                    } else if (reaction.emoji?.name === "3️⃣") {
+                                    } else if (obeyUi.matchesReaction(reaction.emoji, "3️⃣")) {
                                         thedb?.set(message.guild.id, "3", pre + ".rosterstyle");
                                         edit_Roster_msg(client, message.guild, thedb, pre);
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable37"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable37"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                        obeyUi.limit(`The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                             0,
                                                             2000
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
-                                    } else if (reaction.emoji?.name === "4️⃣") {
+                                    } else if (obeyUi.matchesReaction(reaction.emoji, "4️⃣")) {
                                         thedb?.set(message.guild.id, "4", pre + ".rosterstyle");
                                         edit_Roster_msg(client, message.guild, thedb, pre);
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable38"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable38"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                        obeyUi.limit(`The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                             0,
                                                             2000
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
-                                    } else if (reaction.emoji?.name === "5️⃣") {
+                                    } else if (obeyUi.matchesReaction(reaction.emoji, "5️⃣")) {
                                         thedb?.set(message.guild.id, "5", pre + ".rosterstyle");
                                         edit_Roster_msg(client, message.guild, thedb, pre);
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable39"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable39"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                        obeyUi.limit(`The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                             0,
                                                             2000
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
-                                    } else if (reaction.emoji?.name === "6️⃣") {
+                                    } else if (obeyUi.matchesReaction(reaction.emoji, "6️⃣")) {
                                         thedb?.set(message.guild.id, "6", pre + ".rosterstyle");
                                         edit_Roster_msg(client, message.guild, thedb, pre);
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable40"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable40"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                        obeyUi.limit(`The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                             0,
                                                             2000
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
-                                    } else if (reaction.emoji?.name === "7️⃣") {
+                                    } else if (obeyUi.matchesReaction(reaction.emoji, "7️⃣")) {
                                         thedb?.set(message.guild.id, "7", "rosterstyle");
                                         edit_Roster_msg(client, message.guild, thedb, pre);
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable41"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable41"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                        obeyUi.limit(`The Roster will edit soon!\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                             0,
                                                             2000
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -765,10 +767,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable42"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable42"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                         }
@@ -778,10 +780,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable43"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable43"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable44"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable44"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -802,18 +804,18 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable45"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n<@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                            obeyUi.limit(`To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n<@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             return;
@@ -826,20 +828,20 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-roster"][
                                                                         "variable46"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setColor(es.color)
                                                             .setDescription(
-                                                                `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n${msg} <@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                                obeyUi.limit(`To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n${msg} <@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                                     0,
                                                                     2048
-                                                                )
+                                                                ), 4096)
                                                             )
-                                                            .setFooter(client.getFooter(es)),
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                     ],
                                                 });
                                             }
@@ -849,18 +851,18 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable47"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n${msg.substring(0, 5)} <@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                            obeyUi.limit(`To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nExample: \n${msg.substring(0, 5)} <@${message.author.id}> | \`${message.author.username}\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -868,17 +870,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable48"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable55"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -891,10 +893,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable50"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable50"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -905,10 +907,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable51"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable51"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable52"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable52"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -929,18 +931,18 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable53"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                                            obeyUi.limit(`To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -948,17 +950,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable54"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-roster"]["variable61"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -971,10 +973,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable56"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable56"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -987,15 +989,15 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable57"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable57"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                            obeyUi.limit(`To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                 0,
                                                 2048
-                                            )
+                                            ), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -1011,15 +1013,15 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable58"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable58"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
+                                            obeyUi.limit(`To add Roles to the Roster type: \`${prefix}setup-roster\`\n\nIt will update in less then **5 Minutes**, *If it did not update yet*`.substring(
                                                 0,
                                                 2048
-                                            )
+                                            ), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -1043,10 +1045,10 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable59"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-roster"]["variable59"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(`Re-set-it-up with: \`${prefix}setup-roster\``.substring(0, 2048))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`Re-set-it-up with: \`${prefix}setup-roster\``.substring(0, 2048), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -1059,9 +1061,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``, 4096)),
                 ],
             });
         }

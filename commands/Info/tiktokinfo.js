@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 // tiktok-scraper no disponible en Node 22 — comando desactivado temporalmente
 const TikTokScraper = null;
@@ -45,7 +46,7 @@ module.exports = {
                                 following: author.following,
                             })
                         )
-                        .setFooter(client.getFooter(`ID: ${author.id_str}`, author.avatar));
+                        .setFooter(obeyMeta.asFooter(client.getFooter(`ID: ${author.id_str}`, author.avatar)));
                     var allposts = posts.collector.map(p => {
                         const Obj = {};
                         Obj.id = p.id;
@@ -77,7 +78,7 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setTitle(client.la[ls].common.erroroccur)
                                 .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                         ],
@@ -90,7 +91,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

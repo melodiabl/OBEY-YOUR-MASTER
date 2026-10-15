@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `useridban`,
@@ -21,8 +23,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"]), 256)),
                     ],
                 });
             //databasing(client, message.guild.id, message.author.id);
@@ -53,9 +55,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"]), 4096)),
                     ],
                 });
             let user = args[0];
@@ -64,9 +66,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle("❌ Por favor add a USERID")
-                            .setDescription(`Usage: \`${prefix}useridban <ID> [REASON]\``),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(obeyUi.owned("❌ Por favor add a USERID"), 256))
+                            .setDescription(obeyUi.limit(`Usage: \`${prefix}useridban <ID> [REASON]\``, 4096)),
                     ],
                 });
             let reason = args.slice(1).join(" ") || "No reason given.";
@@ -87,9 +89,9 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`${allEmojis.msg.SUCCESS} Baneado ${ban.tag || user}`)
-                            .setDescription(`**Reason**: ${reason}`),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`${allEmojis.msg.SUCCESS} Baneado ${ban.tag || user}`, 256))
+                            .setDescription(obeyUi.limit(`**Reason**: ${reason}`, 4096)),
                     ],
                 });
             } catch (e) {
@@ -98,9 +100,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].common.erroroccur)
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable17"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable17"]), 4096)),
                     ],
                 });
             }
@@ -120,16 +122,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable14"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable14"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -143,9 +145,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"]), 4096)),
                 ],
             });
         }

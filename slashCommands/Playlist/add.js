@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
@@ -23,12 +24,12 @@ module.exports = {
     const playlist = await Playlist.findOne({ userId, name: exactPlaylistName(plName) })
     if (!playlist)
       return interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ No tienes una playlist llamada **${plName}**. Usa \`/playlist create\` primero.`)],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} No tienes una playlist llamada **${plName}**. Usa \`/playlist create\` primero.`, 4096))],
       })
 
     if (playlist.tracks.length >= MAX_TRACKS)
       return interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ La playlist ya tiene ${MAX_TRACKS} canciones (límite máximo).`)],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} La playlist ya tiene ${MAX_TRACKS} canciones (límite máximo).`, 4096))],
       })
 
     let track
@@ -39,7 +40,7 @@ module.exports = {
       const current = state?.currentTrack?.info
       if (!current)
         return interaction.editReply({
-          embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay nada reproduciendo ahora mismo. Pasa una canción en `cancion` o pon música primero.')],
+          embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No hay nada reproduciendo ahora mismo. Pasa una canción en `cancion` o pon música primero.'), 4096))],
         })
       track = {
         title:      current.title,
@@ -54,7 +55,7 @@ module.exports = {
       const first  = result?.tracks?.[0]
       if (!first)
         return interaction.editReply({
-          embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ No se encontraron resultados para **${query}**.`)],
+          embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} No se encontraron resultados para **${query}**.`, 4096))],
         })
       const info = first.info || first
       track = {
@@ -71,7 +72,7 @@ module.exports = {
     const dup = playlist.tracks.find(t => t.uri === track.uri)
     if (dup)
       return interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xF59E0B).setDescription(`⚠️ **${track.title}** ya está en la playlist.`)],
+        embeds: [new EmbedBuilder().setColor(0xF59E0B).setDescription(obeyUi.limit(`${obeyUi.markup("icon.warning")} **${track.title}** ya está en la playlist.`, 4096))],
       })
 
     playlist.tracks.push(track)
@@ -84,12 +85,12 @@ module.exports = {
     await interaction.editReply({
       embeds: [
         new EmbedBuilder().setColor(0x1DB954)
-          .setTitle('🎵 Canción agregada')
-          .setDescription(`**${track.title}** — ${track.author}`)
+          .setTitle(obeyUi.limit('🎵 Canción agregada', 256))
+          .setDescription(obeyUi.limit(`**${track.title}** — ${track.author}`, 4096))
           .addFields(
-            { name: '📋 Playlist', value: playlist.name,                  inline: true },
-            { name: '⏱ Duración', value: dur,                             inline: true },
-            { name: '🎶 Total',   value: `${playlist.tracks.length} canciones`, inline: true },
+            { name: obeyUi.owned('📋 Playlist'), value: playlist.name,                  inline: true },
+            { name: obeyUi.owned('⏱ Duración'), value: dur,                             inline: true },
+            { name: obeyUi.owned('🎶 Total'),   value: `${playlist.tracks.length} canciones`, inline: true },
           )
           .setThumbnail(track.artworkUrl ?? null),
       ],

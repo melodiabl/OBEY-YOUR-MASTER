@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 const { EmbedBuilder, ActionRowBuilder,
     ChannelType
 } = require("discord.js");
@@ -158,7 +159,7 @@ module.exports = client => {
         let ls = client.settings.get(guild.id, "language");
         let embed = new EmbedBuilder()
             .setColor("#57F287")
-            .setTitle(`<a:Join_vc:863876115584385074> Se unió a New Servidor`)
+            .setTitle(`${obeyUi.markup("icon.voice")} Se unió a New Servidor`)
             .addFields({ name: "Guild Info", value: `>>> \`\`\`${guild.name} (${guild.id})\`\`\`` })
             .addFields({ name: "Owner Info", value: `>>> \`\`\`${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`}\`\`\`` })
             .addFields({ name: "Member Count", value: `>>> \`\`\`${guild.memberCount}\`\`\`` })
@@ -226,7 +227,7 @@ module.exports = client => {
             .catch(() => {});
         let embed = new EmbedBuilder()
             .setColor("#ED4245")
-            .setTitle(`<:leaves:866356598356049930> Salió a Servidor`)
+            .setTitle(`${obeyUi.markup("icon.leaf")} Salió a Servidor`)
             .addFields({ name: "Guild Info", value: `>>> \`\`\`${guild.name} (${guild.id})\`\`\`` })
             .addFields({ name: "Owner Info", value: `>>> \`\`\`${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`}\`\`\`` })
             .addFields({ name: "Member Count", value: `>>> \`\`\`${guild.memberCount}\`\`\`` })

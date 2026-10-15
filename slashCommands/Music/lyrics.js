@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const lyricsProvider = require('../../handlers/music/lyrics')
 const { showLyrics } = require('../../handlers/music/lyrics-pagination')
@@ -16,7 +17,7 @@ module.exports = {
     },
   ],
   run: async (client, interaction) => {
-    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
+    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(d, 4096))
 
     await interaction.deferReply()
 
@@ -31,7 +32,7 @@ module.exports = {
     } else {
       const state = client.music?.getState(interaction.guild.id)
       const track = state?.currentTrack
-      if (!track) return interaction.editReply({ embeds: [err('❌ No hay música reproduciéndose. Usa `/lyrics cancion: nombre` para buscar.')] })
+      if (!track) return interaction.editReply({ embeds: [err(obeyUi.owned('❌ No hay música reproduciéndose. Usa `/lyrics cancion: nombre` para buscar.'))] })
       const playbackId = state.playbackId, sessionId = state.sessionId
       isCurrent = () => {
         const latest = client.music?.getState(interaction.guild.id)
@@ -44,14 +45,14 @@ module.exports = {
       title = title.replace(/\(Official\s*(Music|Audio|Video|Lyric\s*Video)?\s*\)/gi, '').trim()
     }
 
-    if (!title) return interaction.editReply({ embeds: [err('❌ No se pudo obtener el título de la canción.')] })
+    if (!title) return interaction.editReply({ embeds: [err(obeyUi.owned('❌ No se pudo obtener el título de la canción.'))] })
 
     let lyrics = null
     try { lyrics = await lyricsProvider.fetchLyrics(title, artist, options) } catch {}
     if (!lyrics) { try { lyrics = await lyricsProvider.fetchLyrics(title, '', options) } catch {} }
 
     if (!lyrics) {
-      return interaction.editReply({ embeds: [err(`❌ No se encontraron letras para **${title}**${artist ? ` — ${artist}` : ''}.`)] })
+      return interaction.editReply({ embeds: [err(`${obeyUi.markup("icon.error")} No se encontraron letras para **${title}**${artist ? ` — ${artist}` : ''}.`)] })
     }
 
     const text = lyrics.plain || lyrics.lines?.map(line => line.text).join('\n')

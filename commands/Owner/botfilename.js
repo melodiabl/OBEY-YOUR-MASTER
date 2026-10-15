@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "botfilename",
@@ -21,9 +23,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["botfilename"]["variable1"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["botfilename"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["botfilename"]["variable1"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["botfilename"]["variable2"]), 4096)),
                 ],
             });
         try {
@@ -51,11 +53,11 @@ Link: https://discord.com/developers/applications/${client.user.id}
 Name: ${clientapp.name} 
 ${clientapp.owner.discriminator ? "Owner: " + clientapp.owner.tag : "Team: " + clientapp.owner.name + "\n |-> Members: " + clientapp.owner.members.map(uid => `${uid.user.username}`).join(", ") + "\n |-> Team-Owner: " + `${guild.members.cache.get(clientapp.owner.ownerId) && guild.members.cache.get(clientapp.owner.ownerId).user ? guild.members.cache.get(clientapp.owner.ownerId).user.username : clientapp.owner.ownerId}`} 
 Icon: ${clientapp.iconURL()}
-Bot-Public: ${clientapp.botPublic ? "✅" : "❌"} (Invite able)
+Bot-Public: ${clientapp.botPublic ? obeyUi.owned("✅") : obeyUi.owned("❌")} (Invite able)
 \`\`\`
 > **About me:**
 \`\`\`yml
-${clientapp.description ? clientapp.description : "❌ NO DESCRIPTION YET!"}
+${clientapp.description ? clientapp.description : obeyUi.owned("❌ NO DESCRIPTION YET!")}
 \`\`\``
         : ""
 }
@@ -67,9 +69,9 @@ ${clientapp.description ? clientapp.description : "❌ NO DESCRIPTION YET!"}
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["botfilename"]["variable3"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["botfilename"]["variable3"]), 4096)),
                 ],
             });
         }

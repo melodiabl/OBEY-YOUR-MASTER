@@ -1,3 +1,4 @@
+const obeyMeta = require("./presentation/metadata")
 //import the config.json file
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var { EmbedBuilder } = require(`discord.js`);
@@ -46,7 +47,7 @@ module.exports = client => {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setDescription(cmd.output.replace("{member}", `<@${message.author.id}>`)),
                                 ],
                             });

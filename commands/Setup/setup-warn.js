@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -29,32 +31,32 @@ module.exports = {
                     {
                         value: "Kick Amount",
                         description: `${warnsettings.kick ? `A User will be kicked if he has ${warnsettings.kick} Warns,change it` : `Define a amount some1 need to have to get kicked`}`,
-                        emoji: allEmojis.msg.kick,
+                        emoji: obeyUi.component(allEmojis.msg.kick),
                     },
                     {
                         value: "Ban Amount",
                         description: `${warnsettings.kick ? `A User will be banned if he has ${warnsettings.ban} Warns,change it` : `Define a amount some1 need to have to get kicked`}`,
-                        emoji: allEmojis.msg.ban,
+                        emoji: obeyUi.component(allEmojis.msg.ban),
                     },
                     {
                         value: "Add Role on Warn",
                         description: `Define a Rol to give, if he has X Warns`,
-                        emoji: allEmojis.msg.roles,
+                        emoji: obeyUi.component(allEmojis.msg.roles),
                     },
                     {
                         value: "Remove Role on Warn",
                         description: `Remove a X Warn Defined Rol`,
-                        emoji: allEmojis.msg.roles,
+                        emoji: obeyUi.component(allEmojis.msg.roles),
                     },
                     {
                         value: "Show Settings",
                         description: `Show the Current Ajustes`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ticket-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -62,7 +64,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Warn System!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Warn System!"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -78,8 +80,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Warn Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Warn Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -99,7 +101,7 @@ module.exports = {
                     if (!menu?.isStringSelectMenu()) return;
                     if (menu?.user.id !== commandUserId)
                         return menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${commandUserId}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${commandUserId}>`,
                             flags: Discord.MessageFlags.Ephemeral,
                         });
 
@@ -115,9 +117,9 @@ module.exports = {
                 switch (menuoptionindex) {
                     case 0:
                         var msg6 = new EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable4"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable5"]))
-                            .setFooter(client.getFooter(es))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable4"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable5"]), 4096))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.color);
                         message.reply({ embeds: [msg6] }).then(msg => {
                             msg.channel
@@ -134,11 +136,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable6"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable6"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelado`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`Cancelado`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (amount.toLowerCase() == "no") {
@@ -147,10 +149,10 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable7"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable7"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -159,11 +161,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable8"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable8"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`You entered: \`${amount}\``.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`You entered: \`${amount}\``.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (Number(amount) <= 0)
@@ -171,20 +173,20 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable9"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable9"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`You entered: \`${amount}\``.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`You entered: \`${amount}\``.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     client.settings.set(message.guild.id, amount, "warnsettings.kick");
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable10"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable10"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 })
@@ -193,10 +195,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable11"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable11"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -204,9 +206,9 @@ module.exports = {
                         break;
                     case 1:
                         var msg7 = new EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable12"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable13"]))
-                            .setFooter(client.getFooter(es))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable12"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable13"]), 4096))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.color);
                         message.reply({ embeds: [msg7] }).then(msg => {
                             msg.channel
@@ -223,11 +225,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable14"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable14"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelado`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`Cancelado`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (amount.toLowerCase() == "no") {
@@ -236,10 +238,10 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable15"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable15"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -248,11 +250,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable16"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable16"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`You entered: \`${amount}\``.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`You entered: \`${amount}\``.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (Number(amount) <= 0)
@@ -260,20 +262,20 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable17"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable17"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`You entered: \`${amount}\``.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`You entered: \`${amount}\``.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     client.settings.set(message.guild.id, amount, "warnsettings.ban");
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable18"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable18"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 })
@@ -282,10 +284,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable19"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable19"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -293,9 +295,9 @@ module.exports = {
                         break;
                     case 2:
                         var msg8 = new EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable20"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable21"]))
-                            .setFooter(client.getFooter(es))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable20"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable21"]), 4096))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.color);
                         message.reply({ embeds: [msg8] }).then(msg => {
                             msg.channel
@@ -318,11 +320,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable22"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable22"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelado`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`Cancelado`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (!amount)
@@ -330,11 +332,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable23"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable23"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelado`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`Cancelado`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (isNaN(amount))
@@ -342,11 +344,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable24"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable24"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`You entered: \`${amount}\``.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`You entered: \`${amount}\``.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (Number(amount) <= 0)
@@ -354,11 +356,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable25"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable25"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`You entered: \`${amount}\``.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`You entered: \`${amount}\``.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
 
@@ -367,13 +369,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable26"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable26"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
                                                     .setDescription(
-                                                        `You can't add 2 Roles at the Same time`.substring(0, 2000)
+                                                        obeyUi.limit(`You can't add 2 Roles at the Same time`.substring(0, 2000), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     client.settings.push(
@@ -384,9 +386,9 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable27"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable27"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 })
@@ -395,10 +397,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable28"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable28"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -406,9 +408,9 @@ module.exports = {
                         break;
                     case 3:
                         var msg8 = new EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable29"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable30"]))
-                            .setFooter(client.getFooter(es))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable29"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable30"]), 4096))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.color);
                         message.reply({ embeds: [msg8] }).then(msg => {
                             msg.channel
@@ -426,11 +428,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable31"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable31"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`Cancelado`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`Cancelado`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (isNaN(amount))
@@ -438,11 +440,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable32"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable32"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`You entered: \`${amount}\``.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`You entered: \`${amount}\``.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     if (Number(amount) <= 0)
@@ -450,11 +452,11 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable33"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable33"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`You entered: \`${amount}\``.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`You entered: \`${amount}\``.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
 
@@ -463,13 +465,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable34"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable34"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
                                                     .setDescription(
-                                                        `You can't remove a Setting which does not exist`.substring(0, 2000)
+                                                        obeyUi.limit(`You can't remove a Setting which does not exist`.substring(0, 2000), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     let yeee = warnsettings.roles.filter(r => r?.warncount == amount)[0];
@@ -481,9 +483,9 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable35"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable35"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 })
@@ -492,10 +494,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable36"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable36"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -504,18 +506,18 @@ module.exports = {
                     case 4:
                         var rembed = new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable37"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable38"]));
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable37"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable38"]), 4096));
                         message.reply({ embeds: [rembed] }).catch(error => {
                             console.log(error);
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable39"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable39"]), 256))
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -535,9 +537,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable40"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-warn"]["variable40"]), 4096)),
                 ],
             });
         }

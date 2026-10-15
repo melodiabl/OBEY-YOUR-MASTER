@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -26,7 +28,7 @@ module.exports = {
             let tempmsg;
 
             //function to handle true/false
-            const d2p = bool => (bool ? "`✔️ Enabled`" : "`❌ Disabled`");
+            const d2p = bool => (bool ? obeyUi.owned("`✔️ Enabled`") : obeyUi.owned("`❌ Disabled`"));
             //call the first layer
             first_layer();
 
@@ -36,46 +38,46 @@ module.exports = {
                     {
                         value: `${client.settings.get(message.guild.id, `antidiscord.enabled`) ? "Disable" : "Enable"} Anti Discord`,
                         description: `${client.settings.get(message.guild.id, `antidiscord.enabled`) ? "Don't delete other Discord Links" : "Delete other Discord Links"}`,
-                        emoji: `${client.settings.get(message.guild.id, `antidiscord.enabled`) ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`,
+                        emoji: obeyUi.component(`${client.settings.get(message.guild.id, `antidiscord.enabled`) ? allEmojis.msg.ERROR : allEmojis.msg.SUCCESS}`),
                     },
                     {
                         value: "Settings",
                         description: `Show the current Ajustes of the Anti-Discord System`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Add Whitelist-CHANNEL",
                         description: `Allow Channels where it is allowed`,
-                        emoji: "💯",
+                        emoji: obeyUi.component("💯"),
                     },
                     {
                         value: "Remove Whitelist-CHANNEL",
                         description: `Remove allowed Channels`,
-                        emoji: "💢",
+                        emoji: obeyUi.component("💢"),
                     },
                     {
                         value: "Add Whitelist-LINK",
                         description: `Allow Links of specific Servidor(s)`,
-                        emoji: "🔗",
+                        emoji: obeyUi.component("🔗"),
                     },
                     {
                         value: "Remove Whitelist-LINK",
                         description: `Remove allowed Links`,
-                        emoji: "💢",
+                        emoji: obeyUi.component("💢"),
                     },
                     {
                         value: "Change Max-Mute Amount",
                         description: `Change the max allow Time to do it before mute!`,
-                        emoji: "🕛",
+                        emoji: obeyUi.component("🕛"),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ticket-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("¡Haz clic para configurar the Anti-Discord-Links System!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Anti-Discord-Links System!"))
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -93,8 +95,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Anti-Discord-Links System Setup", iconURL: "https://cdn.discordapp.com/emojis/858405056238714930.gif?v=1", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable1"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Anti-Discord-Links System Setup", iconURL: obeyUi.image("icon.code"), url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable1"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -121,16 +123,16 @@ module.exports = {
                         handle_the_picks(menuoptionindex, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -148,9 +150,9 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable3"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable3"]), 256))
                                         .setColor(es.color)
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -161,16 +163,16 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable4"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable4"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Activado:** ${thesettings.enabled ? allEmojis.msg.SUCCESS : allEmojis.msg.ERROR}\n\n**Witelisted Channels:** ${thesettings.whitelistedchannels.length > 0 ? `<#${thesettings.whitelistedchannels.join("> | <#")}>` : "No Channels Whitelisted!"}\n\n**Information:** *Anti Discord are not enabled in Tickets from THIS BOT*`.substring(
+                                            obeyUi.limit(`**Activado:** ${thesettings.enabled ? allEmojis.msg.SUCCESS : allEmojis.msg.ERROR}\n\n**Witelisted Channels:** ${thesettings.whitelistedchannels.length > 0 ? `<#${thesettings.whitelistedchannels.join("> | <#")}>` : "No Channels Whitelisted!"}\n\n**Information:** *Anti Discord are not enabled in Tickets from THIS BOT*`.substring(
                                                 0,
                                                 2048
-                                            )
+                                            ), 4096)
                                         )
                                         .addFields({ name: "**Whitelisted Links**", value: `${thesettings.whitelistedlinks.lenght > 0 ? thesettings.whitelistedlinks.join("\n").substring(0, 1024) : "No Links allowed!"}` })
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -180,12 +182,12 @@ module.exports = {
                             tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable5"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable5"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable6"])
+                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable6"]), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -210,14 +212,14 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable7"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         try {
@@ -230,20 +232,20 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable8"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Every single Canal:\n<#${client.settings.get(message.guild.id, "antidiscord.whitelistedchannels").join(">\n<#")}>\nis not a checked by the Anti Discord Links System`.substring(
+                                                            obeyUi.limit(`Every single Canal:\n<#${client.settings.get(message.guild.id, "antidiscord.whitelistedchannels").join(">\n<#")}>\nis not a checked by the Anti Discord Links System`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -251,21 +253,21 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable9"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable10"
                                                                 ]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -278,11 +280,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -293,12 +295,12 @@ module.exports = {
                             tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable12"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable12"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable13"])
+                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable13"]), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -323,14 +325,14 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable14"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         try {
@@ -343,20 +345,20 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable15"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Every single Canal:\n> <#${client.settings.get(message.guild.id, "antidiscord.whitelistedchannels").join(">\n> <#")}>\nis not checked by the Anti Discord Links System`.substring(
+                                                            obeyUi.limit(`Every single Canal:\n> <#${client.settings.get(message.guild.id, "antidiscord.whitelistedchannels").join(">\n> <#")}>\nis not checked by the Anti Discord Links System`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -364,21 +366,21 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable16"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable17"
                                                                 ]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -391,11 +393,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -406,12 +408,12 @@ module.exports = {
                             tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Which Link do you want to enable?")
+                                        .setTitle(obeyUi.limit("Which Link do you want to enable?", 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `Just send it in!\n**NOTE:**\n> It is suggest to remove the \`https\`, because it just checks, **if the Link contains what you send**\n\n**Example:**\n> If you want to allow \`https://discord.gg/Cool-Guys\` then make sure to send: \`discord.gg/Cool-Guys\``
+                                            obeyUi.limit(`Just send it in!\n**NOTE:**\n> It is suggest to remove the \`https\`, because it just checks, **if the Link contains what you send**\n\n**Example:**\n> If you want to allow \`https://discord.gg/Cool-Guys\` then make sure to send: \`discord.gg/Cool-Guys\``, 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -434,10 +436,10 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            "This Link is already Allowed! you can remove it if you want!"
+                                                            obeyUi.limit("This Link is already Allowed! you can remove it if you want!", 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         try {
@@ -445,15 +447,15 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle(`Añadido the Link ${content} to the allowed links!`)
+                                                        .setTitle(obeyUi.limit(`Añadido the Link ${content} to the allowed links!`, 256))
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Every single allowed Link:\n> ${client.settings.get(message.guild.id, "antidiscord.whitelistedlinks").join("\n> ")}\nIs not a checked by the Anti Discord Links System`.substring(
+                                                            obeyUi.limit(`Every single allowed Link:\n> ${client.settings.get(message.guild.id, "antidiscord.whitelistedlinks").join("\n> ")}\nIs not a checked by the Anti Discord Links System`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -461,21 +463,21 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable9"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable10"
                                                                 ]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -489,11 +491,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -506,10 +508,10 @@ module.exports = {
                             tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Which Link do you want to disable again?\nSend the Link in the Chat")
+                                        .setTitle(obeyUi.limit("Which Link do you want to disable again?\nSend the Link in the Chat", 256))
                                         .setColor(es.color)
-                                        .setDescription(`${antisettings.map(i => `\`${i}\``).join("\n")}`)
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`${antisettings.map(i => `\`${i}\``).join("\n")}`, 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -527,9 +529,9 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle("This Link is already not whitelisted!")
+                                                        .setTitle(obeyUi.limit("This Link is already not whitelisted!", 256))
                                                         .setColor(es.wrongcolor)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         try {
@@ -541,15 +543,15 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle(`Removido the Link ${content} from the allowed links!`)
+                                                        .setTitle(obeyUi.limit(`Removido the Link ${content} from the allowed links!`, 256))
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `Every single allowed Link:\n> ${client.settings.get(message.guild.id, "antidiscord.whitelistedlinks").join("\n> ")}\nIs not a checked by the Anti Discord Links System`.substring(
+                                                            obeyUi.limit(`Every single allowed Link:\n> ${client.settings.get(message.guild.id, "antidiscord.whitelistedlinks").join("\n> ")}\nIs not a checked by the Anti Discord Links System`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -557,21 +559,21 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable9"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable10"
                                                                 ]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -585,11 +587,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable11"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -601,12 +603,12 @@ module.exports = {
                             tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("How often should someone be allowed to do it within 15 Seconds?")
+                                        .setTitle(obeyUi.limit("How often should someone be allowed to do it within 15 Seconds?", 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `Currently it is at: \`${client.settings.get(message.guild.id, "antidiscord.mute_amount")}\`\n\nPlease just send the Number! (0 means after the first time he/she will get muted)`
+                                            obeyUi.limit(`Currently it is at: \`${client.settings.get(message.guild.id, "antidiscord.mute_amount")}\`\n\nPlease just send the Number! (0 means after the first time he/she will get muted)`, 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -630,18 +632,18 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            "Successfully set the New Maximum Allowed Amounts to " +
+                                                            obeyUi.limit("Successfully set the New Maximum Allowed Amounts to " +
                                                                 number +
-                                                                " Times"
+                                                                " Times", 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `**If someone does it over __${number} times__ he/she/they will get muted for 10 Minutes!**`.substring(
+                                                            obeyUi.limit(`**If someone does it over __${number} times__ he/she/they will get muted for 10 Minutes!**`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -649,21 +651,21 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable16"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-antidiscord"][
                                                                     "variable17"
                                                                 ]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -676,11 +678,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable18"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -698,9 +700,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable19"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-antidiscord"]["variable19"]), 4096)),
                 ],
             });
         }

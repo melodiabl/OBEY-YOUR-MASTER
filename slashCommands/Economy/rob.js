@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const { ensure_economy_user, nFormatter, duration } = require('../../handlers/functions')
 
@@ -14,16 +16,16 @@ module.exports = {
 
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'ECONOMY'))
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de economía no está activado.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de economía no está activado.'), 4096))], ephemeral: true })
 
     const target = interaction.options.getUser('usuario')
     const uid    = interaction.user.id
     const gid    = interaction.guild.id
 
     if (target.id === uid)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No puedes robarte a ti mismo.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No puedes robarte a ti mismo.'), 4096))], ephemeral: true })
     if (target.bot)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Los bots no tienen dinero.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Los bots no tienen dinero.'), 4096))], ephemeral: true })
 
     ensure_economy_user(client, gid, uid)
     ensure_economy_user(client, gid, target.id)
@@ -34,15 +36,15 @@ module.exports = {
     if (data.rob !== 0 && remaining > 0) {
       return interaction.reply({
         embeds: [new EmbedBuilder().setColor(0xED4245)
-          .setTitle('⏳ Cooldown de robo activo')
-          .setDescription(`Espera **${duration(remaining)}**`)],
+          .setTitle(obeyUi.limit(obeyUi.owned('⏳ Cooldown de robo activo'), 256))
+          .setDescription(obeyUi.limit(`Espera **${duration(remaining)}**`, 4096))],
         ephemeral: true,
       })
     }
 
     if ((data2.balance ?? 0) < MIN_TARGET)
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ **${target.username}** tiene menos de ${MIN_TARGET} 🪙, no vale la pena.`)],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} **${target.username}** tiene menos de ${MIN_TARGET} ${obeyUi.markup("icon.coins")}, no vale la pena.`, 4096))],
         ephemeral: true,
       })
 
@@ -55,12 +57,12 @@ module.exports = {
 
     await interaction.reply({
       embeds: [new EmbedBuilder().setColor(0xF97316)
-        .setTitle('🦹 Robo exitoso')
-        .setDescription(`Le robaste **${nFormatter(amount)}** 🪙 a **${target.username}**`)
+        .setTitle(obeyUi.limit(obeyUi.owned('🦹 Robo exitoso'), 256))
+        .setDescription(obeyUi.limit(`Le robaste **${nFormatter(amount)}** ${obeyUi.markup("icon.coins")} a **${target.username}**`, 4096))
         .addFields(
-          { name: '💰 Tu balance', value: `**${nFormatter(client.economy.get(`${gid}-${uid}`, 'balance'))}** 🪙`, inline: true },
+          { name: obeyUi.owned('💰 Tu balance'), value: `**${nFormatter(client.economy.get(`${gid}-${uid}`, 'balance'))}** ${obeyUi.markup("icon.coins")}`, inline: true },
         )
-        .setFooter({ text: 'Cooldown: 1 hora' })],
+        .setFooter(obeyMeta.asFooter({ text: 'Cooldown: 1 hora' }))],
     })
   },
 }

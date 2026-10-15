@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const { ensure_economy_user, nFormatter, duration } = require('../../handlers/functions')
 
@@ -11,7 +13,7 @@ module.exports = {
 
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'ECONOMY'))
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de economía no está activado.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de economía no está activado.'), 4096))], ephemeral: true })
 
     const uid = interaction.user.id
     const gid = interaction.guild.id
@@ -22,8 +24,8 @@ module.exports = {
     if (data.work !== 0 && remaining > 0) {
       return interaction.reply({
         embeds: [new EmbedBuilder().setColor(0xED4245)
-          .setTitle('⏳ Todavía estás trabajando')
-          .setDescription(`Descansa **${duration(remaining)}** más`)],
+          .setTitle(obeyUi.limit(obeyUi.owned('⏳ Todavía estás trabajando'), 256))
+          .setDescription(obeyUi.limit(`Descansa **${duration(remaining)}** más`, 4096))],
         ephemeral: true,
       })
     }
@@ -38,10 +40,10 @@ module.exports = {
 
     await interaction.reply({
       embeds: [new EmbedBuilder().setColor(0x3B82F6)
-        .setTitle('💼 Trabajo completado')
-        .setDescription(`Trabajaste como **${job}** y ganaste **${nFormatter(amount)}** 🪙`)
-        .addFields({ name: '💰 Balance actual', value: `**${nFormatter(newBal)}** 🪙`, inline: true })
-        .setFooter({ text: 'Cooldown: 25 minutos' })],
+        .setTitle(obeyUi.limit(obeyUi.owned('💼 Trabajo completado'), 256))
+        .setDescription(obeyUi.limit(`Trabajaste como **${job}** y ganaste **${nFormatter(amount)}** ${obeyUi.markup("icon.coins")}`, 4096))
+        .addFields({ name: obeyUi.owned('💰 Balance actual'), value: `**${nFormatter(newBal)}** ${obeyUi.markup("icon.coins")}`, inline: true })
+        .setFooter(obeyMeta.asFooter({ text: 'Cooldown: 25 minutos' }))],
     })
   },
 }

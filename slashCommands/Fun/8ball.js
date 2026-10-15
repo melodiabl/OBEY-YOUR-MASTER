@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const https = require('https')
 
@@ -18,7 +20,7 @@ const TYPE_COLOR = { Affirmative: 0x22C55E, Contrary: 0xED4245, Neutral: 0x71717
 
 module.exports = {
   name: '8ball',
-  description: 'Pregúntale algo a la bola mágica 🎱',
+  description: obeyUi.owned('Pregúntale algo a la bola mágica 🎱'),
   options: [
     { String: { name: 'pregunta', description: '¿Qué quieres preguntarle?', required: true } },
   ],
@@ -26,7 +28,7 @@ module.exports = {
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'FUN'))
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de diversión no está activado.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de diversión no está activado.'), 4096))],
         ephemeral: true,
       })
 
@@ -42,17 +44,17 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
             .setColor(color)
-            .setTitle('🎱 Bola Mágica 8')
+            .setTitle(obeyUi.limit(obeyUi.owned('🎱 Bola Mágica 8'), 256))
             .addFields(
-              { name: '❓ Pregunta',   value: question,         inline: false },
-              { name: '🔮 Respuesta', value: magic?.answer ?? '…', inline: false },
+              { name: obeyUi.owned('❓ Pregunta'),   value: question,         inline: false },
+              { name: obeyUi.owned('🔮 Respuesta'), value: magic?.answer ?? '…', inline: false },
             )
-            .setFooter({ text: `Preguntado por ${interaction.user.username}` }),
+            .setFooter(obeyMeta.asFooter({ text: `Preguntado por ${interaction.user.username}` })),
         ],
       })
     } catch {
       await interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No se pudo contactar la bola mágica. Intenta de nuevo.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No se pudo contactar la bola mágica. Intenta de nuevo.'), 4096))],
       })
     }
   },

@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const map = new Map();
 const { EmbedBuilder, PermissionFlagsBits, MessageMentions } = require(`discord.js`);
 const { databasing, delay } = require(`${process.cwd()}/handlers/functions`);
@@ -21,7 +23,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable1"])),
                     ],
                 });
@@ -52,7 +54,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable3"])),
                     ],
@@ -62,7 +64,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable4"])),
                     ],
                 });
@@ -76,7 +78,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable5"]))
                             .setDescription(`Usage: \`${prefix}removerolefromrole @RoletoHave @RoletoGive\``),
                     ],
@@ -86,7 +88,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(`The Roles can't be the same!`)
                             .setDescription(`Usage: \`${prefix}removerolefromrole @RoletoHave @RoletoGive\``),
                     ],
@@ -96,7 +98,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable7"])),
                     ],
                 });
@@ -109,7 +111,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(`There are 0 Members who have that Rol`)
                             .setDescription(`Sometimes that's a bug/wrong so please try again later!`),
                     ],
@@ -126,8 +128,8 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
-                        .setAuthor({ name: `Changing roles for ${members.length} Members...`, iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif", url: "https://discord.gg/2dKrZQyaC4" })
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setAuthor(obeyMeta.asAuthor({ name: `Changing roles for ${members.length} Members...`, iconURL: obeyUi.image("motion.cargando"), url: "https://discord.gg/2dKrZQyaC4" }))
                         .setDescription(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable10"])),
                 ],
             });
@@ -147,18 +149,18 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
                                 .setDescription(
                                     eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable11"])
                                 )
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -202,7 +204,7 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(`${emoji?.msg.SUCCESS} SUCCESS`)
                             .setDescription(
                                 `Successfully removed ${role} from \`${success} MEMBERS\` of \`${counter} Members\`${failed != 0 ? `\n${failed} Members, did not get the Removido, redo it with: \`${prefix}removerolefromrole ${role.id}\`` : ""}`
@@ -217,7 +219,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable16"])),
                 ],

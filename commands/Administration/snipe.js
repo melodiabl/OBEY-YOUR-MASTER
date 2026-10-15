@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -41,31 +43,31 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["say"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["say"]["variable2"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["say"]["variable1"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["say"]["variable2"]), 4096)),
                     ],
                 });
             var channel = message.mentions.channels.first() || message.channel;
 
             const snipes = client.snipes.get(channel.id);
-            if (!snipes) return message.reply("❌ There is no Eliminado Mensaje");
+            if (!snipes) return message.reply(obeyUi.owned("❌ There is no Eliminado Mensaje"));
             const snipe = args[0] && !isNaN(args[0]) ? Number(args[0]) - 1 : 0;
             const targetSnipe = snipes[snipe];
-            if (!targetSnipe) return message.reply("❌ There is no Eliminado Mensaje");
+            if (!targetSnipe) return message.reply(obeyUi.owned("❌ There is no Eliminado Mensaje"));
             const { tag, id, avatar, content, time, image } = targetSnipe;
 
             message.reply({
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setDescription(content.substring(0, 2048))
-                        .setAuthor({ name: tag, iconURL: avatar })
+                        .setDescription(obeyUi.limit(content.substring(0, 2048), 4096))
+                        .setAuthor(obeyMeta.asAuthor({ name: tag, iconURL: avatar }))
                         .setImage(image)
-                        .setFooter(client.getFooter(
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `${moment(time).fromNow()} - Snipe ${snipe + 1} / ${snipes.length}\nUser-ID: ${id}`,
                                 avatar
-                            )
+                            ))
                         ),
                 ],
             });
@@ -86,16 +88,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["say"]["variable5"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["say"]["variable5"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -109,9 +111,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["say"]["variable8"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["say"]["variable8"]), 4096)),
                 ],
             });
         }

@@ -1,0 +1,13 @@
+{
+  "scope": "new_sticky_suites_local_in_memory_and_mocked_discord_only",
+  "tests": 11,
+  "passed": 11,
+  "failed": 0,
+  "files": [
+    "test/sticky-service.test.js",
+    "test/sticky-transport.test.js"
+  ],
+  "liveMongo": "not_tested",
+  "liveDiscord": "not_tested",
+  "automaticActivation": false
+}

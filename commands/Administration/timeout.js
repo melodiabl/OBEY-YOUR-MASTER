@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const ms = require("ms");
 const { databasing, duration } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -44,9 +46,9 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"]), 4096)),
                         ],
                     })
                     .catch(() => {});
@@ -61,20 +63,20 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable4"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable5"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable4"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable5"]), 4096)),
                         ],
                     })
                     .catch(() => {});
             if (!message.member || message.member.roles || !message.member.roles.highest)
                 await message.member.fetch().catch(() => {});
             if (kickmember.communicationDisabledUntilTimestamp)
-                return message.reply("❌ **This Usuario is already timeouted!**");
+                return message.reply(obeyUi.owned("❌ **This Usuario is already timeouted!**"));
             let time = 0;
             if (!args[1])
                 return message.reply(
-                    `❌ **No time added!**\nTry something like this:\n> \`${prefix}timeout ${kickmember.id} 1h+15min Stop spamming!\``
+                    `${obeyUi.markup("icon.error")} **No time added!**\nTry something like this:\n> \`${prefix}timeout ${kickmember.id} 1h+15min Stop spamming!\``
                 );
             let timeargs = [args[1]];
             if (timeargs[0].includes("+")) {
@@ -85,7 +87,7 @@ module.exports = {
             }
             if (!time || isNaN(time))
                 return message.reply(
-                    `❌ **You added a invalid time!**\nTry something like this:\n> \`${prefix}timeout ${kickmember.id} 1h+15min Stop spamming!\``
+                    `${obeyUi.markup("icon.error")} **You added a invalid time!**\nTry something like this:\n> \`${prefix}timeout ${kickmember.id} 1h+15min Stop spamming!\``
                 );
 
             let reason = args.slice(2).join(` `);
@@ -102,8 +104,8 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable6"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable6"]), 256)),
                         ],
                     })
                     .catch(() => {});
@@ -114,8 +116,8 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle("❌ **I am not able to manage this Usuario**"),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(obeyUi.owned("❌ **I am not able to manage this Usuario**"), 256)),
                         ],
                     })
                     .catch(() => {});
@@ -134,13 +136,13 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(
-                                        `You got timeouted by \`${message.author.username}\` for ${duration(time)
+                                        obeyUi.limit(`You got timeouted by \`${message.author.username}\` for ${duration(time)
                                             .map(t => `\`${t}\``)
-                                            .join(" ")}`
+                                            .join(" ")}`, 256)
                                     )
-                                    .setDescription(`Reason:\n>>> ${reason}`.substring(0, 2048)),
+                                    .setDescription(obeyUi.limit(`Reason:\n>>> ${reason}`.substring(0, 2048), 4096)),
                             ],
                         })
                         .catch(e => {
@@ -154,9 +156,9 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable10"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable11"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable10"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable11"]), 4096)),
                         ],
                     })
                     .catch(() => {});
@@ -177,15 +179,15 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(
-                                        `**${kickmember.user.username}** got timeouted by \`${message.author.username}\` for ${duration(
+                                        obeyUi.limit(`**${kickmember.user.username}** got timeouted by \`${message.author.username}\` for ${duration(
                                             time
                                         )
                                             .map(t => `\`${t}\``)
-                                            .join(" ")}`
+                                            .join(" ")}`, 256)
                                     )
-                                    .setDescription(`Reason:\n>>> ${reason}`.substring(0, 2048)),
+                                    .setDescription(obeyUi.limit(`Reason:\n>>> ${reason}`.substring(0, 2048), 4096)),
                             ],
                         })
                         .catch(e => {
@@ -209,16 +211,16 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setFooter(client.getFooter(es))
-                                        .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable14"]))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                        .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable14"]), 4096))
                                         .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                         .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                         .setTimestamp()
-                                        .setFooter(client.getFooter(
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                 "ID: " + message.author.id,
                                                 message.author.displayAvatarURL()
-                                            )
+                                            ))
                                         ),
                                 ],
                             });
@@ -233,9 +235,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].common.erroroccur)
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable17"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable17"]), 4096)),
                     ],
                 });
             }
@@ -245,9 +247,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"]), 4096)),
                 ],
             });
         }

@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js')
 const Canvas = require('@napi-rs/canvas')
 
@@ -25,7 +27,7 @@ async function applyRainbow(avatarURL) {
 
 module.exports = {
   name: 'rainbow',
-  description: 'Aplica efecto arcoíris al avatar de un usuario 🌈',
+  description: obeyUi.owned('Aplica efecto arcoíris al avatar de un usuario 🌈'),
   options: [
     { User: { name: 'usuario', description: 'Usuario (por defecto tú)', required: false } },
   ],
@@ -33,7 +35,7 @@ module.exports = {
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'FUN'))
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de diversión no está activado.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de diversión no está activado.'), 4096))],
         ephemeral: true,
       })
 
@@ -46,14 +48,14 @@ module.exports = {
       await interaction.editReply({
         embeds: [
           new EmbedBuilder().setColor(0xFF7700)
-            .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
+            .setAuthor(obeyMeta.asAuthor({ name: user.username, iconURL: user.displayAvatarURL() }))
             .setImage('attachment://rainbow.png'),
         ],
         files: [new AttachmentBuilder(buffer, { name: 'rainbow.png' })],
       })
     } catch {
       await interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Error al procesar la imagen.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Error al procesar la imagen.'), 4096))],
       })
     }
   },

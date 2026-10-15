@@ -1,0 +1,458 @@
+{
+  "scope": "static_literal_embed_signatures_and_known_colors_only",
+  "files": [
+    {
+      "file": "commands/Administration/embedbuilder.js",
+      "changes": [
+        {
+          "kind": "color_name",
+          "line": 167
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-apply.js",
+      "changes": [
+        {
+          "kind": "color_name",
+          "line": 1216
+        }
+      ]
+    },
+    {
+      "file": "handlers/anti_nuke.js",
+      "changes": [
+        {
+          "kind": "setAuthor",
+          "line": 260
+        },
+        {
+          "kind": "setAuthor",
+          "line": 298
+        },
+        {
+          "kind": "setAuthor",
+          "line": 338
+        },
+        {
+          "kind": "setAuthor",
+          "line": 372
+        },
+        {
+          "kind": "setAuthor",
+          "line": 409
+        },
+        {
+          "kind": "setAuthor",
+          "line": 442
+        },
+        {
+          "kind": "setAuthor",
+          "line": 478
+        },
+        {
+          "kind": "setAuthor",
+          "line": 512
+        },
+        {
+          "kind": "setAuthor",
+          "line": 548
+        },
+        {
+          "kind": "setAuthor",
+          "line": 612
+        },
+        {
+          "kind": "setAuthor",
+          "line": 654
+        },
+        {
+          "kind": "setAuthor",
+          "line": 723
+        },
+        {
+          "kind": "setAuthor",
+          "line": 808
+        },
+        {
+          "kind": "setAuthor",
+          "line": 850
+        },
+        {
+          "kind": "setAuthor",
+          "line": 904
+        },
+        {
+          "kind": "setAuthor",
+          "line": 972
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1014
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1070
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1145
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1181
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1223
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1256
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1294
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1328
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1364
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1398
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1434
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1513
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1600
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1674
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1748
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1784
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1826
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1859
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1897
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1931
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1967
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2000
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2036
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2115
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2202
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2276
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2386
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2422
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2463
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2496
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2534
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2568
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2604
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2637
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2673
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2736
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2798
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2881
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2928
+        },
+        {
+          "kind": "setAuthor",
+          "line": 2996
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3045
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3117
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3153
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3194
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3227
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3265
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3299
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3335
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3368
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3404
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3484
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3568
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3639
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3710
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3746
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3787
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3820
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3858
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3892
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3928
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3961
+        },
+        {
+          "kind": "setAuthor",
+          "line": 3997
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4060
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4122
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4205
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4252
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4320
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4369
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4440
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4476
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4517
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4550
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4588
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4622
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4658
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4692
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4728
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4808
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4892
+        },
+        {
+          "kind": "setAuthor",
+          "line": 4963
+        }
+      ]
+    },
+    {
+      "file": "handlers/command.js",
+      "changes": [
+        {
+          "kind": "setAuthor",
+          "line": 77
+        },
+        {
+          "kind": "setAuthor",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "file": "handlers/ticketevent.js",
+      "changes": [
+        {
+          "kind": "setAuthor",
+          "line": 231
+        },
+        {
+          "kind": "setAuthor",
+          "line": 511
+        },
+        {
+          "kind": "setAuthor",
+          "line": 677
+        },
+        {
+          "kind": "setAuthor",
+          "line": 823
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1007
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1235
+        },
+        {
+          "kind": "setAuthor",
+          "line": 1417
+        }
+      ]
+    }
+  ]
+}

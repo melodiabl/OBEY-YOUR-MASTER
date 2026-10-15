@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits,
     ButtonStyle
 } = require("discord.js");
@@ -46,47 +48,47 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable2"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable1"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable2"]), 4096)),
                     ],
                 });
-            let embedToBuild = new EmbedBuilder().setAuthor({ name: message.member.user.username, iconURL: message.member.user.avatarURL() });
+            let embedToBuild = new EmbedBuilder().setAuthor(obeyMeta.asAuthor({ name: message.member.user.username, iconURL: message.member.user.avatarURL() }));
 
-            let title = new ButtonBuilder().setLabel("Title").setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_title`);
+            let title = new ButtonBuilder().setLabel(obeyUi.plain("Title")).setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_title`);
 
             let description = new ButtonBuilder()
-                .setLabel("Description")
+                .setLabel(obeyUi.plain("Description"))
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_desc`);
 
-            let footer = new ButtonBuilder().setLabel("Footer").setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_footer`);
+            let footer = new ButtonBuilder().setLabel(obeyUi.plain("Footer")).setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_footer`);
 
             let footerImage = new ButtonBuilder()
-                .setLabel("Footer Image")
+                .setLabel(obeyUi.plain("Footer Image"))
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_footerimg`);
 
-            let image = new ButtonBuilder().setLabel("Image").setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_img`);
+            let image = new ButtonBuilder().setLabel(obeyUi.plain("Image")).setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_img`);
 
             let thumbnail = new ButtonBuilder()
-                .setLabel("Thumbnail")
+                .setLabel(obeyUi.plain("Thumbnail"))
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_thumb`);
 
             let timestamp = new ButtonBuilder()
-                .setLabel("Timestamp")
+                .setLabel(obeyUi.plain("Timestamp"))
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_timestamp`);
 
-            let color = new ButtonBuilder().setLabel("Color").setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_color`);
+            let color = new ButtonBuilder().setLabel(obeyUi.plain("Color")).setStyle(ButtonStyle.Primary).setCustomId(`buildEmbed_builder_color`);
 
-            let save = new ButtonBuilder().setLabel("📨 Send").setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_save`);
+            let save = new ButtonBuilder().setLabel(obeyUi.plain("📨 Send")).setEmoji(obeyUi.component("📨")).setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_save`);
 
-            let cancel = new ButtonBuilder().setLabel("❌ Cancel").setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`);
+            let cancel = new ButtonBuilder().setLabel(obeyUi.plain("❌ Cancel")).setEmoji(obeyUi.component("❌")).setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`);
 
             let channel = new ButtonBuilder()
-                .setLabel("💬 Select Channel")
+                .setLabel(obeyUi.plain("💬 Select Channel")).setEmoji(obeyUi.component("💬"))
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId(`buildEmbed_builder_channel`);
 
@@ -106,7 +108,7 @@ module.exports = {
                         embedEditing(interaction);
                     } else {
                         await interaction?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${message.author.id}>`,
+                            content: `${obeyUi.markup("icon.error")} You are not allowed to do that! Only: <@${message.author.id}>`,
                             ephemeral: true,
                         }); //ephemeral message
                     }
@@ -135,10 +137,10 @@ module.exports = {
                     );
 
                     button?.message.edit({
-                        content: `<a:Loading:833101350623117342> **Por favor send me Your Input now!**`,
+                        content: `${obeyUi.markup("motion.cargando")} **Por favor send me Your Input now!**`,
                         components: [
                             new ActionRowBuilder().addComponents([
-                                new ButtonBuilder().setLabel("Cancel").setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`),
+                                new ButtonBuilder().setLabel(obeyUi.plain("Cancel")).setStyle(ButtonStyle.Danger).setCustomId(`buildEmbed_cancel`),
                             ]),
                         ],
                     });
@@ -159,19 +161,19 @@ module.exports = {
 
                     let finalInput = input && input.size > 0 ? input.first() : "";
                     if (builderId == "channel") channel2send = finalInput.mentions.channels.first() || false;
-                    if (builderId == "title") embedToBuild.setTitle(finalInput.content);
-                    if (builderId == "desc") embedToBuild.setDescription(finalInput.content);
-                    if (builderId == "footer") embedToBuild.setFooter({ text: finalInput.content });
+                    if (builderId == "title") embedToBuild.setTitle(obeyUi.limit(finalInput.content, 256));
+                    if (builderId == "desc") embedToBuild.setDescription(obeyUi.limit(finalInput.content, 4096));
+                    if (builderId == "footer") embedToBuild.setFooter(obeyMeta.asFooter({ text: finalInput.content }));
 
                     if (builderId == "color") {
-                        if (!/^#[0-9A-F]{6}$/i?.test(finalInput.content)) embedToBuild.setColor("RANDOM");
+                        if (!/^#[0-9A-F]{6}$/i?.test(finalInput.content)) embedToBuild.setColor("Random");
                         else embedToBuild.setColor(finalInput.content);
                     }
                     if (builderId == "footerimg") {
                         if (ifUrl.test(finalInput)) {
-                            embedToBuild.setFooter(client.getFooter(
+                            embedToBuild.setFooter(obeyMeta.asFooter(client.getFooter(
                                     `${embedToBuild.footer ? embedToBuild.footer.text : "\u200B"}`,
-                                    finalInput.content)
+                                    finalInput.content))
                             );
                         }
                     }
@@ -245,16 +247,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable3"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable3"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -268,9 +270,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable6"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["embedbuilder"]["variable6"]), 4096)),
                 ],
             });
         }

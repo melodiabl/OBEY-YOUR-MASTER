@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -38,7 +40,7 @@ module.exports = {
                 return message.reply(client.la[ls].common.usernotfound);
 
             //create the EMBED
-            const embeduserinfo = new EmbedBuilder().setColor(es.color).setTitle(`Banner of ${user.username}`);
+            const embeduserinfo = new EmbedBuilder().setColor(es.color).setTitle(obeyUi.limit(`Banner of ${user.username}`, 256));
             let banner = false;
             try {
                 await user
@@ -57,10 +59,10 @@ module.exports = {
             if (banner) {
                 embeduserinfo.setImage(banner);
                 embeduserinfo.setColor(user.hexAccentColor ? user.hexAccentColor : es.color);
-                embeduserinfo.setDescription(`[Download the Banner of **${user.username}**](${banner}) <@${user.id}>`);
+                embeduserinfo.setDescription(obeyUi.limit(`[Download the Banner of **${user.username}**](${banner}) <@${user.id}>`, 4096));
             } else {
                 embeduserinfo.setColor(user.hexAccentColor ? user.hexAccentColor : es.color);
-                embeduserinfo.setTitle(`<:no:833101993668771842> **Has no Banner!**`);
+                embeduserinfo.setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **Has no Banner!**`, 256));
             }
             message.reply({ embeds: [embeduserinfo] });
         } catch (e) {
@@ -69,9 +71,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"]), 4096)),
                 ],
             });
         }

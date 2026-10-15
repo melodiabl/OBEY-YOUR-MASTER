@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const FormData = require('form-data')
 const axios = require('axios')
@@ -13,17 +14,17 @@ module.exports = {
   ],
 
   run: async (client, interaction) => {
-    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
+    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(d, 4096))
     const target = interaction.options.getUser('usuario') || interaction.user
     const member = await interaction.guild.members.fetch(target.id).catch(() => null)
-    if (!member) return interaction.reply({ embeds: [err('❌ Usuario no encontrado en el servidor.')], ephemeral: true })
+    if (!member) return interaction.reply({ embeds: [err(obeyUi.owned('❌ Usuario no encontrado en el servidor.'))], ephemeral: true })
 
     await interaction.deferReply()
     const guildId = interaction.guild.id
     const settings = client.settings.get(guildId, 'welcome')
 
     if (!settings || settings.channel === 'nochannel') {
-      return interaction.editReply({ embeds: [err('❌ El sistema de bienvenida no está configurado.\nUsa `!setup-welcome` para configurarlo.')] })
+      return interaction.editReply({ embeds: [err(obeyUi.owned('❌ El sistema de bienvenida no está configurado.\nUsa `!setup-welcome` para configurarlo.'))] })
     }
 
     try {
@@ -37,7 +38,7 @@ module.exports = {
         content: `${member.user} — **Vista previa de la tarjeta de bienvenida**`,
         embeds: [{
           color,
-          title: '👋 Bienvenido — Vista previa',
+          title: obeyUi.owned('👋 Bienvenido — Vista previa'),
           description,
           image: { url: 'attachment://welcome-preview.png' },
           footer: { text: `ID: ${member.user.id}` },

@@ -1,7 +1,9 @@
+const obeyUi = require("../../handlers/assets/system")
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { parseMilliseconds, duration, GetUser, nFormatter, ensure_economy_user } = require(
     `${process.cwd()}/handlers/functions`
 );
@@ -12,7 +14,7 @@ module.exports = {
     usage: "slots",
     type: "game",
     run: async (client, message, args, cmduser, text, prefix) => {
-        const slotItems = ["🍅", "🥑", "🥒", "🍆", "🥝", "🍇", "🍉", "🍊", "🍏", "💣", "🍓", "🍎", "🍒", "🍈", "🍋", "🍌"];
+        const slotItems = ["🍅", "🥑", "🥒", "🍆", "🥝", "🍇", "🍉", "🍊", "🍏", "💣", "🍓", "🍎", "🍒", "🍈", "🍋", "🍌"].map(obeyUi.owned);
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         if (!client.settings.get(message.guild.id, "ECONOMY")) {
@@ -20,7 +22,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -50,7 +52,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["slots"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["slots"]["variable3"])),
                     ],
@@ -60,7 +62,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["slots"]["variable4"])),
                     ],
                 });
@@ -69,7 +71,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["slots"]["variable5"])),
                     ],
                 });
@@ -106,7 +108,7 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() }),
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() })),
                     ],
                 });
             } else {
@@ -121,7 +123,7 @@ module.exports = {
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["slots"]["variable8"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["slots"]["variable9"]))
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() }),
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() })),
                     ],
                 });
             }
@@ -131,7 +133,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["slots"]["variable10"])),
                 ],

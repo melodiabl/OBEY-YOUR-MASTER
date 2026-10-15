@@ -1,0 +1,2056 @@
+{
+  "version": 1,
+  "entries": {
+    "icon.automation": {
+      "file": "icon_automation.png",
+      "name": "obey_automation_ff8ac28b",
+      "sha256": "ff8ac28b1b6cd3c406edaee53ad9c0516a102678c1c125682932aad0b9651327",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.autoplay": {
+      "file": "icon_autoplay.png",
+      "name": "obey_autoplay_6600f8b4",
+      "sha256": "6600f8b46ebd5c248fd48c4e00dee75706113855d25474bbbd5cefb5669d46f3",
+      "animated": false,
+      "fallback": "♾"
+    },
+    "icon.bell": {
+      "file": "icon_bell.png",
+      "name": "obey_bell_1d106d29",
+      "sha256": "1d106d29ea6097982415065825cfa1ba9f25db5298ef92ecf25f093dd3d71ee9",
+      "animated": false,
+      "fallback": "🔔"
+    },
+    "icon.blueprint": {
+      "file": "icon_blueprint.png",
+      "name": "obey_blueprint_67222099",
+      "sha256": "6722209919f7ce848ea309ea69b88e19491c18b7e8167b8d2e9910539d4c04c1",
+      "animated": false,
+      "fallback": "👷"
+    },
+    "icon.brush": {
+      "file": "icon_brush.png",
+      "name": "obey_brush_df0e7815",
+      "sha256": "df0e78150865a97464b75266041338e85e5aaf206bd519a8edb62d1573b18f50",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.calendar": {
+      "file": "icon_calendar.png",
+      "name": "obey_calendar_16f3acf0",
+      "sha256": "16f3acf05b1f0ea3bcce938e0e069ae5b8b1e7a3ab3b0daa11619a7cdd39a8d9",
+      "animated": false,
+      "fallback": "🗓"
+    },
+    "icon.case": {
+      "file": "icon_case.png",
+      "name": "obey_case_a65acc8f",
+      "sha256": "a65acc8f94cb94c53803457b388efc83c4aec9d0c77d19a89beb31b222aff69f",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.chart": {
+      "file": "icon_chart.png",
+      "name": "obey_chart_f0d66a99",
+      "sha256": "f0d66a99f9527621842fbf9a50aff6abf9e35bfb9d325b7bbfa1a36599c6cd79",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.claim": {
+      "file": "icon_claim.png",
+      "name": "obey_claim_c162029e",
+      "sha256": "c162029ed4e62ed3fe43ceafb6c794a8f41cdcc12e2d35a7b0443f276f76f3b5",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.close": {
+      "file": "icon_close.png",
+      "name": "obey_close_be6c8ad7",
+      "sha256": "be6c8ad7787c71d0ba6c96973cf5cf8d57bf743152d7dfe6c745b9f79aad2d8c",
+      "animated": false,
+      "fallback": "✖️"
+    },
+    "icon.edit": {
+      "file": "icon_edit.png",
+      "name": "obey_edit_cd04c7f9",
+      "sha256": "cd04c7f92611823426b665f2761c6fa79f3393cbb0e76d1b217ec57b5ee101c2",
+      "animated": false,
+      "fallback": "📝"
+    },
+    "icon.error": {
+      "file": "icon_error.png",
+      "name": "obey_error_28ca2a5b",
+      "sha256": "28ca2a5b18127b4365b4a0ab06fdf991cea97f2d97592d4a66186847f901d43a",
+      "animated": false,
+      "fallback": "❌"
+    },
+    "icon.export": {
+      "file": "icon_export.png",
+      "name": "obey_export_353ce35b",
+      "sha256": "353ce35b04beeee12f2f70062dbc37a3fcdf290f310fab6d64531d42b3278b7c",
+      "animated": false,
+      "fallback": "📂"
+    },
+    "icon.feed": {
+      "file": "icon_feed.png",
+      "name": "obey_feed_5d1fed56",
+      "sha256": "5d1fed56090dcd9cc74cdb303e0f30dd5ed796aed811b13e4dcb5b4409cf97e7",
+      "animated": false,
+      "fallback": "🗞"
+    },
+    "icon.game": {
+      "file": "icon_game.png",
+      "name": "obey_game_98c0c7c7",
+      "sha256": "98c0c7c7150efb0235b5d862b8c04beb23357c7d85ced60b409a26900f70277f",
+      "animated": false,
+      "fallback": "👾"
+    },
+    "icon.gift": {
+      "file": "icon_gift.png",
+      "name": "obey_gift_9b164020",
+      "sha256": "9b1640207c542285a98e99c07c533b2cf4bb4b0bb40d9db24add66dfa8809550",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.help": {
+      "file": "icon_help.png",
+      "name": "obey_help_4259f92b",
+      "sha256": "4259f92b31739b7d2fc4ac370e82576f2965e13f7254a631cd7a644051f85ad9",
+      "animated": false,
+      "fallback": "❓"
+    },
+    "icon.idea": {
+      "file": "icon_idea.png",
+      "name": "obey_idea_4fcf0f0d",
+      "sha256": "4fcf0f0d33bdfa43b5d1a00b4f6c307ae93918eeff88f5c72c63e676a2fb442f",
+      "animated": false,
+      "fallback": "💡"
+    },
+    "icon.image": {
+      "file": "icon_image.png",
+      "name": "obey_image_1dc1f216",
+      "sha256": "1dc1f216ab0e4a5f355db68a6164cd6430de900ef4c6d6d5c944ff35120cc31b",
+      "animated": false,
+      "fallback": "🖼️"
+    },
+    "icon.info": {
+      "file": "icon_info.png",
+      "name": "obey_info_92c364f3",
+      "sha256": "92c364f357c06bd5230dd9f46cde38e20659714c63fb4d622040f28f5bcdab3f",
+      "animated": false,
+      "fallback": "ℹ️"
+    },
+    "icon.levels": {
+      "file": "icon_levels.png",
+      "name": "obey_levels_2514d72c",
+      "sha256": "2514d72cd82852a5933d8bc89dd5e43e28203f09c870c8c2f6e6ff96036538af",
+      "animated": false,
+      "fallback": "💯"
+    },
+    "icon.like": {
+      "file": "icon_like.png",
+      "name": "obey_heart_afe77ecb",
+      "sha256": "afe77ecb30e7040ecb3c21733ecee6cd11f449fb06bd869db330040c201cf0c1",
+      "animated": false,
+      "fallback": "💛"
+    },
+    "icon.loading": {
+      "file": "icon_loading.png",
+      "name": "obey_loading_6caa0944",
+      "sha256": "6caa0944be86a06ea6871e03e651f1513830958e253cdaf7d90b07c213988d34",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.lock": {
+      "file": "icon_lock.png",
+      "name": "obey_lock_c59eb2a1",
+      "sha256": "c59eb2a143af6c6f5d09e1881c56c426af2292c8022ba18c5c959893cd8a694e",
+      "animated": false,
+      "fallback": "🔒"
+    },
+    "icon.loop": {
+      "file": "icon_loop.png",
+      "name": "obey_repeat_adf56a41",
+      "sha256": "adf56a41033a40c0a6d59536a00dc6cd9918db7419f832064a08427deea952dc",
+      "animated": false,
+      "fallback": "🔁"
+    },
+    "icon.lyrics": {
+      "file": "icon_lyrics.png",
+      "name": "obey_lyrics_0f1cadfe",
+      "sha256": "0f1cadfe9ae1680495d758725a25cfb241281bd9a3860342379ef150e0851e84",
+      "animated": false,
+      "fallback": "🎤"
+    },
+    "icon.pause": {
+      "file": "icon_pause.png",
+      "name": "obey_pause_7fae00b7",
+      "sha256": "7fae00b7a073cb0835749a073d4748ae54d993bf0d3e71f2f4a916530d25ce6a",
+      "animated": false,
+      "fallback": "⏸️"
+    },
+    "icon.play": {
+      "file": "icon_play.png",
+      "name": "obey_play_1f52bad9",
+      "sha256": "1f52bad956d50e5cf5b2fa0bee737e2081efce1e3589bc7191676ffe85654ace",
+      "animated": false,
+      "fallback": "▶️"
+    },
+    "icon.previous": {
+      "file": "icon_previous.png",
+      "name": "obey_previous_2bb7427f",
+      "sha256": "2bb7427f99af84f618775fec9965a0c9ce57c9f6e19b107cc1b584c7b8298341",
+      "animated": false,
+      "fallback": "⏮️"
+    },
+    "icon.profile": {
+      "file": "icon_profile.png",
+      "name": "obey_profile_12007ca0",
+      "sha256": "12007ca01159f358234825efae254532a5e674a527868a68dd0eabee6fe5158e",
+      "animated": false,
+      "fallback": "👤"
+    },
+    "icon.queue": {
+      "file": "icon_queue.png",
+      "name": "obey_queue_234b0c98",
+      "sha256": "234b0c98341383f882862d2dd53e956f307af2640c56962b43dc43d940d851e3",
+      "animated": false,
+      "fallback": "📋"
+    },
+    "icon.reopen": {
+      "file": "icon_reopen.png",
+      "name": "obey_reopen_ad1e2d48",
+      "sha256": "ad1e2d489f48e8aeb0fabc1ad2d5909fda941d9d8655e1f946e62e9b3dc1bb04",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.roles": {
+      "file": "icon_roles.png",
+      "name": "obey_roles_db2101ae",
+      "sha256": "db2101ae41f2fe7b42fd32fba5605f5e22acad62067343be04c0b387b9ebf68b",
+      "animated": false,
+      "fallback": "👥"
+    },
+    "icon.save": {
+      "file": "icon_save.png",
+      "name": "obey_save_0c3c38cc",
+      "sha256": "0c3c38cc276336b36a9d034811ec7b2e03264c0d2a11bb8866ea1a874bedac68",
+      "animated": false,
+      "fallback": "🔖"
+    },
+    "icon.search": {
+      "file": "icon_search.png",
+      "name": "obey_search_9dff64f1",
+      "sha256": "9dff64f188f698607378a75152d3d155743a6b236f80d29b35b7088a678c511d",
+      "animated": false,
+      "fallback": "🔎"
+    },
+    "icon.send": {
+      "file": "icon_send.png",
+      "name": "obey_send_1c015a92",
+      "sha256": "1c015a925e6a0d22f51e4aa7745f845b57ce3481daad7145f251d8bee65958b6",
+      "animated": false,
+      "fallback": "📨"
+    },
+    "icon.settings": {
+      "file": "icon_settings.png",
+      "name": "obey_settings_6494ae06",
+      "sha256": "6494ae069de4d5e17933e3d6aa68d18824361fb287d8d9535ad2cf69580b2da8",
+      "animated": false,
+      "fallback": "⚙️"
+    },
+    "icon.shield": {
+      "file": "icon_shield.png",
+      "name": "obey_shield_b656aad9",
+      "sha256": "b656aad9134b8c9e2eefafc4471eaa1d4ed7e2fa149cf45898e6988e1fb2ae18",
+      "animated": false,
+      "fallback": "🛡️"
+    },
+    "icon.shuffle": {
+      "file": "icon_shuffle.png",
+      "name": "obey_shuffle_ee8d4410",
+      "sha256": "ee8d441094253425f3569acc0292c3fa02517c8d60f550fc1b7a5f4d81377109",
+      "animated": false,
+      "fallback": "🔀"
+    },
+    "icon.skip": {
+      "file": "icon_skip.png",
+      "name": "obey_skip_0158d45b",
+      "sha256": "0158d45bc7ba690c562f2158edd40f4de05ab6f705d9ce340e52911466cf0381",
+      "animated": false,
+      "fallback": "⏭️"
+    },
+    "icon.star": {
+      "file": "icon_star.png",
+      "name": "obey_star_ccec2e16",
+      "sha256": "ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e",
+      "animated": false,
+      "fallback": "🌟"
+    },
+    "icon.stop": {
+      "file": "icon_stop.png",
+      "name": "obey_stop_449fa926",
+      "sha256": "449fa926f156219c95b1273f983a6d5c9fb6e28f6b047f956c854de3073eb055",
+      "animated": false,
+      "fallback": "⏹️"
+    },
+    "icon.success": {
+      "file": "icon_success.png",
+      "name": "obey_success_b5c6e0de",
+      "sha256": "b5c6e0de45970dee562558d690d24fb22fef01278ec0ae11f745bc73128f4bff",
+      "animated": false,
+      "fallback": "✅"
+    },
+    "icon.template": {
+      "file": "icon_template.png",
+      "name": "obey_template_8600a243",
+      "sha256": "8600a24375134e2ace37a33c850cfe6cf66f74dcea0961cc71b06c620feb8a96",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ticket": {
+      "file": "icon_ticket.png",
+      "name": "obey_ticket_7dea9c5f",
+      "sha256": "7dea9c5fde6f2b9d2756a9b370db9e945c8034e9f636e318a24c2f27621acd0a",
+      "animated": false,
+      "fallback": "🎫"
+    },
+    "icon.transcript": {
+      "file": "icon_transcript.png",
+      "name": "obey_transcript_709bf89d",
+      "sha256": "709bf89d22bb44721dd5f7728d55c97545b6a27ba39c9d673b7b70bed26ee7c1",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.undo": {
+      "file": "icon_undo.png",
+      "name": "obey_undo_9f8d221b",
+      "sha256": "9f8d221be3adb913a2fe945be4321c27f2ed76ff2672f90692a8e1ec54cc8d8f",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.verify": {
+      "file": "icon_verify.png",
+      "name": "obey_verify_fb7115b1",
+      "sha256": "fb7115b166dbb64f7652a10a44c2f7a3d1c0780d25217b90a3523dd0d117ac4d",
+      "animated": false,
+      "fallback": "🔰"
+    },
+    "icon.voice": {
+      "file": "icon_voice.png",
+      "name": "obey_voice_e90ec587",
+      "sha256": "e90ec587e40f99d7e9b2d79e73e9efeaf0dc3fc913873587afae3dd1f7ab29cf",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.volume-down": {
+      "file": "icon_volume-down.png",
+      "name": "obey_vol_down_7871f8aa",
+      "sha256": "7871f8aaec7d50931715d00d8570b35c010c34138f0bcbb05fcd4952f627b1f4",
+      "animated": false,
+      "fallback": "🔉"
+    },
+    "icon.volume-up": {
+      "file": "icon_volume-up.png",
+      "name": "obey_vol_up_10c48e81",
+      "sha256": "10c48e81142a5e09656fb6ebb275bab616274c680dbe6d42d2dfcd2c0e21337c",
+      "animated": false,
+      "fallback": "🔊"
+    },
+    "icon.volume": {
+      "file": "icon_volume.png",
+      "name": "obey_volume_f91e8bc5",
+      "sha256": "f91e8bc589e1130717b74964bd5bb9ad7fb61af109fe2c6d62206b8da139a72e",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.wallet": {
+      "file": "icon_wallet.png",
+      "name": "obey_wallet_0f29a86c",
+      "sha256": "0f29a86cf03d0860182b3a65cac3a8560f02f85fe6cf6bcd10d942a6e88e0dab",
+      "animated": false,
+      "fallback": "💰"
+    },
+    "icon.warning": {
+      "file": "icon_warning.png",
+      "name": "obey_warning_0085d3d2",
+      "sha256": "0085d3d241714a4a24df581de4daa7a00441af1db4f92dc0e53b98919261588e",
+      "animated": false,
+      "fallback": "🚫"
+    },
+    "emoji.ayuda": {
+      "file": "emoji_ayuda.png",
+      "name": "obey_char_ayuda_7903a247",
+      "sha256": "7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.bienvenida": {
+      "file": "emoji_bienvenida.png",
+      "name": "obey_char_bienvenida_c9b81826",
+      "sha256": "c9b81826cab7b9a053d1532e18660d88a4dfd73517034c5dbe399751d1278238",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.espera": {
+      "file": "emoji_espera.png",
+      "name": "obey_char_espera_4d6ed1b9",
+      "sha256": "4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.exito": {
+      "file": "emoji_exito.png",
+      "name": "obey_char_exito_d31398db",
+      "sha256": "d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.moderacion": {
+      "file": "emoji_moderacion.png",
+      "name": "obey_char_moderacion_ab836ce9",
+      "sha256": "ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.musica": {
+      "file": "emoji_musica.png",
+      "name": "obey_char_musica_140bf397",
+      "sha256": "140bf3978577854a4d679ac693383572f5949a5e8cadf1c0f8d039d83594cf5b",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.colecciones": {
+      "file": "emoji_colecciones.png",
+      "name": "obey_char_colecciones_afbe4a4d",
+      "sha256": "afbe4a4d7f5ee44c2fd3658b4baf30700e56c319f690aa9d96e15e88eb47e4ae",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.configuracion": {
+      "file": "emoji_configuracion.png",
+      "name": "obey_char_configuracion_551d6873",
+      "sha256": "551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.sobre": {
+      "file": "emoji_sobre.png",
+      "name": "obey_char_sobre_b02aebd9",
+      "sha256": "b02aebd9c36a17b7e2bd5cabb4a397cc53df52d66ac99f11e9178a9f6cd2a762",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "emoji.gracias": {
+      "file": "emoji_gracias.png",
+      "name": "obey_char_gracias_16e8bd94",
+      "sha256": "16e8bd94978a17bb5312dba7ede94fa6435c764fbfe206fd38983ee757db80e7",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "motion.cargando": {
+      "file": "motion_cargando.gif",
+      "name": "obey_motion_cargando_bc5d0145",
+      "sha256": "bc5d0145ff82d404c923a778bc27ae029a844cb607a8a119799a6644f23fa104",
+      "animated": true,
+      "fallback": "⏳"
+    },
+    "motion.carta-especial": {
+      "file": "motion_carta-especial.gif",
+      "name": "obey_motion_carta_espec_107ff923",
+      "sha256": "107ff9234fef6c4dc9e1456d0427401588583374665b9d4fa850eb121daf5d21",
+      "animated": true,
+      "fallback": "▫️"
+    },
+    "motion.exito": {
+      "file": "motion_exito.gif",
+      "name": "obey_motion_exito_6ffcbc50",
+      "sha256": "6ffcbc501c999e2a4f48ad51b193da9aa0e9b3d4c0d5330329c85089d13f189e",
+      "animated": true,
+      "fallback": "🎉"
+    },
+    "motion.favorito": {
+      "file": "motion_favorito.gif",
+      "name": "obey_motion_favorito_1bb961e6",
+      "sha256": "1bb961e675f370e3b7234f06cf568cac36f3b15eeee1f4b493efb4abb7892d46",
+      "animated": true,
+      "fallback": "▫️"
+    },
+    "motion.reproduciendo": {
+      "file": "motion_reproduciendo.gif",
+      "name": "obey_motion_reproducien_5b3b93c6",
+      "sha256": "5b3b93c6e7db6438a78b4d5ad0aaa52e6008a7bdf8a26237baa641992d1fb7d3",
+      "animated": true,
+      "fallback": "🎶"
+    },
+    "motion.ticket-espera": {
+      "file": "motion_ticket-espera.gif",
+      "name": "obey_motion_ticket_espe_47ebadbd",
+      "sha256": "47ebadbd8aaead9cecd837fe4cf7d1dd776bf7c0748527f7eca8bf486c01249f",
+      "animated": true,
+      "fallback": "▫️"
+    },
+    "motion.ticket-atencion": {
+      "file": "motion_ticket-atencion.gif",
+      "name": "obey_motion_ticket_aten_6ce0e34e",
+      "sha256": "6ce0e34ed543014faa7deff0442951f4d7f095ddfcab56298c4725adcac00ed9",
+      "animated": true,
+      "fallback": "▫️"
+    },
+    "motion.ticket-confirmado": {
+      "file": "motion_ticket-confirmado.gif",
+      "name": "obey_motion_ticket_conf_abeae545",
+      "sha256": "abeae545e529a5e9c788edd3cf21ee6b0c29363d38135e0f8d269a0528e1ff63",
+      "animated": true,
+      "fallback": "▫️"
+    },
+    "motion.character-sobre": {
+      "file": "motion_character-sobre.gif",
+      "name": "obey_motion_character_s_b7a86e37",
+      "sha256": "b7a86e371fe5d7f5a49eccaad9c1f9208c26673831339df1aea15333019fbf5f",
+      "animated": true,
+      "fallback": "▫️"
+    },
+    "motion.character-gracias": {
+      "file": "motion_character-gracias.gif",
+      "name": "obey_motion_character_g_dac30a71",
+      "sha256": "dac30a71c6f756d6d9b6f71c0a6b590bdafa4e81a2005bc5f138bb7e589e52a3",
+      "animated": true,
+      "fallback": "▫️"
+    },
+    "ticket.icon.abrir": {
+      "file": "ticket_icon_abrir.png",
+      "name": "obey_ticket_abrir_9ff3925d",
+      "sha256": "9ff3925d47c4d222e7086b7397bc517828ac4aa62c133a15b40ad4f09886c122",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "ticket.icon.ayuda": {
+      "file": "ticket_icon_ayuda.png",
+      "name": "obey_ticket_ayuda_1a5cd1f4",
+      "sha256": "1a5cd1f449a0faacc055494fcd30eb1df6c098bcc454ce979fb69550262ade9a",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "ticket.icon.tecnico": {
+      "file": "ticket_icon_tecnico.png",
+      "name": "obey_ticket_tecnico_529d9966",
+      "sha256": "529d9966331b09f22edeb7a22f12b32dbb37d401b638bf17ad34512cbc9d91f4",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "ticket.icon.reporte": {
+      "file": "ticket_icon_reporte.png",
+      "name": "obey_ticket_reporte_8eb22d1a",
+      "sha256": "8eb22d1a3207ea3c2a1230c6c7c860fbc33d589a8517ffd0a5af3c76530298d7",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "ticket.icon.atencion": {
+      "file": "ticket_icon_atencion.png",
+      "name": "obey_ticket_atencion_eec33aff",
+      "sha256": "eec33aff4d8952630b142f3bfb9209b33d550749888262a542601343b91d43d1",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "ticket.icon.espera": {
+      "file": "ticket_icon_espera.png",
+      "name": "obey_ticket_espera_1fe4dabb",
+      "sha256": "1fe4dabb23288db3ee9a08a021270addeb7a592da245a9bea68d78a7fb638422",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "ticket.icon.cierre": {
+      "file": "ticket_icon_cierre.png",
+      "name": "obey_ticket_cierre_056a89a6",
+      "sha256": "056a89a67312da6aac911a342c477a8f6c5a002f46c99a1fddfd40bf72eafcc8",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "ticket.icon.valoracion": {
+      "file": "ticket_icon_valoracion.png",
+      "name": "obey_ticket_valoracion_c715667e",
+      "sha256": "c715667ec4c62aa87e819faabd8dc5fe8ce1a03f41bf386ef602d55c1a112037",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.bank": {
+      "file": "icon_bank.png",
+      "name": "obey_bank_09206395",
+      "sha256": "09206395d0dafb91fe34211af5a05bd3b4893092ece0ee02b11ad9c216f5d7ef",
+      "animated": false,
+      "fallback": "🏦"
+    },
+    "icon.coins": {
+      "file": "icon_coins.png",
+      "name": "obey_coins_28e0b671",
+      "sha256": "28e0b671f584935134018bd99b4c3760a8d14eef545e0a98e00cfec26ac23ba5",
+      "animated": false,
+      "fallback": "🪙"
+    },
+    "icon.vote-up": {
+      "file": "icon_vote-up.png",
+      "name": "obey_vote_up_8dc3c327",
+      "sha256": "8dc3c3277099229ba5b7942f15a57acc0cab5263a37630f06c08a797d54d5366",
+      "animated": false,
+      "fallback": "👍"
+    },
+    "icon.vote-down": {
+      "file": "icon_vote-down.png",
+      "name": "obey_vote_down_ec487f6b",
+      "sha256": "ec487f6b9ba4a9d9016a48d374ce2180c18fce31c588c8e075395fa71bc4aac0",
+      "animated": false,
+      "fallback": "👎"
+    },
+    "icon.music": {
+      "file": "icon_music.png",
+      "name": "obey_music_4d8cee48",
+      "sha256": "4d8cee4889ac6c906991800c9c204105845fb585a178170f1f19a9ec54d4c6e2",
+      "animated": false,
+      "fallback": "🎵"
+    },
+    "icon.album": {
+      "file": "icon_album.png",
+      "name": "obey_album_0a39690f",
+      "sha256": "0a39690fbcc524794f5371460913fb61061ece0d4094cf10ed896cd1c3370052",
+      "animated": false,
+      "fallback": "📀"
+    },
+    "icon.link": {
+      "file": "icon_link.png",
+      "name": "obey_link_bde1e3a3",
+      "sha256": "bde1e3a3738e4e9fb573eadf34fc0d37b95c98f26437be6b28f647cbe171769b",
+      "animated": false,
+      "fallback": "🔗"
+    },
+    "icon.mute": {
+      "file": "icon_mute.png",
+      "name": "obey_mute_9e76a7c3",
+      "sha256": "9e76a7c318260b84ff34db5aa3a1ac70f6648036f4f554528b73a39e99b7be4e",
+      "animated": false,
+      "fallback": "🔇"
+    },
+    "icon.clock": {
+      "file": "icon_clock.png",
+      "name": "obey_clock_f67a52e4",
+      "sha256": "f67a52e4d622c78de999b733d3ef3fad18116daf8bc687d96dca7b8e138f33ef",
+      "animated": false,
+      "fallback": "⌛"
+    },
+    "icon.repeat-one": {
+      "file": "icon_repeat-one.png",
+      "name": "obey_repeat_one_186ed443",
+      "sha256": "186ed4439c6088dc83058bfc484f1159b3c68afb128feccb6b9fb2169d279d30",
+      "animated": false,
+      "fallback": "🔂"
+    },
+    "icon.page-previous": {
+      "file": "icon_page-previous.png",
+      "name": "obey_page_previous_ccbb0000",
+      "sha256": "ccbb000077f61f15e57cffec3965d63863986b03dd74d132c77c956ce2ce1cae",
+      "animated": false,
+      "fallback": "◀️"
+    },
+    "icon.page-next": {
+      "file": "icon_page-next.png",
+      "name": "obey_page_next_5bfb6bbb",
+      "sha256": "5bfb6bbb786b4d233d5ac0a794f3da98115a2e6520e27ab1f762a0988d226323",
+      "animated": false,
+      "fallback": "➡️"
+    },
+    "icon.delete": {
+      "file": "icon_delete.png",
+      "name": "obey_delete_d085b8b0",
+      "sha256": "d085b8b02e6db18958d9ee3a907991feeb779d96b2749104bab4598445725df1",
+      "animated": false,
+      "fallback": "🗑"
+    },
+    "icon.channel": {
+      "file": "icon_channel.png",
+      "name": "obey_channel_e9472337",
+      "sha256": "e9472337d4ea98e28d5452df4cfb44a92a84c630056cbec196cb42acb44af600",
+      "animated": false,
+      "fallback": "📢"
+    },
+    "icon.conversation": {
+      "file": "icon_conversation.png",
+      "name": "obey_conversation_a497d835",
+      "sha256": "a497d8352074f91bb1d91e6a0c22f036c95212bfccb8d8fbd9c83792f83b1374",
+      "animated": false,
+      "fallback": "💬"
+    },
+    "icon.bot": {
+      "file": "icon_bot.png",
+      "name": "obey_bot_19e24835",
+      "sha256": "19e2483562777233fe463f5af37762906af5d69f914e85b1aaf9405da6234e53",
+      "animated": false,
+      "fallback": "🤖"
+    },
+    "icon.code": {
+      "file": "icon_code.png",
+      "name": "obey_code_986af819",
+      "sha256": "986af819808b6ca954b373ebeeb0342b29d556a1e44922238e3696ac8ee02572",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.crown": {
+      "file": "icon_crown.png",
+      "name": "obey_crown_937621a7",
+      "sha256": "937621a7566b64567fd2391929363f6093f5e7599254f14d81df158c89c4533b",
+      "animated": false,
+      "fallback": "👑"
+    },
+    "icon.boost": {
+      "file": "icon_boost.png",
+      "name": "obey_boost_0cc0959d",
+      "sha256": "0cc0959d847ed21359ef6bcc54cbeb28ece5008c688328bcc7670a0bbed07888",
+      "animated": false,
+      "fallback": "⚡"
+    },
+    "icon.rewind": {
+      "file": "icon_rewind.png",
+      "name": "obey_rewind_3643cce2",
+      "sha256": "3643cce219ff4b19ffdc8857f72f393090c775a5af091a4bb59b1fabadf38223",
+      "animated": false,
+      "fallback": "⏪"
+    },
+    "icon.forward": {
+      "file": "icon_forward.png",
+      "name": "obey_forward_f153ef51",
+      "sha256": "f153ef513f3bfe220b802979abe4be747b605122a74cc7500a158f3d10e357b5",
+      "animated": false,
+      "fallback": "⏩"
+    },
+    "icon.headphones": {
+      "file": "icon_headphones.png",
+      "name": "obey_headphones_c6fe9a27",
+      "sha256": "c6fe9a2731f77f347b0ee1a3a1afc6590c2a085f6afca6ce986c9cd9d50ec1b9",
+      "animated": false,
+      "fallback": "🎧"
+    },
+    "icon.equalizer": {
+      "file": "icon_equalizer.png",
+      "name": "obey_equalizer_8c3e5c5c",
+      "sha256": "8c3e5c5ccf791baf7dc8e41fb073f8ef39de2e45c602829d02022cb964c64bf1",
+      "animated": false,
+      "fallback": "🎚"
+    },
+    "icon.microphone": {
+      "file": "icon_microphone.png",
+      "name": "obey_microphone_d4edc64a",
+      "sha256": "d4edc64a23350bc0b6e29bbd1fe560b78b86996ef5a2ae5fef660b2aaa8172a0",
+      "animated": false,
+      "fallback": "🎤"
+    },
+    "icon.globe": {
+      "file": "icon_globe.png",
+      "name": "obey_globe_043f6b63",
+      "sha256": "043f6b6374146d59c1be92314d6678788e3d7b566682424e236ef6b309386d6c",
+      "animated": false,
+      "fallback": "🎌"
+    },
+    "icon.home": {
+      "file": "icon_home.png",
+      "name": "obey_home_0f19f380",
+      "sha256": "0f19f38095b83c0624c89c65ed1718ba6c6ebbb367646c4995954f77ef29341d",
+      "animated": false,
+      "fallback": "🏠"
+    },
+    "icon.pin": {
+      "file": "icon_pin.png",
+      "name": "obey_pin_96a37e8e",
+      "sha256": "96a37e8e4ed145c231c8b95f9c95c0c336ae1d0b4c8f361f920c57d1fbea37a8",
+      "animated": false,
+      "fallback": "📌"
+    },
+    "icon.live": {
+      "file": "icon_live.png",
+      "name": "obey_live_e9fcc0f3",
+      "sha256": "e9fcc0f3d4916279b47a4c7d3e79afdf9194a776b6567b7d22d460694ae52631",
+      "animated": false,
+      "fallback": "📡"
+    },
+    "icon.cake": {
+      "file": "icon_cake.png",
+      "name": "obey_cake_6381d7cd",
+      "sha256": "6381d7cd253d146c768c83da8a3061bc440a06ec96236c26a95fa49f4c0eb459",
+      "animated": false,
+      "fallback": "🎂"
+    },
+    "icon.gavel": {
+      "file": "icon_gavel.png",
+      "name": "obey_gavel_41512c72",
+      "sha256": "41512c724d5c208c1f8b8549ab10650d000953d5da3036b165340c35fed05185",
+      "animated": false,
+      "fallback": "🔨"
+    },
+    "icon.exit": {
+      "file": "icon_exit.png",
+      "name": "obey_exit_2cacc2d3",
+      "sha256": "2cacc2d3a01bb90474249b7f21aeac390fb87812dd22756d1b217076e6238f3b",
+      "animated": false,
+      "fallback": "🚪"
+    },
+    "icon.join": {
+      "file": "icon_join.png",
+      "name": "obey_join_dbd7c4c5",
+      "sha256": "dbd7c4c57eb364a432892985e90a0e5229d6529afc8f6f54a09b638e2105009c",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.document": {
+      "file": "icon_document.png",
+      "name": "obey_document_a1831dbf",
+      "sha256": "a1831dbf8cd66f5de26937efc6ca66f6a03de2f749ad978c8e133c374b5854be",
+      "animated": false,
+      "fallback": "📃"
+    },
+    "icon.radio": {
+      "file": "icon_radio.png",
+      "name": "obey_radio_c7e7f811",
+      "sha256": "c7e7f8117f10b1bb8735f2d9c7d611e5511cfa5a74e8046aa0e56687fc135020",
+      "animated": false,
+      "fallback": "📻"
+    },
+    "icon.medal": {
+      "file": "icon_medal.png",
+      "name": "obey_medal_a5421445",
+      "sha256": "a5421445b7629b6f1cccadef798392a6b5e5013f4a4817ea6b4495a3ee5e0bdc",
+      "animated": false,
+      "fallback": "🥇"
+    },
+    "icon.shirt": {
+      "file": "icon_shirt.png",
+      "name": "obey_shirt_cdeceef1",
+      "sha256": "cdeceef18025ffcfdcbb6c07682501612f8e5960a7a2064c7554d18a8a68d97f",
+      "animated": false,
+      "fallback": "👕"
+    },
+    "icon.shoe": {
+      "file": "icon_shoe.png",
+      "name": "obey_shoe_1d75c290",
+      "sha256": "1d75c290963e40469ced190c40203f90cab821380821d58c8a6c8de6aee02253",
+      "animated": false,
+      "fallback": "👟"
+    },
+    "icon.car": {
+      "file": "icon_car.png",
+      "name": "obey_car_7e420ea8",
+      "sha256": "7e420ea8b5d716f939f36b573c3c266bdc6467f30fae385bc98b17abeb7c168a",
+      "animated": false,
+      "fallback": "🚗"
+    },
+    "icon.bike": {
+      "file": "icon_bike.png",
+      "name": "obey_bike_b0d1f5f5",
+      "sha256": "b0d1f5f5382f9648984889ef797f4372c0f145754dccb51c0826edd6f3d5ec43",
+      "animated": false,
+      "fallback": "🚲"
+    },
+    "icon.boat": {
+      "file": "icon_boat.png",
+      "name": "obey_boat_ff479770",
+      "sha256": "ff4797702970258f4b229e5eab19d48cd274a0923c53957a5b42b55531db1a6a",
+      "animated": false,
+      "fallback": "🛥️"
+    },
+    "icon.dog": {
+      "file": "icon_dog.png",
+      "name": "obey_dog_67f0bf13",
+      "sha256": "67f0bf1382ea8d50f26bd5a0632693ea8d3e2aced0547a0ff6dcc115ef3d98e8",
+      "animated": false,
+      "fallback": "🐕"
+    },
+    "icon.fish": {
+      "file": "icon_fish.png",
+      "name": "obey_fish_03557c51",
+      "sha256": "03557c518ff382176dd6b66033ee1490f4dc47ce285dfe971610c2b152e870f0",
+      "animated": false,
+      "fallback": "🐟"
+    },
+    "icon.hamster": {
+      "file": "icon_hamster.png",
+      "name": "obey_hamster_1cd1a5fa",
+      "sha256": "1cd1a5fac91ee2908e940c2726779108c86effd68727eae4de7daa2bf172b1cd",
+      "animated": false,
+      "fallback": "🐹"
+    },
+    "icon.cat": {
+      "file": "icon_cat.png",
+      "name": "obey_cat_726dab54",
+      "sha256": "726dab54fd31cc8b47f2f874084f9beaa975094b6717ca51fd8e6a87362fac71",
+      "animated": false,
+      "fallback": "😺"
+    },
+    "icon.bear": {
+      "file": "icon_bear.png",
+      "name": "obey_bear_10a8b59d",
+      "sha256": "10a8b59d768bec1c5c2a8e773300b6c7783c2ba6f9f519bd947ed37e6734d5cb",
+      "animated": false,
+      "fallback": "🧸"
+    },
+    "icon.dice": {
+      "file": "icon_dice.png",
+      "name": "obey_dice_3b0db778",
+      "sha256": "3b0db778c85720ea8975f6fa4aad1de2927e5df31bb0e6c0568b257745d4313a",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.cards": {
+      "file": "icon_cards.png",
+      "name": "obey_cards_b66e1378",
+      "sha256": "b66e13781f8ea435d80c97b595f7e3eb7674a4838c3d3a54f560e8b6eb6ee97f",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.game-cross": {
+      "file": "icon_game-cross.png",
+      "name": "obey_game_cross_3de7d5ed",
+      "sha256": "3de7d5ed530fd7b16a0acf13aeed73ebe40faa2524b324218d75ab9b9457dbc3",
+      "animated": false,
+      "fallback": "✖️"
+    },
+    "icon.game-ring": {
+      "file": "icon_game-ring.png",
+      "name": "obey_game_ring_e2130573",
+      "sha256": "e21305737eb4e118e8e35bbdd469868da8185e48047aef4ae219d73c9802c686",
+      "animated": false,
+      "fallback": "⭕"
+    },
+    "icon.game-empty": {
+      "file": "icon_game-empty.png",
+      "name": "obey_game_empty_cb35e1db",
+      "sha256": "cb35e1db6797c76b301f109f7a77fe3dcd1dfa5c98546f52a7dfd675cbec08b1",
+      "animated": false,
+      "fallback": "⚫️"
+    },
+    "icon.progress-filled": {
+      "file": "icon_progress-filled.png",
+      "name": "obey_progress_filled_e7d5ef74",
+      "sha256": "e7d5ef74fcc8423134c531eef7eec238bccfb7cb1695b88caf605966b5757e7e",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.progress-empty": {
+      "file": "icon_progress-empty.png",
+      "name": "obey_progress_empty_0982c488",
+      "sha256": "0982c488cfc35baaaccda7062110e8e9e4ea9c39c69de1356ed6ba1904fadaf4",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.leaf": {
+      "file": "icon_leaf.png",
+      "name": "obey_leaf_a701a986",
+      "sha256": "a701a986db79549846c423603edbce543052f4a76534d789c901dc981e2ffbd3",
+      "animated": false,
+      "fallback": "🍃"
+    },
+    "icon.gem": {
+      "file": "icon_gem.png",
+      "name": "obey_gem_49ca342f",
+      "sha256": "49ca342f608828188b1dd246e2f0fc72d76fe8fc6fcc73448a4a92f8756a2f9a",
+      "animated": false,
+      "fallback": "💎"
+    },
+    "icon.book": {
+      "file": "icon_book.png",
+      "name": "obey_book_5381e2be",
+      "sha256": "5381e2be69fa0c179b293f9877e65bdfe7f8f2ed33d522e070895c72aab095ef",
+      "animated": false,
+      "fallback": "📕"
+    },
+    "icon.moon": {
+      "file": "icon_moon.png",
+      "name": "obey_moon_f19d9a8c",
+      "sha256": "f19d9a8c13bb7073e5c3a6c2500c354ffbea7440f2544def2a1000e6e9a927c4",
+      "animated": false,
+      "fallback": "🌑"
+    },
+    "icon.sun": {
+      "file": "icon_sun.png",
+      "name": "obey_sun_66ed961c",
+      "sha256": "66ed961c07a22dea7e7ceca30ce290790beb6dd12d51733cc62d9c9b2bdd4834",
+      "animated": false,
+      "fallback": "☀️"
+    },
+    "icon.fire": {
+      "file": "icon_fire.png",
+      "name": "obey_fire_72652095",
+      "sha256": "726520957de15c243a5a849445afdf00d3eea92387c515527917aaff064a3aa8",
+      "animated": false,
+      "fallback": "🔥"
+    },
+    "icon.coffee": {
+      "file": "icon_coffee.png",
+      "name": "obey_coffee_8477af6f",
+      "sha256": "8477af6fe02467e61aa659cc3e7aeaa0faf4ade68ebac8d82ffd3d423797373f",
+      "animated": false,
+      "fallback": "☕"
+    },
+    "icon.flower": {
+      "file": "icon_flower.png",
+      "name": "obey_flower_6c30b6bd",
+      "sha256": "6c30b6bd0865825616e78953fba651f04550ad5009d4c2a8b8ecfc71f8f21c46",
+      "animated": false,
+      "fallback": "🌸"
+    },
+    "icon.plane": {
+      "file": "icon_plane.png",
+      "name": "obey_plane_a7472d5e",
+      "sha256": "a7472d5e7436e8b2239733cc869d8920579a932e7f60bfacbb1790f3c221a571",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.keyboard": {
+      "file": "icon_keyboard.png",
+      "name": "obey_keyboard_1698bc1e",
+      "sha256": "1698bc1eef0cc2ff34fddc2ec2a13188235203690bc0a052de53b8bd2583d274",
+      "animated": false,
+      "fallback": "⌨️"
+    },
+    "icon.phone": {
+      "file": "icon_phone.png",
+      "name": "obey_phone_c1cc597f",
+      "sha256": "c1cc597f528b815d818f34c897fb10f647e9e4b10d4466b0e44d51617eee9493",
+      "animated": false,
+      "fallback": "📳"
+    },
+    "icon.monitor": {
+      "file": "icon_monitor.png",
+      "name": "obey_monitor_98d3bc74",
+      "sha256": "98d3bc748665599d6fc3c443e97b5c0d4b4b0c55f592abca009d33209562efca",
+      "animated": false,
+      "fallback": "💻"
+    },
+    "icon.arrow-up": {
+      "file": "icon_arrow-up.png",
+      "name": "obey_arrow_up_e52ceba1",
+      "sha256": "e52ceba1cc5608b0307b6762dd70c7557ca4d268a7458db557f6cd33a2434dbd",
+      "animated": false,
+      "fallback": "⬆️"
+    },
+    "icon.arrow-down": {
+      "file": "icon_arrow-down.png",
+      "name": "obey_arrow_down_fbf49ad9",
+      "sha256": "fbf49ad90d244f0a647cc141d2daaab0e70c06fb1a47938eec2374ce5afe20b8",
+      "animated": false,
+      "fallback": "⬇️"
+    },
+    "icon.arrow-left": {
+      "file": "icon_arrow-left.png",
+      "name": "obey_arrow_left_7552ed14",
+      "sha256": "7552ed14074612844041869de3e238b217220a7dbe36a06c4f8079cab500f24b",
+      "animated": false,
+      "fallback": "⬅️"
+    },
+    "icon.arrow-right": {
+      "file": "icon_arrow-right.png",
+      "name": "obey_arrow_right_dc6fe54f",
+      "sha256": "dc6fe54f91211cf4b43e1f097eecc0ffa901ec4acbca66b7beecbd8608626fc9",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.eye": {
+      "file": "icon_eye.png",
+      "name": "obey_eye_19a4660f",
+      "sha256": "19a4660fa4cdb9c111b7d8052b8db2aa65993d5f95fbc0d07424dd7412451327",
+      "animated": false,
+      "fallback": "👀"
+    },
+    "icon.archive": {
+      "file": "icon_archive.png",
+      "name": "obey_archive_485b5dc3",
+      "sha256": "485b5dc37b5df93f1ce1ef8e1848b4bd23d1a1247a01331357e6a84a71044eaf",
+      "animated": false,
+      "fallback": "🗃"
+    },
+    "icon.palette": {
+      "file": "icon_palette.png",
+      "name": "obey_palette_3bf6a69c",
+      "sha256": "3bf6a69c258077d8017a4c061366d0cb161b8fe73a8b50f9859da6d476bac5ea",
+      "animated": false,
+      "fallback": "🎨"
+    },
+    "icon.skull": {
+      "file": "icon_skull.png",
+      "name": "obey_skull_2447fb3c",
+      "sha256": "2447fb3c3f4abf236642c0b7fa76de2a72db8628d1d31abc1f0e5626d8553904",
+      "animated": false,
+      "fallback": "💀"
+    },
+    "icon.ghost": {
+      "file": "icon_ghost.png",
+      "name": "obey_ghost_46fed3cd",
+      "sha256": "46fed3cd23348d775978ac9674e391cc3dd988e540bfdb7888a7203ad41db484",
+      "animated": false,
+      "fallback": "👻"
+    },
+    "icon.heart-broken": {
+      "file": "icon_heart-broken.png",
+      "name": "obey_heart_broken_c3f28072",
+      "sha256": "c3f28072c757373c7892cf37eb26a2969d26d132ab9069a6a25cd79e254f0b39",
+      "animated": false,
+      "fallback": "💔"
+    },
+    "icon.badge-id": {
+      "file": "icon_badge-id.png",
+      "name": "obey_badge_id_e969a091",
+      "sha256": "e969a091a85f583131b96f7b9e67e9c2beacf26dc9fc0fbb6830ae026c9637d7",
+      "animated": false,
+      "fallback": "🪪"
+    },
+    "icon.bag": {
+      "file": "icon_bag.png",
+      "name": "obey_bag_3aafef99",
+      "sha256": "3aafef9951da15d09e210e353ea2289eebac00010e7b5177dc776e1118b63d57",
+      "animated": false,
+      "fallback": "💼"
+    },
+    "icon.hat": {
+      "file": "icon_hat.png",
+      "name": "obey_hat_9229503a",
+      "sha256": "9229503a3a0d9baa13d9220502677dcdbd9835f05f8884e3d7de5b8a6cb53bcd",
+      "animated": false,
+      "fallback": "🎩"
+    },
+    "icon.swords": {
+      "file": "icon_swords.png",
+      "name": "obey_swords_9493ebb7",
+      "sha256": "9493ebb7753a26503b1573f535d4e5655a9cd992f780c908cc0decb228de7ffd",
+      "animated": false,
+      "fallback": "⚔️"
+    },
+    "icon.wave": {
+      "file": "icon_wave.png",
+      "name": "obey_wave_e7ec9623",
+      "sha256": "e7ec9623df738f91c7f121168e989beb73cb33ddfdb3e4eb613dfa47ca304139",
+      "animated": false,
+      "fallback": "🌊"
+    },
+    "icon.rocket": {
+      "file": "icon_rocket.png",
+      "name": "obey_rocket_78b4ee6b",
+      "sha256": "78b4ee6b0b34bb94235173edc7141b65e091836c632265e1cb0abc7ffacb821a",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.location": {
+      "file": "icon_location.png",
+      "name": "obey_location_4d596f3f",
+      "sha256": "4d596f3f200a7700b947f91b74eb42dfcb3c6cfd887780aac9174721e43c7a99",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.food": {
+      "file": "icon_food.png",
+      "name": "obey_food_58bd9acf",
+      "sha256": "58bd9acf1e316aa01931908ee65662a5f1d608f94eb8315b17744019227657f0",
+      "animated": false,
+      "fallback": "🍔"
+    },
+    "icon.hand": {
+      "file": "icon_hand.png",
+      "name": "obey_hand_239ce504",
+      "sha256": "239ce504e2fb5dfd64e47f02afec1aafabc771da18ccc729ccc2be9ef7872d3d",
+      "animated": false,
+      "fallback": "🤘"
+    },
+    "icon.kiss": {
+      "file": "icon_kiss.png",
+      "name": "obey_kiss_4585bf01",
+      "sha256": "4585bf01d35247de982c780eb95f2c171c2f4c7e4b1a28a042df65b3066d09ab",
+      "animated": false,
+      "fallback": "💋"
+    },
+    "icon.dance": {
+      "file": "icon_dance.png",
+      "name": "obey_dance_0740dc50",
+      "sha256": "0740dc508ee7121e2c5189da45fdd51338fda9a1f9fbd82db5b4150a53438946",
+      "animated": false,
+      "fallback": "💃"
+    },
+    "icon.bed": {
+      "file": "icon_bed.png",
+      "name": "obey_bed_5e3c004c",
+      "sha256": "5e3c004c67fa5f4c0ab76d3349a363b436f76a01ffbc4d835f5586cd95965f5c",
+      "animated": false,
+      "fallback": "🛏️"
+    },
+    "icon.bat": {
+      "file": "icon_bat.png",
+      "name": "obey_bat_1825f8eb",
+      "sha256": "1825f8eb2f72423ebd34466255518956318d2420fd80cc4dccc4cc94e4e623fd",
+      "animated": false,
+      "fallback": "🦇"
+    },
+    "icon.guitar": {
+      "file": "icon_guitar.png",
+      "name": "obey_guitar_bb16a62c",
+      "sha256": "bb16a62c53b2c6be2b5465115835a2b46d8f8e9b098e2d25657479be0d978229",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.piano": {
+      "file": "icon_piano.png",
+      "name": "obey_piano_6610ca4d",
+      "sha256": "6610ca4d4b98f61378385bb67ed1552710ec01f5967c05fed7ff448c384f3cbb",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ball": {
+      "file": "icon_ball.png",
+      "name": "obey_ball_4d709015",
+      "sha256": "4d7090155a9a4be22a8cf302ed61d054bd70f7abe03e136753dc8d25b7731d57",
+      "animated": false,
+      "fallback": "🎱"
+    },
+    "icon.crystal": {
+      "file": "icon_crystal.png",
+      "name": "obey_crystal_5be45c5e",
+      "sha256": "5be45c5e68522e063f4f1e2d2226f964a7d8931100b51039a4962e2fde512cd0",
+      "animated": false,
+      "fallback": "🔮"
+    },
+    "icon.leaf-palm": {
+      "file": "icon_leaf-palm.png",
+      "name": "obey_leaf_palm_d33e6c46",
+      "sha256": "d33e6c46eb3f0acda2aa7f1c634828803b4b1f164525c4fcb6335b962939e442",
+      "animated": false,
+      "fallback": "🌴"
+    },
+    "icon.no-mention": {
+      "file": "icon_no-mention.png",
+      "name": "obey_no_mention_f50291a3",
+      "sha256": "f50291a371a2c549ea0087a25eba54e8ead9764d694215b289435350371061a5",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.notify-off": {
+      "file": "icon_notify-off.png",
+      "name": "obey_notify_off_0a013c2f",
+      "sha256": "0a013c2f55c6dfe9b21f084b8a2f5b887d525e09408832beb836f81cff464642",
+      "animated": false,
+      "fallback": "🔕"
+    },
+    "icon.slot-tomato": {
+      "file": "icon_slot-tomato.png",
+      "name": "obey_slot_tomato_71266917",
+      "sha256": "712669175696734ed26ee50f877bfda91b42d2c97b00ec584b47644ae0b6f76b",
+      "animated": false,
+      "fallback": "🍅"
+    },
+    "icon.slot-avocado": {
+      "file": "icon_slot-avocado.png",
+      "name": "obey_slot_avocado_91d8799a",
+      "sha256": "91d8799af44e7a107e23ff328f88a28d7a5f1d3fd4cd0595d9edbff5183cb18e",
+      "animated": false,
+      "fallback": "🥑"
+    },
+    "icon.slot-cucumber": {
+      "file": "icon_slot-cucumber.png",
+      "name": "obey_slot_cucumber_9369b3a9",
+      "sha256": "9369b3a975af81f2e9f2ef32dc92cce69e3679574de925c7f7c701fd132107fc",
+      "animated": false,
+      "fallback": "🥒"
+    },
+    "icon.slot-eggplant": {
+      "file": "icon_slot-eggplant.png",
+      "name": "obey_slot_eggplant_4fb4c076",
+      "sha256": "4fb4c076805c8ffa16bb145189e38367ab72f00404e59c5010c72074dc7bbded",
+      "animated": false,
+      "fallback": "🍆"
+    },
+    "icon.slot-kiwi": {
+      "file": "icon_slot-kiwi.png",
+      "name": "obey_slot_kiwi_70545fc0",
+      "sha256": "70545fc0bd6c590be40c9cf1cf25301b0456c62c4baf638d35c006d7b791bca3",
+      "animated": false,
+      "fallback": "🥝"
+    },
+    "icon.slot-grapes": {
+      "file": "icon_slot-grapes.png",
+      "name": "obey_slot_grapes_f30e5c72",
+      "sha256": "f30e5c723475f38ed4efb41f34728cf92394ac74b6c3ececf43f69b982421650",
+      "animated": false,
+      "fallback": "🍇"
+    },
+    "icon.slot-watermelon": {
+      "file": "icon_slot-watermelon.png",
+      "name": "obey_slot_watermelon_ddbc0d44",
+      "sha256": "ddbc0d442592013a729cf679ed2ec22e06ac2541ebe74678c51f9e8b197b0dee",
+      "animated": false,
+      "fallback": "🍉"
+    },
+    "icon.slot-orange": {
+      "file": "icon_slot-orange.png",
+      "name": "obey_slot_orange_e88535f5",
+      "sha256": "e88535f5cf9df1083fa590384149bfdd5d37cdd1199d9c58989ec27656eded93",
+      "animated": false,
+      "fallback": "🍊"
+    },
+    "icon.slot-apple-green": {
+      "file": "icon_slot-apple-green.png",
+      "name": "obey_slot_apple_green_5e4bf50d",
+      "sha256": "5e4bf50dea11fe4cd97da68150439e714777f7492af4f3bf96c6f36b0ce91b77",
+      "animated": false,
+      "fallback": "🍏"
+    },
+    "icon.slot-bomb": {
+      "file": "icon_slot-bomb.png",
+      "name": "obey_slot_bomb_7f368cae",
+      "sha256": "7f368cae6a95a36160a89d459f7d81212a306a39062bcf0337161fd9d69a59f4",
+      "animated": false,
+      "fallback": "💣"
+    },
+    "icon.slot-strawberry": {
+      "file": "icon_slot-strawberry.png",
+      "name": "obey_slot_strawberry_cce6325a",
+      "sha256": "cce6325ab3402eb0d133e28529d5f0cc9d1b449dabcc129ac4bf2f07958a3cb3",
+      "animated": false,
+      "fallback": "🍓"
+    },
+    "icon.slot-apple-red": {
+      "file": "icon_slot-apple-red.png",
+      "name": "obey_slot_apple_red_e15f3647",
+      "sha256": "e15f3647b76627981fa5e286f538afea84d3b67e05e07f2f94ccc69150b6b66f",
+      "animated": false,
+      "fallback": "🍎"
+    },
+    "icon.slot-cherry": {
+      "file": "icon_slot-cherry.png",
+      "name": "obey_slot_cherry_5cd6cdb9",
+      "sha256": "5cd6cdb9bbacee56abe8e3f54df2b86bb8a486933486bd8bc5d7cf901385ac15",
+      "animated": false,
+      "fallback": "🍒"
+    },
+    "icon.slot-melon": {
+      "file": "icon_slot-melon.png",
+      "name": "obey_slot_melon_5d24bc34",
+      "sha256": "5d24bc341ae161cdf9ec3fb0b146b9e16ce40c5d57a53fe2888271884d9dfc4d",
+      "animated": false,
+      "fallback": "🍈"
+    },
+    "icon.slot-lemon": {
+      "file": "icon_slot-lemon.png",
+      "name": "obey_slot_lemon_1aa1b79a",
+      "sha256": "1aa1b79ab0636bba573eef92355b86f7dcb3e41540ecb35d79348a6f0f2cb22b",
+      "animated": false,
+      "fallback": "🍋"
+    },
+    "icon.slot-banana": {
+      "file": "icon_slot-banana.png",
+      "name": "obey_slot_banana_d29949f2",
+      "sha256": "d29949f2a844a1e0396649dae09c1a855688f51e76571d91e686149da8894b32",
+      "animated": false,
+      "fallback": "🍌"
+    },
+    "icon.piece-red": {
+      "file": "icon_piece-red.png",
+      "name": "obey_piece_red_5c70ee07",
+      "sha256": "5c70ee07cae8dde4c1cd0647cec8837e0278a21161299c0c849c5fdedab2d2f0",
+      "animated": false,
+      "fallback": "🔴"
+    },
+    "icon.piece-yellow": {
+      "file": "icon_piece-yellow.png",
+      "name": "obey_piece_yellow_a6bb7927",
+      "sha256": "a6bb79279c2915a36524d4176b2781554545358e2d901b1148f3f68af4b5204c",
+      "animated": false,
+      "fallback": "🟠"
+    },
+    "icon.piece-blue": {
+      "file": "icon_piece-blue.png",
+      "name": "obey_piece_blue_580d1426",
+      "sha256": "580d14262eef8ac5bac3ac69269b6a3241ee2fc92ac56d85a2b1f0cbf7467597",
+      "animated": false,
+      "fallback": "🔵"
+    },
+    "icon.piece-green": {
+      "file": "icon_piece-green.png",
+      "name": "obey_piece_green_24e9f50f",
+      "sha256": "24e9f50f22b33f7ad71ac8373f42df91ef05d667266d569d99eb380b7c31686e",
+      "animated": false,
+      "fallback": "🟢"
+    },
+    "icon.face-smile": {
+      "file": "icon_face-smile.png",
+      "name": "obey_face_smile_5a795b9e",
+      "sha256": "5a795b9eede9e54911b0da9edf2fc7732d007849319b0384ba295765a4c7841e",
+      "animated": false,
+      "fallback": "😀"
+    },
+    "icon.face-sad": {
+      "file": "icon_face-sad.png",
+      "name": "obey_face_sad_e0ea0819",
+      "sha256": "e0ea0819fcd3ed01a8a28b3d527a7dc8c69f6ee9dce9a3fba078a31ca9b10e33",
+      "animated": false,
+      "fallback": "😟"
+    },
+    "icon.face-cry": {
+      "file": "icon_face-cry.png",
+      "name": "obey_face_cry_3da426a2",
+      "sha256": "3da426a2b28bf7104d20c2ba1a0ff44dc82628724297de9c3690c54bb93dc747",
+      "animated": false,
+      "fallback": "😓"
+    },
+    "icon.face-angry": {
+      "file": "icon_face-angry.png",
+      "name": "obey_face_angry_f5acde0e",
+      "sha256": "f5acde0ef5822a32b8a716e7a08d9f26f7a77e7561382f5e7eb74f84887f14e2",
+      "animated": false,
+      "fallback": "😤"
+    },
+    "icon.face-wink": {
+      "file": "icon_face-wink.png",
+      "name": "obey_face_wink_6a96b98b",
+      "sha256": "6a96b98bcf019e99b2705496bae0d335e033d413a92b8c557a8bd1be53c778c9",
+      "animated": false,
+      "fallback": "😉"
+    },
+    "icon.face-love": {
+      "file": "icon_face-love.png",
+      "name": "obey_face_love_d900a427",
+      "sha256": "d900a42795861eba6077bf9075f5f7f4da2a5b23507b590095d22a0eb4baf262",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.face-surprise": {
+      "file": "icon_face-surprise.png",
+      "name": "obey_face_surprise_f4547e4f",
+      "sha256": "f4547e4f3c663bf6943470d4632ac3cae404641c0f42355a3816af7af799c006",
+      "animated": false,
+      "fallback": "😳"
+    },
+    "icon.face-thinking": {
+      "file": "icon_face-thinking.png",
+      "name": "obey_face_thinking_f84c6427",
+      "sha256": "f84c642718f8225beddb4f00b97cd41cfe4a4c208db150535e1c3dfb647faf6e",
+      "animated": false,
+      "fallback": "🤔"
+    },
+    "icon.face-cool": {
+      "file": "icon_face-cool.png",
+      "name": "obey_face_cool_06939314",
+      "sha256": "06939314e6551da184cb133d4e861b61e62ef66e06bef23eec064bc620a8f08a",
+      "animated": false,
+      "fallback": "😎"
+    },
+    "icon.face-sleep": {
+      "file": "icon_face-sleep.png",
+      "name": "obey_face_sleep_dff0b448",
+      "sha256": "dff0b448ef490b4bd6658430fc06986e0809d8f286addad9f40e1cd1c91fc9d4",
+      "animated": false,
+      "fallback": "💤"
+    },
+    "icon.face-neutral": {
+      "file": "icon_face-neutral.png",
+      "name": "obey_face_neutral_f82905a5",
+      "sha256": "f82905a56920e9484e4cc8dfef36ccf4f14661583e2b0e224d51b53eca1adf3c",
+      "animated": false,
+      "fallback": "💩"
+    },
+    "icon.face-laugh": {
+      "file": "icon_face-laugh.png",
+      "name": "obey_face_laugh_804a8efc",
+      "sha256": "804a8efcc20a783d68bac8a21570d211d266cb3c5a1d1f30e0f84aaa3373b100",
+      "animated": false,
+      "fallback": "😂"
+    },
+    "icon.face-fear": {
+      "file": "icon_face-fear.png",
+      "name": "obey_face_fear_69bdddd2",
+      "sha256": "69bdddd2a17308cfb76f14cbd396edd3f05091dae17ff64665222029888a1099",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.locale-gb": {
+      "file": "icon_locale-gb.png",
+      "name": "obey_locale_gb_9ef7c86d",
+      "sha256": "9ef7c86d144df71966ea98e983a20d761781f605d835b5681d37af0ac24834f2",
+      "animated": false,
+      "fallback": "🇬🇧"
+    },
+    "icon.locale-de": {
+      "file": "icon_locale-de.png",
+      "name": "obey_locale_de_459f5692",
+      "sha256": "459f5692565f9f2d294bb2fa927ef7262efb7c9dc290fc634f8ee1b352e5705b",
+      "animated": false,
+      "fallback": "🇩🇪"
+    },
+    "icon.locale-fr": {
+      "file": "icon_locale-fr.png",
+      "name": "obey_locale_fr_6ce57125",
+      "sha256": "6ce571252dd7c6796afe1afb086f70174fed154c86ec376a1d88e20b51791c25",
+      "animated": false,
+      "fallback": "🇫🇷"
+    },
+    "icon.locale-it": {
+      "file": "icon_locale-it.png",
+      "name": "obey_locale_it_9cd36c7c",
+      "sha256": "9cd36c7c7e4e4986e4f07d9c9afc92a00d97f6f38ce294ba774a422d55c83ff6",
+      "animated": false,
+      "fallback": "🇮🇹"
+    },
+    "icon.locale-es": {
+      "file": "icon_locale-es.png",
+      "name": "obey_locale_es_c5f99ca4",
+      "sha256": "c5f99ca4aae704ad207a31196a3d217852f331faae2fb8540fde49abc3f935dc",
+      "animated": false,
+      "fallback": "🇪🇸"
+    },
+    "icon.locale-in": {
+      "file": "icon_locale-in.png",
+      "name": "obey_locale_in_c4d0f7e1",
+      "sha256": "c4d0f7e167e3e39b84aa6785302e63ebacddcfc39c1028c38bb5dc8b5a90ab71",
+      "animated": false,
+      "fallback": "🇮🇳"
+    },
+    "icon.locale-nl": {
+      "file": "icon_locale-nl.png",
+      "name": "obey_locale_nl_c339b310",
+      "sha256": "c339b3102997657f4525a1f8979b0e0b811ec169a853b3f713f655c044c63b26",
+      "animated": false,
+      "fallback": "🇳🇱"
+    },
+    "icon.locale-tr": {
+      "file": "icon_locale-tr.png",
+      "name": "obey_locale_tr_7553fdaa",
+      "sha256": "7553fdaa82fca87f121ca5708e97f81e6434810875aff41ef31822a9adee278f",
+      "animated": false,
+      "fallback": "🇹🇷"
+    },
+    "icon.locale-ir": {
+      "file": "icon_locale-ir.png",
+      "name": "obey_locale_ir_6347fb22",
+      "sha256": "6347fb22cecbd34b1bf9efb9fe590d7a6211805d69fab03410da7e0d7af8bedb",
+      "animated": false,
+      "fallback": "🇮🇷"
+    },
+    "icon.locale-us": {
+      "file": "icon_locale-us.png",
+      "name": "obey_locale_us_02ee579e",
+      "sha256": "02ee579eb235bd843a93b4f13287f536c2d4f4f3032ff271d8361a23e1accd2a",
+      "animated": false,
+      "fallback": "🇺🇸"
+    },
+    "icon.locale-at": {
+      "file": "icon_locale-at.png",
+      "name": "obey_locale_at_5f2b67f7",
+      "sha256": "5f2b67f7233d3c613dae28634af19196de26404a93f051de2be16b04fb910795",
+      "animated": false,
+      "fallback": "🇦🇹"
+    },
+    "icon.locale-be": {
+      "file": "icon_locale-be.png",
+      "name": "obey_locale_be_ba440494",
+      "sha256": "ba44049466482342bccbbdeea5ecec74624f9e19cf3ae27f141b00dcaf657bbe",
+      "animated": false,
+      "fallback": "🇧🇪"
+    },
+    "icon.locale-ba": {
+      "file": "icon_locale-ba.png",
+      "name": "obey_locale_ba_d5e2a806",
+      "sha256": "d5e2a8067de499661e4d69513183ad7b2cc56cf8afac9d2c9fd26b6fe3116c3b",
+      "animated": false,
+      "fallback": "🇧🇦"
+    },
+    "icon.locale-cz": {
+      "file": "icon_locale-cz.png",
+      "name": "obey_locale_cz_a2bcf924",
+      "sha256": "a2bcf92493571d3961e110371b31ad019b0123a83597ef168ef8435098b7a4dd",
+      "animated": false,
+      "fallback": "🇨🇿"
+    },
+    "icon.locale-dk": {
+      "file": "icon_locale-dk.png",
+      "name": "obey_locale_dk_8ffb4ba8",
+      "sha256": "8ffb4ba8024090b7860c49264ceeb12d04bf7aadcc764fc520cd0bae6055d296",
+      "animated": false,
+      "fallback": "🇩🇰"
+    },
+    "icon.locale-hu": {
+      "file": "icon_locale-hu.png",
+      "name": "obey_locale_hu_3d8c5d3b",
+      "sha256": "3d8c5d3bca799c9f1bc67cb89e917c94182ba1a22bdd56e98726d46fe72a942e",
+      "animated": false,
+      "fallback": "🇭🇺"
+    },
+    "icon.locale-ie": {
+      "file": "icon_locale-ie.png",
+      "name": "obey_locale_ie_49f0e311",
+      "sha256": "49f0e3119a4b0cd1d5f82981d45d5339f73c4bff85b598d490b0dbfebc981cfd",
+      "animated": false,
+      "fallback": "🇮🇪"
+    },
+    "icon.locale-lu": {
+      "file": "icon_locale-lu.png",
+      "name": "obey_locale_lu_ad7671d1",
+      "sha256": "ad7671d187b392ecdc194eb5293c3f4b56cbe2841e2fe556b9bb1ba5290c0d18",
+      "animated": false,
+      "fallback": "🇱🇺"
+    },
+    "icon.locale-ro": {
+      "file": "icon_locale-ro.png",
+      "name": "obey_locale_ro_19489cc3",
+      "sha256": "19489cc3ca5b2045c79ea75877217feec2805e776925065347594deb92c2c8d9",
+      "animated": false,
+      "fallback": "🇷🇴"
+    },
+    "icon.locale-rs": {
+      "file": "icon_locale-rs.png",
+      "name": "obey_locale_rs_79bc0a19",
+      "sha256": "79bc0a19b4d291e38d4677c73601b0361dde88d8b3790d186dbe3dacfd8a6815",
+      "animated": false,
+      "fallback": "🇷🇸"
+    },
+    "icon.locale-se": {
+      "file": "icon_locale-se.png",
+      "name": "obey_locale_se_839214c0",
+      "sha256": "839214c09f76a159a6a0be12cc9e07340c7a4293a1a286ca324cb54922cede47",
+      "animated": false,
+      "fallback": "🇸🇪"
+    },
+    "icon.locale-ua": {
+      "file": "icon_locale-ua.png",
+      "name": "obey_locale_ua_001a3b8e",
+      "sha256": "001a3b8e49203485c15f4f90f0420549fdf8364476f3678cb9a4e1a89bb71a4e",
+      "animated": false,
+      "fallback": "🇺🇦"
+    },
+    "icon.ordinal-0": {
+      "file": "icon_ordinal-0.png",
+      "name": "obey_ordinal_0_ce197a55",
+      "sha256": "ce197a550973e1f7539ce383930cad55ec78192c73feae4537cf39e0ca626607",
+      "animated": false,
+      "fallback": "0️⃣"
+    },
+    "icon.ordinal-1": {
+      "file": "icon_ordinal-1.png",
+      "name": "obey_ordinal_1_c2f81471",
+      "sha256": "c2f81471074ccc5ffc2bc76b3e6b9011ff298f93a0ebea9b9585a2dd90f9e66e",
+      "animated": false,
+      "fallback": "1️⃣"
+    },
+    "icon.ordinal-2": {
+      "file": "icon_ordinal-2.png",
+      "name": "obey_ordinal_2_ab8e9b11",
+      "sha256": "ab8e9b110555adb00c01440b5a00e1400b07bb3ff4e1de1e4864411f2af7e98a",
+      "animated": false,
+      "fallback": "2️⃣"
+    },
+    "icon.ordinal-3": {
+      "file": "icon_ordinal-3.png",
+      "name": "obey_ordinal_3_54954d78",
+      "sha256": "54954d780cb46bbcda8ec9d901bae2b8eb5c65563564c79565681ab2e7abe2b6",
+      "animated": false,
+      "fallback": "3️⃣"
+    },
+    "icon.ordinal-4": {
+      "file": "icon_ordinal-4.png",
+      "name": "obey_ordinal_4_56005745",
+      "sha256": "56005745c83ede5318ebc2807656fd2a0e241f82c1b5ad71d7d70d08e44cd2b4",
+      "animated": false,
+      "fallback": "4️⃣"
+    },
+    "icon.ordinal-5": {
+      "file": "icon_ordinal-5.png",
+      "name": "obey_ordinal_5_c16a354b",
+      "sha256": "c16a354bbe1d10edef1ef6e61c2818039f0eeb3a3ca860c4fe08f2c07b000d11",
+      "animated": false,
+      "fallback": "5️⃣"
+    },
+    "icon.ordinal-6": {
+      "file": "icon_ordinal-6.png",
+      "name": "obey_ordinal_6_549fe778",
+      "sha256": "549fe778ae62bbc48c044eb4addb10e4b1241a8c3aca5c2ec068e913951e93ab",
+      "animated": false,
+      "fallback": "6️⃣"
+    },
+    "icon.ordinal-7": {
+      "file": "icon_ordinal-7.png",
+      "name": "obey_ordinal_7_065b62ec",
+      "sha256": "065b62eca732df07bbf966a56b2ccdd91c26d8a001261abbefbc1ce82e1b4419",
+      "animated": false,
+      "fallback": "7️⃣"
+    },
+    "icon.ordinal-8": {
+      "file": "icon_ordinal-8.png",
+      "name": "obey_ordinal_8_1ee3afaa",
+      "sha256": "1ee3afaa5bf6a389d83cbe09abd6bfa049ad3b5f7ff2f0c65a4c78b160c042ff",
+      "animated": false,
+      "fallback": "8️⃣"
+    },
+    "icon.ordinal-9": {
+      "file": "icon_ordinal-9.png",
+      "name": "obey_ordinal_9_9e1df090",
+      "sha256": "9e1df0903898ded2fc90eda1cc97622b3ebcca9482d94f411d62dd3f61c45dcd",
+      "animated": false,
+      "fallback": "9️⃣"
+    },
+    "icon.ordinal-10": {
+      "file": "icon_ordinal-10.png",
+      "name": "obey_ordinal_10_077c58d2",
+      "sha256": "077c58d280b855fdbc41690fbc921a8375632f129f66fce5a00776ab834d525e",
+      "animated": false,
+      "fallback": "🔟"
+    },
+    "icon.ordinal-11": {
+      "file": "icon_ordinal-11.png",
+      "name": "obey_ordinal_11_072d2926",
+      "sha256": "072d2926a78d2a685265c2d948dbcccf4818b49f2ea7e137488aa0cc0debf379",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-12": {
+      "file": "icon_ordinal-12.png",
+      "name": "obey_ordinal_12_c4ce612e",
+      "sha256": "c4ce612e07489a0f35f94659b45233d732157623eae02b58862434601a6e1493",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-13": {
+      "file": "icon_ordinal-13.png",
+      "name": "obey_ordinal_13_9612ba8d",
+      "sha256": "9612ba8d08f92de71a94de6c2d342eb5ac75512403ae4af8b40805b3c82e4615",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-14": {
+      "file": "icon_ordinal-14.png",
+      "name": "obey_ordinal_14_16b1b54f",
+      "sha256": "16b1b54f52e4da61b238417d60c0c975ee830ab85b3a223caa0252176198caf0",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-15": {
+      "file": "icon_ordinal-15.png",
+      "name": "obey_ordinal_15_ad8a5e20",
+      "sha256": "ad8a5e203b9bf25e997877eefdf77052f16e98883ae98575cc39c334dde1ebd0",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-16": {
+      "file": "icon_ordinal-16.png",
+      "name": "obey_ordinal_16_2ab4ac88",
+      "sha256": "2ab4ac8835e29099c811111e6cd9a065f78507d45ea7bab9785b0a28895610fc",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-17": {
+      "file": "icon_ordinal-17.png",
+      "name": "obey_ordinal_17_9a27ef91",
+      "sha256": "9a27ef91e737a01cc438ae56138c2327f28b0701463a3965d9a5dd76222ed593",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-18": {
+      "file": "icon_ordinal-18.png",
+      "name": "obey_ordinal_18_8ab6b1c9",
+      "sha256": "8ab6b1c93dde7c6606fffce81207a766f76b2c28f27f0b720aae8f9566a09ee3",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-19": {
+      "file": "icon_ordinal-19.png",
+      "name": "obey_ordinal_19_e7136ba4",
+      "sha256": "e7136ba41dc39ab761341e364ce70bc308f882091aa5ee95db4f4147b163cda5",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-20": {
+      "file": "icon_ordinal-20.png",
+      "name": "obey_ordinal_20_f76e15cb",
+      "sha256": "f76e15cb37a4142bbb4a1d8617877006235bb1b93f825773800336b49a85dd56",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-21": {
+      "file": "icon_ordinal-21.png",
+      "name": "obey_ordinal_21_9fbc04cc",
+      "sha256": "9fbc04cce2291efe8b7acea850489e71e3ce1b983e8ce38680709a7b98251465",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-22": {
+      "file": "icon_ordinal-22.png",
+      "name": "obey_ordinal_22_a2ff0c32",
+      "sha256": "a2ff0c323615e699483660fbecb7553929d6a13d1cf4e02af9c8a1a64a8e59b0",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-23": {
+      "file": "icon_ordinal-23.png",
+      "name": "obey_ordinal_23_8f132de1",
+      "sha256": "8f132de14fb4b517d08353c1501cf97084f57d415ec46a9d839907ac61675392",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-24": {
+      "file": "icon_ordinal-24.png",
+      "name": "obey_ordinal_24_50af2b24",
+      "sha256": "50af2b24fc65d33d57d8319b95fd2f6e234b9ab27e85d4f30dc2597a7ae70e69",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.ordinal-25": {
+      "file": "icon_ordinal-25.png",
+      "name": "obey_ordinal_25_dd2a35b4",
+      "sha256": "dd2a35b42ee5e2cf906f2629d75213a46aa242724ea54829cb058c2ab89de3ed",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.connection": {
+      "file": "icon_connection.png",
+      "name": "obey_connection_8ee49f9b",
+      "sha256": "8ee49f9b960c59b2944322785b18061aac8484613046504059af7bfa5ba99a7e",
+      "animated": false,
+      "fallback": "🏓"
+    },
+    "icon.drop": {
+      "file": "icon_drop.png",
+      "name": "obey_drop_395a2edc",
+      "sha256": "395a2edc4eb4d6ed772a7fddc30dffa0a52697f1c4a2197d4e6a379700af6398",
+      "animated": false,
+      "fallback": "🩸"
+    },
+    "icon.slow": {
+      "file": "icon_slow.png",
+      "name": "obey_slow_0cd9f90d",
+      "sha256": "0cd9f90d221e367609079f6e3c00090ebca8bf43106260704ea107d167c5a2c8",
+      "animated": false,
+      "fallback": "🐢"
+    },
+    "icon.cloud": {
+      "file": "icon_cloud.png",
+      "name": "obey_cloud_124e8c9c",
+      "sha256": "124e8c9c173782d40c467a5975d5daf0774166d319b239feb3d76f8f2ed5f540",
+      "animated": false,
+      "fallback": "☁️"
+    },
+    "icon.new": {
+      "file": "icon_new.png",
+      "name": "obey_new_0119ccb4",
+      "sha256": "0119ccb42cdb3827b0dadabc2664adb88091a48858aa1f04ebfc03be9df0d7d4",
+      "animated": false,
+      "fallback": "🆕"
+    },
+    "icon.ordinal": {
+      "file": "icon_ordinal.png",
+      "name": "obey_ordinal_cb0b88ef",
+      "sha256": "cb0b88ef2a33448592885e409e71916898b805bd558ed349d8fab402a37bdb45",
+      "animated": false,
+      "fallback": "🔢"
+    },
+    "icon.cut": {
+      "file": "icon_cut.png",
+      "name": "obey_cut_b3225fcd",
+      "sha256": "b3225fcdc780da3bddc3a856f04f66bb172a4229ef4cc436489a75d9093a131b",
+      "animated": false,
+      "fallback": "✂️"
+    },
+    "icon.dot": {
+      "file": "icon_dot.png",
+      "name": "obey_dot_6ce44fcd",
+      "sha256": "6ce44fcdb26e16d52bb7ae8587a5120c4178a8649ea517d9f4d410529056d297",
+      "animated": false,
+      "fallback": "🔘"
+    },
+    "icon.masks": {
+      "file": "icon_masks.png",
+      "name": "obey_masks_0bd2c1ed",
+      "sha256": "0bd2c1edaf4b2add498ac054632dba14169461a36d10b7fd9e38bb74208920db",
+      "animated": false,
+      "fallback": "🎭"
+    },
+    "icon.resize": {
+      "file": "icon_resize.png",
+      "name": "obey_resize_33dd3970",
+      "sha256": "33dd3970732610005b5bc61dc8254feed8bfaf9fb6d856bfed06066f1b8c5111",
+      "animated": false,
+      "fallback": "↔"
+    },
+    "icon.tooth": {
+      "file": "icon_tooth.png",
+      "name": "obey_tooth_32dc9d10",
+      "sha256": "32dc9d10aefb80437c874a9a15b1a6eaf644469c94eccbc96a14253fe0d39918",
+      "animated": false,
+      "fallback": "🦷"
+    },
+    "icon.rob": {
+      "file": "icon_rob.png",
+      "name": "obey_rob_6a59487d",
+      "sha256": "6a59487d81ddc74c0fb48c62ff78cf8adf4b03c69dd9a85b4b58ad71c9c85695",
+      "animated": false,
+      "fallback": "🦹"
+    },
+    "icon.target": {
+      "file": "icon_target.png",
+      "name": "obey_target_f5b3e60c",
+      "sha256": "f5b3e60c64c99c5f577eef0ed5cf5dc04b449ab4ff8ee977c94b041426c4f32b",
+      "animated": false,
+      "fallback": "🎯"
+    },
+    "icon.piece-purple": {
+      "file": "icon_piece-purple.png",
+      "name": "obey_piece_purple_fc157b81",
+      "sha256": "fc157b8111b694074a39dce44a43d114b0f7818b5e5617e4bb1d4446206a25d8",
+      "animated": false,
+      "fallback": "🟣"
+    },
+    "icon.move": {
+      "file": "icon_move.png",
+      "name": "obey_move_2b2edecb",
+      "sha256": "2b2edecb0e7174bdd97ab03a8f2db3338ef16d08c02bf6dbcb5dd4c942701c1d",
+      "animated": false,
+      "fallback": "▫️"
+    },
+    "icon.bird": {
+      "file": "icon_bird.png",
+      "name": "obey_bird_486dcdbb",
+      "sha256": "486dcdbba898ae33e883a61984aade69576635077b9916b26d85b63e52a78f14",
+      "animated": false,
+      "fallback": "🐦"
+    },
+    "icon.video": {
+      "file": "icon_video.png",
+      "name": "obey_video_d20930b5",
+      "sha256": "d20930b53db7eed8bc9e6cc7435bffe907b1c130f2245102517e531b686f6a41",
+      "animated": false,
+      "fallback": "🎥"
+    },
+    "icon.baby": {
+      "file": "icon_baby.png",
+      "name": "obey_baby_379c691f",
+      "sha256": "379c691f238ec706a6f7370604234f6906c2101dd08f7d5de06fe2c2cf60a320",
+      "animated": false,
+      "fallback": "🍼"
+    },
+    "icon.letter-a": {
+      "file": "icon_letter-a.png",
+      "name": "obey_letter_a_3ceafa50",
+      "sha256": "3ceafa50563e606606662501e5d46749d4255a9ebf41ed8fa6f11004da965a45",
+      "animated": false,
+      "fallback": "🅰️"
+    },
+    "icon.letter-b": {
+      "file": "icon_letter-b.png",
+      "name": "obey_letter_b_146bdfd4",
+      "sha256": "146bdfd442232fe1382ae37a6faff391d213f3923a2aa52d4b3e316af6ad036c",
+      "animated": false,
+      "fallback": "🅱️"
+    },
+    "icon.letter-m": {
+      "file": "icon_letter-m.png",
+      "name": "obey_letter_m_27cd5cfd",
+      "sha256": "27cd5cfde8acc4df09b0b35123db0fb5bf3e811006cc6fbe8ee0bb0992857c26",
+      "animated": false,
+      "fallback": "Ⓜ️"
+    },
+    "icon.letter-o": {
+      "file": "icon_letter-o.png",
+      "name": "obey_letter_o_a42d6bb3",
+      "sha256": "a42d6bb3df6a4a0b5590c266a169e674daa4cf9cdc3952adc58b730603cf750e",
+      "animated": false,
+      "fallback": "🅾️"
+    },
+    "icon.letter-p": {
+      "file": "icon_letter-p.png",
+      "name": "obey_letter_p_2d6e4b7d",
+      "sha256": "2d6e4b7d21506ba0706d3f2e0eab20d631f524d9632a6021e2736788883aeb9b",
+      "animated": false,
+      "fallback": "🅿️"
+    }
+  },
+  "aliases": {
+    "analytics": "icon.chart",
+    "apply": "icon.save",
+    "architect": "icon.blueprint",
+    "automation": "icon.automation",
+    "autoplay": "icon.autoplay",
+    "back": "icon.previous",
+    "backup": "icon.export",
+    "ban": "icon.shield",
+    "bell": "icon.bell",
+    "calendar": "icon.calendar",
+    "case": "icon.case",
+    "category": "icon.template",
+    "channel": "icon.voice",
+    "claim": "icon.claim",
+    "close": "icon.close",
+    "collection": "icon.image",
+    "currency": "icon.wallet",
+    "decoration": "icon.brush",
+    "delete": "icon.delete",
+    "diff": "icon.edit",
+    "document": "icon.transcript",
+    "download": "icon.export",
+    "edit": "icon.edit",
+    "error": "icon.error",
+    "evidence": "icon.transcript",
+    "expired": "icon.warning",
+    "eye": "icon.info",
+    "farewell": "icon.image",
+    "filter": "icon.search",
+    "gift": "icon.gift",
+    "globe": "icon.feed",
+    "heart": "icon.like",
+    "help": "icon.help",
+    "history": "icon.clock",
+    "home": "icon.profile",
+    "info": "icon.info",
+    "kick": "icon.shield",
+    "level": "icon.levels",
+    "link": "icon.link",
+    "live": "icon.play",
+    "loading": "icon.loading",
+    "lock": "icon.lock",
+    "logout": "icon.close",
+    "lyrics": "icon.lyrics",
+    "minus": "icon.volume-down",
+    "music": "icon.music",
+    "muted": "icon.volume-down",
+    "next": "icon.skip",
+    "pause": "icon.pause",
+    "play": "icon.play",
+    "plus": "icon.volume-up",
+    "poll": "icon.idea",
+    "previous": "icon.previous",
+    "progress": "icon.levels",
+    "queue": "icon.queue",
+    "raid": "icon.shield",
+    "refresh": "icon.search",
+    "reopen": "icon.reopen",
+    "repeat": "icon.loop",
+    "report": "icon.case",
+    "restore": "icon.undo",
+    "role": "icon.roles",
+    "save": "icon.save",
+    "search": "icon.search",
+    "server": "icon.blueprint",
+    "settings": "icon.edit",
+    "setup": "icon.edit",
+    "shield": "icon.shield",
+    "shuffle": "icon.shuffle",
+    "skip": "icon.skip",
+    "star": "icon.star",
+    "stop": "icon.stop",
+    "success": "icon.success",
+    "suggestion": "icon.idea",
+    "template": "icon.template",
+    "ticket": "icon.ticket",
+    "timeout": "icon.shield",
+    "transfer": "icon.voice",
+    "unlock": "icon.verify",
+    "upload": "icon.image",
+    "user": "icon.profile",
+    "verify": "icon.verify",
+    "voice": "icon.voice",
+    "vol_down": "icon.volume-down",
+    "vol_up": "icon.volume-up",
+    "volume": "icon.volume-up",
+    "wallet": "icon.wallet",
+    "warning": "icon.warning",
+    "welcome": "icon.image"
+  }
+}

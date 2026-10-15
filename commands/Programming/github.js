@@ -1,3 +1,4 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 //Here the command starts
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -23,7 +24,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["programming"]["github"]["variable1"]))
                             .setDescription(eval(client.la[ls]["cmds"]["programming"]["github"]["variable2"])),
                     ],
@@ -34,7 +35,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["programming"]["github"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["programming"]["github"]["variable4"])),
                     ],
@@ -48,7 +49,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["programming"]["github"]["variable5"]))
                             .setDescription(eval(client.la[ls]["cmds"]["programming"]["github"]["variable6"])),
                     ],
@@ -71,11 +72,11 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setTitle(body.full_name)
-                        .setAuthor({ name: "GitHub", iconURL: "https://github?.githubassets.com/images/modules/logos_page/GitHub-Mark.png" })
+                        .setAuthor(obeyMeta.asAuthor({ name: "GitHub", iconURL: "https://github?.githubassets.com/images/modules/logos_page/GitHub-Mark.png" }))
                         .setURL(body.html_url)
                         .setThumbnail(body.owner.avatar_url)
                         .setColor(es.color)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setDescription(eval(client.la[ls]["cmds"]["programming"]["github"]["variable8"])),
                 ],
             });
@@ -85,7 +86,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["programming"]["github"]["variable9"])),
                 ],

@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -18,20 +20,20 @@ module.exports = {
     const autoroles  = client.settings.get(gid, 'welcome.roles') || []
     const welcomeCh  = client.settings.get(gid, 'welcome.channel')
 
-    const LANG_LABEL = { es: '🇪🇸 Español', en: '🇬🇧 English', de: '🇩🇪 Deutsch', fr: '🇫🇷 Français', it: '🇮🇹 Italiano', nl: '🇳🇱 Dutch', tr: '🇹🇷 Türkçe' }
+    const LANG_LABEL = { es: obeyUi.owned('🇪🇸 Español'), en: obeyUi.owned('🇬🇧 English'), de: obeyUi.owned('🇩🇪 Deutsch'), fr: obeyUi.owned('🇫🇷 Français'), it: obeyUi.owned('🇮🇹 Italiano'), nl: obeyUi.owned('🇳🇱 Dutch'), tr: obeyUi.owned('🇹🇷 Türkçe') }
 
     const embed = new EmbedBuilder()
       .setColor(0x5865F2)
-      .setTitle(`⚙️ Configuración — ${g.name}`)
+      .setTitle(obeyUi.limit(`${obeyUi.markup("icon.settings")} Configuración — ${g.name}`, 256))
       .setThumbnail(g.iconURL())
       .addFields(
-        { name: '🔤 Prefijo',    value: `\`${prefix}\``,                                                      inline: true },
-        { name: '🌐 Idioma',     value: LANG_LABEL[language] || language,                                      inline: true },
-        { name: '🎵 Música',     value: musicOn ? '✅ Activada' : '❌ Desactivada',                            inline: true },
-        { name: '📋 Canal logs', value: logCh && logCh !== 'no' ? `<#${logCh}>` : '*(no configurado)*',       inline: true },
-        { name: '👋 Bienvenida', value: welcomeCh && welcomeCh !== 'nochannel' ? `<#${welcomeCh}>` : '*(no configurado)*', inline: true },
-        { name: '🎭 Autoroles',  value: autoroles.length ? autoroles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : '*(ninguno)*', inline: true },
-        { name: '👑 Roles admin', value: adminroles.length ? adminroles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : '*(ninguno)*', inline: false },
+        { name: obeyUi.owned('🔤 Prefijo'),    value: `\`${prefix}\``,                                                      inline: true },
+        { name: obeyUi.owned('🌐 Idioma'),     value: LANG_LABEL[language] || language,                                      inline: true },
+        { name: obeyUi.owned('🎵 Música'),     value: musicOn ? obeyUi.owned('✅ Activada') : obeyUi.owned('❌ Desactivada'),                            inline: true },
+        { name: obeyUi.owned('📋 Canal logs'), value: logCh && logCh !== 'no' ? `<#${logCh}>` : '*(no configurado)*',       inline: true },
+        { name: obeyUi.owned('👋 Bienvenida'), value: welcomeCh && welcomeCh !== 'nochannel' ? `<#${welcomeCh}>` : '*(no configurado)*', inline: true },
+        { name: obeyUi.owned('🎭 Autoroles'),  value: autoroles.length ? autoroles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : '*(ninguno)*', inline: true },
+        { name: obeyUi.owned('👑 Roles admin'), value: adminroles.length ? adminroles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : '*(ninguno)*', inline: false },
       )
       .setFooter({ text: 'Usa /config para consultar las opciones y cambiar ajustes' })
       .setTimestamp()

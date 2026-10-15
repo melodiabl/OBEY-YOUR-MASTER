@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, ButtonBuilder, ActionRowBuilder, MessageMenuOption, StringSelectMenuBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fs = require("fs");
 var { databasing, isValidURL, nFormatter } = require(`${process.cwd()}/handlers/functions`);
 const moment = require("moment");
@@ -23,9 +25,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable1"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable1"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable2"]), 4096)),
                 ],
             });
         try {
@@ -35,32 +37,32 @@ module.exports = {
                     {
                         value: "Status 1. Text",
                         description: `Change the first Display Text of the Status`,
-                        emoji: "📝",
+                        emoji: obeyUi.component("📝"),
                     },
                     {
                         value: "Status 2. Text",
                         description: `Change the second Display Text of the Status`,
-                        emoji: "📝",
+                        emoji: obeyUi.component("📝"),
                     },
                     {
                         value: "Status Type",
                         description: `Change the Status-Type to: Playing/Listening/...`,
-                        emoji: "🔰",
+                        emoji: obeyUi.component("🔰"),
                     },
                     {
                         value: "Status URL",
                         description: `If Status-State = Streaming, change the Twitch URL`,
-                        emoji: "🔗",
+                        emoji: obeyUi.component("🔗"),
                     },
                     {
                         value: "Status State",
                         description: `Change the Status-State to: Online/Idle/Dnd/Streaming`,
-                        emoji: "🔖",
+                        emoji: obeyUi.component("🔖"),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ai-Chat-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -68,7 +70,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to change the Status")
+                    .setPlaceholder(obeyUi.plain("Click me to change the Status"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -84,8 +86,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -106,16 +108,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0]);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} You are not allowed to do that! Only: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -127,14 +129,14 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable7"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable7"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `Example: \`${prefix}help | ${client.user.username.split(" ")[0]} | by: github.com/melodiabl\`
+                                            obeyUi.limit(`Example: \`${prefix}help | ${client.user.username.split(" ")[0]} | by: github.com/melodiabl\`
 
-              *Enter the text now!*`
+              *Enter the text now!*`, 4096)
                                         )
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .addFields({ name: "KEYWORDS which get replaced:", value: `\`{guildcount}\` .. Shows all guilds
               \`{prefix}\` .. Shows the default Prefix
               \`{membercount}\` .. Shows all Members
@@ -207,13 +209,13 @@ module.exports = {
                                             return message.channel.send({
                                                 embeds: [
                                                     new EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable8"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable8"]), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable9"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable9"]), 4096)
                                                         ),
                                                 ],
                                             });
@@ -221,10 +223,10 @@ module.exports = {
                                         return message.channel.send({
                                             embeds: [
                                                 new EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(es.color)
                                                     .setTitle(
-                                                        `Successfully set the New Status Text to:\n> \`${newStatusText}\``
+                                                        obeyUi.limit(`Successfully set the New Status Text to:\n> \`${newStatusText}\``, 256)
                                                     ),
                                             ],
                                         });
@@ -235,15 +237,15 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable11"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable11"]), 256))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
-                                                    `\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``.substring(
+                                                    obeyUi.limit(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``.substring(
                                                         0,
                                                         2000
-                                                    )
+                                                    ), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -254,14 +256,14 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable7"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable7"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `Example: \`${prefix}help | ${client.user.username.split(" ")[0]} | by: github.com/melodiabl\`
+                                            obeyUi.limit(`Example: \`${prefix}help | ${client.user.username.split(" ")[0]} | by: github.com/melodiabl\`
 
-              *Enter the text now!*`
+              *Enter the text now!*`, 4096)
                                         )
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .addFields({ name: "KEYWORDS which get replaced:", value: `\`{guildcount}\` .. Shows all guilds
               \`{prefix}\` .. Shows the default Prefix
               \`{membercount}\` .. Shows all Members
@@ -334,13 +336,13 @@ module.exports = {
                                             return message.channel.send({
                                                 embeds: [
                                                     new EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable8"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable8"]), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable9"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable9"]), 4096)
                                                         ),
                                                 ],
                                             });
@@ -348,10 +350,10 @@ module.exports = {
                                         return message.channel.send({
                                             embeds: [
                                                 new EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(es.color)
                                                     .setTitle(
-                                                        `Successfully set the New Status Text to:\n> \`${newStatusText}\``
+                                                        obeyUi.limit(`Successfully set the New Status Text to:\n> \`${newStatusText}\``, 256)
                                                     ),
                                             ],
                                         });
@@ -362,15 +364,15 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable11"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable11"]), 256))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
-                                                    `\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``.substring(
+                                                    obeyUi.limit(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``.substring(
                                                         0,
                                                         2000
-                                                    )
+                                                    ), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -404,7 +406,7 @@ module.exports = {
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Ai-Chat-Configuración!`,
-                                        emoji: allEmojis.msg.cancel,
+                                        emoji: obeyUi.component(allEmojis.msg.cancel),
                                     },
                                 ];
                                 //define the selection
@@ -412,7 +414,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to change the Status")
+                                    .setPlaceholder(obeyUi.plain("Click me to change the Status"))
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -430,8 +432,8 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                    .setAuthor(obeyMeta.asAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -464,21 +466,21 @@ module.exports = {
                                                 return message.channel.send({
                                                     embeds: [
                                                         new EmbedBuilder()
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setColor(es.wrongcolor)
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["owner"]["changestatus"][
                                                                         "variable14"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setDescription(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["owner"]["changestatus"][
                                                                         "variable15"
                                                                     ]
-                                                                )
+                                                                ), 4096)
                                                             ),
                                                     ],
                                                 });
@@ -486,28 +488,28 @@ module.exports = {
                                             return message.channel.send({
                                                 embeds: [
                                                     new EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.color)
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["owner"]["changestatus"]["variable16"]
-                                                            )
+                                                            ), 256)
                                                         ),
                                                 ],
                                             });
                                         });
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                            content: `${obeyUi.markup("icon.error")} You are not allowed to do that! Only: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -518,15 +520,15 @@ module.exports = {
                             tempmsg = await message.reply({
                                 embeds: [
                                     new EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable22"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable22"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `
+                                            obeyUi.limit(`
             Example: \`https://twitch.tv/#\` --> must be a twitch link
 
-            *Enter the text now!*`
+            *Enter the text now!*`, 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -542,10 +544,10 @@ module.exports = {
                                         return message.channel.send({
                                             embeds: [
                                                 new EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(es.wrongcolor)
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable23"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable23"]), 256)
                                                     ),
                                             ],
                                         });
@@ -553,10 +555,10 @@ module.exports = {
                                         return message.channel.send({
                                             embeds: [
                                                 new EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(es.wrongcolor)
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable24"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable24"]), 256)
                                                     ),
                                             ],
                                         });
@@ -572,17 +574,17 @@ module.exports = {
                                             return message.channel.send({
                                                 embeds: [
                                                     new EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["owner"]["changestatus"]["variable25"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["owner"]["changestatus"]["variable26"]
-                                                            )
+                                                            ), 4096)
                                                         ),
                                                 ],
                                             });
@@ -590,10 +592,10 @@ module.exports = {
                                         return message.channel.send({
                                             embeds: [
                                                 new EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(es.color)
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable27"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable27"]), 256)
                                                     ),
                                             ],
                                         });
@@ -604,15 +606,15 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable28"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable28"]), 256))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
-                                                    `\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``.substring(
+                                                    obeyUi.limit(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``.substring(
                                                         0,
                                                         2000
-                                                    )
+                                                    ), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -626,22 +628,22 @@ module.exports = {
                                     {
                                         value: "online",
                                         description: `Showing myself as ONLINE`,
-                                        emoji: "🟢",
+                                        emoji: obeyUi.component("🟢"),
                                     },
                                     {
                                         value: "idle",
                                         description: `Showing myself as IDLE`,
-                                        emoji: "🟡",
+                                        emoji: obeyUi.component("🟡"),
                                     },
                                     {
                                         value: "dnd",
                                         description: `Showing myself as DND`,
-                                        emoji: "🔴",
+                                        emoji: obeyUi.component("🔴"),
                                     },
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Ai-Chat-Configuración!`,
-                                        emoji: allEmojis.msg.cancel,
+                                        emoji: obeyUi.component(allEmojis.msg.cancel),
                                     },
                                 ];
                                 //define the selection
@@ -649,7 +651,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("Click me to change the Status")
+                                    .setPlaceholder(obeyUi.plain("Click me to change the Status"))
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -667,8 +669,8 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                    .setAuthor(obeyMeta.asAuthor({ name: "Change Status", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/au-kddi/190/purple-heart_1f49c.png", url: "https://github.com/melodiabl" }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -693,25 +695,25 @@ module.exports = {
                                         return message.channel.send({
                                             embeds: [
                                                 new EmbedBuilder()
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setColor(es.color)
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable20"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable20"]), 256)
                                                     ),
                                             ],
                                         });
                                     }
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                        content: `${obeyUi.markup("icon.error")} You are not allowed to do that! Only: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -725,9 +727,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable30"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changestatus"]["variable30"]), 4096)),
                 ],
             });
         }

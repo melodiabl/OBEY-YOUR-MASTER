@@ -1,3 +1,5 @@
+const obeyUi = require("../../handlers/assets/system")
+const { localeFor } = require('../../handlers/i18n')
 // play estilo Soundy: muestra RESULTADOS (🎵 Pistas / 💿 Álbumes, clasificados) para elegir
 // antes de reproducir. Las URLs (track/playlist) se reproducen directas.
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js')
@@ -20,7 +22,7 @@ module.exports = {
     const es = client.settings.get(message.guild.id, 'embed')
     const ls = client.settings.get(message.guild.id, 'language')
     if (!client.settings.get(message.guild.id, 'MUSIC')) {
-      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(client.la[ls].common.disabled.title)] }).catch(() => {})
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))] }).catch(() => {})
     }
     const voiceChannel = message.member?.voice?.channel
     if (!voiceChannel) return message.reply({ embeds: [err('Únete a un canal de voz primero.')] }).catch(() => {})
@@ -33,7 +35,7 @@ module.exports = {
 
     if (isUrl(query)) return handleUrl(client, message, voiceChannel, query)
 
-    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(`${E.music} Buscando **${query.slice(0, 60)}**…`)] }).catch(() => null)
+    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(obeyUi.limit(`${E.music} Buscando **${query.slice(0, 60)}**…`, 4096))] }).catch(() => null)
     if (!loading) return
 
     const results = await searchDiscordCatalog(client, query, { guildId: message.guild.id }).catch(() => ({ tracks: [], albums: [] }))
@@ -43,7 +45,7 @@ module.exports = {
 
     let tab = 'tracks'
     let items = results.tracks || []
-    await loading.edit({ embeds: [catEmbed(tab, items, query)], components: catRows(tab, items, 'pplay') }).catch(() => {})
+    await loading.edit({ embeds: [catEmbed(tab, items, query, localeFor(client, message.guild.id))], components: catRows(tab, items, 'pplay', localeFor(client, message.guild.id)) }).catch(() => {})
 
     const collector = loading.createMessageComponentCollector({ filter: i => i.user.id === message.author.id, time: 60_000 })
     collector.on('collect', async i => {
@@ -51,11 +53,11 @@ module.exports = {
         await i.deferUpdate()
         tab = i.customId.split(':')[1]
         items = results[tab] || []
-        return loading.edit({ embeds: [catEmbed(tab, items, query)], components: catRows(tab, items, 'pplay') }).catch(() => {})
+        return loading.edit({ embeds: [catEmbed(tab, items, query, localeFor(client, message.guild.id))], components: catRows(tab, items, 'pplay', localeFor(client, message.guild.id)) }).catch(() => {})
       }
       if (i.customId === 'pplay_cancel') {
         await i.deferUpdate(); collector.stop('cancel')
-        return loading.edit({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription('🚫 Búsqueda cancelada.')], components: [] }).catch(() => {})
+        return loading.edit({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(obeyUi.owned('🚫 Búsqueda cancelada.'), 4096))], components: [] }).catch(() => {})
       }
       if (i.customId === 'pplay_pick') {
         await i.deferUpdate(); collector.stop('picked')
@@ -63,7 +65,7 @@ module.exports = {
         const info = itemInfo(item)
         try {
           const queued = await enqueueCatalogItem(client, message, voiceChannel, item)
-          await loading.edit({ embeds: [addedEmbed(info, queued, message.author.id)], components: [] }).catch(() => {})
+          await loading.edit({ embeds: [addedEmbed(info, queued, message.author.id, localeFor(client, message.guild.id))], components: [] }).catch(() => {})
         } catch (e) {
           await loading.edit({ embeds: [err(e.message || String(e))], components: [] }).catch(() => {})
         }
@@ -77,7 +79,7 @@ module.exports = {
 
 // URL directa: track o playlist/álbum → reproducir sin picker
 async function handleUrl(client, message, voiceChannel, query) {
-  const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(`${E.music} Cargando…`)] }).catch(() => null)
+  const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(obeyUi.limit(`${E.music} Cargando…`, 4096))] }).catch(() => null)
   if (!loading) return
   const result = await client.music.search(query, message.author, { guildId: message.guild.id }).catch(() => null)
   if (!result?.tracks?.length) return loading.edit({ embeds: [err('No encontré resultados para esa URL.')] }).catch(() => {})
@@ -85,15 +87,13 @@ async function handleUrl(client, message, voiceChannel, query) {
     const player = await client.music.joinChannel(message.guild.id, voiceChannel.id, message.channel.id)
     const state  = client.music.getState(message.guild.id)
     if (result.loadType === 'playlist' && result.tracks.length > 1) {
-      await client.music.enqueue(guildId, result.tracks)
-      if (!state.currentTrack) await client.music._playNext(message.guild.id, player)
-      return loading.edit({ embeds: [playlistAdded(result, query, message.author.id)] }).catch(() => {})
+      await client.music.enqueue(message.guild.id, result.tracks)
+      return loading.edit({ embeds: [playlistAdded(result, query, message.author.id, localeFor(client, message.guild.id))] }).catch(() => {})
     }
     const track = result.tracks[0]
-    await client.music.enqueue(guildId, [track])
     const wasEmpty = !state.currentTrack
-    if (wasEmpty) await client.music._playNext(message.guild.id, player)
-    return loading.edit({ embeds: [addedEmbed(track.info || track, { isNow: wasEmpty, added: 1 }, message.author.id)] }).catch(() => {})
+    await client.music.enqueue(message.guild.id, [track])
+    return loading.edit({ embeds: [addedEmbed(track.info || track, { isNow: wasEmpty, added: 1 }, message.author.id, localeFor(client, message.guild.id))] }).catch(() => {})
   } catch (e) {
     return loading.edit({ embeds: [err(e.message || String(e))] }).catch(() => {})
   }

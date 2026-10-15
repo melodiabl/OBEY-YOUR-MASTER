@@ -11,11 +11,11 @@ const emoji = Object.defineProperties({}, Object.fromEntries(Object.keys(musicKe
 }])))
 
 const color = {
-  primary:   0x00ff33,
-  secondary: 0x00ff00,
-  yes:       0x00ff33,
-  no:        0xff0000,
-  warn:      0xffff00,
+  primary:   0xFFD36F,
+  secondary: 0x101C38,
+  yes:       0xFFD36F,
+  no:        0xED4245,
+  warn:      0xF0B232,
 }
 
 const config = {

@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 const { allEmojis } = require("../botconfig/emojiFunctions");
 
 module.exports = client => {
@@ -32,7 +33,7 @@ module.exports = client => {
                         message.content.includes("```lua") ||
                         message.content.includes("```py"))
                 )
-                    message.react(allEmojis.msg.validcode).catch(() => {});
+                    message.react(obeyUi.reaction(allEmojis.msg.validcode)).catch(() => {});
             } catch (e) {
                 console.log(String(e.stack).grey.bgRed);
             }

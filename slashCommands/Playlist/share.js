@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
@@ -33,18 +34,18 @@ module.exports = {
     if (!playlist)
       return interaction.editReply({
         embeds: [new EmbedBuilder().setColor(0xED4245)
-          .setDescription(`❌ No tienes una playlist llamada **${name}**.`)],
+          .setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} No tienes una playlist llamada **${name}**.`, 4096))],
       })
 
-    const label = playlist.isPublic ? '🌐 Pública' : '🔒 Privada'
+    const label = playlist.isPublic ? obeyUi.owned('🌐 Pública') : obeyUi.owned('🔒 Privada')
     const desc  = playlist.isPublic
       ? `Cualquiera puede verla con \`/playlist show nombre: ${playlist.name} usuario: @${interaction.user.username}\`.`
       : 'Solo tú puedes verla.'
 
     await interaction.editReply({
       embeds: [new EmbedBuilder().setColor(0x5865F2)
-        .setTitle(`✅ Playlist actualizada — ${label}`)
-        .setDescription(`**${playlist.name}** ahora es **${label.slice(3)}**.\n${desc}`)],
+        .setTitle(obeyUi.limit(`${obeyUi.markup("icon.success")} Playlist actualizada — ${label}`, 256))
+        .setDescription(obeyUi.limit(`**${playlist.name}** ahora es **${label.slice(3)}**.\n${desc}`, 4096))],
     })
   },
 }

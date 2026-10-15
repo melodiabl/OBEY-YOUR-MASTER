@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 const fetch = require("node-fetch");
 module.exports = {
@@ -38,18 +40,18 @@ module.exports = {
                 (await message.guild.members.fetch(user.id).catch(() => {})) ||
                 false;
 
-            if (!member) return message.reply("❌ **This Usuario is not a Miembro of this Guild!**");
+            if (!member) return message.reply(obeyUi.owned("❌ **This Usuario is not a Miembro of this Guild!**"));
             if (!member.voice || !member.voice.channel)
-                return message.reply("❌ **This Usuario is not Conectado to a Voicechannel!**");
+                return message.reply(obeyUi.owned("❌ **This Usuario is not Conectado to a Voicechannel!**"));
 
             const embed = new Discord.EmbedBuilder()
-                .setTitle(`Connection Información of: \`${user.username}\``)
-                .addFields({ name: "<:arrow:832598861813776394> **Channel**", value: `> **${member.voice.channel.name}** ${member.voice.channel}`, inline: true })
-                .addFields({ name: "<:arrow:832598861813776394> **Channel-ID**", value: `> \`${member.voice.channel.id}\``, inline: true })
-                .addFields({ name: "<:arrow:832598861813776394> **Members in there**", value: `> \`${member.voice.channel.members.size} total Members\``, inline: true })
-                .addFields({ name: "<:arrow:832598861813776394> **Full Channel?**", value: `> ${member.voice.channel.full ? "✅" : "❌"}`, inline: true })
-                .addFields({ name: "<:arrow:832598861813776394> **Bitrate**", value: `> ${member.voice.channel.bitrate}`, inline: true })
-                .addFields({ name: "<:arrow:832598861813776394> **User join limit**", value: `> \`${member.voice.channel.userLimit != 0 ? member.voice.channel.userLimit : "No limit!"}\``, inline: true });
+                .setTitle(obeyUi.limit(`Connection Información of: \`${user.username}\``, 256))
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> **Channel**"), value: `> **${member.voice.channel.name}** ${member.voice.channel}`, inline: true })
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> **Channel-ID**"), value: `> \`${member.voice.channel.id}\``, inline: true })
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> **Members in there**"), value: `> \`${member.voice.channel.members.size} total Members\``, inline: true })
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> **Full Channel?**"), value: `> ${member.voice.channel.full ? obeyUi.owned("✅") : obeyUi.owned("❌")}`, inline: true })
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> **Bitrate**"), value: `> ${member.voice.channel.bitrate}`, inline: true })
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> **User join limit**"), value: `> \`${member.voice.channel.userLimit != 0 ? member.voice.channel.userLimit : "No limit!"}\``, inline: true });
 
             message.reply({
                 embeds: [embed],
@@ -60,9 +62,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"]), 4096)),
                 ],
             });
         }

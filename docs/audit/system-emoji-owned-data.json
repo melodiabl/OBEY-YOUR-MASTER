@@ -1,0 +1,405 @@
+{
+  "scope": "bot_owned_display_variables_fields_and_lists_logic_values_preserved",
+  "files": [
+    {
+      "file": "commands/Info/avatar.js",
+      "changes": [
+        {
+          "line": 57,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 58,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 59,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "commands/Info/color.js",
+      "changes": [
+        {
+          "line": 41,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 42,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 43,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 44,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "commands/Info/customavatar.js",
+      "changes": [
+        {
+          "line": 53,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 54,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 55,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 75,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 76,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 77,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "commands/Info/serveravatar.js",
+      "changes": [
+        {
+          "line": 32,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 33,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 34,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "commands/Info/serverbanner.js",
+      "changes": [
+        {
+          "line": 22,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 32,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "commands/Info/serverinfo.js",
+      "changes": [
+        {
+          "line": 140,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 148,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "commands/Info/youtubeinfo.js",
+      "changes": [
+        {
+          "line": 74,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 74,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 75,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 75,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/check.js",
+      "changes": [
+        {
+          "line": 22,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/ver.js",
+      "changes": [
+        {
+          "line": 27,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/avatar.js",
+      "changes": [
+        {
+          "line": 70,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 71,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 72,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/color.js",
+      "changes": [
+        {
+          "line": 53,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 54,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 55,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 56,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/customavatar.js",
+      "changes": [
+        {
+          "line": 74,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 75,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 76,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 102,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 103,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 104,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/serveravatar.js",
+      "changes": [
+        {
+          "line": 43,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 44,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 45,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/serverinfo.js",
+      "changes": [
+        {
+          "line": 86,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 87,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 88,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 89,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 90,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 91,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 92,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 94,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 95,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 96,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Invites/show.js",
+      "changes": [
+        {
+          "line": 21,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/cases.js",
+      "changes": [
+        {
+          "line": 29,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/playtop.js",
+      "changes": [
+        {
+          "line": 24,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/add.js",
+      "changes": [
+        {
+          "line": 91,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 92,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 93,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Rank/leaderboard.js",
+      "changes": [
+        {
+          "line": 67,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 67,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/ver.js",
+      "changes": [
+        {
+          "line": 30,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "handlers/birthdayScheduler.js",
+      "changes": [
+        {
+          "line": 41,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 44,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 44,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 45,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 45,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "handlers/extraevents.js",
+      "changes": [
+        {
+          "line": 161,
+          "kind": "owned_display_literal"
+        },
+        {
+          "line": 229,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/searchui.js",
+      "changes": [
+        {
+          "line": 42,
+          "kind": "owned_display_literal"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/setup.js",
+      "changes": [
+        {
+          "line": 37,
+          "kind": "owned_display_literal"
+        }
+      ]
+    }
+  ]
+}

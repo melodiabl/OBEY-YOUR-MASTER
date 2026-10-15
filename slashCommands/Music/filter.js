@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const { filterLabel } = require('../../handlers/music/filters')
 module.exports = {
@@ -33,24 +34,24 @@ module.exports = {
     },
   ],
   run: async (client, interaction) => {
-    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
-    const ok  = d => new EmbedBuilder().setColor(0x5865F2).setDescription(d)
+    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(d, 4096))
+    const ok  = d => new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(d, 4096))
 
     const voiceChannel = interaction.member?.voice?.channel
-    if (!voiceChannel) return interaction.reply({ embeds: [err('❌ Debes estar en un canal de voz.')], ephemeral: true })
-    if (!client.music) return interaction.reply({ embeds: [err('❌ Sistema de música no disponible.')], ephemeral: true })
+    if (!voiceChannel) return interaction.reply({ embeds: [err(obeyUi.owned('❌ Debes estar en un canal de voz.'))], ephemeral: true })
+    if (!client.music) return interaction.reply({ embeds: [err(obeyUi.owned('❌ Sistema de música no disponible.'))], ephemeral: true })
 
     const state = client.music.getState(interaction.guild.id)
-    if (!state.currentTrack) return interaction.reply({ embeds: [err('❌ No hay música reproduciéndose.')], ephemeral: true })
+    if (!state.currentTrack) return interaction.reply({ embeds: [err(obeyUi.owned('❌ No hay música reproduciéndose.'))], ephemeral: true })
 
     const preset = interaction.options.getString('preset')
     await interaction.deferReply()
     try {
       await client.music.setFilter(interaction.guild.id, preset)
       const label = filterLabel(preset) || preset
-      await interaction.editReply({ embeds: [ok(preset === 'off' ? `🎵 Filtro **desactivado**` : `🎛️ Filtro aplicado: **${label}**`)] })
+      await interaction.editReply({ embeds: [ok(preset === 'off' ? `${obeyUi.markup("icon.music")} Filtro **desactivado**` : `${obeyUi.markup("icon.settings")} Filtro aplicado: **${label}**`)] })
     } catch (e) {
-      await interaction.editReply({ embeds: [err(`❌ ${e.message || e}`)] })
+      await interaction.editReply({ embeds: [err(`${obeyUi.markup("icon.error")} ${e.message || e}`)] })
     }
   },
 }

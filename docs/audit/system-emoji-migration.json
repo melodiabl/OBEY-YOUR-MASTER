@@ -1,0 +1,8674 @@
+{
+  "scope": "owned_literal_render_segments_and_component_reaction_boundaries",
+  "files": [
+    {
+      "file": "commands/Setup/setup-apply.js",
+      "changes": [
+        {
+          "line": 26,
+          "kind": "plain"
+        },
+        {
+          "line": 26,
+          "kind": "component"
+        },
+        {
+          "line": 60,
+          "kind": "plain"
+        },
+        {
+          "line": 79,
+          "kind": "plain"
+        },
+        {
+          "line": 99,
+          "kind": "plain"
+        },
+        {
+          "line": 119,
+          "kind": "plain"
+        },
+        {
+          "line": 171,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 180,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 180,
+          "kind": "owned"
+        },
+        {
+          "line": 269,
+          "kind": "component"
+        },
+        {
+          "line": 274,
+          "kind": "component"
+        },
+        {
+          "line": 279,
+          "kind": "component"
+        },
+        {
+          "line": 284,
+          "kind": "component"
+        },
+        {
+          "line": 289,
+          "kind": "component"
+        },
+        {
+          "line": 294,
+          "kind": "component"
+        },
+        {
+          "line": 299,
+          "kind": "component"
+        },
+        {
+          "line": 304,
+          "kind": "component"
+        },
+        {
+          "line": 309,
+          "kind": "component"
+        },
+        {
+          "line": 314,
+          "kind": "component"
+        },
+        {
+          "line": 319,
+          "kind": "component"
+        },
+        {
+          "line": 325,
+          "kind": "component"
+        },
+        {
+          "line": 330,
+          "kind": "component"
+        },
+        {
+          "line": 335,
+          "kind": "component"
+        },
+        {
+          "line": 340,
+          "kind": "component"
+        },
+        {
+          "line": 345,
+          "kind": "component"
+        },
+        {
+          "line": 354,
+          "kind": "component"
+        },
+        {
+          "line": 359,
+          "kind": "component"
+        },
+        {
+          "line": 368,
+          "kind": "plain"
+        },
+        {
+          "line": 409,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 418,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 418,
+          "kind": "owned"
+        },
+        {
+          "line": 462,
+          "kind": "component"
+        },
+        {
+          "line": 463,
+          "kind": "component"
+        },
+        {
+          "line": 2486,
+          "kind": "reaction"
+        },
+        {
+          "line": 2487,
+          "kind": "reaction"
+        },
+        {
+          "line": 2488,
+          "kind": "reaction"
+        },
+        {
+          "line": 2489,
+          "kind": "reaction"
+        },
+        {
+          "line": 2490,
+          "kind": "reaction"
+        },
+        {
+          "line": 2884,
+          "kind": "reaction"
+        },
+        {
+          "line": 2885,
+          "kind": "reaction"
+        },
+        {
+          "line": 2886,
+          "kind": "reaction"
+        },
+        {
+          "line": 2887,
+          "kind": "reaction"
+        },
+        {
+          "line": 2888,
+          "kind": "reaction"
+        },
+        {
+          "line": 3325,
+          "kind": "reaction"
+        },
+        {
+          "line": 3326,
+          "kind": "reaction"
+        },
+        {
+          "line": 3327,
+          "kind": "reaction"
+        },
+        {
+          "line": 3328,
+          "kind": "reaction"
+        },
+        {
+          "line": 3329,
+          "kind": "reaction"
+        },
+        {
+          "line": 3760,
+          "kind": "reaction"
+        },
+        {
+          "line": 3761,
+          "kind": "reaction"
+        },
+        {
+          "line": 3762,
+          "kind": "reaction"
+        },
+        {
+          "line": 3763,
+          "kind": "reaction"
+        },
+        {
+          "line": 3764,
+          "kind": "reaction"
+        },
+        {
+          "line": 4196,
+          "kind": "reaction"
+        },
+        {
+          "line": 4197,
+          "kind": "reaction"
+        },
+        {
+          "line": 4198,
+          "kind": "reaction"
+        },
+        {
+          "line": 4199,
+          "kind": "reaction"
+        },
+        {
+          "line": 4200,
+          "kind": "reaction"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autobackup.js",
+      "changes": [
+        {
+          "line": 29,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 52,
+          "kind": "component"
+        },
+        {
+          "line": 59,
+          "kind": "component"
+        },
+        {
+          "line": 63,
+          "kind": "plain"
+        },
+        {
+          "line": 124,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 133,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autodelete.js",
+      "changes": [
+        {
+          "line": 29,
+          "kind": "component"
+        },
+        {
+          "line": 34,
+          "kind": "component"
+        },
+        {
+          "line": 39,
+          "kind": "component"
+        },
+        {
+          "line": 47,
+          "kind": "plain"
+        },
+        {
+          "line": 88,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 97,
+          "kind": "owned"
+        },
+        {
+          "line": 148,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 163,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 175,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 281,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 355,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autoembed.js",
+      "changes": [
+        {
+          "line": 29,
+          "kind": "component"
+        },
+        {
+          "line": 34,
+          "kind": "component"
+        },
+        {
+          "line": 39,
+          "kind": "component"
+        },
+        {
+          "line": 44,
+          "kind": "component"
+        },
+        {
+          "line": 52,
+          "kind": "plain"
+        },
+        {
+          "line": 94,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 103,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-automeme.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "component"
+        },
+        {
+          "line": 33,
+          "kind": "component"
+        },
+        {
+          "line": 38,
+          "kind": "component"
+        },
+        {
+          "line": 43,
+          "kind": "component"
+        },
+        {
+          "line": 51,
+          "kind": "plain"
+        },
+        {
+          "line": 92,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 101,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autonsfw.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "component"
+        },
+        {
+          "line": 33,
+          "kind": "component"
+        },
+        {
+          "line": 38,
+          "kind": "component"
+        },
+        {
+          "line": 43,
+          "kind": "component"
+        },
+        {
+          "line": 51,
+          "kind": "plain"
+        },
+        {
+          "line": 92,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 101,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autosupport.js",
+      "changes": [
+        {
+          "line": 36,
+          "kind": "component"
+        },
+        {
+          "line": 45,
+          "kind": "plain"
+        },
+        {
+          "line": 63,
+          "kind": "plain"
+        },
+        {
+          "line": 81,
+          "kind": "plain"
+        },
+        {
+          "line": 99,
+          "kind": "plain"
+        },
+        {
+          "line": 135,
+          "kind": "component"
+        },
+        {
+          "line": 134,
+          "kind": "plain"
+        },
+        {
+          "line": 159,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 197,
+          "kind": "component"
+        },
+        {
+          "line": 202,
+          "kind": "component"
+        },
+        {
+          "line": 207,
+          "kind": "component"
+        },
+        {
+          "line": 212,
+          "kind": "component"
+        },
+        {
+          "line": 220,
+          "kind": "plain"
+        },
+        {
+          "line": 259,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 280,
+          "kind": "owned"
+        },
+        {
+          "line": 340,
+          "kind": "plain"
+        },
+        {
+          "line": 347,
+          "kind": "component"
+        },
+        {
+          "line": 364,
+          "kind": "plain"
+        },
+        {
+          "line": 371,
+          "kind": "component"
+        },
+        {
+          "line": 398,
+          "kind": "owned"
+        },
+        {
+          "line": 402,
+          "kind": "owned"
+        },
+        {
+          "line": 412,
+          "kind": "owned"
+        },
+        {
+          "line": 435,
+          "kind": "owned"
+        },
+        {
+          "line": 441,
+          "kind": "owned"
+        },
+        {
+          "line": 456,
+          "kind": "component"
+        },
+        {
+          "line": 455,
+          "kind": "plain"
+        },
+        {
+          "line": 461,
+          "kind": "component"
+        },
+        {
+          "line": 460,
+          "kind": "plain"
+        },
+        {
+          "line": 511,
+          "kind": "reaction"
+        },
+        {
+          "line": 552,
+          "kind": "reaction"
+        },
+        {
+          "line": 599,
+          "kind": "owned"
+        },
+        {
+          "line": 614,
+          "kind": "owned"
+        },
+        {
+          "line": 624,
+          "kind": "owned"
+        },
+        {
+          "line": 645,
+          "kind": "plain"
+        },
+        {
+          "line": 652,
+          "kind": "component"
+        },
+        {
+          "line": 671,
+          "kind": "plain"
+        },
+        {
+          "line": 678,
+          "kind": "component"
+        },
+        {
+          "line": 720,
+          "kind": "owned"
+        },
+        {
+          "line": 726,
+          "kind": "owned"
+        },
+        {
+          "line": 741,
+          "kind": "component"
+        },
+        {
+          "line": 740,
+          "kind": "plain"
+        },
+        {
+          "line": 746,
+          "kind": "component"
+        },
+        {
+          "line": 745,
+          "kind": "plain"
+        },
+        {
+          "line": 796,
+          "kind": "reaction"
+        },
+        {
+          "line": 837,
+          "kind": "reaction"
+        },
+        {
+          "line": 878,
+          "kind": "owned"
+        },
+        {
+          "line": 895,
+          "kind": "owned"
+        },
+        {
+          "line": 900,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 919,
+          "kind": "owned"
+        },
+        {
+          "line": 940,
+          "kind": "plain"
+        },
+        {
+          "line": 947,
+          "kind": "component"
+        },
+        {
+          "line": 966,
+          "kind": "plain"
+        },
+        {
+          "line": 973,
+          "kind": "component"
+        },
+        {
+          "line": 1003,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autowarn.js",
+      "changes": [
+        {
+          "line": 43,
+          "kind": "component"
+        },
+        {
+          "line": 49,
+          "kind": "component"
+        },
+        {
+          "line": 55,
+          "kind": "component"
+        },
+        {
+          "line": 61,
+          "kind": "component"
+        },
+        {
+          "line": 67,
+          "kind": "component"
+        },
+        {
+          "line": 73,
+          "kind": "component"
+        },
+        {
+          "line": 79,
+          "kind": "component"
+        },
+        {
+          "line": 85,
+          "kind": "component"
+        },
+        {
+          "line": 95,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-blacklist.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "component"
+        },
+        {
+          "line": 33,
+          "kind": "component"
+        },
+        {
+          "line": 38,
+          "kind": "component"
+        },
+        {
+          "line": 43,
+          "kind": "component"
+        },
+        {
+          "line": 48,
+          "kind": "component"
+        },
+        {
+          "line": 53,
+          "kind": "component"
+        },
+        {
+          "line": 58,
+          "kind": "component"
+        },
+        {
+          "line": 63,
+          "kind": "component"
+        },
+        {
+          "line": 71,
+          "kind": "plain"
+        },
+        {
+          "line": 112,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 121,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-boostlog.js",
+      "changes": [
+        {
+          "line": 43,
+          "kind": "component"
+        },
+        {
+          "line": 48,
+          "kind": "component"
+        },
+        {
+          "line": 53,
+          "kind": "component"
+        },
+        {
+          "line": 58,
+          "kind": "component"
+        },
+        {
+          "line": 63,
+          "kind": "component"
+        },
+        {
+          "line": 68,
+          "kind": "component"
+        },
+        {
+          "line": 76,
+          "kind": "plain"
+        },
+        {
+          "line": 121,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 130,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-commands.js",
+      "changes": [
+        {
+          "line": 27,
+          "kind": "component"
+        },
+        {
+          "line": 28,
+          "kind": "owned"
+        },
+        {
+          "line": 28,
+          "kind": "owned"
+        },
+        {
+          "line": 33,
+          "kind": "component"
+        },
+        {
+          "line": 34,
+          "kind": "owned"
+        },
+        {
+          "line": 34,
+          "kind": "owned"
+        },
+        {
+          "line": 39,
+          "kind": "component"
+        },
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 45,
+          "kind": "component"
+        },
+        {
+          "line": 46,
+          "kind": "owned"
+        },
+        {
+          "line": 46,
+          "kind": "owned"
+        },
+        {
+          "line": 51,
+          "kind": "component"
+        },
+        {
+          "line": 52,
+          "kind": "owned"
+        },
+        {
+          "line": 52,
+          "kind": "owned"
+        },
+        {
+          "line": 57,
+          "kind": "component"
+        },
+        {
+          "line": 58,
+          "kind": "owned"
+        },
+        {
+          "line": 58,
+          "kind": "owned"
+        },
+        {
+          "line": 63,
+          "kind": "component"
+        },
+        {
+          "line": 64,
+          "kind": "owned"
+        },
+        {
+          "line": 64,
+          "kind": "owned"
+        },
+        {
+          "line": 69,
+          "kind": "component"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 75,
+          "kind": "component"
+        },
+        {
+          "line": 76,
+          "kind": "owned"
+        },
+        {
+          "line": 76,
+          "kind": "owned"
+        },
+        {
+          "line": 81,
+          "kind": "component"
+        },
+        {
+          "line": 82,
+          "kind": "owned"
+        },
+        {
+          "line": 82,
+          "kind": "owned"
+        },
+        {
+          "line": 87,
+          "kind": "component"
+        },
+        {
+          "line": 88,
+          "kind": "owned"
+        },
+        {
+          "line": 88,
+          "kind": "owned"
+        },
+        {
+          "line": 93,
+          "kind": "component"
+        },
+        {
+          "line": 94,
+          "kind": "owned"
+        },
+        {
+          "line": 94,
+          "kind": "owned"
+        },
+        {
+          "line": 99,
+          "kind": "component"
+        },
+        {
+          "line": 100,
+          "kind": "owned"
+        },
+        {
+          "line": 100,
+          "kind": "owned"
+        },
+        {
+          "line": 108,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-counter.js",
+      "changes": [
+        {
+          "line": 35,
+          "kind": "component"
+        },
+        {
+          "line": 40,
+          "kind": "component"
+        },
+        {
+          "line": 45,
+          "kind": "component"
+        },
+        {
+          "line": 50,
+          "kind": "component"
+        },
+        {
+          "line": 58,
+          "kind": "plain"
+        },
+        {
+          "line": 100,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 109,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-customcommand.js",
+      "changes": [
+        {
+          "line": 32,
+          "kind": "component"
+        },
+        {
+          "line": 37,
+          "kind": "component"
+        },
+        {
+          "line": 42,
+          "kind": "component"
+        },
+        {
+          "line": 50,
+          "kind": "plain"
+        },
+        {
+          "line": 91,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 100,
+          "kind": "owned"
+        },
+        {
+          "line": 204,
+          "kind": "reaction"
+        },
+        {
+          "line": 205,
+          "kind": "reaction"
+        },
+        {
+          "line": 341,
+          "kind": "owned"
+        },
+        {
+          "line": 341,
+          "kind": "owned"
+        },
+        {
+          "line": 353,
+          "kind": "plain"
+        },
+        {
+          "line": 408,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 417,
+          "kind": "owned"
+        },
+        {
+          "line": 450,
+          "kind": "owned"
+        },
+        {
+          "line": 450,
+          "kind": "owned"
+        },
+        {
+          "line": 450,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 452,
+          "kind": "owned"
+        },
+        {
+          "line": 452,
+          "kind": "owned"
+        },
+        {
+          "line": 452,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-dailyfact.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "component"
+        },
+        {
+          "line": 33,
+          "kind": "component"
+        },
+        {
+          "line": 38,
+          "kind": "component"
+        },
+        {
+          "line": 43,
+          "kind": "component"
+        },
+        {
+          "line": 51,
+          "kind": "plain"
+        },
+        {
+          "line": 91,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 100,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-embed.js",
+      "changes": [
+        {
+          "line": 26,
+          "kind": "component"
+        },
+        {
+          "line": 27,
+          "kind": "component"
+        },
+        {
+          "line": 28,
+          "kind": "component"
+        },
+        {
+          "line": 29,
+          "kind": "component"
+        },
+        {
+          "line": 479,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 488,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-epicgamesverify.js",
+      "changes": [
+        {
+          "line": 30,
+          "kind": "component"
+        },
+        {
+          "line": 35,
+          "kind": "component"
+        },
+        {
+          "line": 40,
+          "kind": "component"
+        },
+        {
+          "line": 45,
+          "kind": "component"
+        },
+        {
+          "line": 53,
+          "kind": "plain"
+        },
+        {
+          "line": 93,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        },
+        {
+          "line": 161,
+          "kind": "component"
+        },
+        {
+          "line": 160,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-ghost-ping-detector.js",
+      "changes": [
+        {
+          "line": 34,
+          "kind": "component"
+        },
+        {
+          "line": 39,
+          "kind": "component"
+        },
+        {
+          "line": 44,
+          "kind": "component"
+        },
+        {
+          "line": 49,
+          "kind": "component"
+        },
+        {
+          "line": 57,
+          "kind": "plain"
+        },
+        {
+          "line": 97,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 106,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-joinvc.js",
+      "changes": [
+        {
+          "line": 48,
+          "kind": "component"
+        },
+        {
+          "line": 53,
+          "kind": "component"
+        },
+        {
+          "line": 58,
+          "kind": "component"
+        },
+        {
+          "line": 66,
+          "kind": "plain"
+        },
+        {
+          "line": 107,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 116,
+          "kind": "owned"
+        },
+        {
+          "line": 130,
+          "kind": "component"
+        },
+        {
+          "line": 135,
+          "kind": "component"
+        },
+        {
+          "line": 140,
+          "kind": "component"
+        },
+        {
+          "line": 145,
+          "kind": "component"
+        },
+        {
+          "line": 153,
+          "kind": "plain"
+        },
+        {
+          "line": 196,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 205,
+          "kind": "owned"
+        },
+        {
+          "line": 284,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 432,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 524,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 549,
+          "kind": "component"
+        },
+        {
+          "line": 554,
+          "kind": "component"
+        },
+        {
+          "line": 559,
+          "kind": "component"
+        },
+        {
+          "line": 564,
+          "kind": "component"
+        },
+        {
+          "line": 572,
+          "kind": "plain"
+        },
+        {
+          "line": 615,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 624,
+          "kind": "owned"
+        },
+        {
+          "line": 709,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 851,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 943,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-jtc.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "plain"
+        },
+        {
+          "line": 58,
+          "kind": "plain"
+        },
+        {
+          "line": 76,
+          "kind": "plain"
+        },
+        {
+          "line": 94,
+          "kind": "plain"
+        },
+        {
+          "line": 139,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 148,
+          "kind": "owned"
+        },
+        {
+          "line": 168,
+          "kind": "component"
+        },
+        {
+          "line": 173,
+          "kind": "component"
+        },
+        {
+          "line": 178,
+          "kind": "component"
+        },
+        {
+          "line": 183,
+          "kind": "component"
+        },
+        {
+          "line": 192,
+          "kind": "plain"
+        },
+        {
+          "line": 241,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 250,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-keyword.js",
+      "changes": [
+        {
+          "line": 31,
+          "kind": "component"
+        },
+        {
+          "line": 36,
+          "kind": "component"
+        },
+        {
+          "line": 41,
+          "kind": "component"
+        },
+        {
+          "line": 49,
+          "kind": "plain"
+        },
+        {
+          "line": 90,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 99,
+          "kind": "owned"
+        },
+        {
+          "line": 280,
+          "kind": "reaction"
+        },
+        {
+          "line": 281,
+          "kind": "reaction"
+        },
+        {
+          "line": 507,
+          "kind": "owned"
+        },
+        {
+          "line": 507,
+          "kind": "owned"
+        },
+        {
+          "line": 519,
+          "kind": "plain"
+        },
+        {
+          "line": 574,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 583,
+          "kind": "owned"
+        },
+        {
+          "line": 616,
+          "kind": "owned"
+        },
+        {
+          "line": 616,
+          "kind": "owned"
+        },
+        {
+          "line": 616,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 618,
+          "kind": "owned"
+        },
+        {
+          "line": 618,
+          "kind": "owned"
+        },
+        {
+          "line": 618,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-language.js",
+      "changes": [
+        {
+          "line": 48,
+          "kind": "component"
+        },
+        {
+          "line": 53,
+          "kind": "component"
+        },
+        {
+          "line": 58,
+          "kind": "component"
+        },
+        {
+          "line": 63,
+          "kind": "component"
+        },
+        {
+          "line": 67,
+          "kind": "plain"
+        },
+        {
+          "line": 111,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 117,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 132,
+          "kind": "plain"
+        },
+        {
+          "line": 131,
+          "kind": "component"
+        },
+        {
+          "line": 138,
+          "kind": "plain"
+        },
+        {
+          "line": 137,
+          "kind": "component"
+        },
+        {
+          "line": 144,
+          "kind": "plain"
+        },
+        {
+          "line": 143,
+          "kind": "component"
+        },
+        {
+          "line": 150,
+          "kind": "plain"
+        },
+        {
+          "line": 149,
+          "kind": "component"
+        },
+        {
+          "line": 156,
+          "kind": "plain"
+        },
+        {
+          "line": 155,
+          "kind": "component"
+        },
+        {
+          "line": 162,
+          "kind": "plain"
+        },
+        {
+          "line": 161,
+          "kind": "component"
+        },
+        {
+          "line": 168,
+          "kind": "plain"
+        },
+        {
+          "line": 167,
+          "kind": "component"
+        },
+        {
+          "line": 174,
+          "kind": "plain"
+        },
+        {
+          "line": 173,
+          "kind": "component"
+        },
+        {
+          "line": 180,
+          "kind": "plain"
+        },
+        {
+          "line": 179,
+          "kind": "component"
+        },
+        {
+          "line": 208,
+          "kind": "plain"
+        },
+        {
+          "line": 207,
+          "kind": "component"
+        },
+        {
+          "line": 214,
+          "kind": "plain"
+        },
+        {
+          "line": 213,
+          "kind": "component"
+        },
+        {
+          "line": 220,
+          "kind": "plain"
+        },
+        {
+          "line": 219,
+          "kind": "component"
+        },
+        {
+          "line": 226,
+          "kind": "plain"
+        },
+        {
+          "line": 225,
+          "kind": "component"
+        },
+        {
+          "line": 232,
+          "kind": "plain"
+        },
+        {
+          "line": 231,
+          "kind": "component"
+        },
+        {
+          "line": 238,
+          "kind": "plain"
+        },
+        {
+          "line": 237,
+          "kind": "component"
+        },
+        {
+          "line": 244,
+          "kind": "plain"
+        },
+        {
+          "line": 243,
+          "kind": "component"
+        },
+        {
+          "line": 250,
+          "kind": "plain"
+        },
+        {
+          "line": 249,
+          "kind": "component"
+        },
+        {
+          "line": 256,
+          "kind": "plain"
+        },
+        {
+          "line": 255,
+          "kind": "component"
+        },
+        {
+          "line": 275,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-leave.js",
+      "changes": [
+        {
+          "line": 36,
+          "kind": "component"
+        },
+        {
+          "line": 41,
+          "kind": "component"
+        },
+        {
+          "line": 46,
+          "kind": "component"
+        },
+        {
+          "line": 54,
+          "kind": "plain"
+        },
+        {
+          "line": 94,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 103,
+          "kind": "owned"
+        },
+        {
+          "line": 118,
+          "kind": "component"
+        },
+        {
+          "line": 123,
+          "kind": "component"
+        },
+        {
+          "line": 128,
+          "kind": "component"
+        },
+        {
+          "line": 133,
+          "kind": "component"
+        },
+        {
+          "line": 138,
+          "kind": "component"
+        },
+        {
+          "line": 143,
+          "kind": "component"
+        },
+        {
+          "line": 151,
+          "kind": "plain"
+        },
+        {
+          "line": 195,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 204,
+          "kind": "owned"
+        },
+        {
+          "line": 255,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 299,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 317,
+          "kind": "component"
+        },
+        {
+          "line": 322,
+          "kind": "component"
+        },
+        {
+          "line": 327,
+          "kind": "component"
+        },
+        {
+          "line": 332,
+          "kind": "component"
+        },
+        {
+          "line": 337,
+          "kind": "component"
+        },
+        {
+          "line": 342,
+          "kind": "component"
+        },
+        {
+          "line": 347,
+          "kind": "component"
+        },
+        {
+          "line": 352,
+          "kind": "component"
+        },
+        {
+          "line": 357,
+          "kind": "component"
+        },
+        {
+          "line": 362,
+          "kind": "component"
+        },
+        {
+          "line": 367,
+          "kind": "component"
+        },
+        {
+          "line": 372,
+          "kind": "component"
+        },
+        {
+          "line": 380,
+          "kind": "plain"
+        },
+        {
+          "line": 435,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 448,
+          "kind": "owned"
+        },
+        {
+          "line": 1057,
+          "kind": "plain"
+        },
+        {
+          "line": 1056,
+          "kind": "component"
+        },
+        {
+          "line": 1062,
+          "kind": "plain"
+        },
+        {
+          "line": 1061,
+          "kind": "component"
+        },
+        {
+          "line": 1067,
+          "kind": "plain"
+        },
+        {
+          "line": 1066,
+          "kind": "component"
+        },
+        {
+          "line": 1072,
+          "kind": "plain"
+        },
+        {
+          "line": 1071,
+          "kind": "component"
+        },
+        {
+          "line": 1079,
+          "kind": "plain"
+        },
+        {
+          "line": 1078,
+          "kind": "component"
+        },
+        {
+          "line": 1084,
+          "kind": "plain"
+        },
+        {
+          "line": 1083,
+          "kind": "component"
+        },
+        {
+          "line": 1089,
+          "kind": "plain"
+        },
+        {
+          "line": 1088,
+          "kind": "component"
+        },
+        {
+          "line": 1094,
+          "kind": "plain"
+        },
+        {
+          "line": 1093,
+          "kind": "component"
+        },
+        {
+          "line": 1132,
+          "kind": "owned"
+        },
+        {
+          "line": 1258,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1280,
+          "kind": "component"
+        },
+        {
+          "line": 1285,
+          "kind": "component"
+        },
+        {
+          "line": 1290,
+          "kind": "component"
+        },
+        {
+          "line": 1295,
+          "kind": "component"
+        },
+        {
+          "line": 1300,
+          "kind": "component"
+        },
+        {
+          "line": 1308,
+          "kind": "plain"
+        },
+        {
+          "line": 1352,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1361,
+          "kind": "owned"
+        },
+        {
+          "line": 1407,
+          "kind": "component"
+        },
+        {
+          "line": 1412,
+          "kind": "component"
+        },
+        {
+          "line": 1417,
+          "kind": "component"
+        },
+        {
+          "line": 1422,
+          "kind": "component"
+        },
+        {
+          "line": 1427,
+          "kind": "component"
+        },
+        {
+          "line": 1432,
+          "kind": "component"
+        },
+        {
+          "line": 1437,
+          "kind": "component"
+        },
+        {
+          "line": 1442,
+          "kind": "component"
+        },
+        {
+          "line": 1447,
+          "kind": "component"
+        },
+        {
+          "line": 1452,
+          "kind": "component"
+        },
+        {
+          "line": 1457,
+          "kind": "component"
+        },
+        {
+          "line": 1462,
+          "kind": "component"
+        },
+        {
+          "line": 1470,
+          "kind": "plain"
+        },
+        {
+          "line": 1525,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1538,
+          "kind": "owned"
+        },
+        {
+          "line": 2150,
+          "kind": "plain"
+        },
+        {
+          "line": 2149,
+          "kind": "component"
+        },
+        {
+          "line": 2155,
+          "kind": "plain"
+        },
+        {
+          "line": 2154,
+          "kind": "component"
+        },
+        {
+          "line": 2160,
+          "kind": "plain"
+        },
+        {
+          "line": 2159,
+          "kind": "component"
+        },
+        {
+          "line": 2165,
+          "kind": "plain"
+        },
+        {
+          "line": 2164,
+          "kind": "component"
+        },
+        {
+          "line": 2172,
+          "kind": "plain"
+        },
+        {
+          "line": 2171,
+          "kind": "component"
+        },
+        {
+          "line": 2177,
+          "kind": "plain"
+        },
+        {
+          "line": 2176,
+          "kind": "component"
+        },
+        {
+          "line": 2182,
+          "kind": "plain"
+        },
+        {
+          "line": 2181,
+          "kind": "component"
+        },
+        {
+          "line": 2187,
+          "kind": "plain"
+        },
+        {
+          "line": 2186,
+          "kind": "component"
+        },
+        {
+          "line": 2225,
+          "kind": "owned"
+        },
+        {
+          "line": 2351,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-logger.js",
+      "changes": [
+        {
+          "line": 30,
+          "kind": "component"
+        },
+        {
+          "line": 35,
+          "kind": "component"
+        },
+        {
+          "line": 40,
+          "kind": "component"
+        },
+        {
+          "line": 45,
+          "kind": "component"
+        },
+        {
+          "line": 53,
+          "kind": "plain"
+        },
+        {
+          "line": 93,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-membercount.js",
+      "changes": [
+        {
+          "line": 46,
+          "kind": "plain"
+        },
+        {
+          "line": 95,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 104,
+          "kind": "owned"
+        },
+        {
+          "line": 202,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-menuapply.js",
+      "changes": [
+        {
+          "line": 46,
+          "kind": "plain"
+        },
+        {
+          "line": 64,
+          "kind": "plain"
+        },
+        {
+          "line": 82,
+          "kind": "plain"
+        },
+        {
+          "line": 100,
+          "kind": "plain"
+        },
+        {
+          "line": 136,
+          "kind": "component"
+        },
+        {
+          "line": 135,
+          "kind": "plain"
+        },
+        {
+          "line": 160,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 196,
+          "kind": "component"
+        },
+        {
+          "line": 201,
+          "kind": "component"
+        },
+        {
+          "line": 206,
+          "kind": "component"
+        },
+        {
+          "line": 214,
+          "kind": "plain"
+        },
+        {
+          "line": 242,
+          "kind": "component"
+        },
+        {
+          "line": 241,
+          "kind": "plain"
+        },
+        {
+          "line": 263,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 284,
+          "kind": "owned"
+        },
+        {
+          "line": 338,
+          "kind": "owned"
+        },
+        {
+          "line": 344,
+          "kind": "plain"
+        },
+        {
+          "line": 351,
+          "kind": "component"
+        },
+        {
+          "line": 370,
+          "kind": "plain"
+        },
+        {
+          "line": 377,
+          "kind": "component"
+        },
+        {
+          "line": 402,
+          "kind": "owned"
+        },
+        {
+          "line": 406,
+          "kind": "owned"
+        },
+        {
+          "line": 416,
+          "kind": "owned"
+        },
+        {
+          "line": 439,
+          "kind": "owned"
+        },
+        {
+          "line": 445,
+          "kind": "owned"
+        },
+        {
+          "line": 465,
+          "kind": "plain"
+        },
+        {
+          "line": 485,
+          "kind": "plain"
+        },
+        {
+          "line": 505,
+          "kind": "plain"
+        },
+        {
+          "line": 525,
+          "kind": "plain"
+        },
+        {
+          "line": 572,
+          "kind": "owned"
+        },
+        {
+          "line": 585,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 597,
+          "kind": "reaction"
+        },
+        {
+          "line": 636,
+          "kind": "reaction"
+        },
+        {
+          "line": 682,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 691,
+          "kind": "owned"
+        },
+        {
+          "line": 696,
+          "kind": "owned"
+        },
+        {
+          "line": 706,
+          "kind": "owned"
+        },
+        {
+          "line": 727,
+          "kind": "plain"
+        },
+        {
+          "line": 734,
+          "kind": "component"
+        },
+        {
+          "line": 754,
+          "kind": "plain"
+        },
+        {
+          "line": 761,
+          "kind": "component"
+        },
+        {
+          "line": 792,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-menuticket.js",
+      "changes": [
+        {
+          "line": 55,
+          "kind": "plain"
+        },
+        {
+          "line": 72,
+          "kind": "plain"
+        },
+        {
+          "line": 89,
+          "kind": "plain"
+        },
+        {
+          "line": 106,
+          "kind": "plain"
+        },
+        {
+          "line": 130,
+          "kind": "component"
+        },
+        {
+          "line": 129,
+          "kind": "plain"
+        },
+        {
+          "line": 146,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 175,
+          "kind": "component"
+        },
+        {
+          "line": 180,
+          "kind": "component"
+        },
+        {
+          "line": 185,
+          "kind": "component"
+        },
+        {
+          "line": 190,
+          "kind": "component"
+        },
+        {
+          "line": 198,
+          "kind": "plain"
+        },
+        {
+          "line": 240,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 249,
+          "kind": "owned"
+        },
+        {
+          "line": 334,
+          "kind": "owned"
+        },
+        {
+          "line": 374,
+          "kind": "owned"
+        },
+        {
+          "line": 380,
+          "kind": "plain"
+        },
+        {
+          "line": 387,
+          "kind": "component"
+        },
+        {
+          "line": 401,
+          "kind": "plain"
+        },
+        {
+          "line": 408,
+          "kind": "component"
+        },
+        {
+          "line": 429,
+          "kind": "owned"
+        },
+        {
+          "line": 432,
+          "kind": "owned"
+        },
+        {
+          "line": 439,
+          "kind": "owned"
+        },
+        {
+          "line": 456,
+          "kind": "owned"
+        },
+        {
+          "line": 460,
+          "kind": "owned"
+        },
+        {
+          "line": 529,
+          "kind": "reaction"
+        },
+        {
+          "line": 550,
+          "kind": "reaction"
+        },
+        {
+          "line": 598,
+          "kind": "owned"
+        },
+        {
+          "line": 601,
+          "kind": "owned"
+        },
+        {
+          "line": 604,
+          "kind": "owned"
+        },
+        {
+          "line": 607,
+          "kind": "owned"
+        },
+        {
+          "line": 616,
+          "kind": "owned"
+        },
+        {
+          "line": 629,
+          "kind": "plain"
+        },
+        {
+          "line": 636,
+          "kind": "component"
+        },
+        {
+          "line": 653,
+          "kind": "plain"
+        },
+        {
+          "line": 660,
+          "kind": "component"
+        },
+        {
+          "line": 689,
+          "kind": "component"
+        },
+        {
+          "line": 694,
+          "kind": "component"
+        },
+        {
+          "line": 699,
+          "kind": "component"
+        },
+        {
+          "line": 704,
+          "kind": "component"
+        },
+        {
+          "line": 709,
+          "kind": "component"
+        },
+        {
+          "line": 717,
+          "kind": "plain"
+        },
+        {
+          "line": 738,
+          "kind": "component"
+        },
+        {
+          "line": 737,
+          "kind": "plain"
+        },
+        {
+          "line": 754,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 785,
+          "kind": "owned"
+        },
+        {
+          "line": 789,
+          "kind": "owned"
+        },
+        {
+          "line": 796,
+          "kind": "owned"
+        },
+        {
+          "line": 819,
+          "kind": "owned"
+        },
+        {
+          "line": 853,
+          "kind": "reaction"
+        },
+        {
+          "line": 868,
+          "kind": "owned"
+        },
+        {
+          "line": 874,
+          "kind": "reaction"
+        },
+        {
+          "line": 884,
+          "kind": "owned"
+        },
+        {
+          "line": 891,
+          "kind": "owned"
+        },
+        {
+          "line": 916,
+          "kind": "owned"
+        },
+        {
+          "line": 952,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 969,
+          "kind": "owned"
+        },
+        {
+          "line": 982,
+          "kind": "plain"
+        },
+        {
+          "line": 1005,
+          "kind": "plain"
+        },
+        {
+          "line": 1040,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1137,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1139,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-music.js",
+      "changes": [
+        {
+          "line": 57,
+          "kind": "plain"
+        },
+        {
+          "line": 56,
+          "kind": "component"
+        },
+        {
+          "line": 63,
+          "kind": "plain"
+        },
+        {
+          "line": 62,
+          "kind": "component"
+        },
+        {
+          "line": 71,
+          "kind": "plain"
+        },
+        {
+          "line": 70,
+          "kind": "component"
+        },
+        {
+          "line": 73,
+          "kind": "plain"
+        },
+        {
+          "line": 73,
+          "kind": "component"
+        },
+        {
+          "line": 78,
+          "kind": "plain"
+        },
+        {
+          "line": 77,
+          "kind": "component"
+        },
+        {
+          "line": 84,
+          "kind": "plain"
+        },
+        {
+          "line": 83,
+          "kind": "component"
+        },
+        {
+          "line": 90,
+          "kind": "plain"
+        },
+        {
+          "line": 89,
+          "kind": "component"
+        },
+        {
+          "line": 98,
+          "kind": "plain"
+        },
+        {
+          "line": 97,
+          "kind": "component"
+        },
+        {
+          "line": 104,
+          "kind": "plain"
+        },
+        {
+          "line": 103,
+          "kind": "component"
+        },
+        {
+          "line": 110,
+          "kind": "plain"
+        },
+        {
+          "line": 109,
+          "kind": "component"
+        },
+        {
+          "line": 116,
+          "kind": "plain"
+        },
+        {
+          "line": 115,
+          "kind": "component"
+        },
+        {
+          "line": 122,
+          "kind": "plain"
+        },
+        {
+          "line": 121,
+          "kind": "component"
+        },
+        {
+          "line": 127,
+          "kind": "owned"
+        },
+        {
+          "line": 133,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-mute.js",
+      "changes": [
+        {
+          "line": 45,
+          "kind": "component"
+        },
+        {
+          "line": 50,
+          "kind": "component"
+        },
+        {
+          "line": 55,
+          "kind": "component"
+        },
+        {
+          "line": 60,
+          "kind": "component"
+        },
+        {
+          "line": 65,
+          "kind": "component"
+        },
+        {
+          "line": 73,
+          "kind": "plain"
+        },
+        {
+          "line": 113,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 122,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-rank.js",
+      "changes": [
+        {
+          "line": 37,
+          "kind": "component"
+        },
+        {
+          "line": 42,
+          "kind": "component"
+        },
+        {
+          "line": 47,
+          "kind": "component"
+        },
+        {
+          "line": 52,
+          "kind": "component"
+        },
+        {
+          "line": 57,
+          "kind": "component"
+        },
+        {
+          "line": 62,
+          "kind": "component"
+        },
+        {
+          "line": 70,
+          "kind": "plain"
+        },
+        {
+          "line": 110,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 119,
+          "kind": "owned"
+        },
+        {
+          "line": 288,
+          "kind": "owned"
+        },
+        {
+          "line": 306,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 322,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 338,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-reactionrole.js",
+      "changes": [
+        {
+          "line": 186,
+          "kind": "reaction"
+        },
+        {
+          "line": 310,
+          "kind": "reaction"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-reportlog.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "component"
+        },
+        {
+          "line": 33,
+          "kind": "component"
+        },
+        {
+          "line": 38,
+          "kind": "component"
+        },
+        {
+          "line": 46,
+          "kind": "plain"
+        },
+        {
+          "line": 86,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 95,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-roster.js",
+      "changes": [
+        {
+          "line": 59,
+          "kind": "plain"
+        },
+        {
+          "line": 77,
+          "kind": "plain"
+        },
+        {
+          "line": 95,
+          "kind": "plain"
+        },
+        {
+          "line": 113,
+          "kind": "plain"
+        },
+        {
+          "line": 165,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 174,
+          "kind": "owned"
+        },
+        {
+          "line": 183,
+          "kind": "component"
+        },
+        {
+          "line": 188,
+          "kind": "component"
+        },
+        {
+          "line": 193,
+          "kind": "component"
+        },
+        {
+          "line": 198,
+          "kind": "component"
+        },
+        {
+          "line": 203,
+          "kind": "component"
+        },
+        {
+          "line": 208,
+          "kind": "component"
+        },
+        {
+          "line": 213,
+          "kind": "component"
+        },
+        {
+          "line": 218,
+          "kind": "component"
+        },
+        {
+          "line": 223,
+          "kind": "component"
+        },
+        {
+          "line": 229,
+          "kind": "component"
+        },
+        {
+          "line": 234,
+          "kind": "component"
+        },
+        {
+          "line": 243,
+          "kind": "plain"
+        },
+        {
+          "line": 290,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 299,
+          "kind": "owned"
+        },
+        {
+          "line": 611,
+          "kind": "reaction"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-suggestion.js",
+      "changes": [
+        {
+          "line": 36,
+          "kind": "component"
+        },
+        {
+          "line": 41,
+          "kind": "component"
+        },
+        {
+          "line": 46,
+          "kind": "component"
+        },
+        {
+          "line": 51,
+          "kind": "component"
+        },
+        {
+          "line": 56,
+          "kind": "component"
+        },
+        {
+          "line": 61,
+          "kind": "component"
+        },
+        {
+          "line": 66,
+          "kind": "component"
+        },
+        {
+          "line": 71,
+          "kind": "component"
+        },
+        {
+          "line": 76,
+          "kind": "component"
+        },
+        {
+          "line": 81,
+          "kind": "component"
+        },
+        {
+          "line": 86,
+          "kind": "component"
+        },
+        {
+          "line": 94,
+          "kind": "plain"
+        },
+        {
+          "line": 134,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 143,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-ticket.js",
+      "changes": [
+        {
+          "line": 47,
+          "kind": "plain"
+        },
+        {
+          "line": 65,
+          "kind": "plain"
+        },
+        {
+          "line": 83,
+          "kind": "plain"
+        },
+        {
+          "line": 101,
+          "kind": "plain"
+        },
+        {
+          "line": 155,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 164,
+          "kind": "owned"
+        },
+        {
+          "line": 173,
+          "kind": "component"
+        },
+        {
+          "line": 178,
+          "kind": "component"
+        },
+        {
+          "line": 183,
+          "kind": "component"
+        },
+        {
+          "line": 188,
+          "kind": "component"
+        },
+        {
+          "line": 193,
+          "kind": "component"
+        },
+        {
+          "line": 198,
+          "kind": "component"
+        },
+        {
+          "line": 203,
+          "kind": "component"
+        },
+        {
+          "line": 208,
+          "kind": "component"
+        },
+        {
+          "line": 213,
+          "kind": "component"
+        },
+        {
+          "line": 218,
+          "kind": "component"
+        },
+        {
+          "line": 223,
+          "kind": "component"
+        },
+        {
+          "line": 232,
+          "kind": "plain"
+        },
+        {
+          "line": 280,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 289,
+          "kind": "owned"
+        },
+        {
+          "line": 493,
+          "kind": "component"
+        },
+        {
+          "line": 492,
+          "kind": "plain"
+        },
+        {
+          "line": 847,
+          "kind": "component"
+        },
+        {
+          "line": 852,
+          "kind": "component"
+        },
+        {
+          "line": 857,
+          "kind": "component"
+        },
+        {
+          "line": 862,
+          "kind": "component"
+        },
+        {
+          "line": 871,
+          "kind": "plain"
+        },
+        {
+          "line": 925,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 934,
+          "kind": "owned"
+        },
+        {
+          "line": 1127,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-tiktok.js",
+      "changes": [
+        {
+          "line": 35,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 51,
+          "kind": "reaction"
+        },
+        {
+          "line": 52,
+          "kind": "reaction"
+        },
+        {
+          "line": 53,
+          "kind": "reaction"
+        },
+        {
+          "line": 54,
+          "kind": "reaction"
+        },
+        {
+          "line": 248,
+          "kind": "reaction"
+        },
+        {
+          "line": 312,
+          "kind": "reaction"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-twitch.js",
+      "changes": [
+        {
+          "line": 29,
+          "kind": "component"
+        },
+        {
+          "line": 34,
+          "kind": "component"
+        },
+        {
+          "line": 39,
+          "kind": "component"
+        },
+        {
+          "line": 44,
+          "kind": "component"
+        },
+        {
+          "line": 49,
+          "kind": "component"
+        },
+        {
+          "line": 54,
+          "kind": "component"
+        },
+        {
+          "line": 59,
+          "kind": "component"
+        },
+        {
+          "line": 67,
+          "kind": "plain"
+        },
+        {
+          "line": 107,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 116,
+          "kind": "owned"
+        },
+        {
+          "line": 186,
+          "kind": "plain"
+        },
+        {
+          "line": 228,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 231,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 240,
+          "kind": "owned"
+        },
+        {
+          "line": 248,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-twitter.js",
+      "changes": [
+        {
+          "line": 31,
+          "kind": "component"
+        },
+        {
+          "line": 36,
+          "kind": "component"
+        },
+        {
+          "line": 41,
+          "kind": "component"
+        },
+        {
+          "line": 46,
+          "kind": "component"
+        },
+        {
+          "line": 51,
+          "kind": "component"
+        },
+        {
+          "line": 56,
+          "kind": "component"
+        },
+        {
+          "line": 64,
+          "kind": "plain"
+        },
+        {
+          "line": 104,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 113,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-validcode.js",
+      "changes": [
+        {
+          "line": 39,
+          "kind": "component"
+        },
+        {
+          "line": 46,
+          "kind": "component"
+        },
+        {
+          "line": 51,
+          "kind": "component"
+        },
+        {
+          "line": 55,
+          "kind": "plain"
+        },
+        {
+          "line": 99,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 105,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-warn.js",
+      "changes": [
+        {
+          "line": 32,
+          "kind": "component"
+        },
+        {
+          "line": 37,
+          "kind": "component"
+        },
+        {
+          "line": 42,
+          "kind": "component"
+        },
+        {
+          "line": 47,
+          "kind": "component"
+        },
+        {
+          "line": 52,
+          "kind": "component"
+        },
+        {
+          "line": 57,
+          "kind": "component"
+        },
+        {
+          "line": 65,
+          "kind": "plain"
+        },
+        {
+          "line": 102,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-welcome.js",
+      "changes": [
+        {
+          "line": 163,
+          "kind": "component"
+        },
+        {
+          "line": 168,
+          "kind": "component"
+        },
+        {
+          "line": 173,
+          "kind": "component"
+        },
+        {
+          "line": 178,
+          "kind": "component"
+        },
+        {
+          "line": 182,
+          "kind": "owned"
+        },
+        {
+          "line": 182,
+          "kind": "owned"
+        },
+        {
+          "line": 183,
+          "kind": "component"
+        },
+        {
+          "line": 188,
+          "kind": "component"
+        },
+        {
+          "line": 193,
+          "kind": "component"
+        },
+        {
+          "line": 201,
+          "kind": "plain"
+        },
+        {
+          "line": 247,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 256,
+          "kind": "owned"
+        },
+        {
+          "line": 271,
+          "kind": "component"
+        },
+        {
+          "line": 276,
+          "kind": "component"
+        },
+        {
+          "line": 281,
+          "kind": "component"
+        },
+        {
+          "line": 286,
+          "kind": "component"
+        },
+        {
+          "line": 291,
+          "kind": "component"
+        },
+        {
+          "line": 296,
+          "kind": "component"
+        },
+        {
+          "line": 304,
+          "kind": "plain"
+        },
+        {
+          "line": 352,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 361,
+          "kind": "owned"
+        },
+        {
+          "line": 462,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 480,
+          "kind": "component"
+        },
+        {
+          "line": 485,
+          "kind": "component"
+        },
+        {
+          "line": 490,
+          "kind": "component"
+        },
+        {
+          "line": 495,
+          "kind": "component"
+        },
+        {
+          "line": 500,
+          "kind": "component"
+        },
+        {
+          "line": 505,
+          "kind": "component"
+        },
+        {
+          "line": 510,
+          "kind": "component"
+        },
+        {
+          "line": 515,
+          "kind": "component"
+        },
+        {
+          "line": 520,
+          "kind": "component"
+        },
+        {
+          "line": 525,
+          "kind": "component"
+        },
+        {
+          "line": 530,
+          "kind": "component"
+        },
+        {
+          "line": 535,
+          "kind": "component"
+        },
+        {
+          "line": 543,
+          "kind": "plain"
+        },
+        {
+          "line": 602,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 615,
+          "kind": "owned"
+        },
+        {
+          "line": 1227,
+          "kind": "plain"
+        },
+        {
+          "line": 1226,
+          "kind": "component"
+        },
+        {
+          "line": 1232,
+          "kind": "plain"
+        },
+        {
+          "line": 1231,
+          "kind": "component"
+        },
+        {
+          "line": 1237,
+          "kind": "plain"
+        },
+        {
+          "line": 1236,
+          "kind": "component"
+        },
+        {
+          "line": 1242,
+          "kind": "plain"
+        },
+        {
+          "line": 1241,
+          "kind": "component"
+        },
+        {
+          "line": 1249,
+          "kind": "plain"
+        },
+        {
+          "line": 1248,
+          "kind": "component"
+        },
+        {
+          "line": 1254,
+          "kind": "plain"
+        },
+        {
+          "line": 1253,
+          "kind": "component"
+        },
+        {
+          "line": 1259,
+          "kind": "plain"
+        },
+        {
+          "line": 1258,
+          "kind": "component"
+        },
+        {
+          "line": 1264,
+          "kind": "plain"
+        },
+        {
+          "line": 1263,
+          "kind": "component"
+        },
+        {
+          "line": 1302,
+          "kind": "owned"
+        },
+        {
+          "line": 1336,
+          "kind": "owned"
+        },
+        {
+          "line": 1454,
+          "kind": "component"
+        },
+        {
+          "line": 1459,
+          "kind": "component"
+        },
+        {
+          "line": 1464,
+          "kind": "component"
+        },
+        {
+          "line": 1469,
+          "kind": "component"
+        },
+        {
+          "line": 1477,
+          "kind": "plain"
+        },
+        {
+          "line": 1525,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1534,
+          "kind": "owned"
+        },
+        {
+          "line": 1639,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1735,
+          "kind": "component"
+        },
+        {
+          "line": 1742,
+          "kind": "component"
+        },
+        {
+          "line": 1747,
+          "kind": "component"
+        },
+        {
+          "line": 1752,
+          "kind": "component"
+        },
+        {
+          "line": 1757,
+          "kind": "component"
+        },
+        {
+          "line": 1765,
+          "kind": "plain"
+        },
+        {
+          "line": 1813,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1822,
+          "kind": "owned"
+        },
+        {
+          "line": 1870,
+          "kind": "component"
+        },
+        {
+          "line": 1875,
+          "kind": "component"
+        },
+        {
+          "line": 1880,
+          "kind": "component"
+        },
+        {
+          "line": 1885,
+          "kind": "component"
+        },
+        {
+          "line": 1890,
+          "kind": "component"
+        },
+        {
+          "line": 1895,
+          "kind": "component"
+        },
+        {
+          "line": 1900,
+          "kind": "component"
+        },
+        {
+          "line": 1905,
+          "kind": "component"
+        },
+        {
+          "line": 1910,
+          "kind": "component"
+        },
+        {
+          "line": 1915,
+          "kind": "component"
+        },
+        {
+          "line": 1920,
+          "kind": "component"
+        },
+        {
+          "line": 1925,
+          "kind": "component"
+        },
+        {
+          "line": 1933,
+          "kind": "plain"
+        },
+        {
+          "line": 1992,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 2005,
+          "kind": "owned"
+        },
+        {
+          "line": 2596,
+          "kind": "plain"
+        },
+        {
+          "line": 2595,
+          "kind": "component"
+        },
+        {
+          "line": 2601,
+          "kind": "plain"
+        },
+        {
+          "line": 2600,
+          "kind": "component"
+        },
+        {
+          "line": 2606,
+          "kind": "plain"
+        },
+        {
+          "line": 2605,
+          "kind": "component"
+        },
+        {
+          "line": 2611,
+          "kind": "plain"
+        },
+        {
+          "line": 2610,
+          "kind": "component"
+        },
+        {
+          "line": 2618,
+          "kind": "plain"
+        },
+        {
+          "line": 2617,
+          "kind": "component"
+        },
+        {
+          "line": 2623,
+          "kind": "plain"
+        },
+        {
+          "line": 2622,
+          "kind": "component"
+        },
+        {
+          "line": 2628,
+          "kind": "plain"
+        },
+        {
+          "line": 2627,
+          "kind": "component"
+        },
+        {
+          "line": 2633,
+          "kind": "plain"
+        },
+        {
+          "line": 2632,
+          "kind": "component"
+        },
+        {
+          "line": 2671,
+          "kind": "owned"
+        },
+        {
+          "line": 2705,
+          "kind": "owned"
+        },
+        {
+          "line": 2825,
+          "kind": "component"
+        },
+        {
+          "line": 2830,
+          "kind": "component"
+        },
+        {
+          "line": 2835,
+          "kind": "component"
+        },
+        {
+          "line": 2840,
+          "kind": "component"
+        },
+        {
+          "line": 2848,
+          "kind": "plain"
+        },
+        {
+          "line": 2896,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 2905,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-youtube.js",
+      "changes": [
+        {
+          "line": 29,
+          "kind": "component"
+        },
+        {
+          "line": 34,
+          "kind": "component"
+        },
+        {
+          "line": 39,
+          "kind": "component"
+        },
+        {
+          "line": 44,
+          "kind": "component"
+        },
+        {
+          "line": 49,
+          "kind": "component"
+        },
+        {
+          "line": 54,
+          "kind": "component"
+        },
+        {
+          "line": 62,
+          "kind": "plain"
+        },
+        {
+          "line": 102,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 111,
+          "kind": "owned"
+        },
+        {
+          "line": 293,
+          "kind": "plain"
+        },
+        {
+          "line": 335,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 338,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 347,
+          "kind": "owned"
+        },
+        {
+          "line": 381,
+          "kind": "plain"
+        },
+        {
+          "line": 492,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 501,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Setup/setup.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "component"
+        },
+        {
+          "line": 33,
+          "kind": "component"
+        },
+        {
+          "line": 38,
+          "kind": "component"
+        },
+        {
+          "line": 43,
+          "kind": "component"
+        },
+        {
+          "line": 48,
+          "kind": "component"
+        },
+        {
+          "line": 53,
+          "kind": "component"
+        },
+        {
+          "line": 58,
+          "kind": "component"
+        },
+        {
+          "line": 63,
+          "kind": "component"
+        },
+        {
+          "line": 68,
+          "kind": "component"
+        },
+        {
+          "line": 73,
+          "kind": "component"
+        },
+        {
+          "line": 78,
+          "kind": "component"
+        },
+        {
+          "line": 83,
+          "kind": "component"
+        },
+        {
+          "line": 88,
+          "kind": "component"
+        },
+        {
+          "line": 93,
+          "kind": "component"
+        },
+        {
+          "line": 98,
+          "kind": "component"
+        },
+        {
+          "line": 103,
+          "kind": "component"
+        },
+        {
+          "line": 108,
+          "kind": "component"
+        },
+        {
+          "line": 113,
+          "kind": "component"
+        },
+        {
+          "line": 118,
+          "kind": "component"
+        },
+        {
+          "line": 123,
+          "kind": "component"
+        },
+        {
+          "line": 128,
+          "kind": "component"
+        },
+        {
+          "line": 133,
+          "kind": "component"
+        },
+        {
+          "line": 138,
+          "kind": "component"
+        },
+        {
+          "line": 143,
+          "kind": "component"
+        },
+        {
+          "line": 148,
+          "kind": "component"
+        },
+        {
+          "line": 153,
+          "kind": "component"
+        },
+        {
+          "line": 158,
+          "kind": "component"
+        },
+        {
+          "line": 163,
+          "kind": "component"
+        },
+        {
+          "line": 168,
+          "kind": "component"
+        },
+        {
+          "line": 173,
+          "kind": "component"
+        },
+        {
+          "line": 178,
+          "kind": "component"
+        },
+        {
+          "line": 183,
+          "kind": "component"
+        },
+        {
+          "line": 188,
+          "kind": "component"
+        },
+        {
+          "line": 193,
+          "kind": "component"
+        },
+        {
+          "line": 198,
+          "kind": "component"
+        },
+        {
+          "line": 203,
+          "kind": "component"
+        },
+        {
+          "line": 208,
+          "kind": "component"
+        },
+        {
+          "line": 213,
+          "kind": "component"
+        },
+        {
+          "line": 218,
+          "kind": "component"
+        },
+        {
+          "line": 222,
+          "kind": "plain"
+        },
+        {
+          "line": 242,
+          "kind": "plain"
+        },
+        {
+          "line": 265,
+          "kind": "plain"
+        },
+        {
+          "line": 326,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 336,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 346,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/a-wow.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/abdi.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/afewmomentslater.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/ahshit.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/airhorn.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/amogus.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/araara.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/bhau.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/bruh.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/cuteuwu.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/dattebayo.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/disconnected.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/fart.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/game-over.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/giggle.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/gimme-ohyeah.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/ha-gay.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/hellomf.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/honk.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/ilikecutg.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/illuminati.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/iphone-notification.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/john-cena.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/kuss-digga.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/laugh.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/magic.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/margayamc.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/moin-meister.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/nani.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/nogodno.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/oioi.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/oioioi.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/onichan.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/pew-pew.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/ph-intro.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/quack-quack.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/rickroll.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/samsung-notification.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/sheesh.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/sike.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/silly-fart.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/skype.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/suiii.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/superidol.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/surprisemf.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/sus.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/uwu.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/verpissdich.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/wetfart.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/wow.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Soundboard/wryd-stepbro.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "owned"
+        },
+        {
+          "line": 80,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 85,
+          "kind": "reaction"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "commands/Voice/voice.js",
+      "changes": [
+        {
+          "line": 272,
+          "kind": "owned"
+        },
+        {
+          "line": 355,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Admin/embed.js",
+      "changes": [
+        {
+          "line": 84,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Admin/say.js",
+      "changes": [
+        {
+          "line": 59,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Anime/emote.js",
+      "changes": [
+        {
+          "line": 79,
+          "kind": "owned"
+        },
+        {
+          "line": 89,
+          "kind": "owned"
+        },
+        {
+          "line": 113,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/check.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 24,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 25,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/list.js",
+      "changes": [
+        {
+          "line": 11,
+          "kind": "owned"
+        },
+        {
+          "line": 30,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/remove.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        },
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/set.js",
+      "changes": [
+        {
+          "line": 19,
+          "kind": "owned"
+        },
+        {
+          "line": 21,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 26,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/247.js",
+      "changes": [
+        {
+          "line": 15,
+          "kind": "owned"
+        },
+        {
+          "line": 21,
+          "kind": "owned"
+        },
+        {
+          "line": 26,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/adminrol.js",
+      "changes": [
+        {
+          "line": 38,
+          "kind": "owned"
+        },
+        {
+          "line": 48,
+          "kind": "owned"
+        },
+        {
+          "line": 52,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 55,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 60,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 62,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/architect.js",
+      "changes": [
+        {
+          "line": 46,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/autorole.js",
+      "changes": [
+        {
+          "line": 39,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 54,
+          "kind": "owned"
+        },
+        {
+          "line": 58,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 60,
+          "kind": "owned"
+        },
+        {
+          "line": 63,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 68,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 70,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/idioma.js",
+      "changes": [
+        {
+          "line": 35,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/logs.js",
+      "changes": [
+        {
+          "line": 19,
+          "kind": "owned"
+        },
+        {
+          "line": 26,
+          "kind": "owned"
+        },
+        {
+          "line": 39,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/musica.js",
+      "changes": [
+        {
+          "line": 30,
+          "kind": "owned"
+        },
+        {
+          "line": 31,
+          "kind": "owned"
+        },
+        {
+          "line": 31,
+          "kind": "owned"
+        },
+        {
+          "line": 41,
+          "kind": "owned"
+        },
+        {
+          "line": 43,
+          "kind": "owned"
+        },
+        {
+          "line": 44,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/prefix.js",
+      "changes": [
+        {
+          "line": 15,
+          "kind": "owned"
+        },
+        {
+          "line": 17,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/setupmusic.js",
+      "changes": [
+        {
+          "line": 20,
+          "kind": "owned"
+        },
+        {
+          "line": 28,
+          "kind": "owned"
+        },
+        {
+          "line": 28,
+          "kind": "owned"
+        },
+        {
+          "line": 34,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 38,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 41,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Config/ver.js",
+      "changes": [
+        {
+          "line": 30,
+          "kind": "owned"
+        },
+        {
+          "line": 30,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Economy/coinflip.js",
+      "changes": [
+        {
+          "line": 24,
+          "kind": "owned"
+        },
+        {
+          "line": 32,
+          "kind": "owned"
+        },
+        {
+          "line": 38,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 38,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 53,
+          "kind": "owned"
+        },
+        {
+          "line": 53,
+          "kind": "owned"
+        },
+        {
+          "line": 55,
+          "kind": "owned"
+        },
+        {
+          "line": 55,
+          "kind": "owned"
+        },
+        {
+          "line": 56,
+          "kind": "owned"
+        },
+        {
+          "line": 56,
+          "kind": "owned"
+        },
+        {
+          "line": 56,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 57,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Economy/daily.js",
+      "changes": [
+        {
+          "line": 14,
+          "kind": "owned"
+        },
+        {
+          "line": 25,
+          "kind": "owned"
+        },
+        {
+          "line": 37,
+          "kind": "owned"
+        },
+        {
+          "line": 38,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 39,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Economy/rob.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "owned"
+        },
+        {
+          "line": 24,
+          "kind": "owned"
+        },
+        {
+          "line": 26,
+          "kind": "owned"
+        },
+        {
+          "line": 37,
+          "kind": "owned"
+        },
+        {
+          "line": 45,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 45,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 58,
+          "kind": "owned"
+        },
+        {
+          "line": 59,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 61,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Economy/work.js",
+      "changes": [
+        {
+          "line": 14,
+          "kind": "owned"
+        },
+        {
+          "line": 25,
+          "kind": "owned"
+        },
+        {
+          "line": 41,
+          "kind": "owned"
+        },
+        {
+          "line": 42,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 43,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Favorites/like.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        },
+        {
+          "line": 17,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Favorites/lista.js",
+      "changes": [
+        {
+          "line": 16,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/8ball.js",
+      "changes": [
+        {
+          "line": 21,
+          "kind": "owned"
+        },
+        {
+          "line": 29,
+          "kind": "owned"
+        },
+        {
+          "line": 45,
+          "kind": "owned"
+        },
+        {
+          "line": 55,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/blur.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "owned"
+        },
+        {
+          "line": 48,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/fact.js",
+      "changes": [
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        },
+        {
+          "line": 42,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/greyscale.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "owned"
+        },
+        {
+          "line": 48,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/invert.js",
+      "changes": [
+        {
+          "line": 29,
+          "kind": "owned"
+        },
+        {
+          "line": 49,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/joke.js",
+      "changes": [
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        },
+        {
+          "line": 42,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/meme.js",
+      "changes": [
+        {
+          "line": 41,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/note.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/notstonks.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/ohno.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/rainbow.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "owned"
+        },
+        {
+          "line": 36,
+          "kind": "owned"
+        },
+        {
+          "line": 56,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/rip.js",
+      "changes": [
+        {
+          "line": 65,
+          "kind": "owned"
+        },
+        {
+          "line": 73,
+          "kind": "owned"
+        },
+        {
+          "line": 93,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/roblox.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/sepia.js",
+      "changes": [
+        {
+          "line": 30,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/shit.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/stonks.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/stroke.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/trash.js",
+      "changes": [
+        {
+          "line": 43,
+          "kind": "owned"
+        },
+        {
+          "line": 63,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/wasted.js",
+      "changes": [
+        {
+          "line": 39,
+          "kind": "owned"
+        },
+        {
+          "line": 59,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/whodidthis.js",
+      "changes": [
+        {
+          "line": 48,
+          "kind": "owned"
+        },
+        {
+          "line": 68,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/end.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 21,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/list.js",
+      "changes": [
+        {
+          "line": 11,
+          "kind": "owned"
+        },
+        {
+          "line": 14,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/pause.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 19,
+          "kind": "owned"
+        },
+        {
+          "line": 22,
+          "kind": "owned"
+        },
+        {
+          "line": 24,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/reroll.js",
+      "changes": [
+        {
+          "line": 19,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 20,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "owned"
+        },
+        {
+          "line": 25,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/resume.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 21,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/start.js",
+      "changes": [
+        {
+          "line": 23,
+          "kind": "owned"
+        },
+        {
+          "line": 26,
+          "kind": "owned"
+        },
+        {
+          "line": 29,
+          "kind": "owned"
+        },
+        {
+          "line": 54,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 56,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/botfaq.js",
+      "changes": [
+        {
+          "line": 35,
+          "kind": "component"
+        },
+        {
+          "line": 48,
+          "kind": "component"
+        },
+        {
+          "line": 57,
+          "kind": "component"
+        },
+        {
+          "line": 63,
+          "kind": "component"
+        },
+        {
+          "line": 71,
+          "kind": "component"
+        },
+        {
+          "line": 79,
+          "kind": "component"
+        },
+        {
+          "line": 88,
+          "kind": "component"
+        },
+        {
+          "line": 95,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/enlarge.js",
+      "changes": [
+        {
+          "line": 18,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/membercount.js",
+      "changes": [
+        {
+          "line": 20,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/roleinfo.js",
+      "changes": [
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 50,
+          "kind": "owned"
+        },
+        {
+          "line": 51,
+          "kind": "owned"
+        },
+        {
+          "line": 51,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/serverbanner.js",
+      "changes": [
+        {
+          "line": 12,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/userbanner.js",
+      "changes": [
+        {
+          "line": 19,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/userid.js",
+      "changes": [
+        {
+          "line": 16,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Info/userinfo.js",
+      "changes": [
+        {
+          "line": 129,
+          "kind": "component"
+        },
+        {
+          "line": 153,
+          "kind": "owned"
+        },
+        {
+          "line": 153,
+          "kind": "owned"
+        },
+        {
+          "line": 193,
+          "kind": "owned"
+        },
+        {
+          "line": 193,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Invites/add.js",
+      "changes": [
+        {
+          "line": 21,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Invites/leaderboard.js",
+      "changes": [
+        {
+          "line": 14,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Invites/reset.js",
+      "changes": [
+        {
+          "line": 18,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/cases.js",
+      "changes": [
+        {
+          "line": 18,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/purge.js",
+      "changes": [
+        {
+          "line": 32,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        },
+        {
+          "line": 57,
+          "kind": "owned"
+        },
+        {
+          "line": 60,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 62,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/slowmode.js",
+      "changes": [
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 21,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/unban.js",
+      "changes": [
+        {
+          "line": 20,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "owned"
+        },
+        {
+          "line": 29,
+          "kind": "owned"
+        },
+        {
+          "line": 51,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/unwarn.js",
+      "changes": [
+        {
+          "line": 23,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 25,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 33,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/vdeafen.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "owned"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 20,
+          "kind": "owned"
+        },
+        {
+          "line": 25,
+          "kind": "owned"
+        },
+        {
+          "line": 25,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/vkick.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "owned"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 20,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/vmute.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "owned"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 20,
+          "kind": "owned"
+        },
+        {
+          "line": 25,
+          "kind": "owned"
+        },
+        {
+          "line": 25,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/warn.js",
+      "changes": [
+        {
+          "line": 21,
+          "kind": "owned"
+        },
+        {
+          "line": 22,
+          "kind": "owned"
+        },
+        {
+          "line": 23,
+          "kind": "owned"
+        },
+        {
+          "line": 26,
+          "kind": "owned"
+        },
+        {
+          "line": 29,
+          "kind": "owned"
+        },
+        {
+          "line": 54,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/autoplay.js",
+      "changes": [
+        {
+          "line": 9,
+          "kind": "owned"
+        },
+        {
+          "line": 12,
+          "kind": "owned"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/clearqueue.js",
+      "changes": [
+        {
+          "line": 7,
+          "kind": "owned"
+        },
+        {
+          "line": 10,
+          "kind": "owned"
+        },
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/filter.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 41,
+          "kind": "owned"
+        },
+        {
+          "line": 44,
+          "kind": "owned"
+        },
+        {
+          "line": 51,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 51,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 53,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/forward.js",
+      "changes": [
+        {
+          "line": 9,
+          "kind": "owned"
+        },
+        {
+          "line": 14,
+          "kind": "owned"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 20,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/history.js",
+      "changes": [
+        {
+          "line": 39,
+          "kind": "owned"
+        },
+        {
+          "line": 51,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/jump.js",
+      "changes": [
+        {
+          "line": 14,
+          "kind": "owned"
+        },
+        {
+          "line": 20,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 23,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 25,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/loop.js",
+      "changes": [
+        {
+          "line": 15,
+          "kind": "owned"
+        },
+        {
+          "line": 20,
+          "kind": "component"
+        },
+        {
+          "line": 21,
+          "kind": "component"
+        },
+        {
+          "line": 22,
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/lyrics.js",
+      "changes": [
+        {
+          "line": 34,
+          "kind": "owned"
+        },
+        {
+          "line": 46,
+          "kind": "owned"
+        },
+        {
+          "line": 53,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/move.js",
+      "changes": [
+        {
+          "line": 15,
+          "kind": "owned"
+        },
+        {
+          "line": 22,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 25,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 27,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/nowplaying.js",
+      "changes": [
+        {
+          "line": 9,
+          "kind": "owned"
+        },
+        {
+          "line": 15,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/pause.js",
+      "changes": [
+        {
+          "line": 7,
+          "kind": "owned"
+        },
+        {
+          "line": 11,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/playmusicmix.js",
+      "changes": [
+        {
+          "line": 11,
+          "kind": "owned"
+        },
+        {
+          "line": 12,
+          "kind": "owned"
+        },
+        {
+          "line": 16,
+          "kind": "owned"
+        },
+        {
+          "line": 22,
+          "kind": "owned"
+        },
+        {
+          "line": 31,
+          "kind": "owned"
+        },
+        {
+          "line": 32,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/playtop.js",
+      "changes": [
+        {
+          "line": 9,
+          "kind": "owned"
+        },
+        {
+          "line": 10,
+          "kind": "owned"
+        },
+        {
+          "line": 14,
+          "kind": "owned"
+        },
+        {
+          "line": 32,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 34,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/queue.js",
+      "changes": [
+        {
+          "line": 10,
+          "kind": "owned"
+        },
+        {
+          "line": 27,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/remove.js",
+      "changes": [
+        {
+          "line": 14,
+          "kind": "owned"
+        },
+        {
+          "line": 20,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 22,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/replay.js",
+      "changes": [
+        {
+          "line": 7,
+          "kind": "owned"
+        },
+        {
+          "line": 11,
+          "kind": "owned"
+        },
+        {
+          "line": 19,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/resume.js",
+      "changes": [
+        {
+          "line": 7,
+          "kind": "owned"
+        },
+        {
+          "line": 11,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/rewind.js",
+      "changes": [
+        {
+          "line": 9,
+          "kind": "owned"
+        },
+        {
+          "line": 14,
+          "kind": "owned"
+        },
+        {
+          "line": 18,
+          "kind": "owned"
+        },
+        {
+          "line": 20,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/seek.js",
+      "changes": [
+        {
+          "line": 9,
+          "kind": "owned"
+        },
+        {
+          "line": 16,
+          "kind": "owned"
+        },
+        {
+          "line": 19,
+          "kind": "owned"
+        },
+        {
+          "line": 24,
+          "kind": "owned"
+        },
+        {
+          "line": 26,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/shuffle.js",
+      "changes": [
+        {
+          "line": 7,
+          "kind": "owned"
+        },
+        {
+          "line": 12,
+          "kind": "owned"
+        },
+        {
+          "line": 12,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/skip.js",
+      "changes": [
+        {
+          "line": 8,
+          "kind": "owned"
+        },
+        {
+          "line": 12,
+          "kind": "owned"
+        },
+        {
+          "line": 17,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/stop.js",
+      "changes": [
+        {
+          "line": 7,
+          "kind": "owned"
+        },
+        {
+          "line": 13,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/add.js",
+      "changes": [
+        {
+          "line": 26,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 31,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 42,
+          "kind": "owned"
+        },
+        {
+          "line": 57,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 74,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/create.js",
+      "changes": [
+        {
+          "line": 21,
+          "kind": "owned"
+        },
+        {
+          "line": 30,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 36,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 44,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/delete.js",
+      "changes": [
+        {
+          "line": 23,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 28,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/list.js",
+      "changes": [
+        {
+          "line": 21,
+          "kind": "owned"
+        },
+        {
+          "line": 33,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/play.js",
+      "changes": [
+        {
+          "line": 26,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 27,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        },
+        {
+          "line": 62,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 73,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/share.js",
+      "changes": [
+        {
+          "line": 36,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 46,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/show.js",
+      "changes": [
+        {
+          "line": 39,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 44,
+          "kind": "owned"
+        },
+        {
+          "line": 49,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 65,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Rank/leaderboard.js",
+      "changes": [
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 73,
+          "kind": "plain"
+        },
+        {
+          "line": 74,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Rank/rank.js",
+      "changes": [
+        {
+          "line": 120,
+          "kind": "owned"
+        },
+        {
+          "line": 142,
+          "kind": "owned"
+        },
+        {
+          "line": 161,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Rank/setlevel.js",
+      "changes": [
+        {
+          "line": 28,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Soundboard/play.js",
+      "changes": [
+        {
+          "line": 45,
+          "kind": "owned"
+        },
+        {
+          "line": 51,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 55,
+          "kind": "owned"
+        },
+        {
+          "line": 59,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 62,
+          "kind": "owned"
+        },
+        {
+          "line": 90,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 93,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/canal.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "owned"
+        },
+        {
+          "line": 24,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/tarjeta.js",
+      "changes": [
+        {
+          "line": 47,
+          "kind": "owned"
+        },
+        {
+          "line": 277,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/test.js",
+      "changes": [
+        {
+          "line": 30,
+          "kind": "owned"
+        },
+        {
+          "line": 37,
+          "kind": "owned"
+        },
+        {
+          "line": 102,
+          "kind": "owned"
+        },
+        {
+          "line": 119,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/ver.js",
+      "changes": [
+        {
+          "line": 17,
+          "kind": "owned"
+        },
+        {
+          "line": 32,
+          "kind": "owned"
+        },
+        {
+          "line": 32,
+          "kind": "owned"
+        },
+        {
+          "line": 33,
+          "kind": "owned"
+        },
+        {
+          "line": 33,
+          "kind": "owned"
+        },
+        {
+          "line": 34,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 34,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        },
+        {
+          "line": 35,
+          "kind": "owned"
+        },
+        {
+          "line": 36,
+          "kind": "owned"
+        },
+        {
+          "line": 36,
+          "kind": "owned"
+        },
+        {
+          "line": 38,
+          "kind": "owned"
+        },
+        {
+          "line": 39,
+          "kind": "owned"
+        },
+        {
+          "line": 39,
+          "kind": "owned"
+        },
+        {
+          "line": 40,
+          "kind": "owned"
+        },
+        {
+          "line": 40,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/aichat.js",
+      "changes": [
+        {
+          "line": 34,
+          "kind": "owned"
+        },
+        {
+          "line": 49,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 131,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/anticaps.js",
+      "changes": [
+        {
+          "line": 319,
+          "kind": "owned"
+        },
+        {
+          "line": 366,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/antidiscord.js",
+      "changes": [
+        {
+          "line": 535,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/antilinks.js",
+      "changes": [
+        {
+          "line": 522,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/antimention.js",
+      "changes": [
+        {
+          "line": 353,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/antiselfbot.js",
+      "changes": [
+        {
+          "line": 327,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/antispam.js",
+      "changes": [
+        {
+          "line": 361,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/apply.js",
+      "changes": [
+        {
+          "line": 38,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 42,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 265,
+          "kind": "reaction"
+        },
+        {
+          "line": 266,
+          "kind": "reaction"
+        },
+        {
+          "line": 690,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 692,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 764,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 866,
+          "kind": "component"
+        },
+        {
+          "line": 865,
+          "kind": "plain"
+        },
+        {
+          "line": 871,
+          "kind": "component"
+        },
+        {
+          "line": 870,
+          "kind": "plain"
+        },
+        {
+          "line": 876,
+          "kind": "component"
+        },
+        {
+          "line": 875,
+          "kind": "plain"
+        },
+        {
+          "line": 881,
+          "kind": "component"
+        },
+        {
+          "line": 880,
+          "kind": "plain"
+        },
+        {
+          "line": 886,
+          "kind": "component"
+        },
+        {
+          "line": 885,
+          "kind": "plain"
+        },
+        {
+          "line": 1005,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1090,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1185,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1280,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1375,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1470,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/blacklist.js",
+      "changes": [
+        {
+          "line": 374,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/counter.js",
+      "changes": [
+        {
+          "line": 24,
+          "kind": "owned"
+        },
+        {
+          "line": 41,
+          "kind": "owned"
+        },
+        {
+          "line": 58,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/dailyfact.js",
+      "changes": [
+        {
+          "line": 57,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/epicgamesverification.js",
+      "changes": [
+        {
+          "line": 45,
+          "kind": "plain"
+        },
+        {
+          "line": 44,
+          "kind": "component"
+        },
+        {
+          "line": 50,
+          "kind": "plain"
+        },
+        {
+          "line": 49,
+          "kind": "component"
+        },
+        {
+          "line": 64,
+          "kind": "plain"
+        },
+        {
+          "line": 71,
+          "kind": "component"
+        },
+        {
+          "line": 77,
+          "kind": "component"
+        },
+        {
+          "line": 83,
+          "kind": "component"
+        },
+        {
+          "line": 96,
+          "kind": "owned"
+        },
+        {
+          "line": 113,
+          "kind": "owned"
+        },
+        {
+          "line": 124,
+          "kind": "owned"
+        },
+        {
+          "line": 129,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 137,
+          "kind": "owned"
+        },
+        {
+          "line": 149,
+          "kind": "plain"
+        },
+        {
+          "line": 156,
+          "kind": "component"
+        },
+        {
+          "line": 162,
+          "kind": "component"
+        },
+        {
+          "line": 168,
+          "kind": "component"
+        },
+        {
+          "line": 198,
+          "kind": "owned"
+        },
+        {
+          "line": 225,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/functions.js",
+      "changes": [
+        {
+          "line": 1239,
+          "kind": "reaction"
+        },
+        {
+          "line": 1773,
+          "kind": "plain"
+        },
+        {
+          "line": 1772,
+          "kind": "component"
+        },
+        {
+          "line": 1774,
+          "kind": "plain"
+        },
+        {
+          "line": 1774,
+          "kind": "component"
+        },
+        {
+          "line": 1779,
+          "kind": "plain"
+        },
+        {
+          "line": 1778,
+          "kind": "component"
+        },
+        {
+          "line": 1783,
+          "kind": "plain"
+        },
+        {
+          "line": 1785,
+          "kind": "plain"
+        },
+        {
+          "line": 1785,
+          "kind": "component"
+        },
+        {
+          "line": 1804,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1879,
+          "kind": "plain"
+        },
+        {
+          "line": 1878,
+          "kind": "component"
+        },
+        {
+          "line": 1880,
+          "kind": "plain"
+        },
+        {
+          "line": 1880,
+          "kind": "component"
+        },
+        {
+          "line": 1885,
+          "kind": "plain"
+        },
+        {
+          "line": 1884,
+          "kind": "component"
+        },
+        {
+          "line": 1889,
+          "kind": "plain"
+        },
+        {
+          "line": 1891,
+          "kind": "plain"
+        },
+        {
+          "line": 1891,
+          "kind": "component"
+        },
+        {
+          "line": 1911,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1994,
+          "kind": "plain"
+        },
+        {
+          "line": 1993,
+          "kind": "component"
+        },
+        {
+          "line": 1995,
+          "kind": "plain"
+        },
+        {
+          "line": 1995,
+          "kind": "component"
+        },
+        {
+          "line": 2000,
+          "kind": "plain"
+        },
+        {
+          "line": 1999,
+          "kind": "component"
+        },
+        {
+          "line": 2004,
+          "kind": "plain"
+        },
+        {
+          "line": 2006,
+          "kind": "plain"
+        },
+        {
+          "line": 2006,
+          "kind": "component"
+        },
+        {
+          "line": 2027,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/games-choice.js",
+      "changes": [
+        {
+          "line": 36,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "handlers/helpui.js",
+      "changes": [
+        {
+          "line": 12,
+          "kind": "component"
+        },
+        {
+          "line": 14,
+          "kind": "component"
+        },
+        {
+          "line": 47,
+          "kind": "plain"
+        },
+        {
+          "line": 81,
+          "kind": "component"
+        },
+        {
+          "line": 82,
+          "kind": "plain"
+        },
+        {
+          "line": 82,
+          "kind": "component"
+        },
+        {
+          "line": 83,
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/command-settings.js",
+      "changes": [
+        {
+          "line": 8,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/controls.js",
+      "changes": [
+        {
+          "line": 29,
+          "kind": "component"
+        },
+        {
+          "line": 29,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/embeds.js",
+      "changes": [
+        {
+          "line": 13,
+          "kind": "owned"
+        },
+        {
+          "line": 57,
+          "kind": "owned"
+        },
+        {
+          "line": 134,
+          "kind": "plain"
+        },
+        {
+          "line": 134,
+          "kind": "component"
+        },
+        {
+          "line": 135,
+          "kind": "component"
+        },
+        {
+          "line": 135,
+          "kind": "plain"
+        },
+        {
+          "line": 136,
+          "kind": "plain"
+        },
+        {
+          "line": 136,
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/index.js",
+      "changes": [
+        {
+          "line": 712,
+          "kind": "owned"
+        },
+        {
+          "line": 750,
+          "kind": "owned"
+        },
+        {
+          "line": 759,
+          "kind": "owned"
+        },
+        {
+          "line": 769,
+          "kind": "owned"
+        },
+        {
+          "line": 774,
+          "kind": "owned"
+        },
+        {
+          "line": 774,
+          "kind": "owned"
+        },
+        {
+          "line": 782,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/likes.js",
+      "changes": [
+        {
+          "line": 79,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 79,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 115,
+          "kind": "plain"
+        },
+        {
+          "line": 115,
+          "kind": "component"
+        },
+        {
+          "line": 116,
+          "kind": "component"
+        },
+        {
+          "line": 116,
+          "kind": "plain"
+        },
+        {
+          "line": 117,
+          "kind": "plain"
+        },
+        {
+          "line": 117,
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/lyrics-pagination.js",
+      "changes": [
+        {
+          "line": 34,
+          "kind": "plain"
+        },
+        {
+          "line": 35,
+          "kind": "plain"
+        },
+        {
+          "line": 36,
+          "kind": "plain"
+        },
+        {
+          "line": 39,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/lyricsLive.js",
+      "changes": [
+        {
+          "line": 24,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/playui.js",
+      "changes": [
+        {
+          "line": 15,
+          "kind": "component"
+        },
+        {
+          "line": 16,
+          "kind": "component"
+        },
+        {
+          "line": 55,
+          "kind": "plain"
+        },
+        {
+          "line": 68,
+          "kind": "component"
+        },
+        {
+          "line": 68,
+          "kind": "plain"
+        },
+        {
+          "line": 70,
+          "kind": "component"
+        },
+        {
+          "line": 70,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/prefix-compat.js",
+      "changes": [
+        {
+          "line": 31,
+          "kind": "owned"
+        },
+        {
+          "line": 70,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/searchui.js",
+      "changes": [
+        {
+          "line": 10,
+          "kind": "component"
+        },
+        {
+          "line": 11,
+          "kind": "component"
+        },
+        {
+          "line": 18,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 53,
+          "kind": "plain"
+        },
+        {
+          "line": 70,
+          "kind": "plain"
+        },
+        {
+          "line": 73,
+          "kind": "component"
+        },
+        {
+          "line": 73,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/ui.js",
+      "changes": [
+        {
+          "line": 68,
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/utils.js",
+      "changes": [
+        {
+          "line": 33,
+          "kind": "component"
+        },
+        {
+          "line": 34,
+          "kind": "component"
+        },
+        {
+          "line": 35,
+          "kind": "component"
+        },
+        {
+          "line": 36,
+          "kind": "component"
+        },
+        {
+          "line": 37,
+          "kind": "component"
+        },
+        {
+          "line": 38,
+          "kind": "component"
+        },
+        {
+          "line": 39,
+          "kind": "component"
+        },
+        {
+          "line": 40,
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "file": "handlers/project/info.js",
+      "changes": [
+        {
+          "line": 12,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "handlers/ranking.js",
+      "changes": [
+        {
+          "line": 510,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 684,
+          "kind": "reaction"
+        },
+        {
+          "line": 685,
+          "kind": "reaction"
+        },
+        {
+          "line": 686,
+          "kind": "reaction"
+        },
+        {
+          "line": 740,
+          "kind": "owned"
+        },
+        {
+          "line": 740,
+          "kind": "owned"
+        },
+        {
+          "line": 740,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/suggest.js",
+      "changes": [
+        {
+          "line": 199,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "handlers/suggestions/presentation.js",
+      "changes": [
+        {
+          "line": 8,
+          "kind": "component"
+        },
+        {
+          "line": 11,
+          "kind": "plain"
+        },
+        {
+          "line": 11,
+          "kind": "component"
+        },
+        {
+          "line": 12,
+          "kind": "plain"
+        },
+        {
+          "line": 12,
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "file": "handlers/ticket.js",
+      "changes": [
+        {
+          "line": 31,
+          "kind": "owned"
+        },
+        {
+          "line": 86,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 207,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 278,
+          "kind": "component"
+        },
+        {
+          "line": 278,
+          "kind": "plain"
+        },
+        {
+          "line": 283,
+          "kind": "component"
+        },
+        {
+          "line": 282,
+          "kind": "plain"
+        },
+        {
+          "line": 287,
+          "kind": "component"
+        },
+        {
+          "line": 287,
+          "kind": "plain"
+        },
+        {
+          "line": 291,
+          "kind": "component"
+        },
+        {
+          "line": 291,
+          "kind": "plain"
+        },
+        {
+          "line": 295,
+          "kind": "component"
+        },
+        {
+          "line": 295,
+          "kind": "plain"
+        },
+        {
+          "line": 311,
+          "kind": "component"
+        },
+        {
+          "line": 311,
+          "kind": "plain"
+        },
+        {
+          "line": 362,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/ticketevent.js",
+      "changes": [
+        {
+          "line": 47,
+          "kind": "owned"
+        },
+        {
+          "line": 109,
+          "kind": "component"
+        },
+        {
+          "line": 109,
+          "kind": "plain"
+        },
+        {
+          "line": 127,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 289,
+          "kind": "component"
+        },
+        {
+          "line": 289,
+          "kind": "plain"
+        },
+        {
+          "line": 328,
+          "kind": "owned"
+        },
+        {
+          "line": 339,
+          "kind": "component"
+        },
+        {
+          "line": 339,
+          "kind": "plain"
+        },
+        {
+          "line": 355,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 564,
+          "kind": "component"
+        },
+        {
+          "line": 564,
+          "kind": "plain"
+        },
+        {
+          "line": 709,
+          "kind": "owned"
+        },
+        {
+          "line": 782,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 904,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 967,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1122,
+          "kind": "owned"
+        },
+        {
+          "line": 1195,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1316,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1378,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1525,
+          "kind": "owned"
+        },
+        {
+          "line": 1535,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1544,
+          "kind": "owned"
+        },
+        {
+          "line": 1605,
+          "kind": "owned"
+        },
+        {
+          "line": 1644,
+          "kind": "owned"
+        },
+        {
+          "line": 1680,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1710,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 1887,
+          "kind": "component"
+        },
+        {
+          "line": 1887,
+          "kind": "plain"
+        },
+        {
+          "line": 1892,
+          "kind": "component"
+        },
+        {
+          "line": 1891,
+          "kind": "plain"
+        },
+        {
+          "line": 1896,
+          "kind": "component"
+        },
+        {
+          "line": 1896,
+          "kind": "plain"
+        },
+        {
+          "line": 1900,
+          "kind": "component"
+        },
+        {
+          "line": 1900,
+          "kind": "plain"
+        },
+        {
+          "line": 1904,
+          "kind": "component"
+        },
+        {
+          "line": 1904,
+          "kind": "plain"
+        },
+        {
+          "line": 1920,
+          "kind": "component"
+        },
+        {
+          "line": 1920,
+          "kind": "plain"
+        },
+        {
+          "line": 1999,
+          "kind": "owned"
+        },
+        {
+          "line": 2034,
+          "kind": "owned"
+        },
+        {
+          "line": 2100,
+          "kind": "owned"
+        },
+        {
+          "line": 2131,
+          "kind": "owned"
+        },
+        {
+          "line": 2136,
+          "kind": "owned"
+        }
+      ]
+    },
+    {
+      "file": "handlers/tickets/application-buttons.js",
+      "changes": [
+        {
+          "line": 7,
+          "kind": "component"
+        },
+        {
+          "line": 7,
+          "kind": "plain"
+        },
+        {
+          "line": 9,
+          "kind": "plain"
+        }
+      ]
+    },
+    {
+      "file": "handlers/validcode.js",
+      "changes": [
+        {
+          "line": 35,
+          "kind": "reaction"
+        }
+      ]
+    },
+    {
+      "file": "events/guild/interactionCreate.js",
+      "changes": [
+        {
+          "line": 41,
+          "kind": "owned"
+        },
+        {
+          "line": 175,
+          "kind": "template_owned_segment"
+        }
+      ]
+    },
+    {
+      "file": "events/guild/messageCreate.js",
+      "changes": [
+        {
+          "line": 65,
+          "kind": "reaction"
+        },
+        {
+          "line": 147,
+          "kind": "owned"
+        },
+        {
+          "line": 228,
+          "kind": "reaction"
+        },
+        {
+          "line": 288,
+          "kind": "template_owned_segment"
+        },
+        {
+          "line": 393,
+          "kind": "owned"
+        }
+      ]
+    }
+  ]
+}

@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder,
     PermissionFlagsBits
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -26,16 +28,16 @@ module.exports = {
             ///////////////////////////////////////
 
             if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-                return message.reply("<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso!**");
+                return message.reply(obeyUi.owned("<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso!**"));
             }
             let owner = await message.guild.fetchOwner().catch(e => {
                 return message.reply("Could not get owner of target guild");
             });
             if (owner.id != cmduser.id) {
-                return message.reply(`<:no:833101993668771842> **You need to be the Propietario of this Servidor!**`);
+                return message.reply(`${obeyUi.markup("icon.error")} **You need to be the Propietario of this Servidor!**`);
             }
             //function to handle true/false
-            const d2p = bool => (bool ? "`✔️ Enabled`" : "`❌ Disabled`");
+            const d2p = bool => (bool ? obeyUi.owned("`✔️ Enabled`") : obeyUi.owned("`❌ Disabled`"));
             //call the first layer
             first_layer();
 
@@ -49,18 +51,18 @@ module.exports = {
                         description: !client.settings.get(message.guild.id, "autobackup")
                             ? "Make a Backup every 2nd Day"
                             : "Don't make automated Server Backups anymore",
-                        emoji: !client.settings.get(message.guild.id, "autobackup")
+                        emoji: obeyUi.component(!client.settings.get(message.guild.id, "autobackup")
                             ? "833101995723194437"
-                            : "833101993668771842",
+                            : "833101993668771842"),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Anti-Caps-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("¡Haz clic para configurar the Anti Caps System!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Anti Caps System!"))
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -78,8 +80,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Auto-Backup System Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/floppy-disk_1f4be.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-anticaps"]["variable1"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Auto-Backup System Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/floppy-disk_1f4be.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-anticaps"]["variable1"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -105,32 +107,32 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setTitle(
-                                        client.settings.get(message.guild.id, "autobackup")
+                                        obeyUi.limit(client.settings.get(message.guild.id, "autobackup")
                                             ? "Enabled Auto-Backups"
-                                            : "Disabled Auto-Backups"
+                                            : "Disabled Auto-Backups", 256)
                                     )
                                     .setColor(es.color)
                                     .setDescription(
-                                        `${client.settings.get(message.guild.id, "autobackup") ? `I woll now make a Backup every 2nd Day!\nOld Backups will automatically get removed!\n\nTo See the backups use the: \`${prefix}listbackups ${message.guild.id}\` Command\n\nTo load the latest Backup use the \`${prefix}loadbackup ${message.guild.id} 0\` Command` : `I will no longer make automatic Backups every 2 Days!\n\nTo create backups manually use: \`${prefix}createbackup`}`.substring(
+                                        obeyUi.limit(`${client.settings.get(message.guild.id, "autobackup") ? `I woll now make a Backup every 2nd Day!\nOld Backups will automatically get removed!\n\nTo See the backups use the: \`${prefix}listbackups ${message.guild.id}\` Command\n\nTo load the latest Backup use the \`${prefix}loadbackup ${message.guild.id} 0\` Command` : `I will no longer make automatic Backups every 2 Days!\n\nTo create backups manually use: \`${prefix}createbackup`}`.substring(
                                             0,
                                             2048
-                                        )
+                                        ), 4096)
                                     )
-                                    .setFooter(client.getFooter(es)),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     }
                     menu?.reply({
-                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                        content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                         ephemeral: true,
                     });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -144,9 +146,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-anticaps"]["variable13"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-anticaps"]["variable13"]), 4096)),
                 ],
             });
         }

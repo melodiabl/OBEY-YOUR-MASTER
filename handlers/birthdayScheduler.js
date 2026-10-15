@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Birthday = require(`${process.cwd()}/database/schemas/BirthdaySchema`)
 const Guild    = require(`${process.cwd()}/database/schemas/GuildSchema`)
@@ -38,11 +39,11 @@ async function announceBirthdays(client) {
       const mentions = valid.map(m => `${m}`).join(', ')
       const embed = new EmbedBuilder()
         .setColor(0xEB459E)
-        .setTitle('🎂 ¡Hoy es un cumpleaños especial!')
+        .setTitle(obeyUi.owned('🎂 ¡Hoy es un cumpleaños especial!'))
         .setDescription(
           valid.length === 1
-            ? `🎉 ¡Feliz cumpleaños ${mentions}! Esperamos que tengas un día increíble. 🥳`
-            : `🎉 ¡Feliz cumpleaños ${mentions}! ¡Que lo pasen increíble! 🥳`
+            ? `${obeyUi.markup("motion.exito")} ¡Feliz cumpleaños ${mentions}! Esperamos que tengas un día increíble. ${obeyUi.markup("motion.exito")}`
+            : `${obeyUi.markup("motion.exito")} ¡Feliz cumpleaños ${mentions}! ¡Que lo pasen increíble! ${obeyUi.markup("motion.exito")}`
         )
         .setThumbnail(valid[0].user.displayAvatarURL({ size: 256 }))
         .setTimestamp()

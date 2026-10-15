@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { EmbedBuilder, PermissionFlagsBits, StringSelectMenuBuilder, ButtonBuilder, ActionRowBuilder } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const { databasing, GetUser } = require(`${process.cwd()}/handlers/functions`);
@@ -36,42 +38,42 @@ module.exports = {
                     value: "Add Joins",
                     description: "Add a specific Number of Joins to: " + user.username,
                     replymsg: "Please Send the Number of Invites (Joins) you want to add to him/her!",
-                    emoji: "📨", //optional
+                    emoji: obeyUi.component("📨"), //optional
                 },
                 {
                     value: "Remove Joins",
                     description: "Remove a specific Number of Joins to: " + user.username,
                     replymsg: "Please Send the Number of Invites (Joins) you want to remove to him/her!",
-                    emoji: "📨", //optional
+                    emoji: obeyUi.component("📨"), //optional
                 },
                 {
                     value: "Add Fakes",
                     description: "Add a specific Number of Fakes to: " + user.username,
                     replymsg: "Please Send the Number of Fake-Invites you want to add to him/her!",
-                    emoji: "❌", //optional
+                    emoji: obeyUi.component("❌"), //optional
                 },
                 {
                     value: "Remove Fakes",
                     description: "Remove a specific Number of Fakes to: " + user.username,
                     replymsg: "Please Send the Number of Fake-Invites you want to remove to him/her!",
-                    emoji: "❌", //optional
+                    emoji: obeyUi.component("❌"), //optional
                 },
                 {
                     value: "Add Leaves",
                     description: "Add a specific Number of Leaves to: " + user.username,
                     replymsg: "Please Send the Number of Leaves you want to add to him/her!",
-                    emoji: "📩", //optional
+                    emoji: obeyUi.component("📩"), //optional
                 },
                 {
                     value: "Remove Leaves",
                     description: "Remove a specific Number of Leaves to: " + user.username,
                     replymsg: "Please Send the Number of Leaves you want to remove to him/her!",
-                    emoji: "📩", //optional
+                    emoji: obeyUi.component("📩"), //optional
                 },
                 {
                     value: "Cancel",
                     description: `Cancelar and stop the Ticket-Configuración!`,
-                    emoji: allEmojis.msg.cancel,
+                    emoji: obeyUi.component(allEmojis.msg.cancel),
                 },
             ];
             //define the selection
@@ -79,7 +81,7 @@ module.exports = {
                 .setCustomId("MenuSelection")
                 .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                .setPlaceholder(client.la[ls].cmds.info.botfaq.placeholder) //message in the content placeholder
+                .setPlaceholder(obeyUi.plain(client.la[ls].cmds.info.botfaq.placeholder)) //message in the content placeholder
                 .addOptions(
                     menuoptions.map(option => {
                         let Obj = {
@@ -120,9 +122,9 @@ module.exports = {
             //define the embed
             let MenuEmbed = new EmbedBuilder()
                 .setColor(es.color)
-                .setAuthor({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable1"]) })
-                .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable2"]))
-                .addFields({ name: "**CURRENT INVITES:**", value: `<:Like:857334024087011378> ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!` })
+                .setAuthor(obeyMeta.asAuthor({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable1"]) }))
+                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable2"]), 4096))
+                .addFields({ name: "**CURRENT INVITES:**", value: `${obeyUi.markup("icon.like")} ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!` })
                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variablex_3"]), value: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable3"]) });
             //send the menu msg
             let menumsg = await message.reply({
@@ -141,8 +143,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor({ name: client.la[ls].cmds.info.botfaq.menuembed.title, iconURL: client.user.displayAvatarURL(), url: "https://github.com/melodiabl" })
-                            .setDescription(menuoptiondata.replymsg),
+                            .setAuthor(obeyMeta.asAuthor({ name: client.la[ls].cmds.info.botfaq.menuembed.title, iconURL: client.user.displayAvatarURL(), url: "https://github.com/melodiabl" }))
+                            .setDescription(obeyUi.limit(menuoptiondata.replymsg, 4096)),
                     ],
                 });
                 await message.channel
@@ -199,7 +201,7 @@ module.exports = {
                         message.reply({
                             embeds: [
                                 new EmbedBuilder()
-                                    .setAuthor({ name: `New Invites of: ${user.username}`, iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" })
+                                    .setAuthor(obeyMeta.asAuthor({ name: `New Invites of: ${user.username}`, iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" }))
                                     .setColor(es.color)
                                     .setThumbnail(
                                         es.thumb
@@ -209,9 +211,9 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .addFields({ name: "\u200b", value: `<:Like:857334024087011378> ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!` })
+                                    .addFields({ name: "\u200b", value: `${obeyUi.markup("icon.like")} ${user} _**has invited __${realinvites} Member${realinvites != 1 ? "s" : ""}__**_!` })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variablex_6"]), value: eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable6"]) })
-                                    .setFooter(client.getFooter(es)),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     });
@@ -246,16 +248,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable7"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable7"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -269,9 +271,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable10"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["manageinvites"]["variable10"]), 4096)),
                 ],
             });
         }

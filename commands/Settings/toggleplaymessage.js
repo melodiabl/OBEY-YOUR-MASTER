@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require("../../botconfig/emojis.json");
+const emoji = require("../../handlers/assets/legacy-config");
 module.exports = {
     name: "toggleplaymessage",
     aliases: ["toggleplaymsg", "playmessage", "playmsg"],

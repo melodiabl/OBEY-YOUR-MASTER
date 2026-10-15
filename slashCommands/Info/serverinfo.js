@@ -1,10 +1,12 @@
+const obeyUi = require("../../handlers/assets/system")
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder,
     ChannelType
 } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const { swap_pages, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -65,11 +67,11 @@ module.exports = {
                 ephemeral: true,
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setAuthor({
+                        .setAuthor(obeyMeta.asAuthor({
                             name: client.la[ls].cmds.info.serverinfo.author + " " + message.guild.name,
                             iconURL: message.guild.iconURL(),
                             url: "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
-                        })
+                        }))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -82,27 +84,27 @@ module.exports = {
                             { name: client.la[ls].cmds.info.serverinfo.field1, value: `${message.guild.owner}\n\`${message.guild.owner.tag}\``, inline: true },
                             { name: client.la[ls].cmds.info.serverinfo.field2, value: "`" + moment(message.guild.createdTimestamp).format("DD/MM/YYYY") + "`\n`" + moment(message.guild.createdTimestamp).format("hh:mm:ss") + "`", inline: true },
                             { name: client.la[ls].cmds.info.serverinfo.field3, value: "`" + moment(message.member.joinedTimestamp).format("DD/MM/YYYY") + "`\n`" + moment(message.member.joinedTimestamp).format("hh:mm:ss") + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field4, value: "👁‍🗨 `" + message.guild.channels.cache.size + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field5, value: "💬 `" + message.guild.channels.cache.filter(channel => channel.type == ChannelType.GuildText).size + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field6, value: "🔈 `" + message.guild.channels.cache.filter(channel => channel.type == ChannelType.GuildVoice).size + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field7, value: "😀 `" + message.guild.memberCount + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field8, value: "👤 `" + message.guild.members.cache.filter(member => !member.user.bot).size + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field9, value: "🤖 `" + message.guild.members.cache.filter(member => member.user.bot).size + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field10, value: "🟢 `" + message.guild.members.cache.filter(member => member.presence && member.presence.status != "offline").size + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field4, value: obeyUi.owned("👁‍🗨 `") + message.guild.channels.cache.size + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field5, value: obeyUi.owned("💬 `") + message.guild.channels.cache.filter(channel => channel.type == ChannelType.GuildText).size + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field6, value: obeyUi.owned("🔈 `") + message.guild.channels.cache.filter(channel => channel.type == ChannelType.GuildVoice).size + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field7, value: obeyUi.owned("😀 `") + message.guild.memberCount + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field8, value: obeyUi.owned("👤 `") + message.guild.members.cache.filter(member => !member.user.bot).size + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field9, value: obeyUi.owned("🤖 `") + message.guild.members.cache.filter(member => member.user.bot).size + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field10, value: obeyUi.owned("🟢 `") + message.guild.members.cache.filter(member => member.presence && member.presence.status != "offline").size + "`", inline: true },
                             { name: client.la[ls].cmds.info.serverinfo.field11, value: ":black_circle:`" + message.guild.members.cache.filter(member => !member.presence || member.presence.status == "offline").size + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field12, value: "<a:nitro_logo:833402717950836806> `" + message.guild.premiumSubscriptionCount + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field13, value: "<a:nitro:833402717506502707> `" + boostlevel + "`", inline: true },
-                            { name: client.la[ls].cmds.info.serverinfo.field14, value: "👾 `" + maxbitrate + " kbps`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field12, value: obeyUi.owned("<a:nitro_logo:833402717950836806> `") + message.guild.premiumSubscriptionCount + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field13, value: obeyUi.owned("<a:nitro:833402717506502707> `") + boostlevel + "`", inline: true },
+                            { name: client.la[ls].cmds.info.serverinfo.field14, value: obeyUi.owned("👾 `") + maxbitrate + " kbps`", inline: true },
                             { name: eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variablex_1"]), value: eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variable1"]) },
                             { name: eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variablex_2"]), value: eval(client.la[ls]["cmds"]["info"]["serverinfo"]["variable1"]) }
                         )
                         .setThumbnail(
                             message.guild.iconURL()
                         )
-                        .setFooter(client.getFooter(
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 "ID: " + message.guild.id,
                                 message.guild.iconURL()
-                            )
+                            ))
                         ),
                 ],
             });

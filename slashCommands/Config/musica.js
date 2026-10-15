@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -27,8 +29,8 @@ module.exports = {
       const enabled = !!client.settings.get(gid, 'MUSIC')
       return interaction.reply({
         embeds: [new EmbedBuilder().setColor(enabled ? 0x22C55E : 0x6B7280)
-          .setTitle('🎵 Sistema de Música')
-          .setDescription(enabled ? '✅ **Activado**' : '❌ **Desactivado**')],
+          .setTitle(obeyUi.limit(obeyUi.owned('🎵 Sistema de Música'), 256))
+          .setDescription(obeyUi.limit(enabled ? obeyUi.owned('✅ **Activado**') : obeyUi.owned('❌ **Desactivado**'), 4096))],
         ephemeral: true,
       })
     }
@@ -38,11 +40,11 @@ module.exports = {
 
     await interaction.reply({
       embeds: [new EmbedBuilder().setColor(enable ? 0x22C55E : 0x6B7280)
-        .setTitle('🎵 Sistema de Música')
-        .setDescription(enable
-          ? '✅ Música **activada**. Los usuarios pueden usar `!play`, `/music play`, etc.'
-          : '❌ Música **desactivada**. Los comandos de música están bloqueados.')
-        .setFooter({ text: `Cambiado por ${interaction.user.tag}` })],
+        .setTitle(obeyUi.limit(obeyUi.owned('🎵 Sistema de Música'), 256))
+        .setDescription(obeyUi.limit(enable
+          ? obeyUi.owned('✅ Música **activada**. Los usuarios pueden usar `!play`, `/music play`, etc.')
+          : obeyUi.owned('❌ Música **desactivada**. Los comandos de música están bloqueados.'), 4096))
+        .setFooter(obeyMeta.asFooter({ text: `Cambiado por ${interaction.user.tag}` }))],
     })
   },
 }

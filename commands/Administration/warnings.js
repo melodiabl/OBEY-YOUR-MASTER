@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `warnings`,
@@ -35,7 +36,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable4"])),
                     ],
@@ -64,10 +65,10 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         `He/She has: ${client.userProfiles.get(warnmember.id, "warnings" ) ? client.userProfiles.get(warnmember.id, "warnings").length : 0} Global Warns`,
                                         "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/275/globe-with-meridians_1f310.png"
-                                    )
+                                    ))
                                 )
 
                                 .setTitle(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable5"])),
@@ -83,10 +84,10 @@ module.exports = {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .setFooter(client.getFooter(
+                    .setFooter(obeyMeta.asFooter(client.getFooter(
                             `He/She has: ${client.userProfiles.get(warnmember.id, "warnings" ) ? client.userProfiles.get(warnmember.id, "warnings").length : 0} Global Warns`,
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/275/globe-with-meridians_1f310.png"
-                        )
+                        ))
                     )
 
                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable6"]));
@@ -121,16 +122,16 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setFooter(client.getFooter(es))
-                                    .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable7"]))
                                     .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                     .setTimestamp()
-                                    .setFooter(client.getFooter(
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(
                                             "ID: " + message.author.id,
                                             message.author.displayAvatarURL()
-                                        )
+                                        ))
                                     ),
                             ],
                         });
@@ -144,7 +145,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(client.la[ls].common.erroroccur)
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable10"])),
                     ],
@@ -156,7 +157,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable11"]))
                         .setDescription(eval(client.la[ls]["cmds"]["administration"]["warnings"]["variable12"])),
                 ],

@@ -1,3 +1,5 @@
+const { localeFor } = require('../../handlers/i18n')
+const views = require('../../handlers/economy/messages')
 const { EmbedBuilder } = require('discord.js')
 const { ensure_economy_user, nFormatter } = require('../../handlers/functions')
 
@@ -9,33 +11,18 @@ module.exports = {
   ],
 
   run: async (client, interaction) => {
-    if (!client.settings.get(interaction.guild.id, 'ECONOMY'))
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de economía no está activado.')], ephemeral: true })
-
-    const uid = interaction.user.id
-    const gid = interaction.guild.id
-    ensure_economy_user(client, gid, uid)
-
-    const bank  = client.economy.get(`${gid}-${uid}`, 'bank') ?? 0
-    const input = interaction.options.getString('cantidad').toLowerCase()
-    const amount = input === 'todo' || input === 'all' ? bank : parseInt(input)
-
-    if (isNaN(amount) || amount < 1)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Cantidad inválida.')], ephemeral: true })
-    if (bank < amount)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ No tienes suficiente en el banco. Banco: **${nFormatter(bank)}** 🪙`)], ephemeral: true })
-
-    client.economy.math(`${gid}-${uid}`, '+', amount, 'balance')
-    client.economy.math(`${gid}-${uid}`, '-', amount, 'bank')
-
-    await interaction.reply({
-      embeds: [new EmbedBuilder().setColor(0x3B82F6)
-        .setTitle('💵 Retiro realizado')
-        .addFields(
-          { name: '💰 Retirado', value: `**${nFormatter(amount)}** 🪙`,                                         inline: true },
-          { name: '👛 Cartera',  value: `**${nFormatter(client.economy.get(`${gid}-${uid}`, 'balance'))}** 🪙`, inline: true },
-          { name: '🏦 Banco',    value: `**${nFormatter(client.economy.get(`${gid}-${uid}`, 'bank'))}** 🪙`,    inline: true },
-        )],
-    })
+    const gid=interaction.guild.id, locale=localeFor(client,gid)
+    const fail=(key,vars)=>interaction.reply({embeds:[views.error(locale,key,vars)],ephemeral:true,allowedMentions:{parse:[]}})
+    if(!client.settings.get(gid,'ECONOMY'))return fail('disabled')
+    const uid=interaction.user.id, key=`${gid}-${uid}`
+    ensure_economy_user(client,gid,uid)
+    const available=client.economy.get(key,'bank')??0
+    const amount=views.parseAmount(interaction.options.getString('cantidad'),available)
+    if(amount===null)return fail('invalidAmount')
+    if(available<amount)return fail('insufficientBank',{amount:nFormatter(available)})
+    // This preserves the legacy two-write store; it is not a cross-process transaction.
+    client.economy.math(key,'-',amount,'bank')
+    client.economy.math(key,'+',amount,'balance')
+    return interaction.reply({embeds:[views.transaction(locale,'withdrawn',amount,client.economy.get(key),nFormatter)],allowedMentions:{parse:[]}})
   },
 }

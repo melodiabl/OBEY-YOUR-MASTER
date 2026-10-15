@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -24,7 +26,7 @@ module.exports = {
             ///////////////////////////////////////
 
             //function to handle true/false
-            const d2p = bool => (bool ? "`✔️ Enabled`" : "`❌ Disabled`");
+            const d2p = bool => (bool ? obeyUi.owned("`✔️ Enabled`") : obeyUi.owned("`❌ Disabled`"));
             //call the first layer
             first_layer();
 
@@ -36,23 +38,23 @@ module.exports = {
                         description: client.settings.get(message.guild.id, `validcode`)
                             ? "Don't do anything with Messages containing Code"
                             : "React to messages containing a Valid Code Snippet",
-                        emoji: client.settings.get(message.guild.id, `validcode`)
+                        emoji: obeyUi.component(client.settings.get(message.guild.id, `validcode`)
                             ? allEmojis.msg.ERROR
-                            : allEmojis.msg.SUCCESS,
+                            : allEmojis.msg.SUCCESS),
                     },
                     {
                         value: "Settings",
                         description: `Show the Current Ajustes of the Valid-Code System`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ticket-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("¡Haz clic para configurar the Valid-Code System!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Valid-Code System!"))
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -70,8 +72,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Valid-Code System Setup", iconURL: "https://cdn.discordapp.com/emojis/858405056238714930.gif?v=1", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable1"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Valid-Code System Setup", iconURL: obeyUi.image("icon.code"), url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable1"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -96,13 +98,13 @@ module.exports = {
                         if (menu?.user.id === cmduser.id) {
                             if (used1)
                                 return menu?.reply({
-                                    content: `<:no:833101993668771842> You already selected something, this Selection is now disabled!`,
+                                    content: `${obeyUi.markup("icon.error")} You already selected something, this Selection is now disabled!`,
                                     ephemeral: true,
                                 });
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -121,9 +123,9 @@ module.exports = {
                         return message.reply({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable3"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable3"]), 256))
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es)),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     }
@@ -132,10 +134,10 @@ module.exports = {
                         return message.reply({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable4"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable4"]), 256))
                                     .setColor(es.color)
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable5"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable5"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     }
@@ -151,9 +153,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable6"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-validcode"]["variable6"]), 4096)),
                 ],
             });
         }

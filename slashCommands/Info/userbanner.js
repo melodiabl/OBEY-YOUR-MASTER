@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -16,15 +17,15 @@ module.exports = {
 
     if (!bannerURL)
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0x71717A).setDescription(`❌ **${target.username}** no tiene banner de perfil.`)],
+        embeds: [new EmbedBuilder().setColor(0x71717A).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} **${target.username}** no tiene banner de perfil.`, 4096))],
         ephemeral: true,
       })
 
     await interaction.reply({
       embeds: [
         new EmbedBuilder().setColor(0x5865F2)
-          .setTitle(`🖼️ Banner de ${target.username}`)
-          .setDescription(`[Descargar (4K)](${bannerURL})`)
+          .setTitle(obeyUi.limit(`🖼️ Banner de ${target.username}`, 256))
+          .setDescription(obeyUi.limit(`[Descargar (4K)](${bannerURL})`, 4096))
           .setThumbnail(target.displayAvatarURL())
           .setImage(bannerURL),
       ],

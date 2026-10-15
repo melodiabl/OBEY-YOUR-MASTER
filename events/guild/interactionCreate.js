@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 //Import Modules
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -38,7 +40,7 @@ module.exports = async (client, interaction) => {
     const { guild } = member;
     if (!guild) {
         return interaction
-            ?.reply({ content: "❌ ¡Las interacciones solo funcionan dentro de servidores!", ephemeral: true })
+            ?.reply({ content: obeyUi.owned("❌ ¡Las interacciones solo funcionan dentro de servidores!"), ephemeral: true })
             .catch(() => {});
     }
     const CategoryName = interaction?.commandName;
@@ -72,10 +74,10 @@ module.exports = async (client, interaction) => {
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].common.botchat.title)
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(client.la[ls].common.botchat.title, 256))
                             .setDescription(
-                                `${client.la[ls].common.botchat.description}\n> ${botchannel.map(c => `<#${c}>`).join(", ")}`
+                                obeyUi.limit(`${client.la[ls].common.botchat.description}\n> ${botchannel.map(c => `<#${c}>`).join(", ")}`, 4096)
                             ),
                     ],
                 });
@@ -99,10 +101,10 @@ module.exports = async (client, interaction) => {
                     ephemeral: true,
                     embeds: [
                         new Discord.EmbedBuilder().setColor(es.wrongcolor).setTitle(
-                            handlemsg(client.la[ls].common.cooldown, {
+                            obeyUi.limit(handlemsg(client.la[ls].common.cooldown, {
                                 time: timeLeft.toFixed(1),
                                 commandname: command.name,
-                            })
+                            }), 256)
                         ),
                     ],
                 }); //send an information message
@@ -125,10 +127,10 @@ module.exports = async (client, interaction) => {
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].common.permissions.title)
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(client.la[ls].common.permissions.title, 256))
                             .setDescription(
-                                `${client.la[ls].common.permissions.description}\n> \`${command.memberpermissions.join("`, ``")}\``
+                                obeyUi.limit(`${client.la[ls].common.permissions.description}\n> \`${command.memberpermissions.join("`, ``")}\``, 4096)
                             ),
                     ],
                 });
@@ -155,8 +157,8 @@ module.exports = async (client, interaction) => {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(client.la[ls].common.join_vc),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(client.la[ls].common.join_vc, 256)),
                         ],
                     });
                 }
@@ -171,9 +173,9 @@ module.exports = async (client, interaction) => {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(ee.wrongcolor)
-                                    .setFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` })
-                                    .setTitle(` <:no:833101993668771842> **¡No eres DJ ni el solicitante de la canción!**`)
-                                    .setDescription(` **ROLES DE DJ:**\n${check_if_dj(client, interaction?.member, mstate.currentTrack?.info || mstate.currentTrack)}`),
+                                    .setFooter(obeyMeta.asFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` }))
+                                    .setTitle(obeyUi.limit(` ${obeyUi.markup("icon.error")} **¡No eres DJ ni el solicitante de la canción!**`, 256))
+                                    .setDescription(obeyUi.limit(` **ROLES DE DJ:**\n${check_if_dj(client, interaction?.member, mstate.currentTrack?.info || mstate.currentTrack)}`, 4096)),
                             ],
                             ephemeral: true,
                         });
@@ -188,8 +190,8 @@ module.exports = async (client, interaction) => {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(client.la[ls].common.nothing_playing),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(client.la[ls].common.nothing_playing, 256)),
                             ],
                         });
                     }
@@ -201,8 +203,8 @@ module.exports = async (client, interaction) => {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(client.la[ls].common.not_connected),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(client.la[ls].common.not_connected, 256)),
                             ],
                         });
                     }
@@ -216,8 +218,8 @@ module.exports = async (client, interaction) => {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(client.la[ls].common.nothing_playing),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(client.la[ls].common.nothing_playing, 256)),
                             ],
                         });
                     }
@@ -230,9 +232,9 @@ module.exports = async (client, interaction) => {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(client.la[ls].common.wrong_vc)
-                                .setDescription(`Canal: <#${botVcId}>`),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(client.la[ls].common.wrong_vc, 256))
+                                .setDescription(obeyUi.limit(`Canal: <#${botVcId}>`, 4096)),
                         ],
                     });
                 }

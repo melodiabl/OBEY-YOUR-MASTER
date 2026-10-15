@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js')
 
 function fmt(n) {
@@ -37,7 +39,7 @@ module.exports = {
 
     if (!all.length)
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0x4f545c).setDescription('📊 Aún no hay datos de ranking en este servidor.')],
+        embeds: [new EmbedBuilder().setColor(0x4f545c).setDescription(obeyUi.limit(obeyUi.owned('📊 Aún no hay datos de ranking en este servidor.'), 4096))],
         ephemeral: true,
       })
 
@@ -62,16 +64,16 @@ module.exports = {
 
       return new EmbedBuilder()
         .setColor(0x5865F2)
-        .setTitle(`${type === 'voice' ? '🎙️ Ranking de Voz' : '💬 Ranking de Chat'} — ${interaction.guild.name}`)
+        .setTitle(obeyUi.limit(`${type === 'voice' ? obeyUi.owned('🎙️ Ranking de Voz') : obeyUi.owned('💬 Ranking de Chat')} — ${interaction.guild.name}`, 256))
         .setThumbnail(interaction.guild.iconURL())
-        .setDescription(lines.join('\n'))
-        .setFooter({ text: `Página ${p + 1}/${pages} · Tu posición: ${myPos >= 0 ? `#${myPos + 1}` : 'sin datos'}` })
+        .setDescription(obeyUi.limit(lines.join('\n'), 4096))
+        .setFooter(obeyMeta.asFooter({ text: `Página ${p + 1}/${pages} · Tu posición: ${myPos >= 0 ? `#${myPos + 1}` : 'sin datos'}` }))
     }
 
     function buildRow(p) {
       return new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('lb_prev').setLabel('◀').setStyle(ButtonStyle.Secondary).setDisabled(p === 0),
-        new ButtonBuilder().setCustomId('lb_next').setLabel('▶').setStyle(ButtonStyle.Secondary).setDisabled(p >= pages - 1),
+        new ButtonBuilder().setCustomId('lb_prev').setLabel(obeyUi.plain('◀')).setEmoji(obeyUi.component("◀")).setStyle(ButtonStyle.Secondary).setDisabled(p === 0),
+        new ButtonBuilder().setCustomId('lb_next').setLabel(obeyUi.plain('▶')).setEmoji(obeyUi.component("▶")).setStyle(ButtonStyle.Secondary).setDisabled(p >= pages - 1),
       )
     }
 

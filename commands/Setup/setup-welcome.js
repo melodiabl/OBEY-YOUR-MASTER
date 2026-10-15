@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder,
     ButtonStyle
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
 //Import npm modules
 const Canvas = require("@napi-rs/canvas");
@@ -160,37 +162,37 @@ module.exports = {
                     {
                         value: "Channel Welcome Messages",
                         description: `Manage Bienvenido Messages in 1 CHANNEL`,
-                        emoji: allEmojis.msg.channel, //
+                        emoji: obeyUi.component(allEmojis.msg.channel), //
                     },
                     {
                         value: "Channel Welcome Message 2",
                         description: `Set a normal msg for a 2nd Canal (without Embed)`,
-                        emoji: allEmojis.msg.channel, //
+                        emoji: obeyUi.component(allEmojis.msg.channel), //
                     },
                     {
                         value: "Direct Welcome Messages",
                         description: `Manage Bienvenido Messages on DMS`,
-                        emoji: "😬",
+                        emoji: obeyUi.component("😬"),
                     },
                     {
                         value: "Welcome Roles (On Join)",
                         description: `Manage the Bienvenido Roles. Add/remove/list them!`,
-                        emoji: allEmojis.msg.roles,
+                        emoji: obeyUi.component(allEmojis.msg.roles),
                     },
                     {
                         value: "Captcha System (Security)",
-                        description: `${client.settings.get(message.guild.id, "welcome.captcha") ? "❌ Disable the Captcha-Security-System" : "✅ Enable the Captcha-Security-System"}`,
-                        emoji: allEmojis.msg.builder,
+                        description: `${client.settings.get(message.guild.id, "welcome.captcha") ? obeyUi.owned("❌ Disable the Captcha-Security-System") : obeyUi.owned("✅ Enable the Captcha-Security-System")}`,
+                        emoji: obeyUi.component(allEmojis.msg.builder),
                     },
                     {
                         value: `Test Welcome`,
                         description: `Test the current welcome Mensaje`,
-                        emoji: `💪`,
+                        emoji: obeyUi.component(`💪`),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Bienvenido-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -198,7 +200,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Welcome-System"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -214,14 +216,14 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({
+                    .setAuthor(obeyMeta.asAuthor({
                         name: "Welcome Setup",
                         url: "https://github.com/melodiabl",
                         iconURL:
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
-                    })
+                    }))
                     //.setAuthor('Welcome Setup', 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png', 'https://github.com/melodiabl')
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -244,16 +246,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -268,32 +270,32 @@ module.exports = {
                                     {
                                         value: `${client.settings.get(message.guild.id, "welcome.channel") == "nochannel" ? "Set Channel" : "Overwrite Channel"}`,
                                         description: `${client.settings.get(message.guild.id, "welcome.channel") == "nochannel" ? "Set a Channel where the Welcome Messages should be" : "Overwrite the current Channel with a new one"}`,
-                                        emoji: allEmojis.msg.channel, //
+                                        emoji: obeyUi.component(allEmojis.msg.channel), //
                                     },
                                     {
                                         value: "Disable Welcome",
                                         description: `Disable the Bienvenido Messages`,
-                                        emoji: allEmojis.msg.ERROR,
+                                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                                     },
                                     {
                                         value: "Manage the Image",
                                         description: `Manage the Bienvenido Image for the Mensaje`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: "Edit the Message",
                                         description: `Edit the Bienvenido Mensaje ...`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: `${client.settings.get(message.guild.id, "welcome.invite") ? "Disable InviteInformation" : "Enable Invite Information"}`,
                                         description: `${client.settings.get(message.guild.id, "welcome.invite") ? "No longer show Information who invited him/her" : "Show Information about who invited him/her"}`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Bienvenido-Configuración!`,
-                                        emoji: allEmojis.msg.cacnel,
+                                        emoji: obeyUi.component(allEmojis.msg.cacnel),
                                     },
                                 ];
                                 //define the selection
@@ -301,7 +303,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
+                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Welcome-System"))
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -319,12 +321,12 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({
+                                    .setAuthor(obeyMeta.asAuthor({
                                         name: "Welcome Setup",
                                         iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
                                         url: "https://github.com/melodiabl"
-                                    })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                    }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -349,16 +351,16 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -370,17 +372,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable7"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable8"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -406,20 +408,20 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                                 "variable9"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setDescription(
-                                                                        `If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
+                                                                        obeyUi.limit(`If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
                                                                             0,
                                                                             2048
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     }
@@ -431,17 +433,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable12"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -454,18 +456,18 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable13"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-welcome\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
+                                                            obeyUi.limit(`If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-welcome\` --> Pick ${obeyUi.markup("icon.ordinal-1")} --> Pick ${obeyUi.markup("icon.ordinal-1")}`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -478,62 +480,62 @@ module.exports = {
                                                     {
                                                         value: "Disable the Image",
                                                         description: `I won't attach any Images anymore`,
-                                                        emoji: allEmojis.msg.ERROR,
+                                                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                                                     },
                                                     {
                                                         value: "Enable auto Image",
                                                         description: `I will generate an Image with the Userdata`,
-                                                        emoji: allEmojis.msg.SUCCESS,
+                                                        emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                                                     },
                                                     {
                                                         value: "Set Image Background",
                                                         description: `Define the Background of the AUTO IMAGE`,
-                                                        emoji: allEmojis.msg.UPVOTE,
+                                                        emoji: obeyUi.component(allEmojis.msg.UPVOTE),
                                                     },
                                                     {
                                                         value: "Del Image Background",
                                                         description: `Reset the AUTO IMAGE Background to the default one`,
-                                                        emoji: allEmojis.msg.cleared,
+                                                        emoji: obeyUi.component(allEmojis.msg.cleared),
                                                     },
                                                     {
                                                         value: "Custom Image",
                                                         description: `Use a custom Image instead of the Background Image`,
-                                                        emoji: "🖼",
+                                                        emoji: obeyUi.component("🖼"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.frame") ? "Disable" : "Enable"} Frame`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.frame") ? "I won't show the Frame anymore" : "Let me display a colored Frame for highlighting"}`,
-                                                        emoji: allEmojis.msg.edit,
+                                                        emoji: obeyUi.component(allEmojis.msg.edit),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.discriminator") ? "Disable" : "Enable"} User-Tag`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.discriminator") ? "I won't show the User-Tag anymore" : "Let me display a colored User-Tag (#1234)"}`,
-                                                        emoji: "🔢",
+                                                        emoji: obeyUi.component("🔢"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.membercount") ? "Disable" : "Enable"} Member Count`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.membercount") ? "I won't show the Member Count anymore" : "Let me display a colored MemberCount of the Server"}`,
-                                                        emoji: "📈",
+                                                        emoji: obeyUi.component("📈"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.servername") ? "Disable" : "Enable"} Server Name`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.servername") ? "I won't show the ServerName anymore" : "Let me display a colored ServerName"}`,
-                                                        emoji: "🗒",
+                                                        emoji: obeyUi.component("🗒"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.pb") ? "Disable" : "Enable"} User-Avatar`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.pb") ? "I won't show the User-Avatar anymore" : "Let me display the User-Avatar"}`,
-                                                        emoji: allEmojis.msg.song_by,
+                                                        emoji: obeyUi.component(allEmojis.msg.song_by),
                                                     },
                                                     {
                                                         value: "Frame Color",
                                                         description: `Change the Frame Color`,
-                                                        emoji: "⬜",
+                                                        emoji: obeyUi.component("⬜"),
                                                     },
                                                     {
                                                         value: "Cancel",
                                                         description: `Cancelar and stop the Bienvenido-Configuración!`,
-                                                        emoji: allEmojis.msg.cacnel,
+                                                        emoji: obeyUi.component(allEmojis.msg.cacnel),
                                                     },
                                                 ];
                                                 //define the selection
@@ -541,7 +543,7 @@ module.exports = {
                                                     .setCustomId("MenuSelection")
                                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
+                                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Welcome-System"))
                                                     .addOptions(
                                                         menuoptions.map(option => {
                                                             let Obj = {
@@ -559,13 +561,13 @@ module.exports = {
                                                 //define the embed
                                                 let MenuEmbed = new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setAuthor({
+                                                    .setAuthor(obeyMeta.asAuthor({
                                                         name: "Welcome Setup",
                                                         iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
                                                         url: "https://github.com/melodiabl"
-                                                    })
+                                                    }))
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096)
                                                     );
                                                 //send the menu msg
                                                 let menumsg = await message.reply({
@@ -600,7 +602,7 @@ module.exports = {
                                                         handle_the_picks_3(menu?.values[0], SetupNumber, menuoptiondata);
                                                     } else
                                                         menu?.reply({
-                                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                             ephemeral: true,
                                                         });
                                                 });
@@ -609,11 +611,11 @@ module.exports = {
                                                     menumsg.edit({
                                                         embeds: [
                                                             EmbedBuilder.from(menumsg.embeds[0]).setDescription(
-                                                                `~~${menumsg.embeds[0].description}~~`
+                                                                obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096)
                                                             ),
                                                         ],
                                                         components: [],
-                                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                                     });
                                                 });
                                             }
@@ -630,20 +632,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable18"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with__out__ an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with__out__ an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -655,20 +657,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable21"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -679,21 +681,21 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable24"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable25"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             await tempmsg.channel
@@ -725,22 +727,22 @@ module.exports = {
                                                                                 embeds: [
                                                                                     new Discord.EmbedBuilder()
                                                                                         .setTitle(
-                                                                                            eval(
+                                                                                            obeyUi.limit(eval(
                                                                                                 client.la[ls]["cmds"][
                                                                                                     "setup"
                                                                                                 ]["setup-welcome"][
                                                                                                     "variable26"
                                                                                                 ]
-                                                                                            )
+                                                                                            ), 256)
                                                                                         )
                                                                                         .setColor(es.color)
                                                                                         .setDescription(
-                                                                                            `I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                                 0,
                                                                                                 2048
-                                                                                            )
+                                                                                            ), 4096)
                                                                                         )
-                                                                                        .setFooter(client.getFooter(es)),
+                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                 ],
                                                                             });
                                                                         }
@@ -748,14 +750,14 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-welcome"
                                                                                             ]["variable27"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -775,20 +777,20 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-welcome"
                                                                                             ]["variable28"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
                                                                                     .setDescription(
-                                                                                        `I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                        obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                             0,
                                                                                             2048
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -796,21 +798,21 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable29"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable30"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
                                                                                 .setColor(es.color)
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
 
@@ -842,20 +844,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable31"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 });
@@ -873,20 +875,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable32"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -897,14 +899,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable35"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             await tempmsg.channel
@@ -931,22 +933,22 @@ module.exports = {
                                                                                 embeds: [
                                                                                     new Discord.EmbedBuilder()
                                                                                         .setTitle(
-                                                                                            eval(
+                                                                                            obeyUi.limit(eval(
                                                                                                 client.la[ls]["cmds"][
                                                                                                     "setup"
                                                                                                 ]["setup-welcome"][
                                                                                                     "variable36"
                                                                                                 ]
-                                                                                            )
+                                                                                            ), 256)
                                                                                         )
                                                                                         .setColor(es.color)
                                                                                         .setDescription(
-                                                                                            `I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                                 0,
                                                                                                 2048
-                                                                                            )
+                                                                                            ), 4096)
                                                                                         )
-                                                                                        .setFooter(client.getFooter(es)),
+                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                 ],
                                                                             });
                                                                         }
@@ -954,14 +956,14 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-welcome"
                                                                                             ]["variable37"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -976,20 +978,20 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-welcome"
                                                                                             ]["variable38"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
                                                                                     .setDescription(
-                                                                                        `I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                        obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.custom") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}\n\nIf Someone joins this Server, a message **with an image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                             0,
                                                                                             2048
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -997,21 +999,21 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable39"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable40"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
                                                                                 .setColor(es.color)
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
 
@@ -1043,20 +1045,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable41"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 });
@@ -1074,20 +1076,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable42"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1107,20 +1109,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable45"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1140,20 +1142,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable48"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1170,20 +1172,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable51"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1200,20 +1202,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable54"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -1224,45 +1226,45 @@ module.exports = {
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FFFFF9")
-                                                                    .setEmoji("⬜")
-                                                                    .setLabel("#FFFFF9"),
+                                                                    .setEmoji(obeyUi.component("⬜"))
+                                                                    .setLabel(obeyUi.plain("#FFFFF9")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FAFA25")
-                                                                    .setEmoji("🟨")
-                                                                    .setLabel("#FAFA25"),
+                                                                    .setEmoji(obeyUi.component("🟨"))
+                                                                    .setLabel(obeyUi.plain("#FAFA25")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA9E25")
-                                                                    .setEmoji("🟧")
-                                                                    .setLabel("#FA9E25"),
+                                                                    .setEmoji(obeyUi.component("🟧"))
+                                                                    .setLabel(obeyUi.plain("#FA9E25")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA2525")
-                                                                    .setEmoji("🟥")
-                                                                    .setLabel("#FA2525"),
+                                                                    .setEmoji(obeyUi.component("🟥"))
+                                                                    .setLabel(obeyUi.plain("#FA2525")),
                                                             ]);
                                                             let row2 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#25FA6C")
-                                                                    .setEmoji("🟩")
-                                                                    .setLabel("#25FA6C"),
+                                                                    .setEmoji(obeyUi.component("🟩"))
+                                                                    .setLabel(obeyUi.plain("#25FA6C")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#3A98F0")
-                                                                    .setEmoji("🟦")
-                                                                    .setLabel("#3A98F0"),
+                                                                    .setEmoji(obeyUi.component("🟦"))
+                                                                    .setLabel(obeyUi.plain("#3A98F0")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#8525FA")
-                                                                    .setEmoji("🟪")
-                                                                    .setLabel("#8525FA"),
+                                                                    .setEmoji(obeyUi.component("🟪"))
+                                                                    .setLabel(obeyUi.plain("#8525FA")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#030303")
-                                                                    .setEmoji("⬛")
-                                                                    .setLabel("#030303"),
+                                                                    .setEmoji(obeyUi.component("⬛"))
+                                                                    .setLabel(obeyUi.plain("#030303")),
                                                             ]);
 
                                                             tempmsg = await message.reply({
@@ -1270,17 +1272,17 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable57"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `*React to the Color you want the Frame/Text to be like ;)*`
+                                                                            obeyUi.limit(`*React to the Color you want the Frame/Text to be like ;)*`, 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             //Create the collector
@@ -1296,11 +1298,11 @@ module.exports = {
                                                                 tempmsg.edit({
                                                                     embeds: [
                                                                         tempEmbedBuilder.from(msg.embeds[0]).setDescription(
-                                                                            `~~${tempmsg.embeds[0].description}~~`
+                                                                            obeyUi.limit(`~~${tempmsg.embeds[0].description}~~`, 4096)
                                                                         ),
                                                                     ],
                                                                     components: [],
-                                                                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\` Color**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                                                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\` Color**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                                                 });
                                                             });
                                                             //Menu Collections
@@ -1316,25 +1318,25 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable59"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(color)
                                                                                 .setDescription(
-                                                                                    `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                    obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                         0,
                                                                                         2048
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 }
                                                                 button?.reply(
-                                                                    "❌ **Only the Comando Executor is allowed to react!**"
+                                                                    obeyUi.owned("❌ **Only the Comando Executor is allowed to react!**")
                                                                 );
                                                             });
                                                         }
@@ -1349,15 +1351,15 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable64"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `\`{user}\` ... will be replaced with the Userping (e.g: ${cmduser})\n\`{username}\` ... will be replaced with the Username (e.g: ${cmduser.user.username})\n\`{usertag}\` ... will be replaced with the Usertag (e.g: ${cmduser.user.username})\n\n**Enter your Message now!**`
+                                                            obeyUi.limit(`\`{user}\` ... will be replaced with the Userping (e.g: ${cmduser})\n\`{username}\` ... will be replaced with the Username (e.g: ${cmduser.user.username})\n\`{usertag}\` ... will be replaced with the Usertag (e.g: ${cmduser.user.username})\n\n**Enter your Message now!**`, 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -1374,20 +1376,20 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable66"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
+                                                                    obeyUi.limit(`If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
                                                                         0,
                                                                         2048
-                                                                    )
+                                                                    ), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 })
@@ -1397,17 +1399,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable69"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -1424,18 +1426,18 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable70"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Servidor, a message with Invite Information will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
+                                                            obeyUi.limit(`If Someone joins this Servidor, a message with Invite Information will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -1452,22 +1454,22 @@ module.exports = {
                                     {
                                         value: `${client.settings.get(message.guild.id, "welcome.secondchannel") == "nochannel" ? "Set Channel" : "Overwrite Channel"}`,
                                         description: `${client.settings.get(message.guild.id, "welcome.secondchannel") == "nochannel" ? "Set a Channel where the Welcome Messages should be" : "Overwrite the current Channel with a new one"}`,
-                                        emoji: allEmojis.msg.channel, //
+                                        emoji: obeyUi.component(allEmojis.msg.channel), //
                                     },
                                     {
                                         value: "Disable Welcome 2",
                                         description: `Disable the second Bienvenido Mensaje`,
-                                        emoji: allEmojis.msg.ERROR,
+                                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                                     },
                                     {
                                         value: "Edit the Message",
                                         description: `Edit the second Bienvenido Mensaje ...`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Bienvenido-Configuración!`,
-                                        emoji: allEmojis.msg.cacnel,
+                                        emoji: obeyUi.component(allEmojis.msg.cacnel),
                                     },
                                 ];
                                 //define the selection
@@ -1475,7 +1477,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
+                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Welcome-System"))
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -1493,12 +1495,12 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({
+                                    .setAuthor(obeyMeta.asAuthor({
                                         name: "Welcome Setup",
                                         iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
                                         url: "https://github.com/melodiabl"
-                                    })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                    }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -1523,16 +1525,16 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -1544,17 +1546,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable7"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable8"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -1583,20 +1585,20 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                                 "variable9"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setDescription(
-                                                                        `If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
+                                                                        obeyUi.limit(`If Someone joins this Servidor, a message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) : "Not defined yet"}!\nEdit the message with: \`${prefix}setup-welcome\``.substring(
                                                                             0,
                                                                             2048
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     }
@@ -1608,17 +1610,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable12"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -1631,18 +1633,18 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable13"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-welcome\` --> Pick 1️⃣ --> Pick 1️⃣`.substring(
+                                                            obeyUi.limit(`If Someone joins this Servidor, no message will be sent into a Canal!\nSet a Canal with: \`${prefix}setup-welcome\` --> Pick ${obeyUi.markup("icon.ordinal-1")} --> Pick ${obeyUi.markup("icon.ordinal-1")}`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -1653,15 +1655,15 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable64"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `\`{user}\` ... will be replaced with the Userping (e.g: ${cmduser})\n\`{username}\` ... will be replaced with the Username (e.g: ${cmduser.user.username})\n\`{usertag}\` ... will be replaced with the Usertag (e.g: ${cmduser.user.username})\n\n**Enter your Message now!**`
+                                                            obeyUi.limit(`\`{user}\` ... will be replaced with the Userping (e.g: ${cmduser})\n\`{username}\` ... will be replaced with the Username (e.g: ${cmduser.user.username})\n\`{usertag}\` ... will be replaced with the Usertag (e.g: ${cmduser.user.username})\n\n**Enter your Message now!**`, 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -1682,20 +1684,20 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable66"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
+                                                                    obeyUi.limit(`If Someone joins this Servidor, this message will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.secondchannel")) : "NO CHANNEL YET"}!\n\n${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
                                                                         0,
                                                                         2048
-                                                                    )
+                                                                    ), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 })
@@ -1705,17 +1707,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable69"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -1733,29 +1735,29 @@ module.exports = {
                                     {
                                         value: `${!client.settings.get(message.guild.id, "welcome.dm") ? "ENABLE DM WELCOME" : "DISABLE DM WELCOME"}`,
                                         description: `${!client.settings.get(message.guild.id, "welcome.dm") ? "Send Welcome Messages Directly to Users" : "Don't send Welcome Messages Directly to Users"}`,
-                                        emoji: !client.settings.get(message.guild.id, "welcome.dm")
+                                        emoji: obeyUi.component(!client.settings.get(message.guild.id, "welcome.dm")
                                             ? "✅"
-                                            : allEmojis.msg.ERROR, // ✅❌
+                                            : allEmojis.msg.ERROR), // ✅❌
                                     },
                                     {
                                         value: "Manage the Image",
                                         description: `Manage the Bienvenido Image for the Mensaje`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: "Edit the Message",
                                         description: `Edit the Bienvenido Mensaje ...`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: `${client.settings.get(message.guild.id, "welcome.invite") ? "Disable InviteInformation" : "Enable Invite Information"}`,
                                         description: `${client.settings.get(message.guild.id, "welcome.invite") ? "No longer show Information who invited him/her" : "Show Information about who invited him/her"}`,
-                                        emoji: "🖼️",
+                                        emoji: obeyUi.component("🖼️"),
                                     },
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Bienvenido-Configuración!`,
-                                        emoji: allEmojis.msg.cacnel,
+                                        emoji: obeyUi.component(allEmojis.msg.cacnel),
                                     },
                                 ];
                                 //define the selection
@@ -1763,7 +1765,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
+                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Welcome-System"))
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -1781,12 +1783,12 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({
+                                    .setAuthor(obeyMeta.asAuthor({
                                         name: "DM - Welcome Setup",
                                         iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
                                         url: "https://github.com/melodiabl"
-                                    })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                    }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -1811,16 +1813,16 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -1835,14 +1837,14 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                         "variable79"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setColor(es.color)
-                                                            .setFooter(client.getFooter(es)),
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                     ],
                                                 });
                                             }
@@ -1850,12 +1852,12 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable76"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -1868,62 +1870,62 @@ module.exports = {
                                                     {
                                                         value: "Disable the Image",
                                                         description: `I won't attach any Images anymore`,
-                                                        emoji: allEmojis.msg.ERROR,
+                                                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                                                     },
                                                     {
                                                         value: "Enable auto Image",
                                                         description: `I will generate an Image with the Userdata`,
-                                                        emoji: allEmojis.msg.SUCCESS,
+                                                        emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                                                     },
                                                     {
                                                         value: "Set Image Background",
                                                         description: `Define the Background of the AUTO IMAGE`,
-                                                        emoji: "👍",
+                                                        emoji: obeyUi.component("👍"),
                                                     },
                                                     {
                                                         value: "Del Image Background",
                                                         description: `Reset the AUTO IMAGE Background to the default one`,
-                                                        emoji: "🗑",
+                                                        emoji: obeyUi.component("🗑"),
                                                     },
                                                     {
                                                         value: "Custom Image",
                                                         description: `Use a custom Image instead of the Background Image`,
-                                                        emoji: "🖼",
+                                                        emoji: obeyUi.component("🖼"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.framedm") ? "Disable" : "Enable"} Frame`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.framedm") ? "I won't show the Frame anymore" : "Let me display a colored Frame for highlighting"}`,
-                                                        emoji: "✏️",
+                                                        emoji: obeyUi.component("✏️"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.discriminatordm") ? "Disable" : "Enable"} User-Tag`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.discriminatordm") ? "I won't show the User-Tag anymore" : "Let me display a colored User-Tag (#1234)"}`,
-                                                        emoji: "🔢",
+                                                        emoji: obeyUi.component("🔢"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.membercountdm") ? "Disable" : "Enable"} Member Count`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.membercountdm") ? "I won't show the Member Count anymore" : "Let me display a colored MemberCount of the Server"}`,
-                                                        emoji: "📈",
+                                                        emoji: obeyUi.component("📈"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.servernamedm") ? "Disable" : "Enable"} Server Name`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.servernamedm") ? "I won't show the ServerName anymore" : "Let me display a colored ServerName"}`,
-                                                        emoji: "🗒",
+                                                        emoji: obeyUi.component("🗒"),
                                                     },
                                                     {
                                                         value: `${client.settings.get(message.guild.id, "welcome.pbdm") ? "Disable" : "Enable"} User-Avatar`,
                                                         description: `${client.settings.get(message.guild.id, "welcome.pbdm") ? "I won't show the User-Avatar anymore" : "Let me display the User-Avatar"}`,
-                                                        emoji: "💯",
+                                                        emoji: obeyUi.component("💯"),
                                                     },
                                                     {
                                                         value: "Frame Color",
                                                         description: `Change the Frame Color`,
-                                                        emoji: "⬜",
+                                                        emoji: obeyUi.component("⬜"),
                                                     },
                                                     {
                                                         value: "Cancel",
                                                         description: `Cancelar and stop the Bienvenido-Configuración!`,
-                                                        emoji: allEmojis.msg.cacnel,
+                                                        emoji: obeyUi.component(allEmojis.msg.cacnel),
                                                     },
                                                 ];
                                                 //define the selection
@@ -1931,7 +1933,7 @@ module.exports = {
                                                     .setCustomId("MenuSelection")
                                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
+                                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Welcome-System"))
                                                     .addOptions(
                                                         menuoptions.map(option => {
                                                             let Obj = {
@@ -1949,13 +1951,13 @@ module.exports = {
                                                 //define the embed
                                                 let MenuEmbed = new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setAuthor({
+                                                    .setAuthor(obeyMeta.asAuthor({
                                                         name: "Welcome Setup",
                                                         iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
                                                         url: "https://github.com/melodiabl"
-                                                    })
+                                                    }))
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096)
                                                     );
                                                 //send the menu msg
                                                 let menumsg = await message.reply({
@@ -1990,7 +1992,7 @@ module.exports = {
                                                         handle_the_picks_3(menu?.values[0], SetupNumber, menuoptiondata);
                                                     } else
                                                         menu?.reply({
-                                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                                             ephemeral: true,
                                                         });
                                                 });
@@ -1999,11 +2001,11 @@ module.exports = {
                                                     menumsg.edit({
                                                         embeds: [
                                                             EmbedBuilder.from(menumsg.embeds[0]).setDescription(
-                                                                `~~${menumsg.embeds[0].description}~~`
+                                                                obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096)
                                                             ),
                                                         ],
                                                         components: [],
-                                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                                     });
                                                 });
                                             }
@@ -2020,14 +2022,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable84"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2039,14 +2041,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable87"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2057,21 +2059,21 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable90"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable91"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             await tempmsg.channel
@@ -2103,22 +2105,22 @@ module.exports = {
                                                                                 embeds: [
                                                                                     new Discord.EmbedBuilder()
                                                                                         .setTitle(
-                                                                                            eval(
+                                                                                            obeyUi.limit(eval(
                                                                                                 client.la[ls]["cmds"][
                                                                                                     "setup"
                                                                                                 ]["setup-welcome"][
                                                                                                     "variable92"
                                                                                                 ]
-                                                                                            )
+                                                                                            ), 256)
                                                                                         )
                                                                                         .setColor(es.color)
                                                                                         .setDescription(
-                                                                                            `I will be using ${client.settings.get(message.guild.id, "welcome.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}`.substring(
+                                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}`.substring(
                                                                                                 0,
                                                                                                 2048
-                                                                                            )
+                                                                                            ), 4096)
                                                                                         )
-                                                                                        .setFooter(client.getFooter(es)),
+                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                 ],
                                                                             });
                                                                         }
@@ -2126,14 +2128,14 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-welcome"
                                                                                             ]["variable93"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -2153,20 +2155,20 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-welcome"
                                                                                             ]["variable94"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
                                                                                     .setDescription(
-                                                                                        `I will be using ${client.settings.get(message.guild.id, "welcome.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}`.substring(
+                                                                                        obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}`.substring(
                                                                                             0,
                                                                                             2048
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -2174,21 +2176,21 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable95"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable96"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
                                                                                 .setColor(es.color)
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
 
@@ -2220,20 +2222,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable31"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 });
@@ -2251,14 +2253,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable98"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2269,14 +2271,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable101"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             await tempmsg.channel
@@ -2303,22 +2305,22 @@ module.exports = {
                                                                                 embeds: [
                                                                                     new Discord.EmbedBuilder()
                                                                                         .setTitle(
-                                                                                            eval(
+                                                                                            obeyUi.limit(eval(
                                                                                                 client.la[ls]["cmds"][
                                                                                                     "setup"
                                                                                                 ]["setup-welcome"][
                                                                                                     "variable102"
                                                                                                 ]
-                                                                                            )
+                                                                                            ), 256)
                                                                                         )
                                                                                         .setColor(es.color)
                                                                                         .setDescription(
-                                                                                            `I will be using ${client.settings.get(message.guild.id, "welcome.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}`.substring(
+                                                                                            obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}`.substring(
                                                                                                 0,
                                                                                                 2048
-                                                                                            )
+                                                                                            ), 4096)
                                                                                         )
-                                                                                        .setFooter(client.getFooter(es)),
+                                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                                 ],
                                                                             });
                                                                         }
@@ -2326,14 +2328,14 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-welcome"
                                                                                             ]["variable103"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -2348,20 +2350,20 @@ module.exports = {
                                                                             embeds: [
                                                                                 new Discord.EmbedBuilder()
                                                                                     .setTitle(
-                                                                                        eval(
+                                                                                        obeyUi.limit(eval(
                                                                                             client.la[ls]["cmds"]["setup"][
                                                                                                 "setup-welcome"
                                                                                             ]["variable104"]
-                                                                                        )
+                                                                                        ), 256)
                                                                                     )
                                                                                     .setColor(es.color)
                                                                                     .setDescription(
-                                                                                        `I will be using ${client.settings.get(message.guild.id, "welcome.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}`.substring(
+                                                                                        obeyUi.limit(`I will be using ${client.settings.get(message.guild.id, "welcome.customdm") === "no" ? "an Auto generated Image with User Data" : "Your defined, custom Image"}`.substring(
                                                                                             0,
                                                                                             2048
-                                                                                        )
+                                                                                        ), 4096)
                                                                                     )
-                                                                                    .setFooter(client.getFooter(es)),
+                                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                             ],
                                                                         });
                                                                     }
@@ -2369,21 +2371,21 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable105"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setDescription(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable106"]
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
                                                                                 .setColor(es.color)
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
 
@@ -2415,20 +2417,20 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable41"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(es.wrongcolor)
                                                                                 .setDescription(
-                                                                                    `¡Operación Cancelada!`.substring(
+                                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(
                                                                                         0,
                                                                                         2000
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 });
@@ -2446,14 +2448,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable108"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2473,20 +2475,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable111"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2506,20 +2508,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable114"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2539,20 +2541,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable117"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2569,20 +2571,20 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable120"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                            obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                 0,
                                                                                 2048
-                                                                            )
+                                                                            ), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         }
@@ -2593,45 +2595,45 @@ module.exports = {
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FFFFF9")
-                                                                    .setEmoji("⬜")
-                                                                    .setLabel("#FFFFF9"),
+                                                                    .setEmoji(obeyUi.component("⬜"))
+                                                                    .setLabel(obeyUi.plain("#FFFFF9")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FAFA25")
-                                                                    .setEmoji("🟨")
-                                                                    .setLabel("#FAFA25"),
+                                                                    .setEmoji(obeyUi.component("🟨"))
+                                                                    .setLabel(obeyUi.plain("#FAFA25")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA9E25")
-                                                                    .setEmoji("🟧")
-                                                                    .setLabel("#FA9E25"),
+                                                                    .setEmoji(obeyUi.component("🟧"))
+                                                                    .setLabel(obeyUi.plain("#FA9E25")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#FA2525")
-                                                                    .setEmoji("🟥")
-                                                                    .setLabel("#FA2525"),
+                                                                    .setEmoji(obeyUi.component("🟥"))
+                                                                    .setLabel(obeyUi.plain("#FA2525")),
                                                             ]);
                                                             let row2 = new ActionRowBuilder().addComponents([
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#25FA6C")
-                                                                    .setEmoji("🟩")
-                                                                    .setLabel("#25FA6C"),
+                                                                    .setEmoji(obeyUi.component("🟩"))
+                                                                    .setLabel(obeyUi.plain("#25FA6C")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#3A98F0")
-                                                                    .setEmoji("🟦")
-                                                                    .setLabel("#3A98F0"),
+                                                                    .setEmoji(obeyUi.component("🟦"))
+                                                                    .setLabel(obeyUi.plain("#3A98F0")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#8525FA")
-                                                                    .setEmoji("🟪")
-                                                                    .setLabel("#8525FA"),
+                                                                    .setEmoji(obeyUi.component("🟪"))
+                                                                    .setLabel(obeyUi.plain("#8525FA")),
                                                                 new ButtonBuilder()
                                                                     .setStyle(ButtonStyle.Secondary)
                                                                     .setCustomId("#030303")
-                                                                    .setEmoji("⬛")
-                                                                    .setLabel("#030303"),
+                                                                    .setEmoji(obeyUi.component("⬛"))
+                                                                    .setLabel(obeyUi.plain("#030303")),
                                                             ]);
 
                                                             tempmsg = await message.reply({
@@ -2639,17 +2641,17 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable57"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.color)
                                                                         .setDescription(
-                                                                            `*React to the Color you want the Frame/Text to be like ;)*`
+                                                                            obeyUi.limit(`*React to the Color you want the Frame/Text to be like ;)*`, 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                             //Create the collector
@@ -2665,11 +2667,11 @@ module.exports = {
                                                                 tempmsg.edit({
                                                                     embeds: [
                                                                         tempEmbedBuilder.from(msg.embeds[0]).setDescription(
-                                                                            `~~${tempmsg.embeds[0].description}~~`
+                                                                            obeyUi.limit(`~~${tempmsg.embeds[0].description}~~`, 4096)
                                                                         ),
                                                                     ],
                                                                     components: [],
-                                                                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\` Color**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                                                    content: `${collected && collected.first() && collected.first().customId ? `${allEmojis.msg.SUCCESS} **Selected the \`${collected.first().customId}\` Color**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                                                 });
                                                             });
                                                             //Menu Collections
@@ -2685,25 +2687,25 @@ module.exports = {
                                                                         embeds: [
                                                                             new Discord.EmbedBuilder()
                                                                                 .setTitle(
-                                                                                    eval(
+                                                                                    obeyUi.limit(eval(
                                                                                         client.la[ls]["cmds"]["setup"][
                                                                                             "setup-welcome"
                                                                                         ]["variable125"]
-                                                                                    )
+                                                                                    ), 256)
                                                                                 )
                                                                                 .setColor(color)
                                                                                 .setDescription(
-                                                                                    `If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
+                                                                                    obeyUi.limit(`If Someone joins this Servidor, a message **with an automated image** will be sent into ${message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) ? message.guild.channels.cache.get(client.settings.get(message.guild.id, "welcome.channel")) : "NO CHANNEL DEFINED YET"}`.substring(
                                                                                         0,
                                                                                         2048
-                                                                                    )
+                                                                                    ), 4096)
                                                                                 )
-                                                                                .setFooter(client.getFooter(es)),
+                                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                         ],
                                                                     });
                                                                 }
                                                                 button?.reply(
-                                                                    "❌ **Only the Comando Executor is allowed to react!**"
+                                                                    obeyUi.owned("❌ **Only the Comando Executor is allowed to react!**")
                                                                 );
                                                             });
                                                         }
@@ -2718,21 +2720,21 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                     "variable130"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                     "variable131"
                                                                 ]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -2749,20 +2751,20 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable132"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    `${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
+                                                                    obeyUi.limit(`${message.content.replace("{user}", `${cmduser.user}`).replace("{username}", `${cmduser.user.username}`).replace("{usertag}", `${cmduser.user.username}`)}`.substring(
                                                                         0,
                                                                         2048
-                                                                    )
+                                                                    ), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 })
@@ -2772,17 +2774,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable69"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -2799,14 +2801,14 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                     "variable136"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -2823,22 +2825,22 @@ module.exports = {
                                     {
                                         value: "Add Role",
                                         description: `Add a Bienvenido Rol`,
-                                        emoji: "✅",
+                                        emoji: obeyUi.component("✅"),
                                     },
                                     {
                                         value: "Remove Role",
                                         description: `Remove a Bienvenido Rol`,
-                                        emoji: "🗑️",
+                                        emoji: obeyUi.component("🗑️"),
                                     },
                                     {
                                         value: "Show Roles",
                                         description: `Show all Bienvenido Roles`,
-                                        emoji: "📑",
+                                        emoji: obeyUi.component("📑"),
                                     },
                                     {
                                         value: "Cancel",
                                         description: `Cancelar and stop the Bienvenido-Configuración!`,
-                                        emoji: allEmojis.msg.cacnel,
+                                        emoji: obeyUi.component(allEmojis.msg.cacnel),
                                     },
                                 ];
                                 //define the selection
@@ -2846,7 +2848,7 @@ module.exports = {
                                     .setCustomId("MenuSelection")
                                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                    .setPlaceholder("¡Haz clic para configurar the Welcome-System")
+                                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Welcome-System"))
                                     .addOptions(
                                         menuoptions.map(option => {
                                             let Obj = {
@@ -2864,12 +2866,12 @@ module.exports = {
                                 //define the embed
                                 let MenuEmbed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setAuthor({
+                                    .setAuthor(obeyMeta.asAuthor({
                                         name: "Welcome Setup",
                                         iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/306/waving-hand_1f44b?.png",
                                         url: "https://github.com/melodiabl"
-                                    })
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                    }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                                 //send the menu msg
                                 let menumsg = await message.reply({
                                     embeds: [MenuEmbed],
@@ -2894,16 +2896,16 @@ module.exports = {
                                         handle_the_picks_2(menu?.values[0], SetupNumber, menuoptiondata);
                                     } else
                                         menu?.reply({
-                                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                             ephemeral: true,
                                         });
                                 });
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     menumsg.edit({
-                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                         components: [],
-                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                     });
                                 });
                             }
@@ -2915,21 +2917,21 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                     "variable142"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                     "variable143"
                                                                 ]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -2954,14 +2956,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable144"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.wrongcolor)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         client.settings.push(message.guild.id, role.id, "welcome.roles");
@@ -2969,20 +2971,20 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                                 "variable145"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setDescription(
-                                                                        `Everyone who joins will get those Roles now:\n<@&${client.settings.get(message.guild.id, "welcome.roles").join(">\n<@&")}>`.substring(
+                                                                        obeyUi.limit(`Everyone who joins will get those Roles now:\n<@&${client.settings.get(message.guild.id, "welcome.roles").join(">\n<@&")}>`.substring(
                                                                             0,
                                                                             2048
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     }
@@ -2994,17 +2996,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable146"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -3016,21 +3018,21 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                     "variable147"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                     "variable148"
                                                                 ]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                             await tempmsg.channel
@@ -3055,14 +3057,14 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-welcome"
                                                                                 ]["variable149"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.wrongcolor)
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         client.settings.remove(message.guild.id, role.id, "welcome.roles");
@@ -3070,20 +3072,20 @@ module.exports = {
                                                             embeds: [
                                                                 new Discord.EmbedBuilder()
                                                                     .setTitle(
-                                                                        eval(
+                                                                        obeyUi.limit(eval(
                                                                             client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                                 "variable150"
                                                                             ]
-                                                                        )
+                                                                        ), 256)
                                                                     )
                                                                     .setColor(es.color)
                                                                     .setDescription(
-                                                                        `Everyone who joins will get those Roles now:\n<@&${client.settings.get(message.guild.id, "welcome.roles").join(">\n<@&")}>`.substring(
+                                                                        obeyUi.limit(`Everyone who joins will get those Roles now:\n<@&${client.settings.get(message.guild.id, "welcome.roles").join(">\n<@&")}>`.substring(
                                                                             0,
                                                                             2048
-                                                                        )
+                                                                        ), 4096)
                                                                     )
-                                                                    .setFooter(client.getFooter(es)),
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                             ],
                                                         });
                                                     }
@@ -3095,17 +3097,17 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                             "variable151"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.wrongcolor)
                                                                 .setDescription(
-                                                                    `¡Operación Cancelada!`.substring(0, 2000)
+                                                                    obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                 });
@@ -3117,20 +3119,20 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-welcome"][
                                                                     "variable152"
                                                                 ]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `<@&${client.settings.get(message.guild.id, "welcome.roles").join(">\n<@&")}>`.substring(
+                                                            obeyUi.limit(`<@&${client.settings.get(message.guild.id, "welcome.roles").join(">\n<@&")}>`.substring(
                                                                 0,
                                                                 2048
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -3149,15 +3151,15 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable154"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-welcome"]["variable154"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `${client.settings.get(message.guild.id, "welcome.captcha") ? "I will ask new Members to verify themself, then send welcome messages / add them the roles if they succeed, + I will kick them if they failed!..." : "I will not ask new Members to verify themself!"}`.substring(
+                                            obeyUi.limit(`${client.settings.get(message.guild.id, "welcome.captcha") ? "I will ask new Members to verify themself, then send welcome messages / add them the roles if they succeed, + I will kick them if they failed!..." : "I will not ask new Members to verify themself!"}`.substring(
                                                 0,
                                                 2048
-                                            )
+                                            ), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -3166,7 +3168,7 @@ module.exports = {
                         {
                             var { member } = message;
                             let welcome = client.settings.get(member.guild.id, "welcome");
-                            let invitemessage = `Invited by ${member.user.username ? `**${member.user.username}**` : `<@${member.user.id}>`}\n<:Like:857334024087011378> **X Invites**\n[<:joines:866356465299488809> X Joins | <:leaves:866356598356049930> X Leaves | <:no:833101993668771842> X Fakes]`;
+                            let invitemessage = `Invited by ${member.user.username ? `**${member.user.username}**` : `<@${member.user.id}>`}\n${obeyUi.markup("icon.like")} **X Invites**\n[${obeyUi.markup("icon.join")} X Joins | ${obeyUi.markup("icon.leaf")} X Leaves | ${obeyUi.markup("icon.error")} X Fakes]`;
                             if (welcome) {
                                 let themessage = String(welcome.secondmsg);
                                 if (!themessage || themessage.length == 0)
@@ -3223,16 +3225,16 @@ module.exports = {
                                             : null
                                     )
                                     .setTimestamp()
-                                    .setFooter({ text: "ID: " + member.user.id,
+                                    .setFooter(obeyMeta.asFooter({ text: "ID: " + member.user.id,
                                         iconURL: member.user.displayAvatarURL()
-                                    })
-                                    .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable7"]))
+                                    }))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable7"]), 256))
                                     .setDescription(
-                                        client.settings
+                                        obeyUi.limit(client.settings
                                             .get(member.guild.id, "welcome.msg")
                                             .replace("{user}", `${member.user}`)
                                             .replace("{username}", `${member.user.username}`)
-                                            .replace("{usertag}", `${member.user.username}`)
+                                            .replace("{usertag}", `${member.user.username}`), 4096)
                                     )
                                     .addFields(
                                         eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variablex_8"]),
@@ -3277,16 +3279,16 @@ module.exports = {
                                             : null
                                     )
                                     .setTimestamp()
-                                    .setFooter({ text: "ID: " + member.user.id,
+                                    .setFooter(obeyMeta.asFooter({ text: "ID: " + member.user.id,
                                         iconURL: member.user.displayAvatarURL()
-                                    })
-                                    .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable9"]))
+                                    }))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable9"]), 256))
                                     .setDescription(
-                                        client.settings
+                                        obeyUi.limit(client.settings
                                             .get(member.guild.id, "welcome.dm_msg")
                                             .replace("{user}", `${member.user}`)
                                             .replace("{username}", `${member.user.username}`)
-                                            .replace("{usertag}", `${member.user.username}`)
+                                            .replace("{usertag}", `${member.user.username}`), 4096)
                                     );
                                 if (client.settings.get(member.guild.id, "welcome.invitedm"))
                                     welcomeembed.addFields("\u200b", `${invitemessage}`);
@@ -3313,16 +3315,16 @@ module.exports = {
                                             : null
                                     )
                                     .setTimestamp()
-                                    .setFooter({ text: "ID: " + member.user.id,
+                                    .setFooter(obeyMeta.asFooter({ text: "ID: " + member.user.id,
                                         iconURL: member.user.displayAvatarURL()
-                                    })
-                                    .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable10"]))
+                                    }))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable10"]), 256))
                                     .setDescription(
-                                        client.settings
+                                        obeyUi.limit(client.settings
                                             .get(member.guild.id, "welcome.dm_msg")
                                             .replace("{user}", `${member.user}`)
                                             .replace("{username}", `${member.user.username}`)
-                                            .replace("{usertag}", `${member.user.username}`)
+                                            .replace("{usertag}", `${member.user.username}`), 4096)
                                     )
                                     .setImage(client.settings.get(member.guild.id, "welcome.customdm"));
                                 if (client.settings.get(member.guild.id, "welcome.invitedm"))
@@ -3350,16 +3352,16 @@ module.exports = {
                                             : null
                                     )
                                     .setTimestamp()
-                                    .setFooter({ text: "ID: " + member.user.id,
+                                    .setFooter(obeyMeta.asFooter({ text: "ID: " + member.user.id,
                                         iconURL: member.user.displayAvatarURL()
-                                    })
-                                    .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable11"]))
+                                    }))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable11"]), 256))
                                     .setDescription(
-                                        client.settings
+                                        obeyUi.limit(client.settings
                                             .get(member.guild.id, "welcome.msg")
                                             .replace("{user}", `${member.user}`)
                                             .replace("{username}", `${member.user.username}`)
-                                            .replace("{usertag}", `${member.user.username}`)
+                                            .replace("{usertag}", `${member.user.username}`), 4096)
                                     )
                                     .setImage(client.settings.get(member.guild.id, "welcome.custom"));
                                 if (client.settings.get(member.guild.id, "welcome.invite"))
@@ -3404,16 +3406,16 @@ module.exports = {
                                                 : null
                                         )
                                         .setTimestamp()
-                                        .setFooter({ text: "ID: " + member.user.id,
+                                        .setFooter(obeyMeta.asFooter({ text: "ID: " + member.user.id,
                                             iconURL: member.user.displayAvatarURL()
-                                        })
-                                        .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable12"]))
+                                        }))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable12"]), 256))
                                         .setDescription(
-                                            client.settings
+                                            obeyUi.limit(client.settings
                                                 .get(member.guild.id, "welcome.dm_msg")
                                                 .replace("{user}", `${member.user}`)
                                                 .replace("{username}", `${member.user.username}`)
-                                                .replace("{usertag}", `${member.user.username}`)
+                                                .replace("{usertag}", `${member.user.username}`), 4096)
                                         );
                                     if (client.settings.get(member.guild.id, "welcome.invitedm"))
                                         welcomeembed.addFields("\u200b", `${invitemessage}`);
@@ -3455,17 +3457,17 @@ module.exports = {
                                                 : null
                                         )
                                         .setTimestamp()
-                                        .setFooter({ text: "ID: " + member.user.id,
+                                        .setFooter(obeyMeta.asFooter({ text: "ID: " + member.user.id,
                                             iconURL: member.user.displayAvatarURL()
-                                        })
+                                        }))
 
-                                        .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable13"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable13"]), 256))
                                         .setDescription(
-                                            client.settings
+                                            obeyUi.limit(client.settings
                                                 .get(member.guild.id, "welcome.msg")
                                                 .replace("{user}", `${member.user}`)
                                                 .replace("{username}", `${member.user.username}`)
-                                                .replace("{usertag}", `${member.user.username}`)
+                                                .replace("{usertag}", `${member.user.username}`), 4096)
                                         );
                                     if (client.settings.get(member.guild.id, "welcome.invite"))
                                         welcomeembed.addFields("\u200b", `${invitemessage}`);
@@ -3548,9 +3550,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``, 4096)),
                 ],
             });
         }

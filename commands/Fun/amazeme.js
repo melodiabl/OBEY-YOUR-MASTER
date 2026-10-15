@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const fetch = require("node-fetch");
 const Discord = require("discord.js");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
@@ -5,7 +7,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const request = require("request");
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const subreddits = ["memes", "DeepFriedMemes", "bonehurtingjuice", "surrealmemes", "dankmemes", "meirl", "me_irl", "funny"];
 const path = require("path");
 module.exports = {
@@ -22,13 +24,13 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                         .setDescription(
-                            require(`${process.cwd()}/handlers/functions`).handlemsg(
+                            obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
                                 { prefix: prefix }
-                            )
+                            ), 4096)
                         ),
                 ],
             });
@@ -43,7 +45,7 @@ module.exports = {
             if (!selected) selected = data[Math.floor(Math.random() * data.length)];
             if (!selected) selected = data[Math.floor(Math.random() * data.length)];
             if (!selected) selected = data[Math.floor(Math.random() * data.length)];
-            if (!selected) return message.reply("❌ **No Meme found, please retry!**");
+            if (!selected) return message.reply(obeyUi.owned("❌ **No Meme found, please retry!**"));
             return message.reply({ content: eval(client.la[ls]["cmds"]["fun"]["meme"]["variable1"]) });
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
@@ -51,9 +53,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["fun"]["amazeme"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["fun"]["amazeme"]["variable2"]), 4096)),
                 ],
             });
         }

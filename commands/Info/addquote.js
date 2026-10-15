@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder,
     PermissionFlagsBits
 } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { swap_pages } = require(`${process.cwd()}/handlers/functions`);
 const moment = require("moment");
 module.exports = {
@@ -29,7 +31,7 @@ module.exports = {
 
             if (user.id != message.author.id) {
                 if (!message.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-                    return message.reply("❌ **Only Admins can add Quotes to other Users!**");
+                    return message.reply(obeyUi.owned("❌ **Only Admins can add Quotes to other Users!**"));
                 }
             }
             client.afkDB.ensure(user.id, {
@@ -72,7 +74,7 @@ module.exports = {
             message.reply("Añadido the Quote to his Quotes!");
             let data = client.afkDB.get(user.id, "quotes");
             if (!data || data.length == 0)
-                return message.reply({ content: "❌ **¡Este usuario no tiene citas en este servidor todavía!**" });
+                return message.reply({ content: obeyUi.owned("❌ **¡Este usuario no tiene citas en este servidor todavía!**") });
             var datas = data
                 .sort((a, b) => b?.at - a.at)
                 .map(
@@ -91,9 +93,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"]), 4096)),
                 ],
             });
         }

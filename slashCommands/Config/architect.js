@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } = require('discord.js')
 const { diffBlueprint } = require('../../handlers/architect/diff')
 module.exports = {
@@ -22,15 +24,15 @@ module.exports = {
       }
       const state = await client.architect.read(interaction.guild, interaction.user.id)
       const categories = state.snapshot.channels.filter(channel => channel.type === 4).length
-      const embed = new EmbedBuilder().setColor(0x5865f2).setTitle(`Architect · ${interaction.guild.name}`)
+      const embed = new EmbedBuilder().setColor(0x5865f2).setTitle(obeyUi.limit(`Architect · ${interaction.guild.name}`, 256))
         .addFields({ name: 'Estructura actual', value: `${categories} categorías · ${state.snapshot.channels.length - categories} canales · ${state.snapshot.roles.length} roles` })
-        .setFooter({ text: `Estructura consultada · ${state.snapshot.revision.slice(0, 12)}` })
+        .setFooter(obeyMeta.asFooter({ text: `Estructura consultada · ${state.snapshot.revision.slice(0, 12)}` }))
       if (state.draft) {
         const diff = diffBlueprint(state.draft.snapshot, state.draft.blueprint)
         embed.addFields({ name: `Tu borrador · revisión ${state.draft.draftRevision}`, value: `${diff.changes.length} cambios propuestos.${state.draftStale ? ' La estructura de Discord cambió desde ese borrador.' : ''}` })
       } else if (state.storageAvailable === false) embed.addFields({ name: 'Tu propuesta', value: 'El almacenamiento de borradores no está disponible. No se pudo consultar tu propuesta guardada.' })
       else embed.addFields({ name: 'Tu propuesta', value: 'Todavía no tienes un borrador guardado. Puedes diseñarlo desde el editor web.' })
-      embed.setDescription('Consulta categorías, canales y roles; edita una propuesta, revisa cambios y guarda puntos de restauración de estructura. La aplicación de nombres, temas y colores desde la web requiere un canary habilitado. La restauración sigue pendiente.')
+      embed.setDescription(obeyUi.limit('Consulta categorías, canales y roles; edita una propuesta, revisa cambios y guarda puntos de restauración de estructura. La aplicación de nombres, temas y colores desde la web requiere un canary habilitado. La restauración sigue pendiente.', 4096))
       if (client.jobs) {
         try {
           const jobs = await client.jobs.list(interaction.guild.id, interaction.user.id)
@@ -43,7 +45,7 @@ module.exports = {
         const url = new URL(process.env.DASHBOARD_BASE_URL)
         if (['http:', 'https:'].includes(url.protocol)) {
           url.pathname = `/architect/${interaction.guild.id}`; url.search = ''; url.hash = ''
-          components.push(new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel('Abrir Architect').setStyle(ButtonStyle.Link).setURL(url.href)))
+          components.push(new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(obeyUi.plain('Abrir Architect')).setStyle(ButtonStyle.Link).setURL(url.href)))
         }
       } catch {}
       return interaction.editReply({ embeds: [embed], components, allowedMentions: { parse: [] } })

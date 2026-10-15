@@ -1,10 +1,11 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const math = require("math-expression-evaluator");
 const ms = require("ms");
 const moment = require("moment");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 module.exports = {
     name: "calc",
     aliases: ["calculate"],
@@ -20,7 +21,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -38,7 +39,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable1"]))
                         .setDescription(eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable2"])),
                 ],
@@ -64,7 +65,7 @@ module.exports = {
                             : null
                     )
                     .setDescription(eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable4"]))
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .addFields({ name: eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variablex_5"]), value: eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable5"]) })
                     .addFields({ name: eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variablex_6"]), value: eval(client.la[ls]["cmds"]["schoolcommands"]["calc"]["variable6"]) }),
             ],

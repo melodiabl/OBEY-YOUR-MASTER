@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, ButtonBuilder, ActionRowBuilder, MessageMenuOption, StringSelectMenuBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fs = require("fs");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
@@ -22,9 +24,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable1"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable1"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable2"]), 4096)),
                 ],
             });
         try {
@@ -34,17 +36,17 @@ module.exports = {
                     {
                         value: `${client.ad.enabled ? "Disable" : "Enable"} Advertisement`,
                         description: `${client.ad.enabled ? "Disables the Ads from Bero-Host and melodia" : "Enables the Ads from Bero-Host and melodia"}`,
-                        emoji: client.ad.enabled ? emoji?.react.ERROR : emoji?.react.SUCCESS,
+                        emoji: obeyUi.component(client.ad.enabled ? emoji?.react.ERROR : emoji?.react.SUCCESS),
                     },
                     {
                         value: "Settings",
                         description: `Show the current Ajustes`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Advertisement Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -52,7 +54,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Advertising System!")
+                    .setPlaceholder(obeyUi.plain("Click me to setup the Advertising System!"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -68,8 +70,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Advertising Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable4"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Advertising Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable4"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.channel.send({
@@ -95,7 +97,7 @@ module.exports = {
                             if (used1)
                                 return menu?.reply(
                                     {
-                                        content: `<:no:833101993668771842> You already selected something, this Selection is now disabled!`,
+                                        content: `${obeyUi.markup("icon.error")} You already selected something, this Selection is now disabled!`,
                                     },
                                     { ephermal: true }
                                 );
@@ -103,7 +105,7 @@ module.exports = {
                         } else
                             menu?.reply(
                                 {
-                                    content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                    content: `${obeyUi.markup("icon.error")} You are not allowed to do that! Only: <@${cmduser.id}>`,
                                 },
                                 { ephermal: true }
                             );
@@ -111,8 +113,8 @@ module.exports = {
                 });
             }
 
-            const d2p = bool => (bool ? "`✔️ Enabled`" : "`❌ Disabled`");
-            const d2p2 = bool => (bool ? "`✔️ Yes`" : "`❌ Nope`");
+            const d2p = bool => (bool ? obeyUi.owned("`✔️ Enabled`") : obeyUi.owned("`❌ Disabled`"));
+            const d2p2 = bool => (bool ? obeyUi.owned("`✔️ Yes`") : obeyUi.owned("`❌ Nope`"));
 
             async function handle_the_picks(menuoptionindex, menuoptiondata) {
                 switch (menuoptionindex) {
@@ -126,13 +128,13 @@ module.exports = {
                                     return message.channel.send({
                                         embedq: [
                                             new EmbedBuilder()
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setColor(es.wrongcolor)
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable6"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable6"]), 256)
                                                 )
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable7"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable7"]), 4096)
                                                 ),
                                         ],
                                     });
@@ -145,9 +147,9 @@ module.exports = {
                                 return message.channel.send({
                                     embeds: [
                                         new EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.color)
-                                            .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable8"])),
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable8"]), 256)),
                                     ],
                                 });
                             });
@@ -156,7 +158,7 @@ module.exports = {
                     case 1:
                         {
                             var embed = new EmbedBuilder()
-                                .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable9"]))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable9"]), 256))
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -167,12 +169,12 @@ module.exports = {
                                         : null
                                 )
                                 .setDescription(
-                                    `**Activado:** ${d2p2(client.ad.enabled)}\n**Statusad:** \`${client.ad.statusad.name}\`\n**Textad:** \`${client.ad.textad}\`\n**Space Dot:** \`${client.ad.spacedot}\``.substring(
+                                    obeyUi.limit(`**Activado:** ${d2p2(client.ad.enabled)}\n**Statusad:** \`${client.ad.statusad.name}\`\n**Textad:** \`${client.ad.textad}\`\n**Space Dot:** \`${client.ad.spacedot}\``.substring(
                                         0,
                                         2048
-                                    )
+                                    ), 4096)
                                 )
-                                .setFooter(client.getFooter(es));
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)));
 
                             return message.channel.send({ embeds: [embed] });
                         }
@@ -187,9 +189,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable10"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable10"]), 4096)),
                 ],
             });
         }

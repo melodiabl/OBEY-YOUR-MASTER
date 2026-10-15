@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `idban`,
@@ -20,8 +22,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"]), 256)),
                     ],
                 });
             //databasing(client, message.guild.id, message.author.id);
@@ -52,9 +54,9 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable2"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable3"]), 4096)),
                         ],
                     })
                     .catch(() => {});
@@ -64,10 +66,10 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle("❌ No válido Comando Usage")
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(obeyUi.owned("❌ No válido Comando Usage"), 256))
                                 .setDescription(
-                                    `Usage: \`${prefix}idban <USER-ID>\`\nExample: \`${prefix}idban 917827695453286410\``
+                                    obeyUi.limit(`Usage: \`${prefix}idban <USER-ID>\`\nExample: \`${prefix}idban 917827695453286410\``, 4096)
                                 ),
                         ],
                     })
@@ -84,9 +86,9 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(`✅ Baneado ${ban.tag || `Unkown Usuario with id: \`${banuser}\``}`)
-                                    .setDescription(`**Reason**: ${reason ? reason : "No Reason"}`),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(`${obeyUi.markup("icon.success")} Baneado ${ban.tag || `Unkown Usuario with id: \`${banuser}\``}`, 256))
+                                    .setDescription(obeyUi.limit(`**Reason**: ${reason ? reason : "No Reason"}`, 4096)),
                             ],
                         })
                         .catch(() => {});
@@ -97,9 +99,9 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(`❌ Could not ban ${banuser}`)
-                                    .setDescription(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} Could not ban ${banuser}`, 256))
+                                    .setDescription(obeyUi.limit(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``, 4096)),
                             ],
                         })
                         .catch(() => {});
@@ -110,9 +112,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"]), 4096)),
                 ],
             });
         }

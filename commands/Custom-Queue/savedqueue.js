@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const { execute } = require('../../handlers/music/saved-queues')
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
       const text = await execute(client, {
         user: message.author, guildId: message.guild.id, voiceChannelId: message.member.voice.channelId, textChannelId: message.channel.id,
       }, args)
-      return message.reply({ embeds: [new EmbedBuilder().setColor(0x5865f2).setDescription(text.slice(0, 4000))], allowedMentions: { parse: [] } })
-    } catch (error) { return message.reply({ content: `❌ ${error.message}`, allowedMentions: { parse: [] } }) }
+      return message.reply({ embeds: [new EmbedBuilder().setColor(0x5865f2).setDescription(obeyUi.limit(text.slice(0, 4000), 4096))], allowedMentions: { parse: [] } })
+    } catch (error) { return message.reply({ content: `${obeyUi.markup("icon.error")} ${error.message}`, allowedMentions: { parse: [] } }) }
   },
 }

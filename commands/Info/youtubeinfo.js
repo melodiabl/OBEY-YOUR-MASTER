@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder,
     ButtonStyle
 } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const { databasing, delay, getLatestVideos, channelInfo } = require("../../handlers/functions");
 const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
@@ -20,8 +22,8 @@ module.exports = {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            let button_back = new ButtonBuilder().setStyle(ButtonStyle.Primary).setCustomId("1").setLabel("<< Back");
-            let button_forward = new ButtonBuilder().setStyle(ButtonStyle.Primary).setCustomId("3").setLabel("Forward >>");
+            let button_back = new ButtonBuilder().setStyle(ButtonStyle.Primary).setCustomId("1").setLabel(obeyUi.plain("<< Back"));
+            let button_forward = new ButtonBuilder().setStyle(ButtonStyle.Primary).setCustomId("3").setLabel(obeyUi.plain("Forward >>"));
             const allbuttons = [new ActionRowBuilder().addComponents([button_back, button_forward])];
             let url = args[0];
             if (url && typeof url === "string") {
@@ -30,13 +32,13 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(client.la[ls].cmds.info.youtubeinfo.error1)
-                                .setTitle(client.la[ls].cmds.info.youtubeinfo.example)
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(client.la[ls].cmds.info.youtubeinfo.error1, 256))
+                                .setTitle(obeyUi.limit(client.la[ls].cmds.info.youtubeinfo.example, 256))
                                 .setDescription(
-                                    handlemsg(client.la[ls].cmds.info.youtubeinfo.example, {
+                                    obeyUi.limit(handlemsg(client.la[ls].cmds.info.youtubeinfo.example, {
                                         prefix: prefix,
-                                    })
+                                    }), 4096)
                                 ),
                         ],
                     });
@@ -45,12 +47,12 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(client.la[ls].cmds.info.youtubeinfo.error1)
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(client.la[ls].cmds.info.youtubeinfo.error1, 256))
                             .setDescription(
-                                handlemsg(client.la[ls].cmds.info.youtubeinfo.example, {
+                                obeyUi.limit(handlemsg(client.la[ls].cmds.info.youtubeinfo.example, {
                                     prefix: prefix,
-                                })
+                                }), 4096)
                             ),
                     ],
                 });
@@ -59,27 +61,27 @@ module.exports = {
                 embeds: [
                     new Discord.EmbedBuilder()
                         .setColor(es.color)
-                        .setAuthor({ name: client.la[ls].cmds.info.youtubeinfo.loading, iconURL: "https://cdn.discordapp.com/emojis/756773010123522058.gif", url: "https://github.com/melodiabl" }),
+                        .setAuthor(obeyMeta.asAuthor({ name: client.la[ls].cmds.info.youtubeinfo.loading, iconURL: obeyUi.image("motion.cargando"), url: "https://github.com/melodiabl" })),
                 ],
             });
             let Channel = await channelInfo(url);
             let embed = new Discord.EmbedBuilder()
-                .setTitle(Canal.name)
+                .setTitle(obeyUi.limit(Canal.name, 256))
                 .setURL(Channel.url)
                 .setColor("#ED4245")
                 .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field1, value: "`" + Channel.subscribers + "`" })
                 .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field2, value: Channel.tags.map(t => `\`${t}\``).join(",  ") })
-                .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field3, value: Channel.unlisted ? "✅" : "❌", inline: true })
-                .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field4, value: Channel.familySafe ? "✅" : "❌", inline: true })
-                .setFooter({ text: "ID: " + Channel.id })
+                .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field3, value: Channel.unlisted ? obeyUi.owned("✅") : obeyUi.owned("❌"), inline: true })
+                .addFields({ name: client.la[ls].cmds.info.youtubeinfo.field4, value: Channel.familySafe ? obeyUi.owned("✅") : obeyUi.owned("❌"), inline: true })
+                .setFooter(obeyMeta.asFooter({ text: "ID: " + Channel.id }))
                 .setImage(Channel.mobileBanner[0] ? Channel.mobileBanner[0].url : undefined)
-                .setDescription(String(Canal.description).substring(0, 1500));
+                .setDescription(obeyUi.limit(String(Canal.description).substring(0, 1500), 4096));
             let Videos = await getLatestVideos(url);
             let embed2 = new Discord.EmbedBuilder()
                 .setTitle(
-                    handlemsg(client.la[ls].cmds.info.youtubeinfo.videosof, {
+                    obeyUi.limit(handlemsg(client.la[ls].cmds.info.youtubeinfo.videosof, {
                         author: Videos[0].author,
-                    })
+                    }), 256)
                 )
                 .setColor("#ED4245")
                 .setURL(url);
@@ -158,9 +160,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"]), 4096)),
                 ],
             });
         }

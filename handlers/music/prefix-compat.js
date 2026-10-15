@@ -1,6 +1,7 @@
+const obeyUi = require("../assets/system")
 const { EmbedBuilder } = require('discord.js')
 const { database } = require('./database')
-function reply(message, text) { return message.reply({ embeds: [new EmbedBuilder().setColor(0x5865f2).setDescription(text)] }) }
+function reply(message, text) { return message.reply({ embeds: [new EmbedBuilder().setColor(0x5865f2).setDescription(obeyUi.limit(text, 4096))] }) }
 async function related(client, message, args, add) {
   const state = client.music.getState(message.guild.id)
   const seed = state.currentTrack?.info || state.currentTrack
@@ -15,7 +16,7 @@ async function related(client, message, args, add) {
   if (!channel) throw new Error('Únete a un canal de voz.')
   await client.music.joinChannel(message.guild.id, channel.id, message.channel.id)
   await client.music.enqueue(message.guild.id, tracks)
-  return reply(message, `🎵 ${tracks.length} canciones añadidas a la cola.`)
+  return reply(message, `${obeyUi.markup("icon.music")} ${tracks.length} canciones añadidas a la cola.`)
 }
 async function playlist(client, message, args) {
   const action = args.shift() || 'list'
@@ -28,7 +29,7 @@ async function playlist(client, message, args) {
   const interaction = {
     user: message.author, guild: message.guild, member: message.member, channel: message.channel, channelId: message.channel.id,
     options: { getString: () => name, getBoolean: () => true },
-    deferReply: async () => { response = await message.reply('⏳ Procesando…') },
+    deferReply: async () => { response = await message.reply(obeyUi.owned('⏳ Procesando…')) },
     reply: payload => message.reply(payload),
     editReply: payload => response ? response.edit(payload) : message.reply(payload),
   }
@@ -39,7 +40,7 @@ module.exports = name => async (client, message, args = []) => {
     if (['pitch', 'speed', 'rate', 'equalizer'].includes(name)) {
       if (!args.length) throw new Error(`Usa ${name} ${name === 'equalizer' ? '<banda 0-14> <ganancia -0.25 a 1>' : '<valor 0.25 a 2>'}.`)
       await client.music.setAudioParameter(message.guild.id, name, Number(args[0]), Number(args[1]))
-      return reply(message, `🎛️ ${name}: **${args.join(' ')}**`)
+      return reply(message, `${obeyUi.markup("icon.settings")} ${name}: **${args.join(' ')}**`)
     }
     if (['playsc', 'playskipsc', 'searchsc'].includes(name)) throw new Error('SoundCloud está desactivado. Usa play o search con YouTube.')
     if (name === 'playlist') return await playlist(client, message, args)
@@ -47,7 +48,7 @@ module.exports = name => async (client, message, args = []) => {
       const playlists = await database.getPlaylists(message.author.id)
       const query = args.join(' ').toLowerCase()
       const matches = playlists.filter(item => item.name.toLowerCase().includes(query))
-      return reply(message, matches.map(item => `📋 **${item.name}** · ${item.tracks.length} pistas`).join('\n').slice(0, 4000) || 'No encontré playlists guardadas.')
+      return reply(message, matches.map(item => `${obeyUi.markup("icon.queue")} **${item.name}** · ${item.tracks.length} pistas`).join('\n').slice(0, 4000) || 'No encontré playlists guardadas.')
     }
     if (name === 'searchsimilar') return await related(client, message, args, false)
     if (['addsimilar', 'playmusicmix'].includes(name)) return await related(client, message, args, true)
@@ -56,7 +57,7 @@ module.exports = name => async (client, message, args = []) => {
       if (!query) throw new Error('Indica una emisora o un enlace de radio.')
       const stations = /^https?:\/\//i.test(query) ? [{ name: 'Radio', url_resolved: query }] : await require('radio-browser').getStations({ by: 'name', searchterm: query, limit: 5, hidebroken: true })
       if (!stations.length) throw new Error('No encontré emisoras. También puedes usar el enlace directo.')
-      if (name === 'searchradio') return reply(message, stations.map(station => `📻 **${station.name}**\n${station.url_resolved || station.url}`).join('\n').slice(0, 4000))
+      if (name === 'searchradio') return reply(message, stations.map(station => `${obeyUi.markup("icon.radio")} **${station.name}**\n${station.url_resolved || station.url}`).join('\n').slice(0, 4000))
       args = [stations[0].url_resolved || stations[0].url]
     }
     if (name === 'playsongoftheday') args = ['ytsearch:top music hits']
@@ -66,6 +67,6 @@ module.exports = name => async (client, message, args = []) => {
     const result = await client.music.play(message.guild.id, voice.id, message.channel.id, args.join(' '), message.author)
     const track = result?.result?.tracks?.[0]
     if (!track) throw new Error('No encontré una canción disponible para esa búsqueda.')
-    return reply(message, `🎵 **${(track.info || track).title}** añadida.`)
-  } catch (error) { return message.reply(`❌ ${error.message}`) }
+    return reply(message, `${obeyUi.markup("icon.music")} **${(track.info || track).title}** añadida.`)
+  } catch (error) { return message.reply(`${obeyUi.markup("icon.error")} ${error.message}`) }
 }

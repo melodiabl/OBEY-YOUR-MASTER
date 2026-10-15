@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 ﻿const Discord = require("discord.js");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const request = require("request");
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 module.exports = {
     name: "bed",
     aliases: [""],
@@ -20,13 +22,13 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                         .setDescription(
-                            require(`${process.cwd()}/handlers/functions`).handlemsg(
+                            obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
                                 { prefix: prefix }
-                            )
+                            ), 4096)
                         ),
                 ],
             });
@@ -36,7 +38,7 @@ module.exports = {
             embeds: [
                 new EmbedBuilder()
                     .setColor(ee.color)
-                    .setAuthor({ name: "Obteniendo datos de imagen...", iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif" }),
+                    .setAuthor(obeyMeta.asAuthor({ name: "Obteniendo datos de imagen...", iconURL: obeyUi.image("motion.cargando") })),
             ],
         });
         //find the USER
@@ -74,9 +76,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle("❌ ¡Olvidaste mencionar al menos a un miembro!")
-                        .setDescription(`Usage: \`${prefix}bed <@User1> [@User2]\``),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(obeyUi.owned("❌ ¡Olvidaste mencionar al menos a un miembro!"), 256))
+                        .setDescription(obeyUi.limit(`Usage: \`${prefix}bed <@User1> [@User2]\``, 4096)),
                 ],
             });
         let avatar1 = user.displayAvatarURL({
@@ -95,7 +97,7 @@ module.exports = {
                 .reply({
                     embeds: [
                         tempmsg.embeds[0]
-                            .setAuthor({ name: `Meme para: ${user1.tag} | ${user2.tag}`, iconURL: avatar1 })
+                            .setAuthor(obeyMeta.asAuthor({ name: `Meme para: ${user1.tag} | ${user2.tag}`, iconURL: avatar1 }))
                             .setColor(es.color)
                             .setImage("attachment://bed.png"),
                     ],

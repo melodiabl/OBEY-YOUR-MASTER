@@ -1,3 +1,8 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
+const { registry } = require('./assets/registry')
+const { t, localeFor } = require('./i18n')
+const { voteEmoji, updateVoteEmbed, voteButtons } = require('./suggestions/presentation')
 const { Client, Collection, EmbedBuilder, AttachmentBuilder, ButtonStyle, ButtonBuilder, ActionRowBuilder } = require(`discord.js`);
 const { allEmojis } = require("../botconfig/emojiFunctions");
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -16,9 +21,9 @@ module.exports = client => {
                 channel: "",
                 approvemsg: `${allEmojis.msg.SUCCESS} Accepted Idea! Expect this soon.`,
                 denymsg: `${allEmojis.msg.ERROR} Thank you for the feedback, but we are not interested in this idea at this time.`,
-                maybemsg: `💡 We are thinking about this idea!`,
-                duplicatemsg: `💢 This is a duplicated Suggestion`,
-                soonmsg: `👌 Expect this Feature Soon!`,
+                maybemsg: `${obeyUi.markup("icon.idea")} We are thinking about this idea!`,
+                duplicatemsg: `${obeyUi.markup("icon.warning")} This is a duplicated Suggestion`,
+                soonmsg: `${obeyUi.markup("icon.success")} Expect this Feature Soon!`,
                 statustext: `${allEmojis.msg.loading} Waiting for Community Feedback, please vote!`,
                 footertext: `Want to suggest / Feedback something? Simply type in this channel!`,
                 approveemoji: `${allEmojis.msg.SUCCESS}`,
@@ -34,33 +39,9 @@ module.exports = client => {
         var footertext = settings.footertext;
         var statustext = settings.statustext;
         var feedbackchannel = settings.channel;
-        let whobutton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Primary)
-            .setEmoji("❓")
-            .setCustomId("Suggest_who")
-            .setLabel("Who voted?");
-        let upvotebutton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Secondary)
-            .setEmoji(approveemoji)
-            .setCustomId("Suggest_upvote")
-            .setLabel("0");
-        let downvotebutton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Secondary)
-            .setEmoji(denyemoji)
-            .setCustomId("Suggest_downvote")
-            .setLabel("0");
-        let allbuttons = [new ActionRowBuilder().addComponents([upvotebutton, downvotebutton, whobutton])];
-        let supvotebutton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Secondary)
-            .setEmoji("✅")
-            .setCustomId("Suggest_upvote")
-            .setLabel("0");
-        let sdownvotebutton = new ButtonBuilder()
-            .setStyle(ButtonStyle.Secondary)
-            .setEmoji("❌")
-            .setCustomId("Suggest_downvote")
-            .setLabel("0");
-        let allbuttonsSave = [new ActionRowBuilder().addComponents([supvotebutton, sdownvotebutton, whobutton])];
+        const locale = localeFor(client, message.guild.id)
+        let allbuttons = [voteButtons(settings, {}, locale)];
+        let allbuttonsSave = [voteButtons({}, {}, locale)];
         if (!feedbackchannel) return;
         if (message.channel.id === feedbackchannel) {
             try {
@@ -84,17 +65,18 @@ module.exports = client => {
                 .addFields({ name: `:thumbsdown: **__Down Votes__**`, value: `**\`\`\`0 Votes\`\`\`**`, inline: true })
                 .setColor(es.color)
                 .setAuthor(
-                    client.getAuthor(
+                    obeyMeta.asAuthor(client.getAuthor(
                         message.author.username + "' Suggestion",
                         message.member.user.displayAvatarURL(),
                         `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`
-                    )
+                    ))
                 )
-                .setDescription("\n" + message.content + "\n")
-                .setFooter(client.getFooter(footertext, message.guild.iconURL()));
+                .setDescription(obeyUi.limit("\n" + message.content + "\n", 4096))
+                .setFooter(obeyMeta.asFooter(client.getFooter(footertext, message.guild.iconURL())));
+            embed = updateVoteEmbed(embed, {}, locale);
             //.addFields({ name: `Status`, value: `REASON` })
             if (message.content) {
-                embed.setDescription(">>> " + message.content);
+                embed.setDescription(obeyUi.limit(">>> " + message.content, 4096));
             }
             //add images if added (no videos possible)
             if (message.attachments.size > 0) {
@@ -171,9 +153,11 @@ module.exports = client => {
         if (button?.message.author.id != client.user.id) return;
         let guild = button?.message.guild;
         let channel = button?.message.channel;
-        if (button?.customId.startsWith("Suggest_")) {
+        if (['Suggest_upvote','Suggest_downvote','Suggest_who'].includes(button?.customId)) {
+            const locale = localeFor(client, guild.id)
             if (client.settings.get(guild.id, "suggest.channel") !== channel.id) return;
             let SuggestionsData = client.settings.get(button?.message.id);
+            if (!SuggestionsData || !Array.isArray(SuggestionsData.voted_ppl) || !button.message.embeds[0]) return button.reply({content:t(locale,'suggestions.expired'),ephemeral:true});
             if (!SuggestionsData.downvoted_ppl) {
                 client.settings.set(button?.message.id, [], "downvoted_ppl");
                 SuggestionsData = client.settings.get(button?.message.id);
@@ -181,7 +165,7 @@ module.exports = client => {
             if (button?.customId == "Suggest_upvote") {
                 if (SuggestionsData.voted_ppl.includes(button?.user.id)) {
                     return button?.reply({
-                        content: `You can't upvote the Sugerencia of <@${SuggestionsData.user}> twice!`,
+                        content: t(locale, 'suggestions.already'),
                         ephemeral: true,
                     });
                 }
@@ -196,7 +180,7 @@ module.exports = client => {
             if (button?.customId == "Suggest_downvote") {
                 if (SuggestionsData.downvoted_ppl.includes(button?.user.id)) {
                     return button?.reply({
-                        content: `You can't downvote the Sugerencia of <@${SuggestionsData.user}> twice!`,
+                        content: t(locale, 'suggestions.already'),
                         ephemeral: true,
                     });
                 }
@@ -214,7 +198,7 @@ module.exports = client => {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(button?.message.embeds[0].color)
-                            .setTitle(`❓ **Who reacted with what?** ❓`)
+                            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.help")} **Who reacted with what?** ${obeyUi.markup("icon.help")}`, 256))
                             .addFields({ name: `${SuggestionsData.upvotes} Upvotes`, value: `${SuggestionsData.voted_ppl && SuggestionsData.voted_ppl.length > 0 ? (SuggestionsData.voted_ppl.length < 20 ? SuggestionsData.voted_ppl.map(r => `<@${r}>`).join("\n") : [...SuggestionsData.voted_ppl.slice(0, 20).map(r => `<@${r}>`), `${SuggestionsData.voted_ppl.length - 20} more...`].join("\n")) : "Noone"}`.substring(
                                     0,
                                     1024
@@ -227,11 +211,7 @@ module.exports = client => {
                 });
             }
             SuggestionsData = client.settings.get(button?.message.id);
-            let embed = button?.message.embeds[0];
-            embed.fields[0].key = `:thumbsup: **__Up Votes__**`;
-            embed.fields[0].value = `**\`\`\`${SuggestionsData.upvotes} Votes\`\`\`**`;
-            embed.fields[1].key = `:thumbsdown: **__Down Votes__**`;
-            embed.fields[1].value = `**\`\`\`${SuggestionsData.downvotes} Votes\`\`\`**`;
+            let embed = updateVoteEmbed(button.message.embeds[0], SuggestionsData, locale);
             let settings = client.settings.get(button?.message.guild.id, "suggest") || { approveemoji: "✅", denyemoji: "❌" };
             var approveemoji = settings.approveemoji;
             var denyemoji = settings.denyemoji;
@@ -240,47 +220,23 @@ module.exports = client => {
                     embed.setImage(button.message.attachments.first().attachment);
                 }
             }
-            let whobutton = new ButtonBuilder()
-                .setStyle(ButtonStyle.Primary)
-                .setEmoji("❓")
-                .setCustomId("Suggest_who")
-                .setLabel("Who voted?");
-            let upvotebutton = new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji(approveemoji)
-                .setCustomId("Suggest_upvote")
-                .setLabel(String(SuggestionsData.upvotes));
-            let downvotebutton = new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji(denyemoji)
-                .setCustomId("Suggest_downvote")
-                .setLabel(String(SuggestionsData.downvotes));
-            let supvotebutton = new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji("✅")
-                .setCustomId("Suggest_upvote")
-                .setLabel(String(SuggestionsData.upvotes));
-            let sdownvotebutton = new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji("❌")
-                .setCustomId("Suggest_downvote")
-                .setLabel(String(SuggestionsData.downvotes));
-            button?.message
+            await button.deferUpdate();
+            await button?.message
                 .edit({
                     embeds: [embed],
-                    components: [new ActionRowBuilder().addComponents([upvotebutton, downvotebutton, whobutton])],
+                    components: [voteButtons(settings, SuggestionsData, locale)],
                 })
                 .catch(e => {
-                    button?.message
+                    return button?.message
                         .edit({
                             embeds: [embed],
-                            components: [new ActionRowBuilder().addComponents([supvotebutton, sdownvotebutton, whobutton])],
+                            components: [voteButtons({}, SuggestionsData, locale)],
                         })
                         .catch(e => {
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                         });
                 });
-            button?.deferUpdate();
+
             function attachIsImage(msgAttach) {
                 var url = msgAttach.url;
                 return (

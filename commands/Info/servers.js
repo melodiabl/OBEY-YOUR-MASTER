@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { swap_pages, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "servers",
@@ -20,7 +21,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["botfilename"]["variable1"]))
                             .setDescription(eval(client.la[ls]["cmds"]["owner"]["botfilename"]["variable2"])),
                     ],
@@ -43,7 +44,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

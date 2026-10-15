@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const twitconfig = require("../../social_log/twitter.json");
 const Twit = require("twit");
@@ -41,9 +42,9 @@ module.exports = {
                     var embed = new Discord.EmbedBuilder()
                         .setColor(`#${user.profile_background_color}`)
                         .setThumbnail(user.profile_image_url_https ? user.profile_image_url_https : user.profile_image_url)
-                        .setFooter(client.getFooter(
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `ID: ${user.id_str}`,
-                                user.profile_image_url_https ? user.profile_image_url_https : user.profile_image_url)
+                                user.profile_image_url_https ? user.profile_image_url_https : user.profile_image_url))
                         )
                         .addFields({ name: client.la[ls].cmds.info.twitterinfo.field1.title, value: `\`${user.name}\``, inline: true })
                         .addFields({ name: client.la[ls].cmds.info.twitterinfo.field2.title, value: `\`${moment(user.created_at).format("DD/MM/YYYY")}\`\n\`${moment(user.created_at).format("hh:mm:ss")}\``, inline: true })
@@ -66,7 +67,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

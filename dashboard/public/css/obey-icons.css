@@ -1,0 +1,208 @@
+/* Own OBEY assets. Existing control classes and click handlers are preserved. */
+i.fa-arrow-left{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_arrow-left.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-arrow-left::before{content:none!important;}
+i.fa-arrow-right{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_arrow-right.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-arrow-right::before{content:none!important;}
+i.fa-award{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_medal.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-award::before{content:none!important;}
+i.fa-backward-step{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_previous.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-backward-step::before{content:none!important;}
+i.fa-bars{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_queue.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-bars::before{content:none!important;}
+i.fa-bolt{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_boost.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-bolt::before{content:none!important;}
+i.fa-brain{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_bot.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-brain::before{content:none!important;}
+i.fa-champagne-glasses{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_gift.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-champagne-glasses::before{content:none!important;}
+i.fa-chart-line{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_chart.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-chart-line::before{content:none!important;}
+i.fa-check-circle{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_success.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-check-circle::before{content:none!important;}
+i.fa-chevron-down{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_arrow-down.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-chevron-down::before{content:none!important;}
+i.fa-chevron-right{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_arrow-right.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-chevron-right::before{content:none!important;}
+i.fa-chevron-up{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_arrow-up.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-chevron-up::before{content:none!important;}
+i.fa-circle{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_dot.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-circle::before{content:none!important;}
+i.fa-circle-check{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_success.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-circle-check::before{content:none!important;}
+i.fa-circle-exclamation{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_warning.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-circle-exclamation::before{content:none!important;}
+i.fa-circle-info{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_info.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-circle-info::before{content:none!important;}
+i.fa-circle-plus{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_reopen.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-circle-plus::before{content:none!important;}
+i.fa-circle-xmark{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_error.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-circle-xmark::before{content:none!important;}
+i.fa-clock{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_clock.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-clock::before{content:none!important;}
+i.fa-clock-rotate-left{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_clock.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-clock-rotate-left::before{content:none!important;}
+i.fa-cloud{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_cloud.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-cloud::before{content:none!important;}
+i.fa-cog{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_settings.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-cog::before{content:none!important;}
+i.fa-coins{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_coins.png") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-coins::before{content:none!important;}
+i.fa-compact-disc{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_album.png") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-compact-disc::before{content:none!important;}
+i.fa-compass{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_globe.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-compass::before{content:none!important;}
+i.fa-database{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_archive.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-database::before{content:none!important;}
+i.fa-dice{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_dice.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-dice::before{content:none!important;}
+i.fa-discord{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_conversation.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-discord::before{content:none!important;}
+i.fa-door-closed{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_lock.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-door-closed::before{content:none!important;}
+i.fa-door-open{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_exit.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-door-open::before{content:none!important;}
+i.fa-envelope{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_send.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-envelope::before{content:none!important;}
+i.fa-exclamation-circle{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_warning.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-exclamation-circle::before{content:none!important;}
+i.fa-exclamation-triangle{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_warning.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-exclamation-triangle::before{content:none!important;}
+i.fa-external-link-alt{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_link.png") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-external-link-alt::before{content:none!important;}
+i.fa-fire{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_fire.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-fire::before{content:none!important;}
+i.fa-folder{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_export.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-folder::before{content:none!important;}
+i.fa-folder-open{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_export.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-folder-open::before{content:none!important;}
+i.fa-forward-step{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_skip.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-forward-step::before{content:none!important;}
+i.fa-gauge-high{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_chart.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-gauge-high::before{content:none!important;}
+i.fa-gavel{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_gavel.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-gavel::before{content:none!important;}
+i.fa-gear{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_settings.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-gear::before{content:none!important;}
+i.fa-github{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_code.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-github::before{content:none!important;}
+i.fa-guitar{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_guitar.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-guitar::before{content:none!important;}
+i.fa-hashtag{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_channel.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-hashtag::before{content:none!important;}
+i.fa-headphones{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_headphones.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-headphones::before{content:none!important;}
+i.fa-heart{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_like.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-heart::before{content:none!important;}
+i.fa-heart-broken{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_heart-broken.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-heart-broken::before{content:none!important;}
+i.fa-heartbeat{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_live.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-heartbeat::before{content:none!important;}
+i.fa-house{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_home.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-house::before{content:none!important;}
+i.fa-keyboard{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_keyboard.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-keyboard::before{content:none!important;}
+i.fa-link{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_link.png") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-link::before{content:none!important;}
+i.fa-list{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_queue.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-list::before{content:none!important;}
+i.fa-list-ul{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_queue.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-list-ul::before{content:none!important;}
+i.fa-magnifying-glass{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_search.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-magnifying-glass::before{content:none!important;}
+i.fa-microchip{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_code.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-microchip::before{content:none!important;}
+i.fa-microphone{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_microphone.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-microphone::before{content:none!important;}
+i.fa-mug-hot{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_coffee.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-mug-hot::before{content:none!important;}
+i.fa-music{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_music.png") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-music::before{content:none!important;}
+i.fa-pause{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_pause.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-pause::before{content:none!important;}
+i.fa-play{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_play.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-play::before{content:none!important;}
+i.fa-plus{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_reopen.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-plus::before{content:none!important;}
+i.fa-record-vinyl{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_album.png") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-record-vinyl::before{content:none!important;}
+i.fa-repeat{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_loop.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-repeat::before{content:none!important;}
+i.fa-right-from-bracket{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_exit.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-right-from-bracket::before{content:none!important;}
+i.fa-robot{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_bot.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-robot::before{content:none!important;}
+i.fa-rotate{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_loop.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-rotate::before{content:none!important;}
+i.fa-rss{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_feed.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-rss::before{content:none!important;}
+i.fa-save{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_save.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-save::before{content:none!important;}
+i.fa-scroll{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_transcript.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-scroll::before{content:none!important;}
+i.fa-search{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_search.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-search::before{content:none!important;}
+i.fa-server{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_archive.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-server::before{content:none!important;}
+i.fa-shield-halved{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_shield.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-shield-halved::before{content:none!important;}
+i.fa-shield-virus{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_shield.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-shield-virus::before{content:none!important;}
+i.fa-shuffle{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_shuffle.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-shuffle::before{content:none!important;}
+i.fa-skull{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_skull.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-skull::before{content:none!important;}
+i.fa-sliders{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_equalizer.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-sliders::before{content:none!important;}
+i.fa-spinner{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_loading.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-spinner::before{content:none!important;}
+i.fa-spotify{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_headphones.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-spotify::before{content:none!important;}
+i.fa-star{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_star.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-star::before{content:none!important;}
+i.fa-stop{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_stop.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-stop::before{content:none!important;}
+i.fa-sync-alt{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_loop.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-sync-alt::before{content:none!important;}
+i.fa-tag{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_badge-id.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-tag::before{content:none!important;}
+i.fa-terminal{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_code.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-terminal::before{content:none!important;}
+i.fa-ticket{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_ticket.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-ticket::before{content:none!important;}
+i.fa-tiktok{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_microphone.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-tiktok::before{content:none!important;}
+i.fa-trash-can{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_delete.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-trash-can::before{content:none!important;}
+i.fa-triangle-exclamation{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_warning.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-triangle-exclamation::before{content:none!important;}
+i.fa-twitch{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_video.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-twitch::before{content:none!important;}
+i.fa-user{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_profile.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-user::before{content:none!important;}
+i.fa-user-check{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_success.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-user-check::before{content:none!important;}
+i.fa-user-plus{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_join.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-user-plus::before{content:none!important;}
+i.fa-user-shield{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_shield.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-user-shield::before{content:none!important;}
+i.fa-users{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_roles.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-users::before{content:none!important;}
+i.fa-volume-high{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_volume-up.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-volume-high::before{content:none!important;}
+i.fa-volume-low{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_volume-down.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-volume-low::before{content:none!important;}
+i.fa-volume-xmark{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_mute.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-volume-xmark::before{content:none!important;}
+i.fa-wand-magic-sparkles{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_brush.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-wand-magic-sparkles::before{content:none!important;}
+i.fa-wave-square{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_wave.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-wave-square::before{content:none!important;}
+i.fa-x-twitter{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_feed.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-x-twitter::before{content:none!important;}
+i.fa-xmark{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_error.svg") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-xmark::before{content:none!important;}
+i.fa-youtube{display:inline-block;width:1.15em;height:1.15em;min-width:1.15em;vertical-align:-.15em;background:url("/obey-icons/icon_music.png") center/contain no-repeat;font-size:inherit;line-height:1;}
+i.fa-youtube::before{content:none!important;}
+@media(prefers-reduced-motion:reduce){i.fa-spin{animation:none!important;}}
+
+.obey-inline-emoji{display:inline-block;vertical-align:middle;object-fit:contain;width:1.2em;height:1.2em;}

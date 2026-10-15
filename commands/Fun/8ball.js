@@ -1,10 +1,11 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const request = require("request");
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 module.exports = {
     name: "8ball",
     category: "Fun",
@@ -17,7 +18,7 @@ module.exports = {
         if (!client.settings.get(message.guild.id, "FUN")) {
             const embed1 = new EmbedBuilder()
                 .setColor(es.wrongcolor)
-                .setFooter(client.getFooter(es))
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                 .setTitle(client.la[ls].common.disabled.title)
                 .setDescription(
                     require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
@@ -31,7 +32,7 @@ module.exports = {
             const question = args.slice(0).join(" ");
             const embed2 = new EmbedBuilder()
                 .setColor(es.wrongcolor)
-                .setFooter(client.getFooter(es))
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                 .setTitle(eval(client.la[ls]["cmds"]["fun"]["8ball"]["variable1"]));
             if (!question) return message.reply({ embeds: [embed2] });
             request(`https://8ball.delegator.com/magic/JSON/${question}`, function (e, response, body) {
@@ -53,7 +54,7 @@ module.exports = {
                     .addFields({ name: "Question: ", value: question, inline: false })
                     .addFields({ name: "Asked by: ", value: message.author.username, inline: false })
                     .addFields({ name: "Reply: ", value: body.magic.answer, inline: false })
-                    .setFooter({ text: eval(client.la[ls]["cmds"]["fun"]["8ball"]["variable4"]) });
+                    .setFooter(obeyMeta.asFooter({ text: eval(client.la[ls]["cmds"]["fun"]["8ball"]["variable4"]) }));
 
                 message.reply({ embeds: [embed3] });
             });
@@ -61,7 +62,7 @@ module.exports = {
             console.log(String(e.stack).grey.bgRed);
             const embed4 = new EmbedBuilder()
                 .setColor(es.wrongcolor)
-                .setFooter(client.getFooter(es))
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                 .setTitle(client.la[ls].common.erroroccur)
                 .setDescription(eval(client.la[ls]["cmds"]["fun"]["8ball"]["variable5"]));
             return message.reply({ embeds: [embed4] });

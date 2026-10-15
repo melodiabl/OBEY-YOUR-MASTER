@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 // discord-canvas requiere canvas nativo incompatible con Node 22
 const Canvas = null;
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "fnshop",
@@ -17,7 +19,7 @@ module.exports = {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
         try {
-            let themsg = await message.reply("<a:Loading:833101350623117342> Obteniendo los Datos de la Tienda");
+            let themsg = await message.reply(obeyUi.owned("<a:Loading:833101350623117342> Obteniendo los Datos de la Tienda"));
             const shop = new Canvas.FortniteShop();
             const image = await shop
                 .setToken(process.env.fnbr || config.fnbr)
@@ -31,9 +33,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"]), 4096)),
                 ],
             });
         }

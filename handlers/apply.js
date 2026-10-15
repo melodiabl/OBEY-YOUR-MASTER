@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 //all reactions for the finished channel
 const moment = require("moment");
 const { dbEnsure } = require(`./functions`);
@@ -7,49 +9,14 @@ const antimap = new Map();
 const cooldown = new Set();
 const { ButtonBuilder, ActionRowBuilder, PermissionFlagsBits, ButtonStyle } = require("discord.js");
 
-const Buttons = {
-    acceptbutton: new ButtonBuilder().setStyle(ButtonStyle.Success).setEmoji(`✅`).setCustomId(`Apply_accept`).setLabel(`Accept`),
-    declinebutton: new ButtonBuilder().setStyle(ButtonStyle.Danger).setEmoji(`❌`).setCustomId(`Apply_deny`).setLabel(`Decline`),
-    ticketbutton: new ButtonBuilder()
-        .setStyle(ButtonStyle.Secondary)
-        .setEmoji(`🎟️`)
-        .setCustomId(`Apply_ticket`)
-        .setLabel(`Ask Question`),
-    emoji1button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`1️⃣`).setCustomId(`Apply_1`),
-    emoji2button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`2️⃣`).setCustomId(`Apply_2`),
-    emoji3button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`3️⃣`).setCustomId(`Apply_3`),
-    emoji4button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`4️⃣`).setCustomId(`Apply_4`),
-    emoji5button: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`5️⃣`).setCustomId(`Apply_5`),
-    acceptbutton_d: new ButtonBuilder()
-        .setStyle(ButtonStyle.Success)
-        .setEmoji(`✅`)
-        .setCustomId(`Apply_accept`)
-        .setLabel(`Accept`)
-        .setDisabled(true),
-    declinebutton_d: new ButtonBuilder()
-        .setStyle(ButtonStyle.Danger)
-        .setEmoji(`❌`)
-        .setCustomId(`Apply_deny`)
-        .setLabel(`Decline`)
-        .setDisabled(true),
-    ticketbutton_d: new ButtonBuilder()
-        .setStyle(ButtonStyle.Secondary)
-        .setEmoji(`🎟️`)
-        .setCustomId(`Apply_ticket`)
-        .setLabel(`Ask Question`)
-        .setDisabled(true),
-    emoji1button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`1️⃣`).setCustomId(`Apply_1`).setDisabled(true),
-    emoji2button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`2️⃣`).setCustomId(`Apply_2`).setDisabled(true),
-    emoji3button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`3️⃣`).setCustomId(`Apply_3`).setDisabled(true),
-    emoji4button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`4️⃣`).setCustomId(`Apply_4`).setDisabled(true),
-    emoji5button_d: new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(`5️⃣`).setCustomId(`Apply_5`).setDisabled(true),
-};
+const { buildApplicationButtons } = require('./tickets/application-buttons');
 //Start the module
 module.exports = client => {
     const applySystemAmount = 100;
 
     //define the apply system variable
     async function ApplySystem({ guild, channel, user, message, interaction, es, ls, preindex = false }) {
+        const Buttons = buildApplicationButtons(ls);
         let index = preindex ? preindex : false;
         if (!index) {
             let d = client.apply;
@@ -70,11 +37,11 @@ module.exports = client => {
             if (!interaction.replied)
                 return interaction?.reply({
                     ephemeral: true,
-                    content: `❌ Could not find the Database for your Application!`,
+                    content: `${obeyUi.markup("icon.error")} Could not find the Database for your Application!`,
                 });
             return interaction?.editReply({
                 ephemeral: true,
-                content: `❌ Could not find the Database for your Application!`,
+                content: `${obeyUi.markup("icon.error")} Could not find the Database for your Application!`,
             });
         }
         let applyname = `apply${index}`;
@@ -104,8 +71,8 @@ module.exports = client => {
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable1`]))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable1`]), 256))
                             .addFields({ name: eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variablex_2`]), value: eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable2`]) }),
                     ],
                     ephemeral: true,
@@ -130,9 +97,9 @@ module.exports = client => {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable5`]))
-                                .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable6`])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable5`]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable6`]), 4096)),
                         ],
                         ephemeral: true,
                     })
@@ -169,15 +136,15 @@ module.exports = client => {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setDescription(qu)
+                            .setDescription(obeyUi.limit(qu, 4096))
                             .setAuthor(
-                                client.getAuthor(
+                                obeyMeta.asAuthor(client.getAuthor(
                                     `Question ${counter + 1} / ${Questions.length}`,
                                     client.user.displayAvatarURL(),
                                     `https://discord.gg/MBPsvcphGf`
-                                )
+                                ))
                             )
-                            .setFooter(client.getFooter(es)),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                     ],
                 })
                     .then(msg => {
@@ -223,8 +190,8 @@ module.exports = client => {
                                                             : client.user.displayAvatarURL()
                                                         : null
                                                 )
-                                                .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable7`]))
-                                                .setFooter(client.getFooter(es)),
+                                                .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable7`]), 256))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     })
                                     .catch(e => {
@@ -234,12 +201,12 @@ module.exports = client => {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setColor(es.wrongcolor)
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setTitle(
-                                                            eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable8`])
+                                                            obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable8`]), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable9`])
+                                                            obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable9`]), 4096)
                                                         ),
                                                 ],
                                             })
@@ -261,9 +228,9 @@ module.exports = client => {
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setColor(es.wrongcolor)
-                                        .setFooter(client.getFooter(es))
-                                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable10`]))
-                                        .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable11`])),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable10`]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable11`]), 4096)),
                                 ],
                             })
                             .then(msg => {
@@ -293,12 +260,12 @@ module.exports = client => {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable12`]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable12`]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     }).then(async msg => {
-                        msg.react(`✅`);
-                        msg.react(`❌`);
+                        msg.react(obeyUi.reaction(`✅`));
+                        msg.react(obeyUi.reaction(`❌`));
 
                         const filter = (reaction, user) => {
                             return user.id === originaluser.id;
@@ -306,10 +273,10 @@ module.exports = client => {
                         msg.awaitReactions({ filter, max: 1, time: 300e3, errors: ["time"] })
                             .then(async collected => {
                                 let reaction = collected.first();
-                                if (reaction.emoji?.name === `✅`) {
+                                if (obeyUi.matchesReaction(reaction.emoji, `✅`)) {
                                     antimap.delete(originaluser.id);
                                     var embed = new Discord.EmbedBuilder()
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -319,11 +286,11 @@ module.exports = client => {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable13`])) //${user.username} -
-                                        .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable14`]))
-                                        .setFooter({ text: originaluser.id,
+                                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable13`]), 256)) //${user.username} -
+                                        .setDescription(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable14`]), 4096))
+                                        .setFooter(obeyMeta.asFooter({ text: originaluser.id,
                                             iconURL: originaluser.displayAvatarURL()
-                                        })
+                                        }))
                                         .setThumbnail(
                                             originaluser.displayAvatarURL()
                                         )
@@ -360,9 +327,9 @@ module.exports = client => {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable15`]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable15`]), 256))
                                         .addFields({ name: `\u200b`, value: `**❯** Go Back to the Channel ${originalchannel}` })
-                                        .setFooter(client.getFooter(es));
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)));
 
                                     //send an informational message
                                     originaluser.send({ embeds: [finished_embed] });
@@ -403,8 +370,8 @@ module.exports = client => {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setColor(es.wrongcolor)
-                                                .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable18`]))
-                                                .setFooter(client.getFooter(es)),
+                                                .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable18`]), 256))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 }
@@ -416,8 +383,8 @@ module.exports = client => {
                                     embeds: [
                                         new Discord.EmbedBuilder()
                                             .setColor(es.wrongcolor)
-                                            .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable19`]))
-                                            .setFooter(client.getFooter(es)),
+                                            .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable19`]), 256))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             });
@@ -425,7 +392,7 @@ module.exports = client => {
                 } else {
                     antimap.delete(user.id);
                     var embed = new Discord.EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -434,11 +401,11 @@ module.exports = client => {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable20`])) //${user.username} -
-                        .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable21`]))
-                        .setFooter({ text: originaluser.id,
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable20`]), 256)) //${user.username} -
+                        .setDescription(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable21`]), 4096))
+                        .setFooter(obeyMeta.asFooter({ text: originaluser.id,
                             iconURL: originaluser.displayAvatarURL()
-                        })
+                        }))
                         .setTimestamp();
 
                     //for each question add a field
@@ -468,9 +435,9 @@ module.exports = client => {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable22`]))
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable22`]), 256))
                         .addFields({ name: `\u200b`, value: `**❯** Go Back to the Channel ${originalchannel}` })
-                        .setFooter(client.getFooter(es));
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                     originaluser.send({
                         content: `**❯** Go Atrás to the Canal ${originalchannel}`,
                         embeds: [finished_embed],
@@ -526,9 +493,9 @@ module.exports = client => {
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable26`]))
-                            .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable27`])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable26`]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable27`]), 4096)),
                     ],
                 })
                 .then(msg => {
@@ -550,6 +517,7 @@ module.exports = client => {
         if (message.author.id != client.user.id) return;
         let es = client.settings.get(guild.id, `embed`);
         let ls = client.settings.get(guild.id, `language`);
+        const Buttons = buildApplicationButtons(ls);
         if (interaction?.customId.startsWith(`User_Apply`)) {
             ApplySystem({ guild, channel, user, message, interaction, es, ls });
         }
@@ -563,6 +531,7 @@ module.exports = client => {
         if (message.author.id != client.user.id) return;
         let es = client.settings.get(guild.id, `embed`);
         let ls = client.settings.get(guild.id, `language`);
+        const Buttons = buildApplicationButtons(ls);
         if (interaction?.customId.startsWith(`Apply_`)) {
             let index = false;
             let d = client.apply;
@@ -596,10 +565,10 @@ module.exports = client => {
                     return interaction?.reply({
                         embeds: [
                             new Discord.EmbedBuilder()
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable28`]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable28`]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                         ephemeral: true,
                     });
@@ -612,33 +581,33 @@ module.exports = client => {
                     return interaction?.reply({
                         embeds: [
                             new Discord.EmbedBuilder()
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable29`]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable29`]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                         ephemeral: true,
                     });
 
                 let emoji = {
-                    Apply_accept: `✅`,
-                    Apply_deny: `❌`,
-                    Apply_ticket: `🎟️`,
-                    Apply_1: `1️⃣`,
-                    Apply_2: `2️⃣`,
-                    Apply_3: `3️⃣`,
-                    Apply_4: `4️⃣`,
-                    Apply_5: `5️⃣`,
+                    Apply_accept: `${obeyUi.markup("icon.success")}`,
+                    Apply_deny: `${obeyUi.markup("icon.error")}`,
+                    Apply_ticket: `${obeyUi.markup("icon.ticket")}`,
+                    Apply_1: `${obeyUi.markup("icon.ordinal-1")}`,
+                    Apply_2: `${obeyUi.markup("icon.ordinal-2")}`,
+                    Apply_3: `${obeyUi.markup("icon.ordinal-3")}`,
+                    Apply_4: `${obeyUi.markup("icon.ordinal-4")}`,
+                    Apply_5: `${obeyUi.markup("icon.ordinal-5")}`,
                 };
                 //create a new embed
                 const embed = new Discord.EmbedBuilder()
-                    .setFooter(client.getFooter(es))
-                    .setTitle(oldEmbed.title)
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                    .setTitle(obeyUi.limit(oldEmbed.title, 256))
                     .setDescription(
-                        `${oldEmbed.description ? `${oldEmbed.description}\n` : ``} Edited by: <@${interaction?.user.id}> | ${emoji[interaction?.customId]}`.substr(
+                        obeyUi.limit(`${oldEmbed.description ? `${oldEmbed.description}\n` : ``} Edited by: <@${interaction?.user.id}> | ${emoji[interaction?.customId]}`.substr(
                             0,
                             2048
-                        )
+                        ), 4096)
                     );
 
                 //for each data in it from before hand
@@ -688,15 +657,15 @@ module.exports = client => {
 
                     //CREATE THE APPROVE MESSAGE
                     var approve = new Discord.EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(`GREEN`)
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable30`]))
-                        .setFooter(client.getFooter(
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable30`]), 256))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `By: ` + interaction?.user.username,
                                 interaction?.user.displayAvatarURL()
-                            )
+                            ))
                         )
-                        .setDescription(apply_db.get(message.guild.id, `${pre}.accept`));
+                        .setDescription(obeyUi.limit(apply_db.get(message.guild.id, `${pre}.accept`), 4096));
 
                     //GET THE USER FROM THE DATABASE
                     var usert = await client.users.fetch(apply_db.get(message.id, `${pre}.temp`)).catch(() => {});
@@ -720,9 +689,9 @@ module.exports = client => {
                         })
                         .then(() => {
                             if (interaction.replied) {
-                                interaction.editReply({ content: `👍`, ephemeral: true }).catch(() => {});
+                                interaction.editReply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true }).catch(() => {});
                             }
-                            interaction?.reply({ content: `👍`, ephemeral: true }).catch(() => {});
+                            interaction?.reply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true }).catch(() => {});
                         });
                     //TRY CATCH --- ADDING ROLE
                     try {
@@ -773,14 +742,14 @@ module.exports = client => {
                             );
                         });
                     var deny = new Discord.EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(es.wrongcolor)
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable34`]))
-                        .setDescription(apply_db.get(message.guild.id, `${pre}.deny`))
-                        .setFooter(client.getFooter(
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable34`]), 256))
+                        .setDescription(obeyUi.limit(apply_db.get(message.guild.id, `${pre}.deny`), 4096))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `By: ` + interaction?.user.username,
                                 interaction?.user.displayAvatarURL()
-                            )
+                            ))
                         );
 
                     var usert = await client.users.fetch(apply_db.get(message.id, `${pre}.temp`)).catch(() => {});
@@ -794,7 +763,7 @@ module.exports = client => {
                     usert
                         .send({ embeds: [deny] })
                         .then(() => {
-                            interaction?.reply({ content: `👍`, ephemeral: true });
+                            interaction?.reply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true });
                         })
                         .catch(e => {
                             if (e) {
@@ -895,28 +864,28 @@ module.exports = client => {
                                 let button_close = new ButtonBuilder()
                                     .setStyle(ButtonStyle.Primary)
                                     .setCustomId("ticket_close")
-                                    .setLabel("Close")
-                                    .setEmoji(`🔒`);
+                                    .setLabel(obeyUi.plain("Close"))
+                                    .setEmoji(obeyUi.component(`🔒`));
                                 let button_delete = new ButtonBuilder()
                                     .setStyle(ButtonStyle.Secondary)
                                     .setCustomId("ticket_delete")
-                                    .setLabel(`Delete`)
-                                    .setEmoji(`🗑️`);
+                                    .setLabel(obeyUi.plain(`Delete`))
+                                    .setEmoji(obeyUi.component(`🗑️`));
                                 let button_transcript = new ButtonBuilder()
                                     .setStyle(ButtonStyle.Primary)
                                     .setCustomId("ticket_transcript")
-                                    .setLabel(`Transcript`)
-                                    .setEmoji(`📑`);
+                                    .setLabel(obeyUi.plain(`Transcript`))
+                                    .setEmoji(obeyUi.component(`📑`));
                                 let button_user = new ButtonBuilder()
                                     .setStyle(ButtonStyle.Success)
                                     .setCustomId("ticket_user")
-                                    .setLabel(`Managee Users`)
-                                    .setEmoji(`👤`);
+                                    .setLabel(obeyUi.plain(`Managee Users`))
+                                    .setEmoji(obeyUi.component(`👤`));
                                 let button_role = new ButtonBuilder()
                                     .setStyle(ButtonStyle.Success)
                                     .setCustomId("ticket_role")
-                                    .setLabel(`Managee Roles`)
-                                    .setEmoji(`📌`);
+                                    .setLabel(obeyUi.plain(`Managee Roles`))
+                                    .setEmoji(obeyUi.component(`📌`));
                                 let buttonRow1 = new ActionRowBuilder().addComponents([
                                     button_close,
                                     button_delete,
@@ -941,17 +910,17 @@ module.exports = client => {
                                                             : null
                                                     )
                                                     .setTitle(
-                                                        eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable36`])
+                                                        obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable36`]), 256)
                                                     )
-                                                    .setFooter(client.getFooter(
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(
                                                             `Just Delete this channel, if not needed there is no delete/close command!`,
                                                             message.guild.iconURL()
-                                                        )
+                                                        ))
                                                     )
                                                     .setDescription(
-                                                        apply_db
+                                                        obeyUi.limit(apply_db
                                                             .get(message.guild.id, `${pre}.ticket`)
-                                                            .replace(`{user}`, `<@${usert.id}>`)
+                                                            .replace(`{user}`, `<@${usert.id}>`), 4096)
                                                     ),
                                             ],
                                         });
@@ -986,18 +955,18 @@ module.exports = client => {
                                                             : null
                                                     )
                                                     .setTitle(
-                                                        eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable37`])
+                                                        obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable37`]), 256)
                                                     )
-                                                    .setFooter(client.getFooter(
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(
                                                             `To close/manage this ticket react with the buttons
 You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                                                             message.guild.iconURL()
-                                                        )
+                                                        ))
                                                     )
                                                     .setDescription(
-                                                        apply_db
+                                                        obeyUi.limit(apply_db
                                                             .get(message.guild.id, `${pre}.ticket`)
-                                                            .replace(`{user}`, `<@${usert.id}>`)
+                                                            .replace(`{user}`, `<@${usert.id}>`), 4096)
                                                     ),
                                             ],
                                             components: allbuttons,
@@ -1012,16 +981,16 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                                     //CREATE THE APPROVE MESSAGE
                                     var approve = new Discord.EmbedBuilder()
                                         .setColor(`ORANGE`)
-                                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable38`]))
-                                        .setFooter(client.getFooter(
+                                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable38`]), 256))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                                 `By: ` + interaction?.user.username,
                                                 interaction?.user.displayAvatarURL()
-                                            )
+                                            ))
                                         )
                                         .setDescription(
-                                            apply_db
+                                            obeyUi.limit(apply_db
                                                 .get(message.guild.id, `${pre}.ticket`)
-                                                .replace(`{user}`, `<@${usert.id}>`) + `Channel: <#${channel.id}>`
+                                                .replace(`{user}`, `<@${usert.id}>`) + `Channel: <#${channel.id}>`, 4096)
                                         );
 
                                     //send the user the approve message
@@ -1035,7 +1004,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                                         })
                                         .then(() => {
-                                            interaction?.reply({ content: `👍`, ephemeral: true });
+                                            interaction?.reply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true });
                                         });
                                 } catch {
                                     /* */
@@ -1081,15 +1050,15 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
 
                     //CREATE THE APPROVE MESSAGE
                     var approve = new Discord.EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(`GREEN`)
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable41`]))
-                        .setFooter(client.getFooter(
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable41`]), 256))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `By: ` + interaction?.user.username,
                                 interaction?.user.displayAvatarURL()
-                            )
+                            ))
                         )
-                        .setDescription(apply_db.get(message.guild.id, `${pre}.one.message`));
+                        .setDescription(obeyUi.limit(apply_db.get(message.guild.id, `${pre}.one.message`), 4096));
                     //if image is enabled then set the image
                     if (apply_db.get(message.guild.id, `${pre}.one.image.enabled`))
                         try {
@@ -1120,7 +1089,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                         })
                         .then(() => {
-                            interaction?.reply({ content: `👍`, ephemeral: true });
+                            interaction?.reply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true });
                         });
 
                     //TRY CATCH --- ADDING ROLE
@@ -1176,15 +1145,15 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
 
                     //CREATE THE APPROVE MESSAGE
                     var approve = new Discord.EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(`GREEN`)
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable44`]))
-                        .setFooter(client.getFooter(
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable44`]), 256))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `By: ` + interaction?.user.username,
                                 interaction?.user.displayAvatarURL()
-                            )
+                            ))
                         )
-                        .setDescription(apply_db.get(message.guild.id, `${pre}.two.message`));
+                        .setDescription(obeyUi.limit(apply_db.get(message.guild.id, `${pre}.two.message`), 4096));
                     //if image is enabled then set the image
                     if (apply_db.get(message.guild.id, `${pre}.two.image.enabled`))
                         try {
@@ -1215,7 +1184,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                         })
                         .then(() => {
-                            interaction?.reply({ content: `👍`, ephemeral: true });
+                            interaction?.reply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true });
                         });
 
                     //TRY CATCH --- ADDING ROLE
@@ -1271,15 +1240,15 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
 
                     //CREATE THE APPROVE MESSAGE
                     var approve = new Discord.EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(`GREEN`)
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable47`]))
-                        .setFooter(client.getFooter(
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable47`]), 256))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `By: ` + interaction?.user.username,
                                 interaction?.user.displayAvatarURL()
-                            )
+                            ))
                         )
-                        .setDescription(apply_db.get(message.guild.id, `${pre}.three.message`));
+                        .setDescription(obeyUi.limit(apply_db.get(message.guild.id, `${pre}.three.message`), 4096));
                     //if image is enabled then set the image
                     if (apply_db.get(message.guild.id, `${pre}.three.image.enabled`))
                         try {
@@ -1310,7 +1279,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                         })
                         .then(() => {
-                            interaction?.reply({ content: `👍`, ephemeral: true });
+                            interaction?.reply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true });
                         });
 
                     //TRY CATCH --- ADDING ROLE
@@ -1366,15 +1335,15 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
 
                     //CREATE THE APPROVE MESSAGE
                     var approve = new Discord.EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(`GREEN`)
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable50`]))
-                        .setFooter(client.getFooter(
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable50`]), 256))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `By: ` + interaction?.user.username,
                                 interaction?.user.displayAvatarURL()
-                            )
+                            ))
                         )
-                        .setDescription(apply_db.get(message.guild.id, `${pre}.four.message`));
+                        .setDescription(obeyUi.limit(apply_db.get(message.guild.id, `${pre}.four.message`), 4096));
                     //if image is enabled then set the image
                     if (apply_db.get(message.guild.id, `${pre}.four.image.enabled`))
                         try {
@@ -1405,7 +1374,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                         })
                         .then(() => {
-                            interaction?.reply({ content: `👍`, ephemeral: true });
+                            interaction?.reply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true });
                         });
 
                     //TRY CATCH --- ADDING ROLE
@@ -1461,15 +1430,15 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
 
                     //CREATE THE APPROVE MESSAGE
                     var approve = new Discord.EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(`GREEN`)
-                        .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable53`]))
-                        .setFooter(client.getFooter(
+                        .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable53`]), 256))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `By: ` + interaction?.user.username,
                                 interaction?.user.displayAvatarURL()
-                            )
+                            ))
                         )
-                        .setDescription(apply_db.get(message.guild.id, `${pre}.five.message`));
+                        .setDescription(obeyUi.limit(apply_db.get(message.guild.id, `${pre}.five.message`), 4096));
                     //if image is enabled then set the image
                     if (apply_db.get(message.guild.id, `${pre}.five.image.enabled`))
                         try {
@@ -1500,7 +1469,7 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             console.log(e.stack ? String(e.stack).grey : String(e).grey);
                         })
                         .then(() => {
-                            interaction?.reply({ content: `👍`, ephemeral: true });
+                            interaction?.reply({ content: `${obeyUi.markup("icon.vote-up")}`, ephemeral: true });
                         });
 
                     //TRY CATCH --- ADDING ROLE
@@ -1543,9 +1512,9 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable56`]))
-                                    .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable57`])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable56`]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable57`]), 4096)),
                             ],
                             ephemeral: true,
                         })
@@ -1561,9 +1530,9 @@ You can also type: ${client.settings.get(channel.guild.id, `prefix`)}ticket!`,
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable56`]))
-                                .setDescription(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable57`])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable56`]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls][`handlers`][`applyjs`][`apply`][`variable57`]), 4096)),
                         ],
                         ephemeral: true,
                     });

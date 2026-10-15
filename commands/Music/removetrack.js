@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 module.exports = {
   name: 'removetrack', category: 'Music',
@@ -9,17 +10,17 @@ module.exports = {
     const guildId = message.guild.id
     const mstate  = client.music?.getState(guildId)
     if (!mstate?.queue?.length)
-      return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ La cola está vacía.')] }).catch(() => {})
+      return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ La cola está vacía.'), 4096))] }).catch(() => {})
     const pos = parseInt(args[0])
     if (isNaN(pos) || pos < 1)
-      return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Ingresa una posición válida.')] }).catch(() => {})
+      return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Ingresa una posición válida.'), 4096))] }).catch(() => {})
     const removed = await client.music.remove(guildId, pos).catch(e => {
-      message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ ${e.message}`)] }).catch(() => {})
+      message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} ${e.message}`, 4096))] }).catch(() => {})
       return null
     })
     if (removed) {
       const info = removed.info || removed
-      message.reply({ embeds: [new EmbedBuilder().setColor(0x57F287).setDescription(`🗑️ Eliminado: **${info.title || '?'}**`)] }).catch(() => {})
+      message.reply({ embeds: [new EmbedBuilder().setColor(0x57F287).setDescription(obeyUi.limit(`${obeyUi.markup("icon.delete")} Eliminado: **${info.title || '?'}**`, 4096))] }).catch(() => {})
     }
   },
 }

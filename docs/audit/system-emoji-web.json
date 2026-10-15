@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "file": "dashboard/views/pages/player.ejs",
+      "staticTextEmojiReplaced": 4
+    },
+    {
+      "file": "dashboard/views/pages/guild.ejs",
+      "staticTextEmojiReplaced": 2
+    }
+  ],
+  "publicLandingUntouched": true,
+  "layoutRedesign": false
+}

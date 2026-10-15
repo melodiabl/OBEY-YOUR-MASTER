@@ -1,10 +1,11 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const request = require("request");
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const got = require("got");
 const path = require("path");
 module.exports = {
@@ -21,7 +22,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -41,9 +42,9 @@ module.exports = {
                     let jokeembed = new EmbedBuilder()
                         .setDescription(joke)
                         .setColor(es.color)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(title)
-                        .setAuthor({ name: "Joke" })
+                        .setAuthor(obeyMeta.asAuthor({ name: "Joke" }))
                         .setTimestamp();
                     return message.reply({ embeds: [jokeembed] });
                 })
@@ -54,7 +55,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["fun"]["joke"]["variable2"])),
                 ],

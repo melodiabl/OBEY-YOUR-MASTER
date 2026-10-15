@@ -1,0 +1,976 @@
+{
+  "version": 1,
+  "scope": "presentation_defaults_not_domain_implementation",
+  "modules": {
+    "music": {
+      "resources": [
+        "emoji.musica",
+        "icon.play",
+        "icon.pause",
+        "icon.previous",
+        "icon.skip",
+        "icon.shuffle",
+        "icon.stop",
+        "icon.loop",
+        "icon.queue",
+        "icon.lyrics",
+        "icon.volume-down",
+        "icon.volume-up",
+        "icon.like",
+        "icon.autoplay",
+        "icon.info",
+        "motion.cargando",
+        "icon.success",
+        "icon.error",
+        "motion.favorito",
+        "motion.reproduciendo",
+        "icon.music",
+        "icon.album",
+        "icon.link",
+        "icon.profile",
+        "icon.send",
+        "icon.close",
+        "icon.mute",
+        "icon.clock",
+        "icon.repeat-one",
+        "icon.page-previous",
+        "icon.page-next",
+        "icon.delete"
+      ],
+      "defaultHeaderCharacter": "emoji.musica",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/music.md",
+      "experience": "09_EXPERIENCIAS/music.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "welcome": {
+      "resources": [
+        "emoji.bienvenida",
+        "icon.image",
+        "icon.roles",
+        "icon.info",
+        "icon.send",
+        "icon.edit",
+        "icon.search",
+        "icon.error",
+        "icon.success",
+        "motion.cargando",
+        "motion.exito",
+        "fondos.bienvenida",
+        "fondos.despedida",
+        "plantillas.bienvenida",
+        "plantillas.despedida",
+        "icon.previous"
+      ],
+      "defaultHeaderCharacter": "emoji.bienvenida",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/welcome.md",
+      "experience": "09_EXPERIENCIAS/welcome.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "verification": {
+      "resources": [
+        "emoji.moderacion",
+        "icon.verify",
+        "icon.lock",
+        "icon.warning",
+        "icon.info",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito"
+      ],
+      "defaultHeaderCharacter": "emoji.moderacion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/verification.md",
+      "experience": "09_EXPERIENCIAS/verification.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "roles": {
+      "resources": [
+        "emoji.ayuda",
+        "icon.roles",
+        "icon.verify",
+        "icon.info",
+        "icon.close",
+        "icon.search",
+        "icon.success",
+        "icon.warning",
+        "icon.lock",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.edit"
+      ],
+      "defaultHeaderCharacter": "emoji.ayuda",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/roles.md",
+      "experience": "09_EXPERIENCIAS/roles.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "tickets": {
+      "resources": [
+        "emoji.ayuda",
+        "icon.ticket",
+        "icon.claim",
+        "icon.close",
+        "icon.reopen",
+        "icon.transcript",
+        "icon.send",
+        "ticket.icon.abrir",
+        "ticket.icon.ayuda",
+        "ticket.icon.tecnico",
+        "ticket.icon.reporte",
+        "ticket.icon.atencion",
+        "ticket.icon.espera",
+        "ticket.icon.cierre",
+        "ticket.icon.valoracion",
+        "icon.info",
+        "icon.search",
+        "motion.cargando",
+        "icon.success",
+        "icon.error",
+        "icon.warning",
+        "motion.ticket-espera",
+        "motion.ticket-atencion",
+        "motion.ticket-confirmado",
+        "motion.character-sobre",
+        "motion.character-gracias",
+        "icon.delete"
+      ],
+      "defaultHeaderCharacter": "emoji.ayuda",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/tickets.md",
+      "experience": "09_EXPERIENCIAS/tickets.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "moderation": {
+      "resources": [
+        "emoji.moderacion",
+        "icon.case",
+        "icon.shield",
+        "icon.warning",
+        "icon.transcript",
+        "icon.close",
+        "icon.info",
+        "icon.edit",
+        "icon.search",
+        "icon.previous",
+        "motion.cargando",
+        "icon.success",
+        "icon.lock",
+        "motion.exito"
+      ],
+      "defaultHeaderCharacter": "emoji.moderacion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/moderation.md",
+      "experience": "09_EXPERIENCIAS/moderation.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "automod": {
+      "resources": [
+        "emoji.moderacion",
+        "icon.shield",
+        "icon.automation",
+        "icon.warning",
+        "icon.info",
+        "icon.edit",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.chart",
+        "icon.lock"
+      ],
+      "defaultHeaderCharacter": "emoji.moderacion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/automod.md",
+      "experience": "09_EXPERIENCIAS/automod.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "security": {
+      "resources": [
+        "emoji.moderacion",
+        "icon.shield",
+        "icon.lock",
+        "icon.warning",
+        "icon.undo",
+        "icon.info",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.edit",
+        "icon.transcript"
+      ],
+      "defaultHeaderCharacter": "emoji.moderacion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/security.md",
+      "experience": "09_EXPERIENCIAS/security.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "logs": {
+      "resources": [
+        "emoji.espera",
+        "icon.transcript",
+        "icon.search",
+        "icon.export",
+        "icon.info",
+        "icon.previous",
+        "motion.cargando",
+        "icon.error",
+        "icon.lock",
+        "motion.exito",
+        "icon.edit"
+      ],
+      "defaultHeaderCharacter": "emoji.espera",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/logs.md",
+      "experience": "09_EXPERIENCIAS/logs.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "levels": {
+      "resources": [
+        "emoji.exito",
+        "icon.levels",
+        "icon.star",
+        "icon.info",
+        "icon.previous",
+        "icon.skip",
+        "icon.search",
+        "icon.success",
+        "motion.cargando",
+        "motion.exito",
+        "fondos.nivel",
+        "plantillas.nivel",
+        "scene.celebracion"
+      ],
+      "defaultHeaderCharacter": "emoji.exito",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/levels.md",
+      "experience": "09_EXPERIENCIAS/levels.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "economy": {
+      "resources": [
+        "emoji.exito",
+        "icon.wallet",
+        "icon.gift",
+        "icon.info",
+        "icon.close",
+        "icon.search",
+        "icon.previous",
+        "icon.success",
+        "icon.warning",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.image",
+        "icon.bank",
+        "icon.coins"
+      ],
+      "defaultHeaderCharacter": "emoji.exito",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/economy.md",
+      "experience": "09_EXPERIENCIAS/economy.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "profiles": {
+      "resources": [
+        "emoji.bienvenida",
+        "icon.profile",
+        "icon.image",
+        "icon.star",
+        "icon.info",
+        "icon.edit",
+        "icon.save",
+        "icon.search",
+        "icon.lock",
+        "icon.success",
+        "motion.cargando",
+        "motion.exito",
+        "fondos.perfil",
+        "plantillas.perfil",
+        "badge.staff",
+        "badge.supporter",
+        "icon.levels"
+      ],
+      "defaultHeaderCharacter": "emoji.bienvenida",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/profiles.md",
+      "experience": "09_EXPERIENCIAS/profiles.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "voice": {
+      "resources": [
+        "emoji.ayuda",
+        "icon.voice",
+        "icon.lock",
+        "icon.claim",
+        "icon.edit",
+        "icon.info",
+        "icon.close",
+        "icon.search",
+        "icon.success",
+        "icon.warning",
+        "motion.cargando",
+        "motion.exito"
+      ],
+      "defaultHeaderCharacter": "emoji.ayuda",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/voice.md",
+      "experience": "09_EXPERIENCIAS/voice.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "events": {
+      "resources": [
+        "emoji.exito",
+        "icon.calendar",
+        "icon.bell",
+        "icon.close",
+        "icon.info",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "icon.warning",
+        "motion.cargando",
+        "motion.exito",
+        "fondos.evento",
+        "plantillas.evento"
+      ],
+      "defaultHeaderCharacter": "emoji.exito",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/events.md",
+      "experience": "09_EXPERIENCIAS/events.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "giveaways": {
+      "resources": [
+        "emoji.exito",
+        "icon.gift",
+        "icon.star",
+        "icon.info",
+        "icon.close",
+        "icon.success",
+        "icon.lock",
+        "motion.cargando",
+        "motion.exito",
+        "scene.celebracion",
+        "icon.shield"
+      ],
+      "defaultHeaderCharacter": "emoji.exito",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/giveaways.md",
+      "experience": "09_EXPERIENCIAS/giveaways.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "suggestions": {
+      "resources": [
+        "emoji.ayuda",
+        "icon.idea",
+        "icon.success",
+        "icon.close",
+        "icon.like",
+        "icon.undo",
+        "icon.search",
+        "icon.info",
+        "icon.warning",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.vote-up",
+        "icon.vote-down"
+      ],
+      "defaultHeaderCharacter": "emoji.ayuda",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/suggestions.md",
+      "experience": "09_EXPERIENCIAS/suggestions.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "starboard": {
+      "resources": [
+        "emoji.exito",
+        "icon.star",
+        "icon.search",
+        "icon.info",
+        "icon.warning",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito"
+      ],
+      "defaultHeaderCharacter": "emoji.exito",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/starboard.md",
+      "experience": "09_EXPERIENCIAS/starboard.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "reminders": {
+      "resources": [
+        "emoji.espera",
+        "icon.bell",
+        "icon.calendar",
+        "icon.edit",
+        "icon.info",
+        "icon.success",
+        "icon.error",
+        "icon.warning",
+        "motion.cargando",
+        "motion.exito"
+      ],
+      "defaultHeaderCharacter": "emoji.espera",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/reminders.md",
+      "experience": "09_EXPERIENCIAS/reminders.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "messages": {
+      "resources": [
+        "emoji.configuracion",
+        "icon.template",
+        "icon.edit",
+        "icon.send",
+        "icon.info",
+        "icon.save",
+        "icon.search",
+        "icon.success",
+        "icon.warning",
+        "icon.error",
+        "icon.lock",
+        "motion.cargando",
+        "motion.exito",
+        "scene.vacio",
+        "scene.sin-conexion",
+        "scene.celebracion"
+      ],
+      "defaultHeaderCharacter": "emoji.configuracion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/messages.md",
+      "experience": "09_EXPERIENCIAS/messages.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "cards": {
+      "resources": [
+        "emoji.configuracion",
+        "icon.image",
+        "icon.brush",
+        "icon.info",
+        "icon.save",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "icon.warning",
+        "motion.cargando",
+        "motion.exito",
+        "fondos.bienvenida",
+        "fondos.despedida",
+        "fondos.evento",
+        "fondos.nivel",
+        "fondos.perfil",
+        "plantillas.bienvenida",
+        "plantillas.despedida",
+        "plantillas.evento",
+        "plantillas.nivel",
+        "plantillas.perfil",
+        "badge.staff",
+        "badge.supporter",
+        "icon.template",
+        "icon.edit"
+      ],
+      "defaultHeaderCharacter": "emoji.configuracion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/cards.md",
+      "experience": "09_EXPERIENCIAS/cards.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "automation": {
+      "resources": [
+        "emoji.configuracion",
+        "icon.automation",
+        "icon.warning",
+        "icon.info",
+        "icon.edit",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.shield",
+        "icon.calendar"
+      ],
+      "defaultHeaderCharacter": "emoji.configuracion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/automation.md",
+      "experience": "09_EXPERIENCIAS/automation.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "feeds": {
+      "resources": [
+        "emoji.espera",
+        "icon.feed",
+        "icon.warning",
+        "icon.info",
+        "icon.send",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "scene.sin-conexion"
+      ],
+      "defaultHeaderCharacter": "emoji.espera",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/feeds.md",
+      "experience": "09_EXPERIENCIAS/feeds.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "analytics": {
+      "resources": [
+        "emoji.espera",
+        "icon.chart",
+        "icon.export",
+        "icon.info",
+        "motion.cargando",
+        "icon.error",
+        "icon.success",
+        "motion.exito",
+        "icon.calendar",
+        "icon.levels"
+      ],
+      "defaultHeaderCharacter": "emoji.espera",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/analytics.md",
+      "experience": "09_EXPERIENCIAS/analytics.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "utilities": {
+      "resources": [
+        "emoji.ayuda",
+        "icon.help",
+        "icon.info",
+        "icon.search",
+        "icon.previous",
+        "motion.cargando",
+        "icon.error",
+        "icon.warning",
+        "motion.exito",
+        "scene.vacio",
+        "icon.levels"
+      ],
+      "defaultHeaderCharacter": "emoji.ayuda",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/utilities.md",
+      "experience": "09_EXPERIENCIAS/utilities.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "fun": {
+      "resources": [
+        "emoji.exito",
+        "icon.game",
+        "icon.star",
+        "icon.info",
+        "icon.close",
+        "icon.previous",
+        "icon.success",
+        "icon.warning",
+        "icon.lock",
+        "motion.cargando",
+        "motion.exito",
+        "scene.celebracion",
+        "icon.shield"
+      ],
+      "defaultHeaderCharacter": "emoji.exito",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/fun.md",
+      "experience": "09_EXPERIENCIAS/fun.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "architect": {
+      "resources": [
+        "emoji.configuracion",
+        "icon.blueprint",
+        "icon.warning",
+        "icon.undo",
+        "icon.info",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.template",
+        "icon.edit",
+        "icon.chart"
+      ],
+      "defaultHeaderCharacter": "emoji.configuracion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/architect.md",
+      "experience": "09_EXPERIENCIAS/architect.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "decoration": {
+      "resources": [
+        "emoji.configuracion",
+        "icon.brush",
+        "icon.edit",
+        "icon.undo",
+        "icon.info",
+        "icon.search",
+        "icon.close",
+        "icon.success",
+        "icon.warning",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito"
+      ],
+      "defaultHeaderCharacter": "emoji.configuracion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/decoration.md",
+      "experience": "09_EXPERIENCIAS/decoration.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "templates": {
+      "resources": [
+        "emoji.configuracion",
+        "icon.template",
+        "icon.export",
+        "icon.image",
+        "icon.info",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "icon.warning",
+        "motion.cargando",
+        "motion.exito",
+        "icon.levels",
+        "icon.transcript"
+      ],
+      "defaultHeaderCharacter": "emoji.configuracion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/templates.md",
+      "experience": "09_EXPERIENCIAS/templates.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "collections": {
+      "resources": [
+        "emoji.colecciones",
+        "icon.star",
+        "icon.image",
+        "icon.info",
+        "icon.like",
+        "icon.search",
+        "motion.cargando",
+        "icon.warning",
+        "icon.success",
+        "motion.carta-especial",
+        "motion.exito",
+        "colecciones.carta-muestra",
+        "colecciones.marco-azul",
+        "colecciones.marco-base",
+        "colecciones.marco-dorado",
+        "colecciones.marco-violeta",
+        "colecciones.reverso",
+        "icon.levels"
+      ],
+      "defaultHeaderCharacter": "emoji.colecciones",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/collections.md",
+      "experience": "09_EXPERIENCIAS/collections.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "applications": {
+      "resources": [
+        "emoji.ayuda",
+        "icon.case",
+        "icon.info",
+        "icon.send",
+        "icon.edit",
+        "icon.search",
+        "icon.success",
+        "icon.warning",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.lock",
+        "icon.idea"
+      ],
+      "defaultHeaderCharacter": "emoji.ayuda",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/applications.md",
+      "experience": "09_EXPERIENCIAS/applications.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "sticky": {
+      "resources": [
+        "emoji.ayuda",
+        "icon.bell",
+        "icon.info",
+        "icon.edit",
+        "icon.pause",
+        "icon.search",
+        "icon.success",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito"
+      ],
+      "defaultHeaderCharacter": "emoji.ayuda",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/sticky.md",
+      "experience": "09_EXPERIENCIAS/sticky.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    },
+    "migrations": {
+      "resources": [
+        "emoji.configuracion",
+        "icon.export",
+        "icon.info",
+        "icon.search",
+        "icon.edit",
+        "icon.success",
+        "icon.warning",
+        "icon.error",
+        "motion.cargando",
+        "motion.exito",
+        "icon.levels",
+        "icon.transcript"
+      ],
+      "defaultHeaderCharacter": "emoji.configuracion",
+      "states": [
+        "ready",
+        "loading",
+        "empty",
+        "success",
+        "error",
+        "expired"
+      ],
+      "contract": "03_CONTRATOS/migrations.md",
+      "experience": "09_EXPERIENCIAS/migrations.md",
+      "runtimeConsumerBinding": "required_per_domain_view"
+    }
+  },
+  "sharedStateResources": [
+    "icon.info",
+    "motion.cargando",
+    "icon.success",
+    "icon.error",
+    "icon.clock"
+  ]
+}

@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js')
 
 const CUSTOM_EMOJI = /<a?:[\w]+:(\d+)>/
@@ -15,7 +16,7 @@ module.exports = {
 
     if (!match)
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Eso no es un emoji personalizado válido. Solo funcionan emojis de servidores (no emojis de Unicode).')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Eso no es un emoji personalizado válido. Solo funcionan emojis de servidores (no emojis de Unicode).'), 4096))],
         ephemeral: true,
       })
 

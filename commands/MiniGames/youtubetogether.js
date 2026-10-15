@@ -1,10 +1,11 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder, AttachmentBuilder,
     PermissionFlagsBits
 } = require("discord.js");
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fetch = require("node-fetch");
 module.exports = {
     name: "youtubetogether",
@@ -28,7 +29,7 @@ module.exports = {
             return message.reply({ embeds: [
                 new EmbedBuilder()
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .setTitle(client.la[ls].common.disabled.title)
                     .setDescription(
                         require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
@@ -43,14 +44,14 @@ module.exports = {
                 return message.reply(
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["minigames"]["youtubetogether"]["variable1"]))
                 );
             if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.CreateInstantInvite)) {
                 const nochannel = new EmbedBuilder()
                     .setDescription(eval(client.la[ls]["cmds"]["minigames"]["youtubetogether"]["variable2"]))
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 return message.reply(nochannel);
             }
             await fetch(`https://discord.com/api/v8/channels/${channel.id}/invites`, {
@@ -75,7 +76,7 @@ module.exports = {
                             new EmbedBuilder()
                                 .setDescription(eval(client.la[ls]["cmds"]["minigames"]["youtubetogether"]["variable3"]))
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         );
                     }
                     message.reply(eval(client.la[ls]["cmds"]["minigames"]["youtubetogether"]["variable4"]));
@@ -85,7 +86,7 @@ module.exports = {
             return message.reply(
                 new Discord.EmbedBuilder()
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .setTitle(client.la[ls].common.erroroccur)
                     .setDescription(eval(client.la[ls]["cmds"]["minigames"]["youtubetogether"]["variable5"]))
             );

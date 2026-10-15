@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { duration, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 const { ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 module.exports = {
@@ -32,7 +34,7 @@ module.exports = {
                     value: client.la[ls].cmds.info.botfaq.menuoptions[0].value,
                     description: client.la[ls].cmds.info.botfaq.menuoptions[0].description,
                     replymsg: client.la[ls].cmds.info.botfaq.menuoptions[0].replymsg,
-                    emoji: client.la[ls].cmds.info.botfaq.menuoptions[0].emoji, //optional
+                    emoji: obeyUi.component(client.la[ls].cmds.info.botfaq.menuoptions[0].emoji), //optional
                 },
                 {
                     value: client.la[ls].cmds.info.botfaq.menuoptions[1].value,
@@ -45,7 +47,7 @@ module.exports = {
                             .join(", "),
                         ping: Math.floor(client.ws.ping),
                     }),
-                    emoji: client.la[ls].cmds.info.botfaq.menuoptions[1].emoji, //optional
+                    emoji: obeyUi.component(client.la[ls].cmds.info.botfaq.menuoptions[1].emoji), //optional
                 },
                 {
                     value: client.la[ls].cmds.info.botfaq.menuoptions[2].value,
@@ -54,13 +56,13 @@ module.exports = {
                         prefix: prefix,
                         commandcount: client.commands.map(a => a).length,
                     }),
-                    emoji: client.la[ls].cmds.info.botfaq.menuoptions[2].emoji, //optional
+                    emoji: obeyUi.component(client.la[ls].cmds.info.botfaq.menuoptions[2].emoji), //optional
                 },
                 {
                     value: client.la[ls].cmds.info.botfaq.menuoptions[3].value,
                     description: client.la[ls].cmds.info.botfaq.menuoptions[3].description,
                     replymsg: client.la[ls].cmds.info.botfaq.menuoptions[3].replymsg,
-                    emoji: client.la[ls].cmds.info.botfaq.menuoptions[3].emoji, //optional
+                    emoji: obeyUi.component(client.la[ls].cmds.info.botfaq.menuoptions[3].emoji), //optional
                 },
                 {
                     value: client.la[ls].cmds.info.botfaq.menuoptions[4].value,
@@ -68,7 +70,7 @@ module.exports = {
                     replymsg: handlemsg(client.la[ls].cmds.info.botfaq.menuoptions[4].replymsg, {
                         partnercount: partnercount,
                     }),
-                    emoji: client.la[ls].cmds.info.botfaq.menuoptions[4].emoji, //optional
+                    emoji: obeyUi.component(client.la[ls].cmds.info.botfaq.menuoptions[4].emoji), //optional
                 },
                 {
                     value: client.la[ls].cmds.info.botfaq.menuoptions[5].value,
@@ -76,7 +78,7 @@ module.exports = {
                     replymsg: handlemsg(client.la[ls].cmds.info.botfaq.menuoptions[5].replymsg, {
                         prefix: prefix,
                     }),
-                    emoji: client.la[ls].cmds.info.botfaq.menuoptions[5].emoji, //optional
+                    emoji: obeyUi.component(client.la[ls].cmds.info.botfaq.menuoptions[5].emoji), //optional
                 },
                 {
                     value: client.la[ls].cmds.info.botfaq.menuoptions[6].value,
@@ -85,14 +87,14 @@ module.exports = {
                         prefix: prefix,
                         clientusertag: client.user.username,
                     }),
-                    emoji: client.la[ls].cmds.info.botfaq.menuoptions[6].emoji, //optional
+                    emoji: obeyUi.component(client.la[ls].cmds.info.botfaq.menuoptions[6].emoji), //optional
                 },
             ];
             //define the selection
             let Selection = new ActionRowBuilder().addComponents(
                 new StringSelectMenuBuilder()
                     .setCustomId("Botfaq-SlashCmd")
-                    .setPlaceholder(client.la[ls].cmds.info.botfaq.placeholder)
+                    .setPlaceholder(obeyUi.plain(client.la[ls].cmds.info.botfaq.placeholder))
                     .addOptions(
                         menuoptions.map(o => {
                             let Obj = {};
@@ -107,12 +109,12 @@ module.exports = {
             //define the embed
             let MenuEmbed = new Discord.EmbedBuilder()
                 .setColor(es.color)
-                .setAuthor({
+                .setAuthor(obeyMeta.asAuthor({
                     name: client.la[ls].cmds.info.botfaq.menuembed.title,
                     iconURL: client.user.displayAvatarURL(),
                     url: "https://github.com/melodiabl"
-                })
-                .setDescription(client.la[ls].cmds.info.botfaq.menuembed.description);
+                }))
+                .setDescription(obeyUi.limit(client.la[ls].cmds.info.botfaq.menuembed.description, 4096));
             //send the menu msg
             await interaction?.reply({ embeds: [MenuEmbed], components: [Selection], ephemeral: true });
             //function to handle the menuselection
@@ -122,12 +124,12 @@ module.exports = {
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor({
+                            .setAuthor(obeyMeta.asAuthor({
                                 name: client.la[ls].cmds.info.botfaq.menuembed.title,
                                 iconURL: client.user.displayAvatarURL(),
                                 url: "https://github.com/melodiabl"
-                            })
-                            .setDescription(menuoptiondata.replymsg),
+                            }))
+                            .setDescription(obeyUi.limit(menuoptiondata.replymsg, 4096)),
                     ],
                     ephemeral: true,
                 });

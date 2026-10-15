@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing, duration } = require(`${process.cwd()}/handlers/functions`);
 const ms = require("ms");
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
@@ -46,32 +48,32 @@ module.exports = {
                         description: !settings.enabled
                             ? "Detect New Accounts and kick / Ban them"
                             : "Don't Detect New Accounts",
-                        emoji: !settings.enabled ? allEmojis.msg.SUCCESS : allEmojis.msg.ERROR,
+                        emoji: obeyUi.component(!settings.enabled ? allEmojis.msg.SUCCESS : allEmojis.msg.ERROR),
                     },
                     {
                         value: "Set Extra Message",
                         description: `Define an extra Mensaje, sent to their DM`,
-                        emoji: "💬",
+                        emoji: obeyUi.component("💬"),
                     },
                     {
                         value: "Select the Action",
                         description: `Seleccionar the right Action kick/ban`,
-                        emoji: "🔨",
+                        emoji: obeyUi.component("🔨"),
                     },
                     {
                         value: "Set the Duration",
                         description: `Define the Minimum Account Age`,
-                        emoji: "🕒",
+                        emoji: obeyUi.component("🕒"),
                     },
                     {
                         value: "Show Settings",
                         description: `Show Ajustes of the Anti-New-Account`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Anti-New-Account-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -79,7 +81,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Anti-New-Account")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Anti-New-Account"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -95,8 +97,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Anti-New-Account", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/hammer_1f528.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Anti-New-Account", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/hammer_1f528.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -119,16 +121,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -143,11 +145,11 @@ module.exports = {
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setTitle(
-                                            `${thesettings ? `Activado New Account Detection` : `Desactivado New Account Detection`}`
+                                            obeyUi.limit(`${thesettings ? `Activado New Account Detection` : `Desactivado New Account Detection`}`, 256)
                                         )
                                         .setColor(es.color)
                                         .setDescription(
-                                            `${
+                                            obeyUi.limit(`${
                                                 thesettings
                                                     ? `I will now kick New Accounts if they were created before ${duration(
                                                           thesettings.delay
@@ -155,9 +157,9 @@ module.exports = {
                                                           .map(i => `\`${i}\``)
                                                           .join(", ")} ago!`
                                                     : `I will now no longer kick new Accounts!`
-                                            }`.substring(0, 2048)
+                                            }`.substring(0, 2048), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -168,14 +170,14 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(`What should be the new Extra Mensaje?`)
+                                        .setTitle(obeyUi.limit(`What should be the new Extra Mensaje?`, 256))
                                         .setColor(es.color)
                                         .addFields({ name: `**Current Extra-Message:**`, value: `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
                                                 0,
                                                 1024
                                             ) })
-                                        .setDescription(`Send it now!`)
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`Send it now!`, 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -194,13 +196,13 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setTitle(`Defined the New Extra Mensaje!`)
+                                                    .setTitle(obeyUi.limit(`Defined the New Extra Mensaje!`, 256))
                                                     .setColor(es.color)
                                                     .addFields({ name: `**New Extra-Message:**`, value: `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
                                                             0,
                                                             1024
                                                         ) })
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -210,10 +212,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(`Something went wrong`)
+                                                .setTitle(obeyUi.limit(`Something went wrong`, 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -226,20 +228,20 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(`Ajustes of the New Account Detection Configuración`)
+                                        .setTitle(obeyUi.limit(`Ajustes of the New Account Detection Configuración`, 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            `**Activado:**\n> ${thesettings.enabled ? "✅" : "❌"}\n\n**Minimum Account Age:**\n> ${duration(
+                                            obeyUi.limit(`**Activado:**\n> ${thesettings.enabled ? obeyUi.owned("✅") : obeyUi.owned("❌")}\n\n**Minimum Account Age:**\n> ${duration(
                                                 thesettings.delay
                                             )
                                                 .map(i => `\`${i}\``)
-                                                .join(", ")}\n\n**Action:**\n> ${thesettings.action}`.substring(0, 2048)
+                                                .join(", ")}\n\n**Action:**\n> ${thesettings.action}`.substring(0, 2048), 4096)
                                         )
                                         .addFields({ name: `**Current Extra-Message:**`, value: `${extramessage && extramessage.length > 1 ? extramessage : "No Extra Message provided"}`.substring(
                                                 0,
                                                 1024
                                             ) })
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -251,17 +253,17 @@ module.exports = {
                                 {
                                     value: "Kick",
                                     description: `Kick new Members`,
-                                    emoji: allEmojis.msg.SUCCESS,
+                                    emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                                 },
                                 {
                                     value: "Ban",
                                     description: `Ban new Members`,
-                                    emoji: "🔨",
+                                    emoji: obeyUi.component("🔨"),
                                 },
                                 {
                                     value: "Cancel",
                                     description: `Cancelar and stop the Anti-New-Account-Configuración!`,
-                                    emoji: allEmojis.msg.cancel,
+                                    emoji: obeyUi.component(allEmojis.msg.cancel),
                                 },
                             ];
                             //define the selection
@@ -269,7 +271,7 @@ module.exports = {
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                .setPlaceholder("Click me to select the Action Type")
+                                .setPlaceholder(obeyUi.plain("Click me to select the Action Type"))
                                 .addOptions(
                                     menuoptions.map(option => {
                                         let Obj = {
@@ -287,8 +289,8 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor({ name: "Anti-New-Account", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/hammer_1f528.png", url: "https://github.com/melodiabl" })
-                                .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                                .setAuthor(obeyMeta.asAuthor({ name: "Anti-New-Account", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/hammer_1f528.png", url: "https://github.com/melodiabl" }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
@@ -313,29 +315,29 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(`Successfully set the new Action to: ${menu?.values[0]}`)
+                                                .setTitle(obeyUi.limit(`Successfully set the new Action to: ${menu?.values[0]}`, 256))
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `I will now ${menu?.values[0]} new Members, which Account are too young!`.substring(
+                                                    obeyUi.limit(`I will now ${menu?.values[0]} new Members, which Account are too young!`.substring(
                                                         0,
                                                         2048
-                                                    )
+                                                    ), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 }
                                 menu?.reply({
-                                    content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                    content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                     ephemeral: true,
                                 });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                     components: [],
-                                    content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                    content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                 });
                             });
                         }
@@ -345,13 +347,13 @@ module.exports = {
                         var tempmsg = await message.reply({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(`What should be the new Minimum Account Age?`)
+                                    .setTitle(obeyUi.limit(`What should be the new Minimum Account Age?`, 256))
                                     .setColor(es.color)
                                     .addFields({ name: `**Current Minimum Account Age:**`, value: `${duration(settings.delay)
                                             .map(i => `\`${i}\``)
                                             .join(", ")}`.substring(0, 1024) })
-                                    .setDescription(`Send it now!\nExample: \`2 Days\`, \`6 hours + 2 Days\``)
-                                    .setFooter(client.getFooter(es)),
+                                    .setDescription(obeyUi.limit(`Send it now!\nExample: \`2 Days\`, \`6 hours + 2 Days\``, 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                         await tempmsg.channel
@@ -376,12 +378,12 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(`Defined the New Minimum Account Duración!`)
+                                                .setTitle(obeyUi.limit(`Defined the New Minimum Account Duración!`, 256))
                                                 .setColor(es.color)
                                                 .addFields({ name: `**New Minimum Account Age:**`, value: `${duration(time)
                                                         .map(i => `\`${i}\``)
                                                         .join(", ")}`.substring(0, 1024) })
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 }
@@ -391,10 +393,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(`Something went wrong`)
+                                            .setTitle(obeyUi.limit(`Something went wrong`, 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             });
@@ -407,9 +409,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``, 4096)),
                 ],
             });
         }

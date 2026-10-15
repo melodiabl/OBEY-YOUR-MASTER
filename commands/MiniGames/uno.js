@@ -1,9 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 //const { DiscordUNO } = require("discord-uno");
 //const discordUNO = new DiscordUNO("#2f3136");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fetch = require("node-fetch");
 module.exports = {
     name: "uno",
@@ -19,7 +20,7 @@ module.exports = {
             return message.reply({ embeds: [
                 new EmbedBuilder()
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .setTitle(client.la[ls].common.disabled.title)
                     .setDescription(
                         require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {

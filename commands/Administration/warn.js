@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `warn`,
@@ -41,7 +42,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable1"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable2"])),
                     ],
@@ -54,7 +55,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable4"])),
                     ],
@@ -73,7 +74,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable5"])),
                     ],
                 });
@@ -118,13 +119,13 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         `You have: ${client.userProfiles.get(warnmember.user.id, "warnings" ) ? client.userProfiles.get(warnmember.user.id, "warnings").length : 0} Global Warns`,
                                         "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/275/globe-with-meridians_1f310.png"
-                                    )
+                                    ))
                                 )
 
-                                .setAuthor({ name: `You've got warned by: ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                .setAuthor(obeyMeta.asAuthor({ name: `You've got warned by: ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
                                 .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable6"])),
                         ],
                     })
@@ -142,10 +143,10 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(
+                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                     `He has: ${client.userProfiles.get(warnmember.user.id, "warnings" ) ? client.userProfiles.get(warnmember.user.id, "warnings").length : 0} Global Warns`,
                                     "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/275/globe-with-meridians_1f310.png"
-                                )
+                                ))
                             )
 
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable7"]))
@@ -165,7 +166,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable8"])),
                             ],
                         });
@@ -182,7 +183,7 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable9"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable10"])),
                             ],
@@ -192,7 +193,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable11"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable12"])),
                             ],
@@ -217,7 +218,7 @@ module.exports = {
                                                         : client.user.displayAvatarURL()
                                                     : null
                                             )
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable13"]))
                                             .setDescription(
                                                 eval(client.la[ls]["cmds"]["administration"]["warn"]["variable14"])
@@ -231,7 +232,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(client.la[ls].common.erroroccur)
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable15"])),
                             ],
@@ -244,7 +245,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable16"])),
                             ],
                         });
@@ -261,7 +262,7 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable17"])),
                             ],
                         });
@@ -270,7 +271,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable18"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable19"])),
                             ],
@@ -295,7 +296,7 @@ module.exports = {
                                                         : client.user.displayAvatarURL()
                                                     : null
                                             )
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable20"]))
                                             .setDescription(
                                                 eval(client.la[ls]["cmds"]["administration"]["warn"]["variable21"])
@@ -309,7 +310,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable22"]))
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable23"])),
                             ],
@@ -339,16 +340,16 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setFooter(client.getFooter(es))
-                                    .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
                                     .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable24"]))
                                     .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                     .setTimestamp()
-                                    .setFooter(client.getFooter(
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(
                                             "ID: " + message.author.id,
                                             message.author.displayAvatarURL()
-                                        )
+                                        ))
                                     ),
                             ],
                         });
@@ -362,7 +363,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable27"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable28"])),
                     ],
@@ -374,7 +375,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable29"]))
                         .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable30"])),
                 ],

@@ -6,7 +6,7 @@ const { validateSelectedAssets, planEmojiSync, syncEmojis } = require('../handle
 const { snowflake } = require('../handlers/assets/registry')
 async function main() {
   const args = process.argv.slice(2)
-  if (args.some(arg => arg !== '--apply' && !arg.startsWith('--keys='))) throw new Error('Use --apply and/or --keys=play,pause,...')
+  if (args.some(arg => arg !== '--apply' && !arg.startsWith('--keys='))) throw new Error('Use --apply and/or --keys=icon.play,icon.pause,...')
   const keysArgument = args.find(arg => arg.startsWith('--keys='))
   const assets = await validateSelectedAssets(keysArgument ? keysArgument.slice(7).split(',') : undefined)
   if (!args.includes('--apply')) {

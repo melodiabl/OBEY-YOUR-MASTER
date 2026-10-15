@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fs = require("fs");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
@@ -19,11 +21,11 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["changename"]["variable1"]))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changename"]["variable1"]), 256))
                         .setDescription(
-                            eval(client.la[ls]["cmds"]["owner"]["changename"]["variable2"]) +
-                                `\n\nIf you want to change the Settings for **this Server** then type use the \`${prefix}prefix <newprefix>\` Command`
+                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["changename"]["variable2"]) +
+                                `\n\nIf you want to change the Settings for **this Server** then type use the \`${prefix}prefix <newprefix>\` Command`, 4096)
                         ),
                 ],
             });
@@ -34,9 +36,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["settings"]["prefix"]["variable1"]))
-                            .setDescription(`Current global Prefix: \`${config.prefix}\``),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["prefix"]["variable1"]), 256))
+                            .setDescription(obeyUi.limit(`Current global Prefix: \`${config.prefix}\``, 4096)),
                     ],
                 });
             //if there are multiple arguments
@@ -45,8 +47,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["settings"]["prefix"]["variable3"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["prefix"]["variable3"]), 256)),
                     ],
                 });
             //if the prefix is too long
@@ -55,8 +57,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["settings"]["prefix"]["variable4"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["prefix"]["variable4"]), 256)),
                     ],
                 });
             let status = config;
@@ -67,21 +69,21 @@ module.exports = {
                     return message.channel.send({
                         embeds: [
                             new EmbedBuilder()
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setColor(es.wrongcolor)
-                                .setTitle(`<:no:833101993668771842> Something went wrong`)
-                                .setDescription(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``),
+                                .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} Something went wrong`, 256))
+                                .setDescription(obeyUi.limit(`\`\`\`${String(e.message ? e.message : e).substring(0, 2000)}\`\`\``, 4096)),
                         ],
                     });
                 }
                 return message.channel.send({
                     embeds: [
                         new EmbedBuilder()
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.color)
-                            .setTitle(`${allEmojis.msg.SUCCESS} Successfully changed the Prefix`)
+                            .setTitle(obeyUi.limit(`${allEmojis.msg.SUCCESS} Successfully changed the Prefix`, 256))
                             .setDescription(
-                                `**To change it in this Servidor use the: \`${prefix}prefix <newprefix>\` Comando!**`
+                                obeyUi.limit(`**To change it in this Servidor use the: \`${prefix}prefix <newprefix>\` Comando!**`, 4096)
                             ),
                     ],
                 });
@@ -92,9 +94,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["settings"]["prefix"]["variable6"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["prefix"]["variable6"]), 4096)),
                 ],
             });
         }

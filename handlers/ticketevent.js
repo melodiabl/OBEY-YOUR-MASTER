@@ -1,3 +1,8 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
+const { asAuthor } = require("./presentation/metadata")
+const { registry } = require('./assets/registry');
+const { t, localeFor } = require('./i18n');
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, Collection, AttachmentBuilder, PermissionFlagsBits,
     ButtonStyle,
     ChannelType
@@ -41,7 +46,7 @@ module.exports = client => {
 
         if (!client.setups.has(channel.id)) {
             if (interaction.customId != "ticket_verify") {
-                interaction?.reply({ content: "❌ Este canal no es un ticket", ephemeral: true });
+                interaction?.reply({ content: obeyUi.owned("❌ Este canal no es un ticket"), ephemeral: true });
             }
             return;
         }
@@ -95,7 +100,7 @@ module.exports = client => {
                     content: `<@${buttonuser.id}>`,
                     embeds: [
                         new Discord.EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable5"]))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable5"]), 256))
                             .setColor(es.wrongcolor),
                     ],
                 });
@@ -103,14 +108,13 @@ module.exports = client => {
             let button_ticket_verify = new ButtonBuilder()
                 .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_verify")
-                .setLabel("Verify this Step")
-                .setEmoji("✅");
+                .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.verify'))).setEmoji(obeyUi.component(registry.emoji('icon.verify')));
             channel
                 .send({
                     content: `<@${buttonuser.id}>`,
                     embeds: [
                         new Discord.EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable6"]))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable6"]), 256))
                             .setColor(es.color),
                     ],
                     components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
@@ -122,7 +126,7 @@ module.exports = client => {
                     collector.on("collect", async b => {
                         if (b?.user.id !== user.id)
                             return b?.reply(
-                                `<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`,
+                                `${obeyUi.markup("icon.error")} **Only the one who typed ${prefix}help is allowed to react!**`,
                                 true
                             );
 
@@ -131,7 +135,7 @@ module.exports = client => {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
+                                embeds: [new Discord.EmbedBuilder().setTitle(obeyUi.limit("¡Verificado!", 256)).setColor(es.color)],
                                 components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
@@ -187,7 +191,7 @@ module.exports = client => {
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setTitle(
-                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable7"])
+                                            obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable7"]), 256)
                                         )
                                         .setColor(es.color)
                                         .setThumbnail(
@@ -199,15 +203,15 @@ module.exports = client => {
                                                 : null
                                         )
                                         .setDescription(
-                                            `Closed the Ticket of <@${data.user}> and removed him from the Canal!`.substring(
+                                            obeyUi.limit(`Closed the Ticket of <@${data.user}> and removed him from the Canal!`.substring(
                                                 0,
                                                 2000
-                                            )
+                                            ), 4096)
                                         )
                                         .addFields({ name: "User: ", value: `<@${data.user}>` })
                                         .addFields({ name: eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variablex_8"]), value: eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable8"]) })
                                         .addFields({ name: "State: ", value: `${data.state}` })
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             try {
@@ -238,22 +242,22 @@ module.exports = client => {
                                                             : client.user.displayAvatarURL()
                                                         : null
                                                 )
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setAuthor(
-                                                    `ticket --> LOG | ${user.username}`,
-                                                    user.displayAvatarURL()
+                                                    asAuthor(`ticket --> LOG | ${user.username}`,
+                                                    user.displayAvatarURL())
                                                 )
                                                 .setDescription(
-                                                    eval(
+                                                    obeyUi.limit(eval(
                                                         client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                             "variable9"
                                                         ]
-                                                    )
+                                                    ), 4096)
                                                 )
                                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                                 .setTimestamp()
-                                                .setFooter({ text: `ID: ${user.id}` }),
+                                                .setFooter(obeyMeta.asFooter({ text: `ID: ${user.id}` })),
                                         ],
                                     });
                                 } catch (e) {
@@ -264,7 +268,7 @@ module.exports = client => {
                             edited = true;
                             msg.edit({
                                 content: `<@${buttonuser.id}>`,
-                                embeds: [new Discord.EmbedBuilder().setTitle("Cancelado!").setColor(es.wrongcolor)],
+                                embeds: [new Discord.EmbedBuilder().setTitle(obeyUi.limit("Cancelado!", 256)).setColor(es.wrongcolor)],
                                 components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                             }).catch(e => {
                                 console.log(String(e).grey);
@@ -272,7 +276,7 @@ module.exports = client => {
                         }
                     });
                     let endedembed = new Discord.EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable12"]))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable12"]), 256))
                         .setColor(es.wrongcolor);
                     collector.on("end", collected => {
                         if (!edited) {
@@ -284,8 +288,7 @@ module.exports = client => {
                                     new ActionRowBuilder().addComponents(
                                         button_ticket_verify
                                             .setDisabled(true)
-                                            .setLabel("FAILED TO VERIFY")
-                                            .setEmoji("❌")
+                                            .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.verifyFailed'))).setEmoji(obeyUi.component(registry.emoji('icon.error')))
                                             .setStyle(ButtonStyle.Danger)
                                     ),
                                 ],
@@ -323,10 +326,10 @@ module.exports = client => {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle("<:no:833101993668771842> No tienes permiso para eliminar este ticket")
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(obeyUi.owned("<:no:833101993668771842> No tienes permiso para eliminar este ticket"), 256))
                             .setDescription(
-                                `${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`
+                                obeyUi.limit(`${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`, 4096)
                             )
                             .addFields({ name: "Ticket Specific Role(s)/User(s):", value: `${ticketspecific.join(", ")}`.substring(0, 1024) }),
                     ],
@@ -335,13 +338,12 @@ module.exports = client => {
             let button_ticket_verify = new ButtonBuilder()
                 .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_verify")
-                .setLabel("Verify this Step")
-                .setEmoji("✅");
+                .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.verify'))).setEmoji(obeyUi.component(registry.emoji('icon.verify')));
             let msg = await channel.send({
                 content: `<@${buttonuser.id}>`,
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable13"]))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable13"]), 256))
                         .setColor(es.color),
                 ],
                 components: [new ActionRowBuilder().addComponents(button_ticket_verify)],
@@ -352,7 +354,7 @@ module.exports = client => {
             collector.on("collect", async b => {
                 if (b?.user.id !== user.id)
                     return b?.reply(
-                        `<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`,
+                        `${obeyUi.markup("icon.error")} **Only the one who typed ${prefix}help is allowed to react!**`,
                         true
                     );
 
@@ -361,7 +363,7 @@ module.exports = client => {
                     edited = true;
                     b.update({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.EmbedBuilder().setTitle("¡Verificado!").setColor(es.color)],
+                        embeds: [new Discord.EmbedBuilder().setTitle(obeyUi.limit("¡Verificado!", 256)).setColor(es.color)],
                         components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
@@ -424,28 +426,28 @@ module.exports = client => {
                                             //send the Transcript Into the Channel and then Deleting it again from the FOLDER
                                             let sendembed = new EmbedBuilder()
                                                 .setTitle(
-                                                    eval(
+                                                    obeyUi.limit(eval(
                                                         client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                             "variable20"
                                                         ]
-                                                    )
+                                                    ), 256)
                                                 )
                                                 .setColor(ee.color)
-                                                .setFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` });
+                                                .setFooter(obeyMeta.asFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` }));
                                             try {
                                                 let user = guild.members.cache.get(data.user);
                                                 sendembed.setDescription(
-                                                    eval(
+                                                    obeyUi.limit(eval(
                                                         client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                             "variable21"
                                                         ]
-                                                    )
+                                                    ), 4096)
                                                 );
                                                 sendembed.setThumbnail(
                                                     user.user.displayAvatarURL()
                                                 );
                                             } catch {
-                                                sendembed.setDescription(channel.topic);
+                                                sendembed.setDescription(obeyUi.limit(channel.topic, 4096));
                                             }
                                             await logChannel
                                                 .send({
@@ -477,7 +479,7 @@ module.exports = client => {
                     await msg.channel.send({
                         embeds: [
                             new Discord.EmbedBuilder()
-                                .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable14"]))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable14"]), 256))
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -488,12 +490,12 @@ module.exports = client => {
                                         : null
                                 )
                                 .setDescription(
-                                    `Deleting Ticket in less then **\`3 Seconds\`** ....\n\n*If not you can do it manually*`.substring(
+                                    obeyUi.limit(`Deleting Ticket in less then **\`3 Seconds\`** ....\n\n*If not you can do it manually*`.substring(
                                         0,
                                         2000
-                                    )
+                                    ), 4096)
                                 )
-                                .setFooter(client.getFooter(es)),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                     setTimeout(() => {
@@ -519,18 +521,18 @@ module.exports = client => {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setAuthor(
-                                            `ticket --> LOG | ${user.username}`,
-                                            user.displayAvatarURL()
+                                            asAuthor(`ticket --> LOG | ${user.username}`,
+                                            user.displayAvatarURL())
                                         )
                                         .setDescription(
-                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable15"])
+                                            obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable15"]), 4096)
                                         )
                                         .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                         .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                         .setTimestamp()
-                                        .setFooter({ text: `ID: ${user.id}` }),
+                                        .setFooter(obeyMeta.asFooter({ text: `ID: ${user.id}` })),
                                 ],
                             });
                         } catch (e) {
@@ -541,7 +543,7 @@ module.exports = client => {
                     edited = true;
                     b.update({
                         content: `<@${buttonuser.id}>`,
-                        embeds: [new Discord.EmbedBuilder().setTitle("Cancelado!").setColor(es.wrongcolor)],
+                        embeds: [new Discord.EmbedBuilder().setTitle(obeyUi.limit("Cancelado!", 256)).setColor(es.wrongcolor)],
                         components: [new ActionRowBuilder().addComponents(button_ticket_verify.setDisabled(true))],
                     }).catch(e => {
                         console.log(String(e).grey);
@@ -549,7 +551,7 @@ module.exports = client => {
                 }
             });
             let endedembed = new Discord.EmbedBuilder()
-                .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable18"]))
+                .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable18"]), 256))
                 .setColor(es.wrongcolor);
             collector.on("end", collected => {
                 if (!edited) {
@@ -561,8 +563,7 @@ module.exports = client => {
                             new ActionRowBuilder().addComponents(
                                 button_ticket_verify
                                     .setDisabled(true)
-                                    .setLabel("FAILED TO VERIFY")
-                                    .setEmoji("❌")
+                                    .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.verifyFailed'))).setEmoji(obeyUi.component(registry.emoji('icon.error')))
                                     .setStyle(ButtonStyle.Danger)
                             ),
                         ],
@@ -610,19 +611,19 @@ module.exports = client => {
                         const attachment = new AttachmentBuilder(path); //send it as an attachment
                         //send the Transcript Into the Channel and then Deleting it again from the FOLDER
                         let sendembed = new EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable20"]))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable20"]), 256))
                             .setColor(ee.color)
-                            .setFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` });
+                            .setFooter(obeyMeta.asFooter({ text: `${ee.footertext}`, iconURL: `${ee.footericon}` }));
                         try {
                             let user = guild.members.cache.get(data.user);
                             sendembed.setDescription(
-                                eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable21"])
+                                obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable21"]), 4096)
                             );
                             sendembed.setThumbnail(
                                 user.user.displayAvatarURL()
                             );
                         } catch {
-                            sendembed.setDescription(channel.topic);
+                            sendembed.setDescription(obeyUi.limit(channel.topic, 4096));
                         }
                         await channel.send({
                             content: `<@${buttonuser.id}>`,
@@ -650,20 +651,20 @@ module.exports = client => {
                                                         : client.user.displayAvatarURL()
                                                     : null
                                             )
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setAuthor(
-                                                client.getAuthor(
+                                                obeyMeta.asAuthor(client.getAuthor(
                                                     `ticket --> LOG | ${user.username}`,
                                                     user.displayAvatarURL()
-                                                )
+                                                ))
                                             )
                                             .setDescription(
-                                                eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable22"])
+                                                obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable22"]), 4096)
                                             )
                                             .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                             .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                             .setTimestamp()
-                                            .setFooter({ text: `ID: ${user.id}` }),
+                                            .setFooter(obeyMeta.asFooter({ text: `ID: ${user.id}` })),
                                     ],
                                 });
                             } catch (e) {
@@ -678,12 +679,12 @@ module.exports = client => {
                             embeds: [
                                 new EmbedBuilder()
                                     .setAuthor(
-                                        "ERROR! Transcript is to big, to be sent into the Channel!",
-                                        user.displayAvatarURL()
+                                        asAuthor("ERROR! Transcript is to big, to be sent into the Channel!",
+                                        user.displayAvatarURL())
                                     )
-                                    .setFooter({
+                                    .setFooter(obeyMeta.asFooter({
                                         text: `${eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable25"])}`,
-                                    }),
+                                    })),
                             ],
                         });
                     }
@@ -706,10 +707,10 @@ module.exports = client => {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle("<:no:833101993668771842> No tienes permiso para añadir/eliminar usuarios de este ticket")
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(obeyUi.owned("<:no:833101993668771842> No tienes permiso para añadir/eliminar usuarios de este ticket"), 256))
                             .setDescription(
-                                `${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`
+                                obeyUi.limit(`${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`, 4096)
                             ),
                     ],
                 });
@@ -719,7 +720,7 @@ module.exports = client => {
                     content: `<@${buttonuser.id}>`,
                     embeds: [
                         new Discord.EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable32"]))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable32"]), 256))
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -730,9 +731,9 @@ module.exports = client => {
                                     : null
                             )
                             .setDescription(
-                                `Either with <@USERID> or with the USERNAME, or with the USERID`.substring(0, 2000)
+                                obeyUi.limit(`Either with <@USERID> or with the USERNAME, or with the USERID`.substring(0, 2000), 4096)
                             )
-                            .setFooter(client.getFooter(es)),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                     ],
                 })
                 .then(async msg => {
@@ -780,7 +781,7 @@ module.exports = client => {
                                                     .has(PermissionFlagsBits.ManageChannels)
                                             ) {
                                                 return channel.send(
-                                                    `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                                    `${obeyUi.markup("icon.error")} **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                                 );
                                             }
                                             channel.permissionOverwrites
@@ -803,13 +804,13 @@ module.exports = client => {
                                                                             : client.user.displayAvatarURL()
                                                                         : null
                                                                 )
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable35"]
-                                                                    )
+                                                                    ), 256)
                                                                 ),
                                                         ],
                                                     });
@@ -833,17 +834,17 @@ module.exports = client => {
                                                                                     : client.user.displayAvatarURL()
                                                                                 : null
                                                                         )
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setAuthor(
-                                                                            `ticket --> LOG | ${user.username}`,
-                                                                            user.displayAvatarURL()
+                                                                            asAuthor(`ticket --> LOG | ${user.username}`,
+                                                                            user.displayAvatarURL())
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["handlers"]["ticketeventjs"][
                                                                                     "ticketevent"
                                                                                 ]["variable36"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
                                                                         .addFields({ name: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
@@ -864,7 +865,7 @@ module.exports = client => {
                                                                                 ]["variable16"]
                                                                             ) })
                                                                         .setTimestamp()
-                                                                        .setFooter({ text: `ID: ${user.id}` }),
+                                                                        .setFooter(obeyMeta.asFooter({ text: `ID: ${user.id}` })),
                                                                 ],
                                                             });
                                                         } catch (e) {
@@ -877,20 +878,20 @@ module.exports = client => {
                                                         embeds: [
                                                             new EmbedBuilder()
                                                                 .setColor(es.wrongcolor)
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable39"]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable40"]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     });
@@ -902,7 +903,7 @@ module.exports = client => {
                                                     .has(PermissionFlagsBits.ManageChannels)
                                             ) {
                                                 return channel.send(
-                                                    `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                                    `${obeyUi.markup("icon.error")} **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                                 );
                                             }
                                             channel.permissionOverwrites
@@ -925,13 +926,13 @@ module.exports = client => {
                                                                             : client.user.displayAvatarURL()
                                                                         : null
                                                                 )
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable41"]
-                                                                    )
+                                                                    ), 256)
                                                                 ),
                                                         ],
                                                     });
@@ -941,20 +942,20 @@ module.exports = client => {
                                                         embeds: [
                                                             new EmbedBuilder()
                                                                 .setColor(es.wrongcolor)
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable42"]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable43"]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     });
@@ -965,7 +966,7 @@ module.exports = client => {
                             } else {
                                 if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                     return channel.send(
-                                        `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                        `${obeyUi.markup("icon.error")} **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                     );
                                 }
                                 channel.permissionOverwrites
@@ -988,13 +989,13 @@ module.exports = client => {
                                                                 : client.user.displayAvatarURL()
                                                             : null
                                                     )
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setTitle(
-                                                        eval(
+                                                        obeyUi.limit(eval(
                                                             client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                                 "variable44"
                                                             ]
-                                                        )
+                                                        ), 256)
                                                     ),
                                             ],
                                         });
@@ -1017,17 +1018,17 @@ module.exports = client => {
                                                                         : client.user.displayAvatarURL()
                                                                     : null
                                                             )
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setAuthor(
-                                                                `ticket --> LOG | ${user.username}`,
-                                                                user.displayAvatarURL()
+                                                                asAuthor(`ticket --> LOG | ${user.username}`,
+                                                                user.displayAvatarURL())
                                                             )
                                                             .setDescription(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["handlers"]["ticketeventjs"][
                                                                         "ticketevent"
                                                                     ]["variable45"]
-                                                                )
+                                                                ), 4096)
                                                             )
                                                             .addFields({ name: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
@@ -1048,7 +1049,7 @@ module.exports = client => {
                                                                     ]
                                                                 ) })
                                                             .setTimestamp()
-                                                            .setFooter({ text: `ID: ${user.id}` }),
+                                                            .setFooter(obeyMeta.asFooter({ text: `ID: ${user.id}` })),
                                                     ],
                                                 });
                                             } catch (e) {
@@ -1061,20 +1062,20 @@ module.exports = client => {
                                             embeds: [
                                                 new EmbedBuilder()
                                                     .setColor(es.wrongcolor)
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setTitle(
-                                                        eval(
+                                                        obeyUi.limit(eval(
                                                             client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                                 "variable48"
                                                             ]
-                                                        )
+                                                        ), 256)
                                                     )
                                                     .setDescription(
-                                                        eval(
+                                                        obeyUi.limit(eval(
                                                             client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                                 "variable49"
                                                             ]
-                                                        )
+                                                        ), 4096)
                                                     ),
                                             ],
                                         });
@@ -1086,15 +1087,15 @@ module.exports = client => {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(
+                                                        obeyUi.limit(eval(
                                                             client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                                 "variable50"
                                                             ]
-                                                        )
+                                                        ), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
-                                                    .setDescription(`"Cancelado"`.substring(0, 2000))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setDescription(obeyUi.limit(`"Cancelado"`.substring(0, 2000), 4096))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -1119,10 +1120,10 @@ module.exports = client => {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle("<:no:833101993668771842> No tienes permiso para añadir/eliminar roles de este ticket")
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(obeyUi.owned("<:no:833101993668771842> No tienes permiso para añadir/eliminar roles de este ticket"), 256))
                             .setDescription(
-                                `${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`
+                                obeyUi.limit(`${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`, 4096)
                             ),
                     ],
                 });
@@ -1132,7 +1133,7 @@ module.exports = client => {
                     content: `<@${buttonuser.id}>`,
                     embeds: [
                         new Discord.EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable51"]))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable51"]), 256))
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -1143,9 +1144,9 @@ module.exports = client => {
                                     : null
                             )
                             .setDescription(
-                                `Either with <@&ROLEID> or with the ROLEID or with the ROLENAME`.substring(0, 2000)
+                                obeyUi.limit(`Either with <@&ROLEID> or with the ROLEID or with the ROLENAME`.substring(0, 2000), 4096)
                             )
-                            .setFooter(client.getFooter(es)),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                     ],
                 })
                 .then(async msg => {
@@ -1193,7 +1194,7 @@ module.exports = client => {
                                                     .has(PermissionFlagsBits.ManageChannels)
                                             ) {
                                                 return channel.send(
-                                                    `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                                    `${obeyUi.markup("icon.error")} **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                                 );
                                             }
                                             channel.permissionOverwrites
@@ -1215,13 +1216,13 @@ module.exports = client => {
                                                                             : client.user.displayAvatarURL()
                                                                         : null
                                                                 )
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable54"]
-                                                                    )
+                                                                    ), 256)
                                                                 ),
                                                         ],
                                                     });
@@ -1245,17 +1246,17 @@ module.exports = client => {
                                                                                     : client.user.displayAvatarURL()
                                                                                 : null
                                                                         )
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setAuthor(
-                                                                            `ticket --> LOG | ${user.username}`,
-                                                                            user.displayAvatarURL()
+                                                                            asAuthor(`ticket --> LOG | ${user.username}`,
+                                                                            user.displayAvatarURL())
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["handlers"]["ticketeventjs"][
                                                                                     "ticketevent"
                                                                                 ]["variable55"]
-                                                                            )
+                                                                            ), 4096)
                                                                         )
                                                                         .addFields({ name: eval(
                                                                                 client.la[ls]["cmds"]["administration"][
@@ -1276,7 +1277,7 @@ module.exports = client => {
                                                                                 ]["variable16"]
                                                                             ) })
                                                                         .setTimestamp()
-                                                                        .setFooter({ text: `ID: ${user.id}` }),
+                                                                        .setFooter(obeyMeta.asFooter({ text: `ID: ${user.id}` })),
                                                                 ],
                                                             });
                                                         } catch (e) {
@@ -1289,20 +1290,20 @@ module.exports = client => {
                                                         embeds: [
                                                             new EmbedBuilder()
                                                                 .setColor(es.wrongcolor)
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable58"]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable59"]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     });
@@ -1314,7 +1315,7 @@ module.exports = client => {
                                                     .has(PermissionFlagsBits.ManageChannels)
                                             ) {
                                                 return channel.send(
-                                                    `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                                    `${obeyUi.markup("icon.error")} **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                                 );
                                             }
                                             channel.permissionOverwrites
@@ -1336,13 +1337,13 @@ module.exports = client => {
                                                                             : client.user.displayAvatarURL()
                                                                         : null
                                                                 )
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable60"]
-                                                                    )
+                                                                    ), 256)
                                                                 ),
                                                         ],
                                                     });
@@ -1352,20 +1353,20 @@ module.exports = client => {
                                                         embeds: [
                                                             new EmbedBuilder()
                                                                 .setColor(es.wrongcolor)
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable61"]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["handlers"]["ticketeventjs"][
                                                                             "ticketevent"
                                                                         ]["variable62"]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     });
@@ -1376,7 +1377,7 @@ module.exports = client => {
                             } else {
                                 if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
                                     return channel.send(
-                                        `❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
+                                        `${obeyUi.markup("icon.error")} **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`
                                     );
                                 }
                                 channel.permissionOverwrites
@@ -1398,13 +1399,13 @@ module.exports = client => {
                                                                 : client.user.displayAvatarURL()
                                                             : null
                                                     )
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setTitle(
-                                                        eval(
+                                                        obeyUi.limit(eval(
                                                             client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                                 "variable63"
                                                             ]
-                                                        )
+                                                        ), 256)
                                                     ),
                                             ],
                                         });
@@ -1427,17 +1428,17 @@ module.exports = client => {
                                                                         : client.user.displayAvatarURL()
                                                                     : null
                                                             )
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setAuthor(
-                                                                `ticket --> LOG | ${user.username}`,
-                                                                user.displayAvatarURL()
+                                                                asAuthor(`ticket --> LOG | ${user.username}`,
+                                                                user.displayAvatarURL())
                                                             )
                                                             .setDescription(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["handlers"]["ticketeventjs"][
                                                                         "ticketevent"
                                                                     ]["variable64"]
-                                                                )
+                                                                ), 4096)
                                                             )
                                                             .addFields({ name: eval(
                                                                     client.la[ls]["cmds"]["administration"]["ban"][
@@ -1458,7 +1459,7 @@ module.exports = client => {
                                                                     ]
                                                                 ) })
                                                             .setTimestamp()
-                                                            .setFooter({ text: `ID: ${user.id}` }),
+                                                            .setFooter(obeyMeta.asFooter({ text: `ID: ${user.id}` })),
                                                     ],
                                                 });
                                             } catch (e) {
@@ -1471,20 +1472,20 @@ module.exports = client => {
                                             embeds: [
                                                 new EmbedBuilder()
                                                     .setColor(es.wrongcolor)
-                                                    .setFooter(client.getFooter(es))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                     .setTitle(
-                                                        eval(
+                                                        obeyUi.limit(eval(
                                                             client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                                 "variable67"
                                                             ]
-                                                        )
+                                                        ), 256)
                                                     )
                                                     .setDescription(
-                                                        eval(
+                                                        obeyUi.limit(eval(
                                                             client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"][
                                                                 "variable68"
                                                             ]
-                                                        )
+                                                        ), 4096)
                                                     ),
                                             ],
                                         });
@@ -1498,11 +1499,11 @@ module.exports = client => {
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setTitle(
-                                            eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable69"])
+                                            obeyUi.limit(eval(client.la[ls]["handlers"]["ticketeventjs"]["ticketevent"]["variable69"]), 256)
                                         )
                                         .setColor(es.wrongcolor)
-                                        .setDescription(`"Cancelado"`.substring(0, 2000))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`"Cancelado"`.substring(0, 2000), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -1522,10 +1523,10 @@ module.exports = client => {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle("<:no:833101993668771842> No tienes permiso para reclamar este ticket")
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(obeyUi.owned("<:no:833101993668771842> No tienes permiso para reclamar este ticket"), 256))
                             .setDescription(
-                                `${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`
+                                obeyUi.limit(`${adminroles.length > 0 ? "You need one of those Roles: " + adminroles.map(role => `<@&${role}>`).join(" | ") + cmdrole.join(" | ") + theadminroles.join(" | ") : `No Admin Roles Setupped yet! Do it with: \`${prefix}setup-admin\` You can also add Ticket only Roles with \`${prefix}setup-ticket\``}`, 4096)
                             ),
                     ],
                 });
@@ -1533,7 +1534,7 @@ module.exports = client => {
             let data = client.setups.get(channel.id, "ticketdata");
             if (!channel.permissionsFor(member).has(Discord.PermissionFlagsBits.SendMessages)) {
                 if (!channel.permissionsFor(channel.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
-                    return channel.send(`❌ **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`);
+                    return channel.send(`${obeyUi.markup("icon.error")} **I am missing the PermissionFlagsBits MANAGE_CHANNELS for: \`${channel.name}\`**`);
                 }
                 channel.permissionOverwrites
                     .edit(member.user, {
@@ -1542,7 +1543,7 @@ module.exports = client => {
                     .catch(e => {
                         return interaction?.reply({
                             ephemeral: true,
-                            content: "❌ **¡No se pueden cambiar tus permisos!**",
+                            content: obeyUi.owned("❌ **¡No se pueden cambiar tus permisos!**"),
                         });
                     });
             }
@@ -1562,11 +1563,11 @@ module.exports = client => {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor({ name: member.user.username, iconURL: member.displayAvatarURL() })
+                            .setAuthor(obeyMeta.asAuthor({ name: member.user.username, iconURL: member.displayAvatarURL() }))
                             .setDescription(
-                                messageClaim
+                                obeyUi.limit(messageClaim
                                     .replace(/\{claimer\}/gi, `${member.user}`)
-                                    .replace(/\{user\}/gi, `<@${data.user}>`)
+                                    .replace(/\{user\}/gi, `<@${data.user}>`), 4096)
                             ),
                     ],
                 })
@@ -1603,7 +1604,7 @@ module.exports = client => {
                     if (!interaction.placeholder.includes("Menu-Apply System!")) return;
                 }
                 if (interaction.replied)
-                    return interaction?.editReply("❌ Could not find the Database for your Application!");
+                    return interaction?.editReply(obeyUi.owned("❌ Could not find the Database for your Application!"));
                 return;
             }
             let pre = `menuticket${DBindex}`;
@@ -1642,7 +1643,7 @@ module.exports = client => {
                 if (index < 0) {
                     return interaction?.reply({
                         ephemeral: true,
-                        content: "❌ **No se pudo encontrar la configuración del ticket para esta opción**",
+                        content: obeyUi.owned("❌ **No se pudo encontrar la configuración del ticket para esta opción**"),
                     });
                 }
                 let data = settings.data[index];
@@ -1678,7 +1679,7 @@ module.exports = client => {
                             let data = client.setups.get(ticketchannel.id, "ticketdata");
                             if (data.state != "closed" && data.menutickettype == 3) {
                                 return interaction?.reply({
-                                    content: `<:no:833101993668771842> **You already have an Ticket!** <#${ticketchannel.id}>`,
+                                    content: `${obeyUi.markup("icon.error")} **You already have an Ticket!** <#${ticketchannel.id}>`,
                                     ephemeral: true,
                                 });
                             }
@@ -1694,7 +1695,7 @@ module.exports = client => {
                 client.stats.inc(guild.id, "ticketamount");
                 let ticketamount = client.stats.get(guild.id, "ticketamount");
 
-                if (!data.defaultname) data.defaultname = "🎫・{count}・{member}";
+                if (!data.defaultname) data.defaultname = obeyUi.owned("ticket-{count}-{member}");
 
                 let channelname = data.defaultname
                     .replace("{member}", user.username)
@@ -1702,13 +1703,13 @@ module.exports = client => {
                     .replace(/\s/giu, "-")
                     .substring(0, 31);
                 let optionsData = {
-                    topic: `📨 Ticket for: ${user.username} (${user.id}) | ${values[0]} | ✅ Created at: ${moment().format("LLLL")}`,
+                    topic: `${obeyUi.markup("icon.send")} Ticket for: ${user.username} (${user.id}) | ${values[0]} | ${obeyUi.markup("icon.success")} Created at: ${moment().format("LLLL")}`,
                     type: ChannelType.GuildText,
                     reason: `Menu Ticket System for: ${user.username}`,
                 };
                 guild.channels.create({ name: channelname.substring(0, 31), ...optionsData }).then(async ch => {
                     await interaction?.reply({
-                        content: `<a:Loading:833101350623117342> **Creating your ticket?...** (Usually takes 0-2 Seconds)`,
+                        content: `${obeyUi.markup("motion.cargando")} **Creating your ticket?...** (Usually takes 0-2 Seconds)`,
                         ephemeral: true,
                     });
                     try {
@@ -1845,19 +1846,19 @@ module.exports = client => {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(
+                        .setFooter(obeyMeta.asFooter(client.getFooter(
                                 `To close/manage this ticket react with the buttons\nYou can also type: ${client.settings.get(guild.id, "prefix" )}ticket`,
                                 es.footericon
-                            )
+                            ))
                         )
                         .setAuthor(
-                            client.getAuthor(
+                            obeyMeta.asAuthor(client.getAuthor(
                                 `Ticket for: ${user.username}`,
                                 user.displayAvatarURL(),
                                 "https://github.com/melodiabl"
-                            )
+                            ))
                         )
-                        .setDescription(replyMsg.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
+                        .setDescription(obeyUi.limit(replyMsg.replace(/\{user\}/giu, `${user}`).substring(0, 2000), 4096));
                     var ticketembeds = [ticketembed];
                     if (settings.claim.enabled) {
                         var claimEmbed = new EmbedBuilder()
@@ -1870,43 +1871,39 @@ module.exports = client => {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setAuthor(
-                                client.getAuthor(
+                                obeyMeta.asAuthor(client.getAuthor(
                                     `A Staff Member will claim the Ticket soon!`,
-                                    "https://cdn.discordapp.com/emojis/833101350623117342.gif?size=44",
+                                    registry.imageURL('motion.cargando'),
                                     "https://github.com/melodiabl"
-                                )
+                                ))
                             )
-                            .setDescription(settings.claim.messageOpen.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
+                            .setDescription(obeyUi.limit(settings.claim.messageOpen.replace(/\{user\}/giu, `${user}`).substring(0, 2000), 4096));
                         ticketembeds.push(claimEmbed);
                     }
                     const { ButtonBuilder } = require("discord.js");
                     let button_close = new ButtonBuilder()
                         .setStyle(ButtonStyle.Primary)
                         .setCustomId("ticket_close")
-                        .setLabel("Close")
-                        .setEmoji("🔒");
+                        .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.close'))).setEmoji(obeyUi.component(registry.emoji('icon.close')));
                     let button_delete = new ButtonBuilder()
-                        .setStyle(ButtonStyle.Secondary)
+                        .setStyle(ButtonStyle.Danger)
                         .setCustomId("ticket_delete")
-                        .setLabel("Delete")
-                        .setEmoji("🗑️");
+                        .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.delete')))
+                        .setEmoji(obeyUi.component(registry.emoji('icon.delete')));
                     let button_transcript = new ButtonBuilder()
                         .setStyle(ButtonStyle.Primary)
                         .setCustomId("ticket_transcript")
-                        .setLabel("Transcript")
-                        .setEmoji("📑");
+                        .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.transcript'))).setEmoji(obeyUi.component(registry.emoji('icon.transcript')));
                     let button_user = new ButtonBuilder()
                         .setStyle(ButtonStyle.Success)
                         .setCustomId("ticket_user")
-                        .setLabel("Users")
-                        .setEmoji("👤");
+                        .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.users'))).setEmoji(obeyUi.component(registry.emoji('icon.profile')));
                     let button_role = new ButtonBuilder()
                         .setStyle(ButtonStyle.Success)
                         .setCustomId("ticket_role")
-                        .setLabel("Roles")
-                        .setEmoji("📌");
+                        .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.roles'))).setEmoji(obeyUi.component(registry.emoji('icon.roles')));
                     const allbuttons = [
                         new ActionRowBuilder().addComponents([
                             button_close,
@@ -1922,8 +1919,7 @@ module.exports = client => {
                                 new ButtonBuilder()
                                     .setStyle(ButtonStyle.Secondary)
                                     .setCustomId("ticket_claim")
-                                    .setLabel("Claim the Ticket")
-                                    .setEmoji("✅"),
+                                    .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.claim'))).setEmoji(obeyUi.component(registry.emoji('icon.claim'))),
                             ])
                         );
                     }
@@ -2002,7 +1998,7 @@ module.exports = client => {
                     if (!interaction.placeholder.includes("Menu-Apply System!")) return;
                 }
                 if (interaction.replied)
-                    return interaction?.editReply("❌ Could not find the Database for your Application!");
+                    return interaction?.editReply(obeyUi.owned("❌ Could not find the Database for your Application!"));
                 return;
             }
             let theDB = client.autosupport;
@@ -2037,7 +2033,7 @@ module.exports = client => {
                 if (index < 0) {
                     return interaction?.reply({
                         ephemeral: true,
-                        content: "❌ **No se pudo encontrar la configuración de auto-soporte para esta opción**",
+                        content: obeyUi.owned("❌ **No se pudo encontrar la configuración de auto-soporte para esta opción**"),
                     });
                 }
                 let data = settings.data[index];
@@ -2048,7 +2044,7 @@ module.exports = client => {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.color)
-                                .setFooter(client.getFooter(es))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                 .setThumbnail(
                                     es.thumb
                                         ? es.footericon &&
@@ -2058,9 +2054,9 @@ module.exports = client => {
                                         : null
                                 )
                                 .setDescription(
-                                    String(replyMsg)
+                                    obeyUi.limit(String(replyMsg)
                                         .replace(/\{user\}/giu, `<@${user.id}>`)
-                                        .substring(0, 2000)
+                                        .substring(0, 2000), 4096)
                                 ),
                         ],
                     });
@@ -2103,7 +2099,7 @@ module.exports = client => {
                     if (!interaction.placeholder.includes("Menu-Apply System!")) return;
                 }
                 if (interaction.replied)
-                    return interaction?.editReply("❌ Could not find the Database for your Application!");
+                    return interaction?.editReply(obeyUi.owned("❌ Could not find the Database for your Application!"));
                 return;
             }
             let pre = `menuapply${DBindex}`;
@@ -2134,12 +2130,12 @@ module.exports = client => {
             if (index < 0) {
                 return interaction?.reply({
                     ephemeral: true,
-                    content: "❌ **No se pudo encontrar la configuración del ticket para esta opción**",
+                    content: obeyUi.owned("❌ **No se pudo encontrar la configuración del ticket para esta opción**"),
                 });
             }
             const data = settings.data[index];
             if (!data)
-                return interaction?.reply({ ephemeral: true, content: "❌ **No se pudo encontrar los datos de este sistema**" });
+                return interaction?.reply({ ephemeral: true, content: obeyUi.owned("❌ **No se pudo encontrar los datos de este sistema**") });
             require(`./apply.js`).ApplySystem({
                 guild: guild,
                 channel: message.channel,

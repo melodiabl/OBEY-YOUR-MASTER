@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `unban`,
@@ -21,7 +22,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"])),
                     ],
                 });
@@ -32,7 +33,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(`${emoji?.msg.ERROR} Por favor add a valid USERID`)
                             .setDescription(
                                 `Usage: \`${prefix}unban <ID>\`\nExample: \`${prefix}unban ${message.author.id}\``
@@ -46,7 +47,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(`${emoji?.msg.ERROR} The Usuario with that Id is not banned in this Servidor!`)
                             .setDescription(`Type: \`${prefix}listbans\` to see all Bans!`),
                     ],
@@ -58,7 +59,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(`${emoji?.msg.SUCCESS} Successfully Unbanned ${banuser ? banuser.tag : args[0]}`)
                             .setDescription(`Type: \`${prefix}listbans\` to see all ${bans.size - 1} Bans!`),
                     ],
@@ -69,7 +70,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable10"]))
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable11"])),
                     ],
@@ -81,7 +82,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))
                         .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"])),
                 ],

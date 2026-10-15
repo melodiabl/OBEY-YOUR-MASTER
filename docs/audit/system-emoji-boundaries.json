@@ -1,0 +1,6343 @@
+{
+  "scope": "owned_cdn_resources_and_render_limits",
+  "files": [
+    {
+      "file": "commands/Administration/addroletobots.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/addroletoeveryone.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/addroletohumans.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/addroletorole.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/archivethread.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/channellock.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/channelunlock.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/close.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/createbackup.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/deletechannel.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/deleterole.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/deletethread.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/dm.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/embedbuilder.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/giveaway.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/idban.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/instantclose.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/instantdelete.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/jointhreads.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/listbackups.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/loadbackup.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/lockchannel.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/manageinvites.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/mute.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/nickname.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/poll.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/react.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/removerolefrombots.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/removerolefromeveryone.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/removerolefromhumans.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/removerolefromrole.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Administration/removetimeout.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/snipe.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/suggest.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/sync-invites.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/tempmute.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/timeout.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/unarchivethread.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/unlockchannel.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Administration/useridban.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Custom-Queue/savedqueue.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Economy/buy.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Economy/ecolb.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Economy/profile.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Economy/storeinfo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/3d.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/bassboost.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/china.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/chipmunk.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/cleareq.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/clearfilter.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/darthvader.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/filtros.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/nightcore.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/slowmo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/tremolo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/vibrate.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Filter/vibrato.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Fun/abandon.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/affect.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/airpods.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/amazeme.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Fun/america.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/armor.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/beautiful.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/bed.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Fun/blur.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/brazzers.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/byemom.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/cancer.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/changemymind.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/circle.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/communism.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/corporate.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/cry.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/dab.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/delete.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/disability.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/door.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/drake.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/egg.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/emergencymeeting.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/excuseme.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/facepalm.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/facts.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/failure.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/fakenews.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/floor.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/godwhy.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/greyscale.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/hitler.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/invert.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/ipad.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/jail.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/jokeOverHead.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/keepdistance.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/kiss.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Fun/meme.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Fun/note.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/notstonks.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/obama.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/ohno.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/piccolo.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/rainbow.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/rip.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/roblox.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/satan.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/savehumanity.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/sepia.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/shit.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/stonks.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/stroke.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/test.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/tornado.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/trash.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/trigger.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/tweet.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/violence.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/walking.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/wanted.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/wasted.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/whodidthis.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Fun/youtube.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Info/addquote.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/botfaq.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/botinfo.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Info/commandcount.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "commands/Info/connectioninfo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/epic.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/fnshop.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/fnstats.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/invite.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/latestquotes.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/membercount.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/notes.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/quotes.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/removequote.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/roleinfo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/serverinfo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/userbanner.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/userinfo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Info/youtubeinfo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/MiniGames/2024.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/MiniGames/connect4.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "preserve_domain_emoji_field",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/MiniGames/quickclick.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "preserve_domain_emoji_field"
+      ]
+    },
+    {
+      "file": "commands/MiniGames/rockpaperscissors.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/MiniGames/snake.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/MiniGames/tictactoe.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/247.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/autoplay.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/clearqueue.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/join.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/like.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/likedsongs.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/lyrics.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/nowplaying.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/play.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/playskip.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/playtop.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/queue.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/queuestatus.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/removedupes.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/removetrack.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/removevoteskip.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/search.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Music/setupmusic.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/2danal.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/2dboobs.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/2dfeet.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/2dtits.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/2feetgif.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/anal.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/cumslut.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/foxgirl.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/NSFW/waifu.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Owner/botfilename.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Owner/changeprefix.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Owner/changestatus.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Owner/deployslash.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Owner/reloadbot.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Owner/setup-advertise.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Owner/setup-owner.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Owner/stopbot.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Settings/removedj.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-admin.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-admincmdlog.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-aichat.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-anticaps.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-antidiscord.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-antilink.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-antimention.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-antinewaccount.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-antinuke.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-antispam.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-apply.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autobackup.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autodelete.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autoembed.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-automeme.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autonsfw.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autosupport.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-autowarn.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-blacklist.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-boostlog.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-commands.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-counter.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-customcommand.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-dailyfact.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-embed.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-epicgamesverify.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-ghost-ping-detector.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-joinvc.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-jtc.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-keyword.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-language.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-leave.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-logger.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-membercount.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-menuapply.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-menuticket.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-music.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-mute.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-rank.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-reactionrole.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-reportlog.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-roster.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-suggestion.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-ticket.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-tiktok.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-twitch.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-twitter.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-validcode.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-warn.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-welcome.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup-youtube.js",
+      "changes": [
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "own_cdn_image",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Setup/setup.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/a-wow.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/abdi.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/afewmomentslater.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/ahshit.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/airhorn.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/amogus.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/araara.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/bhau.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/bruh.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/cuteuwu.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/dattebayo.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/disconnected.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/fart.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/game-over.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/giggle.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/gimme-ohyeah.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/ha-gay.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/hellomf.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/honk.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/ilikecutg.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/illuminati.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/iphone-notification.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/john-cena.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/kuss-digga.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/laugh.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/magic.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/margayamc.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/moin-meister.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/nani.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/nogodno.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/oioi.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/oioioi.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/onichan.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/pew-pew.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/ph-intro.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/quack-quack.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/rickroll.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/samsung-notification.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/sheesh.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/sike.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/silly-fart.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/skype.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/suiii.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/superidol.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/surprisemf.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/sus.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/uwu.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/verpissdich.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/wetfart.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/wow.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Soundboard/wryd-stepbro.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "commands/Voice/voice.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Admin/embed.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Anime/emote.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/check.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/list.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/remove.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Birthday/set.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/247.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/adminrol.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/architect.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/autorole.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/idioma.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/logs.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/musica.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/prefix.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/setupmusic.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Config/ver.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Economy/coinflip.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Economy/daily.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Economy/rob.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Economy/work.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Favorites/like.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Favorites/lista.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/8ball.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/blur.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/fact.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/greyscale.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/invert.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/joke.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/meme.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/note.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/notstonks.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/ohno.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/rainbow.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/rip.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/roblox.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/sepia.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/shit.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/stonks.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/stroke.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/trash.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/wasted.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Fun/whodidthis.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/end.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/list.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/pause.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/reroll.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Giveaway/resume.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Info/botfaq.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Info/botinfo.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "slashCommands/Info/commandcount.js",
+      "changes": [
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "slashCommands/Info/enlarge.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Info/membercount.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Info/serverbanner.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Info/userbanner.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Info/userid.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Invites/add.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Invites/leaderboard.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Invites/reset.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/cases.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/purge.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/slowmode.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/unban.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/unwarn.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/vdeafen.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/vkick.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/vmute.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Moderation/warn.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/autoplay.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/clearqueue.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/filter.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/forward.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/history.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/jump.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/loop.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/lyrics.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/move.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/nowplaying.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/pause.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/playmusicmix.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/playtop.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/queue.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/remove.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/replay.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/resume.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/rewind.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/seek.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/shuffle.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/skip.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Music/stop.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/add.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/create.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/delete.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/list.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/play.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/share.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Playlist/show.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Rank/leaderboard.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Rank/rank.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Rank/setlevel.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Soundboard/play.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/canal.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/tarjeta.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/test.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "slashCommands/Welcome/ver.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/anticaps.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/antidiscord.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/antilinks.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/antimention.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/antiselfbot.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/antispam.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/apply.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/blacklist.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/command.js",
+      "changes": [
+        "own_cdn_image",
+        "own_cdn_image",
+        "own_cdn_image",
+        "own_cdn_image",
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "handlers/epicgamesverification.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/functions.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/games-choice.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/helpui.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/joinvc.js",
+      "changes": [
+        "own_cdn_image",
+        "own_cdn_image"
+      ]
+    },
+    {
+      "file": "handlers/music/command-settings.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/embeds.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/likes.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/lyrics-pagination.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/lyricsLive.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/playui.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/prefix-compat.js",
+      "changes": [
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/searchui.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/ui.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/music/utils.js",
+      "changes": [
+        "preserve_domain_emoji_field",
+        "preserve_domain_emoji_field",
+        "preserve_domain_emoji_field",
+        "preserve_domain_emoji_field",
+        "preserve_domain_emoji_field",
+        "preserve_domain_emoji_field",
+        "preserve_domain_emoji_field",
+        "preserve_domain_emoji_field"
+      ]
+    },
+    {
+      "file": "handlers/project/info.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/ranking.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/suggest.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/ticket.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "handlers/ticketevent.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "events/guild/interactionCreate.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    },
+    {
+      "file": "events/guild/messageCreate.js",
+      "changes": [
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit",
+        "discord_text_limit"
+      ]
+    }
+  ]
+}

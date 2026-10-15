@@ -1,0 +1,71 @@
+{
+  "scope": "explicitly_reviewed_local_tests_with_mocked_services_not_complete_suite",
+  "coreTests": 32,
+  "reviewedFiles": [
+    {
+      "file": "test/economy-presentation.test.js",
+      "exitCode": 0,
+      "tests": 4,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/suggestions-presentation.test.js",
+      "exitCode": 0,
+      "tests": 3,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/semantic-pages.test.js",
+      "exitCode": 0,
+      "tests": 1,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/music-continuation.test.js",
+      "exitCode": 0,
+      "tests": 10,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/music-lifecycle.test.js",
+      "exitCode": 0,
+      "tests": 4,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/music-recovery.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/obey-assets.test.js",
+      "exitCode": 0,
+      "tests": 8,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/sticky-service.test.js",
+      "exitCode": 0,
+      "tests": 8,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/sticky-transport.test.js",
+      "exitCode": 0,
+      "tests": 3,
+      "failed": 0,
+      "summaryPresent": true
+    }
+  ],
+  "tests": 75,
+  "passed": true
+}

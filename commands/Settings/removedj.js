@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 module.exports = {
     name: `removedj`,
     aliases: [`deletedj`],
@@ -22,8 +24,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable1"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable1"]), 256)),
                     ],
                 });
             //try to find the role in the guild just incase he pings a role of a different server
@@ -34,8 +36,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable2"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable2"]), 256)),
                     ],
                 });
             }
@@ -45,8 +47,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`<:no:833101993668771842> **This Rol is not a DJ-Rol!**`),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} **This Rol is not a DJ-Rol!**`, 256)),
                     ],
                 });
             //remove it from the Database
@@ -67,9 +69,9 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable4"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable5"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable4"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable5"]), 4096)),
                 ],
             });
         } catch (e) {
@@ -78,9 +80,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable6"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["settings"]["removedj"]["variable6"]), 4096)),
                 ],
             });
         }

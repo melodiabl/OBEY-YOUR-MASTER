@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder,
     ButtonStyle
 } = require("discord.js");
@@ -64,13 +66,13 @@ class TicTacToe {
         let Embed;
         if (player == 0) {
             Embed = new EmbedBuilder()
-                .setTitle(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
-                .setDescription(`It is ${authorName}'s Turn!`)
+                .setTitle(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 256))
+                .setDescription(obeyUi.limit(`It is ${authorName}'s Turn!`, 4096))
                 .setColor(3426654);
         } else {
             Embed = new EmbedBuilder()
-                .setTitle(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
-                .setDescription(`It is ${this.opponent.username}'s Turn!`)
+                .setTitle(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 256))
+                .setDescription(obeyUi.limit(`It is ${this.opponent.username}'s Turn!`, 4096))
                 .setColor(3426654);
         }
 
@@ -147,17 +149,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             A1 = new ButtonBuilder()
                                 .setCustomId(a11)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else if (btn.customId == a22 && gameData[player].member.id === btn.user.id) {
@@ -212,17 +214,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             A2 = new ButtonBuilder()
                                 .setCustomId(a22)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else if (btn.customId == a33 && gameData[player].member.id === btn.user.id) {
@@ -277,17 +279,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             A3 = new ButtonBuilder()
                                 .setCustomId(a33)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else if (btn.customId == b11 && gameData[player].member.id === btn.user.id) {
@@ -342,17 +344,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             B1 = new ButtonBuilder()
                                 .setCustomId(b11)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else if (btn.customId == b22 && gameData[player].member.id === btn.user.id) {
@@ -407,17 +409,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             B2 = new ButtonBuilder()
                                 .setCustomId(b22)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else if (btn.customId == b33 && gameData[player].member.id === btn.user.id) {
@@ -472,17 +474,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             B3 = new ButtonBuilder()
                                 .setCustomId(b33)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else if (btn.customId == c11 && gameData[player].member.id === btn.user.id) {
@@ -537,17 +539,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             C1 = new ButtonBuilder()
                                 .setCustomId(c11)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else if (btn.customId == c22 && gameData[player].member.id === btn.user.id) {
@@ -602,17 +604,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             C2 = new ButtonBuilder()
                                 .setCustomId(c22)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else if (btn.customId == c33 && gameData[player].member.id === btn.user.id) {
@@ -667,17 +669,17 @@ class TicTacToe {
                             player = (player + 1) % 2;
                             if (player == 0) {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 __**${authorName}**__ VS ${this.opponent.username} 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} __**${authorName}**__ VS ${this.opponent.username} ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             } else {
                                 Embed = new EmbedBuilder()
-                                    .setDescription(`🎮 ${authorName} VS __**${this.opponent.username}**__ 🎮`)
+                                    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.game")} ${authorName} VS __**${this.opponent.username}**__ ${obeyUi.markup("icon.game")}`, 4096))
                                     .setColor(3426654);
                             }
                             C3 = new ButtonBuilder()
                                 .setCustomId(c33)
                                 .setStyle(`${gameData[player].color}`)
-                                .setEmoji(gameData[player].em)
+                                .setEmoji(obeyUi.gameComponent(gameData[player].em))
                                 .setDisabled();
                         }
                     } else {
@@ -719,15 +721,15 @@ class TicTacToe {
 
         function getButtons() {
             return [
-                new ButtonBuilder().setCustomId(a11).setStyle(ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(a22).setStyle(ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(a33).setStyle(ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(b11).setStyle(ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(b22).setStyle(ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(b33).setStyle(ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(c11).setStyle(ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(c22).setStyle(ButtonStyle.Secondary).setLabel("~"),
-                new ButtonBuilder().setCustomId(c33).setStyle(ButtonStyle.Secondary).setLabel("~"),
+                new ButtonBuilder().setCustomId(a11).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
+                new ButtonBuilder().setCustomId(a22).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
+                new ButtonBuilder().setCustomId(a33).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
+                new ButtonBuilder().setCustomId(b11).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
+                new ButtonBuilder().setCustomId(b22).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
+                new ButtonBuilder().setCustomId(b33).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
+                new ButtonBuilder().setCustomId(c11).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
+                new ButtonBuilder().setCustomId(c22).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
+                new ButtonBuilder().setCustomId(c33).setStyle(ButtonStyle.Secondary).setLabel(obeyUi.plain("~")),
             ];
         }
     }
@@ -749,15 +751,15 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                         .setDescription(
-                            require(`${process.cwd()}/handlers/functions`).handlemsg(
+                            obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
                                 {
                                     prefix: prefix,
                                 }
-                            )
+                            ), 4096)
                         ),
                 ],
             });

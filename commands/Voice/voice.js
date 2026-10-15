@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const Discord = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -20,13 +22,13 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                         .setDescription(
-                            require(`${process.cwd()}/handlers/functions`).handlemsg(
+                            obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
                                 { prefix: prefix }
-                            )
+                            ), 4096)
                         ),
                 ],
             });
@@ -43,8 +45,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable1"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable1"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -65,8 +67,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable2"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable2"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
@@ -104,9 +106,9 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable3"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable4"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable3"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable4"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -115,8 +117,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable5"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable5"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -127,8 +129,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable6"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable6"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -148,8 +150,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable7"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable7"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
 
@@ -185,9 +187,9 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable8"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable9"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable8"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable9"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -196,8 +198,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable10"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable10"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -208,8 +210,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable1"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable1"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -230,8 +232,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable2"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable2"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
@@ -269,9 +271,9 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle("✅ ¡ESCENARIO en tu Canal!")
-                                        .setDescription(`¡Nadie puede hablar ya!`)
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(obeyUi.owned("✅ ¡ESCENARIO en tu Canal!"), 256))
+                                        .setDescription(obeyUi.limit(`¡Nadie puede hablar ya!`, 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -280,8 +282,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable5"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable5"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -292,8 +294,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable6"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable6"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -313,8 +315,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable7"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable7"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
 
@@ -352,9 +354,9 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle("✅ ¡SIN ESCENARIO en tu Canal!")
-                                        .setDescription(`¡Todos pueden hablar en tu Canal ahora!`)
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(obeyUi.owned("✅ ¡SIN ESCENARIO en tu Canal!"), 256))
+                                        .setDescription(obeyUi.limit(`¡Todos pueden hablar en tu Canal ahora!`, 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -363,8 +365,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable10"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable10"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -375,8 +377,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable11"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable11"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -396,8 +398,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable12"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable12"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -405,9 +407,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable13"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable14"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable13"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable14"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     let member =
@@ -418,9 +420,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable15"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable16"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable15"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable16"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!member.voice.channel)
@@ -428,8 +430,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable17"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable17"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (member.voice.channel.id != channel.id)
@@ -437,8 +439,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable18"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable18"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     try {
@@ -455,8 +457,8 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable19"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable19"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     } catch (e) {
@@ -464,9 +466,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable20"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable21"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable20"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable21"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     }
@@ -475,8 +477,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable22"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable22"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -487,8 +489,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable23"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable23"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -508,8 +510,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable24"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable24"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -517,9 +519,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable25"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable26"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable25"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable26"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     let member =
@@ -530,9 +532,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable27"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable28"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable27"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable28"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     let txt = args.slice(1).join(" ");
@@ -579,14 +581,14 @@ module.exports = {
                                                                 : client.user.displayAvatarURL()
                                                             : null
                                                     )
-                                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable29"]))
+                                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable29"]), 256))
                                                     .setDescription(
-                                                        `[Click aquí](${invite.url}) para unirte a **${channel.name}**\n\n${txt ? txt : ""}`.substring(
+                                                        obeyUi.limit(`[Click aquí](${invite.url}) para unirte a **${channel.name}**\n\n${txt ? txt : ""}`.substring(
                                                             0,
                                                             2000
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         })
                                         .catch(e => {
@@ -595,12 +597,12 @@ module.exports = {
                                                     new Discord.EmbedBuilder()
                                                         .setColor(es.wrongcolor)
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["voice"]["voice"]["variable30"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable30"]), 256)
                                                         )
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["voice"]["voice"]["variable31"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable31"]), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
@@ -617,8 +619,8 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable32"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable32"]), 256))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -627,9 +629,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable33"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable34"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable33"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable34"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     }
@@ -638,8 +640,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable35"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable35"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -650,8 +652,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable36"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable36"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -671,8 +673,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable37"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable37"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -680,9 +682,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable38"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable39"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable38"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable39"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     let member =
@@ -693,9 +695,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable40"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable41"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable40"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable41"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (member.voice.channel && member.voice.channel.id == channel.id)
@@ -713,8 +715,8 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable42"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable42"]), 256))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         } catch (e) {
@@ -722,9 +724,9 @@ module.exports = {
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setColor(es.wrongcolor)
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable43"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable44"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable43"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable44"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -761,8 +763,8 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable45"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable45"]), 256))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -771,8 +773,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable46"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable46"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -783,8 +785,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable47"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable47"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -804,8 +806,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable48"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable48"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -813,9 +815,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable49"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable50"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable49"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable50"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     let member =
@@ -826,9 +828,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable51"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable52"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable51"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable52"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
@@ -863,9 +865,9 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable53"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable54"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable53"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable54"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -874,8 +876,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable55"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable55"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -886,8 +888,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable56"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable56"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -907,8 +909,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable57"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable57"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -916,9 +918,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable58"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable59"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable58"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable59"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     let member =
@@ -929,9 +931,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable60"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable61"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable60"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable61"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
@@ -966,9 +968,9 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable62"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable63"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable62"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable63"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -977,8 +979,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable64"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable64"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -989,8 +991,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable65"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable65"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -1010,8 +1012,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable66"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable66"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -1019,9 +1021,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable67"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable68"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable67"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable68"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     let member =
@@ -1032,9 +1034,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable69"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable70"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable69"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable70"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!vc.permissionsFor(vc.guild.members.me).has(PermissionFlagsBits.ManageChannels)) {
@@ -1069,9 +1071,9 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable71"]))
-                                        .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable72"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable71"]), 256))
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable72"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         });
@@ -1080,8 +1082,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable73"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable73"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -1092,8 +1094,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable74"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable74"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -1113,8 +1115,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable75"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable75"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -1122,8 +1124,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable76"])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable76"]), 256)),
                             ],
                         });
                     if (isNaN(args[0]))
@@ -1131,8 +1133,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable77"])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable77"]), 256)),
                             ],
                         });
                     let userlimit = Number(args[0]);
@@ -1141,8 +1143,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable78"])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable78"]), 256)),
                             ],
                         });
                     channel.setUserLimit(userlimit).then(vc => {
@@ -1158,8 +1160,8 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable79"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable79"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     });
@@ -1168,8 +1170,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable80"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable80"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -1180,8 +1182,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable81"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable81"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -1201,8 +1203,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable82"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable82"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -1210,8 +1212,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable83"])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable83"]), 256)),
                             ],
                         });
                     if (isNaN(args[0]))
@@ -1219,8 +1221,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable84"])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable84"]), 256)),
                             ],
                         });
                     let maxbitrate = 96000;
@@ -1234,8 +1236,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable85"])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable85"]), 256)),
                             ],
                         });
                     channel.setBitrate(userlimit).then(vc => {
@@ -1251,8 +1253,8 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable86"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable86"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     });
@@ -1261,8 +1263,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable87"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable87"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -1273,8 +1275,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable88"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable88"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 client.jointocreatemap.ensure(`tempvoicechannel_${message.guild.id}_${channel.id}`, false);
@@ -1294,8 +1296,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable89"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable89"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!args[0])
@@ -1303,9 +1305,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable90"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable91"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable90"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable91"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     let member =
@@ -1316,9 +1318,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable92"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable93"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable92"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable93"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (!member.voice.channel)
@@ -1326,8 +1328,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable94"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable94"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     if (member.voice.channel.id != channel.id)
@@ -1335,8 +1337,8 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable95"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable95"]), 256))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     try {
@@ -1378,8 +1380,8 @@ module.exports = {
                                                                 : client.user.displayAvatarURL()
                                                             : null
                                                     )
-                                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable96"]))
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable96"]), 256))
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     });
@@ -1389,9 +1391,9 @@ module.exports = {
                             embeds: [
                                 new Discord.EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable97"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable98"]))
-                                    .setFooter(client.getFooter(es)),
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable97"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable98"]), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     }
@@ -1400,8 +1402,8 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable99"]))
-                                .setFooter(client.getFooter(es)),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable99"]), 256))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -1409,7 +1411,7 @@ module.exports = {
                 return message.reply({
                     embeds: [
                         new Discord.EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable100"]))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable100"]), 256))
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -1419,8 +1421,8 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable101"]))
-                            .setFooter(client.getFooter(es)),
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable101"]), 4096))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                     ],
                 });
             }
@@ -1430,9 +1432,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable102"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["voice"]["voice"]["variable102"]), 4096)),
                 ],
             });
         }

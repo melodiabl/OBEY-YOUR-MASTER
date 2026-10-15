@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder,
     ButtonStyle
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -23,19 +25,19 @@ module.exports = {
 
         try {
             let languages = {
-                en: "🇬🇧 English",
-                de: "🇩🇪 German",
-                fr: "🇫🇷 French",
-                it: "🇮🇹 Italian",
-                sp: "🇪🇸 Spanish",
-                in: "🇮🇳 India (Hindi)",
-                nl: "🇳🇱 Dutch",
-                tr: "🇹🇷 Turkish",
-                ir: "🇮🇷 Iran",
+                en: obeyUi.owned("🇬🇧 English"),
+                de: obeyUi.owned("🇩🇪 German"),
+                fr: obeyUi.owned("🇫🇷 French"),
+                it: obeyUi.owned("🇮🇹 Italian"),
+                sp: obeyUi.owned("🇪🇸 Spanish"),
+                in: obeyUi.owned("🇮🇳 India (Hindi)"),
+                nl: obeyUi.owned("🇳🇱 Dutch"),
+                tr: obeyUi.owned("🇹🇷 Turkish"),
+                ir: obeyUi.owned("🇮🇷 Iran"),
             };
 
             //function to handle true/false
-            const d2p = bool => (bool ? "`✔️ Enabled`" : "`❌ Disabled`");
+            const d2p = bool => (bool ? obeyUi.owned("`✔️ Enabled`") : obeyUi.owned("`❌ Disabled`"));
             //call the first layer
             first_layer();
 
@@ -45,26 +47,26 @@ module.exports = {
                     {
                         value: `Change Language`,
                         description: "Cambiar el Idioma del Bot",
-                        emoji: allEmojis.msg.SUCCESS,
+                        emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                     },
                     {
                         value: `Reset Language`,
                         description: "Reset to the Default Language (English)",
-                        emoji: allEmojis.msg.ERROR,
+                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                     },
                     {
                         value: "Settings",
                         description: `Show the Current Language`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ticket-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 let Selection = new StringSelectMenuBuilder()
-                    .setPlaceholder("¡Haz clic para configurar the Language!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Language!"))
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -82,8 +84,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Language System Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/flag-united-kingdom_1f1ec-1f1e7.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable1"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Language System Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/flag-united-kingdom_1f1ec-1f1e7.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable1"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -108,13 +110,13 @@ module.exports = {
                         if (menu?.user.id === cmduser.id) {
                             if (used1)
                                 return menu?.reply({
-                                    content: `<:no:833101993668771842> You already selected something, this Selection is now disabled!`,
+                                    content: `${obeyUi.markup("icon.error")} You already selected something, this Selection is now disabled!`,
                                     ephemeral: true,
                                 });
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -128,56 +130,56 @@ module.exports = {
                         let button_en = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_en")
-                            .setEmoji("🇬🇧")
-                            .setLabel("English")
+                            .setEmoji(obeyUi.component("🇬🇧"))
+                            .setLabel(obeyUi.plain("English"))
                             .setDisabled(false);
                         let button_de = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_de")
-                            .setEmoji("🇩🇪")
-                            .setLabel("German")
+                            .setEmoji(obeyUi.component("🇩🇪"))
+                            .setLabel(obeyUi.plain("German"))
                             .setDisabled(false);
                         let button_fr = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_fr")
-                            .setEmoji("🇫🇷")
-                            .setLabel("French")
+                            .setEmoji(obeyUi.component("🇫🇷"))
+                            .setLabel(obeyUi.plain("French"))
                             .setDisabled(false);
                         let button_it = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_it")
-                            .setEmoji("🇮🇹")
-                            .setLabel("Italian")
+                            .setEmoji(obeyUi.component("🇮🇹"))
+                            .setLabel(obeyUi.plain("Italian"))
                             .setDisabled(false);
                         let button_sp = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_sp")
-                            .setEmoji("🇪🇸")
-                            .setLabel("Spanish")
+                            .setEmoji(obeyUi.component("🇪🇸"))
+                            .setLabel(obeyUi.plain("Spanish"))
                             .setDisabled(false);
                         let button_ae = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_in")
-                            .setEmoji("🇮🇳")
-                            .setLabel("India (Hindi)")
+                            .setEmoji(obeyUi.component("🇮🇳"))
+                            .setLabel(obeyUi.plain("India (Hindi)"))
                             .setDisabled(false);
                         let button_nl = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_nl")
-                            .setEmoji("🇳🇱")
-                            .setLabel("Dutch")
+                            .setEmoji(obeyUi.component("🇳🇱"))
+                            .setLabel(obeyUi.plain("Dutch"))
                             .setDisabled(false);
                         let button_tr = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_tr")
-                            .setEmoji("🇹🇷")
-                            .setLabel("Turkish")
+                            .setEmoji(obeyUi.component("🇹🇷"))
+                            .setLabel(obeyUi.plain("Turkish"))
                             .setDisabled(false);
                         let button_ir = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_ir")
-                            .setEmoji("🇮🇷")
-                            .setLabel("Iran")
+                            .setEmoji(obeyUi.component("🇮🇷"))
+                            .setLabel(obeyUi.plain("Iran"))
                             .setDisabled(false);
 
                         let buttonRow1 = new ActionRowBuilder().addComponents(
@@ -193,10 +195,10 @@ module.exports = {
                             content: `***Click on the __Buttons__ to select the Language***`,
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable3"]))
-                                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable4"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable3"]), 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable4"]), 4096))
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es)),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                             components: allbuttons,
                         });
@@ -204,56 +206,56 @@ module.exports = {
                         button_en = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_en")
-                            .setEmoji("🇬🇧")
-                            .setLabel("English")
+                            .setEmoji(obeyUi.component("🇬🇧"))
+                            .setLabel(obeyUi.plain("English"))
                             .setDisabled(true);
                         button_de = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_de")
-                            .setEmoji("🇩🇪")
-                            .setLabel("German")
+                            .setEmoji(obeyUi.component("🇩🇪"))
+                            .setLabel(obeyUi.plain("German"))
                             .setDisabled(true);
                         button_fr = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_fr")
-                            .setEmoji("🇫🇷")
-                            .setLabel("French")
+                            .setEmoji(obeyUi.component("🇫🇷"))
+                            .setLabel(obeyUi.plain("French"))
                             .setDisabled(true);
                         button_it = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_it")
-                            .setEmoji("🇮🇹")
-                            .setLabel("Italian")
+                            .setEmoji(obeyUi.component("🇮🇹"))
+                            .setLabel(obeyUi.plain("Italian"))
                             .setDisabled(true);
                         button_sp = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_sp")
-                            .setEmoji("🇪🇸")
-                            .setLabel("Spanish")
+                            .setEmoji(obeyUi.component("🇪🇸"))
+                            .setLabel(obeyUi.plain("Spanish"))
                             .setDisabled(true);
                         button_ae = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_in")
-                            .setEmoji("🇮🇳")
-                            .setLabel("India (Hindi)")
+                            .setEmoji(obeyUi.component("🇮🇳"))
+                            .setLabel(obeyUi.plain("India (Hindi)"))
                             .setDisabled(true);
                         button_nl = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_nl")
-                            .setEmoji("🇳🇱")
-                            .setLabel("Dutch")
+                            .setEmoji(obeyUi.component("🇳🇱"))
+                            .setLabel(obeyUi.plain("Dutch"))
                             .setDisabled(true);
                         button_tr = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_tr")
-                            .setEmoji("🇹🇷")
-                            .setLabel("Turkish")
+                            .setEmoji(obeyUi.component("🇹🇷"))
+                            .setLabel(obeyUi.plain("Turkish"))
                             .setDisabled(true);
                         button_ir = new ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("language_ir")
-                            .setEmoji("🇮🇷")
-                            .setLabel("Iran")
+                            .setEmoji(obeyUi.component("🇮🇷"))
+                            .setLabel(obeyUi.plain("Iran"))
                             .setDisabled(true);
                         buttonRow1 = new ActionRowBuilder().addComponents(
                             button_en,
@@ -272,7 +274,7 @@ module.exports = {
                         collector.on("collect", async b => {
                             if (b?.user.id !== message.author.id)
                                 return b?.reply(
-                                    `<:no:833101993668771842> **Only the one who typed ${prefix}setup-language is allowed to react!**`,
+                                    `${obeyUi.markup("icon.error")} **Only the one who typed ${prefix}setup-language is allowed to react!**`,
                                     true
                                 );
                             if (
@@ -287,9 +289,9 @@ module.exports = {
                                 message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable5"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable5"]), 256))
                                             .setColor(es.color)
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                                 edited = true;
@@ -327,9 +329,9 @@ module.exports = {
                         return message.reply({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable6"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable6"]), 256))
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es)),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     }
@@ -338,9 +340,9 @@ module.exports = {
                         return message.reply({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable7"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable7"]), 256))
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es)),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     }
@@ -356,9 +358,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable8"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-language"]["variable8"]), 4096)),
                 ],
             });
         }

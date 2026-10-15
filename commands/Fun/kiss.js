@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const imageEffects = require('../../handlers/image-effects');
 const Discord = require("discord.js");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
@@ -5,7 +7,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const request = require("request");
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const path = require("path");
 module.exports = {
     name: path.parse(__filename).name,
@@ -21,13 +23,13 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                         .setDescription(
-                            require(`${process.cwd()}/handlers/functions`).handlemsg(
+                            obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
                                 { prefix: prefix }
-                            )
+                            ), 4096)
                         ),
                 ],
             });
@@ -37,8 +39,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter(client.getFooter(es))
-                        .setAuthor({ name: "Obteniendo datos de imagen...", iconURL: "https://images-ext-1.discordapp.net/external/ANU162U1fDdmQhim_BcbQ3lf4dLaIQl7p0HcqzD5wJA/https/cdn.discordapp.com/emojis/756773010123522058.gif" }),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setAuthor(obeyMeta.asAuthor({ name: "Obteniendo datos de imagen...", iconURL: obeyUi.image("motion.cargando") })),
                 ],
             });
             //find the USER
@@ -78,9 +80,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle("❌ ¡Olvidaste mencionar al menos a un miembro!")
-                            .setDescription(`Usage: \`${prefix}kiss <@User1> [@User2]\``),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(obeyUi.owned("❌ ¡Olvidaste mencionar al menos a un miembro!"), 256))
+                            .setDescription(obeyUi.limit(`Usage: \`${prefix}kiss <@User1> [@User2]\``, 4096)),
                     ],
                 });
             let avatar = user.displayAvatarURL({
@@ -93,7 +95,7 @@ module.exports = {
             let attachment = await new Discord.AttachmentBuilder(image, "kiss.png");
             let fastembed2 = new Discord.EmbedBuilder()
                 .setColor(es.color)
-                .setFooter(client.getFooter(es))
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                 .setImage("attachment://kiss.png");
             await message.reply({ embeds: [fastembed2], files: [attachment] });
             await tempmsg.delete().catch(() => {});
@@ -103,9 +105,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["fun"]["kiss"]["variable4"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["fun"]["kiss"]["variable4"]), 4096)),
                 ],
             });
         }

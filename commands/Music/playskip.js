@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 module.exports = {
   name: 'playskip', category: 'Music',
@@ -7,10 +8,10 @@ module.exports = {
   parameters: { type: 'music', activeplayer: false, previoussong: false },
   run: async (client, message, args) => {
     const query = args.join(' ')
-    if (!query) return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Ingresa el nombre de la canción.')] }).catch(() => {})
+    if (!query) return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Ingresa el nombre de la canción.'), 4096))] }).catch(() => {})
     const voiceChannel = message.member?.voice?.channel
-    if (!voiceChannel) return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Únete a un canal de voz.')] }).catch(() => {})
-    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription('🔎 Buscando...')] })
+    if (!voiceChannel) return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Únete a un canal de voz.'), 4096))] }).catch(() => {})
+    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(obeyUi.owned('🔎 Buscando...'), 4096))] })
     try {
       const player = await client.music.joinChannel(message.guild.id, voiceChannel.id, message.channel.id)
       const result = await client.music.search(query, message.author, { guildId: message.guild.id })
@@ -19,9 +20,9 @@ module.exports = {
       const track  = result.tracks[0]
       await client.music.enqueue(message.guild.id, [track], { front: true, skip: true })
       const info = track.info || track
-      loading.edit({ embeds: [new EmbedBuilder().setColor(0x57F287).setDescription(`▶️ Reproduciendo ahora: **${info.title || query}**`)] }).catch(() => {})
+      loading.edit({ embeds: [new EmbedBuilder().setColor(0x57F287).setDescription(obeyUi.limit(`${obeyUi.markup("icon.play")} Reproduciendo ahora: **${info.title || query}**`, 4096))] }).catch(() => {})
     } catch (e) {
-      loading.edit({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ ${e.message || e}`)] }).catch(() => {})
+      loading.edit({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} ${e.message || e}`, 4096))] }).catch(() => {})
     }
   },
 }

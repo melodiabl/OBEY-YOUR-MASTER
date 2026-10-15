@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -25,196 +27,196 @@ module.exports = {
                     {
                         value: "setup-admin",
                         description: `Configuración Roles/Users for all/specific Admin Cmds`,
-                        emoji: "🔨",
+                        emoji: obeyUi.component("🔨"),
                     },
                     {
                         value: "setup-admincmdlog",
                         description: `Configuración a Logger for Admin Commands to a Canal`,
-                        emoji: "📑",
+                        emoji: obeyUi.component("📑"),
                     },
                     {
                         value: "setup-aichat",
                         description: `Configuración a fun AI-Chat System to chat with me`,
-                        emoji: "💬",
+                        emoji: obeyUi.component("💬"),
                     },
                     {
                         value: "setup-anticaps",
                         description: `Configuración a Anit-CAPS System to prevent CAPS-only msgs`,
-                        emoji: "🅰️",
+                        emoji: obeyUi.component("🅰️"),
                     },
                     {
                         value: "setup-antidiscord",
                         description: `Configuración a Anit-DISCORD System to prevent DC-LINKS`,
-                        emoji: allEmojis.msg.discord_robot,
+                        emoji: obeyUi.component(allEmojis.msg.discord_robot),
                     },
                     {
                         value: "setup-antilink",
                         description: `Configuración a Anit-LINK System to prevent LINKS`,
-                        emoji: "🔗",
+                        emoji: obeyUi.component("🔗"),
                     },
                     {
                         value: "setup-antinuke",
                         description: `Configuración a Anit-NUKE System to prevent NUKES`,
-                        emoji: allEmojis.msg.builder,
+                        emoji: obeyUi.component(allEmojis.msg.builder),
                     },
                     {
                         value: "setup-apply",
                         description: `Configuración up to 25 different Apply Systems`,
-                        emoji: "📋",
+                        emoji: obeyUi.component("📋"),
                     },
                     {
                         value: "setup-autodelete",
                         description: `Configuración auto deletion Channels`,
-                        emoji: "🗑️",
+                        emoji: obeyUi.component("🗑️"),
                     },
                     {
                         value: "setup-autoembed",
                         description: `Define Canal(s) to replace messages with EMBEDS`,
-                        emoji: "📰",
+                        emoji: obeyUi.component("📰"),
                     },
                     {
                         value: "setup-automeme",
                         description: `Define a Canal to post MEMES every Minute`,
-                        emoji: allEmojis.msg.automeme,
+                        emoji: obeyUi.component(allEmojis.msg.automeme),
                     },
                     {
                         value: "setup-blacklist",
                         description: `Manage the Word(s)-Blacklist`,
-                        emoji: "🔠",
+                        emoji: obeyUi.component("🔠"),
                     },
                     {
                         value: "setup-commands",
                         description: `Enable/Disable specific Commands`,
-                        emoji: "⚙️",
+                        emoji: obeyUi.component("⚙️"),
                     },
                     {
                         value: "setup-counter",
                         description: `Configuración a fun Number-Counter Canal`,
-                        emoji: "#️⃣",
+                        emoji: obeyUi.component("#️⃣"),
                     },
                     {
                         value: "setup-customcommand",
                         description: `Configuración up to 25 different Personalizado-Commands`,
-                        emoji: "⌨️",
+                        emoji: obeyUi.component("⌨️"),
                     },
                     {
                         value: "setup-dailyfact",
                         description: `Configuración a Canal to post daily Facts`,
-                        emoji: "🗓",
+                        emoji: obeyUi.component("🗓"),
                     },
                     {
                         value: "setup-embed",
                         description: `Configuración the Look of the Embeded Messages`,
-                        emoji: "📕",
+                        emoji: obeyUi.component("📕"),
                     },
                     {
                         value: "setup-jtc",
                         description: `Configuración the Join-To-Create Canal(s)`,
-                        emoji: "🔈",
+                        emoji: obeyUi.component("🔈"),
                     },
                     {
                         value: "setup-keyword",
                         description: `Configuración up to 25 different Keyword-Messages`,
-                        emoji: "📖",
+                        emoji: obeyUi.component("📖"),
                     },
                     {
                         value: "setup-language",
                         description: `Manage the Bot's Language`,
-                        emoji: "🇬🇧",
+                        emoji: obeyUi.component("🇬🇧"),
                     },
                     {
                         value: "setup-leave",
                         description: `Manage the Leave Messages`,
-                        emoji: "📤",
+                        emoji: obeyUi.component("📤"),
                     },
                     {
                         value: "setup-logger",
                         description: `Configuración the Audit-Log`,
-                        emoji: "🛠",
+                        emoji: obeyUi.component("🛠"),
                     },
                     {
                         value: "setup-membercount",
                         description: `Configuración up to 25 different Miembro-Counters`,
-                        emoji: "📈",
+                        emoji: obeyUi.component("📈"),
                     },
                     {
                         value: "setup-radio",
                         description: `Configuración the Radio/Waitingroom System`,
-                        emoji: "📻",
+                        emoji: obeyUi.component("📻"),
                     },
                     {
                         value: "setup-rank",
                         description: `Configuración the Ranking System`,
-                        emoji: "📊",
+                        emoji: obeyUi.component("📊"),
                     },
                     {
                         value: "setup-reactionrole",
                         description: `Configuración Infinite Reaction Roles`,
-                        emoji: "📌",
+                        emoji: obeyUi.component("📌"),
                     },
                     {
                         value: "setup-reportlog",
                         description: `Configuración the Report System & Canal`,
-                        emoji: "🗃",
+                        emoji: obeyUi.component("🗃"),
                     },
                     {
                         value: "setup-roster",
                         description: `Configuración the Roster System`,
-                        emoji: "📜",
+                        emoji: obeyUi.component("📜"),
                     },
                     {
                         value: "setup-serverstats",
                         description: `Configuración up to 25 different Miembro-Counters`,
-                        emoji: "📈",
+                        emoji: obeyUi.component("📈"),
                     },
                     {
                         value: "setup-suggestion",
                         description: `Configuración the Sugerencia System`,
-                        emoji: "💡",
+                        emoji: obeyUi.component("💡"),
                     },
                     {
                         value: "setup-ticket",
                         description: `Configuración up to 25 different Ticket-Systems`,
-                        emoji: "📨",
+                        emoji: obeyUi.component("📨"),
                     },
                     {
                         value: "setup-tiktok",
                         description: `Configuración up to 3 different TikTok Logger Channels`,
-                        emoji: allEmojis.msg.tiktok,
+                        emoji: obeyUi.component(allEmojis.msg.tiktok),
                     },
                     {
                         value: "setup-twitch",
                         description: `Configuración up to 5 different Twitch Logger Channels`,
-                        emoji: allEmojis.msg.twitch,
+                        emoji: obeyUi.component(allEmojis.msg.twitch),
                     },
                     {
                         value: "setup-twitter",
                         description: `Configuración up to 2 different Twitter Logger Channels`,
-                        emoji: allEmojis.msg.spotify,
+                        emoji: obeyUi.component(allEmojis.msg.spotify),
                     },
                     {
                         value: "setup-validcode",
                         description: `Configuración the Valid-Code System`,
-                        emoji: allEmojis.msg.validcode,
+                        emoji: obeyUi.component(allEmojis.msg.validcode),
                     },
                     {
                         value: "setup-warn",
                         description: `Configuración the Warn System Ajustes`,
-                        emoji: allEmojis.msg.warn,
+                        emoji: obeyUi.component(allEmojis.msg.warn),
                     },
                     {
                         value: "setup-welcome",
                         description: `Configuración the Bienvenido System/Messages`,
-                        emoji: allEmojis.msg.channel,
+                        emoji: obeyUi.component(allEmojis.msg.channel),
                     },
                     {
                         value: "setup-youtube",
                         description: `Configuración up to 5 different Youtube Logger Channels`,
-                        emoji: allEmojis.msg.youtube,
+                        emoji: obeyUi.component(allEmojis.msg.youtube),
                     },
                 ];
                 let Selection1 = new StringSelectMenuBuilder()
-                    .setPlaceholder("¡Haz clic para configurar the (1/3) Systems [A-C]!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the (1/3) Systems [A-C]!"))
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -234,7 +236,7 @@ module.exports = {
                             .filter(Boolean)
                     );
                 let Selection2 = new StringSelectMenuBuilder()
-                    .setPlaceholder("¡Haz clic para configurar the (2/3) Systems [C-R]!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the (2/3) Systems [C-R]!"))
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -257,7 +259,7 @@ module.exports = {
                             .filter(Boolean)
                     );
                 let Selection3 = new StringSelectMenuBuilder()
-                    .setPlaceholder("¡Haz clic para configurar the (3/3) Systems [R-Z]!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the (3/3) Systems [R-Z]!"))
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
@@ -279,16 +281,16 @@ module.exports = {
                 //define the embed
                 let MenuEmbed1 = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Setup-Systems | (1/3) [A-C]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable1"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Setup-Systems | (1/3) [A-C]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable1"]), 4096));
                 let MenuEmbed2 = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Setup-Systems | (2/3) [C-R]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Setup-Systems | (2/3) [C-R]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable2"]), 4096));
                 let MenuEmbed3 = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Setup-Systems | (3/3) [R-Z]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable3"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Setup-Systems | (3/3) [R-Z]", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/lg/57/gear_2699.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable3"]), 4096));
                 //send the menu msg
                 let menumsg1 = await message.reply({
                     embeds: [MenuEmbed1],
@@ -318,7 +320,7 @@ module.exports = {
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -328,7 +330,7 @@ module.exports = {
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -338,7 +340,7 @@ module.exports = {
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                 ephemeral: true,
                             });
                     }
@@ -354,9 +356,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable10"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup"]["variable10"]), 4096)),
                 ],
             });
         }

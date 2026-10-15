@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 //Import npm modules
 const Discord = require("discord.js");
 const { ChannelType,
@@ -279,7 +281,7 @@ module.exports = client => {
                 if (leaves < 0) leaves *= -1;
                 if (invites < 0) invites *= -1;
                 let realinvites = invites - fake - leaves;
-                invitemessage = `Invited by ${inviter.tag ? `**${inviter.tag}**` : `<@${inviter.id}>`}\n<:Like:857334024087011378> **${realinvites} Invite${realinvites == 1 ? "" : "s"}**\n[<:joines:866356465299488809> ${invites} Joins | <:leaves:866356598356049930> ${leaves} Leaves | <:no:833101993668771842> ${fake} Fakes]`;
+                invitemessage = `Invited by ${inviter.tag ? `**${inviter.tag}**` : `<@${inviter.id}>`}\n${obeyUi.markup("icon.like")} **${realinvites} Invite${realinvites == 1 ? "" : "s"}**\n[${obeyUi.markup("icon.join")} ${invites} Joins | ${obeyUi.markup("icon.leaf")} ${leaves} Leaves | ${obeyUi.markup("icon.error")} ${fake} Fakes]`;
             } else if (invite) {
                 invitemessage = `Invited by an **Unknown Member**`;
             } else if (vanity) {
@@ -365,7 +367,7 @@ module.exports = client => {
                             : undefined
                     )
                     .setTimestamp()
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable1"]))
                     .setDescription(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable2"]));
                 //Dm him
@@ -997,10 +999,10 @@ module.exports = client => {
                             : undefined
                     )
                     .setTimestamp()
-                    .setFooter({
+                    .setFooter(obeyMeta.asFooter({
                         text: `ID: ${member.user.id}`,
                         iconURL: `${member.user.displayAvatarURL()}`,
-                    })
+                    }))
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable7"]))
                     .setDescription(
                         require("./welcome-message").renderWelcomeMessage(require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!", member.user, member.guild)
@@ -1037,10 +1039,10 @@ module.exports = client => {
                             : undefined
                     )
                     .setTimestamp()
-                    .setFooter({
+                    .setFooter(obeyMeta.asFooter({
                         text: `ID: ${member.user.id}`,
                         iconURL: `${member.user.displayAvatarURL()}`,
-                    })
+                    }))
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable9"]))
                     .setDescription(
                         (client.settings.get(member.guild.id, "welcome.dm_msg") || "{user} ¡Bienvenido al servidor!")
@@ -1071,10 +1073,10 @@ module.exports = client => {
                             : undefined
                     )
                     .setTimestamp()
-                    .setFooter({
+                    .setFooter(obeyMeta.asFooter({
                         text: `ID: ${member.user.id}`,
                         iconURL: `${member.user.displayAvatarURL()}`,
-                    })
+                    }))
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable10"]))
                     .setDescription(
                         (client.settings.get(member.guild.id, "welcome.dm_msg") || "{user} ¡Bienvenido al servidor!")
@@ -1110,10 +1112,10 @@ module.exports = client => {
                             : undefined
                     )
                     .setTimestamp()
-                    .setFooter({
+                    .setFooter(obeyMeta.asFooter({
                         text: `ID: ${member.user.id}`,
                         iconURL: `${member.user.displayAvatarURL()}`,
-                    })
+                    }))
                     .setTitle(eval(client.la[ls]["handlers"]["welcomejs"]["welcome"]["variable11"]))
                     .setDescription(
                         require("./welcome-message").renderWelcomeMessage(require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!", member.user, member.guild)
@@ -1153,10 +1155,10 @@ module.exports = client => {
                                 : undefined
                         )
                         .setTimestamp()
-                        .setFooter({
+                        .setFooter(obeyMeta.asFooter({
                             text: `ID: ${member.user.id}`,
                             iconURL: `${member.user.displayAvatarURL()}`,
-                        })
+                        }))
                         .setTitle(membershipTitle(client, ls, 'welcome', member, 'variable12'))
                         .setDescription(
                             (client.settings.get(member.guild.id, "welcome.dm_msg") || "{user} ¡Bienvenido al servidor!")
@@ -1191,10 +1193,10 @@ module.exports = client => {
                                 : undefined
                         )
                         .setTimestamp()
-                        .setFooter({
+                        .setFooter(obeyMeta.asFooter({
                             text: `ID: ${member.user.id}`,
                             iconURL: `${member.user.displayAvatarURL()}`,
-                        })
+                        }))
                         .setTitle(membershipTitle(client, ls, 'welcome', member, 'variable13'))
                         .setDescription(
                             require("./welcome-message").renderWelcomeMessage(require("./config-service").welcomeMessage(client.settings, member.guild.id) || "{user} ¡Bienvenido a este servidor!", member.user, member.guild)
@@ -1257,10 +1259,10 @@ module.exports = client => {
                         new Discord.EmbedBuilder()
                             .setTitle(`You got banned from __${member.guild.name}__`)
                             .setThumbnail(member.guild.iconURL())
-                            .setFooter({
+                            .setFooter(obeyMeta.asFooter({
                                 text: `${member.guild.name} | ${member.guild.id}`,
                                 iconURL: `${member.guild.iconURL()}`,
-                            })
+                            }))
                             .setDescription(
                                 `This is because your Account was Creado ${duration(Date.now() - createdAccount)
                                     .map(a => `\`${a}\``)
@@ -1287,10 +1289,10 @@ module.exports = client => {
                         new Discord.EmbedBuilder()
                             .setTitle(`You got kicked from __${member.guild.name}__`)
                             .setThumbnail(member.guild.iconURL())
-                            .setFooter({
+                            .setFooter(obeyMeta.asFooter({
                                 text: `${member.guild.name} | ${member.guild.id}`,
                                 iconURL: `${member.guild.iconURL()}`,
-                            })
+                            }))
                             .setDescription(
                                 `This is because your Account was Creado ${duration(Date.now() - createdAccount)
                                     .map(a => `\`${a}\``)

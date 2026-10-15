@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 const { EmbedBuilder } = require("discord.js");
 module.exports = function (client, options) {
     client.on("guildMemberUpdate", async (oM, nM) => {
@@ -7,11 +9,11 @@ module.exports = function (client, options) {
                 message: "",
                 log: false,
                 stopBoost:
-                    "<a:Server_Boosts:867777823468027924> {member} **stopped Boosting us..** <:Cat_Sad:867722685949804565>",
+                    obeyUi.owned("<a:Server_Boosts:867777823468027924> {member} **stopped Boosting us..** <:Cat_Sad:867722685949804565>"),
                 startBoost:
-                    "<a:Server_Boosts:867777823468027924> {member} **has boosted us!** <a:Light_Saber_Dancce:867721861462229013>",
+                    obeyUi.owned("<a:Server_Boosts:867777823468027924> {member} **has boosted us!** <a:Light_Saber_Dancce:867721861462229013>"),
                 againBoost:
-                    "<a:Server_Boosts:867777823468027924> {member} **has boosted us again!** <:Tada_WON:867724032207224833>",
+                    obeyUi.owned("<a:Server_Boosts:867777823468027924> {member} **has boosted us again!** <:Tada_WON:867724032207224833>"),
             },
         });
         if (!client.settings.has(nM.guild.id)) return;
@@ -37,21 +39,21 @@ module.exports = function (client, options) {
             if (!boostLogChannel) return;
 
             let stopBoost = new EmbedBuilder()
-                .setFooter(client.getFooter("ID: " + nM.user.id))
+                .setFooter(obeyMeta.asFooter(client.getFooter("ID: " + nM.user.id)))
                 .setTimestamp()
-                .setAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL()))
+                .setAuthor(obeyMeta.asAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL())))
                 .setColor("#ED4245")
                 .setDescription(`${String(settings.stopBoost).replace(/\{member\}/giu, `${nM.user}`)}`);
             let startBoost = new EmbedBuilder()
-                .setFooter(client.getFooter("ID: " + nM.user.id))
+                .setFooter(obeyMeta.asFooter(client.getFooter("ID: " + nM.user.id)))
                 .setTimestamp()
-                .setAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL()))
+                .setAuthor(obeyMeta.asAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL())))
                 .setColor("#ff8afb")
                 .setDescription(`${String(settings.startBoost).replace(/\{member\}/giu, `${nM.user}`)}`);
             let againBoost = new EmbedBuilder()
-                .setFooter(client.getFooter("ID: " + nM.user.id))
+                .setFooter(obeyMeta.asFooter(client.getFooter("ID: " + nM.user.id)))
                 .setTimestamp()
-                .setAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL()))
+                .setAuthor(obeyMeta.asAuthor(client.getAuthor(nM.user.username, nM.user.displayAvatarURL())))
                 .setColor("#ff8afb")
                 .setDescription(`${String(settings.againBoost).replace(/\{member\}/giu, `${nM.user}`)}`);
 

@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg, nFormatter, swap_pages2 } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "invitesleaderboard",
@@ -71,7 +72,7 @@ module.exports = {
             swap_pages2(
                 client,
                 message,
-                embeds.map(e => e.setFooter(client.getFooter(`You are #${userrank} on the Leaderboard`)))
+                embeds.map(e => e.setFooter(obeyMeta.asFooter(client.getFooter(`You are #${userrank} on the Leaderboard`))))
             );
         } catch (e) {
             console.log(String(e.stack).grey.bgRed);
@@ -79,7 +80,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

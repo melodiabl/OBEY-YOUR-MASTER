@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require("../../botconfig/emojis.json");
+const emoji = require("../../handlers/assets/legacy-config");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 module.exports = {
     name: "toggledisabled",
@@ -26,7 +27,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(
                             `${allEmojis.msg.SUCCESS} ${client.settings.get(message.guild.id, "showdisabled") ? "Enabled" : "Disabled"} Disabled-Cmds Showing`
                         )
@@ -44,7 +45,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["settings"]["toggleunknowncommandinfo"]["variable2"])),
                 ],

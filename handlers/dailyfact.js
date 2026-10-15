@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 //Importing Packages
 const Discord = require("discord.js");
 var superagent = require("superagent");
@@ -54,7 +55,7 @@ module.exports = client => {
             }
             let owo;
             owo = await neko.sfw.fact();
-            channel.send("***〔📢〕Daily Fact***\n>>> " + owo.fact).catch(() => {});
+            channel.send(obeyUi.owned("***〔📢〕Daily Fact***\n>>> ") + owo.fact).catch(() => {});
         } catch (e) {
             console.log(String(e).grey);
         }

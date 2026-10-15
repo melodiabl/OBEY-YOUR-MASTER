@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -12,12 +14,12 @@ module.exports = {
   run: async (client, message, args) => {
     const state = client.music?.getState(message.guild.id)
     if (!state?.currentTrack)
-      return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay música reproduciéndose.')] }).catch(() => {})
+      return message.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No hay música reproduciéndose.'), 4096))] }).catch(() => {})
 
     const info  = state.currentTrack.info || state.currentTrack
     const query = args.join(' ') || `${info.title || ''} ${info.author || ''}`
 
-    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(`🔍 Buscando letra de **${(info.title || query).substring(0, 60)}**...`)] })
+    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(`${obeyUi.markup("icon.search")} Buscando letra de **${(info.title || query).substring(0, 60)}**...`, 4096))] })
 
     try {
       const node = [...(client.shoukaku?.nodes?.values() || [])].find(n => n.state === 2)
@@ -40,13 +42,13 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
             .setColor(0x5865F2)
-            .setTitle(`🎤 ${(data.title || info.title || query).substring(0, 60)}`)
-            .setDescription(chunks[0])
-            .setFooter({ text: `Fuente: ${data.sourceUrl || 'Lavalink'} • pág 1/${chunks.length}` }),
+            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.microphone")} ${(data.title || info.title || query).substring(0, 60)}`, 256))
+            .setDescription(obeyUi.limit(chunks[0], 4096))
+            .setFooter(obeyMeta.asFooter({ text: `Fuente: ${data.sourceUrl || 'Lavalink'} • pág 1/${chunks.length}` })),
         ],
       })
     } catch {
-      await loading.edit({ embeds: [new EmbedBuilder().setColor(0x4f545c).setDescription('⚠️ No se pudieron obtener las letras en este momento.')] }).catch(() => {})
+      await loading.edit({ embeds: [new EmbedBuilder().setColor(0x4f545c).setDescription(obeyUi.limit(obeyUi.owned('⚠️ No se pudieron obtener las letras en este momento.'), 4096))] }).catch(() => {})
     }
   },
 }

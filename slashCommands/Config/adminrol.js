@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -21,8 +23,8 @@ module.exports = {
   ],
 
   run: async (client, interaction) => {
-    const ok  = d => new EmbedBuilder().setColor(0x22C55E).setDescription(d)
-    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
+    const ok  = d => new EmbedBuilder().setColor(0x22C55E).setDescription(obeyUi.limit(d, 4096))
+    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(d, 4096))
 
     const action = interaction.options.getString('accion')
     const role   = interaction.options.getRole('rol')
@@ -35,31 +37,31 @@ module.exports = {
       const valid = adminroles.filter(id => interaction.guild.roles.cache.has(id))
       return interaction.reply({
         embeds: [new EmbedBuilder().setColor(0x5865F2)
-          .setTitle('👑 Roles de administración')
-          .setDescription(valid.length
+          .setTitle(obeyUi.limit(obeyUi.owned('👑 Roles de administración'), 256))
+          .setDescription(obeyUi.limit(valid.length
             ? valid.map(id => `<@&${id}>`).join('\n')
-            : '*(ninguno — solo Administrador nativo tiene acceso)*')
-          .setFooter({ text: `${valid.length} roles configurados` })],
+            : '*(ninguno — solo Administrador nativo tiene acceso)*', 4096))
+          .setFooter(obeyMeta.asFooter({ text: `${valid.length} roles configurados` }))],
         ephemeral: true,
       })
     }
 
     if (!role)
-      return interaction.reply({ embeds: [err('❌ Debes especificar un rol.')], ephemeral: true })
+      return interaction.reply({ embeds: [err(obeyUi.owned('❌ Debes especificar un rol.'))], ephemeral: true })
 
     if (action === 'add') {
       if (adminroles.includes(role.id))
-        return interaction.reply({ embeds: [err(`❌ <@&${role.id}> ya es un rol admin.`)], ephemeral: true })
+        return interaction.reply({ embeds: [err(`${obeyUi.markup("icon.error")} <@&${role.id}> ya es un rol admin.`)], ephemeral: true })
       adminroles.push(role.id)
       client.settings.set(gid, adminroles, 'adminroles')
-      return interaction.reply({ embeds: [ok(`✅ <@&${role.id}> puede usar comandos de administración.`)], ephemeral: false })
+      return interaction.reply({ embeds: [ok(`${obeyUi.markup("icon.success")} <@&${role.id}> puede usar comandos de administración.`)], ephemeral: false })
     }
 
     if (action === 'remove') {
       if (!adminroles.includes(role.id))
-        return interaction.reply({ embeds: [err(`❌ <@&${role.id}> no es un rol admin.`)], ephemeral: true })
+        return interaction.reply({ embeds: [err(`${obeyUi.markup("icon.error")} <@&${role.id}> no es un rol admin.`)], ephemeral: true })
       client.settings.set(gid, adminroles.filter(id => id !== role.id), 'adminroles')
-      return interaction.reply({ embeds: [ok(`✅ <@&${role.id}> eliminado de los roles admin.`)], ephemeral: true })
+      return interaction.reply({ embeds: [ok(`${obeyUi.markup("icon.success")} <@&${role.id}> eliminado de los roles admin.`)], ephemeral: true })
     }
   },
 }

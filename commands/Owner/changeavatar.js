@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fs = require("fs");
 const fetch = require("node-fetch");
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
@@ -23,7 +24,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable1"]))
                         .setDescription(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable2"])),
                 ],
@@ -43,7 +44,7 @@ module.exports = {
                                     new EmbedBuilder()
                                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable3"]))
                                         .setColor(es.color)
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         })
@@ -52,7 +53,7 @@ module.exports = {
                                 embeds: [
                                     new EmbedBuilder()
                                         .setColor(es.wrongcolor)
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setTitle(client.la[ls].common.erroroccur)
                                         .setDescription(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable4"])),
                                 ],
@@ -64,7 +65,7 @@ module.exports = {
                             new EmbedBuilder()
                                 .setTitle(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable5"]))
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es)),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                         ],
                     });
                 }
@@ -84,7 +85,7 @@ module.exports = {
                                 new EmbedBuilder()
                                     .setTitle(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable6"]))
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es)),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     })
@@ -93,7 +94,7 @@ module.exports = {
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                     .setTitle(client.la[ls].common.erroroccur)
                                     .setDescription(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable7"])),
                             ],
@@ -106,7 +107,7 @@ module.exports = {
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable8"]))
                             .setDescription(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable9"]))
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es)),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                     ],
                 });
             }
@@ -130,7 +131,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["owner"]["changeavatar"]["variable10"])),
                 ],

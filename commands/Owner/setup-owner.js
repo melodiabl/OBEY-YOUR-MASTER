@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder, ButtonBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fs = require("fs");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
@@ -22,9 +24,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable1"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable1"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable2"]), 4096)),
                 ],
             });
         try {
@@ -34,22 +36,22 @@ module.exports = {
                     {
                         value: `Add Owner`,
                         description: `Add another Propietario to the Bot!`,
-                        emoji: allEmojis.react.SUCCESS,
+                        emoji: obeyUi.component(allEmojis.react.SUCCESS),
                     },
                     {
                         value: `Remove Owner`,
                         description: `Remove an Propietario from the Bot! (Only Original Propietario is allowed to do so)`,
-                        emoji: allEmojis.react.ERROR,
+                        emoji: obeyUi.component(allEmojis.react.ERROR),
                     },
                     {
                         value: "Settings",
                         description: `Show the current Ajustes`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Advertisement Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -57,7 +59,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("Click me to setup the Owners!")
+                    .setPlaceholder(obeyUi.plain("Click me to setup the Owners!"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -73,8 +75,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Owner Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable4"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Owner Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/prohibited_1f6ab?.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-advertise"]["variable4"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.channel.send({
@@ -99,21 +101,21 @@ module.exports = {
                         if (menu?.user.id === cmduser.id) {
                             if (used1)
                                 return menu?.reply({
-                                    content: `<:no:833101993668771842> You already selected something, this Selection is now disabled!`,
+                                    content: `${obeyUi.markup("icon.error")} You already selected something, this Selection is now disabled!`,
                                     ephermal: true,
                                 });
                             menuselection(menu);
                         } else
                             menu?.reply({
-                                content: `<:no:833101993668771842> You are not allowed to do that! Only: <@${cmduser.id}>`,
+                                content: `${obeyUi.markup("icon.error")} You are not allowed to do that! Only: <@${cmduser.id}>`,
                                 ephermal: true,
                             });
                     }
                 });
             }
 
-            const d2p = bool => (bool ? "`✔️ Enabled`" : "`❌ Disabled`");
-            const d2p2 = bool => (bool ? "`✔️ Yes`" : "`❌ Nope`");
+            const d2p = bool => (bool ? obeyUi.owned("`✔️ Enabled`") : obeyUi.owned("`❌ Disabled`"));
+            const d2p2 = bool => (bool ? obeyUi.owned("`✔️ Yes`") : obeyUi.owned("`❌ Nope`"));
 
             async function handle_the_picks(menuoptionindex, menuoptiondata) {
                 switch (menuoptionindex) {
@@ -123,7 +125,7 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable7"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable7"]), 256))
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -133,8 +135,8 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable8"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable8"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -153,10 +155,10 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable9"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable9"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         try {
@@ -168,21 +170,21 @@ module.exports = {
                                                     return message.channel.send({
                                                         embeds: [
                                                             new EmbedBuilder()
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setColor(es.wrongcolor)
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["owner"]["setup-owner"][
                                                                             "variable10"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["owner"]["setup-owner"][
                                                                             "variable11"
                                                                         ]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     });
@@ -190,14 +192,14 @@ module.exports = {
                                                 return message.channel.send({
                                                     embeds: [
                                                         new EmbedBuilder()
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setColor(es.color)
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["owner"]["setup-owner"][
                                                                         "variable12"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             ),
                                                     ],
                                                 });
@@ -207,13 +209,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable13"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable13"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable14"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable14"]), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -225,10 +227,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable15"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable15"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelado the Operation!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`Cancelado the Operation!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -241,11 +243,11 @@ module.exports = {
                                 return message.channel.send({
                                     embeds: [
                                         new EmbedBuilder()
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setColor(es.wrongcolor)
-                                            .setTitle(`You are not allowed to remove Owners`)
+                                            .setTitle(obeyUi.limit(`You are not allowed to remove Owners`, 256))
                                             .setDescription(
-                                                `Only <@${config.ownerIDS[0]}> and <@${config.ownerIDS[1]}> are allowed to do that!`
+                                                obeyUi.limit(`Only <@${config.ownerIDS[0]}> and <@${config.ownerIDS[1]}> are allowed to do that!`, 4096)
                                             ),
                                     ],
                                 });
@@ -253,7 +255,7 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Remove Propietario")
+                                        .setTitle(obeyUi.limit("Remove Propietario", 256))
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -263,8 +265,8 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setDescription("Por favor Ping the Propietario you want to remove")
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit("Por favor Ping the Propietario you want to remove", 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -282,19 +284,19 @@ module.exports = {
                                             return message.reply({
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
-                                                        .setTitle("This Usuario isn't a Bot Propietario..")
+                                                        .setTitle(obeyUi.limit("This Usuario isn't a Bot Propietario..", 256))
                                                         .setColor(es.wrongcolor)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         if (user.id == "1087034447825735741") {
                                             return message.channel.send({
                                                 embeds: [
                                                     new EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.wrongcolor)
-                                                        .setTitle(`You can't remove Tomato!`)
-                                                        .setDescription(`This is a security Option`),
+                                                        .setTitle(obeyUi.limit(`You can't remove Tomato!`, 256))
+                                                        .setDescription(obeyUi.limit(`This is a security Option`, 4096)),
                                                 ],
                                             });
                                         }
@@ -302,9 +304,9 @@ module.exports = {
                                             return message.channel.send({
                                                 embeds: [
                                                     new EmbedBuilder()
-                                                        .setFooter(client.getFooter(es))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                         .setColor(es.wrongcolor)
-                                                        .setTitle(`You can't remove yourself!`),
+                                                        .setTitle(obeyUi.limit(`You can't remove yourself!`, 256)),
                                                 ],
                                             });
                                         }
@@ -322,21 +324,21 @@ module.exports = {
                                                             return message.channel.send({
                                                                 embeds: [
                                                                     new EmbedBuilder()
-                                                                        .setFooter(client.getFooter(es))
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                         .setColor(es.wrongcolor)
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["owner"][
                                                                                     "setup-owner"
                                                                                 ]["variable10"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setDescription(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["owner"][
                                                                                     "setup-owner"
                                                                                 ]["variable11"]
-                                                                            )
+                                                                            ), 4096)
                                                                         ),
                                                                 ],
                                                             });
@@ -344,10 +346,10 @@ module.exports = {
                                                         return message.channel.send({
                                                             embeds: [
                                                                 new EmbedBuilder()
-                                                                    .setFooter(client.getFooter(es))
+                                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                     .setColor(es.color)
                                                                     .setTitle(
-                                                                        `Successfully removed ${user.username} from the Ownerlist!`
+                                                                        obeyUi.limit(`Successfully removed ${user.username} from the Ownerlist!`, 256)
                                                                     ),
                                                             ],
                                                         });
@@ -357,9 +359,9 @@ module.exports = {
                                                 return message.channel.send({
                                                     embeds: [
                                                         new EmbedBuilder()
-                                                            .setFooter(client.getFooter(es))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                             .setColor(es.wrongcolor)
-                                                            .setTitle(`Could not find the Usuario`),
+                                                            .setTitle(obeyUi.limit(`Could not find the Usuario`, 256)),
                                                     ],
                                                 });
                                             }
@@ -368,13 +370,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable13"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable13"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable14"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable14"]), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -386,10 +388,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable15"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable15"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`Cancelado the Operation!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`Cancelado the Operation!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -400,7 +402,7 @@ module.exports = {
                         {
                             let originalOwner = config.ownerIDS.length > 1 ? config.ownerIDS[1] : config.ownerIDS[0];
                             var embed = new EmbedBuilder()
-                                .setTitle(`There are ${config.ownerIDS.length} Owners`)
+                                .setTitle(obeyUi.limit(`There are ${config.ownerIDS.length} Owners`, 256))
                                 .setColor(es.color)
                                 .setThumbnail(
                                     es.thumb
@@ -415,7 +417,7 @@ module.exports = {
                                         .filter(id => id != originalOwner)
                                         .map(id => `<@${id}>`)
                                         .join("︲")}`.substring(0, 1024) })
-                                .setFooter(client.getFooter(es));
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                             return message.reply({ embeds: [embed] });
                         }
                         break;
@@ -427,9 +429,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable18"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["setup-owner"]["variable18"]), 4096)),
                 ],
             });
         }

@@ -1,10 +1,11 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const math = require("math-expression-evaluator");
 const ms = require("ms");
 const moment = require("moment");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { duration } = require("../../handlers/functions");
 module.exports = {
     name: "remind",
@@ -21,7 +22,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -37,7 +38,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable1"]))
                         .setDescription(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable2"])),
                 ],
@@ -55,7 +56,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable3"]))
                         .setDescription(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable4"])),
                 ],
@@ -70,7 +71,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable6"]))
                         .setDescription(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable7"])),
                 ],
@@ -80,7 +81,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable8"]))
                         .setDescription(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable9"])),
                 ],
@@ -100,7 +101,7 @@ module.exports = {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .setTitle(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable10"]))
                     .setDescription(eval(client.la[ls]["cmds"]["schoolcommands"]["remind"]["variable11"])),
             ],

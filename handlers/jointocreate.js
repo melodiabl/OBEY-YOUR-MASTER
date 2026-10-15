@@ -1,3 +1,4 @@
+const obeyMeta = require("./presentation/metadata")
 const { EmbedBuilder, Collection, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const kernelsettings = require(`${process.cwd()}/botconfig/settings.json`);
@@ -107,7 +108,7 @@ module.exports = function (client) {
                                         new EmbedBuilder()
                                             .setColor(es.color)
                                             .setThumbnail(oldState.member.displayAvatarURL())
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setTitle(
                                                 `The VC-OWNER \`${oldState.member.user.username}\` left the VC! A new Random Propietario got picked!`
                                             )
@@ -191,7 +192,7 @@ module.exports = function (client) {
                                             new EmbedBuilder()
                                                 .setColor(es.color)
                                                 .setThumbnail(oldState.member.displayAvatarURL())
-                                                .setFooter(client.getFooter(es))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                 .setTitle(
                                                     `The VC-OWNER \`${oldState.member.user.username}\` left the VC! A new Random Propietario got picked!`
                                                 )

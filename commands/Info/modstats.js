@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { getRandomInt, GetGlobalUser, GetUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "modstats",
@@ -55,7 +56,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .addFields({ name: eval(client.la[ls]["cmds"]["info"]["modstats"]["variablex_1"]), value: eval(client.la[ls]["cmds"]["info"]["modstats"]["variable1"]), inline: true })
                         .addFields({ name: eval(client.la[ls]["cmds"]["info"]["modstats"]["variablex_2"]), value: eval(client.la[ls]["cmds"]["info"]["modstats"]["variable2"]), inline: true })
                         .addFields({ name: eval(client.la[ls]["cmds"]["info"]["modstats"]["variablex_3"]), value: eval(client.la[ls]["cmds"]["info"]["modstats"]["variable3"]), inline: true })
@@ -80,7 +81,7 @@ module.exports = {
                         .addFields({ name: eval(client.la[ls]["cmds"]["info"]["modstats"]["variablex_17"]), value: eval(client.la[ls]["cmds"]["info"]["modstats"]["variable17"]), inline: true })
                         .addFields({ name: eval(client.la[ls]["cmds"]["info"]["modstats"]["variablex_18"]), value: eval(client.la[ls]["cmds"]["info"]["modstats"]["variable18"]), inline: true })
                         .addFields({ name: "\u200b", value: client.la[ls].cmds.info.modstats.desc })
-                        .setAuthor({ name: `${client.la[ls].cmds.info.modstats.about} ${user.username}`, iconURL: user.displayAvatarURL({ size: 512 }) }),
+                        .setAuthor(obeyMeta.asAuthor({ name: `${client.la[ls].cmds.info.modstats.about} ${user.username}`, iconURL: user.displayAvatarURL({ size: 512 }) })),
                 ],
             });
         } catch (e) {
@@ -89,7 +90,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

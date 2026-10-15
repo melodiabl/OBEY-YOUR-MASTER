@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder,
     ButtonStyle
 } = require("discord.js");
 const Discord = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "invite",
@@ -22,21 +24,21 @@ module.exports = {
                 if (!user.bot)
                     return interaction?.reply({
                         ephemeral: true,
-                        content: "<:no:833101993668771842> ¡No puedes invitar a un usuario normal! **DEBE SER UN BOT**",
+                        content: obeyUi.owned("<:no:833101993668771842> ¡No puedes invitar a un usuario normal! **DEBE SER UN BOT**"),
                     });
                 let button_public_invite = new ButtonBuilder()
                     .setStyle(ButtonStyle.Link)
-                    .setLabel(handlemsg(client.la[ls].cmds.info.invite.buttons.public))
+                    .setLabel(obeyUi.plain(handlemsg(client.la[ls].cmds.info.invite.buttons.public)))
                     .setURL(
                         "https://discord.com/api/oauth2/authorize?client_id=734513783338434591&permissions=8&scope=bot%20applications.commands"
                     );
                 let button_support_dc = new ButtonBuilder()
                     .setStyle(ButtonStyle.Link)
-                    .setLabel(handlemsg(client.la[ls].cmds.info.invite.buttons.server))
+                    .setLabel(obeyUi.plain(handlemsg(client.la[ls].cmds.info.invite.buttons.server)))
                     .setURL("https://github.com/melodiabl");
                 let button_invite = new ButtonBuilder()
                     .setStyle(ButtonStyle.Link)
-                    .setLabel("Invite " + user.username)
+                    .setLabel(obeyUi.plain("Invite " + user.username))
                     .setURL(
                         `https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot%20applications.commands`
                     );
@@ -48,14 +50,14 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(ee.color)
-                            .setTitle(`Invite: __**${user.username}**__`)
+                            .setTitle(obeyUi.limit(`Invite: __**${user.username}**__`, 256))
                             .setDescription(
-                                `||[*Click here for an Invitelink without Slash Commands*](https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot)||`
+                                obeyUi.limit(`||[*Click here for an Invitelink without Slash Commands*](https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot)||`, 4096)
                             )
                             .setURL(
                                 `https://discord.com/api/oauth2/authorize?client_id=${user.id}&permissions=8&scope=bot%20applications.commands`
                             )
-                            .setFooter(client.getFooter(`${user.username} | powered by github.com/melodiabl`, "https://imgur.com/jPItIw0.gif")
+                            .setFooter(obeyMeta.asFooter(client.getFooter(`${user.username} | powered by github.com/melodiabl`, "https://imgur.com/jPItIw0.gif"))
                             ),
                     ],
                     components: allbuttons,
@@ -67,9 +69,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"]), 4096)),
                 ],
             });
         }

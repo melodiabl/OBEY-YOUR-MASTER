@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 const { GiveawaysManager } = require('discord-giveaways')
 const GiveawayModel = require('../database/schemas/GiveawaySchema')
 
@@ -25,7 +26,7 @@ module.exports = client => {
       botsCanWin: false,
       embedColor: '#FF4500',
       embedColorEnd: '#7289DA',
-      reaction: '🎉',
+      reaction: obeyUi.owned('🎉'),
     },
   })
   console.log('[Giveaway] GiveawaysManager iniciado'.green)

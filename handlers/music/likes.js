@@ -1,3 +1,7 @@
+const obeyMeta = require("../presentation/metadata")
+const obeyUi = require("../assets/system")
+const { registry } = require('../assets/registry')
+const { t } = require('../i18n')
 // Lógica compartida del sistema de favoritos ("liked songs"), replica exacta de Soundy.
 // Usada por prefix, slash y el botón ❤️ del Now Playing.
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
@@ -73,8 +77,8 @@ async function getLikedSongsCount(userId) {
 function buildLikeEmbed({ liked, meta }) {
   const embed = new EmbedBuilder()
     .setColor(liked ? PRIMARY : NEUTRAL)
-    .setTitle(`${HEART} ${liked ? 'Añadida a favoritos' : 'Quitada de favoritos'}`)
-    .setDescription(`🎵 **[${meta.title}](${meta.uri})**\n🎤 \`${meta.author}\``)
+    .setTitle(obeyUi.limit(`${HEART} ${liked ? 'Añadida a favoritos' : 'Quitada de favoritos'}`, 256))
+    .setDescription(obeyUi.limit(`${obeyUi.markup("icon.music")} **[${meta.title}](${meta.uri})**\n${obeyUi.markup("icon.microphone")} \`${meta.author}\``, 4096))
     .setTimestamp()
   if (meta.artworkUrl) embed.setThumbnail(meta.artworkUrl)
   return embed
@@ -97,9 +101,9 @@ function buildLikedPages(songs, totalCount, user) {
 
     const embed = new EmbedBuilder()
       .setColor(PRIMARY)
-      .setAuthor({ name: `${HEART} Favoritos de ${user.username}`, iconURL: user.displayAvatarURL?.() })
-      .setDescription(desc)
-      .setFooter({ text: `Página ${Math.floor(i / PER_PAGE) + 1} • Mostrando ${i + 1}-${Math.min(i + PER_PAGE, songs.length)} de ${totalCount}` })
+      .setAuthor(obeyMeta.asAuthor({ name: `${HEART} Favoritos de ${user.username}`, iconURL: user.displayAvatarURL?.() }))
+      .setDescription(obeyUi.limit(desc, 4096))
+      .setFooter(obeyMeta.asFooter({ text: `Página ${Math.floor(i / PER_PAGE) + 1} • Mostrando ${i + 1}-${Math.min(i + PER_PAGE, songs.length)} de ${totalCount}` }))
       .setTimestamp()
     if (slice[0]?.artworkUrl) embed.setThumbnail(slice[0].artworkUrl)
     pages.push(embed)
@@ -107,12 +111,12 @@ function buildLikedPages(songs, totalCount, user) {
   return pages
 }
 
-function buildLikedRows(page, totalPages) {
+function buildLikedRows(page, totalPages, locale = 'es') {
   if (totalPages <= 1) return []
   return [new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId(`lk_prev:${page}`).setEmoji('◀️').setStyle(ButtonStyle.Secondary).setDisabled(page <= 1),
-    new ButtonBuilder().setCustomId('lk_close').setLabel('Cerrar').setStyle(ButtonStyle.Danger),
-    new ButtonBuilder().setCustomId(`lk_next:${page}`).setEmoji('▶️').setStyle(ButtonStyle.Secondary).setDisabled(page >= totalPages),
+    new ButtonBuilder().setCustomId(`lk_prev:${page}`).setEmoji(obeyUi.component(registry.emoji('icon.page-previous'))).setLabel(obeyUi.plain(t(locale, 'common.previous'))).setStyle(ButtonStyle.Secondary).setDisabled(page <= 1),
+    new ButtonBuilder().setCustomId('lk_close').setLabel(obeyUi.plain(t(locale, 'common.close'))).setEmoji(obeyUi.component(registry.emoji('icon.close'))).setStyle(ButtonStyle.Danger),
+    new ButtonBuilder().setCustomId(`lk_next:${page}`).setEmoji(obeyUi.component(registry.emoji('icon.page-next'))).setLabel(obeyUi.plain(t(locale, 'common.next'))).setStyle(ButtonStyle.Secondary).setDisabled(page >= totalPages),
   )]
 }
 

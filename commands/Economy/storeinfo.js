@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { parseMilliseconds, duration, GetUser, nFormatter, ensure_economy_user } = require(
     `${process.cwd()}/handlers/functions`
 );
@@ -21,9 +23,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
-                        .setDescription(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable1"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable1"]), 4096)),
                 ],
             });
         }
@@ -115,34 +117,34 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: user.username + " | ❌ .. Unable to buy | ✅ ... Possible to buy",
+                        .setFooter(obeyMeta.asFooter({ text: user.username + obeyUi.owned(" | ❌ .. Unable to buy | ✅ ... Possible to buy"),
                             iconURL: user.displayAvatarURL()
-                        })
-                        .setTitle(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable3"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable4"]))
-                        .addFields({ name: "✏️ Useables", value: ">>> " +
-                                `✏️ **\`Pensil [10 💸]\`** | ${p2b(10)}
-🖊️ **\`Pen [20 💸]\`** | ${p2b(20)}
-🟪 **\`Condom [30 💸]\`** | ${p2b(30)}
-🍼 **\`Bottle [50 💸]\`** | ${p2b(50)}` })
-                        .addFields({ name: "👕 Clothes", value: ">>> " +
-                                `👟 **\`Nike Shoe [300 💸]\`** | ${p2b(300)}
-👕 **\`T-Shirt [60 💸]\`** | ${p2b(60)}` })
-                        .addFields({ name: "🐕 Animals", value: ">>> " +
-                                `🐟\`Fish [1000 💸]\`** | ${p2b(1000)}
-🐹 **\`Hamster [1500 💸]\`** | ${p2b(1500)}
-🐕 **\`Dog [2000 💸]\`** | ${p2b(2000)}
-😺 **\`Cat [2000 💸]\`** | ${p2b(2000)}` })
-                        .addFields({ name: "🚗 Means of Transport", value: ">>> " +
-                                `🛥️\`Yacht [75000 💸]\`** | ${p2b(75000)}
-🏎️ **\`Lamborghini [50000 💸]\`** | ${p2b(50000)}
-🚗 **\`Car [6400 💸]\`** | ${p2b(6400)}
-🏍️ **\`Motorbike [1500 💸]\`** | ${p2b(1500)}
-🚲 **\`Bicycle [500 💸]\`** | ${p2b(500)}` })
-                        .addFields({ name: "🏠 Livingarea", value: ">>> " +
-                                `🏘️ **\`Mansion [45000 💸]\`** | ${p2b(45000)}
-🏠 **\`House [8000 💸]\`** | ${p2b(8000)}
-🟫 **\`Dirthut [150 💸]\`** | ${p2b(150)}` }),
+                        }))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable3"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable4"]), 4096))
+                        .addFields({ name: obeyUi.owned("✏️ Useables"), value: ">>> " +
+                                `${obeyUi.markup("icon.edit")} **\`Pensil [10 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(10)}
+${obeyUi.markup("icon.edit")} **\`Pen [20 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(20)}
+${obeyUi.markup("icon.piece-purple")} **\`Condom [30 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(30)}
+${obeyUi.markup("icon.baby")} **\`Bottle [50 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(50)}` })
+                        .addFields({ name: obeyUi.owned("👕 Clothes"), value: ">>> " +
+                                `${obeyUi.markup("icon.shoe")} **\`Nike Shoe [300 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(300)}
+${obeyUi.markup("icon.shirt")} **\`T-Shirt [60 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(60)}` })
+                        .addFields({ name: obeyUi.owned("🐕 Animals"), value: ">>> " +
+                                `${obeyUi.markup("icon.fish")}\`Fish [1000 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(1000)}
+${obeyUi.markup("icon.hamster")} **\`Hamster [1500 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(1500)}
+${obeyUi.markup("icon.dog")} **\`Dog [2000 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(2000)}
+${obeyUi.markup("icon.cat")} **\`Cat [2000 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(2000)}` })
+                        .addFields({ name: obeyUi.owned("🚗 Means of Transport"), value: ">>> " +
+                                `${obeyUi.markup("icon.boat")}\`Yacht [75000 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(75000)}
+${obeyUi.markup("icon.car")} **\`Lamborghini [50000 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(50000)}
+${obeyUi.markup("icon.car")} **\`Car [6400 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(6400)}
+${obeyUi.markup("icon.car")} **\`Motorbike [1500 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(1500)}
+${obeyUi.markup("icon.bike")} **\`Bicycle [500 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(500)}` })
+                        .addFields({ name: obeyUi.owned("🏠 Livingarea"), value: ">>> " +
+                                `${obeyUi.markup("icon.home")} **\`Mansion [45000 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(45000)}
+${obeyUi.markup("icon.home")} **\`House [8000 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(8000)}
+${obeyUi.markup("icon.game-empty")} **\`Dirthut [150 ${obeyUi.markup("icon.wallet")}]\`** | ${p2b(150)}` }),
                 ],
             });
         } catch (e) {
@@ -151,9 +153,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable5"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable5"]), 4096)),
                 ],
             });
         }

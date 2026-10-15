@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder,
     ChannelType
 } = require("discord.js");
@@ -56,7 +57,7 @@ module.exports = {
             //SEND THE EMBED!
             await channel.send({ content: String(Text).substring(0, 2000).split("+n+").join("\n") }).catch(() => {});
             //Edit the reply
-            interaction?.editReply({ content: `✅ Mensaje enviado en ${channel}!`, ephemeral: true }).catch(() => {});
+            interaction?.editReply({ content: `${obeyUi.markup("icon.success")} Mensaje enviado en ${channel}!`, ephemeral: true }).catch(() => {});
         } catch (e) {
             console.log(String(e.stack).bgRed);
         }

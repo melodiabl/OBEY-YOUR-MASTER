@@ -1,19 +1,20 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 module.exports = {
   name: 'resume', description: 'Reanuda la musica pausada',
   parameters: { type: 'music', activeplayer: true, previoussong: false }, options: [],
   run: async (client, interaction) => {
     if (!interaction.member?.voice?.channel)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Debes estar en un canal de voz.'), 4096))], ephemeral: true })
     await interaction.deferReply()
     const state = client.music?.getState(interaction.guild.id)
     if (!state?.paused)
-      return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xFEE75C).setDescription('▶️ La música no está pausada.')] })
+      return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xFEE75C).setDescription(obeyUi.limit(obeyUi.owned('▶️ La música no está pausada.'), 4096))] })
     const track = state?.currentTrack?.info || state?.currentTrack
     await client.music?.pause(interaction.guild.id)
     await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x57F287)
-      .setTitle('▶️ Reanudado')
-      .setDescription(track ? `**${track.title || '?'}** — reanudada.` : 'Música reanudada.')
+      .setTitle(obeyUi.limit('▶️ Reanudado', 256))
+      .setDescription(obeyUi.limit(track ? `**${track.title || '?'}** — reanudada.` : 'Música reanudada.', 4096))
       .setThumbnail(track?.artworkUrl || undefined)] })
   },
 }

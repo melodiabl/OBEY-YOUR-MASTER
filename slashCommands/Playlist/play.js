@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
@@ -22,9 +24,9 @@ module.exports = {
     if (!playlist || !playlist.tracks.length)
       return interaction.reply({
         embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(
-          !playlist
-            ? `❌ No tienes una playlist llamada **${name}**.`
-            : `❌ La playlist **${name}** está vacía.`
+          obeyUi.limit(!playlist
+            ? `${obeyUi.markup("icon.error")} No tienes una playlist llamada **${name}**.`
+            : `${obeyUi.markup("icon.error")} La playlist **${name}** está vacía.`, 4096)
         )],
         ephemeral: true,
       })
@@ -32,7 +34,7 @@ module.exports = {
     const voiceChannel = interaction.member?.voice?.channel
     if (!voiceChannel)
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Debes estar en un canal de voz.'), 4096))],
         ephemeral: true,
       })
 
@@ -59,18 +61,18 @@ module.exports = {
       await interaction.editReply({
         embeds: [
           new EmbedBuilder().setColor(0x1DB954)
-            .setTitle(`▶️ Playlist: ${playlist.name}`)
-            .setDescription(`**${playlist.tracks.length}** canciones ${wasIdle ? 'reproduciendo ahora' : 'agregadas a la cola'}.`)
+            .setTitle(obeyUi.limit(`${obeyUi.markup("icon.play")} Playlist: ${playlist.name}`, 256))
+            .setDescription(obeyUi.limit(`**${playlist.tracks.length}** canciones ${wasIdle ? 'reproduciendo ahora' : 'agregadas a la cola'}.`, 4096))
             .addFields(
-              { name: '🎵 Primera canción', value: playlist.tracks[0].title, inline: true },
-              { name: '🔊 Canal',           value: voiceChannel.name,         inline: true },
+              { name: obeyUi.owned('🎵 Primera canción'), value: playlist.tracks[0].title, inline: true },
+              { name: obeyUi.owned('🔊 Canal'),           value: voiceChannel.name,         inline: true },
             )
-            .setFooter({ text: `Pedido por ${interaction.user.username}` }),
+            .setFooter(obeyMeta.asFooter({ text: `Pedido por ${interaction.user.username}` })),
         ],
       })
     } catch (e) {
       await interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ Error al reproducir: ${e.message}`)],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} Error al reproducir: ${e.message}`, 4096))],
       })
     }
   },

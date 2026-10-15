@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { duration, nFormatter, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 const moment = require("moment");
 const fs = require("fs");
@@ -21,8 +23,8 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter({ text: "It could take up to 30 Seconds ...", iconURL: client.user.displayAvatarURL() })
-                        .setAuthor({ name: handlemsg(client.la[ls].cmds.info.commandcount.tempmsg), iconURL: "https://cdn.discordapp.com/emojis/756773010123522058.gif", url: "https://github.com/melodiabl" }),
+                        .setFooter(obeyMeta.asFooter({ text: "It could take up to 30 Seconds ...", iconURL: client.user.displayAvatarURL() }))
+                        .setAuthor(obeyMeta.asAuthor({ name: handlemsg(client.la[ls].cmds.info.commandcount.tempmsg), iconURL: obeyUi.image("motion.cargando"), url: "https://github.com/melodiabl" })),
                 ],
             });
             let lines = 0;
@@ -64,7 +66,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(
                             handlemsg(client.la[ls].cmds.info.commandcount.title, { cmdcount: client.commands.size }) +
                                 ` | **[\`${client.slashCommands.size}\`] Slashcommands**`
@@ -84,7 +86,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

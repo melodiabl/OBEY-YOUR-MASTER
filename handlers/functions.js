@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 const Discord = require("discord.js");
 const {
     Client,
@@ -12,7 +14,7 @@ const {
     ChannelType,
     ButtonStyle
 } = require("discord.js");
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const radios = require("../botconfig/radiostations.json");
@@ -151,7 +153,7 @@ function isValidURL(string) {
     return url;
 }
 function GetUser(message, arg) {
-    var errormessage = "<:no:833101993668771842> I failed finding that User...";
+    var errormessage = obeyUi.owned("<:no:833101993668771842> I failed finding that User...");
     return new Promise(async (resolve, reject) => {
         var args = arg,
             client = message.client;
@@ -196,7 +198,7 @@ function GetUser(message, arg) {
     });
 }
 function GetRole(message, arg) {
-    var errormessage = "<:no:833101993668771842> I failed finding that Role...";
+    var errormessage = obeyUi.owned("<:no:833101993668771842> I failed finding that Role...");
     return new Promise(async (resolve, reject) => {
         var args = arg,
             client = message.client;
@@ -220,7 +222,7 @@ function GetRole(message, arg) {
     });
 }
 function GetGlobalUser(message, arg) {
-    var errormessage = "<:no:833101993668771842> I failed finding that User...";
+    var errormessage = obeyUi.owned("<:no:833101993668771842> I failed finding that User...");
     return new Promise(async (resolve, reject) => {
         var args = arg,
             client = message.client;
@@ -303,8 +305,8 @@ async function edit_Roster_msg(client, guild, the_roster_db, pre) {
                         : client.user.displayAvatarURL()
                     : null
             )
-            .setFooter(client.getFooter(es))
-            .setTitle(String(data.rostertitle).substring(0, 256));
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+            .setTitle(obeyUi.limit(String(data.rostertitle).substring(0, 256), 256));
         //get rosterole and loop through every single role
         let rosterroles = data.rosterroles;
         //if there are no roles added add this to the embed
@@ -768,8 +770,8 @@ async function send_roster_msg(client, guild, the_roster_db, pre) {
                     : client.user.displayAvatarURL()
                 : null
         )
-        .setTitle(String(the_roster_db?.get(guild.id, pre + ".rostertitle")).substring(0, 256))
-        .setFooter(client.getFooter(es));
+        .setTitle(obeyUi.limit(String(the_roster_db?.get(guild.id, pre + ".rostertitle")).substring(0, 256), 256))
+        .setFooter(obeyMeta.asFooter(client.getFooter(es)));
     //get rosterole and loop through every single role
     let rosterroles = the_roster_db?.get(guild.id, pre + ".rosterroles");
     if (!rosterroles || rosterroles.length === 0)
@@ -1236,7 +1238,7 @@ function duration(duration, useMilli = false) {
 async function promptMessage(message, author, time, validReactions) {
     try {
         time *= 1000;
-        for (const reaction of validReactions) await message.react(reaction);
+        for (const reaction of validReactions) await message.react(obeyUi.reaction(reaction));
         const filter = (reaction, user) => validReactions.includes(reaction.emoji?.name) && user.id === author.id;
         return message
             .awaitReactions({
@@ -1283,11 +1285,11 @@ function createBar(player) {
         let size = 25;
         let line = "▬";
         //player.queue.current.duration == 0 ? player.position : player.queue.current.duration, player.position, 25, "▬", "🔷")
-        if (!player.queue.current) return `**[${"🔷"}${line.repeat(size - 1)}]**\n**00:00:00 / 00:00:00**`;
+        if (!player.queue.current) return `**[${obeyUi.owned("🔷")}${line.repeat(size - 1)}]**\n**00:00:00 / 00:00:00**`;
         let current = player.queue.current.duration !== 0 ? player.position : player.queue.current.duration;
         let total = player.queue.current.duration;
 
-        let slider = "🔷";
+        let slider = obeyUi.owned("🔷");
         let bar =
             current > total
                 ? [line.repeat((size / 2) * 2), (current / total) * 100]
@@ -1296,7 +1298,7 @@ function createBar(player) {
                           line.repeat(size - Math.round(size * (current / total)) + 1),
                       current / total,
                   ];
-        if (!String(bar).includes("🔷")) return `**[${"🔷"}${line.repeat(size - 1)}]**\n**00:00:00 / 00:00:00**`;
+        if (!String(bar).includes("🔷")) return `**[${obeyUi.owned("🔷")}${line.repeat(size - 1)}]**\n**00:00:00 / 00:00:00**`;
         return `**[${bar[0]}]**\n**${new Date(player.position).toISOString().substring(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substring(11, 8))}**`;
     } catch (e) {
         console.log(String(e.stack).grey.bgRed);
@@ -1331,9 +1333,9 @@ function stations(client, prefix, message) {
                         : client.user.displayAvatarURL()
                     : null
             )
-            .setFooter(client.getFooter(es))
-            .setTitle("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
-            .setDescription(`Example: \`${prefix}radio 11\``);
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+            .setTitle(obeyUi.limit("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!", 256))
+            .setDescription(obeyUi.limit(`Example: \`${prefix}radio 11\``, 4096));
         const stationsembed = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
@@ -1343,9 +1345,9 @@ function stations(client, prefix, message) {
                         : client.user.displayAvatarURL()
                     : null
             )
-            .setFooter(client.getFooter(es))
-            .setTitle("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
-            .setDescription(`Example: \`${prefix}radio 44\``);
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+            .setTitle(obeyUi.limit("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!", 256))
+            .setDescription(obeyUi.limit(`Example: \`${prefix}radio 44\``, 4096));
         const stationsembed2 = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
@@ -1355,9 +1357,9 @@ function stations(client, prefix, message) {
                         : client.user.displayAvatarURL()
                     : null
             )
-            .setFooter(client.getFooter(es))
-            .setTitle("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
-            .setDescription(`Example: \`${prefix}radio 69\``);
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+            .setTitle(obeyUi.limit("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!", 256))
+            .setDescription(obeyUi.limit(`Example: \`${prefix}radio 69\``, 4096));
         const stationsembed3 = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
@@ -1367,9 +1369,9 @@ function stations(client, prefix, message) {
                         : client.user.displayAvatarURL()
                     : null
             )
-            .setFooter(client.getFooter(es))
-            .setTitle("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
-            .setDescription(`Example: \`${prefix}radio 120\``);
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+            .setTitle(obeyUi.limit("¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!", 256))
+            .setDescription(obeyUi.limit(`Example: \`${prefix}radio 120\``, 4096));
         const stationsembed4 = new EmbedBuilder()
             .setColor(es.color)
             .setThumbnail(
@@ -1379,8 +1381,8 @@ function stations(client, prefix, message) {
                         : client.user.displayAvatarURL()
                     : null
             )
-            .setFooter(client.getFooter(es))
-            .setTitle("SOLICITUDES PERSONALIZADAS | ¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!");
+            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+            .setTitle(obeyUi.limit("SOLICITUDES PERSONALIZADAS | ¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!", 256));
 
         let beforeindex = 1;
         let REYFM = "";
@@ -1402,118 +1404,118 @@ function stations(client, prefix, message) {
             United_Kingdom += `**${i + beforeindex}** [${radios.EU.United_Kingdom[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.United_Kingdom[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.United_Kingdom.length;
-        stationsembed.addFields({ name: "🇬🇧 United Kingdom", value: `>>> ${United_Kingdom}`, inline: true });
+        stationsembed.addFields({ name: obeyUi.owned("🇬🇧 United Kingdom"), value: `>>> ${United_Kingdom}`, inline: true });
 
         let austria = "";
         for (let i = 0; i < radios.EU.Austria.length; i++) {
             austria += `**${i + beforeindex}** [${radios.EU.Austria[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Austria[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Austria.length;
-        stationsembed.addFields({ name: "🇦🇹 Austria", value: `>>> ${austria}`, inline: true });
+        stationsembed.addFields({ name: obeyUi.owned("🇦🇹 Austria"), value: `>>> ${austria}`, inline: true });
 
         let Belgium = "";
         for (let i = 0; i < radios.EU.Belgium.length; i++) {
             Belgium += `**${i + beforeindex}** [${radios.EU.Belgium[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Belgium[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Belgium.length;
-        stationsembed.addFields({ name: "🇧🇪 Belgium", value: `>>> ${Belgium}`, inline: true });
+        stationsembed.addFields({ name: obeyUi.owned("🇧🇪 Belgium"), value: `>>> ${Belgium}`, inline: true });
 
         let Bosnia = "";
         for (let i = 0; i < radios.EU.Bosnia.length; i++) {
             Bosnia += `**${i + beforeindex}** [${radios.EU.Bosnia[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Bosnia[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Bosnia.length;
-        stationsembed.addFields({ name: "🇧🇦 Bosnia", value: `>>> ${Bosnia}`, inline: true });
+        stationsembed.addFields({ name: obeyUi.owned("🇧🇦 Bosnia"), value: `>>> ${Bosnia}`, inline: true });
 
         let Czech = "";
         for (let i = 0; i < radios.EU.Czech.length; i++) {
             Czech += `**${i + beforeindex}** [${radios.EU.Czech[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Czech[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Czech.length;
-        stationsembed.addFields({ name: "🇨🇿 Czech", value: `>>> ${Czech}`, inline: true });
+        stationsembed.addFields({ name: obeyUi.owned("🇨🇿 Czech"), value: `>>> ${Czech}`, inline: true });
 
         let Denmark = "";
         for (let i = 0; i < radios.EU.Denmark.length; i++) {
             Denmark += `**${i + beforeindex}** [${radios.EU.Denmark[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Denmark[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Denmark.length;
-        stationsembed.addFields({ name: "🇩🇰 Denmark", value: `>>> ${Denmark}`, inline: true });
+        stationsembed.addFields({ name: obeyUi.owned("🇩🇰 Denmark"), value: `>>> ${Denmark}`, inline: true });
 
         let germany = "";
         for (let i = 0; i < radios.EU.Germany.length; i++) {
             germany += `**${i + beforeindex}** [${radios.EU.Germany[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Germany[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Germany.length;
-        stationsembed2.addFields({ name: "🇩🇪 Germany", value: `>>> ${germany}`, inline: true });
+        stationsembed2.addFields({ name: obeyUi.owned("🇩🇪 Germany"), value: `>>> ${germany}`, inline: true });
 
         let Hungary = "";
         for (let i = 0; i < radios.EU.Hungary.length; i++) {
             Hungary += `**${i + beforeindex}** [${radios.EU.Hungary[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Hungary[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Hungary.length;
-        stationsembed2.addFields({ name: "🇭🇺 Hungary", value: `>>> ${Hungary}`, inline: true });
+        stationsembed2.addFields({ name: obeyUi.owned("🇭🇺 Hungary"), value: `>>> ${Hungary}`, inline: true });
 
         let Ireland = "";
         for (let i = 0; i < radios.EU.Ireland.length; i++) {
             Ireland += `**${i + beforeindex}** [${radios.EU.Ireland[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Ireland[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Ireland.length;
-        stationsembed2.addFields({ name: "🇮🇪 Ireland", value: `>>> ${Ireland}`, inline: true });
+        stationsembed2.addFields({ name: obeyUi.owned("🇮🇪 Ireland"), value: `>>> ${Ireland}`, inline: true });
 
         let Italy = "";
         for (let i = 0; i < radios.EU.Italy.length; i++) {
             Italy += `**${i + beforeindex}** [${radios.EU.Italy[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Italy[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Italy.length;
-        stationsembed2.addFields({ name: "🇮🇹 Italy", value: `>>> ${Italy}`, inline: true });
+        stationsembed2.addFields({ name: obeyUi.owned("🇮🇹 Italy"), value: `>>> ${Italy}`, inline: true });
 
         let Luxembourg = "";
         for (let i = 0; i < radios.EU.Luxembourg.length; i++) {
             Luxembourg += `**${i + beforeindex}** [${radios.EU.Luxembourg[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Luxembourg[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Luxembourg.length;
-        stationsembed2.addFields({ name: "🇱🇺 Luxembourg", value: `>>> ${Luxembourg}`, inline: true });
+        stationsembed2.addFields({ name: obeyUi.owned("🇱🇺 Luxembourg"), value: `>>> ${Luxembourg}`, inline: true });
 
         let Romania = "";
         for (let i = 0; i < radios.EU.Romania.length; i++) {
             Romania += `**${i + beforeindex}** [${radios.EU.Romania[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Romania[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Romania.length;
-        stationsembed2.addFields({ name: "🇷🇴 Romania", value: `>>> ${Romania}`, inline: true });
+        stationsembed2.addFields({ name: obeyUi.owned("🇷🇴 Romania"), value: `>>> ${Romania}`, inline: true });
 
         let Serbia = "";
         for (let i = 0; i < radios.EU.Serbia.length; i++) {
             Serbia += `**${i + beforeindex}** [${radios.EU.Serbia[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Serbia[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Serbia.length;
-        stationsembed3.addFields({ name: "🇷🇸 Serbia", value: `>>> ${Serbia}`, inline: true });
+        stationsembed3.addFields({ name: obeyUi.owned("🇷🇸 Serbia"), value: `>>> ${Serbia}`, inline: true });
 
         let Spain = "";
         for (let i = 0; i < radios.EU.Spain.length; i++) {
             Spain += `**${i + beforeindex}** [${radios.EU.Spain[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Spain[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Spain.length;
-        stationsembed3.addFields({ name: "🇪🇸 Spain", value: `>>> ${Spain}`, inline: true });
+        stationsembed3.addFields({ name: obeyUi.owned("🇪🇸 Spain"), value: `>>> ${Spain}`, inline: true });
 
         let Sweden = "";
         for (let i = 0; i < radios.EU.Sweden.length; i++) {
             Sweden += `**${i + beforeindex}** [${radios.EU.Sweden[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Sweden[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Sweden.length;
-        stationsembed3.addFields({ name: "🇸🇪 Sweden", value: `>>> ${Sweden}`, inline: true });
+        stationsembed3.addFields({ name: obeyUi.owned("🇸🇪 Sweden"), value: `>>> ${Sweden}`, inline: true });
 
         let TURKEY = "";
         for (let i = 0; i < radios.EU.TURKEY.length; i++) {
             TURKEY += `**${i + beforeindex}** [${radios.EU.TURKEY[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.TURKEY[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.TURKEY.length;
-        stationsembed3.addFields({ name: "🇹🇷 TURKEY", value: `>>> ${TURKEY}`, inline: true });
+        stationsembed3.addFields({ name: obeyUi.owned("🇹🇷 TURKEY"), value: `>>> ${TURKEY}`, inline: true });
         let Ukraine = "";
         for (let i = 0; i < radios.EU.Ukraine.length; i++) {
             Ukraine += `**${i + beforeindex}** [${radios.EU.Ukraine[i].split(" ")[0].replace("-", " ").substring(0, 16)}](${radios.EU.Ukraine[i].split(" ")[1]})\n`;
         }
         beforeindex += radios.EU.Ukraine.length;
-        stationsembed3.addFields({ name: "🇺🇦 Ukraine", value: `>>> ${Ukraine}`, inline: true });
+        stationsembed3.addFields({ name: obeyUi.owned("🇺🇦 Ukraine"), value: `>>> ${Ukraine}`, inline: true });
 
         let embeds = [];
         embeds.push(reyfm_iloveradio_embed);
@@ -1534,15 +1536,15 @@ function stations(client, prefix, message) {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
-                        .setTitle("SOLICITUDES PERSONALIZADAS | ¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!")
-                        .setDescription(`${requests}`)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit("SOLICITUDES PERSONALIZADAS | ¡Elige tu estación escribiendo el número de `ÍNDICE` correcto!", 256))
+                        .setDescription(obeyUi.limit(`${requests}`, 4096))
                 );
                 requests = "";
             }
         }
         beforeindex += radios.OTHERS.request.length;
-        stationsembed4.setDescription(`${requests}`);
+        stationsembed4.setDescription(obeyUi.limit(`${requests}`, 4096));
         embeds.push(stationsembed4);
         require("./functions").swap_pages2(client, message, embeds);
         let amount = 0;
@@ -1574,14 +1576,14 @@ async function autoplay(client, player, type) {
         //if nothing is found, send error message, plus if there  is a delay for the empty QUEUE send error message TOO
         if (!response || response.loadType === "LOAD_FAILED" || response.loadType !== "PLAYLIST_LOADED") {
             let embed = new EmbedBuilder()
-                .setTitle(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable7"]))
+                .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable7"]), 256))
                 .setDescription(
-                    config.settings.LeaveOnEmpty_Queue.enabled && type != "skip"
+                    obeyUi.limit(config.settings.LeaveOnEmpty_Queue.enabled && type != "skip"
                         ? `I'll leave the Canal: \`${client.channels.cache.get(player.voiceChannel).name}\` in: \`${ms(config.settings.LeaveOnEmpty_Queue.time_delay, { long: true })}\`, If the Queue stays Empty! `
-                        : eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable9"])
+                        : eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable9"]), 4096)
                 )
                 .setColor(es.wrongcolor)
-                .setFooter(client.getFooter(es));
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)));
             client.channels.cache
                 .get(player.textChannel)
                 .send({ embeds: [embed] })
@@ -1593,18 +1595,18 @@ async function autoplay(client, player, type) {
                         if (player.queue.size === 0) {
                             let embed = new EmbedBuilder();
                             try {
-                                embed.setTitle(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable8"]));
+                                embed.setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable8"]), 256));
                             } catch {}
                             try {
                                 embed.setDescription(
-                                    eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable1"])
+                                    obeyUi.limit(eval(client.la[ls]["handlers"]["functionsjs"]["functions"]["variable1"]), 4096)
                                 );
                             } catch {}
                             try {
                                 embed.setColor(es.wrongcolor);
                             } catch {}
                             try {
-                                embed.setFooter(client.getFooter(es));
+                                embed.setFooter(obeyMeta.asFooter(client.getFooter(es)));
                             } catch {}
                             client.channels.cache
                                 .get(player.textChannel)
@@ -1703,8 +1705,8 @@ async function swap_pages(client, message, description, TITLE) {
                 const current = description.slice(i, k);
                 k += 20;
                 const embed = new EmbedBuilder()
-                    .setDescription(current.join("\n"))
-                    .setTitle(TITLE)
+                    .setDescription(obeyUi.limit(current.join("\n"), 4096))
+                    .setTitle(obeyUi.limit(TITLE, 256))
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -1713,7 +1715,7 @@ async function swap_pages(client, message, description, TITLE) {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 embeds.push(embed);
             }
             embeds;
@@ -1727,8 +1729,8 @@ async function swap_pages(client, message, description, TITLE) {
                 const current = description.slice(i, k);
                 k += 1000;
                 const embed = new EmbedBuilder()
-                    .setDescription(current)
-                    .setTitle(TITLE)
+                    .setDescription(obeyUi.limit(current, 4096))
+                    .setTitle(obeyUi.limit(TITLE, 256))
                     .setColor(es.color)
                     .setThumbnail(
                         es.thumb
@@ -1737,7 +1739,7 @@ async function swap_pages(client, message, description, TITLE) {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 embeds.push(embed);
             }
             embeds;
@@ -1750,7 +1752,7 @@ async function swap_pages(client, message, description, TITLE) {
             .send({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle(`${emoji?.msg.ERROR} No se añadió contenido a la función de intercambio de páginas`)
+                        .setTitle(obeyUi.limit(`${emoji?.msg.ERROR} No se añadió contenido a la función de intercambio de páginas`, 256))
                         .setColor(es.wrongcolor)
                         .setThumbnail(
                             es.thumb
@@ -1759,7 +1761,7 @@ async function swap_pages(client, message, description, TITLE) {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es)),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             })
             .catch(e => console.log("THIS IS TO PREVENT A CRASH"));
@@ -1769,20 +1771,20 @@ async function swap_pages(client, message, description, TITLE) {
     let button_back = new ButtonBuilder()
         .setStyle(ButtonStyle.Success)
         .setCustomId("1")
-        .setEmoji("◀️")
-        .setLabel("Back");
-    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+        .setEmoji(obeyUi.component("◀️"))
+        .setLabel(obeyUi.plain("Back"));
+    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji(obeyUi.component("🏠")).setLabel(obeyUi.plain("Home"));
     let button_forward = new ButtonBuilder()
         .setStyle(ButtonStyle.Success)
         .setCustomId("3")
-        .setEmoji("▶️")
-        .setLabel("Forward");
+        .setEmoji(obeyUi.component("▶️"))
+        .setLabel(obeyUi.plain("Forward"));
     let button_blank = new ButtonBuilder()
         .setStyle(ButtonStyle.Secondary)
         .setCustomId("button_blank")
-        .setLabel("\u200b")
+        .setLabel(obeyUi.plain("\u200b"))
         .setDisabled();
-    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji(obeyUi.component("🛑")).setLabel(obeyUi.plain("Stop"));
     const allbuttons = [
         new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
@@ -1801,7 +1803,7 @@ async function swap_pages(client, message, description, TITLE) {
     collector.on("collect", async b => {
         if (b?.user.id !== message.author.id)
             return b?.reply({
-                content: `<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`,
+                content: `${obeyUi.markup("icon.error")} **Only the one who typed ${prefix}help is allowed to react!**`,
                 ephemeral: true,
             });
         //page forward
@@ -1875,20 +1877,20 @@ async function swap_pages2(client, message, embeds) {
     let button_back = new ButtonBuilder()
         .setStyle(ButtonStyle.Success)
         .setCustomId("1")
-        .setEmoji("◀️")
-        .setLabel("Back");
-    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+        .setEmoji(obeyUi.component("◀️"))
+        .setLabel(obeyUi.plain("Back"));
+    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji(obeyUi.component("🏠")).setLabel(obeyUi.plain("Home"));
     let button_forward = new ButtonBuilder()
         .setStyle(ButtonStyle.Success)
         .setCustomId("3")
-        .setEmoji("▶️")
-        .setLabel("Forward");
+        .setEmoji(obeyUi.component("▶️"))
+        .setLabel(obeyUi.plain("Forward"));
     let button_blank = new ButtonBuilder()
         .setStyle(ButtonStyle.Secondary)
         .setCustomId("button_blank")
-        .setLabel("\u200b")
+        .setLabel(obeyUi.plain("\u200b"))
         .setDisabled();
-    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji(obeyUi.component("🛑")).setLabel(obeyUi.plain("Stop"));
     const allbuttons = [
         new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
@@ -1908,7 +1910,7 @@ async function swap_pages2(client, message, embeds) {
     collector.on("collect", async b => {
         if (b?.user.id !== message.author.id)
             return b?.reply({
-                content: `<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`,
+                content: `${obeyUi.markup("icon.error")} **Only the one who typed ${prefix}help is allowed to react!**`,
                 ephemeral: true,
             });
         //page forward
@@ -1990,20 +1992,20 @@ async function swap_pages2_interaction(client, interaction, embeds) {
     let button_back = new ButtonBuilder()
         .setStyle(ButtonStyle.Success)
         .setCustomId("1")
-        .setEmoji("◀️")
-        .setLabel("Back");
-    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji("🏠").setLabel("Home");
+        .setEmoji(obeyUi.component("◀️"))
+        .setLabel(obeyUi.plain("Back"));
+    let button_home = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("2").setEmoji(obeyUi.component("🏠")).setLabel(obeyUi.plain("Home"));
     let button_forward = new ButtonBuilder()
         .setStyle(ButtonStyle.Success)
         .setCustomId("3")
-        .setEmoji("▶️")
-        .setLabel("Forward");
+        .setEmoji(obeyUi.component("▶️"))
+        .setLabel(obeyUi.plain("Forward"));
     let button_blank = new ButtonBuilder()
         .setStyle(ButtonStyle.Secondary)
         .setCustomId("button_blank")
-        .setLabel("\u200b")
+        .setLabel(obeyUi.plain("\u200b"))
         .setDisabled();
-    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji("🛑").setLabel("Stop");
+    let button_stop = new ButtonBuilder().setStyle(ButtonStyle.Danger).setCustomId("stop").setEmoji(obeyUi.component("🛑")).setLabel(obeyUi.plain("Stop"));
     const allbuttons = [
         new ActionRowBuilder().addComponents([button_back, button_home, button_forward, button_blank, button_stop]),
     ];
@@ -2024,7 +2026,7 @@ async function swap_pages2_interaction(client, interaction, embeds) {
     collector.on("collect", async b => {
         if (b?.user.id !== cmduser.id)
             return b?.reply({
-                content: `<:no:833101993668771842> **Only the one who typed ${prefix}help is allowed to react!**`,
+                content: `${obeyUi.markup("icon.error")} **Only the one who typed ${prefix}help is allowed to react!**`,
                 ephemeral: true,
             });
         //page forward
@@ -2178,7 +2180,7 @@ function databasing(client, guildid, userid) {
                 ensureData[`ticketsystem${i}`] = {
                     enabled: false,
                     guildid: guildid,
-                    defaultname: "🎫・{count}・{member}",
+                    defaultname: "ticket-{count}-{member}",
                     messageid: "",
                     channelid: "",
                     parentid: "",

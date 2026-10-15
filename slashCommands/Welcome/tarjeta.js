@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const FormData = require('form-data')
 const axios = require('axios')
@@ -12,10 +13,10 @@ module.exports = {
   ],
 
   run: async (client, interaction) => {
-    const errEmbed = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
+    const errEmbed = d => new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(d, 4096))
     const target = interaction.options.getUser('usuario') || interaction.user
     const member = await interaction.guild.members.fetch(target.id).catch(() => null)
-    if (!member) return interaction.reply({ embeds: [errEmbed('❌ Usuario no encontrado.')], ephemeral: true })
+    if (!member) return interaction.reply({ embeds: [errEmbed(obeyUi.owned('❌ Usuario no encontrado.'))], ephemeral: true })
 
     await interaction.deferReply()
     const gid = interaction.guild.id

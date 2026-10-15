@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const canvacord = require("canvacord");
@@ -507,7 +509,7 @@ module.exports = function (client) {
                         ["level", "points", "neededpoints"],
                         ["voicelevel", "voicepoints", "neededvoicepoints"],
                     ];
-                    let tempmessage = await message.channel.send(`📊 *Getting the RANK-DATA of: **${rankuser.tag}** ...*`);
+                    let tempmessage = await message.channel.send(`${obeyUi.markup("icon.levels")} *Getting the RANK-DATA of: **${rankuser.tag}** ...*`);
 
                     /**
                      * TEXT RANK
@@ -642,7 +644,7 @@ module.exports = function (client) {
                 for (let i = 25; i <= maxnum; i += 25) {
                     const top = sorted.splice(0, 25);
                     const embed = new Discord.EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable18"]))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable18"]), 256))
                         .setTimestamp()
                         .setColor(embedcolor);
                     var string = "";
@@ -659,8 +661,8 @@ module.exports = function (client) {
                                 string += `\`${j}\`. **${data.usertag}**: \`Level: ${data[`${theDbDatas[0]}`]} | Points: ${shortenLargeNumber(data[`${theDbDatas[1]}`], 2)}\`\n`;
                         } catch {}
                     }
-                    embed.setDescription(string.substring(0, 2048));
-                    embed.setFooter({ text: eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable19"]) });
+                    embed.setDescription(obeyUi.limit(string.substring(0, 2048), 4096));
+                    embed.setFooter(obeyMeta.asFooter({ text: eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable19"]) }));
                     embeds.push(embed);
                 }
                 return embeds;
@@ -681,9 +683,9 @@ module.exports = function (client) {
                     .catch(() => {});
 
                 try {
-                    await lbembed.react("⏪");
-                    await lbembed.react("⏹");
-                    await lbembed.react("⏩");
+                    await lbembed.react(obeyUi.reaction("⏪"));
+                    await lbembed.react(obeyUi.reaction("⏹"));
+                    await lbembed.react(obeyUi.reaction("⏩"));
                 } catch (error) {
                     console.error(error);
                 }
@@ -694,7 +696,7 @@ module.exports = function (client) {
 
                 collector.on("collect", async (reaction, user) => {
                     try {
-                        if (reaction.emoji?.name === "⏩") {
+                        if (obeyUi.matchesReaction(reaction.emoji, "⏩")) {
                             if (currentPage < embeds.length - 1) {
                                 currentPage++;
                                 lbembed.edit({
@@ -708,7 +710,7 @@ module.exports = function (client) {
                                     embeds: [embeds[currentPage]],
                                 });
                             }
-                        } else if (reaction.emoji?.name === "⏪") {
+                        } else if (obeyUi.matchesReaction(reaction.emoji, "⏪")) {
                             if (currentPage !== 0) {
                                 --currentPage;
                                 lbembed.edit({
@@ -737,7 +739,7 @@ module.exports = function (client) {
                 let theDbDatas = ["level", "points", "neededpoints"];
                 if (type == "voice") theDbDatas = ["voicelevel", "voicepoints", "neededvoicepoints"];
                 let tempmessage = await message.channel.send(
-                    `📊 *Getting the ${type == "voice" ? "🔉" : "💬"}__${type.toUpperCase()}__-LEADERBOARD-DATA of: **${message.guild.name}** ...*`
+                    `${obeyUi.markup("icon.levels")} *Getting the ${type == "voice" ? obeyUi.owned("🔉") : obeyUi.owned("💬")}__${type.toUpperCase()}__-LEADERBOARD-DATA of: **${message.guild.name}** ...*`
                 );
                 var filtered = client.points
                     .filter(p => p.guild === message.guild.id)
@@ -928,7 +930,7 @@ module.exports = function (client) {
                     client.points.set(key, Number(args[1]), `xpcounter`); //set points to 0
                     const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable26"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable26"]), 4096));
                     message.reply({ embeds: [embed] });
                 } catch (error) {
                     console.log("RANKING:".underline.red + " :: " + error.stack.toString().grey);
@@ -945,7 +947,7 @@ module.exports = function (client) {
                     client.points.set(message.guild.id, Number(args[0]), `setglobalxpcounter`); //set points to 0
                     const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable30"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable30"]), 4096));
                     message.reply({ embeds: [embed] });
                 } catch {}
             }
@@ -999,11 +1001,11 @@ module.exports = function (client) {
 
                             //THE INFORMATION EMBED
                             const embed = new Discord.EmbedBuilder()
-                                .setAuthor({
+                                .setAuthor(obeyMeta.asAuthor({
                                     name: `Ranking of:  ${rankuser.tag}`,
                                     iconURL: rankuser.displayAvatarURL()
-                                })
-                                .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable36"]))
+                                }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable36"]), 4096))
                                 .setColor(embedcolor);
                             //send ping and embed message only IF the adding will be completed!
                             if (toaddpoints - leftpoints < newneededPoints)
@@ -1017,7 +1019,7 @@ module.exports = function (client) {
 
                     const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable37"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable37"]), 4096));
                     message.reply({ embeds: [embed] });
                     rank(rankuser); //also sending the rankcard
                 } catch (error) {
@@ -1064,11 +1066,11 @@ module.exports = function (client) {
 
                             //THE INFORMATION EMBED
                             const embed = new Discord.EmbedBuilder()
-                                .setAuthor({
+                                .setAuthor(obeyMeta.asAuthor({
                                     name: `Ranking of:  ${rankuser.tag}`,
                                     iconURL: rankuser.displayAvatarURL()
-                                })
-                                .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable44"]))
+                                }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable44"]), 4096))
                                 .setColor(embedcolor);
                             //send ping and embed message
                             message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
@@ -1081,7 +1083,7 @@ module.exports = function (client) {
 
                     const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable45"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable45"]), 4096));
                     message.channel.send({ embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
                 } catch (error) {
@@ -1138,11 +1140,11 @@ module.exports = function (client) {
 
                             //THE INFORMATION EMBED
                             const embed = new Discord.EmbedBuilder()
-                                .setAuthor({
+                                .setAuthor(obeyMeta.asAuthor({
                                     name: `Ranking of:  ${rankuser.tag}`,
                                     iconURL: rankuser.displayAvatarURL()
-                                })
-                                .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable53"]))
+                                }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable53"]), 4096))
                                 .setColor(embedcolor);
                             //send ping and embed message only IF the removing will be completed!
                             if (amount - removedpoints < neededPoints)
@@ -1156,7 +1158,7 @@ module.exports = function (client) {
 
                     const embed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable54"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable54"]), 4096));
                     message.reply({ embeds: [embed] });
                     rank(rankuser); //also sending the rankcard
                 } catch (error) {
@@ -1199,17 +1201,17 @@ module.exports = function (client) {
 
                     //THE INFORMATION EMBED
                     const embed = new Discord.EmbedBuilder()
-                        .setAuthor({
+                        .setAuthor(obeyMeta.asAuthor({
                             name: `Ranking of:  ${rankuser.tag}`,
                             iconURL: rankuser.displayAvatarURL()
-                        })
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable61"]))
+                        }))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable61"]), 4096))
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
                     const sssembed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable62"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable62"]), 4096));
                     message.reply(sssembed);
                 } catch (error) {
                     console.log("RANKING:".underline.red + " :: " + error.stack.toString().grey);
@@ -1257,17 +1259,17 @@ module.exports = function (client) {
                     const newPoints = client.points.get(key, `points`); //get current NEW points
                     //THE INFORMATION EMBED
                     const embed = new Discord.EmbedBuilder()
-                        .setAuthor({
+                        .setAuthor(obeyMeta.asAuthor({
                             name: `Ranking of:  ${rankuser.tag}`,
                             iconURL: rankuser.displayAvatarURL()
-                        })
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable69"]))
+                        }))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable69"]), 4096))
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
                     const sssembed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable70"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable70"]), 4096));
                     message.reply(sssembed);
                 } catch (error) {
                     console.log("RANKING:".underline.red + " :: " + error.stack.toString().grey);
@@ -1315,17 +1317,17 @@ module.exports = function (client) {
 
                     //THE INFORMATION EMBED
                     const embed = new Discord.EmbedBuilder()
-                        .setAuthor({
+                        .setAuthor(obeyMeta.asAuthor({
                             name: `Ranking of:  ${rankuser.tag}`,
                             iconURL: rankuser.displayAvatarURL()
-                        })
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable76"]))
+                        }))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable76"]), 4096))
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
                     const sssembed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable77"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable77"]), 4096));
                     message.reply(sssembed);
                 } catch (error) {
                     console.log("RANKING:".underline.red + " :: " + error.stack.toString().grey);
@@ -1357,17 +1359,17 @@ module.exports = function (client) {
 
                     //THE INFORMATION EMBED
                     const embed = new Discord.EmbedBuilder()
-                        .setAuthor({
+                        .setAuthor(obeyMeta.asAuthor({
                             name: `Ranking of:  ${rankuser.tag}`,
                             iconURL: rankuser.displayAvatarURL()
-                        })
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable82"]))
+                        }))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable82"]), 4096))
                         .setColor(embedcolor);
                     message.channel.send({ content: `${rankuser}`, embeds: [embed] }).catch(() => {});
                     rank(rankuser); //also sending the rankcard
                     const sssembed = new Discord.EmbedBuilder()
                         .setColor(embedcolor)
-                        .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable83"]));
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable83"]), 4096));
                     message.reply(sssembed);
                 } catch (error) {
                     console.log("RANKING:".underline.red + " :: " + error.stack.toString().grey);
@@ -1384,7 +1386,7 @@ module.exports = function (client) {
                 }
                 const embed = new Discord.EmbedBuilder()
                     .setColor(embedcolor)
-                    .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable85"]));
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable85"]), 4096));
                 message.reply({ content: `I limited the MAXIMUM MEMBERS to 100`, embeds: [embed] });
             }
 
@@ -1409,7 +1411,7 @@ module.exports = function (client) {
                 }
                 const embed = new Discord.EmbedBuilder()
                     .setColor(embedcolor)
-                    .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable86"]));
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable86"]), 4096));
                 message.reply({ embeds: [embed] });
             }
 
@@ -1429,14 +1431,14 @@ module.exports = function (client) {
                 }
                 const embed = new Discord.EmbedBuilder()
                     .setColor(embedcolor)
-                    .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable88"]));
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable88"]), 4096));
                 message.reply({ embeds: [embed] });
             }
 
             function levelinghelp() {
                 const embed = new Discord.EmbedBuilder()
-                    .setTitle(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable89"]))
-                    .setDescription(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable90"]))
+                    .setTitle(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable89"]), 256))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["handlers"]["rankingjs"]["ranking"]["variable90"]), 4096))
                     .setColor(embedcolor)
                     .addFields([
                         {

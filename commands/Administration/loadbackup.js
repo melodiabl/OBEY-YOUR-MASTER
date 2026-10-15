@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder, PermissionFlagsBits,
     ButtonStyle
@@ -18,16 +20,16 @@ module.exports = {
         let server = client.guilds.cache.get(args[0]);
         if (!server)
             return message.reply(
-                `<:no:833101993668771842> **You forgot to add from which Servidor i should load the Backup in here**\n> Type: \`${prefix}loadbackup <ServerId> <BackupId>\``
+                `${obeyUi.markup("icon.error")} **You forgot to add from which Servidor i should load the Backup in here**\n> Type: \`${prefix}loadbackup <ServerId> <BackupId>\``
             );
         if (!server.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
             return message.reply(
-                `<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso in ${server.name}!**`
+                `${obeyUi.markup("icon.error")} **I am missing the ADMINISTRATOR Permiso in ${server.name}!**`
             );
         }
         if (!message.guild.members.me.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
             return message.reply(
-                `<:no:833101993668771842> **I am missing the ADMINISTRATOR Permiso in ${server.name}!**`
+                `${obeyUi.markup("icon.error")} **I am missing the ADMINISTRATOR Permiso in ${server.name}!**`
             );
         }
         let owner = await server.fetchOwner().catch(e => {
@@ -37,7 +39,7 @@ module.exports = {
             return message.reply("Could not get owner of this guild");
         });
         if (owner.id != cmduser.id || owner2.id != cmduser.id) {
-            return message.reply(`<:no:833101993668771842> **You need to be Propietario in both Servers!**`);
+            return message.reply(`${obeyUi.markup("icon.error")} **You need to be Propietario in both Servers!**`);
         }
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
@@ -68,9 +70,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable1"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable1"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable2"]), 4096)),
                 ],
             });
         client.backupDB.ensure(server.id, {
@@ -79,35 +81,35 @@ module.exports = {
         let backups = client.backupDB.get(server.id, "backups");
         if (!backups || backups.length == 0) {
             return message.reply(
-                `<:no:833101993668771842> **There are no Backups in ${server.name}**\nCreate one with: \`${prefix}createbackup\``
+                `${obeyUi.markup("icon.error")} **There are no Backups in ${server.name}**\nCreate one with: \`${prefix}createbackup\``
             );
         }
         if (!args[1])
             return message.reply(
-                `<:no:833101993668771842> **You forgot to add the Backup Id**\n> Type: \`${prefix}loadbackup <ServerId> <BackupId>\``
+                `${obeyUi.markup("icon.error")} **You forgot to add the Backup Id**\n> Type: \`${prefix}loadbackup <ServerId> <BackupId>\``
             );
         if (isNaN(args[1]) || Number(args[1]) < 1 || Number(args[1]) > 5)
             return message.reply(
-                `<:no:833101993668771842> **The Backup Id Must be a Number between 1 and 5**\n> Type: \`${prefix}loadbackup <ServerId> <BackupId>\``
+                `${obeyUi.markup("icon.error")} **The Backup Id Must be a Number between 1 and 5**\n> Type: \`${prefix}loadbackup <ServerId> <BackupId>\``
             );
         if (backups.length < Number(args[1])) {
             return message.reply(
-                `<:no:833101993668771842> **The Provided Backup Id does not exist!**\n> Type: \`${prefix}listbackups\` to see all Backups`
+                `${obeyUi.markup("icon.error")} **The Provided Backup Id does not exist!**\n> Type: \`${prefix}listbackups\` to see all Backups`
             );
         }
         let backupData = backups[Number(args[1]) - 1];
         if (!backupData) {
             return message.reply(
-                `<:no:833101993668771842> **The __Provided__ Backup Id does not exist!**\n> Type: \`${prefix}listbackups\` to see all Backups`
+                `${obeyUi.markup("icon.error")} **The __Provided__ Backup Id does not exist!**\n> Type: \`${prefix}listbackups\` to see all Backups`
             );
         }
         if (Array.isArray(backupData)) backupData = backupData[0];
         message.channel
             .send({
-                content: `⚠️ **THIS WILL CLEAR ALL CURRENT GUILD DATA!** ⚠️\n> This cannot be undone!`,
+                content: `${obeyUi.markup("icon.warning")} **THIS WILL CLEAR ALL CURRENT GUILD DATA!** ${obeyUi.markup("icon.warning")}\n> This cannot be undone!`,
                 components: [
                     new Discord.ActionRowBuilder().addComponents([
-                        new Discord.ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel("Continue").setCustomId("verified"),
+                        new Discord.ButtonBuilder().setStyle(ButtonStyle.Danger).setLabel(obeyUi.plain("Continue")).setCustomId("verified"),
                     ]),
                 ],
             })
@@ -123,7 +125,7 @@ module.exports = {
                         collector.stop();
                         button
                             ?.reply({
-                                content: `<a:Loading:833101350623117342> Now loading the Backup from \`${server.name}\` to \`${message.guild.name}\`!`,
+                                content: `${obeyUi.markup("motion.cargando")} Now loading the Backup from \`${server.name}\` to \`${message.guild.name}\`!`,
                             })
                             .catch(() => {});
                         // Create the backup
@@ -154,16 +156,16 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]), 4096))
                             .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                             .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                             .setTimestamp()
-                            .setFooter(client.getFooter(
+                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                     "ID: " + message.author.id,
                                     message.author.displayAvatarURL()
-                                )
+                                ))
                             ),
                     ],
                 });

@@ -1,3 +1,4 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -1207,7 +1208,7 @@ class HangmanGame {
 
         const embed = new Discord.EmbedBuilder()
             .setColor("#2f3136")
-            .setAuthor({ name: "Hangman Minigame", iconURL: "https://imgur.com/0guxxtY.png", url: "https://github.com/melodiabl" })
+            .setAuthor(obeyMeta.asAuthor({ name: "Hangman Minigame", iconURL: "https://imgur.com/0guxxtY.png", url: "https://github.com/melodiabl" }))
             .setDescription(this.getDescription())
             .addFields({ name: eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variablex_1"]), value: eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variable1"]) })
             .addFields({ name: "How To Play", value: "React to this message using the emojis that look like letters (🅰️, 🇹, )" });
@@ -1266,7 +1267,7 @@ class HangmanGame {
         this.inGame = false;
         const editEmbed = new Discord.EmbedBuilder()
             .setColor("#ED4245")
-            .setAuthor({ name: "Hangman Minigame", iconURL: "https://imgur.com/0guxxtY.png", url: "https://github.com/melodiabl" })
+            .setAuthor(obeyMeta.asAuthor({ name: "Hangman Minigame", iconURL: "https://imgur.com/0guxxtY.png", url: "https://github.com/melodiabl" }))
             .setDescription(win ? "**Chat Wins!**" : "**Chat losses**")
             .addFields({ name: eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variablex_3"]), value: eval(client.la[ls]["cmds"]["minigames"]["hangman"]["variable3"]) });
         this.gameEmbed.edit({ embeds: [editEmbed] });
@@ -1327,7 +1328,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(

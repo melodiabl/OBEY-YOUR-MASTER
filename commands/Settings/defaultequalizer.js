@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 module.exports = {
     name: "defaultequalizer",
     category: "Settings",
@@ -24,7 +25,7 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -42,7 +43,7 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(es.wrongcolor)
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["settings"]["defaultequalizer"]["variable3"])),

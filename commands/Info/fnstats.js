@@ -1,9 +1,11 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const Canvas = null; // discord-canvas incompatible con Node 22
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "fnstats",
@@ -30,7 +32,7 @@ module.exports = {
                     let data = client.epicgamesDB.get(message.author.id);
                     if (!data.epic || data.epic.length < 5)
                         return message.reply(
-                            `❌ **Your Account is not linked!**\nPlease enter a Epic Games name for individual Search!\n>Usage: \`fnstats <platform> <Epic>\``
+                            `${obeyUi.markup("icon.error")} **Your Account is not linked!**\nPlease enter a Epic Games name for individual Search!\n>Usage: \`fnstats <platform> <Epic>\``
                         );
                     Epic = data.epic;
                     platform = data.Platform;
@@ -53,13 +55,13 @@ module.exports = {
                 });
                 let data = client.epicgamesDB.get(message.author.id);
                 if (!data.epic || data.epic.length < 5)
-                    return message.reply(`❌ **${message.author.username}** did not verify/connect their Epic Games Account`);
+                    return message.reply(`${obeyUi.markup("icon.error")} **${message.author.username}** did not verify/connect their Epic Games Account`);
                 Epic = data.epic;
                 platform = data.Platform;
             }
             try {
                 if (platform !== "pc" && platform !== "xbl" && platform !== "psn") platform = "pc";
-                let themsg = await message.reply(`<a:Loading:833101350623117342> Getting the Fortnite Stats of ${Epic}`);
+                let themsg = await message.reply(`${obeyUi.markup("motion.cargando")} Getting the Fortnite Stats of ${Epic}`);
                 const stats = new Canvas.FortniteStats();
                 const image = await stats
                     .setToken(process.env.fortnitetracker || config.fortnitetracker)
@@ -79,9 +81,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"]), 4096)),
                 ],
             });
         }

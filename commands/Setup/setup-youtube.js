@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -26,32 +28,32 @@ module.exports = {
                     {
                         value: "Set Discord Channel",
                         description: `Define Poster Canal, where Uploads will be`,
-                        emoji: allEmojis.msg.channel,
+                        emoji: obeyUi.component(allEmojis.msg.channel),
                     },
                     {
                         value: "Add Youtube Channel",
                         description: `Add up to 5 Youtube Accounts`,
-                        emoji: allEmojis.msg.SUCCESS,
+                        emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                     },
                     {
                         value: "Remove Youtube Channel",
                         description: `Remove one of the added Youtube Accounts`,
-                        emoji: allEmojis.msg.ERROR,
+                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                     },
                     {
                         value: "Edit Youtube Channel",
                         description: `Edit one of the added Youtube Accounts`,
-                        emoji: allEmojis.msg.edit,
+                        emoji: obeyUi.component(allEmojis.msg.edit),
                     },
                     {
                         value: "Show Settings",
                         description: `Show Ajustes of the Ai-Chat`,
-                        emoji: allEmojis.msg.info,
+                        emoji: obeyUi.component(allEmojis.msg.info),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ai-Chat-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -59,7 +61,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Youtube System")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Youtube System"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -75,8 +77,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Youtube-Poster", iconURL: "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Youtube-Poster", iconURL: obeyUi.image("icon.music"), url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -99,16 +101,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -120,10 +122,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable4"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable4"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable5"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable5"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -145,13 +147,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable6"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable6"]), 256)
                                                     )
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable7"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable7"]), 4096)
                                                     )
                                                     .setColor(es.color)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -162,10 +164,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable8"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable8"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -177,19 +179,19 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable9"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable9"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Remove some others first...`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`Remove some others first...`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable10"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable10"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(`Example:\nhttps://www.youtube.com/channel/UC1AgotpFHNhzolUtAjPgZqQ`)
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`Example:\nhttps://www.youtube.com/channel/UC1AgotpFHNhzolUtAjPgZqQ`, 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -219,12 +221,12 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable11"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         client.social_log.push(message.guild.id, msg.content, "youtube.channels");
@@ -232,13 +234,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable12"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable12"]), 256)
                                                     )
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable13"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable13"]), 4096)
                                                     )
                                                     .setColor(es.color)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -250,11 +252,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable14"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable14"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -266,10 +268,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable15"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable15"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Add some others first...`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`Add some others first...`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             let channels = client.social_log.get(message.guild.id, "youtube.channels");
@@ -290,7 +292,7 @@ module.exports = {
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(menuoptions.length) //OPTIONAL, this is how many values you can have at each selection
                                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                .setPlaceholder("Click me to remove an Account")
+                                .setPlaceholder(obeyUi.plain("Click me to remove an Account"))
                                 .addOptions(
                                     menuoptions.map(option => {
                                         let Obj = {
@@ -308,8 +310,8 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor({ name: "Youtube-Poster", iconURL: "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128", url: "https://github.com/melodiabl" })
-                                .setDescription("Seleccionar all Youtube Channels you want to remove!");
+                                .setAuthor(obeyMeta.asAuthor({ name: "Youtube-Poster", iconURL: obeyUi.image("icon.music"), url: "https://github.com/melodiabl" }))
+                                .setDescription(obeyUi.limit("Seleccionar all Youtube Channels you want to remove!", 4096));
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
@@ -332,19 +334,19 @@ module.exports = {
                                             "youtube.channels"
                                         );
                                     }
-                                    menu?.reply(`✅ **Successfully removed ${menu?.values.length} Youtube Accounts!**`);
+                                    menu?.reply(`${obeyUi.markup("icon.success")} **Successfully removed ${menu?.values.length} Youtube Accounts!**`);
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                        content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                     components: [],
-                                    content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                    content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                 });
                             });
                         }
@@ -355,10 +357,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable19"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable19"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Add some others first...`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`Add some others first...`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             let channels = client.social_log.get(message.guild.id, "youtube.channels");
@@ -378,7 +380,7 @@ module.exports = {
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                .setPlaceholder("Click me to remove an Account")
+                                .setPlaceholder(obeyUi.plain("Click me to remove an Account"))
                                 .addOptions(
                                     menuoptions.map(option => {
                                         let Obj = {
@@ -396,8 +398,8 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor({ name: "Youtube-Poster", iconURL: "https://cdn.discordapp.com/emojis/840260133686870036.png?size=128", url: "https://github.com/melodiabl" })
-                                .setDescription("Seleccionar the Youtube Canal you want to edit!");
+                                .setAuthor(obeyMeta.asAuthor({ name: "Youtube-Poster", iconURL: obeyUi.image("icon.music"), url: "https://github.com/melodiabl" }))
+                                .setDescription(obeyUi.limit("Seleccionar the Youtube Canal you want to edit!", 4096));
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
@@ -427,17 +429,17 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable21"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable21"]), 256)
                                                 )
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `**CURRENT MESSAGE:**\n> ${client.youtube_log.get(channel, "message")}`.substring(
+                                                    obeyUi.limit(`**CURRENT MESSAGE:**\n> ${client.youtube_log.get(channel, "message")}`.substring(
                                                         0,
                                                         2048
-                                                    )
+                                                    ), 4096)
                                                 )
                                                 .addFields({ name: "**VARIABLES**", value: `> \`{url}\` ... will be replaced with the video **LINK**\n> \`{author}\` ... will be replaced with the video's **Author**\n> \`{title}\` ... will be replaced with the video's **title**\n> \`{date}\` ... will be replaced with the video's **date**` })
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                     await tempmsg.channel
@@ -455,15 +457,15 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-youtube"][
                                                                         "variable22"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
-                                                            .setDescription("New Mensaje:\n" + msg.content)
+                                                            .setDescription(obeyUi.limit("New Mensaje:\n" + msg.content, 4096))
                                                             .setColor(es.color)
-                                                            .setFooter(client.getFooter(es)),
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                     ],
                                                 });
                                             }
@@ -477,28 +479,28 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable23"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
-                                                        .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         });
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                        content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                     components: [],
-                                    content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                    content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                 });
                             });
                         }
@@ -509,15 +511,15 @@ module.exports = {
                             message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(`Ajustes of the Youtube Poster`)
+                                        .setTitle(obeyUi.limit(`Ajustes of the Youtube Poster`, 256))
                                         .setColor(es.wrongcolor)
                                         .setDescription(
-                                            `**Discord Poster Canal:** <#${client.social_log.get(message.guild.id, "youtube.dc_channel")}>\n**[${channels.length}] Channels:**${channels.length == 0 ? "\n> `NONE`" : channels.map(d => `\n> [${d.split("/")[d.split("/").length - 1]}](${d})`).join("\n")}`.substring(
+                                            obeyUi.limit(`**Discord Poster Canal:** <#${client.social_log.get(message.guild.id, "youtube.dc_channel")}>\n**[${channels.length}] Channels:**${channels.length == 0 ? "\n> `NONE`" : channels.map(d => `\n> [${d.split("/")[d.split("/").length - 1]}](${d})`).join("\n")}`.substring(
                                                 0,
                                                 2000
-                                            )
+                                            ), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -530,9 +532,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable26"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-youtube"]["variable26"]), 4096)),
                 ],
             });
         }

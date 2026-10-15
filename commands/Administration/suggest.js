@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { allEmojis } = require("../../botconfig/emojiFunctions");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { delay, databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: `suggest`,
@@ -42,9 +44,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable2"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable1"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable2"]), 4096)),
                     ],
                 });
             let reason = `No reason`;
@@ -54,9 +56,9 @@ module.exports = {
                     channel: "",
                     approvemsg: `${allEmojis.msg.SUCCESS} Accepted Idea! Expect this soon.`,
                     denymsg: `${allEmojis.msg.ERROR} Thank you for the feedback, but we are not interested in this idea at this time.`,
-                    maybemsg: `💡 We are thinking about this idea!`,
-                    duplicatemsg: `💢 This is a duplicated Suggestion`,
-                    soonmsg: `👌 Expect this Feature Soon!`,
+                    maybemsg: `${obeyUi.markup("icon.idea")} We are thinking about this idea!`,
+                    duplicatemsg: `${obeyUi.markup("icon.warning")} This is a duplicated Suggestion`,
+                    soonmsg: `${obeyUi.markup("icon.success")} Expect this Feature Soon!`,
                     statustext: `${allEmojis.msg.loading} Waiting for Community Feedback, please vote!`,
                     footertext: `Want to suggest / Feedback something? Simply type in this channel!`,
                     approveemoji: `${allEmojis.msg.SUCCESS}`,
@@ -76,7 +78,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setThumbnail(
                                 es.thumb
                                     ? es.footericon &&
@@ -85,8 +87,8 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                             )
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable3"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable4"])),
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable3"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable4"]), 4096)),
                     ],
                 });
             if (!args[0])
@@ -94,7 +96,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setThumbnail(
                                 es.thumb
                                     ? es.footericon &&
@@ -103,8 +105,8 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                             )
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable5"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable6"])),
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable5"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable6"]), 4096)),
                     ],
                 });
             //wenn kein grund
@@ -113,7 +115,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setThumbnail(
                                 es.thumb
                                     ? es.footericon &&
@@ -122,8 +124,8 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                             )
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable7"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable8"])),
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable7"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable8"]), 4096)),
                     ],
                 });
 
@@ -132,7 +134,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setThumbnail(
                                 es.thumb
                                     ? es.footericon &&
@@ -141,8 +143,8 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                             )
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable9"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable10"])),
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable9"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable10"]), 4096)),
                     ],
                 });
             if (!args[2]) reason = `No reason`;
@@ -154,7 +156,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setThumbnail(
                                 es.thumb
                                     ? es.footericon &&
@@ -163,8 +165,8 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                             )
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable11"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable12"])),
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable11"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable12"]), 4096)),
                     ],
                 });
 
@@ -175,7 +177,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setThumbnail(
                                 es.thumb
                                     ? es.footericon &&
@@ -184,7 +186,7 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                             )
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable13"])),
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable13"]), 256)),
                     ],
                 });
 
@@ -196,7 +198,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setThumbnail(
                                 es.thumb
                                     ? es.footericon &&
@@ -205,7 +207,7 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                             )
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable14"])),
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable14"]), 256)),
                     ],
                 });
 
@@ -229,8 +231,8 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                                 )
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable15"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable16"])),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable15"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable16"]), 4096)),
                         ],
                     });
                     break;
@@ -250,8 +252,8 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : `https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png`
                                 )
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable17"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable18"])),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable17"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable18"]), 4096)),
                         ],
                     });
                     break;
@@ -263,8 +265,8 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.color)
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable19"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable20"])),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable19"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable20"]), 4096)),
                         ],
                     });
                     break;
@@ -276,8 +278,8 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.color)
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable21"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable22"])),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable21"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable22"]), 4096)),
                         ],
                     });
                     break;
@@ -289,8 +291,8 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.color)
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable23"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable24"])),
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable23"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable24"]), 4096)),
                         ],
                     });
                     break;
@@ -300,19 +302,19 @@ module.exports = {
             }
 
             const embed = new EmbedBuilder()
-                .setAuthor({ name: oldEmbed.author.name, iconURL: oldEmbed.author.iconURL })
-                .setDescription(oldEmbed.description)
+                .setAuthor(obeyMeta.asAuthor({ name: oldEmbed.author.name, iconURL: oldEmbed.author.iconURL }))
+                .setDescription(obeyUi.limit(oldEmbed.description, 4096))
                 .setColor(color)
-                .setFooter(client.getFooter(
+                .setFooter(obeyMeta.asFooter(client.getFooter(
                         `Want to suggest something? Simply type it in this channel`,
-                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/light-bulb_1f4a1.png")
+                        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/light-bulb_1f4a1.png"))
                 );
 
             if (embed.fields[2]) {
                 embed.fields[2].name == `<:arrow:832598861813776394> __Reason by **${message.author.username}**:__`;
                 embed.fields[2].value == `>>> ${String(reason).substring(0, 1000)}`;
             } else {
-                embed.addFields({ name: `<:arrow:832598861813776394> __Reason by **${message.author.username}**__`, value: `>>> ${String(reason).substring(0, 1000)}` });
+                embed.addFields({ name: `${obeyUi.markup("icon.arrow-right")} __Reason by **${message.author.username}**__`, value: `>>> ${String(reason).substring(0, 1000)}` });
             }
             targetMessage.edit({ embeds: [embed] });
             try {
@@ -344,16 +346,16 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable26"]))
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable26"]), 4096))
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                 .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                 .setTimestamp()
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "ID: " + message.author.id,
                                         message.author.displayAvatarURL()
-                                    )
+                                    ))
                                 ),
                         ],
                     });
@@ -367,9 +369,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable29"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["suggest"]["variable29"]), 4096)),
                 ],
             });
         }

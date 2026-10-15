@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
@@ -18,7 +19,7 @@ module.exports = {
 
     if (!NAME_RE.test(name))
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Nombre inválido. Solo letras, números, espacios y guiones (máx. 32 caracteres).')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Nombre inválido. Solo letras, números, espacios y guiones (máx. 32 caracteres).'), 4096))],
         ephemeral: true,
       })
 
@@ -27,13 +28,13 @@ module.exports = {
     const count = await Playlist.countDocuments({ userId })
     if (count >= MAX_PLAYLISTS)
       return interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ Ya tienes **${MAX_PLAYLISTS}** playlists. Elimina una antes de crear otra.`)],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} Ya tienes **${MAX_PLAYLISTS}** playlists. Elimina una antes de crear otra.`, 4096))],
       })
 
     const exists = await Playlist.findOne({ userId, name: exactPlaylistName(name) })
     if (exists)
       return interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ Ya tienes una playlist llamada **${name}**.`)],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} Ya tienes una playlist llamada **${name}**.`, 4096))],
       })
 
     await Playlist.create({ userId, name, tracks: [] })
@@ -41,8 +42,8 @@ module.exports = {
     await interaction.editReply({
       embeds: [
         new EmbedBuilder().setColor(0x22C55E)
-          .setTitle('✅ Playlist creada')
-          .setDescription(`**${name}** está lista. Usa \`/playlist add\` para agregar canciones.`),
+          .setTitle(obeyUi.limit(obeyUi.owned('✅ Playlist creada'), 256))
+          .setDescription(obeyUi.limit(`**${name}** está lista. Usa \`/playlist add\` para agregar canciones.`, 4096)),
       ],
     })
   },

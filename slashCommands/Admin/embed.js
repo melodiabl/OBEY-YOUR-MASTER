@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder,
     ChannelType
 } = require("discord.js");
@@ -64,8 +66,8 @@ module.exports = {
                     : guild.channels.cache.get(channelId);
             let embed = new EmbedBuilder()
                 .setColor(EmbedColor ? EmbedColor : es.color)
-                .setTitle(String(EmbedTitle).substring(0, 256))
-                .setDescription(String(EmbedDescription).substring(0, 2048).split("+n+").join("\n"))
+                .setTitle(obeyUi.limit(String(EmbedTitle).substring(0, 256), 256))
+                .setDescription(obeyUi.limit(String(EmbedDescription).substring(0, 2048).split("+n+").join("\n"), 4096))
                 .setThumbnail(
                     es.thumb
                         ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
@@ -73,7 +75,7 @@ module.exports = {
                             : client.user.displayAvatarURL()
                         : null
                 )
-                .setFooter(client.getFooter(es));
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)));
             //update it without a response!
             await interaction?.reply({ content: `Enviando el embed...`, ephemeral: true }).catch(() => {});
             //SEND THE EMBED!
@@ -81,7 +83,7 @@ module.exports = {
                 channel.send({ embeds: [embed.setColor(es.color)] }).catch(() => {});
             });
             //Edit the reply
-            interaction?.editReply({ content: `✅ Embed enviado en ${channel}!`, ephemeral: true }).catch(() => {});
+            interaction?.editReply({ content: `${obeyUi.markup("icon.success")} Embed enviado en ${channel}!`, ephemeral: true }).catch(() => {});
         } catch (e) {
             console.log(String(e.stack).bgRed);
         }

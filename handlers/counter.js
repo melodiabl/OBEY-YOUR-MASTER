@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 const { PermissionFlagsBits } = require("discord.js");
 module.exports = function (client, options) {
     client.on("messageCreate", message => {
@@ -21,7 +22,7 @@ module.exports = function (client, options) {
                 if (message.channel.permissionsFor(message.channel.guild.members.me).has(PermissionFlagsBits.ManageMessages)) {
                     message.delete().catch(() => {});
                 } else {
-                    message.reply("❌ **I am missing the MANAGE_MESSAGES Permiso!**").then(m => {
+                    message.reply(obeyUi.owned("❌ **I am missing the MANAGE_MESSAGES Permiso!**")).then(m => {
                         setTimeout(() => {
                             m.delete().catch(() => {});
                         }, 3500);
@@ -38,7 +39,7 @@ module.exports = function (client, options) {
                 if (message.channel.permissionsFor(message.channel.guild.members.me).has(PermissionFlagsBits.ManageMessages)) {
                     message.delete().catch(() => {});
                 } else {
-                    message.reply("❌ **I am missing the MANAGE_MESSAGES Permiso!**").then(m => {
+                    message.reply(obeyUi.owned("❌ **I am missing the MANAGE_MESSAGES Permiso!**")).then(m => {
                         setTimeout(() => {
                             m.delete().catch(() => {});
                         }, 3500);
@@ -55,7 +56,7 @@ module.exports = function (client, options) {
                 if (message.channel.permissionsFor(message.channel.guild.members.me).has(PermissionFlagsBits.ManageMessages)) {
                     message.delete().catch(() => {});
                 } else {
-                    message.reply("❌ **I am missing the MANAGE_MESSAGES Permiso!**").then(m => {
+                    message.reply(obeyUi.owned("❌ **I am missing the MANAGE_MESSAGES Permiso!**")).then(m => {
                         setTimeout(() => {
                             m.delete().catch(() => {});
                         }, 3500);

@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`../../botconfig/config.json`);
 var ee = require(`../../botconfig/embed.json`);
-var emoji = require(`../../botconfig/emojis.json`);
+var emoji = require(`../../handlers/assets/legacy-config`);
 const fs = require("fs");
 var { databasing, isValidURL } = require(`../../handlers/functions`);
 module.exports = {
@@ -18,11 +19,11 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter({ text: client.user.username,
+                        .setFooter(obeyMeta.asFooter({ text: client.user.username,
                             iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                 ? es.footericon
                                 : client.user.displayAvatarURL()
-                        })
+                        }))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["cmdreload"]["variable1"])),
                 ],
             });
@@ -58,7 +59,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["owner"]["cmdreload"]["variable6"])),
                 ],

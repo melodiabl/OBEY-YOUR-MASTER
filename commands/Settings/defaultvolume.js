@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 module.exports = {
     name: "defaultvolume",
     category: "Settings",
@@ -22,7 +23,7 @@ module.exports = {
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.wrongcolor)
                             .setTitle(eval(client.la[ls]["cmds"]["settings"]["defaultvolume"]["variable1"]))
                             .setDescription(eval(client.la[ls]["cmds"]["settings"]["defaultvolume"]["variable2"])),
@@ -34,7 +35,7 @@ module.exports = {
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.wrongcolor)
                             .setTitle(eval(client.la[ls]["cmds"]["settings"]["defaultvolume"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["settings"]["defaultvolume"]["variable4"])),
@@ -45,7 +46,7 @@ module.exports = {
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setColor(es.wrongcolor)
                             .setTitle(eval(client.la[ls]["cmds"]["settings"]["defaultvolume"]["variable5"]))
                             .setDescription(eval(client.la[ls]["cmds"]["settings"]["defaultvolume"]["variable6"])),
@@ -56,7 +57,7 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -73,7 +74,7 @@ module.exports = {
             return message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setColor(es.wrongcolor)
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["settings"]["defaultvolume"]["variable8"])),

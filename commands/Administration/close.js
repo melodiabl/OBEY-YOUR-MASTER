@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, Collection, AttachmentBuilder, PermissionFlagsBits,
     ButtonStyle
 } = require("discord.js");
@@ -146,36 +148,36 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable3"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["close"]["variable4"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable3"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable4"]), 4096)),
                     ],
                 });
             let button_close = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("ticket_close")
-                .setLabel("Close")
-                .setEmoji("🔒");
+                .setLabel(obeyUi.plain("Close"))
+                .setEmoji(obeyUi.component("🔒"));
             let button_delete = new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
                 .setCustomId("ticket_delete")
-                .setLabel("Delete")
-                .setEmoji("🗑️");
+                .setLabel(obeyUi.plain("Delete"))
+                .setEmoji(obeyUi.component("🗑️"));
             let button_transcript = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
                 .setCustomId("ticket_transcript")
-                .setLabel("Transcript")
-                .setEmoji("📑");
+                .setLabel(obeyUi.plain("Transcript"))
+                .setEmoji(obeyUi.component("📑"));
             let button_user = new ButtonBuilder()
                 .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_user")
-                .setLabel("Manage Users")
-                .setEmoji("👤");
+                .setLabel(obeyUi.plain("Manage Users"))
+                .setEmoji(obeyUi.component("👤"));
             let button_role = new ButtonBuilder()
                 .setStyle(ButtonStyle.Success)
                 .setCustomId("ticket_role")
-                .setLabel("Manage Roles")
-                .setEmoji("📌");
+                .setLabel(obeyUi.plain("Manage Roles"))
+                .setEmoji(obeyUi.component("📌"));
             let buttonRow1 = new ActionRowBuilder().addComponents([
                 button_close,
                 button_delete,
@@ -187,7 +189,7 @@ module.exports = {
             message.reply({
                 embeds: [
                     new EmbedBuilder()
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable5"]))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable5"]), 256))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -197,17 +199,17 @@ module.exports = {
                                 : null
                         )
                         .setDescription(
-                            `> 🔒 **== Close** the Ticket
+                            obeyUi.limit(`> ${obeyUi.markup("icon.lock")} **== Close** the Ticket
             
->  🗑 **== Delete** the Ticket
+>  ${obeyUi.markup("icon.delete")} **== Delete** the Ticket
 
-> 📑 **== Create a Log** of the Ticket
+> ${obeyUi.markup("icon.queue")} **== Create a Log** of the Ticket
 
-> 👤 **==** Manage **Usuario** Access (Add/Remove)
+> ${obeyUi.markup("icon.profile")} **==** Manage **Usuario** Access (Add/Remove)
 
-> 📌 **==** Manage **Role** Access (Add/Remove)`
+> ${obeyUi.markup("icon.pin")} **==** Manage **Role** Access (Add/Remove)`, 4096)
                         )
-                        .setFooter(client.getFooter(es)),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
                 components: allbuttons,
             });
@@ -218,9 +220,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["close"]["variable6"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["close"]["variable7"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable6"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["close"]["variable7"]), 4096)),
                 ],
             });
         }

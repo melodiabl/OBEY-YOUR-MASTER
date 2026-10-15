@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require(`discord.js`);
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 module.exports = {
     name: `reset`,
     aliases: [`hardreset`],
@@ -20,7 +21,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable1"])),
                     ],
                 });
@@ -38,7 +39,7 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable3"])),
                     ],
@@ -85,7 +86,7 @@ module.exports = {
                                                         : client.user.displayAvatarURL()
                                                     : null
                                             )
-                                            .setFooter(client.getFooter(es))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                             .setTitle(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable4"]))
                                             .setDescription(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable5"])),
                                     ],
@@ -99,7 +100,7 @@ module.exports = {
                                 embeds: [
                                     new EmbedBuilder()
                                         .setColor(es.wrongcolor)
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setTitle(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable6"])),
                                 ],
                             });
@@ -111,7 +112,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["settings"]["reset"]["variable7"])),
                 ],

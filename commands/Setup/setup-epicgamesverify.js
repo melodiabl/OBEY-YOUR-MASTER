@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder,
     ButtonStyle
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -27,22 +29,22 @@ module.exports = {
                     {
                         value: "Enable Verification",
                         description: `Define the Canal for the Verification Process`,
-                        emoji: allEmojis.msg.SUCCESS,
+                        emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                     },
                     {
                         value: "Enable Log",
                         description: `Define the Comando Log Canal`,
-                        emoji: allEmojis.msg.SUCCESS,
+                        emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                     },
                     {
                         value: "Disable Log",
                         description: `Disable the Action Log`,
-                        emoji: allEmojis.msg.ERROR,
+                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -50,7 +52,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Epic Games Verify")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Epic Games Verify"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -66,8 +68,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Epic Games Verify Setup", iconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/882px-Epic_Games_logo.svg.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Epic Games Verify Setup", iconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/882px-Epic_Games_logo.svg.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -90,16 +92,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -115,12 +117,12 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable4"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable4"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable5"])
+                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable5"]), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             var thecmd;
@@ -143,13 +145,13 @@ module.exports = {
                                             embeds: [
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setFooter({ text: message.guild.name + " | Powered by: github.com/melodiabl",
+                                                    .setFooter(obeyMeta.asFooter({ text: message.guild.name + " | Powered by: github.com/melodiabl",
                                                         iconURL: message.guild.iconURL()
-                                                    })
+                                                    }))
                                                     .setThumbnail(es.thumb ? message.guild.iconURL() : undefined)
-                                                    .setTitle(`Click the Button to Verify and Link your Epic Games Account`)
+                                                    .setTitle(obeyUi.limit(`Click the Button to Verify and Link your Epic Games Account`, 256))
                                                     .setDescription(
-                                                        `If you click the Button you can verify your Epic Games account to this Servidor!\nYou can click it again to change your Account details!`
+                                                        obeyUi.limit(`If you click the Button you can verify your Epic Games account to this Servidor!\nYou can click it again to change your Account details!`, 4096)
                                                     ),
                                             ],
                                             components: [
@@ -157,8 +159,8 @@ module.exports = {
                                                     new ButtonBuilder()
                                                         .setCustomId("epicgamesverify")
                                                         .setStyle(ButtonStyle.Primary)
-                                                        .setLabel("Verify")
-                                                        .setEmoji("✋"),
+                                                        .setLabel(obeyUi.plain("Verify"))
+                                                        .setEmoji(obeyUi.component("✋")),
                                                 ]),
                                             ],
                                         });
@@ -168,15 +170,15 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setTitle("Activado the Verification System!")
+                                                    .setTitle(obeyUi.limit("Activado the Verification System!", 256))
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `People can now verify their Epic Games Account in <#${channel.id}>\n> If wished, you can edit the Embed in there by running the \`${prefix}editembed\` Comando!`.substring(
+                                                        obeyUi.limit(`People can now verify their Epic Games Account in <#${channel.id}>\n> If wished, you can edit the Embed in there by running the \`${prefix}editembed\` Comando!`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -188,11 +190,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -203,12 +205,12 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable4"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable4"]), 256))
                                         .setColor(es.color)
                                         .setDescription(
-                                            eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable5"])
+                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable5"]), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             var thecmd;
@@ -232,15 +234,15 @@ module.exports = {
                                         return message.reply({
                                             embeds: [
                                                 new Discord.EmbedBuilder()
-                                                    .setTitle("Activado the Log")
+                                                    .setTitle(obeyUi.limit("Activado the Log", 256))
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `I will now log all Actions in <#${message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first().id}>`.substring(
+                                                        obeyUi.limit(`I will now log all Actions in <#${message.mentions.channels.filter(ch => ch.guild.id == message.guild.id).first().id}>`.substring(
                                                             0,
                                                             2048
-                                                        )
+                                                        ), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -252,11 +254,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable7"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -268,9 +270,9 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Desactivado the Log Canal")
+                                        .setTitle(obeyUi.limit("Desactivado the Log Canal", 256))
                                         .setColor(es.color)
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -283,9 +285,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable11"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-admincmdlog"]["variable11"]), 4096)),
                 ],
             });
         }

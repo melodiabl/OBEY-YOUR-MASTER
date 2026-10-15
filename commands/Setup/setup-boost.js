@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 module.exports = {
@@ -25,11 +27,11 @@ module.exports = {
                     message: "",
                     log: false,
                     stopBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **dejó de impulsarnos..** <:Cat_Sad:867722685949804565>",
+                        obeyUi.owned("<a:Server_Boosts:867777823468027924> {member} **dejó de impulsarnos..** <:Cat_Sad:867722685949804565>"),
                     startBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **nos ha impulsado!** <a:Light_Saber_Dancce:867721861462229013>",
+                        obeyUi.owned("<a:Server_Boosts:867777823468027924> {member} **nos ha impulsado!** <a:Light_Saber_Dancce:867721861462229013>"),
                     againBoost:
-                        "<a:Server_Boosts:867777823468027924> {member} **nos ha impulsado de nuevo!** <:Tada_WON:867724032207224833>",
+                        obeyUi.owned("<a:Server_Boosts:867777823468027924> {member} **nos ha impulsado de nuevo!** <:Tada_WON:867724032207224833>"),
                 },
             });
 
@@ -53,7 +55,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``),
                 ],

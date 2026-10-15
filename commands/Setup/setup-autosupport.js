@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder,
     ButtonStyle
 } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { getNumberEmojis, isEmoji, allEmojis } = require("../../botconfig/emojiFunctions");
@@ -23,7 +25,7 @@ module.exports = {
         try {
             let theDB = client.autosupport;
             let pre;
-            const defaultEmoji = "🅾️";
+            const defaultEmoji = obeyUi.owned("🅾️");
             const NumberEmojis = getNumberEmojis();
 
             first_layer();
@@ -33,7 +35,7 @@ module.exports = {
                     menuoptions.push({
                         value: `${i}. Auto Support`,
                         description: `Manage/Edit the ${i}. Auto Support Configuración`,
-                        emoji: NumberEmojiIds[i],
+                        emoji: obeyUi.component(NumberEmojiIds[i]),
                     });
                 }
 
@@ -42,7 +44,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Auto Support System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto Support System!"))
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -60,7 +62,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Auto Support System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto Support System!"))
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -78,7 +80,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Auto Support System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto Support System!"))
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -96,7 +98,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Auto Support System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto Support System!"))
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -112,12 +114,12 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(client.getAuthor(
+                    .setAuthor(obeyMeta.asAuthor(client.getAuthor(
                             "Auto Support Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/envelope_2709-fe0f.png",
                             "https://github.com/melodiabl"
-                        ))
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                        )))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
 
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -131,8 +133,8 @@ module.exports = {
                             new ButtonBuilder()
                                 .setStyle(ButtonStyle.Link)
                                 .setURL("https://youtu.be/QGESDc31d4U")
-                                .setLabel("Tutorial Video")
-                                .setEmoji(allEmojis.msg.youtube)
+                                .setLabel(obeyUi.plain("Tutorial Video"))
+                                .setEmoji(obeyUi.component(allEmojis.msg.youtube))
                         ),
                     ],
                 });
@@ -156,14 +158,14 @@ module.exports = {
                         second_layer();
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
                         content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values ? collected.first().values[0] : "Nothing"}\`**`,
                     });
@@ -194,22 +196,22 @@ module.exports = {
                     {
                         value: "Send the Config	Message",
                         description: `(Re) Send the auto-responding Support Mensaje (with MENU)`,
-                        emoji: "👍",
+                        emoji: obeyUi.component("👍"),
                     },
                     {
                         value: "Add AutoSup Option",
                         description: `Add up to 25 different auto-responding Support Options`,
-                        emoji: "📤",
+                        emoji: obeyUi.component("📤"),
                     },
                     {
                         value: "Edit AutoSup Option",
                         description: `Edit one of the auto-responding Support Options`,
-                        emoji: "✒️",
+                        emoji: obeyUi.component("✒️"),
                     },
                     {
                         value: "Remove AutoSup Option",
                         description: `Remove auto-responding Support Options`,
-                        emoji: "🗑",
+                        emoji: obeyUi.component("🗑"),
                     },
                 ];
                 //define the selection
@@ -217,7 +219,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1)
                     .setMinValues(1)
-                    .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto-Support System!"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -232,8 +234,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Auto Support Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/question-mark_2753.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Auto Support Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/298/question-mark_2753.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -256,14 +258,14 @@ module.exports = {
                         handle_the_picks(menu?.values[0], menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
                         content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected && collected.first() && collected.first().values.length > 0 ? collected.first().values[0] : "Nothing"}\`**`,
                     });
@@ -277,16 +279,16 @@ module.exports = {
                             let settings = theDB.get(message.guild.id, pre);
                             if (!data || data.length < 1) {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You need to add at least 1 Auto-Support-Option**"
+                                    obeyUi.owned("<:no:833101993668771842> **You need to add at least 1 Auto-Support-Option**")
                                 );
                             }
                             let tempmsg = await message.reply({
                                 embeds: [
                                     new EmbedBuilder()
                                         .setColor(es.color)
-                                        .setTitle("What should be the Text to display in the Embed?")
+                                        .setTitle(obeyUi.limit("What should be the Text to display in the Embed?", 256))
                                         .setDescription(
-                                            `For Example:\n> \`\`\`To get general Help for our Servidor and our Topics, make sure to select the right option!\`\`\``
+                                            obeyUi.limit(`For Example:\n> \`\`\`To get general Help for our Servidor and our Topics, make sure to select the right option!\`\`\``, 4096)
                                         ),
                                 ],
                             });
@@ -302,9 +304,9 @@ module.exports = {
                                     embeds: [
                                         new EmbedBuilder()
                                             .setColor(es.color)
-                                            .setTitle("In where should I send the Auto-Support Mensaje?")
+                                            .setTitle(obeyUi.limit("In where should I send the Auto-Support Mensaje?", 256))
                                             .setDescription(
-                                                `Por favor Ping the Canal now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`
+                                                obeyUi.limit(`Por favor Ping the Canal now!\n> Just type: \`#channel\`${settings.channelId && message.guild.channels.cache.get(settings.channelId) ? `| Before it was: <#${settings.channelId}>` : settings.channelId ? `| Before it was: ${settings.channelId} (Channel got deleted)` : ""}\n\nYou can edit the Title etc. afterwards by using the \`${prefix}editembed\` Command`, 4096)
                                             ),
                                     ],
                                 });
@@ -329,24 +331,24 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setFooter(client.getFooter(es))
-                                        .setDescription(msgContent)
-                                        .setTitle(":question: Auto Support");
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                        .setDescription(obeyUi.limit(msgContent, 4096))
+                                        .setTitle(obeyUi.limit(":question: Auto Support", 256));
                                     //define the selection
                                     let Selection = new StringSelectMenuBuilder()
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1)
                                         .setMinValues(1)
-                                        .setPlaceholder("Click me to Access the Auto-Support System!")
+                                        .setPlaceholder(obeyUi.plain("Click me to Access the Auto-Support System!"))
                                         .addOptions(
                                             data.map((option, index) => {
                                                 let Obj = {
                                                     label: option.value.substring(0, 50),
                                                     value: option.value.substring(0, 50),
                                                     description: option.description.substring(0, 50),
-                                                    emoji: isEmoji(client, message, option.emoji)
+                                                    emoji: obeyUi.component(isEmoji(client, message, option.emoji)
                                                         ? option.emoji
-                                                        : NumberEmojiIds[index + 1],
+                                                        : NumberEmojiIds[index + 1]),
                                                 };
                                                 return Obj;
                                             })
@@ -361,14 +363,14 @@ module.exports = {
                                                 .setCustomId("MenuSelection")
                                                 .setMaxValues(1)
                                                 .setMinValues(1)
-                                                .setPlaceholder("Click me to Access the Auto-Support System!")
+                                                .setPlaceholder(obeyUi.plain("Click me to Access the Auto-Support System!"))
                                                 .addOptions(
                                                     data.map((option, index) => {
                                                         let Obj = {
                                                             label: option.value.substring(0, 50),
                                                             value: option.value.substring(0, 50),
                                                             description: option.description.substring(0, 50),
-                                                            emoji: NumberEmojiIds[index + 1],
+                                                            emoji: obeyUi.component(NumberEmojiIds[index + 1]),
                                                         };
                                                         return Obj;
                                                     })
@@ -395,11 +397,11 @@ module.exports = {
                                             );
                                         });
                                 } else {
-                                    return message.reply("<:no:833101993668771842> **You did not ping a valid Canal!**");
+                                    return message.reply(obeyUi.owned("<:no:833101993668771842> **You did not ping a valid Canal!**"));
                                 }
                             } else {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
+                                    obeyUi.owned("<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**")
                                 );
                             }
                         }
@@ -409,7 +411,7 @@ module.exports = {
                             let data = theDB.get(message.guild.id, pre + ".data");
                             if (data.length >= 25) {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You reached the limit of 25 different Options!** Remove another Option first!"
+                                    obeyUi.owned("<:no:833101993668771842> **You reached the limit of 25 different Options!** Remove another Option first!")
                                 );
                             }
                             //ask for value and description
@@ -417,9 +419,9 @@ module.exports = {
                                 embeds: [
                                     new EmbedBuilder()
                                         .setColor(es.color)
-                                        .setTitle("What should be the VALUE and DESCRIPTION of the Menu-Option?")
+                                        .setTitle(obeyUi.limit("What should be the VALUE and DESCRIPTION of the Menu-Option?", 256))
                                         .setDescription(
-                                            `**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`Where to get Help++To Get Help visit #ticket-support!\`\`\``
+                                            obeyUi.limit(`**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`Where to get Help++To Get Help visit #ticket-support!\`\`\``, 4096)
                                         ),
                                 ],
                             });
@@ -432,13 +434,13 @@ module.exports = {
                             if (collected && collected.first().content) {
                                 if (!collected.first().content.includes("++"))
                                     return message.reply(
-                                        "<:no:833101993668771842> **No válido Usage! Por favor mind the Usage and check the Example**"
+                                        obeyUi.owned("<:no:833101993668771842> **No válido Usage! Por favor mind the Usage and check the Example**")
                                     );
                                 let value = collected.first().content.split("++")[0].trim().substring(0, 25);
                                 let index2 = data.findIndex(v => v.value == value);
                                 if (index2 >= 0 && index != index2) {
                                     return message.reply(
-                                        "<:no:833101993668771842> **Options can't have the SAME VALUE!** There is already an Option with that Value!"
+                                        obeyUi.owned("<:no:833101993668771842> **Options can't have the SAME VALUE!** There is already an Option with that Value!")
                                     );
                                 }
                                 let description = collected.first().content.split("++")[1].trim().substring(0, 50);
@@ -446,19 +448,19 @@ module.exports = {
                                     embeds: [
                                         new EmbedBuilder()
                                             .setColor(es.color)
-                                            .setTitle("Should the Response be inside of an Embed?"),
+                                            .setTitle(obeyUi.limit("Should the Response be inside of an Embed?", 256)),
                                     ],
                                     components: [
                                         new ActionRowBuilder().addComponents([
                                             new ButtonBuilder()
                                                 .setStyle(ButtonStyle.Success)
-                                                .setLabel("In an Embed")
-                                                .setEmoji("✅")
+                                                .setLabel(obeyUi.plain("In an Embed"))
+                                                .setEmoji(obeyUi.component("✅"))
                                                 .setCustomId("yes"),
                                             new ButtonBuilder()
                                                 .setStyle(ButtonStyle.Danger)
-                                                .setLabel("Not in an Embed")
-                                                .setEmoji("❌")
+                                                .setLabel(obeyUi.plain("Not in an Embed"))
+                                                .setEmoji(obeyUi.component("❌"))
                                                 .setCustomId("no"),
                                         ]),
                                     ],
@@ -483,10 +485,10 @@ module.exports = {
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
                                                     .setTitle(
-                                                        "What should be the Reply Mensaje Content when someone Selects an Auto-Support-Option?"
+                                                        obeyUi.limit("What should be the Reply Mensaje Content when someone Selects an Auto-Support-Option?", 256)
                                                     )
                                                     .setDescription(
-                                                        `For Example:\n> \`\`\`{user} Make sure to check out #ticket-support Canal to open a Ticket!\`\`\``
+                                                        obeyUi.limit(`For Example:\n> \`\`\`{user} Make sure to check out #ticket-support Canal to open a Ticket!\`\`\``, 4096)
                                                     ),
                                             ],
                                         });
@@ -501,14 +503,14 @@ module.exports = {
 
                                             var rermbed = new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setTitle("What should be the EMOJI to be displayed?")
+                                                .setTitle(obeyUi.limit("What should be the EMOJI to be displayed?", 256))
                                                 .setDescription(
-                                                    `React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`
+                                                    obeyUi.limit(`React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`, 4096)
                                                 );
 
                                             var emoji;
                                             message.reply({ embeds: [rermbed] }).then(async msg => {
-                                                await msg.react(NumberEmojiIds[data.length]).catch(console.warn);
+                                                await msg.react(obeyUi.reaction(NumberEmojiIds[data.length])).catch(console.warn);
                                                 msg.awaitReactions({
                                                     filter: (reaction, user) => user.id == cmduser.id,
                                                     max: 1,
@@ -549,7 +551,7 @@ module.exports = {
                                                         }
 
                                                         try {
-                                                            await msg.react(emoji);
+                                                            await msg.react(obeyUi.reaction(emoji));
                                                             if (NumberEmojiIds.includes(collected.first().emoji?.id)) {
                                                                 emoji = null;
                                                                 emojiMsg = NumberEmojis[data.length] || defaultEmoji;
@@ -587,16 +589,16 @@ module.exports = {
                                                     embeds: [
                                                         new EmbedBuilder()
                                                             .setColor(es.color)
-                                                            .setTitle("Successfully added the New Data to the List!")
+                                                            .setTitle(obeyUi.limit("Successfully added the New Data to the List!", 256))
                                                             .setDescription(
-                                                                `Make sure to re-send the Mensaje, so that it's also updating it!\n> \`${prefix}setup-autosupport\` --> Send Config Mensaje`
+                                                                obeyUi.limit(`Make sure to re-send the Mensaje, so that it's also updating it!\n> \`${prefix}setup-autosupport\` --> Send Config Mensaje`, 4096)
                                                             ),
                                                     ],
                                                 });
                                             }
                                         } else {
                                             return message.reply(
-                                                "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
+                                                obeyUi.owned("<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**")
                                             );
                                         }
                                     }
@@ -604,14 +606,14 @@ module.exports = {
                                 //Once the Collections ended edit the menu message
                                 collector.on("end", collected => {
                                     tempmsg.edit({
-                                        embeds: [tempEmbedBuilder.from(msg.embeds[0]).setDescription(`~~${tempmsg.embeds[0].description}~~`)],
+                                        embeds: [tempEmbedBuilder.from(msg.embeds[0]).setDescription(obeyUi.limit(`~~${tempmsg.embeds[0].description}~~`, 4096))],
                                         components: [],
                                         content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.customId : "Nothing | CANCELLED"}\`**`,
                                     });
                                 });
                             } else {
                                 return message.reply(
-                                    "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
+                                    obeyUi.owned("<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**")
                                 );
                             }
                         }
@@ -621,7 +623,7 @@ module.exports = {
                             let data = theDB.get(message.guild.id, pre + ".data");
                             if (!data || data.length < 1) {
                                 return message.reply(
-                                    "<:no:833101993668771842> **There are no Open-Ticket-Options to edit**"
+                                    obeyUi.owned("<:no:833101993668771842> **There are no Open-Ticket-Options to edit**")
                                 );
                             }
                             let embed = new EmbedBuilder()
@@ -634,24 +636,24 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setDescription("Just pick the Options you want to edit!")
-                                .setTitle("Which Option do you want to edit?");
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setDescription(obeyUi.limit("Just pick the Options you want to edit!", 4096))
+                                .setTitle(obeyUi.limit("Which Option do you want to edit?", 256));
                             //define the selection
                             let Selection = new StringSelectMenuBuilder()
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(1)
                                 .setMinValues(1)
-                                .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
+                                .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto-Support System!"))
                                 .addOptions(
                                     data.map((option, index) => {
                                         let Obj = {
                                             label: option.value.substring(0, 50),
                                             value: option.value.substring(0, 50),
                                             description: option.description.substring(0, 50),
-                                            emoji: isEmoji(client, message, option.emoji)
+                                            emoji: obeyUi.component(isEmoji(client, message, option.emoji)
                                                 ? option.emoji
-                                                : NumberEmojiIds[index + 1],
+                                                : NumberEmojiIds[index + 1]),
                                         };
                                         return Obj;
                                     })
@@ -668,14 +670,14 @@ module.exports = {
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1)
                                         .setMinValues(1)
-                                        .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
+                                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto-Support System!"))
                                         .addOptions(
                                             data.map((option, index) => {
                                                 let Obj = {
                                                     label: option.value.substring(0, 50),
                                                     value: option.value.substring(0, 50),
                                                     description: option.description.substring(0, 50),
-                                                    emoji: NumberEmojiIds[index + 1],
+                                                    emoji: obeyUi.component(NumberEmojiIds[index + 1]),
                                                 };
                                                 return Obj;
                                             })
@@ -702,9 +704,9 @@ module.exports = {
                                         embeds: [
                                             new EmbedBuilder()
                                                 .setColor(es.color)
-                                                .setTitle("What should be the VALUE and DESCRIPTION of the Menu-Option?")
+                                                .setTitle(obeyUi.limit("What should be the VALUE and DESCRIPTION of the Menu-Option?", 256))
                                                 .setDescription(
-                                                    `**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`Where to get Help++To Get Help visit #ticket-support!\`\`\``
+                                                    obeyUi.limit(`**Usage:** \`VALUE++DESCRIPTION\`\n> **Note:** The maximum length of the VALUE is: \`25 Letters\`\n> **Note:** The maximum length of the DESCRIPTION is: \`50 Letters\`\n\nFor Example:\n> \`\`\`Where to get Help++To Get Help visit #ticket-support!\`\`\``, 4096)
                                                 ),
                                         ],
                                     });
@@ -717,13 +719,13 @@ module.exports = {
                                     if (collected && collected.first().content) {
                                         if (!collected.first().content.includes("++"))
                                             return message.reply(
-                                                "<:no:833101993668771842> **No válido Usage! Por favor mind the Usage and check the Example**"
+                                                obeyUi.owned("<:no:833101993668771842> **No válido Usage! Por favor mind the Usage and check the Example**")
                                             );
                                         let value = collected.first().content.split("++")[0].trim().substring(0, 25);
                                         let index2 = data.findIndex(v => v.value == value);
                                         if (index2 >= 0 && index != index2) {
                                             return message.reply(
-                                                "<:no:833101993668771842> **Options can't have the SAME VALUE!** There is already an Option with that Value!"
+                                                obeyUi.owned("<:no:833101993668771842> **Options can't have the SAME VALUE!** There is already an Option with that Value!")
                                             );
                                         }
                                         let description = collected.first().content.split("++")[1].trim().substring(0, 50);
@@ -731,19 +733,19 @@ module.exports = {
                                             embeds: [
                                                 new EmbedBuilder()
                                                     .setColor(es.color)
-                                                    .setTitle("Should the Response be inside of an Embed?"),
+                                                    .setTitle(obeyUi.limit("Should the Response be inside of an Embed?", 256)),
                                             ],
                                             components: [
                                                 new ActionRowBuilder().addComponents([
                                                     new ButtonBuilder()
                                                         .setStyle(ButtonStyle.Success)
-                                                        .setLabel("In an Embed")
-                                                        .setEmoji("✅")
+                                                        .setLabel(obeyUi.plain("In an Embed"))
+                                                        .setEmoji(obeyUi.component("✅"))
                                                         .setCustomId("yes"),
                                                     new ButtonBuilder()
                                                         .setStyle(ButtonStyle.Danger)
-                                                        .setLabel("Not in an Embed")
-                                                        .setEmoji("❌")
+                                                        .setLabel(obeyUi.plain("Not in an Embed"))
+                                                        .setEmoji(obeyUi.component("❌"))
                                                         .setCustomId("no"),
                                                 ]),
                                             ],
@@ -768,10 +770,10 @@ module.exports = {
                                                         new EmbedBuilder()
                                                             .setColor(es.color)
                                                             .setTitle(
-                                                                "What should be the Reply Mensaje Content when someone Selects an Auto-Support-Option?"
+                                                                obeyUi.limit("What should be the Reply Mensaje Content when someone Selects an Auto-Support-Option?", 256)
                                                             )
                                                             .setDescription(
-                                                                `For Example:\n> \`\`\`{user} Make sure to check out #ticket-support Canal to open a Ticket!\`\`\``
+                                                                obeyUi.limit(`For Example:\n> \`\`\`{user} Make sure to check out #ticket-support Canal to open a Ticket!\`\`\``, 4096)
                                                             ),
                                                     ],
                                                 });
@@ -786,14 +788,14 @@ module.exports = {
 
                                                     var rermbed = new EmbedBuilder()
                                                         .setColor(es.color)
-                                                        .setTitle("What should be the EMOJI to be displayed?")
+                                                        .setTitle(obeyUi.limit("What should be the EMOJI to be displayed?", 256))
                                                         .setDescription(
-                                                            `React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`
+                                                            obeyUi.limit(`React to __THIS MESSAGE__ with the Emoji you want!\n> Either click on the default Emoji or add a CUSTOM ONE/Standard`, 4096)
                                                         );
 
                                                     var emoji;
                                                     message.reply({ embeds: [rermbed] }).then(async msg => {
-                                                        await msg.react(NumberEmojiIds[data.length]).catch(console.warn);
+                                                        await msg.react(obeyUi.reaction(NumberEmojiIds[data.length])).catch(console.warn);
                                                         msg.awaitReactions({
                                                             filter: (reaction, user) => user.id == cmduser.id,
                                                             max: 1,
@@ -834,7 +836,7 @@ module.exports = {
                                                                 }
 
                                                                 try {
-                                                                    await msg.react(emoji);
+                                                                    await msg.react(obeyUi.reaction(emoji));
                                                                     if (
                                                                         NumberEmojiIds.includes(collected.first().emoji?.id)
                                                                     ) {
@@ -875,7 +877,7 @@ module.exports = {
                                                     }
                                                 } else {
                                                     return message.reply(
-                                                        "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
+                                                        obeyUi.owned("<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**")
                                                     );
                                                 }
                                             }
@@ -884,7 +886,7 @@ module.exports = {
                                         collector.on("end", collected => {
                                             tempmsg.edit({
                                                 embeds: [
-                                                    tempEmbedBuilder.from(msg.embeds[0]).setDescription(`~~${tempmsg.embeds[0].description}~~`),
+                                                    tempEmbedBuilder.from(msg.embeds[0]).setDescription(obeyUi.limit(`~~${tempmsg.embeds[0].description}~~`, 4096)),
                                                 ],
                                                 components: [],
                                                 content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.customId : "Nothing | CANCELLED"}\`**`,
@@ -892,19 +894,19 @@ module.exports = {
                                         });
                                     } else {
                                         return message.reply(
-                                            "<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**"
+                                            obeyUi.owned("<:no:833101993668771842> **You did not enter a Valid Mensaje in Time! CANCELLED!**")
                                         );
                                     }
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                        content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                     components: [],
                                     content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**`,
                                 });
@@ -916,7 +918,7 @@ module.exports = {
                             let data = theDB.get(message.guild.id, pre + ".data");
                             if (!data || data.length < 1) {
                                 return message.reply(
-                                    "<:no:833101993668771842> **There are no Auto-Responding-Support-Options to remove**"
+                                    obeyUi.owned("<:no:833101993668771842> **There are no Auto-Responding-Support-Options to remove**")
                                 );
                             }
                             let embed = new EmbedBuilder()
@@ -929,24 +931,24 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(es))
-                                .setDescription("Just pick the Options you want to remove!")
-                                .setTitle("Which Option Do you want to remove?");
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setDescription(obeyUi.limit("Just pick the Options you want to remove!", 4096))
+                                .setTitle(obeyUi.limit("Which Option Do you want to remove?", 256));
                             //define the selection
                             let Selection = new StringSelectMenuBuilder()
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(data.length)
                                 .setMinValues(1)
-                                .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
+                                .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto-Support System!"))
                                 .addOptions(
                                     data.map((option, index) => {
                                         let Obj = {
                                             label: option.value.substring(0, 50),
                                             value: option.value.substring(0, 50),
                                             description: option.description.substring(0, 50),
-                                            emoji: isEmoji(client, message, option.emoji)
+                                            emoji: obeyUi.component(isEmoji(client, message, option.emoji)
                                                 ? option.emoji
-                                                : NumberEmojiIds[index + 1],
+                                                : NumberEmojiIds[index + 1]),
                                         };
                                         return Obj;
                                     })
@@ -963,14 +965,14 @@ module.exports = {
                                         .setCustomId("MenuSelection")
                                         .setMaxValues(1)
                                         .setMinValues(1)
-                                        .setPlaceholder("¡Haz clic para configurar the Auto-Support System!")
+                                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Auto-Support System!"))
                                         .addOptions(
                                             data.map((option, index) => {
                                                 let Obj = {
                                                     label: option.value.substring(0, 50),
                                                     value: option.value.substring(0, 50),
                                                     description: option.description.substring(0, 50),
-                                                    emoji: NumberEmojiIds[index + 1],
+                                                    emoji: obeyUi.component(NumberEmojiIds[index + 1]),
                                                 };
                                                 return Obj;
                                             })
@@ -1000,14 +1002,14 @@ module.exports = {
                                     );
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                        content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                     components: [],
                                     content: `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**`,
                                 });
@@ -1022,9 +1024,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable39"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable39"]), 4096)),
                 ],
             });
         }

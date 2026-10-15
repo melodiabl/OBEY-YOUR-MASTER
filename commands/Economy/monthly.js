@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { parseMilliseconds, duration, GetUser, nFormatter, ensure_economy_user } = require(
     `${process.cwd()}/handlers/functions`
 );
@@ -19,7 +20,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -48,7 +49,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["economy"]["monthly"]["variable2"]))
                             .setDescription(eval(client.la[ls]["cmds"]["economy"]["monthly"]["variable3"])),
                     ],
@@ -92,7 +93,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() })
+                        .setFooter(obeyMeta.asFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL() }))
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["monthly"]["variable4"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["monthly"]["variable5"])),
                 ],
@@ -103,7 +104,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["monthly"]["variable6"])),
                 ],

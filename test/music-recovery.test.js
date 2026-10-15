@@ -38,3 +38,20 @@ test('failed reconnect preserves the saved song and a later retry restores mute,
   client._shuttingDown = true
   await client.music.flushSessions()
 })
+test('REST failure during restoration preserves the saved song instead of advancing its queue',async()=>{
+ const model=require('../database/schemas/MusicSessionSchema')
+ const saved={guildId:'restore-rest-failure',voiceChannelId:'voice',textChannelId:'text',currentTrack:{encoded:'saved',info:{title:'Saved',uri:'https://example.com/saved'}},queue:[{encoded:'queued'}],volume:0,paused:true,position:42000}
+ model.find=()=>({lean:async()=>[saved]});model.findOneAndUpdate=async()=>{}
+ const client=new EventEmitter(),node={},player={node,setGlobalVolume:async()=>{},playTrack:async()=>{throw new Error('REST unavailable')}}
+ client._dbReady=true;client.shoukaku={players:new Map(),nodes:new Map(),options:{nodeResolver:()=>node}}
+ client.guilds={cache:new Map([[saved.guildId,{}]])};client.channels={cache:new Map([['voice',{}]])}
+ require('../handlers/musichandler')(client)
+ client.music.joinChannel=async()=>{client.shoukaku.players.set(saved.guildId,player);return player}
+ client.music.search=async()=>({tracks:[{encoded:'resolved',info:{title:'Saved',uri:'https://example.com/saved'}}]})
+ let recovery=0;client.music._recoverFailedTrack=async()=>{recovery++}
+ await client.music.restoreSessions()
+ const state=client.music.getState(saved.guildId)
+ assert.equal(recovery,0);assert.equal(state.status,'recovering');assert.equal(state.currentTrack.encoded,'saved')
+ assert.equal(state.queue[0].encoded,'queued');assert.equal(state.lastPosition,42000);assert.equal(state.volume,0);assert.equal(state.paused,true)
+ client._shuttingDown=true;await client.music.flushSessions()
+})

@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const User = require('../../database/schemas/UserSchema')
 module.exports = {
@@ -8,13 +9,13 @@ module.exports = {
     { User: { name: 'usuario', description: 'Usuario a resetear', required: true } },
   ],
   run: async (client, interaction) => {
-    const ok = d => new EmbedBuilder().setColor(0x5865F2).setDescription(d)
+    const ok = d => new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(d, 4096))
 
     const target = interaction.options.getUser('usuario')
     await User.findOneAndUpdate(
       { userId: target.id, guildId: interaction.guild.id },
       { invites: 0, fakeInvites: 0, leftInvites: 0, invitedBy: null }
     )
-    await interaction.reply({ embeds: [ok(`🔄 Invitaciones de ${target} reseteadas a **0**.`)], ephemeral: true })
+    await interaction.reply({ embeds: [ok(`${obeyUi.markup("icon.loop")} Invitaciones de ${target} reseteadas a **0**.`)], ephemeral: true })
   },
 }

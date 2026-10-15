@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { handlemsg, getRandomNum } = require(`${process.cwd()}/handlers/functions`);
 var cp = require("child_process");
 module.exports = {
@@ -38,7 +39,7 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
 .setTitle(handlemsg(client.la[ls].cmds.info.ping.m1)),
                     ],
                 })
@@ -66,13 +67,13 @@ module.exports = {
                                             : client.user.displayAvatarURL()
                                         : null
                                 )
-                                .setFooter(client.getFooter(
+                                .setFooter(obeyMeta.asFooter(client.getFooter(
                                         "Tarda más, porque estoy obteniendo el ping de mi host!",
                                         es.footericon &&
                                             (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                             ? es.footericon
                                             : client.user.displayAvatarURL()
-                                    )
+                                    ))
                                 )
                                 .setTitle(
                                     handlemsg(client.la[ls].cmds.info.ping.m2, {

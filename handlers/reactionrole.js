@@ -1,3 +1,4 @@
+const obeyUi = require("./assets/system")
 /*
  **** EXAMPLE DB STRUCTURE:
     //Create the database:
@@ -65,7 +66,7 @@ module.exports = client => {
                     let rr = reactionsetup[k].Parameters;
                     let currrole;
                     for (let j = 0; j < rr.length; j++) {
-                        if (reaction.emoji?.id == rr[j].Emoji) {
+                        if (obeyUi.matchesReaction(reaction.emoji, rr[j].Emoji)) {
                             try {
                                 currrole = rr[j].Role;
                                 let guildRole = messagereaction.guild.roles.cache.get(rr[j].Role);
@@ -99,7 +100,7 @@ module.exports = client => {
                                     })
                                     .catch(() => {});
                             }
-                        } else if (reaction.emoji?.name == rr[j].Emoji) {
+                        } else if (obeyUi.matchesReaction(reaction.emoji, rr[j].Emoji)) {
                             try {
                                 currrole = rr[j].Role;
                                 let guildRole = messagereaction.guild.roles.cache.get(rr[j].Role);
@@ -148,7 +149,7 @@ module.exports = client => {
                         const userReactions = reaction.message.reactions.cache;
                         try {
                             for (const reaction of userReactions.values()) {
-                                if (reaction.users.cache.has(user.id) && oldreact.emoji?.name != reaction.emoji?.name) {
+                                if (reaction.users.cache.has(user.id) && !obeyUi.matchesReaction(oldreact.emoji, reaction.emoji?.name)) {
                                     reaction.users.remove(user.id);
                                 }
                             }
@@ -219,7 +220,7 @@ module.exports = client => {
                     let messagereaction = await reaction.message.guild.members.fetch(user.id).catch(() => {});
                     let rr = reactionsetup[k].Parameters;
                     for (let j = 0; j < rr.length; j++) {
-                        if (reaction.emoji?.id === rr[j].Emoji) {
+                        if (obeyUi.matchesReaction(reaction.emoji, rr[j].Emoji)) {
                             try {
                                 let guildRole = messagereaction.guild.roles.cache.get(rr[j].Role);
                                 if (guildRole) {
@@ -254,7 +255,7 @@ module.exports = client => {
                                     })
                                     .catch(() => {});
                             }
-                        } else if (reaction.emoji?.name === rr[j].Emoji) {
+                        } else if (obeyUi.matchesReaction(reaction.emoji, rr[j].Emoji)) {
                             try {
                                 let guildRole = messagereaction.guild.roles.cache.get(rr[j].Role);
                                 if (guildRole) {

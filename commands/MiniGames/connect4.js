@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, AttachmentBuilder,
     ButtonStyle
 } = require("discord.js");
@@ -115,13 +117,13 @@ class Connect4Game {
         }
         this.inGame = true;
 
-        const btn1 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("1️⃣").setCustomId("1_connect4");
-        const btn2 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("2️⃣").setCustomId("2_connect4");
-        const btn3 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("3️⃣").setCustomId("3_connect4");
-        const btn4 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("4️⃣").setCustomId("4_connect4");
-        const btn5 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("5️⃣").setCustomId("5_connect4");
-        const btn6 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("6️⃣").setCustomId("6_connect4");
-        const btn7 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji("7️⃣").setCustomId("7_connect4");
+        const btn1 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(obeyUi.component("1️⃣")).setCustomId("1_connect4");
+        const btn2 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(obeyUi.component("2️⃣")).setCustomId("2_connect4");
+        const btn3 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(obeyUi.component("3️⃣")).setCustomId("3_connect4");
+        const btn4 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(obeyUi.component("4️⃣")).setCustomId("4_connect4");
+        const btn5 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(obeyUi.component("5️⃣")).setCustomId("5_connect4");
+        const btn6 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(obeyUi.component("6️⃣")).setCustomId("6_connect4");
+        const btn7 = new ButtonBuilder().setStyle(ButtonStyle.Primary).setEmoji(obeyUi.component("7️⃣")).setCustomId("7_connect4");
 
         const row1 = new ActionRowBuilder().addComponents(btn1, btn2, btn3, btn4);
         const row2 = new ActionRowBuilder().addComponents(btn5, btn6, btn7);
@@ -133,18 +135,18 @@ class Connect4Game {
 
     GameEmbed() {
         const status = this.options.turnMessage
-            .replace("{emoji}", this.getChip())
+            .replace("{emoji}", obeyUi.owned(this.getChip()))
             .replace("{player}", this.redTurn ? this.message.author.username : this.opponent.tag);
 
         return new EmbedBuilder()
             .setColor(this.options.embed.color)
-            .setTitle(this.options.embed.title)
-            .setDescription(this.getGameBoard())
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
+            .setDescription(obeyUi.limit(obeyUi.owned(this.getGameBoard()), 4096))
             .addFields({ name: this.options.embed.statusTitle || "Status", value: status })
-            .setFooter(client.getFooter(
+            .setFooter(obeyMeta.asFooter(this.message.client.getFooter(
                     `${this.message.author.username} vs ${this.opponent.username}`,
                     this.message.guild.iconURL()
-                )
+                ))
             );
     }
 
@@ -153,13 +155,13 @@ class Connect4Game {
 
         const editEmbed = new EmbedBuilder()
             .setColor(this.options.embed.color)
-            .setTitle(this.options.embed.title)
-            .setDescription(this.getGameBoard())
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
+            .setDescription(obeyUi.limit(obeyUi.owned(this.getGameBoard()), 4096))
             .addFields({ name: this.options.embed.statusTitle || "Status", value: this.getResultText(result) })
-            .setFooter(client.getFooter(
+            .setFooter(obeyMeta.asFooter(this.message.client.getFooter(
                     `${this.message.author.username} vs ${this.opponent.username}`,
                     this.message.guild.iconURL()
-                )
+                ))
             );
 
         return msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) });
@@ -316,12 +318,12 @@ module.exports = {
             return message.reply({ embeds: [
                 new EmbedBuilder()
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es))
-                    .setTitle(client.la[ls].common.disabled.title)
+                    .setFooter(obeyMeta.asFooter(this.message.client.getFooter(es)))
+                    .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                     .setDescription(
-                        require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
+                        obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
                             prefix: prefix,
-                        })
+                        }), 4096)
                     )] }
             );
         }
@@ -358,20 +360,20 @@ async function verify(options) {
         const opponent = options.opponent;
 
         const askEmbed = new EmbedBuilder()
-            .setTitle(options.embed.askTitle || options.embed.title)
+            .setTitle(obeyUi.limit(options.embed.askTitle || options.embed.title, 256))
             .setDescription(
-                options.askMessage
+                obeyUi.limit(options.askMessage
                     .replace("{challenger}", message.author.toString())
-                    .replace("{opponent}", opponent.toString())
+                    .replace("{opponent}", opponent.toString()), 4096)
             )
             .setColor(options.colors?.green || options.embed.color);
 
         const btn1 = new ButtonBuilder()
-            .setLabel(options.buttons?.accept || "Accept")
+            .setLabel(obeyUi.plain(options.buttons?.accept || "Accept"))
             .setStyle(ButtonStyle.Success)
             .setCustomId("accept");
         const btn2 = new ButtonBuilder()
-            .setLabel(options.buttons?.reject || "Reject")
+            .setLabel(obeyUi.plain(options.buttons?.reject || "Reject"))
             .setStyle(ButtonStyle.Danger)
             .setCustomId("reject");
         const row = new ActionRowBuilder().addComponents(btn1, btn2);
@@ -401,19 +403,19 @@ async function verify(options) {
             }
 
             const cancelEmbed = new EmbedBuilder()
-                .setTitle(options.embed.cancelTitle || options.embed.title)
+                .setTitle(obeyUi.limit(options.embed.cancelTitle || options.embed.title, 256))
                 .setDescription(
-                    options.cancelMessage
+                    obeyUi.limit(options.cancelMessage
                         .replace("{challenger}", message.author.toString())
-                        .replace("{opponent}", opponent.toString())
+                        .replace("{opponent}", opponent.toString()), 4096)
                 )
                 .setColor(options.colors?.red || options.embed.color);
 
             if (r === "time") {
                 cancelEmbed.setDescription(
-                    options.timeEndMessage
+                    obeyUi.limit(options.timeEndMessage
                         .replace("{challenger}", message.author.toString())
-                        .replace("{opponent}", opponent.toString())
+                        .replace("{opponent}", opponent.toString()), 4096)
                 );
             }
 

@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, splitMessage } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { parseMilliseconds, duration, GetUser, nFormatter, ensure_economy_user } = require(
     `${process.cwd()}/handlers/functions`
 );
@@ -20,13 +22,13 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                         .setDescription(
-                            require(`${process.cwd()}/handlers/functions`).handlemsg(
+                            obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
                                 { prefix: prefix }
-                            )
+                            ), 4096)
                         ),
                 ],
             });
@@ -252,16 +254,16 @@ module.exports = {
                     itemsvalue += prize * data.items[`${itemarray}`];
                 }
                 let theindex = index + 1;
-                if (theindex == 1) theindex = "🥇";
-                if (theindex == 2) theindex = "🥈";
-                if (theindex == 3) theindex = "🥉";
+                if (theindex == 1) theindex = obeyUi.owned("🥇");
+                if (theindex == 2) theindex = obeyUi.owned("🥈");
+                if (theindex == 3) theindex = obeyUi.owned("🥉");
                 stringarray.push(
-                    `**${theindex}. \`${tuser.tag}\`** ・ ${tuser}\`\`\`yml\nPocket: ${nFormatter(Math.floor(data.balance))} 💸 ・ Bank: ${nFormatter(data.bank)} 💸 ・ [${items}] Items: ${nFormatter(itemsvalue)} 💸\`\`\``
+                    `**${theindex}. \`${tuser.tag}\`** ・ ${tuser}\`\`\`yml\nPocket: ${nFormatter(Math.floor(data.balance))} ${obeyUi.markup("icon.wallet")} ・ Bank: ${nFormatter(data.bank)} ${obeyUi.markup("icon.wallet")} ・ [${items}] Items: ${nFormatter(itemsvalue)} ${obeyUi.markup("icon.wallet")}\`\`\``
                 );
             }
 
             const description = stringarray;
-            const TITLE = `${message.guild.name} | Economy Leaderboard 💸`;
+            const TITLE = `${message.guild.name} | Economy Leaderboard ${obeyUi.markup("icon.wallet")}`;
 
             let currentPage = 0;
             let embeds = [];
@@ -271,8 +273,8 @@ module.exports = {
                     const current = description.slice(i, k);
                     k += 10;
                     const embed = new EmbedBuilder()
-                        .setDescription(current)
-                        .setTitle(TITLE)
+                        .setDescription(obeyUi.limit(current, 4096))
+                        .setTitle(obeyUi.limit(TITLE, 256))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -286,23 +288,23 @@ module.exports = {
                 }
                 embeds;
             } catch {}
-            if (embeds.length == 0) return message.reply("❌ No leaderboard yet!**");
+            if (embeds.length == 0) return message.reply(obeyUi.owned("❌ No leaderboard yet!**"));
             if (embeds.length === 1)
                 return message.reply({ embeds: [embeds[0]] }).catch(e => console.log("THIS IS TO PREVENT A CRASH"));
             const queueEmbed = await message
                 .reply({
                     embeds: [
-                        embeds[currentPage].setFooter(client.getFooter(
+                        embeds[currentPage].setFooter(obeyMeta.asFooter(client.getFooter(
                                 `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                 user.displayAvatarURL()
-                            )
+                            ))
                         ),
                     ],
                 })
                 .catch(e => console.log("THIS IS TO PREVENT A CRASH"));
             let reactionemojis = ["⏪", "⏩"];
             try {
-                for (const emoji of reactionemojis) await queueEmbed.react(emoji);
+                for (const emoji of reactionemojis) await queueEmbed.react(obeyUi.reaction(emoji));
             } catch {}
 
             const filter = (reaction, user) =>
@@ -312,15 +314,15 @@ module.exports = {
 
             collector.on("collect", async (reaction, user) => {
                 try {
-                    if (reaction.emoji?.name === reactionemojis[1] || reaction.emoji?.id === reactionemojis[1]) {
+                    if (obeyUi.matchesReaction(reaction.emoji, reactionemojis[1]) || obeyUi.matchesReaction(reaction.emoji, reactionemojis[1])) {
                         if (currentPage < embeds.length - 1) {
                             currentPage++;
                             queueEmbed.edit({
                                 embeds: [
-                                    embeds[currentPage].setFooter(client.getFooter(
+                                    embeds[currentPage].setFooter(obeyMeta.asFooter(client.getFooter(
                                             `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                             user.displayAvatarURL()
-                                        )
+                                        ))
                                     ),
                                 ],
                             });
@@ -328,23 +330,23 @@ module.exports = {
                             currentPage = 0;
                             queueEmbed.edit({
                                 embeds: [
-                                    embeds[currentPage].setFooter(client.getFooter(
+                                    embeds[currentPage].setFooter(obeyMeta.asFooter(client.getFooter(
                                             `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                             user.displayAvatarURL()
-                                        )
+                                        ))
                                     ),
                                 ],
                             });
                         }
-                    } else if (reaction.emoji?.name === reactionemojis[0] || reaction.emoji?.id === reactionemojis[0]) {
+                    } else if (obeyUi.matchesReaction(reaction.emoji, reactionemojis[0]) || obeyUi.matchesReaction(reaction.emoji, reactionemojis[0])) {
                         if (currentPage !== 0) {
                             --currentPage;
                             queueEmbed.edit({
                                 embeds: [
-                                    embeds[currentPage].setFooter(client.getFooter(
+                                    embeds[currentPage].setFooter(obeyMeta.asFooter(client.getFooter(
                                             `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                             user.displayAvatarURL()
-                                        )
+                                        ))
                                     ),
                                 ],
                             });
@@ -353,10 +355,10 @@ module.exports = {
                             queueEmbed.edit({
                                 embeds: [
                                     embeds[
-                                        currentPage.setFooter(client.getFooter(
+                                        currentPage.setFooter(obeyMeta.asFooter(client.getFooter(
                                                 `You are: Rank #${yourrank} ・ Page: ${currentPage + 1}/${embeds.length}`,
                                                 user.displayAvatarURL()
-                                            )
+                                            ))
                                         )
                                     ],
                                 ],
@@ -375,9 +377,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["economy"]["ecolb"]["variable1"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["economy"]["ecolb"]["variable1"]), 4096)),
                 ],
             });
         }

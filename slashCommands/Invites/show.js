@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const User = require('../../database/schemas/UserSchema')
 module.exports = {
@@ -17,15 +18,15 @@ module.exports = {
     const inviterMention = invitedBy && invitedBy !== 'VANITY' ? `<@${invitedBy}>` : invitedBy === 'VANITY' ? 'URL vanity' : 'Desconocido'
 
     const embed = new EmbedBuilder()
-      .setTitle(`📨 Invitaciones de ${target.username}`)
+      .setTitle(`${obeyUi.markup("icon.send")} Invitaciones de ${target.username}`)
       .setThumbnail(target.displayAvatarURL())
       .setColor('#5865F2')
       .addFields(
-        { name: '✅ Efectivas', value: `**${effective}**`, inline: true },
-        { name: '📊 Totales', value: `**${invites}**`, inline: true },
-        { name: '❌ Falsas', value: `**${fake}**`, inline: true },
-        { name: '🚪 Que salieron', value: `**${left}**`, inline: true },
-        { name: '🔗 Invitado por', value: inviterMention, inline: true },
+        { name: obeyUi.owned('✅ Efectivas'), value: `**${effective}**`, inline: true },
+        { name: obeyUi.owned('📊 Totales'), value: `**${invites}**`, inline: true },
+        { name: obeyUi.owned('❌ Falsas'), value: `**${fake}**`, inline: true },
+        { name: obeyUi.owned('🚪 Que salieron'), value: `**${left}**`, inline: true },
+        { name: obeyUi.owned('🔗 Invitado por'), value: inviterMention, inline: true },
       )
       .setTimestamp()
     await interaction.reply({ embeds: [embed], ephemeral: false })

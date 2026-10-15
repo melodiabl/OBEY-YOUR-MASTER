@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const { ensure_economy_user, nFormatter } = require('../../handlers/functions')
 
@@ -21,7 +22,7 @@ module.exports = {
 
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'ECONOMY'))
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de economía no está activado.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de economía no está activado.'), 4096))], ephemeral: true })
 
     const choice = interaction.options.getString('lado')
     const bet    = interaction.options.getInteger('apuesta')
@@ -29,13 +30,13 @@ module.exports = {
     const gid    = interaction.guild.id
 
     if (bet < 1)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ La apuesta debe ser mayor a 0.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ La apuesta debe ser mayor a 0.'), 4096))], ephemeral: true })
 
     ensure_economy_user(client, gid, uid)
     const bal = client.economy.get(`${gid}-${uid}`, 'balance') ?? 0
 
     if (bal < bet)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(`❌ No tienes suficiente. Tienes **${nFormatter(bal)}** 🪙`)], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} No tienes suficiente. Tienes **${nFormatter(bal)}** ${obeyUi.markup("icon.coins")}`, 4096))], ephemeral: true })
 
     const result = Math.random() < 0.5 ? 'cara' : 'cruz'
     const won    = result === choice
@@ -50,11 +51,11 @@ module.exports = {
 
     await interaction.reply({
       embeds: [new EmbedBuilder().setColor(won ? 0x22C55E : 0xED4245)
-        .setTitle(won ? '🎉 ¡Ganaste!' : '😢 Perdiste')
+        .setTitle(obeyUi.limit(won ? obeyUi.owned('🎉 ¡Ganaste!') : obeyUi.owned('😢 Perdiste'), 256))
         .addFields(
-          { name: '🪙 Resultado', value: result === 'cara' ? '🟡 Cara' : '⚪ Cruz', inline: true },
-          { name: won ? '💰 Ganado' : '💸 Perdido', value: `**${nFormatter(bet)}** 🪙`, inline: true },
-          { name: '👛 Balance',  value: `**${nFormatter(newBal)}** 🪙`, inline: true },
+          { name: obeyUi.owned('🪙 Resultado'), value: result === 'cara' ? obeyUi.owned('🟡 Cara') : obeyUi.owned('⚪ Cruz'), inline: true },
+          { name: won ? obeyUi.owned('💰 Ganado') : obeyUi.owned('💸 Perdido'), value: `**${nFormatter(bet)}** ${obeyUi.markup("icon.coins")}`, inline: true },
+          { name: obeyUi.owned('👛 Balance'),  value: `**${nFormatter(newBal)}** ${obeyUi.markup("icon.coins")}`, inline: true },
         )],
     })
   },

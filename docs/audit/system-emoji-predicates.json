@@ -1,0 +1,2749 @@
+{
+  "scope": "reaction_identity_and_plain_metadata_compatibility",
+  "files": [
+    {
+      "file": "commands/Administration/addrole.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/addroletobots.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/addroletoeveryone.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/addroletohumans.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/addroletorole.js",
+      "edits": 28
+    },
+    {
+      "file": "commands/Administration/archivethread.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Administration/ban.js",
+      "edits": 28
+    },
+    {
+      "file": "commands/Administration/bans.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Administration/channellock.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/channelunlock.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/clear.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Administration/clearbotmessages.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/close.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Administration/copymessage.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Administration/createbackup.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Administration/deletechannel.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Administration/deleterole.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/deletethread.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Administration/detailwarn.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/dm.js",
+      "edits": 36
+    },
+    {
+      "file": "commands/Administration/editembed.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/editimgembed.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Administration/embed.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/embedbuilder.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/esay.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/giveaway.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/globalwarnings.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/idban.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Administration/image.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/imgembed.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/instantclose.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Administration/instantdelete.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/jointhread.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Administration/jointhreads.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/kick.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/leavethread.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/listbackups.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Administration/listbans.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Administration/loadbackup.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Administration/lockchannel.js",
+      "edits": 22
+    },
+    {
+      "file": "commands/Administration/lockthread.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/manageinvites.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/mute.js",
+      "edits": 40
+    },
+    {
+      "file": "commands/Administration/nickname.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/permamute.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/poll.js",
+      "edits": 49
+    },
+    {
+      "file": "commands/Administration/react.js",
+      "edits": 22
+    },
+    {
+      "file": "commands/Administration/removeallwarns.js",
+      "edits": 24
+    },
+    {
+      "file": "commands/Administration/removerole.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/removerolefrombots.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/removerolefromeveryone.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/removerolefromhumans.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/removerolefromrole.js",
+      "edits": 28
+    },
+    {
+      "file": "commands/Administration/removetimeout.js",
+      "edits": 24
+    },
+    {
+      "file": "commands/Administration/report.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/say.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Administration/setautoarchiveduration.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/slowmode.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/snipe.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/suggest.js",
+      "edits": 28
+    },
+    {
+      "file": "commands/Administration/sync-invites.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Administration/tempmute.js",
+      "edits": 34
+    },
+    {
+      "file": "commands/Administration/timeout.js",
+      "edits": 24
+    },
+    {
+      "file": "commands/Administration/unarchivethread.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/unban.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Administration/unlockchannel.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Administration/unlockthread.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Administration/unmute.js",
+      "edits": 24
+    },
+    {
+      "file": "commands/Administration/unwarn.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Administration/updatemessage.js",
+      "edits": 24
+    },
+    {
+      "file": "commands/Administration/useridban.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Administration/warn.js",
+      "edits": 42
+    },
+    {
+      "file": "commands/Administration/warnings.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Anime-Emotions/a-agree.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-baka.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-bite.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-blush.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-bonk.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-bored.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-bully.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-confused.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-cry.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-cuddle.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-dance.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-goodnight.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-happy.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-highfive.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-hug.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-kick.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-kill.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-kiss.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-nervous.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-pat.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-poke.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-punch.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-sad.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-scream.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-slap.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-smile.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-stare.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-thinking.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-wallpaper.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-wave.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-wink.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-yeet.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-yes.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Anime-Emotions/a-zerotwo.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Economy/balance.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Economy/bank.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Economy/beg.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Economy/blackmarket.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Economy/buy.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Economy/coinflip.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Economy/crime.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Economy/daily.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Economy/deposit.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Economy/dice.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Economy/ecohelp.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Economy/ecolb.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Economy/hourly.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Economy/inventory.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Economy/items.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Economy/monthly.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Economy/pay.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Economy/profile.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Economy/rob.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Economy/sell.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Economy/slots.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Economy/storeinfo.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Economy/transfer.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Economy/weekly.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Economy/withdraw.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Economy/work.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Filter/filtros.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Fun/8ball.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Fun/abandon.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/affect.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/airpods.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/amazeme.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Fun/america.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/armor.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/beautiful.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/bed.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Fun/blur.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/brazzers.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/byemom.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/cancer.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/changemymind.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/chat.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/circle.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/communism.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/corporate.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/cry.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/dab.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/delete.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/disability.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/door.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/drake.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/egg.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/emergencymeeting.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/excuseme.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/facepalm.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/fact.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/facts.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/failure.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/fakenews.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/floor.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/godwhy.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/greyscale.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/hitler.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/invert.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/ipad.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/jail.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/joke.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Fun/jokeOverHead.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/keepdistance.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/kill.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/kiss.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Fun/meme.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Fun/note.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/notstonks.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/obama.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/ohno.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/piccolo.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/rainbow.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/rip.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Fun/roblox.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/satan.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/savehumanity.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/sepia.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/shit.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/stonks.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/stroke.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/test.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Fun/tornado.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/trash.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/trigger.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/tweet.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/violence.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/walking.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/wanted.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/wasted.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Fun/weather.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/whodidthis.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Fun/youtube.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/addquote.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/avatar.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/botfaq.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/botinfo.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Info/color.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/commandcount.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Info/connectioninfo.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/customavatar.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Info/emojiinfo.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/enlarge.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/epic.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/fnshop.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/fnstats.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/getInviteChannel.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/invite.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/invites.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/invitesleaderboard.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/latestquotes.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/membercount.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/modstats.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/notes.js",
+      "edits": 34
+    },
+    {
+      "file": "commands/Info/permissions.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Info/ping.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/quotes.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/removequote.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/roleinfo.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/serveravatar.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/serverbanner.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/serverinfo.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/servers.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/showblacklist.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/stats.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/tiktokinfo.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/translate.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Info/twitterinfo.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/uptime.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Info/userbanner.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/userid.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/userinfo.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Info/usertag.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Info/youtubeinfo.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/MiniGames/2024.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/MiniGames/bent.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/betrayal-io.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/MiniGames/chaoswords.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/chess.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/MiniGames/connect4.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/MiniGames/fasttype.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/fight.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/fishington-io.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/MiniGames/flip.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/guessthenumber.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/guessthepokemon.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/hangman.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/MiniGames/lieswatter.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/mirror.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/neverhaveiever.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/pokemon.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/MiniGames/poker-night.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/MiniGames/quickclick.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/randomcase.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/randomcolor.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/reverse.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/rockpaperscissors.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/shuffleguess.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/snake.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/MiniGames/tictactoe.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/tiny.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/uno.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/vaporwave.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/willyoupressthebutton.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/wouldyourather.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/MiniGames/youtubetogether.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Music/grab.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Music/lyrics.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Music/musictop.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Music/queue.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/2danal.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/2dboobs.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/2dfeet.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/2dtits.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/2feetgif.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/3d-porn.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/4k.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/aesthetic.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/amateur.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/anal-db.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/anal.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/asian.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/asmr.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/ass-db.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/ass.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/bath-shower.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/bdsm.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/bj.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/blowjob.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/boobs-db.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/boobs.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/cock.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/cosplay.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/creampie.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/cuckhold.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/cumshots.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/cumslut.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/danbooru.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/dilf.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/double-penetration.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/ebony.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/ero.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/erokitsune.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/eroyuri.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/feet.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/femdom-db.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/femdom.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/fisting.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/food-play.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/foxgirl.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/funny.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/furry.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/futanari.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/gasm.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/gelbooru.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/girlsolo.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/girlsologif.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/glory-hole.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/goth.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/hands.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/hass.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/hboobs.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/hentai-db.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/hentai-no-loli.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/hentai2.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/hentaigif.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/hmidriff.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/holo.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/holoero.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/horror.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/interracial.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/joi.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/keta.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/kitsune.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/kuni.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lactation.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/latin.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lesbian.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lewdneko.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lewdnekogif.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lgbt-femboy.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lgbt-gay.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lgbt-lesbian.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lgbt-transgender.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lgbt-twink.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/lingerie.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/massage.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/mature.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/milf.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/naked-wrestling.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/nekoapiclassic.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/oral.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/orgy.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/pegging.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/petite.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/pgif.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/piss.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/plus-size.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/porn.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/pornstar.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/pov.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/public.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/pussy-db.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/pussy.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/pussywank.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/r34.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/rimming.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/rough.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/solo.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/spank.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/squirting.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/tattoos-piercings.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/tease.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/thighs.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/threesomes.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/toys.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/trap.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/uniform.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/vintage.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/waifu.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/NSFW/yuri.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Owner/addmoney.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Owner/botfilename.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Owner/changeavatar.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Owner/changename.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Owner/changeprefix.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Owner/changestatus.js",
+      "edits": 44
+    },
+    {
+      "file": "commands/Owner/cmdreload.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Owner/deployslash.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Owner/detailedeval.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Owner/eval.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Owner/leaveserver.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Owner/reloadallcmds.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Owner/reloadbot.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Owner/removemoney.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Owner/resetsettings.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Owner/restartbot.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Owner/setup-advertise.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Owner/setup-owner.js",
+      "edits": 40
+    },
+    {
+      "file": "commands/Owner/stopbot.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Programming/coliru.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Programming/compile.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Programming/github.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Programming/httpstatus.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Programming/npm.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Programming/npmpkgsize.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/School-Commands/calc.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/School-Commands/calculator.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/School-Commands/e.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/School-Commands/pi.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/School-Commands/remind.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Settings/addbotchat.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Settings/adddj.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Settings/addmoney.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Settings/afk.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Settings/afkmusic.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Settings/defaultautoplay.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Settings/defaultequalizer.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Settings/defaultvolume.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Settings/playmsg.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Settings/prefix.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Settings/removebotchat.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Settings/removedj.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Settings/removemoney.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Settings/reset.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Settings/toggledisabled.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Settings/toggledm.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Settings/togglepruning.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Settings/toggleunknowncommandinfo.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Setup/setup-admin.js",
+      "edits": 70
+    },
+    {
+      "file": "commands/Setup/setup-admincmdlog.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Setup/setup-aichat.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Setup/setup-anticaps.js",
+      "edits": 46
+    },
+    {
+      "file": "commands/Setup/setup-antidiscord.js",
+      "edits": 56
+    },
+    {
+      "file": "commands/Setup/setup-antilink.js",
+      "edits": 56
+    },
+    {
+      "file": "commands/Setup/setup-antimassmention.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Setup/setup-antimasspings.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Setup/setup-antimention.js",
+      "edits": 46
+    },
+    {
+      "file": "commands/Setup/setup-antinewaccount.js",
+      "edits": 24
+    },
+    {
+      "file": "commands/Setup/setup-antinuke.js",
+      "edits": 86
+    },
+    {
+      "file": "commands/Setup/setup-antipings.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Setup/setup-antispam.js",
+      "edits": 46
+    },
+    {
+      "file": "commands/Setup/setup-apply.js",
+      "edits": 555
+    },
+    {
+      "file": "commands/Setup/setup-auditlog.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Setup/setup-autobackup.js",
+      "edits": 6
+    },
+    {
+      "file": "commands/Setup/setup-autodelete.js",
+      "edits": 30
+    },
+    {
+      "file": "commands/Setup/setup-autoembed.js",
+      "edits": 26
+    },
+    {
+      "file": "commands/Setup/setup-automeme.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Setup/setup-autonsfw.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Setup/setup-autosupport.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Setup/setup-autowarn.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Setup/setup-blacklist.js",
+      "edits": 50
+    },
+    {
+      "file": "commands/Setup/setup-boost.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Setup/setup-boostlog.js",
+      "edits": 30
+    },
+    {
+      "file": "commands/Setup/setup-commands.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Setup/setup-counter.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Setup/setup-customcommand.js",
+      "edits": 32
+    },
+    {
+      "file": "commands/Setup/setup-dailyfact.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Setup/setup-embed.js",
+      "edits": 42
+    },
+    {
+      "file": "commands/Setup/setup-epicgamesverify.js",
+      "edits": 20
+    },
+    {
+      "file": "commands/Setup/setup-ghost-ping-detector.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Setup/setup-joinlist.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Setup/setup-joinvc.js",
+      "edits": 54
+    },
+    {
+      "file": "commands/Setup/setup-jtc.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Setup/setup-keyword.js",
+      "edits": 42
+    },
+    {
+      "file": "commands/Setup/setup-language.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Setup/setup-leave.js",
+      "edits": 128
+    },
+    {
+      "file": "commands/Setup/setup-logger.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Setup/setup-membercount.js",
+      "edits": 16
+    },
+    {
+      "file": "commands/Setup/setup-menuapply.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Setup/setup-menuticket.js",
+      "edits": 28
+    },
+    {
+      "file": "commands/Setup/setup-music.js",
+      "edits": 4
+    },
+    {
+      "file": "commands/Setup/setup-mute.js",
+      "edits": 18
+    },
+    {
+      "file": "commands/Setup/setup-radio.js",
+      "edits": 10
+    },
+    {
+      "file": "commands/Setup/setup-rank.js",
+      "edits": 36
+    },
+    {
+      "file": "commands/Setup/setup-reactionrole.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Setup/setup-reportlog.js",
+      "edits": 12
+    },
+    {
+      "file": "commands/Setup/setup-roster.js",
+      "edits": 87
+    },
+    {
+      "file": "commands/Setup/setup-serverstats.js",
+      "edits": 2
+    },
+    {
+      "file": "commands/Setup/setup-suggestion.js",
+      "edits": 86
+    },
+    {
+      "file": "commands/Setup/setup-ticket.js",
+      "edits": 60
+    },
+    {
+      "file": "commands/Setup/setup-tiktok.js",
+      "edits": 52
+    },
+    {
+      "file": "commands/Setup/setup-twitch.js",
+      "edits": 56
+    },
+    {
+      "file": "commands/Setup/setup-twitter.js",
+      "edits": 46
+    },
+    {
+      "file": "commands/Setup/setup-validcode.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Setup/setup-warn.js",
+      "edits": 66
+    },
+    {
+      "file": "commands/Setup/setup-welcome.js",
+      "edits": 178
+    },
+    {
+      "file": "commands/Setup/setup-youtube.js",
+      "edits": 36
+    },
+    {
+      "file": "commands/Setup/setup.js",
+      "edits": 8
+    },
+    {
+      "file": "commands/Soundboard/a-wow.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/abdi.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/afewmomentslater.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/ahshit.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/airhorn.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/amogus.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/araara.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/bhau.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/bruh.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/cuteuwu.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/dattebayo.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/disconnected.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/fart.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/game-over.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/giggle.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/gimme-ohyeah.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/ha-gay.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/hellomf.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/honk.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/ilikecutg.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/illuminati.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/iphone-notification.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/john-cena.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/kuss-digga.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/laugh.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/magic.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/margayamc.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/moin-meister.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/nani.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/nogodno.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/oioi.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/oioioi.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/onichan.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/pew-pew.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/ph-intro.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/quack-quack.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/rickroll.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/samsung-notification.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/sheesh.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/sike.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/silly-fart.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/skype.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/suiii.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/superidol.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/surprisemf.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/sus.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/uwu.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/verpissdich.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/wetfart.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/wow.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Soundboard/wryd-stepbro.js",
+      "edits": 14
+    },
+    {
+      "file": "commands/Voice/voice.js",
+      "edits": 172
+    },
+    {
+      "file": "slashCommands/Admin/embed.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Anime/emote.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Birthday/list.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Config/adminrol.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Config/architect.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Config/autorole.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Config/idioma.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Config/logs.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Config/musica.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Config/prefix.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Config/ver.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Economy/balance.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Economy/daily.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Economy/rob.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Economy/work.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/8ball.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/blur.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/fact.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/greyscale.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/invert.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/joke.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/meme.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/note.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/notstonks.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/ohno.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/rainbow.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/roblox.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/sepia.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/shit.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/stonks.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/stroke.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/trash.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/wanted.js",
+      "edits": 6
+    },
+    {
+      "file": "slashCommands/Fun/wasted.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Fun/weather.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Fun/whodidthis.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Giveaway/list.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Info/avatar.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/botfaq.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/botinfo.js",
+      "edits": 6
+    },
+    {
+      "file": "slashCommands/Info/commandcount.js",
+      "edits": 8
+    },
+    {
+      "file": "slashCommands/Info/customavatar.js",
+      "edits": 8
+    },
+    {
+      "file": "slashCommands/Info/emojiinfo.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/invites.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/membercount.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/modstats.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/permissions.js",
+      "edits": 8
+    },
+    {
+      "file": "slashCommands/Info/ping.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/roleinfo.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/serveravatar.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/serverinfo.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/stats.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Info/translate.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/uptime.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Info/userid.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Info/userinfo.js",
+      "edits": 8
+    },
+    {
+      "file": "slashCommands/Info/usertag.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Invites/leaderboard.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Moderation/cases.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Music/history.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Music/playtop.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Music/queue.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/4k.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/anal.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/ass.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/blowjob.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/boobs.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/eroyuri.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/futanari.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/gelbooru.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/girlsologif.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/hass.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/hboobs.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/hentai.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/hentaigif.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/keta.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/kuni.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/lesbian.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/lewdnekogif.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/nekoapiclassic.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/pgif.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/porn.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/pussy.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/pussywank.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/r34.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/waifu.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/NSFW/yuri.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Playlist/list.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Playlist/play.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Rank/leaderboard.js",
+      "edits": 2
+    },
+    {
+      "file": "slashCommands/Rank/rank.js",
+      "edits": 4
+    },
+    {
+      "file": "slashCommands/Welcome/ver.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/anti_nuke.js",
+      "edits": 126
+    },
+    {
+      "file": "handlers/anticaps.js",
+      "edits": 30
+    },
+    {
+      "file": "handlers/antidiscord.js",
+      "edits": 30
+    },
+    {
+      "file": "handlers/antilinks.js",
+      "edits": 30
+    },
+    {
+      "file": "handlers/antimention.js",
+      "edits": 30
+    },
+    {
+      "file": "handlers/antiselfbot.js",
+      "edits": 42
+    },
+    {
+      "file": "handlers/antispam.js",
+      "edits": 30
+    },
+    {
+      "file": "handlers/apply.js",
+      "edits": 83
+    },
+    {
+      "file": "handlers/autoembed.js",
+      "edits": 6
+    },
+    {
+      "file": "handlers/blacklist.js",
+      "edits": 30
+    },
+    {
+      "file": "handlers/boostlog.js",
+      "edits": 12
+    },
+    {
+      "file": "handlers/command.js",
+      "edits": 16
+    },
+    {
+      "file": "handlers/economy/messages.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/epicgamesverification.js",
+      "edits": 4
+    },
+    {
+      "file": "handlers/functions.js",
+      "edits": 26
+    },
+    {
+      "file": "handlers/games-choice.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/ghost_ping_detector.js",
+      "edits": 26
+    },
+    {
+      "file": "handlers/helpui.js",
+      "edits": 6
+    },
+    {
+      "file": "handlers/jointocreate.js",
+      "edits": 4
+    },
+    {
+      "file": "handlers/joinvc.js",
+      "edits": 6
+    },
+    {
+      "file": "handlers/keyword.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/leave.js",
+      "edits": 12
+    },
+    {
+      "file": "handlers/logger.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/music/embeds.js",
+      "edits": 6
+    },
+    {
+      "file": "handlers/music/likes.js",
+      "edits": 4
+    },
+    {
+      "file": "handlers/music/lyrics-pagination.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/music/lyricsLive.js",
+      "edits": 6
+    },
+    {
+      "file": "handlers/music/playui.js",
+      "edits": 8
+    },
+    {
+      "file": "handlers/music/searchui.js",
+      "edits": 6
+    },
+    {
+      "file": "handlers/music/setup.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/music/ui.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/mute.js",
+      "edits": 6
+    },
+    {
+      "file": "handlers/ranking.js",
+      "edits": 18
+    },
+    {
+      "file": "handlers/reactionrole.js",
+      "edits": 5
+    },
+    {
+      "file": "handlers/suggest.js",
+      "edits": 4
+    },
+    {
+      "file": "handlers/ticket.js",
+      "edits": 8
+    },
+    {
+      "file": "handlers/ticketevent.js",
+      "edits": 92
+    },
+    {
+      "file": "handlers/timedmessages.js",
+      "edits": 2
+    },
+    {
+      "file": "handlers/welcome.js",
+      "edits": 18
+    },
+    {
+      "file": "events/guild/interactionCreate.js",
+      "edits": 16
+    },
+    {
+      "file": "events/guild/messageCreate.js",
+      "edits": 24
+    }
+  ]
+}

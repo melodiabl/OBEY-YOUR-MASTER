@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -16,14 +18,14 @@ module.exports = {
       client.settings.set(gid, 'no', 'logger.channel')
       return interaction.reply({
         embeds: [new EmbedBuilder().setColor(0xF97316)
-          .setDescription('🔕 Logs de moderación **desactivados**.')],
+          .setDescription(obeyUi.limit(obeyUi.owned('🔕 Logs de moderación **desactivados**.'), 4096))],
         ephemeral: true,
       })
     }
 
     if (!channel.isTextBased())
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debe ser un canal de texto.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Debe ser un canal de texto.'), 4096))],
         ephemeral: true,
       })
 
@@ -36,12 +38,12 @@ module.exports = {
 
     await interaction.reply({
       embeds: [new EmbedBuilder().setColor(0x22C55E)
-        .setTitle('✅ Canal de logs configurado')
+        .setTitle(obeyUi.limit(obeyUi.owned('✅ Canal de logs configurado'), 256))
         .addFields(
-          { name: '📢 Canal',   value: `${channel}`,                                  inline: true },
-          { name: '🔔 Eventos', value: enabled.length ? enabled.join(', ') : '*(usar `!setup-logger` para activar eventos)*', inline: false },
+          { name: obeyUi.owned('📢 Canal'),   value: `${channel}`,                                  inline: true },
+          { name: obeyUi.owned('🔔 Eventos'), value: enabled.length ? enabled.join(', ') : '*(usar `!setup-logger` para activar eventos)*', inline: false },
         )
-        .setFooter({ text: 'Usa !setup-logger para configurar los eventos de log' })],
+        .setFooter(obeyMeta.asFooter({ text: 'Usa !setup-logger para configurar los eventos de log' }))],
     })
   },
 }

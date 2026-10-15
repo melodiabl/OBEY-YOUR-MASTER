@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { parseMilliseconds, duration, GetUser, nFormatter, ensure_economy_user } = require(
     `${process.cwd()}/handlers/functions`
 );
@@ -21,13 +23,13 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.disabled.title)
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                         .setDescription(
-                            require(`${process.cwd()}/handlers/functions`).handlemsg(
+                            obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(
                                 client.la[ls].common.disabled.description,
                                 { prefix: prefix }
-                            )
+                            ), 4096)
                         ),
                 ],
             });
@@ -40,8 +42,8 @@ module.exports = {
                     user = await GetUser(message, args);
                 } catch (e) {
                     if (!e) return message.reply(isSpanish
-                        ? "<:no:833101993668771842> NO SE PUDO ENCONTRAR AL USUARIO"
-                        : "<:no:833101993668771842> UNABLE TO FIND THE USER");
+                        ? obeyUi.owned("<:no:833101993668771842> NO SE PUDO ENCONTRAR AL USUARIO")
+                        : obeyUi.owned("<:no:833101993668771842> UNABLE TO FIND THE USER"));
                     return message.reply({
                         content: `\`\`\`${String(e?.message || e).substring(0, 1900)}\`\`\``,
                     });
@@ -51,8 +53,8 @@ module.exports = {
             }
             if (!user || user == null || user.id == null || !user.id) user = message.author;
             if (user.bot) return message.reply(isSpanish
-                ? "<:no:833101993668771842> **Un bot de Discord no puede tener economía.**"
-                : "<:no:833101993668771842> **A Discord bot cannot have an economy profile.**");
+                ? obeyUi.owned("<:no:833101993668771842> **Un bot de Discord no puede tener economía.**")
+                : obeyUi.owned("<:no:833101993668771842> **A Discord bot cannot have an economy profile.**"));
 
             //ensure the economy data
             ensure_economy_user(client, message.guild.id, user.id);
@@ -131,96 +133,96 @@ module.exports = {
                 switch (itemarray.toLowerCase()) {
                     case "yacht":
                         theitems.push(
-                            `🛥️ ${data.items[`${itemarray}`]} Yacht${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(75000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.boat")} ${data.items[`${itemarray}`]} Yacht${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(75000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "lamborghini":
                         theitems.push(
-                            `🏎️ ${data.items[`${itemarray}`]} Lamborghini${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(50000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.car")} ${data.items[`${itemarray}`]} Lamborghini${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(50000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "car":
                         theitems.push(
-                            `🚗 ${data.items[`${itemarray}`]} Car${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(6400 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.car")} ${data.items[`${itemarray}`]} Car${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(6400 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "motorbike":
                         theitems.push(
-                            `🏍️ ${data.items[`${itemarray}`]} Motorbike${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(1500 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.car")} ${data.items[`${itemarray}`]} Motorbike${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(1500 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "bicycle":
                         theitems.push(
-                            `🚲 ${data.items[`${itemarray}`]} Bicycle${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(500 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.bike")} ${data.items[`${itemarray}`]} Bicycle${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(500 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
 
                     case "nike":
                         theitems.push(
-                            `👟 ${data.items[`${itemarray}`]} Nike${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(300 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.shoe")} ${data.items[`${itemarray}`]} Nike${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(300 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "tshirt":
                         theitems.push(
-                            `👕 ${data.items[`${itemarray}`]} T-Shirt${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(60 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.shirt")} ${data.items[`${itemarray}`]} T-Shirt${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(60 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
 
                     case "mansion":
                         theitems.push(
-                            `🏘️ ${data.items[`${itemarray}`]} Mansion${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(45000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.home")} ${data.items[`${itemarray}`]} Mansion${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(45000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "house":
                         theitems.push(
-                            `🏠 ${data.items[`${itemarray}`]} House${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(8000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.home")} ${data.items[`${itemarray}`]} House${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(8000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "dirthut":
                         theitems.push(
-                            `🟫 ${data.items[`${itemarray}`]} Dirthut${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(150 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.game-empty")} ${data.items[`${itemarray}`]} Dirthut${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(150 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
 
                     case "pensil":
                         theitems.push(
-                            `✏️ ${data.items[`${itemarray}`]} Pensil${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(20 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.edit")} ${data.items[`${itemarray}`]} Pensil${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(20 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "pen":
                         theitems.push(
-                            `🖊️ ${data.items[`${itemarray}`]} Pen${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(10 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.edit")} ${data.items[`${itemarray}`]} Pen${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(10 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "condom":
                         theitems.push(
-                            `🟪 ${data.items[`${itemarray}`]} Condom${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(30 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.piece-purple")} ${data.items[`${itemarray}`]} Condom${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(30 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "bottle":
                         theitems.push(
-                            `🍼 ${data.items[`${itemarray}`]} Bottle${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(50 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.baby")} ${data.items[`${itemarray}`]} Bottle${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(50 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
 
                     case "fish":
                         theitems.push(
-                            `🐟 ${data.items[`${itemarray}`]} Fish${data.items[`${itemarray}`] > 1 ? "es" : ""} | \`${nFormatter(1000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.fish")} ${data.items[`${itemarray}`]} Fish${data.items[`${itemarray}`] > 1 ? "es" : ""} | \`${nFormatter(1000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "hamster":
                         theitems.push(
-                            `🐹 ${data.items[`${itemarray}`]} Hamster${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(1500 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.hamster")} ${data.items[`${itemarray}`]} Hamster${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(1500 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "dog":
                         theitems.push(
-                            `🐕 ${data.items[`${itemarray}`]} Dog${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(2000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.dog")} ${data.items[`${itemarray}`]} Dog${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(2000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "cat":
                         theitems.push(
-                            `😺 ${data.items[`${itemarray}`]} Cat${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(2000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.cat")} ${data.items[`${itemarray}`]} Cat${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(2000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                 }
@@ -228,14 +230,14 @@ module.exports = {
             const viewingSelf = user.id === message.author.id;
             const subject = viewingSelf ? (isSpanish ? "Tú" : "You") : user.username;
             const profileTitle = isSpanish
-                ? `🧸 **${subject}** ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(items)} artículos\` con un valor de \`${nFormatter(itemsvalue)} 💸\``
-                : `🧸 **${subject}** ${viewingSelf ? "have" : "has"} \`${nFormatter(items)} items\` worth \`${nFormatter(itemsvalue)} 💸\``;
+                ? `${obeyUi.markup("icon.bear")} **${subject}** ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(items)} artículos\` con un valor de \`${nFormatter(itemsvalue)} ${obeyUi.markup("icon.wallet")}\``
+                : `${obeyUi.markup("icon.bear")} **${subject}** ${viewingSelf ? "have" : "has"} \`${nFormatter(items)} items\` worth \`${nFormatter(itemsvalue)} ${obeyUi.markup("icon.wallet")}\``;
             const emptyInventory = isSpanish
-                ? `\`${nFormatter(Math.floor(data.balance))} 💸\` ${viewingSelf ? "Aún no tienes" : "Aún no tiene"} artículos.`
-                : `\`${nFormatter(Math.floor(data.balance))} 💸\` ${viewingSelf ? "You have" : "They have"} no items yet.`;
+                ? `\`${nFormatter(Math.floor(data.balance))} ${obeyUi.markup("icon.wallet")}\` ${viewingSelf ? "Aún no tienes" : "Aún no tiene"} artículos.`
+                : `\`${nFormatter(Math.floor(data.balance))} ${obeyUi.markup("icon.wallet")}\` ${viewingSelf ? "You have" : "They have"} no items yet.`;
             const profileDescription = isSpanish
-                ? `👛 **${subject}** ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(Math.floor(data.balance))} 💸\` en el bolsillo\n**🏦 ${subject} ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(data.bank)} 💸\` en el banco**\n\`\`\` \`\`\`**ARTÍCULOS:**\n${theitems.length ? ">>> " + theitems.join("\n\n") : emptyInventory}`
-                : `👛 **${subject}** ${viewingSelf ? "have" : "has"} \`${nFormatter(Math.floor(data.balance))} 💸\` in the pocket\n**🏦 ${subject} ${viewingSelf ? "have" : "has"} \`${nFormatter(data.bank)} 💸\` in the bank**\n\`\`\` \`\`\`**ITEMS:**\n${theitems.length ? ">>> " + theitems.join("\n\n") : emptyInventory}`;
+                ? `${obeyUi.markup("icon.wallet")} **${subject}** ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(Math.floor(data.balance))} ${obeyUi.markup("icon.wallet")}\` en el bolsillo\n**${obeyUi.markup("icon.bank")} ${subject} ${viewingSelf ? "tienes" : "tiene"} \`${nFormatter(data.bank)} ${obeyUi.markup("icon.wallet")}\` en el banco**\n\`\`\` \`\`\`**ARTÍCULOS:**\n${theitems.length ? ">>> " + theitems.join("\n\n") : emptyInventory}`
+                : `${obeyUi.markup("icon.wallet")} **${subject}** ${viewingSelf ? "have" : "has"} \`${nFormatter(Math.floor(data.balance))} ${obeyUi.markup("icon.wallet")}\` in the pocket\n**${obeyUi.markup("icon.bank")} ${subject} ${viewingSelf ? "have" : "has"} \`${nFormatter(data.bank)} ${obeyUi.markup("icon.wallet")}\` in the bank**\n\`\`\` \`\`\`**ITEMS:**\n${theitems.length ? ">>> " + theitems.join("\n\n") : emptyInventory}`;
             //return some message!
             return message.reply({
                 embeds: [
@@ -248,9 +250,9 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
-                        .setTitle(profileTitle)
-                        .setDescription(profileDescription),
+                        .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
+                        .setTitle(obeyUi.limit(profileTitle, 256))
+                        .setDescription(obeyUi.limit(profileDescription, 4096)),
                 ],
             });
         } catch (e) {
@@ -259,9 +261,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(`\`\`\`${String(e?.message || e?.stack || e).substring(0, 1900)}\`\`\``),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(`\`\`\`${String(e?.message || e?.stack || e).substring(0, 1900)}\`\`\``, 4096)),
                 ],
             });
         }

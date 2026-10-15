@@ -1,4 +1,4 @@
-const emojis = require("./emojis.json");
+const emojis = require("../handlers/assets/legacy-config");
 
 function getNumberEmojis() {
     return emojis.numberEmojis;

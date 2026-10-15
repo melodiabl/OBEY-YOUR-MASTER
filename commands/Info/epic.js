@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "epic",
@@ -50,18 +52,18 @@ module.exports = {
             });
             let data = client.epicgamesDB.get(user.id);
             if (!data.epic || data.epic.length < 5)
-                return message.reply(`❌ **${user.username}** did not verify/connect their Epic Games Account`);
+                return message.reply(`${obeyUi.markup("icon.error")} **${user.username}** did not verify/connect their Epic Games Account`);
             message
                 .reply({
                     embeds: [
                         new Discord.EmbedBuilder()
                             .setColor(es.color)
-                            .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
-                            .setTitle(`Epic Games Account!`)
+                            .setAuthor(obeyMeta.asAuthor({ name: user.username, iconURL: user.displayAvatarURL() }))
+                            .setTitle(obeyUi.limit(`Epic Games Account!`, 256))
                             .addFields({ name: "**Epic Games Name:**", value: `\`\`\`${data.epic}\`\`\`` })
                             .addFields({ name: "**Platform:**", value: `\`\`\`${data.Platform}\`\`\`` })
                             .addFields({ name: "**Input Method:**", value: `\`\`\`${data.InputMethod}\`\`\`` })
-                            .setFooter({ text: "ID: " + user.id, iconURL: user.displayAvatarURL() }),
+                            .setFooter(obeyMeta.asFooter({ text: "ID: " + user.id, iconURL: user.displayAvatarURL() })),
                     ],
                 })
                 .catch(() => {});
@@ -71,9 +73,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"]), 4096)),
                 ],
             });
         }

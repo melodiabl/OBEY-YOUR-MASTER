@@ -1,3 +1,4 @@
+const obeyUi = require("../assets/system")
 const { configureSponsorBlock } = require('./nodes-runtime')
 const { searchNodes, trackOnNode } = require('./node-search')
 const { allowedMusicTrack } = require('./nodes-config')
@@ -52,13 +53,13 @@ module.exports = client => {
     clock.anchor(state, options.position || 0)
     state.lastPlayerUpdateTime = 0
     state.positionChangeAt = Date.now()
-    return player.playTrack({ ...options, track: { encoded, userData: { obeyPlaybackId: state.playbackId } } })
+    const { recoverOnFailure, ...playOptions } = options
+    return player.playTrack({ ...playOptions, track: { encoded, userData: { obeyPlaybackId: state.playbackId } } })
   }
 
   async function playQueuedTrack(guildId, player, state, encoded) {
     try { await playTrack(player, state, encoded) }
     catch (error) {
-      if (!client.nodePool) throw error
       await client.music._recoverFailedTrack(guildId, player, 'play_request_failed')
     }
   }
@@ -262,6 +263,7 @@ module.exports = client => {
       const player = await client.shoukaku.joinVoiceChannel({ guildId, channelId: voiceChannelId, shardId: 0 })
       const state  = getState(guildId)
       state.status = 'idle'
+      state.locale = require('../i18n').localeFor(client, guildId)
       state.voiceChannelId = voiceChannelId
       state.textChannelId  = textChannelId
       const autoplay = client.settings?.get?.(guildId, 'autoplay')
@@ -310,9 +312,11 @@ module.exports = client => {
           state.startedAt = null; state.status = 'loading'
           emitState(guildId)
           let pick
+          const lookup = new AbortController()
+          state.autoplayLookup = lookup
           state.autoplaySearching = true
-          try { pick = await require('./autoplay').findAutoplayTrack(this, guildId, seed, state.history, () => isCurrent() && state.autoplay && !state.queue.length && !state.pendingEnqueues) }
-          finally { state.autoplaySearching = false }
+          try { pick = await require('./autoplay').findAutoplayTrack(this, guildId, seed, state.history, () => isCurrent() && state.autoplay && !state.queue.length && !state.pendingEnqueues, lookup.signal) }
+          finally { state.autoplaySearching = false; if (state.autoplayLookup === lookup) state.autoplayLookup = null }
           if (!isCurrent()) return
           if (state.pendingEnqueues) {
             state.history.unshift(seed); if (state.history.length > 10) state.history.pop()
@@ -408,8 +412,9 @@ module.exports = client => {
           }
         }
         const res  = await node.rest.resolve(`ytsearch:${info.title || ''} ${info.author || ''}`)
-        const fallback = tracksFromResolve(res).find(t => allowedMusicTrack(t) && t.encoded && t.info?.uri !== info.uri)
+        const fallback = tracksFromResolve(res).find(t => allowedMusicTrack(t) && t.encoded && t.info?.uri !== info.uri && sameSong(info, t.info))
         if (fallback) {
+          fallback._fallbackAttempted = true
           if (fallback.info) { fallback.info.requester = info.requester || 'Fallback'; fallback.info.requesterId = info.requesterId; fallback._fallbackAttempted = true }
           state.currentTrack = fallback; state.startedAt = Date.now(); state.lastPosition = 0; state.paused = false
           await playTrack(player, state, fallback.encoded)
@@ -521,6 +526,7 @@ module.exports = client => {
     setAutoplay(guildId, enabled = null) {
       const state = getState(guildId)
       state.autoplay = enabled === null ? !state.autoplay : Boolean(enabled)
+      if (!state.autoplay) state.autoplayLookup?.abort()
       emitState(guildId)
       return state.autoplay
     },
@@ -558,6 +564,7 @@ module.exports = client => {
       const state = getState(guildId)
       const count = state.queue.length
       state.requestEpoch = (state.requestEpoch || 0) + 1
+      state.autoplayLookup?.abort()
       state.queue = []
       emitState(guildId)
       scheduleNpUpdate(client, guildId)
@@ -676,7 +683,7 @@ module.exports = client => {
       if (denial) return interaction.reply({ content: denial, ephemeral: true })
     }
     if (stateForAccess.voiceChannelId && interaction.member?.voice?.channelId !== stateForAccess.voiceChannelId) {
-      await interaction.reply({ content: '❌ Debes estar en el mismo canal de voz que el bot.', ephemeral: true }).catch(() => {})
+      await interaction.reply({ content: obeyUi.owned('❌ Debes estar en el mismo canal de voz que el bot.'), ephemeral: true }).catch(() => {})
       return
     }
     if (!interaction.deferred && !interaction.replied) await interaction.deferUpdate().catch(() => {})
@@ -688,7 +695,7 @@ module.exports = client => {
       const cur  = parseInt(pageStr) || 1
       const page = cid.startsWith('mq_next') ? cur + 1 : cur - 1
       const totalPages = Math.max(1, Math.ceil(state.queue.length / 10))
-      await interaction.editReply({ embeds: [buildQueueEmbed(state, page)], components: buildQueueRows(page, totalPages) }).catch(() => {})
+      await interaction.editReply({ embeds: [buildQueueEmbed(state, page)], components: buildQueueRows(page, totalPages, require('../i18n').localeFor(client, guildId)) }).catch(() => {})
       return
     }
 
@@ -710,11 +717,11 @@ module.exports = client => {
       case 'mp_volup':   await client.music.setVolume(guildId, Math.min(200, state.volume + 10)); break
       case 'mp_queue': {
         const totalPages = Math.max(1, Math.ceil(state.queue.length / 10))
-        interaction.followUp({ embeds: [buildQueueEmbed(state, 1)], components: buildQueueRows(1, totalPages), ephemeral: true }).catch(() => {})
+        interaction.followUp({ embeds: [buildQueueEmbed(state, 1)], components: buildQueueRows(1, totalPages, require('../i18n').localeFor(client, guildId)), ephemeral: true }).catch(() => {})
         return
       }
       case 'mp_like': {
-        if (!state.currentTrack) { interaction.followUp({ content: '❌ No hay música reproduciéndose.', ephemeral: true }).catch(() => {}); return }
+        if (!state.currentTrack) { interaction.followUp({ content: obeyUi.owned('❌ No hay música reproduciéndose.'), ephemeral: true }).catch(() => {}); return }
         const res = await toggleLike(interaction.user.id, state.currentTrack)
         if (res) interaction.followUp({ embeds: [buildLikeEmbed(res)], ephemeral: true }).catch(() => {})
         return
@@ -723,7 +730,7 @@ module.exports = client => {
         const live = require('../music/lyricsLive')
         if (live.isActive(guildId)) {
           await live.stop(guildId, client)
-          interaction.followUp({ content: '🔇 Letras en vivo desactivadas.', ephemeral: true }).catch(() => {})
+          interaction.followUp({ content: obeyUi.owned('🔇 Letras en vivo desactivadas.'), ephemeral: true }).catch(() => {})
           return
         }
         const requestedTrack = state.currentTrack, playbackId = state.playbackId, sessionId = state.sessionId
@@ -733,12 +740,12 @@ module.exports = client => {
         }
         const r = await live.start(client, guildId)
         if (r.ok) {
-          interaction.followUp({ content: '🎤 Letras en vivo activadas — se sincronizan solas con la canción.', ephemeral: true }).catch(() => {})
+          interaction.followUp({ content: obeyUi.owned('🎤 Letras en vivo activadas — se sincronizan solas con la canción.'), ephemeral: true }).catch(() => {})
         } else if (r.reason === 'no_sync' && r.plain) {
           const info = requestedTrack?.info || requestedTrack || {}
           await require('./lyrics-pagination').showLyrics(interaction, { text: r.plain, title: info.title, artist: info.author, isCurrent }, 'followUp')
         } else {
-          interaction.followUp({ content: r.reason === 'no_track' ? '❌ No hay música reproduciéndose.' : '🔇 No encontré letras sincronizadas para esta canción.', ephemeral: true }).catch(() => {})
+          interaction.followUp({ content: r.reason === 'no_track' ? obeyUi.owned('❌ No hay música reproduciéndose.') : obeyUi.owned('🔇 No encontré letras sincronizadas para esta canción.'), ephemeral: true }).catch(() => {})
         }
         return
       }
@@ -746,7 +753,7 @@ module.exports = client => {
     scheduleNpUpdate(client, guildId)
     } catch (error) {
       console.warn(`[Music] Control failed (${guildId}):`, error.message)
-      await interaction.followUp({ content: '❌ No se pudo aplicar el control. Inténtalo de nuevo.', ephemeral: true }).catch(() => {})
+      await interaction.followUp({ content: obeyUi.owned('❌ No se pudo aplicar el control. Inténtalo de nuevo.'), ephemeral: true }).catch(() => {})
     }
   })
 
@@ -764,6 +771,7 @@ module.exports = client => {
     client.music[name] = function (guildId, ...args) {
       const state = getState(guildId)
       if (name === 'stop') {
+        state.autoplayLookup?.abort()
         state.requestEpoch = (state.requestEpoch || 0) + 1
         state.stopRequestEpoch = (state.stopRequestEpoch || 0) + 1
       }
@@ -831,7 +839,7 @@ module.exports = client => {
             track.info.requesterId = savedInfo.requesterId
             state.currentTrack = track
             state.status = 'loading'
-            await playTrack(player, state, track.encoded, { position: saved.position || 0, paused: Boolean(saved.paused) })
+            await playTrack(player, state, track.encoded, { position: saved.position || 0, paused: Boolean(saved.paused), recoverOnFailure: false })
             state.lastPosition = saved.position || 0
             state.paused = Boolean(saved.paused)
             state.startedAt = state.paused ? null : Date.now() - state.lastPosition

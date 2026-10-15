@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const User = require('../../database/schemas/UserSchema')
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
     { Integer: { name: 'cantidad', description: 'Invitaciones a agregar', required: true } },
   ],
   run: async (client, interaction) => {
-    const ok = d => new EmbedBuilder().setColor(0x5865F2).setDescription(d)
+    const ok = d => new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(d, 4096))
 
     const target = interaction.options.getUser('usuario')
     const amount = interaction.options.getInteger('cantidad')
@@ -18,6 +19,6 @@ module.exports = {
       { $inc: { invites: amount }, $setOnInsert: { userId: target.id, guildId: interaction.guild.id } },
       { upsert: true }
     )
-    await interaction.reply({ embeds: [ok(`✉️ **+${amount}** invitaciones agregadas a ${target}.`)], ephemeral: true })
+    await interaction.reply({ embeds: [ok(`${obeyUi.markup("icon.send")} **+${amount}** invitaciones agregadas a ${target}.`)], ephemeral: true })
   },
 }

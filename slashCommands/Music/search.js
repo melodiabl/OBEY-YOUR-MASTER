@@ -1,3 +1,4 @@
+const { localeFor } = require('../../handlers/i18n')
 // /music search estilo Soundy: pestañas 🎵 Pistas / 💿 Álbumes + menú para elegir.
 const { EmbedBuilder } = require('discord.js')
 const { searchDiscordCatalog, enqueueCatalogItem, itemInfo } = require('../../handlers/discordmusiccatalog')
@@ -25,16 +26,16 @@ module.exports = {
     let tab = 'tracks'
     let items = results.tracks || []
     const fakeMsg = { guild: interaction.guild, author: interaction.user, channel: { id: interaction.channelId } }
-    const reply = await interaction.editReply({ embeds: [catEmbed(tab, items, query)], components: catRows(tab, items, 'srch') })
+    const reply = await interaction.editReply({ embeds: [catEmbed(tab, items, query, localeFor(client, interaction.guild.id))], components: catRows(tab, items, 'srch', localeFor(client, interaction.guild.id)) })
     const collector = reply.createMessageComponentCollector({ time: 60_000 })
 
     collector.on('collect', async i => {
       if (i.user.id !== interaction.user.id) return i.reply({ content: 'No es tu búsqueda.', ephemeral: true }).catch(() => {})
       if (i.customId.startsWith('srch_tab:')) {
         await i.deferUpdate(); tab = i.customId.split(':')[1]; items = results[tab] || []
-        return interaction.editReply({ embeds: [catEmbed(tab, items, query)], components: catRows(tab, items, 'srch') }).catch(() => {})
+        return interaction.editReply({ embeds: [catEmbed(tab, items, query, localeFor(client, interaction.guild.id))], components: catRows(tab, items, 'srch', localeFor(client, interaction.guild.id)) }).catch(() => {})
       }
-      if (i.customId === 'srch_cancel') { collector.stop('cancel'); return interaction.deleteReply().catch(() => {}) }
+      if (i.customId === 'srch_cancel') { await i.deferUpdate(); collector.stop('cancel'); return interaction.deleteReply().catch(() => {}) }
       if (i.customId === 'srch_pick') {
         const voiceChannel = i.member?.voice?.channel
         if (!voiceChannel) return i.reply({ embeds: [err('Debes estar en un canal de voz.')], ephemeral: true }).catch(() => {})
@@ -43,7 +44,7 @@ module.exports = {
         const info = itemInfo(item)
         try {
           const queued = await enqueueCatalogItem(client, fakeMsg, voiceChannel, item)
-          await interaction.editReply({ embeds: [addedEmbed(info, queued, interaction.user.id)], components: [] }).catch(() => {})
+          await interaction.editReply({ embeds: [addedEmbed(info, queued, interaction.user.id, localeFor(client, interaction.guild.id))], components: [] }).catch(() => {})
         } catch (e) {
           await interaction.editReply({ embeds: [err(e.message || String(e))], components: [] }).catch(() => {})
         }

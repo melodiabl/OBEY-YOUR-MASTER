@@ -1,0 +1,987 @@
+{
+  "common": {
+    "cancel": "Cancelar",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "error": "No se pudo completar la acción. Inténtalo de nuevo.",
+    "close": "Cerrar",
+    "commandError": "Ocurrió un error al ejecutar el comando."
+  },
+  "music": {
+    "tracks": "Pistas",
+    "albums": "Álbumes",
+    "chooseTrack": "Elige una canción…",
+    "chooseAlbum": "Elige un álbum…",
+    "resultsFor": "Resultados para «{query}»",
+    "noTracks": "No hay pistas para esta búsqueda.",
+    "noAlbums": "No hay álbumes para esta búsqueda.",
+    "emptyFooter": "Cambia de categoría abajo · expira en 60 s",
+    "resultsFooter": "{count} {category} · elige uno · cambia de categoría abajo · 60 s",
+    "trackCount": "{count} pistas",
+    "artist": "Artista",
+    "requestedBy": "Pedido por",
+    "duration": "Duración",
+    "live": "EN DIRECTO",
+    "albumAdded": "Álbum añadido",
+    "playlistAdded": "Playlist añadida",
+    "playlist": "Lista de reproducción",
+    "playingNow": "Reproduciendo ahora",
+    "addedToQueue": "Añadido a la cola",
+    "noCurrentTrack": "No hay música reproduciéndose.",
+    "openLink": "Abrir enlace",
+    "savedFrom": "Guardado desde {server}",
+    "dmSent": "Te envié la canción por privado.",
+    "dmBlocked": "No pude enviarte el privado. Revisa los permisos de mensajes directos.",
+    "pause": "Pausar",
+    "resume": "Reanudar",
+    "shuffle": "Aleatorio",
+    "previousTrack": "Anterior",
+    "skip": "Saltar",
+    "loop": "Repetir",
+    "loopTrack": "Repetir canción",
+    "loopQueue": "Repetir cola",
+    "lyrics": "Letras",
+    "volumeDown": "Bajar volumen",
+    "stop": "Detener",
+    "volumeUp": "Subir volumen",
+    "queue": "Cola",
+    "like": "Me gusta",
+    "autoplay": "Autoplay",
+    "volume": "Volumen",
+    "ends": "Termina",
+    "paused": "Pausado",
+    "off": "Desactivado",
+    "silenced": "Silenciado",
+    "voiceRequired": "Debes estar en un canal de voz."
+  },
+  "economy": {
+    "disabled": "El sistema de economía no está activado.",
+    "bots": "Los bots no tienen economía.",
+    "invalidUser": "No pude encontrar ese usuario.",
+    "invalidAmount": "Usa una cantidad entera positiva o «todo».",
+    "insufficientWallet": "No tienes suficiente en la cartera: {amount}.",
+    "insufficientBank": "No tienes suficiente en el banco: {amount}.",
+    "selfPay": "No puedes transferirte monedas a ti mismo.",
+    "balance": "Saldo",
+    "wallet": "Cartera",
+    "bank": "Banco",
+    "total": "Total",
+    "inventory": "Inventario",
+    "inventoryValue": "{count} objetos · valor: {amount}",
+    "deposited": "Depósito realizado",
+    "withdrawn": "Retiro realizado",
+    "transfer": "Transferencia realizada",
+    "amount": "Cantidad",
+    "recipient": "Destinatario",
+    "failed": "No se pudo completar la operación. Revisa el estado antes de repetirla."
+  },
+  "suggestions": {
+    "for": "A favor",
+    "against": "En contra",
+    "who": "Quién votó",
+    "count": "{count} votos",
+    "already": "Ya votaste en ese sentido.",
+    "expired": "Esta sugerencia ya no tiene datos válidos para votar."
+  },
+  "tickets": {
+    "notTicket": "Este canal no tiene un ticket registrado.",
+    "closed": "Este ticket ya está cerrado.",
+    "permission": "No tienes permiso para realizar esta acción en el ticket.",
+    "botPermission": "Necesito el permiso Gestionar canales en este canal.",
+    "alreadyClaimed": "Este ticket ya fue asignado a un responsable.",
+    "unknownMember": "No encontré ese miembro en el servidor.",
+    "ownerProtected": "No puedes quitar al dueño del ticket.",
+    "reconcile": "No pude restaurar los permisos tras un fallo. El staff debe revisar el canal.",
+    "failed": "La acción no pudo completarse. Revisa el ticket antes de repetirla.",
+    "claimDone": "Ticket asignado a {user}.",
+    "closeDone": "Ticket cerrado por {user}. El canal y su historial se conservan.",
+    "addDone": "{user} tiene acceso al ticket.",
+    "removeDone": "Se retiró el acceso de {user}.",
+    "noReason": "Sin motivo indicado",
+    "closedTitle": "Ticket cerrado",
+    "closeLog": "Cerrado por {user}\nMotivo: {reason}",
+    "accept": "Aceptar",
+    "deny": "Rechazar",
+    "ask": "Consultar",
+    "verify": "Verificar paso",
+    "verifyFailed": "Verificación fallida",
+    "close": "Cerrar",
+    "delete": "Eliminar",
+    "transcript": "Transcripción",
+    "users": "Usuarios",
+    "roles": "Roles",
+    "claim": "Asignarme",
+    "unknownAction": "Acción de ticket desconocida.",
+    "privilegedMember": "No puedo retirar el acceso de un administrador mediante permisos del canal."
+  },
+  "moderation": {
+    "noReason": "Sin motivo indicado",
+    "permission": "No tienes permiso para esa acción.",
+    "botPermission": "No tengo el permiso necesario para esa acción.",
+    "protectedTarget": "Ese usuario está protegido para esta acción.",
+    "missingMember": "Ese usuario no está en el servidor.",
+    "hierarchy": "La jerarquía de roles no permite esta acción.",
+    "invalidDuration": "La duración seleccionada no es válida.",
+    "actionFailed": "Discord no pudo aplicar la acción. No se confirmó ningún cambio.",
+    "recordFailed": "La acción se aplicó, pero no pude guardar el caso. El staff debe revisar el registro.",
+    "dmUnconfirmed": "La notificación privada no está confirmada.",
+    "banDone": "Usuario bloqueado",
+    "kickDone": "Miembro expulsado",
+    "timeoutDone": "Suspensión temporal aplicada",
+    "banDm": "Se aplicó un bloqueo en {server}.",
+    "kickDm": "Se aplicó una expulsión de {server}.",
+    "timeoutDm": "Se aplicó una suspensión temporal en {server}.",
+    "reason": "Motivo",
+    "user": "Usuario",
+    "case": "Caso"
+  },
+  "modules": {
+    "music": {
+      "ready": {
+        "title": "Música · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Música · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Música · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Música · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Música · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Música · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "welcome": {
+      "ready": {
+        "title": "Bienvenida y despedida · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Bienvenida y despedida · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Bienvenida y despedida · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Bienvenida y despedida · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Bienvenida y despedida · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Bienvenida y despedida · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "verification": {
+      "ready": {
+        "title": "Verificación · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Verificación · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Verificación · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Verificación · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Verificación · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Verificación · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "roles": {
+      "ready": {
+        "title": "Roles · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Roles · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Roles · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Roles · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Roles · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Roles · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "tickets": {
+      "ready": {
+        "title": "Tickets · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Tickets · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Tickets · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Tickets · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Tickets · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Tickets · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "moderation": {
+      "ready": {
+        "title": "Moderación · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Moderación · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Moderación · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Moderación · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Moderación · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Moderación · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "automod": {
+      "ready": {
+        "title": "Moderación automática · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Moderación automática · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Moderación automática · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Moderación automática · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Moderación automática · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Moderación automática · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "security": {
+      "ready": {
+        "title": "Seguridad · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Seguridad · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Seguridad · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Seguridad · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Seguridad · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Seguridad · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "logs": {
+      "ready": {
+        "title": "Registros · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Registros · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Registros · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Registros · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Registros · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Registros · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "levels": {
+      "ready": {
+        "title": "Niveles · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Niveles · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Niveles · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Niveles · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Niveles · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Niveles · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "economy": {
+      "ready": {
+        "title": "Economía · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Economía · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Economía · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Economía · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Economía · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Economía · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "profiles": {
+      "ready": {
+        "title": "Perfiles · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Perfiles · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Perfiles · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Perfiles · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Perfiles · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Perfiles · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "voice": {
+      "ready": {
+        "title": "Canales de voz · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Canales de voz · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Canales de voz · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Canales de voz · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Canales de voz · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Canales de voz · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "events": {
+      "ready": {
+        "title": "Eventos · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Eventos · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Eventos · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Eventos · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Eventos · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Eventos · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "giveaways": {
+      "ready": {
+        "title": "Sorteos · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Sorteos · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Sorteos · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Sorteos · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Sorteos · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Sorteos · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "suggestions": {
+      "ready": {
+        "title": "Sugerencias · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Sugerencias · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Sugerencias · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Sugerencias · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Sugerencias · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Sugerencias · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "starboard": {
+      "ready": {
+        "title": "Destacados · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Destacados · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Destacados · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Destacados · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Destacados · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Destacados · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "reminders": {
+      "ready": {
+        "title": "Recordatorios · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Recordatorios · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Recordatorios · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Recordatorios · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Recordatorios · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Recordatorios · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "messages": {
+      "ready": {
+        "title": "Mensajes · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Mensajes · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Mensajes · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Mensajes · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Mensajes · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Mensajes · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "cards": {
+      "ready": {
+        "title": "Tarjetas · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Tarjetas · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Tarjetas · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Tarjetas · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Tarjetas · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Tarjetas · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "automation": {
+      "ready": {
+        "title": "Automatizaciones · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Automatizaciones · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Automatizaciones · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Automatizaciones · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Automatizaciones · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Automatizaciones · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "feeds": {
+      "ready": {
+        "title": "Publicaciones · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Publicaciones · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Publicaciones · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Publicaciones · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Publicaciones · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Publicaciones · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "analytics": {
+      "ready": {
+        "title": "Estadísticas · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Estadísticas · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Estadísticas · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Estadísticas · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Estadísticas · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Estadísticas · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "utilities": {
+      "ready": {
+        "title": "Utilidades · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Utilidades · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Utilidades · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Utilidades · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Utilidades · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Utilidades · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "fun": {
+      "ready": {
+        "title": "Entretenimiento · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Entretenimiento · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Entretenimiento · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Entretenimiento · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Entretenimiento · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Entretenimiento · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "architect": {
+      "ready": {
+        "title": "Constructor del servidor · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Constructor del servidor · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Constructor del servidor · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Constructor del servidor · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Constructor del servidor · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Constructor del servidor · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "decoration": {
+      "ready": {
+        "title": "Decoración · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Decoración · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Decoración · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Decoración · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Decoración · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Decoración · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "templates": {
+      "ready": {
+        "title": "Plantillas · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Plantillas · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Plantillas · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Plantillas · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Plantillas · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Plantillas · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "collections": {
+      "ready": {
+        "title": "Colecciones · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Colecciones · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Colecciones · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Colecciones · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Colecciones · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Colecciones · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "applications": {
+      "ready": {
+        "title": "Postulaciones · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Postulaciones · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Postulaciones · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Postulaciones · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Postulaciones · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Postulaciones · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "sticky": {
+      "ready": {
+        "title": "Mensajes fijados · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Mensajes fijados · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Mensajes fijados · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Mensajes fijados · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Mensajes fijados · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Mensajes fijados · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    },
+    "migrations": {
+      "ready": {
+        "title": "Migraciones · Vista disponible",
+        "description": "Selecciona una opción para continuar."
+      },
+      "loading": {
+        "title": "Migraciones · Procesando",
+        "description": "Espera mientras termina la operación."
+      },
+      "empty": {
+        "title": "Migraciones · Sin resultados",
+        "description": "No hay elementos para mostrar en esta vista."
+      },
+      "success": {
+        "title": "Migraciones · Operación completada",
+        "description": "La operación se completó. Revisa el resultado mostrado."
+      },
+      "error": {
+        "title": "Migraciones · No se pudo completar",
+        "description": "Revisa los permisos y la configuración antes de intentarlo de nuevo."
+      },
+      "expired": {
+        "title": "Migraciones · Vista vencida",
+        "description": "Abre una nueva vista para continuar."
+      }
+    }
+  },
+  "project": {
+    "developerTitle": "{name} · Proyecto",
+    "developerBody": "La información de contacto del equipo se publica mediante los enlaces configurados por el responsable del proyecto. Se conservan los créditos y licencias del código utilizado.",
+    "githubTitle": "{name} · Código",
+    "githubBody": "Consulta el repositorio del proyecto cuando su responsable haya configurado el enlace.",
+    "sponsorTitle": "{name} · Colaboración",
+    "sponsorBody": "Podés colaborar reportando fallos y proponiendo mejoras. Esta vista no habilita pagos ni publica patrocinadores sin configurar.",
+    "supportTitle": "{name} · Soporte",
+    "supportBody": "Para solicitar ayuda, describe lo ocurrido, el comando utilizado y el resultado esperado. No compartas tokens ni contraseñas.",
+    "repository": "Repositorio",
+    "support": "Soporte",
+    "contact": "Contacto",
+    "links": "Enlaces",
+    "notConfigured": "El responsable todavía no configuró un enlace para esta vista."
+  }
+}

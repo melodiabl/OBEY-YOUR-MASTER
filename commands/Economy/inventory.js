@@ -1,7 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { parseMilliseconds, duration, GetUser, nFormatter, ensure_economy_user } = require(
     `${process.cwd()}/handlers/functions`
 );
@@ -20,7 +22,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -126,96 +128,96 @@ module.exports = {
                 switch (itemarray.toLowerCase()) {
                     case "yacht":
                         theitems.push(
-                            `🛥️ ${data.items[`${itemarray}`]} Yacht${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(75000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.boat")} ${data.items[`${itemarray}`]} Yacht${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(75000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "lamborghini":
                         theitems.push(
-                            `🏎️ ${data.items[`${itemarray}`]} Lamborghini${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(50000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.car")} ${data.items[`${itemarray}`]} Lamborghini${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(50000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "car":
                         theitems.push(
-                            `🚗 ${data.items[`${itemarray}`]} Car${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(6400 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.car")} ${data.items[`${itemarray}`]} Car${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(6400 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "motorbike":
                         theitems.push(
-                            `🏍️ ${data.items[`${itemarray}`]} Motorbike${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(1500 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.car")} ${data.items[`${itemarray}`]} Motorbike${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(1500 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "bicycle":
                         theitems.push(
-                            `🚲 ${data.items[`${itemarray}`]} Bicycle${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(500 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.bike")} ${data.items[`${itemarray}`]} Bicycle${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(500 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
 
                     case "nike":
                         theitems.push(
-                            `👟 ${data.items[`${itemarray}`]} Nike${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(300 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.shoe")} ${data.items[`${itemarray}`]} Nike${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(300 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "tshirt":
                         theitems.push(
-                            `👕 ${data.items[`${itemarray}`]} T-Shirt${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(60 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.shirt")} ${data.items[`${itemarray}`]} T-Shirt${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(60 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
 
                     case "mansion":
                         theitems.push(
-                            `🏘️ ${data.items[`${itemarray}`]} Mansion${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(45000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.home")} ${data.items[`${itemarray}`]} Mansion${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(45000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "house":
                         theitems.push(
-                            `🏠 ${data.items[`${itemarray}`]} House${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(8000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.home")} ${data.items[`${itemarray}`]} House${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(8000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "dirthut":
                         theitems.push(
-                            `🟫 ${data.items[`${itemarray}`]} Dirthut${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(150 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.game-empty")} ${data.items[`${itemarray}`]} Dirthut${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(150 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
 
                     case "pensil":
                         theitems.push(
-                            `✏️ ${data.items[`${itemarray}`]} Pensil${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(20 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.edit")} ${data.items[`${itemarray}`]} Pensil${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(20 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "pen":
                         theitems.push(
-                            `🖊️ ${data.items[`${itemarray}`]} Pen${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(10 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.edit")} ${data.items[`${itemarray}`]} Pen${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(10 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "condom":
                         theitems.push(
-                            `🟪 ${data.items[`${itemarray}`]} Condom${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(30 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.piece-purple")} ${data.items[`${itemarray}`]} Condom${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(30 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "bottle":
                         theitems.push(
-                            `🍼 ${data.items[`${itemarray}`]} Bottle${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(50 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.baby")} ${data.items[`${itemarray}`]} Bottle${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(50 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
 
                     case "fish":
                         theitems.push(
-                            `🐟 ${data.items[`${itemarray}`]} Fish${data.items[`${itemarray}`] > 1 ? "es" : ""} | \`${nFormatter(1000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.fish")} ${data.items[`${itemarray}`]} Fish${data.items[`${itemarray}`] > 1 ? "es" : ""} | \`${nFormatter(1000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "hamster":
                         theitems.push(
-                            `🐹 ${data.items[`${itemarray}`]} Hamster${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(1500 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.hamster")} ${data.items[`${itemarray}`]} Hamster${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(1500 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "dog":
                         theitems.push(
-                            `🐕 ${data.items[`${itemarray}`]} Dog${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(2000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.dog")} ${data.items[`${itemarray}`]} Dog${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(2000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                     case "cat":
                         theitems.push(
-                            `😺 ${data.items[`${itemarray}`]} Cat${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(2000 * data.items[`${itemarray}`])} 💸\``
+                            `${obeyUi.markup("icon.cat")} ${data.items[`${itemarray}`]} Cat${data.items[`${itemarray}`] > 1 ? "s" : ""} | \`${nFormatter(2000 * data.items[`${itemarray}`])} ${obeyUi.markup("icon.wallet")}\``
                         );
                         break;
                 }
@@ -232,7 +234,7 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                        .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                         .setTitle(eval(client.la[ls]["cmds"]["economy"]["inventory"]["variable3"]))
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["inventory"]["variable4"])),
                 ],
@@ -243,7 +245,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["economy"]["inventory"]["variable5"])),
                 ],

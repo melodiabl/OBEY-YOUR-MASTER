@@ -1,3 +1,5 @@
+const obeyMeta = require("../presentation/metadata")
+const obeyUi = require("../assets/system")
 // ─────────────────────────────────────────────────────────────────────────────
 // OBEY — Motor de música: Lyrics karaoke EN VIVO (port de Soundy lavalink/lyrics/line.ts).
 // Usa los timestamps LRC de lrclib + la posición viva del player y auto-edita el mensaje.
@@ -24,9 +26,9 @@ function livePos(state) { return clock.position(state) }
 function renderEmbed(info, lines, pos) {
   const e = new EmbedBuilder()
     .setColor(config.color.primary)
-    .setAuthor({ name: `Letras · ${(info?.title || 'Desconocido').slice(0, 80)}`, iconURL: DISK })
+    .setAuthor(obeyMeta.asAuthor({ name: `Letras · ${(info?.title || 'Desconocido').slice(0, 80)}`, iconURL: DISK }))
   if (!lines?.length) {
-    return e.setDescription('🔇 Esta canción no tiene letras sincronizadas.').setFooter({ text: 'En espera de una canción con letra…' })
+    return e.setDescription(obeyUi.limit(obeyUi.owned('🔇 Esta canción no tiene letras sincronizadas.'), 4096)).setFooter(obeyMeta.asFooter({ text: 'En espera de una canción con letra…' }))
   }
   const ctx  = getLyricContext(lines, pos)
   const idx  = ctx?.index ?? 0

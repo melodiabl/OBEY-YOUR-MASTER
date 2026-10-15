@@ -1,7 +1,8 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { parseMilliseconds, duration, GetUser } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "removemoney",
@@ -19,7 +20,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -39,7 +40,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable3"]))
                             .setDescription(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable4"])),
                     ],
@@ -51,7 +52,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable5"]))
                             .setDescription(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable6"])),
                     ],
@@ -126,7 +127,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable8"])),
                     ],
                 });
@@ -136,7 +137,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                            .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable9"])),
                     ],
                 });
@@ -148,7 +149,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
-                        .setFooter({ text: user.username, iconURL: user.displayAvatarURL() })
+                        .setFooter(obeyMeta.asFooter({ text: user.username, iconURL: user.displayAvatarURL() }))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable10"]))
                         .setDescription(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable11"])),
                 ],
@@ -159,7 +160,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["owner"]["removemoney"]["variable12"])),
                 ],

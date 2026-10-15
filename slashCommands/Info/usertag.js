@@ -1,3 +1,5 @@
+const obeyUi = require("../../handlers/assets/system")
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -15,11 +17,11 @@ module.exports = {
     await interaction.reply({
       embeds: [
         new EmbedBuilder().setColor(0x5865F2)
-          .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
+          .setAuthor(obeyMeta.asAuthor({ name: user.username, iconURL: user.displayAvatarURL() }))
           .addFields(
-            { name: '🏷️ Username',       value: `\`${user.username}\``, inline: true },
-            { name: '🪪 ID',             value: `\`${user.id}\``,       inline: true },
-            { name: '📛 Nick en server', value: `\`${display}\``,       inline: true },
+            { name: obeyUi.owned('🏷️ Username'),       value: `\`${user.username}\``, inline: true },
+            { name: obeyUi.owned('🪪 ID'),             value: `\`${user.id}\``,       inline: true },
+            { name: obeyUi.owned('📛 Nick en server'), value: `\`${display}\``,       inline: true },
           ),
       ],
     })

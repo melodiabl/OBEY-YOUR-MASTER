@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 module.exports = {
@@ -28,9 +30,9 @@ module.exports = {
         try {
             var rembed = new EmbedBuilder()
                 .setColor(es.color)
-                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable2"]))
+                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable2"]), 256))
                 .setDescription(
-                    `
+                    obeyUi.limit(`
 **How to setup Clan Bots's Reaction Rol!**
 > 1. React to message __BELOW__ **this** message
 
@@ -48,10 +50,10 @@ module.exports = {
 > 4.4 After that the Reaction Role Embed, with the information for every Parameter: \`EMOJI = ROLE\`, will be sent in your wished channel and it'll work!
 
 *You have 30 seconds for each input!*
-`
+`, 4096)
                 )
 
-                .setFooter(client.getFooter(es));
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)));
             message.reply({ embeds: [rembed] });
             var objet = {
                 MESSAGE_ID: "",
@@ -71,8 +73,8 @@ module.exports = {
                 };
                 var rermbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable3"]))
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable4"]));
+                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable3"]), 256))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable4"]), 4096));
                 var cancel = false;
                 message.reply({ embeds: [rermbed] }).then(msg => {
                     msg.awaitReactions({ filter: (reaction, user) => user.id == message.author.id, max: 1, time: 180e3 })
@@ -128,7 +130,7 @@ module.exports = {
                     counters++;
                     var rermbed = new EmbedBuilder()
                         .setColor(es.color)
-                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable8"]));
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable8"]), 256));
                     message.reply({ embeds: [rermbed] }).then(msg => {
                         msg.channel
                             .awaitMessages({ filter: m => m.author.id == message.author.id, max: 1, time: 180e3 })
@@ -176,14 +178,14 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.color)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable12"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable13"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable12"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable13"]), 4096)),
                         ],
                     })
                     .then(msg => {
                         var emojis2 = ["1️⃣", "2️⃣"];
-                        for (var emoji of emojis2) msg.react(emoji);
+                        for (var emoji of emojis2) msg.react(obeyUi.reaction(emoji));
                         msg.awaitReactions({
                             filter: (reaction, user) =>
                                 user.id === message.author.id && emojis2.includes(reaction.emoji?.name),
@@ -193,9 +195,9 @@ module.exports = {
                         })
                             .then(collected => {
                                 switch (collected.first().emoji?.name) {
-                                    case "1️⃣":
+                                    case obeyUi.owned("1️⃣"):
                                         break;
-                                    case "2️⃣":
+                                    case obeyUi.owned("2️⃣"):
                                         objet.remove_others = true;
                                         break;
                                     default:
@@ -209,10 +211,10 @@ module.exports = {
 
                                 var thisembed = new EmbedBuilder()
                                     .setColor(es.color)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable15"]))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable15"]), 256))
                                     .setDescription(
-                                        eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable16"])
+                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable16"]), 4096)
                                     );
                                 message
                                     .reply({
@@ -235,20 +237,20 @@ module.exports = {
                                                         embeds: [
                                                             new EmbedBuilder()
                                                                 .setColor(es.color)
-                                                                .setFooter(client.getFooter(es))
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-reactionrole"][
                                                                             "variable17"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-reactionrole"][
                                                                             "variable18"
                                                                         ]
-                                                                    )
+                                                                    ), 4096)
                                                                 ),
                                                         ],
                                                     })
@@ -277,10 +279,10 @@ module.exports = {
                                                                         .first();
                                                                     var embed = new EmbedBuilder()
                                                                         .setColor(es.color)
-                                                                        .setTitle(title.substring(0, 256))
-                                                                        .setFooter({ text: message.guild.name,
+                                                                        .setTitle(obeyUi.limit(title.substring(0, 256), 256))
+                                                                        .setFooter(obeyMeta.asFooter({ text: message.guild.name,
                                                                             iconURL: message.guild.iconURL()
-                                                                        });
+                                                                        }));
                                                                     var buffer = "";
                                                                     for (var i = 0; i < objet.Parameters.length; i++) {
                                                                         try {
@@ -298,7 +300,7 @@ module.exports = {
                                                                         }
                                                                     }
                                                                     channel
-                                                                        .send({ embeds: [embed.setDescription(buffer)] })
+                                                                        .send({ embeds: [embed.setDescription(obeyUi.limit(buffer, 4096))] })
                                                                         .then(msg => {
                                                                             for (
                                                                                 var i = 0;
@@ -307,7 +309,7 @@ module.exports = {
                                                                             ) {
                                                                                 try {
                                                                                     msg.react(
-                                                                                        objet.Parameters[i].Emoji
+                                                                                        obeyUi.reaction(objet.Parameters[i].Emoji)
                                                                                     ).catch(e =>
                                                                                         console.log(
                                                                                             e.stack
@@ -365,9 +367,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable22"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-reactionrole"]["variable22"]), 4096)),
                 ],
             });
         }

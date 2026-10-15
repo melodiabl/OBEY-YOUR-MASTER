@@ -1,9 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const canvacord = require("canvacord");
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const anime = require("anime-actions");
 module.exports = {
     name: "a-wink",
@@ -20,7 +21,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.disabled.title)
                         .setDescription(
                             require(`${process.cwd()}/handlers/functions`).handlemsg(
@@ -38,7 +39,7 @@ module.exports = {
                     new EmbedBuilder()
                         .setColor(es.color)
                         .setImage(await anime.wink())
-                        .setAuthor({ name: `${message.author.username} winks${message.mentions.users.first() ? " " + message.mentions.users.first().username : " him-/herself.."}`, iconURL: message.author.displayAvatarURL() }),
+                        .setAuthor(obeyMeta.asAuthor({ name: `${message.author.username} winks${message.mentions.users.first() ? " " + message.mentions.users.first().username : " him-/herself.."}`, iconURL: message.author.displayAvatarURL() })),
                 ],
             })
             .catch(() => {});

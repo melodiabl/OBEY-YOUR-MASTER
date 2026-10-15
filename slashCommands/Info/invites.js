@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg, nFormatter } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "invites",
@@ -74,11 +75,11 @@ module.exports = {
                 ephemeral: true,
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setAuthor({
+                        .setAuthor(obeyMeta.asAuthor({
                             name: handlemsg(client.la[ls].cmds.info.invites.author, { usertag: user.username }),
                             iconURL: user.displayAvatarURL(),
                             url: "https://github.com/melodiabl"
-                        })
+                        }))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -93,7 +94,7 @@ module.exports = {
                             { name: client.la[ls].cmds.info.invites.field3.title, value: `>>> \`\`\`yml\nJoins - Fakes - Leaves = RealInvites\n${invites}${" ".repeat("Joins ".length - String(invites).length)}- ${fake}${" ".repeat("Fakes ".length - String(fake).length)}- ${leaves}${" ".repeat("Leaves ".length - String(leaves).length)}= ${realinvites}\n\`\`\`` },
                             { name: client.la[ls].cmds.info.invites.field4.title, value: handlemsg(client.la[ls].cmds.info.invites.field4.value, { messagesCount: messagesCount }) }
                         )
-                        .setFooter(client.getFooter(es)),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                 ],
             });
         } catch (e) {

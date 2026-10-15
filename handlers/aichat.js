@@ -1,7 +1,8 @@
+const obeyUi = require("./assets/system")
 //import the config.json file
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { EmbedBuilder, AttachmentBuilder, User, PermissionFlagsBits, ChannelType } = require(`discord.js`);
 const { databasing } = require(`./functions`);
 const fetch = require("node-fetch");
@@ -31,7 +32,7 @@ module.exports = client => {
                             message.channel.send({ content: data.cnt }).catch(() => {});
                         });
                 } catch (e) {
-                    message.channel.send({ content: "<:no:833101993668771842> LA API DE CHAT IA ESTÁ CAÍDA" }).catch(() => {});
+                    message.channel.send({ content: obeyUi.owned("<:no:833101993668771842> LA API DE CHAT IA ESTÁ CAÍDA") }).catch(() => {});
                 }
             }
         } catch (e) {
@@ -46,7 +47,7 @@ module.exports = client => {
                 if (client.afkDB.has(message.guild.id + user.id)) {
                     await message
                         .reply({
-                            content: `<:Crying:867724032316407828> **${user.username}** went AFK <t:${Math.floor(client.afkDB.get(message.guild.id + user.id, "stamp") / 1000)}:R>!${
+                            content: `${obeyUi.markup("icon.face-cry")} **${user.username}** went AFK <t:${Math.floor(client.afkDB.get(message.guild.id + user.id, "stamp") / 1000)}:R>!${
                                 client.afkDB.get(message.guild.id + user.id, "message") &&
                                 client.afkDB.get(message.guild.id + user.id, "message").length > 1
                                     ? `\n\n__His Message__\n>>> ${String(
@@ -128,7 +129,7 @@ module.exports = client => {
                                         }, 1500);
                                     });
                                 } else {
-                                    message.reply("❌ **I am missing the MANAGE_MESSAGES Permiso!**").then(m => {
+                                    message.reply(obeyUi.owned("❌ **I am missing the MANAGE_MESSAGES Permiso!**")).then(m => {
                                         setTimeout(() => {
                                             m.delete().catch(() => {});
                                         }, 3500);

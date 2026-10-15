@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const https = require('https')
 
@@ -15,12 +17,12 @@ function fetchFact() {
 
 module.exports = {
   name: 'fact',
-  description: 'Obtén un dato curioso aleatorio 📚',
+  description: obeyUi.owned('Obtén un dato curioso aleatorio 📚'),
 
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'FUN'))
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de diversión no está activado.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de diversión no está activado.'), 4096))],
         ephemeral: true,
       })
 
@@ -32,14 +34,14 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
             .setColor(0x3B82F6)
-            .setTitle('📯 Dato Curioso')
-            .setDescription(`> *${data.text || 'Sin dato disponible'}*`)
-            .setFooter({ text: 'uselessfacts.jsph.pl' }),
+            .setTitle(obeyUi.limit(obeyUi.owned('📯 Dato Curioso'), 256))
+            .setDescription(obeyUi.limit(`> *${data.text || 'Sin dato disponible'}*`, 4096))
+            .setFooter(obeyMeta.asFooter({ text: 'uselessfacts.jsph.pl' })),
         ],
       })
     } catch {
       await interaction.editReply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No se pudo obtener el dato. Intenta de nuevo.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No se pudo obtener el dato. Intenta de nuevo.'), 4096))],
       })
     }
   },

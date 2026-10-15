@@ -1,16 +1,17 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 module.exports = {
   name: 'clearqueue', description: 'Limpia la cola sin detener la cancion actual',
   parameters: { type: 'music', activeplayer: true, previoussong: false }, options: [],
   run: async (client, interaction) => {
     if (!interaction.member?.voice?.channel)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Debes estar en un canal de voz.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Debes estar en un canal de voz.'), 4096))], ephemeral: true })
     await interaction.deferReply()
     const state = client.music?.getState(interaction.guild.id)
-    if (!state) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ No hay música activa.')] })
+    if (!state) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No hay música activa.'), 4096))] })
     const count = client.music.clearQueue(interaction.guild.id)
     await interaction.editReply({ embeds: [new EmbedBuilder().setColor(0x5865F2)
-      .setTitle('🗑️ Cola limpiada')
-      .setDescription(count > 0 ? `**${count}** pista${count !== 1 ? 's' : ''} eliminada${count !== 1 ? 's' : ''} de la cola.` : 'La cola ya estaba vacía.')] })
+      .setTitle(obeyUi.limit(obeyUi.owned('🗑️ Cola limpiada'), 256))
+      .setDescription(obeyUi.limit(count > 0 ? `**${count}** pista${count !== 1 ? 's' : ''} eliminada${count !== 1 ? 's' : ''} de la cola.` : 'La cola ya estaba vacía.', 4096))] })
   },
 }

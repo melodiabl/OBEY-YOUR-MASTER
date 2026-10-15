@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, ChannelType } = require("discord.js");
 var Discord = require("discord.js");
 var config = require(`${process.cwd()}/botconfig/config.json`);
@@ -37,7 +39,7 @@ module.exports = {
                         .setCustomId("MenuSelection")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Join-to-Create System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Join-to-Create System!"))
                         .addOptions(
                             menuoptions.slice(0, 25).map(option => {
                                 let Obj = {
@@ -55,7 +57,7 @@ module.exports = {
                         .setCustomId("MenuSelection2")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Join-to-Create System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Join-to-Create System!"))
                         .addOptions(
                             menuoptions.slice(25, 50).map(option => {
                                 let Obj = {
@@ -73,7 +75,7 @@ module.exports = {
                         .setCustomId("MenuSelection3")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Join-to-Create System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Join-to-Create System!"))
                         .addOptions(
                             menuoptions.slice(50, 75).map(option => {
                                 let Obj = {
@@ -91,7 +93,7 @@ module.exports = {
                         .setCustomId("MenuSelection4")
                         .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                         .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                        .setPlaceholder("¡Haz clic para configurar the Join-to-Create System!")
+                        .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Join-to-Create System!"))
                         .addOptions(
                             menuoptions.slice(75, 100).map(option => {
                                 let Obj = {
@@ -108,8 +110,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Join-to-Create Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/291/studio-microphone_1f399-fe0f.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Join-to-Create Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/291/studio-microphone_1f399-fe0f.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({ embeds: [MenuEmbed], components: [row1, row2, row3, row4] });
                 //function to handle the menuselection
@@ -136,16 +138,16 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -165,22 +167,22 @@ module.exports = {
                     {
                         value: "Create Channel Setup",
                         description: `Create a Join to Create Canal`,
-                        emoji: allEmojis.msg.setup,
+                        emoji: obeyUi.component(allEmojis.msg.setup),
                     },
                     {
                         value: "Use Current Channel",
                         description: `Use your connected VC as a new Configuración`,
-                        emoji: allEmojis.msg.dj,
+                        emoji: obeyUi.component(allEmojis.msg.dj),
                     },
                     {
                         value: "Change the Temp Names",
                         description: `Change the temporary Names of new VCS`,
-                        emoji: allEmojis.msg.setup,
+                        emoji: obeyUi.component(allEmojis.msg.setup),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ticket-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -189,7 +191,7 @@ module.exports = {
                     .setMaxValues(1)
                     .setMinValues(1)
                     .setPlaceholder(
-                        `Click me to manage the ${SetupNumber} Join-To-Create System!\n\n**You've picked:**\n> ${menuoptiondata.value}`
+                        obeyUi.plain(`Click me to manage the ${SetupNumber} Join-To-Create System!\n\n**You've picked:**\n> ${menuoptiondata.value}`)
                     )
                     .addOptions(
                         menuoptions.map(option => {
@@ -206,12 +208,12 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor(client.getAuthor(
+                    .setAuthor(obeyMeta.asAuthor(client.getAuthor(
                             SetupNumber + " Join-to-Create Setup",
                             "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/291/studio-microphone_1f399-fe0f.png",
                             "https://github.com/melodiabl"
-                        ))
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]));
+                        )))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable4"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -238,16 +240,16 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -280,12 +282,12 @@ module.exports = {
                                     message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable6"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable6"]), 256))
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable7"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable7"]), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                     thedb?.set(message.guild.id, vc.id, `${pre}.channel`);
@@ -299,19 +301,19 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable8"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable8"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable9"]))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable9"]), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable10"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable10"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable11"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable11"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             thedb?.set(message.guild.id, channel.id, `${pre}.channel`);
@@ -322,10 +324,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable12"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable12"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable13"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable13"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -344,12 +346,12 @@ module.exports = {
                                     message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable14"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable14"]), 256))
                                                 .setColor(es.color)
                                                 .setDescription(
-                                                    `**New Canal Name:**\n> \`${thedb?.get(message.guild.id, pre + ".channelname")}\`\n\n**What it could look like:**\n> \`${thedb?.get(message.guild.id, pre + ".channelname").replace("{user}", `${message.author.username}`)}\``
+                                                    obeyUi.limit(`**New Canal Name:**\n> \`${thedb?.get(message.guild.id, pre + ".channelname")}\`\n\n**What it could look like:**\n> \`${thedb?.get(message.guild.id, pre + ".channelname").replace("{user}", `${message.author.username}`)}\``, 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 })
@@ -360,10 +362,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable16"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable16"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                         }
@@ -376,9 +378,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable45"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-jtc"]["variable45"]), 4096)),
                 ],
             });
         }

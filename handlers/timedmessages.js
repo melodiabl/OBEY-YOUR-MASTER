@@ -1,3 +1,4 @@
+const obeyMeta = require("./presentation/metadata")
 //Importing Packages
 const Discord = require("discord.js");
 var CronJob = require("cron").CronJob;
@@ -72,7 +73,7 @@ module.exports = client => {
                                 embeds: [
                                     new Discord.EmbedBuilder()
                                         .setColor(es.color)
-                                        .setFooter(client.getFooter(es))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                                         .setThumbnail(
                                             es.thumb
                                                 ? es.footericon &&

@@ -1,0 +1,13 @@
+{
+  "scope": "static_decorated_labels_gain_separate_component_emoji",
+  "files": [
+    {
+      "file": "commands/Administration/embedbuilder.js",
+      "buttons": 3
+    },
+    {
+      "file": "slashCommands/Rank/leaderboard.js",
+      "buttons": 2
+    }
+  ]
+}

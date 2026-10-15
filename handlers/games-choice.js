@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 const { randomUUID, randomInt } = require('node:crypto')
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const active = new Set()
@@ -33,9 +35,9 @@ async function choice(name, options) {
   try {
     const prompt = prompts[name][randomInt(prompts[name].length)]
     const id = randomUUID()
-    const buttons = prompt.slice(1).map((label, index) => new ButtonBuilder().setCustomId(`${id}:${index}`).setLabel(label).setStyle(ButtonStyle.Primary))
+    const buttons = prompt.slice(1).map((label, index) => new ButtonBuilder().setCustomId(`${id}:${index}`).setLabel(obeyUi.plain(label)).setStyle(ButtonStyle.Primary))
     const row = () => new ActionRowBuilder().addComponents(buttons)
-    const embed = new EmbedBuilder().setColor(options.embed.color).setTitle(options.embed.title).setDescription(prompt[0])
+    const embed = new EmbedBuilder().setColor(options.embed.color).setTitle(obeyUi.limit(options.embed.title, 256)).setDescription(obeyUi.limit(prompt[0], 4096))
     const sent = await message.reply({ embeds: [embed], components: [row()] })
     let answered = false
     const collector = sent.createMessageComponentCollector({ time: Math.min(options.time || 60000, 120000) })
@@ -46,7 +48,7 @@ async function choice(name, options) {
         if (index < 0 || answered || collector.ended) return
         answered = true
         buttons.forEach(button => button.setDisabled(true))
-        embed.setDescription(`${prompt[0]}\n\nElegiste: **${prompt[index + 1]}**`)
+        embed.setDescription(obeyUi.limit(`${prompt[0]}\n\nElegiste: **${prompt[index + 1]}**`, 4096))
         await interaction.update({ embeds: [embed], components: [row()] })
         collector.stop('answered')
       } catch (error) { console.warn('[Games] Choice update:', error.message); collector.stop('error') }
@@ -55,7 +57,7 @@ async function choice(name, options) {
       active.delete(key)
       if (reason === 'answered') return
       buttons.forEach(button => button.setDisabled(true))
-      embed.setFooter({ text: 'Partida finalizada' })
+      embed.setFooter(obeyMeta.asFooter({ text: 'Partida finalizada' }))
       await sent.edit({ embeds: [embed], components: [row()] }).catch(error => console.warn('[Games] Choice cleanup:', error.message))
     })
     return sent

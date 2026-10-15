@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -24,74 +26,74 @@ module.exports = {
                     {
                         label: "ECONOMY",
                         value: "ECONOMY",
-                        emoji: "💸",
-                        description: `${client.settings.get(message.guild.id, "ECONOMY") ? "❌ Desactivar Comandos ECONOMY" : "✅ Activar Comandos ECONOMY"}`,
+                        emoji: obeyUi.component("💸"),
+                        description: `${client.settings.get(message.guild.id, "ECONOMY") ? obeyUi.owned("❌ Desactivar Comandos ECONOMY") : obeyUi.owned("✅ Activar Comandos ECONOMY")}`,
                     },
                     {
                         label: "SCHOOL",
                         value: "SCHOOL",
-                        emoji: "🏫",
-                        description: `${client.settings.get(message.guild.id, "SCHOOL") ? "❌ Desactivar SCHOOL" : "✅ Activar SCHOOL"}`,
+                        emoji: obeyUi.component("🏫"),
+                        description: `${client.settings.get(message.guild.id, "SCHOOL") ? obeyUi.owned("❌ Desactivar SCHOOL") : obeyUi.owned("✅ Activar SCHOOL")}`,
                     },
                     {
                         label: "MUSIC",
                         value: "MUSIC",
-                        emoji: "🎶",
-                        description: `${client.settings.get(message.guild.id, "MUSIC") ? "❌ Desactivar Music" : "✅ Activar Music"}`,
+                        emoji: obeyUi.component("🎶"),
+                        description: `${client.settings.get(message.guild.id, "MUSIC") ? obeyUi.owned("❌ Desactivar Music") : obeyUi.owned("✅ Activar Music")}`,
                     },
                     {
                         label: "FILTER",
                         value: "FILTER",
-                        emoji: "👀",
-                        description: `${client.settings.get(message.guild.id, "FILTER") ? "❌ Desactivar FILTER" : "✅ Activar FILTER"}`,
+                        emoji: obeyUi.component("👀"),
+                        description: `${client.settings.get(message.guild.id, "FILTER") ? obeyUi.owned("❌ Desactivar FILTER") : obeyUi.owned("✅ Activar FILTER")}`,
                     },
                     {
                         label: "CUSTOMQUEUE",
                         value: "CUSTOMQUEUE",
-                        emoji: "⚜️",
-                        description: `${client.settings.get(message.guild.id, "CUSTOMQUEUE") ? "❌ Desactivar CUSTOM-QUEUE" : "✅ Activar CUSTOM-QUEUE"}`,
+                        emoji: obeyUi.component("⚜️"),
+                        description: `${client.settings.get(message.guild.id, "CUSTOMQUEUE") ? obeyUi.owned("❌ Desactivar CUSTOM-QUEUE") : obeyUi.owned("✅ Activar CUSTOM-QUEUE")}`,
                     },
                     {
                         label: "PROGRAMMING",
                         value: "PROGRAMMING",
-                        emoji: "⌨️",
-                        description: `${client.settings.get(message.guild.id, "PROGRAMMING") ? "❌ Desactivar PROGRAMMING" : "✅ Activar PROGRAMMING"}`,
+                        emoji: obeyUi.component("⌨️"),
+                        description: `${client.settings.get(message.guild.id, "PROGRAMMING") ? obeyUi.owned("❌ Desactivar PROGRAMMING") : obeyUi.owned("✅ Activar PROGRAMMING")}`,
                     },
                     {
                         label: "RANKING",
                         value: "RANKING",
-                        emoji: "📈",
-                        description: `${client.settings.get(message.guild.id, "RANKING") ? "❌ Desactivar RANKING" : "✅ Activar RANKING"}`,
+                        emoji: obeyUi.component("📈"),
+                        description: `${client.settings.get(message.guild.id, "RANKING") ? obeyUi.owned("❌ Desactivar RANKING") : obeyUi.owned("✅ Activar RANKING")}`,
                     },
                     {
                         label: "SOUNDBOARD",
                         value: "SOUNDBOARD",
-                        emoji: "🔊",
-                        description: `${client.settings.get(message.guild.id, "SOUNDBOARD") ? "❌ Desactivar SOUNDBOARD" : "✅ Activar SOUNDBOARD"}`,
+                        emoji: obeyUi.component("🔊"),
+                        description: `${client.settings.get(message.guild.id, "SOUNDBOARD") ? obeyUi.owned("❌ Desactivar SOUNDBOARD") : obeyUi.owned("✅ Activar SOUNDBOARD")}`,
                     },
                     {
                         label: "VOICE",
                         value: "VOICE",
-                        emoji: "🎤",
-                        description: `${client.settings.get(message.guild.id, "VOICE") ? "❌ Desactivar VOICE" : "✅ Activar VOICE"}`,
+                        emoji: obeyUi.component("🎤"),
+                        description: `${client.settings.get(message.guild.id, "VOICE") ? obeyUi.owned("❌ Desactivar VOICE") : obeyUi.owned("✅ Activar VOICE")}`,
                     },
                     {
                         label: "FUN",
                         value: "FUN",
-                        emoji: "🕹️",
-                        description: `${client.settings.get(message.guild.id, "FUN") ? "❌ Desactivar FUN" : "✅ Activar FUN"}`,
+                        emoji: obeyUi.component("🕹️"),
+                        description: `${client.settings.get(message.guild.id, "FUN") ? obeyUi.owned("❌ Desactivar FUN") : obeyUi.owned("✅ Activar FUN")}`,
                     },
                     {
                         label: "MINIGAMES",
                         value: "MINIGAMES",
-                        emoji: "🎮",
-                        description: `${client.settings.get(message.guild.id, "MINIGAMES") ? "❌ Desactivar MINIGAMES" : "✅ Activar MINIGAMES"}`,
+                        emoji: obeyUi.component("🎮"),
+                        description: `${client.settings.get(message.guild.id, "MINIGAMES") ? obeyUi.owned("❌ Desactivar MINIGAMES") : obeyUi.owned("✅ Activar MINIGAMES")}`,
                     },
                     {
                         label: "ANIME",
                         value: "ANIME",
-                        emoji: "😳",
-                        description: `${client.settings.get(message.guild.id, "ANIME") ? "❌ Desactivar ANIME" : "✅ Activar ANIME"}`,
+                        emoji: obeyUi.component("😳"),
+                        description: `${client.settings.get(message.guild.id, "ANIME") ? obeyUi.owned("❌ Desactivar ANIME") : obeyUi.owned("✅ Activar ANIME")}`,
                     },
                 ];
             }
@@ -99,7 +101,7 @@ module.exports = {
                 let menuOptions = getMenuOptions();
                 let menuSelection = new StringSelectMenuBuilder()
                     .setCustomId("MenuSelection")
-                    .setPlaceholder("Click: enable/disable Command-Categories")
+                    .setPlaceholder(obeyUi.plain("Click: enable/disable Command-Categories"))
                     .setMinValues(1)
                     .setMaxValues(menuOptions.length)
                     .addOptions(menuOptions.filter(Boolean));
@@ -107,10 +109,10 @@ module.exports = {
             }
 
             let embed = new Discord.EmbedBuilder()
-                .setTitle(`Configuración the allowed/not-allowed Comando-Categories of this Servidor`)
+                .setTitle(obeyUi.limit(`Configuración the allowed/not-allowed Comando-Categories of this Servidor`, 256))
                 .setColor(es.color)
                 .setDescription(
-                    `**In the selection down below all Categories are listed**\n\n**Seleccionar it to either disable/enable it!**\n\n**You can select all (*at least 1*) Command-Categories if you want to disable/enable all of them at once!**`
+                    obeyUi.limit(`**In the selection down below all Categories are listed**\n\n**Seleccionar it to either disable/enable it!**\n\n**You can select all (*at least 1*) Command-Categories if you want to disable/enable all of them at once!**`, 4096)
                 );
 
             //Send message with buttons
@@ -147,12 +149,12 @@ module.exports = {
                     content: `${allEmojis.msg.ERROR} Time ran out/Input finished! Cancelado`,
                     embeds: [
                         EmbedBuilder.from(msg.embeds[0]).setDescription(
-                            `${getMenuOptions()
+                            obeyUi.limit(`${getMenuOptions()
                                 .map(
                                     option =>
                                         `> ${option.emoji} **${option.value}-Comandos**: ${option.description.split(" ")[0] != "❌" ? `\`Ahora desactivados [❌]\`` : `\`Ahora activados [✅]\``}`
                                 )
-                                .join("\n\n")}`
+                                .join("\n\n")}`, 4096)
                         ),
                     ],
                     components: [],
@@ -164,9 +166,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-commands"]["variable5"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-commands"]["variable5"]), 4096)),
                 ],
             });
         }

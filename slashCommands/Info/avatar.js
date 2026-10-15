@@ -1,7 +1,9 @@
+const obeyUi = require("../../handlers/assets/system")
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "avatar",
@@ -50,13 +52,13 @@ module.exports = {
                 });
             }
             let embed = new EmbedBuilder()
-                .setAuthor({
+                .setAuthor(obeyMeta.asAuthor({
                     name: handlemsg(client.la[ls].cmds.info.avatar.author, {
                         usertag: user.username,
                     }),
                     iconURL: user.displayAvatarURL(),
                     url: "https://github.com/melodiabl",
-                })
+                }))
                 .setColor(es.color)
                 .setThumbnail(
                     es.thumb
@@ -66,14 +68,14 @@ module.exports = {
                         : null
                 )
                 .addFields(
-                    { name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true },
-                    { name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true },
-                    { name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true }
+                    { name: obeyUi.owned("<:arrow:832598861813776394> PNG"), value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true },
+                    { name: obeyUi.owned("<:arrow:832598861813776394> JPEG"), value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true },
+                    { name: obeyUi.owned("<:arrow:832598861813776394> WEBP"), value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true }
                 )
                 .setURL(
                     user.displayAvatarURL()
                 )
-                .setFooter(client.getFooter(es))
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                 .setImage(
                     user.displayAvatarURL({
                         size: 4096,

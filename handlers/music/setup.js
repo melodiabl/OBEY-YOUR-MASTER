@@ -1,3 +1,5 @@
+const obeyMeta = require("../presentation/metadata")
+const obeyUi = require("../assets/system")
 // ─────────────────────────────────────────────────────────────────────────────
 // OBEY — Motor de música v2: Canal de peticiones (port de Soundy setup/create.ts).
 // Crea un canal dedicado con un PANEL ÚNICO que actúa de reproductor: escribir el
@@ -32,9 +34,9 @@ function idlePanel(client) {
   const embed = new EmbedBuilder()
     .setColor(config.color.primary)
     .setTitle(`${E.music} Canal de Música`)
-    .setDescription('**Escribe el nombre o el enlace de una canción aquí para reproducirla.**\n\n🟢 YouTube · 🟢 Spotify · 🟢 Apple Music')
+    .setDescription(obeyUi.owned('**Escribe el nombre o el enlace de una canción aquí para reproducirla.**\n\n🟢 YouTube · 🟢 Spotify · 🟢 Apple Music'))
     .setImage(client.user.displayAvatarURL({ size: 512 }))
-    .setFooter({ text: 'Sin música reproduciéndose' })
+    .setFooter(obeyMeta.asFooter({ text: 'Sin música reproduciéndose' }))
   return { embeds: [embed], components: buildControls({ loop: 'none', paused: false }, { idle: true }) }
 }
 
@@ -74,9 +76,9 @@ async function create(client, guild) {
     return { ok: false, reason: 'exists', channelId: existing.channelId }
   }
   const channel = await guild.channels.create({
-    name: '🎧・música',
+    name: 'musica',
     type: ChannelType.GuildText,
-    topic: 'Escribe el nombre de una canción para reproducirla 🎶',
+    topic: obeyUi.owned('Escribe el nombre de una canción para reproducirla 🎶'),
     permissionOverwrites: [
       { id: client.user.id, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.ReadMessageHistory, PermissionFlagsBits.ManageMessages] },
       { id: guild.id, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.ReadMessageHistory] },
@@ -116,11 +118,11 @@ async function handleSetupMessage(client, message) {
   if (!vc) return flash(config.color.no, `${E.no} <@${message.author.id}>, entra a un canal de voz primero.`)
   try {
     const res = await client.music.play(message.guild.id, vc.id, message.channel.id, query, message.author)
-    if (!res?.result?.tracks?.length) return flash(config.color.no, `🔇 No encontré nada para **${query.slice(0, 80)}**`)
+    if (!res?.result?.tracks?.length) return flash(config.color.no, `${obeyUi.markup("icon.mute")} No encontré nada para **${query.slice(0, 80)}**`)
     const info = res.result.tracks[0].info || res.result.tracks[0]
     const added = res.result.loadType === 'playlist' ? `playlist (${res.result.tracks.length} pistas)` : `**${(info.title || query).slice(0, 80)}**`
     return flash(config.color.primary, `${E.music} Añadido: ${added}`, 5000)
-  } catch { return flash(config.color.no, '❌ Error al reproducir.') }
+  } catch { return flash(config.color.no, obeyUi.owned('❌ Error al reproducir.')) }
 }
 
 module.exports = { load, isSetupChannel, getChannelId, getMessageId, create, remove, handleSetupMessage, idlePanel, resetToIdle, updatePanel }

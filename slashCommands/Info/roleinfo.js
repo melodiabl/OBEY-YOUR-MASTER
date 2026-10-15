@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 module.exports = {
@@ -35,11 +37,11 @@ module.exports = {
             //create the EMBED
             const embeduserinfo = new EmbedBuilder();
             embeduserinfo.setThumbnail(guild.iconURL({ size: 512 }));
-            embeduserinfo.setAuthor({
+            embeduserinfo.setAuthor(obeyMeta.asAuthor({
                 name: client.la[ls].cmds.info.roleinfo.author + " " + role.name,
                 iconURL: guild.iconURL(),
                 url: "https://github.com/melodiabl"
-            });
+            }));
             embeduserinfo.addFields(
                 { name: client.la[ls].cmds.info.roleinfo.field1, value: `\`${role.name}\``, inline: true },
                 { name: client.la[ls].cmds.info.roleinfo.field2, value: `\`${role.id}\``, inline: true },
@@ -47,12 +49,12 @@ module.exports = {
                 { name: client.la[ls].cmds.info.roleinfo.field4, value: "`" + moment(role.createdAt).format("DD/MM/YYYY") + "`\n`" + moment(role.createdAt).format("hh:mm:ss") + "`", inline: true },
                 { name: client.la[ls].cmds.info.roleinfo.field5, value: `\`${role.rawPosition}\``, inline: true },
                 { name: client.la[ls].cmds.info.roleinfo.field6, value: `\`${role.members.size} Members have it\``, inline: true },
-                { name: client.la[ls].cmds.info.roleinfo.field7, value: `\`${role.hoist ? "✔️" : "❌"}\``, inline: true },
-                { name: client.la[ls].cmds.info.roleinfo.field8, value: `\`${role.mentionable ? "✔️" : "❌"}\``, inline: true },
+                { name: client.la[ls].cmds.info.roleinfo.field7, value: `\`${role.hoist ? obeyUi.owned("✔️") : obeyUi.owned("❌")}\``, inline: true },
+                { name: client.la[ls].cmds.info.roleinfo.field8, value: `\`${role.mentionable ? obeyUi.owned("✔️") : obeyUi.owned("❌")}\``, inline: true },
                 { name: client.la[ls].cmds.info.roleinfo.field9, value: `${role.permissions.toArray().map(p => `\`${p}\``).join(", ")}` }
             );
             embeduserinfo.setColor(role.hexColor);
-            embeduserinfo.setFooter(client.getFooter(es));
+            embeduserinfo.setFooter(obeyMeta.asFooter(client.getFooter(es)));
             //send the EMBED
             interaction?.reply({ ephemeral: true, embeds: [embeduserinfo] });
         } catch (e) {

@@ -1,8 +1,10 @@
+const obeyUi = require("../../handlers/assets/system")
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "avatar",
@@ -42,9 +44,9 @@ module.exports = {
                 console.log(String(e.stack).grey.bgRed);
             }
             let embed = new EmbedBuilder()
-                .setAuthor({ name: handlemsg(client.la[ls].cmds.info.avatar.author, {
+                .setAuthor(obeyMeta.asAuthor({ name: handlemsg(client.la[ls].cmds.info.avatar.author, {
                         usertag: user.username,
-                    }), iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" })
+                    }), iconURL: user.displayAvatarURL(), url: "https://github.com/melodiabl" }))
                 .setColor(es.color)
                 .setThumbnail(
                     es.thumb
@@ -53,13 +55,13 @@ module.exports = {
                             : client.user.displayAvatarURL()
                         : null
                 )
-                .addFields({ name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
-                .addFields({ name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
-                .addFields({ name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> PNG"), value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> JPEG"), value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
+                .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> WEBP"), value: `[\`LINK\`](${user.displayAvatarURL()})`, inline: true })
                 .setURL(
                     user.displayAvatarURL()
                 )
-                .setFooter(client.getFooter(es))
+                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                 .setImage(
                     user.displayAvatarURL({
                         size: 4096,
@@ -78,7 +80,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["avatar"]["variable1"])),
                 ],

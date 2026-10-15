@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing, edit_msg, send_roster } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { allEmojis } = require("../../botconfig/emojiFunctions");
@@ -34,32 +36,32 @@ module.exports = {
                     {
                         value: "Channel Levelup",
                         description: `Define the a Canal for all Levelup Messages`,
-                        emoji: allEmojis.msg.SUCCESS,
+                        emoji: obeyUi.component(allEmojis.msg.SUCCESS),
                     },
                     {
                         value: "Reply on Levelup",
                         description: `Set it that the Levelup Messages are getting replied`,
-                        emoji: "👻",
+                        emoji: obeyUi.component("👻"),
                     },
                     {
                         value: "Disable Levelup",
                         description: `Never send Levelup Information`,
-                        emoji: allEmojis.msg.ERROR,
+                        emoji: obeyUi.component(allEmojis.msg.ERROR),
                     },
                     {
                         value: "Levelup Roles",
                         description: `Manage Levelup Roles`,
-                        emoji: "💾",
+                        emoji: obeyUi.component("💾"),
                     },
                     {
                         value: "Show Settings",
                         description: `Show Ajustes of the Ranking System`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Ranking-System-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -67,7 +69,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Ranking-System")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Ranking-System"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -83,8 +85,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Rank Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/page-with-curl_1f4c3.png", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Rank Setup", iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/page-with-curl_1f4c3.png", url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -107,16 +109,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -128,10 +130,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable5"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable5"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable6"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable6"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -154,10 +156,10 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable7"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable7"]), 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -165,13 +167,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable8"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable8"]), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable9"])
+                                                            obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable9"]), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -184,10 +186,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable10"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable10"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -201,20 +203,20 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable11"]))
-                                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable12"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable11"]), 256))
+                                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable12"]), 4096))
                                             .setColor(es.color)
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable13"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable13"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable14"]))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable14"]), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             }
@@ -227,32 +229,32 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable15"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable15"]), 256))
                                                 .setColor(es.wrongcolor)
                                                 .setDescription(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable16"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable16"]), 4096)
                                                 )
-                                                .setFooter(client.getFooter(es)),
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 client.points.set(message.guild.id, true, "disabled");
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable17"]))
-                                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable18"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable17"]), 256))
+                                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable18"]), 4096))
                                             .setColor(es.color)
-                                            .setFooter(client.getFooter(es)),
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             } catch (e) {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable19"]))
+                                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable19"]), 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable20"]))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable20"]), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             }
@@ -266,11 +268,11 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("What do you want to do now?")
+                                        .setTitle(obeyUi.limit("What do you want to do now?", 256))
                                         .setColor(es.color)
                                         .addFields({ name: "To __add__ a Rank Role send the Following:", value: "> `LEVEL @ROLE`\nExample:\n > `3 @Level3` / `5 @LEVEL5`\n\n*After a Role has been set, you can just type this again to CHAGEN it!*" })
                                         .addFields({ name: "To __remove__ a Rank Role send the Following:", value: "> `LEVEL`\nExample:\n > `3` / `5`" })
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -285,7 +287,7 @@ module.exports = {
                                     let arggs = message.content.trim().split(" ");
                                     if (!arggs[0] || isNaN(arggs[0]))
                                         return message.reply(
-                                            "**❌ YOU DID WRONG! Por favor read what the introduction tells you!**\nCancelled!"
+                                            obeyUi.owned("**❌ YOU DID WRONG! Por favor read what the introduction tells you!**\nCancelled!")
                                         );
                                     var Role =
                                         message.mentions.roles.filter(ch => ch.guild.id == message.guild.id).first() ||
@@ -299,13 +301,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            `**REMOVED** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`
+                                                            obeyUi.limit(`**REMOVED** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`, 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `To add it back type: \`${prefix}setup-rank\` --> 4️⃣ -->  \`${parseInt(arggs[0])} @${Role.name}\``
+                                                            obeyUi.limit(`To add it back type: \`${prefix}setup-rank\` --> ${obeyUi.markup("icon.ordinal-4")} -->  \`${parseInt(arggs[0])} @${Role.name}\``, 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } else if (arggs[1] && oldRankRoles[parseInt(arggs[0])]) {
@@ -315,13 +317,13 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            `**CHANGE** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`
+                                                            obeyUi.limit(`**CHANGE** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`, 256)
                                                         )
                                                         .setColor(es.color)
                                                         .setDescription(
-                                                            `To add it back type: \`${prefix}setup-rank\` --> 4️⃣ -->  \`${parseInt(arggs[0])} @${Role.name}\``
+                                                            obeyUi.limit(`To add it back type: \`${prefix}setup-rank\` --> ${obeyUi.markup("icon.ordinal-4")} -->  \`${parseInt(arggs[0])} @${Role.name}\``, 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -331,13 +333,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        `**ADDED** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`
+                                                        obeyUi.limit(`**ADDED** the Levelup-Rol: ${Rol.name} for the Levelup-Level: ${parseInt(arggs[0])}`, 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        `To remove it type: \`${prefix}setup-rank\` --> 4️⃣ -->  \`${parseInt(arggs[0])}\``
+                                                        obeyUi.limit(`To remove it type: \`${prefix}setup-rank\` --> ${obeyUi.markup("icon.ordinal-4")} -->  \`${parseInt(arggs[0])}\``, 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     } catch (e) {
@@ -345,13 +347,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable8"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable8"]), 256)
                                                     )
                                                     .setColor(es.wrongcolor)
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable9"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable9"]), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -361,10 +363,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable10"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable10"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -385,16 +387,16 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle("Ajustes of the Ranking System")
+                                        .setTitle(obeyUi.limit("Ajustes of the Ranking System", 256))
                                         .setColor(es.color)
                                         .addFields({ name: "**Levelup-Message**", value: `> Disabled: ${!disabled ? "NO (ACTIVE)" : "Yes (DISABLED)"}\n> **Reply in ${channel ? `<#${channel}>` : "the same Channel"}**` })
                                         .setDescription(
-                                            `**Level up Roles:**\n>>> ${rankroles.length > 0 ? rankroles.join("\n") : "`NONE`"}`.substring(
+                                            obeyUi.limit(`**Level up Roles:**\n>>> ${rankroles.length > 0 ? rankroles.join("\n") : "`NONE`"}`.substring(
                                                 0,
                                                 2000
-                                            )
+                                            ), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -407,9 +409,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable36"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-rank"]["variable36"]), 4096)),
                 ],
             });
         }

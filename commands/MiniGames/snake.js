@@ -1,3 +1,6 @@
+const { renderBoard } = require('../../handlers/games/board-image')
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder,
     ButtonStyle
 } = require("discord.js");
@@ -153,28 +156,29 @@ class SnakeGame {
 
         const embed = new EmbedBuilder()
             .setColor(this.options.embed.color)
-            .setTitle(this.options.embed.title)
-            .setDescription("**Score:** " + this.score + "\n\n" + this.getGameBoard())
-            .setFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
+            .setDescription(obeyUi.limit("**Score:** " + this.score, 4096))
+            .setImage("attachment://obey-snake.png")
+            .setFooter(obeyMeta.asFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() }));
 
-        const up = new ButtonBuilder().setEmoji(emojis.up).setStyle(ButtonStyle.Primary).setCustomId("snake_up");
-        const left = new ButtonBuilder().setEmoji(emojis.left).setStyle(ButtonStyle.Primary).setCustomId("snake_left");
-        const down = new ButtonBuilder().setEmoji(emojis.down).setStyle(ButtonStyle.Primary).setCustomId("snake_down");
-        const right = new ButtonBuilder().setEmoji(emojis.right).setStyle(ButtonStyle.Primary).setCustomId("snake_right");
-        const stop = new ButtonBuilder().setLabel(this.options.stopButton).setStyle(ButtonStyle.Danger).setCustomId("snake_stop");
+        const up = new ButtonBuilder().setEmoji(obeyUi.component(emojis.up)).setStyle(ButtonStyle.Primary).setCustomId("snake_up");
+        const left = new ButtonBuilder().setEmoji(obeyUi.component(emojis.left)).setStyle(ButtonStyle.Primary).setCustomId("snake_left");
+        const down = new ButtonBuilder().setEmoji(obeyUi.component(emojis.down)).setStyle(ButtonStyle.Primary).setCustomId("snake_down");
+        const right = new ButtonBuilder().setEmoji(obeyUi.component(emojis.right)).setStyle(ButtonStyle.Primary).setCustomId("snake_right");
+        const stop = new ButtonBuilder().setLabel(obeyUi.plain(this.options.stopButton)).setStyle(ButtonStyle.Danger).setCustomId("snake_stop");
 
-        const dis1 = new ButtonBuilder().setLabel("\u200b").setStyle(ButtonStyle.Secondary).setCustomId("dis1").setDisabled(true);
-        const dis2 = new ButtonBuilder().setLabel("\u200b").setStyle(ButtonStyle.Secondary).setCustomId("dis2").setDisabled(true);
+        const dis1 = new ButtonBuilder().setLabel(obeyUi.plain("\u200b")).setStyle(ButtonStyle.Secondary).setCustomId("dis1").setDisabled(true);
+        const dis2 = new ButtonBuilder().setLabel(obeyUi.plain("\u200b")).setStyle(ButtonStyle.Secondary).setCustomId("dis2").setDisabled(true);
 
         const row1 = new ActionRowBuilder().addComponents(dis1, up, dis2, stop);
         const row2 = new ActionRowBuilder().addComponents(left, down, right);
 
-        const msg = await this.sendMessage({ embeds: [embed], components: [row1, row2] });
+        const msg = await this.sendMessage({ embeds: [embed], components: [row1, row2], files: [{attachment: await renderBoard(this.getGameBoard()), name: "obey-snake.png"}] });
 
         this.ButtonInteraction(msg);
     }
 
-    move(msg) {
+    async move(msg) {
         if (this.apple.x == this.snake[0].x && this.apple.y == this.snake[0].y) {
             this.score += 1;
             this.snakeLength++;
@@ -183,11 +187,12 @@ class SnakeGame {
 
         const moveEmbed = new EmbedBuilder()
             .setColor(this.options.embed.color)
-            .setTitle(this.options.embed.title)
-            .setDescription("**Score:** " + this.score + "\n\n" + this.getGameBoard())
-            .setFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
+            .setDescription(obeyUi.limit("**Score:** " + this.score, 4096))
+            .setImage("attachment://obey-snake.png")
+            .setFooter(obeyMeta.asFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() }));
 
-        msg.edit({ embeds: [moveEmbed], components: msg.components });
+        await msg.edit({ embeds: [moveEmbed], components: msg.components, attachments: [], files: [{attachment: await renderBoard(this.getGameBoard()), name: "obey-snake.png"}] });
     }
 
     async gameOver(msg) {
@@ -196,11 +201,12 @@ class SnakeGame {
 
         const editEmbed = new EmbedBuilder()
             .setColor(this.options.embed.color)
-            .setTitle(this.options.embed.title)
-            .setDescription(text + "\n\n" + this.getGameBoard())
-            .setFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
+            .setTitle(obeyUi.limit(this.options.embed.title, 256))
+            .setDescription(obeyUi.limit(text, 4096))
+            .setImage("attachment://obey-snake.png")
+            .setFooter(obeyMeta.asFooter({ text: this.message.author.username, iconURL: this.message.author.displayAvatarURL() }));
 
-        return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components) });
+        return await msg.edit({ embeds: [editEmbed], components: disableButtons(msg.components), attachments: [], files: [{attachment: await renderBoard(this.getGameBoard()), name: "obey-snake.png"}] });
     }
 
     ButtonInteraction(msg) {
@@ -264,7 +270,7 @@ class SnakeGame {
                 this.snake.unshift(nextPos);
                 if (this.snake.length > this.snakeLength) this.snake.pop();
 
-                this.move(msg);
+                await this.move(msg);
             }
         });
 
@@ -286,12 +292,12 @@ module.exports = {
             return message.reply({ embeds: [
                 new EmbedBuilder()
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es))
-                    .setTitle(client.la[ls].common.disabled.title)
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                    .setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))
                     .setDescription(
-                        require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
+                        obeyUi.limit(require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {
                             prefix: prefix,
-                        })
+                        }), 4096)
                     )] }
             );
         }

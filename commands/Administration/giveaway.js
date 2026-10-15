@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -40,9 +42,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable1"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable2"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable1"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable2"]), 4096)),
                 ],
             });
         if (!args[0])
@@ -50,9 +52,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable3"]))
-                        .setDescription(`> \`${prefix}giveaway start\` ... para iniciar un nuevo sorteo
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable3"]), 256))
+                        .setDescription(obeyUi.limit(`> \`${prefix}giveaway start\` ... para iniciar un nuevo sorteo
 
 > \`${prefix}giveaway end <G-Id>\` ... para finalizar un sorteo específico
 
@@ -71,7 +73,7 @@ module.exports = {
 :warning: **A VECES LOS SORTEOS NO TERMINAN** :warning:
 > Aquí hay algo que puedes hacer:
 > \`${prefix}giveaway winner <G-Id>\`
-> Esto enviará los ganadores del Sorteo, recibidos de la Base de Datos`),
+> Esto enviará los ganadores del Sorteo, recibidos de la Base de Datos`, 4096)),
                 ],
             });
         var originalowner = message.author.id;
@@ -90,9 +92,9 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable5"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable6"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable5"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable6"]), 4096)),
                     ],
                 });
                 var collected = await message.channel.awaitMessages({
@@ -122,9 +124,9 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable11"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable12"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable11"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable12"]), 4096)),
                     ],
                 });
                 var collected = await message.channel.awaitMessages({
@@ -153,9 +155,9 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable17"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable18"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable17"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable18"]), 4096)),
                     ],
                 });
                 var collected = await message.channel.awaitMessages({
@@ -181,9 +183,9 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable23"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable24"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable23"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable24"]), 4096)),
                     ],
                 });
                 var collected = await message.channel.awaitMessages({
@@ -199,7 +201,7 @@ module.exports = {
                 let options = {
                     time: giveawayDuration,
                     duration: giveawayDuration,
-                    prize: `<a:Gift:853993605868683285> ${giveawayPrize} <a:Gift:853993605868683285>`,
+                    prize: `${obeyUi.markup("icon.gift")} ${giveawayPrize} ${obeyUi.markup("icon.gift")}`,
                     winnerCount: giveawayNumberWinners,
                     hostedBy: message.author,
                     thumbnail: es.thumb
@@ -217,28 +219,28 @@ module.exports = {
                     reaction: "867721863151747092",
                     lastChance: {
                         enabled: true,
-                        content: "⚠️ **¡ÚLTIMA OPORTUNIDAD PARA ENTRAR!** ⚠️",
+                        content: obeyUi.owned("⚠️ **¡ÚLTIMA OPORTUNIDAD PARA ENTRAR!** ⚠️"),
                         threshold: 60000,
                         embedColor: "#FEE75C",
                     },
                     pauseOptions: {
                         isPaused: false,
-                        content: "⏸️ **¡ESTE SORTEO ESTÁ PAUSADO!** ⏸️",
+                        content: obeyUi.owned("⏸️ **¡ESTE SORTEO ESTÁ PAUSADO!** ⏸️"),
                         unPauseAfter: null,
                         embedColor: "#582812",
                     },
                     bonusEntries: [],
                     messages: {
-                        inviteToParticipate: "***¡Reacciona con <a:Tada_Yellow:867721863151747092> para participar!***\n",
+                        inviteToParticipate: obeyUi.owned("***¡Reacciona con <a:Tada_Yellow:867721863151747092> para participar!***\n"),
                         drawing: "> Termina: {timestamp}\n",
                         hostedBy: "**Organizado por:** {this.hostedBy}",
-                        dropMessage: "Sé el primero en reaccionar con <a:Tada_Yellow:867721863151747092>",
+                        dropMessage: obeyUi.owned("Sé el primero en reaccionar con <a:Tada_Yellow:867721863151747092>"),
                         noWinner: "\n**¡Sorteo cancelado!**\n> No hay participaciones válidas. :cry:",
                         endedAt: "Termina en",
                         giveaway:
-                            "<a:Tada_Yellow:867721863151747092> **SORTEO INICIADO** <a:Tada_Yellow:867721863151747092>",
+                            obeyUi.owned("<a:Tada_Yellow:867721863151747092> **SORTEO INICIADO** <a:Tada_Yellow:867721863151747092>"),
                         giveawayEnded:
-                            "<a:Tada_Green:867721862858539048> **SORTEO FINALIZADO** <a:Tada_Green:867721862858539048>",
+                            obeyUi.owned("<a:Tada_Green:867721862858539048> **SORTEO FINALIZADO** <a:Tada_Green:867721862858539048>"),
                         winMessage:
                             "**Felicitaciones** {winners}!\n> Has ganado **{this.prize}**!\n> **Saltar:** {this.messageURL}\nOrganizado por: {this.hostedBy}",
                         embedFooter: '{this.winnerCount} Ganador{this.winnerCount > 1 ? "es" : ""}',
@@ -258,10 +260,10 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`¿Quieres agregar Roles de Entrada Extra?`)
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`¿Quieres agregar Roles de Entrada Extra?`, 256))
                             .setDescription(
-                                `Escribe: \`no\` o \`0\` Entradas Extra, si no quieres tener ninguna!\n\nPara agregar Entradas Extra, **Menciona un Rol y luego escribe la cantidad de Entradas!**\n\n**Ejemplo:**\n> \`@ROL 3\`\n\n> *Si quieres agregar Múltiples Entradas Extra haz algo como esto:*\nEjemplo:\n> \`@Rol 2, @Rol 2, @Role5\``
+                                obeyUi.limit(`Escribe: \`no\` o \`0\` Entradas Extra, si no quieres tener ninguna!\n\nPara agregar Entradas Extra, **Menciona un Rol y luego escribe la cantidad de Entradas!**\n\n**Ejemplo:**\n> \`@ROL 3\`\n\n> *Si quieres agregar Múltiples Entradas Extra haz algo como esto:*\nEjemplo:\n> \`@Rol 2, @Rol 2, @Role5\``, 4096)
                             ),
                     ],
                 });
@@ -275,7 +277,7 @@ module.exports = {
                 if (bonusentriesdata.mentions.roles.size > 0) {
                     let args = bonusentriesdata.content.split(",").map(i => i?.trim());
                     if (bonusentriesdata.mentions.roles.size > 1) {
-                        if (!args[0]) return message.reply("❌ ¡Entrada de Múltiples Roles Extra no válida, revisa el EJEMPLO!");
+                        if (!args[0]) return message.reply(obeyUi.owned("❌ ¡Entrada de Múltiples Roles Extra no válida, revisa el EJEMPLO!"));
                         options.messages.giveaway += "\n\n**ROLES DE ENTRADA EXTRA:**\n";
                         options.messages.giveawayEnded += "\n\n**ROLES DE ENTRADA EXTRA:**\n";
                         [...bonusentriesdata.mentions.roles.values()].forEach((role, index) => {
@@ -322,10 +324,10 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setTitle(`¿Quieres un Rol Requerido?`)
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(`¿Quieres un Rol Requerido?`, 256))
                             .setDescription(
-                                `Escribe: \`no\` o \`0\` Roles Requeridos, si no quieres tener ninguno!\n\nPara agregar Roles Requeridos, **Menciona todos los Roles** que deberían ser **requeridos (los Usuarios solo necesitan al menos uno de ellos)**\n\n**Ejemplo:**\n> \`@ROL1 @Role2\` (1 Rol también es suficiente)\n\n**NOTA:**\n> *Los Usuarios sin el Rol pueden reaccionar, pero __no serán elegidos__!*`
+                                obeyUi.limit(`Escribe: \`no\` o \`0\` Roles Requeridos, si no quieres tener ninguno!\n\nPara agregar Roles Requeridos, **Menciona todos los Roles** que deberían ser **requeridos (los Usuarios solo necesitan al menos uno de ellos)**\n\n**Ejemplo:**\n> \`@ROL1 @Role2\` (1 Rol también es suficiente)\n\n**NOTA:**\n> *Los Usuarios sin el Rol pueden reaccionar, pero __no serán elegidos__!*`, 4096)
                             ),
                     ],
                 });
@@ -358,9 +360,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable25"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable26"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable25"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable26"]), 4096)),
                     ],
                 });
             }
@@ -421,7 +423,7 @@ module.exports = {
                         console.error(e);
                         message.reply({
                             content:
-                                "<:no:833101993668771842> **Ocurrió un error...**\`\`\`" +
+                                obeyUi.owned("<:no:833101993668771842> **Ocurrió un error...**\`\`\`") +
                                 String(e.message).substring(0, 1900) +
                                 "```",
                         });
@@ -448,7 +450,7 @@ module.exports = {
                         console.error(e);
                         message.reply({
                             content:
-                                "<:no:833101993668771842> **Ocurrió un error...**\`\`\`" +
+                                obeyUi.owned("<:no:833101993668771842> **Ocurrió un error...**\`\`\`") +
                                 String(e.message).substring(0, 1900) +
                                 "```",
                         });
@@ -477,7 +479,7 @@ module.exports = {
                         console.error(e);
                         message.reply({
                             content:
-                                "<:no:833101993668771842> **Ocurrió un error...**\`\`\`" +
+                                obeyUi.owned("<:no:833101993668771842> **Ocurrió un error...**\`\`\`") +
                                 String(e.message).substring(0, 1900) +
                                 "```",
                         });
@@ -571,13 +573,13 @@ module.exports = {
             args.shift();
             if (!args[0]) {
                 return message.reply({
-                    content: `❌ El uso correcto de este Comando es: \`${prefix}giveaway winner <GiveawayId>\` ... ten en cuenta que GiveawayId es el MessageId del mensaje (Embed) del Sorteo`,
+                    content: `${obeyUi.markup("icon.error")} El uso correcto de este Comando es: \`${prefix}giveaway winner <GiveawayId>\` ... ten en cuenta que GiveawayId es el MessageId del mensaje (Embed) del Sorteo`,
                 });
             }
             let giveaway = client.giveawayDB.find(g => g.messageId === args[0]);
 
             if (!giveaway) {
-                return message.reply({ content: "❌ No se pudieron encontrar Datos de este Sorteo" });
+                return message.reply({ content: obeyUi.owned("❌ No se pudieron encontrar Datos de este Sorteo") });
             }
             if (giveaway.messages && giveaway.messages.winMessage && giveaway.messages.winMessage.includes("{winners}")) {
                 return message.reply({
@@ -604,9 +606,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable47"]))
-                        .setDescription(`> \`${prefix}giveaway start\` ... para iniciar un nuevo sorteo
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable47"]), 256))
+                        .setDescription(obeyUi.limit(`> \`${prefix}giveaway start\` ... para iniciar un nuevo sorteo
 
 > \`${prefix}giveaway end <G-Id>\` ... para finalizar un sorteo específico
 
@@ -625,7 +627,7 @@ module.exports = {
 :warning: **A VECES LOS SORTEOS NO TERMINAN** :warning:
 > Aquí hay algo que puedes hacer:
 > \`${prefix}giveaway winner <G-Id>\`
-> Esto enviará los ganadores del Sorteo, recibidos de la Base de Datos`),
+> Esto enviará los ganadores del Sorteo, recibidos de la Base de Datos`, 4096)),
                 ],
             });
         }
@@ -646,16 +648,16 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setFooter(client.getFooter(es))
-                            .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable49"]), 4096))
                             .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                             .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                             .setTimestamp()
-                            .setFooter(client.getFooter(
+                            .setFooter(obeyMeta.asFooter(client.getFooter(
                                     "ID: " + message.author.id,
                                     message.author.displayAvatarURL()
-                                )
+                                ))
                             ),
                     ],
                 });

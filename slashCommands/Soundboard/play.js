@@ -1,9 +1,10 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js')
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice')
 const path = require('path')
 const fs   = require('fs')
 
-const AUDIO_DIR = path.join(process.cwd(), 'commands', '🔊 Soundboard', 'audio')
+const AUDIO_DIR = path.join(process.cwd(), 'commands', obeyUi.owned('🔊 Soundboard'), 'audio')
 
 // Lista de sonidos disponibles (nombre → archivo)
 const SOUNDS = (() => {
@@ -39,27 +40,27 @@ module.exports = {
   },
 
   run: async (client, interaction) => {
-    const err = d => ({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(d)], ephemeral: true })
+    const err = d => ({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(d, 4096))], ephemeral: true })
 
     if (!client.settings.get(interaction.guild.id, 'SOUNDBOARD'))
-      return interaction.reply(err('❌ El sistema de soundboard no está activado.'))
+      return interaction.reply(err(obeyUi.owned('❌ El sistema de soundboard no está activado.')))
 
     const soundName = interaction.options.getString('sonido')
     const sound     = SOUNDS.find(s => s.name === soundName)
 
     if (!sound)
-      return interaction.reply(err(`❌ Sonido \`${soundName}\` no encontrado. Usa autocomplete para ver los disponibles.`))
+      return interaction.reply(err(`${obeyUi.markup("icon.error")} Sonido \`${soundName}\` no encontrado. Usa autocomplete para ver los disponibles.`))
 
     const voiceChannel = interaction.member?.voice?.channel
     if (!voiceChannel)
-      return interaction.reply(err('❌ Debes estar en un canal de voz.'))
+      return interaction.reply(err(obeyUi.owned('❌ Debes estar en un canal de voz.')))
 
     const botChannel = interaction.guild.members.me?.voice?.channel
     if (botChannel && botChannel.id !== voiceChannel.id)
-      return interaction.reply(err(`❌ Ya estoy en **${botChannel.name}**. Únete a ese canal.`))
+      return interaction.reply(err(`${obeyUi.markup("icon.error")} Ya estoy en **${botChannel.name}**. Únete a ese canal.`))
 
     if (!voiceChannel.permissionsFor(interaction.guild.members.me).has([PermissionFlagsBits.Connect, PermissionFlagsBits.Speak]))
-      return interaction.reply(err('❌ No tengo permisos para unirme o hablar en ese canal.'))
+      return interaction.reply(err(obeyUi.owned('❌ No tengo permisos para unirme o hablar en ese canal.')))
 
     await interaction.deferReply({ ephemeral: true })
 
@@ -87,10 +88,10 @@ module.exports = {
 
       await interaction.editReply({
         embeds: [new EmbedBuilder().setColor(0x5865F2)
-          .setDescription(`🔊 Reproduciendo \`${soundName}\` en **${voiceChannel.name}**`)],
+          .setDescription(obeyUi.limit(`${obeyUi.markup("icon.volume-up")} Reproduciendo \`${soundName}\` en **${voiceChannel.name}**`, 4096))],
       })
     } catch (e) {
-      await interaction.editReply(err(`❌ Error: ${e.message}`))
+      await interaction.editReply(err(`${obeyUi.markup("icon.error")} Error: ${e.message}`))
     }
   },
 }

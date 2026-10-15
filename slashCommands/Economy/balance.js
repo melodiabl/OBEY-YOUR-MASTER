@@ -1,3 +1,6 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const { localeFor } = require('../../handlers/i18n')
+const views = require('../../handlers/economy/messages')
 const { EmbedBuilder } = require('discord.js')
 const { ensure_economy_user, nFormatter } = require('../../handlers/functions')
 
@@ -9,29 +12,13 @@ module.exports = {
   ],
 
   run: async (client, interaction) => {
-    if (!client.settings.get(interaction.guild.id, 'ECONOMY'))
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de economía no está activado.')], ephemeral: true })
-
-    const target = interaction.options.getUser('usuario') || interaction.user
-    if (target.bot)
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Los bots no tienen economía.')], ephemeral: true })
-
-    ensure_economy_user(client, interaction.guild.id, target.id)
-    const data = client.economy.get(`${interaction.guild.id}-${target.id}`)
-
-    const bal  = data?.balance ?? 0
-    const bank = data?.bank ?? 0
-
-    await interaction.reply({
-      embeds: [new EmbedBuilder().setColor(0x22C55E)
-        .setAuthor({ name: target.username, iconURL: target.displayAvatarURL() })
-        .setTitle('💰 Balance')
-        .addFields(
-          { name: '👛 Cartera',  value: `**${nFormatter(bal)}** 🪙`,         inline: true },
-          { name: '🏦 Banco',    value: `**${nFormatter(bank)}** 🪙`,        inline: true },
-          { name: '💎 Total',    value: `**${nFormatter(bal + bank)}** 🪙`,  inline: true },
-        )
-        .setFooter({ text: interaction.guild.name })],
-    })
+    const gid=interaction.guild.id, locale=localeFor(client,gid)
+    const fail=(key,vars)=>interaction.reply({embeds:[views.error(locale,key,vars)],ephemeral:true,allowedMentions:{parse:[]}})
+    if(!client.settings.get(gid,'ECONOMY'))return fail('disabled')
+    const target=interaction.options.getUser('usuario')||interaction.user
+    if(target.bot)return fail('bots')
+    ensure_economy_user(client,gid,target.id)
+    const data=client.economy.get(`${gid}-${target.id}`)
+    return interaction.reply({embeds:[views.balance(locale,target,data,nFormatter).setFooter(obeyMeta.asFooter({text:interaction.guild.name}))],allowedMentions:{parse:[]}})
   },
 }

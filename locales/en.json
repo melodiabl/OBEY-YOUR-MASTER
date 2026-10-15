@@ -1,0 +1,987 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "previous": "Previous",
+    "next": "Next",
+    "error": "The action could not be completed. Please try again.",
+    "close": "Close",
+    "commandError": "An error occurred while running the command."
+  },
+  "music": {
+    "tracks": "Tracks",
+    "albums": "Albums",
+    "chooseTrack": "Choose a song…",
+    "chooseAlbum": "Choose an album…",
+    "resultsFor": "Results for “{query}”",
+    "noTracks": "No tracks found for this search.",
+    "noAlbums": "No albums found for this search.",
+    "emptyFooter": "Switch category below · expires in 60 s",
+    "resultsFooter": "{count} {category} · choose one · switch category below · 60 s",
+    "trackCount": "{count} tracks",
+    "artist": "Artist",
+    "requestedBy": "Requested by",
+    "duration": "Duration",
+    "live": "LIVE",
+    "albumAdded": "Album added",
+    "playlistAdded": "Playlist added",
+    "playlist": "Playlist",
+    "playingNow": "Now playing",
+    "addedToQueue": "Added to the queue",
+    "noCurrentTrack": "There is no music playing.",
+    "openLink": "Open link",
+    "savedFrom": "Saved from {server}",
+    "dmSent": "I sent you the song in a direct message.",
+    "dmBlocked": "I could not send the direct message. Check your direct message permissions.",
+    "pause": "Pause",
+    "resume": "Resume",
+    "shuffle": "Shuffle",
+    "previousTrack": "Previous",
+    "skip": "Skip",
+    "loop": "Repeat",
+    "loopTrack": "Repeat song",
+    "loopQueue": "Repeat queue",
+    "lyrics": "Lyrics",
+    "volumeDown": "Volume down",
+    "stop": "Stop",
+    "volumeUp": "Volume up",
+    "queue": "Queue",
+    "like": "Like",
+    "autoplay": "Autoplay",
+    "volume": "Volume",
+    "ends": "Ends",
+    "paused": "Paused",
+    "off": "Off",
+    "silenced": "Muted",
+    "voiceRequired": "Join a voice channel first."
+  },
+  "economy": {
+    "disabled": "The economy system is disabled.",
+    "bots": "Bots do not have an economy account.",
+    "invalidUser": "I could not find that user.",
+    "invalidAmount": "Use a positive whole amount or “all”.",
+    "insufficientWallet": "Insufficient wallet funds: {amount}.",
+    "insufficientBank": "Insufficient bank funds: {amount}.",
+    "selfPay": "You cannot transfer coins to yourself.",
+    "balance": "Balance",
+    "wallet": "Wallet",
+    "bank": "Bank",
+    "total": "Total",
+    "inventory": "Inventory",
+    "inventoryValue": "{count} items · value: {amount}",
+    "deposited": "Deposit completed",
+    "withdrawn": "Withdrawal completed",
+    "transfer": "Transfer completed",
+    "amount": "Amount",
+    "recipient": "Recipient",
+    "failed": "The operation could not be completed. Check its status before retrying."
+  },
+  "suggestions": {
+    "for": "For",
+    "against": "Against",
+    "who": "Who voted",
+    "count": "{count} votes",
+    "already": "You have already voted that way.",
+    "expired": "This suggestion no longer has valid voting data."
+  },
+  "tickets": {
+    "notTicket": "This channel has no registered ticket.",
+    "closed": "This ticket is already closed.",
+    "permission": "You do not have permission to perform this ticket action.",
+    "botPermission": "I need Manage Channels permission in this channel.",
+    "alreadyClaimed": "This ticket has already been assigned.",
+    "unknownMember": "I could not find that member in this server.",
+    "ownerProtected": "You cannot remove the ticket owner.",
+    "reconcile": "Permissions could not be restored after a failure. Staff must review this channel.",
+    "failed": "The action could not be completed. Check the ticket before retrying.",
+    "claimDone": "Ticket assigned to {user}.",
+    "closeDone": "Ticket closed by {user}. The channel and its history are preserved.",
+    "addDone": "{user} has access to the ticket.",
+    "removeDone": "Access was removed for {user}.",
+    "noReason": "No reason provided",
+    "closedTitle": "Ticket closed",
+    "closeLog": "Closed by {user}\nReason: {reason}",
+    "accept": "Accept",
+    "deny": "Decline",
+    "ask": "Ask a question",
+    "verify": "Verify step",
+    "verifyFailed": "Verification failed",
+    "close": "Close",
+    "delete": "Delete",
+    "transcript": "Transcript",
+    "users": "Users",
+    "roles": "Roles",
+    "claim": "Claim",
+    "unknownAction": "Unknown ticket action.",
+    "privilegedMember": "Channel permissions cannot remove an administrator’s access."
+  },
+  "moderation": {
+    "noReason": "No reason provided",
+    "permission": "You do not have permission for that action.",
+    "botPermission": "I do not have the required permission for that action.",
+    "protectedTarget": "That user is protected from this action.",
+    "missingMember": "That user is not in this server.",
+    "hierarchy": "Role hierarchy does not allow this action.",
+    "invalidDuration": "The selected duration is invalid.",
+    "actionFailed": "Discord could not apply the action. No change was confirmed.",
+    "recordFailed": "The action was applied, but the case could not be saved. Staff must review the record.",
+    "dmUnconfirmed": "The direct message notification is not confirmed.",
+    "banDone": "User banned",
+    "kickDone": "Member kicked",
+    "timeoutDone": "Timeout applied",
+    "banDm": "A ban was applied in {server}.",
+    "kickDm": "You were kicked from {server}.",
+    "timeoutDm": "A timeout was applied in {server}.",
+    "reason": "Reason",
+    "user": "User",
+    "case": "Case"
+  },
+  "modules": {
+    "music": {
+      "ready": {
+        "title": "Music · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Music · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Music · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Music · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Music · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Music · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "welcome": {
+      "ready": {
+        "title": "Welcome and farewell · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Welcome and farewell · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Welcome and farewell · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Welcome and farewell · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Welcome and farewell · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Welcome and farewell · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "verification": {
+      "ready": {
+        "title": "Verification · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Verification · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Verification · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Verification · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Verification · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Verification · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "roles": {
+      "ready": {
+        "title": "Roles · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Roles · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Roles · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Roles · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Roles · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Roles · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "tickets": {
+      "ready": {
+        "title": "Tickets · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Tickets · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Tickets · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Tickets · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Tickets · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Tickets · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "moderation": {
+      "ready": {
+        "title": "Moderation · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Moderation · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Moderation · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Moderation · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Moderation · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Moderation · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "automod": {
+      "ready": {
+        "title": "Automatic moderation · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Automatic moderation · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Automatic moderation · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Automatic moderation · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Automatic moderation · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Automatic moderation · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "security": {
+      "ready": {
+        "title": "Security · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Security · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Security · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Security · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Security · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Security · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "logs": {
+      "ready": {
+        "title": "Logs · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Logs · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Logs · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Logs · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Logs · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Logs · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "levels": {
+      "ready": {
+        "title": "Levels · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Levels · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Levels · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Levels · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Levels · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Levels · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "economy": {
+      "ready": {
+        "title": "Economy · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Economy · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Economy · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Economy · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Economy · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Economy · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "profiles": {
+      "ready": {
+        "title": "Profiles · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Profiles · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Profiles · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Profiles · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Profiles · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Profiles · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "voice": {
+      "ready": {
+        "title": "Voice channels · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Voice channels · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Voice channels · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Voice channels · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Voice channels · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Voice channels · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "events": {
+      "ready": {
+        "title": "Events · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Events · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Events · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Events · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Events · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Events · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "giveaways": {
+      "ready": {
+        "title": "Giveaways · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Giveaways · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Giveaways · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Giveaways · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Giveaways · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Giveaways · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "suggestions": {
+      "ready": {
+        "title": "Suggestions · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Suggestions · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Suggestions · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Suggestions · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Suggestions · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Suggestions · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "starboard": {
+      "ready": {
+        "title": "Starboard · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Starboard · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Starboard · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Starboard · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Starboard · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Starboard · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "reminders": {
+      "ready": {
+        "title": "Reminders · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Reminders · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Reminders · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Reminders · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Reminders · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Reminders · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "messages": {
+      "ready": {
+        "title": "Messages · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Messages · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Messages · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Messages · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Messages · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Messages · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "cards": {
+      "ready": {
+        "title": "Cards · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Cards · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Cards · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Cards · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Cards · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Cards · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "automation": {
+      "ready": {
+        "title": "Automations · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Automations · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Automations · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Automations · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Automations · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Automations · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "feeds": {
+      "ready": {
+        "title": "Feeds · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Feeds · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Feeds · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Feeds · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Feeds · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Feeds · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "analytics": {
+      "ready": {
+        "title": "Analytics · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Analytics · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Analytics · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Analytics · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Analytics · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Analytics · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "utilities": {
+      "ready": {
+        "title": "Utilities · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Utilities · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Utilities · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Utilities · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Utilities · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Utilities · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "fun": {
+      "ready": {
+        "title": "Fun · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Fun · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Fun · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Fun · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Fun · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Fun · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "architect": {
+      "ready": {
+        "title": "Server architect · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Server architect · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Server architect · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Server architect · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Server architect · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Server architect · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "decoration": {
+      "ready": {
+        "title": "Decoration · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Decoration · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Decoration · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Decoration · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Decoration · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Decoration · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "templates": {
+      "ready": {
+        "title": "Templates · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Templates · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Templates · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Templates · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Templates · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Templates · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "collections": {
+      "ready": {
+        "title": "Collections · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Collections · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Collections · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Collections · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Collections · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Collections · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "applications": {
+      "ready": {
+        "title": "Applications · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Applications · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Applications · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Applications · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Applications · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Applications · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "sticky": {
+      "ready": {
+        "title": "Sticky messages · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Sticky messages · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Sticky messages · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Sticky messages · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Sticky messages · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Sticky messages · View expired",
+        "description": "Open a new view to continue."
+      }
+    },
+    "migrations": {
+      "ready": {
+        "title": "Migrations · View available",
+        "description": "Choose an option to continue."
+      },
+      "loading": {
+        "title": "Migrations · Processing",
+        "description": "Wait for the operation to finish."
+      },
+      "empty": {
+        "title": "Migrations · No results",
+        "description": "There are no items to display in this view."
+      },
+      "success": {
+        "title": "Migrations · Operation completed",
+        "description": "The operation completed. Review the displayed result."
+      },
+      "error": {
+        "title": "Migrations · Could not complete",
+        "description": "Check permissions and configuration before trying again."
+      },
+      "expired": {
+        "title": "Migrations · View expired",
+        "description": "Open a new view to continue."
+      }
+    }
+  },
+  "project": {
+    "developerTitle": "{name} · Project",
+    "developerBody": "Team contact information is available through links configured by the project owner. Credits and licenses for reused code are preserved.",
+    "githubTitle": "{name} · Source",
+    "githubBody": "View the project repository when its owner has configured the link.",
+    "sponsorTitle": "{name} · Contributions",
+    "sponsorBody": "You can contribute by reporting bugs and suggesting improvements. This view does not enable payments or publish unconfigured sponsors.",
+    "supportTitle": "{name} · Support",
+    "supportBody": "For help, describe what happened, the command used and the expected result. Do not share tokens or passwords.",
+    "repository": "Repository",
+    "support": "Support",
+    "contact": "Contact",
+    "links": "Links",
+    "notConfigured": "The project owner has not configured a link for this view yet."
+  }
+}

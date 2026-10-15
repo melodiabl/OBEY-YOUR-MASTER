@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const { getNumberEmojis, allEmojis } = require("../../botconfig/emojiFunctions");
@@ -26,37 +28,37 @@ module.exports = {
                     {
                         value: "Remove Channel",
                         description: `Remove one of the added Twitch Channels`,
-                        emoji: allEmojis.msg.twitch,
+                        emoji: obeyUi.component(allEmojis.msg.twitch),
                     },
                     {
                         value: "New Channel",
                         description: `Add a New Twitch Canal`,
-                        emoji: allEmojis.msg.UPVOTE,
+                        emoji: obeyUi.component(allEmojis.msg.UPVOTE),
                     },
                     {
                         value: "Discord Channel",
                         description: `Set a Discord Canal for Posting Messages`,
-                        emoji: allEmojis.msg.channel,
+                        emoji: obeyUi.component(allEmojis.msg.channel),
                     },
                     {
                         value: "Active Live Role",
                         description: `Set a Rol to add for current live Streamers`,
-                        emoji: allEmojis.msg.roles,
+                        emoji: obeyUi.component(allEmojis.msg.roles),
                     },
                     {
                         value: "Ghost Ping Role",
                         description: `Set a Ghost Ping Rol.`,
-                        emoji: "👻",
+                        emoji: obeyUi.component("👻"),
                     },
                     {
                         value: "View Twitch-Channels",
                         description: `View / Show all setupped Twitch Channels`,
-                        emoji: allEmojis.msg.list,
+                        emoji: obeyUi.component(allEmojis.msg.list),
                     },
                     {
                         value: "Cancel",
                         description: `Cancelar and stop the Twitch-Logger-Configuración!`,
-                        emoji: allEmojis.msg.cancel,
+                        emoji: obeyUi.component(allEmojis.msg.cancel),
                     },
                 ];
                 //define the selection
@@ -64,7 +66,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Twitch-Logger")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Twitch-Logger"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -80,8 +82,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Twitch-Logger", iconURL: "https://cdn.discordapp.com/emojis/720391959746969710.gif?size=160", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Twitch-Logger", iconURL: obeyUi.image("icon.feed"), url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 //send the menu msg
                 let menumsg = await message.reply({
                     embeds: [MenuEmbed],
@@ -104,16 +106,16 @@ module.exports = {
                         handle_the_picks(menu?.values[0], SetupNumber, menuoptiondata);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -126,10 +128,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(`There are no Twitch Channels Setupped yet!`)
+                                            .setTitle(obeyUi.limit(`There are no Twitch Channels Setupped yet!`, 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Add some others first...`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`Add some others first...`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             let channels = client.social_log.get(message.guild.id, "twitch.channels");
@@ -144,15 +146,15 @@ module.exports = {
                             return message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(`All [${channels.length}] Twitch-Channels`)
+                                        .setTitle(obeyUi.limit(`All [${channels.length}] Twitch-Channels`, 256))
                                         .setColor(es.wrongcolor)
                                         .setDescription(
-                                            `${channels.map((data, index) => `> ${NumberEmojis[index + 1] || index + 1} [${data.ChannelName}](https://twitch.tv/${data.ChannelName})`).join("\n\n")}`.substring(
+                                            obeyUi.limit(`${channels.map((data, index) => `> ${NumberEmojis[index + 1] || index + 1} [${data.ChannelName}](https://twitch.tv/${data.ChannelName})`).join("\n\n")}`.substring(
                                                 0,
                                                 2000
-                                            )
+                                            ), 4096)
                                         )
-                                        .setFooter(client.getFooter(es)),
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                         }
@@ -163,10 +165,10 @@ module.exports = {
                                 return message.reply({
                                     embeds: [
                                         new Discord.EmbedBuilder()
-                                            .setTitle(`There are no Twitch Channels Setupped yet!`)
+                                            .setTitle(obeyUi.limit(`There are no Twitch Channels Setupped yet!`, 256))
                                             .setColor(es.wrongcolor)
-                                            .setDescription(`Add some others first...`.substring(0, 2000))
-                                            .setFooter(client.getFooter(es)),
+                                            .setDescription(obeyUi.limit(`Add some others first...`.substring(0, 2000), 4096))
+                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                     ],
                                 });
                             let channels = client.social_log.get(message.guild.id, "twitch.channels");
@@ -183,7 +185,7 @@ module.exports = {
                                 .setCustomId("MenuSelection")
                                 .setMaxValues(menuoptions.length) //OPTIONAL, this is how many values you can have at each selection
                                 .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                                .setPlaceholder("Click me to remove Account(s)")
+                                .setPlaceholder(obeyUi.plain("Click me to remove Account(s)"))
                                 .addOptions(
                                     menuoptions.map(option => {
                                         let Obj = {
@@ -201,8 +203,8 @@ module.exports = {
                             //define the embed
                             let MenuEmbed = new EmbedBuilder()
                                 .setColor(es.color)
-                                .setAuthor({ name: "Twitch-Poster", iconURL: "https://cdn.discordapp.com/emojis/720391959746969710.gif?size=160", url: "https://github.com/melodiabl" })
-                                .setDescription("Seleccionar all Twitch Channels you want to remove!");
+                                .setAuthor(obeyMeta.asAuthor({ name: "Twitch-Poster", iconURL: obeyUi.image("icon.feed"), url: "https://github.com/melodiabl" }))
+                                .setDescription(obeyUi.limit("Seleccionar all Twitch Channels you want to remove!", 4096));
                             //send the menu msg
                             let menumsg = await message.reply({
                                 embeds: [MenuEmbed],
@@ -225,19 +227,19 @@ module.exports = {
                                             "twitch.channels"
                                         );
                                     }
-                                    menu?.reply(`✅ **Successfully removed ${menu?.values.length} Twitch Accounts!**`);
+                                    menu?.reply(`${obeyUi.markup("icon.success")} **Successfully removed ${menu?.values.length} Twitch Accounts!**`);
                                 } else
                                     menu?.reply({
-                                        content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                                        content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                                         ephemeral: true,
                                     });
                             });
                             //Once the Collections ended edit the menu message
                             collector.on("end", collected => {
                                 menumsg.edit({
-                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                                    embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                                     components: [],
-                                    content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                                    content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                                 });
                             });
                         }
@@ -245,14 +247,14 @@ module.exports = {
                     case "New Channel":
                         {
                             if (client.social_log.get(message.guild.id, "twitch.channels").length > 10)
-                                return message.reply("❌ **You can't have more then 10 Twitch Channels**");
+                                return message.reply(obeyUi.owned("❌ **You can't have more then 10 Twitch Channels**"));
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable5"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable5"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable6"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable6"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -271,13 +273,13 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable7"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable7"]), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setDescription(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable8"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable8"]), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                         await tempmsg.channel
@@ -295,21 +297,21 @@ module.exports = {
                                                         embeds: [
                                                             new Discord.EmbedBuilder()
                                                                 .setTitle(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitch"][
                                                                             "variable9"
                                                                         ]
-                                                                    )
+                                                                    ), 256)
                                                                 )
                                                                 .setColor(es.color)
                                                                 .setDescription(
-                                                                    eval(
+                                                                    obeyUi.limit(eval(
                                                                         client.la[ls]["cmds"]["setup"]["setup-twitch"][
                                                                             "variable10"
                                                                         ]
-                                                                    )
+                                                                    ), 4096)
                                                                 )
-                                                                .setFooter(client.getFooter(es)),
+                                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                         ],
                                                     });
                                                     await tempmsg.channel
@@ -338,21 +340,21 @@ module.exports = {
                                                                     embeds: [
                                                                         new Discord.EmbedBuilder()
                                                                             .setTitle(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-twitch"
                                                                                     ]["variable11"]
-                                                                                )
+                                                                                ), 256)
                                                                             )
                                                                             .setDescription(
-                                                                                eval(
+                                                                                obeyUi.limit(eval(
                                                                                     client.la[ls]["cmds"]["setup"][
                                                                                         "setup-twitch"
                                                                                     ]["variable12"]
-                                                                                )
+                                                                                ), 4096)
                                                                             )
                                                                             .setColor(es.color)
-                                                                            .setFooter(client.getFooter(es)),
+                                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                     ],
                                                                 });
                                                             }
@@ -364,17 +366,17 @@ module.exports = {
                                                                 embeds: [
                                                                     new Discord.EmbedBuilder()
                                                                         .setTitle(
-                                                                            eval(
+                                                                            obeyUi.limit(eval(
                                                                                 client.la[ls]["cmds"]["setup"][
                                                                                     "setup-twitch"
                                                                                 ]["variable15"]
-                                                                            )
+                                                                            ), 256)
                                                                         )
                                                                         .setColor(es.wrongcolor)
                                                                         .setDescription(
-                                                                            `¡Operación Cancelada!`.substring(0, 2000)
+                                                                            obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096)
                                                                         )
-                                                                        .setFooter(client.getFooter(es)),
+                                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                                 ],
                                                             });
                                                         });
@@ -388,15 +390,15 @@ module.exports = {
                                                     embeds: [
                                                         new Discord.EmbedBuilder()
                                                             .setTitle(
-                                                                eval(
+                                                                obeyUi.limit(eval(
                                                                     client.la[ls]["cmds"]["setup"]["setup-twitch"][
                                                                         "variable15"
                                                                     ]
-                                                                )
+                                                                ), 256)
                                                             )
                                                             .setColor(es.wrongcolor)
-                                                            .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                            .setFooter(client.getFooter(es)),
+                                                            .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                     ],
                                                 });
                                             });
@@ -409,10 +411,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable15"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable15"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -423,10 +425,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable17"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable17"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable18"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable18"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -444,10 +446,10 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable19"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable19"]), 256)
                                                     )
                                                     .setColor(es.color)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -461,12 +463,12 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable20"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -474,17 +476,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable21"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable22"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -497,10 +499,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable23"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable23"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -511,10 +513,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable24"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable24"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable25"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable25"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -532,10 +534,10 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable26"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable26"]), 256)
                                                     )
                                                     .setColor(es.color)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -549,12 +551,12 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable27"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -562,17 +564,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable28"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable29"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -585,10 +587,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable30"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable30"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -599,10 +601,10 @@ module.exports = {
                             var tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable31"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable31"]), 256))
                                         .setColor(es.color)
-                                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable32"]))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable32"]), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -620,10 +622,10 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable33"])
+                                                        obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable33"]), 256)
                                                     )
                                                     .setColor(es.color)
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -637,12 +639,12 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable34"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.color)
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         } catch (e) {
@@ -650,17 +652,17 @@ module.exports = {
                                                 embeds: [
                                                     new Discord.EmbedBuilder()
                                                         .setTitle(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable35"]
-                                                            )
+                                                            ), 256)
                                                         )
                                                         .setColor(es.wrongcolor)
                                                         .setDescription(
-                                                            eval(
+                                                            obeyUi.limit(eval(
                                                                 client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable36"]
-                                                            )
+                                                            ), 4096)
                                                         )
-                                                        .setFooter(client.getFooter(es)),
+                                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                                 ],
                                             });
                                         }
@@ -673,10 +675,10 @@ module.exports = {
                                     return message.reply({
                                         embeds: [
                                             new Discord.EmbedBuilder()
-                                                .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable37"]))
+                                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable37"]), 256))
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -690,9 +692,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable39"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-twitch"]["variable39"]), 4096)),
                 ],
             });
         }

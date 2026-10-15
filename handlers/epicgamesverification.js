@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 const Discord = require("discord.js");
 const { ButtonStyle } = require("discord.js");
 const Platforms = {
@@ -41,13 +43,13 @@ module.exports = async client => {
                     new Discord.ActionRowBuilder().addComponents([
                         new Discord.ButtonBuilder()
                             .setStyle(ButtonStyle.Primary)
-                            .setEmoji("✋")
-                            .setLabel("Yes Change it!")
+                            .setEmoji(obeyUi.component("✋"))
+                            .setLabel(obeyUi.plain("Yes Change it!"))
                             .setCustomId("epicgamesverify_f"),
                         new Discord.ButtonBuilder()
                             .setStyle(ButtonStyle.Secondary)
-                            .setEmoji("✋")
-                            .setLabel("No I want to keep it!")
+                            .setEmoji(obeyUi.component("✋"))
+                            .setLabel(obeyUi.plain("No I want to keep it!"))
                             .setCustomId("no"),
                     ]),
                 ],
@@ -61,26 +63,26 @@ module.exports = async client => {
                         new Discord.StringSelectMenuBuilder()
                             .setMaxValues(1)
                             .setMinValues(1)
-                            .setPlaceholder("Selecciona la plataforma")
+                            .setPlaceholder(obeyUi.plain("Selecciona la plataforma"))
                             .setCustomId("Platform")
                             .addOptions([
                                 {
                                     label: "PC | Computadora",
                                     value: "pc",
                                     description: "Si juegas en computadora/portátil",
-                                    emoji: "🖥️",
+                                    emoji: obeyUi.component("🖥️"),
                                 },
                                 {
                                     label: "Playstation",
                                     value: "psn",
                                     description: "Si juegas en una PlayStation",
-                                    emoji: "🎮",
+                                    emoji: obeyUi.component("🎮"),
                                 },
                                 {
                                     label: "Xbox",
                                     value: "xbl",
                                     description: "Si juegas en una Xbox",
-                                    emoji: "🎮",
+                                    emoji: obeyUi.component("🎮"),
                                 },
                                 {
                                     label: "Others",
@@ -93,7 +95,7 @@ module.exports = async client => {
             })
                 .then(async msg => {
                     interaction.reply({
-                        content: "👍 **¡Revisa tus mensajes directos! Y responde mis preguntas**",
+                        content: obeyUi.owned("👍 **¡Revisa tus mensajes directos! Y responde mis preguntas**"),
                         ephemeral: true,
                     });
                     let Platform =
@@ -110,7 +112,7 @@ module.exports = async client => {
                             })
                             .catch(() => {})) || false;
                     if (!Platform) {
-                        return user.send("❌ Cancelado, por no reaccionar en menos de 2 minutos");
+                        return user.send(obeyUi.owned("❌ Cancelado, por no reaccionar en menos de 2 minutos"));
                     }
                     user.send(
                         `:question: **¿Cuál es tu nombre de usuario de EPIC GAMES?**\n> Asegúrate de enviar solo el nombre de usuario tal cual aparece en \`Epicgames.com\``
@@ -121,12 +123,12 @@ module.exports = async client => {
                             .then(c => c.first()?.content)
                             .catch(() => {})) || false;
                     if (!Username) {
-                        return user.send("❌ Cancelado, por no enviar el nombre de usuario en menos de 2 minutos");
+                        return user.send(obeyUi.owned("❌ Cancelado, por no enviar el nombre de usuario en menos de 2 minutos"));
                     }
                     let others = client.epicgamesDB.find(d => d.guild && d.guild == guildId && d.epic && d.epic == Username);
                     if (others && others.length > 0)
                         return user.send(
-                            `❌ **Alguien con la ID de usuario: \`${others.user}\` ¡Vinculó su cuenta con este nombre de Epic Games!**`
+                            `${obeyUi.markup("icon.error")} **Alguien con la ID de usuario: \`${others.user}\` ¡Vinculó su cuenta con este nombre de Epic Games!**`
                         );
                     let fortniteClient = new fortnite("e032828b-886d-4ed6-9aa1-0e2e725592a8");
                     let tdata =
@@ -134,7 +136,7 @@ module.exports = async client => {
                         false;
                     if (!tdata || tdata.code === 404) {
                         return user.send(
-                            "❌ No se pudo encontrar tu cuenta de Epic Games, inténtalo de nuevo y asegúrate de enviar el nombre correcto"
+                            obeyUi.owned("❌ No se pudo encontrar tu cuenta de Epic Games, inténtalo de nuevo y asegúrate de enviar el nombre correcto")
                         );
                     }
                     client.epicgamesDB.set(user.id, Username, "epic");
@@ -146,26 +148,26 @@ module.exports = async client => {
                                 new Discord.StringSelectMenuBuilder()
                                     .setMaxValues(1)
                                     .setMinValues(1)
-                                    .setPlaceholder("Selecciona la plataforma")
+                                    .setPlaceholder(obeyUi.plain("Selecciona la plataforma"))
                                     .setCustomId("Platform")
                                     .addOptions([
                                         {
                                             label: "Teclado y ratón",
                                             value: "kbm",
                                             description: "Si juegas con teclado y ratón",
-                                            emoji: "⌨️",
+                                            emoji: obeyUi.component("⌨️"),
                                         },
                                         {
                                             label: "Controller",
                                             value: "controller",
                                             description: "Si juegas con un control",
-                                            emoji: "🎮",
+                                            emoji: obeyUi.component("🎮"),
                                         },
                                         {
                                             label: "Touch",
                                             value: "touch",
                                             description: "Si juegas en un dispositivo táctil",
-                                            emoji: "📱",
+                                            emoji: obeyUi.component("📱"),
                                         },
                                         {
                                             label: "Others",
@@ -195,7 +197,7 @@ module.exports = async client => {
                         } else {
                             client.epicgamesDB.set(user.id, InputMethod, "InputMethod");
                         }
-                        user.send("✋ **¡Cuenta vinculada correctamente!**").catch(() => {});
+                        user.send(obeyUi.owned("✋ **¡Cuenta vinculada correctamente!**")).catch(() => {});
                         let logChannel =
                             guild.channels.cache.get(guilddata.logChannel) ||
                             (await guild.channels.fetch(guilddata.logChannel).catch(() => {})) ||
@@ -206,12 +208,12 @@ module.exports = async client => {
                                     embeds: [
                                         new Discord.EmbedBuilder()
                                             .setColor("#57F287")
-                                            .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
-                                            .setTitle(`¡Vinculó/Actualizó su cuenta de EPIC GAMES!`)
+                                            .setAuthor(obeyMeta.asAuthor({ name: user.username, iconURL: user.displayAvatarURL() }))
+                                            .setTitle(obeyUi.limit(`¡Vinculó/Actualizó su cuenta de EPIC GAMES!`, 256))
                                             .addFields({ name: "**Nombre de Epic Games:**", value: `\`\`\`${Username}\`\`\`` })
                                             .addFields({ name: "**Plataforma:**", value: `\`\`\`${Platform}\`\`\`` })
                                             .addFields({ name: "**Método de entrada:**", value: `\`\`\`${InputMethod}\`\`\`` })
-                                            .setFooter(client.getFooter("ID: " + user.id, user.displayAvatarURL())
+                                            .setFooter(obeyMeta.asFooter(client.getFooter("ID: " + user.id, user.displayAvatarURL()))
                                             ),
                                     ],
                                 })
@@ -222,7 +224,7 @@ module.exports = async client => {
                 .catch(e => {
                     console.log(e);
                     interaction.reply({
-                        content: "❌ **No puedo enviarte MD... ¡Primero habilita tus mensajes directos!**",
+                        content: obeyUi.owned("❌ **No puedo enviarte MD... ¡Primero habilita tus mensajes directos!**"),
                         ephemeral: true,
                     });
                 });

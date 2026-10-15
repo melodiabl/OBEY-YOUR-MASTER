@@ -1,9 +1,11 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 var { EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder, ChannelType } = require(`discord.js`);
 var Discord = require(`discord.js`);
 const { getNumberEmojis } = require("../../botconfig/emojiFunctions");
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var { databasing } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
     name: "setup-membercount",
@@ -22,7 +24,7 @@ module.exports = {
         let ensureobject = {};
         for (let i = 1; i <= 25; i++) {
             ensureobject[`channel${i}`] = "no";
-            ensureobject[`message${i}`] = "🗣 Members: {member}";
+            ensureobject[`message${i}`] = obeyUi.owned("🗣 Members: {member}");
         }
         client.setups.ensure(message.guild.id, ensureobject, "membercount");
         try {
@@ -43,7 +45,7 @@ module.exports = {
                     .setCustomId("MenuSelection")
                     .setMaxValues(1) //OPTIONAL, this is how many values you can have at each selection
                     .setMinValues(1) //OPTIONAL , this is how many values you need to have at each selection
-                    .setPlaceholder("¡Haz clic para configurar the Member Counter!")
+                    .setPlaceholder(obeyUi.plain("¡Haz clic para configurar the Member Counter!"))
                     .addOptions(
                         menuoptions.map(option => {
                             let Obj = {
@@ -59,8 +61,8 @@ module.exports = {
                 //define the embed
                 let MenuEmbed = new Discord.EmbedBuilder()
                     .setColor(es.color)
-                    .setAuthor({ name: "Member Counter Setup", iconURL: "https://cdn.discordapp.com/emojis/891040423605321778.png?size=96", url: "https://github.com/melodiabl" })
-                    .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]));
+                    .setAuthor(obeyMeta.asAuthor({ name: "Member Counter Setup", iconURL: obeyUi.image("icon.roles"), url: "https://github.com/melodiabl" }))
+                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-ticket"]["variable2"]), 4096));
                 let used1 = false;
                 //send the menu msg
                 let menumsg = await message.reply({
@@ -92,16 +94,16 @@ module.exports = {
                         menuselection(menu);
                     } else
                         menu?.reply({
-                            content: `<:no:833101993668771842> ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
+                            content: `${obeyUi.markup("icon.error")} ¡No tienes permiso para hacer eso! Solo: <@${cmduser.id}>`,
                             ephemeral: true,
                         });
                 });
                 //Once the Collections ended edit the menu message
                 collector.on("end", collected => {
                     menumsg.edit({
-                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(`~~${menumsg.embeds[0].description}~~`)],
+                        embeds: [EmbedBuilder.from(menumsg.embeds[0]).setDescription(obeyUi.limit(`~~${menumsg.embeds[0].description}~~`, 4096))],
                         components: [],
-                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : "❌ **NOTHING SELECTED - CANCELLED**"}`,
+                        content: `${collected && collected.first() && collected.first().values ? `${allEmojis.msg.SUCCESS} **Selected: \`${collected ? collected.first().values[0] : "Nothing"}\`**` : obeyUi.owned("❌ **NOTHING SELECTED - CANCELLED**")}`,
                     });
                 });
             }
@@ -109,7 +111,7 @@ module.exports = {
                 var tempmsg = await message.reply({
                     embeds: [
                         new Discord.EmbedBuilder()
-                            .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable6"]))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable6"]), 256))
                             .setColor(es.color)
                             .setThumbnail(
                                 es.thumb
@@ -119,8 +121,8 @@ module.exports = {
                                         : client.user.displayAvatarURL()
                                     : null
                             )
-                            .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable7"]))
-                            .setFooter(client.getFooter(es)),
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable7"]), 4096))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                     ],
                 });
                 await tempmsg.channel
@@ -140,7 +142,7 @@ module.exports = {
                             message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable8"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable8"]), 256))
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -150,15 +152,15 @@ module.exports = {
                                                     : client.user.displayAvatarURL()
                                                 : null
                                         )
-                                        .setDescription(`Current Name: \`${curmessage}\``.substring(0, 2048))
-                                        .setFooter(client.getFooter(es)),
+                                        .setDescription(obeyUi.limit(`Current Name: \`${curmessage}\``.substring(0, 2048), 4096))
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
 
                             tempmsg = await message.reply({
                                 embeds: [
                                     new Discord.EmbedBuilder()
-                                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable9"]))
+                                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable9"]), 256))
                                         .setColor(es.color)
                                         .setThumbnail(
                                             es.thumb
@@ -169,9 +171,9 @@ module.exports = {
                                                 : null
                                         )
                                         .setDescription(
-                                            `Current Name: \`${curmessage}\`
+                                            obeyUi.limit(`Current Name: \`${curmessage}\`
 
-*Send the Name NOW!, mind that the Name must be shorter then 32 Characters!!!*`
+*Send the Name NOW!, mind that the Name must be shorter then 32 Characters!!!*`, 4096)
                                         )
                                         .addFields({ name: `**USER KEYWORDS** (USERS __including__ Bots):`, value: `> \`{user}\` / \`{users}\` will be replaced with the amount of all users, no matter if bot or not
 
@@ -199,12 +201,12 @@ module.exports = {
 > \`{archivedthread}\` / \`{archivedthreads}\` will be replaced with the amount of archived Threads
 
 > \`{role}\` / \`{roles}\` will be replaced with the amount of Roles` })
-                                        .addFields({ name: `**Examples:**`, value: `> \`🗣 Members: {members}\`
-> \`🗣 Roles: {roles}\`
-> \`🗣 Channels: {channels}\`
-> \`🗣 Bots: {bots} \`
-> \`🗣 All Users: {users}\`` })
-                                        .setFooter(client.getFooter(es)),
+                                        .addFields({ name: `**Examples:**`, value: `> \`${obeyUi.markup("icon.conversation")} Members: {members}\`
+> \`${obeyUi.markup("icon.conversation")} Roles: {roles}\`
+> \`${obeyUi.markup("icon.conversation")} Channels: {channels}\`
+> \`${obeyUi.markup("icon.conversation")} Bots: {bots} \`
+> \`${obeyUi.markup("icon.conversation")} All Users: {users}\`` })
+                                        .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                 ],
                             });
                             await tempmsg.channel
@@ -393,9 +395,9 @@ module.exports = {
                                             embeds: [
                                                 new Discord.EmbedBuilder()
                                                     .setTitle(
-                                                        eval(
+                                                        obeyUi.limit(eval(
                                                             client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable10"]
-                                                        )
+                                                        ), 256)
                                                     )
                                                     .setColor(es.color)
                                                     .setThumbnail(
@@ -408,7 +410,7 @@ module.exports = {
                                                             : null
                                                     )
                                                     .setDescription(
-                                                        `Example: \`${String(name)
+                                                        obeyUi.limit(`Example: \`${String(name)
                                                             .replace(/{user}/i, guild.memberCount)
                                                             .replace(/{users}/i, guild.memberCount)
 
@@ -593,9 +595,9 @@ module.exports = {
 
 **Checking all Channels every 60 Minutes:**
 > **Delay between each channel:** \`5.1 Minutes\` (Only if a Change is needed)
-> **Optimal Member-Count Channels:** \`6 or less\``.substring(0, 2048)
+> **Optimal Member-Count Channels:** \`6 or less\``.substring(0, 2048), 4096)
                                                     )
-                                                    .setFooter(client.getFooter(es)),
+                                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                             ],
                                         });
                                     }
@@ -607,11 +609,11 @@ module.exports = {
                                         embeds: [
                                             new Discord.EmbedBuilder()
                                                 .setTitle(
-                                                    eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable11"])
+                                                    obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable11"]), 256)
                                                 )
                                                 .setColor(es.wrongcolor)
-                                                .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                                .setFooter(client.getFooter(es)),
+                                                .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                                .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                                         ],
                                     });
                                 });
@@ -624,10 +626,10 @@ module.exports = {
                         return message.reply({
                             embeds: [
                                 new Discord.EmbedBuilder()
-                                    .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable12"]))
+                                    .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable12"]), 256))
                                     .setColor(es.wrongcolor)
-                                    .setDescription(`¡Operación Cancelada!`.substring(0, 2000))
-                                    .setFooter(client.getFooter(es)),
+                                    .setDescription(obeyUi.limit(`¡Operación Cancelada!`.substring(0, 2000), 4096))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es))),
                             ],
                         });
                     });
@@ -638,9 +640,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable15"]))
-                        .setDescription(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["setup"]["setup-membercount"]["variable15"]), 256))
+                        .setDescription(obeyUi.limit(`\`\`\`${String(JSON.stringify(e)).substring(0, 2000)}\`\`\``, 4096)),
                 ],
             });
         }

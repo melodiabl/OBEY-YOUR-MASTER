@@ -1,8 +1,10 @@
+const obeyUi = require("../../handlers/assets/system")
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -18,9 +20,9 @@ module.exports = {
         try {
             if (message.guild.banner) {
                 let embed = new Discord.EmbedBuilder()
-                    .setTitle(`**<:arrow:832598861813776394> SERVER BANNER:**`)
+                    .setTitle(`**${obeyUi.markup("icon.arrow-right")} SERVER BANNER:**`)
                     .setColor(es.color)
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .setDescription(
                         `[Download Link](${message.guild.bannerURL({ size: 1024 })})${message.guild.discoverySplash ? ` | [Link of Discovery Splash Image](${message.guild.discoverySplashURL({ size: 4096 })})` : ""}\n> This is the Image which is shown on the Top left Corner of this Server, where you see the Channels!`
                     )
@@ -28,9 +30,9 @@ module.exports = {
                 message.reply({ embeds: [embed] });
             } else {
                 let embed = new Discord.EmbedBuilder()
-                    .setTitle(`<:no:833101993668771842> **This Servidor has no Banner!**`)
+                    .setTitle(`${obeyUi.markup("icon.error")} **This Servidor has no Banner!**`)
                     .setColor(es.color)
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .setThumbnail(
                         es.thumb
                             ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
@@ -46,7 +48,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

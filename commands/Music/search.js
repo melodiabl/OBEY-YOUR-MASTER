@@ -1,3 +1,5 @@
+const obeyUi = require("../../handlers/assets/system")
+const { localeFor } = require('../../handlers/i18n')
 // Búsqueda estilo Soundy: pestañas 🎵 Pistas / 💿 Álbumes (clasificadas) + menú para elegir.
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js')
 const { searchDiscordCatalog, enqueueCatalogItem, itemInfo } = require('../../handlers/discordmusiccatalog')
@@ -17,7 +19,7 @@ module.exports = {
     const es = client.settings.get(message.guild.id, 'embed')
     const ls = client.settings.get(message.guild.id, 'language')
     if (!client.settings.get(message.guild.id, 'MUSIC')) {
-      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(client.la[ls].common.disabled.title)] }).catch(() => {})
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(obeyUi.limit(client.la[ls].common.disabled.title, 256))] }).catch(() => {})
     }
     const voiceChannel = message.member?.voice?.channel
     if (!voiceChannel) return message.reply({ embeds: [err('Debes estar en un canal de voz.')] }).catch(() => {})
@@ -28,7 +30,7 @@ module.exports = {
       return message.reply({ embeds: [err('No tengo permisos para unirme a tu canal de voz.')] }).catch(() => {})
     }
 
-    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(`${E.music} Buscando **${query.slice(0, 60)}**…`)] }).catch(() => null)
+    const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(obeyUi.limit(`${E.music} Buscando **${query.slice(0, 60)}**…`, 4096))] }).catch(() => null)
     if (!loading) return
 
     const results = await searchDiscordCatalog(client, query, { guildId: message.guild.id }).catch(() => ({ tracks: [], albums: [] }))
@@ -38,7 +40,7 @@ module.exports = {
 
     let tab = 'tracks'
     let items = results.tracks || []
-    await loading.edit({ embeds: [catEmbed(tab, items, query)], components: catRows(tab, items, 'srch') }).catch(() => {})
+    await loading.edit({ embeds: [catEmbed(tab, items, query, localeFor(client, message.guild.id))], components: catRows(tab, items, 'srch', localeFor(client, message.guild.id)) }).catch(() => {})
 
     const collector = loading.createMessageComponentCollector({ filter: i => i.user.id === message.author.id, time: 60_000 })
     collector.on('collect', async i => {
@@ -46,11 +48,11 @@ module.exports = {
         await i.deferUpdate()
         tab = i.customId.split(':')[1]
         items = results[tab] || []
-        return loading.edit({ embeds: [catEmbed(tab, items, query)], components: catRows(tab, items, 'srch') }).catch(() => {})
+        return loading.edit({ embeds: [catEmbed(tab, items, query, localeFor(client, message.guild.id))], components: catRows(tab, items, 'srch', localeFor(client, message.guild.id)) }).catch(() => {})
       }
       if (i.customId === 'srch_cancel') {
         await i.deferUpdate(); collector.stop('cancel')
-        return loading.edit({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription('🚫 Búsqueda cancelada.')], components: [] }).catch(() => {})
+        return loading.edit({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(obeyUi.owned('🚫 Búsqueda cancelada.'), 4096))], components: [] }).catch(() => {})
       }
       if (i.customId === 'srch_pick') {
         await i.deferUpdate(); collector.stop('picked')
@@ -58,7 +60,7 @@ module.exports = {
         const info = itemInfo(item)
         try {
           const queued = await enqueueCatalogItem(client, message, voiceChannel, item)
-          await loading.edit({ embeds: [addedEmbed(info, queued, message.author.id)], components: [] }).catch(() => {})
+          await loading.edit({ embeds: [addedEmbed(info, queued, message.author.id, localeFor(client, message.guild.id))], components: [] }).catch(() => {})
         } catch (e) {
           await loading.edit({ embeds: [err(e.message || String(e))], components: [] }).catch(() => {})
         }

@@ -1,8 +1,9 @@
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { GetUser, GetGlobalUser, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 const fetch = require("node-fetch");
 module.exports = {
@@ -50,10 +51,10 @@ module.exports = {
             const embed = new Discord.EmbedBuilder()
                 .setTitle(eval(client.la[ls]["cmds"]["info"]["color"]["variable1"]))
                 .addFields(
-                    { name: "<:arrow:832598861813776394> **Name**", value: json.name, inline: true },
-                    { name: "<:arrow:832598861813776394> **Hex**", value: json.hex, inline: true },
-                    { name: "<:arrow:832598861813776394> **RGB**", value: json.rgb, inline: true },
-                    { name: `<:arrow:832598861813776394> **${client.la[ls].cmds.info.color.brightershade}**`, value: json.brightened, inline: true }
+                    { name: obeyUi.owned("<:arrow:832598861813776394> **Name**"), value: json.name, inline: true },
+                    { name: obeyUi.owned("<:arrow:832598861813776394> **Hex**"), value: json.hex, inline: true },
+                    { name: obeyUi.owned("<:arrow:832598861813776394> **RGB**"), value: json.rgb, inline: true },
+                    { name: `${obeyUi.markup("icon.arrow-right")} **${client.la[ls].cmds.info.color.brightershade}**`, value: json.brightened, inline: true }
                 )
                 .setThumbnail(json.color_image)
                 .setColor(json.hex);

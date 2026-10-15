@@ -1,5 +1,7 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const config = require(`${process.cwd()}/botconfig/config.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { databasing } = require(`${process.cwd()}/handlers/functions`);
@@ -41,9 +43,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["react"]["variable1"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["react"]["variable2"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable1"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable2"]), 4096)),
                     ],
                 });
 
@@ -52,9 +54,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["react"]["variable3"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["react"]["variable4"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable3"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable4"]), 4096)),
                     ],
                 });
             if (args[0].length != 18)
@@ -62,8 +64,8 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["react"]["variable5"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable5"]), 256)),
                     ],
                 });
 
@@ -72,9 +74,9 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["react"]["variable6"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["react"]["variable7"])),
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                            .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable6"]), 256))
+                            .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable7"]), 4096)),
                     ],
                 });
 
@@ -86,15 +88,15 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["react"]["variable8"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["react"]["variable9"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable8"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable9"]), 4096)),
                         ],
                     });
                 message.channel.messages
                     .fetch(args[0])
                     .catch(() => {})
-                    .then(msg => msg.react(emojii).catch(() => {}))
+                    .then(msg => msg.react(obeyUi.reaction(emojii)).catch(() => {}))
                     .catch(() => {});
                 if (client.settings.get(message.guild.id, `adminlog`) != "no") {
                     try {
@@ -112,16 +114,16 @@ module.exports = {
                                                 : client.user.displayAvatarURL()
                                             : null
                                     )
-                                    .setFooter(client.getFooter(es))
-                                    .setAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() })
-                                    .setDescription(eval(client.la[ls]["cmds"]["administration"]["react"]["variable10"]))
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setAuthor(obeyMeta.asAuthor({ name: `${require("path").parse(__filename).name} | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable10"]), 4096))
                                     .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
                                     .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
                                     .setTimestamp()
-                                    .setFooter(client.getFooter(
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(
                                             "ID: " + message.author.id,
                                             message.author.displayAvatarURL()
-                                        )
+                                        ))
                                     ),
                             ],
                         });
@@ -136,24 +138,24 @@ module.exports = {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.wrongcolor)
-                                .setFooter(client.getFooter(es))
-                                .setTitle(eval(client.la[ls]["cmds"]["administration"]["react"]["variable13"]))
-                                .setDescription(eval(client.la[ls]["cmds"]["administration"]["react"]["variable14"])),
+                                .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable13"]), 256))
+                                .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable14"]), 4096)),
                         ],
                     });
                 message.channel.messages
                     .fetch(args[0])
                     .catch(() => {})
-                    .then(msg => msg.react(emojii).catch(() => {}))
+                    .then(msg => msg.react(obeyUi.reaction(emojii)).catch(() => {}))
                     .catch(e => {
                         console.log(String(e.stack).grey.bgRed);
                         return message.reply({
                             embeds: [
                                 new EmbedBuilder()
                                     .setColor(es.wrongcolor)
-                                    .setFooter(client.getFooter(es))
-                                    .setTitle(client.la[ls].common.erroroccur)
-                                    .setDescription(eval(client.la[ls]["cmds"]["administration"]["react"]["variable15"])),
+                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                                    .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                                    .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable15"]), 4096)),
                             ],
                         });
                     });
@@ -164,9 +166,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["react"]["variable16"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["react"]["variable17"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable16"]), 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["administration"]["react"]["variable17"]), 4096)),
                 ],
             });
         }

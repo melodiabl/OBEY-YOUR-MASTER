@@ -5050,6 +5050,4164 @@
             "sourcePath": "08_TICKETS_VISUAL/iconos/valoracion-atenuado.svg"
           }
         }
+      },
+      "icon.bank": {
+        "kind": "icon",
+        "fallback": "🏦",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_bank.png",
+            "bytes": 19086,
+            "sha256": "09206395d0dafb91fe34211af5a05bd3b4893092ece0ee02b11ad9c216f5d7ef",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.coins": {
+        "kind": "icon",
+        "fallback": "🪙",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_coins.png",
+            "bytes": 17833,
+            "sha256": "28e0b671f584935134018bd99b4c3760a8d14eef545e0a98e00cfec26ac23ba5",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.vote-up": {
+        "kind": "icon",
+        "fallback": "👍",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_vote-up.png",
+            "bytes": 18312,
+            "sha256": "8dc3c3277099229ba5b7942f15a57acc0cab5263a37630f06c08a797d54d5366",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.vote-down": {
+        "kind": "icon",
+        "fallback": "👎",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_vote-down.png",
+            "bytes": 14751,
+            "sha256": "ec487f6b9ba4a9d9016a48d374ce2180c18fce31c588c8e075395fa71bc4aac0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.music": {
+        "kind": "icon",
+        "fallback": "🎵",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_music.png",
+            "bytes": 13805,
+            "sha256": "4d8cee4889ac6c906991800c9c204105845fb585a178170f1f19a9ec54d4c6e2",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.album": {
+        "kind": "icon",
+        "fallback": "📀",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_album.png",
+            "bytes": 24786,
+            "sha256": "0a39690fbcc524794f5371460913fb61061ece0d4094cf10ed896cd1c3370052",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.link": {
+        "kind": "icon",
+        "fallback": "🔗",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_link.png",
+            "bytes": 22304,
+            "sha256": "bde1e3a3738e4e9fb573eadf34fc0d37b95c98f26437be6b28f647cbe171769b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.mute": {
+        "kind": "icon",
+        "fallback": "🔇",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_mute.png",
+            "bytes": 3218,
+            "sha256": "9e76a7c318260b84ff34db5aa3a1ac70f6648036f4f554528b73a39e99b7be4e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.clock": {
+        "kind": "icon",
+        "fallback": "⌛",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_clock.png",
+            "bytes": 5574,
+            "sha256": "f67a52e4d622c78de999b733d3ef3fad18116daf8bc687d96dca7b8e138f33ef",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.repeat-one": {
+        "kind": "icon",
+        "fallback": "🔂",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_repeat-one.png",
+            "bytes": 4688,
+            "sha256": "186ed4439c6088dc83058bfc484f1159b3c68afb128feccb6b9fb2169d279d30",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.page-previous": {
+        "kind": "icon",
+        "fallback": "◀️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_page-previous.png",
+            "bytes": 2651,
+            "sha256": "ccbb000077f61f15e57cffec3965d63863986b03dd74d132c77c956ce2ce1cae",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.page-next": {
+        "kind": "icon",
+        "fallback": "➡️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_page-next.png",
+            "bytes": 2599,
+            "sha256": "5bfb6bbb786b4d233d5ac0a794f3da98115a2e6520e27ab1f762a0988d226323",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.delete": {
+        "kind": "icon",
+        "fallback": "🗑",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_delete.png",
+            "bytes": 3096,
+            "sha256": "d085b8b02e6db18958d9ee3a907991feeb779d96b2749104bab4598445725df1",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.channel": {
+        "kind": "icon",
+        "fallback": "📢",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_channel.png",
+            "bytes": 2610,
+            "sha256": "e9472337d4ea98e28d5452df4cfb44a92a84c630056cbec196cb42acb44af600",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.conversation": {
+        "kind": "icon",
+        "fallback": "💬",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_conversation.png",
+            "bytes": 2480,
+            "sha256": "a497d8352074f91bb1d91e6a0c22f036c95212bfccb8d8fbd9c83792f83b1374",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.bot": {
+        "kind": "icon",
+        "fallback": "🤖",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_bot.png",
+            "bytes": 3269,
+            "sha256": "19e2483562777233fe463f5af37762906af5d69f914e85b1aaf9405da6234e53",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.code": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_code.png",
+            "bytes": 2834,
+            "sha256": "986af819808b6ca954b373ebeeb0342b29d556a1e44922238e3696ac8ee02572",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.crown": {
+        "kind": "icon",
+        "fallback": "👑",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_crown.png",
+            "bytes": 3361,
+            "sha256": "937621a7566b64567fd2391929363f6093f5e7599254f14d81df158c89c4533b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.boost": {
+        "kind": "icon",
+        "fallback": "⚡",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_boost.png",
+            "bytes": 3037,
+            "sha256": "0cc0959d847ed21359ef6bcc54cbeb28ece5008c688328bcc7670a0bbed07888",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.rewind": {
+        "kind": "icon",
+        "fallback": "⏪",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_rewind.png",
+            "bytes": 2734,
+            "sha256": "3643cce219ff4b19ffdc8857f72f393090c775a5af091a4bb59b1fabadf38223",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.forward": {
+        "kind": "icon",
+        "fallback": "⏩",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_forward.png",
+            "bytes": 2598,
+            "sha256": "f153ef513f3bfe220b802979abe4be747b605122a74cc7500a158f3d10e357b5",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.headphones": {
+        "kind": "icon",
+        "fallback": "🎧",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_headphones.png",
+            "bytes": 3316,
+            "sha256": "c6fe9a2731f77f347b0ee1a3a1afc6590c2a085f6afca6ce986c9cd9d50ec1b9",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.equalizer": {
+        "kind": "icon",
+        "fallback": "🎚",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_equalizer.png",
+            "bytes": 2501,
+            "sha256": "8c3e5c5ccf791baf7dc8e41fb073f8ef39de2e45c602829d02022cb964c64bf1",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.microphone": {
+        "kind": "icon",
+        "fallback": "🎤",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_microphone.png",
+            "bytes": 3473,
+            "sha256": "d4edc64a23350bc0b6e29bbd1fe560b78b86996ef5a2ae5fef660b2aaa8172a0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.globe": {
+        "kind": "icon",
+        "fallback": "🎌",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_globe.png",
+            "bytes": 3980,
+            "sha256": "043f6b6374146d59c1be92314d6678788e3d7b566682424e236ef6b309386d6c",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.home": {
+        "kind": "icon",
+        "fallback": "🏠",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_home.png",
+            "bytes": 2796,
+            "sha256": "0f19f38095b83c0624c89c65ed1718ba6c6ebbb367646c4995954f77ef29341d",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.pin": {
+        "kind": "icon",
+        "fallback": "📌",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_pin.png",
+            "bytes": 2518,
+            "sha256": "96a37e8e4ed145c231c8b95f9c95c0c336ae1d0b4c8f361f920c57d1fbea37a8",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.live": {
+        "kind": "icon",
+        "fallback": "📡",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_live.png",
+            "bytes": 4239,
+            "sha256": "e9fcc0f3d4916279b47a4c7d3e79afdf9194a776b6567b7d22d460694ae52631",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.cake": {
+        "kind": "icon",
+        "fallback": "🎂",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_cake.png",
+            "bytes": 2797,
+            "sha256": "6381d7cd253d146c768c83da8a3061bc440a06ec96236c26a95fa49f4c0eb459",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.gavel": {
+        "kind": "icon",
+        "fallback": "🔨",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_gavel.png",
+            "bytes": 2577,
+            "sha256": "41512c724d5c208c1f8b8549ab10650d000953d5da3036b165340c35fed05185",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.exit": {
+        "kind": "icon",
+        "fallback": "🚪",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_exit.png",
+            "bytes": 2213,
+            "sha256": "2cacc2d3a01bb90474249b7f21aeac390fb87812dd22756d1b217076e6238f3b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.join": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_join.png",
+            "bytes": 2219,
+            "sha256": "dbd7c4c57eb364a432892985e90a0e5229d6529afc8f6f54a09b638e2105009c",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.document": {
+        "kind": "icon",
+        "fallback": "📃",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_document.png",
+            "bytes": 2314,
+            "sha256": "a1831dbf8cd66f5de26937efc6ca66f6a03de2f749ad978c8e133c374b5854be",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.radio": {
+        "kind": "icon",
+        "fallback": "📻",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_radio.png",
+            "bytes": 3616,
+            "sha256": "c7e7f8117f10b1bb8735f2d9c7d611e5511cfa5a74e8046aa0e56687fc135020",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.medal": {
+        "kind": "icon",
+        "fallback": "🥇",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_medal.png",
+            "bytes": 4051,
+            "sha256": "a5421445b7629b6f1cccadef798392a6b5e5013f4a4817ea6b4495a3ee5e0bdc",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.shirt": {
+        "kind": "icon",
+        "fallback": "👕",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_shirt.png",
+            "bytes": 3298,
+            "sha256": "cdeceef18025ffcfdcbb6c07682501612f8e5960a7a2064c7554d18a8a68d97f",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.shoe": {
+        "kind": "icon",
+        "fallback": "👟",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_shoe.png",
+            "bytes": 2685,
+            "sha256": "1d75c290963e40469ced190c40203f90cab821380821d58c8a6c8de6aee02253",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.car": {
+        "kind": "icon",
+        "fallback": "🚗",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_car.png",
+            "bytes": 2520,
+            "sha256": "7e420ea8b5d716f939f36b573c3c266bdc6467f30fae385bc98b17abeb7c168a",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.bike": {
+        "kind": "icon",
+        "fallback": "🚲",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_bike.png",
+            "bytes": 3908,
+            "sha256": "b0d1f5f5382f9648984889ef797f4372c0f145754dccb51c0826edd6f3d5ec43",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.boat": {
+        "kind": "icon",
+        "fallback": "🛥️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_boat.png",
+            "bytes": 3183,
+            "sha256": "ff4797702970258f4b229e5eab19d48cd274a0923c53957a5b42b55531db1a6a",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.dog": {
+        "kind": "icon",
+        "fallback": "🐕",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_dog.png",
+            "bytes": 3988,
+            "sha256": "67f0bf1382ea8d50f26bd5a0632693ea8d3e2aced0547a0ff6dcc115ef3d98e8",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.fish": {
+        "kind": "icon",
+        "fallback": "🐟",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_fish.png",
+            "bytes": 3869,
+            "sha256": "03557c518ff382176dd6b66033ee1490f4dc47ce285dfe971610c2b152e870f0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.hamster": {
+        "kind": "icon",
+        "fallback": "🐹",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_hamster.png",
+            "bytes": 4542,
+            "sha256": "1cd1a5fac91ee2908e940c2726779108c86effd68727eae4de7daa2bf172b1cd",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.cat": {
+        "kind": "icon",
+        "fallback": "😺",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_cat.png",
+            "bytes": 3806,
+            "sha256": "726dab54fd31cc8b47f2f874084f9beaa975094b6717ca51fd8e6a87362fac71",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.bear": {
+        "kind": "icon",
+        "fallback": "🧸",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_bear.png",
+            "bytes": 5218,
+            "sha256": "10a8b59d768bec1c5c2a8e773300b6c7783c2ba6f9f519bd947ed37e6734d5cb",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.dice": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_dice.png",
+            "bytes": 3871,
+            "sha256": "3b0db778c85720ea8975f6fa4aad1de2927e5df31bb0e6c0568b257745d4313a",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.cards": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_cards.png",
+            "bytes": 2909,
+            "sha256": "b66e13781f8ea435d80c97b595f7e3eb7674a4838c3d3a54f560e8b6eb6ee97f",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.game-cross": {
+        "kind": "icon",
+        "fallback": "✖️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_game-cross.png",
+            "bytes": 2502,
+            "sha256": "3de7d5ed530fd7b16a0acf13aeed73ebe40faa2524b324218d75ab9b9457dbc3",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.game-ring": {
+        "kind": "icon",
+        "fallback": "⭕",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_game-ring.png",
+            "bytes": 3316,
+            "sha256": "e21305737eb4e118e8e35bbdd469868da8185e48047aef4ae219d73c9802c686",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.game-empty": {
+        "kind": "icon",
+        "fallback": "⚫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_game-empty.png",
+            "bytes": 2884,
+            "sha256": "cb35e1db6797c76b301f109f7a77fe3dcd1dfa5c98546f52a7dfd675cbec08b1",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.progress-filled": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_progress-filled.png",
+            "bytes": 2503,
+            "sha256": "e7d5ef74fcc8423134c531eef7eec238bccfb7cb1695b88caf605966b5757e7e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.progress-empty": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_progress-empty.png",
+            "bytes": 2506,
+            "sha256": "0982c488cfc35baaaccda7062110e8e9e4ea9c39c69de1356ed6ba1904fadaf4",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.leaf": {
+        "kind": "icon",
+        "fallback": "🍃",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_leaf.png",
+            "bytes": 3580,
+            "sha256": "a701a986db79549846c423603edbce543052f4a76534d789c901dc981e2ffbd3",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.gem": {
+        "kind": "icon",
+        "fallback": "💎",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_gem.png",
+            "bytes": 3340,
+            "sha256": "49ca342f608828188b1dd246e2f0fc72d76fe8fc6fcc73448a4a92f8756a2f9a",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.book": {
+        "kind": "icon",
+        "fallback": "📕",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_book.png",
+            "bytes": 3188,
+            "sha256": "5381e2be69fa0c179b293f9877e65bdfe7f8f2ed33d522e070895c72aab095ef",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.moon": {
+        "kind": "icon",
+        "fallback": "🌑",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_moon.png",
+            "bytes": 3940,
+            "sha256": "f19d9a8c13bb7073e5c3a6c2500c354ffbea7440f2544def2a1000e6e9a927c4",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.sun": {
+        "kind": "icon",
+        "fallback": "☀️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_sun.png",
+            "bytes": 3777,
+            "sha256": "66ed961c07a22dea7e7ceca30ce290790beb6dd12d51733cc62d9c9b2bdd4834",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.fire": {
+        "kind": "icon",
+        "fallback": "🔥",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_fire.png",
+            "bytes": 4942,
+            "sha256": "726520957de15c243a5a849445afdf00d3eea92387c515527917aaff064a3aa8",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.coffee": {
+        "kind": "icon",
+        "fallback": "☕",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_coffee.png",
+            "bytes": 3183,
+            "sha256": "8477af6fe02467e61aa659cc3e7aeaa0faf4ade68ebac8d82ffd3d423797373f",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.flower": {
+        "kind": "icon",
+        "fallback": "🌸",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_flower.png",
+            "bytes": 4761,
+            "sha256": "6c30b6bd0865825616e78953fba651f04550ad5009d4c2a8b8ecfc71f8f21c46",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.plane": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_plane.png",
+            "bytes": 3760,
+            "sha256": "a7472d5e7436e8b2239733cc869d8920579a932e7f60bfacbb1790f3c221a571",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.keyboard": {
+        "kind": "icon",
+        "fallback": "⌨️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_keyboard.png",
+            "bytes": 2732,
+            "sha256": "1698bc1eef0cc2ff34fddc2ec2a13188235203690bc0a052de53b8bd2583d274",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.phone": {
+        "kind": "icon",
+        "fallback": "📳",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_phone.png",
+            "bytes": 2953,
+            "sha256": "c1cc597f528b815d818f34c897fb10f647e9e4b10d4466b0e44d51617eee9493",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.monitor": {
+        "kind": "icon",
+        "fallback": "💻",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_monitor.png",
+            "bytes": 2573,
+            "sha256": "98d3bc748665599d6fc3c443e97b5c0d4b4b0c55f592abca009d33209562efca",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.arrow-up": {
+        "kind": "icon",
+        "fallback": "⬆️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_arrow-up.png",
+            "bytes": 2284,
+            "sha256": "e52ceba1cc5608b0307b6762dd70c7557ca4d268a7458db557f6cd33a2434dbd",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.arrow-down": {
+        "kind": "icon",
+        "fallback": "⬇️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_arrow-down.png",
+            "bytes": 2281,
+            "sha256": "fbf49ad90d244f0a647cc141d2daaab0e70c06fb1a47938eec2374ce5afe20b8",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.arrow-left": {
+        "kind": "icon",
+        "fallback": "⬅️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_arrow-left.png",
+            "bytes": 2011,
+            "sha256": "7552ed14074612844041869de3e238b217220a7dbe36a06c4f8079cab500f24b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.arrow-right": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_arrow-right.png",
+            "bytes": 2003,
+            "sha256": "dc6fe54f91211cf4b43e1f097eecc0ffa901ec4acbca66b7beecbd8608626fc9",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.eye": {
+        "kind": "icon",
+        "fallback": "👀",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_eye.png",
+            "bytes": 4506,
+            "sha256": "19a4660fa4cdb9c111b7d8052b8db2aa65993d5f95fbc0d07424dd7412451327",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.archive": {
+        "kind": "icon",
+        "fallback": "🗃",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_archive.png",
+            "bytes": 2213,
+            "sha256": "485b5dc37b5df93f1ce1ef8e1848b4bd23d1a1247a01331357e6a84a71044eaf",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.palette": {
+        "kind": "icon",
+        "fallback": "🎨",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_palette.png",
+            "bytes": 4166,
+            "sha256": "3bf6a69c258077d8017a4c061366d0cb161b8fe73a8b50f9859da6d476bac5ea",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.skull": {
+        "kind": "icon",
+        "fallback": "💀",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_skull.png",
+            "bytes": 4018,
+            "sha256": "2447fb3c3f4abf236642c0b7fa76de2a72db8628d1d31abc1f0e5626d8553904",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ghost": {
+        "kind": "icon",
+        "fallback": "👻",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ghost.png",
+            "bytes": 3712,
+            "sha256": "46fed3cd23348d775978ac9674e391cc3dd988e540bfdb7888a7203ad41db484",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.heart-broken": {
+        "kind": "icon",
+        "fallback": "💔",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_heart-broken.png",
+            "bytes": 4467,
+            "sha256": "c3f28072c757373c7892cf37eb26a2969d26d132ab9069a6a25cd79e254f0b39",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.badge-id": {
+        "kind": "icon",
+        "fallback": "🪪",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_badge-id.png",
+            "bytes": 3478,
+            "sha256": "e969a091a85f583131b96f7b9e67e9c2beacf26dc9fc0fbb6830ae026c9637d7",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.bag": {
+        "kind": "icon",
+        "fallback": "💼",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_bag.png",
+            "bytes": 2806,
+            "sha256": "3aafef9951da15d09e210e353ea2289eebac00010e7b5177dc776e1118b63d57",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.hat": {
+        "kind": "icon",
+        "fallback": "🎩",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_hat.png",
+            "bytes": 3015,
+            "sha256": "9229503a3a0d9baa13d9220502677dcdbd9835f05f8884e3d7de5b8a6cb53bcd",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.swords": {
+        "kind": "icon",
+        "fallback": "⚔️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_swords.png",
+            "bytes": 4770,
+            "sha256": "9493ebb7753a26503b1573f535d4e5655a9cd992f780c908cc0decb228de7ffd",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.wave": {
+        "kind": "icon",
+        "fallback": "🌊",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_wave.png",
+            "bytes": 3048,
+            "sha256": "e7ec9623df738f91c7f121168e989beb73cb33ddfdb3e4eb613dfa47ca304139",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.rocket": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_rocket.png",
+            "bytes": 4820,
+            "sha256": "78b4ee6b0b34bb94235173edc7141b65e091836c632265e1cb0abc7ffacb821a",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.location": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_location.png",
+            "bytes": 4228,
+            "sha256": "4d596f3f200a7700b947f91b74eb42dfcb3c6cfd887780aac9174721e43c7a99",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.food": {
+        "kind": "icon",
+        "fallback": "🍔",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_food.png",
+            "bytes": 2815,
+            "sha256": "58bd9acf1e316aa01931908ee65662a5f1d608f94eb8315b17744019227657f0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.hand": {
+        "kind": "icon",
+        "fallback": "🤘",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_hand.png",
+            "bytes": 3738,
+            "sha256": "239ce504e2fb5dfd64e47f02afec1aafabc771da18ccc729ccc2be9ef7872d3d",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.kiss": {
+        "kind": "icon",
+        "fallback": "💋",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_kiss.png",
+            "bytes": 3441,
+            "sha256": "4585bf01d35247de982c780eb95f2c171c2f4c7e4b1a28a042df65b3066d09ab",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.dance": {
+        "kind": "icon",
+        "fallback": "💃",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_dance.png",
+            "bytes": 3794,
+            "sha256": "0740dc508ee7121e2c5189da45fdd51338fda9a1f9fbd82db5b4150a53438946",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.bed": {
+        "kind": "icon",
+        "fallback": "🛏️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_bed.png",
+            "bytes": 2152,
+            "sha256": "5e3c004c67fa5f4c0ab76d3349a363b436f76a01ffbc4d835f5586cd95965f5c",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.bat": {
+        "kind": "icon",
+        "fallback": "🦇",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_bat.png",
+            "bytes": 4041,
+            "sha256": "1825f8eb2f72423ebd34466255518956318d2420fd80cc4dccc4cc94e4e623fd",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.guitar": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_guitar.png",
+            "bytes": 3813,
+            "sha256": "bb16a62c53b2c6be2b5465115835a2b46d8f8e9b098e2d25657479be0d978229",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.piano": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_piano.png",
+            "bytes": 2819,
+            "sha256": "6610ca4d4b98f61378385bb67ed1552710ec01f5967c05fed7ff448c384f3cbb",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ball": {
+        "kind": "icon",
+        "fallback": "🎱",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ball.png",
+            "bytes": 4726,
+            "sha256": "4d7090155a9a4be22a8cf302ed61d054bd70f7abe03e136753dc8d25b7731d57",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.crystal": {
+        "kind": "icon",
+        "fallback": "🔮",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_crystal.png",
+            "bytes": 3909,
+            "sha256": "5be45c5e68522e063f4f1e2d2226f964a7d8931100b51039a4962e2fde512cd0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.leaf-palm": {
+        "kind": "icon",
+        "fallback": "🌴",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_leaf-palm.png",
+            "bytes": 4145,
+            "sha256": "d33e6c46eb3f0acda2aa7f1c634828803b4b1f164525c4fcb6335b962939e442",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.no-mention": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_no-mention.png",
+            "bytes": 4262,
+            "sha256": "f50291a371a2c549ea0087a25eba54e8ead9764d694215b289435350371061a5",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.notify-off": {
+        "kind": "icon",
+        "fallback": "🔕",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_notify-off.png",
+            "bytes": 3159,
+            "sha256": "0a013c2f55c6dfe9b21f084b8a2f5b887d525e09408832beb836f81cff464642",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-tomato": {
+        "kind": "icon",
+        "fallback": "🍅",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-tomato.png",
+            "bytes": 3908,
+            "sha256": "712669175696734ed26ee50f877bfda91b42d2c97b00ec584b47644ae0b6f76b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-avocado": {
+        "kind": "icon",
+        "fallback": "🥑",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-avocado.png",
+            "bytes": 4987,
+            "sha256": "91d8799af44e7a107e23ff328f88a28d7a5f1d3fd4cd0595d9edbff5183cb18e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-cucumber": {
+        "kind": "icon",
+        "fallback": "🥒",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-cucumber.png",
+            "bytes": 3717,
+            "sha256": "9369b3a975af81f2e9f2ef32dc92cce69e3679574de925c7f7c701fd132107fc",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-eggplant": {
+        "kind": "icon",
+        "fallback": "🍆",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-eggplant.png",
+            "bytes": 4068,
+            "sha256": "4fb4c076805c8ffa16bb145189e38367ab72f00404e59c5010c72074dc7bbded",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-kiwi": {
+        "kind": "icon",
+        "fallback": "🥝",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-kiwi.png",
+            "bytes": 4556,
+            "sha256": "70545fc0bd6c590be40c9cf1cf25301b0456c62c4baf638d35c006d7b791bca3",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-grapes": {
+        "kind": "icon",
+        "fallback": "🍇",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-grapes.png",
+            "bytes": 3757,
+            "sha256": "f30e5c723475f38ed4efb41f34728cf92394ac74b6c3ececf43f69b982421650",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-watermelon": {
+        "kind": "icon",
+        "fallback": "🍉",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-watermelon.png",
+            "bytes": 4071,
+            "sha256": "ddbc0d442592013a729cf679ed2ec22e06ac2541ebe74678c51f9e8b197b0dee",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-orange": {
+        "kind": "icon",
+        "fallback": "🍊",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-orange.png",
+            "bytes": 3960,
+            "sha256": "e88535f5cf9df1083fa590384149bfdd5d37cdd1199d9c58989ec27656eded93",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-apple-green": {
+        "kind": "icon",
+        "fallback": "🍏",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-apple-green.png",
+            "bytes": 4133,
+            "sha256": "5e4bf50dea11fe4cd97da68150439e714777f7492af4f3bf96c6f36b0ce91b77",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-bomb": {
+        "kind": "icon",
+        "fallback": "💣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-bomb.png",
+            "bytes": 3854,
+            "sha256": "7f368cae6a95a36160a89d459f7d81212a306a39062bcf0337161fd9d69a59f4",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-strawberry": {
+        "kind": "icon",
+        "fallback": "🍓",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-strawberry.png",
+            "bytes": 4498,
+            "sha256": "cce6325ab3402eb0d133e28529d5f0cc9d1b449dabcc129ac4bf2f07958a3cb3",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-apple-red": {
+        "kind": "icon",
+        "fallback": "🍎",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-apple-red.png",
+            "bytes": 4484,
+            "sha256": "e15f3647b76627981fa5e286f538afea84d3b67e05e07f2f94ccc69150b6b66f",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-cherry": {
+        "kind": "icon",
+        "fallback": "🍒",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-cherry.png",
+            "bytes": 4186,
+            "sha256": "5cd6cdb9bbacee56abe8e3f54df2b86bb8a486933486bd8bc5d7cf901385ac15",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-melon": {
+        "kind": "icon",
+        "fallback": "🍈",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-melon.png",
+            "bytes": 5009,
+            "sha256": "5d24bc341ae161cdf9ec3fb0b146b9e16ce40c5d57a53fe2888271884d9dfc4d",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-lemon": {
+        "kind": "icon",
+        "fallback": "🍋",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-lemon.png",
+            "bytes": 4350,
+            "sha256": "1aa1b79ab0636bba573eef92355b86f7dcb3e41540ecb35d79348a6f0f2cb22b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slot-banana": {
+        "kind": "icon",
+        "fallback": "🍌",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slot-banana.png",
+            "bytes": 4619,
+            "sha256": "d29949f2a844a1e0396649dae09c1a855688f51e76571d91e686149da8894b32",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.piece-red": {
+        "kind": "icon",
+        "fallback": "🔴",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_piece-red.png",
+            "bytes": 2623,
+            "sha256": "5c70ee07cae8dde4c1cd0647cec8837e0278a21161299c0c849c5fdedab2d2f0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.piece-yellow": {
+        "kind": "icon",
+        "fallback": "🟠",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_piece-yellow.png",
+            "bytes": 2210,
+            "sha256": "a6bb79279c2915a36524d4176b2781554545358e2d901b1148f3f68af4b5204c",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.piece-blue": {
+        "kind": "icon",
+        "fallback": "🔵",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_piece-blue.png",
+            "bytes": 2135,
+            "sha256": "580d14262eef8ac5bac3ac69269b6a3241ee2fc92ac56d85a2b1f0cbf7467597",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.piece-green": {
+        "kind": "icon",
+        "fallback": "🟢",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_piece-green.png",
+            "bytes": 2550,
+            "sha256": "24e9f50f22b33f7ad71ac8373f42df91ef05d667266d569d99eb380b7c31686e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-smile": {
+        "kind": "icon",
+        "fallback": "😀",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-smile.png",
+            "bytes": 4335,
+            "sha256": "5a795b9eede9e54911b0da9edf2fc7732d007849319b0384ba295765a4c7841e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-sad": {
+        "kind": "icon",
+        "fallback": "😟",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-sad.png",
+            "bytes": 4334,
+            "sha256": "e0ea0819fcd3ed01a8a28b3d527a7dc8c69f6ee9dce9a3fba078a31ca9b10e33",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-cry": {
+        "kind": "icon",
+        "fallback": "😓",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-cry.png",
+            "bytes": 4443,
+            "sha256": "3da426a2b28bf7104d20c2ba1a0ff44dc82628724297de9c3690c54bb93dc747",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-angry": {
+        "kind": "icon",
+        "fallback": "😤",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-angry.png",
+            "bytes": 4848,
+            "sha256": "f5acde0ef5822a32b8a716e7a08d9f26f7a77e7561382f5e7eb74f84887f14e2",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-wink": {
+        "kind": "icon",
+        "fallback": "😉",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-wink.png",
+            "bytes": 4387,
+            "sha256": "6a96b98bcf019e99b2705496bae0d335e033d413a92b8c557a8bd1be53c778c9",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-love": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-love.png",
+            "bytes": 4433,
+            "sha256": "d900a42795861eba6077bf9075f5f7f4da2a5b23507b590095d22a0eb4baf262",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-surprise": {
+        "kind": "icon",
+        "fallback": "😳",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-surprise.png",
+            "bytes": 4506,
+            "sha256": "f4547e4f3c663bf6943470d4632ac3cae404641c0f42355a3816af7af799c006",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-thinking": {
+        "kind": "icon",
+        "fallback": "🤔",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-thinking.png",
+            "bytes": 4468,
+            "sha256": "f84c642718f8225beddb4f00b97cd41cfe4a4c208db150535e1c3dfb647faf6e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-cool": {
+        "kind": "icon",
+        "fallback": "😎",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-cool.png",
+            "bytes": 4299,
+            "sha256": "06939314e6551da184cb133d4e861b61e62ef66e06bef23eec064bc620a8f08a",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-sleep": {
+        "kind": "icon",
+        "fallback": "💤",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-sleep.png",
+            "bytes": 3887,
+            "sha256": "dff0b448ef490b4bd6658430fc06986e0809d8f286addad9f40e1cd1c91fc9d4",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-neutral": {
+        "kind": "icon",
+        "fallback": "💩",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-neutral.png",
+            "bytes": 3903,
+            "sha256": "f82905a56920e9484e4cc8dfef36ccf4f14661583e2b0e224d51b53eca1adf3c",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-laugh": {
+        "kind": "icon",
+        "fallback": "😂",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-laugh.png",
+            "bytes": 4473,
+            "sha256": "804a8efcc20a783d68bac8a21570d211d266cb3c5a1d1f30e0f84aaa3373b100",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.face-fear": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_face-fear.png",
+            "bytes": 4865,
+            "sha256": "69bdddd2a17308cfb76f14cbd396edd3f05091dae17ff64665222029888a1099",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-gb": {
+        "kind": "icon",
+        "fallback": "🇬🇧",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-gb.png",
+            "bytes": 3547,
+            "sha256": "9ef7c86d144df71966ea98e983a20d761781f605d835b5681d37af0ac24834f2",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-de": {
+        "kind": "icon",
+        "fallback": "🇩🇪",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-de.png",
+            "bytes": 3202,
+            "sha256": "459f5692565f9f2d294bb2fa927ef7262efb7c9dc290fc634f8ee1b352e5705b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-fr": {
+        "kind": "icon",
+        "fallback": "🇫🇷",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-fr.png",
+            "bytes": 3080,
+            "sha256": "6ce571252dd7c6796afe1afb086f70174fed154c86ec376a1d88e20b51791c25",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-it": {
+        "kind": "icon",
+        "fallback": "🇮🇹",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-it.png",
+            "bytes": 2707,
+            "sha256": "9cd36c7c7e4e4986e4f07d9c9afc92a00d97f6f38ce294ba774a422d55c83ff6",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-es": {
+        "kind": "icon",
+        "fallback": "🇪🇸",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-es.png",
+            "bytes": 3283,
+            "sha256": "c5f99ca4aae704ad207a31196a3d217852f331faae2fb8540fde49abc3f935dc",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-in": {
+        "kind": "icon",
+        "fallback": "🇮🇳",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-in.png",
+            "bytes": 3104,
+            "sha256": "c4d0f7e167e3e39b84aa6785302e63ebacddcfc39c1028c38bb5dc8b5a90ab71",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-nl": {
+        "kind": "icon",
+        "fallback": "🇳🇱",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-nl.png",
+            "bytes": 3169,
+            "sha256": "c339b3102997657f4525a1f8979b0e0b811ec169a853b3f713f655c044c63b26",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-tr": {
+        "kind": "icon",
+        "fallback": "🇹🇷",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-tr.png",
+            "bytes": 3072,
+            "sha256": "7553fdaa82fca87f121ca5708e97f81e6434810875aff41ef31822a9adee278f",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-ir": {
+        "kind": "icon",
+        "fallback": "🇮🇷",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-ir.png",
+            "bytes": 3054,
+            "sha256": "6347fb22cecbd34b1bf9efb9fe590d7a6211805d69fab03410da7e0d7af8bedb",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-us": {
+        "kind": "icon",
+        "fallback": "🇺🇸",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-us.png",
+            "bytes": 3497,
+            "sha256": "02ee579eb235bd843a93b4f13287f536c2d4f4f3032ff271d8361a23e1accd2a",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-at": {
+        "kind": "icon",
+        "fallback": "🇦🇹",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-at.png",
+            "bytes": 3246,
+            "sha256": "5f2b67f7233d3c613dae28634af19196de26404a93f051de2be16b04fb910795",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-be": {
+        "kind": "icon",
+        "fallback": "🇧🇪",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-be.png",
+            "bytes": 3151,
+            "sha256": "ba44049466482342bccbbdeea5ecec74624f9e19cf3ae27f141b00dcaf657bbe",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-ba": {
+        "kind": "icon",
+        "fallback": "🇧🇦",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-ba.png",
+            "bytes": 3429,
+            "sha256": "d5e2a8067de499661e4d69513183ad7b2cc56cf8afac9d2c9fd26b6fe3116c3b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-cz": {
+        "kind": "icon",
+        "fallback": "🇨🇿",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-cz.png",
+            "bytes": 3439,
+            "sha256": "a2bcf92493571d3961e110371b31ad019b0123a83597ef168ef8435098b7a4dd",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-dk": {
+        "kind": "icon",
+        "fallback": "🇩🇰",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-dk.png",
+            "bytes": 3293,
+            "sha256": "8ffb4ba8024090b7860c49264ceeb12d04bf7aadcc764fc520cd0bae6055d296",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-hu": {
+        "kind": "icon",
+        "fallback": "🇭🇺",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-hu.png",
+            "bytes": 3115,
+            "sha256": "3d8c5d3bca799c9f1bc67cb89e917c94182ba1a22bdd56e98726d46fe72a942e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-ie": {
+        "kind": "icon",
+        "fallback": "🇮🇪",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-ie.png",
+            "bytes": 2789,
+            "sha256": "49f0e3119a4b0cd1d5f82981d45d5339f73c4bff85b598d490b0dbfebc981cfd",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-lu": {
+        "kind": "icon",
+        "fallback": "🇱🇺",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-lu.png",
+            "bytes": 3076,
+            "sha256": "ad7671d187b392ecdc194eb5293c3f4b56cbe2841e2fe556b9bb1ba5290c0d18",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-ro": {
+        "kind": "icon",
+        "fallback": "🇷🇴",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-ro.png",
+            "bytes": 3490,
+            "sha256": "19489cc3ca5b2045c79ea75877217feec2805e776925065347594deb92c2c8d9",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-rs": {
+        "kind": "icon",
+        "fallback": "🇷🇸",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-rs.png",
+            "bytes": 3485,
+            "sha256": "79bc0a19b4d291e38d4677c73601b0361dde88d8b3790d186dbe3dacfd8a6815",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-se": {
+        "kind": "icon",
+        "fallback": "🇸🇪",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-se.png",
+            "bytes": 3261,
+            "sha256": "839214c09f76a159a6a0be12cc9e07340c7a4293a1a286ca324cb54922cede47",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.locale-ua": {
+        "kind": "icon",
+        "fallback": "🇺🇦",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_locale-ua.png",
+            "bytes": 3431,
+            "sha256": "001a3b8e49203485c15f4f90f0420549fdf8364476f3678cb9a4e1a89bb71a4e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-0": {
+        "kind": "icon",
+        "fallback": "0️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-0.png",
+            "bytes": 2970,
+            "sha256": "ce197a550973e1f7539ce383930cad55ec78192c73feae4537cf39e0ca626607",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-1": {
+        "kind": "icon",
+        "fallback": "1️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-1.png",
+            "bytes": 2222,
+            "sha256": "c2f81471074ccc5ffc2bc76b3e6b9011ff298f93a0ebea9b9585a2dd90f9e66e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-2": {
+        "kind": "icon",
+        "fallback": "2️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-2.png",
+            "bytes": 2679,
+            "sha256": "ab8e9b110555adb00c01440b5a00e1400b07bb3ff4e1de1e4864411f2af7e98a",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-3": {
+        "kind": "icon",
+        "fallback": "3️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-3.png",
+            "bytes": 2861,
+            "sha256": "54954d780cb46bbcda8ec9d901bae2b8eb5c65563564c79565681ab2e7abe2b6",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-4": {
+        "kind": "icon",
+        "fallback": "4️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-4.png",
+            "bytes": 2389,
+            "sha256": "56005745c83ede5318ebc2807656fd2a0e241f82c1b5ad71d7d70d08e44cd2b4",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-5": {
+        "kind": "icon",
+        "fallback": "5️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-5.png",
+            "bytes": 2751,
+            "sha256": "c16a354bbe1d10edef1ef6e61c2818039f0eeb3a3ca860c4fe08f2c07b000d11",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-6": {
+        "kind": "icon",
+        "fallback": "6️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-6.png",
+            "bytes": 3028,
+            "sha256": "549fe778ae62bbc48c044eb4addb10e4b1241a8c3aca5c2ec068e913951e93ab",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-7": {
+        "kind": "icon",
+        "fallback": "7️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-7.png",
+            "bytes": 2539,
+            "sha256": "065b62eca732df07bbf966a56b2ccdd91c26d8a001261abbefbc1ce82e1b4419",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-8": {
+        "kind": "icon",
+        "fallback": "8️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-8.png",
+            "bytes": 3115,
+            "sha256": "1ee3afaa5bf6a389d83cbe09abd6bfa049ad3b5f7ff2f0c65a4c78b160c042ff",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-9": {
+        "kind": "icon",
+        "fallback": "9️⃣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-9.png",
+            "bytes": 3004,
+            "sha256": "9e1df0903898ded2fc90eda1cc97622b3ebcca9482d94f411d62dd3f61c45dcd",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-10": {
+        "kind": "icon",
+        "fallback": "🔟",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-10.png",
+            "bytes": 2866,
+            "sha256": "077c58d280b855fdbc41690fbc921a8375632f129f66fce5a00776ab834d525e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-11": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-11.png",
+            "bytes": 2362,
+            "sha256": "072d2926a78d2a685265c2d948dbcccf4818b49f2ea7e137488aa0cc0debf379",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-12": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-12.png",
+            "bytes": 2742,
+            "sha256": "c4ce612e07489a0f35f94659b45233d732157623eae02b58862434601a6e1493",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-13": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-13.png",
+            "bytes": 2836,
+            "sha256": "9612ba8d08f92de71a94de6c2d342eb5ac75512403ae4af8b40805b3c82e4615",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-14": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-14.png",
+            "bytes": 2561,
+            "sha256": "16b1b54f52e4da61b238417d60c0c975ee830ab85b3a223caa0252176198caf0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-15": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-15.png",
+            "bytes": 2693,
+            "sha256": "ad8a5e203b9bf25e997877eefdf77052f16e98883ae98575cc39c334dde1ebd0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-16": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-16.png",
+            "bytes": 2953,
+            "sha256": "2ab4ac8835e29099c811111e6cd9a065f78507d45ea7bab9785b0a28895610fc",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-17": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-17.png",
+            "bytes": 2569,
+            "sha256": "9a27ef91e737a01cc438ae56138c2327f28b0701463a3965d9a5dd76222ed593",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-18": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-18.png",
+            "bytes": 3006,
+            "sha256": "8ab6b1c93dde7c6606fffce81207a766f76b2c28f27f0b720aae8f9566a09ee3",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-19": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-19.png",
+            "bytes": 2943,
+            "sha256": "e7136ba41dc39ab761341e364ce70bc308f882091aa5ee95db4f4147b163cda5",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-20": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-20.png",
+            "bytes": 3111,
+            "sha256": "f76e15cb37a4142bbb4a1d8617877006235bb1b93f825773800336b49a85dd56",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-21": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-21.png",
+            "bytes": 2708,
+            "sha256": "9fbc04cce2291efe8b7acea850489e71e3ce1b983e8ce38680709a7b98251465",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-22": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-22.png",
+            "bytes": 2957,
+            "sha256": "a2ff0c323615e699483660fbecb7553929d6a13d1cf4e02af9c8a1a64a8e59b0",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-23": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-23.png",
+            "bytes": 3086,
+            "sha256": "8f132de14fb4b517d08353c1501cf97084f57d415ec46a9d839907ac61675392",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-24": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-24.png",
+            "bytes": 2811,
+            "sha256": "50af2b24fc65d33d57d8319b95fd2f6e234b9ab27e85d4f30dc2597a7ae70e69",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal-25": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal-25.png",
+            "bytes": 2955,
+            "sha256": "dd2a35b42ee5e2cf906f2629d75213a46aa242724ea54829cb058c2ab89de3ed",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.connection": {
+        "kind": "icon",
+        "fallback": "🏓",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_connection.png",
+            "bytes": 2238,
+            "sha256": "8ee49f9b960c59b2944322785b18061aac8484613046504059af7bfa5ba99a7e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.drop": {
+        "kind": "icon",
+        "fallback": "🩸",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_drop.png",
+            "bytes": 3570,
+            "sha256": "395a2edc4eb4d6ed772a7fddc30dffa0a52697f1c4a2197d4e6a379700af6398",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.slow": {
+        "kind": "icon",
+        "fallback": "🐢",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_slow.png",
+            "bytes": 4097,
+            "sha256": "0cd9f90d221e367609079f6e3c00090ebca8bf43106260704ea107d167c5a2c8",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.cloud": {
+        "kind": "icon",
+        "fallback": "☁️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_cloud.png",
+            "bytes": 3667,
+            "sha256": "124e8c9c173782d40c467a5975d5daf0774166d319b239feb3d76f8f2ed5f540",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.new": {
+        "kind": "icon",
+        "fallback": "🆕",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_new.png",
+            "bytes": 3942,
+            "sha256": "0119ccb42cdb3827b0dadabc2664adb88091a48858aa1f04ebfc03be9df0d7d4",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.ordinal": {
+        "kind": "icon",
+        "fallback": "🔢",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_ordinal.png",
+            "bytes": 2371,
+            "sha256": "cb0b88ef2a33448592885e409e71916898b805bd558ed349d8fab402a37bdb45",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.cut": {
+        "kind": "icon",
+        "fallback": "✂️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_cut.png",
+            "bytes": 3536,
+            "sha256": "b3225fcdc780da3bddc3a856f04f66bb172a4229ef4cc436489a75d9093a131b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.dot": {
+        "kind": "icon",
+        "fallback": "🔘",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_dot.png",
+            "bytes": 3236,
+            "sha256": "6ce44fcdb26e16d52bb7ae8587a5120c4178a8649ea517d9f4d410529056d297",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.masks": {
+        "kind": "icon",
+        "fallback": "🎭",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_masks.png",
+            "bytes": 4134,
+            "sha256": "0bd2c1edaf4b2add498ac054632dba14169461a36d10b7fd9e38bb74208920db",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.resize": {
+        "kind": "icon",
+        "fallback": "↔",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_resize.png",
+            "bytes": 2985,
+            "sha256": "33dd3970732610005b5bc61dc8254feed8bfaf9fb6d856bfed06066f1b8c5111",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.tooth": {
+        "kind": "icon",
+        "fallback": "🦷",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_tooth.png",
+            "bytes": 4199,
+            "sha256": "32dc9d10aefb80437c874a9a15b1a6eaf644469c94eccbc96a14253fe0d39918",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.rob": {
+        "kind": "icon",
+        "fallback": "🦹",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_rob.png",
+            "bytes": 3872,
+            "sha256": "6a59487d81ddc74c0fb48c62ff78cf8adf4b03c69dd9a85b4b58ad71c9c85695",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.target": {
+        "kind": "icon",
+        "fallback": "🎯",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_target.png",
+            "bytes": 5127,
+            "sha256": "f5b3e60c64c99c5f577eef0ed5cf5dc04b449ab4ff8ee977c94b041426c4f32b",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.piece-purple": {
+        "kind": "icon",
+        "fallback": "🟣",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_piece-purple.png",
+            "bytes": 2915,
+            "sha256": "fc157b8111b694074a39dce44a43d114b0f7818b5e5617e4bb1d4446206a25d8",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.move": {
+        "kind": "icon",
+        "fallback": "▫️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_move.png",
+            "bytes": 2895,
+            "sha256": "2b2edecb0e7174bdd97ab03a8f2db3338ef16d08c02bf6dbcb5dd4c942701c1d",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.bird": {
+        "kind": "icon",
+        "fallback": "🐦",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_bird.png",
+            "bytes": 4282,
+            "sha256": "486dcdbba898ae33e883a61984aade69576635077b9916b26d85b63e52a78f14",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.video": {
+        "kind": "icon",
+        "fallback": "🎥",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_video.png",
+            "bytes": 3156,
+            "sha256": "d20930b53db7eed8bc9e6cc7435bffe907b1c130f2245102517e531b686f6a41",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.baby": {
+        "kind": "icon",
+        "fallback": "🍼",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_baby.png",
+            "bytes": 2457,
+            "sha256": "379c691f238ec706a6f7370604234f6906c2101dd08f7d5de06fe2c2cf60a320",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.letter-a": {
+        "kind": "icon",
+        "fallback": "🅰️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_letter-a.png",
+            "bytes": 3614,
+            "sha256": "3ceafa50563e606606662501e5d46749d4255a9ebf41ed8fa6f11004da965a45",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.letter-b": {
+        "kind": "icon",
+        "fallback": "🅱️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_letter-b.png",
+            "bytes": 3471,
+            "sha256": "146bdfd442232fe1382ae37a6faff391d213f3923a2aa52d4b3e316af6ad036c",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.letter-m": {
+        "kind": "icon",
+        "fallback": "Ⓜ️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_letter-m.png",
+            "bytes": 3506,
+            "sha256": "27cd5cfde8acc4df09b0b35123db0fb5bf3e811006cc6fbe8ee0bb0992857c26",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.letter-o": {
+        "kind": "icon",
+        "fallback": "🅾️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_letter-o.png",
+            "bytes": 3845,
+            "sha256": "a42d6bb3df6a4a0b5590c266a169e674daa4cf9cdc3952adc58b730603cf750e",
+            "width": 128,
+            "height": 128
+          }
+        }
+      },
+      "icon.letter-p": {
+        "kind": "icon",
+        "fallback": "🅿️",
+        "fixtureOnly": false,
+        "destinations": {
+          "discordVariant": "production_png",
+          "webDarkVariant": "production_png",
+          "webLightVariant": "production_png",
+          "webDisabledVariant": "production_png"
+        },
+        "files": {
+          "production_png": {
+            "variant": "production_png",
+            "path": "production/icon_letter-p.png",
+            "bytes": 3281,
+            "sha256": "2d6e4b7d21506ba0706d3f2e0eab20d631f524d9632a6021e2736788883aeb9b",
+            "width": 128,
+            "height": 128
+          }
+        }
       }
     },
     "aliases": {
@@ -5071,7 +9229,7 @@
       "collection": "icon.image",
       "currency": "icon.wallet",
       "decoration": "icon.brush",
-      "delete": "icon.close",
+      "delete": "icon.delete",
       "diff": "icon.edit",
       "document": "icon.transcript",
       "download": "icon.export",
@@ -5086,19 +9244,19 @@
       "globe": "icon.feed",
       "heart": "icon.like",
       "help": "icon.help",
-      "history": "icon.info",
+      "history": "icon.clock",
       "home": "icon.profile",
       "info": "icon.info",
       "kick": "icon.shield",
       "level": "icon.levels",
-      "link": "icon.info",
+      "link": "icon.link",
       "live": "icon.play",
       "loading": "icon.loading",
       "lock": "icon.lock",
       "logout": "icon.close",
       "lyrics": "icon.lyrics",
       "minus": "icon.volume-down",
-      "music": "icon.lyrics",
+      "music": "icon.music",
       "muted": "icon.volume-down",
       "next": "icon.skip",
       "pause": "icon.pause",
@@ -5799,6 +9957,1590 @@
         "animated": false,
         "name": "obey_ticket_valoracion_c715667e",
         "sha256": "c715667ec4c62aa87e819faabd8dc5fe8ce1a03f41bf386ef602d55c1a112037"
+      },
+      {
+        "key": "icon.bank",
+        "storageKey": "bank",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_bank_09206395",
+        "sha256": "09206395d0dafb91fe34211af5a05bd3b4893092ece0ee02b11ad9c216f5d7ef"
+      },
+      {
+        "key": "icon.coins",
+        "storageKey": "coins",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_coins_28e0b671",
+        "sha256": "28e0b671f584935134018bd99b4c3760a8d14eef545e0a98e00cfec26ac23ba5"
+      },
+      {
+        "key": "icon.vote-up",
+        "storageKey": "vote_up",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_vote_up_8dc3c327",
+        "sha256": "8dc3c3277099229ba5b7942f15a57acc0cab5263a37630f06c08a797d54d5366"
+      },
+      {
+        "key": "icon.vote-down",
+        "storageKey": "vote_down",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_vote_down_ec487f6b",
+        "sha256": "ec487f6b9ba4a9d9016a48d374ce2180c18fce31c588c8e075395fa71bc4aac0"
+      },
+      {
+        "key": "icon.music",
+        "storageKey": "music",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_music_4d8cee48",
+        "sha256": "4d8cee4889ac6c906991800c9c204105845fb585a178170f1f19a9ec54d4c6e2"
+      },
+      {
+        "key": "icon.album",
+        "storageKey": "album",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_album_0a39690f",
+        "sha256": "0a39690fbcc524794f5371460913fb61061ece0d4094cf10ed896cd1c3370052"
+      },
+      {
+        "key": "icon.link",
+        "storageKey": "link",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_link_bde1e3a3",
+        "sha256": "bde1e3a3738e4e9fb573eadf34fc0d37b95c98f26437be6b28f647cbe171769b"
+      },
+      {
+        "key": "icon.mute",
+        "storageKey": "mute",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_mute_9e76a7c3",
+        "sha256": "9e76a7c318260b84ff34db5aa3a1ac70f6648036f4f554528b73a39e99b7be4e"
+      },
+      {
+        "key": "icon.clock",
+        "storageKey": "clock",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_clock_f67a52e4",
+        "sha256": "f67a52e4d622c78de999b733d3ef3fad18116daf8bc687d96dca7b8e138f33ef"
+      },
+      {
+        "key": "icon.repeat-one",
+        "storageKey": "repeat_one",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_repeat_one_186ed443",
+        "sha256": "186ed4439c6088dc83058bfc484f1159b3c68afb128feccb6b9fb2169d279d30"
+      },
+      {
+        "key": "icon.page-previous",
+        "storageKey": "page_previous",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_page_previous_ccbb0000",
+        "sha256": "ccbb000077f61f15e57cffec3965d63863986b03dd74d132c77c956ce2ce1cae"
+      },
+      {
+        "key": "icon.page-next",
+        "storageKey": "page_next",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_page_next_5bfb6bbb",
+        "sha256": "5bfb6bbb786b4d233d5ac0a794f3da98115a2e6520e27ab1f762a0988d226323"
+      },
+      {
+        "key": "icon.delete",
+        "storageKey": "delete",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_delete_d085b8b0",
+        "sha256": "d085b8b02e6db18958d9ee3a907991feeb779d96b2749104bab4598445725df1"
+      },
+      {
+        "key": "icon.channel",
+        "storageKey": "channel",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_channel_e9472337",
+        "sha256": "e9472337d4ea98e28d5452df4cfb44a92a84c630056cbec196cb42acb44af600"
+      },
+      {
+        "key": "icon.conversation",
+        "storageKey": "conversation",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_conversation_a497d835",
+        "sha256": "a497d8352074f91bb1d91e6a0c22f036c95212bfccb8d8fbd9c83792f83b1374"
+      },
+      {
+        "key": "icon.bot",
+        "storageKey": "bot",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_bot_19e24835",
+        "sha256": "19e2483562777233fe463f5af37762906af5d69f914e85b1aaf9405da6234e53"
+      },
+      {
+        "key": "icon.code",
+        "storageKey": "code",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_code_986af819",
+        "sha256": "986af819808b6ca954b373ebeeb0342b29d556a1e44922238e3696ac8ee02572"
+      },
+      {
+        "key": "icon.crown",
+        "storageKey": "crown",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_crown_937621a7",
+        "sha256": "937621a7566b64567fd2391929363f6093f5e7599254f14d81df158c89c4533b"
+      },
+      {
+        "key": "icon.boost",
+        "storageKey": "boost",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_boost_0cc0959d",
+        "sha256": "0cc0959d847ed21359ef6bcc54cbeb28ece5008c688328bcc7670a0bbed07888"
+      },
+      {
+        "key": "icon.rewind",
+        "storageKey": "rewind",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_rewind_3643cce2",
+        "sha256": "3643cce219ff4b19ffdc8857f72f393090c775a5af091a4bb59b1fabadf38223"
+      },
+      {
+        "key": "icon.forward",
+        "storageKey": "forward",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_forward_f153ef51",
+        "sha256": "f153ef513f3bfe220b802979abe4be747b605122a74cc7500a158f3d10e357b5"
+      },
+      {
+        "key": "icon.headphones",
+        "storageKey": "headphones",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_headphones_c6fe9a27",
+        "sha256": "c6fe9a2731f77f347b0ee1a3a1afc6590c2a085f6afca6ce986c9cd9d50ec1b9"
+      },
+      {
+        "key": "icon.equalizer",
+        "storageKey": "equalizer",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_equalizer_8c3e5c5c",
+        "sha256": "8c3e5c5ccf791baf7dc8e41fb073f8ef39de2e45c602829d02022cb964c64bf1"
+      },
+      {
+        "key": "icon.microphone",
+        "storageKey": "microphone",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_microphone_d4edc64a",
+        "sha256": "d4edc64a23350bc0b6e29bbd1fe560b78b86996ef5a2ae5fef660b2aaa8172a0"
+      },
+      {
+        "key": "icon.globe",
+        "storageKey": "globe",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_globe_043f6b63",
+        "sha256": "043f6b6374146d59c1be92314d6678788e3d7b566682424e236ef6b309386d6c"
+      },
+      {
+        "key": "icon.home",
+        "storageKey": "home",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_home_0f19f380",
+        "sha256": "0f19f38095b83c0624c89c65ed1718ba6c6ebbb367646c4995954f77ef29341d"
+      },
+      {
+        "key": "icon.pin",
+        "storageKey": "pin",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_pin_96a37e8e",
+        "sha256": "96a37e8e4ed145c231c8b95f9c95c0c336ae1d0b4c8f361f920c57d1fbea37a8"
+      },
+      {
+        "key": "icon.live",
+        "storageKey": "live",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_live_e9fcc0f3",
+        "sha256": "e9fcc0f3d4916279b47a4c7d3e79afdf9194a776b6567b7d22d460694ae52631"
+      },
+      {
+        "key": "icon.cake",
+        "storageKey": "cake",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_cake_6381d7cd",
+        "sha256": "6381d7cd253d146c768c83da8a3061bc440a06ec96236c26a95fa49f4c0eb459"
+      },
+      {
+        "key": "icon.gavel",
+        "storageKey": "gavel",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_gavel_41512c72",
+        "sha256": "41512c724d5c208c1f8b8549ab10650d000953d5da3036b165340c35fed05185"
+      },
+      {
+        "key": "icon.exit",
+        "storageKey": "exit",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_exit_2cacc2d3",
+        "sha256": "2cacc2d3a01bb90474249b7f21aeac390fb87812dd22756d1b217076e6238f3b"
+      },
+      {
+        "key": "icon.join",
+        "storageKey": "join",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_join_dbd7c4c5",
+        "sha256": "dbd7c4c57eb364a432892985e90a0e5229d6529afc8f6f54a09b638e2105009c"
+      },
+      {
+        "key": "icon.document",
+        "storageKey": "document",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_document_a1831dbf",
+        "sha256": "a1831dbf8cd66f5de26937efc6ca66f6a03de2f749ad978c8e133c374b5854be"
+      },
+      {
+        "key": "icon.radio",
+        "storageKey": "radio",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_radio_c7e7f811",
+        "sha256": "c7e7f8117f10b1bb8735f2d9c7d611e5511cfa5a74e8046aa0e56687fc135020"
+      },
+      {
+        "key": "icon.medal",
+        "storageKey": "medal",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_medal_a5421445",
+        "sha256": "a5421445b7629b6f1cccadef798392a6b5e5013f4a4817ea6b4495a3ee5e0bdc"
+      },
+      {
+        "key": "icon.shirt",
+        "storageKey": "shirt",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_shirt_cdeceef1",
+        "sha256": "cdeceef18025ffcfdcbb6c07682501612f8e5960a7a2064c7554d18a8a68d97f"
+      },
+      {
+        "key": "icon.shoe",
+        "storageKey": "shoe",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_shoe_1d75c290",
+        "sha256": "1d75c290963e40469ced190c40203f90cab821380821d58c8a6c8de6aee02253"
+      },
+      {
+        "key": "icon.car",
+        "storageKey": "car",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_car_7e420ea8",
+        "sha256": "7e420ea8b5d716f939f36b573c3c266bdc6467f30fae385bc98b17abeb7c168a"
+      },
+      {
+        "key": "icon.bike",
+        "storageKey": "bike",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_bike_b0d1f5f5",
+        "sha256": "b0d1f5f5382f9648984889ef797f4372c0f145754dccb51c0826edd6f3d5ec43"
+      },
+      {
+        "key": "icon.boat",
+        "storageKey": "boat",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_boat_ff479770",
+        "sha256": "ff4797702970258f4b229e5eab19d48cd274a0923c53957a5b42b55531db1a6a"
+      },
+      {
+        "key": "icon.dog",
+        "storageKey": "dog",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_dog_67f0bf13",
+        "sha256": "67f0bf1382ea8d50f26bd5a0632693ea8d3e2aced0547a0ff6dcc115ef3d98e8"
+      },
+      {
+        "key": "icon.fish",
+        "storageKey": "fish",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_fish_03557c51",
+        "sha256": "03557c518ff382176dd6b66033ee1490f4dc47ce285dfe971610c2b152e870f0"
+      },
+      {
+        "key": "icon.hamster",
+        "storageKey": "hamster",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_hamster_1cd1a5fa",
+        "sha256": "1cd1a5fac91ee2908e940c2726779108c86effd68727eae4de7daa2bf172b1cd"
+      },
+      {
+        "key": "icon.cat",
+        "storageKey": "cat",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_cat_726dab54",
+        "sha256": "726dab54fd31cc8b47f2f874084f9beaa975094b6717ca51fd8e6a87362fac71"
+      },
+      {
+        "key": "icon.bear",
+        "storageKey": "bear",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_bear_10a8b59d",
+        "sha256": "10a8b59d768bec1c5c2a8e773300b6c7783c2ba6f9f519bd947ed37e6734d5cb"
+      },
+      {
+        "key": "icon.dice",
+        "storageKey": "dice",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_dice_3b0db778",
+        "sha256": "3b0db778c85720ea8975f6fa4aad1de2927e5df31bb0e6c0568b257745d4313a"
+      },
+      {
+        "key": "icon.cards",
+        "storageKey": "cards",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_cards_b66e1378",
+        "sha256": "b66e13781f8ea435d80c97b595f7e3eb7674a4838c3d3a54f560e8b6eb6ee97f"
+      },
+      {
+        "key": "icon.game-cross",
+        "storageKey": "game_cross",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_game_cross_3de7d5ed",
+        "sha256": "3de7d5ed530fd7b16a0acf13aeed73ebe40faa2524b324218d75ab9b9457dbc3"
+      },
+      {
+        "key": "icon.game-ring",
+        "storageKey": "game_ring",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_game_ring_e2130573",
+        "sha256": "e21305737eb4e118e8e35bbdd469868da8185e48047aef4ae219d73c9802c686"
+      },
+      {
+        "key": "icon.game-empty",
+        "storageKey": "game_empty",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_game_empty_cb35e1db",
+        "sha256": "cb35e1db6797c76b301f109f7a77fe3dcd1dfa5c98546f52a7dfd675cbec08b1"
+      },
+      {
+        "key": "icon.progress-filled",
+        "storageKey": "progress_filled",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_progress_filled_e7d5ef74",
+        "sha256": "e7d5ef74fcc8423134c531eef7eec238bccfb7cb1695b88caf605966b5757e7e"
+      },
+      {
+        "key": "icon.progress-empty",
+        "storageKey": "progress_empty",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_progress_empty_0982c488",
+        "sha256": "0982c488cfc35baaaccda7062110e8e9e4ea9c39c69de1356ed6ba1904fadaf4"
+      },
+      {
+        "key": "icon.leaf",
+        "storageKey": "leaf",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_leaf_a701a986",
+        "sha256": "a701a986db79549846c423603edbce543052f4a76534d789c901dc981e2ffbd3"
+      },
+      {
+        "key": "icon.gem",
+        "storageKey": "gem",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_gem_49ca342f",
+        "sha256": "49ca342f608828188b1dd246e2f0fc72d76fe8fc6fcc73448a4a92f8756a2f9a"
+      },
+      {
+        "key": "icon.book",
+        "storageKey": "book",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_book_5381e2be",
+        "sha256": "5381e2be69fa0c179b293f9877e65bdfe7f8f2ed33d522e070895c72aab095ef"
+      },
+      {
+        "key": "icon.moon",
+        "storageKey": "moon",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_moon_f19d9a8c",
+        "sha256": "f19d9a8c13bb7073e5c3a6c2500c354ffbea7440f2544def2a1000e6e9a927c4"
+      },
+      {
+        "key": "icon.sun",
+        "storageKey": "sun",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_sun_66ed961c",
+        "sha256": "66ed961c07a22dea7e7ceca30ce290790beb6dd12d51733cc62d9c9b2bdd4834"
+      },
+      {
+        "key": "icon.fire",
+        "storageKey": "fire",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_fire_72652095",
+        "sha256": "726520957de15c243a5a849445afdf00d3eea92387c515527917aaff064a3aa8"
+      },
+      {
+        "key": "icon.coffee",
+        "storageKey": "coffee",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_coffee_8477af6f",
+        "sha256": "8477af6fe02467e61aa659cc3e7aeaa0faf4ade68ebac8d82ffd3d423797373f"
+      },
+      {
+        "key": "icon.flower",
+        "storageKey": "flower",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_flower_6c30b6bd",
+        "sha256": "6c30b6bd0865825616e78953fba651f04550ad5009d4c2a8b8ecfc71f8f21c46"
+      },
+      {
+        "key": "icon.plane",
+        "storageKey": "plane",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_plane_a7472d5e",
+        "sha256": "a7472d5e7436e8b2239733cc869d8920579a932e7f60bfacbb1790f3c221a571"
+      },
+      {
+        "key": "icon.keyboard",
+        "storageKey": "keyboard",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_keyboard_1698bc1e",
+        "sha256": "1698bc1eef0cc2ff34fddc2ec2a13188235203690bc0a052de53b8bd2583d274"
+      },
+      {
+        "key": "icon.phone",
+        "storageKey": "phone",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_phone_c1cc597f",
+        "sha256": "c1cc597f528b815d818f34c897fb10f647e9e4b10d4466b0e44d51617eee9493"
+      },
+      {
+        "key": "icon.monitor",
+        "storageKey": "monitor",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_monitor_98d3bc74",
+        "sha256": "98d3bc748665599d6fc3c443e97b5c0d4b4b0c55f592abca009d33209562efca"
+      },
+      {
+        "key": "icon.arrow-up",
+        "storageKey": "arrow_up",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_arrow_up_e52ceba1",
+        "sha256": "e52ceba1cc5608b0307b6762dd70c7557ca4d268a7458db557f6cd33a2434dbd"
+      },
+      {
+        "key": "icon.arrow-down",
+        "storageKey": "arrow_down",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_arrow_down_fbf49ad9",
+        "sha256": "fbf49ad90d244f0a647cc141d2daaab0e70c06fb1a47938eec2374ce5afe20b8"
+      },
+      {
+        "key": "icon.arrow-left",
+        "storageKey": "arrow_left",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_arrow_left_7552ed14",
+        "sha256": "7552ed14074612844041869de3e238b217220a7dbe36a06c4f8079cab500f24b"
+      },
+      {
+        "key": "icon.arrow-right",
+        "storageKey": "arrow_right",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_arrow_right_dc6fe54f",
+        "sha256": "dc6fe54f91211cf4b43e1f097eecc0ffa901ec4acbca66b7beecbd8608626fc9"
+      },
+      {
+        "key": "icon.eye",
+        "storageKey": "eye",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_eye_19a4660f",
+        "sha256": "19a4660fa4cdb9c111b7d8052b8db2aa65993d5f95fbc0d07424dd7412451327"
+      },
+      {
+        "key": "icon.archive",
+        "storageKey": "archive",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_archive_485b5dc3",
+        "sha256": "485b5dc37b5df93f1ce1ef8e1848b4bd23d1a1247a01331357e6a84a71044eaf"
+      },
+      {
+        "key": "icon.palette",
+        "storageKey": "palette",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_palette_3bf6a69c",
+        "sha256": "3bf6a69c258077d8017a4c061366d0cb161b8fe73a8b50f9859da6d476bac5ea"
+      },
+      {
+        "key": "icon.skull",
+        "storageKey": "skull",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_skull_2447fb3c",
+        "sha256": "2447fb3c3f4abf236642c0b7fa76de2a72db8628d1d31abc1f0e5626d8553904"
+      },
+      {
+        "key": "icon.ghost",
+        "storageKey": "ghost",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ghost_46fed3cd",
+        "sha256": "46fed3cd23348d775978ac9674e391cc3dd988e540bfdb7888a7203ad41db484"
+      },
+      {
+        "key": "icon.heart-broken",
+        "storageKey": "heart_broken",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_heart_broken_c3f28072",
+        "sha256": "c3f28072c757373c7892cf37eb26a2969d26d132ab9069a6a25cd79e254f0b39"
+      },
+      {
+        "key": "icon.badge-id",
+        "storageKey": "badge_id",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_badge_id_e969a091",
+        "sha256": "e969a091a85f583131b96f7b9e67e9c2beacf26dc9fc0fbb6830ae026c9637d7"
+      },
+      {
+        "key": "icon.bag",
+        "storageKey": "bag",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_bag_3aafef99",
+        "sha256": "3aafef9951da15d09e210e353ea2289eebac00010e7b5177dc776e1118b63d57"
+      },
+      {
+        "key": "icon.hat",
+        "storageKey": "hat",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_hat_9229503a",
+        "sha256": "9229503a3a0d9baa13d9220502677dcdbd9835f05f8884e3d7de5b8a6cb53bcd"
+      },
+      {
+        "key": "icon.swords",
+        "storageKey": "swords",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_swords_9493ebb7",
+        "sha256": "9493ebb7753a26503b1573f535d4e5655a9cd992f780c908cc0decb228de7ffd"
+      },
+      {
+        "key": "icon.wave",
+        "storageKey": "wave",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_wave_e7ec9623",
+        "sha256": "e7ec9623df738f91c7f121168e989beb73cb33ddfdb3e4eb613dfa47ca304139"
+      },
+      {
+        "key": "icon.rocket",
+        "storageKey": "rocket",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_rocket_78b4ee6b",
+        "sha256": "78b4ee6b0b34bb94235173edc7141b65e091836c632265e1cb0abc7ffacb821a"
+      },
+      {
+        "key": "icon.location",
+        "storageKey": "location",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_location_4d596f3f",
+        "sha256": "4d596f3f200a7700b947f91b74eb42dfcb3c6cfd887780aac9174721e43c7a99"
+      },
+      {
+        "key": "icon.food",
+        "storageKey": "food",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_food_58bd9acf",
+        "sha256": "58bd9acf1e316aa01931908ee65662a5f1d608f94eb8315b17744019227657f0"
+      },
+      {
+        "key": "icon.hand",
+        "storageKey": "hand",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_hand_239ce504",
+        "sha256": "239ce504e2fb5dfd64e47f02afec1aafabc771da18ccc729ccc2be9ef7872d3d"
+      },
+      {
+        "key": "icon.kiss",
+        "storageKey": "kiss",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_kiss_4585bf01",
+        "sha256": "4585bf01d35247de982c780eb95f2c171c2f4c7e4b1a28a042df65b3066d09ab"
+      },
+      {
+        "key": "icon.dance",
+        "storageKey": "dance",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_dance_0740dc50",
+        "sha256": "0740dc508ee7121e2c5189da45fdd51338fda9a1f9fbd82db5b4150a53438946"
+      },
+      {
+        "key": "icon.bed",
+        "storageKey": "bed",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_bed_5e3c004c",
+        "sha256": "5e3c004c67fa5f4c0ab76d3349a363b436f76a01ffbc4d835f5586cd95965f5c"
+      },
+      {
+        "key": "icon.bat",
+        "storageKey": "bat",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_bat_1825f8eb",
+        "sha256": "1825f8eb2f72423ebd34466255518956318d2420fd80cc4dccc4cc94e4e623fd"
+      },
+      {
+        "key": "icon.guitar",
+        "storageKey": "guitar",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_guitar_bb16a62c",
+        "sha256": "bb16a62c53b2c6be2b5465115835a2b46d8f8e9b098e2d25657479be0d978229"
+      },
+      {
+        "key": "icon.piano",
+        "storageKey": "piano",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_piano_6610ca4d",
+        "sha256": "6610ca4d4b98f61378385bb67ed1552710ec01f5967c05fed7ff448c384f3cbb"
+      },
+      {
+        "key": "icon.ball",
+        "storageKey": "ball",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ball_4d709015",
+        "sha256": "4d7090155a9a4be22a8cf302ed61d054bd70f7abe03e136753dc8d25b7731d57"
+      },
+      {
+        "key": "icon.crystal",
+        "storageKey": "crystal",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_crystal_5be45c5e",
+        "sha256": "5be45c5e68522e063f4f1e2d2226f964a7d8931100b51039a4962e2fde512cd0"
+      },
+      {
+        "key": "icon.leaf-palm",
+        "storageKey": "leaf_palm",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_leaf_palm_d33e6c46",
+        "sha256": "d33e6c46eb3f0acda2aa7f1c634828803b4b1f164525c4fcb6335b962939e442"
+      },
+      {
+        "key": "icon.no-mention",
+        "storageKey": "no_mention",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_no_mention_f50291a3",
+        "sha256": "f50291a371a2c549ea0087a25eba54e8ead9764d694215b289435350371061a5"
+      },
+      {
+        "key": "icon.notify-off",
+        "storageKey": "notify_off",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_notify_off_0a013c2f",
+        "sha256": "0a013c2f55c6dfe9b21f084b8a2f5b887d525e09408832beb836f81cff464642"
+      },
+      {
+        "key": "icon.slot-tomato",
+        "storageKey": "slot_tomato",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_tomato_71266917",
+        "sha256": "712669175696734ed26ee50f877bfda91b42d2c97b00ec584b47644ae0b6f76b"
+      },
+      {
+        "key": "icon.slot-avocado",
+        "storageKey": "slot_avocado",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_avocado_91d8799a",
+        "sha256": "91d8799af44e7a107e23ff328f88a28d7a5f1d3fd4cd0595d9edbff5183cb18e"
+      },
+      {
+        "key": "icon.slot-cucumber",
+        "storageKey": "slot_cucumber",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_cucumber_9369b3a9",
+        "sha256": "9369b3a975af81f2e9f2ef32dc92cce69e3679574de925c7f7c701fd132107fc"
+      },
+      {
+        "key": "icon.slot-eggplant",
+        "storageKey": "slot_eggplant",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_eggplant_4fb4c076",
+        "sha256": "4fb4c076805c8ffa16bb145189e38367ab72f00404e59c5010c72074dc7bbded"
+      },
+      {
+        "key": "icon.slot-kiwi",
+        "storageKey": "slot_kiwi",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_kiwi_70545fc0",
+        "sha256": "70545fc0bd6c590be40c9cf1cf25301b0456c62c4baf638d35c006d7b791bca3"
+      },
+      {
+        "key": "icon.slot-grapes",
+        "storageKey": "slot_grapes",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_grapes_f30e5c72",
+        "sha256": "f30e5c723475f38ed4efb41f34728cf92394ac74b6c3ececf43f69b982421650"
+      },
+      {
+        "key": "icon.slot-watermelon",
+        "storageKey": "slot_watermelon",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_watermelon_ddbc0d44",
+        "sha256": "ddbc0d442592013a729cf679ed2ec22e06ac2541ebe74678c51f9e8b197b0dee"
+      },
+      {
+        "key": "icon.slot-orange",
+        "storageKey": "slot_orange",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_orange_e88535f5",
+        "sha256": "e88535f5cf9df1083fa590384149bfdd5d37cdd1199d9c58989ec27656eded93"
+      },
+      {
+        "key": "icon.slot-apple-green",
+        "storageKey": "slot_apple_green",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_apple_green_5e4bf50d",
+        "sha256": "5e4bf50dea11fe4cd97da68150439e714777f7492af4f3bf96c6f36b0ce91b77"
+      },
+      {
+        "key": "icon.slot-bomb",
+        "storageKey": "slot_bomb",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_bomb_7f368cae",
+        "sha256": "7f368cae6a95a36160a89d459f7d81212a306a39062bcf0337161fd9d69a59f4"
+      },
+      {
+        "key": "icon.slot-strawberry",
+        "storageKey": "slot_strawberry",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_strawberry_cce6325a",
+        "sha256": "cce6325ab3402eb0d133e28529d5f0cc9d1b449dabcc129ac4bf2f07958a3cb3"
+      },
+      {
+        "key": "icon.slot-apple-red",
+        "storageKey": "slot_apple_red",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_apple_red_e15f3647",
+        "sha256": "e15f3647b76627981fa5e286f538afea84d3b67e05e07f2f94ccc69150b6b66f"
+      },
+      {
+        "key": "icon.slot-cherry",
+        "storageKey": "slot_cherry",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_cherry_5cd6cdb9",
+        "sha256": "5cd6cdb9bbacee56abe8e3f54df2b86bb8a486933486bd8bc5d7cf901385ac15"
+      },
+      {
+        "key": "icon.slot-melon",
+        "storageKey": "slot_melon",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_melon_5d24bc34",
+        "sha256": "5d24bc341ae161cdf9ec3fb0b146b9e16ce40c5d57a53fe2888271884d9dfc4d"
+      },
+      {
+        "key": "icon.slot-lemon",
+        "storageKey": "slot_lemon",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_lemon_1aa1b79a",
+        "sha256": "1aa1b79ab0636bba573eef92355b86f7dcb3e41540ecb35d79348a6f0f2cb22b"
+      },
+      {
+        "key": "icon.slot-banana",
+        "storageKey": "slot_banana",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slot_banana_d29949f2",
+        "sha256": "d29949f2a844a1e0396649dae09c1a855688f51e76571d91e686149da8894b32"
+      },
+      {
+        "key": "icon.piece-red",
+        "storageKey": "piece_red",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_piece_red_5c70ee07",
+        "sha256": "5c70ee07cae8dde4c1cd0647cec8837e0278a21161299c0c849c5fdedab2d2f0"
+      },
+      {
+        "key": "icon.piece-yellow",
+        "storageKey": "piece_yellow",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_piece_yellow_a6bb7927",
+        "sha256": "a6bb79279c2915a36524d4176b2781554545358e2d901b1148f3f68af4b5204c"
+      },
+      {
+        "key": "icon.piece-blue",
+        "storageKey": "piece_blue",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_piece_blue_580d1426",
+        "sha256": "580d14262eef8ac5bac3ac69269b6a3241ee2fc92ac56d85a2b1f0cbf7467597"
+      },
+      {
+        "key": "icon.piece-green",
+        "storageKey": "piece_green",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_piece_green_24e9f50f",
+        "sha256": "24e9f50f22b33f7ad71ac8373f42df91ef05d667266d569d99eb380b7c31686e"
+      },
+      {
+        "key": "icon.face-smile",
+        "storageKey": "face_smile",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_smile_5a795b9e",
+        "sha256": "5a795b9eede9e54911b0da9edf2fc7732d007849319b0384ba295765a4c7841e"
+      },
+      {
+        "key": "icon.face-sad",
+        "storageKey": "face_sad",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_sad_e0ea0819",
+        "sha256": "e0ea0819fcd3ed01a8a28b3d527a7dc8c69f6ee9dce9a3fba078a31ca9b10e33"
+      },
+      {
+        "key": "icon.face-cry",
+        "storageKey": "face_cry",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_cry_3da426a2",
+        "sha256": "3da426a2b28bf7104d20c2ba1a0ff44dc82628724297de9c3690c54bb93dc747"
+      },
+      {
+        "key": "icon.face-angry",
+        "storageKey": "face_angry",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_angry_f5acde0e",
+        "sha256": "f5acde0ef5822a32b8a716e7a08d9f26f7a77e7561382f5e7eb74f84887f14e2"
+      },
+      {
+        "key": "icon.face-wink",
+        "storageKey": "face_wink",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_wink_6a96b98b",
+        "sha256": "6a96b98bcf019e99b2705496bae0d335e033d413a92b8c557a8bd1be53c778c9"
+      },
+      {
+        "key": "icon.face-love",
+        "storageKey": "face_love",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_love_d900a427",
+        "sha256": "d900a42795861eba6077bf9075f5f7f4da2a5b23507b590095d22a0eb4baf262"
+      },
+      {
+        "key": "icon.face-surprise",
+        "storageKey": "face_surprise",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_surprise_f4547e4f",
+        "sha256": "f4547e4f3c663bf6943470d4632ac3cae404641c0f42355a3816af7af799c006"
+      },
+      {
+        "key": "icon.face-thinking",
+        "storageKey": "face_thinking",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_thinking_f84c6427",
+        "sha256": "f84c642718f8225beddb4f00b97cd41cfe4a4c208db150535e1c3dfb647faf6e"
+      },
+      {
+        "key": "icon.face-cool",
+        "storageKey": "face_cool",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_cool_06939314",
+        "sha256": "06939314e6551da184cb133d4e861b61e62ef66e06bef23eec064bc620a8f08a"
+      },
+      {
+        "key": "icon.face-sleep",
+        "storageKey": "face_sleep",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_sleep_dff0b448",
+        "sha256": "dff0b448ef490b4bd6658430fc06986e0809d8f286addad9f40e1cd1c91fc9d4"
+      },
+      {
+        "key": "icon.face-neutral",
+        "storageKey": "face_neutral",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_neutral_f82905a5",
+        "sha256": "f82905a56920e9484e4cc8dfef36ccf4f14661583e2b0e224d51b53eca1adf3c"
+      },
+      {
+        "key": "icon.face-laugh",
+        "storageKey": "face_laugh",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_laugh_804a8efc",
+        "sha256": "804a8efcc20a783d68bac8a21570d211d266cb3c5a1d1f30e0f84aaa3373b100"
+      },
+      {
+        "key": "icon.face-fear",
+        "storageKey": "face_fear",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_face_fear_69bdddd2",
+        "sha256": "69bdddd2a17308cfb76f14cbd396edd3f05091dae17ff64665222029888a1099"
+      },
+      {
+        "key": "icon.locale-gb",
+        "storageKey": "locale_gb",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_gb_9ef7c86d",
+        "sha256": "9ef7c86d144df71966ea98e983a20d761781f605d835b5681d37af0ac24834f2"
+      },
+      {
+        "key": "icon.locale-de",
+        "storageKey": "locale_de",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_de_459f5692",
+        "sha256": "459f5692565f9f2d294bb2fa927ef7262efb7c9dc290fc634f8ee1b352e5705b"
+      },
+      {
+        "key": "icon.locale-fr",
+        "storageKey": "locale_fr",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_fr_6ce57125",
+        "sha256": "6ce571252dd7c6796afe1afb086f70174fed154c86ec376a1d88e20b51791c25"
+      },
+      {
+        "key": "icon.locale-it",
+        "storageKey": "locale_it",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_it_9cd36c7c",
+        "sha256": "9cd36c7c7e4e4986e4f07d9c9afc92a00d97f6f38ce294ba774a422d55c83ff6"
+      },
+      {
+        "key": "icon.locale-es",
+        "storageKey": "locale_es",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_es_c5f99ca4",
+        "sha256": "c5f99ca4aae704ad207a31196a3d217852f331faae2fb8540fde49abc3f935dc"
+      },
+      {
+        "key": "icon.locale-in",
+        "storageKey": "locale_in",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_in_c4d0f7e1",
+        "sha256": "c4d0f7e167e3e39b84aa6785302e63ebacddcfc39c1028c38bb5dc8b5a90ab71"
+      },
+      {
+        "key": "icon.locale-nl",
+        "storageKey": "locale_nl",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_nl_c339b310",
+        "sha256": "c339b3102997657f4525a1f8979b0e0b811ec169a853b3f713f655c044c63b26"
+      },
+      {
+        "key": "icon.locale-tr",
+        "storageKey": "locale_tr",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_tr_7553fdaa",
+        "sha256": "7553fdaa82fca87f121ca5708e97f81e6434810875aff41ef31822a9adee278f"
+      },
+      {
+        "key": "icon.locale-ir",
+        "storageKey": "locale_ir",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_ir_6347fb22",
+        "sha256": "6347fb22cecbd34b1bf9efb9fe590d7a6211805d69fab03410da7e0d7af8bedb"
+      },
+      {
+        "key": "icon.locale-us",
+        "storageKey": "locale_us",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_us_02ee579e",
+        "sha256": "02ee579eb235bd843a93b4f13287f536c2d4f4f3032ff271d8361a23e1accd2a"
+      },
+      {
+        "key": "icon.locale-at",
+        "storageKey": "locale_at",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_at_5f2b67f7",
+        "sha256": "5f2b67f7233d3c613dae28634af19196de26404a93f051de2be16b04fb910795"
+      },
+      {
+        "key": "icon.locale-be",
+        "storageKey": "locale_be",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_be_ba440494",
+        "sha256": "ba44049466482342bccbbdeea5ecec74624f9e19cf3ae27f141b00dcaf657bbe"
+      },
+      {
+        "key": "icon.locale-ba",
+        "storageKey": "locale_ba",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_ba_d5e2a806",
+        "sha256": "d5e2a8067de499661e4d69513183ad7b2cc56cf8afac9d2c9fd26b6fe3116c3b"
+      },
+      {
+        "key": "icon.locale-cz",
+        "storageKey": "locale_cz",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_cz_a2bcf924",
+        "sha256": "a2bcf92493571d3961e110371b31ad019b0123a83597ef168ef8435098b7a4dd"
+      },
+      {
+        "key": "icon.locale-dk",
+        "storageKey": "locale_dk",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_dk_8ffb4ba8",
+        "sha256": "8ffb4ba8024090b7860c49264ceeb12d04bf7aadcc764fc520cd0bae6055d296"
+      },
+      {
+        "key": "icon.locale-hu",
+        "storageKey": "locale_hu",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_hu_3d8c5d3b",
+        "sha256": "3d8c5d3bca799c9f1bc67cb89e917c94182ba1a22bdd56e98726d46fe72a942e"
+      },
+      {
+        "key": "icon.locale-ie",
+        "storageKey": "locale_ie",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_ie_49f0e311",
+        "sha256": "49f0e3119a4b0cd1d5f82981d45d5339f73c4bff85b598d490b0dbfebc981cfd"
+      },
+      {
+        "key": "icon.locale-lu",
+        "storageKey": "locale_lu",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_lu_ad7671d1",
+        "sha256": "ad7671d187b392ecdc194eb5293c3f4b56cbe2841e2fe556b9bb1ba5290c0d18"
+      },
+      {
+        "key": "icon.locale-ro",
+        "storageKey": "locale_ro",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_ro_19489cc3",
+        "sha256": "19489cc3ca5b2045c79ea75877217feec2805e776925065347594deb92c2c8d9"
+      },
+      {
+        "key": "icon.locale-rs",
+        "storageKey": "locale_rs",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_rs_79bc0a19",
+        "sha256": "79bc0a19b4d291e38d4677c73601b0361dde88d8b3790d186dbe3dacfd8a6815"
+      },
+      {
+        "key": "icon.locale-se",
+        "storageKey": "locale_se",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_se_839214c0",
+        "sha256": "839214c09f76a159a6a0be12cc9e07340c7a4293a1a286ca324cb54922cede47"
+      },
+      {
+        "key": "icon.locale-ua",
+        "storageKey": "locale_ua",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_locale_ua_001a3b8e",
+        "sha256": "001a3b8e49203485c15f4f90f0420549fdf8364476f3678cb9a4e1a89bb71a4e"
+      },
+      {
+        "key": "icon.ordinal-0",
+        "storageKey": "ordinal_0",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_0_ce197a55",
+        "sha256": "ce197a550973e1f7539ce383930cad55ec78192c73feae4537cf39e0ca626607"
+      },
+      {
+        "key": "icon.ordinal-1",
+        "storageKey": "ordinal_1",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_1_c2f81471",
+        "sha256": "c2f81471074ccc5ffc2bc76b3e6b9011ff298f93a0ebea9b9585a2dd90f9e66e"
+      },
+      {
+        "key": "icon.ordinal-2",
+        "storageKey": "ordinal_2",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_2_ab8e9b11",
+        "sha256": "ab8e9b110555adb00c01440b5a00e1400b07bb3ff4e1de1e4864411f2af7e98a"
+      },
+      {
+        "key": "icon.ordinal-3",
+        "storageKey": "ordinal_3",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_3_54954d78",
+        "sha256": "54954d780cb46bbcda8ec9d901bae2b8eb5c65563564c79565681ab2e7abe2b6"
+      },
+      {
+        "key": "icon.ordinal-4",
+        "storageKey": "ordinal_4",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_4_56005745",
+        "sha256": "56005745c83ede5318ebc2807656fd2a0e241f82c1b5ad71d7d70d08e44cd2b4"
+      },
+      {
+        "key": "icon.ordinal-5",
+        "storageKey": "ordinal_5",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_5_c16a354b",
+        "sha256": "c16a354bbe1d10edef1ef6e61c2818039f0eeb3a3ca860c4fe08f2c07b000d11"
+      },
+      {
+        "key": "icon.ordinal-6",
+        "storageKey": "ordinal_6",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_6_549fe778",
+        "sha256": "549fe778ae62bbc48c044eb4addb10e4b1241a8c3aca5c2ec068e913951e93ab"
+      },
+      {
+        "key": "icon.ordinal-7",
+        "storageKey": "ordinal_7",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_7_065b62ec",
+        "sha256": "065b62eca732df07bbf966a56b2ccdd91c26d8a001261abbefbc1ce82e1b4419"
+      },
+      {
+        "key": "icon.ordinal-8",
+        "storageKey": "ordinal_8",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_8_1ee3afaa",
+        "sha256": "1ee3afaa5bf6a389d83cbe09abd6bfa049ad3b5f7ff2f0c65a4c78b160c042ff"
+      },
+      {
+        "key": "icon.ordinal-9",
+        "storageKey": "ordinal_9",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_9_9e1df090",
+        "sha256": "9e1df0903898ded2fc90eda1cc97622b3ebcca9482d94f411d62dd3f61c45dcd"
+      },
+      {
+        "key": "icon.ordinal-10",
+        "storageKey": "ordinal_10",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_10_077c58d2",
+        "sha256": "077c58d280b855fdbc41690fbc921a8375632f129f66fce5a00776ab834d525e"
+      },
+      {
+        "key": "icon.ordinal-11",
+        "storageKey": "ordinal_11",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_11_072d2926",
+        "sha256": "072d2926a78d2a685265c2d948dbcccf4818b49f2ea7e137488aa0cc0debf379"
+      },
+      {
+        "key": "icon.ordinal-12",
+        "storageKey": "ordinal_12",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_12_c4ce612e",
+        "sha256": "c4ce612e07489a0f35f94659b45233d732157623eae02b58862434601a6e1493"
+      },
+      {
+        "key": "icon.ordinal-13",
+        "storageKey": "ordinal_13",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_13_9612ba8d",
+        "sha256": "9612ba8d08f92de71a94de6c2d342eb5ac75512403ae4af8b40805b3c82e4615"
+      },
+      {
+        "key": "icon.ordinal-14",
+        "storageKey": "ordinal_14",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_14_16b1b54f",
+        "sha256": "16b1b54f52e4da61b238417d60c0c975ee830ab85b3a223caa0252176198caf0"
+      },
+      {
+        "key": "icon.ordinal-15",
+        "storageKey": "ordinal_15",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_15_ad8a5e20",
+        "sha256": "ad8a5e203b9bf25e997877eefdf77052f16e98883ae98575cc39c334dde1ebd0"
+      },
+      {
+        "key": "icon.ordinal-16",
+        "storageKey": "ordinal_16",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_16_2ab4ac88",
+        "sha256": "2ab4ac8835e29099c811111e6cd9a065f78507d45ea7bab9785b0a28895610fc"
+      },
+      {
+        "key": "icon.ordinal-17",
+        "storageKey": "ordinal_17",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_17_9a27ef91",
+        "sha256": "9a27ef91e737a01cc438ae56138c2327f28b0701463a3965d9a5dd76222ed593"
+      },
+      {
+        "key": "icon.ordinal-18",
+        "storageKey": "ordinal_18",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_18_8ab6b1c9",
+        "sha256": "8ab6b1c93dde7c6606fffce81207a766f76b2c28f27f0b720aae8f9566a09ee3"
+      },
+      {
+        "key": "icon.ordinal-19",
+        "storageKey": "ordinal_19",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_19_e7136ba4",
+        "sha256": "e7136ba41dc39ab761341e364ce70bc308f882091aa5ee95db4f4147b163cda5"
+      },
+      {
+        "key": "icon.ordinal-20",
+        "storageKey": "ordinal_20",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_20_f76e15cb",
+        "sha256": "f76e15cb37a4142bbb4a1d8617877006235bb1b93f825773800336b49a85dd56"
+      },
+      {
+        "key": "icon.ordinal-21",
+        "storageKey": "ordinal_21",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_21_9fbc04cc",
+        "sha256": "9fbc04cce2291efe8b7acea850489e71e3ce1b983e8ce38680709a7b98251465"
+      },
+      {
+        "key": "icon.ordinal-22",
+        "storageKey": "ordinal_22",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_22_a2ff0c32",
+        "sha256": "a2ff0c323615e699483660fbecb7553929d6a13d1cf4e02af9c8a1a64a8e59b0"
+      },
+      {
+        "key": "icon.ordinal-23",
+        "storageKey": "ordinal_23",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_23_8f132de1",
+        "sha256": "8f132de14fb4b517d08353c1501cf97084f57d415ec46a9d839907ac61675392"
+      },
+      {
+        "key": "icon.ordinal-24",
+        "storageKey": "ordinal_24",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_24_50af2b24",
+        "sha256": "50af2b24fc65d33d57d8319b95fd2f6e234b9ab27e85d4f30dc2597a7ae70e69"
+      },
+      {
+        "key": "icon.ordinal-25",
+        "storageKey": "ordinal_25",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_25_dd2a35b4",
+        "sha256": "dd2a35b42ee5e2cf906f2629d75213a46aa242724ea54829cb058c2ab89de3ed"
+      },
+      {
+        "key": "icon.connection",
+        "storageKey": "connection",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_connection_8ee49f9b",
+        "sha256": "8ee49f9b960c59b2944322785b18061aac8484613046504059af7bfa5ba99a7e"
+      },
+      {
+        "key": "icon.drop",
+        "storageKey": "drop",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_drop_395a2edc",
+        "sha256": "395a2edc4eb4d6ed772a7fddc30dffa0a52697f1c4a2197d4e6a379700af6398"
+      },
+      {
+        "key": "icon.slow",
+        "storageKey": "slow",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_slow_0cd9f90d",
+        "sha256": "0cd9f90d221e367609079f6e3c00090ebca8bf43106260704ea107d167c5a2c8"
+      },
+      {
+        "key": "icon.cloud",
+        "storageKey": "cloud",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_cloud_124e8c9c",
+        "sha256": "124e8c9c173782d40c467a5975d5daf0774166d319b239feb3d76f8f2ed5f540"
+      },
+      {
+        "key": "icon.new",
+        "storageKey": "new",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_new_0119ccb4",
+        "sha256": "0119ccb42cdb3827b0dadabc2664adb88091a48858aa1f04ebfc03be9df0d7d4"
+      },
+      {
+        "key": "icon.ordinal",
+        "storageKey": "ordinal",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_ordinal_cb0b88ef",
+        "sha256": "cb0b88ef2a33448592885e409e71916898b805bd558ed349d8fab402a37bdb45"
+      },
+      {
+        "key": "icon.cut",
+        "storageKey": "cut",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_cut_b3225fcd",
+        "sha256": "b3225fcdc780da3bddc3a856f04f66bb172a4229ef4cc436489a75d9093a131b"
+      },
+      {
+        "key": "icon.dot",
+        "storageKey": "dot",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_dot_6ce44fcd",
+        "sha256": "6ce44fcdb26e16d52bb7ae8587a5120c4178a8649ea517d9f4d410529056d297"
+      },
+      {
+        "key": "icon.masks",
+        "storageKey": "masks",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_masks_0bd2c1ed",
+        "sha256": "0bd2c1edaf4b2add498ac054632dba14169461a36d10b7fd9e38bb74208920db"
+      },
+      {
+        "key": "icon.resize",
+        "storageKey": "resize",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_resize_33dd3970",
+        "sha256": "33dd3970732610005b5bc61dc8254feed8bfaf9fb6d856bfed06066f1b8c5111"
+      },
+      {
+        "key": "icon.tooth",
+        "storageKey": "tooth",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_tooth_32dc9d10",
+        "sha256": "32dc9d10aefb80437c874a9a15b1a6eaf644469c94eccbc96a14253fe0d39918"
+      },
+      {
+        "key": "icon.rob",
+        "storageKey": "rob",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_rob_6a59487d",
+        "sha256": "6a59487d81ddc74c0fb48c62ff78cf8adf4b03c69dd9a85b4b58ad71c9c85695"
+      },
+      {
+        "key": "icon.target",
+        "storageKey": "target",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_target_f5b3e60c",
+        "sha256": "f5b3e60c64c99c5f577eef0ed5cf5dc04b449ab4ff8ee977c94b041426c4f32b"
+      },
+      {
+        "key": "icon.piece-purple",
+        "storageKey": "piece_purple",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_piece_purple_fc157b81",
+        "sha256": "fc157b8111b694074a39dce44a43d114b0f7818b5e5617e4bb1d4446206a25d8"
+      },
+      {
+        "key": "icon.move",
+        "storageKey": "move",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_move_2b2edecb",
+        "sha256": "2b2edecb0e7174bdd97ab03a8f2db3338ef16d08c02bf6dbcb5dd4c942701c1d"
+      },
+      {
+        "key": "icon.bird",
+        "storageKey": "bird",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_bird_486dcdbb",
+        "sha256": "486dcdbba898ae33e883a61984aade69576635077b9916b26d85b63e52a78f14"
+      },
+      {
+        "key": "icon.video",
+        "storageKey": "video",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_video_d20930b5",
+        "sha256": "d20930b53db7eed8bc9e6cc7435bffe907b1c130f2245102517e531b686f6a41"
+      },
+      {
+        "key": "icon.baby",
+        "storageKey": "baby",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_baby_379c691f",
+        "sha256": "379c691f238ec706a6f7370604234f6906c2101dd08f7d5de06fe2c2cf60a320"
+      },
+      {
+        "key": "icon.letter-a",
+        "storageKey": "letter_a",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_letter_a_3ceafa50",
+        "sha256": "3ceafa50563e606606662501e5d46749d4255a9ebf41ed8fa6f11004da965a45"
+      },
+      {
+        "key": "icon.letter-b",
+        "storageKey": "letter_b",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_letter_b_146bdfd4",
+        "sha256": "146bdfd442232fe1382ae37a6faff391d213f3923a2aa52d4b3e316af6ad036c"
+      },
+      {
+        "key": "icon.letter-m",
+        "storageKey": "letter_m",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_letter_m_27cd5cfd",
+        "sha256": "27cd5cfde8acc4df09b0b35123db0fb5bf3e811006cc6fbe8ee0bb0992857c26"
+      },
+      {
+        "key": "icon.letter-o",
+        "storageKey": "letter_o",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_letter_o_a42d6bb3",
+        "sha256": "a42d6bb3df6a4a0b5590c266a169e674daa4cf9cdc3952adc58b730603cf750e"
+      },
+      {
+        "key": "icon.letter-p",
+        "storageKey": "letter_p",
+        "variant": "production_png",
+        "animated": false,
+        "name": "obey_letter_p_2d6e4b7d",
+        "sha256": "2d6e4b7d21506ba0706d3f2e0eab20d631f524d9632a6021e2736788883aeb9b"
       }
     ]
   }

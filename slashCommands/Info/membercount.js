@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -16,15 +18,15 @@ module.exports = {
     await interaction.reply({
       embeds: [
         new EmbedBuilder().setColor(0x5865F2)
-          .setAuthor({ name: guild.name, iconURL: guild.iconURL() ?? undefined })
-          .setTitle('👥 Conteo de Miembros')
+          .setAuthor(obeyMeta.asAuthor({ name: guild.name, iconURL: guild.iconURL() ?? undefined }))
+          .setTitle(obeyUi.limit(obeyUi.owned('👥 Conteo de Miembros'), 256))
           .addFields(
-            { name: '📊 Total',    value: `\`${total}\``,  inline: true },
-            { name: '👤 Humanos',  value: `\`${humans}\``, inline: true },
-            { name: '🤖 Bots',     value: `\`${bots}\``,   inline: true },
-            { name: '🟢 En línea', value: `\`${online}\``, inline: true },
+            { name: obeyUi.owned('📊 Total'),    value: `\`${total}\``,  inline: true },
+            { name: obeyUi.owned('👤 Humanos'),  value: `\`${humans}\``, inline: true },
+            { name: obeyUi.owned('🤖 Bots'),     value: `\`${bots}\``,   inline: true },
+            { name: obeyUi.owned('🟢 En línea'), value: `\`${online}\``, inline: true },
           )
-          .setFooter({ text: guild.name }),
+          .setFooter(obeyMeta.asFooter({ text: guild.name })),
       ],
     })
   },

@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits, ChannelType } = require('discord.js')
 const ms = require('ms')
 module.exports = {
@@ -20,13 +21,13 @@ module.exports = {
 
     const duration = ms(durationStr)
     if (!duration || duration < 5000)
-      return interaction.reply({ content: '❌ Duración inválida. Usa formatos como `1d`, `12h`, `30m`.', ephemeral: true })
+      return interaction.reply({ content: obeyUi.owned('❌ Duración inválida. Usa formatos como `1d`, `12h`, `30m`.'), ephemeral: true })
 
     if (winners < 1 || winners > 20)
-      return interaction.reply({ content: '❌ Los ganadores deben ser entre 1 y 20.', ephemeral: true })
+      return interaction.reply({ content: obeyUi.owned('❌ Los ganadores deben ser entre 1 y 20.'), ephemeral: true })
 
     if (channel.type !== ChannelType.GuildText)
-      return interaction.reply({ content: '❌ Solo puedes iniciar sorteos en canales de texto.', ephemeral: true })
+      return interaction.reply({ content: obeyUi.owned('❌ Solo puedes iniciar sorteos en canales de texto.'), ephemeral: true })
 
     const options = {
       duration,
@@ -34,9 +35,9 @@ module.exports = {
       winnerCount: winners,
       hostedBy: interaction.user,
       messages: {
-        giveaway: '🎉 **SORTEO** 🎉',
-        giveawayEnded: '🎉 **SORTEO FINALIZADO** 🎉',
-        inviteToParticipate: 'Reacciona con 🎉 para participar',
+        giveaway: obeyUi.owned('🎉 **SORTEO** 🎉'),
+        giveawayEnded: obeyUi.owned('🎉 **SORTEO FINALIZADO** 🎉'),
+        inviteToParticipate: obeyUi.owned('Reacciona con 🎉 para participar'),
         drawing: '¡Sorteo en {timestamp}!',
         hostedBy: `\nOrganizado por: {this.hostedBy}`,
         noWinner: 'Sin ganadores, no hubo participantes válidos.',
@@ -51,9 +52,9 @@ module.exports = {
 
     try {
       await client.giveawaysManager.start(channel, options)
-      await interaction.reply({ content: `✅ ¡Sorteo iniciado en ${channel}!`, ephemeral: true })
+      await interaction.reply({ content: `${obeyUi.markup("icon.success")} ¡Sorteo iniciado en ${channel}!`, ephemeral: true })
     } catch (e) {
-      await interaction.reply({ content: `❌ Error al iniciar: ${e.message}`, ephemeral: true })
+      await interaction.reply({ content: `${obeyUi.markup("icon.error")} Error al iniciar: ${e.message}`, ephemeral: true })
     }
   },
 }

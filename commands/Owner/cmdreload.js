@@ -1,8 +1,9 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 var { EmbedBuilder } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fs = require("fs");
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -20,11 +21,11 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter({ text: client.user.username,
+                        .setFooter(obeyMeta.asFooter({ text: client.user.username,
                             iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                 ? es.footericon
                                 : client.user.displayAvatarURL()
-                        })
+                        }))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["cmdreload"]["variable1"])),
                 ],
             });
@@ -34,7 +35,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["cmdreload"]["variable2"])),
                     ],
                 });
@@ -57,7 +58,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.wrongcolor)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["cmdreload"]["variable3"])),
                     ],
                 });
@@ -67,7 +68,7 @@ module.exports = {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(es.color)
-                            .setFooter(client.getFooter(es))
+                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                             .setTitle(eval(client.la[ls]["cmds"]["owner"]["cmdreload"]["variable4"])),
                     ],
                 });
@@ -75,7 +76,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(eval(client.la[ls]["cmds"]["owner"]["cmdreload"]["variable5"]))
                         .setDescription(`Cmd is now removed from the BOT COMMANDS!`),
                 ],
@@ -86,7 +87,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["owner"]["cmdreload"]["variable6"])),
                 ],

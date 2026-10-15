@@ -1,8 +1,10 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, splitMessage } = require(`discord.js`);
 var Discord = require(`discord.js`);
 var config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const fs = require("fs");
 var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
 const { inspect } = require(`util`);
@@ -30,14 +32,14 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter({ text: client.user.username,
+                        .setFooter(obeyMeta.asFooter({ text: client.user.username,
                             iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                                 ? es.footericon
                                 : client.user.displayAvatarURL()
-                        })
-                        .setTitle("Only Tomato is allowed to deploy the SLASH-COMMANDS")
+                        }))
+                        .setTitle(obeyUi.limit("Only Tomato is allowed to deploy the SLASH-COMMANDS", 256))
                         .setDescription(
-                            `Go to the [Discord-Servidor](https://github.com/melodiabl), open a Ticket and ask for it!`
+                            obeyUi.limit(`Go to the [Discord-Servidor](https://github.com/melodiabl), open a Ticket and ask for it!`, 4096)
                         ),
                 ],
             });
@@ -53,7 +55,7 @@ module.exports = {
             }
             if (loadSlashsGlobal) {
                 let themsg = await message.reply(
-                    `<a:Loading:833101350623117342> **Attempting to set the Global Slash Commands in \`${client.guilds.cache.size} Guilds\`...**`
+                    `${obeyUi.markup("motion.cargando")} **Attempting to set the Global Slash Commands in \`${client.guilds.cache.size} Guilds\`...**`
                 );
                 client.application.commands
                     .set(client.allCommands)
@@ -66,7 +68,7 @@ module.exports = {
             } else {
                 let guild = client.guilds.cache.get(guildId);
                 let themsg = await message.reply(
-                    `<a:Loading:833101350623117342> **Attempting to set the GUILD Slash Commands in \`${guild.name}\`...**`
+                    `${obeyUi.markup("motion.cargando")} **Attempting to set the GUILD Slash Commands in \`${guild.name}\`...**`
                 );
                 await guild.commands
                     .set(client.allCommands)
@@ -88,9 +90,9 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["leaveserver"]["variable6"])),
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
+                        .setTitle(obeyUi.limit(client.la[ls].common.erroroccur, 256))
+                        .setDescription(obeyUi.limit(eval(client.la[ls]["cmds"]["owner"]["leaveserver"]["variable6"]), 4096)),
                 ],
             });
         }

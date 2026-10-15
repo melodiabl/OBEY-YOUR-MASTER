@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -12,9 +14,9 @@ module.exports = {
     await interaction.reply({
       embeds: [
         new EmbedBuilder().setColor(0x5865F2)
-          .setAuthor({ name: user.username, iconURL: user.displayAvatarURL() })
-          .setDescription(`🪪 ID: \`${user.id}\``)
-          .setFooter({ text: 'Haz clic en el ID para copiarlo' }),
+          .setAuthor(obeyMeta.asAuthor({ name: user.username, iconURL: user.displayAvatarURL() }))
+          .setDescription(obeyUi.limit(`${obeyUi.markup("icon.badge-id")} ID: \`${user.id}\``, 4096))
+          .setFooter(obeyMeta.asFooter({ text: 'Haz clic en el ID para copiarlo' })),
       ],
     })
   },

@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -10,7 +12,7 @@ module.exports = {
   run: async (client, interaction) => {
     if (!client.settings.get(interaction.guild.id, 'FUN'))
       return interaction.reply({
-        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ El sistema de diversión no está activado.')],
+        embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ El sistema de diversión no está activado.'), 4096))],
         ephemeral: true,
       })
 
@@ -19,10 +21,10 @@ module.exports = {
     await interaction.reply({
       embeds: [
         new EmbedBuilder().setColor(0xE23535)
-          .setTitle('🎮 ROBLOX')
-          .setDescription(`**${user.username}** has left the game.`)
+          .setTitle(obeyUi.limit('🎮 ROBLOX', 256))
+          .setDescription(obeyUi.limit(`**${user.username}** has left the game.`, 4096))
           .setThumbnail(user.displayAvatarURL())
-          .setFooter({ text: 'ROBLOX' }),
+          .setFooter(obeyMeta.asFooter({ text: 'ROBLOX' })),
       ],
     })
   },

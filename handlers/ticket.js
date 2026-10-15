@@ -1,3 +1,7 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
+const { registry } = require('./assets/registry');
+const { t, localeFor } = require('./i18n');
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder, PermissionFlagsBits, ButtonStyle,
     ChannelType
@@ -26,7 +30,7 @@ module.exports = (client, preindex) => {
             }
         }
         if (!index) {
-            return interaction?.editReply("❌ Could not find the Database for your Ticket!");
+            return interaction?.editReply(obeyUi.owned("❌ Could not find the Database for your Ticket!"));
         }
 
         let filename = `ticket${index}`;
@@ -40,7 +44,7 @@ module.exports = (client, preindex) => {
             {
                 enabled: false,
                 guildid: guild.id,
-                defaultname: "🎫・{count}・{member}",
+                defaultname: "ticket-{count}-{member}",
                 messageid: "",
                 channelid: "",
                 parentid: "",
@@ -81,7 +85,7 @@ module.exports = (client, preindex) => {
                     let data = client.setups.get(ticketchannel.id, "ticketdata");
                     if (data.state != "closed") {
                         return interaction?.reply({
-                            content: `<:no:833101993668771842> **You already have an Ticket!** <#${ticketchannel.id}>`,
+                            content: `${obeyUi.markup("icon.error")} **You already have an Ticket!** <#${ticketchannel.id}>`,
                             ephemeral: true,
                         });
                     }
@@ -104,7 +108,7 @@ module.exports = (client, preindex) => {
             .substring(0, 31);
 
         let optionsData = {
-            topic: `📨 #${String(filename).replace("ticket", "").length > 0 ? String(filename).replace("ticket", "") : "1"} Ticket for: ${user.username} (${user.id}) | ✅ Created at: ${moment().format("LLLL")}`,
+            topic: `${obeyUi.markup("icon.send")} #${String(filename).replace("ticket", "").length > 0 ? String(filename).replace("ticket", "") : "1"} Ticket for: ${user.username} (${user.id}) | ${obeyUi.markup("icon.success")} Created at: ${moment().format("LLLL")}`,
             type: ChannelType.GuildText,
             reason: `Ticket System #${String(filename).replace("ticket", "").length > 0 ? String(filename).replace("ticket", "") : "1"} for: ${user.username}`,
             permissionOverwrites: [],
@@ -202,7 +206,7 @@ module.exports = (client, preindex) => {
          * CREATE THE CHANNEL
          */
         await interaction?.reply({
-            content: `<a:Loading:833101350623117342> **Creating your Ticket...** (Usually takes 0-2 Seconds)`,
+            content: `${obeyUi.markup("motion.cargando")} **Creating your Ticket...** (Usually takes 0-2 Seconds)`,
             ephemeral: true,
         });
         guild.channels
@@ -234,19 +238,19 @@ module.exports = (client, preindex) => {
                                 : client.user.displayAvatarURL()
                             : null
                     )
-                    .setFooter(client.getFooter(
+                    .setFooter(obeyMeta.asFooter(client.getFooter(
                             `To close/manage this ticket react with the buttons\nYou can also type: ${client.settings.get(guild.id, "prefix")}ticket`,
                             es.footericon
-                        )
+                        ))
                     )
                     .setAuthor(
-                        client.getAuthor(
+                        obeyMeta.asAuthor(client.getAuthor(
                             `Ticket for: ${user.username}`,
                             user.displayAvatarURL(),
                             "https://github.com/melodiabl"
-                        )
+                        ))
                     )
-                    .setDescription(ticket.message.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
+                    .setDescription(obeyUi.limit(ticket.message.replace(/\{user\}/giu, `${user}`).substring(0, 2000), 4096));
                 var ticketembeds = [ticketembed];
                 if (ticket.claim.enabled) {
                     var claimEmbed = new EmbedBuilder()
@@ -258,43 +262,39 @@ module.exports = (client, preindex) => {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setAuthor(
-                            client.getAuthor(
+                            obeyMeta.asAuthor(client.getAuthor(
                                 `A Staff Member will claim the Ticket soon!`,
-                                "https://cdn.discordapp.com/emojis/833101350623117342.gif?size=44",
+                                registry.imageURL('motion.cargando'),
                                 "https://github.com/melodiabl"
-                            )
+                            ))
                         )
-                        .setDescription(ticket.claim.messageOpen.replace(/\{user\}/giu, `${user}`).substring(0, 2000));
+                        .setDescription(obeyUi.limit(ticket.claim.messageOpen.replace(/\{user\}/giu, `${user}`).substring(0, 2000), 4096));
                     ticketembeds.push(claimEmbed);
                 }
                 const { ButtonBuilder } = require("discord.js");
                 let button_close = new ButtonBuilder()
                     .setStyle(ButtonStyle.Primary)
                     .setCustomId("ticket_close")
-                    .setLabel("Close")
-                    .setEmoji("🔒");
+                    .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.close'))).setEmoji(obeyUi.component(registry.emoji('icon.close')));
                 let button_delete = new ButtonBuilder()
-                    .setStyle(ButtonStyle.Secondary)
+                    .setStyle(ButtonStyle.Danger)
                     .setCustomId("ticket_delete")
-                    .setLabel("Delete")
-                    .setEmoji("🗑️");
+                    .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.delete')))
+                    .setEmoji(obeyUi.component(registry.emoji('icon.delete')));
                 let button_transcript = new ButtonBuilder()
                     .setStyle(ButtonStyle.Primary)
                     .setCustomId("ticket_transcript")
-                    .setLabel("Transcript")
-                    .setEmoji("📑");
+                    .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.transcript'))).setEmoji(obeyUi.component(registry.emoji('icon.transcript')));
                 let button_user = new ButtonBuilder()
                     .setStyle(ButtonStyle.Success)
                     .setCustomId("ticket_user")
-                    .setLabel("Users")
-                    .setEmoji("👤");
+                    .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.users'))).setEmoji(obeyUi.component(registry.emoji('icon.profile')));
                 let button_role = new ButtonBuilder()
                     .setStyle(ButtonStyle.Success)
                     .setCustomId("ticket_role")
-                    .setLabel("Roles")
-                    .setEmoji("📌");
+                    .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.roles'))).setEmoji(obeyUi.component(registry.emoji('icon.roles')));
                 const allbuttons = [
                     new ActionRowBuilder().addComponents([
                         button_close,
@@ -310,8 +310,7 @@ module.exports = (client, preindex) => {
                             new ButtonBuilder()
                                 .setStyle(ButtonStyle.Secondary)
                                 .setCustomId("ticket_claim")
-                                .setLabel("Claim the Ticket")
-                                .setEmoji("✅"),
+                                .setLabel(obeyUi.plain(t(localeFor(client, guild.id), 'tickets.claim'))).setEmoji(obeyUi.component(registry.emoji('icon.claim'))),
                         ])
                     );
                 }
@@ -362,7 +361,7 @@ module.exports = (client, preindex) => {
                 });
             })
             .catch(e => {
-                interaction?.editReply({ content: "❌ **¡Algo salió mal!**", ephemeral: true });
+                interaction?.editReply({ content: obeyUi.owned("❌ **¡Algo salió mal!**"), ephemeral: true });
                 console.error(e);
             });
     });

@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
@@ -20,13 +21,13 @@ module.exports = {
     if (!playlist)
       return interaction.editReply({
         embeds: [new EmbedBuilder().setColor(0xED4245)
-          .setDescription(`❌ No tienes una playlist llamada **${name}**.`)],
+          .setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} No tienes una playlist llamada **${name}**.`, 4096))],
       })
 
     await interaction.editReply({
       embeds: [new EmbedBuilder().setColor(0x22C55E)
-        .setTitle('🗑️ Playlist eliminada')
-        .setDescription(`**${playlist.name}** eliminada correctamente (${playlist.tracks.length} canciones).`)],
+        .setTitle(obeyUi.limit(obeyUi.owned('🗑️ Playlist eliminada'), 256))
+        .setDescription(obeyUi.limit(`**${playlist.name}** eliminada correctamente (${playlist.tracks.length} canciones).`, 4096))],
     })
   },
 }

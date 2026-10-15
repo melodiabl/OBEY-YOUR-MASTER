@@ -1,3 +1,4 @@
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -25,14 +26,14 @@ module.exports = {
     const key    = `${gid}-${target.id}`
 
     if (!client.points?.has(key))
-      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription('❌ Ese usuario no tiene datos de ranking.')], ephemeral: true })
+      return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Ese usuario no tiene datos de ranking.'), 4096))], ephemeral: true })
 
     const levelKey = type === 'voice' ? 'voicelevel' : 'level'
     client.points.set(key, level, levelKey)
 
     await interaction.reply({
       embeds: [new EmbedBuilder().setColor(0x22C55E)
-        .setDescription(`✅ **${target.username}** — ${type === 'voice' ? '🎙️ nivel de voz' : '💬 nivel de chat'} establecido a **${level}**.`)],
+        .setDescription(obeyUi.limit(`${obeyUi.markup("icon.success")} **${target.username}** — ${type === 'voice' ? obeyUi.owned('🎙️ nivel de voz') : obeyUi.owned('💬 nivel de chat')} establecido a **${level}**.`, 4096))],
       ephemeral: true,
     })
   },

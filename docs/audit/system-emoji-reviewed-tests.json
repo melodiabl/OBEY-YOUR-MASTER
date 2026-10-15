@@ -1,0 +1,176 @@
+{
+  "scope": "explicit_reviewed_files_mocked_services_and_local_asset_rendering_only",
+  "files": [
+    {
+      "file": "test/ticket-actions.test.js",
+      "exitCode": 0,
+      "tests": 7,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/moderation-action.test.js",
+      "exitCode": 0,
+      "tests": 6,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/application-buttons.test.js",
+      "exitCode": 0,
+      "tests": 1,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/legacy-emoji-adapter.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/command-execution.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/music-ui-locales.test.js",
+      "exitCode": 0,
+      "tests": 3,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/module-presentation.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/production-emojis.test.js",
+      "exitCode": 0,
+      "tests": 5,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/project-info.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/economy-presentation.test.js",
+      "exitCode": 0,
+      "tests": 4,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/suggestions-presentation.test.js",
+      "exitCode": 0,
+      "tests": 3,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/semantic-pages.test.js",
+      "exitCode": 0,
+      "tests": 1,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/music-continuation.test.js",
+      "exitCode": 0,
+      "tests": 10,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/music-lifecycle.test.js",
+      "exitCode": 0,
+      "tests": 4,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/music-recovery.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/obey-assets.test.js",
+      "exitCode": 0,
+      "tests": 8,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/embed-metadata.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/sticky-service.test.js",
+      "exitCode": 0,
+      "tests": 8,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/sticky-transport.test.js",
+      "exitCode": 0,
+      "tests": 3,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/legacy-translations.test.js",
+      "exitCode": 0,
+      "tests": 3,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/system-emojis.test.js",
+      "exitCode": 0,
+      "tests": 11,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/game-board-image.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/music-modes.test.js",
+      "exitCode": 0,
+      "tests": 4,
+      "failed": 0,
+      "summaryPresent": true
+    },
+    {
+      "file": "test/web-own-icons.test.js",
+      "exitCode": 0,
+      "tests": 2,
+      "failed": 0,
+      "summaryPresent": true
+    }
+  ],
+  "tests": 97,
+  "passed": true,
+  "liveDiscordOrMongoOrLavalink": false
+}

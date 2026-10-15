@@ -1,8 +1,10 @@
+const obeyUi = require("../../handlers/assets/system")
+const obeyMeta = require("../../handlers/presentation/metadata")
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const moment = require("moment");
 const { swap_pages, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -19,7 +21,7 @@ module.exports = {
             message.reply({
                 embeds: [
                     new Discord.EmbedBuilder()
-                        .setAuthor({ name: handlemsg(client.la[ls].cmds.info.serveravatar.author, { servername: message.guild.name }), iconURL: message.guild.iconURL(), url: "https://github.com/melodiabl" })
+                        .setAuthor(obeyMeta.asAuthor({ name: handlemsg(client.la[ls].cmds.info.serveravatar.author, { servername: message.guild.name }), iconURL: message.guild.iconURL(), url: "https://github.com/melodiabl" }))
                         .setColor(es.color)
                         .setThumbnail(
                             es.thumb
@@ -28,13 +30,13 @@ module.exports = {
                                     : client.user.displayAvatarURL()
                                 : null
                         )
-                        .addFields({ name: "<:arrow:832598861813776394> PNG", value: `[\`LINK\`](${message.guild.iconURL()})`, inline: true })
-                        .addFields({ name: "<:arrow:832598861813776394> JPEG", value: `[\`LINK\`](${message.guild.iconURL()})`, inline: true })
-                        .addFields({ name: "<:arrow:832598861813776394> WEBP", value: `[\`LINK\`](${message.guild.iconURL()})`, inline: true })
+                        .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> PNG"), value: `[\`LINK\`](${message.guild.iconURL()})`, inline: true })
+                        .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> JPEG"), value: `[\`LINK\`](${message.guild.iconURL()})`, inline: true })
+                        .addFields({ name: obeyUi.owned("<:arrow:832598861813776394> WEBP"), value: `[\`LINK\`](${message.guild.iconURL()})`, inline: true })
                         .setURL(
                             message.guild.iconURL()
                         )
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setImage(
                             message.guild.iconURL({
                                 size: 256,
@@ -48,7 +50,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

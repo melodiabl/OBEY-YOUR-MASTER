@@ -1,3 +1,5 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const MusicHistory = require('../../database/schemas/MusicHistorySchema')
 
@@ -24,7 +26,7 @@ module.exports = {
     },
   ],
   run: async (client, interaction) => {
-    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
+    const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(d, 4096))
     await interaction.deferReply()
 
     const limit = Math.min(20, Math.max(1, interaction.options.getInteger('limite') || 10))
@@ -36,21 +38,21 @@ module.exports = {
       .catch(() => [])
 
     if (!records.length) {
-      return interaction.editReply({ embeds: [err('❌ No hay historial de reproducción para este servidor.')] })
+      return interaction.editReply({ embeds: [err(obeyUi.owned('❌ No hay historial de reproducción para este servidor.'))] })
     }
 
     const lines = records.map((r, i) => {
       const dur  = r.length ? ` — \`${fmtMs(r.length)}\`` : ''
       const plays = r.plays > 1 ? ` _(×${r.plays})_` : ''
       const link = r.uri ? `[${(r.title || '?').substring(0, 48)}](${r.uri})` : (r.title || '?').substring(0, 48)
-      return `\`${i + 1}.\` 🎵 ${link}${dur}${plays}`
+      return `\`${i + 1}.\` ${obeyUi.markup("icon.music")} ${link}${dur}${plays}`
     })
 
     const embed = new EmbedBuilder()
       .setColor(0x5865F2)
-      .setTitle(`📋 Historial de reproducción — ${interaction.guild.name}`)
-      .setDescription(lines.join('\n'))
-      .setFooter({ text: `Mostrando las últimas ${records.length} canciones` })
+      .setTitle(obeyUi.limit(`${obeyUi.markup("icon.queue")} Historial de reproducción — ${interaction.guild.name}`, 256))
+      .setDescription(obeyUi.limit(lines.join('\n'), 4096))
+      .setFooter(obeyMeta.asFooter({ text: `Mostrando las últimas ${records.length} canciones` }))
 
     await interaction.editReply({ embeds: [embed] })
   },

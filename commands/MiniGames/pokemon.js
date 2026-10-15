@@ -1,3 +1,4 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const fetch = require("node-fetch");
 const config = require(`${process.cwd()}/botconfig/config.json`);
@@ -66,10 +67,10 @@ class GuessThePokemon {
             .setColor(this.options.embed.color)
             .setTitle(this.options.embed.title)
             .setImage("attachment://question-image.png")
-            .setFooter({ text: this.options.embed.footer })
+            .setFooter(obeyMeta.asFooter({ text: this.options.embed.footer }))
             .addFields({ name: "Type(s)", value: data.types.join(", ") || "No data." })
             .addFields({ name: "Abilities", value: data.abilities.join(", ") || "No data." })
-            .setAuthor({ name: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
+            .setAuthor(obeyMeta.asAuthor({ name: this.message.author.username, iconURL: this.message.author.displayAvatarURL() }));
 
         if (thinkMsg && !thinkMsg.deletedTimestamp) thinkMsg.delete().catch();
         const msg = await this.sendMessage({ embeds: [embed], files: [attachment] });
@@ -100,7 +101,7 @@ class GuessThePokemon {
                     .addFields({ name: "Pokemon Name", value: data.name, inline: false })
                     .addFields({ name: "Type(s)", value: data.types.join(", ") || "No data." })
                     .addFields({ name: "Abilities", value: data.abilities.join(", ") || "No data." })
-                    .setAuthor({ name: this.message.author.username, iconURL: this.message.author.displayAvatarURL() });
+                    .setAuthor(obeyMeta.asAuthor({ name: this.message.author.username, iconURL: this.message.author.displayAvatarURL() }));
 
                 return msg.edit({
                     content: this.options.winMessage.replace("{pokemon}", data.name),
@@ -139,7 +140,7 @@ module.exports = {
             return message.reply({ embeds: [
                 new EmbedBuilder()
                     .setColor(es.wrongcolor)
-                    .setFooter(client.getFooter(es))
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                     .setTitle(client.la[ls].common.disabled.title)
                     .setDescription(
                         require(`${process.cwd()}/handlers/functions`).handlemsg(client.la[ls].common.disabled.description, {

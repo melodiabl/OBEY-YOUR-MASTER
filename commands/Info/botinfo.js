@@ -1,10 +1,12 @@
+const obeyMeta = require("../../handlers/presentation/metadata")
+const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
 const moment = require("moment");
 let os = require("os");
 let cpuStat = require("cpu-stat");
 const config = require(`${process.cwd()}/botconfig/config.json`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/botconfig/emojis.json`);
+const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
 const { duration, handlemsg } = require(`${process.cwd()}/handlers/functions`);
 const { connected } = require("process");
 module.exports = {
@@ -23,7 +25,7 @@ module.exports = {
                 embeds: [
                     new Discord.EmbedBuilder()
                         .setColor(es.color)
-                        .setAuthor({ name: client.la[ls].cmds.info.botinfo.loading, iconURL: "https://cdn.discordapp.com/emojis/756773010123522058.gif", url: "https://github.com/melodiabl" }),
+                        .setAuthor(obeyMeta.asAuthor({ name: client.la[ls].cmds.info.botinfo.loading, iconURL: obeyUi.image("motion.cargando"), url: "https://github.com/melodiabl" })),
                 ],
             });
             cpuStat.usagePercent(function (e, percent, seconds) {
@@ -39,9 +41,9 @@ module.exports = {
                 const totalMembers = client.users.cache.size;
                 countertest = 0;
                 const botinfo = new Discord.EmbedBuilder()
-                    .setAuthor({ name: client.user.username + " Information", iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
+                    .setAuthor(obeyMeta.asAuthor({ name: client.user.username + " Information", iconURL: es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://"))
                             ? es.footericon
-                            : client.user.displayAvatarURL(), url: `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands` })
+                            : client.user.displayAvatarURL(), url: `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands` }))
                     .setDescription(eval(client.la[ls]["cmds"]["info"]["botinfo"]["variable1"]))
                     .setColor(es.color)
                     .setThumbnail(
@@ -66,7 +68,7 @@ module.exports = {
                     .addFields({ name: client.la[ls].cmds.info.botinfo.field5.title, value: handlemsg(client.la[ls].cmds.info.botinfo.field5.value, {
                             invitelink: `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`,
                         }) })
-                    .setFooter(client.getFooter(es));
+                    .setFooter(obeyMeta.asFooter(client.getFooter(es)));
                 tempmsg.edit({ embeds: [botinfo] });
             });
         } catch (e) {
@@ -75,7 +77,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.wrongcolor)
-                        .setFooter(client.getFooter(es))
+                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
                         .setTitle(client.la[ls].common.erroroccur)
                         .setDescription(eval(client.la[ls]["cmds"]["info"]["color"]["variable2"])),
                 ],

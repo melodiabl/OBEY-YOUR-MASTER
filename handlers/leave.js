@@ -1,3 +1,5 @@
+const obeyMeta = require("./presentation/metadata")
+const obeyUi = require("./assets/system")
 //Import npm modules
 const Discord = require("discord.js");
 //require functions from files
@@ -55,7 +57,7 @@ module.exports = client => {
                 member.guild.members.cache.get(leftInviterData.id) ||
                 (await member.guild.members.fetch(leftInviterData.id).catch(() => {})) ||
                 false;
-            invitemessage = `Was Invited by ${invitedby && invitedby.tag ? `**${invitedby.tag}**` : `<@${leftInviterData.id}>`}\n<:Like:857334024087011378> **${realinvites} Invite${realinvites == 1 ? "" : "s"}**\n[<:joines:866356465299488809> ${invites} Joins | <:leaves:866356598356049930> ${leaves} Leaves | <:no:833101993668771842> ${fake} Fakes]`;
+            invitemessage = `Was Invited by ${invitedby && invitedby.tag ? `**${invitedby.tag}**` : `<@${leftInviterData.id}>`}\n${obeyUi.markup("icon.like")} **${realinvites} Invite${realinvites == 1 ? "" : "s"}**\n[${obeyUi.markup("icon.join")} ${invites} Joins | ${obeyUi.markup("icon.leaf")} ${leaves} Leaves | ${obeyUi.markup("icon.error")} ${fake} Fakes]`;
         } else {
             if (memberData.joinData.type == "vanity") {
                 try {
@@ -113,10 +115,10 @@ module.exports = client => {
                         : undefined
                 )
                 .setTimestamp()
-                .setFooter(client.getFooter(
+                .setFooter(obeyMeta.asFooter(client.getFooter(
                         "Good bye: " + member.user.id,
                         member.user.displayAvatarURL()
-                    )
+                    ))
                 )
                 .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable1"]))
                 .setDescription((client.settings.get(member.guild.id, "leave.msg") || "{user} left this Server").replace("{user}", `${member.user}`));
@@ -140,10 +142,10 @@ module.exports = client => {
                         : undefined
                 )
                 .setTimestamp()
-                .setFooter(client.getFooter(
+                .setFooter(obeyMeta.asFooter(client.getFooter(
                         "Good bye: " + member.user.id,
                         member.user.displayAvatarURL()
-                    )
+                    ))
                 )
                 .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable2"]))
                 .setDescription((client.settings.get(member.guild.id, "leave.dm_msg") || "{user} left this Server").replace("{user}", `${member.user}`));
@@ -168,10 +170,10 @@ module.exports = client => {
                         : undefined
                 )
                 .setTimestamp()
-                .setFooter(client.getFooter(
+                .setFooter(obeyMeta.asFooter(client.getFooter(
                         "Good bye: " + member.user.id,
                         member.user.displayAvatarURL()
-                    )
+                    ))
                 )
                 .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable3"]))
                 .setDescription((client.settings.get(member.guild.id, "leave.dm_msg") || "{user} left this Server").replace("{user}", `${member.user}`))
@@ -201,10 +203,10 @@ module.exports = client => {
                         : undefined
                 )
                 .setTimestamp()
-                .setFooter(client.getFooter(
+                .setFooter(obeyMeta.asFooter(client.getFooter(
                         "Good bye: " + member.user.id,
                         member.user.displayAvatarURL()
-                    )
+                    ))
                 )
                 .setTitle(eval(client.la[ls]["handlers"]["leavejs"]["leave"]["variable4"]))
                 .setDescription((client.settings.get(member.guild.id, "leave.msg") || "{user} left this Server").replace("{user}", `${member.user}`))
@@ -231,10 +233,10 @@ module.exports = client => {
                             : undefined
                     )
                     .setTimestamp()
-                    .setFooter(client.getFooter(
+                    .setFooter(obeyMeta.asFooter(client.getFooter(
                             "Good bye: " + member.user.id,
                             member.user.displayAvatarURL()
-                        )
+                        ))
                     )
                     .setTitle(membershipTitle(client, ls, 'leave', member, 'variable5'))
                     .setDescription(
@@ -265,10 +267,10 @@ module.exports = client => {
                             : undefined
                     )
                     .setTimestamp()
-                    .setFooter(client.getFooter(
+                    .setFooter(obeyMeta.asFooter(client.getFooter(
                             "Good bye: " + member.user.id,
                             member.user.displayAvatarURL()
-                        )
+                        ))
                     )
                     .setTitle(membershipTitle(client, ls, 'leave', member, 'variable6'))
                     .setDescription((client.settings.get(member.guild.id, "leave.msg") || "{user} left this Server").replace("{user}", `${member.user}`));

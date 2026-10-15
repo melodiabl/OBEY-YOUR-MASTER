@@ -14,7 +14,7 @@ function map(key, overrides) {
 }
 
 test('selected catalog and aliases resolve files with verified imported content', () => {
-  assert.equal(Object.keys(assets.contract.selected.assets).length, 103)
+  assert.equal(Object.keys(assets.contract.selected.assets).length, 301)
   assert.equal(Object.keys(assets.contract.selected.aliases).length, 89)
   for (const [alias, canonical] of Object.entries(assets.contract.selected.aliases)) {
     assert.deepEqual(assets.selectedAsset(alias), assets.selectedAsset(canonical))
