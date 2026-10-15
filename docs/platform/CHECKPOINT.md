@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Tus Me gusta · 15 de octubre de 2026
+
+Petición confirmada: playlist personal automática con los corazones de OBEY, estilo Spotify. Fija en barra lateral y biblioteca; contador, canciones, quitar corazón y reproducir todo o añadir a la cola sin sustituir la canción actual. Discord/web comparten LikedSongs; URI estable, claves antiguas compatibles, deduplicación y propietario derivado de sesión. La web recoge cambios externos cada 15 segundos mientras está visible. Guardados repetidos expresan estado deseado; errores no se presentan como éxitos. Cola manual priorizada frente a autoplay y cancelación al detener durante conexión.
+
+Código activo `585948c48f8b7af0c7b37eb5242c8e2fe48c0ff3`, imagen `4f4e3b5a769bf2929e5a101fc1f97d4d15aa5c2347cc193fe28b4423057bb665`, etiqueta `release-liked-20261015`. 514 pruebas pasan; seis pruebas finales focalizadas también. Chromium comprueba EJS/JS reales con API aislada en escritorio/móvil y Mongo real comprueba persistencia/aislamiento en colección temporal eliminada. Letras conservan su prueba de navegador. Sin reproducción de voz ni sesión OAuth real en esta entrega.
+
+Bot healthy, cero reinicios, Mongo/música disponibles; 28 hashes en imagen y dos recursos web publicados verificados. 19 raíces slash, Fun 22, sin NSFW; 295 emojis conservados. Solo bot recreado; imágenes/Redis y las 16 entradas locales previas conservados. Nazha principal y MilloHost conectados/HTTP 200; Serenetia agota el plazo y sigue con reconexión automática. Privado apagado/excluido, restart=no y 2333 cerrado. Recuperación vigente `.runtime/bot-recovery-public-only.yml` fija esta versión; plataformas queda como imagen anterior para reversión. Las secciones siguientes son antecedentes. [Detalle y evidencia](LIKED-PLAYLIST.md).
+
 ## Correcciones de plataformas · 15 de octubre de 2026
 
 Fuente vigente `/home/OBEY_Documentacion_correcciones_2026-10-15/OBEY_Documentacion`, ZIP SHA-256 `857a2ceb27ca32710fe5ed6cb456088c34fd89161cdbc650b1f663b3b201bab6`, 4274 entradas. Extracción verificada, ZIP eliminado y extracción anterior reemplazada. Integrada solo la diferencia de identidad de plataformas: 15 logos, seis IDs históricos y siete clases web, con iconos funcionales propios conservados. 316 materiales / 295 emojis (285 PNG, diez GIF), todos sincronizados sin fallos.

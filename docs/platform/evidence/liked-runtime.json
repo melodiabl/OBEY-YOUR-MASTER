@@ -1,0 +1,94 @@
+{
+  "code": "585948c48f8b7af0c7b37eb5242c8e2fe48c0ff3",
+  "image": "4f4e3b5a769bf2929e5a101fc1f97d4d15aa5c2347cc193fe28b4423057bb665",
+  "health": {
+    "status": "ok",
+    "database": true,
+    "music": true,
+    "uptime": 86
+  },
+  "assetsServedWithVerifiedHashes": 2,
+  "unauthorized": [
+    {
+      "method": "GET",
+      "path": "/api/music/liked",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/music/like",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/music/liked/play/1217876542114365562",
+      "status": 401
+    }
+  ],
+  "selectedPublic": "nazha",
+  "connectedPublics": [
+    "nazha",
+    "millohost"
+  ],
+  "unavailablePublics": [
+    "serenetia"
+  ],
+  "nodeReconnectEnabled": true,
+  "privateNode": {
+    "off": true,
+    "restart": "no",
+    "portClosed": true,
+    "excluded": true
+  },
+  "unrelatedServicesUnchanged": true,
+  "services": [
+    {
+      "name": "obey_bot",
+      "image": "4f4e3b5a769bf2929e5a101fc1f97d4d15aa5c2347cc193fe28b4423057bb665",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-15T18:23:24.484182311+02:00"
+    },
+    {
+      "name": "obey_images",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-14T02:12:54.386242902+02:00"
+    },
+    {
+      "name": "obey_redis",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-05T01:35:33.989316999+02:00"
+    },
+    {
+      "name": "obey_lavalink",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "status": "created",
+      "health": null,
+      "restarts": 0,
+      "startedAt": "0001-01-01T00:00:00Z"
+    }
+  ],
+  "nodeRestChecks": [
+    {
+      "id": "nazha",
+      "status": 200
+    },
+    {
+      "id": "millohost",
+      "status": 200
+    },
+    {
+      "id": "serenetia",
+      "reachable": false,
+      "error": "ETIMEDOUT"
+    }
+  ],
+  "verifiedAt": "2026-10-15T16:25:21Z"
+}

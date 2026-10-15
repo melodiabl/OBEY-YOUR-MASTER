@@ -1,0 +1,30 @@
+{
+  "code": "585948c48f8b7af0c7b37eb5242c8e2fe48c0ff3",
+  "image": "4f4e3b5a769bf2929e5a101fc1f97d4d15aa5c2347cc193fe28b4423057bb665",
+  "collection": "existing LikedSongs",
+  "noSchemaMigration": true,
+  "personalObeyHearts": true,
+  "spotifyAccountConnected": false,
+  "tests": {
+    "tests": 514,
+    "pass": 514,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "finalFocusedTests": {
+    "tests": 6,
+    "pass": 6,
+    "fail": 0
+  },
+  "imageFilesVerified": 28,
+  "slashRoots": 19,
+  "funSubcommands": 22,
+  "selectedEmojisPreserved": 295,
+  "previousLocalFilesPreserved": 16,
+  "browser": "Real EJS/JS with isolated API fixtures, desktop and mobile",
+  "storage": "Real MongoDB disposable collection removed after verification",
+  "voicePlaybackPerformed": false,
+  "recoveryConfiguration": ".runtime/bot-recovery-public-only.yml",
+  "rollbackImage": "localhost/obey-your-master_bot:release-platforms-20261015"
+}

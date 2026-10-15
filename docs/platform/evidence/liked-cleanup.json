@@ -1,0 +1,12 @@
+{
+  "temporaryDirectoryRemoved": "/tmp/obey-liked-playlist",
+  "temporaryFilesRemoved": 45,
+  "temporaryBytesRemoved": 694845,
+  "activeDataAndBaselinePreserved": true,
+  "previousLocalFilesPreserved": 16,
+  "retainedReleaseImages": [
+    "release-liked-20261015",
+    "release-platforms-20261015"
+  ],
+  "disposableMongoCollectionRemoved": true
+}
