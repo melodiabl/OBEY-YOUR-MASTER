@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Letras y autoplay · 15 de octubre de 2026
+
+Nuevo ZIP actualizado extraído íntegramente en `/home/OBEY_Documentacion_actualizada_2026-10-15`, SHA-256 `ca088d85cdf3a062216043dd87629de1297325dab7515b06b5eefac01c963668`, 4130 entradas / 152563722 bytes; comprimido eliminado. Su auditoría base del 10/10 es histórica y no sustituye el estado vigente ni cierra los 32 contratos.
+
+Correcciones de letras para Discord/web: reloj compartido con velocidad/pausa/seek/carga/recuperación, grabación y nodo activo, duración LRCLIB, silencios/repeticiones LRC y ticks web autorizados. Autoplay consulta el buscador compartido con respaldos, filtra recientes, prioriza cola manual y cancela resultados después de detener. 405 tests pasan; Chromium verifica EJS/JS reales con datos aislados. HTTP Nazha confirmó letras sincronizadas (58 entradas) y candidato nuevo de autoplay. La prueba de voz final se omitió por canción/cola activas en THZ: no se afirma audición ni transición natural real de autoplay. [Detalles y evidencia](MUSIC-SYNC.md).
+
+Código desplegado `8b1725a8`, imagen `849b2ebff87f45089c2bc10b856a12b4f8f2d055dbcd210eeb44ed24f6e920c4`; producto `e5ea8253` más cambios del verificador. 16 archivos musicales del contenedor coinciden con Git. Healthy, cero reinicios/errores de arranque; Mongo/música listos y JS publicado correcto. Nazha principal, Serenetia/MilloHost conectados, privado sigue apagado y excluido con restart=no/2333 cerrado. Imágenes/Redis y las 16 entradas locales anteriores se conservan. Modo/montaje de prueba retirados; recuperación `.runtime/bot-recovery-public-only.yml` fija esta versión pública. [Estado final](evidence/music-sync-runtime.json).
+
 ## Nodo privado apagado y principal público · 14 de octubre de 2026
 
 Petición actual: apagar el nodo propio y usar un público seleccionado con respaldos funcionales. Contenedor Lavalink creado sin iniciar, `restart=no` y sin puerto 2333; archivos/configuración conservados y perfil manual. Bot excluye todos los privados con `LAVALINK_PRIVATE_ENABLED=false`; principal global Nazha y selección Nazha persistida en THZ. Serenetia/MilloHost son respaldos; Trinium sigue desactivado.

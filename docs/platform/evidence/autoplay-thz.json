@@ -1,0 +1,9 @@
+{
+  "status": "skipped",
+  "audibleHumanConfirmed": false,
+  "reason": "existing_playback",
+  "finishedAt": "2026-10-15T00:21:51.652Z",
+  "scope": "THZ voice probe skipped because a song and queue were already active; no test music substituted",
+  "plannedMuted": true,
+  "probePerformed": false
+}

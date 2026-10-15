@@ -56,3 +56,7 @@ Código `4431bc9e`, imagen `f919bc076e9b4f7c485c091d63d807ddbc0cc0534a02840ca238
 
 
 Despliegue vigente exclusivamente público: código `f73d04dc`, imagen `74b4d1f893fc461c2e2aefaaea2ad98465132a19645480ae4962f977637c2310`. [Estado final](evidence/music-nodes/public-only-runtime.json). Recuperación `.runtime/bot-recovery-public-only.yml` conserva públicos, principal Nazha y privado excluido; no iniciar Lavalink ni restaurar los overrides antiguos con privados. La prueba temporal de voz quedó retirada y su resultado se mantiene privado en el servidor.
+
+## Actualización de letras/autoplay · 15/10/2026
+
+La versión vigente es `8b1725a8`, imagen `849b2ebff87f45089c2bc10b856a12b4f8f2d055dbcd210eeb44ed24f6e920c4`, con privados apagados y excluidos. Nazha principal y Serenetia/MilloHost conectados; imagen/arranque de imágenes y Redis conservados. Recuperación pública fijada a esta versión. [Letras, autoplay y límites de comprobación](MUSIC-SYNC.md), [ejecución](evidence/music-sync-runtime.json). Los despliegues anteriores de este documento son históricos.

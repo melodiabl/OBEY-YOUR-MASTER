@@ -1,0 +1,60 @@
+{
+  "code": "8b1725a8a2182800ff6c7b6ab8ddf65c19a8f8cc",
+  "image": "849b2ebff87f45089c2bc10b856a12b4f8f2d055dbcd210eeb44ed24f6e920c4",
+  "healthHttp": 200,
+  "database": true,
+  "music": true,
+  "lyricsScriptPublished": true,
+  "releaseCheckRemoved": true,
+  "privateNode": {
+    "status": "created",
+    "restart": "no",
+    "portClosed": true,
+    "excluded": true
+  },
+  "selectedPublic": "nazha",
+  "services": [
+    {
+      "name": "obey_bot",
+      "image": "849b2ebff87f45089c2bc10b856a12b4f8f2d055dbcd210eeb44ed24f6e920c4",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-15T02:23:51.186009618+02:00"
+    },
+    {
+      "name": "obey_lavalink",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "status": "created",
+      "health": null,
+      "restarts": 0,
+      "startedAt": "0001-01-01T00:00:00Z"
+    },
+    {
+      "name": "obey_images",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-14T02:12:54.386242902+02:00"
+    },
+    {
+      "name": "obey_redis",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-05T01:35:33.989316999+02:00"
+    }
+  ],
+  "thzSessionObserved": {
+    "active": true,
+    "queueLength": 1,
+    "volume": 100,
+    "persistedPublic": "nazha",
+    "restorationLog": {
+      "status": "playing",
+      "position": 54690
+    }
+  }
+}
