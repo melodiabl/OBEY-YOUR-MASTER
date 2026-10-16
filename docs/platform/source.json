@@ -27,16 +27,16 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "7b3031bbc61709b662c711801be734a764678963",
-    "image": "96f81a6833ae845df7d57f0895498af8a0042798450e4cadeec2aefd3c9fddec",
+    "code": "7650e56938c285636a73dbd819101364bf44eedf",
+    "image": "edb8a5e2a7c30b4ea1753fd74646b1fafd996c37229a8d5c07662b9c0164bc6d",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "gdjkhp",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/node-performance-runtime.json",
-    "change": "Explicit request for measured public nodes after source adoption"
+    "evidence": "evidence/botinfo-music-runtime.json",
+    "change": "Fix botinfo loading and explicitly restart music with bounded player voice telemetry"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",

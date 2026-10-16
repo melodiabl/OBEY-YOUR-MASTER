@@ -2,6 +2,12 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Infobot y reinicio musical · 17 de octubre de 2026
+
+Corregido el bloqueo de `botinfo`/alias `infobot` y `/info botinfo`: usaban `guild.me.voice` y lanzaban el error dentro de un callback de CPU fuera del catch. Ahora comparten datos compatibles con Discord.js v14, muestran recursos/conexiones/nodo y ping de voz del servidor, toleran caché incompleta y sustituyen el mensaje de carga también si falla la lectura. Regresión reproducida con cuatro fallos antes del cambio; 536/536 pruebas finales y 37 en imagen sin red pasan.
+
+Reinicio musical solicitado aplicado mediante recreación exclusiva del bot. Código `7650e56938c285636a73dbd819101364bf44eedf`, imagen `edb8a5e2a7c30b4ea1753fd74646b1fafd996c37229a8d5c07662b9c0164bc6d`, etiqueta `release-botinfo-music-20261017`. Healthy/cero reinicios; sesión activa restaurada en 117257 ms, tres nodos públicos conectados. Serenetia sigue principal; GDjkhp/MilloHost de respaldo. Los registros de voz reales muestran conexión y 169–172 ms tras el dato inicial de arranque; no prueban audio continuo. Causa de los cortes aún sin confirmar: ahora se registra telemetría de voz acotada para diagnosticar recurrencias. Imágenes/Redis, privado apagado y 16 cambios locales previos preservados. Recuperación vigente actualizada; release anterior de nodos retenida. [Detalle y límites](BOTINFO-MUSIC.md).
+
 ## Nodos públicos medidos · 17 de octubre de 2026
 
 Petición explícita: usar el paquete actualizado y nodos de buen rendimiento/bajo ping. Conservado el motor actual según la conciliación del ZIP; se midieron 13 candidatos TLS y se seleccionaron proveedores que completan handshake, ping/pong y tres búsquedas reales. Principal Serenetia, respaldos GDjkhp y MilloHost. Dentro del contenedor: RTT medianas 108,9/162,9/199,3 ms; no se encontró un público funcional de menos de 30 ms entre los comprobados. Nazha (502) y Trinium (alta variación y dos búsquedas agotadas de tres) quedan desactivados. Cinco preferencias de sesión ya eran auto: sin migración ni escrituras Mongo.
