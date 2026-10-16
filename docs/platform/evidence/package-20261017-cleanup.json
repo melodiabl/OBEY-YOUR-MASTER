@@ -1,0 +1,14 @@
+{
+  "retiredSource": "/home/OBEY_Documentacion_correcciones_2026-10-15",
+  "retiredFiles": 4275,
+  "retiredBytes": 153071538,
+  "extractionRecordPreserved": "/home/OBEY_Documentacion_actualizada_2026-10-17/history/extraction-20261015.json",
+  "currentSource": "/home/OBEY_Documentacion_actualizada_2026-10-17",
+  "currentSourceFiles": 4468,
+  "originalPackagePreserved": true,
+  "temporaryDirectoryRemoved": "/tmp/obey-package-20261017",
+  "temporaryFilesRemoved": 4,
+  "temporaryBytesRemoved": 3533,
+  "previousLocalFilesPreserved": 16,
+  "runtimeChanged": false
+}

@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## ZIP y referencia documental actualizados · 17 de octubre de 2026
+
+Fuente vigente `/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion`. ZIP SHA-256 `98774d4367fc1c4d6f9712cd4e9cb82b76f74bfb4c97e8983545b32e98224e1c`: 4468 archivos verificados contra el comprimido, eliminado después. Validación documental: 129 JSON, 3856 enlaces y 1762 hashes de recursos, sin errores; 1473 hashes del overlay comprobados. Delta frente a la fuente del 15/10: 195 altas, 77 modificaciones y una retirada; 110 archivos del overlay.
+
+Precedencia nueva: capítulo 25 (decisiones/conciliación), plan/grafo del 23 y contratos de capacidad; capítulo 24 opcional, sin registro automático de sus 24 propuestas. 32 módulos, 140 tareas base y 128 casos de aceptación escritos; no equivalen a implementación ni tests del bot. El overlay parte de `9f11a850` y omite mejoras actuales de favoritos; no sustituir el código vigente indiscriminadamente. Las 295 claves permitidas de emojis ya están en el mapa; `icon.adult` continúa excluida. La política visual del 19 queda documentada con sus diferencias reales pendientes, sin afirmar que ya esté aplicada a toda la web.
+
+Recepción documental: código desplegado `694bcd388f04332df5ae3978ed4e87769fc0e8f1` e imagen `bcfd54f8b1002c3bbde8bcd90f34f5446496d0de1c7199add1942e5d3102904e` conservados, healthy/cero reinicios al revisar. Configuración/datos, recuperación y 16 entradas locales previas preservados. No se reintroducen NSFW, nodo privado ni WARP. La extracción anterior se retira tras validar la nueva; el paquete original del usuario permanece. [Fuente, conciliación y evidencia](SOURCE-2026-10-17.md), [índice procesable](source.json). Las secciones siguientes describen entregas históricas.
+
 ## Tus Me gusta en Discord · 16 de octubre de 2026
 
 El usuario corrigió que faltaba en Discord. La primera entrega solo integraba la colección en el panel: `/playlist list` seguía consultando únicamente las listas manuales. Ahora muestra Tus Me gusta primero incluso vacía; `/playlist show nombre: Tus Me gusta` lee los corazones actuales y `/playlist play nombre: Tus Me gusta` añade la colección mediante el motor compartido, con prioridad manual y cancelación al detener. Se conserva la lista personal privada, sin copia de datos ni consumir el límite manual. Las operaciones de crear/agregar/borrar/compartir ese nombre explican su gestión con el corazón. Otro actor no puede consultar sus canciones con el parámetro usuario. Playlists manuales y adaptador de prefijo comprobados.

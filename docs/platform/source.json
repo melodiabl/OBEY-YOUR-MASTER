@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "receivedDate": "2026-10-17",
+  "sourceRoot": "/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion",
+  "archive": {
+    "originalPath": "/tmp/f93d330b-cb64-4a3f-9b9a-19df96a4edfa.zip",
+    "sha256": "98774d4367fc1c4d6f9712cd4e9cb82b76f74bfb4c97e8983545b32e98224e1c",
+    "entries": 4468,
+    "filesVerified": 4468,
+    "uncompressedBytes": 158222924,
+    "deletedAfterVerification": true
+  },
+  "readingOrder": [
+    "25_ESPECIFICACION_PROFUNDIZADA/DECISIONES_Y_PRECEDENCIA.md",
+    "25_ESPECIFICACION_PROFUNDIZADA/CONCILIACION_SIN_DUPLICAR.md",
+    "25_ESPECIFICACION_PROFUNDIZADA/GUIA_TRANSVERSAL.md",
+    "23_PLAN_MAESTRO/LEER_PRIMERO.md",
+    "23_PLAN_MAESTRO/PLAN_EJECUTABLE.json",
+    "19_PANEL_INTERNO/POLITICA_VISUAL_VIGENTE.md"
+  ],
+  "scope": {
+    "modules": 32,
+    "baseTasks": 140,
+    "writtenAcceptanceCases": 128,
+    "optionalCommandProposals": 24,
+    "optionalProposalsAutomaticallyAuthorized": false,
+    "latestRevision": "documentation_refinement_of_existing_scope"
+  },
+  "currentRuntime": {
+    "code": "694bcd388f04332df5ae3978ed4e87769fc0e8f1",
+    "image": "bcfd54f8b1002c3bbde8bcd90f34f5446496d0de1c7199add1942e5d3102904e",
+    "documentationHeadAtReceipt": "d74aaf854fd27d8cb36796ca3c71dfa4014d3b7d",
+    "changedBySourceAdoption": false
+  },
+  "preserve": [
+    "Personal OBEY hearts in Discord and web",
+    "Existing lyrics clock and restart recovery",
+    "Private Lavalink off and excluded, no WARP",
+    "NSFW removal and Fun facepalm",
+    "Existing local typography and Soundy layout",
+    "All 16 preexisting local changes"
+  ],
+  "materialReconciliation": {
+    "packageEmojiEntries": 296,
+    "excludedKeys": [
+      "icon.adult"
+    ],
+    "allowedKeys": 295,
+    "currentMappedKeys": 295,
+    "missingAllowedKeys": []
+  },
+  "overlayPolicy": "Review and adapt against current HEAD; cumulative patch targets old base 9f11a850 and must not overwrite later fixes",
+  "sourceReport": "SOURCE-2026-10-17.md"
+}
