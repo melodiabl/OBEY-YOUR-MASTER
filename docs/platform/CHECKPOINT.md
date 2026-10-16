@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Tus Me gusta en Discord · 16 de octubre de 2026
+
+El usuario corrigió que faltaba en Discord. La primera entrega solo integraba la colección en el panel: `/playlist list` seguía consultando únicamente las listas manuales. Ahora muestra Tus Me gusta primero incluso vacía; `/playlist show nombre: Tus Me gusta` lee los corazones actuales y `/playlist play nombre: Tus Me gusta` añade la colección mediante el motor compartido, con prioridad manual y cancelación al detener. Se conserva la lista personal privada, sin copia de datos ni consumir el límite manual. Las operaciones de crear/agregar/borrar/compartir ese nombre explican su gestión con el corazón. Otro actor no puede consultar sus canciones con el parámetro usuario. Playlists manuales y adaptador de prefijo comprobados.
+
+Código activo `694bcd388f04332df5ae3978ed4e87769fc0e8f1`, imagen `bcfd54f8b1002c3bbde8bcd90f34f5446496d0de1c7199add1942e5d3102904e`, etiqueta `release-discord-liked-20261016`. 524/524 pruebas pasan, diez nuevas; smoke aislado de comandos en la imagen y 20 hashes en contenedor activo comprobados. Sin mensajes de prueba enviados ni reproducción de voz. Consulta real de solo lectura: cero playlists manuales con el nombre reservado. No hay migración de datos.
+
+Bot healthy, cero reinicios, Mongo/música listos y 19 comandos registrados globalmente. MilloHost disponible/HTTP 200; Nazha y Serenetia agotan el plazo y mantienen reintentos. Privado apagado/excluido, restart=no y 2333 cerrado. Solo bot recreado, imágenes/Redis y 16 entradas locales previas intactos/excluidos. Recuperación vigente `.runtime/bot-recovery-public-only.yml` fija esta versión; la imagen anterior `release-liked-20261015` se conserva para reversión. Las secciones siguientes son antecedentes. [Detalle y evidencia](LIKED-PLAYLIST.md).
+
 ## Tus Me gusta · 15 de octubre de 2026
 
 Petición confirmada: playlist personal automática con los corazones de OBEY, estilo Spotify. Fija en barra lateral y biblioteca; contador, canciones, quitar corazón y reproducir todo o añadir a la cola sin sustituir la canción actual. Discord/web comparten LikedSongs; URI estable, claves antiguas compatibles, deduplicación y propietario derivado de sesión. La web recoge cambios externos cada 15 segundos mientras está visible. Guardados repetidos expresan estado deseado; errores no se presentan como éxitos. Cola manual priorizada frente a autoplay y cancelación al detener durante conexión.

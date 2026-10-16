@@ -1,0 +1,31 @@
+{
+  "code": "694bcd388f04332df5ae3978ed4e87769fc0e8f1",
+  "image": "bcfd54f8b1002c3bbde8bcd90f34f5446496d0de1c7199add1942e5d3102904e",
+  "bug": "Discord playlist commands queried only manual Playlist documents",
+  "fix": "Pinned virtual private collection backed by existing LikedSongs",
+  "redTests": {
+    "initial": 6,
+    "failed": 6,
+    "automaticGuardsFailedBeforeFix": 1
+  },
+  "tests": {
+    "tests": 524,
+    "pass": 524,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "newTests": 10,
+  "focusedTests": 14,
+  "offlineImageCommandTestsPassed": true,
+  "imageFilesVerified": 20,
+  "selectedEmojisPreserved": 295,
+  "existingManualPlaylistsWithReservedName": 0,
+  "reservedNameQueryReadOnly": true,
+  "previousLocalFilesPreserved": 16,
+  "noPersistentDataMigration": true,
+  "voicePlaybackPerformed": false,
+  "discordMessagesSent": false,
+  "recoveryConfiguration": ".runtime/bot-recovery-public-only.yml",
+  "rollbackImage": "localhost/obey-your-master_bot:release-liked-20261015"
+}

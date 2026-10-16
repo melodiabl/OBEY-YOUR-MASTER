@@ -1,0 +1,8 @@
+{
+  "temporaryDirectoryRemoved": "/tmp/obey-discord-liked",
+  "temporaryFilesRemoved": 28,
+  "temporaryBytesRemoved": 195736,
+  "previousLocalFilesPreserved": 16,
+  "activeDataAndBaselinePreserved": true,
+  "rollbackImageRetained": "localhost/obey-your-master_bot:release-liked-20261015"
+}
