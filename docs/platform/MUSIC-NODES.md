@@ -1,5 +1,7 @@
 # Nodos de música y retirada de WARP
 
+Estado vigente (17/10/2026): Serenetia principal; GDjkhp y MilloHost como respaldos, con RTT medianas desde el contenedor de 108,9/162,9/199,3 ms y tres búsquedas válidas por proveedor. Nazha y Trinium desactivados por las mediciones. Tres conexiones confirmadas, privado apagado/excluido y sin 2333. Código `7b3031b`, imagen `96f81a6833ae845df7d57f0895498af8a0042798450e4cadeec2aefd3c9fddec`; recuperación vigente `.runtime/bot-recovery-public-only.yml`. [Mediciones, selección, respaldo y límites](NODE-PERFORMANCE.md). Las secciones siguientes describen antecedentes.
+
 Petición del usuario: retirar WARP de Lavalink/OBEY, añadir distintos nodos públicos y conservar su nodo como principal/respaldo interno oculto al público. Esta instrucción actualiza el backend permitido de Soundy; conserva el único servicio musical, sus sesiones, cola y los doce controles existentes.
 
 ## Cambio vigente: solo públicos

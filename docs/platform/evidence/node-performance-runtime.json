@@ -1,0 +1,70 @@
+{
+  "verifiedAt": "2026-10-16T23:27:30.061Z",
+  "code": "7b3031bbc61709b662c711801be734a764678963",
+  "image": "96f81a6833ae845df7d57f0895498af8a0042798450e4cadeec2aefd3c9fddec",
+  "health": {
+    "status": "ok",
+    "database": true,
+    "music": true,
+    "uptime": 46
+  },
+  "services": [
+    {
+      "name": "obey_bot",
+      "image": "96f81a6833ae845df7d57f0895498af8a0042798450e4cadeec2aefd3c9fddec",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-17T01:26:43.039817514+02:00"
+    },
+    {
+      "name": "obey_images",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-14T02:12:54.386242902+02:00"
+    },
+    {
+      "name": "obey_redis",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-05T01:35:33.989316999+02:00"
+    },
+    {
+      "name": "obey_lavalink",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "status": "created",
+      "health": null,
+      "restarts": 0,
+      "startedAt": "0001-01-01T00:00:00Z"
+    }
+  ],
+  "selectedPublic": "serenetia",
+  "connectedPublics": [
+    "serenetia",
+    "gdjkhp",
+    "millohost"
+  ],
+  "backupOrder": [
+    "gdjkhp",
+    "millohost"
+  ],
+  "disabledPublics": [
+    "nazha",
+    "trinium"
+  ],
+  "sourceFilesVerified": 19,
+  "slashRoots": 19,
+  "privateNode": {
+    "off": true,
+    "restart": "no",
+    "portClosed": true,
+    "excluded": true
+  },
+  "unrelatedServicesUnchanged": true,
+  "noActiveTrackBeforeRestart": true,
+  "voicePlaybackPerformed": false
+}

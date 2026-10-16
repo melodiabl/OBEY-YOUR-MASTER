@@ -1,0 +1,698 @@
+{
+  "sourcePackage": "/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion",
+  "candidateScreen": [
+    {
+      "id": "nazha",
+      "host": "lavalink.nazha.online",
+      "http": 502,
+      "infoMs": 388
+    },
+    {
+      "id": "trinium",
+      "host": "lavalink-v4.triniumhost.com",
+      "http": 200,
+      "infoMs": 755,
+      "version": "4.2.2",
+      "sources": [
+        "soundcloud",
+        "bandcamp",
+        "twitch",
+        "vimeo",
+        "niconico",
+        "local",
+        "youtube",
+        "spotify",
+        "deezer",
+        "flowery-tts",
+        "pornhub",
+        "soundgasm",
+        "pixeldrain",
+        "ocremix",
+        "tiktok",
+        "clypit",
+        "getyarn.io",
+        "speak",
+        "reddit",
+        "mixcloud",
+        "http"
+      ],
+      "plugins": [
+        "youtube-plugin",
+        "lavalyrics-plugin",
+        "lava-xm-plugin",
+        "lavasrc-plugin",
+        "java-lyrics-plugin",
+        "lavasearch-plugin",
+        "plugin-template",
+        "lavadspx-plugin",
+        "DuncteBot-plugin"
+      ],
+      "valid": true
+    },
+    {
+      "id": "millohost",
+      "host": "lava-v4.millohost.my.id",
+      "http": 200,
+      "infoMs": 589,
+      "version": "3d2748ed3186cd956146a78ef14edbb6a05c9046-SNAPSHOT",
+      "sources": [
+        "soundcloud",
+        "bandcamp",
+        "youtube",
+        "spotify",
+        "applemusic",
+        "deezer",
+        "http"
+      ],
+      "plugins": [
+        "yt-sosor",
+        "lavasrc-plugin"
+      ],
+      "valid": true
+    },
+    {
+      "id": "trinium-new",
+      "host": "lavalink-v4.triniumhost.indevs.in",
+      "http": 200,
+      "infoMs": 501,
+      "version": "4.2.2",
+      "sources": [
+        "soundcloud",
+        "bandcamp",
+        "twitch",
+        "vimeo",
+        "niconico",
+        "local",
+        "youtube",
+        "spotify",
+        "deezer",
+        "flowery-tts",
+        "pornhub",
+        "soundgasm",
+        "pixeldrain",
+        "ocremix",
+        "tiktok",
+        "clypit",
+        "getyarn.io",
+        "speak",
+        "reddit",
+        "mixcloud",
+        "http"
+      ],
+      "plugins": [
+        "youtube-plugin",
+        "lavalyrics-plugin",
+        "lava-xm-plugin",
+        "lavasrc-plugin",
+        "java-lyrics-plugin",
+        "lavasearch-plugin",
+        "plugin-template",
+        "lavadspx-plugin",
+        "DuncteBot-plugin"
+      ],
+      "valid": true
+    },
+    {
+      "id": "heaven-eu",
+      "host": "eu.lavalink.heavencloud.in",
+      "error": "ENOTFOUND",
+      "infoMs": 42
+    },
+    {
+      "id": "heaven-us",
+      "host": "us.lavalink.heavencloud.in",
+      "error": "ENOTFOUND",
+      "infoMs": 18
+    },
+    {
+      "id": "gdjkhp",
+      "host": "nodelink.gdjkhp.com",
+      "http": 200,
+      "infoMs": 541,
+      "version": "3.10.0-dev.2026-10-13.1",
+      "sources": [
+        "youtube",
+        "spotify",
+        "applemusic",
+        "vkmusic",
+        "deezer",
+        "tidal",
+        "jiosaavn",
+        "gaana",
+        "yandexmusic",
+        "eternalbox",
+        "songlink",
+        "http",
+        "flowery",
+        "lazypytts",
+        "audius",
+        "qobuz",
+        "pandora",
+        "amazonmusic",
+        "bluesky",
+        "rss",
+        "mixcloud",
+        "audiomack",
+        "bandcamp",
+        "newgrounds",
+        "soundcloud",
+        "local",
+        "vimeo",
+        "iheartradio",
+        "telegram",
+        "shazam",
+        "bilibili",
+        "genius",
+        "pinterest",
+        "google-tts",
+        "instagram",
+        "kwai",
+        "twitch",
+        "nicovideo",
+        "reddit",
+        "tumblr",
+        "twitter",
+        "lastfm",
+        "netease",
+        "letrasmus",
+        "googledrive",
+        "tiktok"
+      ],
+      "plugins": [],
+      "valid": true
+    },
+    {
+      "id": "nazha-sg1",
+      "host": "sg-1.nazha.online",
+      "http": 530,
+      "infoMs": 166
+    },
+    {
+      "id": "serenetia",
+      "host": "lavalinkv4.serenetia.com",
+      "http": 200,
+      "infoMs": 1403,
+      "version": "47c0c5fddc6d23f6a9503437c59d74e57a626630-SNAPSHOT",
+      "sources": [
+        "soundcloud",
+        "bandcamp",
+        "vimeo",
+        "niconico",
+        "youtube",
+        "spotify",
+        "applemusic",
+        "deezerm",
+        "amazonmusic",
+        "gaana",
+        "pandora",
+        "shazam",
+        "bilibili",
+        "yandexmusic",
+        "tidal",
+        "lastfm",
+        "sophon",
+        "http"
+      ],
+      "plugins": [
+        "yt-sosor",
+        "sponsorblock-plugin",
+        "lavasearch-plugin",
+        "lavasrc-plugin",
+        "lavalyrics-plugin"
+      ],
+      "valid": true
+    },
+    {
+      "id": "nazha-sg2",
+      "host": "sg-2.nazha.online",
+      "http": 530,
+      "infoMs": 105
+    },
+    {
+      "id": "nazha-sg3",
+      "host": "sg-3.nazha.online",
+      "error": "ENOTFOUND",
+      "infoMs": 26
+    },
+    {
+      "id": "jirayu",
+      "host": "lavalink.jirayu.net",
+      "http": 500,
+      "infoMs": 3145
+    },
+    {
+      "id": "heaven",
+      "host": "lavalink.heavencloud.in",
+      "error": "TimeoutError",
+      "infoMs": 8001
+    }
+  ],
+  "initialMeasurements": {
+    "measuredAt": "2026-10-16T23:18:07.265Z",
+    "scope": "Bot host to public node; no Discord voice or audio playback",
+    "nodes": [
+      {
+        "id": "serenetia",
+        "host": "lavalinkv4.serenetia.com",
+        "websocket": {
+          "ready": true,
+          "handshakeMs": 842,
+          "rttMs": [
+            109.7,
+            111.2,
+            109.5,
+            110.2,
+            112.5
+          ],
+          "medianRttMs": 110,
+          "jitterMs": 3
+        },
+        "stats": {
+          "players": 251,
+          "playingPlayers": 12,
+          "uptimeMs": 468913474,
+          "cpuCores": 8,
+          "lavalinkCpuPercent": 8.98,
+          "systemCpuPercent": 33.92
+        },
+        "search": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 3231,
+            "loadType": "search",
+            "tracks": 20,
+            "encodedTracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1083,
+            "loadType": "search",
+            "tracks": 10,
+            "encodedTracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 722,
+            "loadType": "search",
+            "tracks": 20,
+            "encodedTracks": 20
+          }
+        ]
+      },
+      {
+        "id": "millohost",
+        "host": "lava-v4.millohost.my.id",
+        "websocket": {
+          "ready": true,
+          "handshakeMs": 702,
+          "rttMs": [
+            205.4,
+            204.1,
+            205.3,
+            202,
+            201
+          ],
+          "medianRttMs": 204,
+          "jitterMs": 4.4
+        },
+        "stats": {
+          "players": 1887,
+          "playingPlayers": 292,
+          "uptimeMs": 1616236439,
+          "cpuCores": 32,
+          "lavalinkCpuPercent": 0,
+          "systemCpuPercent": 0
+        },
+        "search": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 1099,
+            "loadType": "search",
+            "tracks": 20,
+            "encodedTracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1578,
+            "loadType": "search",
+            "tracks": 10,
+            "encodedTracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 877,
+            "loadType": "search",
+            "tracks": 20,
+            "encodedTracks": 20
+          }
+        ]
+      },
+      {
+        "id": "trinium-new",
+        "host": "lavalink-v4.triniumhost.indevs.in",
+        "websocket": {
+          "ready": true,
+          "handshakeMs": 844,
+          "rttMs": [
+            296.7,
+            278,
+            274.9,
+            269.2,
+            444.1
+          ],
+          "medianRttMs": 278,
+          "jitterMs": 174.9
+        },
+        "stats": {
+          "players": 1,
+          "playingPlayers": 0,
+          "uptimeMs": 10809245,
+          "cpuCores": 4,
+          "lavalinkCpuPercent": 0.39,
+          "systemCpuPercent": 7.16
+        },
+        "search": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "error": "The operation was aborted due to timeout",
+            "ms": 9004
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "error": "The operation was aborted due to timeout",
+            "ms": 9004
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 2108,
+            "loadType": "search",
+            "tracks": 20,
+            "encodedTracks": 20
+          }
+        ]
+      },
+      {
+        "id": "gdjkhp",
+        "host": "nodelink.gdjkhp.com",
+        "websocket": {
+          "ready": true,
+          "handshakeMs": 608,
+          "rttMs": [
+            192,
+            192.2,
+            193.2,
+            192.7,
+            192.9
+          ],
+          "medianRttMs": 193,
+          "jitterMs": 1.2
+        },
+        "stats": {
+          "players": 19,
+          "playingPlayers": 1,
+          "uptimeMs": 40900687,
+          "cpuCores": 1,
+          "lavalinkCpuPercent": null,
+          "systemCpuPercent": 24
+        },
+        "search": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 527,
+            "loadType": "search",
+            "tracks": 10,
+            "encodedTracks": 10
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1623,
+            "loadType": "search",
+            "tracks": 10,
+            "encodedTracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 518,
+            "loadType": "search",
+            "tracks": 10,
+            "encodedTracks": 10
+          }
+        ]
+      }
+    ]
+  },
+  "confirmation": {
+    "measuredAt": "2026-10-16T23:21:08.791Z",
+    "scope": "Bot host to public node, not Discord voice latency or audio playback",
+    "nodes": [
+      {
+        "id": "serenetia",
+        "label": "Serenetia",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 113.6,
+        "jitterMs": 14.6,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 813,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 2409,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 813,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 795,
+            "tracks": 20
+          }
+        ],
+        "players": 251,
+        "lavalinkCpuPercent": 5.44,
+        "usable": true
+      },
+      {
+        "id": "gdjkhp",
+        "label": "GDjkhp",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 193.3,
+        "jitterMs": 11.1,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 598,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 541,
+            "tracks": 10
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1370,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 598,
+            "tracks": 10
+          }
+        ],
+        "players": 19,
+        "lavalinkCpuPercent": null,
+        "usable": true
+      },
+      {
+        "id": "millohost",
+        "label": "MilloHost",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 228.4,
+        "jitterMs": 185.2,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 1136,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 1136,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1354,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 1007,
+            "tracks": 20
+          }
+        ],
+        "players": 1882,
+        "lavalinkCpuPercent": 0,
+        "usable": true
+      }
+    ]
+  },
+  "deployedMeasurements": {
+    "measuredAt": "2026-10-16T23:27:09.380Z",
+    "scope": "Bot host to public node, not Discord voice latency or audio playback",
+    "nodes": [
+      {
+        "id": "serenetia",
+        "label": "Serenetia",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 108.9,
+        "jitterMs": 1.5,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 1012,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 1546,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1012,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 987,
+            "tracks": 20
+          }
+        ],
+        "players": 259,
+        "lavalinkCpuPercent": 5.83,
+        "usable": true
+      },
+      {
+        "id": "gdjkhp",
+        "label": "GDjkhp",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 162.9,
+        "jitterMs": 0.9,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 630,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 509,
+            "tracks": 10
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1458,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 630,
+            "tracks": 10
+          }
+        ],
+        "players": 20,
+        "lavalinkCpuPercent": null,
+        "usable": true
+      },
+      {
+        "id": "millohost",
+        "label": "MilloHost",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 199.3,
+        "jitterMs": 736.8,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 1100,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 1100,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1234,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 805,
+            "tracks": 20
+          }
+        ],
+        "players": 1886,
+        "lavalinkCpuPercent": 0,
+        "usable": true
+      }
+    ]
+  },
+  "functionalFailover": {
+    "measuredAt": "2026-10-16T23:22:00.905Z",
+    "scope": "Existing node pool and search engine with real public search results; failed providers simulated locally; no voice or audio",
+    "results": [
+      {
+        "scenario": "primary",
+        "forcedLocalFailures": [],
+        "provider": "serenetia",
+        "tracks": 10,
+        "attempts": [
+          "serenetia"
+        ]
+      },
+      {
+        "scenario": "firstBackup",
+        "forcedLocalFailures": [
+          "serenetia"
+        ],
+        "provider": "gdjkhp",
+        "tracks": 10,
+        "attempts": [
+          "serenetia",
+          "serenetia",
+          "gdjkhp"
+        ]
+      },
+      {
+        "scenario": "secondBackup",
+        "forcedLocalFailures": [
+          "serenetia",
+          "gdjkhp"
+        ],
+        "provider": "millohost",
+        "tracks": 10,
+        "attempts": [
+          "gdjkhp",
+          "gdjkhp",
+          "millohost"
+        ]
+      }
+    ]
+  },
+  "tests": {
+    "tests": 528,
+    "pass": 528,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "focusedTests": 26,
+  "newTests": 4,
+  "noPrivateNodeProbed": true,
+  "noDiscordTokenSentToPublicNodes": true,
+  "noVoicePlaybackPerformed": true,
+  "settingsPreserved": "Five existing session preferences already auto; no database migration or writes",
+  "baselineFilesPreserved": 16
+}

@@ -27,10 +27,16 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "694bcd388f04332df5ae3978ed4e87769fc0e8f1",
-    "image": "bcfd54f8b1002c3bbde8bcd90f34f5446496d0de1c7199add1942e5d3102904e",
-    "documentationHeadAtReceipt": "d74aaf854fd27d8cb36796ca3c71dfa4014d3b7d",
-    "changedBySourceAdoption": false
+    "code": "7b3031bbc61709b662c711801be734a764678963",
+    "image": "96f81a6833ae845df7d57f0895498af8a0042798450e4cadeec2aefd3c9fddec",
+    "selectedPublicNode": "serenetia",
+    "backupOrder": [
+      "gdjkhp",
+      "millohost"
+    ],
+    "privateEnabled": false,
+    "evidence": "evidence/node-performance-runtime.json",
+    "change": "Explicit request for measured public nodes after source adoption"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -50,5 +56,11 @@
     "missingAllowedKeys": []
   },
   "overlayPolicy": "Review and adapt against current HEAD; cumulative patch targets old base 9f11a850 and must not overwrite later fixes",
-  "sourceReport": "SOURCE-2026-10-17.md"
+  "sourceReport": "SOURCE-2026-10-17.md",
+  "runtimeAtSourceAdoption": {
+    "code": "694bcd388f04332df5ae3978ed4e87769fc0e8f1",
+    "image": "bcfd54f8b1002c3bbde8bcd90f34f5446496d0de1c7199add1942e5d3102904e",
+    "documentationHeadAtReceipt": "d74aaf854fd27d8cb36796ca3c71dfa4014d3b7d",
+    "changedBySourceAdoption": false
+  }
 }

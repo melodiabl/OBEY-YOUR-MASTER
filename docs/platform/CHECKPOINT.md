@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Nodos públicos medidos · 17 de octubre de 2026
+
+Petición explícita: usar el paquete actualizado y nodos de buen rendimiento/bajo ping. Conservado el motor actual según la conciliación del ZIP; se midieron 13 candidatos TLS y se seleccionaron proveedores que completan handshake, ping/pong y tres búsquedas reales. Principal Serenetia, respaldos GDjkhp y MilloHost. Dentro del contenedor: RTT medianas 108,9/162,9/199,3 ms; no se encontró un público funcional de menos de 30 ms entre los comprobados. Nazha (502) y Trinium (alta variación y dos búsquedas agotadas de tres) quedan desactivados. Cinco preferencias de sesión ya eran auto: sin migración ni escrituras Mongo.
+
+Nueva CLI explícita `scripts/benchmark-music-nodes.js`, sin token Discord, datos de usuario, reproducción ni descubrimiento automático; informe redactado y consultas acotadas. El pool/buscador actual devolvió diez pistas usando cada respaldo tras fallos locales simulados de los anteriores. No se afirma failover de voz real ni capacidad máxima. 528/528 pruebas y 26 focalizadas pasan; imagen verifica 19 hashes y conserva 295 emojis, 19 raíces y Fun 22, sin NSFW.
+
+Código activo `7b3031bbc61709b662c711801be734a764678963`, imagen `96f81a6833ae845df7d57f0895498af8a0042798450e4cadeec2aefd3c9fddec`, etiqueta `release-node-performance-20261017`. Desplegado al quedar cero pistas activas, sin cortar la canción observada. Bot healthy/cero reinicios; Mongo/música y tres nodos conectados. Solo bot recreado; imágenes/Redis y las 16 entradas locales previas intactos/excluidos. Privado apagado/excluido, restart=no y 2333 cerrado. Recuperación vigente `.runtime/bot-recovery-public-only.yml`; imagen anterior de favoritos Discord conservada para reversión con el registro público actual. [Detalle y evidencia](NODE-PERFORMANCE.md).
+
 ## ZIP y referencia documental actualizados · 17 de octubre de 2026
 
 Fuente vigente `/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion`. ZIP SHA-256 `98774d4367fc1c4d6f9712cd4e9cb82b76f74bfb4c97e8983545b32e98224e1c`: 4468 archivos verificados contra el comprimido, eliminado después. Validación documental: 129 JSON, 3856 enlaces y 1762 hashes de recursos, sin errores; 1473 hashes del overlay comprobados. Delta frente a la fuente del 15/10: 195 altas, 77 modificaciones y una retirada; 110 archivos del overlay.

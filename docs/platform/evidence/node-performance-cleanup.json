@@ -1,0 +1,11 @@
+{
+  "temporaryDirectoryRemoved": "/tmp/obey-node-performance",
+  "temporaryFilesRemoved": 34,
+  "temporaryBytesRemoved": 195745,
+  "operatorRegistryRetained": ".runtime/nodes/nodes.json",
+  "recoveryConfigurationRetained": ".runtime/bot-recovery-public-only.yml",
+  "rollbackImageRetained": "localhost/obey-your-master_bot:release-discord-liked-20261016",
+  "baselineFilesPreserved": 16,
+  "sourcePackageRetained": "/home/OBEY_Documentacion_actualizada_2026-10-17",
+  "userDataAndUnrelatedServicesPreserved": true
+}
