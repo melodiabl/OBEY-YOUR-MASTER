@@ -970,6 +970,23 @@
     }
   },
   "project": {
+    "botInfo": {
+      "title": "{name} · Bot information",
+      "loading": "Loading bot information…",
+      "unavailable": "Unavailable",
+      "servers": "Servers",
+      "members": "Combined member count",
+      "cachedUsers": "Cached users",
+      "uptime": "Uptime",
+      "gatewayPing": "Discord gateway ping",
+      "voiceConnections": "Voice connections",
+      "process": "Process",
+      "resources": "CPU: {cpu} · RAM: {ram} · Heap: {heap}",
+      "music": "Music in this server",
+      "musicState": "Node: {node}\nVoice ping: {ping}",
+      "noVoice": "No voice connection",
+      "versions": "Versions"
+    },
     "developerTitle": "{name} · Project",
     "developerBody": "Team contact information is available through links configured by the project owner. Credits and licenses for reused code are preserved.",
     "githubTitle": "{name} · Source",

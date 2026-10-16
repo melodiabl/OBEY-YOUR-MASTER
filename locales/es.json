@@ -970,6 +970,23 @@
     }
   },
   "project": {
+    "botInfo": {
+      "title": "{name} · Información del bot",
+      "loading": "Cargando información del bot…",
+      "unavailable": "No disponible",
+      "servers": "Servidores",
+      "members": "Miembros sumados",
+      "cachedUsers": "Usuarios en caché",
+      "uptime": "Tiempo activo",
+      "gatewayPing": "Ping de Discord",
+      "voiceConnections": "Conexiones de voz",
+      "process": "Proceso",
+      "resources": "CPU: {cpu} · RAM: {ram} · Heap: {heap}",
+      "music": "Música en este servidor",
+      "musicState": "Nodo: {node}\nPing de voz: {ping}",
+      "noVoice": "Sin conexión de voz",
+      "versions": "Versiones"
+    },
     "developerTitle": "{name} · Proyecto",
     "developerBody": "La información de contacto del equipo se publica mediante los enlaces configurados por el responsable del proyecto. Se conservan los créditos y licencias del código utilizado.",
     "githubTitle": "{name} · Código",
