@@ -2,6 +2,7 @@ const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
+const { isLikedPlaylist, AUTOMATIC_MESSAGE } = require('../../handlers/music/liked-playlist')
 
 module.exports = {
   name: 'delete',
@@ -11,6 +12,8 @@ module.exports = {
   ],
   run: async (client, interaction) => {
     const name = interaction.options.getString('nombre').trim()
+    if (isLikedPlaylist(name)) return interaction.reply({ ephemeral: true,
+      embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(AUTOMATIC_MESSAGE)] })
     await interaction.deferReply({ ephemeral: true })
 
     const playlist = await Playlist.findOneAndDelete({

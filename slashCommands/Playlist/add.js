@@ -2,6 +2,7 @@ const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
+const { isLikedPlaylist, AUTOMATIC_MESSAGE } = require('../../handlers/music/liked-playlist')
 
 const MAX_TRACKS = 100
 
@@ -18,6 +19,8 @@ module.exports = {
     const plName   = interaction.options.getString('playlist').trim()
     const query    = interaction.options.getString('cancion')?.trim() || null
     const guildId  = interaction.guild.id
+    if (isLikedPlaylist(plName)) return interaction.reply({ ephemeral: true,
+      embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(AUTOMATIC_MESSAGE)] })
 
     await interaction.deferReply({ ephemeral: true })
 

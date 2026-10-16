@@ -28,7 +28,7 @@ async function playlist(client, message, args) {
   let response
   const interaction = {
     user: message.author, guild: message.guild, member: message.member, channel: message.channel, channelId: message.channel.id,
-    options: { getString: () => name, getBoolean: () => true },
+    options: { getString: () => name, getBoolean: () => true, getUser: () => null },
     deferReply: async () => { response = await message.reply(obeyUi.owned('⏳ Procesando…')) },
     reply: payload => message.reply(payload),
     editReply: payload => response ? response.edit(payload) : message.reply(payload),

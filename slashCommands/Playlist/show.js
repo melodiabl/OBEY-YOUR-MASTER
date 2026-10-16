@@ -2,6 +2,7 @@ const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
+const { isLikedPlaylist, getLikedPlaylist } = require('../../handlers/music/liked-playlist')
 
 function fmtMs(ms) {
   const s = Math.floor((ms || 0) / 1000)
@@ -29,7 +30,11 @@ module.exports = {
 
     await interaction.deferReply({ ephemeral: true })
 
-    const playlist = await Playlist.findOne({
+    if (isLikedPlaylist(name) && !ownQuery)
+      return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245)
+        .setDescription('Tus Me gusta es una lista privada. Solo su propietario puede verla.')] })
+
+    const playlist = isLikedPlaylist(name) ? await getLikedPlaylist(interaction.user.id) : await Playlist.findOne({
       userId: targetUser.id,
       name: exactPlaylistName(name),
     }).lean().catch(() => null)
