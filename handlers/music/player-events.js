@@ -1,6 +1,7 @@
 const { getState, playerStates, liveMessages } = require('./state')
 const { stopLiveUpdate } = require('./liveupdate')
 module.exports = function bindPlayerEvents(client, player, guildId, { emitState, elapsedForState, requestRecovery }) {
+  const observeHealth = require('./playback-health').createPlaybackHealth(guildId, player)
   let events = Promise.resolve()
   const isCurrent = data => {
     if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return false
@@ -46,6 +47,7 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     const state    = playerStates.get(guildId)
     const position = Number(data?.state?.position)
     if (!state?.currentTrack || !Number.isFinite(position) || !['playing', 'paused'].includes(state.status)) return
+    observeHealth(data)
     if (state.paused) return
     const timestamp = Number(data?.state?.time)
     if (Number.isFinite(timestamp) && timestamp < (state.lastPlayerUpdateTime || 0)) return
