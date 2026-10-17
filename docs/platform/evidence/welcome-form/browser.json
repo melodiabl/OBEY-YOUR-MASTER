@@ -1,0 +1,74 @@
+{
+  "sourceBase": "47e01fa",
+  "environment": "isolated loopback, Mongo fixture and simulated Discord permissions",
+  "checks": [
+    "descriptor renders fields and canonical 500 limit",
+    "draft does not activate and duplicate submit is disabled",
+    "two tabs: conflict preserves local text, compare and discard retain saved draft",
+    "safe synthetic preview and publication confirmation",
+    "channel permission failure preserves edits and retries the same operation",
+    "lost publication response reconciles receipt without repeating the write",
+    "storage failure and refresh preserve unsaved text",
+    "server field errors are linked, focused and preserve values",
+    "320/768/1024/1440 layout, label/help associations, keyboard and focus",
+    "English editor uses the same descriptor and contract",
+    "revoked actor clears configuration, options, preview and private draft",
+    "initial storage failure exits loading with fields disabled"
+  ],
+  "responsive": [
+    {
+      "viewport": 320,
+      "content": 320,
+      "fields": true
+    },
+    {
+      "viewport": 768,
+      "content": 768,
+      "fields": true
+    },
+    {
+      "viewport": 1024,
+      "content": 1024,
+      "fields": true
+    },
+    {
+      "viewport": 1440,
+      "content": 1440,
+      "fields": true
+    }
+  ],
+  "pageErrors": [],
+  "unexpectedNetwork": [],
+  "expectedFailureConsoleMessages": 8,
+  "sharedHeaderPreloadWarnings": 2,
+  "productionVerified": false,
+  "sourceHashes": {
+    "dashboard/configuration-routes.js": "be75a748180a1156946c6bf65c485fef75257cfa1743c7953e21abce5785015c",
+    "dashboard/public/css/configuration-editor.css": "3bb7192d13d5feefaf93f11a4ff73a48feb6ab6fad1511b1fa1c5a229afc6b54",
+    "dashboard/public/js/configuration-editor.js": "e66a26d84dda2b8ea5425191a1e1d75f173d454ac79fa45dec1ceb09f17a7e4c",
+    "dashboard/views/pages/configuration-editor.ejs": "5c790a419b8b762ef2f03b0d2267b45b7e434dda92acddecdab1336cbe7abe60",
+    "handlers/welcome-access.js": "6a11df789dd3e92433dc25944a188b5b5c4b392241cbcc8dbb58cec356a05375",
+    "handlers/welcome/error.js": "757791deabe922234c722cca3ebc8775e179d62cf17b35e840bc7868342a6862",
+    "handlers/welcome/service.js": "499e8267b3adf866e5a5d39efecf8d3a2b6a8c56a966132d709f37d13bcd5666",
+    "locales/en.json": "47ac70c93442d1d64005c651ac6024206de21dbffdf98805c88e9167f14d3d3f",
+    "locales/es.json": "865c92df86930dd80cae7ed5a7a50c25859ad51ea138e947c17066a2d4792cc3",
+    "slashCommands/Welcome/mensaje.js": "e00d7a7f11545fa6d07ae512f79ff6034c869488de16abf61823d7e22b596340",
+    "tsconfig.welcome.json": "732d38ba134a6658f448eb799c22b54c324c65a330c5cee46b94e03535d63e6b",
+    "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
+    "dashboard/views/includes/configuration-fields.ejs": "b343000d92506fa4f936cb66b5dc189f2fef5f4f19a16b646e088f142b40067b"
+  },
+  "browser": {
+    "engine": "Chrome for Testing headless shell",
+    "version": "151.0.7922.34",
+    "driver": "puppeteer-core 25.13.0, already available outside the project",
+    "profile": "isolated temporary profile"
+  },
+  "unitChecks": [
+    "es/en keys and schema/EJS limits",
+    "removed member and missing access distinct from transient network failure",
+    "Zod field allowlist in errors",
+    "slash UTF-16 500/502 limit",
+    "EJS text and JSON embedding escape markup"
+  ],
+  "consoleNotes": "8 expected messages for deliberately failed API requests; 2 font-preload warnings from the unchanged shared header. No page errors or unexpected network requests."
+}

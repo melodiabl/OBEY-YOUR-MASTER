@@ -1,8 +1,18 @@
-const {PermissionFlagsBits:F}=require('discord.js')
+const {PermissionFlagsBits:F,RESTJSONErrorCodes}=require('discord.js')
 const {ConfigurationError}=require('./welcome-configuration')
+function denyWelcomeAccess(){
+ const error=new ConfigurationError('No se verificó el permiso de configuración.','configuration_permissions')
+ error.accessRevoked=true
+ throw error
+}
 async function assertWelcomeActor(guild,actorId){
- const actor=await guild.members.fetch({user:actorId,force:true})
- if(!actor.permissions.has(F.ManageGuild))throw new ConfigurationError('No se verificó el permiso de configuración.','configuration_permissions')
+ let actor
+ try{actor=await guild.members.fetch({user:actorId,force:true})}
+ catch(error){
+  if([RESTJSONErrorCodes.UnknownMember,RESTJSONErrorCodes.MissingAccess].includes(error.code))denyWelcomeAccess()
+  throw error
+ }
+ if(!actor.permissions.has(F.ManageGuild))denyWelcomeAccess()
  return actor
 }
 async function assertWelcomeChannel(guild,actorId,channelId){

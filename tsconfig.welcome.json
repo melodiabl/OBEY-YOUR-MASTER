@@ -10,5 +10,9 @@
     "types": [],
     "maxNodeModuleJsDepth": 0
   },
-  "files": ["handlers/welcome/contract.js", "handlers/welcome/service.js"]
+  "files": [
+    "handlers/welcome/contract.js",
+    "handlers/welcome/service.js",
+    "handlers/welcome/ui.js"
+  ]
 }

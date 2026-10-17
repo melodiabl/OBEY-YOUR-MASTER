@@ -1,0 +1,15 @@
+<% form.sections.forEach(section => { %>
+<div class="configuration-section" role="group" aria-labelledby="config-section-<%= section.id %>">
+  <h3 class="sr-only" id="config-section-<%= section.id %>"><%= section.title %></h3>
+  <% section.fields.forEach(field => { %>
+    <label for="<%= field.id %>"><%= field.label %></label>
+    <% if (field.component === 'guild-text-channel') { %>
+      <select id="<%= field.id %>" name="<%= field.path %>" data-config-field="<%= field.path %>" data-nullable="<%= field.nullable %>" aria-describedby="<%= field.id %>-help <%= field.id %>-error"></select>
+    <% } else if (field.component === 'message-template') { %>
+      <textarea id="<%= field.id %>" name="<%= field.path %>" data-config-field="<%= field.path %>" data-nullable="<%= field.nullable %>" maxlength="<%= field.maxLength %>" rows="5" aria-describedby="<%= field.id %>-help <%= field.id %>-error"></textarea>
+    <% } else { throw new Error('Unknown configuration field component') } %>
+    <p id="<%= field.id %>-help" class="configuration-note"><%= field.help %></p>
+    <p id="<%= field.id %>-error" class="configuration-field-error" hidden></p>
+  <% }) %>
+</div>
+<% }) %>

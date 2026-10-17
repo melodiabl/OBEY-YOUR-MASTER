@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require('discord.js')
+const { configSchema, configJsonSchema } = require('../../handlers/welcome/contract')
 
 module.exports = {
   name: 'mensaje',
@@ -13,8 +14,8 @@ module.exports = {
     const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(d)
 
     const msg = interaction.options.getString('mensaje')
-    if (msg.length > 500)
-      return interaction.reply({ embeds: [err('❌ El mensaje no puede superar 500 caracteres.')], ephemeral: true })
+    if (!configSchema.shape.message.safeParse(msg).success)
+      return interaction.reply({ embeds: [err(`❌ El mensaje no puede superar ${configJsonSchema.properties.message.maxLength} caracteres.`)], ephemeral: true })
 
     const gid = interaction.guild.id
     await interaction.deferReply({ ephemeral: true })

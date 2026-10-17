@@ -1,4 +1,7 @@
 const { ConfigurationError } = require('../handlers/welcome-configuration')
+const { welcomeSettingsForm } = require('../handlers/welcome/ui')
+const { localeFor, normalizeLocale } = require('../handlers/i18n')
+const { assertWelcomeActor } = require('../handlers/welcome-access')
 module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canManageGuild }) => {
   const access = (req, res, next) => {
     const guild = client.guilds.cache.get(req.params.guildId)
@@ -11,6 +14,10 @@ module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canM
     return next()
   }
   const guarded = [requireAuth, requireFreshGuildPermissions, access]
+  const failure = error => ({ error: error instanceof ConfigurationError ? error.code : 'configuration_storage',
+    ...(error instanceof ConfigurationError && error.accessRevoked ? { accessRevoked: true } : {}),
+    ...(error instanceof ConfigurationError && error.fields.length ? { fields: error.fields } : {}),
+  })
   const wrap = handler => async (req, res) => {
     try { return await handler(req, res) }
     catch (error) {
@@ -19,11 +26,11 @@ module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canM
         try { return res.status(409).json({ error: code, current: await client.welcomeConfiguration.read(context(req)) }) }
         catch (currentError) {
           const currentCode = currentError instanceof ConfigurationError ? currentError.code : 'configuration_storage'
-          return res.status({ configuration_permissions: 403, configuration_not_found: 404 }[currentCode] || 503).json({ error: currentCode })
+          return res.status({ configuration_permissions: 403, configuration_not_found: 404 }[currentCode] || 503).json(failure(currentError))
         }
       }
       const status = { invalid_configuration: 400, configuration_permissions: 403, configuration_not_found: 404 }[code] || 503
-      return res.status(status).json({ error: code })
+      return res.status(status).json(failure(error))
     }
   }
   const context = req => ({ guildId: req.configurationGuild.id, actorId: req.session.user.id })
@@ -35,12 +42,12 @@ module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canM
   })) }))
   app.get('/configuration/:guildId/:moduleId', ...guarded, (req, res) => res.render('pages/configuration-editor', {
     user: req.session.user, guild: { id: req.configurationGuild.id, name: req.configurationGuild.name }, moduleId: req.params.moduleId,
+    form: welcomeSettingsForm(normalizeLocale(localeFor(client, req.configurationGuild.id)) === 'en' ? 'en' : 'es'),
   }))
   app.get('/api/guilds/:guildId/modules/:moduleId/config', ...guarded, wrap(async (req, res) => res.json(await service().read(context(req)))))
   app.get('/api/guilds/:guildId/modules/:moduleId/channels', ...guarded, wrap(async (req, res) => {
     const guild = req.configurationGuild
-    const [channels, actor] = await Promise.all([guild.channels.fetch(), guild.members.fetch({ user: req.session.user.id, force: true })])
-    if (!actor.permissions.has('ManageGuild')) throw new ConfigurationError('No se verificó el permiso de configuración.', 'configuration_permissions')
+    const [channels, actor] = await Promise.all([guild.channels.fetch(), assertWelcomeActor(guild, req.session.user.id)])
     res.json({ channels: [...channels.values()].filter(channel => channel.type === 0 && channel.permissionsFor(actor)?.has('ViewChannel')).map(({ id, name }) => ({ id, name })) })
   }))
   app.put('/api/guilds/:guildId/modules/:moduleId/draft', ...guarded, wrap(async (req, res) => {

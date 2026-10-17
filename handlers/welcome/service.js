@@ -16,7 +16,14 @@ const { contextSchema, draftSchema, publishSchema, saveSchema, previewSchema } =
  */
 function parse(schema, value) {
   const result = schema.safeParse(value)
-  if (!result.success) throw new ConfigurationError('Solicitud de bienvenida inválida.', 'invalid_configuration')
+  if (!result.success) {
+    const error = new ConfigurationError('Solicitud de bienvenida inválida.', 'invalid_configuration')
+    error.fields = [...new Set(result.error.issues.flatMap(issue => {
+      const field = issue.path.at(-1)
+      return field === 'channelId' || field === 'message' ? [field] : []
+    }))]
+    throw error
+  }
   return result.data
 }
 
