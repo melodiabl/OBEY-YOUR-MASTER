@@ -10,7 +10,7 @@ const { FILTER_PRESETS, FILTER_RESET } = require('./filters')
 const clock = require('./playback-clock')
 const { buildNPEmbed, buildControls, buildQueueEmbed, buildQueueRows } = require('./embeds')
 const { toggleLike, buildLikeEmbed } = require('./likes')
-const { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate } = require('./liveupdate')
+const { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate, updatePanel } = require('./liveupdate')
 
 function normalizedSongText(value) {
   return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
@@ -40,6 +40,7 @@ module.exports = client => {
   const volumeWrites = new Map()
   const confirmedVolumes = new Map()
   const panels = require('./action-queue').createActionQueue()
+  const panelPublications = new Map()
 
   function anchorFromNode(state, response, fallback, requestedPosition = null) {
     let position = clock.nodePosition(state, response?.state)
@@ -682,13 +683,20 @@ module.exports = client => {
     },
 
     async sendNowPlaying(guildId, track) {
-      await stopLiveUpdate(guildId)
       const state = getState(guildId)
       if (!state.currentTrack || !state.textChannelId) return
-
-      // El mensaje fijado del canal de peticiones muestra la pista y el progreso.
       const setup = require('../music/setup')
       const setupChId = setup.getChannelId(guildId)
+      const live = liveMessages.get(guildId)
+      if (live?.channelId === (setupChId || state.textChannelId)) {
+        if (!liveTimers.has(guildId)) startLiveUpdate(client, guildId)
+        await updatePanel(client, guildId)
+        return
+      }
+      await stopLiveUpdate(guildId)
+      if (!state.currentTrack || state.status === 'stopping') return
+
+      // El mensaje fijado del canal de peticiones muestra la pista y el progreso.
       if (setupChId) {
         const sm = await setup.updatePanel(client, guildId, { embeds: [buildNPEmbed(client, guildId, state)], components: buildControls(state) })
         if (sm) {
@@ -808,7 +816,7 @@ module.exports = client => {
         return
       }
     }
-    scheduleNpUpdate(client, guildId)
+    scheduleNpUpdate(client, guildId, { immediate: true })
     } catch (error) {
       await acknowledgement
       console.warn(`[Music] Control failed (${guildId}):`, error.message)
@@ -843,7 +851,17 @@ module.exports = client => {
 
   const sendNowPlaying = client.music.sendNowPlaying
   client.music.sendNowPlaying = function (guildId, ...args) {
-    return panels.run(guildId, () => sendNowPlaying.call(this, guildId, ...args))
+    const pending = panelPublications.get(guildId)
+    if (pending) { pending.dirty = true; return pending.promise }
+    const publication = { dirty: true, promise: null }
+    panelPublications.set(guildId, publication)
+    publication.promise = panels.run(guildId, async () => {
+      do {
+        publication.dirty = false
+        await sendNowPlaying.call(this, guildId, ...args)
+      } while (publication.dirty && getState(guildId).currentTrack && getState(guildId).status !== 'stopping')
+    }).finally(() => { if (panelPublications.get(guildId) === publication) panelPublications.delete(guildId) })
+    return publication.promise
   }
 
   let restoring = false, restoreRetry = null, preferencesLoaded = false

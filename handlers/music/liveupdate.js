@@ -1,5 +1,6 @@
 const { liveMessages, liveTimers, getState } = require('./state')
 const { buildNPEmbed, buildControls } = require('./embeds')
+const { measureRequest } = require('./request-timing')
 
 const scheduled = new Map()
 const pending = new Map()
@@ -11,20 +12,21 @@ async function renderPanel(client, guildId, generation) {
   if (!live || !getState(guildId).currentTrack) return
   const channel = client.channels.cache.get(live.channelId)
   if (!channel) return
-  const message = await channel.messages.fetch(live.messageId).catch(() => null)
-  if ((generations.get(guildId) || 0) !== generation || liveMessages.get(guildId) !== live) return
   const state = getState(guildId)
-  if (!state.currentTrack) return
-  if (!message) {
-    if (live.isSetup) {
-      const replacement = await require('./setup').updatePanel(client, guildId, {
-        embeds: [buildNPEmbed(client, guildId, state)], components: buildControls(state),
-      })
-      if (replacement) live.messageId = replacement.id
-    }
-    return
+  try {
+    await measureRequest(guildId, 'panel_edit', () => channel.messages.edit(live.messageId, {
+      embeds: [buildNPEmbed(client, guildId, state)], components: buildControls(state),
+    }))
+  } catch (error) {
+    // Only a deleted message needs replacement; transient errors must not create duplicates.
+    if (error.code !== 10008 || !live.isSetup) throw error
+    if ((generations.get(guildId) || 0) !== generation || liveMessages.get(guildId) !== live || !getState(guildId).currentTrack) return
+    const latest = getState(guildId)
+    const replacement = await require('./setup').updatePanel(client, guildId, {
+      embeds: [buildNPEmbed(client, guildId, latest)], components: buildControls(latest),
+    })
+    if (replacement) live.messageId = replacement.id
   }
-  await message.edit({ embeds: [buildNPEmbed(client, guildId, state)], components: buildControls(state) })
 }
 
 function updatePanel(client, guildId) {
@@ -68,7 +70,11 @@ function stopLiveUpdate(guildId) {
   return job?.promise || Promise.resolve()
 }
 
-function scheduleNpUpdate(client, guildId) {
+function scheduleNpUpdate(client, guildId, { immediate = false } = {}) {
+  if (immediate) {
+    clearTimeout(scheduled.get(guildId)); scheduled.delete(guildId)
+    return updatePanel(client, guildId)
+  }
   if (scheduled.has(guildId)) return
   const timer = setTimeout(() => {
     scheduled.delete(guildId)

@@ -1,5 +1,6 @@
 const { AsyncLocalStorage } = require('node:async_hooks')
 const { Player, Rest } = require('shoukaku')
+const { measureRequest } = require('./request-timing')
 
 const responses = new AsyncLocalStorage()
 const number = value => Number.isFinite(value) ? value : undefined
@@ -9,7 +10,7 @@ const number = value => Number.isFinite(value) ? value : undefined
 class StateRest extends Rest {
   async updatePlayer(data) {
     const sentAt = Date.now()
-    const response = await super.updatePlayer(data)
+    const response = await measureRequest(data.guildId, 'node_update', () => super.updatePlayer(data))
     const context = responses.getStore()
     if (context?.node === this.node && context.guildId === data.guildId && response?.state) {
       context.snapshot = {

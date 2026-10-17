@@ -25,7 +25,7 @@ test('stop sends its audio request before a slow Discord panel finishes', async 
   const id = 'stop-before-discord', f = fixture(id), { liveMessages } = require('../handlers/music/state'), { updatePanel } = require('../handlers/music/liveupdate')
   let release, began, stopped = false
   const started = new Promise(resolve => { began = resolve })
-  f.client.channels.cache.set('text', { messages: { fetch: async () => ({ edit: async () => { began(); await new Promise(resolve => { release = resolve }) } }) } })
+  f.client.channels.cache.set('text', { messages: { edit: async () => { began(); await new Promise(resolve => { release = resolve }) } } })
   liveMessages.set(id, { channelId: 'text', messageId: 'panel' })
   const edit = updatePanel(f.client, id); await started
   f.player.stopTrack = async () => { stopped = true }

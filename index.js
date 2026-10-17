@@ -1,7 +1,7 @@
 require('dotenv').config()
 require('colors')
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js')
-const { Agent } = require('undici')
+const discordRestOptions = require('./handlers/project/discord-rest')
 
 // Polyfill: splitMessage fue removido en discord.js v14
 ;(function patchDiscordJs() {
@@ -58,11 +58,7 @@ const client = new Client({
   ],
   allowedMentions: { parse: ['roles', 'users'], repliedUser: false },
   failIfNotExists: false,
-  rest: {
-    timeout: 60_000,
-    retries: 5,
-    agent: new Agent({ pipelining: 0 }),
-  },
+  rest: discordRestOptions(),
 })
 // 27+ handlers registran eventos — aumentar límite para evitar el warning
 client.setMaxListeners(50)
