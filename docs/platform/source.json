@@ -62,5 +62,12 @@
     "image": "bcfd54f8b1002c3bbde8bcd90f34f5446496d0de1c7199add1942e5d3102904e",
     "documentationHeadAtReceipt": "d74aaf854fd27d8cb36796ca3c71dfa4014d3b7d",
     "changedBySourceAdoption": false
+  },
+  "latestNodeResearch": {
+    "date": "2026-10-17",
+    "report": "PUBLIC-NODE-RESEARCH.md",
+    "evidence": "evidence/public-node-research.json",
+    "runtimeChanged": false,
+    "conclusion": "Retain GDjkhp; no tested public node meets all requested latency/audio/plugin requirements"
   }
 }

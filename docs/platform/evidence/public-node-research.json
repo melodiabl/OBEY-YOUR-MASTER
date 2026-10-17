@@ -1,0 +1,1296 @@
+{
+  "evaluatedAt": "2026-10-17T00:30:12.495802+00:00",
+  "scope": "Explicit public node research; no deployment or production node changes",
+  "candidates": 21,
+  "tlsCandidates": 19,
+  "apiV4Info200": 8,
+  "aliasesAmong200": 2,
+  "distinctBackendsDeepTested": 6,
+  "screen": [
+    {
+      "id": "lavalinkv4-serenetia-com-443",
+      "host": "lavalinkv4.serenetia.com",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 200,
+      "infoMs": 1170,
+      "version": "47c0c5fddc6d23f6a9503437c59d74e57a626630-SNAPSHOT",
+      "versionMajor": 0,
+      "plugins": [
+        {
+          "name": "yt-sosor",
+          "version": "10f3c72ba562b7b2b70ba372eb268f54b5cd1d0c"
+        },
+        {
+          "name": "sponsorblock-plugin",
+          "version": "f08c401"
+        },
+        {
+          "name": "lavasearch-plugin",
+          "version": "1.0.0"
+        },
+        {
+          "name": "lavasrc-plugin",
+          "version": "cd33eee"
+        },
+        {
+          "name": "lavalyrics-plugin",
+          "version": "1.1.0"
+        }
+      ],
+      "filters": [
+        "volume",
+        "equalizer",
+        "karaoke",
+        "timescale",
+        "tremolo",
+        "vibrato",
+        "distortion",
+        "rotation",
+        "channelMix",
+        "lowPass"
+      ],
+      "declaredSourceCount": 18,
+      "declaredMusicSources": [
+        "soundcloud",
+        "bandcamp",
+        "youtube",
+        "spotify",
+        "applemusic",
+        "deezerm",
+        "amazonmusic",
+        "gaana",
+        "pandora",
+        "yandexmusic",
+        "tidal",
+        "http"
+      ],
+      "otherSourceCount": 6
+    },
+    {
+      "id": "lavalink-jirayu-net-443",
+      "host": "lavalink.jirayu.net",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 500,
+      "infoMs": 902,
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "lava-v4-millohost-my-id-443",
+      "host": "lava-v4.millohost.my.id",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 200,
+      "infoMs": 628,
+      "version": "3d2748ed3186cd956146a78ef14edbb6a05c9046-SNAPSHOT",
+      "versionMajor": 0,
+      "plugins": [
+        {
+          "name": "yt-sosor",
+          "version": "10f3c72ba562b7b2b70ba372eb268f54b5cd1d0c"
+        },
+        {
+          "name": "lavasrc-plugin",
+          "version": "21cfb5c"
+        }
+      ],
+      "filters": [
+        "volume"
+      ],
+      "declaredSourceCount": 7,
+      "declaredMusicSources": [
+        "soundcloud",
+        "bandcamp",
+        "youtube",
+        "spotify",
+        "applemusic",
+        "deezer",
+        "http"
+      ],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "lavalink-v4-triniumhost-com-443",
+      "host": "lavalink-v4.triniumhost.com",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 200,
+      "infoMs": 403,
+      "version": "4.2.2",
+      "versionMajor": 4,
+      "plugins": [
+        {
+          "name": "youtube-plugin",
+          "version": "1.18.2"
+        },
+        {
+          "name": "lavalyrics-plugin",
+          "version": "1.1.0"
+        },
+        {
+          "name": "lava-xm-plugin",
+          "version": "0.2.8"
+        },
+        {
+          "name": "lavasrc-plugin",
+          "version": "4.8.3"
+        },
+        {
+          "name": "java-lyrics-plugin",
+          "version": "1.6.6"
+        },
+        {
+          "name": "lavasearch-plugin",
+          "version": "1.0.0"
+        },
+        {
+          "name": "plugin-template",
+          "version": "0.0.5"
+        },
+        {
+          "name": "lavadspx-plugin",
+          "version": "0.0.5"
+        },
+        {
+          "name": "DuncteBot-plugin",
+          "version": "1.7.2"
+        }
+      ],
+      "filters": [
+        "volume",
+        "equalizer",
+        "karaoke",
+        "timescale",
+        "tremolo",
+        "vibrato",
+        "distortion",
+        "rotation",
+        "channelMix",
+        "lowPass",
+        "low-pass",
+        "high-pass",
+        "echo",
+        "normalization"
+      ],
+      "declaredSourceCount": 21,
+      "declaredMusicSources": [
+        "soundcloud",
+        "bandcamp",
+        "youtube",
+        "spotify",
+        "deezer",
+        "mixcloud",
+        "http"
+      ],
+      "otherSourceCount": 14
+    },
+    {
+      "id": "nodelink-triniumhost-com-443",
+      "host": "nodelink.triniumhost.com",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 200,
+      "infoMs": 513,
+      "version": "3.8.0",
+      "versionMajor": 3,
+      "plugins": [],
+      "filters": [
+        "tremolo",
+        "vibrato",
+        "lowpass",
+        "highpass",
+        "rotation",
+        "karaoke",
+        "distortion",
+        "channelMix",
+        "equalizer",
+        "chorus",
+        "compressor",
+        "echo",
+        "phaser",
+        "timescale"
+      ],
+      "declaredSourceCount": 45,
+      "declaredMusicSources": [
+        "amazonmusic",
+        "mixcloud",
+        "audiomack",
+        "deezer",
+        "bandcamp",
+        "soundcloud",
+        "http",
+        "jiosaavn",
+        "gaana",
+        "youtube",
+        "spotify",
+        "applemusic",
+        "audius",
+        "tidal",
+        "pandora",
+        "qobuz",
+        "netease",
+        "yandexmusic"
+      ],
+      "otherSourceCount": 27
+    },
+    {
+      "id": "nodelink-02-triniumhost-com-443",
+      "host": "nodelink-02.triniumhost.com",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 200,
+      "infoMs": 494,
+      "version": "3.8.0",
+      "versionMajor": 3,
+      "plugins": [],
+      "filters": [
+        "tremolo",
+        "vibrato",
+        "lowpass",
+        "highpass",
+        "rotation",
+        "karaoke",
+        "distortion",
+        "channelMix",
+        "equalizer",
+        "chorus",
+        "compressor",
+        "echo",
+        "phaser",
+        "timescale"
+      ],
+      "declaredSourceCount": 45,
+      "declaredMusicSources": [
+        "amazonmusic",
+        "mixcloud",
+        "audiomack",
+        "deezer",
+        "bandcamp",
+        "soundcloud",
+        "http",
+        "jiosaavn",
+        "gaana",
+        "youtube",
+        "spotify",
+        "applemusic",
+        "audius",
+        "tidal",
+        "pandora",
+        "qobuz",
+        "netease",
+        "yandexmusic"
+      ],
+      "otherSourceCount": 27
+    },
+    {
+      "id": "lavalink-nazha-online-443",
+      "host": "lavalink.nazha.online",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 502,
+      "infoMs": 334,
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "sg-1-nazha-online-443",
+      "host": "sg-1.nazha.online",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 530,
+      "infoMs": 64,
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "sg-2-nazha-online-443",
+      "host": "sg-2.nazha.online",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 530,
+      "infoMs": 54,
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "sg-3-nazha-online-443",
+      "host": "sg-3.nazha.online",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "error": "dns_unavailable_or_nonpublic",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "nodelink-gdjkhp-com-443",
+      "host": "nodelink.gdjkhp.com",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink-list.ajieblogs.eu.org/SSL",
+      "http": 200,
+      "infoMs": 603,
+      "version": "3.10.0-dev.2026-10-13.1",
+      "versionMajor": 3,
+      "plugins": [],
+      "filters": [
+        "tremolo",
+        "vibrato",
+        "lowpass",
+        "highpass",
+        "rotation",
+        "karaoke",
+        "distortion",
+        "channelMix",
+        "equalizer",
+        "chorus",
+        "compressor",
+        "echo",
+        "phaser",
+        "timescale"
+      ],
+      "declaredSourceCount": 46,
+      "declaredMusicSources": [
+        "youtube",
+        "spotify",
+        "applemusic",
+        "deezer",
+        "tidal",
+        "jiosaavn",
+        "gaana",
+        "yandexmusic",
+        "http",
+        "audius",
+        "qobuz",
+        "pandora",
+        "amazonmusic",
+        "mixcloud",
+        "audiomack",
+        "bandcamp",
+        "soundcloud",
+        "netease"
+      ],
+      "otherSourceCount": 28
+    },
+    {
+      "id": "nyx-0",
+      "host": "sg1-nodelink-ssl.nyxbot.app",
+      "port": 443,
+      "tls": true,
+      "source": "https://github.com/Nonsen-Production/Free-Nodelink-List/blob/main/nodelink.json",
+      "error": "dns_unavailable_or_nonpublic",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "nyx-1",
+      "host": "sg2-nodelink-ssl.nyxbot.app",
+      "port": 443,
+      "tls": true,
+      "source": "https://github.com/Nonsen-Production/Free-Nodelink-List/blob/main/nodelink.json",
+      "error": "dns_unavailable_or_nonpublic",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "nyx-frankfurt-plain",
+      "host": "fr1-nodelink.nyxbot.app",
+      "port": 3000,
+      "tls": false,
+      "source": "https://github.com/Nonsen-Production/Free-Nodelink-List/blob/main/nodelink.json",
+      "error": "dns_unavailable_or_nonpublic",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "lavalink-v4-indevs",
+      "host": "lavalink-v4.triniumhost.indevs.in",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink.triniumhost.com/",
+      "http": 200,
+      "infoMs": 397,
+      "version": "4.2.2",
+      "versionMajor": 4,
+      "plugins": [
+        {
+          "name": "youtube-plugin",
+          "version": "1.18.2"
+        },
+        {
+          "name": "lavalyrics-plugin",
+          "version": "1.1.0"
+        },
+        {
+          "name": "lava-xm-plugin",
+          "version": "0.2.8"
+        },
+        {
+          "name": "lavasrc-plugin",
+          "version": "4.8.3"
+        },
+        {
+          "name": "java-lyrics-plugin",
+          "version": "1.6.6"
+        },
+        {
+          "name": "lavasearch-plugin",
+          "version": "1.0.0"
+        },
+        {
+          "name": "plugin-template",
+          "version": "0.0.5"
+        },
+        {
+          "name": "lavadspx-plugin",
+          "version": "0.0.5"
+        },
+        {
+          "name": "DuncteBot-plugin",
+          "version": "1.7.2"
+        }
+      ],
+      "filters": [
+        "volume",
+        "equalizer",
+        "karaoke",
+        "timescale",
+        "tremolo",
+        "vibrato",
+        "distortion",
+        "rotation",
+        "channelMix",
+        "lowPass",
+        "low-pass",
+        "high-pass",
+        "echo",
+        "normalization"
+      ],
+      "declaredSourceCount": 21,
+      "declaredMusicSources": [
+        "soundcloud",
+        "bandcamp",
+        "youtube",
+        "spotify",
+        "deezer",
+        "mixcloud",
+        "http"
+      ],
+      "otherSourceCount": 14
+    },
+    {
+      "id": "nodelink-indevs",
+      "host": "nodelink.triniumhost.indevs.in",
+      "port": 443,
+      "tls": true,
+      "source": "https://lavalink.triniumhost.com/",
+      "http": 200,
+      "infoMs": 517,
+      "version": "3.8.0",
+      "versionMajor": 3,
+      "plugins": [],
+      "filters": [
+        "tremolo",
+        "vibrato",
+        "lowpass",
+        "highpass",
+        "rotation",
+        "karaoke",
+        "distortion",
+        "channelMix",
+        "equalizer",
+        "chorus",
+        "compressor",
+        "echo",
+        "phaser",
+        "timescale"
+      ],
+      "declaredSourceCount": 45,
+      "declaredMusicSources": [
+        "amazonmusic",
+        "mixcloud",
+        "audiomack",
+        "deezer",
+        "bandcamp",
+        "soundcloud",
+        "http",
+        "jiosaavn",
+        "gaana",
+        "youtube",
+        "spotify",
+        "applemusic",
+        "audius",
+        "tidal",
+        "pandora",
+        "qobuz",
+        "netease",
+        "yandexmusic"
+      ],
+      "otherSourceCount": 27
+    },
+    {
+      "id": "lavalink-heaven",
+      "host": "lavalink.heavencloud.in",
+      "port": 443,
+      "tls": true,
+      "source": "https://github.com/knownasrazi/lavalink-hosting",
+      "error": "TimeoutError",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "us-heaven",
+      "host": "us.lavalink.heavencloud.in",
+      "port": 443,
+      "tls": true,
+      "source": "https://github.com/knownasrazi/lavalink-hosting",
+      "error": "dns_unavailable_or_nonpublic",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "sg-heaven",
+      "host": "sg.lavalink.heavencloud.in",
+      "port": 443,
+      "tls": true,
+      "source": "https://github.com/knownasrazi/lavalink-hosting",
+      "error": "dns_unavailable_or_nonpublic",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "eu-heaven",
+      "host": "eu.lavalink.heavencloud.in",
+      "port": 443,
+      "tls": true,
+      "source": "https://github.com/knownasrazi/lavalink-hosting",
+      "error": "dns_unavailable_or_nonpublic",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    },
+    {
+      "id": "heaven-current-plain",
+      "host": "free-lava.heavencloud.in",
+      "port": 4000,
+      "tls": false,
+      "source": "https://heavencloud.in/service/public-lavalink-servers",
+      "error": "TimeoutError",
+      "declaredSourceCount": 0,
+      "declaredMusicSources": [],
+      "otherSourceCount": 0
+    }
+  ],
+  "functionalBenchmark": {
+    "measuredAt": "2026-10-17T00:24:59.834Z",
+    "scope": "Bot host to public node, not Discord voice latency or audio playback",
+    "nodes": [
+      {
+        "id": "probe-0",
+        "label": "lavalinkv4-serenetia-com-443",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 109.8,
+        "jitterMs": 13.2,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 1650,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 1650,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 2367,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 901,
+            "tracks": 20
+          }
+        ],
+        "players": 271,
+        "lavalinkCpuPercent": 4.72,
+        "usable": true
+      },
+      {
+        "id": "probe-1",
+        "label": "lava-v4-millohost-my-id-443",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 187.3,
+        "jitterMs": 4.5,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 1108,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 1108,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1610,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 1005,
+            "tracks": 20
+          }
+        ],
+        "players": 1886,
+        "lavalinkCpuPercent": 0,
+        "usable": true
+      },
+      {
+        "id": "probe-5",
+        "label": "nodelink-gdjkhp-com-443",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 192.7,
+        "jitterMs": 2.4,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 803,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 803,
+            "tracks": 10
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1466,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 602,
+            "tracks": 10
+          }
+        ],
+        "players": 22,
+        "lavalinkCpuPercent": null,
+        "usable": true
+      },
+      {
+        "id": "probe-4",
+        "label": "nodelink-02-triniumhost-com-443",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 215.4,
+        "jitterMs": 1043.9,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 937,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 928,
+            "tracks": 10
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 937,
+            "tracks": 1
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 986,
+            "tracks": 10
+          }
+        ],
+        "players": 1,
+        "lavalinkCpuPercent": null,
+        "usable": true
+      },
+      {
+        "id": "probe-2",
+        "label": "lavalink-v4-triniumhost-com-443",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 145.9,
+        "jitterMs": 682.7,
+        "successfulSearches": 1,
+        "totalSearches": 3,
+        "medianSearchMs": 864,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 864,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": null,
+            "tracks": 0,
+            "error": "request_failed"
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": null,
+            "tracks": 0,
+            "error": "request_failed"
+          }
+        ],
+        "players": 1,
+        "lavalinkCpuPercent": 0.24,
+        "usable": false
+      },
+      {
+        "id": "probe-3",
+        "label": "nodelink-triniumhost-com-443",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 498.7,
+        "jitterMs": 494.6,
+        "successfulSearches": 0,
+        "totalSearches": 3,
+        "medianSearchMs": null,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": null,
+            "tracks": 0,
+            "error": "request_failed"
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": null,
+            "tracks": 0,
+            "error": "request_failed"
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": null,
+            "tracks": 0,
+            "error": "request_failed"
+          }
+        ],
+        "players": 1,
+        "lavalinkCpuPercent": null,
+        "usable": false
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "lavalinkv4-serenetia-com-443",
+      "spotify": {
+        "http": 200,
+        "ms": 2595,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "youtube": {
+        "http": 200,
+        "ms": 1621,
+        "loadType": "search",
+        "tracks": 20
+      },
+      "soundcloud": {
+        "http": null,
+        "ms": 552,
+        "loadType": null,
+        "tracks": 0
+      },
+      "applemusic": {
+        "http": 200,
+        "ms": 1155,
+        "loadType": "search",
+        "tracks": 25
+      },
+      "deezer": {
+        "http": 200,
+        "ms": 731,
+        "loadType": "search",
+        "tracks": 0
+      },
+      "lyrics": {
+        "http": 500,
+        "ms": 1951,
+        "responseKeys": [
+          "timestamp",
+          "status",
+          "error",
+          "path"
+        ],
+        "lines": 0,
+        "loadType": null,
+        "plainAvailable": false
+      },
+      "advancedSearch": {
+        "http": 200,
+        "ms": 1063,
+        "tracks": 10
+      }
+    },
+    {
+      "id": "lava-v4-millohost-my-id-443",
+      "spotify": {
+        "http": 200,
+        "ms": 1682,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "youtube": {
+        "http": 200,
+        "ms": 1186,
+        "loadType": "search",
+        "tracks": 20
+      },
+      "soundcloud": {
+        "http": 200,
+        "ms": 939,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "applemusic": {
+        "http": 200,
+        "ms": 1871,
+        "loadType": "search",
+        "tracks": 25
+      },
+      "deezer": {
+        "http": 200,
+        "ms": 254,
+        "loadType": "empty",
+        "tracks": 0
+      },
+      "lyrics": {
+        "http": 404,
+        "ms": 251,
+        "responseKeys": [
+          "timestamp",
+          "status",
+          "error",
+          "message",
+          "path"
+        ],
+        "lines": 0,
+        "loadType": null,
+        "plainAvailable": false
+      }
+    },
+    {
+      "id": "lavalink-v4-triniumhost-com-443",
+      "spotify": {
+        "http": null,
+        "ms": 9011,
+        "loadType": null,
+        "tracks": 0
+      },
+      "youtube": {
+        "http": 200,
+        "ms": 1730,
+        "loadType": "search",
+        "tracks": 20
+      },
+      "soundcloud": {
+        "http": 200,
+        "ms": 1159,
+        "loadType": "error",
+        "tracks": 0
+      },
+      "applemusic": {
+        "http": 200,
+        "ms": 522,
+        "loadType": "empty",
+        "tracks": 0
+      },
+      "deezer": {
+        "http": null,
+        "ms": 9003,
+        "loadType": null,
+        "tracks": 0
+      },
+      "lyrics": {
+        "http": 500,
+        "ms": 589,
+        "responseKeys": [
+          "timestamp",
+          "status",
+          "error",
+          "message",
+          "path"
+        ],
+        "lines": 0,
+        "loadType": null,
+        "plainAvailable": false
+      },
+      "advancedSearch": {
+        "http": null,
+        "ms": 9001,
+        "tracks": 0
+      }
+    },
+    {
+      "id": "nodelink-triniumhost-com-443",
+      "spotify": {
+        "http": 200,
+        "ms": 2760,
+        "loadType": "search",
+        "tracks": 1
+      },
+      "youtube": {
+        "http": 502,
+        "ms": 2502,
+        "loadType": null,
+        "tracks": 0
+      },
+      "soundcloud": {
+        "http": 502,
+        "ms": 267,
+        "loadType": null,
+        "tracks": 0
+      },
+      "applemusic": {
+        "http": 502,
+        "ms": 215,
+        "loadType": null,
+        "tracks": 0
+      },
+      "deezer": {
+        "http": 502,
+        "ms": 198,
+        "loadType": null,
+        "tracks": 0
+      },
+      "lyrics": {
+        "http": 502,
+        "ms": 250,
+        "responseKeys": [],
+        "lines": 0,
+        "loadType": null,
+        "plainAvailable": false
+      },
+      "audioSample": {
+        "http": 502,
+        "mime": "text/html; charset=UTF-8",
+        "bytes": 0,
+        "nonZeroBytes": 0,
+        "ms": 183
+      }
+    },
+    {
+      "id": "nodelink-02-triniumhost-com-443",
+      "spotify": {
+        "http": 200,
+        "ms": 1522,
+        "loadType": "search",
+        "tracks": 1
+      },
+      "youtube": {
+        "http": 200,
+        "ms": 1236,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "soundcloud": {
+        "http": 200,
+        "ms": 1098,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "applemusic": {
+        "http": 502,
+        "ms": 330,
+        "loadType": null,
+        "tracks": 0
+      },
+      "deezer": {
+        "http": 502,
+        "ms": 906,
+        "loadType": null,
+        "tracks": 0
+      },
+      "lyrics": {
+        "http": 502,
+        "ms": 347,
+        "responseKeys": [],
+        "lines": 0,
+        "loadType": null,
+        "plainAvailable": false
+      },
+      "audioSample": {
+        "http": 502,
+        "mime": "text/html; charset=UTF-8",
+        "bytes": 0,
+        "nonZeroBytes": 0,
+        "ms": 614
+      }
+    },
+    {
+      "id": "nodelink-gdjkhp-com-443",
+      "spotify": {
+        "http": 200,
+        "ms": 1333,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "youtube": {
+        "http": 200,
+        "ms": 1175,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "soundcloud": {
+        "http": 200,
+        "ms": 1029,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "applemusic": {
+        "http": 200,
+        "ms": 715,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "deezer": {
+        "http": 200,
+        "ms": 695,
+        "loadType": "search",
+        "tracks": 10
+      },
+      "lyrics": {
+        "http": 200,
+        "ms": 2230,
+        "responseKeys": [
+          "message",
+          "severity"
+        ],
+        "lines": 0,
+        "loadType": "error",
+        "plainAvailable": false
+      },
+      "audioSample": {
+        "http": 200,
+        "mime": "audio/l16;rate=48000;channels=2",
+        "bytes": 194304,
+        "nonZeroBytes": 190165,
+        "ms": 2473
+      }
+    }
+  ],
+  "additionalProbes": {
+    "id": "nodelink-gdjkhp-com-443",
+    "mutedAudio": {
+      "http": 200,
+      "mime": "audio/l16;rate=48000;channels=2",
+      "bytes": 194554,
+      "nonZeroBytes": 0,
+      "ms": 1461
+    },
+    "extraLyrics": [
+      {
+        "query": "spsearch:Coldplay Yellow",
+        "trackFound": true,
+        "http": 200,
+        "loadType": "error",
+        "lineCount": 0,
+        "responseKeys": [
+          "message",
+          "severity"
+        ]
+      },
+      {
+        "query": "ytsearch:Rick Astley Never Gonna Give You Up",
+        "trackFound": true,
+        "http": 200,
+        "loadType": "error",
+        "lineCount": 0,
+        "responseKeys": [
+          "message",
+          "severity"
+        ]
+      }
+    ],
+    "serenetiaDeezer": {
+      "http": 200,
+      "rawTracks": 25,
+      "sourceNames": [
+        "deezerm"
+      ],
+      "explicit": 0
+    }
+  },
+  "productionObservation": [
+    {
+      "observedAt": "2026-10-17T02:24:41.161774239+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 344,
+      "positionMs": 50600,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 1983,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:25:11.163597590+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 345,
+      "positionMs": 80620,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 3483,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:25:41.176010347+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 344,
+      "positionMs": 110620,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 4983,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:26:11.289942145+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 368,
+      "positionMs": 140620,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 6483,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:26:43.191458414+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 493,
+      "positionMs": 172620,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 8234,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:27:15.174724465+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 501,
+      "positionMs": 8340,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 9734,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:27:47.173509263+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 344,
+      "positionMs": 40340,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 1420,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:28:17.179567781+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 344,
+      "positionMs": 70340,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 2920,
+        "deficit": 0,
+        "nulled": 0
+      }
+    }
+  ],
+  "botCompatibilityFindings": {
+    "serenetiaDeezerSourceAlias": "deezerm is returned by the node but rejected by current allowedMusicTrack",
+    "capabilityDiscovery": "nodes.js only caches info with version.major === 4, excluding observed snapshot major 0 and NodeLink software major 3",
+    "nodeLinkNativeLyrics": "Current bot uses LavaLyrics /v4/lyrics only when plugin is detected; NodeLink /v4/loadlyrics is separate",
+    "extendedFilters": "Current LavaDSPX pluginFilters presets are not automatically equivalent to NodeLink native filters"
+  },
+  "conclusion": "No tested public node combines lower latency than the current stable option, validated audio and every required music feature; retain GDjkhp for now",
+  "lessThan50msFunctionalPublicFound": false,
+  "allPluginsFunctionallyVerified": false,
+  "discordVoiceTestPerformed": false,
+  "audioBytesStored": false,
+  "privateNodeStarted": false,
+  "runtimeChanged": false,
+  "productionHealth": {
+    "healthy": true,
+    "database": true,
+    "music": true,
+    "restarts": 0,
+    "image": "4879dca40e62fe39a0eb363bc1fdc7e0251266332d7ac8c9e196e19b609ccb55",
+    "defaultNode": "gdjkhp"
+  },
+  "originalWorkingTreeEntriesPreserved": 16
+}

@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Investigación ampliada de nodos públicos · 17 de octubre de 2026
+
+Petición: buscar Lavalink/NodeLink de alto rendimiento, bajo ping, audio y todos los plugins musicales funcionales. Investigadas 21 direcciones (19 TLS); ocho respondieron a `/v4/info`, incluidas dos variantes de dominio del mismo backend. Se profundizó en seis backends con WebSocket, cinco ping/pong, búsquedas, fuentes/plugins/filtros, letras y audio directo cuando el nodo lo permite. GDjkhp devolvió PCM real no silencioso y silencio con volumen cero; cinco búsquedas de plataformas dieron resultados. RTT mediano 192,7 ms, jitter 2,4 ms; sus letras nativas no devolvieron datos en tres canciones. No equivale a prueba auditiva de voz.
+
+Serenetia 109,8 ms pero letras 500 y antecedente de entrecortes; MilloHost 187,3 ms con filtros anunciados limitados a volumen y letras 404; Trinium NodeLink 02 215,4 ms con variación de 1043,9 ms y audio/letras 502; Trinium Java 145,9 ms pero dos búsquedas base agotadas, letras 500 y variación 682,7 ms. NodeLink 01 498,7 ms y búsquedas inestables. NYX Frankfurt/Singapur y los endpoints regionales HeavenCloud no proporcionaron un candidato funcional. No se encontró público funcional de menos de 50 ms ni uno que cumpla todo. Se conserva GDjkhp sin reiniciar ni alterar producción.
+
+Documentados límites del cliente: cache de capacidades restringida a version.major===4, alias `deezerm` no admitido, letras NodeLink nativas todavía sin adaptador y filtros LavaDSPX distintos de los nativos NodeLink. Son trabajo de integración separado; no se afirma que un cambio de nodo lo resuelva. Se mantiene código `868c65f` e imagen de controles, healthy/cero reinicios; 16 entradas locales previas intactas. [Informe y resultados](PUBLIC-NODE-RESEARCH.md).
+
 ## Respuesta de botones y sincronización · 17 de octubre de 2026
 
 El usuario aclaró que el retraso aparece al pulsar controles de música. El handler esperaba el HTTP de confirmación de Discord antes de enviar la orden al nodo. Ahora inicia esa confirmación y permite ejecutar los controles autorizados en paralelo; permisos/canal de voz se comprueban antes, la cola de operaciones por guild se conserva y los mensajes de error esperan la confirmación. Simulación repetida con ambas peticiones de 60 ms: mediana de 125 a 62 ms, sin afirmar esos tiempos para Discord real.
