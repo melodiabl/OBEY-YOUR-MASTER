@@ -81,3 +81,14 @@ test('periodic progress ticks do not keep scheduling work behind a slow edit', a
   t.mock.timers.tick(15000); release(); await settle()
   const writes = edits; await f.cleanup(); assert.equal(writes, 1)
 })
+test('Discord rate-limit backoff pauses background ticks while confirmed changes still render', async t => {
+  t.mock.timers.enable({ apis: ['setInterval', 'Date'], now: 100000 })
+  const id = 'panel-rate-backoff'; let edits = 0
+  const f = fixture(id, { messages: { edit: async () => { edits++ } } })
+  liveMessages.set(id, { channelId: 'text', messageId: 'panel' }); live.startLiveUpdate(f.client, id)
+  live.deferProgress('text', 1000); t.mock.timers.tick(5000); await settle()
+  assert.equal(edits, 0)
+  await live.scheduleNpUpdate(f.client, id, { immediate: true }); assert.equal(edits, 1)
+  t.mock.timers.tick(5000); await settle(); assert.equal(edits, 2)
+  await f.cleanup()
+})

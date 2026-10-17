@@ -58,7 +58,7 @@ const client = new Client({
   ],
   allowedMentions: { parse: ['roles', 'users'], repliedUser: false },
   failIfNotExists: false,
-  rest: discordRestOptions(),
+  rest: discordRestOptions({ onMessageRateLimit: (channelId, retryAfterMs) => require('./handlers/music/liveupdate').deferProgress(channelId, retryAfterMs) }),
 })
 // 27+ handlers registran eventos — aumentar límite para evitar el warning
 observeRateLimits(client.rest)

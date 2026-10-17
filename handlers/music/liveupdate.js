@@ -5,6 +5,14 @@ const { measureRequest } = require('./request-timing')
 const scheduled = new Map()
 const pending = new Map()
 const generations = new Map()
+const progressDeferred = new Map()
+
+function deferProgress(channelId, retryAfterMs) {
+  const delay = Math.max(10000, Number.isFinite(retryAfterMs) && retryAfterMs > 0 ? retryAfterMs * 2 : 0)
+  for (const [guildId, live] of liveMessages) {
+    if (live.channelId === channelId) progressDeferred.set(guildId, Math.max(progressDeferred.get(guildId) || 0, Date.now() + delay))
+  }
+}
 
 async function renderPanel(client, guildId, generation) {
   if ((generations.get(guildId) || 0) !== generation) return
@@ -53,7 +61,7 @@ function startLiveUpdate(client, guildId) {
   stopLiveUpdate(guildId)
   const timer = setInterval(() => {
     if (!liveMessages.has(guildId) || !getState(guildId).currentTrack) return stopLiveUpdate(guildId)
-    if (!pending.has(guildId)) updatePanel(client, guildId)
+    if (!pending.has(guildId) && Date.now() >= (progressDeferred.get(guildId) || 0)) updatePanel(client, guildId)
   }, 5000)
   timer.unref?.()
   liveTimers.set(guildId, timer)
@@ -62,6 +70,7 @@ function startLiveUpdate(client, guildId) {
 function stopLiveUpdate(guildId) {
   clearInterval(liveTimers.get(guildId))
   liveTimers.delete(guildId)
+  progressDeferred.delete(guildId)
   clearTimeout(scheduled.get(guildId))
   scheduled.delete(guildId)
   generations.set(guildId, (generations.get(guildId) || 0) + 1)
@@ -84,4 +93,4 @@ function scheduleNpUpdate(client, guildId, { immediate = false } = {}) {
   scheduled.set(guildId, timer)
 }
 
-module.exports = { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate, updatePanel }
+module.exports = { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate, updatePanel, deferProgress }

@@ -64,3 +64,11 @@ test('body timing reads JSON once, preserves its result and never logs message c
     assert.doesNotMatch(JSON.stringify(rows), /private-message|content|\/channels/)
   } finally { await options.agent.close() }
 })
+test('each message HTTP 429 notifies the music backoff without altering the response or retry headers', async () => {
+  const calls = [], response = { status: 429, headers: new Headers({ 'retry-after': '1' }) }
+  const options = discordRestOptions({ now: () => 0, write() {}, makeRequest: async () => response, onMessageRateLimit: (...args) => calls.push(args) })
+  try {
+    for (let i = 0; i < 2; i++) assert.equal(await options.makeRequest('https://discord.com/api/v10/channels/123/messages/456', { method: 'PATCH' }), response)
+    assert.deepEqual(calls, [['123', 1000], ['123', 1000]]); assert.equal(response.headers.get('retry-after'), '1')
+  } finally { await options.agent.close() }
+})

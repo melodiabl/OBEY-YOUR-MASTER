@@ -5,7 +5,7 @@ const { createHash, randomUUID } = require('node:crypto')
 const hash = value => createHash('sha256').update(String(value)).digest('hex').slice(0, 12)
 const log = row => console.warn('[Discord] Request timing:', JSON.stringify(row))
 
-function discordRestOptions({ makeRequest = DefaultRestOptions.makeRequest, now = () => performance.now(), write = log } = {}) {
+function discordRestOptions({ makeRequest = DefaultRestOptions.makeRequest, now = () => performance.now(), write = log, onMessageRateLimit } = {}) {
   let lastRateLimit = -Infinity
   return { timeout: 60_000, retries: 5, agent: new Agent({ pipelining: 1, keepAliveTimeout: 15_000 }),
     async makeRequest(url, options) {
@@ -34,12 +34,14 @@ function discordRestOptions({ makeRequest = DefaultRestOptions.makeRequest, now 
         const limited = response?.status === 429
         const report = limited ? now() - lastRateLimit >= 10000 : durationMs >= 1000
         const retryAfter = response?.headers?.get('retry-after')
+        const retryAfterMs = limited && retryAfter != null && Number.isFinite(Number(retryAfter)) ? Number(retryAfter) * 1000 : null
+        if (tracked && limited) onMessageRateLimit?.(channel, retryAfterMs)
         if (tracked && report) {
           if (limited) lastRateLimit = now()
           write({
           event: limited ? 'discord_http_rate_limit' : 'discord_slow_http', requestId, entryPoint: 'message_patch',
           channel: hash(channel), durationMs, statusCode: response?.status ?? null,
-          retryAfterMs: limited && retryAfter != null && Number.isFinite(Number(retryAfter)) ? Number(retryAfter) * 1000 : null,
+          retryAfterMs,
         })
         }
       }
