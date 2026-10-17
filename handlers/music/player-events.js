@@ -33,10 +33,13 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
   player.on('start', data => {
     if (!isCurrent(data)) return
     const state = getState(guildId)
+    if (state.status === 'stopping') return
     const options = state.playbackOptions || {}
-    state.lastPosition = options.position || 0; state.paused = Boolean(options.paused)
-    state.startedAt = state.paused ? null : Date.now() - state.lastPosition
-    state.status = state.paused ? 'paused' : 'playing'
+    if (state.confirmedPlaybackId !== state.playbackId || !state.playbackId) {
+      state.lastPosition = options.position || 0; state.paused = Boolean(options.paused)
+      state.startedAt = state.paused ? null : Date.now() - state.lastPosition
+      state.status = state.paused ? 'paused' : 'playing'
+    }
     console.info('[Music] Playback started:', JSON.stringify({ guildId, queued: state.queue.length, resumed: state.lastPosition > 0 }))
     emitState(guildId)
     if (state.currentTrack) client.music.sendNowPlaying(guildId, state.currentTrack)
@@ -54,8 +57,13 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     const expected = elapsedForState(guildId, state)
     if (state.positionChangeAt && Date.now() - state.positionChangeAt < 5000 && Math.abs(position - expected) > 5000) return
     if (Number.isFinite(timestamp)) state.lastPlayerUpdateTime = timestamp
-    state.lastPosition = position
-    if (!state.paused) state.startedAt = Date.now() - position
+    const corrected = require('./playback-clock').nodePosition(state, data.state)
+    state.lastPosition = corrected ?? position
+    state.startedAt = Date.now() - state.lastPosition
+    if (Math.abs(state.lastPosition - expected) >= 1000) {
+      emitState(guildId, { persist: false })
+      require('./liveupdate').scheduleNpUpdate(client, guildId)
+    }
   })
   player.on('exception', data => {
     console.error('[Music] Error de reproducción; se intentará recuperar la pista')

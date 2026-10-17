@@ -41,6 +41,14 @@ module.exports = client => {
   const confirmedVolumes = new Map()
   const panels = require('./action-queue').createActionQueue()
 
+  function anchorFromNode(state, response, fallback, requestedPosition = null) {
+    let position = clock.nodePosition(state, response?.state)
+    // Some providers acknowledge a restored/seeked player with its initial zero.
+    if (requestedPosition !== null && Math.abs((response?.state?.position ?? requestedPosition) - requestedPosition) > 5000) position = null
+    if (position !== null && Number.isFinite(response?.state?.time)) state.lastPlayerUpdateTime = response.state.time
+    clock.anchor(state, position ?? fallback)
+  }
+
   async function playTrack(player, state, encoded, options = {}) {
     if (!allowedMusicTrack(state.currentTrack)) throw new Error('source_not_allowed')
     if (client.nodePool && state.currentTrack?._resolvedNode !== player.node.name) {
@@ -50,11 +58,23 @@ module.exports = client => {
     state.playbackId = require('node:crypto').randomUUID()
     state.playbackOptions = { position: options.position || 0, paused: Boolean(options.paused) }
     state.status = 'loading'
+    state.paused = Boolean(options.paused)
     clock.anchor(state, options.position || 0)
     state.lastPlayerUpdateTime = 0
     state.positionChangeAt = Date.now()
     const { recoverOnFailure, ...playOptions } = options
-    return player.playTrack({ ...playOptions, track: { encoded, userData: { obeyPlaybackId: state.playbackId } } })
+    const playbackId = state.playbackId
+    const response = await player.playTrack({ ...playOptions, track: { encoded, userData: { obeyPlaybackId: playbackId } } })
+    if (state.playbackId === playbackId && client.shoukaku.players.get(player.guildId) === player &&
+        response?.trackPresent && response.state?.connected === true &&
+        (!response.playbackId || response.playbackId === playbackId)) {
+      state.paused = typeof response.paused === 'boolean' ? response.paused : Boolean(options.paused)
+      state.status = state.paused ? 'paused' : 'playing'
+      anchorFromNode(state, response, options.position || 0, options.position || 0)
+      state.confirmedPlaybackId = playbackId
+      emitState(player.guildId)
+    }
+    return response
   }
 
   async function playQueuedTrack(guildId, player, state, encoded) {
@@ -64,12 +84,12 @@ module.exports = client => {
     }
   }
 
-  function emitState(guildId) {
+  function emitState(guildId, { persist = true } = {}) {
     const state = playerStates.get(guildId)
     if (state) {
       state.revision++
-      if (!state.currentTrack && state.status !== 'connecting') state.status = client.shoukaku?.players?.has(guildId) ? 'idle' : 'disconnected'
-      if (client._dbReady && !client._shuttingDown && !state.nodeTransition) sessions.save(guildId, state).catch(error => console.error('[Music] Session persistence:', error.message))
+      if (!state.currentTrack && !['connecting', 'stopping'].includes(state.status)) state.status = client.shoukaku?.players?.has(guildId) ? 'idle' : 'disconnected'
+      if (persist && client._dbReady && !client._shuttingDown && !state.nodeTransition) sessions.save(guildId, state).catch(error => console.error('[Music] Session persistence:', error.message))
     }
     try { client?.emit?.('playerStateUpdate', guildId) } catch {}
   }
@@ -252,10 +272,11 @@ module.exports = client => {
         if (!['pitch', 'speed', 'rate'].includes(parameter) || !Number.isFinite(value) || value < 0.25 || value > 2) throw new Error('Usa un valor entre 0.25 y 2.')
         filters = { ...FILTER_RESET, timescale: { speed: 1, pitch: 1, rate: 1, ...player.filters?.timescale, [parameter]: value } }
       }
-      await player.setFilters(filters)
-      clock.anchor(state, elapsedForState(guildId, state))
+      const response = await player.setFilters(filters)
+      const position = elapsedForState(guildId, state)
       state.filter = 'custom'
       state.customFilters = filters
+      anchorFromNode(state, response, position)
       emitState(guildId)
     },
 
@@ -469,12 +490,26 @@ module.exports = client => {
     async stop(guildId) {
       const player = client.shoukaku?.players?.get(guildId)
       const state  = getState(guildId)
+      const previous = { status: state.status, startedAt: state.startedAt, lastPosition: state.lastPosition }
+      state.lastPosition = elapsedForState(guildId, state)
+      state.startedAt = null
       state.status = 'stopping'
-      await Promise.allSettled([volumeWrites.get(guildId)].filter(Boolean))
-      await panels.drain(guildId)
-      await stopLiveUpdate(guildId)
+      const panelDone = stopLiveUpdate(guildId)
+      emitState(guildId)
+      try { if (player) await player.stopTrack() }
+      catch (error) {
+        Object.assign(state, previous)
+        if (liveMessages.has(guildId)) { startLiveUpdate(client, guildId); scheduleNpUpdate(client, guildId) }
+        emitState(guildId)
+        throw error
+      }
       state.queue = []; state.currentTrack = null; state.loop = 'none'; state.history = []
-      if (player) { await player.stopTrack(); await client.shoukaku.leaveVoiceChannel(guildId) }
+      state.startedAt = null; state.lastPosition = 0; state.paused = false
+      emitState(guildId)
+      await Promise.allSettled([volumeWrites.get(guildId)].filter(Boolean))
+      if (player) await client.shoukaku.leaveVoiceChannel(guildId)
+      await panels.drain(guildId)
+      await panelDone
       emitState(guildId)
       playerStates.delete(guildId)
       confirmedVolumes.delete(guildId)
@@ -489,10 +524,12 @@ module.exports = client => {
       if (!player) return
       const state      = getState(guildId)
       const nextPaused = !state.paused
-      const position = elapsedForState(guildId, state)
-      await player.setPaused(nextPaused)
-      state.paused = nextPaused
-      clock.anchor(state, position)
+      const response = await player.setPaused(nextPaused)
+      const fallbackPosition = elapsedForState(guildId, state)
+      state.paused = typeof response?.paused === 'boolean' ? response.paused : nextPaused
+      state.status = state.paused ? 'paused' : 'playing'
+      state.positionChangeAt = Date.now()
+      anchorFromNode(state, response, fallbackPosition)
       emitState(guildId)
       return state.paused
     },
@@ -625,9 +662,9 @@ module.exports = client => {
       if (!Number.isFinite(ms) || ms < 0) throw new Error('Tiempo inválido.')
       if (state.currentTrack?.info?.isStream || !len) throw new Error('Esta pista no permite adelantar o retroceder.')
       const pos = Math.max(0, Math.min(len, ms))
+      const response = await player.seekTo(pos)
       state.positionChangeAt = Date.now()
-      await player.seekTo(pos)
-      state.startedAt = Date.now() - pos; state.lastPosition = pos
+      anchorFromNode(state, response, pos, pos)
       emitState(guildId)
     },
 
@@ -636,9 +673,10 @@ module.exports = client => {
       const player = client.shoukaku?.players?.get(guildId)
       if (!player) throw new Error('No hay reproductor activo.')
       const state = getState(guildId)
-      await player.setFilters({ ...FILTER_RESET, ...(FILTER_PRESETS[preset] || {}) })
-      clock.anchor(state, elapsedForState(guildId, state))
+      const response = await player.setFilters({ ...FILTER_RESET, ...(FILTER_PRESETS[preset] || {}) })
+      const position = elapsedForState(guildId, state)
       state.filter = preset
+      anchorFromNode(state, response, position)
       emitState(guildId)
       return state.filter
     },
@@ -652,7 +690,7 @@ module.exports = client => {
       const setup = require('../music/setup')
       const setupChId = setup.getChannelId(guildId)
       if (setupChId) {
-        const sm = await setup.updatePanel(client, guildId, { embeds: [buildNPEmbed(client, guildId, state, 0)], components: buildControls(state) })
+        const sm = await setup.updatePanel(client, guildId, { embeds: [buildNPEmbed(client, guildId, state)], components: buildControls(state) })
         if (sm) {
           const old = liveMessages.get(guildId)
           if (old && old.messageId !== sm.id) {
@@ -675,7 +713,7 @@ module.exports = client => {
         liveMessages.delete(guildId)
       }
 
-      const embed = buildNPEmbed(client, guildId, state, 0)
+      const embed = buildNPEmbed(client, guildId, state)
       const msg   = await channel.send({ embeds: [embed], components: buildControls(state) }).catch(() => null)
       if (msg) { liveMessages.set(guildId, { messageId: msg.id, channelId: channel.id }); startLiveUpdate(client, guildId) }
     },
@@ -861,10 +899,11 @@ module.exports = client => {
             state.currentTrack = track
             state.status = 'loading'
             await playTrack(player, state, track.encoded, { position: saved.position || 0, paused: Boolean(saved.paused), recoverOnFailure: false })
-            state.lastPosition = saved.position || 0
-            state.paused = Boolean(saved.paused)
-            state.startedAt = state.paused ? null : Date.now() - state.lastPosition
-            state.status = state.paused ? 'paused' : 'playing'
+            if (state.confirmedPlaybackId !== state.playbackId) {
+              state.paused = Boolean(saved.paused)
+              clock.anchor(state, saved.position || 0)
+              state.status = state.paused ? 'paused' : 'playing'
+            }
             state.reconnectVoice = false
             if (saved.filter === 'custom' && saved.customFilters) { await player.setFilters(saved.customFilters); state.filter = 'custom' }
             else if (saved.filter && !['none', 'off'].includes(saved.filter)) await client.music.setFilter(saved.guildId, saved.filter)

@@ -22,7 +22,8 @@ test('missing telemetry is never reported as zero packet loss or zero ping', () 
   observe({ state: { connected: true, ping: -1, position: 10 } })
   assert.equal(rows[0].voicePingMs, null); assert.equal(rows[0].nodeFrames, null); assert.equal(rows[0].nodeCpuPercent, null)
 })
-test('the active player update records voice health without accepting an obsolete player', () => {
+test('the active player update records voice health without accepting an obsolete player', t => {
+  t.mock.timers.enable({ apis: ['Date'], now: 100000 })
   const { EventEmitter } = require('node:events'), { playerStates } = require('../handlers/music/state')
   const bind = require('../handlers/music/player-events'), guildId = 'health-integration', rows = []
   const player = Object.assign(new EventEmitter(), { node: { name: 'one' } })

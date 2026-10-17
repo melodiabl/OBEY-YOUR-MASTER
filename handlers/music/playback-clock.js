@@ -22,4 +22,12 @@ function anchor(state, elapsed, now = Date.now()) {
   state.startedAt = state.paused ? null : now - elapsed
 }
 
-module.exports = { rate, running, position, anchor }
+function nodePosition(state, sample, now = Date.now()) {
+  if (!Number.isFinite(sample?.position) || sample.position < 0) return null
+  // Public nodes may have a different wall clock; compensate only plausible transit time.
+  const age = Number.isFinite(sample.time) && now >= sample.time && now - sample.time <= 2000 ? now - sample.time : 0
+  const advance = !state.paused && sample.connected !== false ? age * rate(state) : 0
+  return clampMs(sample.position + advance, Number((state.currentTrack?.info || state.currentTrack)?.length || 0))
+}
+
+module.exports = { rate, running, position, anchor, nodePosition }
