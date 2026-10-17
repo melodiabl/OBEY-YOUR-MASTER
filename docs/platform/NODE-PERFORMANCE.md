@@ -1,5 +1,7 @@
 # Selección medida de nodos públicos · 17/10/2026
 
+Actualización posterior: los cortes audibles persistieron en Serenetia pese a su menor RTT de control. El principal vigente pasó a GDjkhp; Serenetia/MilloHost quedan de respaldo. Misma imagen de la corrección de infobot. [Investigación y comprobaciones de reproducción](AUDIO-CUTS.md). Las cifras y la selección siguientes documentan la evaluación inicial.
+
 Petición: usar el paquete actualizado y conseguir nodos de buen rendimiento y baja latencia. Se aplica su criterio de conservar el motor existente, medir proveedores reales y distinguir evidencia de aceptación. El pool, sesiones, permisos, recuperación, favoritos y letras conservan su implementación actual; la selección utiliza el registro privado existente, sin otro reproductor ni descubrimiento automático de endpoints.
 
 ## Resultado de las mediciones

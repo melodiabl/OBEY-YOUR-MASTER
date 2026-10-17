@@ -1,0 +1,468 @@
+{
+  "verifiedAt": "2026-10-17T00:05:39.664859+00:00",
+  "code": "7650e56938c285636a73dbd819101364bf44eedf",
+  "image": "edb8a5e2a7c30b4ea1753fd74646b1fafd996c37229a8d5c07662b9c0164bc6d",
+  "services": [
+    {
+      "name": "obey_bot",
+      "image": "edb8a5e2a7c30b4ea1753fd74646b1fafd996c37229a8d5c07662b9c0164bc6d",
+      "startedAt": "2026-10-17T02:01:57.264922198+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_images",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "startedAt": "2026-10-14T02:12:54.386242902+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_redis",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "startedAt": "2026-10-05T01:35:33.989316999+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_lavalink",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "startedAt": "0001-01-01T00:00:00Z",
+      "status": "created",
+      "health": null,
+      "restarts": 0
+    }
+  ],
+  "health": {
+    "status": "ok",
+    "database": true,
+    "music": true,
+    "uptime": 222
+  },
+  "selectedPublicNode": "gdjkhp",
+  "backupOrder": [
+    "serenetia",
+    "millohost"
+  ],
+  "connectedPublics": [
+    "gdjkhp",
+    "serenetia",
+    "millohost"
+  ],
+  "privateOff": true,
+  "privatePortClosed": true,
+  "unrelatedServicesUnchanged": true,
+  "audioAudiblyVerified": false,
+  "userListeningFeedback": "pending",
+  "before": [
+    {
+      "observedAt": "2026-10-17T01:54:46.817213838+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 0,
+      "positionMs": 117257,
+      "nodeCpuPercent": 10.46,
+      "nodeFrames": null
+    },
+    {
+      "observedAt": "2026-10-17T01:55:42.973618845+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 169,
+      "positionMs": 122741,
+      "nodeCpuPercent": 10.46,
+      "nodeFrames": null
+    },
+    {
+      "observedAt": "2026-10-17T01:56:16.787438084+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 169,
+      "positionMs": 192181,
+      "nodeCpuPercent": 9.83,
+      "nodeFrames": null
+    },
+    {
+      "observedAt": "2026-10-17T01:56:46.791197183+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 172,
+      "positionMs": 220101,
+      "nodeCpuPercent": 10.05,
+      "nodeFrames": {
+        "sent": 2776,
+        "deficit": 224,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T01:57:21.890469506+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 169,
+      "positionMs": 251681,
+      "nodeCpuPercent": 10.05,
+      "nodeFrames": {
+        "sent": 2776,
+        "deficit": 224,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T01:57:53.807586248+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 170,
+      "positionMs": 0,
+      "nodeCpuPercent": 8.88,
+      "nodeFrames": {
+        "sent": 2789,
+        "deficit": 211,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T01:58:28.794399434+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 170,
+      "positionMs": 29840,
+      "nodeCpuPercent": 8.88,
+      "nodeFrames": {
+        "sent": 2789,
+        "deficit": 211,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T01:58:58.795874472+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 170,
+      "positionMs": 57760,
+      "nodeCpuPercent": 9.41,
+      "nodeFrames": null
+    },
+    {
+      "observedAt": "2026-10-17T01:59:33.796967603+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 170,
+      "positionMs": 90900,
+      "nodeCpuPercent": 9.41,
+      "nodeFrames": null
+    },
+    {
+      "observedAt": "2026-10-17T02:00:03.843571371+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 229,
+      "positionMs": 118740,
+      "nodeCpuPercent": 8.86,
+      "nodeFrames": {
+        "sent": 2782,
+        "deficit": 218,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:00:38.852932309+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "serenetia",
+      "connected": true,
+      "voicePingMs": 170,
+      "positionMs": 151540,
+      "nodeCpuPercent": 9.79,
+      "nodeFrames": {
+        "sent": 2804,
+        "deficit": 196,
+        "nulled": 0
+      }
+    }
+  ],
+  "after": [
+    {
+      "observedAt": "2026-10-17T02:02:23.848583719+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 0,
+      "positionMs": 0,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 0,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:02:37.033020530+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 339,
+      "positionMs": 9740,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 0,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:03:07.037536334+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 338,
+      "positionMs": 39740,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 1142,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:03:37.042275406+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 337,
+      "positionMs": 69760,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 2642,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:04:07.043726752+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 340,
+      "positionMs": 99760,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 4142,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:04:37.045162124+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 338,
+      "positionMs": 129760,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 5642,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:05:09.052498748+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 337,
+      "positionMs": 161760,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 7142,
+        "deficit": 0,
+        "nulled": 0
+      }
+    }
+  ],
+  "nodeBenchmark": {
+    "measuredAt": "2026-10-17T00:01:26.095Z",
+    "scope": "Bot host to public node, not Discord voice latency or audio playback",
+    "nodes": [
+      {
+        "id": "serenetia",
+        "label": "Serenetia",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 108.8,
+        "jitterMs": 31,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 1361,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 1748,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1361,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 912,
+            "tracks": 20
+          }
+        ],
+        "players": 271,
+        "lavalinkCpuPercent": 6.71,
+        "usable": true
+      },
+      {
+        "id": "gdjkhp",
+        "label": "GDjkhp",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 168.3,
+        "jitterMs": 12,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 706,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 580,
+            "tracks": 10
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1587,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 706,
+            "tracks": 10
+          }
+        ],
+        "players": 21,
+        "lavalinkCpuPercent": null,
+        "usable": true
+      },
+      {
+        "id": "millohost",
+        "label": "MilloHost",
+        "websocketReady": true,
+        "rttSamples": 5,
+        "medianRttMs": 204.5,
+        "jitterMs": 23.4,
+        "successfulSearches": 3,
+        "totalSearches": 3,
+        "medianSearchMs": 1118,
+        "searches": [
+          {
+            "query": "ytsearch:Daft Punk One More Time",
+            "ms": 1118,
+            "tracks": 20
+          },
+          {
+            "query": "spsearch:Daft Punk One More Time",
+            "ms": 1588,
+            "tracks": 10
+          },
+          {
+            "query": "ytsearch:Coldplay Viva La Vida",
+            "ms": 825,
+            "tracks": 20
+          }
+        ],
+        "players": 1909,
+        "lavalinkCpuPercent": 0,
+        "usable": true
+      }
+    ]
+  },
+  "targetTrack": [
+    {
+      "guild": "987bace59463",
+      "target": "gdjkhp",
+      "httpStatus": 200,
+      "loadType": "track",
+      "trackAvailable": true,
+      "sourceBefore": "spotify",
+      "sourceOnTarget": "spotify",
+      "lengthBefore": 201800,
+      "lengthOnTarget": 201800,
+      "queueLength": 0,
+      "filter": "none",
+      "paused": false
+    }
+  ],
+  "poolSimulation": {
+    "simulatedFallbackOrder": [
+      "gdjkhp",
+      "serenetia",
+      "millohost"
+    ],
+    "networkOpened": false
+  },
+  "targetedTests": 24,
+  "playerStartEvents": 2,
+  "transitions": 1,
+  "restoreFailures": 0,
+  "restores": [
+    {
+      "status": "playing",
+      "positionMs": 201800
+    }
+  ],
+  "stuckEvents": 0,
+  "playbackExceptions": 0,
+  "originalWorkingTreeEntriesPreserved": 16
+}

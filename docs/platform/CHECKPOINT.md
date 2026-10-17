@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Entrecortes persistentes: cambio de proveedor · 17 de octubre de 2026
+
+El usuario confirmó que el reinicio anterior no resolvió el audio. Se conservó evidencia antes de actuar: Serenetia seguía conectado, sin filtros ni eventos stuck, pero reportaba déficit de 196–224 frames por ventana; la posición del reproductor avanzó aproximadamente 27,8–27,9 segundos en intervalos de 30 segundos. Los frames son agregados del nodo y no acreditan pérdida de paquetes individual. GDjkhp volvió a pasar conexión/búsquedas y resolvió el enlace Spotify de la sesión con igual duración.
+
+Cambio operativo aplicado: `LAVALINK_DEFAULT_NODE=gdjkhp`, respaldos Serenetia y MilloHost; mismo código `7650e56` e imagen `edb8a5e2a7c30b4ea1753fd74646b1fafd996c37229a8d5c07662b9c0164bc6d`. Solo bot recreado con cierre/recuperación existente. Sesión recuperada y autoplay continuó al terminar la pista guardada. En dos intervalos posteriores, la posición avanzó 30000/30020 ms en unos 30005 ms; frames enviados subieron 1500 en 30 s, déficit/nulos cero en esas muestras agregadas. Ping de voz GDjkhp 337–339 ms, mayor que Serenetia: se evalúa continuidad, no se afirma baja latencia de voz. Sin confirmación auditiva del usuario todavía.
+
+24 pruebas focalizadas pasan; selección/respaldo local simulado GDjkhp → Serenetia → MilloHost. Bot healthy/cero reinicios, tres públicos conectados; imágenes/Redis y 16 entradas locales anteriores preservados. Privado apagado/excluido, sin puerto 2333. Recuperación `.runtime/bot-recovery-public-only.yml` actualizada a GDjkhp. [Investigación y límites](AUDIO-CUTS.md). Las secciones siguientes son antecedentes.
+
 ## Infobot y reinicio musical · 17 de octubre de 2026
 
 Corregido el bloqueo de `botinfo`/alias `infobot` y `/info botinfo`: usaban `guild.me.voice` y lanzaban el error dentro de un callback de CPU fuera del catch. Ahora comparten datos compatibles con Discord.js v14, muestran recursos/conexiones/nodo y ping de voz del servidor, toleran caché incompleta y sustituyen el mensaje de carga también si falla la lectura. Regresión reproducida con cuatro fallos antes del cambio; 536/536 pruebas finales y 37 en imagen sin red pasan.
