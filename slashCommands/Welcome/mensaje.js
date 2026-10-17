@@ -17,15 +17,16 @@ module.exports = {
       return interaction.reply({ embeds: [err('❌ El mensaje no puede superar 500 caracteres.')], ephemeral: true })
 
     const gid = interaction.guild.id
+    await interaction.deferReply({ ephemeral: true })
     try {
-      await require('../../handlers/config-service').saveWelcomeMessage(client.settings, gid, msg)
+      await client.welcomeConfiguration.savePublished({guildId:gid,actorId:interaction.user.id},{patch:{message:msg}})
     } catch {
-      return interaction.reply({ embeds: [err('❌ No se pudo guardar el mensaje de bienvenida. Inténtalo de nuevo.')], ephemeral: true })
+      return interaction.editReply({ embeds: [err('❌ No se pudo guardar el mensaje de bienvenida. Inténtalo de nuevo.')] })
     }
 
     const preview = require('../../handlers/welcome-message').renderWelcomeMessage(msg, interaction.user, interaction.guild)
 
-    await interaction.reply({
+    await interaction.editReply({
       embeds: [
         ok(`✅ Mensaje de bienvenida actualizado.\n\n**Vista previa:**\n${preview}`)
           .setFooter({ text: 'Variables: {user} {username} {guild}' })

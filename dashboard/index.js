@@ -10,7 +10,6 @@ const { freshGuildPermissions } = require('./permissions')
 const { createMusicRealtime, createSocketAuthorizer } = require('./music-realtime')
 const { canManageGuild } = require('../handlers/permissions')
 const { sessionAuth, establishSession } = require('./auth')
-const { welcomeConfiguration } = require('../handlers/welcome-configuration')
 
 module.exports = async client => {
   const app    = express()
@@ -339,7 +338,9 @@ module.exports = async client => {
     if (!canManageGuild(req.session.user, req.params.guildId))
       return res.redirect('/dashboard?error=no_permission')
 
-    const welcome=await welcomeConfiguration(client.settings).read(guild.id)
+    let welcome
+    try { welcome=await client.welcomeConfiguration.readPublished({guildId:guild.id,actorId:req.session.user.id}) }
+    catch(error){if(error.code==='configuration_permissions')return res.redirect('/dashboard?error=no_permission');throw error}
     const settings = { ...(client.settings.get(guild.id) || {}), welcomeMessage: welcome.message, welcomeChannel:welcome.channelId, welcomeRevision:welcome.revision }
     const allCh    = [...guild.channels.cache.values()]
 
@@ -403,8 +404,7 @@ module.exports = async client => {
     if(Object.keys(welcomePatch).length){
       try{
         if(typeof b.welcomeRevision!=='string')return res.status(400).json({error:'invalid_configuration'})
-        if(Object.hasOwn(welcomePatch,'channelId'))await require('../handlers/welcome-access').assertWelcomeChannel(guild,req.session.user.id,welcomePatch.channelId)
-        await welcomeConfiguration(client.settings).save(guild.id,welcomePatch,b.welcomeRevision)
+        await client.welcomeConfiguration.savePublished({guildId:guild.id,actorId:req.session.user.id},{patch:welcomePatch,expectedRevision:b.welcomeRevision})
       }catch(error){return res.status(error.code==='configuration_conflict'?409:error.code==='configuration_permissions'?403:error.code==='invalid_configuration'?400:503).json({error:error.code||'configuration_storage'})}
     }
     if (b.leaveChannel   !== undefined) patch.leaveChannel   = b.leaveChannel   || null

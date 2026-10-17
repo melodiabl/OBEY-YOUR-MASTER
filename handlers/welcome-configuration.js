@@ -1,5 +1,6 @@
 const {createHash,randomUUID}=require('node:crypto')
-class ConfigurationError extends Error {constructor(message,code){super(message);this.code=code}}
+const {ConfigurationError}=require('./welcome/error')
+const {patchSchema}=require('./welcome/contract')
 const fail=(message,code='invalid_configuration')=>{throw new ConfigurationError(message,code)}
 const paths=['welcome','welcomeChannel','welcomeMessage','welcomeConfigRevision']
 function configuration(doc={}){
@@ -9,10 +10,9 @@ function configuration(doc={}){
  return{channelId:channelId==='nochannel'?null:channelId,message,revision}
 }
 function validatePatch(patch){
- if(!patch||typeof patch!=='object'||Array.isArray(patch)||!Object.keys(patch).length||Object.keys(patch).some(key=>!['channelId','message'].includes(key)))fail('Cambios de bienvenida inválidos.')
- if(Object.hasOwn(patch,'message')&&(typeof patch.message!=='string'||patch.message.length>500))fail('El mensaje no puede superar 500 caracteres.')
- if(Object.hasOwn(patch,'channelId')&&patch.channelId!==null&&(typeof patch.channelId!=='string'||!/^[a-zA-Z0-9_:-]{1,100}$/.test(patch.channelId)))fail('Canal de bienvenida inválido.')
- return{...patch,...(patch.channelId==='nochannel'?{channelId:null}:{})}
+ const parsed=patchSchema.safeParse(patch)
+ if(!parsed.success)fail('Cambios de bienvenida inválidos.')
+ return{...parsed.data,...(parsed.data.channelId==='nochannel'?{channelId:null}:{})}
 }
 function createWelcomeConfiguration(settings){
  const guildId=id=>{if(typeof id!=='string'||!/^[a-zA-Z0-9_:-]{1,100}$/.test(id))fail('Servidor inválido.')}

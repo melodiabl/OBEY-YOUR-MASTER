@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+    "noEmit": true,
+    "types": [],
+    "maxNodeModuleJsDepth": 0
+  },
+  "files": ["handlers/welcome/contract.js", "handlers/welcome/service.js"]
+}

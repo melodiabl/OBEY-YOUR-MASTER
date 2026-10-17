@@ -4,7 +4,7 @@
   "description": "Multipurpose Discord Bot — based on Tomato6966, updated to discord.js v14 + Shoukaku",
   "main": "index.js",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.12.0"
   },
   "dependencies": {
     "@discordjs/opus": "^0.10.0",
@@ -56,12 +56,14 @@
     "twit": "^2.2.11",
     "undici": "7.29.1",
     "utf-8-validate": "^6.0.5",
-    "weather-js": "^2.0.0"
+    "weather-js": "^2.0.0",
+    "zod": "4.1.12"
   },
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "typecheck:welcome": "tsc --project tsconfig.welcome.json"
   },
   "author": "Tomato6966 (updated by OBEY team)",
   "license": "MIT",
@@ -71,5 +73,8 @@
     "mathjs": "15.2.0",
     "deepmerge-ts": "8.0.2",
     "serialize-javascript": "$serialize-javascript"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
   }
 }

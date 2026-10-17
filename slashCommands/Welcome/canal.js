@@ -18,10 +18,11 @@ module.exports = {
       return interaction.reply({ embeds: [err(obeyUi.owned('❌ Debe ser un canal de texto.'))], ephemeral: true })
 
     const gid = interaction.guild.id
-    try { await require('../../handlers/welcome-access').assertWelcomeChannel(interaction.guild,interaction.user.id,channel.id);await require('../../handlers/config-service').saveWelcomeChannel(client.settings,gid,channel.id) }
-    catch { return interaction.reply({embeds:[err('❌ No se pudo guardar el canal de bienvenida. Inténtalo de nuevo.')],ephemeral:true}) }
+    await interaction.deferReply({ ephemeral: true })
+    try { await client.welcomeConfiguration.savePublished({guildId:gid,actorId:interaction.user.id},{patch:{channelId:channel.id}}) }
+    catch { return interaction.editReply({embeds:[err('❌ No se pudo guardar el canal de bienvenida. Inténtalo de nuevo.')]}) }
 
-    await interaction.reply({
+    await interaction.editReply({
       embeds: [ok(`${obeyUi.markup("icon.success")} Canal de bienvenida establecido en ${channel}.\nUsa \`!setup-welcome\` para configurar la tarjeta y el mensaje.`)],
     })
   },
