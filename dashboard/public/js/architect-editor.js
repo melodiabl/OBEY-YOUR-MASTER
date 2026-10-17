@@ -8,6 +8,7 @@
   let permissionRoleId = ''
   let decorationUI = null
   let templateUI = null
+  let welcomeUI = null
   const { permissionOptions, setRolePermission, setOverwritePermission, formatPermissions } = architectPermissions
   const order = (a, b) => a.type - b.type || a.position - b.position || a.id.localeCompare(b.id)
   const labels = { name: 'Nombre', topic: 'Tema', color: 'Color', permissions: 'Permisos', overwrites: 'Permisos del canal', nsfw: 'Contenido restringido', hoist: 'Mostrar rol separado', mentionable: 'Rol mencionable' }
@@ -15,6 +16,7 @@
   function buttons() {
     decorationUI?.update()
     templateUI?.update()
+    welcomeUI?.update()
     $('architect-wizard-fields').disabled = busy || !editor
     $('architect-workspace').disabled = busy || !editor
     $('architect-refresh').disabled = busy
@@ -26,8 +28,8 @@
     $('architect-confirm-application').hidden = !applicationPlan
     $('architect-confirm-application').disabled = busy || !applicationPlan
   }
-  async function request(path = '', options) {
-    const response = await fetch(base + path, options)
+  async function request(path = '', options, endpoint = base) {
+    const response = await fetch(endpoint + path, options)
     const body = await response.json().catch(() => ({}))
     if (!response.ok || !body.ok) {
       const messages = { revision_conflict: 'La estructura de Discord cambió. Actualiza el servidor antes de revisar o guardar.',
@@ -39,11 +41,12 @@
       messages.invalid_decoration = 'Revisa el tema y el alcance de decoración seleccionados.'
       messages.decoration_name_limit = 'La decoración supera los 100 caracteres de un nombre. Acorta ese nombre o elige menos decoración.'
       Object.assign(messages,{invalid_template:'El archivo o los datos no corresponden a una plantilla OBEY válida.',template_unsupported:'La selección incluye miembros, tipos avanzados o estilos/referencias de roles que aún no se pueden trasladar. Guarda una selección de recursos nuevos compatibles.',template_conflict:'Un recurso del destino tiene el mismo nombre con atributos diferentes, o la categoría está protegida. Revisa esa estructura antes de añadir la plantilla.',template_not_found:'La plantilla no está disponible para tu cuenta.'})
+      Object.assign(messages,{configuration_conflict:'La bienvenida cambió en otra interfaz. Pulsa Actualizar bienvenida y revisa los valores antes de volver a guardar.',configuration_storage:'El almacenamiento de bienvenida no está disponible. No se confirmó el guardado.',invalid_configuration:'Revisa el canal y el mensaje de bienvenida; el mensaje admite hasta 500 caracteres.',configuration_permissions:'No se verificó el acceso necesario al canal para publicar bienvenidas.'})
       Object.assign(messages, { application_unsupported: 'Separa el orden de creaciones o cambios de categoría del mismo tipo. Revisa una categoría y sus hijos sincronizados por aplicación, sin creaciones, cambios de padre ni otros permisos de canales.',
         application_conflict: 'La confirmación no coincide con el plan revisado. Prepara una aplicación nueva.', application_expired: 'El plan caducó. Prepara una aplicación nueva.',
         application_blocked: 'Los permisos actuales impiden aplicar esta propuesta. Revisa los controles.', apply_unavailable: 'La aplicación requiere un servidor canary habilitado.',
         jobs_unavailable: 'Los trabajos no están disponibles. El plan aún no se ha enviado.', application_not_found: 'El plan ya no está disponible. Prepara uno nuevo.' })
-      if ([401, 403].includes(response.status) || response.status===404 && body.error!=='template_not_found') { if([401,403].includes(response.status))templateUI?.clear();applicationPlan = null; applyAvailable = false; buttons() }
+      if (response.status===401 || response.status===403&&body.error!=='configuration_permissions' || response.status===404 && body.error!=='template_not_found') { if([401,403].includes(response.status)){templateUI?.clear();welcomeUI?.clear()}applicationPlan = null; applyAvailable = false; buttons() }
       throw new Error(messages[body.error] || 'No se pudo completar la solicitud.')
     }
     return body
@@ -53,6 +56,7 @@
     accept: body => { editor.change(next => Object.assign(next, body.blueprint)); changed(); review(body) },
     setBusy: value => { busy = value; if (value) applicationPlan = null; buttons() } })
   templateUI=initArchitectTemplates({request,post,state:()=>({blueprint:editor?.current(),busy}),accept:body=>{editor.change(next=>Object.assign(next,body.blueprint));changed();review(body)},setBusy:value=>{busy=value;if(value)applicationPlan=null;buttons()}})
+  welcomeUI=initArchitectWelcome({request:body=>request('/welcome',body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:undefined,`/api/config/${encodeURIComponent(app.dataset.guildId)}`),state:()=>({busy,channels:source?.channels}),setBusy:value=>{busy=value;if(value)applicationPlan=null;buttons()}})
   function changed() {
     applicationPlan = null
     $('architect-application-status').textContent = applyAvailable ? 'Puedes preparar las ediciones compatibles. Se guardará una copia antes de aplicar.' : 'La aplicación requiere un servidor canary habilitado.'
@@ -165,6 +169,7 @@
       status(`Estructura consultada a las ${new Date(source.capturedAt).toLocaleTimeString()}`)
       changed()
       await templateUI.refresh()
+      await welcomeUI.refresh(source.channels)
     } catch (error) { status(error.message, true) }
     finally { busy = false; buttons() }
   }

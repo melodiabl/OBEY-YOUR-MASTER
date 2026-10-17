@@ -1,6 +1,12 @@
 {
   "scope": "Chromium, Express/EJS/session/CSRF and actual MongoDB/Redis/BullMQ; fixture Discord provider",
   "states": [
+    "welcome channel/message atomic real Mongo save",
+    "welcome aliases/cache/card/DM preserved",
+    "stale welcome tab rejected",
+    "welcome reload resynchronizes revision",
+    "actual Discord welcome command visible in web",
+    "welcome mobile without overflow",
     "private template preview confirmed into actual creation job",
     "template creation checkpoints and real ID map",
     "private portable template capture in actual Mongo",

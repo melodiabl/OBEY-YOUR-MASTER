@@ -50,6 +50,19 @@
       <p id="architect-template-status" class="architect-wizard-note" role="status">Cargando la biblioteca…</p>
     </div>
   </details>
+  <details class="architect-pane architect-template-library architect-wizard" id="architect-welcome-panel">
+    <summary>Bienvenida</summary>
+    <form id="architect-welcome-form" class="architect-template-content">
+      <fieldset id="architect-welcome-fields" disabled><legend class="sr-only">Configurar bienvenida</legend>
+        <label for="architect-welcome-channel">Canal existente</label><select id="architect-welcome-channel"></select>
+        <label for="architect-welcome-message">Mensaje</label><textarea id="architect-welcome-message" maxlength="500" rows="3" placeholder="¡Bienvenido {user} a {guild}!"></textarea>
+        <p class="architect-wizard-note">Variables: {user}, {username}, {guild}, {server} y {count}. Para conectar un canal recién creado, confirma la estructura y actualízala primero. La aplicación automática desde plantillas sigue pendiente.</p>
+        <div class="architect-inspector-actions"><button class="btn btn-p" type="submit">Guardar bienvenida</button></div>
+      </fieldset>
+      <p id="architect-welcome-status" class="architect-wizard-note" role="status">Cargando bienvenida…</p>
+      <button class="btn btn-sec" type="button" id="architect-welcome-reload">Actualizar bienvenida</button>
+    </form>
+  </details>
   <div class="architect-toolbar" aria-label="Acciones de la propuesta">
     <span id="architect-draft-status">Sin propuesta cargada</span>
     <button type="button" class="btn btn-sec" id="architect-undo" disabled>Deshacer</button>
@@ -135,6 +148,7 @@
 <script src="/js/architect-permission-state.js"></script>
 <script src="/js/architect-decoration.js"></script>
 <script src="/js/architect-templates.js"></script>
+<script src="/js/architect-welcome.js"></script>
 <script src="/js/architect-editor.js"></script>
 <script src="/js/architect-jobs.js"></script>
 <%- include('../includes/footer') %>
