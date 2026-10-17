@@ -1,0 +1,166 @@
+# Plan por etapas
+
+Los IDs expresan dependencias técnicas, no fechas prometidas ni permiso de despliegue. Cada tarea debe cerrar una diferencia concreta y mantener estado/evidencia.
+
+## ARCH 01 Fijar la base de trabajo
+
+- [x] Base local/remota conciliada el 18/10/2026
+- Evidencia: [conciliación de la entrega](CONCILIACION_2026-10-18.md).
+- Commit de cierre: commit que incorpora este registro; SHA exacto en el siguiente checkpoint.
+
+Dependencias: ninguna.
+
+Aceptación: SHA remoto y cambios locales identificados; preservar código actual y exclusiones; ninguna importación automática del ZIP o commit local rechazado.
+
+## ARCH 02 Inventariar entradas y propietarios
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-01.
+
+Aceptación: Por capacidad: prefix/slash/customId/evento/ruta/job, servicio real, store, recursos e i18n; marcar evidencia estática y comportamiento pendiente.
+
+## ARCH 03 Fijar límites y decisiones
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-02.
+
+Aceptación: API pública por módulo, imports permitidos, fuente de verdad y decisiones CommonJS/EJS/Mongo registradas; nuevas funciones fuera del alcance.
+
+## ARCH 04 Separar composición y ciclo de vida
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-03.
+
+Aceptación: Orden de ready/dbReady identificado; fallos de núcleo/opcionales definidos; cierre de productores, flush y conexiones; política probada antes de cambiar login.
+
+## ARCH 05 Definir contratos y autorización
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-03.
+
+Aceptación: Entradas allowlist, actor de sesión, guild/recurso, permisos dinámicos, resultado tipado, idempotencia y DTO por audiencia.
+
+## ARCH 06 Pilotar configuración de bienvenida
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-05.
+
+Aceptación: Preservar servicio actual y borrador/preview/publicación; demostrar paridad de entrada sin reemplazar tarjeta o renderer; mappings reales registrados.
+
+## ARCH 07 Definir persistencia y migraciones
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-05.
+
+Aceptación: Propietarios por entidad, revisiones e índices, mapping legacy, política de integridad multi-documento y efectos externos, rollback compatible.
+
+## ARCH 08 Migrar adaptadores por capacidad
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-06, ARCH-07.
+
+Aceptación: Una misma operación desde las superficies existentes; listeners y aliases sin duplicación; diferencias deliberadas documentadas.
+
+## ARCH 09 Consolidar trabajos y recuperación
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-04, ARCH-07.
+
+Aceptación: Reutilizar jobs actuales; generación, cancelación, reintentos, recibos y conciliación por handler; no reactivar efectos sin autorización.
+
+## ARCH 10 Unificar presentación e interfaz
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-08.
+
+Aceptación: Catálogos y variables es/en, assets existentes/fallback, estados y cambios pendientes del panel, DTO sin datos indebidos.
+
+## ARCH 11 Preparar operación y despliegue
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-04, ARCH-09.
+
+Aceptación: Versión Node/lockfile/imagen/CI coherentes, configuración privada externa, readiness y logs redactados, rollback y smoke aislado definidos.
+
+## ARCH 12 Cerrar cada capacidad con evidencia
+
+- [ ] Estado pendiente de ejecución
+- Evidencia de cierre por completar
+- Commit de cierre por completar
+
+Dependencias: ARCH-10, ARCH-11.
+
+Aceptación: Resultados y límites por caso y SHA; compatibilidad retirada solo sin consumidores; publicación y despliegue separados de la documentación.
+
+## Tareas por módulo
+
+- `MOD-MUSIC` — music — audit_before_migration — ficha `modulos/music.md`.
+- `MOD-WELCOME` — welcome — audit_before_migration — ficha `modulos/welcome.md`.
+- `MOD-VERIFICATION` — verification — deferred_no_confirmed_domain — ficha `modulos/verification.md`.
+- `MOD-ROLES` — roles — audit_before_migration — ficha `modulos/roles.md`.
+- `MOD-MODERATION` — moderation — audit_before_migration — ficha `modulos/moderation.md`.
+- `MOD-LOGS` — logs — audit_before_migration — ficha `modulos/logs.md`.
+- `MOD-SECURITY` — security — audit_before_migration — ficha `modulos/security.md`.
+- `MOD-AUTOMOD` — automod — audit_before_migration — ficha `modulos/automod.md`.
+- `MOD-LEVELS` — levels — audit_before_migration — ficha `modulos/levels.md`.
+- `MOD-PROFILES` — profiles — audit_before_migration — ficha `modulos/profiles.md`.
+- `MOD-VOICE` — voice — audit_before_migration — ficha `modulos/voice.md`.
+- `MOD-EVENTS` — events — deferred_no_confirmed_domain — ficha `modulos/events.md`.
+- `MOD-GIVEAWAYS` — giveaways — audit_before_migration — ficha `modulos/giveaways.md`.
+- `MOD-SUGGESTIONS` — suggestions — audit_before_migration — ficha `modulos/suggestions.md`.
+- `MOD-STARBOARD` — starboard — deferred_no_confirmed_domain — ficha `modulos/starboard.md`.
+- `MOD-REMINDERS` — reminders — audit_before_migration — ficha `modulos/reminders.md`.
+- `MOD-MESSAGES` — messages — audit_before_migration — ficha `modulos/messages.md`.
+- `MOD-CARDS` — cards — audit_before_migration — ficha `modulos/cards.md`.
+- `MOD-AUTOMATION` — automation — audit_before_migration — ficha `modulos/automation.md`.
+- `MOD-FEEDS` — feeds — audit_before_migration — ficha `modulos/feeds.md`.
+- `MOD-ANALYTICS` — analytics — audit_before_migration — ficha `modulos/analytics.md`.
+- `MOD-UTILITIES` — utilities — audit_before_migration — ficha `modulos/utilities.md`.
+- `MOD-FUN` — fun — audit_before_migration — ficha `modulos/fun.md`.
+- `MOD-ARCHITECT` — architect — audit_before_migration — ficha `modulos/architect.md`.
+- `MOD-DECORATION` — decoration — audit_before_migration — ficha `modulos/decoration.md`.
+- `MOD-TEMPLATES` — templates — audit_before_migration — ficha `modulos/templates.md`.
+- `MOD-COLLECTIONS` — collections — deferred_no_confirmed_domain — ficha `modulos/collections.md`.
+- `MOD-APPLICATIONS` — applications — audit_before_migration — ficha `modulos/applications.md`.
+- `MOD-STICKY` — sticky — audit_before_migration — ficha `modulos/sticky.md`.
+- `MOD-MIGRATIONS` — migrations — audit_before_migration — ficha `modulos/migrations.md`.
+- `MOD-TICKETS` — tickets — audit_before_migration — ficha `modulos/tickets.md`.
+- `MOD-ECONOMY` — economy — audit_before_migration — ficha `modulos/economy.md`.
+
+## Criterio para marcar completado
+
+No marcar una tarea por existir el documento o la carpeta. Adjuntar capacidad, SHA, operación, permisos, persistencia, escenarios probados, diferencias entre superficies, límites y rollback. Si está bloqueada, mantener el estado pendiente y escribir dependencia y motivo. Las comprobaciones documentales de este paquete no cierran ninguna tarea de implementación.
+
+## Adopción tecnológica complementaria
+
+Leer [TECH-01 a TECH-08](tecnologia/06_PLAN_DE_ADOPCION.md). Son incrementos ligados a los ARCH existentes; todos permanecen pendientes de implementación. La conciliación estática ampliada está en [base real](tecnologia/08_BASE_REAL_Y_DIFERENCIAS.md); no se usa para cerrar pruebas conectadas o aceptar automáticamente el refactor local.
