@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Estado para planificación externa · 17 de octubre de 2026
+
+El usuario pidió retirar scripts auxiliares y también los tests automatizados añadidos, y actualizar la rama. Se eliminaron 122 archivos de pruebas/ayudantes y 28 scripts de diagnóstico, fixtures y verificación. Se conservan los tres archivos de tests originales: 25 casos pasan. CI mantiene instalación, pruebas originales, assets y build; ya no invoca archivos eliminados. Los 14 archivos pendientes de interfaz/evidencias se guardaron sin alterar su contenido en `c5979b3`; los dos verificadores locales modificados se retiraron por petición expresa.
+
+Último código musical desplegado `cd336f8`, imagen `234ca907361e49e870ff0f7efb8b1c76e3119daab76d1803bf592866a7f24c8b`, etiqueta `release-panel-backoff-20261017`. Reloj confirmado por el nodo, publicaciones agrupadas y pausa adaptativa de refrescos de fondo ante 429. Se identificó la demora real del panel en reintentos de Discord; persisten muestras de 3,4–6,6 s después de la mitigación. No se da por resuelta la latencia de todos los botones. La alternativa basada en respuestas de interacción quedó sin implementar al solicitarse la entrega. Bot healthy/cero reinicios, sesión recuperada y tres públicos; privado apagado/excluido. Images/Redis conservados.
+
+[Estado completo para retomar](HANDOFF.md), [correcciones y límites observados](PLAYER-STATE-SYNC.md), [evidencia de la imagen antes de retirar tests](evidence/player-state-sync-runtime.json). La nueva planificación queda a cargo del usuario fuera de esta sesión.
+
 ## Investigación ampliada de nodos públicos · 17 de octubre de 2026
 
 Petición: buscar Lavalink/NodeLink de alto rendimiento, bajo ping, audio y todos los plugins musicales funcionales. Investigadas 21 direcciones (19 TLS); ocho respondieron a `/v4/info`, incluidas dos variantes de dominio del mismo backend. Se profundizó en seis backends con WebSocket, cinco ping/pong, búsquedas, fuentes/plugins/filtros, letras y audio directo cuando el nodo lo permite. GDjkhp devolvió PCM real no silencioso y silencio con volumen cero; cinco búsquedas de plataformas dieron resultados. RTT mediano 192,7 ms, jitter 2,4 ms; sus letras nativas no devolvieron datos en tres canciones. No equivale a prueba auditiva de voz.

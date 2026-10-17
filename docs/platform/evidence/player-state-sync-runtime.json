@@ -1,0 +1,747 @@
+{
+  "verifiedAt": "2026-10-17T03:05:04.395787+00:00",
+  "code": "cd336f8bec50091fb861661e0ef358134f46c5e0",
+  "image": "234ca907361e49e870ff0f7efb8b1c76e3119daab76d1803bf592866a7f24c8b",
+  "tag": "release-panel-backoff-20261017",
+  "health": {
+    "status": "ok",
+    "database": true,
+    "music": true,
+    "uptime": 149
+  },
+  "services": [
+    {
+      "name": "obey_bot",
+      "image": "234ca907361e49e870ff0f7efb8b1c76e3119daab76d1803bf592866a7f24c8b",
+      "startedAt": "2026-10-17T05:02:34.397040289+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_images",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "startedAt": "2026-10-14T02:12:54.386242902+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_redis",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "startedAt": "2026-10-05T01:35:33.989316999+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_lavalink",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "startedAt": "0001-01-01T00:00:00Z",
+      "status": "created",
+      "health": null,
+      "restarts": 0
+    }
+  ],
+  "selectedPublicNode": "gdjkhp",
+  "backupOrder": [
+    "serenetia",
+    "millohost"
+  ],
+  "connectedPublics": [
+    "gdjkhp",
+    "millohost",
+    "serenetia"
+  ],
+  "privateNode": {
+    "off": true,
+    "excluded": true,
+    "restart": "no",
+    "port2333Closed": true
+  },
+  "unrelatedServicesUnchanged": true,
+  "restores": [
+    {
+      "status": "playing",
+      "queue": 0,
+      "positionMs": 163116.0
+    }
+  ],
+  "restoreFailures": 0,
+  "uncaughtErrors": 0,
+  "panelFailures": 0,
+  "registry": {
+    "slashRoots": 19,
+    "funOptions": 22,
+    "nsfwRegistered": false,
+    "botInfoRegistered": true,
+    "pingRegistered": true,
+    "applicationEmojis": 330,
+    "mappedEmojis": 295
+  },
+  "tests": {
+    "full": 575,
+    "imageFocused": 95,
+    "added": 30,
+    "skipped": 0,
+    "scope": "Historical verification before user-requested removal of assistant-added test files"
+  },
+  "imageVerification": {
+    "uid": 1000,
+    "manifestHashes": 31,
+    "envAbsent": true,
+    "network": "none"
+  },
+  "sourceHashes": {
+    "commands/Info/ping.js": "5951ffcc40f2b4a8e9de94e4bb217e74c758b38ec7346ef55063ed7f07e74279",
+    "dashboard/music-realtime.js": "6ebc153dd540d7d77bbc1c91fc28b7e9d06aedc1ebfea664adeb8f8f9a81341c",
+    "dashboard/public/js/player-lyrics.js": "803c255c0bf32bae2f458305aef7521f9cdbeb5089b256604f0ccd151fc0a578",
+    "handlers/music/index.js": "c1ae1b859ab76cd9e85ed477e7e3e24da3e1f4aa63f177056cac42320dfdd1ea",
+    "handlers/music/likes.js": "b9c185b29d73c63d58b8c26e92ff7ebf83bb26d896555cf42d12a21c720baf34",
+    "handlers/music/liveupdate.js": "c706026196973a974d0d3f508a81d5bce030fc6790ea64987ecc6d01091d672d",
+    "handlers/music/lyricsLive.js": "617c66ff21c302cbe61f4e50bbd4cacf380ed3f4c44c7a9dfb4c6491de49ec2d",
+    "handlers/music/node-player.js": "880cdef1aaa2ef3ba11ecee8d77d2587fbdbbd274d9188476bd4538e7da94c1f",
+    "handlers/music/nodes-runtime.js": "8edd66b5256da862932f6708f37769f176d8d153206b51cd4b1bf61d168e40d8",
+    "handlers/music/nodes.js": "e2bd8a4c60b9035dcfa1e7dfc887f230b1e81d06393b93a4460f32eb2590e4fc",
+    "handlers/music/playback-clock.js": "851374eb573c362c635bd6f23dbd02b3119983b44bf62657763ce54a259bf979",
+    "handlers/music/playback-health.js": "b9789429d9395ea4bbde36d9dca31bda37c59aa997b957732997069c4c62018b",
+    "handlers/music/player-events.js": "4e388d549456e04030569e9ed5b8fc54edb9572bb18f6079a78bbb489c115d87",
+    "handlers/music/request-timing.js": "effd8482b6a2da9236521c54132c5a05c203384f23f6e0a67a9ad652868e80ac",
+    "handlers/music/sessions.js": "1940c707fb3d78b1557127205bedd57064f3b7aa0b827d5ebaad6143815fbbcc",
+    "handlers/project/bot-info.js": "588033d2b87b3074f6fa9619e629f357ba4a5f896f967c3e7f72ce29ee9b01ce",
+    "handlers/project/discord-rest.js": "fde0c5813b244c0f663c2ce66402c6dd1063aecf7adf3525a0b2c625f490122c",
+    "handlers/project/ping.js": "cd5c2ab1eaa9e75b60cb8a4e310e4caa00c46b2e35efd0b17787cfed8de750a6",
+    "index.js": "d3cdbbc62f9a474e38154fecb8e694b9ecfd2fac068d024fe47c3784c1a8460d",
+    "locales/en.json": "e486b81d0872b7a998d9367f1934388f78f6579148d1f2f3ee2948d21d0a31d1",
+    "locales/es.json": "28399567b683a883775131a671b174c9d8eb24fc82242994c6dc9d34987130a5",
+    "slashCommands/Info/ping.js": "ad0139fa216241be036f58f39e51fd6e8e683913e6aac1d285db30c852704bca",
+    "test/discord-rest-connection.test.js": "d2516ec453f625b898f54f4030f2dc8af8113718e7ac3e1b6e1beb4151de66c2",
+    "test/liveupdate.test.js": "e678e1e6a623e989cf9673445bec0a1a1ee528f40b06953b21757d2329a55e23",
+    "test/music-button-latency.test.js": "554f0982487aefb791212a46acc7162b8bf68e8b4a1d27f6c82e3223ad234128",
+    "test/music-control-sync.test.js": "6b99b6d1f578e152b6164be501ebcbccb5d4ff7c0f17e3be4dc7838221fe2343",
+    "test/music-panel-response.test.js": "ae332c895fa7c080c89a0d8516c9bc159043b56302ada703dc640ba68cf93a3a",
+    "test/music-playback-health.test.js": "59f0b0b2bfd7ae89a2e564235521dcfeed94baa880f7d0612bac1fec6a288cb9",
+    "test/music-request-timing.test.js": "8c6f9110bec973f576b2a96081877928ed2e7de401aeb63ea01e229e0d68d095",
+    "test/node-player-state.test.js": "b108f3beba4dc14bf3357314890673fd7d8992ad8c97bf15f1387d3bc37e9f27",
+    "test/ping-command.test.js": "2267ef0afe19fc0d42031bf337b7fb1acd736e1809ac806a5a3435ed68e4e80b"
+  },
+  "originalWorkingTreeEntriesPreserved": 16,
+  "httpConnectionBenchmark": {
+    "scope": "Read-only unauthenticated Discord gateway endpoint, same container; HTTP only, not voice or real controls",
+    "results": [
+      {
+        "round": 0,
+        "mode": 0,
+        "connections": 4,
+        "coldMs": 125,
+        "warmMs": [
+          39,
+          56,
+          37
+        ]
+      },
+      {
+        "round": 0,
+        "mode": 1,
+        "connections": 1,
+        "coldMs": 107,
+        "warmMs": [
+          15,
+          16,
+          77
+        ]
+      },
+      {
+        "round": 1,
+        "mode": 1,
+        "connections": 1,
+        "coldMs": 69,
+        "warmMs": [
+          31,
+          26,
+          18
+        ]
+      },
+      {
+        "round": 1,
+        "mode": 0,
+        "connections": 4,
+        "coldMs": 146,
+        "warmMs": [
+          637,
+          105,
+          95
+        ]
+      },
+      {
+        "round": 2,
+        "mode": 0,
+        "connections": 4,
+        "coldMs": 59,
+        "warmMs": [
+          58,
+          52,
+          36
+        ]
+      },
+      {
+        "round": 2,
+        "mode": 1,
+        "connections": 1,
+        "coldMs": 58,
+        "warmMs": [
+          25,
+          25,
+          24
+        ]
+      }
+    ]
+  },
+  "publicationBenchmark": {
+    "before": {
+      "scope": "Controlled Discord adapter, 20ms per write; no real Discord messages or network",
+      "runs": [
+        {
+          "requests": 21,
+          "sends": 21,
+          "edits": 0,
+          "deletes": 20,
+          "reads": 20,
+          "elapsedMs": 635,
+          "latestRendered": true
+        },
+        {
+          "requests": 21,
+          "sends": 21,
+          "edits": 0,
+          "deletes": 20,
+          "reads": 20,
+          "elapsedMs": 523,
+          "latestRendered": true
+        },
+        {
+          "requests": 21,
+          "sends": 21,
+          "edits": 0,
+          "deletes": 20,
+          "reads": 20,
+          "elapsedMs": 565,
+          "latestRendered": true
+        }
+      ]
+    },
+    "after": {
+      "scope": "Controlled Discord adapter, 20ms per write; no real Discord messages or network",
+      "runs": [
+        {
+          "requests": 21,
+          "sends": 1,
+          "edits": 1,
+          "deletes": 0,
+          "reads": 0,
+          "elapsedMs": 572,
+          "latestRendered": true
+        },
+        {
+          "requests": 21,
+          "sends": 1,
+          "edits": 1,
+          "deletes": 0,
+          "reads": 0,
+          "elapsedMs": 133,
+          "latestRendered": true
+        },
+        {
+          "requests": 21,
+          "sends": 1,
+          "edits": 1,
+          "deletes": 0,
+          "reads": 0,
+          "elapsedMs": 74,
+          "latestRendered": true
+        }
+      ]
+    }
+  },
+  "renderProfile": {
+    "scope": "Production assets and persisted track, separate child process; no Discord writes",
+    "runs": [
+      {
+        "embedMs": 9,
+        "controlsMs": 9,
+        "totalMs": 18,
+        "assetReads": 23,
+        "assetBytes": 68812,
+        "readMs": 3
+      },
+      {
+        "embedMs": 4,
+        "controlsMs": 3,
+        "totalMs": 7,
+        "assetReads": 23,
+        "assetBytes": 68812,
+        "readMs": 2
+      },
+      {
+        "embedMs": 3,
+        "controlsMs": 3,
+        "totalMs": 6,
+        "assetReads": 23,
+        "assetBytes": 68812,
+        "readMs": 2
+      }
+    ]
+  },
+  "beforeAdaptiveBackoff": {
+    "scope": "Production before adaptive background backoff; entries are throttled, not a total count of HTTP 429 responses",
+    "events": [
+      {
+        "at": "2026-10-17T04:59:08.324781344+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "3e780a37-8b31-49e3-bbaa-fa386509dc2f",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 301,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T04:59:17.844226111+02:00",
+        "event": "music_slow_request",
+        "requestId": "0684e667-ba8c-49d3-9460-d5994fa3a4f2",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 7537,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T04:59:20.294896044+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "36852c37-6269-47b0-8ccb-7c16b1b7bb30",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 228,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T04:59:29.435844756+02:00",
+        "event": "music_slow_request",
+        "requestId": "14d258f9-de6f-425f-8521-857430a25c55",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 9126,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T04:59:31.907535105+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "8c4e3980-937e-4706-9a43-e78d86f84be0",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 239,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T04:59:41.311432969+02:00",
+        "event": "music_slow_request",
+        "requestId": "6f69ed51-5363-44bc-87c4-ba8228ac0106",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 10998,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T04:59:43.917258899+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "927b156f-a856-49c1-b401-4ffd5db68cf4",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 317,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T04:59:54.587844518+02:00",
+        "event": "music_slow_request",
+        "requestId": "7c706aa4-1215-466b-ab55-3eb74024ce05",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 9274,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T04:59:54.893014931+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "e1e2ba49-9b7b-44f3-a954-6b6fa2b968f8",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 308,
+        "statusCode": 429,
+        "retryAfterMs": 2000
+      },
+      {
+        "at": "2026-10-17T05:00:05.559826222+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "d145032c-e34a-4d8a-9547-a63a5bc0d477",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 3067,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T05:00:08.877077637+02:00",
+        "event": "music_slow_request",
+        "requestId": "5b14b7d5-24eb-4938-bcc2-d4a4bae2b7ac",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 14288,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T05:00:15.746431716+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "963aa2e8-3ac1-49ed-bee0-ee2b1719c83b",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 267,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T05:00:17.843103389+02:00",
+        "event": "music_slow_request",
+        "requestId": "40fb6dc4-8446-46aa-85be-498c8aebffd8",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 8966,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T05:00:26.360066610+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "be098280-7386-42d5-ad6a-3b295b75aff4",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 304,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T05:00:30.589748383+02:00",
+        "event": "music_slow_request",
+        "requestId": "97db0698-db90-4908-a2f0-f47f926bca48",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 9945,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T05:00:37.189526860+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "e808269e-64e5-43c0-b825-8c086df38603",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 3034,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T05:00:39.316022035+02:00",
+        "event": "discord_slow_http",
+        "requestId": "b57fac0b-4425-40ed-bd71-7ce74eaaf4fa",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 1073,
+        "statusCode": 200,
+        "retryAfterMs": null
+      },
+      {
+        "at": "2026-10-17T05:00:42.395850514+02:00",
+        "event": "music_slow_request",
+        "requestId": "be75fdcc-2fe4-4d97-b94a-f83e8fc8c798",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 11750,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T05:00:47.813871417+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "3aded413-129a-4a8e-8677-570110a5f1a2",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 238,
+        "statusCode": 429,
+        "retryAfterMs": 2000
+      },
+      {
+        "at": "2026-10-17T05:00:54.089315026+02:00",
+        "event": "discord_slow_http",
+        "requestId": "7e8e7cec-ec44-437d-a442-1bb5a42ec4af",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 1472,
+        "statusCode": 200,
+        "retryAfterMs": null
+      },
+      {
+        "at": "2026-10-17T05:00:54.143114205+02:00",
+        "event": "music_slow_request",
+        "requestId": "8a94747f-02d1-4215-b0c0-2175b8e482b8",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 8405,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T05:00:58.189858075+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "af35b18d-c486-4934-b40f-54d7a722a61d",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 217,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      },
+      {
+        "at": "2026-10-17T05:01:05.504567314+02:00",
+        "event": "music_slow_request",
+        "requestId": "1b0dc009-472f-4453-9419-2fed53b6272d",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 9780,
+        "succeeded": true
+      },
+      {
+        "at": "2026-10-17T05:01:08.232799121+02:00",
+        "event": "discord_http_rate_limit",
+        "requestId": "8d25785a-83cd-482d-99c3-0475ccf549b7",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 459,
+        "statusCode": 429,
+        "retryAfterMs": 1000
+      }
+    ]
+  },
+  "afterAdaptiveBackoff": {
+    "scope": "Bounded log entries; not all requests or a human control benchmark",
+    "observedUptimeSeconds": 149,
+    "eventCounts": {
+      "discord_http_rate_limit": 10,
+      "music_slow_request": 3
+    },
+    "events": [
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "461fdb03-a579-4ea1-b9ed-260ddc74f9d5",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 211,
+        "statusCode": 429,
+        "retryAfterMs": 2000,
+        "observedAt": "2026-10-17T05:02:56.259668721+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "973d1cea-53ae-4969-a91b-a02698023aff",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 210,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:03:07.265777228+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "7b48ac42-5be8-4366-9a97-b869d13a7d4f",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 192,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:03:19.761856813+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "da25601d-f14a-42b8-97bf-f4dc9f623bee",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 235,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:03:38.613757741+02:00"
+      },
+      {
+        "event": "music_slow_request",
+        "requestId": "ef7db029-2bc3-470e-b31e-e0ab0877ea7b",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 3357,
+        "succeeded": true,
+        "observedAt": "2026-10-17T05:03:41.727218555+02:00"
+      },
+      {
+        "event": "music_slow_request",
+        "requestId": "1aea8331-2b06-4f5d-bdb8-c8c5d2853bf1",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 6605,
+        "succeeded": true,
+        "observedAt": "2026-10-17T05:03:48.332191335+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "049348d4-cdbc-471e-a15c-1012b29bde9c",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 226,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:03:52.337591334+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "f8edb654-4c1d-45dc-b09d-f82c470f8451",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 236,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:04:13.661786366+02:00"
+      },
+      {
+        "event": "music_slow_request",
+        "requestId": "c8fe7375-2de4-4ca0-9d5d-7d9ba28dfcfa",
+        "entryPoint": "panel_edit",
+        "guild": "987bace59463",
+        "durationMs": 4444,
+        "succeeded": true,
+        "observedAt": "2026-10-17T05:04:17.861839440+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "9abc61db-203c-4480-bc1b-5b95fd28d416",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 257,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:04:24.993377037+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "7b0b5b5c-193f-4b2a-af49-07cbea8c715a",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 212,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:04:35.160056113+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "f9f04070-6720-4aa5-b5d8-0aca0c73f337",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 180,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:04:46.110474207+02:00"
+      },
+      {
+        "event": "discord_http_rate_limit",
+        "requestId": "22c84f06-9375-4b11-81d0-1b93f927eed3",
+        "entryPoint": "message_patch",
+        "channel": "4fc55abc0e62",
+        "durationMs": 197,
+        "statusCode": 429,
+        "retryAfterMs": 1000,
+        "observedAt": "2026-10-17T05:04:57.214890214+02:00"
+      }
+    ]
+  },
+  "voiceSamples": [
+    {
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 338,
+      "positionMs": 340,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 26290,
+        "deficit": 0,
+        "nulled": 0
+      },
+      "observedAt": "2026-10-17T05:03:38.724313919+02:00"
+    },
+    {
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 337,
+      "positionMs": 30360,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 1355,
+        "deficit": 0,
+        "nulled": 0
+      },
+      "observedAt": "2026-10-17T05:04:08.730846698+02:00"
+    },
+    {
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 339,
+      "positionMs": 60360,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 2855,
+        "deficit": 0,
+        "nulled": 0
+      },
+      "observedAt": "2026-10-17T05:04:38.735042201+02:00"
+    }
+  ],
+  "panelSnapshots": [
+    {
+      "guild": "987bace59463",
+      "track": "3d46a624133a",
+      "positionMs": 46812,
+      "paused": false,
+      "queue": 0,
+      "filter": "none",
+      "nodePreference": "gdjkhp",
+      "panel": {
+        "httpStatus": 200,
+        "readMs": 330,
+        "matchesCurrentTitle": true,
+        "matchesCurrentUri": true,
+        "editedAt": "2026-10-17T03:04:17.656000+00:00"
+      }
+    }
+  ],
+  "humanButtonLatencyVerified": false,
+  "actualBotButtonInvocationsSent": false,
+  "newTestMessagesSent": false,
+  "remainingLimitation": "Discord edit HTTP 429 responses can still impose waits; adaptive background backoff reduces contention and confirmed controls retain immediate requests.",
+  "sourceHashesScope": "Deployed cd336f8 image; test paths in this manifest were subsequently removed from the source branch at the user request",
+  "subsequentCleanup": {
+    "assistantTestFilesRemoved": 122,
+    "auxiliaryScriptsRemoved": 28,
+    "originalTestFilesRetained": 3,
+    "currentPassingTests": 25,
+    "report": "../HANDOFF.md"
+  }
+}

@@ -27,16 +27,17 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "868c65ffbd6bb465e5d223cdf09e53a2b198e626",
-    "image": "4879dca40e62fe39a0eb363bc1fdc7e0251266332d7ac8c9e196e19b609ccb55",
+    "code": "cd336f8bec50091fb861661e0ef358134f46c5e0",
+    "image": "234ca907361e49e870ff0f7efb8b1c76e3119daab76d1803bf592866a7f24c8b",
     "selectedPublicNode": "gdjkhp",
     "backupOrder": [
       "serenetia",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/control-latency-runtime.json",
-    "change": "Parallel acknowledgement for authorized music buttons, coalesced panel updates and honest ping measurements; GDjkhp and backups retained"
+    "evidence": "evidence/player-state-sync-runtime.json",
+    "change": "Confirmed node playback clock, bounded panel publications and background backoff for observed Discord HTTP 429; panel delay remains under API limits",
+    "tag": "release-panel-backoff-20261017"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -69,5 +70,15 @@
     "evidence": "evidence/public-node-research.json",
     "runtimeChanged": false,
     "conclusion": "Retain GDjkhp; no tested public node meets all requested latency/audio/plugin requirements"
+  },
+  "handoff": {
+    "report": "HANDOFF.md",
+    "requestedDate": "2026-10-17",
+    "assistantTestFilesRemoved": 122,
+    "auxiliaryScriptsRemoved": 28,
+    "originalTestFilesRetained": 3,
+    "currentPassingTests": 25,
+    "pendingDashboardWorkCommit": "c5979b3",
+    "externalPlanningRequested": true
   }
 }
