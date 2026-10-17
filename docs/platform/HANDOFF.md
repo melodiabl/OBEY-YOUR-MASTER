@@ -1,6 +1,10 @@
 # Estado entregado · 17/10/2026
 
-Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTER`. La nueva planificación se realizará fuera de esta sesión, por petición del usuario.
+Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTER`. El usuario entregó la planificación nueva y reanudó trabajo local el 18/10/2026; el estado del 17/10 que sigue se conserva como registro histórico.
+
+## Reanudación · 18/10/2026
+
+Guía nueva conciliada sin sobrescribir el checkout; [piloto de configuración de bienvenida](../guia-arquitectura/PILOTO_BIENVENIDA.md) en `3d63780c30da9fab6546d899af21fc2c072d3016`. [Plan y estados actuales](../guia-arquitectura/PLAN_POR_ETAPAS.md). Cambios locales no desplegados ni publicados; las verificaciones y límites se registran por capacidad. La limpieza de tests/scripts se mantiene. El runtime de producción descrito abajo corresponde a la última verificación del 17/10, no a una nueva comprobación en vivo de esta reanudación.
 
 ## Limpieza pedida
 

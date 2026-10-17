@@ -1,6 +1,6 @@
 # Guía de migración del módulo welcome
 
-Tarea `MOD-WELCOME`. Estado `audit_before_migration`. Destino propuesto `src/modules/welcome`. La migración preserva funciones y datos existentes; la ficha no autoriza agregar funciones nuevas.
+Tarea `MOD-WELCOME`. Estado `configuration_pilot_local; full_module_pending`. Destino propuesto `src/modules/welcome`. La migración preserva funciones y datos existentes; la ficha no autoriza agregar funciones nuevas.
 
 
 Dependencias de arquitectura: `ARCH-03`, `ARCH-05`, `ARCH-07`.
@@ -106,3 +106,7 @@ Entonces Denegar la nueva entrega sin filtrar datos. Preview solo gestores; púb
 ## Cierre y evidencia
 
 Registrar entrada canónica, permisos, datos, efectos, revisión, traducciones, material y rollback. Comparar cada superficie ofrecida y explicar funciones exclusivas. Los casos anteriores son especificaciones, no pruebas ejecutadas. Un módulo sin dominio confirmado queda pendiente de alcance, sin carpetas de relleno.
+
+## Incremento local · 18/10/2026
+
+Canal y mensaje pasan por el servicio autorizado del [piloto](../PILOTO_BIENVENIDA.md), commit `3d63780c30da9fab6546d899af21fc2c072d3016`. Datos y aliases existentes, borrador, CAS y último recibo conservados. Las casillas de esta ficha abarcan todo welcome y permanecen abiertas: no se han migrado tarjetas/DM, segundo canal, concesiones de roles, captcha, entrega/deduplicación ni despedidas. La evidencia distingue Mongo/HTTP aislados de Discord/OAuth reales pendientes.

@@ -80,5 +80,23 @@
     "currentPassingTests": 25,
     "pendingDashboardWorkCommit": "c5979b3",
     "externalPlanningRequested": true
+  },
+  "architectureGuide": {
+    "receivedDate": "2026-10-18",
+    "archiveName": "OBEY_Implementacion_con_Guia (1).zip",
+    "sha256": "55b557df343ab84c7322c9e1bba13aafa5a856e0d5c77ca7a7f2287b99700bf4",
+    "extractedRoot": "/home/OBEY_Implementacion",
+    "verifiedExtractedFiles": 2713,
+    "verifiedDeliveryManifestFiles": 2659,
+    "archiveRemovedAfterVerification": true,
+    "baseCommit": "c8ba6d3ee86515813e68a028e1221d093301e91b",
+    "guideCommit": "a05036a",
+    "pilotCommit": "3d63780c30da9fab6546d899af21fc2c072d3016",
+    "guide": "docs/guia-arquitectura/LEER_PRIMERO.md",
+    "pilotEvidence": "docs/guia-arquitectura/PILOTO_BIENVENIDA.md",
+    "scope": "Local architecture/configuration pilot; retains earlier product requirements and exclusions. No automatic ZIP code replacement.",
+    "zipBootstrapRefactorApplied": false,
+    "pushed": false,
+    "deployed": false
   }
 }

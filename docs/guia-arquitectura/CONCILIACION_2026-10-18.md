@@ -14,7 +14,7 @@ Revisión estática de bootstrap/application.js, shutdown.js, handlers.js, dashb
 
 - Propuesta útil: separación de composición, validación antes de conexiones y cleanup que intenta todos los pasos. Mantiene la lista de handlers, el motor musical y sus IDs.
 - Cambio de conducta: pasa de iniciar Mongo y Gateway en paralelo a esperar Mongo y los inicializadores del núcleo antes del login. Falta demostrar fallo/orden de arranque con los inicializadores reales, no solo dobles aislados. loaddb instala stores antes de esperar ready; preload y reconciliación se completan después y emiten dbReady.
-- Defecto a corregir antes de adoptar: dashboard.stop usa `Promise.resolve().then(() => io?.close())`; Socket.IO devuelve el servidor y termina mediante callback. Ese Promise no acredita que se haya cerrado el servidor HTTP antes de continuar con el store. Deben probarse cierre efectivo, fallo parcial y solicitudes en curso.
+- Cierre del dashboard: comprobada la implementación instalada de Socket.IO 4.8.3, `Server.prototype.close` es asíncrono y espera el cierre HTTP. El wrapper del paquete puede esperarlo; no se atribuye a esta versión la antigua firma que devolvía el servidor. Aún deben probarse fallo parcial y solicitudes en curso con el arranque completo.
 - Cobertura pendiente: interrupción mientras Mongo conecta o dashboard inicia, cleanup de listeners legacy y deadline global con recursos reales aislados. Las 15 comprobaciones declaradas por el paquete son evidencia de su autor, no una ejecución de esta entrega.
 
 La separación se evaluará en ARCH-04 después de fijar contratos. No se incorpora un nuevo orden de arranque para cumplir un árbol de carpetas.

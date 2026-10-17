@@ -6,7 +6,7 @@ Los IDs expresan dependencias técnicas, no fechas prometidas ni permiso de desp
 
 - [x] Base local/remota conciliada el 18/10/2026
 - Evidencia: [conciliación de la entrega](CONCILIACION_2026-10-18.md).
-- Commit de cierre: commit que incorpora este registro; SHA exacto en el siguiente checkpoint.
+- Commit de cierre: `a05036a` (guía/base); actualización de la revisión incluida con el checkpoint del piloto.
 
 Dependencias: ninguna.
 
@@ -14,9 +14,9 @@ Aceptación: SHA remoto y cambios locales identificados; preservar código actua
 
 ## ARCH 02 Inventariar entradas y propietarios
 
-- [ ] Estado pendiente de ejecución
-- Evidencia de cierre por completar
-- Commit de cierre por completar
+- [ ] Inventario del piloto de bienvenida completado; inventario exhaustivo de otras capacidades pendiente.
+- Evidencia local: Entradas, loaders, escritor, caché, recursos y límites en PILOTO_BIENVENIDA.md.
+- Commit del incremento: `3d63780c30da9fab6546d899af21fc2c072d3016`; no equivale a cierre global de la tarea.
 
 Dependencias: ARCH-01.
 
@@ -24,9 +24,9 @@ Aceptación: Por capacidad: prefix/slash/customId/evento/ruta/job, servicio real
 
 ## ARCH 03 Fijar límites y decisiones
 
-- [ ] Estado pendiente de ejecución
-- Evidencia de cierre por completar
-- Commit de cierre por completar
+- [ ] Límite del piloto implementado y comprobado localmente; decisiones y límites del resto pendientes.
+- Evidencia local: Factory sin cliente global, puertos explícitos y AST de imports del piloto en PILOTO_BIENVENIDA.md.
+- Commit del incremento: `3d63780c30da9fab6546d899af21fc2c072d3016`; no equivale a cierre global de la tarea.
 
 Dependencias: ARCH-02.
 
@@ -44,9 +44,9 @@ Aceptación: Orden de ready/dbReady identificado; fallos de núcleo/opcionales d
 
 ## ARCH 05 Definir contratos y autorización
 
-- [ ] Estado pendiente de ejecución
-- Evidencia de cierre por completar
-- Commit de cierre por completar
+- [ ] Contratos y política compartidos para canal/mensaje de bienvenida; resto de operaciones pendiente.
+- Evidencia local: Zod, JSDoc, contexto del servidor, revalidación, CAS e idempotencia existentes; PILOTO_BIENVENIDA.md.
+- Commit del incremento: `3d63780c30da9fab6546d899af21fc2c072d3016`; no equivale a cierre global de la tarea.
 
 Dependencias: ARCH-03.
 
@@ -54,9 +54,9 @@ Aceptación: Entradas allowlist, actor de sesión, guild/recurso, permisos diná
 
 ## ARCH 06 Pilotar configuración de bienvenida
 
-- [ ] Estado pendiente de ejecución
-- Evidencia de cierre por completar
-- Commit de cierre por completar
+- [ ] Servicio y adaptadores del piloto conectados; recorrido real OAuth/Discord y UI declarativa pendientes.
+- Evidencia local: 15 escenarios Mongo, 16 peticiones HTTP, slash simulado y paridad de validación; PILOTO_BIENVENIDA.md.
+- Commit del incremento: `3d63780c30da9fab6546d899af21fc2c072d3016`; no equivale a cierre global de la tarea.
 
 Dependencias: ARCH-05.
 

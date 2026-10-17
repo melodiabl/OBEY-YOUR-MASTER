@@ -1,6 +1,6 @@
 # Adopción gradual de tecnologías
 
-Todas las tareas de implementación siguientes están pendientes. La investigación documental no cierra ARCH-03/05/06 ni demuestra que las tecnologías estén instaladas. Estos IDs complementan el plan original; no duplican las tareas de módulos.
+La tabla conserva el alcance de diseño; consultar el avance local al final antes de elegir la siguiente tarea. La investigación documental no cierra ARCH-03/05/06 ni demuestra que las tecnologías estén instaladas. Estos IDs complementan el plan original; no duplican las tareas de módulos.
 
 | ID | Dependencias | Entrega concreta | Aceptación |
 | --- | --- | --- | --- |
@@ -42,3 +42,7 @@ Cada incremento debe poder revertirse sin traer código musical antiguo. Mantene
 Cambiar de framework, reescribir todo en TypeScript, dividir el repositorio, añadir microservicios, instalar otro bus y crear módulos sin dominio confirmado no son prerequisitos. Registrar un motivo medible antes de incorporarlos al plan.
 
 El siguiente paso después de recibir esta ampliación es TECH-01. Si se autoriza implementación, seguir el grafo por capacidad y registrar evidencia; recibir el ZIP no cambia estados de implementación a completados.
+
+## Avance local · 18/10/2026
+
+TECH-01: base y versiones conciliadas; inventario canal/mensaje de bienvenida en [piloto](../PILOTO_BIENVENIDA.md). TECH-02: Zod 4.1.12 y TypeScript 5.9.3 fijados, strict/noEmit sobre el servicio y contratos CommonJS. TECH-03: adaptadores incluidos delegan en el servicio autorizado, reutilizando el escritor CAS. Commit `3d63780c30da9fab6546d899af21fc2c072d3016`. Comprobaciones Mongo/HTTP locales y slash simulado descritas en la evidencia. Los recorridos reales y el resto de criterios transversales siguen pendientes; no se marca toda la adopción completada. TECH-04/05/06/07/08 aún no implementados.

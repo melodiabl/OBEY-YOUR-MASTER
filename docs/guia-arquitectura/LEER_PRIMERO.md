@@ -24,3 +24,7 @@ La guía contiene ahora 51 Markdown: los 40 documentos base, 10 capítulos de te
 ## Música y respuesta de controles
 
 La [investigación de rendimiento](MUSICA_RENDIMIENTO_Y_LATENCIA.md) compara fuentes y código de bots musicales, identifica el bucle independiente de letras de OBEY y propone coordinación de publicaciones, perfiles de nodo y mediciones. No modifica el audio ni los controles del paquete.
+
+## Estado de ejecución en este checkout
+
+La guía base de 51 Markdown se incorporó en a05036a. Leer primero [conciliación](CONCILIACION_2026-10-18.md), [piloto local de bienvenida](PILOTO_BIENVENIDA.md) y los estados actualizados de PLAN_POR_ETAPAS.md. La carpeta de código del ZIP permanece separada y su refactor bootstrap no se aplicó. El piloto `3d63780c30da9fab6546d899af21fc2c072d3016` es trabajo local, sin publicación remota ni despliegue.

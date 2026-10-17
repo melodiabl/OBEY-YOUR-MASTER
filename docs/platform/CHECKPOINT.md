@@ -2,6 +2,12 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Reanudación local con la guía nueva · 18 de octubre de 2026
+
+Paquete nuevo conciliado con c8ba6d3 y verificado antes de retirar el ZIP. Guía incorporada en a05036a. Piloto de canal/mensaje de bienvenida implementado en `3d63780c30da9fab6546d899af21fc2c072d3016`: servicio autorizado común para web, slash y opciones incluidas de setup-welcome; contratos Zod, comprobación JSDoc, escritor CAS y aliases conservados. 25/25 tests originales, 15 escenarios Mongo aislado, 16 peticiones HTTP y comprobaciones temporales de permisos/paridad. Sin nuevas herramientas de prueba permanentes.
+
+Estado y siguientes dependencias en [plan vigente](../guia-arquitectura/PLAN_POR_ETAPAS.md) y [evidencia del piloto](../guia-arquitectura/PILOTO_BIENVENIDA.md). Rama solo local; runtime musical anterior, sin despliegue ni cambios de nodo. OAuth/Discord reales, UI declarativa, ciclo de vida y módulos restantes pendientes. El refactor bootstrap del paquete sigue separado.
+
 ## Estado para planificación externa · 17 de octubre de 2026
 
 El usuario pidió retirar scripts auxiliares y también los tests automatizados añadidos, y actualizar la rama. Se eliminaron 122 archivos de pruebas/ayudantes y 28 scripts de diagnóstico, fixtures y verificación. Se conservan los tres archivos de tests originales: 25 casos pasan. CI mantiene instalación, pruebas originales, assets y build; ya no invoca archivos eliminados. Los 14 archivos pendientes de interfaz/evidencias se guardaron sin alterar su contenido en `c5979b3`; los dos verificadores locales modificados se retiraron por petición expresa.
