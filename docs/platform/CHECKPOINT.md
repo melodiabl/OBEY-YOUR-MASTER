@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Respuesta de botones y sincronización · 17 de octubre de 2026
+
+El usuario aclaró que el retraso aparece al pulsar controles de música. El handler esperaba el HTTP de confirmación de Discord antes de enviar la orden al nodo. Ahora inicia esa confirmación y permite ejecutar los controles autorizados en paralelo; permisos/canal de voz se comprueban antes, la cola de operaciones por guild se conserva y los mensajes de error esperan la confirmación. Simulación repetida con ambas peticiones de 60 ms: mediana de 125 a 62 ms, sin afirmar esos tiempos para Discord real.
+
+El panel limita las ráfagas a una edición en curso y un refresco del estado más reciente: prueba de 101 solicitudes, de 101 a 2 ediciones; cancelación y nueva generación verificadas. `/ping` y prefijo separan confirmación medida, gateway y voz, eliminando cálculo incorrecto, proceso síncrono a localhost y número aleatorio. 545/545 pruebas completas y 48 dentro de imagen aislada pasan; 20 hashes verificados.
+
+Código `868c65ffbd6bb465e5d223cdf09e53a2b198e626`, imagen `4879dca40e62fe39a0eb363bc1fdc7e0251266332d7ac8c9e196e19b609ccb55`, etiqueta `release-control-latency-20261017`. Bot healthy/cero reinicios, sesión recuperada y tres nodos públicos conectados. GDjkhp principal, respaldos Serenetia/MilloHost; privado apagado/excluido, sin 2333. Se mantienen imágenes/Redis y las 16 entradas locales previas. Gateway observado 126 ms y voz 345–348 ms tras el arranque: no se afirma reducción de esos pings de red. Recuperación vigente actualizada; rollback `release-sync-latency-20261017` con default GDjkhp. Falta confirmación humana del retraso percibido al pulsar. [Detalle y evidencias](CONTROL-LATENCY.md).
+
 ## Entrecortes persistentes: cambio de proveedor · 17 de octubre de 2026
 
 El usuario confirmó que el reinicio anterior no resolvió el audio. Se conservó evidencia antes de actuar: Serenetia seguía conectado, sin filtros ni eventos stuck, pero reportaba déficit de 196–224 frames por ventana; la posición del reproductor avanzó aproximadamente 27,8–27,9 segundos en intervalos de 30 segundos. Los frames son agregados del nodo y no acreditan pérdida de paquetes individual. GDjkhp volvió a pasar conexión/búsquedas y resolvió el enlace Spotify de la sesión con igual duración.

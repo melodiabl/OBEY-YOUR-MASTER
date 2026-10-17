@@ -1,0 +1,247 @@
+{
+  "verifiedAt": "2026-10-17T00:18:43.623297+00:00",
+  "code": "868c65ffbd6bb465e5d223cdf09e53a2b198e626",
+  "image": "4879dca40e62fe39a0eb363bc1fdc7e0251266332d7ac8c9e196e19b609ccb55",
+  "health": {
+    "status": "ok",
+    "database": true,
+    "music": true,
+    "uptime": 80
+  },
+  "services": [
+    {
+      "name": "obey_bot",
+      "image": "4879dca40e62fe39a0eb363bc1fdc7e0251266332d7ac8c9e196e19b609ccb55",
+      "startedAt": "2026-10-17T02:17:22.735635251+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_images",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "startedAt": "2026-10-14T02:12:54.386242902+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_redis",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "startedAt": "2026-10-05T01:35:33.989316999+02:00",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "obey_lavalink",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "startedAt": "0001-01-01T00:00:00Z",
+      "status": "created",
+      "health": null,
+      "restarts": 0
+    }
+  ],
+  "selectedPublicNode": "gdjkhp",
+  "backupOrder": [
+    "serenetia",
+    "millohost"
+  ],
+  "connectedPublics": [
+    "gdjkhp",
+    "serenetia",
+    "millohost"
+  ],
+  "gatewayPingMs": 126,
+  "voiceHealth": [
+    {
+      "observedAt": "2026-10-17T02:17:50.337008388+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 0,
+      "positionMs": 0,
+      "nodeCpuPercent": null,
+      "nodeFrames": null
+    },
+    {
+      "observedAt": "2026-10-17T02:18:05.125716872+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 345,
+      "positionMs": 183251,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 474,
+        "deficit": 0,
+        "nulled": 0
+      }
+    },
+    {
+      "observedAt": "2026-10-17T02:18:35.127836512+02:00",
+      "event": "music_playback_health",
+      "entryPoint": "player_update",
+      "guild": "987bace59463",
+      "node": "gdjkhp",
+      "connected": true,
+      "voicePingMs": 348,
+      "positionMs": 18180,
+      "nodeCpuPercent": null,
+      "nodeFrames": {
+        "sent": 663,
+        "deficit": 0,
+        "nulled": 0
+      }
+    }
+  ],
+  "restores": [
+    {
+      "status": "playing",
+      "positionMs": 169251
+    }
+  ],
+  "restoreFailures": 0,
+  "playbackStarts": 2,
+  "uncaughtErrors": 0,
+  "privateNode": {
+    "off": true,
+    "restart": "no",
+    "portClosed": true,
+    "excluded": true
+  },
+  "unrelatedServicesUnchanged": true,
+  "tests": {
+    "full": 545,
+    "imageFocused": 48,
+    "skipped": 0
+  },
+  "originalWorkingTreeEntriesPreserved": 16,
+  "gatewayBaseline": [
+    {
+      "discordGatewayPingMs": 124,
+      "statsRequestMs": 63.2
+    },
+    {
+      "discordGatewayPingMs": 124,
+      "statsRequestMs": 8.3
+    },
+    {
+      "discordGatewayPingMs": 124,
+      "statsRequestMs": 5.8
+    },
+    {
+      "discordGatewayPingMs": 124,
+      "statsRequestMs": 14.3
+    },
+    {
+      "discordGatewayPingMs": 124,
+      "statsRequestMs": 38.7
+    }
+  ],
+  "panelSimulation": {
+    "scope": "Controlled Discord adapter, 10ms per edit; not real Discord network latency",
+    "before": {
+      "requests": 101,
+      "edits": 101,
+      "elapsedMs": 1752
+    },
+    "after": {
+      "requests": 101,
+      "edits": 2,
+      "elapsedMs": 41
+    }
+  },
+  "buttonSimulation": {
+    "scope": "Controlled adapters: Discord acknowledgement 60ms and node request 60ms; not live Discord button traffic",
+    "beforeMs": [
+      125,
+      124,
+      130
+    ],
+    "afterMs": [
+      62,
+      66,
+      61
+    ]
+  },
+  "sourceHashes": {
+    "commands/Info/ping.js": "5951ffcc40f2b4a8e9de94e4bb217e74c758b38ec7346ef55063ed7f07e74279",
+    "handlers/music/liveupdate.js": "6deef58692b5c9532f92c19bd2428f6000cea6a6877fb55265d0276c7305c0c3",
+    "handlers/project/ping.js": "cd5c2ab1eaa9e75b60cb8a4e310e4caa00c46b2e35efd0b17787cfed8de750a6",
+    "locales/en.json": "e486b81d0872b7a998d9367f1934388f78f6579148d1f2f3ee2948d21d0a31d1",
+    "locales/es.json": "28399567b683a883775131a671b174c9d8eb24fc82242994c6dc9d34987130a5",
+    "slashCommands/Info/ping.js": "ad0139fa216241be036f58f39e51fd6e8e683913e6aac1d285db30c852704bca",
+    "test/liveupdate.test.js": "70be62a76590e93b5eebf9e28cae31637226d27e42f33633d7ce6469952a5020",
+    "test/ping-command.test.js": "2267ef0afe19fc0d42031bf337b7fb1acd736e1809ac806a5a3435ed68e4e80b",
+    "handlers/music/index.js": "d8c48decf38b106e9bfee81e7d96a631a76f6b4f11d3779f46ac435b5818e5ff",
+    "handlers/music/nodes.js": "e2bd8a4c60b9035dcfa1e7dfc887f230b1e81d06393b93a4460f32eb2590e4fc",
+    "handlers/music/playback-clock.js": "a201c14f3757e1ca1776f4e32ae9f1ae57b25361644e12a2946d727d09cbb741",
+    "handlers/music/sessions.js": "1940c707fb3d78b1557127205bedd57064f3b7aa0b827d5ebaad6143815fbbcc",
+    "handlers/music/likes.js": "b9c185b29d73c63d58b8c26e92ff7ebf83bb26d896555cf42d12a21c720baf34",
+    "handlers/music/player-events.js": "e6350817cf70ca669f09420fc00034f342c7ba9ebe71de254672d9c630819d31",
+    "handlers/project/bot-info.js": "588033d2b87b3074f6fa9619e629f357ba4a5f896f967c3e7f72ce29ee9b01ce",
+    "handlers/music/playback-health.js": "b9789429d9395ea4bbde36d9dca31bda37c59aa997b957732997069c4c62018b",
+    "handlers/music/lyricsLive.js": "617c66ff21c302cbe61f4e50bbd4cacf380ed3f4c44c7a9dfb4c6491de49ec2d",
+    "dashboard/music-realtime.js": "6ebc153dd540d7d77bbc1c91fc28b7e9d06aedc1ebfea664adeb8f8f9a81341c",
+    "dashboard/public/js/player-lyrics.js": "803c255c0bf32bae2f458305aef7521f9cdbeb5089b256604f0ccd151fc0a578",
+    "test/music-button-latency.test.js": "554f0982487aefb791212a46acc7162b8bf68e8b4a1d27f6c82e3223ad234128"
+  },
+  "humanButtonLatencyVerified": false,
+  "actualBotButtonInvocationsSent": false,
+  "controlFailures": 0,
+  "registry": {
+    "slashRoots": 19,
+    "pingRegistered": true,
+    "botInfoRegistered": true,
+    "funOptions": 22,
+    "nsfwRegistered": false,
+    "emojiMapKeys": 295
+  },
+  "panelRepeatedSimulation": {
+    "scope": "Repeated controlled Discord adapter, 10ms per edit; not real Discord network latency",
+    "runs": [
+      {
+        "before": {
+          "requests": 101,
+          "edits": 101,
+          "elapsedMs": 1584
+        },
+        "after": {
+          "requests": 101,
+          "edits": 2,
+          "elapsedMs": 26
+        }
+      },
+      {
+        "before": {
+          "requests": 101,
+          "edits": 101,
+          "elapsedMs": 1398
+        },
+        "after": {
+          "requests": 101,
+          "edits": 2,
+          "elapsedMs": 27
+        }
+      },
+      {
+        "before": {
+          "requests": 101,
+          "edits": 101,
+          "elapsedMs": 1380
+        },
+        "after": {
+          "requests": 101,
+          "edits": 2,
+          "elapsedMs": 24
+        }
+      }
+    ]
+  },
+  "userClarification": "Latency when pressing music controls"
+}
