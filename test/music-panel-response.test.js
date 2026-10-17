@@ -71,3 +71,13 @@ test('a transient Discord edit failure does not create a duplicate setup panel',
     assert.equal(replacements, 0); assert.equal(reference.messageId, 'panel')
   } finally { setup.updatePanel = original; await f.cleanup() }
 })
+test('periodic progress ticks do not keep scheduling work behind a slow edit', async t => {
+  t.mock.timers.enable({ apis: ['setInterval'] })
+  const id = 'periodic-panel-pressure'; let edits = 0, release, began
+  const started = new Promise(resolve => { began = resolve })
+  const f = fixture(id, { messages: { edit: async () => { edits++; if (edits === 1) { began(); await new Promise(resolve => { release = resolve }) } } } })
+  liveMessages.set(id, { channelId: 'text', messageId: 'panel' })
+  live.startLiveUpdate(f.client, id); t.mock.timers.tick(5000); await started
+  t.mock.timers.tick(15000); release(); await settle()
+  const writes = edits; await f.cleanup(); assert.equal(writes, 1)
+})

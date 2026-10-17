@@ -53,7 +53,7 @@ function startLiveUpdate(client, guildId) {
   stopLiveUpdate(guildId)
   const timer = setInterval(() => {
     if (!liveMessages.has(guildId) || !getState(guildId).currentTrack) return stopLiveUpdate(guildId)
-    updatePanel(client, guildId)
+    if (!pending.has(guildId)) updatePanel(client, guildId)
   }, 5000)
   timer.unref?.()
   liveTimers.set(guildId, timer)
