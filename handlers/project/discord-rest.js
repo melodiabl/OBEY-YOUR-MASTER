@@ -6,18 +6,42 @@ const hash = value => createHash('sha256').update(String(value)).digest('hex').s
 const log = row => console.warn('[Discord] Request timing:', JSON.stringify(row))
 
 function discordRestOptions({ makeRequest = DefaultRestOptions.makeRequest, now = () => performance.now(), write = log } = {}) {
+  let lastRateLimit = -Infinity
   return { timeout: 60_000, retries: 5, agent: new Agent({ pipelining: 1, keepAliveTimeout: 15_000 }),
     async makeRequest(url, options) {
       const start = now()
+      const channel = String(url).match(/\/channels\/([0-9]+)\/messages\//)?.[1]
+      const tracked = channel && options.method === 'PATCH'
+      const requestId = tracked ? randomUUID() : null
       let response
-      try { response = await makeRequest(url, options); return response }
+      try {
+        response = await makeRequest(url, options)
+        if (tracked && typeof response.json === 'function') {
+          const read = response.json.bind(response)
+          response.json = async (...args) => {
+            const began = now()
+            try { return await read(...args) }
+            finally {
+              const durationMs = Math.round(now() - began)
+              if (durationMs >= 1000) write({ event: 'discord_slow_body', requestId, entryPoint: 'message_patch_body', channel: hash(channel), durationMs })
+            }
+          }
+        }
+        return response
+      }
       finally {
         const durationMs = Math.round(now() - start)
-        const channel = String(url).match(/\/channels\/([0-9]+)\/messages\//)?.[1]
-        if (channel && options.method === 'PATCH' && durationMs >= 1000) write({
-          event: 'discord_slow_http', requestId: randomUUID(), entryPoint: 'message_patch',
+        const limited = response?.status === 429
+        const report = limited ? now() - lastRateLimit >= 10000 : durationMs >= 1000
+        const retryAfter = response?.headers?.get('retry-after')
+        if (tracked && report) {
+          if (limited) lastRateLimit = now()
+          write({
+          event: limited ? 'discord_http_rate_limit' : 'discord_slow_http', requestId, entryPoint: 'message_patch',
           channel: hash(channel), durationMs, statusCode: response?.status ?? null,
+          retryAfterMs: limited && retryAfter != null && Number.isFinite(Number(retryAfter)) ? Number(retryAfter) * 1000 : null,
         })
+        }
       }
     },
   }

@@ -42,3 +42,25 @@ test('rate-limit telemetry is bounded and distinguishes queue waits from HTTP re
   assert.doesNotMatch(JSON.stringify(rows), /private-channel|secret-token|\/channels/)
   dispose(); assert.equal(rest.listenerCount('rateLimited'), 0)
 })
+test('fast unexpected HTTP 429 responses are visible even when the SDK waits internally', async () => {
+  const rows = [], response = { status: 429, headers: new Headers({ 'retry-after': '5.5' }) }
+  const options = discordRestOptions({ now: () => 0, write: row => rows.push(row), makeRequest: async () => response })
+  try {
+    assert.equal(await options.makeRequest('https://discord.com/api/v10/channels/123/messages/456', { method: 'PATCH' }), response)
+    await options.makeRequest('https://discord.com/api/v10/channels/123/messages/456', { method: 'PATCH' })
+    assert.equal(rows.length, 1)
+    assert.equal(rows[0].event, 'discord_http_rate_limit'); assert.equal(rows[0].retryAfterMs, 5500)
+    assert.doesNotMatch(JSON.stringify(rows), /\/channels|\/messages/)
+  } finally { await options.agent.close() }
+})
+test('body timing reads JSON once, preserves its result and never logs message contents', async () => {
+  let at = 0, reads = 0; const rows = [], result = { content: 'private-message' }
+  const response = { status: 200, async json() { reads++; at += 6000; return result } }
+  const options = discordRestOptions({ now: () => at, write: row => rows.push(row), makeRequest: async () => response })
+  try {
+    const received = await options.makeRequest('https://discord.com/api/v10/channels/123/messages/456', { method: 'PATCH' })
+    assert.equal(received, response); assert.equal(await received.json(), result); assert.equal(reads, 1)
+    assert.equal(rows[0].event, 'discord_slow_body'); assert.equal(rows[0].durationMs, 6000)
+    assert.doesNotMatch(JSON.stringify(rows), /private-message|content|\/channels/)
+  } finally { await options.agent.close() }
+})
