@@ -703,7 +703,10 @@ module.exports = client => {
       await interaction.reply({ content: obeyUi.owned('❌ Debes estar en el mismo canal de voz que el bot.'), ephemeral: true }).catch(() => {})
       return
     }
-    if (!interaction.deferred && !interaction.replied) await interaction.deferUpdate().catch(() => {})
+    const acknowledgement = !interaction.deferred && !interaction.replied
+      ? interaction.deferUpdate().catch(() => {}) : Promise.resolve()
+    // Permitted node controls can run while Discord confirms the acknowledgement.
+    if (!actionName && cid !== 'mp_loop' && cid !== 'mp_autoplay') await acknowledgement
 
     if (cid.startsWith('mq_')) {
       const state = getState(guildId)
@@ -769,9 +772,10 @@ module.exports = client => {
     }
     scheduleNpUpdate(client, guildId)
     } catch (error) {
+      await acknowledgement
       console.warn(`[Music] Control failed (${guildId}):`, error.message)
       await interaction.followUp({ content: obeyUi.owned('❌ No se pudo aplicar el control. Inténtalo de nuevo.'), ephemeral: true }).catch(() => {})
-    }
+    } finally { await acknowledgement }
   })
 
   for (const name of ['setAutoplay', 'setLoop', 'setRadioMode', 'removeDuplicates', 'clearQueue']) {
