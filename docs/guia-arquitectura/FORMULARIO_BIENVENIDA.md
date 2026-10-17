@@ -1,6 +1,6 @@
 # Formulario declarativo de bienvenida · TECH-04
 
-Entrega local del 18/10/2026 sobre 47e01fa, continuación del [piloto](PILOTO_BIENVENIDA.md). Canal y mensaje conservan su escritor y almacenamiento. Implementación local y comprobación aislada del editor; recorrido OAuth/Discord de producción pendiente.
+Entrega local del 18/10/2026, commit `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`, sobre 47e01fa, continuación del [piloto](PILOTO_BIENVENIDA.md). Canal y mensaje conservan su escritor y almacenamiento. Implementación local y comprobación aislada del editor; recorrido OAuth/Discord de producción pendiente.
 
 ## Conducta y archivos
 
@@ -14,7 +14,7 @@ Descartar cambios locales vuelve a la publicación o al borrador guardado ya car
 
 ## Revocación y contrato de error
 
-Se reprodujo antes del cambio: un 403 configuration_permissions por gestor revocado conservaba la configuración privada visible. La política ahora distingue la pérdida confirmada de acceso del actor de un problema del canal. Mantiene los códigos HTTP y error existentes y añade accessRevoked:true cuando corresponde; errors de validación pueden incluir fields, limitada a channelId/message. No expone issues completos, payload, mensajes de proveedores o credenciales.
+Se reprodujo antes del cambio: un 403 configuration_permissions por gestor revocado conservaba la configuración privada visible. La política ahora distingue la pérdida confirmada de acceso del actor de un problema del canal. Mantiene los códigos HTTP y error existentes y añade accessRevoked:true cuando corresponde; errores de validación pueden incluir fields, limitada a channelId/message. No expone issues completos, payload, mensajes de proveedores o credenciales.
 
 El resolver de canales utiliza la misma política para evitar que su respuesta 403 gane la carrera de carga y se clasifique erróneamente como fallo del canal. El cliente limpia publicado, borrador local, opciones, diff, preview y estado en memoria al perder acceso. Falta de permisos del bot/canal conserva los cambios. Un fallo de red sin confirmación no se etiqueta como revocación. Miembro inexistente o acceso perdido se clasifican mediante constantes del SDK verificadas contra [los códigos oficiales de Discord](https://docs.discord.com/developers/topics/opcodes-and-status-codes); comprobación aislada de ambas condiciones y error transitorio.
 

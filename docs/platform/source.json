@@ -97,6 +97,9 @@
     "scope": "Local architecture/configuration pilot; retains earlier product requirements and exclusions. No automatic ZIP code replacement.",
     "zipBootstrapRefactorApplied": false,
     "pushed": false,
-    "deployed": false
+    "deployed": false,
+    "formCommit": "c627d2f3a3ed5a6da76c65e58cb67739a13f7589",
+    "formEvidence": "docs/guia-arquitectura/FORMULARIO_BIENVENIDA.md",
+    "latestLocalIncrement": "TECH-04 configuration editor"
   }
 }

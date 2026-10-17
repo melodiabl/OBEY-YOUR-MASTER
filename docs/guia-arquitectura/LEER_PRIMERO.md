@@ -28,3 +28,5 @@ La [investigación de rendimiento](MUSICA_RENDIMIENTO_Y_LATENCIA.md) compara fue
 ## Estado de ejecución en este checkout
 
 La guía base de 51 Markdown se incorporó en a05036a. Leer primero [conciliación](CONCILIACION_2026-10-18.md), [piloto local de bienvenida](PILOTO_BIENVENIDA.md) y los estados actualizados de PLAN_POR_ETAPAS.md. La carpeta de código del ZIP permanece separada y su refactor bootstrap no se aplicó. El piloto `3d63780c30da9fab6546d899af21fc2c072d3016` es trabajo local, sin publicación remota ni despliegue.
+
+Continuación TECH-04: [formulario de bienvenida](FORMULARIO_BIENVENIDA.md), commit `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`, verificado en navegador aislado. Publicación y despliegue siguen separados.

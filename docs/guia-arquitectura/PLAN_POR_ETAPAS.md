@@ -54,7 +54,7 @@ Aceptación: Entradas allowlist, actor de sesión, guild/recurso, permisos diná
 
 ## ARCH 06 Pilotar configuración de bienvenida
 
-- [ ] Servicio y adaptadores del piloto conectados; recorrido real OAuth/Discord y UI declarativa pendientes.
+- [ ] Servicio, adaptadores y formulario declarativo del piloto conectados; recorrido real OAuth/Discord pendiente.
 - Evidencia local: 15 escenarios Mongo, 16 peticiones HTTP, slash simulado y paridad de validación; PILOTO_BIENVENIDA.md.
 - Commit del incremento: `3d63780c30da9fab6546d899af21fc2c072d3016`; no equivale a cierre global de la tarea.
 
@@ -94,9 +94,9 @@ Aceptación: Reutilizar jobs actuales; generación, cancelación, reintentos, re
 
 ## ARCH 10 Unificar presentación e interfaz
 
-- [ ] Estado pendiente de ejecución
-- Evidencia de cierre por completar
-- Commit de cierre por completar
+- [ ] Formulario de bienvenida implementado y probado localmente; resto de presentación e interfaces pendiente.
+- Evidencia: [TECH-04](FORMULARIO_BIENVENIDA.md), 12 escenarios de navegador y cuatro anchos.
+- Commit del incremento: `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`; no cierra la tarea global.
 
 Dependencias: ARCH-08.
 
@@ -164,3 +164,7 @@ No marcar una tarea por existir el documento o la carpeta. Adjuntar capacidad, S
 ## Adopción tecnológica complementaria
 
 Leer [TECH-01 a TECH-08](tecnologia/06_PLAN_DE_ADOPCION.md). Son incrementos ligados a los ARCH existentes; todos permanecen pendientes de implementación. La conciliación estática ampliada está en [base real](tecnologia/08_BASE_REAL_Y_DIFERENCIAS.md); no se usa para cerrar pruebas conectadas o aceptar automáticamente el refactor local.
+
+## Último incremento local · TECH-04
+
+Formulario de canal/mensaje de bienvenida derivado del contrato, traducciones es/en, errores por campo y limpieza ante revocación. Commit `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`. [Evidencia y límites](FORMULARIO_BIENVENIDA.md). TECH-05/06 y recorridos reales de producción pendientes; no se habilitan otros dominios.

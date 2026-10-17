@@ -57,3 +57,4 @@ Abrir [LEER_PRIMERO.md](LEER_PRIMERO.md), [tecnologías](tecnologia/00_LEER_PRIM
 
 - CONCILIACION_2026-10-18.md: referencia local/remota, integridad y revisión del paquete.
 - PILOTO_BIENVENIDA.md: inventario, límites, implementación, verificaciones y pendientes del primer piloto.
+- FORMULARIO_BIENVENIDA.md: implementación TECH-04, traducciones, accesibilidad, revocación y evidencia de navegador.

@@ -70,5 +70,6 @@
     "slash UTF-16 500/502 limit",
     "EJS text and JSON embedding escape markup"
   ],
-  "consoleNotes": "8 expected messages for deliberately failed API requests; 2 font-preload warnings from the unchanged shared header. No page errors or unexpected network requests."
+  "consoleNotes": "8 expected messages for deliberately failed API requests; 2 font-preload warnings from the unchanged shared header. No page errors or unexpected network requests.",
+  "codeCommit": "c627d2f3a3ed5a6da76c65e58cb67739a13f7589"
 }

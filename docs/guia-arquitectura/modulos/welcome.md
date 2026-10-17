@@ -110,3 +110,5 @@ Registrar entrada canónica, permisos, datos, efectos, revisión, traducciones, 
 ## Incremento local · 18/10/2026
 
 Canal y mensaje pasan por el servicio autorizado del [piloto](../PILOTO_BIENVENIDA.md), commit `3d63780c30da9fab6546d899af21fc2c072d3016`. Datos y aliases existentes, borrador, CAS y último recibo conservados. Las casillas de esta ficha abarcan todo welcome y permanecen abiertas: no se han migrado tarjetas/DM, segundo canal, concesiones de roles, captcha, entrega/deduplicación ni despedidas. La evidencia distingue Mongo/HTTP aislados de Discord/OAuth reales pendientes.
+
+Formulario TECH-04 disponible en `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`: [contrato, UI, revocación y evidencia](../FORMULARIO_BIENVENIDA.md). La ficha global continúa abierta; se comprobaron dos campos existentes con servicios reales aislados y permisos simulados.
