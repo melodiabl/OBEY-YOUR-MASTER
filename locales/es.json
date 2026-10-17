@@ -970,6 +970,17 @@
     }
   },
   "project": {
+    "ping": {
+      "title": "Latencia de OBEY",
+      "loading": "Midiendo la respuesta…",
+      "acknowledgement": "Confirmación de respuesta",
+      "gateway": "Discord · Gateway",
+      "voice": "Música · Voz",
+      "node": "Nodo de música en este servidor",
+      "noVoice": "Sin conexión de voz",
+      "unavailable": "No disponible",
+      "explanation": "La voz mide el nodo hacia Discord; no es el tiempo de respuesta del bot."
+    },
     "botInfo": {
       "title": "{name} · Información del bot",
       "loading": "Cargando información del bot…",

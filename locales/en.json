@@ -970,6 +970,17 @@
     }
   },
   "project": {
+    "ping": {
+      "title": "OBEY latency",
+      "loading": "Measuring response…",
+      "acknowledgement": "Response acknowledgement",
+      "gateway": "Discord · Gateway",
+      "voice": "Music · Voice",
+      "node": "Music node in this server",
+      "noVoice": "No voice connection",
+      "unavailable": "Unavailable",
+      "explanation": "Voice measures the node to Discord; it is separate from bot response time."
+    },
     "botInfo": {
       "title": "{name} · Bot information",
       "loading": "Loading bot information…",
