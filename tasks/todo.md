@@ -1588,12 +1588,12 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] [commands/Setup/setup-antimasspings.js](../commands/Setup/setup-antimasspings.js).
 - [x] [commands/Setup/setup-antimention.js](../commands/Setup/setup-antimention.js).
 - [x] [commands/Setup/setup-antinewaccount.js](../commands/Setup/setup-antinewaccount.js).
-- [ ] [commands/Setup/setup-antinuke.js](../commands/Setup/setup-antinuke.js).
+- [x] [commands/Setup/setup-antinuke.js](../commands/Setup/setup-antinuke.js).
 - [x] [commands/Setup/setup-antipings.js](../commands/Setup/setup-antipings.js).
 - [x] [commands/Setup/setup-antispam.js](../commands/Setup/setup-antispam.js).
 - [x] [commands/Setup/setup-autowarn.js](../commands/Setup/setup-autowarn.js).
 - [x] [commands/Setup/setup-blacklist.js](../commands/Setup/setup-blacklist.js).
-- [ ] [commands/Setup/setup-epicgamesverify.js](../commands/Setup/setup-epicgamesverify.js).
+- [x] [commands/Setup/setup-epicgamesverify.js](../commands/Setup/setup-epicgamesverify.js).
 - [x] [commands/Setup/setup-ghost-ping-detector.js](../commands/Setup/setup-ghost-ping-detector.js).
 - [x] [commands/Setup/setup-mute.js](../commands/Setup/setup-mute.js).
 - [x] [commands/Setup/setup-validcode.js](../commands/Setup/setup-validcode.js).
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 54/63 archivos, sin desplegar. Soporte remodelado con publicación de paneles y conservación de accesos de tickets abiertos. Siguiente: Owner, protección y música; no cerrar el trabajo global por completar menús.
+Avance local: 56/63 archivos, sin desplegar. Antinuke remodelado con propiedad fresca y preferencias persistentes. Epic conserva ajustes y bloquea publicaciones porque su verificador no está registrado en el arranque. Siguiente: Owner y música; no cerrar el trabajo global por completar menús.

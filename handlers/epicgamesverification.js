@@ -9,7 +9,7 @@ const Platforms = {
 };
 const fortnite = require("fortnite");
 module.exports = async client => {
-    const EnmapLike = require('./enmap-like'); client.epicgamesDB = new EnmapLike();
+    // loaddb owns the store; this optional legacy handler is not enabled at startup.
 
     client.on("interactionCreate", async interaction => {
         if (!interaction.isButton()) return;

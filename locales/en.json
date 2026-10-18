@@ -1267,7 +1267,8 @@
       "published": "Publication updated.",
       "unpublished": "Publication removed or binding disabled.",
       "publishFailed": "The full publication was not confirmed. Check the channel, permissions and emojis before retrying.",
-      "publicationUncertain": "Creation was not confirmed. Check Discord and select the message or channel that was created before publishing again."
+      "publicationUncertain": "Creation was not confirmed. Check Discord and select the message or channel that was created before publishing again.",
+      "providerUnavailable": "The provider or verifier for this feature is not active yet. No panel was published."
     },
     "records": {
       "description": "Select an entry to edit or create a new one. Save to apply; removals also remain pending.",

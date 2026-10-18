@@ -51,6 +51,9 @@ module.exports = async client => {
   client.menuapply    = client.settings
   client.menuticket   = client.settings
   client.autosupport  = client.settings
+  const { createSettingsView } = require('./settings-view')
+  client.Anti_Nuke_System = createSettingsView(client.settings, 'antinuke', { transientKeys: true })
+  client.epicgamesDB = createSettingsView(client.settings, 'epicgames')
   client.social_log    = client.settings
   client.keyword        = new SyncMap(KeywordSchema)
   client.customcommands = new SyncMap(CustomCommandSchema)

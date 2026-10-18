@@ -5,7 +5,7 @@ const Discord = require("discord.js");
 var { EmbedBuilder, AttachmentBuilder, PermissionFlagsBits, AuditLogEvent } = require(`discord.js`);
 const { simple_databasing } = require(`./functions`);
 module.exports = async client => {
-    const EnmapLike = require('./enmap-like'); client.Anti_Nuke_System = new EnmapLike();
+    // loaddb owns the store; do not discard preferences when registering events.
 
     function antinuke_databasing(GUILDID) {
         client.Anti_Nuke_System.ensure(GUILDID, {
