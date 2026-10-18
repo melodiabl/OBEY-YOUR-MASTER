@@ -1259,6 +1259,27 @@
       "resource": "Check the values, channels and roles. The bot needs permissions and roles must be below its highest role.",
       "previous": "Previous",
       "next": "Next"
+    },
+    "records": {
+      "description": "Select an entry to edit or create a new one. Save to apply; removals also remain pending.",
+      "count": "Entries",
+      "selected": "Selected entry",
+      "empty": "Empty",
+      "choose": "Select an entry",
+      "add": "Create",
+      "edit": "Edit",
+      "remove": "Remove",
+      "save": "Save",
+      "discard": "Discard",
+      "reload": "Discard and reload",
+      "close": "Close",
+      "previous": "Previous",
+      "next": "Next",
+      "current": "Saved configuration",
+      "unsaved": "Unsaved changes",
+      "saved": "Changes saved",
+      "conflict": "Changed in another panel. Your draft is kept; discard and reload to avoid overwriting other entries.",
+      "invalid": "Check the format, duplicate names and channel or role permissions."
     }
   }
 }

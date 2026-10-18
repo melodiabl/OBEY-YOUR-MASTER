@@ -1627,13 +1627,13 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 - [x] [commands/Setup/setup-aichat.js](../commands/Setup/setup-aichat.js).
 - [x] [commands/Setup/setup-autobackup.js](../commands/Setup/setup-autobackup.js).
-- [ ] [commands/Setup/setup-autodelete.js](../commands/Setup/setup-autodelete.js).
+- [x] [commands/Setup/setup-autodelete.js](../commands/Setup/setup-autodelete.js).
 - [x] [commands/Setup/setup-autoembed.js](../commands/Setup/setup-autoembed.js).
 - [x] [commands/Setup/setup-automeme.js](../commands/Setup/setup-automeme.js).
 - [x] [commands/Setup/setup-counter.js](../commands/Setup/setup-counter.js).
-- [ ] [commands/Setup/setup-customcommand.js](../commands/Setup/setup-customcommand.js).
+- [x] [commands/Setup/setup-customcommand.js](../commands/Setup/setup-customcommand.js).
 - [x] [commands/Setup/setup-dailyfact.js](../commands/Setup/setup-dailyfact.js).
-- [ ] [commands/Setup/setup-keyword.js](../commands/Setup/setup-keyword.js).
+- [x] [commands/Setup/setup-keyword.js](../commands/Setup/setup-keyword.js).
 - [x] [commands/Setup/setup-suggestion.js](../commands/Setup/setup-suggestion.js).
 
 **SETUP-FEEDS · Publicaciones de plataformas**
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 34/63 archivos, sin desplegar. Contador, autoembed, boosts y sugerencias añadidos. Siguiente: editores de entradas y automatizaciones; conservar esquemas, permisos y efectos del consumidor.
+Avance local: 37/63 archivos, sin desplegar. Formularios de entradas para comandos personalizados, palabras clave y autodelete añadidos. Siguiente: voz, bienvenida y recursos; conservar esquemas, permisos y efectos del consumidor.

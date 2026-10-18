@@ -1259,6 +1259,27 @@
       "resource": "Revisa los valores, los canales y los roles. El bot necesita permisos y los roles deben estar por debajo del suyo.",
       "previous": "Anterior",
       "next": "Siguiente"
+    },
+    "records": {
+      "description": "Selecciona una entrada para editarla o crea una nueva. Guarda para aplicar; quitar también queda pendiente.",
+      "count": "Entradas",
+      "selected": "Entrada seleccionada",
+      "empty": "Vacío",
+      "choose": "Selecciona una entrada",
+      "add": "Crear",
+      "edit": "Editar",
+      "remove": "Quitar",
+      "save": "Guardar",
+      "discard": "Descartar",
+      "reload": "Descartar y recargar",
+      "close": "Cerrar",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "current": "Configuración guardada",
+      "unsaved": "Cambios pendientes de guardar",
+      "saved": "Cambios guardados",
+      "conflict": "Cambió desde otro panel. Se conserva tu borrador; descarta y recarga para evitar sobrescribir otras entradas.",
+      "invalid": "Revisa el formato, los nombres duplicados y los permisos de canales o roles."
     }
   }
 }
