@@ -151,6 +151,7 @@ async function shutdown() {
     await client.stopCards?.()
     await client.stopJobs?.()
     await client.stopOwnerNotifications?.()
+    await client.stopLogs?.()
     // Include configuration requests still waiting for Discord authorization.
     await client.stopWelcomeConfiguration?.()
     await require('./handlers/setup-operations').stopSetupOperations(client)
