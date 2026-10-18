@@ -29,6 +29,7 @@ const JoinVCSchema        = require('../database/schemas/JoinVCSchema')
 const RankingSchema       = require('../database/schemas/RankingSchema')
 const RosterSchema        = require('../database/schemas/RosterSchema')
 const QueueSavesSchema    = require('../database/schemas/QueueSavesSchema')
+const MusicGuildSchema    = require('../database/schemas/MusicGuildSchema')
 
 // ─── Helpers para dot-notation path ──────────────────────────────────────────
 const SyncMap = require('./sync-map')
@@ -83,6 +84,7 @@ module.exports = async client => {
   client.youtube_log  = new SyncMap(YouTubeSchema, 'channelKey')
   client.joinvc       = new SyncMap(JoinVCSchema)
   client.queuesaves   = new SyncMap(QueueSavesSchema, 'userId')
+  client.musicGuildSettings = new SyncMap(MusicGuildSchema, 'id')
 
   // Stores efímeros (en memoria está bien)
   client.snipes          = new EnmapLike()

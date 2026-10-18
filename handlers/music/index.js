@@ -967,6 +967,7 @@ module.exports = client => {
       const rows = await require('./database').database.getAll247()
       for (const row of rows) {
         if (client.shoukaku.players.has(row.id)) continue
+        if (row.radioSource && await require('./radio-setup').restoreRadio(client, row)) continue
         const channel = client.channels.cache.get(row.channel247Id)
         if (channel?.guild) await client.music.joinChannel(row.id, row.channel247Id, row.text247Id || row.channel247Id)
       }

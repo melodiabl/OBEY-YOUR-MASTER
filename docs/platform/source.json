@@ -116,9 +116,9 @@
     "sourceLinesAtInventory": 40107,
     "navigationCommit": "eadc547b0684ded2c9cca65cc685362c518ab660",
     "navigationEvidence": "docs/platform/evidence/setup-navigation.json",
-    "localCommandFilesRemodeled": 58,
-    "remainingCommandFiles": 5,
-    "next": "commands/Setup/setup-jtc.js",
+    "localCommandFilesRemodeled": 63,
+    "remainingCommandFiles": 0,
+    "next": "Verificación Gateway/Discord y despliegue separados; continuar el plan global existente",
     "pushed": false,
     "deployed": false,
     "languageCommit": "f4163778677b3b893bde2308c1a328e8d24111e5",
@@ -146,7 +146,10 @@
     "supportCommit": "cc0de2f",
     "advancedSecurityEvidence": "docs/guia-arquitectura/PROTECCIONES_AVANZADAS_SETUP.md",
     "advancedSecurityCommit": "3ad2cbc",
-    "ownerEvidence": "docs/guia-arquitectura/OWNER_SETUP.md"
+    "ownerEvidence": "docs/guia-arquitectura/OWNER_SETUP.md",
+    "ownerCommit": "9d08fd9",
+    "musicVoiceEvidence": "docs/guia-arquitectura/MUSICA_VOZ_SETUP.md",
+    "completionEvidence": "docs/platform/evidence/setup-remodeling-local.json"
   },
   "latestCandidateCheck": {
     "date": "2026-10-18",

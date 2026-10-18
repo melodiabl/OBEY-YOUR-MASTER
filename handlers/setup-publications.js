@@ -19,7 +19,7 @@ async function publicationAccess(client, context, channelId) {
   const guild = client.guilds.cache.get(context.guildId)
   if (!guild || guild.available === false) throw failure('setup_unavailable')
   const [bot, channel] = await Promise.all([guild.members.fetchMe({ force: Boolean(context.actorId) }), guild.channels.fetch(channelId)])
-  if (!channel || channel.guildId !== guild.id || ![0, 5].includes(channel.type) || !channel.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks, F.ReadMessageHistory])) throw failure('setup_resource')
+  if (!channel || channel.guildId !== guild.id || ![0, 5].includes(channel.type) || actor && !channel.permissionsFor(actor.member)?.has(F.ViewChannel) || !channel.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks, F.ReadMessageHistory])) throw failure('setup_resource')
   return { guild, bot, channel, member: actor?.member }
 }
 async function knownMessage(channel, id, botId) {
@@ -34,7 +34,7 @@ async function findPending(channel, marker, botId) {
   if (matches.length > 1) throw failure('publication_uncertain')
   return matches[0] || null
 }
-function publishSavedMessage(client, context, port, { automatic = false } = {}) {
+function publishSavedMessage(client, context, port, { automatic = false, recreateMissing = false } = {}) {
   return runSetupOperation(client, () => serialize(client, `${context.guildId}:${port.key}`, async () => {
     let value = await port.read()
     if (automatic && (!value.messageId || !value.channelId || value.channelId === 'notvalid')) return null
@@ -42,7 +42,7 @@ function publishSavedMessage(client, context, port, { automatic = false } = {}) 
     await port.validate?.(access, value)
     let message = await knownMessage(access.channel, value.messageId, client.user.id)
     // A scheduled refresh never creates a replacement resource.
-    if (automatic && !message) return null
+    if (automatic && !message && !recreateMissing) return null
     if (!message && value.nonce) message = await findPending(access.channel, marker, client.user.id)
     if (!message && value.nonce) throw failure('publication_uncertain')
     const payload = await port.payload(access, value, message)

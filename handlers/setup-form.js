@@ -103,7 +103,11 @@ async function openFormSetup(client, origin, definition) {
   try {
     await checkAccess()
     service = definition.service ? definition.service(client, context) : createSetupSettings(client[definition.store || 'settings'], definition.fields, () => Boolean(client._shuttingDown), definition.defaults)
-    let value = await service.read(context.guildId), draft = {}, selected = keys[0]
+    let value = await service.read(context.guildId), draft = structuredClone(definition.initialDraft || {}), selected = keys[0]
+    for (const [id, input] of Object.entries(draft)) {
+      if (!Object.hasOwn(definition.fields, id) || !definition.fields[id].schema.safeParse(input).success) throw new Error('invalid_setup_definition')
+      if (equal(value.values[id], input)) delete draft[id]
+    }
     const current = () => ({ ...value.values, ...draft }), field = () => definition.fields[selected]
     const render = status => buildFormSetup(definition, value, draft, selected, locale, status)
     async function change(interaction, input) {

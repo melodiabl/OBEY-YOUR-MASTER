@@ -73,13 +73,13 @@ class MusicDatabase {
   async set247Mode(guildId, enabled, channelId = null, textId = null) {
     await this._guild(guildId)
     await MusicGuild.updateOne({ id: guildId },
-      { $set: { enabled247: enabled, channel247Id: channelId, text247Id: textId } }).catch(() => {})
+      { $set: { enabled247: enabled, channel247Id: channelId, text247Id: textId, radioSource: '', radioTrackId: '' } }).catch(() => {})
   }
 
   // Todos los guilds con 24/7 activo (para reconectar tras reinicio)
   async getAll247() {
     return MusicGuild.find({ enabled247: true, channel247Id: { $ne: null } })
-      .select('id channel247Id text247Id').lean().catch(() => []) || []
+      .select('id channel247Id text247Id radioSource radioVolume radioTrackId').lean().catch(() => []) || []
   }
 
   async getVoiceStatus(guildId) {

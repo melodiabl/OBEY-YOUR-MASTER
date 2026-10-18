@@ -1994,7 +1994,8 @@ async function check_voice_channels(client) {
                         if (members && members.length != 0) {
                             for (let k = 0; k < members.length; k++) {
                                 let themember = await guild.members.fetch(members[k]).catch(() => {});
-                                create_join_to_create_Channel(client, themember.voice, j + 1);
+                                const slot = Array.from({ length: 100 }, (_, index) => index + 1).find(number => client.jtcsettings.get(guild.id, `jtcsettings${number}.channel`) === channel.id);
+                                if (slot) create_join_to_create_Channel(client, themember.voice, slot);
                             }
                         } else {
                             //console.log("NO MEMBERS")

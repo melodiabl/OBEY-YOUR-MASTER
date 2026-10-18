@@ -1601,12 +1601,12 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-MUSIC · Configuración musical y voz**
 
-- [ ] [commands/Music/setupmusic.js](../commands/Music/setupmusic.js).
+- [x] [commands/Music/setupmusic.js](../commands/Music/setupmusic.js).
 - [x] [commands/Setup/setup-joinvc.js](../commands/Setup/setup-joinvc.js).
-- [ ] [commands/Setup/setup-jtc.js](../commands/Setup/setup-jtc.js).
-- [ ] [commands/Setup/setup-music.js](../commands/Setup/setup-music.js).
-- [ ] [commands/Setup/setup-radio.js](../commands/Setup/setup-radio.js).
-- [ ] [slashCommands/Config/setupmusic.js](../slashCommands/Config/setupmusic.js).
+- [x] [commands/Setup/setup-jtc.js](../commands/Setup/setup-jtc.js).
+- [x] [commands/Setup/setup-music.js](../commands/Setup/setup-music.js).
+- [x] [commands/Setup/setup-radio.js](../commands/Setup/setup-radio.js).
+- [x] [slashCommands/Config/setupmusic.js](../slashCommands/Config/setupmusic.js).
 
 **SETUP-SUPPORT · Tickets y solicitudes**
 
@@ -1655,4 +1655,12 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 58/63 archivos, sin desplegar. Owner y publicidad con autorización por ID completo y guardado atómico confirmado. Quedan cinco archivos de música/voz; no cerrar el trabajo global por completar menús. Epic continúa bloqueado hasta integrar su verificador.
+Avance local: 63/63 archivos de comandos remodelados y verificados localmente. [Música/voz](../docs/guia-arquitectura/MUSICA_VOZ_SETUP.md) unifica paneles y conserva adopción del mensaje antiguo; radio separada del destino de peticiones. [Evidencia acumulada](../docs/platform/evidence/setup-remodeling-local.json). Sin push ni despliegue. Continúan pendientes el recorrido Gateway/Discord, la integración del verificador Epic y las tareas globales ya abiertas del plan; completar estos menús no cierra toda la arquitectura.
+
+### Cierre local del inventario de setups
+
+- [x] Remodelación de los 63 archivos y comprobación estática de nombres, aliases efectivos y permisos.
+- [x] Pruebas locales de formularios, escrituras, recursos, conflictos, permisos y cierre; scripts temporales retirados al terminar. Solo 3 archivos/25 tests originales permanecen en el repositorio.
+- [ ] Recorrido real de Discord y audio Lavalink de los cambios nuevos.
+- [ ] Integración/autenticación del proveedor Epic antes de habilitar su panel.
+- [ ] Publicación remota y despliegue de esta rama local, con verificación y reversión de la versión correspondiente.

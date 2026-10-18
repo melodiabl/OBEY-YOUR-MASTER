@@ -48,7 +48,7 @@ module.exports = function (client) {
                     if (
                         d?.has(newState.guild.id) &&
                         d?.has(newState.guild.id, pre) &&
-                        d?.get(newState.guild.id, pre + ".channel").includes(newState.channelId)
+                        d?.get(newState.guild.id, pre + ".channel") === newState.channelId
                     )
                         index = i;
                 }
@@ -139,7 +139,7 @@ module.exports = function (client) {
                         if (
                             d?.has(newState.guild.id) &&
                             d?.has(newState.guild.id, pre) &&
-                            d?.get(newState.guild.id, pre + ".channel").includes(newState.channelId)
+                            d?.get(newState.guild.id, pre + ".channel") === newState.channelId
                         )
                             index = i;
                     }
