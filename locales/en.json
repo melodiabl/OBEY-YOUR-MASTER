@@ -1393,7 +1393,11 @@
       "closed": "Panel closed. Unsaved local selections were discarded.",
       "expired": "This panel has expired. Reopen the /setup to check the saved settings.",
       "unavailable": "I could not confirm access or saving. Reopen the setup to check the current settings.",
-      "staleForm": "The panel changed while you were editing. Open the form again to avoid losing changes."
+      "staleForm": "The panel changed while you were editing. Open the form again to avoid losing changes.",
+      "accessDenied": "I could not verify your access to this configuration. Check that you have Administrator permission and access to this channel, then reopen /setup.",
+      "botPermissions": "I am missing channel permissions to show this panel. I need View Channel, Send Messages and Embed Links. Check the channel permissions, then reopen /setup.",
+      "storageUnavailable": "I could not read or save the configuration in the database. Reopen /setup to check its current state before saving again.",
+      "starting": "The bot is starting or shutting down. Wait a few seconds and reopen /setup."
     },
     "embed": {
       "title": "Message appearance",

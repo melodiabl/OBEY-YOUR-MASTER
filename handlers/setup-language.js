@@ -1,3 +1,4 @@
+const { setupFailureNotice } = require('./setup-errors')
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { requireSetupAccess } = require('./setup-access')
 const { LANGUAGES, createLanguageSettings } = require('./language-settings')
@@ -19,6 +20,7 @@ function buildLanguageMessage(value, selected, languages, locale, status = '') {
     .setPlaceholder(copy(locale, 'choose')).addOptions(languages.map(language => ({ label: language.name, value: language.code, default: selected === language.code })))))
   components.push(new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId('language_save').setLabel(copy(locale, 'save')).setStyle(ButtonStyle.Primary).setDisabled(!pending || selected === value.language),
+    new ButtonBuilder().setCustomId('language_discard').setLabel(t(locale, 'setup.form.discard')).setStyle(ButtonStyle.Secondary).setDisabled(!pending || selected === value.language),
     new ButtonBuilder().setCustomId('language_reset').setLabel(copy(locale, 'reset')).setStyle(ButtonStyle.Secondary).setDisabled(!languages.some(language => language.code === 'en')),
     new ButtonBuilder().setCustomId('language_close').setLabel(copy(locale, 'close')).setStyle(ButtonStyle.Secondary)))
   return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }
@@ -38,7 +40,7 @@ async function openLanguageSetup(client, origin) {
     const collector = message.createMessageComponentCollector({ time: 180000, idle: 90000 })
     let closed = false, queue = Promise.resolve()
     collector.on('collect', interaction => {
-      const allowed = interaction.customId === 'language_select' ? interaction.isStringSelectMenu() : ['language_save', 'language_reset', 'language_close', ...(back ? ['setup_back'] : [])].includes(interaction.customId) && interaction.isButton()
+      const allowed = interaction.customId === 'language_select' ? interaction.isStringSelectMenu() : ['language_save', 'language_discard', 'language_reset', 'language_close', ...(back ? ['setup_back'] : [])].includes(interaction.customId) && interaction.isButton()
       if (closed || !allowed || interaction.user.id !== context.actorId || interaction.guildId !== context.guildId || interaction.message?.id !== message.id) {
         void interaction.reply({ content: copy(locale, 'notYours'), ephemeral: true, allowedMentions: { parse: [] } }).catch(() => {})
         return
@@ -54,6 +56,11 @@ async function openLanguageSetup(client, origin) {
         }
         await requireSetupAccess(client, context)
         if (closed) return
+        if (interaction.customId === 'language_discard') {
+          selected = null
+          await interaction.editReply(withBackButton(buildLanguageMessage(value, selected, availableLanguages(client), locale), back, locale))
+          return
+        }
         if (interaction.customId === 'setup_back') {
           if (selected !== null && selected !== value.language) {
             await interaction.followUp({ content: t(locale, 'setup.form.saveBeforeBack'), ephemeral: true, allowedMentions: { parse: [] } })
@@ -83,9 +90,9 @@ async function openLanguageSetup(client, origin) {
           locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
         }
         if (!closed) await interaction.editReply(withBackButton(buildLanguageMessage(value, selected, languages, locale, status), back, locale))
-      }).catch(async () => {
+      }).catch(async error => {
         collector.stop('unavailable')
-        await message.edit(notice('unavailable')).catch(() => {})
+        await message.edit(setupFailureNotice(locale, error, notice('unavailable'), 'setup-language/control')).catch(() => {})
       })
     })
     collector.on('end', (_, reason) => {
@@ -93,9 +100,10 @@ async function openLanguageSetup(client, origin) {
       if (reason !== 'back') queue = queue.then(() => message.edit(['time', 'idle'].includes(reason) ? notice('expired') : { components: [] })).catch(() => {})
     })
     return collector
-  } catch {
-    if (message) await message.edit(notice('unavailable')).catch(() => {})
-    else await origin.reply(notice('unavailable'))
+  } catch (error) {
+    const failure = setupFailureNotice(locale, error, notice('unavailable'), 'setup-language/open')
+    if (message) await message.edit(failure).catch(() => {})
+    else await origin.reply(failure)
   }
 }
 

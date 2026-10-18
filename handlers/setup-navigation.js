@@ -1,3 +1,4 @@
+const { setupFailureNotice } = require('./setup-errors')
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, MessageFlags, escapeMarkdown } = require('discord.js')
 const { availableCommands } = require('./help')
 const { t, catalogs, localeFor, normalizeLocale } = require('./i18n')
@@ -144,9 +145,9 @@ async function openSetup(client, origin, initialState = {}) {
         state.page = Math.max(0, Math.min(pages - 1, state.page))
         if (!view.commands.some(entry => entry.group === state.group)) state.group = null
         if (!closed) await interaction.editReply(buildSetupMessage(view, state))
-      }).catch(async () => {
+      }).catch(async error => {
         collector.stop('unavailable')
-        await message.edit(notice('unavailable')).catch(() => {})
+        await message.edit(setupFailureNotice(locale, error, notice('unavailable'), 'setup-navigation/control')).catch(() => {})
       })
     })
     collector.on('end', (_, reason) => {
@@ -155,9 +156,10 @@ async function openSetup(client, origin, initialState = {}) {
       if (reason !== 'selected') queue = queue.then(() => message.edit(['time', 'idle'].includes(reason) ? notice('expired') : { components: [] })).catch(() => {})
     })
     return collector
-  } catch {
-    if (message) await message.edit(notice('unavailable')).catch(() => {})
-    else await origin.reply(notice('unavailable'))
+  } catch (error) {
+    const failure = setupFailureNotice(locale, error, notice('unavailable'), 'setup-navigation/open')
+    if (message) await message.edit(failure).catch(() => {})
+    else await origin.reply(failure)
   }
 }
 

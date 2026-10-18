@@ -1,3 +1,4 @@
+const { setupFailureNotice } = require('./setup-errors')
 const { openSetupChoices } = require('./setup-choices')
 const { requireSetupAccess } = require('./setup-access')
 const { t, localeFor, normalizeLocale } = require('./i18n')
@@ -27,8 +28,8 @@ async function openSetupSlots(client, origin, definition) {
       description: label('Empieza con uno nuevo o revisa uno de los que ya tienen ajustes. Abrir una opción no guarda ni publica nada.', 'Start a new setup or review an existing one. Opening an option does not save or publish anything.'),
       reload: nextOrigin => openSetupSlots(client, nextOrigin, definition),
     })
-  } catch {
-    await origin.reply({ content: t(locale, 'setup.editor.unavailable'), embeds: [], components: [], allowedMentions: { parse: [] } })
+  } catch (error) {
+    await origin.reply(setupFailureNotice(locale, error, { content: t(locale, 'setup.editor.unavailable'), embeds: [], components: [], allowedMentions: { parse: [] } }, 'setup-slots/open'))
   }
 }
 

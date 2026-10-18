@@ -9,11 +9,12 @@ async function requireSetupAccess(client, context) {
     guild.channels.fetch(context.channelId),
   ])
   if (member?.id !== context.actorId || member.guild?.id !== guild.id ||
-    channel?.id !== context.channelId || channel.guildId !== guild.id || !channel.permissionsFor(member)?.has(F.ViewChannel) ||
-    !channel.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks])) throw new Error('setup_denied')
+    channel?.id !== context.channelId || channel.guildId !== guild.id) throw new Error('setup_denied')
+  if (!channel.permissionsFor(member)?.has(F.ViewChannel)) throw new Error('setup_channel_access')
+  if (!channel.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks])) throw new Error('setup_bot_permissions')
   const access = { guild, member, bot, channel }
   if (context.authorizeActor) await context.authorizeActor(access, context)
-  else if (!member.permissions.has(context.actorPermission ?? F.Administrator)) throw new Error('setup_denied')
+  else if (!member.permissions.has(context.actorPermission ?? F.Administrator)) throw new Error('setup_actor_permissions')
   if (client._shuttingDown || client._dbReady === false) throw new Error('setup_unavailable')
   return access
 }

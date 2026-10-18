@@ -1684,3 +1684,11 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Música: identificar Shorts, priorizar grabaciones originales y conservar identidad/duración en recuperación. 48 grupos locales y 25 tests originales pasan; [alcance y límites](../docs/guia-arquitectura/SELECCION_MUSICAL.md). Entrega independiente del centralizador de setups.
 - [x] Revisiones desplegadas como cambios independientes en imagen `release-slash-music-20261019-398e22f`: 11 hashes, 20 slash globales, Gateway/heartbeat, tres nodos públicos y salud local/pública 200. [Evidencia](../docs/platform/evidence/slash-music-deployment-20261019.json).
 - [ ] Recorrido manual de `/setup`, escucha musical y pendientes globales del plan.
+
+
+### Incidencia de setups · 19/10/2026
+
+- [x] Reproducir y corregir la ausencia de Descartar cambios en idioma; comprobar regreso sin escrituras en `!setup` y `/setup`.
+- [x] Distinguir avisos de acceso, permisos del bot, almacenamiento e inicio/cierre; registrar fallos sin credenciales ni documentos. 23 grupos locales, 25 originales y tipos/dependencias pasan. [Alcance](../docs/guia-arquitectura/ERRORES_SETUP.md).
+- [ ] Desplegar y comprobar esta corrección.
+- [ ] Ubicar y reproducir el error original de acceso/guardado en el servidor/canal del usuario; no darlo por resuelto con las pruebas locales.

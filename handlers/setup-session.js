@@ -1,3 +1,4 @@
+const { setupFailureNotice } = require('./setup-errors')
 const { randomBytes } = require('node:crypto')
 const { InteractionCollector, InteractionType } = require('discord.js')
 const { requireSetupAccess } = require('./setup-access')
@@ -39,7 +40,7 @@ function attachSetupSession(client, message, context, { controls, notice, onErro
       if (closed) return
       if (await onError?.(error, interaction)) return
       collector.stop('unavailable')
-      await message.edit(notice('unavailable')).catch(() => {})
+      await message.edit(setupFailureNotice(locale(), error, notice('unavailable'), 'setup-session/control')).catch(() => {})
     }).catch(() => { collector.stop('unavailable') })
   }
   collector.on('collect', interaction => {

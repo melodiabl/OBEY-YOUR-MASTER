@@ -1,3 +1,4 @@
+const { setupFailureNotice } = require('./setup-errors')
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ChannelSelectMenuBuilder, RoleSelectMenuBuilder, MentionableSelectMenuBuilder, UserSelectMenuBuilder,
   ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle, ChannelType, PermissionFlagsBits: F, escapeMarkdown } = require('discord.js')
 const { isDeepStrictEqual: equal } = require('node:util')
@@ -205,6 +206,6 @@ async function openFormSetup(client, origin, definition) {
       } },
       form_close: { async run(i, session) { await i.editReply(notice('closed')); session.close('closed') } },
     } })
-  } catch { if (message) await message.edit(notice('unavailable')).catch(() => {}); else await origin.reply(notice('unavailable')) }
+  } catch (error) { const failure = setupFailureNotice(locale, error, notice('unavailable'), 'setup-form/open'); if (message) await message.edit(failure).catch(() => {}); else await origin.reply(failure) }
 }
 module.exports = { openFormSetup, buildFormSetup, parseFieldInput, checkResources }

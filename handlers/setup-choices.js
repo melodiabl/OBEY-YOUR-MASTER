@@ -1,3 +1,4 @@
+const { setupFailureNotice } = require('./setup-errors')
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, escapeMarkdown } = require('discord.js')
 const { attachSetupSession } = require('./setup-session')
 const { requireSetupAccess } = require('./setup-access')
@@ -31,6 +32,6 @@ async function openSetupChoices(client, origin, title, choices, options = {}) {
       } },
       choices_close: { async run(i, session) { await i.editReply(notice('closed')); session.close('closed') } },
     } })
-  } catch { if (message) await message.edit(notice('unavailable')).catch(() => {}); else await origin.reply(notice('unavailable')) }
+  } catch (error) { const failure = setupFailureNotice(locale, error, notice('unavailable'), 'setup-choices/open'); if (message) await message.edit(failure).catch(() => {}); else await origin.reply(failure) }
 }
 module.exports = { openSetupChoices }

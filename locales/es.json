@@ -1393,7 +1393,11 @@
       "closed": "Panel cerrado. La selección local sin guardar se ha descartado.",
       "expired": "El panel ha caducado. Abre el /setup de nuevo para consultar lo guardado.",
       "unavailable": "No pude confirmar el acceso o el guardado. Abre el setup de nuevo para consultar el estado actual.",
-      "staleForm": "El panel cambió mientras editabas. Abre el formulario de nuevo para no perder cambios."
+      "staleForm": "El panel cambió mientras editabas. Abre el formulario de nuevo para no perder cambios.",
+      "accessDenied": "No pude verificar tu acceso a esta configuración. Comprueba que tienes permiso de Administrador y acceso a este canal; después abre /setup de nuevo.",
+      "botPermissions": "Me faltan permisos en este canal para mostrar el panel. Necesito Ver canal, Enviar mensajes e Insertar enlaces. Revisa los permisos del canal y vuelve a abrir /setup.",
+      "storageUnavailable": "No pude leer o guardar la configuración en la base de datos. Vuelve a abrir /setup para comprobar el estado antes de repetir el guardado.",
+      "starting": "El bot está iniciando o cerrando. Espera unos segundos y vuelve a abrir /setup."
     },
     "embed": {
       "title": "Apariencia de los mensajes",
