@@ -6,6 +6,7 @@ const axios      = require('axios')
 const http       = require('http')
 const crypto     = require('crypto')
 const { Server } = require('socket.io')
+const { PermissionFlagsBits } = require('discord.js')
 const { freshGuildPermissions } = require('./permissions')
 const { createMusicRealtime, createSocketAuthorizer } = require('./music-realtime')
 const { canManageGuild } = require('../handlers/permissions')
@@ -110,6 +111,7 @@ module.exports = async client => {
   require('./configuration-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./help-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./cards-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
+  require('./logs-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
 
   // ─── Public routes ────────────────────────────────────────────────────────
 
@@ -341,13 +343,22 @@ module.exports = async client => {
     let welcome
     try { welcome=await client.welcomeConfiguration.readPublished({guildId:guild.id,actorId:req.session.user.id}) }
     catch(error){if(error.code==='configuration_permissions')return res.redirect('/dashboard?error=no_permission');throw error}
+    let logsConfiguration
+    try { logsConfiguration = await require('../handlers/logs/configuration').createLogConfiguration(client,
+      { guildId: guild.id, actorId: req.session.user.id }, require('../handlers/setup-logs').logSetupDefinition().fields).read() }
+    catch (error) { return res.status(error.code === 'setup_denied' ? 403 : 503).json({ error: error.code === 'setup_denied' ? 'setup_denied' : 'setup_storage' }) }
     const settings = { ...(client.settings.get(guild.id) || {}), welcomeMessage: welcome.message, welcomeChannel:welcome.channelId, welcomeRevision:welcome.revision }
     const allCh    = [...guild.channels.cache.values()]
+    const logActor = guild.members.cache.get(req.session.user.id)
+    const visibleLogChannels = allCh.filter(channel => channel.permissionsFor(logActor)?.has(PermissionFlagsBits.ViewChannel))
 
     res.render('pages/guild', {
       user:     req.session.user,
       guild:    { id: guild.id, name: guild.name, icon: guild.iconURL(), memberCount: guild.memberCount },
       settings,
+      logsConfiguration,
+      logDestinationChannels: visibleLogChannels.filter(channel => [0, 5].includes(channel.type)).map(channel => ({ id: channel.id, name: channel.name })),
+      logSourceChannels: visibleLogChannels.filter(channel => [0, 2, 4, 5, 13, 15, 16].includes(channel.type)).map(channel => ({ id: channel.id, name: channel.name })),
       saved:    req.query.saved === '1',
       channels:   allCh.filter(c => c.type === 0).map(c => ({ id: c.id, name: c.name })).sort((a,b)=>a.name.localeCompare(b.name)),
       categories: allCh.filter(c => c.type === 4).map(c => ({ id: c.id, name: c.name })).sort((a,b)=>a.name.localeCompare(b.name)),
@@ -368,6 +379,8 @@ module.exports = async client => {
       return res.status(403).json({ error: 'No permission' })
 
     const b     = req.body
+    if (['modLogChannel', 'log_messages', 'log_members', 'log_moderation', 'log_voice', 'log_server'].some(key => Object.hasOwn(b, key)))
+      return res.status(409).json({ error: 'logs_configuration_moved', configurationUrl: `/dashboard/${guild.id}?tab=logs` })
     const patch = {}
 
     // General
@@ -378,7 +391,6 @@ module.exports = async client => {
     patch.autoMeme  = b.autoMeme  === 'on'
 
     // Moderation
-    if (b.modLogChannel !== undefined) patch.modLogChannel = b.modLogChannel || null
     if (b.muteRole      !== undefined) patch.muteRole      = b.muteRole      || null
     patch.antiSpam  = b.antiSpam  === 'on'
     patch.antiLinks = b.antiLinks === 'on'
@@ -423,13 +435,6 @@ module.exports = async client => {
     if (b.djRole          !== undefined) patch.djRole          = b.djRole          || null
     if (b.birthdayChannel !== undefined) patch.birthdayChannel = b.birthdayChannel || null
 
-    // Log channels
-    if (b['log_messages']   !== undefined) patch['logChannels.messages']   = b['log_messages']   || null
-    if (b['log_members']    !== undefined) patch['logChannels.members']    = b['log_members']    || null
-    if (b['log_moderation'] !== undefined) patch['logChannels.moderation'] = b['log_moderation'] || null
-    if (b['log_voice']      !== undefined) patch['logChannels.voice']      = b['log_voice']      || null
-    if (b['log_server']     !== undefined) patch['logChannels.server']     = b['log_server']     || null
-
     // Build bot-format paths
     const botPatch = {}
     if (patch.prefix   !== undefined) botPatch.prefix   = patch.prefix
@@ -447,7 +452,6 @@ module.exports = async client => {
     if (patch.antiSelfbot !== undefined) { botPatch['antiselfbot.enabled'] = patch.antiSelfbot; botPatch['autowarn.antiselfbot'] = patch.antiSelfbot }
     if (patch.djRole          !== undefined) botPatch.djroles         = patch.djRole ? [patch.djRole] : []
     if (patch.birthdayChannel !== undefined) botPatch.birthdayChannel = patch.birthdayChannel
-    if (patch.modLogChannel   !== undefined) botPatch['logChannels.moderation'] = patch.modLogChannel || null
 
     // Keep every saved field coherent with commands, including nested module settings.
     const gid = guild.id
@@ -459,7 +463,6 @@ module.exports = async client => {
     if (patch.leaveChannel   !== undefined) s.set(gid, patch.leaveChannel   || 'nochannel', 'leave.channel')
     if (patch.leaveMessage   !== undefined) s.set(gid, patch.leaveMessage,   'leave.msg')
     if (patch.muteRole       !== undefined) s.set(gid, patch.muteRole        || null, 'mute.roleId')
-    if (patch.modLogChannel  !== undefined) s.set(gid, patch.modLogChannel   || null, 'logChannels.moderation')
 
     s.ensure(gid, { antispam: {}, antilink: {}, anticaps: {}, antidiscord: {}, antimention: {}, antiselfbot: {}, autowarn: {} })
     s.set(gid, patch.antiSpam,  'autowarn.antispam')
@@ -487,12 +490,6 @@ module.exports = async client => {
     if (patch.autoEmbed !== undefined) s.set(gid, patch.autoEmbed ? (s.get(gid, 'autoembed') || []) : [], 'autoembed')
     if (patch.autoMeme  !== undefined) s.set(gid, patch.autoMeme  ? 'enabled' : 'disabled', 'automeme')
     if (patch.birthdayChannel !== undefined) s.set(gid, patch.birthdayChannel, 'birthdayChannel')
-
-    if (patch['logChannels.messages']   !== undefined) s.set(gid, patch['logChannels.messages'],   'logChannels.messages')
-    if (patch['logChannels.members']    !== undefined) s.set(gid, patch['logChannels.members'],    'logChannels.members')
-    if (patch['logChannels.moderation'] !== undefined) s.set(gid, patch['logChannels.moderation'], 'logChannels.moderation')
-    if (patch['logChannels.voice']      !== undefined) s.set(gid, patch['logChannels.voice'],      'logChannels.voice')
-    if (patch['logChannels.server']     !== undefined) s.set(gid, patch['logChannels.server'],     'logChannels.server')
 
     await client.settings.flush()
     const tab = b._activeTab ? `&tab=${encodeURIComponent(b._activeTab)}` : ''

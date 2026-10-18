@@ -1,4 +1,4 @@
-const { openChannelSetup } = require('../../handlers/setup-channel')
+const { openLogSetup } = require('../../handlers/setup-logs')
 
 module.exports = {
   name: "setup-logger",
@@ -8,6 +8,6 @@ module.exports = {
   memberpermissions: ['Administrador'],
   type: "security",
   usage: 'setup-logger',
-  description: 'Configura logger con cambios revisables antes de guardar.',
-  run: (client, message) => openChannelSetup(client, message, 'logger'),
+  description: 'Configura destinos, categorías y privacidad de los registros.',
+  run: (client, message) => openLogSetup(client, message),
 }

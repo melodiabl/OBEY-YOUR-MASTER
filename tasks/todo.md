@@ -964,6 +964,8 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 
 ## T38
 
+**Checkpoint 19/10:** consumidor y configuración compartida de registros, privacidad y avisos owner implementados; 111 grupos temporales y 25 originales pasan. [Alcance y límites](../docs/guia-arquitectura/REGISTROS_Y_AVISOS_OWNER.md). Retención, historial consultable y recuperación durable siguen pendientes; T38 permanece abierta.
+
 - [ ] Logging y retención (fase 6).
 
 **Descripción:** Members/messages/mod/voice/roles/channels/webhooks/invites con datos/intents válidos; permisos/retención explícita y no almacenamiento indiscriminado.
@@ -1697,6 +1699,6 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 ### Continuación del plan · registros y avisos al propietario
 
 - [x] Primera entrega local de avisos de alta/baja: mensajes renovados es/en, preferencias del dueño, deduplicación, fallos observables y cierre. Retirada la eliminación automática de stores al salir. 16 grupos aislados y 25 originales pasan. [Alcance](../docs/guia-arquitectura/REGISTROS_Y_AVISOS_OWNER.md).
-- [ ] Remodelar el consumidor real de registros: destinos, permisos, privacidad, cobertura y entregas.
+- [x] Remodelar el consumidor real de registros: destinos, permisos, privacidad, cobertura y entregas; configuración canónica Discord/web con revisión y sin escritor alternativo.
 - [ ] Verificar y desplegar las entregas terminadas; no emitir DMs de prueba ni simular entradas/salidas reales.
 - [ ] Continuar retención/consulta de T38 y los demás bloques abiertos del maestro; completar los setups no equivale a completar el plan.

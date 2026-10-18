@@ -51,6 +51,7 @@ function buildFormSetup(definition, value, draft, selected, locale, status = '',
   if (!['boolean', 'enum', 'channel', 'channels', 'role', 'roles', 'principals', 'users'].includes(field.type)) edits.push(button('form_edit', field.type === 'list' || field.removable ? 'add' : 'edit'))
   if ((['channels', 'roles', 'principals', 'users', 'list'].includes(field.type) || field.removable)) edits.push(button('form_remove', ui.removing ? 'doneRemoving' : 'remove', ButtonStyle.Secondary, !ui.removing && (!current[selected] || !Object.keys(current[selected]).length)))
   if (field.clear !== undefined) edits.push(button('form_clear', 'clear'))
+  if (Object.hasOwn(field, 'inherit')) edits.push(button('form_inherit', 'inheritDefault'))
   if (edits.length) components.push(new ActionRowBuilder().addComponents(edits))
   const publishButton = (id, key, label) => {
     const control = button(id, key, definition.publishStyle || ButtonStyle.Primary, Boolean(Object.keys(draft).length))
@@ -174,6 +175,7 @@ async function openFormSetup(client, origin, definition) {
         },
       },
       form_clear: { async run(i) { if (field().clear === undefined) throw new Error('invalid_field'); await change(i, structuredClone(field().clear)) } },
+      form_inherit: { async run(i) { if (!Object.hasOwn(field(), 'inherit')) throw new Error('invalid_field'); await change(i, structuredClone(field().inherit)) } },
       form_discard: { async run(i) { draft = {}; await i.editReply(render()) } },
       form_save: { async run(i, session) {
         if (!Object.keys(draft).length) return

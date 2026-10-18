@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T23:29:29.126025+00:00",
+  "baseDeployedCode": "ff94f31d91f187310e1776cd794556772fdcbc10",
+  "ownerCode": "5e82099",
+  "temporaryVerificationGroups": {
+    "ownerNotices": 16,
+    "logsPolicyPresentationDeliveryEvents": 42,
+    "configurationRealMongoAndBuilders": 25,
+    "discordSdkRealMongoFlow": 14,
+    "chromiumRealMongoApiCsrf": 14
+  },
+  "temporaryGroupsTotal": 111,
+  "originalTests": {
+    "files": 3,
+    "passed": 25,
+    "failed": 0
+  },
+  "welcomeTypecheck": "passed",
+  "dependencyRules": {
+    "result": "passed",
+    "modules": 1075,
+    "dependencies": 3278
+  },
+  "javascriptRuntimeErrorsInBrowser": [],
+  "sourceHashes": {
+    "commands/Setup/setup-auditlog.js": "dccfbe0931adb0ec4af3f325c493d200300e153a7ab94d7c1eaa8890efc07a7b",
+    "commands/Setup/setup-logger.js": "f3bdf55207f896c2f129b8cf5fc2a167a154e1324f486641a740fc34ad3ed89d",
+    "dashboard/index.js": "0a66ec5162e2527bd2e8883d8bb815258b63bdd64436c2c755ee4a48d4a7a060",
+    "dashboard/logs-routes.js": "498fd9eec71c2bf9186fbe061d7c87eff5e40beab0a464bd484af7d829ad8774",
+    "dashboard/public/css/log-settings.css": "ad63604e5c0265df25191dd523fb94e15bfcc5a235590ff792e8175867c5c59d",
+    "dashboard/public/js/log-settings.js": "4ce2694d1634cf6d1961d7d7c49e5cd0b8391a10e7848fc92731af4108956d08",
+    "dashboard/views/pages/guild.ejs": "3a8797f0b7628822cbd775b20c19022843b9c864acf27c4fdeebf5e4beeb2168",
+    "handlers/extraevents.js": "1bfbf9bb6958494a3d4fc649d246a7d3c1d10f7afb1496d2b9541b6a585ceb93",
+    "handlers/logger.js": "23b2e4ad4909fbcbb872431d4de308a7acc26cb65c10b5f5ad249af79a6019e2",
+    "handlers/logs/configuration.js": "5ae9fc11f9427c51a4a97fa30277b54ac1aeea6380c14b2dfb79bb4c6618ee9d",
+    "handlers/logs/events.js": "754d83b9316772a9aaa95219b97152b73f18125e148e2d1100d42d21354bfd09",
+    "handlers/logs/policy.js": "cae46351ea19849e531585c8923f6aa9d2f47a558ddb25922b991d4d6ef92754",
+    "handlers/logs/presentation.js": "5ad057be4d40ea381d767a34c719870fc2e081af713c202e9abbc94d03b683e9",
+    "handlers/logs/service.js": "61d6d6cfaa9d6ec927fab7f036d945f637f04f1b817a83f8fa0420c0b433499c",
+    "handlers/owner-notifications.js": "790ef5e1ca135f1596b9d2320a214dcdf619efa0b4582e345606ac67ff543e77",
+    "handlers/setup-form.js": "1550d4788741457d1532ba08eef58bc604fa22b2b597a2d7d6cdc9c05a48521f",
+    "handlers/setup-logs.js": "57fe2debff14b38685ed62e230152dbb28194e24c8c84ac76a3cb075f0ff49fb",
+    "handlers/setup-owner-settings.js": "77669ba375940e02c5514d8f71a017b41506511cc044f92d704c93610742a700",
+    "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
+    "locales/en.json": "5d09eed82efa60a99be733d37464d27b1d6e1036ad7b70bfc512f07abfb4a9ed",
+    "locales/es.json": "4259c4eb9bc850ef4cfae3d5d2d977ff9f9dde6248f32d44d14a9b212bc89541",
+    "slashCommands/Config/logs.js": "c270500e1118431b0bfad0e547f69cde2f1e44d0ef9c01a6f07efd683794e927"
+  },
+  "temporaryVerifierHashes": {
+    "verify-owner-events": "61bd55fabf7c8bed6481778263bd91ee2ddc38e0ddb7f66608bcaaba03253413",
+    "verify-logs": "f9195cdc7f0e09795ee8e918d94283e8b12b3f701ea4e99aaee5eb56b09b1664",
+    "verify-log-configuration": "e07c63c6edffde103f763cb8c518443a2f960af8054cac1e796d89e6bad86da8",
+    "verify-log-discord": "759062d3d9a40856c14b66a96bbb8f2d484d3be2d8149bbf624ffa7719ad1bdc",
+    "verify-log-browser": "609452e66901e427ef18a91832f612fef5d697b38b5427eb9fd46739a580bf79"
+  },
+  "screenshots": [
+    "screenshots/logs-desktop-fixture-20261019.png",
+    "screenshots/logs-mobile-fixture-20261019.png"
+  ],
+  "chromeDevtools": "Chrome process failed to open; isolated Playwright Chromium used",
+  "productionDataChangedByTests": false,
+  "discordGatewayOpenedByTests": false,
+  "externalDiscordMessagesSentByTests": false,
+  "temporaryVerifierRetained": false,
+  "limitations": [
+    "No persistent LogEvent/Delivery history or retention",
+    "No durable notification outbox or retry across process restart",
+    "Real Discord settings walkthrough and production event delivery not manually triggered",
+    "Original setup access error still awaiting location and reproduction",
+    "T38, MOD-LOGS migration and global plan remain open"
+  ]
+}

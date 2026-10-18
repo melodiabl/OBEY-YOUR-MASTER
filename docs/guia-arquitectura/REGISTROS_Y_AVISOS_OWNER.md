@@ -2,7 +2,7 @@
 
 Continuación de T38/MOD-LOGS y de la remodelación del código anterior. Los setups ya remodelados no acreditaban la sustitución de sus consumidores. El plan completo sigue abierto.
 
-## Primera entrega local: ciclo de servidores y mensajes privados
+## Ciclo de servidores y mensajes privados
 
 `handlers/owner-notifications.js` es la única composición de avisos privados de entrada/salida. Se retiraron los dos listeners antiguos de `extraevents.js`. Sus mensajes mezclaban idiomas, usaban datos de propietario inexistentes después de salir y ocultaban fallos de entrega. El listener de salida también borraba configuración, economía y otros stores: esa eliminación automática se retiró. Salir del servidor no constituye una orden de borrar sus ajustes.
 
@@ -14,9 +14,24 @@ Preguntas operativas: ¿fue una transición real o carga inicial?, ¿se confirm�
 
 16 grupos temporales verifican builders, alta/baja/duplicados/indisponibilidad, datos pendientes, preferencias, revocación durante fetch, DM cerrado, redacción, cierre y guardado aislado conservando secretos/campos ajenos. Pasan los 25 tests originales. No se envió ningún DM, no se abrió Gateway y no se simuló un alta/baja en producción.
 
+## Consumidor de registros y configuración compartida
+
+`handlers/logger.js` compone ahora los adaptadores Gateway de `handlers/logs/events.js`, la política de destinos/audiencias, el renderer es/en y el servicio de entrega. Cubre miembros, mensajes, moderación observable, voz, roles, canales, emojis, webhooks e invitaciones. No interpreta una carga de miembros como una incursión, ni cambios de mute/deaf como entradas/salidas de voz. Los eventos parciales conservan incertidumbre; una expulsión usa la identidad de su propia entrada de auditoría. Los demás actores sin evidencia aparecen desconocidos. No se consulta la última auditoría para atribuir acciones por proximidad.
+
+Fuente de configuración conservada: `logger.channel` es el destino general; `logChannels.{server,members,moderation,messages,voice}` define cada categoría. Ausente/null hereda; el nuevo apagado explícito usa `"no"`. Valores legacy false/vacío/`nochannel` se interpretan apagados, sin migración masiva ni fallback que los vuelva a habilitar. `logger.excludedChannelIds` excluye orígenes; `logger.includeMessageContent` exige true explícito. No se crea una segunda colección de ajustes ni se sobrescriben campos ajenos.
+
+`setup-logger`, `setup-auditlog`, el centralizador `/setup`, `/config logs` y la pestaña Registros de la web usan `createLogConfiguration` y el escritor CAS existente. Abrir `/config logs` sin canal solo abre el asistente; proponer un canal tampoco guarda hasta pulsar Guardar. Las categorías permiten canal propio, general o desactivado. Se comprueban gestor, guild, canales y permisos del bot antes del guardado y otra vez al ejecutar la escritura en su cola. Dos revisiones en conflicto no se pisan. Los formularios antiguos enviados a la ruta web general reciben 409 `logs_configuration_moved` antes de cualquier escritura; sus campos ya no tienen un segundo escritor. Los ajustes existentes permanecen intactos.
+
+API autenticada `GET/PUT /api/guilds/:guildId/logs/config`: devuelve únicamente values/revision; PUT recibe `{patch,revision}`. Requiere sesión, autorización OAuth fresca, pertenencia y permiso ManageGuild actual en Discord, guild propia, validación estricta y CSRF para escribir. Errores 400 de valores/recursos, 403 de autorización, 409 de revisión y 503 de disponibilidad/almacenamiento; nunca documentos de configuración o errores crudos. El POST del formulario `/dashboard/:guildId/logs` usa el mismo servicio. La web conserva el borrador ante conflicto/fallo y ofrece recarga explícita; los controles pertenecen a su propio formulario y no activan el guardado general.
+
+No se reenvían texto ni URLs de adjuntos por defecto. Incluso activando texto, se exige una prueba conservadora de audiencia: mismo canal, destino reservado a administradores o un origen visible para todos sin denegaciones de lectura. Si falta esa prueba se omiten también los metadatos del origen. Movimientos de voz verifican ambos canales. Los orígenes adultos no aportan contenido. Un canal borrado nunca se reconstruye como público. Las menciones están desactivadas.
+
+Cada entrega vuelve a leer la configuración tras obtener los recursos y valida destino/guild/permisos. Las colas ordenadas por guild tienen un máximo de 100 pendientes; el cierre espera trabajo en curso y retira listeners. Un destino ausente o sin permiso queda pausado durante 60 segundos; cambiarlo permite usar el nuevo inmediatamente. No se reintenta una entrega incierta a ciegas. `nonce`/`enforceNonce` y requestId estable por intento evitan repeticiones inmediatas, sin prometer deduplicación durable. Los registros operativos contienen códigos y guild hasheada, sin contenido de mensajes, invitaciones, credenciales ni errores de transporte completos. Exclusiones de canales no afectan a estos registros operativos ni a avisos privados del dueño.
+
+Verificación local: 42 grupos de política/presentación/entrega/adaptadores, 25 de configuración/builders con Mongo aislado, 14 de recorrido con SDK y Mongo reales, 14 de navegador Chromium con EJS/API/CSRF y Mongo reales, y 16 de avisos owner. Total 111 grupos temporales más los 25 tests originales; tipos y reglas de dependencias pasan. Navegador comprueba escritorio/móvil, guardado persistido, descarte, 403/409/503, aislamiento del formulario, XSS escapado y cero errores JavaScript. Chrome DevTools no pudo abrir su proceso; se utilizó un perfil Chromium aislado de Playwright. No hubo Gateway, mensajes Discord, DMs ni cambios en datos de producción durante estas pruebas. Ver [evidencia local](../platform/evidence/logs-owner-local-20261019.json).
+
 ## Registro de avance del bloque
 
-- Avisos al propietario: implementación local y verificación de la primera entrega; despliegue pendiente.
-- Registros del servidor: pendiente sustituir el consumidor, conciliar destinos/desactivación, permisos y privacidad, y verificar eventos.
-- Retención/consulta/historial general y otros bloques de T38: pendientes; no se cierran por actualizar los mensajes privados.
+- Avisos al propietario y consumidor de registros: implementados y verificados localmente; consultar la evidencia de despliegue para su estado en producción.
+- Retención/consulta/historial general y otros bloques de T38: pendientes. Este incremento no archiva mensajes ni implementa LogEvent/Delivery persistidos, recuperación tras reinicios, alertas durables al gestor o reintentos persistentes. Colas y pausas se pierden al reiniciar. No se ofrece una opción de retención sin almacenamiento detrás.
 - Plan global y el caso original de error de setup: siguen pendientes según sus evidencias; no hay aceptación real del recorrido del usuario.

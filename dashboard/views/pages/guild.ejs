@@ -4,6 +4,7 @@
   activePage: 'settings',
   breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name }]
 }) %>
+<link rel="stylesheet" href="/css/log-settings.css">
 
 <!-- Saved/error alert -->
 <% if (typeof saved !== 'undefined' && saved) { %>
@@ -140,13 +141,8 @@
         </div>
         <div class="card-body">
           <div class="form-group">
-            <label class="form-label">Canal de logs</label>
-            <select name="modLogChannel" class="form-select">
-              <option value="">— Desactivado —</option>
-              <% channels.forEach(ch => { %>
-                <option value="<%= ch.id %>" <%= (settings.logChannels?.moderation||settings.modLogChannel)===ch.id?'selected':'' %>>#<%= ch.name %></option>
-              <% }) %>
-            </select>
+            <p class="form-help">El destino de moderación se configura junto a las demás categorías en Registros.</p>
+            <a class="btn btn-ghost" href="/dashboard/<%= guild.id %>?tab=logs">Configurar registros</a>
           </div>
           <div class="form-group">
             <label class="form-label">Rol de silenciado (mute)</label>
@@ -357,57 +353,56 @@
 
     <!-- ── LOGS ── -->
     <div class="section-panel" id="tab-logs">
+      <% const lv = logsConfiguration.values; const inheritedLog = v => v == null || v === 'inherit'; %>
       <div class="card">
         <div class="card-head">
-          <div class="card-ico ico-p"><i class="fas fa-scroll"></i></div>
-          <div><div class="card-title">Canales de logs</div><div class="card-desc">Cada categoría puede tener su propio canal</div></div>
+          <div class="card-ico ico-p"><i class="fas fa-scroll" aria-hidden="true"></i></div>
+          <div><div class="card-title">Registros del servidor</div><div class="card-desc">Elige un canal general y cambia solo las categorías que necesites.</div></div>
         </div>
         <div class="card-body">
-          <% const lc = settings.logChannels || {} %>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label"><i class="fas fa-envelope" style="margin-right:6px;color:var(--p)"></i>Mensajes</label>
-              <span class="form-help">Edits, deletes, purges</span>
-              <select name="log_messages" class="form-select">
-                <option value="">— Desactivado —</option>
-                <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.messages||lc.get?.('messages')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label"><i class="fas fa-user-plus" style="margin-right:6px;color:var(--green)"></i>Miembros</label>
-              <span class="form-help">Entradas, salidas, cambios de rol</span>
-              <select name="log_members" class="form-select">
-                <option value="">— Desactivado —</option>
-                <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.members||lc.get?.('members')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label"><i class="fas fa-gavel" style="margin-right:6px;color:var(--red)"></i>Moderación</label>
-              <span class="form-help">Bans, kicks, warns, mutes</span>
-              <select name="log_moderation" class="form-select">
-                <option value="">— Desactivado —</option>
-                <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.moderation||lc.get?.('moderation')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label"><i class="fas fa-microphone" style="margin-right:6px;color:var(--purple)"></i>Voz</label>
-              <span class="form-help">Entradas/salidas de canales de voz</span>
-              <select name="log_voice" class="form-select">
-                <option value="">— Desactivado —</option>
-                <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.voice||lc.get?.('voice')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
-              </select>
-            </div>
-          </div>
+          <input form="logs-settings-form" type="hidden" name="revision" value="<%= logsConfiguration.revision %>">
           <div class="form-group">
-            <label class="form-label"><i class="fas fa-server" style="margin-right:6px;color:var(--yellow)"></i>Servidor</label>
-            <span class="form-help">Cambios de roles, canales, configuración del servidor</span>
-            <select name="log_server" class="form-select">
-              <option value="">— Desactivado —</option>
-              <% channels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lc.server||lc.get?.('server')) === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
+            <label class="form-label" for="logs-default">Canal general</label>
+            <span class="form-help" id="logs-default-help">Las categorías que lo heredan usarán este destino. Sin canal general, esas categorías no se envían.</span>
+            <select form="logs-settings-form" name="defaultChannel" id="logs-default" class="form-select" aria-describedby="logs-default-help">
+              <option value="no" <%= !lv.defaultChannel || lv.defaultChannel === 'no' ? 'selected' : '' %>>Sin canal general</option>
+              <% if (lv.defaultChannel && lv.defaultChannel !== 'no' && !logDestinationChannels.some(ch => ch.id === lv.defaultChannel)) { %><option value="<%= lv.defaultChannel %>" selected>Canal guardado no disponible</option><% } %>
+              <% logDestinationChannels.forEach(ch => { %><option value="<%= ch.id %>" <%= lv.defaultChannel === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
             </select>
           </div>
+          <div class="form-row">
+          <% [['messages','Mensajes','Ediciones y eliminaciones; texto omitido por defecto.'],['members','Miembros','Entradas, salidas, apodos y roles.'],['moderation','Moderación','Vetos, expulsiones y aislamiento observables.'],['voice','Voz','Entradas, salidas y cambios de canal.'],['server','Servidor','Canales, roles, emojis, webhooks e invitaciones.']].forEach(([key,title,hint]) => { %>
+            <div class="form-group">
+              <label class="form-label" for="logs-<%= key %>"><%= title %></label>
+              <span class="form-help" id="logs-help-<%= key %>"><%= hint %></span>
+              <select form="logs-settings-form" name="<%= key %>" id="logs-<%= key %>" class="form-select" aria-describedby="logs-help-<%= key %>">
+                <option value="inherit" <%= inheritedLog(lv[key]) ? 'selected' : '' %>>Usar canal general</option>
+                <option value="no" <%= lv[key] === 'no' || lv[key] === false || lv[key] === '' ? 'selected' : '' %>>Desactivado</option>
+                <% if (lv[key] && !['no','inherit'].includes(lv[key]) && !logDestinationChannels.some(ch => ch.id === lv[key])) { %><option value="<%= lv[key] %>" selected>Canal guardado no disponible</option><% } %>
+                <% logDestinationChannels.forEach(ch => { %><option value="<%= ch.id %>" <%= lv[key] === ch.id ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
+              </select>
+            </div>
+          <% }) %>
+          </div>
+          <details>
+            <summary>Privacidad y exclusiones</summary>
+            <div class="form-group">
+              <label for="logs-content"><input form="logs-settings-form" type="checkbox" id="logs-content" name="includeMessageContent" <%= lv.includeMessageContent ? 'checked' : '' %>> Incluir texto de mensajes cuando se pueda confirmar la visibilidad del origen</label>
+              <p class="form-help">Desactivado por defecto. No se reenvían adjuntos ni se archiva el texto. Los datos de canales privados se omiten cuando no se puede confirmar su audiencia.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="logs-excluded">Canales excluidos</label>
+              <span class="form-help" id="logs-excluded-help">Selección múltiple opcional. No afecta a los avisos privados al dueño.</span>
+              <select form="logs-settings-form" name="excludedChannelIds" id="logs-excluded" class="form-select" multiple size="5" aria-describedby="logs-excluded-help">
+                <% (lv.excludedChannelIds || []).filter(id => !logSourceChannels.some(ch => ch.id === id)).forEach(id => { %><option value="<%= id %>" selected>Canal excluido no disponible · <%= id %></option><% }) %>
+                <% logSourceChannels.forEach(ch => { %><option value="<%= ch.id %>" <%= (lv.excludedChannelIds || []).includes(ch.id) ? 'selected' : '' %>>#<%= ch.name %></option><% }) %>
+              </select>
+            </div>
+          </details>
+          <p id="logs-status" role="status" aria-live="polite">Los cambios de registros se aplican al guardarlos aquí.</p>
+          <button form="logs-settings-form" type="submit" id="logs-save" class="btn btn-p" disabled>Guardar registros</button>
+          <button type="button" id="logs-discard" class="btn btn-ghost" disabled>Descartar cambios</button>
+          <button type="button" id="logs-reload" class="btn btn-ghost" hidden>Descartar y recargar</button>
         </div>
       </div>
     </div>
@@ -482,6 +477,8 @@
   </div><!-- end settings-content -->
 </div><!-- end settings-layout -->
 </form>
+<form id="logs-settings-form" method="POST" action="/dashboard/<%= guild.id %>/logs" data-config-url="/api/guilds/<%= guild.id %>/logs/config" hidden></form>
+<script src="/js/log-settings.js" defer></script>
 
 <!-- Save bar -->
 <div class="save-bar" id="save-bar">
@@ -518,8 +515,8 @@ if (urlTab) {
 const form = document.getElementById('settings-form')
 const saveBar = document.getElementById('save-bar')
 let dirty = false
-form.addEventListener('change', () => { if (!dirty) { dirty = true; saveBar.classList.add('show') } })
-form.addEventListener('input', () => { if (!dirty) { dirty = true; saveBar.classList.add('show') } })
+form.addEventListener('change', event => { if (event.target.form !== form) return; if (!dirty) { dirty = true; saveBar.classList.add('show') } })
+form.addEventListener('input', event => { if (event.target.form !== form) return; if (!dirty) { dirty = true; saveBar.classList.add('show') } })
 document.getElementById('save-discard')?.addEventListener('click', () => { dirty = false; saveBar.classList.remove('show'); form.reset() })
 form.addEventListener('submit', () => { dirty = false; saveBar.classList.remove('show') })
 

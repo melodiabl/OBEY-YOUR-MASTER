@@ -2,6 +2,8 @@
 
 Tarea `MOD-LOGS`. Estado `audit_before_migration`. Destino propuesto `src/modules/logs`. La migración preserva funciones y datos existentes; la ficha no autoriza agregar funciones nuevas.
 
+Checkpoint del 19/10/2026: [consumidor, ajustes y avisos owner](../REGISTROS_Y_AVISOS_OWNER.md) implementados en las rutas actuales. Configuración canónica compartida y entregas con privacidad verificadas. No se marca la migración completa: faltan historial/retención y entrega durable, además de la aceptación real de Discord. El destino `src/modules/logs` sigue siendo una propuesta; no se crean carpetas vacías para aparentar migración.
+
 
 Dependencias de arquitectura: `ARCH-03`, `ARCH-05`, `ARCH-07`.
 
