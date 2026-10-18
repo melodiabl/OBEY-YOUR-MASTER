@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T18:49:41.146149+00:00",
+  "code": "3673b478678d368ee5637e6562c3b6754b402574",
+  "imageTag": "release-setup-ux-20261018-3673b47",
+  "containers": {
+    "obey_bot": {
+      "id": "909d81fb420076b6a4eb0d6f9ab1b4d82d1ea5f694a8d23268ccbe8994460d37",
+      "image": "d17a93272f9bd74999368811a18ece44f0ea147e8326d8893c35ceb21d3cb275",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "runtimeSourceHashesMatched": 19,
+  "localEvidence": "setup-usability-local.json",
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "registeredGlobalSlashCommands": 19,
+  "connectedPublicNodes": [
+    "gdjkhp",
+    "serenetia",
+    "millohost"
+  ],
+  "selectedPublicNode": "gdjkhp",
+  "backupOrder": [
+    "serenetia",
+    "millohost"
+  ],
+  "privateEnabled": false,
+  "health": {
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 61
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 61
+      }
+    }
+  },
+  "startupFailureMarkers": [],
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-18T18-47-03-421Z",
+    "mongoArchiveBytes": 59078741,
+    "privateSnapshotDirectory": ".runtime/deploy-setup-ux-20261018"
+  },
+  "rollback": {
+    "image": "f9cd56364741bab8f14d3b701b09b13b67d892fe7282c6e31a4c4efbf2fa79fe",
+    "tag": "release-setups-20261018-f4acfac",
+    "argumentsFile": ".runtime/deploy-setup-ux-20261018/rollback-arguments.json",
+    "testedDuringThisDeployment": false
+  },
+  "limitations": [
+    "No manual user walkthrough inside Discord",
+    "No listening or track transition test",
+    "No host reboot test"
+  ],
+  "pushed": false
+}

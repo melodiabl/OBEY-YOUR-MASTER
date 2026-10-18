@@ -27,19 +27,19 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "f4acfac5226022d68e458ef09cc24e216df69292",
-    "image": "f9cd56364741bab8f14d3b701b09b13b67d892fe7282c6e31a4c4efbf2fa79fe",
+    "code": "3673b478678d368ee5637e6562c3b6754b402574",
+    "image": "d17a93272f9bd74999368811a18ece44f0ea147e8326d8893c35ceb21d3cb275",
     "selectedPublicNode": "gdjkhp",
     "backupOrder": [
       "serenetia",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/setup-deployment-20261018.json",
-    "change": "Deploy all 63 remodeled setup command files; restore bot/images/Redis after host shutdown; restart always included by enabled Podman boot service",
-    "tag": "release-setups-20261018-f4acfac",
+    "evidence": "evidence/setup-usability-deployment-20261018.json",
+    "change": "Single setup hub with same-message back navigation, guided forms, basic paths and existing slot access",
+    "tag": "release-setup-ux-20261018-3673b47",
     "status": "healthy",
-    "statusEvidence": "DESPLIEGUE-SETUPS-2026-10-18.md"
+    "statusEvidence": "DESPLIEGUE-SETUP-UX-2026-10-18.md"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -166,5 +166,18 @@
     "reachableFromBotHost": false,
     "runtimeChanged": false,
     "addedToBackups": false
+  },
+  "setupUsability": {
+    "requestedDate": "2026-10-18",
+    "reason": "User found all setups hard to understand and wants one setup entry instead of typing individual setup commands",
+    "entry": "setup",
+    "implementationCode": "3673b478678d368ee5637e6562c3b6754b402574",
+    "report": "docs/guia-arquitectura/FACILIDAD_SETUP.md",
+    "evidence": "evidence/setup-usability-local.json",
+    "verifiedLocally": true,
+    "deployed": true,
+    "pushed": false,
+    "remaining": "Manual usability walkthrough in Discord; global architecture and Epic integration remain open",
+    "deploymentEvidence": "evidence/setup-usability-deployment-20261018.json"
   }
 }

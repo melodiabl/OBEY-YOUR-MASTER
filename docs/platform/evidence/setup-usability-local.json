@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T18:47:02.781618+00:00",
+  "implementationCode": "3673b478678d368ee5637e6562c3b6754b402574",
+  "increments": [
+    "f9c4a48ee2ede7ccc421143993e1c2ba445910f4",
+    "e3e4eaa3269ffc1bf4552e3401e0ac9165dd69ac",
+    "3673b478678d368ee5637e6562c3b6754b402574"
+  ],
+  "verification": {
+    "navigationBuilderGroups": 32,
+    "sessionAndMongoGroups": 58,
+    "realDiscordJSCollectors": true,
+    "cleanupCycles": 100,
+    "realIsolatedMongo": true,
+    "isolatedDatabaseDropped": true,
+    "temporaryMongoContainerRemoved": true,
+    "temporaryScriptRemoved": true,
+    "temporaryScriptSHA256": "a9c3e7b30805da606a9820444009fb43b0b95fa24551793bd7f8a1c950807748",
+    "originalTestsPassed": 25,
+    "originalTestFiles": 3,
+    "welcomeTypecheck": true,
+    "dependencyRules": {
+      "violations": 0,
+      "modules": 1063,
+      "edges": 3236
+    }
+  },
+  "scope": [
+    "One setup entry and same-message navigation with back",
+    "Localized titles and purpose for 61 prefix names; equivalent operations grouped",
+    "Guided fields, pending changes, resource selectors and guarded back",
+    "Basic welcome/ticket/music paths with advanced settings retained",
+    "Existing/new slot picker for tickets, applications, support menus and temporary voice rooms",
+    "Ephemeral slash setup uses interaction webhook edits"
+  ],
+  "data": {
+    "schemasChanged": false,
+    "productionDataUsedForVerification": false,
+    "openingOrNavigationWrites": false,
+    "canonicalStoresAndCASPreserved": true
+  },
+  "limits": [
+    "No manual interactive usability session with the user in Discord",
+    "Voice/music playback and lyrics not changed or listening-tested by these checks",
+    "Global architecture tasks and Epic integration remain open"
+  ],
+  "files": {
+    "handlers/setup-advanced-security.js": "2bf6ce60fcaa02a4e25ef483ced34b826c2f4d79c36096f8782165636b81efd9",
+    "handlers/setup-channel.js": "55ab8f8d7ac05d6c2105d2a9af8492762497cfdd362d7ec48d8d24cdabcc2d71",
+    "handlers/setup-choices.js": "586f7d6f2683113a8e2933994db2c4c2e22861adf4898e7b0bc52c05f0ed62cb",
+    "handlers/setup-command-categories.js": "cc866357063b45ec7a729be654dfaeb21c1859c54fd36f6ea253bccd90739709",
+    "handlers/setup-embed.js": "25baa711225fe7bf7a2599f62f60a7dedc8a85cd3388718623f698dcf0d5ca06",
+    "handlers/setup-flow.js": "7f5937d19c51cf8d8854cecc7a188fb5458e6036933847fd89b0af42833bf32f",
+    "handlers/setup-form.js": "f3f0edf284414b53473465dce645d9a8f82cacfe0dd97e3a930b621bb4149861",
+    "handlers/setup-language.js": "b376f4089c50c05a8b222d6c196a79c4723e99e39575dde373432f8934663b49",
+    "handlers/setup-membership.js": "51a7007820f2a08e9e130e62e5227f267da16097caa8ee024789495e08495f59",
+    "handlers/setup-music-resources.js": "8e916f197ca97682e7548f61f6bf6f88aa6ed61497e10d94083e33c9944b6a1d",
+    "handlers/setup-navigation.js": "560c66849f3691b501405d149af6176fdf0058e4ebf2bbe4b6daa76cacb46ccd",
+    "handlers/setup-records.js": "4ffa4a32cf42d832f7088707096d5df772cc0678dfceba6f9cfb5d6a43c13cd7",
+    "handlers/setup-session.js": "6ff6c185dcbcce4c896aac2faae26886f0ad8c5d66b94324c59663153d0a7504",
+    "handlers/setup-slots.js": "c442fc18ec288462471a9113f3a2da8ee39a7d6bfe1262d0b7a30f21e36ca9cf",
+    "handlers/setup-support-menus.js": "de975956e394ef4835809494bacd241bd4d08e958b77ccb97565c135bbcef6d0",
+    "handlers/setup-support.js": "14c5e2edee1d2410b99f0a800f5bb5848a0c503d79b14d86dbb0262b22222681",
+    "handlers/setup-voice-resources.js": "9a9e036c79e8ba40dd22bcff39048dcc301e169426905c064c9fab8c4dc9aedb",
+    "locales/en.json": "dcf942c42bfd60ca99974a4a7e236e2c46b11cadd9398ffd1d019717ac1b167f",
+    "locales/es.json": "40a8a9ce5527995b240da9b8183bc9026ad04e68e336c4c6ce1f03c08c9f664c"
+  },
+  "pushed": false,
+  "deployed": true,
+  "deploymentEvidence": "setup-usability-deployment-20261018.json"
+}

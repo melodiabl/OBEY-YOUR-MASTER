@@ -4,6 +4,10 @@ Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTE
 
 ## Estado vigente · despliegue del 18/10/2026
 
+Revisión posterior de facilidad de uso desplegada en `3673b478678d368ee5637e6562c3b6754b402574`, imagen `release-setup-ux-20261018-3673b47`: entrada `!setup`, navegación por el mismo mensaje, regreso protegido y rutas básicas de bienvenida/tickets/música. 58 grupos de SDK/Mongo aislado, 100 ciclos y 25 tests originales; temporales eliminados. Producción saludable, Gateway/heartbeat y HTTPS comprobados. [Despliegue vigente y reversión](DESPLIEGUE-SETUP-UX-2026-10-18.md). Sigue pendiente la validación de uso con el usuario en Discord y el plan global.
+
+Despliegue anterior, conservado como historial:
+
 Los 63 comandos de setups están remodelados y desplegados en `f4acfac5226022d68e458ef09cc24e216df69292`, imagen `release-setups-20261018-f4acfac`. Bot, imágenes y Redis están saludables y con arranque automático configurado; Gateway/heartbeat, MongoDB y salud HTTPS pública comprobados. GDjkhp, Serenetia y MilloHost conectaron; el Lavalink privado permanece apagado. Backup e imagen anterior conservados. [Evidencia y reversión](DESPLIEGUE-SETUPS-2026-10-18.md).
 
 Los 25 tests originales, tipos y reglas de dependencias pasaron; no se añadieron verificadores permanentes. Pendientes: recorrido interactivo de Discord/audio, proveedor Epic y el plan global restante. No se hizo push. Los incrementos que siguen son registros históricos anteriores a este despliegue.

@@ -1,5 +1,7 @@
 # Plan de implementación de la plataforma OBEY
 
+Prioridad vigente del 18/10/2026: [facilidad de uso de setups](../docs/guia-arquitectura/FACILIDAD_SETUP.md), solicitada después de desplegar los 63 adaptadores. Entrada única `!setup`, navegación por el mismo mensaje, regreso y rutas básicas sobre los servicios existentes. Continuar las tareas globales pendientes al completar esta corrección; las entregas anteriores que siguen se conservan como historial.
+
 Preferencia de nombres del usuario: archivos por función, sin el prefijo `module-` (por ejemplo, `cards.js`, `configuration-service.js`, `configuration-editor.js`, `feature-registry.js`). La interfaz nombra directamente Bienvenida, Tarjetas y cada función; evita «módulo» en títulos y mensajes. Las futuras entregas siguen esta convención.
 
 Siguiente entrega activa (13 de octubre): ayuda contextual sobre comandos cargados, schemas slash y aliases efectivos. Filtrar contexto/permisos actuales, administrar navegación más allá de 25 categorías y revalidar pertenencia al utilizar controles. Conectar prefijo y `/info help` al mismo servicio y catálogo; slash privado. Exponer consulta equivalente en el dashboard autenticado sin ejecutar comandos desde la ayuda. Verificar permisos revocados, alias, consultas, límites de componentes, concurrencia y frontend con fixtures; no publicar comandos ni reiniciar producción. Configuración/habilitación de todas las utilidades y renderer de tarjetas conservan sus tareas posteriores.
