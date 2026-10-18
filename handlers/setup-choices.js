@@ -3,8 +3,8 @@ const { attachSetupSession } = require('./setup-session')
 const { requireSetupAccess } = require('./setup-access')
 const { t, localeFor, normalizeLocale } = require('./i18n')
 const text = (value, locale) => typeof value === 'object' && value !== null ? value[locale] || value.en : value
-async function openSetupChoices(client, origin, title, choices, { authorize } = {}) {
-  const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id }
+async function openSetupChoices(client, origin, title, choices, { authorize, authorizeActor, actorPermission } = {}) {
+  const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id, authorizeActor, actorPermission }
   const locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
   const notice = key => ({ content: t(locale, `setup.editor.${key}`), embeds: [], components: [], allowedMentions: { parse: [] } })
   const copy = key => t(locale, `setup.form.${key}`)

@@ -8,11 +8,14 @@ async function requireSetupAccess(client, context) {
     guild.members.fetch({ user: context.actorId, force: true }), guild.members.fetchMe({ force: true }),
     guild.channels.fetch(context.channelId),
   ])
-  if (member?.id !== context.actorId || member.guild?.id !== guild.id || !member.permissions.has(F.Administrator) ||
+  if (member?.id !== context.actorId || member.guild?.id !== guild.id ||
     channel?.id !== context.channelId || channel.guildId !== guild.id || !channel.permissionsFor(member)?.has(F.ViewChannel) ||
     !channel.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks])) throw new Error('setup_denied')
+  const access = { guild, member, bot, channel }
+  if (context.authorizeActor) await context.authorizeActor(access, context)
+  else if (!member.permissions.has(context.actorPermission ?? F.Administrator)) throw new Error('setup_denied')
   if (client._shuttingDown || client._dbReady === false) throw new Error('setup_unavailable')
-  return { guild, member, bot, channel }
+  return access
 }
 
 module.exports = { requireSetupAccess }

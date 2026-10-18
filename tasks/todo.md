@@ -1645,8 +1645,8 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-OWNER · Operación exclusiva del dueño**
 
-- [ ] [commands/Owner/setup-advertise.js](../commands/Owner/setup-advertise.js).
-- [ ] [commands/Owner/setup-owner.js](../commands/Owner/setup-owner.js).
+- [x] [commands/Owner/setup-advertise.js](../commands/Owner/setup-advertise.js).
+- [x] [commands/Owner/setup-owner.js](../commands/Owner/setup-owner.js).
 
 ### SETUP-BASE-02 · idioma · verificación local
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 56/63 archivos, sin desplegar. Antinuke remodelado con propiedad fresca y preferencias persistentes. Epic conserva ajustes y bloquea publicaciones porque su verificador no está registrado en el arranque. Siguiente: Owner y música; no cerrar el trabajo global por completar menús.
+Avance local: 58/63 archivos, sin desplegar. Owner y publicidad con autorización por ID completo y guardado atómico confirmado. Quedan cinco archivos de música/voz; no cerrar el trabajo global por completar menús. Epic continúa bloqueado hasta integrar su verificador.

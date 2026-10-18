@@ -92,7 +92,7 @@ async function checkResources(access, field, value) {
   }
 }
 async function openFormSetup(client, origin, definition) {
-  const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id }
+  const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id, authorizeActor: definition.authorizeActor, actorPermission: definition.actorPermission }
   const locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
   const keys = Object.keys(definition.fields)
   if (!keys.length) throw new Error('invalid_setup_definition')
