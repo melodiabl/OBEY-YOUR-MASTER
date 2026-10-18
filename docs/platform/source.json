@@ -27,19 +27,19 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "3673b478678d368ee5637e6562c3b6754b402574",
-    "image": "d17a93272f9bd74999368811a18ece44f0ea147e8326d8893c35ceb21d3cb275",
+    "code": "398e22f31b49139c5ae54d4ea4ec5de2398e7bd5",
+    "image": "0ec4dc1cd5dea434f75584c75ea0b72408b34a2a73751ba2272473641d2dced2",
     "selectedPublicNode": "gdjkhp",
     "backupOrder": [
       "serenetia",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/setup-usability-deployment-20261018.json",
-    "change": "Single setup hub with same-message back navigation, guided forms, basic paths and existing slot access",
-    "tag": "release-setup-ux-20261018-3673b47",
+    "evidence": "evidence/slash-music-deployment-20261019.json",
+    "change": "Two independent changes: private central setup slash navigation; music recording selection and recovery guards",
+    "tag": "release-slash-music-20261019-398e22f",
     "status": "healthy",
-    "statusEvidence": "DESPLIEGUE-SETUP-UX-2026-10-18.md"
+    "statusEvidence": "DESPLIEGUE-SLASH-MUSICA-2026-10-19.md"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -179,5 +179,28 @@
     "pushed": false,
     "remaining": "Manual usability walkthrough in Discord; global architecture and Epic integration remain open",
     "deploymentEvidence": "evidence/setup-usability-deployment-20261018.json"
+  },
+  "setupSlash": {
+    "implementationCode": "4a0f08027c6e2d9bf037ffe66b2e49195e0fb64c",
+    "entry": "/setup",
+    "scope": "Central setup navigation independent of the music engine",
+    "report": "docs/guia-arquitectura/FACILIDAD_SETUP.md",
+    "evidence": "evidence/setup-slash-local.json",
+    "verifiedLocally": true,
+    "deployed": true,
+    "deploymentEvidence": "evidence/slash-music-deployment-20261019.json",
+    "pushed": false,
+    "remaining": "Manual Discord walkthrough"
+  },
+  "musicSelection": {
+    "implementationCode": "398e22f31b49139c5ae54d4ea4ec5de2398e7bd5",
+    "scope": "Music search and recovery independent of setup navigation",
+    "report": "docs/guia-arquitectura/SELECCION_MUSICAL.md",
+    "evidence": "evidence/music-recordings-local.json",
+    "verifiedLocally": true,
+    "deployed": true,
+    "deploymentEvidence": "evidence/slash-music-deployment-20261019.json",
+    "pushed": false,
+    "remaining": "Real audio listening; Shorts without identifying metadata remain a provider limitation"
   }
 }

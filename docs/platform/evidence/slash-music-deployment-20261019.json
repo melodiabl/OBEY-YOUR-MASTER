@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T22:19:04.331709+00:00",
+  "code": "398e22f31b49139c5ae54d4ea4ec5de2398e7bd5",
+  "imageTag": "localhost/obey-your-master_bot:release-slash-music-20261019-398e22f",
+  "containers": {
+    "obey_bot": {
+      "id": "dd1145e9247ed782dfe743a38590f0de74c9d5bef07dc84a425cea31eda63898",
+      "image": "0ec4dc1cd5dea434f75584c75ea0b72408b34a2a73751ba2272473641d2dced2",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "runtimeSourceHashesMatched": 11,
+  "localEvidence": [
+    "setup-slash-local.json",
+    "music-recordings-local.json"
+  ],
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "registeredGlobalSlashCommands": 20,
+  "discordRegistration": {
+    "globalCommands": 20,
+    "setupRegistered": true,
+    "administratorOnly": true,
+    "guildOnly": true,
+    "noArguments": true,
+    "readOnlyVerification": true
+  },
+  "connectedPublicNodes": [
+    "serenetia",
+    "gdjkhp",
+    "millohost"
+  ],
+  "selectedPublicNode": "gdjkhp",
+  "backupOrder": [
+    "serenetia",
+    "millohost"
+  ],
+  "privateEnabled": false,
+  "health": {
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 42
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 42
+      }
+    }
+  },
+  "startupFailureMarkers": [],
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-18T22-12-33-881Z",
+    "mongoArchiveBytes": 59080836,
+    "privateSnapshotDirectory": ".runtime/deploy-slash-music-20261019"
+  },
+  "rollback": {
+    "image": "d17a93272f9bd74999368811a18ece44f0ea147e8326d8893c35ceb21d3cb275",
+    "tag": "release-setup-ux-20261018-3673b47",
+    "argumentsFile": ".runtime/deploy-slash-music-20261019/rollback-arguments.json",
+    "testedDuringThisDeployment": false
+  },
+  "releasePreparation": [
+    "A command recipe invocation error was corrected before replacement",
+    "Candidate environment comparison excludes HOME/HOSTNAME generated on start; HOME checked again after start"
+  ],
+  "limitations": [
+    "No manual user walkthrough inside Discord",
+    "No listening or track transition test",
+    "No host reboot test",
+    "Short identification depends on URLs and available provider metadata"
+  ],
+  "pushed": false,
+  "restartAlwaysContainers": [
+    "obey_bot",
+    "obey_images",
+    "obey_redis"
+  ],
+  "duplicateBotOnBootAvoided": true
+}

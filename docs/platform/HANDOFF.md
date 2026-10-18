@@ -57,3 +57,10 @@ Discord devuelve HTTP 429 en ediciones de mensajes, con esperas de reintento obs
 Antes de retirar los tests añadidos pasaron 575 casos y 95 comprobaciones de imagen; la evidencia conserva ese contexto. [Detalle](PLAYER-STATE-SYNC.md) y [evidencia redactada](evidence/player-state-sync-runtime.json).
 
 La referencia del ZIP actualizado, su extracción y la precedencia del material siguen registradas en [source.json](source.json). Los límites conocidos de fuentes/plugins públicos permanecen en [el informe de nodos](PUBLIC-NODE-RESEARCH.md).
+
+
+## Reanudación · 19/10/2026
+
+El usuario precisó que el centralizador de setups y el reproductor son tareas independientes. `/setup` global privado y simplificado quedó en `4a0f080`; selección musical y recuperación de grabaciones en `398e22f`. Ambas revisiones se desplegaron en una sola sustitución del proceso, con código `398e22f31b49139c5ae54d4ea4ec5de2398e7bd5`, imagen `0ec4dc1cd5dea434f75584c75ea0b72408b34a2a73751ba2272473641d2dced2`. [Estado, evidencia y reversión](DESPLIEGUE-SLASH-MUSICA-2026-10-19.md).
+
+Pasan 19 grupos de navegación slash, 48 musicales, los 25 tests originales, tipos y reglas de dependencias. Verificadores y contexto temporal retirados. Runtime sano: 20 slash globales confirmados por REST, Gateway/heartbeat, MongoDB, tres nodos públicos y HTTP/HTTPS 200; privado apagado, sin push. La selección favorece grabaciones originales sin garantizar la propiedad ni detectar Shorts sin metadatos. No se probó audio real ni el recorrido manual con el usuario. Continuar pendientes globales del ZIP y Epic sin presentar estos cambios como cierre de toda la arquitectura.

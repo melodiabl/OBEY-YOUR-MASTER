@@ -1682,4 +1682,5 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 
 - [x] `/setup` global, privado, sin argumentos y con navegación simplificada. 19 grupos SDK del registro/flujo pasan; el motor musical no cambia en esta entrega.
 - [x] Música: identificar Shorts, priorizar grabaciones originales y conservar identidad/duración en recuperación. 48 grupos locales y 25 tests originales pasan; [alcance y límites](../docs/guia-arquitectura/SELECCION_MUSICAL.md). Entrega independiente del centralizador de setups.
-- [ ] Verificar y desplegar las revisiones terminadas; continuar los pendientes globales del plan.
+- [x] Revisiones desplegadas como cambios independientes en imagen `release-slash-music-20261019-398e22f`: 11 hashes, 20 slash globales, Gateway/heartbeat, tres nodos públicos y salud local/pública 200. [Evidencia](../docs/platform/evidence/slash-music-deployment-20261019.json).
+- [ ] Recorrido manual de `/setup`, escucha musical y pendientes globales del plan.

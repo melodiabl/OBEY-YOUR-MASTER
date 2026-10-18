@@ -18,9 +18,10 @@
   },
   "temporaryVerifierSha256": "0c3ce416ee6ad98af38888c26b99ebccaf753955be166b20748247de12ae1272",
   "temporaryVerifierRetained": false,
-  "deployed": false,
+  "deployed": true,
   "globalCommandsLoaded": 20,
   "privateDeferredReply": true,
   "scope": "Central setup navigation only; no music engine changes",
-  "implementationCode": "4a0f08027c6e2d9bf037ffe66b2e49195e0fb64c"
+  "implementationCode": "4a0f08027c6e2d9bf037ffe66b2e49195e0fb64c",
+  "deploymentEvidence": "slash-music-deployment-20261019.json"
 }

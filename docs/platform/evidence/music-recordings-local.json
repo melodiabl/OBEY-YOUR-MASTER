@@ -21,7 +21,7 @@
   },
   "temporaryVerifierSha256": "026ed3f1b7789c5aaedf7d80d0daa3f817c64fb4d183fa138002888d54e6c76a",
   "temporaryVerifierRetained": false,
-  "deployed": false,
+  "deployed": true,
   "scope": "Music search, playback selection and recovery only; no setup navigation changes",
   "publicNodeProbe": {
     "node": "gdjkhp",
@@ -33,5 +33,6 @@
     "Shorts cannot always be identified from watch URLs without provider metadata",
     "Ranking signals do not certify original ownership",
     "No real audio listening test or manual Discord walkthrough"
-  ]
+  ],
+  "deploymentEvidence": "slash-music-deployment-20261019.json"
 }
