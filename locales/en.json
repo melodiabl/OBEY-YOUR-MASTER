@@ -1076,17 +1076,17 @@
   "setup": {
     "navigation": {
       "title": "Configure your server",
-      "description": "Choose a category and open the setup you need. Only commands available with your current permissions appear.",
+      "description": "What would you like to set up? Start with a common task or browse by topic. You can review settings before saving.",
       "categoryDescription": "Choose what to configure in {category}.",
-      "categories": "Available settings",
+      "categories": "Browse by topic",
       "chooseCategory": "Choose a category",
-      "chooseCommand": "Open a setup",
+      "chooseCommand": "What would you like to configure?",
       "openDescription": "Open the configuration assistant",
       "previous": "Previous",
       "next": "Next",
-      "home": "Categories",
+      "home": "Back to start",
       "close": "Close",
-      "footer": "{count} available setups · Page {page}/{pages}",
+      "footer": "Only options available to you · Page {page}/{pages}",
       "empty": "No setups are available in this context.",
       "notYours": "This panel belongs to another session. Use setup to open your own.",
       "closed": "Configuration panel closed.",
@@ -1105,7 +1105,266 @@
         "general": "General settings",
         "community": "Community and automation"
       },
-      "categoryCount": "There are {count} setups in this category. Choose one from the menu below."
+      "categoryCount": "There are {count} setups in this category. Choose one from the menu below.",
+      "commands": {
+        "setupmusic": {
+          "title": "Music player",
+          "description": "Publish controls to request and play music."
+        },
+        "setup-welcome": {
+          "title": "Welcome new members",
+          "description": "Choose where and how to greet new members."
+        },
+        "setup-leave": {
+          "title": "Farewell messages",
+          "description": "Choose where to announce when someone leaves."
+        },
+        "setup-ticket": {
+          "title": "Support tickets",
+          "description": "Set up a button to contact your staff."
+        },
+        "setup-apply": {
+          "title": "Applications",
+          "description": "Set up questions and receive member applications."
+        },
+        "setup-language": {
+          "title": "Bot language",
+          "description": "Choose the language OBEY uses in this server."
+        },
+        "setup-embed": {
+          "title": "Message appearance",
+          "description": "Customize the colors and details of bot messages."
+        },
+        "setup-commands": {
+          "title": "Available commands",
+          "description": "Choose which command categories are available."
+        },
+        "setup-admin": {
+          "title": "Moderation permissions",
+          "description": "Set roles and options for moderation actions."
+        },
+        "setup-antinuke": {
+          "title": "Protect the server",
+          "description": "Protect against bulk changes to channels and roles."
+        },
+        "setup-anticaps": {
+          "title": "Limit capital letters",
+          "description": "Moderate messages with excessive capital letters."
+        },
+        "setup-antidiscord": {
+          "title": "Control Discord invites",
+          "description": "Choose how to handle invites to other servers."
+        },
+        "setup-antilink": {
+          "title": "Control links",
+          "description": "Configure allowed links and exceptions."
+        },
+        "setup-antimassmention": {
+          "title": "Limit mass mentions",
+          "description": "Protect against excessive mentions."
+        },
+        "setup-antimasspings": {
+          "title": "Limit repeated pings",
+          "description": "Protect against repeated mass pings."
+        },
+        "setup-antimention": {
+          "title": "Mention protection",
+          "description": "Choose how to handle disallowed mentions."
+        },
+        "setup-antinewaccount": {
+          "title": "Filter new accounts",
+          "description": "Set the minimum account age for new members."
+        },
+        "setup-antipings": {
+          "title": "Control pings",
+          "description": "Set limits and exceptions for pings."
+        },
+        "setup-antispam": {
+          "title": "Prevent spam",
+          "description": "Configure spam limits and exceptions."
+        },
+        "setup-autowarn": {
+          "title": "Warning thresholds",
+          "description": "Choose what happens when warnings accumulate."
+        },
+        "setup-warn": {
+          "title": "Warning settings",
+          "description": "Adjust how server warnings work."
+        },
+        "setup-blacklist": {
+          "title": "Blocked words",
+          "description": "Add words and configure filter exceptions."
+        },
+        "setup-ghost-ping-detector": {
+          "title": "Detect deleted pings",
+          "description": "Configure alerts for deleted mentions."
+        },
+        "setup-mute": {
+          "title": "Mute members",
+          "description": "Configure the mute role and related options."
+        },
+        "setup-validcode": {
+          "title": "Verify members with a code",
+          "description": "Set up code verification and the resulting role."
+        },
+        "setup-epicgamesverify": {
+          "title": "Epic Games verification",
+          "description": "Review settings; publishing requires an active provider."
+        },
+        "setup-admincmdlog": {
+          "title": "Staff action log",
+          "description": "Choose where to record staff actions."
+        },
+        "setup-auditlog": {
+          "title": "Audit log",
+          "description": "Choose where to see server audit events."
+        },
+        "setup-logger": {
+          "title": "Activity log",
+          "description": "Choose where activity logs are sent."
+        },
+        "setup-reportlog": {
+          "title": "Receive reports",
+          "description": "Choose where reports are received."
+        },
+        "setup-boostlog": {
+          "title": "Boost log",
+          "description": "Choose where to log server boosts."
+        },
+        "setup-serverstats": {
+          "title": "Server statistics",
+          "description": "Choose where to show available server statistics."
+        },
+        "setup-boost": {
+          "title": "Thank server boosters",
+          "description": "Prepare a message to thank server boosters."
+        },
+        "setup-joinlist": {
+          "title": "Join list",
+          "description": "Configure the list of server joins."
+        },
+        "setup-membercount": {
+          "title": "Member counters",
+          "description": "Configure channels that display member counts."
+        },
+        "setup-rank": {
+          "title": "Levels and experience",
+          "description": "Adjust experience, rewards and level settings."
+        },
+        "setup-reactionrole": {
+          "title": "Reaction roles",
+          "description": "Publish a message for members to choose their roles."
+        },
+        "setup-roster": {
+          "title": "Team rosters",
+          "description": "Configure member lists by team or role."
+        },
+        "setup-music": {
+          "title": "Music permissions and settings",
+          "description": "Adjust music roles, permissions and options."
+        },
+        "setup-radio": {
+          "title": "Radio stations",
+          "description": "Configure a panel to listen to radio stations."
+        },
+        "setup-jtc": {
+          "title": "Join to create voice rooms",
+          "description": "Set up a channel that creates a room when joined."
+        },
+        "setup-joinvc": {
+          "title": "Automatic voice connection",
+          "description": "Choose which voice channels OBEY connects to."
+        },
+        "setup-menuticket": {
+          "title": "Ticket menu",
+          "description": "Group support types in a selection menu."
+        },
+        "setup-menuapply": {
+          "title": "Application menu",
+          "description": "Group available applications in a menu."
+        },
+        "setup-autosupport": {
+          "title": "Voice support",
+          "description": "Configure channels and options for voice support."
+        },
+        "setup-suggestion": {
+          "title": "Suggestions",
+          "description": "Choose where to publish member suggestions."
+        },
+        "setup-aichat": {
+          "title": "AI chat",
+          "description": "Configure the AI chat channel and options."
+        },
+        "setup-autobackup": {
+          "title": "Backups",
+          "description": "Configure available automatic backups."
+        },
+        "setup-autodelete": {
+          "title": "Automatic message deletion",
+          "description": "Choose channels and automatic deletion rules."
+        },
+        "setup-autoembed": {
+          "title": "Automatic message embeds",
+          "description": "Choose where to turn messages into OBEY embeds."
+        },
+        "setup-automeme": {
+          "title": "Automatic memes",
+          "description": "Configure the channel and posting options."
+        },
+        "setup-counter": {
+          "title": "Counting game",
+          "description": "Set up a channel and rules for counting together."
+        },
+        "setup-customcommand": {
+          "title": "Custom commands",
+          "description": "Create and edit custom server commands."
+        },
+        "setup-dailyfact": {
+          "title": "Daily facts",
+          "description": "Choose where daily facts are posted."
+        },
+        "setup-keyword": {
+          "title": "Keyword replies",
+          "description": "Choose words that trigger bot replies."
+        },
+        "setup-youtube": {
+          "title": "YouTube notifications",
+          "description": "Choose channels to follow and where to announce videos."
+        },
+        "setup-twitch": {
+          "title": "Twitch notifications",
+          "description": "Choose users to follow and where to announce streams."
+        },
+        "setup-tiktok": {
+          "title": "TikTok notifications",
+          "description": "Configure creators and available notification messages."
+        },
+        "setup-twitter": {
+          "title": "X / Twitter notifications",
+          "description": "Configure accounts and the notification channel."
+        },
+        "setup-owner": {
+          "title": "Bot owners",
+          "description": "Review who can administer the entire bot."
+        },
+        "setup-advertise": {
+          "title": "Bot notices",
+          "description": "Adjust notices managed by the bot owner."
+        }
+      },
+      "quickTitle": "Common tasks",
+      "chooseQuick": "Welcome, tickets, music and language",
+      "groupDescriptions": {
+        "welcome": "Greetings, farewells and booster messages.",
+        "logs": "Choose where to receive logs and reports.",
+        "security": "Configure filters, warnings and protection.",
+        "music": "Set up music, radio and voice rooms.",
+        "support": "Receive support requests and applications.",
+        "roles": "Set up roles, levels and member counters.",
+        "feeds": "Announce videos, streams and posts.",
+        "general": "Choose language, appearance and commands.",
+        "community": "Set up games and automatic replies."
+      }
     },
     "language": {
       "title": "Server language",

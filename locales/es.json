@@ -1076,17 +1076,17 @@
   "setup": {
     "navigation": {
       "title": "Configura tu servidor",
-      "description": "Elige una categoría y abre la configuración que necesitas. Solo aparecen comandos disponibles con tus permisos actuales.",
+      "description": "¿Qué quieres preparar? Abre una opción habitual o busca por tema. Aquí puedes revisar la configuración antes de guardar.",
       "categoryDescription": "Elige qué quieres configurar en {category}.",
-      "categories": "Configuraciones disponibles",
+      "categories": "Explorar por tema",
       "chooseCategory": "Elige una categoría",
-      "chooseCommand": "Abre una configuración",
+      "chooseCommand": "¿Qué quieres configurar?",
       "openDescription": "Abrir el asistente de configuración",
       "previous": "Anterior",
       "next": "Siguiente",
-      "home": "Categorías",
+      "home": "Volver al inicio",
       "close": "Cerrar",
-      "footer": "{count} configuraciones disponibles · Página {page}/{pages}",
+      "footer": "Solo opciones disponibles para ti · Página {page}/{pages}",
       "empty": "No hay configuraciones disponibles en este contexto.",
       "notYours": "Este panel pertenece a otra sesión. Abre tu propio panel con setup.",
       "closed": "Panel de configuración cerrado.",
@@ -1105,7 +1105,266 @@
         "general": "Ajustes generales",
         "community": "Comunidad y automatizaciones"
       },
-      "categoryCount": "Hay {count} configuraciones en esta categoría. Elige una en el menú inferior."
+      "categoryCount": "Hay {count} configuraciones en esta categoría. Elige una en el menú inferior.",
+      "commands": {
+        "setupmusic": {
+          "title": "Reproductor de música",
+          "description": "Publica los controles para pedir y escuchar música."
+        },
+        "setup-welcome": {
+          "title": "Dar la bienvenida",
+          "description": "Elige dónde saludar y qué mensaje enviar al entrar."
+        },
+        "setup-leave": {
+          "title": "Despedir a miembros",
+          "description": "Elige dónde avisar cuando alguien salga del servidor."
+        },
+        "setup-ticket": {
+          "title": "Recibir tickets de ayuda",
+          "description": "Prepara un botón para abrir conversaciones con el personal."
+        },
+        "setup-apply": {
+          "title": "Recibir solicitudes",
+          "description": "Prepara preguntas y recibe solicitudes de los miembros."
+        },
+        "setup-language": {
+          "title": "Idioma del bot",
+          "description": "Elige el idioma que usará OBEY en este servidor."
+        },
+        "setup-embed": {
+          "title": "Aspecto de los mensajes",
+          "description": "Personaliza colores e información de los mensajes del bot."
+        },
+        "setup-commands": {
+          "title": "Comandos disponibles",
+          "description": "Decide qué categorías de comandos pueden usarse."
+        },
+        "setup-admin": {
+          "title": "Permisos de moderación",
+          "description": "Define roles y opciones para las acciones de moderación."
+        },
+        "setup-antinuke": {
+          "title": "Proteger el servidor",
+          "description": "Configura protección ante cambios masivos de canales y roles."
+        },
+        "setup-anticaps": {
+          "title": "Limitar mayúsculas",
+          "description": "Decide cuándo moderar mensajes con demasiadas mayúsculas."
+        },
+        "setup-antidiscord": {
+          "title": "Controlar invitaciones",
+          "description": "Configura cómo tratar las invitaciones a otros servidores."
+        },
+        "setup-antilink": {
+          "title": "Controlar enlaces",
+          "description": "Configura los enlaces permitidos y sus excepciones."
+        },
+        "setup-antimassmention": {
+          "title": "Limitar menciones masivas",
+          "description": "Configura protección contra demasiadas menciones."
+        },
+        "setup-antimasspings": {
+          "title": "Limitar avisos repetidos",
+          "description": "Configura protección contra avisos masivos repetidos."
+        },
+        "setup-antimention": {
+          "title": "Proteger de menciones",
+          "description": "Elige cómo actuar ante menciones no permitidas."
+        },
+        "setup-antinewaccount": {
+          "title": "Filtrar cuentas recientes",
+          "description": "Establece la antigüedad mínima de las cuentas que entran."
+        },
+        "setup-antipings": {
+          "title": "Controlar menciones",
+          "description": "Configura límites y excepciones de menciones."
+        },
+        "setup-antispam": {
+          "title": "Evitar mensajes repetidos",
+          "description": "Configura límites y excepciones para el spam."
+        },
+        "setup-autowarn": {
+          "title": "Sanciones por advertencias",
+          "description": "Decide qué ocurre al acumular advertencias."
+        },
+        "setup-warn": {
+          "title": "Opciones de advertencias",
+          "description": "Ajusta cómo funcionan las advertencias del servidor."
+        },
+        "setup-blacklist": {
+          "title": "Palabras bloqueadas",
+          "description": "Añade palabras y revisa las excepciones del filtro."
+        },
+        "setup-ghost-ping-detector": {
+          "title": "Detectar menciones borradas",
+          "description": "Revisa las menciones eliminadas y sus avisos."
+        },
+        "setup-mute": {
+          "title": "Silenciar miembros",
+          "description": "Configura el rol y las opciones de silencio."
+        },
+        "setup-validcode": {
+          "title": "Verificar miembros con código",
+          "description": "Prepara la verificación por código y el rol resultante."
+        },
+        "setup-epicgamesverify": {
+          "title": "Verificación de Epic Games",
+          "description": "Revisa los ajustes; requiere un proveedor activo para publicar."
+        },
+        "setup-admincmdlog": {
+          "title": "Registro de acciones del personal",
+          "description": "Elige dónde guardar las acciones de administración."
+        },
+        "setup-auditlog": {
+          "title": "Registro de auditoría",
+          "description": "Elige dónde ver los eventos de auditoría del servidor."
+        },
+        "setup-logger": {
+          "title": "Registro de actividad",
+          "description": "Elige dónde recibir los registros de actividad."
+        },
+        "setup-reportlog": {
+          "title": "Recibir reportes",
+          "description": "Elige el canal donde llegarán los reportes."
+        },
+        "setup-boostlog": {
+          "title": "Registro de mejoras",
+          "description": "Elige dónde registrar las mejoras del servidor."
+        },
+        "setup-serverstats": {
+          "title": "Estadísticas del servidor",
+          "description": "Elige dónde mostrar las estadísticas disponibles."
+        },
+        "setup-boost": {
+          "title": "Agradecer mejoras",
+          "description": "Prepara el mensaje para agradecer una mejora del servidor."
+        },
+        "setup-joinlist": {
+          "title": "Lista de entradas",
+          "description": "Configura el seguimiento de entradas al servidor."
+        },
+        "setup-membercount": {
+          "title": "Contadores de miembros",
+          "description": "Configura canales que muestran el número de miembros."
+        },
+        "setup-rank": {
+          "title": "Niveles y experiencia",
+          "description": "Ajusta experiencia, recompensas y opciones de niveles."
+        },
+        "setup-reactionrole": {
+          "title": "Elegir roles con reacciones",
+          "description": "Publica un mensaje para que los miembros elijan sus roles."
+        },
+        "setup-roster": {
+          "title": "Listas de equipos",
+          "description": "Configura las listas de miembros por equipo o rol."
+        },
+        "setup-music": {
+          "title": "Permisos y opciones de música",
+          "description": "Ajusta los roles, permisos y opciones musicales."
+        },
+        "setup-radio": {
+          "title": "Emisoras de radio",
+          "description": "Configura el panel para escuchar emisoras."
+        },
+        "setup-jtc": {
+          "title": "Crear salas de voz al entrar",
+          "description": "Prepara un canal que crea una sala al entrar."
+        },
+        "setup-joinvc": {
+          "title": "Conexión automática a voz",
+          "description": "Elige los canales a los que se conectará OBEY."
+        },
+        "setup-menuticket": {
+          "title": "Menú de tickets",
+          "description": "Agrupa los tipos de ayuda en un menú de selección."
+        },
+        "setup-menuapply": {
+          "title": "Menú de solicitudes",
+          "description": "Agrupa las solicitudes disponibles en un menú."
+        },
+        "setup-autosupport": {
+          "title": "Ayuda por voz",
+          "description": "Configura los canales y opciones de atención por voz."
+        },
+        "setup-suggestion": {
+          "title": "Recibir sugerencias",
+          "description": "Elige dónde publicar las propuestas de los miembros."
+        },
+        "setup-aichat": {
+          "title": "Chat con IA",
+          "description": "Configura el canal y las opciones del chat con IA."
+        },
+        "setup-autobackup": {
+          "title": "Copias de seguridad",
+          "description": "Configura las copias automáticas disponibles."
+        },
+        "setup-autodelete": {
+          "title": "Eliminar mensajes automáticamente",
+          "description": "Elige los canales y reglas de borrado automático."
+        },
+        "setup-autoembed": {
+          "title": "Convertir mensajes en tarjetas",
+          "description": "Elige dónde convertir mensajes al formato de OBEY."
+        },
+        "setup-automeme": {
+          "title": "Publicar memes",
+          "description": "Configura el canal y las opciones de publicación."
+        },
+        "setup-counter": {
+          "title": "Juego de contar",
+          "description": "Prepara el canal y las reglas para contar juntos."
+        },
+        "setup-customcommand": {
+          "title": "Respuestas con comandos propios",
+          "description": "Crea y edita los comandos personalizados del servidor."
+        },
+        "setup-dailyfact": {
+          "title": "Publicar datos curiosos",
+          "description": "Configura dónde publicar los datos curiosos."
+        },
+        "setup-keyword": {
+          "title": "Respuestas por palabras",
+          "description": "Elige las palabras que activarán respuestas del bot."
+        },
+        "setup-youtube": {
+          "title": "Avisos de YouTube",
+          "description": "Elige qué canales seguir y dónde anunciar vídeos."
+        },
+        "setup-twitch": {
+          "title": "Avisos de Twitch",
+          "description": "Elige qué usuarios seguir y dónde anunciar directos."
+        },
+        "setup-tiktok": {
+          "title": "Avisos de TikTok",
+          "description": "Configura creadores y mensajes de aviso disponibles."
+        },
+        "setup-twitter": {
+          "title": "Avisos de X / Twitter",
+          "description": "Configura las cuentas y el canal de avisos."
+        },
+        "setup-owner": {
+          "title": "Propietarios del bot",
+          "description": "Revisa quién puede administrar el bot completo."
+        },
+        "setup-advertise": {
+          "title": "Avisos del bot",
+          "description": "Ajusta los avisos administrados por el propietario."
+        }
+      },
+      "quickTitle": "Empieza por lo habitual",
+      "chooseQuick": "Bienvenida, tickets, música e idioma",
+      "groupDescriptions": {
+        "welcome": "Saluda, despide y agradece las mejoras.",
+        "logs": "Decide dónde recibir registros y reportes.",
+        "security": "Configura filtros, advertencias y protección.",
+        "music": "Prepara música, radio y salas de voz.",
+        "support": "Recibe consultas y solicitudes de miembros.",
+        "roles": "Configura roles, niveles y contadores.",
+        "feeds": "Anuncia vídeos, directos y publicaciones.",
+        "general": "Elige idioma, aspecto y comandos.",
+        "community": "Configura juegos y respuestas automáticas."
+      }
     },
     "language": {
       "title": "Idioma del servidor",

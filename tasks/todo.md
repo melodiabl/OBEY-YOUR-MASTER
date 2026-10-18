@@ -1666,3 +1666,11 @@ Avance local: 63/63 archivos de comandos remodelados y verificados localmente. [
 - [ ] Integración/autenticación del proveedor Epic antes de habilitar su panel.
 - [x] Despliegue de `f4acfac` con 63 hashes comprobados en el contenedor, Gateway/heartbeat, MongoDB, tres nodos públicos, servicios healthy y salud HTTPS 200; imagen anterior y backup conservados. [Evidencia](../docs/platform/evidence/setup-deployment-20261018.json).
 - [ ] Publicación remota de esta rama local (sin push durante el despliegue).
+
+### Facilidad de uso de setups · prioridad posterior al despliegue
+
+Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_SETUP.md), ligado a ARCH-10 y a los comandos existentes.
+
+- [x] Inicio con nombres comprensibles y finalidad para 61 configuraciones prefix, accesos habituales y categorías explicadas en es/en. 32 grupos de builders reales comprobados; registro y comprobación fresca conservados.
+- [ ] Formularios guiados y regreso por el mismo mensaje, conservando borrador, CAS y cierre.
+- [ ] Ruta básica de bienvenida/tickets y acceso explícito a opciones avanzadas, conservando configuración existente.
