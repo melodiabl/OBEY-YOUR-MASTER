@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ChannelSelectMenuBuilder, RoleSelectMenuBuilder,
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ChannelSelectMenuBuilder, RoleSelectMenuBuilder, MentionableSelectMenuBuilder,
   ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle, ChannelType, PermissionFlagsBits: F, escapeMarkdown } = require('discord.js')
 const { isDeepStrictEqual: equal } = require('node:util')
 const { t, localeFor, normalizeLocale } = require('./i18n')
@@ -10,6 +10,7 @@ const copy = (locale, key, vars) => t(locale, `setup.form.${key}`, vars)
 const text = (value, locale) => typeof value === 'object' && value !== null ? value[locale] || value.en : value
 const row = component => new ActionRowBuilder().addComponents(component)
 function display(field, value, locale) {
+  if (field.format) return String(field.format(value, locale)).slice(0, 1024) || copy(locale, 'empty')
   if (typeof value === 'boolean') return copy(locale, value ? 'enabled' : 'disabled')
   if (value === null || value === undefined || value === '') return copy(locale, 'empty')
   if (Array.isArray(value)) return value.length ? value.map(item => escapeMarkdown(String(item))).join('\n').slice(0, 1000) + (JSON.stringify(value).length > 1000 ? '\n…' : '') : copy(locale, 'empty')
@@ -24,24 +25,25 @@ function buildFormSetup(definition, value, draft, selected, locale, status = '')
       { name: copy(locale, 'current'), value: display(field, value.values[selected], locale), inline: true },
       { name: copy(locale, 'pending'), value: Object.hasOwn(draft, selected) ? display(field, draft[selected], locale) : copy(locale, 'unchanged'), inline: true })
     .setFooter({ text: copy(locale, status || (Object.keys(draft).length ? 'unsaved' : 'savedStatus')) })
-  const components = [row(new StringSelectMenuBuilder().setCustomId('form_field').setPlaceholder(copy(locale, 'choose')).addOptions(keys.map(id => ({ label: fieldLabel(id), value: id, default: id === selected }))))]
+  const components = [row(new StringSelectMenuBuilder().setCustomId('form_field').setPlaceholder(copy(locale, 'choose')).addOptions(keys.slice(Math.floor(keys.indexOf(selected) / 25) * 25, Math.floor(keys.indexOf(selected) / 25) * 25 + 25).map(id => ({ label: fieldLabel(id), value: id, default: id === selected }))))]
   if (field.type === 'boolean' || field.type === 'enum') components.push(row(new StringSelectMenuBuilder().setCustomId('form_value').setPlaceholder(copy(locale, 'value')).addOptions((field.type === 'boolean' ? [true, false] : field.options).map(option => ({ label: field.type === 'boolean' ? copy(locale, option ? 'enabled' : 'disabled') : text(field.labels?.[option], locale) || String(option), value: String(option), default: current[selected] === option })))))
-  if (['channel', 'channels', 'role', 'roles'].includes(field.type)) {
+  if (['channel', 'channels', 'role', 'roles', 'principals'].includes(field.type)) {
     const multiple = field.type.endsWith('s'), channels = field.type.startsWith('channel')
-    const select = channels ? new ChannelSelectMenuBuilder().setChannelTypes(...(field.channelTypes || [ChannelType.GuildText, ChannelType.GuildAnnouncement, ...(multiple ? [ChannelType.GuildCategory] : [])])) : new RoleSelectMenuBuilder()
+    const select = channels ? new ChannelSelectMenuBuilder().setChannelTypes(...(field.channelTypes || [ChannelType.GuildText, ChannelType.GuildAnnouncement, ...(multiple ? [ChannelType.GuildCategory] : [])])) : field.type === 'principals' ? new MentionableSelectMenuBuilder() : new RoleSelectMenuBuilder()
     components.push(row(select.setCustomId('form_resource').setPlaceholder(copy(locale, multiple ? 'addResources' : 'chooseResource')).setMinValues(multiple ? 1 : 0).setMaxValues(multiple ? 25 : 1)))
   }
   const button = (id, label, style = ButtonStyle.Secondary, disabled = false) => new ButtonBuilder().setCustomId(id).setLabel(copy(locale, label)).setStyle(style).setDisabled(disabled)
   const edits = []
-  if (!['boolean', 'enum', 'channel', 'channels', 'role', 'roles'].includes(field.type)) edits.push(button('form_edit', field.type === 'list' ? 'add' : 'edit'))
-  if (['channels', 'roles', 'list'].includes(field.type)) edits.push(button('form_remove', 'remove', ButtonStyle.Secondary, !Array.isArray(current[selected]) || !current[selected].length))
+  if (!['boolean', 'enum', 'channel', 'channels', 'role', 'roles', 'principals'].includes(field.type)) edits.push(button('form_edit', field.type === 'list' || field.removable ? 'add' : 'edit'))
+  if ((['channels', 'roles', 'principals', 'list'].includes(field.type) || field.removable)) edits.push(button('form_remove', 'remove', ButtonStyle.Secondary, !current[selected] || !Object.keys(current[selected]).length))
   if (field.clear !== undefined) edits.push(button('form_clear', 'clear'))
   if (edits.length) components.push(new ActionRowBuilder().addComponents(edits))
   components.push(new ActionRowBuilder().addComponents(button('form_save', 'save', ButtonStyle.Primary, !Object.keys(draft).length), button('form_discard', 'discard', ButtonStyle.Secondary, !Object.keys(draft).length), button('form_close', 'close')))
+  if (keys.length > 25) components.push(new ActionRowBuilder().addComponents(button('form_previous', 'previous', ButtonStyle.Secondary, keys.indexOf(selected) < 25), button('form_next', 'next', ButtonStyle.Secondary, keys.indexOf(selected) >= Math.floor((keys.length - 1) / 25) * 25)))
   return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }
 }
 function createFieldModal(field, value, locale, removing = false) {
-  const list = ['list', 'channels', 'roles'].includes(field.type)
+  const list = ['list', 'channels', 'roles', 'principals'].includes(field.type) || field.removable
   const input = new TextInputBuilder().setCustomId('value').setLabel(text(field.label, locale).slice(0, 45)).setStyle(TextInputStyle.Paragraph)
     .setRequired(!field.allowEmpty).setMaxLength(Math.min(field.maxInput || 4000, 4000))
     .setPlaceholder(copy(locale, list ? (removing ? 'removeHint' : 'listHint') : field.type === 'duration' ? 'durationHint' : 'inputHint'))
@@ -49,7 +51,8 @@ function createFieldModal(field, value, locale, removing = false) {
   return new ModalBuilder().setTitle(text(field.label, locale).slice(0, 45)).addComponents(row(input))
 }
 function parseFieldInput(field, input, previous, removing = false) {
-  if (['list', 'channels', 'roles'].includes(field.type)) {
+  if (field.parse) return field.parse(input, previous, removing)
+  if (['list', 'channels', 'roles', 'principals'].includes(field.type) || field.removable) {
     const items = input.split(/\r?\n/).map(value => value.trim()).filter(Boolean), old = Array.isArray(previous) ? previous : []
     return removing ? old.filter(value => !items.includes(value)) : [...new Set([...old, ...items])]
   }
@@ -62,7 +65,7 @@ function parseFieldInput(field, input, previous, removing = false) {
   return input
 }
 async function checkResources(access, field, value) {
-  if (!['channel', 'channels', 'role', 'roles'].includes(field.type)) return
+  if (!['channel', 'channels', 'role', 'roles', 'principals'].includes(field.type)) return
   const multiple = field.type.endsWith('s'), channels = field.type.startsWith('channel'), ids = multiple ? value : [value]
   for (const id of ids) {
     if (!id || id === 'no' || id === 'nochannel') continue
@@ -70,8 +73,15 @@ async function checkResources(access, field, value) {
       const resource = await access.guild.channels.fetch(id)
       if (!resource || resource.guildId !== access.guild.id || !(field.channelTypes || [0, 5, ...(multiple ? [4] : [])]).includes(resource.type) || !resource.permissionsFor(access.member)?.has(F.ViewChannel) || !resource.permissionsFor(access.bot)?.has(field.send === false || multiple ? [F.ViewChannel] : [F.ViewChannel, F.SendMessages, F.EmbedLinks])) throw new Error('setup_resource')
     } else {
+      if (field.type === 'principals') {
+        const roles = await access.guild.roles.fetch()
+        if (roles.has(id)) continue
+        const member = await access.guild.members.fetch({ user: id, force: true })
+        if (member?.guild.id !== access.guild.id || member.id !== id) throw new Error('setup_resource')
+        continue
+      }
       const resource = await access.guild.roles.fetch(id)
-      if (!resource || resource.guild.id !== access.guild.id || resource.id === access.guild.id || resource.managed || !access.bot.permissions.has(F.ManageRoles) || resource.comparePositionTo(access.bot.roles.highest) >= 0 || (field.noAdmin && resource.permissions.has(F.Administrator))) throw new Error('setup_resource')
+      if (!resource || resource.guild.id !== access.guild.id || resource.id === access.guild.id || (!field.permissionOnly && (resource.managed || !access.bot.permissions.has(F.ManageRoles) || resource.comparePositionTo(access.bot.roles.highest) >= 0 || (field.noAdmin && resource.permissions.has(F.Administrator))))) throw new Error('setup_resource')
     }
   }
 }
@@ -79,7 +89,7 @@ async function openFormSetup(client, origin, definition) {
   const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id }
   const locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
   const keys = Object.keys(definition.fields)
-  if (!keys.length || keys.length > 25) throw new Error('invalid_setup_definition')
+  if (!keys.length) throw new Error('invalid_setup_definition')
   const notice = key => ({ content: t(locale, `setup.editor.${key}`), embeds: [], components: [], allowedMentions: { parse: [] } })
   const service = createSetupSettings(client[definition.store || 'settings'], definition.fields, () => Boolean(client._shuttingDown))
   const checkAccess = async () => { const access = await requireSetupAccess(client, context); await definition.authorize?.(access, context); return access }
@@ -96,16 +106,20 @@ async function openFormSetup(client, origin, definition) {
       await interaction.editReply(render())
     }
     const modalControl = removing => ({ modal: () => createFieldModal(field(), current()[selected], locale, removing), async run(interaction) {
-      if (removing && !['list', 'channels', 'roles'].includes(field().type)) throw new Error('invalid_field')
-      if (!removing && ['boolean', 'enum', 'channel', 'channels', 'role', 'roles'].includes(field().type)) throw new Error('invalid_field')
-      await change(interaction, parseFieldInput(field(), interaction.fields.getTextInputValue('value'), current()[selected], removing))
+      if (removing && !['list', 'channels', 'roles', 'principals'].includes(field().type) && !field().removable) throw new Error('invalid_field')
+      if (!removing && ['boolean', 'enum', 'channel', 'channels', 'role', 'roles', 'principals'].includes(field().type)) throw new Error('invalid_field')
+      let input
+      try { input = parseFieldInput(field(), interaction.fields.getTextInputValue('value'), current()[selected], removing) } catch { input = undefined }
+      await change(interaction, input)
     } })
     message = await origin.reply(render())
     return attachSetupSession(client, message, context, { notice, authorize: definition.authorize, controls: {
       form_field: { accept: i => i.isStringSelectMenu(), async run(i) { if (i.values.length !== 1 || !keys.includes(i.values[0])) throw new Error('invalid_field'); selected = i.values[0]; await i.editReply(render()) } },
+      form_previous: { async run(i) { selected = keys[Math.max(0, Math.floor(keys.indexOf(selected) / 25) * 25 - 25)]; await i.editReply(render()) } },
+      form_next: { async run(i) { selected = keys[Math.min(keys.length - 1, Math.floor(keys.indexOf(selected) / 25) * 25 + 25)]; await i.editReply(render()) } },
       form_value: { accept: i => i.isStringSelectMenu(), async run(i) { if (i.values.length !== 1 || !['boolean', 'enum'].includes(field().type)) throw new Error('invalid_field'); await change(i, field().type === 'boolean' ? (i.values[0] === 'true' ? true : i.values[0] === 'false' ? false : null) : i.values[0]) } },
-      form_resource: { accept: i => i.isChannelSelectMenu() || i.isRoleSelectMenu(), async run(i) {
-        if (!['channel', 'channels', 'role', 'roles'].includes(field().type) || field().type.startsWith('channel') !== i.isChannelSelectMenu()) throw new Error('invalid_field')
+      form_resource: { accept: i => i.isChannelSelectMenu() || i.isRoleSelectMenu() || i.isMentionableSelectMenu(), async run(i) {
+        if (!['channel', 'channels', 'role', 'roles', 'principals'].includes(field().type) || field().type.startsWith('channel') !== i.isChannelSelectMenu() || (field().type === 'principals') !== i.isMentionableSelectMenu()) throw new Error('invalid_field')
         const multiple = field().type.endsWith('s')
         if (!Array.isArray(i.values) || i.values.length > (multiple ? 25 : 1)) throw new Error('invalid_field')
         await change(i, multiple ? [...new Set([...(current()[selected] || []), ...i.values])] : i.values[0] || field().clear)

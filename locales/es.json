@@ -1256,7 +1256,9 @@
       "listHint": "Una entrada por línea; se conservan las anteriores",
       "removeHint": "Una entrada o ID exacto por línea para quitar",
       "invalid": "Valor no válido para {field}. Revisa el formato y los límites.",
-      "resource": "Revisa los valores, los canales y los roles. El bot necesita permisos y los roles deben estar por debajo del suyo."
+      "resource": "Revisa los valores, los canales y los roles. El bot necesita permisos y los roles deben estar por debajo del suyo.",
+      "previous": "Anterior",
+      "next": "Siguiente"
     }
   }
 }

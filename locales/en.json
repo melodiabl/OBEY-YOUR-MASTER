@@ -1256,7 +1256,9 @@
       "listHint": "One entry per line; previous entries are kept",
       "removeHint": "One exact entry or ID per line to remove",
       "invalid": "Invalid value for {field}. Check the format and limits.",
-      "resource": "Check the values, channels and roles. The bot needs permissions and roles must be below its highest role."
+      "resource": "Check the values, channels and roles. The bot needs permissions and roles must be below its highest role.",
+      "previous": "Previous",
+      "next": "Next"
     }
   }
 }

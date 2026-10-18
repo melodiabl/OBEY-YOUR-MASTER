@@ -1580,7 +1580,7 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-SECURITY · Moderación y protección**
 
-- [ ] [commands/Setup/setup-admin.js](../commands/Setup/setup-admin.js).
+- [x] [commands/Setup/setup-admin.js](../commands/Setup/setup-admin.js).
 - [x] [commands/Setup/setup-anticaps.js](../commands/Setup/setup-anticaps.js).
 - [x] [commands/Setup/setup-antidiscord.js](../commands/Setup/setup-antidiscord.js).
 - [x] [commands/Setup/setup-antilink.js](../commands/Setup/setup-antilink.js).
@@ -1597,7 +1597,7 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] [commands/Setup/setup-ghost-ping-detector.js](../commands/Setup/setup-ghost-ping-detector.js).
 - [x] [commands/Setup/setup-mute.js](../commands/Setup/setup-mute.js).
 - [x] [commands/Setup/setup-validcode.js](../commands/Setup/setup-validcode.js).
-- [ ] [commands/Setup/setup-warn.js](../commands/Setup/setup-warn.js).
+- [x] [commands/Setup/setup-warn.js](../commands/Setup/setup-warn.js).
 
 **SETUP-MUSIC · Configuración musical y voz**
 
@@ -1619,7 +1619,7 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 **SETUP-ROLES · Roles, niveles y contadores de miembros**
 
 - [ ] [commands/Setup/setup-membercount.js](../commands/Setup/setup-membercount.js).
-- [ ] [commands/Setup/setup-rank.js](../commands/Setup/setup-rank.js).
+- [x] [commands/Setup/setup-rank.js](../commands/Setup/setup-rank.js).
 - [ ] [commands/Setup/setup-reactionrole.js](../commands/Setup/setup-reactionrole.js).
 - [ ] [commands/Setup/setup-roster.js](../commands/Setup/setup-roster.js).
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 26/63 archivos, sin desplegar. Protecciones, alias de menciones, blacklist y mute añadidos a las entregas previas. Siguiente: reglas de avisos/roles y automatizaciones; conservar esquemas, permisos y efectos del consumidor.
+Avance local: 29/63 archivos, sin desplegar. Avisos, niveles y permisos generales/por comando añadidos. Siguiente: comunidad y automatizaciones; conservar esquemas, permisos y efectos del consumidor.
