@@ -1559,7 +1559,7 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 - [ ] [commands/Setup/setup-commands.js](../commands/Setup/setup-commands.js).
 - [ ] [commands/Setup/setup-embed.js](../commands/Setup/setup-embed.js).
-- [ ] [commands/Setup/setup-language.js](../commands/Setup/setup-language.js).
+- [x] [commands/Setup/setup-language.js](../commands/Setup/setup-language.js) — código y menú locales verificados; [evidencia](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [x] [commands/Setup/setup.js](../commands/Setup/setup.js) — navegación local verificada; los demás asistentes siguen abiertos.
 
 **SETUP-WELCOME · Bienvenida y despedidas**
@@ -1647,3 +1647,12 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 - [ ] [commands/Owner/setup-advertise.js](../commands/Owner/setup-advertise.js).
 - [ ] [commands/Owner/setup-owner.js](../commands/Owner/setup-owner.js).
+
+### SETUP-BASE-02 · idioma · verificación local
+
+- [x] Idioma actual y selección pendiente en un mensaje; guardar/restablecer/cerrar con es/en, opciones de catálogos cargados y aliases efectivos conservados.
+- [x] Escritor canónico del mismo campo con cola/CAS, confirmación Mongo, conflicto conservando selección, caché legacy y cierre antes del flush comprobados.
+- [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
+- [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
+
+Siguiente entrega: setup-embed; conciliar campos y defaults existentes antes de sustituir su flujo.

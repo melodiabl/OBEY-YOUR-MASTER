@@ -4,7 +4,11 @@ Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTE
 
 ## Reanudación · 18/10/2026
 
-Última prioridad del usuario: remodelar código y menús de Discord de todos los setups. [Mapa e inventario](../guia-arquitectura/REMODELACION_SETUPS.md), 63 comandos. Navegación inicial implementada localmente en `eadc547b0684ded2c9cca65cc685362c518ab660`: un mensaje con categorías/páginas, registro vivo, autorización fresca, cooldown y collector acotado. 15 escenarios SDK y 100 ciclos de limpieza pasan; los 25 originales siguen pasando. No ejecuta ni migra las reglas internas de los asistentes restantes. Siguiente: setup-language. Temporales retirados, sin publicación/despliegue.
+Última entrega local `f4163778677b3b893bde2308c1a328e8d24111e5`: [setup-language remodelado](../guia-arquitectura/IDIOMA_SETUP.md), con guardado confirmado, CAS y menú de un mensaje. 21 escenarios Mongo/SDK, 100 ciclos y 25 originales pasan; fixtures y script temporal retirados. Dos entradas de 63 remodeladas, 61 pendientes; siguiente setup-embed. Sin publicación o despliegue.
+
+[HeavenCloud](HEAVENCLOUD-2026-10-18.md) no respondió en TCP, HTTP, búsqueda ni handshake WebSocket desde este host. No se cambió la configuración musical.
+
+Prioridad del usuario: remodelar código y menús de Discord de todos los setups. [Mapa e inventario](../guia-arquitectura/REMODELACION_SETUPS.md), 63 comandos. Navegación inicial implementada localmente en `eadc547b0684ded2c9cca65cc685362c518ab660`: un mensaje con categorías/páginas, registro vivo, autorización fresca, cooldown y collector acotado. 15 escenarios SDK y 100 ciclos de limpieza pasan; los 25 originales siguen pasando. No ejecuta ni migra las reglas internas de los asistentes restantes. Siguiente: setup-language. Temporales retirados, sin publicación/despliegue.
 
 Incremento anterior TECH-06 parcial en `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [API pública, reglas y evidencia](../guia-arquitectura/API_BIENVENIDA.md). Cinco rutas existentes documentadas y coincidentes con Express/manifest; imports y tipos incorporados a CI. Diez mutaciones y 20 respuestas HTTP locales comprobadas. No hay nuevos tests/helpers permanentes, publicación remota ni despliegue. TECH-05 y ARCH-04 globales siguen pendientes.
 

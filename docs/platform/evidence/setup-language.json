@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "codeCommit": "f4163778677b3b893bde2308c1a328e8d24111e5",
+  "sourceBase": "82f56b225e29c6938989bfda7a9cd48f00bdd548",
+  "scope": "SETUP-BASE-02: language command, UI, canonical save and shared setup guard",
+  "report": "docs/guia-arquitectura/IDIOMA_SETUP.md",
+  "sourceSha256": {
+    "commands/Setup/setup-language.js": "36e99d8c77f16828ee18dda2c2bcd3689b96cc066b658f26973f89f6b20a9fce",
+    "handlers/setup-language.js": "b78eca0f972636bec0515d909f5888ffeab304ed1ca29938ee4a33f234aa5fbe",
+    "handlers/language-settings.js": "23d60859e0a9a892bc75a505b3012f2b8d95f5aece68ab6be0f311ef5aca39bf",
+    "handlers/setup-access.js": "8e4203ea605ac3d6958e0f7f0b7ae8e109f1e24b3a2b24812635523f33452738",
+    "handlers/setup-navigation.js": "69560dbb8f783795301c180269ee1000d9a3b69f4841a7865b5e01d68eeab6f0",
+    "locales/es.json": "fc9840eadd93d37d95115b207d63304f5a2015daa4e2534daea3335ec0ff637d",
+    "locales/en.json": "59dbb9b1c37040b3ed98aaba2394c1a1d782fe249d2433136bf2bc752da52b1c"
+  },
+  "availableLoadedLanguageCodes": [
+    "es",
+    "en",
+    "de",
+    "in"
+  ],
+  "defaultOnMissingField": "es",
+  "explicitResetChoice": "en",
+  "legacySpPreservedOnRead": true,
+  "effectiveAliasesInInventoryUnchanged": true,
+  "verificationMethod": "Temporary Node harness with real Mongo/SyncMap, real discord.js InteractionCollector/builders, fake Discord actor/transport; no Gateway or messages sent",
+  "scenarioGroups": [
+    "supported and actually loaded languages",
+    "builders and es/en parity",
+    "read/selection without writes; confirmed save and preservation",
+    "reset prepares English; Save confirms it",
+    "close without saving",
+    "other actor and forged language",
+    "admin/channel revocation",
+    "two panels retain losing selection on conflict",
+    "duplicate Save harmless",
+    "unloaded supported language rejected",
+    "expiry during authorization",
+    "shutdown during authorization",
+    "failed ACK",
+    "CAS between two stores",
+    "missing document/field, unknown language and sp",
+    "invalid inputs",
+    "accepted save included in database flush",
+    "newer legacy cache write preserved",
+    "lost response after commit never announces false success",
+    "shared navigation guard retains filtering",
+    "100 SDK open/expiry cycles"
+  ],
+  "scenarioGroupsPassed": 21,
+  "failed": 0,
+  "unhandledRejections": 0,
+  "stress": {
+    "sdkOpenExpiryCycles": 100,
+    "remainingListeners": 0,
+    "listenerLimitRestored": true
+  },
+  "persistence": {
+    "canonicalField": "language",
+    "newCollections": 0,
+    "newSchemaFields": 0,
+    "acceptedSavesJoinExistingQueueSynchronously": true,
+    "cas": "presence and raw language value",
+    "revisionIsHistory": false,
+    "newerLegacyCachedWritesPreserved": true,
+    "unrelatedSettingsPreserved": [
+      "welcome.dm",
+      "welcome.custom",
+      "languageTestOther"
+    ]
+  },
+  "standardChecks": {
+    "originalTestsPassed": 25,
+    "originalTestsFailed": 0,
+    "welcomeTypes": "pass (welcome scope only)",
+    "welcomeDependencies": "pass",
+    "modules": 1024,
+    "dependencies": 3201,
+    "violations": 0,
+    "syntax": "pass",
+    "diff": "pass"
+  },
+  "cleanup": {
+    "isolatedDatabaseRunsDropped": 2,
+    "connectionsAndFixtureCollectorsClosed": true,
+    "temporaryHarnessRemoved": true,
+    "permanentTestOrHelperScriptsAdded": 0
+  },
+  "limits": [
+    "No native Discord client appearance verification or Gateway/OAuth",
+    "No full startup/image/build/production shutdown",
+    "Other legacy language writers are not migrated",
+    "Existing global process lifecycle retained",
+    "Selected storage value revision has no monotonic history or operation receipt",
+    "New panel copy es/en; legacy German/Hindi retain fallback behavior"
+  ],
+  "pushed": false,
+  "deployed": false,
+  "productionTouched": false
+}

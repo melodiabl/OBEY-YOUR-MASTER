@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "report": "docs/platform/HEAVENCLOUD-2026-10-18.md",
+  "candidate": {
+    "host": "free-lava.heavencloud.in",
+    "port": 4000,
+    "secure": false,
+    "credentials": "User-provided public password used transiently, omitted from evidence"
+  },
+  "operatorSource": "https://heavencloud.in/service/public-lavalink-servers",
+  "dns": {
+    "address": "109.230.233.91",
+    "family": 4
+  },
+  "probes": [
+    {
+      "path": "/version",
+      "result": "TimeoutError",
+      "ms": 8004
+    },
+    {
+      "path": "/v4/info",
+      "result": "TimeoutError",
+      "ms": 8007
+    },
+    {
+      "path": "/v4/stats",
+      "result": "TimeoutError",
+      "ms": 8003
+    },
+    {
+      "probe": "tcp",
+      "result": "timeout",
+      "ms": 4075
+    },
+    {
+      "path": "/v4/loadtracks",
+      "queryType": "ytsearch",
+      "result": "TimeoutError",
+      "ms": 5006
+    },
+    {
+      "path": "/v4/websocket",
+      "result": "handshake timeout",
+      "ms": 5030,
+      "identity": "synthetic; no Discord token"
+    }
+  ],
+  "existingClientPolicy": {
+    "validation": "public_node_requires_tls",
+    "policyChanged": false
+  },
+  "verifiedFunctionalCapabilities": [],
+  "actualAudioTest": false,
+  "activeNodeChanged": false,
+  "privateNodeActivated": false,
+  "productionSessionsTouched": false,
+  "deployed": false,
+  "conclusion": "Unreachable from the OBEY host during these bounded probes; no working-service RTT, plugin, source, audio or stability claim. Not selected or added as backup."
+}

@@ -4,7 +4,11 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 
 ## Reanudación local con la guía nueva · 18 de octubre de 2026
 
-Último incremento local `eadc547b0684ded2c9cca65cc685362c518ab660`: [navegación de setups](../guia-arquitectura/REMODELACION_SETUPS.md). El usuario confirmó remodelar código y menús de Discord juntos. Inventario: 63 comandos/40.107 líneas. Nuevo setup por categorías/páginas desde el registro cargado, sesiones de mensaje, revalidación y cierre; 15 escenarios con SDK, 100 ciclos sin listeners restantes y 25/25 originales. Script temporal retirado. Los otros 62 archivos de comandos conservan sus migraciones pendientes; siguiente setup-language. Sin publicación ni despliegue.
+Último incremento local `f4163778677b3b893bde2308c1a328e8d24111e5`: [idioma remodelado](../guia-arquitectura/IDIOMA_SETUP.md). Un mensaje con idioma actual/selección, Guardar/Usar inglés/Cerrar. Escritor del mismo campo language con cola/CAS, permisos compartidos, conflicto conservando selección y resultado desconocido sin falso éxito. 21 escenarios Mongo/SDK, 100 ciclos sin listeners restantes, 25 originales y checks de bienvenida/sintaxis pasan. Temporales retirados. Dos de 63 entradas locales, 61 pendientes; siguiente setup-embed. Sin publicación/despliegue.
+
+[HeavenCloud aportado por el usuario](HEAVENCLOUD-2026-10-18.md): DNS resolvió, pero TCP/REST/búsqueda/WebSocket agotaron sus plazos. No se validaron audio/plugins ni se cambió el nodo activo.
+
+Incremento previo `eadc547b0684ded2c9cca65cc685362c518ab660`: [navegación de setups](../guia-arquitectura/REMODELACION_SETUPS.md). El usuario confirmó remodelar código y menús de Discord juntos. Inventario: 63 comandos/40.107 líneas. Nuevo setup por categorías/páginas desde el registro cargado, sesiones de mensaje, revalidación y cierre; 15 escenarios con SDK, 100 ciclos sin listeners restantes y 25/25 originales. Script temporal retirado. Los otros 62 archivos de comandos conservan sus migraciones pendientes; siguiente setup-language. Sin publicación ni despliegue.
 
 Incremento previo `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [API/imports de bienvenida](../guia-arquitectura/API_BIENVENIDA.md). Entrada pública explícita, reglas de dependencias y tipos en CI; OpenAPI para cinco rutas. Diez mutaciones rechazadas, 20 respuestas HTTP con Mongo aislado validadas y 25/25 tests originales. CLI y lockfile comprobados con instalación limpia aislada; sin scripts/tests permanentes nuevos ni despliegue. TECH-06 parcial, resto global pendiente.
 

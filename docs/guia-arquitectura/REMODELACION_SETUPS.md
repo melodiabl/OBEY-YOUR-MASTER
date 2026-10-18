@@ -27,7 +27,7 @@ El usuario confirmó «Código y menús de Discord juntos». Cada entrega remode
 | 9 | SETUP-FEEDS · plataformas | 4 | Integraciones y credenciales actuales, salud real del proveedor y deduplicación |
 | 10 | SETUP-OWNER · dueño | 2 | Autorización exclusiva y audiencias privadas; no exponer por navegación pública |
 
-Cada comando del JSON pertenece exactamente a un grupo y permanece pendiente. Los grupos se subdividen en entregas de un comando o una operación, normalmente dos a cinco archivos; la tabla no autoriza una reescritura de miles de líneas en un solo commit. Un bloqueo específico de proveedor no impide avanzar en una operación independiente.
+Cada comando del JSON pertenece exactamente a un grupo y estaba pendiente en esa base. Los incrementos posteriores y sus casillas actuales figuran al final y en tasks/todo.md. Los grupos se subdividen en entregas de un comando o una operación, normalmente dos a cinco archivos; la tabla no autoriza una reescritura de miles de líneas en un solo commit. Un bloqueo específico de proveedor no impide avanzar en una operación independiente.
 
 ## Criterios para cada entrega
 
@@ -67,6 +67,10 @@ Cada mensaje usa el collector del SDK con máximo de 180 segundos e inactividad 
 
 La prueba no envió mensajes a Discord ni ejecutó los 62 asistentes restantes. El collector es real; providers, transportes y handlers de destino son fixtures. No acredita la apariencia en el cliente Discord, OAuth/Gateway, arranque completo o ciclo global. El script temporal se retiró después de terminar. El inventario inicial sigue ligado a su base y hashes históricos: esta entrega elimina cuatro eval y una de las seis altas globales manuales; no reescribe las demás.
 
-El primer recorrido queda comprobado localmente; SETUP-BASE y los otros grupos siguen abiertos. Siguiente entrega: setup-language, incluyendo sus menús y escritura/lectura del idioma con las opciones existentes conciliadas. Sin publicación remota o despliegue; los datos, motor musical y configuración privada no se tocaron.
+El primer recorrido queda comprobado localmente; SETUP-BASE y los otros grupos siguen abiertos. La entrega posterior de [setup-language](IDIOMA_SETUP.md) ya remodela su menú y guardado; siguiente entrada: setup-embed. Sin publicación remota o despliegue; los datos, motor musical y configuración privada no se tocaron.
 
 Fuentes primarias comprobadas: [Message 14.27.0](https://discord.js.org/docs/packages/discord.js/14.27.0/Message:Class) e [InteractionCollector 14.27.0](https://discord.js.org/docs/packages/discord.js/14.27.0/InteractionCollector:Class); la eliminación de listeners se contrastó también con el código instalado del SDK.
+
+## Segunda entrega local · idioma
+
+[Idioma: comportamiento, datos y evidencia](IDIOMA_SETUP.md), commit `f4163778677b3b893bde2308c1a328e8d24111e5`. Un mensaje con estado actual, selección pendiente, Guardar/Usar inglés/Cerrar; es/en, cuatro idiomas realmente cargados, permisos por acción y persistencia confirmada/CAS del mismo campo legacy. Pasan 21 escenarios Mongo/SDK, 100 ciclos y los 25 originales. Dos de 63 archivos de comandos remodelados localmente; quedan 61. Siguiente setup-embed. Sin despliegue.

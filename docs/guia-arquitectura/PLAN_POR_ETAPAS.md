@@ -180,3 +180,5 @@ Entrada pública explícita de configuración de bienvenida y reglas de imports/
 ## Continuación priorizada por el usuario · setups
 
 Se extiende el plan existente con [63 comandos de setup](REMODELACION_SETUPS.md), código y menús de Discord juntos. Primera entrega local: navegación `setup` en `eadc547b0684ded2c9cca65cc685362c518ab660`, con registro vivo, permisos y sesiones acotadas. Las tareas por comando están en [tasks/todo](../../tasks/todo.md). No cierra TECH-07 ni una migración completa de los otros dominios; conserva los pendientes globales anteriores. Siguiente: setup-language.
+
+Segunda entrada de setups remodelada localmente: [setup-language](IDIOMA_SETUP.md), `f4163778677b3b893bde2308c1a328e8d24111e5`. Código y menú juntos; 21 escenarios/100 ciclos SDK/25 originales. Siguiente setup-embed; los otros dominios del plan y TECH-05 global continúan abiertos.

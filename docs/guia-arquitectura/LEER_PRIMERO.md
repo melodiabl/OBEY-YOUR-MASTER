@@ -36,3 +36,5 @@ Continuación TECH-04: [formulario de bienvenida](FORMULARIO_BIENVENIDA.md), com
 Continuación TECH-06 parcial: [API y límites comprobables de bienvenida](API_BIENVENIDA.md), commit `ddc4ec433252fefc68ce41e10329a7a64e47a80f`. Entrada pública explícita, imports/tipos en CI y cinco rutas documentadas con comportamiento HTTP/Mongo local comprobado. La API avanzada y las dependencias globales del plan siguen abiertas; no se ha publicado ni desplegado.
 
 Prioridad posterior indicada por el usuario: [remodelación de los 63 setups](REMODELACION_SETUPS.md), código y menús de Discord juntos. Navegación `setup` implementada y comprobada localmente en `eadc547b0684ded2c9cca65cc685362c518ab660`; los asistentes individuales conservan sus tareas pendientes.
+
+Continuación de setups: [idioma y guardado confirmado](IDIOMA_SETUP.md) en `f4163778677b3b893bde2308c1a328e8d24111e5`. Dos de 63 entradas remodeladas localmente; quedan 61 y sigue setup-embed. El candidato Lavalink aportado se comprobó aparte en [HeavenCloud](../platform/HEAVENCLOUD-2026-10-18.md) sin modificar el principal o respaldos.
