@@ -1106,6 +1106,25 @@
         "community": "Community and automation"
       },
       "categoryCount": "There are {count} setups in this category. Choose one from the menu below."
+    },
+    "language": {
+      "title": "Server language",
+      "description": "Choose a language and press Save. The current language is shown here.",
+      "current": "Current language",
+      "pending": "Pending selection",
+      "unchanged": "No changes",
+      "unavailableLanguage": "Legacy language unavailable",
+      "choose": "Choose a language",
+      "save": "Save",
+      "reset": "Use English",
+      "close": "Close",
+      "unsaved": "Changes apply when you save.",
+      "saved": "Language saved.",
+      "conflict": "The language changed in another panel. Review the current value before saving again.",
+      "notYours": "This panel belongs to another session. Use setup-language to open your own.",
+      "closed": "Language panel closed.",
+      "expired": "This panel has expired. Open setup-language to check the current language.",
+      "unavailable": "I could not confirm access or saving. Reopen setup-language to check the current language."
     }
   }
 }

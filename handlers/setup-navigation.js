@@ -1,6 +1,7 @@
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits: F, escapeMarkdown } = require('discord.js')
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, escapeMarkdown } = require('discord.js')
 const { availableCommands } = require('./help')
 const { t, localeFor, normalizeLocale } = require('./i18n')
+const { requireSetupAccess } = require('./setup-access')
 
 const PAGE_SIZE = 25
 const groups = [
@@ -19,17 +20,7 @@ const safe = (value, limit) => escapeMarkdown(String(value)).slice(0, limit)
 class SetupError extends Error { constructor(code) { super(code); this.code = code } }
 
 async function readSetupView(client, context) {
-  if (client._shuttingDown || client._dbReady === false) throw new SetupError('unavailable')
-  const guild = client.guilds?.cache?.get(context.guildId)
-  if (!guild || guild.available === false) throw new SetupError('denied')
-  const [member, bot, channel] = await Promise.all([
-    guild.members.fetch({ user: context.actorId, force: true }), guild.members.fetchMe({ force: true }),
-    guild.channels.fetch(context.channelId),
-  ])
-  if (member?.id !== context.actorId || member.guild?.id !== guild.id || !member.permissions.has(F.Administrator) ||
-    channel?.id !== context.channelId || channel.guildId !== guild.id || !channel.permissionsFor(member)?.has(F.ViewChannel) ||
-    !channel.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks])) throw new SetupError('denied')
-  if (client._shuttingDown || client._dbReady === false) throw new SetupError('unavailable')
+  const { guild, member, bot, channel } = await requireSetupAccess(client, context)
   const settings = client.settings.get(guild.id) || {}
   const commands = availableCommands(client, { guild, member, bot, channel, settings, musicState: client.music?.getState(guild.id) })
     .filter(entry => entry.transport === 'prefix' && entry.name !== 'setup' && /^setup(?:-|music$)/.test(entry.name))

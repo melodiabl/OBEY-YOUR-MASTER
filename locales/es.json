@@ -1106,6 +1106,25 @@
         "community": "Comunidad y automatizaciones"
       },
       "categoryCount": "Hay {count} configuraciones en esta categoría. Elige una en el menú inferior."
+    },
+    "language": {
+      "title": "Idioma del servidor",
+      "description": "Elige el idioma y pulsa Guardar. Puedes ver el idioma actual sin recorrer más menús.",
+      "current": "Idioma actual",
+      "pending": "Selección pendiente",
+      "unchanged": "Sin cambios",
+      "unavailableLanguage": "Idioma heredado no disponible",
+      "choose": "Elige un idioma",
+      "save": "Guardar",
+      "reset": "Usar inglés",
+      "close": "Cerrar",
+      "unsaved": "Los cambios se aplican al guardar.",
+      "saved": "Idioma guardado.",
+      "conflict": "El idioma cambió desde otro panel. Revisa el valor actual antes de guardar de nuevo.",
+      "notYours": "Este panel pertenece a otra sesión. Abre el tuyo con setup-language.",
+      "closed": "Panel de idioma cerrado.",
+      "expired": "El panel ha caducado. Abre setup-language para consultar el idioma actual.",
+      "unavailable": "No pude confirmar el acceso o el guardado. Vuelve a abrir setup-language para consultar el idioma actual."
     }
   }
 }
