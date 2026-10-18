@@ -2,6 +2,7 @@
 // searchDiscordCatalog/enqueueCatalogItem, pero ahora todo resuelve vía
 // client.music.search (Lavalink: spsearch→ytmsearch→ytsearch) y LEO solo para álbumes.
 const http = require('http')
+const { sameRecording } = require('./music/recordings')
 
 const CATALOG_LIMIT = 20
 const LEO = 'http://140.245.242.153:8081'
@@ -93,7 +94,7 @@ async function enqueueCatalogItem(client, message, voiceChannel, item) {
     // Item plano sin encoded — resolver por URI o por título
     const q = info.uri || `${info.title || ''} ${info.author || ''}`.trim()
     const result = await client.music.search(q, message.author, { guildId: message.guild.id }).catch(() => null)
-    const first  = result?.tracks?.find(t => t.encoded)
+    const first  = result?.tracks?.find(t => t.encoded && sameRecording(item, t))
     if (!first) throw new Error('No se pudo resolver esta pista.')
     tracks = [first]
   }

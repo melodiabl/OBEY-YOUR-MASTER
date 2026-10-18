@@ -1681,5 +1681,5 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 ### Continuación solicitada · slash y música como trabajos separados
 
 - [x] `/setup` global, privado, sin argumentos y con navegación simplificada. 19 grupos SDK del registro/flujo pasan; el motor musical no cambia en esta entrega.
-- [ ] Música: identificar Shorts, priorizar grabaciones originales y conservar identidad/duración en recuperación. Entrega independiente del centralizador de setups.
+- [x] Música: identificar Shorts, priorizar grabaciones originales y conservar identidad/duración en recuperación. 48 grupos locales y 25 tests originales pasan; [alcance y límites](../docs/guia-arquitectura/SELECCION_MUSICAL.md). Entrega independiente del centralizador de setups.
 - [ ] Verificar y desplegar las revisiones terminadas; continuar los pendientes globales del plan.

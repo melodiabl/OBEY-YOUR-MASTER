@@ -1,4 +1,5 @@
 const axios = require('axios')
+const { isYouTubeShort, recordingPreference } = require('./music/recordings')
 
 const SOURCE_DEFINITIONS = {
   youtube:    { prefix: 'ytsearch',  label: 'YouTube' },
@@ -81,6 +82,7 @@ function relevanceScore(item, query, index, duplicateCount = 1) {
   score += Math.min(240, Math.max(0, duplicateCount - 1) * 90)
   score += Math.min(100, Number(item.popularity || 0))
   if (item.sourceName === 'spotify') score += 25
+  if (item.type === 'track') score += recordingPreference(item, query)
   return score
 }
 
@@ -91,7 +93,7 @@ function rankResults(items, query, keyFn) {
     if (key) counts.set(key, (counts.get(key) || 0) + 1)
   }
   return uniqueBy(
-    items
+    items.filter(item => !isYouTubeShort(item))
       .map((item, index) => ({
         item,
         index,
@@ -155,7 +157,8 @@ function normalizeTrack(raw, sourceHint = '') {
     identifier: cleanText(info.identifier) || null,
     isStream: Boolean(info.isStream),
     isSeekable: info.isSeekable !== false,
-    playable: Boolean(info.uri || info.url),
+    isShort: isYouTubeShort(raw),
+    playable: Boolean(info.uri || info.url) && !isYouTubeShort(raw),
   }
 }
 
@@ -716,7 +719,7 @@ function createMusicCatalog(client, options = {}) {
       }
     }
     const rawTracks = result.loadType === 'track' ? [result.data] : Array.isArray(result.data) ? result.data : []
-    return { tracks: rawTracks.map(normalizeTrack), albums: [], playlists: [] }
+    return { tracks: rawTracks.map(normalizeTrack).filter(track => !track.isShort), albums: [], playlists: [] }
   }
 
   async function resolveCollection(identifier) {
@@ -753,6 +756,7 @@ function createMusicCatalog(client, options = {}) {
     const cleanQuery = cleanText(query)
     const limit = Math.min(20, Math.max(1, Number(options.limit || 8)))
     if (!cleanQuery) return { tracks: [], albums: [], playlists: [], sources: [], advancedSearch: false }
+    if (isYouTubeShort(cleanQuery)) return { tracks: [], albums: [], playlists: [], sources: [], advancedSearch: false }
 
     const node = getNode()
     if (!node) throw new Error('No hay nodos Lavalink disponibles.')

@@ -2,6 +2,7 @@ const obeyUi = require("../assets/system")
 const { configureSponsorBlock } = require('./nodes-runtime')
 const { searchNodes, trackOnNode } = require('./node-search')
 const { allowedMusicTrack } = require('./nodes-config')
+const { sameRecording } = require('./recordings')
 const MusicHistory = require('../../database/schemas/MusicHistorySchema')
 
 const { playerStates, liveMessages, liveTimers, getState, resetState } = require('./state')
@@ -11,22 +12,6 @@ const clock = require('./playback-clock')
 const { buildNPEmbed, buildControls, buildQueueEmbed, buildQueueRows } = require('./embeds')
 const { toggleLike, buildLikeEmbed } = require('./likes')
 const { startLiveUpdate, stopLiveUpdate, scheduleNpUpdate, updatePanel } = require('./liveupdate')
-
-function normalizedSongText(value) {
-  return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase().replace(/\([^)]*(official|video|lyrics|audio)[^)]*\)/g, '')
-    .replace(/\[[^\]]*(official|video|lyrics|audio)[^\]]*\]/g, '')
-    .replace(/[^a-z0-9]+/g, ' ').trim()
-}
-
-function sameSong(a, b) {
-  const title = normalizedSongText(a?.title)
-  const candidateTitle = normalizedSongText(b?.title)
-  const artist = normalizedSongText(a?.author).split(' feat ')[0]
-  const candidateArtist = normalizedSongText(b?.author)
-  return Boolean(title && artist && candidateArtist && title === candidateTitle &&
-    (candidateArtist === artist || candidateArtist.includes(artist) || artist.includes(candidateArtist)))
-}
 
 module.exports = client => {
   if (!client.shoukaku) {
@@ -328,7 +313,7 @@ module.exports = client => {
       if (!player) player = client.shoukaku?.players?.get(guildId)
       if (!player) return
 
-      if (!failed && state.loop === 'track' && state.currentTrack?.encoded) {
+      if (!failed && state.loop === 'track' && state.currentTrack?.encoded && allowedMusicTrack(state.currentTrack)) {
         state.startedAt = Date.now(); state.lastPosition = 0; state.paused = false
         await playQueuedTrack(guildId, player, state, state.currentTrack.encoded)
         emitState(guildId)
@@ -337,9 +322,11 @@ module.exports = client => {
 
       if (!failed && rotate && state.loop === 'queue' && state.currentTrack) state.queue.push(state.currentTrack)
 
-      let next = state.shuffle && state.queue.length > 1
+      const takeNext = () => state.shuffle && state.queue.length > 1
         ? state.queue.splice(Math.floor(Math.random() * state.queue.length), 1)[0]
         : state.queue.shift()
+      let next = takeNext()
+      while (next && !allowedMusicTrack(next)) next = takeNext()
 
       if (!next) {
         if (state.autoplay && state.currentTrack) {
@@ -391,7 +378,7 @@ module.exports = client => {
         const info = next.info || next
         const q    = info.uri || `${info.title || ''} ${info.author || ''}`.trim()
         const resolved = q ? await this.search(q, info.requester || 'Playlist', { guildId }).catch(() => null) : null
-        const real = resolved?.tracks?.find(t => t.encoded)
+        const real = resolved?.tracks?.find(t => t.encoded && sameRecording(next, t))
         if (!real) return this._playNext(guildId, player, { failed: true }) // irrecuperable → siguiente
         if (real.info) { real.info.requester = info.requester || real.info.requester; real.info.requesterId = info.requesterId || real.info.requesterId }
         next = real
@@ -439,7 +426,7 @@ module.exports = client => {
         // Solo se usa si título y artista coinciden para evitar otra grabación.
         if (info.sourceName === 'youtube' || info.sourceName === 'spotify') {
           const direct = await node.rest.resolve(`jssearch:${info.title || ''} ${info.author || ''}`).catch(() => null)
-          const replacement = tracksFromResolve(direct).find(t => allowedMusicTrack(t) && t.encoded && t.info?.sourceName === 'jiosaavn' && sameSong(info, t.info))
+          const replacement = tracksFromResolve(direct).find(t => allowedMusicTrack(t) && t.encoded && t.info?.sourceName === 'jiosaavn' && sameRecording(failed, t))
           if (replacement) {
             replacement.info.requester = info.requester || 'Fallback'
             replacement.info.requesterId = info.requesterId
@@ -451,7 +438,7 @@ module.exports = client => {
           }
         }
         const res  = await node.rest.resolve(`ytsearch:${info.title || ''} ${info.author || ''}`)
-        const fallback = tracksFromResolve(res).find(t => allowedMusicTrack(t) && t.encoded && t.info?.uri !== info.uri && sameSong(info, t.info))
+        const fallback = tracksFromResolve(res).find(t => allowedMusicTrack(t) && t.encoded && t.info?.uri !== info.uri && sameRecording(failed, t))
         if (fallback) {
           fallback._fallbackAttempted = true
           if (fallback.info) { fallback.info.requester = info.requester || 'Fallback'; fallback.info.requesterId = info.requesterId; fallback._fallbackAttempted = true }
@@ -908,8 +895,22 @@ module.exports = client => {
               loop: saved.loop || 'none', autoplay: Boolean(saved.autoplay), shuffle: Boolean(saved.shuffle), radioMode: Boolean(saved.radioMode),
             })
             await player.setGlobalVolume(state.volume)
+            const restoreEffects = async () => {
+              if (saved.filter === 'custom' && saved.customFilters) { await player.setFilters(saved.customFilters); state.filter = 'custom' }
+              else if (saved.filter && !['none', 'off'].includes(saved.filter)) await client.music.setFilter(saved.guildId, saved.filter)
+            }
+            if (!allowedMusicTrack(saved.currentTrack)) {
+              // Old sessions may contain tracks rejected by the current policy.
+              state.currentTrack = null; state.startedAt = null; state.lastPosition = 0
+              if (state.loop === 'track') state.loop = 'none'
+              state.nodeTransition = false; state.reconnectVoice = false
+              await client.music._playNext(saved.guildId, player, { failed: true, rotate: false })
+              await restoreEffects()
+              emitState(saved.guildId)
+              return
+            }
             const result = await client.music.search(saved.currentTrack.info?.uri || saved.currentTrack.uri, 'Recuperación', { guildId: saved.guildId })
-            const track = result?.tracks?.find(track => track.encoded)
+            const track = result?.tracks?.find(track => track.encoded && sameRecording(saved.currentTrack, track))
             if (!track) throw new Error('La pista guardada no está disponible')
             const savedInfo = saved.currentTrack.info || saved.currentTrack
             track.info.requester = savedInfo.requester
@@ -923,8 +924,7 @@ module.exports = client => {
               state.status = state.paused ? 'paused' : 'playing'
             }
             state.reconnectVoice = false
-            if (saved.filter === 'custom' && saved.customFilters) { await player.setFilters(saved.customFilters); state.filter = 'custom' }
-            else if (saved.filter && !['none', 'off'].includes(saved.filter)) await client.music.setFilter(saved.guildId, saved.filter)
+            await restoreEffects()
             await client.music.sendNowPlaying(saved.guildId, track)
             state.nodeTransition = false
             emitState(saved.guildId)

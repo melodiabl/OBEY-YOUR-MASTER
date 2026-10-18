@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T22:11:38.259103+00:00",
+  "targetedGroupsPassed": 48,
+  "originalTestsPassed": 25,
+  "originalTestFiles": 3,
+  "welcomeTypecheck": true,
+  "dependencyViolations": 0,
+  "dependencyModules": 1065,
+  "dependencyEdges": 3244,
+  "gatewayOpenedByTests": false,
+  "audioPlayedByTests": false,
+  "fileHashes": {
+    "handlers/music/recordings.js": "53906adb01076341911bab0142570e1f73ab658ba51b11c0826bb6db9d31cec5",
+    "handlers/music/node-search.js": "3bb13ae5e8ef87a7751c482b22b03648c3496366bc762707fcea84ad5e51bbbc",
+    "handlers/music/nodes-config.js": "62f01297dcd2d8d5d14d92c4c8269761285cff11be4ffcd3f9a8274c15e3a7e3",
+    "handlers/music/autoplay.js": "dd598399d155f6792ab4db7dbfefd48c1a46a7342a323aab28b9de89085234d4",
+    "handlers/music/index.js": "7ce2f664fb5ef7e10650afe4b3dda0da427518087db723fea747f690be62f97a",
+    "handlers/musiccatalog.js": "792c62033dab9b1339f31e9682e42976a95afd68c06a3b4aac809ec03efaca11",
+    "handlers/discordmusiccatalog.js": "653484e3d9bb9128ad3f0e1006ac960635ab179384a53a8db571eeeb9947e755"
+  },
+  "temporaryVerifierSha256": "026ed3f1b7789c5aaedf7d80d0daa3f817c64fb4d183fa138002888d54e6c76a",
+  "temporaryVerifierRetained": false,
+  "deployed": false,
+  "scope": "Music search, playback selection and recovery only; no setup navigation changes",
+  "publicNodeProbe": {
+    "node": "gdjkhp",
+    "requests": 2,
+    "readOnly": true,
+    "sha256": "41e533ec44c909f37400a28a014ef10c4d36f6da45fa073e301e0ff05c873d6e"
+  },
+  "limitations": [
+    "Shorts cannot always be identified from watch URLs without provider metadata",
+    "Ranking signals do not certify original ownership",
+    "No real audio listening test or manual Discord walkthrough"
+  ]
+}

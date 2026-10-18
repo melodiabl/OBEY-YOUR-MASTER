@@ -1,5 +1,6 @@
 const { lookupWithTimeout } = require('./resolve-timeout')
 const { allowedMusicTrack } = require('./nodes-config')
+const { hasUnrequestedVersion } = require('./recordings')
 
 function titleKey(value) {
   return String(value || '').normalize('NFKD').toLowerCase()
@@ -19,7 +20,7 @@ async function findAutoplayTrack(music, guildId, seed, history, isCurrent, signa
     if (!isCurrent()) return null
     const result = await lookupWithTimeout(() => music.search(query, 'Autoplay', { guildId, signal }), 12000, signal).catch(() => null)
     if (!isCurrent()) return null
-    const candidates = (result?.tracks || []).filter(track => allowedMusicTrack(track) && track.encoded && track.info?.uri &&
+    const candidates = (result?.tracks || []).filter(track => allowedMusicTrack(track) && !hasUnrequestedVersion(track, query) && track.encoded && track.info?.uri &&
       !encoded.has(track.encoded) && !uris.has(track.info.uri) && !titles.has(titleKey(track.info.title)))
     if (candidates.length) return candidates[Math.floor(Math.random() * Math.min(8, candidates.length))]
   }

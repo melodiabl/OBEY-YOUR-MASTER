@@ -1,10 +1,12 @@
 const fs = require('node:fs')
 const net = require('node:net')
+const { isYouTubeShort } = require('./recordings')
 const ADULT_SOURCES = new Set(['pornhub', 'soundgasm', 'hentai', 'nsfw'])
-const MUSIC_SOURCES = new Set(['youtube', 'ytdlp', 'spotify', 'soundcloud', 'bandcamp', 'deezer', 'applemusic', 'tidal', 'jiosaavn', 'qobuz', 'yandexmusic', 'audiomack', 'audius', 'netease', 'amazonmusic', 'gaana', 'pandora', 'iheartradio', 'mixcloud', 'ocremix', 'http'])
+const MUSIC_SOURCES = new Set(['youtube', 'ytmusic', 'youtubemusic', 'ytdlp', 'spotify', 'soundcloud', 'bandcamp', 'deezer', 'applemusic', 'tidal', 'jiosaavn', 'qobuz', 'yandexmusic', 'audiomack', 'audius', 'netease', 'amazonmusic', 'gaana', 'pandora', 'iheartradio', 'mixcloud', 'ocremix', 'http'])
 function assertMusicQuery(value) {
   if (typeof value !== 'string' || !value.trim() || value.length > 2000) throw new Error('invalid_music_query')
   const query = value.trim()
+  if (isYouTubeShort(query)) throw new Error('Los Shorts no se reproducen. Busca el título y el artista o envía el enlace de la canción completa.')
   if (/^(?:tts|speak|ftts|flowerytts|reddit|tiktok|clypit|yarn):/i.test(query)) throw new Error('source_not_allowed')
   if (/^(?:pornhub|phsearch|soundgasm|hentai|nsfw):/i.test(query)) throw new Error('source_not_allowed')
   if (/^https?:\/\//i.test(query)) {
@@ -15,6 +17,7 @@ function assertMusicQuery(value) {
 }
 function allowedMusicTrack(track) {
   const info = track?.info || track
+  if (!info || typeof info !== 'object' || isYouTubeShort(track)) return false
   const source = String(info?.sourceName || '').toLowerCase()
   if (ADULT_SOURCES.has(source) || source && !MUSIC_SOURCES.has(source) || info?.isExplicit === true || info?.explicit === true || track?.pluginInfo?.isExplicit === true || track?.pluginInfo?.explicit === true || info?.nsfw === true) return false
   try { if (info?.uri) assertMusicQuery(info.uri); return true } catch { return false }

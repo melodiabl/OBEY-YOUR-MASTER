@@ -1,6 +1,7 @@
 const { resolveWithTimeout } = require('./resolve-timeout')
 const { tracksFromResolve } = require('./utils')
 const { assertMusicQuery, allowedMusicTrack } = require('./nodes-config')
+const { rankMusicTracks, sameRecording } = require('./recordings')
 async function searchNodes(client, raw, requester, { guildId, signal } = {}) {
   const query = assertMusicQuery(raw)
   const nodes = client.nodePool?.candidates(guildId) || [client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)].filter(Boolean)
@@ -20,7 +21,8 @@ async function searchNodes(client, raw, requester, { guildId, signal } = {}) {
         if (!tracks.length) continue
         if (response.loadType === 'track' && !url) { single = { loadType: response.loadType, tracks, playlistName: null }; continue }
         if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
-        return { loadType: response.loadType, tracks: single ? [...tracks, single.tracks[0]] : tracks, playlistName: response.data?.info?.name || null }
+        const combined = single ? [...tracks, single.tracks[0]] : tracks
+        return { loadType: response.loadType, tracks: url || ['playlist', 'album'].includes(response.loadType) ? combined : rankMusicTracks(combined, query), playlistName: response.data?.info?.name || null }
       } catch (error) { if (signal?.aborted) throw error; failed = true; nodeFailed = true }
     }
     if (single) {
@@ -41,7 +43,7 @@ async function trackOnNode(track, node) {
     return track
   }
   const result = await node.rest.resolve(assertMusicQuery(info.uri))
-  const fresh = tracksFromResolve(result).find(value => value.encoded && allowedMusicTrack(value))
+  const fresh = tracksFromResolve(result).find(value => value.encoded && allowedMusicTrack(value) && sameRecording(track, value))
   if (!fresh) throw new Error('track_unavailable')
   return { ...fresh, _resolvedNode: node.name, info: { ...fresh.info, requester: info.requester, requesterId: info.requesterId } }
 }
