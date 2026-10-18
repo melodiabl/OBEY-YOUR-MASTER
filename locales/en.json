@@ -1072,5 +1072,40 @@
       "fieldErrorSummary": "Review the highlighted fields before continuing.",
       "invalidSession": "The editing session changed. Keep your changes and reopen the page before saving."
     }
+  },
+  "setup": {
+    "navigation": {
+      "title": "Configure your server",
+      "description": "Choose a category and open the setup you need. Only commands available with your current permissions appear.",
+      "categoryDescription": "Choose what to configure in {category}.",
+      "categories": "Available settings",
+      "chooseCategory": "Choose a category",
+      "chooseCommand": "Open a setup",
+      "openDescription": "Open the configuration assistant",
+      "previous": "Previous",
+      "next": "Next",
+      "home": "Categories",
+      "close": "Close",
+      "footer": "{count} available setups · Page {page}/{pages}",
+      "empty": "No setups are available in this context.",
+      "notYours": "This panel belongs to another session. Use setup to open your own.",
+      "closed": "Configuration panel closed.",
+      "expired": "This panel has expired. Use setup to open a new session.",
+      "unavailable": "I could not verify your access or open this setup. Use setup to try again.",
+      "openingCommand": "Opening {command}. Continue in its assistant.",
+      "cooldown": "Wait a few seconds before opening this setup again.",
+      "groups": {
+        "welcome": "Welcome and farewell",
+        "logs": "Logs",
+        "security": "Moderation and protection",
+        "music": "Music and voice",
+        "support": "Tickets and applications",
+        "roles": "Roles and levels",
+        "feeds": "Platform feeds",
+        "general": "General settings",
+        "community": "Community and automation"
+      },
+      "categoryCount": "There are {count} setups in this category. Choose one from the menu below."
+    }
   }
 }

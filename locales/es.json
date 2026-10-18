@@ -1072,5 +1072,40 @@
       "fieldErrorSummary": "Revisa los campos indicados antes de continuar.",
       "invalidSession": "La sesión de edición cambió. Conserva tus cambios y vuelve a abrir la página antes de guardar."
     }
+  },
+  "setup": {
+    "navigation": {
+      "title": "Configura tu servidor",
+      "description": "Elige una categoría y abre la configuración que necesitas. Solo aparecen comandos disponibles con tus permisos actuales.",
+      "categoryDescription": "Elige qué quieres configurar en {category}.",
+      "categories": "Configuraciones disponibles",
+      "chooseCategory": "Elige una categoría",
+      "chooseCommand": "Abre una configuración",
+      "openDescription": "Abrir el asistente de configuración",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "home": "Categorías",
+      "close": "Cerrar",
+      "footer": "{count} configuraciones disponibles · Página {page}/{pages}",
+      "empty": "No hay configuraciones disponibles en este contexto.",
+      "notYours": "Este panel pertenece a otra sesión. Abre tu propio panel con setup.",
+      "closed": "Panel de configuración cerrado.",
+      "expired": "El panel ha caducado. Usa setup para abrir una sesión nueva.",
+      "unavailable": "No pude comprobar tu acceso o abrir esta configuración. Usa setup para intentarlo de nuevo.",
+      "openingCommand": "Abriendo {command}. Continúa en su asistente.",
+      "cooldown": "Espera unos segundos antes de abrir otra vez esta configuración.",
+      "groups": {
+        "welcome": "Bienvenida y despedidas",
+        "logs": "Registros",
+        "security": "Moderación y protección",
+        "music": "Música y voz",
+        "support": "Tickets y solicitudes",
+        "roles": "Roles y niveles",
+        "feeds": "Publicaciones de plataformas",
+        "general": "Ajustes generales",
+        "community": "Comunidad y automatizaciones"
+      },
+      "categoryCount": "Hay {count} configuraciones en esta categoría. Elige una en el menú inferior."
+    }
   }
 }
