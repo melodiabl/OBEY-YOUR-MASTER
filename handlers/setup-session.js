@@ -48,7 +48,7 @@ function attachSetupSession(client, message, context, { controls, notice, onErro
         child.once('end', () => children.delete(child))
         child.on('collect', value => enqueue(value, control.run, openedAt))
         void Promise.resolve(interaction.showModal(modal)).catch(() => child.stop('unavailable'))
-      } catch { child?.stop('unavailable') }
+      } catch { child?.stop('unavailable'); void interaction.reply({ ...notice('unavailable'), ephemeral: true }).catch(() => {}) }
       return
     }
     enqueue(interaction, control.run)

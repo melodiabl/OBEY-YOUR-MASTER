@@ -26,7 +26,7 @@ function joinDefinition(id) {
   if (!Object.hasOwn(joinKinds, id)) throw new Error('invalid_setup_definition')
   const dataSchema = id === 'noavatar' ? z.literal('enable') : ['userid', 'server_in_common', 'server_not_in_common'].includes(id) ? snowflake : z.string().min(1).max(100)
   const entrySchema = z.object({ data: dataSchema, action: z.enum(['kick', 'ban', 'timeout', 'setnickname']), days: z.number().int().min(0).max(7).optional(), time: z.number().int().positive().max(2419200000).optional(), nickname: z.string().min(1).max(32).optional() }).passthrough().refine(entry => entry.action === 'timeout' ? Boolean(entry.time) : entry.action === 'setnickname' ? Boolean(entry.nickname) : true)
-  return { title: joinKinds[id], store: 'settings', path: `joinlist.${id}`, schema: z.array(entrySchema).max(1000),
+  return { title: joinKinds[id], store: 'settings', path: `joinlist.${id}`, defaults: Object.fromEntries(Object.keys(joinKinds).map(key => [`joinlist.${key}`, []])), schema: z.array(entrySchema).max(1000),
     inputs: [{ id: 'data', label: label(id === 'noavatar' ? 'Escribe enable' : 'Nombre o ID', id === 'noavatar' ? 'Enter enable' : 'Name or ID'), max: 100 }, { id: 'action', label: label('kick / ban / timeout / setnickname', 'kick / ban / timeout / setnickname'), max: 11 }, { id: 'extra', label: label('Duración, apodo o días de borrado (0–7)', 'Duration, nickname or deletion days (0–7)'), max: 100, required: false, format: (_, record) => record?.action === 'timeout' ? record.time : record?.action === 'setnickname' ? record.nickname : record?.days }],
     key: entry => `${entry.data} | ${entry.action}`, describe: entry => `${entry.data}: ${entry.action}\n${entry.nickname || entry.time || entry.days || ''}`,
     parse(data, previous) {

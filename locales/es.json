@@ -1258,7 +1258,9 @@
       "invalid": "Valor no válido para {field}. Revisa el formato y los límites.",
       "resource": "Revisa los valores, los canales y los roles. El bot necesita permisos y los roles deben estar por debajo del suyo.",
       "previous": "Anterior",
-      "next": "Siguiente"
+      "next": "Siguiente",
+      "preview": "Ejemplo del mensaje",
+      "previewFailed": "No se pudo generar la vista previa. Tus cambios siguen pendientes."
     },
     "records": {
       "description": "Selecciona una entrada para editarla o crea una nueva. Guarda para aplicar; quitar también queda pendiente.",

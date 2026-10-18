@@ -10,6 +10,7 @@ const copy = (locale, key, vars) => t(locale, `setup.form.${key}`, vars)
 const text = (value, locale) => typeof value === 'object' && value !== null ? value[locale] || value.en : value
 const row = component => new ActionRowBuilder().addComponents(component)
 function display(field, value, locale) {
+  if (field.type === 'enum' && field.labels?.[value]) return text(field.labels[value], locale)
   if (field.format) return String(field.format(value, locale)).slice(0, 1024) || copy(locale, 'empty')
   if (typeof value === 'boolean') return copy(locale, value ? 'enabled' : 'disabled')
   if (value === null || value === undefined || value === '') return copy(locale, 'empty')
@@ -25,6 +26,7 @@ function buildFormSetup(definition, value, draft, selected, locale, status = '')
       { name: copy(locale, 'current'), value: display(field, value.values[selected], locale), inline: true },
       { name: copy(locale, 'pending'), value: Object.hasOwn(draft, selected) ? display(field, draft[selected], locale) : copy(locale, 'unchanged'), inline: true })
     .setFooter({ text: copy(locale, status || (Object.keys(draft).length ? 'unsaved' : 'savedStatus')) })
+  if (definition.preview) embed.addFields({ name: copy(locale, 'preview'), value: String(definition.preview(current, locale)).slice(0, 1024) || copy(locale, 'empty') })
   const components = [row(new StringSelectMenuBuilder().setCustomId('form_field').setPlaceholder(copy(locale, 'choose')).addOptions(keys.slice(Math.floor(keys.indexOf(selected) / 25) * 25, Math.floor(keys.indexOf(selected) / 25) * 25 + 25).map(id => ({ label: fieldLabel(id), value: id, default: id === selected }))))]
   if (field.type === 'boolean' || field.type === 'enum') components.push(row(new StringSelectMenuBuilder().setCustomId('form_value').setPlaceholder(copy(locale, 'value')).addOptions((field.type === 'boolean' ? [true, false] : field.options).map(option => ({ label: field.type === 'boolean' ? copy(locale, option ? 'enabled' : 'disabled') : text(field.labels?.[option], locale) || String(option), value: String(option), default: current[selected] === option })))))
   if (['channel', 'channels', 'role', 'roles', 'principals'].includes(field.type)) {
@@ -38,16 +40,17 @@ function buildFormSetup(definition, value, draft, selected, locale, status = '')
   if ((['channels', 'roles', 'principals', 'list'].includes(field.type) || field.removable)) edits.push(button('form_remove', 'remove', ButtonStyle.Secondary, !current[selected] || !Object.keys(current[selected]).length))
   if (field.clear !== undefined) edits.push(button('form_clear', 'clear'))
   if (edits.length) components.push(new ActionRowBuilder().addComponents(edits))
-  components.push(new ActionRowBuilder().addComponents(button('form_save', 'save', ButtonStyle.Primary, !Object.keys(draft).length), button('form_discard', 'discard', ButtonStyle.Secondary, !Object.keys(draft).length), button('form_close', 'close')))
+  components.push(new ActionRowBuilder().addComponents(button('form_save', 'save', ButtonStyle.Primary, !Object.keys(draft).length), button('form_discard', 'discard', ButtonStyle.Secondary, !Object.keys(draft).length), button('form_close', 'close'), ...(definition.previewAction ? [button('form_preview', 'preview')] : [])))
   if (keys.length > 25) components.push(new ActionRowBuilder().addComponents(button('form_previous', 'previous', ButtonStyle.Secondary, keys.indexOf(selected) < 25), button('form_next', 'next', ButtonStyle.Secondary, keys.indexOf(selected) >= Math.floor((keys.length - 1) / 25) * 25)))
   return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }
 }
 function createFieldModal(field, value, locale, removing = false) {
   const list = ['list', 'channels', 'roles', 'principals'].includes(field.type) || field.removable
+  const maxInput = Math.min(4000, Math.max(field.maxInput || 4000, !list && value !== undefined && value !== null ? String(value).length : 0))
   const input = new TextInputBuilder().setCustomId('value').setLabel(text(field.label, locale).slice(0, 45)).setStyle(TextInputStyle.Paragraph)
-    .setRequired(!field.allowEmpty).setMaxLength(Math.min(field.maxInput || 4000, 4000))
+    .setRequired(!field.allowEmpty).setMaxLength(maxInput)
     .setPlaceholder(copy(locale, list ? (removing ? 'removeHint' : 'listHint') : field.type === 'duration' ? 'durationHint' : 'inputHint'))
-  if (!list && value !== undefined && value !== null && typeof value !== 'object') input.setValue(String(value).slice(0, Math.min(field.maxInput || 4000, 4000)))
+  if (!list && value !== undefined && value !== null && typeof value !== 'object') input.setValue(String(value))
   return new ModalBuilder().setTitle(text(field.label, locale).slice(0, 45)).addComponents(row(input))
 }
 function parseFieldInput(field, input, previous, removing = false) {
@@ -91,11 +94,12 @@ async function openFormSetup(client, origin, definition) {
   const keys = Object.keys(definition.fields)
   if (!keys.length) throw new Error('invalid_setup_definition')
   const notice = key => ({ content: t(locale, `setup.editor.${key}`), embeds: [], components: [], allowedMentions: { parse: [] } })
-  const service = createSetupSettings(client[definition.store || 'settings'], definition.fields, () => Boolean(client._shuttingDown))
+  let service
   const checkAccess = async () => { const access = await requireSetupAccess(client, context); await definition.authorize?.(access, context); return access }
   let message
   try {
     await checkAccess()
+    service = definition.service ? definition.service(client, context) : createSetupSettings(client[definition.store || 'settings'], definition.fields, () => Boolean(client._shuttingDown), definition.defaults)
     let value = await service.read(context.guildId), draft = {}, selected = keys[0]
     const current = () => ({ ...value.values, ...draft }), field = () => definition.fields[selected]
     const render = status => buildFormSetup(definition, value, draft, selected, locale, status)
@@ -137,6 +141,14 @@ async function openFormSetup(client, origin, definition) {
         try { value = await service.save(context.guildId, draft, value.revision); draft = {} }
         catch (error) { if (error.code !== 'setup_conflict') throw error; await checkAccess(); value = await service.read(context.guildId); status = 'conflict' }
         await i.editReply(render(status))
+      } },
+      form_preview: { async run(i, session) {
+        if (!definition.previewAction) throw new Error('invalid_field')
+        let payload
+        try { payload = await definition.previewAction(client, context, structuredClone(current())) }
+        catch { if (session.active()) await i.followUp({ content: copy(locale, 'previewFailed'), ephemeral: true, allowedMentions: { parse: [] } }); return }
+        await checkAccess()
+        if (session.active()) await i.followUp({ ...payload, ephemeral: true, allowedMentions: { parse: [] } })
       } },
       form_close: { async run(i, session) { await i.editReply(notice('closed')); session.close('closed') } },
     } })

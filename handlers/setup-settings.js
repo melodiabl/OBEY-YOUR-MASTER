@@ -16,9 +16,12 @@ function lookup(doc, path) {
 const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 
 // Definitions own the paths and validators; requests can only select declared IDs.
-function createSetupSettings(store, fields, isStopping = () => false) {
+function createSetupSettings(store, fields, isStopping = () => false, defaults = {}) {
   const ids = Object.keys(fields), roots = [...new Set(ids.map(id => fields[id].path.split('.')[0]))].sort()
   if (!ids.length || ids.some(id => !/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(id) || !/^[a-zA-Z][a-zA-Z0-9_-]*(?:\.[a-zA-Z][a-zA-Z0-9_-]*)*$/.test(fields[id].path) || fields[id].path.split('.').some(key => ['constructor', 'prototype', '__proto__'].includes(key)))) throw new Error('invalid_setup_definition')
+  const seeds = { ...Object.fromEntries(ids.filter(id => fields[id].path.includes('.')).map(id => [fields[id].path, fields[id].default])), ...defaults }
+  if (Object.keys(seeds).some(path => !/^[a-zA-Z][a-zA-Z0-9_-]*(?:\.[a-zA-Z][a-zA-Z0-9_-]*)*$/.test(path) || path.split('.').some(key => ['constructor', 'prototype', '__proto__'].includes(key)) || !roots.includes(path.split('.')[0]) || Object.values(fields).some(field => field.path === path.split('.')[0]))) throw new Error('invalid_setup_definition')
+  const trackedPaths = [...new Set([...ids.map(id => fields[id].path), ...Object.keys(seeds)])]
   const patchSchema = z.strictObject(Object.fromEntries(ids.map(id => [id, fields[id].schema]))).partial()
     .refine(value => Object.keys(value).length > 0 && Object.values(value).every(item => item !== undefined))
   function check(guildId) {
@@ -32,13 +35,13 @@ function createSetupSettings(store, fields, isStopping = () => false) {
     })), revision: createHash('sha256').update(JSON.stringify(roots.map(root => [root, lookup(doc, root)]))).digest('hex') }
   }
   const stored = guildId => store.model.findOne({ [store.guildKey]: guildId }).lean()
-  function cached(guildId) { return Object.fromEntries(ids.map(id => [id, structuredClone(store.get(guildId, fields[id].path))])) }
+  function cached(guildId) { return Object.fromEntries(trackedPaths.map(path => [path, structuredClone(store.get(guildId, path))])) }
   function publish(guildId, doc, before) {
     if (!doc) return
     const patch = {}
-    for (const id of ids) {
-      const found = lookup(doc, fields[id].path)
-      if (found.present && equal(store.get(guildId, fields[id].path), before[id])) patch[fields[id].path] = found.value
+    for (const path of trackedPaths) {
+      const found = lookup(doc, path)
+      if (found.present && equal(store.get(guildId, path), before[path])) patch[path] = found.value
     }
     if (Object.keys(patch).length) store.patchCached(guildId, patch)
   }
@@ -67,8 +70,10 @@ function createSetupSettings(store, fields, isStopping = () => false) {
       return storage(() => store.exclusive(async () => {
         const before = cached(guildId), doc = await stored(guildId), current = snapshot(doc || {})
         if (current.revision !== expectedRevision) fail('setup_conflict')
-        const changes = Object.fromEntries(Object.entries(parsed.data).filter(([id, value]) => !equal(value, current.values[id])).map(([id, value]) => [fields[id].path, value]))
+        const changes = Object.fromEntries(Object.entries(parsed.data).filter(([id, value]) => !lookup(doc || {}, fields[id].path).present || !equal(value, current.values[id])).map(([id, value]) => [fields[id].path, value]))
         if (!Object.keys(changes).length) { publish(guildId, doc, before); return current }
+        const editedRoots = new Set(Object.keys(changes).map(path => path.split('.')[0]))
+        for (const [path, fallback] of Object.entries(seeds)) if (editedRoots.has(path.split('.')[0]) && !lookup(doc || {}, path).present && !Object.hasOwn(changes, path)) changes[path] = structuredClone(fallback)
         const filter = { [store.guildKey]: guildId }
         for (const root of roots) { const found = lookup(doc || {}, root); filter[root] = found.present ? { $eq: found.value } : { $exists: false } }
         const saved = await store.model.findOneAndUpdate(filter, { $set: changes }, { new: true, upsert: !doc, setDefaultsOnInsert: false }).lean()

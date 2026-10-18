@@ -1566,8 +1566,8 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 - [x] [commands/Setup/setup-boost.js](../commands/Setup/setup-boost.js).
 - [x] [commands/Setup/setup-joinlist.js](../commands/Setup/setup-joinlist.js).
-- [ ] [commands/Setup/setup-leave.js](../commands/Setup/setup-leave.js).
-- [ ] [commands/Setup/setup-welcome.js](../commands/Setup/setup-welcome.js).
+- [x] [commands/Setup/setup-leave.js](../commands/Setup/setup-leave.js).
+- [x] [commands/Setup/setup-welcome.js](../commands/Setup/setup-welcome.js).
 
 **SETUP-LOGS · Registros**
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 39/63 archivos, sin desplegar. Mensajes/roles de voz y seis tipos de reglas de entrada añadidos. Siguiente: bienvenida y recursos; conservar esquemas, permisos y efectos del consumidor.
+Avance local: 41/63 archivos, sin desplegar. Bienvenida/despedida, vista previa de tarjetas y fondos guardados añadidos. Siguiente: feeds y recursos; conservar esquemas, permisos y efectos del consumidor.

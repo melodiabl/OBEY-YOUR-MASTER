@@ -1258,7 +1258,9 @@
       "invalid": "Invalid value for {field}. Check the format and limits.",
       "resource": "Check the values, channels and roles. The bot needs permissions and roles must be below its highest role.",
       "previous": "Previous",
-      "next": "Next"
+      "next": "Next",
+      "preview": "Example message",
+      "previewFailed": "Preview could not be generated. Your changes are still pending."
     },
     "records": {
       "description": "Select an entry to edit or create a new one. Save to apply; removals also remain pending.",

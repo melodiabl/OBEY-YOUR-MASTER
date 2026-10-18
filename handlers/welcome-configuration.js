@@ -1,4 +1,5 @@
 const {createHash,randomUUID}=require('node:crypto')
+const {membershipDefaults}=require('./membership-settings')
 const {ConfigurationError}=require('./welcome/error')
 const {patchSchema}=require('./welcome/contract')
 const fail=(message,code='invalid_configuration')=>{throw new ConfigurationError(message,code)}
@@ -37,7 +38,7 @@ function createWelcomeConfiguration(settings){
     const prior=old?.welcomeConfigLastWrite
     if(prior?.id===operationId){if(before.revision!==prior.after?.revision||wanted.channelId!==prior.after.channelId||wanted.message!==prior.after.message||publication&&(prior.draftRevision!==publication.draftRevision||prior.actorId!==publication.actorId||prior.before.revision!==expectedRevision))fail('La operación de bienvenida cambió.','configuration_conflict');publish(id,old,cachedBefore);return before}
     if(expectedRevision!==undefined&&before.revision!==expectedRevision)fail('La bienvenida cambió desde que la abriste.','configuration_conflict')
-    const welcome={...(old?.welcome&&typeof old.welcome==='object'&&!Array.isArray(old.welcome)?old.welcome:{}),channel:wanted.channelId||'nochannel',msg:wanted.message,message:wanted.message}
+    const welcome={...membershipDefaults('welcome'),...(old?.welcome&&typeof old.welcome==='object'&&!Array.isArray(old.welcome)?old.welcome:{}),channel:wanted.channelId||'nochannel',msg:wanted.message,message:wanted.message}
     const afterDoc={...(old||{}),welcome,welcomeChannel:wanted.channelId,welcomeMessage:wanted.message,welcomeConfigRevision:(old?.welcomeConfigRevision||0)+1}
     const after=configuration(afterDoc),filter={[settings.guildKey]:id}
     for(const path of paths)filter[path]=old&&Object.hasOwn(old,path)?{$eq:old[path]}:{$exists:false}
