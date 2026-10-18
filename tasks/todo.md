@@ -1690,5 +1690,5 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 
 - [x] Reproducir y corregir la ausencia de Descartar cambios en idioma; comprobar regreso sin escrituras en `!setup` y `/setup`.
 - [x] Distinguir avisos de acceso, permisos del bot, almacenamiento e inicio/cierre; registrar fallos sin credenciales ni documentos. 23 grupos locales, 25 originales y tipos/dependencias pasan. [Alcance](../docs/guia-arquitectura/ERRORES_SETUP.md).
-- [ ] Desplegar y comprobar esta corrección.
+- [x] Corrección desplegada en `ff94f31`: 10 hashes, Gateway/heartbeat, 20 slash globales, MongoDB y nodos públicos, salud local/pública 200. [Evidencia](../docs/platform/evidence/setup-errors-deployment-20261019.json).
 - [ ] Ubicar y reproducir el error original de acceso/guardado en el servidor/canal del usuario; no darlo por resuelto con las pruebas locales.

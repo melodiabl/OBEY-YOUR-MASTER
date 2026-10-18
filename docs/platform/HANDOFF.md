@@ -64,3 +64,10 @@ La referencia del ZIP actualizado, su extracción y la precedencia del material 
 El usuario precisó que el centralizador de setups y el reproductor son tareas independientes. `/setup` global privado y simplificado quedó en `4a0f080`; selección musical y recuperación de grabaciones en `398e22f`. Ambas revisiones se desplegaron en una sola sustitución del proceso, con código `398e22f31b49139c5ae54d4ea4ec5de2398e7bd5`, imagen `0ec4dc1cd5dea434f75584c75ea0b72408b34a2a73751ba2272473641d2dced2`. [Estado, evidencia y reversión](DESPLIEGUE-SLASH-MUSICA-2026-10-19.md).
 
 Pasan 19 grupos de navegación slash, 48 musicales, los 25 tests originales, tipos y reglas de dependencias. Verificadores y contexto temporal retirados. Runtime sano: 20 slash globales confirmados por REST, Gateway/heartbeat, MongoDB, tres nodos públicos y HTTP/HTTPS 200; privado apagado, sin push. La selección favorece grabaciones originales sin garantizar la propiedad ni detectar Shorts sin metadatos. No se probó audio real ni el recorrido manual con el usuario. Continuar pendientes globales del ZIP y Epic sin presentar estos cambios como cierre de toda la arquitectura.
+
+
+## Incidencia de setups · 19/10/2026
+
+El usuario copió avisos genéricos de acceso/guardado de `!setup` y de idioma. La ubicación real (servidor/canal) sigue pendiente; no se confirmó la causa de ese error original. Se reprodujo y corrigió una ausencia distinta y concreta: idioma pedía descartar un borrador sin ofrecer ese botón. `ff94f31d91f187310e1776cd794556772fdcbc10` añade descarte sin escrituras y avisos clasificados/registros seguros en el recorrido común. 23 grupos con objetos/collectors reales, 25 originales, tipos y reglas de dependencias pasan; verificador retirado.
+
+Desplegado en imagen `813394a62fe3d2ada32d54a4e97813cb35eb8436d7e8f2a2dc03ff42f73790b2`, con 10 hashes, Gateway/heartbeat, 20 slash, Mongo y tres nodos públicos, servicios healthy y HTTP/HTTPS 200. Privado apagado y sin push. [Evidencia y reversión](DESPLIEGUE-ERRORES-SETUP-2026-10-19.md). No decir que el error original del usuario está resuelto: falta observarlo/ubicarlo; los nuevos registros todavía no muestran un fallo del setup.

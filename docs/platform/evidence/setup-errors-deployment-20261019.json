@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T22:39:54.651469+00:00",
+  "code": "ff94f31d91f187310e1776cd794556772fdcbc10",
+  "imageTag": "localhost/obey-your-master_bot:release-setup-errors-20261019-ff94f31",
+  "containers": {
+    "obey_bot": {
+      "id": "f950a848bd3088ddafa43d1be3199675993fa36e83db04ed8deb555fc5b0b953",
+      "image": "813394a62fe3d2ada32d54a4e97813cb35eb8436d7e8f2a2dc03ff42f73790b2",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "runtimeSourceHashesMatched": 10,
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "registeredGlobalSlashCommands": 20,
+  "connectedPublicNodes": [
+    "gdjkhp",
+    "serenetia",
+    "millohost"
+  ],
+  "selectedPublicNode": "gdjkhp",
+  "privateEnabled": false,
+  "health": {
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 50
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 50
+      }
+    }
+  },
+  "startupFailureMarkers": [],
+  "newSetupFailureMarkers": [],
+  "localEvidence": "setup-errors-local.json",
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-18T22-36-52-747Z",
+    "mongoArchiveBytes": 59077312,
+    "privateSnapshotDirectory": ".runtime/deploy-setup-errors-20261019"
+  },
+  "rollback": {
+    "image": "0ec4dc1cd5dea434f75584c75ea0b72408b34a2a73751ba2272473641d2dced2",
+    "imageName": "localhost/obey-your-master_bot:release-slash-music-20261019-398e22f",
+    "argumentsFile": ".runtime/deploy-setup-errors-20261019/rollback-arguments.json",
+    "testedDuringThisDeployment": false
+  },
+  "originalReportedAccessFailureResolved": false,
+  "limitations": [
+    "User server/channel not yet identified",
+    "Original access/save error not reproduced on real data",
+    "Manual Discord walkthrough pending"
+  ],
+  "pushed": false,
+  "restartAlwaysContainers": [
+    "obey_bot",
+    "obey_images",
+    "obey_redis"
+  ],
+  "duplicateBotOnBootAvoided": true,
+  "temporaryVerifierRetained": false
+}

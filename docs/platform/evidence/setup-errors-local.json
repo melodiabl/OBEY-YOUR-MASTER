@@ -30,5 +30,6 @@
   },
   "temporaryVerifierSha256": "4c0b8a0f0465b4f9ca96e1a9c84722c07b98ab0caf2cda9a5cd6f8356c11ae32",
   "temporaryVerifierRetained": false,
-  "deployed": false
+  "deployed": true,
+  "deploymentEvidence": "setup-errors-deployment-20261019.json"
 }

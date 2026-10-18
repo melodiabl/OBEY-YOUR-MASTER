@@ -27,19 +27,19 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "398e22f31b49139c5ae54d4ea4ec5de2398e7bd5",
-    "image": "0ec4dc1cd5dea434f75584c75ea0b72408b34a2a73751ba2272473641d2dced2",
+    "code": "ff94f31d91f187310e1776cd794556772fdcbc10",
+    "image": "813394a62fe3d2ada32d54a4e97813cb35eb8436d7e8f2a2dc03ff42f73790b2",
     "selectedPublicNode": "gdjkhp",
     "backupOrder": [
       "serenetia",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/slash-music-deployment-20261019.json",
-    "change": "Two independent changes: private central setup slash navigation; music recording selection and recovery guards",
-    "tag": "release-slash-music-20261019-398e22f",
+    "evidence": "evidence/setup-errors-deployment-20261019.json",
+    "change": "Language draft discard and scoped setup failure notices; original user access error still awaiting location/reproduction",
+    "tag": "release-setup-errors-20261019-ff94f31",
     "status": "healthy",
-    "statusEvidence": "DESPLIEGUE-SLASH-MUSICA-2026-10-19.md"
+    "statusEvidence": "DESPLIEGUE-ERRORES-SETUP-2026-10-19.md"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -202,5 +202,15 @@
     "deploymentEvidence": "evidence/slash-music-deployment-20261019.json",
     "pushed": false,
     "remaining": "Real audio listening; Shorts without identifying metadata remain a provider limitation"
+  },
+  "setupErrorRecovery": {
+    "implementationCode": "ff94f31d91f187310e1776cd794556772fdcbc10",
+    "report": "docs/guia-arquitectura/ERRORES_SETUP.md",
+    "localEvidence": "evidence/setup-errors-local.json",
+    "deploymentEvidence": "evidence/setup-errors-deployment-20261019.json",
+    "deployed": true,
+    "originalReportedAccessFailureResolved": false,
+    "remaining": "Identify user server/channel and reproduce the original generic access/save error on real data",
+    "pushed": false
   }
 }
