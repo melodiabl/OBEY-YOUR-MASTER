@@ -1677,3 +1677,9 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Verificación: 58 grupos SDK/Mongo aislado, 100 ciclos, 32 grupos de navegación, 25 tests originales y tipos/dependencias. Script y contenedor temporales eliminados. [Evidencia local](../docs/platform/evidence/setup-usability-local.json).
 - [x] Despliegue de facilidad de uso `3673b47`, con Gateway/heartbeat, MongoDB, nodos públicos, servicios saludables y HTTPS 200. [Evidencia de despliegue](../docs/platform/evidence/setup-usability-deployment-20261018.json).
 - [ ] Validación del recorrido con el usuario dentro de Discord; continuar pendientes globales del ZIP.
+
+### Continuación solicitada · slash y música como trabajos separados
+
+- [x] `/setup` global, privado, sin argumentos y con navegación simplificada. 19 grupos SDK del registro/flujo pasan; el motor musical no cambia en esta entrega.
+- [ ] Música: identificar Shorts, priorizar grabaciones originales y conservar identidad/duración en recuperación. Entrega independiente del centralizador de setups.
+- [ ] Verificar y desplegar las revisiones terminadas; continuar los pendientes globales del plan.

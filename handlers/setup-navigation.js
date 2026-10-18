@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, escapeMarkdown } = require('discord.js')
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, MessageFlags, escapeMarkdown } = require('discord.js')
 const { availableCommands } = require('./help')
 const { t, catalogs, localeFor, normalizeLocale } = require('./i18n')
 const { requireSetupAccess } = require('./setup-access')
@@ -30,7 +30,7 @@ function commandPresentation(name, locale) {
 }
 function shownCommands(view, state) {
   return state.group ? view.commands.filter(entry => entry.group === state.group).slice(state.page * PAGE_SIZE, (state.page + 1) * PAGE_SIZE)
-    : QUICK_COMMANDS.flatMap(name => view.commands.filter(entry => entry.name === name))
+    : state.browse ? [] : QUICK_COMMANDS.flatMap(name => view.commands.filter(entry => entry.name === name))
 }
 class SetupError extends Error { constructor(code) { super(code); this.code = code } }
 
@@ -52,16 +52,13 @@ function buildSetupMessage(view, state = {}) {
   const commands = group ? view.commands.filter(entry => entry.group === group) : []
   const pages = Math.max(1, Math.ceil(commands.length / PAGE_SIZE))
   const page = Math.max(0, Math.min(pages - 1, Number.isInteger(state.page) ? state.page : 0))
-  const shown = shownCommands(view, { group, page })
-  const embed = new EmbedBuilder().setColor(0xFFD36F).setTitle(copy(locale, 'title'))
-    .setDescription(group ? copy(locale, 'categoryDescription', { category: copy(locale, `groups.${group}`) }) : copy(locale, 'description'))
-    .setFooter({ text: copy(locale, 'footer', { count: view.commands.length, page: page + 1, pages }) })
-  if (group) embed.addFields({ name: copy(locale, `groups.${group}`), value: copy(locale, `groupDescriptions.${group}`) })
-  else if (categoryIds.length) embed.addFields({ name: copy(locale, 'categories'),
-    value: categoryIds.map(id => `**${copy(locale, `groups.${id}`)}** — ${copy(locale, `groupDescriptions.${id}`)}`).join('\n') })
-  else embed.addFields({ name: copy(locale, 'categories'), value: copy(locale, 'empty') })
+  const browse = Boolean(state.browse || group)
+  const shown = shownCommands(view, { group, page, browse })
+  const embed = new EmbedBuilder().setColor(0xFFD36F).setTitle(group ? copy(locale, `groups.${group}`) : copy(locale, 'title'))
+    .setDescription(!categoryIds.length ? copy(locale, 'empty') : group ? copy(locale, `groupDescriptions.${group}`) : copy(locale, browse ? 'browseDescription' : 'description'))
+  if (group && pages > 1) embed.setFooter({ text: copy(locale, 'footer', { count: view.commands.length, page: page + 1, pages }) })
   const components = []
-  if (categoryIds.length) components.push(new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
+  if (!group && browse && categoryIds.length) components.push(new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
     .setCustomId('setup_group').setPlaceholder(copy(locale, 'chooseCategory')).addOptions(categoryIds.map(id => ({
       label: copy(locale, `groups.${id}`), value: id, description: copy(locale, `groupDescriptions.${id}`), default: group === id,
     })))))
@@ -71,8 +68,8 @@ function buildSetupMessage(view, state = {}) {
     })))))
   const button = (id, label, disabled = false) => new ButtonBuilder().setCustomId(id).setLabel(copy(locale, label))
     .setStyle(id === 'setup_close' ? ButtonStyle.Danger : ButtonStyle.Secondary).setDisabled(disabled)
-  components.push(new ActionRowBuilder().addComponents(button('setup_prev', 'previous', !group || page === 0),
-    button('setup_home', 'home', !group), button('setup_next', 'next', !group || page === pages - 1), button('setup_close', 'close')))
+  components.push(new ActionRowBuilder().addComponents(...(group && pages > 1 ? [button('setup_prev', 'previous', page === 0), button('setup_next', 'next', page === pages - 1)] : []),
+    ...(group ? [button('setup_browse', 'back')] : browse ? [button('setup_home', 'back')] : categoryIds.length ? [button('setup_browse', 'browse')] : []), button('setup_close', 'close')))
   return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }
 }
 
@@ -84,10 +81,10 @@ async function openSetup(client, origin, initialState = {}) {
   try {
     let view = await readSetupView(client, context)
     locale = view.locale
-    const state = { group: initialState.group || null, page: initialState.page || 0 }
+    const state = { group: initialState.group || null, page: initialState.page || 0, browse: Boolean(initialState.browse || initialState.group) }
     message = await origin.reply(buildSetupMessage(view, state))
     const collector = message.createMessageComponentCollector({ time: 180000, idle: 90000 })
-    const controls = new Set(['setup_group', 'setup_command', 'setup_prev', 'setup_next', 'setup_home', 'setup_close'])
+    const controls = new Set(['setup_group', 'setup_command', 'setup_prev', 'setup_next', 'setup_home', 'setup_browse', 'setup_close'])
     let closed = false, queue = Promise.resolve()
     collector.on('collect', interaction => {
       if (closed || interaction.user.id !== context.actorId || interaction.guildId !== context.guildId || interaction.message?.id !== message.id ||
@@ -139,8 +136,9 @@ async function openSetup(client, origin, initialState = {}) {
         if (interaction.customId === 'setup_group') {
           const group = interaction.values?.[0]
           if (!view.commands.some(entry => entry.group === group)) throw new SetupError('denied')
-          state.group = group; state.page = 0
-        } else if (interaction.customId === 'setup_home') { state.group = null; state.page = 0 }
+          state.group = group; state.page = 0; state.browse = true
+        } else if (interaction.customId === 'setup_home') { state.group = null; state.page = 0; state.browse = false }
+        else if (interaction.customId === 'setup_browse') { state.group = null; state.page = 0; state.browse = true }
         else state.page += interaction.customId === 'setup_next' ? 1 : -1
         const pages = Math.max(1, Math.ceil(view.commands.filter(entry => entry.group === state.group).length / PAGE_SIZE))
         state.page = Math.max(0, Math.min(pages - 1, state.page))
@@ -163,4 +161,16 @@ async function openSetup(client, origin, initialState = {}) {
   }
 }
 
-module.exports = { readSetupView, buildSetupMessage, openSetup }
+async function openSlashSetup(client, interaction) {
+  await interaction.deferReply({ flags: MessageFlags.Ephemeral })
+  const origin = {
+    guild: interaction.guild, author: interaction.user, channel: interaction.channel, channelId: interaction.channelId,
+    async reply(payload) {
+      const message = await interaction.editReply(payload)
+      return Object.create(message, { edit: { value: next => interaction.editReply(next) } })
+    },
+  }
+  return openSetup(client, origin)
+}
+
+module.exports = { readSetupView, buildSetupMessage, openSetup, openSlashSetup }

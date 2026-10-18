@@ -1075,8 +1075,8 @@
   },
   "setup": {
     "navigation": {
-      "title": "Configure your server",
-      "description": "What would you like to set up? Start with a common task or browse by topic. You can review settings before saving.",
+      "title": "Server setup",
+      "description": "What would you like to configure? Choose an option to start.",
       "categoryDescription": "Choose what to configure in {category}.",
       "categories": "Browse by topic",
       "chooseCategory": "Choose a category",
@@ -1088,10 +1088,10 @@
       "close": "Close",
       "footer": "Only options available to you · Page {page}/{pages}",
       "empty": "No setups are available in this context.",
-      "notYours": "This panel belongs to another session. Use setup to open your own.",
+      "notYours": "This panel belongs to another session. Use /setup to open your own.",
       "closed": "Configuration panel closed.",
-      "expired": "This panel has expired. Use setup to open a new session.",
-      "unavailable": "I could not verify your access or open this setup. Use setup to try again.",
+      "expired": "This panel has expired. Use /setup to open a new session.",
+      "unavailable": "I could not verify your access or open this setup. Use /setup to try again.",
       "openingCommand": "Opening {command}. Continue in its assistant.",
       "cooldown": "Wait a few seconds before opening this setup again.",
       "groups": {
@@ -1353,7 +1353,7 @@
         }
       },
       "quickTitle": "Common tasks",
-      "chooseQuick": "Welcome, tickets, music and language",
+      "chooseQuick": "Choose what to configure",
       "groupDescriptions": {
         "welcome": "Greetings, farewells and booster messages.",
         "logs": "Choose where to receive logs and reports.",
@@ -1364,7 +1364,10 @@
         "feeds": "Announce videos, streams and posts.",
         "general": "Choose language, appearance and commands.",
         "community": "Set up games and automatic replies."
-      }
+      },
+      "browse": "See all options",
+      "browseDescription": "Choose a topic to see its settings.",
+      "back": "Back"
     },
     "language": {
       "title": "Server language",
@@ -1388,7 +1391,7 @@
     "editor": {
       "notYours": "This panel belongs to another session. Open your own setup.",
       "closed": "Panel closed. Unsaved local selections were discarded.",
-      "expired": "This panel has expired. Reopen the setup to check the saved settings.",
+      "expired": "This panel has expired. Reopen the /setup to check the saved settings.",
       "unavailable": "I could not confirm access or saving. Reopen the setup to check the current settings.",
       "staleForm": "The panel changed while you were editing. Open the form again to avoid losing changes."
     },

@@ -41,3 +41,11 @@ Datos y reversión: no se cambia ningún schema, colección o customId de los pa
 ## Verificación final local
 
 Implementación `3673b478678d368ee5637e6562c3b6754b402574`, sobre los incrementos `f9c4a48` y `e3e4eaa`. Pasaron 58 grupos de SDK/Mongo, 100 ciclos de limpieza, 32 grupos de navegación, 25 tests originales, tipos y reglas de dependencias (1063 módulos/3236 relaciones, cero infracciones). [Evidencia local y hashes](../platform/evidence/setup-usability-local.json). Se eliminó el comprobador temporal y el contenedor Mongo aislado, con sus volúmenes; la base de prueba se había eliminado antes. No se consultaron datos de producción para las pruebas. El estado de despliegue se registra aparte en source.json.
+
+## Entrada slash solicitada después
+
+El usuario solicitó `/setup` como entrada principal y precisó que este centralizador de configuraciones es independiente del reproductor y de su selección musical. El nuevo comando global no pide parámetros, está limitado a servidores/administradores y difiere una respuesta privada antes de autorizar recursos. Las pantallas usan el webhook de esa respuesta durante todo el recorrido.
+
+El inicio presenta un selector de tareas habituales y Ver todas las opciones. La vista completa ofrece temas y después las configuraciones del tema; solo aparecen botones de página cuando hacen falta. Regreso, permisos frescos, borrador y compatibilidad prefix se conservan. El cambio del slash no modifica el motor de música.
+
+19 grupos con collectors reales comprueban registro global y permisos, ACK privado anterior a I/O, navegación anidada en el mismo mensaje, regreso, expiración, actor ajeno, revocación, ausencia de controles innecesarios y límites de Discord en es/en. El loader produce 20 comandos globales incluyendo setup. La comprobación no abre Gateway ni modifica servidores. El estado de publicación/despliegue se registra aparte de esta comprobación local.

@@ -1075,8 +1075,8 @@
   },
   "setup": {
     "navigation": {
-      "title": "Configura tu servidor",
-      "description": "¿Qué quieres preparar? Abre una opción habitual o busca por tema. Aquí puedes revisar la configuración antes de guardar.",
+      "title": "Configurar servidor",
+      "description": "¿Qué quieres configurar? Elige una opción para empezar.",
       "categoryDescription": "Elige qué quieres configurar en {category}.",
       "categories": "Explorar por tema",
       "chooseCategory": "Elige una categoría",
@@ -1088,10 +1088,10 @@
       "close": "Cerrar",
       "footer": "Solo opciones disponibles para ti · Página {page}/{pages}",
       "empty": "No hay configuraciones disponibles en este contexto.",
-      "notYours": "Este panel pertenece a otra sesión. Abre tu propio panel con setup.",
+      "notYours": "Este panel pertenece a otra sesión. Abre tu propio panel con /setup.",
       "closed": "Panel de configuración cerrado.",
-      "expired": "El panel ha caducado. Usa setup para abrir una sesión nueva.",
-      "unavailable": "No pude comprobar tu acceso o abrir esta configuración. Usa setup para intentarlo de nuevo.",
+      "expired": "El panel ha caducado. Usa /setup para abrir una sesión nueva.",
+      "unavailable": "No pude comprobar tu acceso o abrir esta configuración. Usa /setup para intentarlo de nuevo.",
       "openingCommand": "Abriendo {command}. Continúa en su asistente.",
       "cooldown": "Espera unos segundos antes de abrir otra vez esta configuración.",
       "groups": {
@@ -1353,7 +1353,7 @@
         }
       },
       "quickTitle": "Empieza por lo habitual",
-      "chooseQuick": "Bienvenida, tickets, música e idioma",
+      "chooseQuick": "Elige qué quieres configurar",
       "groupDescriptions": {
         "welcome": "Saluda, despide y agradece las mejoras.",
         "logs": "Decide dónde recibir registros y reportes.",
@@ -1364,7 +1364,10 @@
         "feeds": "Anuncia vídeos, directos y publicaciones.",
         "general": "Elige idioma, aspecto y comandos.",
         "community": "Configura juegos y respuestas automáticas."
-      }
+      },
+      "browse": "Ver todas las opciones",
+      "browseDescription": "Elige un tema para ver sus opciones de configuración.",
+      "back": "Volver"
     },
     "language": {
       "title": "Idioma del servidor",
@@ -1388,7 +1391,7 @@
     "editor": {
       "notYours": "Este panel pertenece a otra sesión. Abre tu propio setup.",
       "closed": "Panel cerrado. La selección local sin guardar se ha descartado.",
-      "expired": "El panel ha caducado. Abre el setup de nuevo para consultar lo guardado.",
+      "expired": "El panel ha caducado. Abre el /setup de nuevo para consultar lo guardado.",
       "unavailable": "No pude confirmar el acceso o el guardado. Abre el setup de nuevo para consultar el estado actual.",
       "staleForm": "El panel cambió mientras editabas. Abre el formulario de nuevo para no perder cambios."
     },
