@@ -1170,6 +1170,62 @@
       "saved": "Categorías guardadas.",
       "conflict": "Las categorías cambiaron en otro panel. Revisa tu selección antes de guardar de nuevo.",
       "blocked": "Esta categoría de comandos está desactivada en este servidor. Un administrador puede cambiarla con setup-commands."
+    },
+    "channels": {
+      "description": "Elige un canal y guarda para aplicar el cambio.",
+      "names": {
+        "adminlog": "Registro de comandos administrativos",
+        "logger": "Registro de auditoría",
+        "reportlog": "Canal de reportes",
+        "aichat": "Chat con IA",
+        "automeme": "Memes automáticos",
+        "dailyfact": "Datos diarios"
+      },
+      "current": "Canal actual",
+      "pending": "Cambio pendiente",
+      "unchanged": "Sin cambios",
+      "disabled": "Desactivado",
+      "unavailableChannel": "Canal anterior no disponible",
+      "currentStatus": "Configuración guardada",
+      "unsaved": "Cambios pendientes de guardar",
+      "choose": "Selecciona un canal",
+      "disable": "Desactivar",
+      "save": "Guardar",
+      "discard": "Descartar",
+      "close": "Cerrar",
+      "saved": "Canal guardado",
+      "conflict": "Cambió desde otro panel. Revisa y guarda de nuevo.",
+      "permissions": "Necesitas ver el canal y el bot debe poder verlo, enviar mensajes e insertar enlaces."
+    },
+    "toggles": {
+      "validcode": {
+        "title": "Códigos válidos",
+        "description": "Activa o desactiva los códigos válidos y guarda para aplicar.",
+        "labels": {
+          "enabled": "Códigos válidos"
+        }
+      },
+      "autobackup": {
+        "title": "Copias automáticas",
+        "description": "Una copia del servidor cada dos días. Solo el propietario puede cambiar esta opción; el bot necesita Administrador.",
+        "labels": {
+          "enabled": "Copias automáticas"
+        }
+      },
+      "autowarn": {
+        "title": "Avisos automáticos",
+        "description": "Selecciona las protecciones que deben añadir un aviso al detectar una infracción. Guarda para aplicar.",
+        "labels": {
+          "antispam": "Spam",
+          "antimention": "Menciones masivas",
+          "antilinks": "Enlaces",
+          "antidiscord": "Invitaciones de Discord",
+          "anticaps": "Mayúsculas",
+          "blacklist": "Palabras bloqueadas",
+          "ghost_ping_detector": "Menciones eliminadas",
+          "antiselfbot": "Selfbots"
+        }
+      }
     }
   }
 }

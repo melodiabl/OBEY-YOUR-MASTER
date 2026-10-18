@@ -1,5 +1,5 @@
 const { z } = require('zod')
-const { Colors } = require('discord.js')
+const { Colors, PermissionFlagsBits: F } = require('discord.js')
 const { randomInt } = require('node:crypto')
 const { COMMAND_CATEGORY_KEYS } = require('./command-policy')
 
@@ -30,5 +30,19 @@ const EMBED_FIELDS = {
 }
 const COMMAND_FLAGS = COMMAND_CATEGORY_KEYS
 const COMMAND_FIELDS = Object.fromEntries(COMMAND_FLAGS.map(id => [id, { path: id, default: true, schema: z.boolean() }]))
+const channelId = z.string().regex(/^[a-zA-Z0-9_:-]{1,100}$/)
+const CHANNEL_SETUPS = Object.fromEntries(Object.entries({ adminlog: 'adminlog', logger: 'logger.channel', reportlog: 'reportlog', aichat: 'aichat', automeme: 'automeme', dailyfact: 'dailyfact' })
+  .map(([id, path]) => [id, { channel: { path, default: 'no', schema: channelId } }]))
+const autowarnIds = ['antispam', 'antimention', 'antilinks', 'antidiscord', 'anticaps', 'blacklist', 'ghost_ping_detector', 'antiselfbot']
+const TOGGLE_GROUPS = {
+  commands: { fields: COMMAND_FIELDS, enabled: value => value !== false },
+  validcode: { fields: { enabled: { path: 'validcode', default: false, schema: z.boolean() } }, enabled: Boolean },
+  autobackup: { fields: { enabled: { path: 'autobackup', default: false, schema: z.boolean() } }, enabled: Boolean,
+    async authorize({ guild, bot, member }) {
+      const fresh = await guild.fetch()
+      if (fresh.ownerId !== member.id || !bot.permissions.has(F.Administrator)) throw new Error('setup_owner_required')
+    } },
+  autowarn: { fields: Object.fromEntries(autowarnIds.map(id => [id, { path: 'autowarn.' + id, default: false, schema: z.boolean() }])), enabled: Boolean },
+}
 
-module.exports = { EMBED_FIELDS, COMMAND_FLAGS, COMMAND_FIELDS, parseColor }
+module.exports = { EMBED_FIELDS, COMMAND_FLAGS, COMMAND_FIELDS, CHANNEL_SETUPS, TOGGLE_GROUPS, parseColor }

@@ -1,53 +1,13 @@
-const obeyMeta = require("../../handlers/presentation/metadata")
-var { EmbedBuilder } = require(`discord.js`);
-var Discord = require(`discord.js`);
-var config = require(`${process.cwd()}/botconfig/config.json`);
-var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
-var { databasing } = require(`${process.cwd()}/handlers/functions`);
-const { ButtonBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
+const { openChannelSetup } = require('../../handlers/setup-channel')
+
 module.exports = {
-    name: "setup-auditlog",
-    category: "Setup",
-    aliases: ["setupauditlog", "auditlog-setup", "auditlogsetup"],
-    cooldown: 5,
-    usage: "setup-auditlog --> Sigue los Pasos",
-    description: "Activate a Logger which logs every action in your Servidor which could be critical!",
-    memberpermissions: ['Administrador'],
-    type: "security",
-    run: async (client, message, args, cmduser, text, prefix) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        try {
-            message
-                .reply(`Redirecting to: \`setup-logger\` ...`)
-                .then(msg => {
-                    setTimeout(() => {
-                        msg.delete().catch(() => {});
-                    }, 3000);
-                })
-                .catch(() => {});
-            require("./setup-logger").run(client, message, args, cmduser, text, prefix);
-        } catch (e) {
-            console.log(String(e.stack).grey.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["setup"]["setup-anticaps"]["variable13"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- */
+  name: "setup-auditlog",
+  category: "Setup",
+  aliases: ["setupauditlog", "auditlog-setup", "auditlogsetup"],
+  cooldown: 5,
+  memberpermissions: ['Administrador'],
+  type: "security",
+  usage: 'setup-auditlog',
+  description: 'Configura logger con cambios revisables antes de guardar.',
+  run: (client, message) => openChannelSetup(client, message, 'logger'),
+}

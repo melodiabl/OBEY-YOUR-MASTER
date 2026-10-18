@@ -3,7 +3,7 @@ const { InteractionCollector, InteractionType } = require('discord.js')
 const { requireSetupAccess } = require('./setup-access')
 
 // Owns only message/modal resources. Each setup owns its state, validation and writes.
-function attachSetupSession(client, message, context, { controls, notice, onError }) {
+function attachSetupSession(client, message, context, { controls, notice, onError, authorize }) {
   const collector = message.createMessageComponentCollector({ time: 180000, idle: 90000 })
   const children = new Set()
   let closed = false, version = 0, queue = Promise.resolve()
@@ -17,7 +17,8 @@ function attachSetupSession(client, message, context, { controls, notice, onErro
         await interaction.followUp({ ...notice('staleForm'), ephemeral: true })
         return
       }
-      await requireSetupAccess(client, context)
+      const access = await requireSetupAccess(client, context)
+      await authorize?.(access, context)
       if (closed) return
       await run(interaction, { active, close: reason => collector.stop(reason) })
       version++

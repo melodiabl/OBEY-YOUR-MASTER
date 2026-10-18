@@ -18,7 +18,7 @@ const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 // Definitions own the paths and validators; requests can only select declared IDs.
 function createSetupSettings(store, fields, isStopping = () => false) {
   const ids = Object.keys(fields), roots = [...new Set(ids.map(id => fields[id].path.split('.')[0]))].sort()
-  if (!ids.length || ids.some(id => !/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(id) || !/^[a-zA-Z][a-zA-Z0-9]*(?:\.[a-zA-Z][a-zA-Z0-9]*)*$/.test(fields[id].path) || fields[id].path.split('.').some(key => ['constructor', 'prototype', '__proto__'].includes(key)))) throw new Error('invalid_setup_definition')
+  if (!ids.length || ids.some(id => !/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(id) || !/^[a-zA-Z][a-zA-Z0-9_-]*(?:\.[a-zA-Z][a-zA-Z0-9_-]*)*$/.test(fields[id].path) || fields[id].path.split('.').some(key => ['constructor', 'prototype', '__proto__'].includes(key)))) throw new Error('invalid_setup_definition')
   const patchSchema = z.strictObject(Object.fromEntries(ids.map(id => [id, fields[id].schema]))).partial()
     .refine(value => Object.keys(value).length > 0 && Object.values(value).every(item => item !== undefined))
   function check(guildId) {

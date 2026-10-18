@@ -1557,8 +1557,8 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-BASE · Navegación y ajustes generales**
 
-- [ ] [commands/Setup/setup-commands.js](../commands/Setup/setup-commands.js).
-- [ ] [commands/Setup/setup-embed.js](../commands/Setup/setup-embed.js).
+- [x] [commands/Setup/setup-commands.js](../commands/Setup/setup-commands.js).
+- [x] [commands/Setup/setup-embed.js](../commands/Setup/setup-embed.js).
 - [x] [commands/Setup/setup-language.js](../commands/Setup/setup-language.js) — código y menú locales verificados; [evidencia](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [x] [commands/Setup/setup.js](../commands/Setup/setup.js) — navegación local verificada; los demás asistentes siguen abiertos.
 
@@ -1571,11 +1571,11 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-LOGS · Registros**
 
-- [ ] [commands/Setup/setup-admincmdlog.js](../commands/Setup/setup-admincmdlog.js).
-- [ ] [commands/Setup/setup-auditlog.js](../commands/Setup/setup-auditlog.js).
+- [x] [commands/Setup/setup-admincmdlog.js](../commands/Setup/setup-admincmdlog.js).
+- [x] [commands/Setup/setup-auditlog.js](../commands/Setup/setup-auditlog.js).
 - [ ] [commands/Setup/setup-boostlog.js](../commands/Setup/setup-boostlog.js).
-- [ ] [commands/Setup/setup-logger.js](../commands/Setup/setup-logger.js).
-- [ ] [commands/Setup/setup-reportlog.js](../commands/Setup/setup-reportlog.js).
+- [x] [commands/Setup/setup-logger.js](../commands/Setup/setup-logger.js).
+- [x] [commands/Setup/setup-reportlog.js](../commands/Setup/setup-reportlog.js).
 - [ ] [commands/Setup/setup-serverstats.js](../commands/Setup/setup-serverstats.js).
 
 **SETUP-SECURITY · Moderación y protección**
@@ -1591,12 +1591,12 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [ ] [commands/Setup/setup-antinuke.js](../commands/Setup/setup-antinuke.js).
 - [ ] [commands/Setup/setup-antipings.js](../commands/Setup/setup-antipings.js).
 - [ ] [commands/Setup/setup-antispam.js](../commands/Setup/setup-antispam.js).
-- [ ] [commands/Setup/setup-autowarn.js](../commands/Setup/setup-autowarn.js).
+- [x] [commands/Setup/setup-autowarn.js](../commands/Setup/setup-autowarn.js).
 - [ ] [commands/Setup/setup-blacklist.js](../commands/Setup/setup-blacklist.js).
 - [ ] [commands/Setup/setup-epicgamesverify.js](../commands/Setup/setup-epicgamesverify.js).
 - [ ] [commands/Setup/setup-ghost-ping-detector.js](../commands/Setup/setup-ghost-ping-detector.js).
 - [ ] [commands/Setup/setup-mute.js](../commands/Setup/setup-mute.js).
-- [ ] [commands/Setup/setup-validcode.js](../commands/Setup/setup-validcode.js).
+- [x] [commands/Setup/setup-validcode.js](../commands/Setup/setup-validcode.js).
 - [ ] [commands/Setup/setup-warn.js](../commands/Setup/setup-warn.js).
 
 **SETUP-MUSIC · Configuración musical y voz**
@@ -1625,14 +1625,14 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-AUTOMATION · Comunidad y automatizaciones**
 
-- [ ] [commands/Setup/setup-aichat.js](../commands/Setup/setup-aichat.js).
-- [ ] [commands/Setup/setup-autobackup.js](../commands/Setup/setup-autobackup.js).
+- [x] [commands/Setup/setup-aichat.js](../commands/Setup/setup-aichat.js).
+- [x] [commands/Setup/setup-autobackup.js](../commands/Setup/setup-autobackup.js).
 - [ ] [commands/Setup/setup-autodelete.js](../commands/Setup/setup-autodelete.js).
 - [ ] [commands/Setup/setup-autoembed.js](../commands/Setup/setup-autoembed.js).
-- [ ] [commands/Setup/setup-automeme.js](../commands/Setup/setup-automeme.js).
+- [x] [commands/Setup/setup-automeme.js](../commands/Setup/setup-automeme.js).
 - [ ] [commands/Setup/setup-counter.js](../commands/Setup/setup-counter.js).
 - [ ] [commands/Setup/setup-customcommand.js](../commands/Setup/setup-customcommand.js).
-- [ ] [commands/Setup/setup-dailyfact.js](../commands/Setup/setup-dailyfact.js).
+- [x] [commands/Setup/setup-dailyfact.js](../commands/Setup/setup-dailyfact.js).
 - [ ] [commands/Setup/setup-keyword.js](../commands/Setup/setup-keyword.js).
 - [ ] [commands/Setup/setup-suggestion.js](../commands/Setup/setup-suggestion.js).
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Siguiente entrega: setup-embed; conciliar campos y defaults existentes antes de sustituir su flujo.
+Avance local: 14/63 archivos, sin desplegar. Apariencia/categorías y seis selectores de canal, alias auditlog y tres grupos de opciones verificados. Siguiente: protecciones con límites y excepciones; conservar esquemas y reglas del consumidor.
