@@ -1,5 +1,7 @@
 const obeyMeta = require("../../handlers/presentation/metadata")
 const obeyUi = require("../../handlers/assets/system")
+const { commandCategoryEnabled } = require('../../handlers/command-policy')
+const { t, localeFor } = require('../../handlers/i18n')
 //Import Modules
 const config = require(`${process.cwd()}/botconfig/config.json`);
 const ee = require(`${process.cwd()}/botconfig/embed.json`);
@@ -18,6 +20,10 @@ module.exports = async (client, interaction) => {
         let cmd = false
         if (subCmd && client.slashCommands.has(CategoryName + subCmd)) cmd = client.slashCommands.get(CategoryName + subCmd)
         else if (client.slashCommands.has('normal' + CategoryName)) cmd = client.slashCommands.get('normal' + CategoryName)
+        if (cmd && !commandCategoryEnabled(client.settings.get(interaction.guildId) || {}, cmd.category || CategoryName)) {
+            await interaction.respond([]).catch(() => {})
+            return
+        }
         if (cmd?.autocomplete) {
             try { await cmd.autocomplete(client, interaction) } catch {}
         }
@@ -60,6 +66,9 @@ module.exports = async (client, interaction) => {
         command = client.slashCommands.get("normal" + CategoryName);
     }
     if (command) {
+        if (!commandCategoryEnabled(guild_settings, command.category || CategoryName)) {
+            return interaction.reply({ content: t(localeFor(client, guild.id), 'setup.categories.blocked'), ephemeral: true, allowedMentions: { parse: [] } });
+        }
         if (botchannel.toString() !== "") {
             if (!botchannel.includes(channelId) && !member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
                 for (const channelId of botchannel) {

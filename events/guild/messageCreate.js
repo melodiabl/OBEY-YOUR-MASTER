@@ -1,5 +1,7 @@
 const obeyMeta = require("../../handlers/presentation/metadata")
 const obeyUi = require("../../handlers/assets/system")
+const { commandCategoryEnabled } = require('../../handlers/command-policy')
+const { t, localeFor } = require('../../handlers/i18n')
 /**
  * @INFO
  * Loading all needed File Information Parameters
@@ -143,6 +145,9 @@ module.exports = async (client, message) => {
         }
         //if the command is now valid
         if (command && !customcmd) {
+            if (!commandCategoryEnabled(guild_settings, command.category)) {
+                return message.reply({ content: t(localeFor(client, message.guild.id), 'setup.categories.blocked'), allowedMentions: { parse: [] } });
+            }
             var musicData = client.musicsettings.get(message.guild.id);
             if (musicData.channel && musicData.channel == message.channel.id) {
                 return message

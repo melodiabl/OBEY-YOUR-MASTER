@@ -1,6 +1,7 @@
 const { PermissionFlagsBits: F } = require('discord.js')
 const { buildCommandCatalog } = require('./command-registry')
 const { commandDenial } = require('./music/permissions')
+const { commandCategoryEnabled } = require('./command-policy')
 class HelpError extends Error { constructor(code) { super('No se pudo consultar la ayuda.'); this.code = code } }
 function has(member, permissions) {
   try { return Boolean(member?.permissions?.has(permissions.map(permission => permission === 'Administrador' ? 'Administrator' : permission))) }
@@ -19,7 +20,7 @@ function availableCommands(client, context) {
       const roles = [...(settings.adminroles || []), ...(settings.cmdadminroles?.[entry.name] || [])]
       if (!roles.includes(member.id) && !roles.some(id => member.roles?.cache?.has(id))) return false
     }
-    if (category === 'fun' && settings.FUN === false || category === 'music' && settings.MUSIC === false) return false
+    if (!commandCategoryEnabled(settings, category)) return false
     if (!admin && settings.botchannel?.length && !settings.botchannel.includes(channel?.id)) return false
     if (entry.transport === 'prefix' && settings.channel && channel?.id === settings.channel) return false
     if (commandDenial(client, member, entry.name, musicState?.currentTrack, { checkDj: Boolean(entry.parameters.check_dj) })) return false

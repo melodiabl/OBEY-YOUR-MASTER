@@ -1125,6 +1125,51 @@
       "closed": "Language panel closed.",
       "expired": "This panel has expired. Open setup-language to check the current language.",
       "unavailable": "I could not confirm access or saving. Reopen setup-language to check the current language."
+    },
+    "editor": {
+      "notYours": "This panel belongs to another session. Open your own setup.",
+      "closed": "Panel closed. Unsaved local selections were discarded.",
+      "expired": "This panel has expired. Reopen the setup to check the saved settings.",
+      "unavailable": "I could not confirm access or saving. Reopen the setup to check the current settings.",
+      "staleForm": "The panel changed while you were editing. Open the form again to avoid losing changes."
+    },
+    "embed": {
+      "title": "Message appearance",
+      "description": "Edit the form or change the thumbnail. The preview uses your selection; changes apply when saved.",
+      "previewTitle": "Preview",
+      "previewDescription": "This previews your message color and footer.",
+      "color": "Color",
+      "footertext": "Footer text",
+      "footericon": "Footer image URL",
+      "thumbnail": "Thumbnail",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "edit": "Edit appearance",
+      "toggleThumbnail": "Toggle thumbnail",
+      "save": "Save",
+      "discard": "Discard",
+      "close": "Close",
+      "current": "Current settings",
+      "unsaved": "Preview · unsaved changes",
+      "saved": "Appearance saved.",
+      "conflict": "Settings changed in another panel. Review the preview before saving again.",
+      "invalid": "Check the “{field}” field. Nothing was saved."
+    },
+    "categories": {
+      "title": "Command categories",
+      "description": "Selected categories stay enabled. Review the state and press Save to apply changes.",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "none": "None",
+      "choose": "Select enabled categories",
+      "save": "Save",
+      "discard": "Discard",
+      "close": "Close",
+      "current": "Current state",
+      "unsaved": "Unsaved changes",
+      "saved": "Categories saved.",
+      "conflict": "Categories changed in another panel. Review your selection before saving again.",
+      "blocked": "This command category is disabled in this server. An administrator can change it with setup-commands."
     }
   }
 }

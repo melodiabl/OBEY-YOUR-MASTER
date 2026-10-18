@@ -1125,6 +1125,51 @@
       "closed": "Panel de idioma cerrado.",
       "expired": "El panel ha caducado. Abre setup-language para consultar el idioma actual.",
       "unavailable": "No pude confirmar el acceso o el guardado. Vuelve a abrir setup-language para consultar el idioma actual."
+    },
+    "editor": {
+      "notYours": "Este panel pertenece a otra sesión. Abre tu propio setup.",
+      "closed": "Panel cerrado. La selección local sin guardar se ha descartado.",
+      "expired": "El panel ha caducado. Abre el setup de nuevo para consultar lo guardado.",
+      "unavailable": "No pude confirmar el acceso o el guardado. Abre el setup de nuevo para consultar el estado actual.",
+      "staleForm": "El panel cambió mientras editabas. Abre el formulario de nuevo para no perder cambios."
+    },
+    "embed": {
+      "title": "Apariencia de los mensajes",
+      "description": "Edita el formulario o cambia la miniatura. La vista previa usa tu selección; se aplica al guardar.",
+      "previewTitle": "Vista previa",
+      "previewDescription": "Así se verá el color y el pie de tus mensajes.",
+      "color": "Color",
+      "footertext": "Texto del pie",
+      "footericon": "URL de imagen del pie",
+      "thumbnail": "Miniatura",
+      "enabled": "Activada",
+      "disabled": "Desactivada",
+      "edit": "Editar apariencia",
+      "toggleThumbnail": "Cambiar miniatura",
+      "save": "Guardar",
+      "discard": "Descartar",
+      "close": "Cerrar",
+      "current": "Configuración actual",
+      "unsaved": "Vista previa · cambios sin guardar",
+      "saved": "Apariencia guardada.",
+      "conflict": "La configuración cambió en otro panel. Revisa la vista previa antes de guardar de nuevo.",
+      "invalid": "Revisa el campo «{field}». No se guardó ningún cambio."
+    },
+    "categories": {
+      "title": "Categorías de comandos",
+      "description": "Las categorías seleccionadas quedan activadas. Revisa el estado y pulsa Guardar para aplicar los cambios.",
+      "enabled": "Activadas",
+      "disabled": "Desactivadas",
+      "none": "Ninguna",
+      "choose": "Selecciona las categorías activadas",
+      "save": "Guardar",
+      "discard": "Descartar",
+      "close": "Cerrar",
+      "current": "Estado actual",
+      "unsaved": "Cambios sin guardar",
+      "saved": "Categorías guardadas.",
+      "conflict": "Las categorías cambiaron en otro panel. Revisa tu selección antes de guardar de nuevo.",
+      "blocked": "Esta categoría de comandos está desactivada en este servidor. Un administrador puede cambiarla con setup-commands."
     }
   }
 }
