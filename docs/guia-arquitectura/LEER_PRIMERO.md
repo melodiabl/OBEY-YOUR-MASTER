@@ -34,3 +34,5 @@ Continuación TECH-04: [formulario de bienvenida](FORMULARIO_BIENVENIDA.md), com
 Último incremento local TECH-05 parcial: [cierre de configuración de bienvenida](CICLO_DE_VIDA_BIENVENIDA.md), commit `0771a47953a17cbac9f4d853554fd0ecb274d45f`. Espera operaciones aceptadas antes del flush y rechaza nuevas entradas. ARCH-04/TECH-05 globales siguen pendientes; sin despliegue.
 
 Continuación TECH-06 parcial: [API y límites comprobables de bienvenida](API_BIENVENIDA.md), commit `ddc4ec433252fefc68ce41e10329a7a64e47a80f`. Entrada pública explícita, imports/tipos en CI y cinco rutas documentadas con comportamiento HTTP/Mongo local comprobado. La API avanzada y las dependencias globales del plan siguen abiertas; no se ha publicado ni desplegado.
+
+Prioridad posterior indicada por el usuario: [remodelación de los 63 setups](REMODELACION_SETUPS.md), código y menús de Discord juntos. Navegación `setup` implementada y comprobada localmente en `eadc547b0684ded2c9cca65cc685362c518ab660`; los asistentes individuales conservan sus tareas pendientes.

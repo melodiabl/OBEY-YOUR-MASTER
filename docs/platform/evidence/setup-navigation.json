@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "codeCommit": "eadc547b0684ded2c9cca65cc685362c518ab660",
+  "scope": "SETUP-BASE-01: prefix setup navigation only; remaining assistants are legacy",
+  "confirmedUserPreference": "Código y menús de Discord juntos",
+  "report": "docs/guia-arquitectura/REMODELACION_SETUPS.md",
+  "sourceSha256": {
+    "commands/Setup/setup.js": "873cc8ac7534c949d6217a543d808941ac403295dc5e57f4a8a5ba1d352b06f0",
+    "handlers/setup-navigation.js": "7b6d6fd23827939a5c9a510e1472931c1ac24238e269f97e539c2b12f23527b4",
+    "locales/es.json": "cc917bc32adc6cd558878cfd2c77df97ac6af609d8c4daad87c4382a1f03e684",
+    "locales/en.json": "e4c431dba41944bd6df1234ac1d9ea226537b67c1da0e8f8a8349a77c95d2250"
+  },
+  "versions": {
+    "node": "22.23.2",
+    "discordJs": "14.27.0"
+  },
+  "verificationMethod": "Temporary Node harness with real discord.js InteractionCollector and builders, fake Discord transport/member/providers and mock selected handlers",
+  "scenarioGroups": [
+    "builder bounds, pagination, empty state and es/en keys",
+    "loaded catalog excludes owner, disabled and restricted commands",
+    "message scoped SDK collector and close cleanup",
+    "other actor private denial",
+    "concurrent session isolation",
+    "ACK order and single dispatch under double click",
+    "forged/unoffered command rejected",
+    "actor permission revocation",
+    "selected command removed",
+    "expiry while authorization is pending",
+    "revocation after slow opening edit",
+    "selected handler rejection contained",
+    "existing cooldown across sessions",
+    "shutdown gate and expired ACK",
+    "guild deletion cleanup"
+  ],
+  "scenarioGroupsPassed": 15,
+  "failed": 0,
+  "unhandledRejections": 0,
+  "stress": {
+    "realSdkOpenExpireCycles": 100,
+    "remainingClientListeners": 0,
+    "listenerLimitRestored": true,
+    "writes": 0
+  },
+  "lifecycle": {
+    "maxTimeMs": 180000,
+    "idleTimeMs": 90000,
+    "sdkListenersRemovedOnEnd": true,
+    "permanentManualInteractionListenerAdded": false,
+    "globalProcessLifecycleNotMigrated": true
+  },
+  "behavior": {
+    "canonicalLoadedCommandsOnly": true,
+    "dynamicRequireFromSelection": false,
+    "administratorRevalidated": true,
+    "actorGuildMessageBound": true,
+    "postEditAuthorization": true,
+    "queuedControls": true,
+    "existingCooldownUsed": true,
+    "safeMentions": true,
+    "legacyChildAssistantsRewritten": false
+  },
+  "checks": {
+    "originalTestsPassed": 25,
+    "originalTestsFailed": 0,
+    "welcomeTypes": "pass (welcome scope only)",
+    "welcomeDependencies": "pass",
+    "modules": 1021,
+    "dependencies": 3197,
+    "violations": 0,
+    "syntax": "pass",
+    "diff": "pass"
+  },
+  "cleanup": {
+    "temporaryHarnessRemoved": true,
+    "permanentTestFilesAdded": 0,
+    "permanentHelperScriptsAdded": 0,
+    "fixtureCollectorsStopped": true
+  },
+  "limits": [
+    "No messages sent to Discord or real Gateway/OAuth interaction",
+    "No native Discord client appearance verification",
+    "Selected setup handlers mocked; their legacy logic not migrated",
+    "Read-only fixture stores; actual target persistence not exercised",
+    "Global process shutdown and remaining setup groups still pending"
+  ],
+  "productionTouched": false,
+  "pushed": false,
+  "deployed": false
+}

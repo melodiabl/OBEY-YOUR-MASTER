@@ -4,7 +4,9 @@ Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTE
 
 ## Reanudación · 18/10/2026
 
-TECH-06 parcial en `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [API pública, reglas y evidencia](../guia-arquitectura/API_BIENVENIDA.md). Cinco rutas existentes documentadas y coincidentes con Express/manifest; imports y tipos incorporados a CI. Diez mutaciones y 20 respuestas HTTP locales comprobadas. No hay nuevos tests/helpers permanentes, publicación remota ni despliegue. TECH-05 y ARCH-04 globales siguen pendientes.
+Última prioridad del usuario: remodelar código y menús de Discord de todos los setups. [Mapa e inventario](../guia-arquitectura/REMODELACION_SETUPS.md), 63 comandos. Navegación inicial implementada localmente en `eadc547b0684ded2c9cca65cc685362c518ab660`: un mensaje con categorías/páginas, registro vivo, autorización fresca, cooldown y collector acotado. 15 escenarios SDK y 100 ciclos de limpieza pasan; los 25 originales siguen pasando. No ejecuta ni migra las reglas internas de los asistentes restantes. Siguiente: setup-language. Temporales retirados, sin publicación/despliegue.
+
+Incremento anterior TECH-06 parcial en `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [API pública, reglas y evidencia](../guia-arquitectura/API_BIENVENIDA.md). Cinco rutas existentes documentadas y coincidentes con Express/manifest; imports y tipos incorporados a CI. Diez mutaciones y 20 respuestas HTTP locales comprobadas. No hay nuevos tests/helpers permanentes, publicación remota ni despliegue. TECH-05 y ARCH-04 globales siguen pendientes.
 
 Incremento previo TECH-05 parcial en `0771a47953a17cbac9f4d853554fd0ecb274d45f`: [cierre de configuración y evidencia](../guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md). Espera las operaciones aceptadas y conserva errores/permisos antes del flush de Mongo. Plazo global de 20 segundos vigente; cierre global y producción pendientes. Comprobaciones temporales sin restaurar scripts/tests; Mongo aislado eliminado y servidores de prueba cerrados.
 

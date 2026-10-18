@@ -176,3 +176,7 @@ Drenaje idempotente de las siete operaciones del servicio de configuración de b
 ## Último incremento local · TECH-06 parcial
 
 Entrada pública explícita de configuración de bienvenida y reglas de imports/tipos en CI en `ddc4ec433252fefc68ce41e10329a7a64e47a80f`. [API, OpenAPI y evidencia](API_BIENVENIDA.md): cinco rutas existentes, 20 respuestas HTTP/Mongo aisladas y diez mutaciones de dependencias verificadas. TECH-05/ARCH-04 globales y resto de contratos/API legacy siguen abiertos. TECH-07 requiere conciliar una segunda capacidad; no se migra automáticamente todo welcome. Sin publicación remota o despliegue.
+
+## Continuación priorizada por el usuario · setups
+
+Se extiende el plan existente con [63 comandos de setup](REMODELACION_SETUPS.md), código y menús de Discord juntos. Primera entrega local: navegación `setup` en `eadc547b0684ded2c9cca65cc685362c518ab660`, con registro vivo, permisos y sesiones acotadas. Las tareas por comando están en [tasks/todo](../../tasks/todo.md). No cierra TECH-07 ni una migración completa de los otros dominios; conserva los pendientes globales anteriores. Siguiente: setup-language.

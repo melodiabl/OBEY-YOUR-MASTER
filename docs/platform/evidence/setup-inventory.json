@@ -1,0 +1,2062 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "sourceCommit": "11572084b937d9a3d0fda4235acab2011a86a6f4",
+  "scope": "Commands named setup*.js in Setup, Owner, Music and slash Config; handlers/music/setup.js is internal wiring and excluded from command count",
+  "method": "TypeScript AST over source; top-level module.exports metadata only. No command modules required or run.",
+  "files": 63,
+  "lines": 40107,
+  "totals": {
+    "evalCalls": 1450,
+    "globalInteractionListeners": 6,
+    "messageCollectors": 211,
+    "componentCollectors": 89,
+    "knownStoreMutationCalls": 312
+  },
+  "reusedAliases": [
+    {
+      "alias": "setup-music",
+      "declaredBy": [
+        "setupmusic"
+      ],
+      "effectiveWithinSetupInventory": "setup-music"
+    },
+    {
+      "alias": "setup-mod",
+      "declaredBy": [
+        "setup-admin",
+        "setup-antidiscord"
+      ],
+      "effectiveWithinSetupInventory": "setup-admin"
+    },
+    {
+      "alias": "setupmod",
+      "declaredBy": [
+        "setup-admin",
+        "setup-antidiscord"
+      ],
+      "effectiveWithinSetupInventory": "setup-admin"
+    },
+    {
+      "alias": "cmdlog",
+      "declaredBy": [
+        "setup-admincmdlog",
+        "setup-automeme",
+        "setup-dailyfact",
+        "setup-reportlog"
+      ],
+      "effectiveWithinSetupInventory": "setup-admincmdlog"
+    },
+    {
+      "alias": "setup-caps",
+      "declaredBy": [
+        "setup-anticaps",
+        "setup-language"
+      ],
+      "effectiveWithinSetupInventory": "setup-anticaps"
+    },
+    {
+      "alias": "setupcaps",
+      "declaredBy": [
+        "setup-anticaps",
+        "setup-language"
+      ],
+      "effectiveWithinSetupInventory": "setup-anticaps"
+    },
+    {
+      "alias": "setup-auditlog",
+      "declaredBy": [
+        "setup-logger"
+      ],
+      "effectiveWithinSetupInventory": "setup-auditlog"
+    },
+    {
+      "alias": "setupmusic",
+      "declaredBy": [
+        "setup-music"
+      ],
+      "effectiveWithinSetupInventory": "setupmusic"
+    }
+  ],
+  "aliasResolutionScope": "Static subset only. Full loaded catalog can contain additional conflicts; main command registry remains authoritative.",
+  "entries": [
+    {
+      "file": "commands/Music/setupmusic.js",
+      "sha256": "96c34216e9e1bad8881f3b4830b210d26a56261dcd0e58f534e4c4fc64843774",
+      "transport": "prefix",
+      "name": "setupmusic",
+      "category": "Music",
+      "aliases": [
+        "setup-music",
+        "musicsetup",
+        "canalmusica"
+      ],
+      "memberpermissions": [],
+      "lines": 35,
+      "counts": {
+        "evalCalls": 0,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-MUSIC"
+    },
+    {
+      "file": "commands/Owner/setup-advertise.js",
+      "sha256": "ed1de8e773526e8b48ee969c069626e82fd71cc10fc369009fa5a8dfa69a3734",
+      "transport": "prefix",
+      "name": "setup-advertise",
+      "category": "Owner",
+      "aliases": [
+        "setup-advert",
+        "setupadvertise",
+        "setupadvert"
+      ],
+      "memberpermissions": [],
+      "lines": 208,
+      "counts": {
+        "evalCalls": 9,
+        "globalInteractionListeners": 1,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-OWNER"
+    },
+    {
+      "file": "commands/Owner/setup-owner.js",
+      "sha256": "b0b03ede97737856c57310713b1639037286d91e8c54b4bf3f20f1dcdddd9dd8",
+      "transport": "prefix",
+      "name": "setup-owner",
+      "category": "Owner",
+      "aliases": [
+        "setup-owners",
+        "setupowner",
+        "setupowners"
+      ],
+      "memberpermissions": [],
+      "lines": 448,
+      "counts": {
+        "evalCalls": 19,
+        "globalInteractionListeners": 1,
+        "messageCollectors": 2,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-OWNER"
+    },
+    {
+      "file": "commands/Setup/setup-admin.js",
+      "sha256": "70a10a197f24bc70ed412ee6ebb1cf238f9e55c04a44b055641bcce700b17189",
+      "transport": "prefix",
+      "name": "setup-admin",
+      "category": "Setup",
+      "aliases": [
+        "setupadmin",
+        "setup-mod",
+        "setupmod",
+        "admin-setup",
+        "adminsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 1053,
+      "counts": {
+        "evalCalls": 44,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 5,
+        "componentCollectors": 2,
+        "knownStoreMutationCalls": 13
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-admincmdlog.js",
+      "sha256": "7a9a6cd55a917d01921cfee8200239c1f878faae98964271f1b492bd00257934",
+      "transport": "prefix",
+      "name": "setup-admincmdlog",
+      "category": "Setup",
+      "aliases": [
+        "setupadmincmdlog",
+        "cmdlog",
+        "admincmdlog-setup",
+        "admincmdlogsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 239,
+      "counts": {
+        "evalCalls": 9,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-LOGS"
+    },
+    {
+      "file": "commands/Setup/setup-aichat.js",
+      "sha256": "7d9fdb42d00ffde4a67fb0f5b85cd8456f10efd374095a57654da2caae79ca21",
+      "transport": "prefix",
+      "name": "setup-aichat",
+      "category": "Setup",
+      "aliases": [
+        "setupaichat",
+        "aichat-setup",
+        "aichatsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 221,
+      "counts": {
+        "evalCalls": 8,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-anticaps.js",
+      "sha256": "7d2fc228b779f70c02639c53f71314f9213f5e6918417debbcf8aa0d160a11cb",
+      "transport": "prefix",
+      "name": "setup-anticaps",
+      "category": "Setup",
+      "aliases": [
+        "setupanticaps",
+        "setup-caps",
+        "setupcaps",
+        "anticaps-setup",
+        "anticapssetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 601,
+      "counts": {
+        "evalCalls": 28,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 4,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antidiscord.js",
+      "sha256": "12c28062bf50d29b4cfb7eb71adc4bb57249610272752fac316cd60d41acaa1f",
+      "transport": "prefix",
+      "name": "setup-antidiscord",
+      "category": "Setup",
+      "aliases": [
+        "setupantidiscord",
+        "setup-mod",
+        "setupmod",
+        "antidiscord-setup",
+        "antidiscordsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 719,
+      "counts": {
+        "evalCalls": 28,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 5,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antilink.js",
+      "sha256": "a09049ae7e0f8b4e4d4fef63101f76c4548615269ef4b6c188ae6e2173cdafcd",
+      "transport": "prefix",
+      "name": "setup-antilink",
+      "category": "Setup",
+      "aliases": [
+        "setupantilink",
+        "antilinks-setup",
+        "antilink-setup",
+        "antilinksetup",
+        "setup-antilinks"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 699,
+      "counts": {
+        "evalCalls": 28,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 5,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antimassmention.js",
+      "sha256": "97a23b2367b984cc2a94d5f6a8d4103be9a43d0bb0ea468100163e832b33c73a",
+      "transport": "prefix",
+      "name": "setup-antimassmention",
+      "category": "Setup",
+      "aliases": [
+        "setupantimassmention",
+        "setup-massmention",
+        "setupmassmention",
+        "antimassmention-setup",
+        "antimassmentionsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 59,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [
+        "./setup-antimention"
+      ],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antimasspings.js",
+      "sha256": "10f0f8f052f7cf9a9173b3a68240af70d38c581692f0f1e3f4a42b550c1df944",
+      "transport": "prefix",
+      "name": "setup-antimasspings",
+      "category": "Setup",
+      "aliases": [
+        "setupantimasspings",
+        "setup-masspings",
+        "setupmasspings",
+        "antimasspings-setup",
+        "antimasspingssetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 53,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [
+        "./setup-antimention"
+      ],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antimention.js",
+      "sha256": "ccb044909dbbf08c7540ef8b16b66e2db09ae7b5bfa09af358d6b776db7a16e7",
+      "transport": "prefix",
+      "name": "setup-antimention",
+      "category": "Setup",
+      "aliases": [
+        "setupantimention",
+        "setup-mention",
+        "setupmention",
+        "antimention-setup",
+        "antimentionsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 596,
+      "counts": {
+        "evalCalls": 21,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 4,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antinewaccount.js",
+      "sha256": "5974b59ee040ba7b4825edc4653a7c1768d15d2c13623e82ad96770632f49594",
+      "transport": "prefix",
+      "name": "setup-antinewaccount",
+      "category": "Setup",
+      "aliases": [
+        "setupnewaccount",
+        "newaccount-setup",
+        "newaccountsetup",
+        "setupantinewaccount",
+        "antinewaccount-setup",
+        "antinewaccountsetup",
+        "setup-newaccount"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 428,
+      "counts": {
+        "evalCalls": 4,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 2,
+        "componentCollectors": 2,
+        "knownStoreMutationCalls": 5
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antinuke.js",
+      "sha256": "936e6631ceb49b3565f297e02b96e2f208e9e4675fac57e4426306b1695a127b",
+      "transport": "prefix",
+      "name": "setup-antinuke",
+      "category": "Setup",
+      "aliases": [
+        "setupantinuke",
+        "antinuke-setup",
+        "antinukesetup",
+        "antinukesystem"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 2192,
+      "counts": {
+        "evalCalls": 124,
+        "globalInteractionListeners": 1,
+        "messageCollectors": 10,
+        "componentCollectors": 3,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antipings.js",
+      "sha256": "58644aa85546fc01d7eed1a806add28e410ad05cd2afd11138b786407bf90d7d",
+      "transport": "prefix",
+      "name": "setup-antipings",
+      "category": "Setup",
+      "aliases": [
+        "setupantipings",
+        "setup-pings",
+        "setuppings",
+        "antipings-setup",
+        "antipingssetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 53,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [
+        "./setup-antimention"
+      ],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-antispam.js",
+      "sha256": "b7abaf72c09621b6207c3430173396bcb2794d0ed4d1589e10b0aee84ccf74c9",
+      "transport": "prefix",
+      "name": "setup-antispam",
+      "category": "Setup",
+      "aliases": [
+        "setupantispam",
+        "setup-spam",
+        "setupspam",
+        "antispam-setup",
+        "antispamsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 595,
+      "counts": {
+        "evalCalls": 21,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 4,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-apply.js",
+      "sha256": "43721879f274434a0875b028c8b069dda2ef6ffff7bdb709e683425130bc09bb",
+      "transport": "prefix",
+      "name": "setup-apply",
+      "category": "Setup",
+      "aliases": [
+        "setupapply",
+        "apply-setup",
+        "applysetup",
+        "setup-application",
+        "setupapplication"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 5668,
+      "counts": {
+        "evalCalls": 223,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 38,
+        "componentCollectors": 3,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SUPPORT"
+    },
+    {
+      "file": "commands/Setup/setup-auditlog.js",
+      "sha256": "116dc85d391db6c3be0c0c6e2822cac3c732c7a3a441d834cce317d9125df681",
+      "transport": "prefix",
+      "name": "setup-auditlog",
+      "category": "Setup",
+      "aliases": [
+        "setupauditlog",
+        "auditlog-setup",
+        "auditlogsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 53,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [
+        "./setup-logger"
+      ],
+      "migration": "pending",
+      "migrationGroup": "SETUP-LOGS"
+    },
+    {
+      "file": "commands/Setup/setup-autobackup.js",
+      "sha256": "58654982283afd10b70f34ae4deacbe3cf35fc54d6ea8da5d0b42be4d4c80138",
+      "transport": "prefix",
+      "name": "setup-autobackup",
+      "category": "Setup",
+      "aliases": [
+        "setupautobackup",
+        "setup-backup",
+        "setupbackup",
+        "autobackup-setup",
+        "autobackupsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 165,
+      "counts": {
+        "evalCalls": 3,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 1
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-autodelete.js",
+      "sha256": "963ec2050f9ae7b391ffec08007632656db16a3863c4950b3db220cd0f158fab",
+      "transport": "prefix",
+      "name": "setup-autodelete",
+      "category": "Setup",
+      "aliases": [
+        "setupautodelete",
+        "autodelete-setup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 392,
+      "counts": {
+        "evalCalls": 11,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 2,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.setups"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-autoembed.js",
+      "sha256": "dbdc4908db4141367438ffc399f97c30e41e09d7bb3d6879dc9fc72624ff8ec1",
+      "transport": "prefix",
+      "name": "setup-autoembed",
+      "category": "Setup",
+      "aliases": [
+        "setupautoembed",
+        "autoembed-setup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 385,
+      "counts": {
+        "evalCalls": 21,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 2,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-automeme.js",
+      "sha256": "0b0500eee480937ac1e56f8e5518ef77e20e639766766e63a16edf471cc7763a",
+      "transport": "prefix",
+      "name": "setup-automeme",
+      "category": "Setup",
+      "aliases": [
+        "setupautomeme",
+        "cmdlog",
+        "automeme-setup",
+        "automemesetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 224,
+      "counts": {
+        "evalCalls": 9,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-autosupport.js",
+      "sha256": "ba6f848f116f016ddccd966ccdf04fd54ad8b6cbaa19653acf41af73618109ea",
+      "transport": "prefix",
+      "name": "setup-autosupport",
+      "category": "Setup",
+      "aliases": [
+        "setupautosupport",
+        "autosupport-setup",
+        "autosupportsetup",
+        "autosupportsystem"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 1043,
+      "counts": {
+        "evalCalls": 5,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 6,
+        "componentCollectors": 6,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SUPPORT"
+    },
+    {
+      "file": "commands/Setup/setup-autowarn.js",
+      "sha256": "9f6d3905f725516c49f388d57f2e85c0eb9075ea55f973a35f9883551d0fbc52",
+      "transport": "prefix",
+      "name": "setup-autowarn",
+      "category": "Setup",
+      "aliases": [
+        "setupautowarn",
+        "autowarn-setup",
+        "autowarnsetup",
+        "autowarnsystem"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 178,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-blacklist.js",
+      "sha256": "3c84d4a494ae933f28b88d0b58b39f142ce2be66c29cc21d2e3183885b542d2b",
+      "transport": "prefix",
+      "name": "setup-blacklist",
+      "category": "Setup",
+      "aliases": [
+        "setupblacklist",
+        "blacklist-setup",
+        "blacklistsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 681,
+      "counts": {
+        "evalCalls": 33,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 5,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.blacklist"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-boost.js",
+      "sha256": "359d3df2cd7c1a5b9684f52b190bc0850303fb330de68d6e8b88f3f9a131ccf7",
+      "transport": "prefix",
+      "name": "setup-boost",
+      "category": "Setup",
+      "aliases": [
+        "setupboost",
+        "boostsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 74,
+      "counts": {
+        "evalCalls": 0,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 4
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-WELCOME"
+    },
+    {
+      "file": "commands/Setup/setup-boostlog.js",
+      "sha256": "fa771da298a14ad67b16172e00e4ae0fe961b859f85b4094cec1bb0c771e93bb",
+      "transport": "prefix",
+      "name": "setup-boostlog",
+      "category": "Setup",
+      "aliases": [
+        "setupboostlog",
+        "boostlogsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 401,
+      "counts": {
+        "evalCalls": 8,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 4,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-LOGS"
+    },
+    {
+      "file": "commands/Setup/setup-commands.js",
+      "sha256": "e0009fabb8cd4915c03cdae070e760af4aa838fb9952610904c1bad88da72f2b",
+      "transport": "prefix",
+      "name": "setup-commands",
+      "category": "Setup",
+      "aliases": [
+        "setupcommands",
+        "setup-command",
+        "setupcommand"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 185,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 1
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-BASE"
+    },
+    {
+      "file": "commands/Setup/setup-counter.js",
+      "sha256": "517e18f3467682d7b9b0bc1f57339c040c14190051efabeb738db1c99fe6fb37",
+      "transport": "prefix",
+      "name": "setup-counter",
+      "category": "Setup",
+      "aliases": [
+        "setupcounter",
+        "counter-setup",
+        "countersetup",
+        "setup-numbercounter",
+        "setupnumbercounter",
+        "numbercounter-setup",
+        "numbercountersetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 247,
+      "counts": {
+        "evalCalls": 10,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 3
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-customcommand.js",
+      "sha256": "2094f3c97c64e8ade8ad2dee24929856fa64cca3b002298ac62ad96fb2389381",
+      "transport": "prefix",
+      "name": "setup-customcommand",
+      "category": "Setup",
+      "aliases": [
+        "setupcustomcommand",
+        "setupcustomcommands",
+        "customcommand-setup",
+        "setup-customcommands"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 487,
+      "counts": {
+        "evalCalls": 16,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 2,
+        "componentCollectors": 2,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.customcommands"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-dailyfact.js",
+      "sha256": "a1f4dff089556d81090ce85fc7dacd1d2e4bf97d9be29ae0aa29c45ab4f88ed9",
+      "transport": "prefix",
+      "name": "setup-dailyfact",
+      "category": "Setup",
+      "aliases": [
+        "setupdailyfact",
+        "cmdlog",
+        "dailyfact-setup",
+        "dailyfactsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 224,
+      "counts": {
+        "evalCalls": 9,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-embed.js",
+      "sha256": "497210ae9827c87a0985caf247f0fe8ff5627fd8738d3e0bbe6a1c326869fd61",
+      "transport": "prefix",
+      "name": "setup-embed",
+      "category": "Setup",
+      "aliases": [
+        "setupembed",
+        "embed-setup",
+        "embedsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 515,
+      "counts": {
+        "evalCalls": 30,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 3,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 5
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-BASE"
+    },
+    {
+      "file": "commands/Setup/setup-epicgamesverify.js",
+      "sha256": "ad98fd1056650db113787cb4e10a0573864d86885fb928258add188c1159ff1d",
+      "transport": "prefix",
+      "name": "setup-epicgamesverify",
+      "category": "Setup",
+      "aliases": [
+        "setupepicgamesverify",
+        "epicgamesverify-setup",
+        "epicgamesverifysetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 304,
+      "counts": {
+        "evalCalls": 9,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 2,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 4
+      },
+      "stores": [
+        "client.epicgamesDB"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-ghost-ping-detector.js",
+      "sha256": "1e5aa8f107b3fc9f9373443f794eccfa90630e170fbf76c40dc8a05e35de706b",
+      "transport": "prefix",
+      "name": "setup-ghost-ping-detector",
+      "category": "Setup",
+      "aliases": [
+        "setupghost-ping-detector",
+        "ghost-ping-detector-setup",
+        "ghost-ping-detectorsetup",
+        "setup-ghost-ping",
+        "setup-ghostping"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 267,
+      "counts": {
+        "evalCalls": 8,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 4
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-joinlist.js",
+      "sha256": "32d93c30cc5897d66223c45e3283d39e54ef4db92955898f3d931d79840504a1",
+      "transport": "prefix",
+      "name": "setup-joinlist",
+      "category": "Setup",
+      "aliases": [
+        "joinlist",
+        "setupjoinlist",
+        "joinlist-setup",
+        "joinlistsetup"
+      ],
+      "memberpermissions": [],
+      "lines": 578,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 19
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-WELCOME"
+    },
+    {
+      "file": "commands/Setup/setup-joinvc.js",
+      "sha256": "2467dcaa6c5e88e784b67e4fd5725b4520578ec844ca6ca1c93a5bea5a3d495c",
+      "transport": "prefix",
+      "name": "setup-joinvc",
+      "category": "Setup",
+      "aliases": [
+        "setupjoinvc",
+        "joinvc-setup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 986,
+      "counts": {
+        "evalCalls": 23,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 4,
+        "componentCollectors": 3,
+        "knownStoreMutationCalls": 17
+      },
+      "stores": [
+        "client.joinvc"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-MUSIC"
+    },
+    {
+      "file": "commands/Setup/setup-jtc.js",
+      "sha256": "2dc74deeedad0af3ee8c1abc93ceb9ff40b0a52fb9f7c9838b383c153586ff86",
+      "transport": "prefix",
+      "name": "setup-jtc",
+      "category": "Setup",
+      "aliases": [
+        "setup-jointocreate",
+        "setupjtc",
+        "setupjointocreate",
+        "jtc-setup",
+        "jtcsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 397,
+      "counts": {
+        "evalCalls": 17,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 2,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-MUSIC"
+    },
+    {
+      "file": "commands/Setup/setup-keyword.js",
+      "sha256": "ec5ee6f8da0a32fa28f775324619ba55f74768a4540434b94d6d089fd98e3d7a",
+      "transport": "prefix",
+      "name": "setup-keyword",
+      "category": "Setup",
+      "aliases": [
+        "setupkeyword",
+        "keyword-setup",
+        "setup-keyword"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 653,
+      "counts": {
+        "evalCalls": 24,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 4,
+        "componentCollectors": 2,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.keyword"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-language.js",
+      "sha256": "89eadd77ae4f0a71c1c14609903c25aa00503c6ab99e21effb5702ff0cd2de8d",
+      "transport": "prefix",
+      "name": "setup-language",
+      "category": "Setup",
+      "aliases": [
+        "setuplanguage",
+        "setup-caps",
+        "setupcaps",
+        "language-setup",
+        "languagesetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 377,
+      "counts": {
+        "evalCalls": 8,
+        "globalInteractionListeners": 1,
+        "messageCollectors": 0,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-BASE"
+    },
+    {
+      "file": "commands/Setup/setup-leave.js",
+      "sha256": "e402bf6415d53a95065598fbf953443dcb3ff0f97dfac9e0c8edcd9214e63dd1",
+      "transport": "prefix",
+      "name": "setup-leave",
+      "category": "Setup",
+      "aliases": [
+        "setupleave"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 2391,
+      "counts": {
+        "evalCalls": 77,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 7,
+        "componentCollectors": 7,
+        "knownStoreMutationCalls": 48
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-WELCOME"
+    },
+    {
+      "file": "commands/Setup/setup-logger.js",
+      "sha256": "1823a32acb28024886afd5b31f8a4121ab3fdfd4f625e580b53fb2aa69ab5a68",
+      "transport": "prefix",
+      "name": "setup-logger",
+      "category": "Setup",
+      "aliases": [
+        "setuplogger",
+        "logger-setup",
+        "loggersetup",
+        "setup-auditlog"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 238,
+      "counts": {
+        "evalCalls": 10,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-LOGS"
+    },
+    {
+      "file": "commands/Setup/setup-membercount.js",
+      "sha256": "f9c3371a83ca020af234e8a7a18792bb67ae7c09ae42fb2398eeae206a3b70fe",
+      "transport": "prefix",
+      "name": "setup-membercount",
+      "category": "Setup",
+      "aliases": [
+        "setupmembercount",
+        "membercount-setup",
+        "membercountsetup",
+        "setup-membercounter",
+        "setupmembercounter"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 659,
+      "counts": {
+        "evalCalls": 11,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 2,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 3
+      },
+      "stores": [
+        "client.setups"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-ROLES"
+    },
+    {
+      "file": "commands/Setup/setup-menuapply.js",
+      "sha256": "b0b13e40617c93a80ba3e69267bce8e02efee208d035a1ab0978e004464c131c",
+      "transport": "prefix",
+      "name": "setup-menuapply",
+      "category": "Setup",
+      "aliases": [
+        "setupmenuapply",
+        "menuapply-setup",
+        "menuapplysetup",
+        "menuapplysystem"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 832,
+      "counts": {
+        "evalCalls": 6,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 3,
+        "componentCollectors": 4,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SUPPORT"
+    },
+    {
+      "file": "commands/Setup/setup-menuticket.js",
+      "sha256": "683233aed067307054c567ab44af999165c08d003ab605e44f2f0c20f2302e77",
+      "transport": "prefix",
+      "name": "setup-menuticket",
+      "category": "Setup",
+      "aliases": [
+        "setupmenuticket",
+        "menuticket-setup",
+        "menuticketsetup",
+        "menuticketsystem"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 1166,
+      "counts": {
+        "evalCalls": 11,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 14,
+        "componentCollectors": 5,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SUPPORT"
+    },
+    {
+      "file": "commands/Setup/setup-music.js",
+      "sha256": "e9f1f3c23d5408eea7c29c83155cb62fc847e6af66861ac897920c1314ce6e0c",
+      "transport": "prefix",
+      "name": "setup-music",
+      "category": "Setup",
+      "aliases": [
+        "setupmusic"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 159,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 3
+      },
+      "stores": [
+        "client.musicsettings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-MUSIC"
+    },
+    {
+      "file": "commands/Setup/setup-mute.js",
+      "sha256": "e7a8cdaa6734b80c793a3d3b4a1597deedb5d464d26d46d6ade4c947ba3f81f4",
+      "transport": "prefix",
+      "name": "setup-mute",
+      "category": "Setup",
+      "aliases": [
+        "setupmute",
+        "mute-setup",
+        "mutesetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 312,
+      "counts": {
+        "evalCalls": 5,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 2,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 4
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-radio.js",
+      "sha256": "b0adf3ac5cbdf592a714121a1b8467c3bed18cb07d3242833f391c2465d63de3",
+      "transport": "prefix",
+      "name": "setup-radio",
+      "category": "Setup",
+      "aliases": [
+        "setupradio",
+        "setup-waitingroom",
+        "setupwaitingroom",
+        "radio-setup",
+        "radiosetup",
+        "waitingroom-setup",
+        "waitingroomsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 254,
+      "counts": {
+        "evalCalls": 7,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 3
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-MUSIC"
+    },
+    {
+      "file": "commands/Setup/setup-rank.js",
+      "sha256": "a3a6f4cb3c8f2abdd7e5d5aa3bf8fbcd668045ae85db513bc84acc4f7a4e95dd",
+      "transport": "prefix",
+      "name": "setup-rank",
+      "category": "Setup",
+      "aliases": [
+        "setuprank",
+        "rank-setup",
+        "setup-level",
+        "setup-levels",
+        "setup-leveling",
+        "setuplevel",
+        "setuplevels",
+        "setupleveling"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 428,
+      "counts": {
+        "evalCalls": 22,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 2,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 10
+      },
+      "stores": [
+        "client.points"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-ROLES"
+    },
+    {
+      "file": "commands/Setup/setup-reactionrole.js",
+      "sha256": "dc75d72a5f4255e5e35fabb0cf474199b3f1c3c24e4b7f86270dac352c01d597",
+      "transport": "prefix",
+      "name": "setup-reactionrole",
+      "category": "Setup",
+      "aliases": [
+        "setupreactionrole",
+        "setup-react",
+        "setupreact",
+        "reactionrolesetup",
+        "reactionrole-setup",
+        "react-setup",
+        "reactsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 386,
+      "counts": {
+        "evalCalls": 20,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 4,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 1
+      },
+      "stores": [
+        "client.reactionrole"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-ROLES"
+    },
+    {
+      "file": "commands/Setup/setup-reportlog.js",
+      "sha256": "9baca06ef92a96e76320adf5d9a8fef1cc37cbf00e48ae77051a60a2d806204b",
+      "transport": "prefix",
+      "name": "setup-reportlog",
+      "category": "Setup",
+      "aliases": [
+        "setupreportlog",
+        "cmdlog",
+        "reportlog-setup",
+        "reportlogsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 210,
+      "counts": {
+        "evalCalls": 8,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 1,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-LOGS"
+    },
+    {
+      "file": "commands/Setup/setup-roster.js",
+      "sha256": "72bb443d0e65275ba889eb0afade2df3876587668fe0488b85b080c4b7214d62",
+      "transport": "prefix",
+      "name": "setup-roster",
+      "category": "Setup",
+      "aliases": [
+        "setuproster",
+        "roster-setup",
+        "rostersetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 1080,
+      "counts": {
+        "evalCalls": 59,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 5,
+        "componentCollectors": 2,
+        "knownStoreMutationCalls": 1
+      },
+      "stores": [
+        "client.roster"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-ROLES"
+    },
+    {
+      "file": "commands/Setup/setup-serverstats.js",
+      "sha256": "830c3698caa02c3078ec7524e41c77fa4eef629bc945246d2edca6456200f49c",
+      "transport": "prefix",
+      "name": "setup-serverstats",
+      "category": "Setup",
+      "aliases": [
+        "setupserverstats",
+        "serverstats-setup",
+        "serverstatssetup",
+        "setup-serverstatser",
+        "setupserverstatser"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 53,
+      "counts": {
+        "evalCalls": 1,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [
+        "./setup-membercount"
+      ],
+      "migration": "pending",
+      "migrationGroup": "SETUP-LOGS"
+    },
+    {
+      "file": "commands/Setup/setup-suggestion.js",
+      "sha256": "578505a5189a13a354df5c59d1c3e76be4127d7858d7a93d4329c3d2870f2e2b",
+      "transport": "prefix",
+      "name": "setup-suggestion",
+      "category": "Setup",
+      "aliases": [
+        "setupsuggestion",
+        "suggestionsetup",
+        "suggestsetup",
+        "suggestion-setup",
+        "suggest-setup",
+        "setup-suggest",
+        "setupsuggest"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 1036,
+      "counts": {
+        "evalCalls": 58,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 7,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 12
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-AUTOMATION"
+    },
+    {
+      "file": "commands/Setup/setup-ticket.js",
+      "sha256": "d4c9ab5a157f77833be356ed99fc5eaf52268ebec9afa7f6ca2583bcccd97072",
+      "transport": "prefix",
+      "name": "setup-ticket",
+      "category": "Setup",
+      "aliases": [
+        "setupticket",
+        "ticket-setup",
+        "ticketsetup",
+        "ticketsystem"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 1179,
+      "counts": {
+        "evalCalls": 48,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 11,
+        "componentCollectors": 3,
+        "knownStoreMutationCalls": 17
+      },
+      "stores": [
+        "client.setups"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SUPPORT"
+    },
+    {
+      "file": "commands/Setup/setup-tiktok.js",
+      "sha256": "059ca3264603a7e483e0cf955bf6009393b0be22c09d7ea32c575cae416d33e2",
+      "transport": "prefix",
+      "name": "setup-tiktok",
+      "category": "Setup",
+      "aliases": [
+        "setuptiktok",
+        "tiktok-setup",
+        "tiktoksetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 435,
+      "counts": {
+        "evalCalls": 26,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 3,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 2
+      },
+      "stores": [
+        "client.tiktok"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-FEEDS"
+    },
+    {
+      "file": "commands/Setup/setup-twitch.js",
+      "sha256": "0125a7656e2d2ab14513b2d75411b28fb08a532870a6e8dcbac802ee94aebc4b",
+      "transport": "prefix",
+      "name": "setup-twitch",
+      "category": "Setup",
+      "aliases": [
+        "setuptwitch",
+        "twitch-setup",
+        "twitchsetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 711,
+      "counts": {
+        "evalCalls": 35,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 6,
+        "componentCollectors": 2,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-FEEDS"
+    },
+    {
+      "file": "commands/Setup/setup-twitter.js",
+      "sha256": "404d2dd20a017ea9fc051fc07a5ba9054ac3681b6ad400252561ff1b158192b7",
+      "transport": "prefix",
+      "name": "setup-twitter",
+      "category": "Setup",
+      "aliases": [
+        "setuptwitter",
+        "twitter-setup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 629,
+      "counts": {
+        "evalCalls": 51,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 5,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-FEEDS"
+    },
+    {
+      "file": "commands/Setup/setup-validcode.js",
+      "sha256": "b8bbe7980ec6d529aa1b211d77f9e41ee26359e0603d521570b9bc60a23fd478",
+      "transport": "prefix",
+      "name": "setup-validcode",
+      "category": "Setup",
+      "aliases": [
+        "setupvalidcode",
+        "validcode-setup",
+        "validcodesetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 172,
+      "counts": {
+        "evalCalls": 6,
+        "globalInteractionListeners": 1,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 1
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-warn.js",
+      "sha256": "efc6e0b795d9989e25e7b00d4ecd3f8b1f777729114bbcb96d6829471dd7f054",
+      "transport": "prefix",
+      "name": "setup-warn",
+      "category": "Setup",
+      "aliases": [
+        "setupwarn",
+        "warn-setup",
+        "warnsetup",
+        "warnsystem"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 556,
+      "counts": {
+        "evalCalls": 39,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 4,
+        "componentCollectors": 1,
+        "knownStoreMutationCalls": 6
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-SECURITY"
+    },
+    {
+      "file": "commands/Setup/setup-welcome.js",
+      "sha256": "096ba56a4a2022e88324c273c4c846c543989c644d4fe9c06b1be7d533196fe7",
+      "transport": "prefix",
+      "name": "setup-welcome",
+      "category": "Setup",
+      "aliases": [
+        "setupwelcome"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 3568,
+      "counts": {
+        "evalCalls": 108,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 11,
+        "componentCollectors": 9,
+        "knownStoreMutationCalls": 51
+      },
+      "stores": [
+        "client.settings"
+      ],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-WELCOME"
+    },
+    {
+      "file": "commands/Setup/setup-youtube.js",
+      "sha256": "d533cf28ec4a415ed755c21d982cce9397e17f417214d5c4eb49c1242f2d69b3",
+      "transport": "prefix",
+      "name": "setup-youtube",
+      "category": "Setup",
+      "aliases": [
+        "setupyoutube",
+        "youtube-setup",
+        "youtubesetup"
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 551,
+      "counts": {
+        "evalCalls": 20,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 3,
+        "componentCollectors": 3,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-FEEDS"
+    },
+    {
+      "file": "commands/Setup/setup.js",
+      "sha256": "0565977be9249faa4d371b188a498b197d35b5ed17b83d8e3985d9d2ce9fd444",
+      "transport": "prefix",
+      "name": "setup",
+      "category": "Setup",
+      "aliases": [
+        ""
+      ],
+      "memberpermissions": [
+        "Administrador"
+      ],
+      "lines": 375,
+      "counts": {
+        "evalCalls": 4,
+        "globalInteractionListeners": 1,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-BASE"
+    },
+    {
+      "file": "slashCommands/Config/setupmusic.js",
+      "sha256": "041b860534ca45c92ea625cc2190fb0ec447294fde03c20d8b7bebee2360c171",
+      "transport": "slash",
+      "name": "setupmusic",
+      "aliases": [],
+      "memberpermissions": [],
+      "lines": 44,
+      "counts": {
+        "evalCalls": 0,
+        "globalInteractionListeners": 0,
+        "messageCollectors": 0,
+        "componentCollectors": 0,
+        "knownStoreMutationCalls": 0
+      },
+      "stores": [],
+      "literalSetupRedirects": [],
+      "migration": "pending",
+      "migrationGroup": "SETUP-MUSIC"
+    }
+  ],
+  "productionTouched": false,
+  "setupCodeChanged": false,
+  "migrationGroups": [
+    {
+      "id": "SETUP-BASE",
+      "title": "Navegación y ajustes generales",
+      "files": [
+        "commands/Setup/setup-commands.js",
+        "commands/Setup/setup-embed.js",
+        "commands/Setup/setup-language.js",
+        "commands/Setup/setup.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-WELCOME",
+      "title": "Bienvenida y despedidas",
+      "files": [
+        "commands/Setup/setup-boost.js",
+        "commands/Setup/setup-joinlist.js",
+        "commands/Setup/setup-leave.js",
+        "commands/Setup/setup-welcome.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-LOGS",
+      "title": "Registros",
+      "files": [
+        "commands/Setup/setup-admincmdlog.js",
+        "commands/Setup/setup-auditlog.js",
+        "commands/Setup/setup-boostlog.js",
+        "commands/Setup/setup-logger.js",
+        "commands/Setup/setup-reportlog.js",
+        "commands/Setup/setup-serverstats.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-SECURITY",
+      "title": "Moderación y protección",
+      "files": [
+        "commands/Setup/setup-admin.js",
+        "commands/Setup/setup-anticaps.js",
+        "commands/Setup/setup-antidiscord.js",
+        "commands/Setup/setup-antilink.js",
+        "commands/Setup/setup-antimassmention.js",
+        "commands/Setup/setup-antimasspings.js",
+        "commands/Setup/setup-antimention.js",
+        "commands/Setup/setup-antinewaccount.js",
+        "commands/Setup/setup-antinuke.js",
+        "commands/Setup/setup-antipings.js",
+        "commands/Setup/setup-antispam.js",
+        "commands/Setup/setup-autowarn.js",
+        "commands/Setup/setup-blacklist.js",
+        "commands/Setup/setup-epicgamesverify.js",
+        "commands/Setup/setup-ghost-ping-detector.js",
+        "commands/Setup/setup-mute.js",
+        "commands/Setup/setup-validcode.js",
+        "commands/Setup/setup-warn.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-MUSIC",
+      "title": "Configuración musical y voz",
+      "files": [
+        "commands/Music/setupmusic.js",
+        "commands/Setup/setup-joinvc.js",
+        "commands/Setup/setup-jtc.js",
+        "commands/Setup/setup-music.js",
+        "commands/Setup/setup-radio.js",
+        "slashCommands/Config/setupmusic.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-SUPPORT",
+      "title": "Tickets y solicitudes",
+      "files": [
+        "commands/Setup/setup-apply.js",
+        "commands/Setup/setup-autosupport.js",
+        "commands/Setup/setup-menuapply.js",
+        "commands/Setup/setup-menuticket.js",
+        "commands/Setup/setup-ticket.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-ROLES",
+      "title": "Roles, niveles y contadores de miembros",
+      "files": [
+        "commands/Setup/setup-membercount.js",
+        "commands/Setup/setup-rank.js",
+        "commands/Setup/setup-reactionrole.js",
+        "commands/Setup/setup-roster.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-AUTOMATION",
+      "title": "Comunidad y automatizaciones",
+      "files": [
+        "commands/Setup/setup-aichat.js",
+        "commands/Setup/setup-autobackup.js",
+        "commands/Setup/setup-autodelete.js",
+        "commands/Setup/setup-autoembed.js",
+        "commands/Setup/setup-automeme.js",
+        "commands/Setup/setup-counter.js",
+        "commands/Setup/setup-customcommand.js",
+        "commands/Setup/setup-dailyfact.js",
+        "commands/Setup/setup-keyword.js",
+        "commands/Setup/setup-suggestion.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-FEEDS",
+      "title": "Publicaciones de plataformas",
+      "files": [
+        "commands/Setup/setup-tiktok.js",
+        "commands/Setup/setup-twitch.js",
+        "commands/Setup/setup-twitter.js",
+        "commands/Setup/setup-youtube.js"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "SETUP-OWNER",
+      "title": "Operación exclusiva del dueño",
+      "files": [
+        "commands/Owner/setup-advertise.js",
+        "commands/Owner/setup-owner.js"
+      ],
+      "status": "pending"
+    }
+  ]
+}

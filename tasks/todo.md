@@ -1541,3 +1541,109 @@ Estado del checkpoint: T01 completa como auditoría estática; T02–T04 impleme
 - [x] Nazha seleccionado, Serenetia/MilloHost respaldos y conservación de cola durante caída completa. 392 tests.
 - [x] Prueba de voz en THZ/VC1: progreso nativo en Nazha y Serenetia, pausa/cola/mute/sesión preservados y limpieza; selección persistida. Sin confirmación auditiva humana.
 - [x] Despliegue final sin bandera de prueba; salud/Mongo/música y 82 emojis; cambios locales previos, imágenes y Redis preservados. Ver checkpoint/evidencia public-only-runtime.
+
+## Remodelación de setups · continuación T08/T11/T12 · 18/10/2026
+
+Alcance confirmado: código y menús de Discord juntos. [Mapa, dependencias, aceptación y verificación por entrega](../docs/guia-arquitectura/REMODELACION_SETUPS.md); [63 archivos y metadatos](../docs/platform/evidence/setup-inventory.json). No sustituye las tareas previas ni cierra el dominio por cambiar su menú. Cada comando se divide en operaciones si supera cinco archivos.
+
+- [x] Inventario estático de los 63 comandos y grupos, con hashes y aliases efectivos del subconjunto.
+- [x] SETUP-BASE-01 (local): remodelar navegación `setup`: registro vivo, menús paginados, actor/permisos frescos, expiración/cancelación y errores asíncronos comprobados con sesiones simultáneas. Archivos: comando, controlador y catálogos es/en. Dependencia: T11 existente. Verificar builders y controles con fixtures temporales; `npm test`, sintaxis y diff.
+
+Verificado en `eadc547b0684ded2c9cca65cc685362c518ab660`: 15 escenarios temporales, 100 ciclos SDK sin listeners sobrantes y 25/25 originales. Sin recorrido real Gateway/Discord ni despliegue. Evidencia: [navegación](../docs/platform/evidence/setup-navigation.json).
+
+### Comandos pendientes por grupo
+
+Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus operaciones, datos, permisos y menús. Dependencia: navegación local y servicio del dominio correspondiente. Archivos: comando indicado, su servicio/persistencia existentes y textos; dividir si supera cinco archivos.
+
+**SETUP-BASE · Navegación y ajustes generales**
+
+- [ ] [commands/Setup/setup-commands.js](../commands/Setup/setup-commands.js).
+- [ ] [commands/Setup/setup-embed.js](../commands/Setup/setup-embed.js).
+- [ ] [commands/Setup/setup-language.js](../commands/Setup/setup-language.js).
+- [x] [commands/Setup/setup.js](../commands/Setup/setup.js) — navegación local verificada; los demás asistentes siguen abiertos.
+
+**SETUP-WELCOME · Bienvenida y despedidas**
+
+- [ ] [commands/Setup/setup-boost.js](../commands/Setup/setup-boost.js).
+- [ ] [commands/Setup/setup-joinlist.js](../commands/Setup/setup-joinlist.js).
+- [ ] [commands/Setup/setup-leave.js](../commands/Setup/setup-leave.js).
+- [ ] [commands/Setup/setup-welcome.js](../commands/Setup/setup-welcome.js).
+
+**SETUP-LOGS · Registros**
+
+- [ ] [commands/Setup/setup-admincmdlog.js](../commands/Setup/setup-admincmdlog.js).
+- [ ] [commands/Setup/setup-auditlog.js](../commands/Setup/setup-auditlog.js).
+- [ ] [commands/Setup/setup-boostlog.js](../commands/Setup/setup-boostlog.js).
+- [ ] [commands/Setup/setup-logger.js](../commands/Setup/setup-logger.js).
+- [ ] [commands/Setup/setup-reportlog.js](../commands/Setup/setup-reportlog.js).
+- [ ] [commands/Setup/setup-serverstats.js](../commands/Setup/setup-serverstats.js).
+
+**SETUP-SECURITY · Moderación y protección**
+
+- [ ] [commands/Setup/setup-admin.js](../commands/Setup/setup-admin.js).
+- [ ] [commands/Setup/setup-anticaps.js](../commands/Setup/setup-anticaps.js).
+- [ ] [commands/Setup/setup-antidiscord.js](../commands/Setup/setup-antidiscord.js).
+- [ ] [commands/Setup/setup-antilink.js](../commands/Setup/setup-antilink.js).
+- [ ] [commands/Setup/setup-antimassmention.js](../commands/Setup/setup-antimassmention.js).
+- [ ] [commands/Setup/setup-antimasspings.js](../commands/Setup/setup-antimasspings.js).
+- [ ] [commands/Setup/setup-antimention.js](../commands/Setup/setup-antimention.js).
+- [ ] [commands/Setup/setup-antinewaccount.js](../commands/Setup/setup-antinewaccount.js).
+- [ ] [commands/Setup/setup-antinuke.js](../commands/Setup/setup-antinuke.js).
+- [ ] [commands/Setup/setup-antipings.js](../commands/Setup/setup-antipings.js).
+- [ ] [commands/Setup/setup-antispam.js](../commands/Setup/setup-antispam.js).
+- [ ] [commands/Setup/setup-autowarn.js](../commands/Setup/setup-autowarn.js).
+- [ ] [commands/Setup/setup-blacklist.js](../commands/Setup/setup-blacklist.js).
+- [ ] [commands/Setup/setup-epicgamesverify.js](../commands/Setup/setup-epicgamesverify.js).
+- [ ] [commands/Setup/setup-ghost-ping-detector.js](../commands/Setup/setup-ghost-ping-detector.js).
+- [ ] [commands/Setup/setup-mute.js](../commands/Setup/setup-mute.js).
+- [ ] [commands/Setup/setup-validcode.js](../commands/Setup/setup-validcode.js).
+- [ ] [commands/Setup/setup-warn.js](../commands/Setup/setup-warn.js).
+
+**SETUP-MUSIC · Configuración musical y voz**
+
+- [ ] [commands/Music/setupmusic.js](../commands/Music/setupmusic.js).
+- [ ] [commands/Setup/setup-joinvc.js](../commands/Setup/setup-joinvc.js).
+- [ ] [commands/Setup/setup-jtc.js](../commands/Setup/setup-jtc.js).
+- [ ] [commands/Setup/setup-music.js](../commands/Setup/setup-music.js).
+- [ ] [commands/Setup/setup-radio.js](../commands/Setup/setup-radio.js).
+- [ ] [slashCommands/Config/setupmusic.js](../slashCommands/Config/setupmusic.js).
+
+**SETUP-SUPPORT · Tickets y solicitudes**
+
+- [ ] [commands/Setup/setup-apply.js](../commands/Setup/setup-apply.js).
+- [ ] [commands/Setup/setup-autosupport.js](../commands/Setup/setup-autosupport.js).
+- [ ] [commands/Setup/setup-menuapply.js](../commands/Setup/setup-menuapply.js).
+- [ ] [commands/Setup/setup-menuticket.js](../commands/Setup/setup-menuticket.js).
+- [ ] [commands/Setup/setup-ticket.js](../commands/Setup/setup-ticket.js).
+
+**SETUP-ROLES · Roles, niveles y contadores de miembros**
+
+- [ ] [commands/Setup/setup-membercount.js](../commands/Setup/setup-membercount.js).
+- [ ] [commands/Setup/setup-rank.js](../commands/Setup/setup-rank.js).
+- [ ] [commands/Setup/setup-reactionrole.js](../commands/Setup/setup-reactionrole.js).
+- [ ] [commands/Setup/setup-roster.js](../commands/Setup/setup-roster.js).
+
+**SETUP-AUTOMATION · Comunidad y automatizaciones**
+
+- [ ] [commands/Setup/setup-aichat.js](../commands/Setup/setup-aichat.js).
+- [ ] [commands/Setup/setup-autobackup.js](../commands/Setup/setup-autobackup.js).
+- [ ] [commands/Setup/setup-autodelete.js](../commands/Setup/setup-autodelete.js).
+- [ ] [commands/Setup/setup-autoembed.js](../commands/Setup/setup-autoembed.js).
+- [ ] [commands/Setup/setup-automeme.js](../commands/Setup/setup-automeme.js).
+- [ ] [commands/Setup/setup-counter.js](../commands/Setup/setup-counter.js).
+- [ ] [commands/Setup/setup-customcommand.js](../commands/Setup/setup-customcommand.js).
+- [ ] [commands/Setup/setup-dailyfact.js](../commands/Setup/setup-dailyfact.js).
+- [ ] [commands/Setup/setup-keyword.js](../commands/Setup/setup-keyword.js).
+- [ ] [commands/Setup/setup-suggestion.js](../commands/Setup/setup-suggestion.js).
+
+**SETUP-FEEDS · Publicaciones de plataformas**
+
+- [ ] [commands/Setup/setup-tiktok.js](../commands/Setup/setup-tiktok.js).
+- [ ] [commands/Setup/setup-twitch.js](../commands/Setup/setup-twitch.js).
+- [ ] [commands/Setup/setup-twitter.js](../commands/Setup/setup-twitter.js).
+- [ ] [commands/Setup/setup-youtube.js](../commands/Setup/setup-youtube.js).
+
+**SETUP-OWNER · Operación exclusiva del dueño**
+
+- [ ] [commands/Owner/setup-advertise.js](../commands/Owner/setup-advertise.js).
+- [ ] [commands/Owner/setup-owner.js](../commands/Owner/setup-owner.js).

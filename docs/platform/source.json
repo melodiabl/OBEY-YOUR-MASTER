@@ -106,5 +106,20 @@
     "apiCommit": "ddc4ec433252fefc68ce41e10329a7a64e47a80f",
     "apiEvidence": "docs/guia-arquitectura/API_BIENVENIDA.md",
     "openapi": "docs/api/welcome.openapi.json"
+  },
+  "setupRemodeling": {
+    "requestedDate": "2026-10-18",
+    "confirmedPreference": "Código y menús de Discord juntos",
+    "inventory": "docs/platform/evidence/setup-inventory.json",
+    "report": "docs/guia-arquitectura/REMODELACION_SETUPS.md",
+    "commandFiles": 63,
+    "sourceLinesAtInventory": 40107,
+    "navigationCommit": "eadc547b0684ded2c9cca65cc685362c518ab660",
+    "navigationEvidence": "docs/platform/evidence/setup-navigation.json",
+    "localCommandFilesRemodeled": 1,
+    "remainingCommandFiles": 62,
+    "next": "commands/Setup/setup-language.js",
+    "pushed": false,
+    "deployed": false
   }
 }

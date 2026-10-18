@@ -4,7 +4,9 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 
 ## Reanudación local con la guía nueva · 18 de octubre de 2026
 
-Último incremento local `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [API/imports de bienvenida](../guia-arquitectura/API_BIENVENIDA.md). Entrada pública explícita, reglas de dependencias y tipos en CI; OpenAPI para cinco rutas. Diez mutaciones rechazadas, 20 respuestas HTTP con Mongo aislado validadas y 25/25 tests originales. CLI y lockfile comprobados con instalación limpia aislada; sin scripts/tests permanentes nuevos ni despliegue. TECH-06 parcial, resto global pendiente.
+Último incremento local `eadc547b0684ded2c9cca65cc685362c518ab660`: [navegación de setups](../guia-arquitectura/REMODELACION_SETUPS.md). El usuario confirmó remodelar código y menús de Discord juntos. Inventario: 63 comandos/40.107 líneas. Nuevo setup por categorías/páginas desde el registro cargado, sesiones de mensaje, revalidación y cierre; 15 escenarios con SDK, 100 ciclos sin listeners restantes y 25/25 originales. Script temporal retirado. Los otros 62 archivos de comandos conservan sus migraciones pendientes; siguiente setup-language. Sin publicación ni despliegue.
+
+Incremento previo `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [API/imports de bienvenida](../guia-arquitectura/API_BIENVENIDA.md). Entrada pública explícita, reglas de dependencias y tipos en CI; OpenAPI para cinco rutas. Diez mutaciones rechazadas, 20 respuestas HTTP con Mongo aislado validadas y 25/25 tests originales. CLI y lockfile comprobados con instalación limpia aislada; sin scripts/tests permanentes nuevos ni despliegue. TECH-06 parcial, resto global pendiente.
 
 Incremento previo `0771a47953a17cbac9f4d853554fd0ecb274d45f`: [drenaje de configuración de bienvenida](../guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md). Las operaciones aceptadas terminan antes del flush; las nuevas entradas reciben indisponibilidad. Mongo/HTTP aislados, errores, idempotencia y deadline simulado comprobados; 25/25 originales y tipos pasan. TECH-05 parcial, ARCH-04 global pendiente. Sin publicación/despliegue ni nuevos scripts/tests.
 
