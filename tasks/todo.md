@@ -1576,7 +1576,7 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] [commands/Setup/setup-boostlog.js](../commands/Setup/setup-boostlog.js).
 - [x] [commands/Setup/setup-logger.js](../commands/Setup/setup-logger.js).
 - [x] [commands/Setup/setup-reportlog.js](../commands/Setup/setup-reportlog.js).
-- [ ] [commands/Setup/setup-serverstats.js](../commands/Setup/setup-serverstats.js).
+- [x] [commands/Setup/setup-serverstats.js](../commands/Setup/setup-serverstats.js).
 
 **SETUP-SECURITY · Moderación y protección**
 
@@ -1618,10 +1618,10 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-ROLES · Roles, niveles y contadores de miembros**
 
-- [ ] [commands/Setup/setup-membercount.js](../commands/Setup/setup-membercount.js).
+- [x] [commands/Setup/setup-membercount.js](../commands/Setup/setup-membercount.js).
 - [x] [commands/Setup/setup-rank.js](../commands/Setup/setup-rank.js).
-- [ ] [commands/Setup/setup-reactionrole.js](../commands/Setup/setup-reactionrole.js).
-- [ ] [commands/Setup/setup-roster.js](../commands/Setup/setup-roster.js).
+- [x] [commands/Setup/setup-reactionrole.js](../commands/Setup/setup-reactionrole.js).
+- [x] [commands/Setup/setup-roster.js](../commands/Setup/setup-roster.js).
 
 **SETUP-AUTOMATION · Comunidad y automatizaciones**
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 45/63 archivos, sin desplegar. Feeds remodelados con plantillas por guild y preferencias del publicador TikTok desactivado conservadas. Siguiente: recursos de roles/contadores, soporte, Owner, protección y música; no cerrar el trabajo global por completar menús.
+Avance local: 49/63 archivos, sin desplegar. Recursos de listas de roles, contadores y reacciones remodelados, con publicación confirmada y cierre de operaciones pendientes. Siguiente: soporte, Owner, protección y música; no cerrar el trabajo global por completar menús.

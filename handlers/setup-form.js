@@ -41,6 +41,7 @@ function buildFormSetup(definition, value, draft, selected, locale, status = '')
   if (field.clear !== undefined) edits.push(button('form_clear', 'clear'))
   if (edits.length) components.push(new ActionRowBuilder().addComponents(edits))
   components.push(new ActionRowBuilder().addComponents(button('form_save', 'save', ButtonStyle.Primary, !Object.keys(draft).length), button('form_discard', 'discard', ButtonStyle.Secondary, !Object.keys(draft).length), button('form_close', 'close'), ...(definition.previewAction ? [button('form_preview', 'preview')] : [])))
+  if (definition.publish) components.push(new ActionRowBuilder().addComponents(button('form_publish', 'publish', ButtonStyle.Primary, Boolean(Object.keys(draft).length)), ...(definition.unpublish ? [button('form_unpublish', 'unpublish', ButtonStyle.Secondary, Boolean(Object.keys(draft).length))] : [])))
   if (keys.length > 25) components.push(new ActionRowBuilder().addComponents(button('form_previous', 'previous', ButtonStyle.Secondary, keys.indexOf(selected) < 25), button('form_next', 'next', ButtonStyle.Secondary, keys.indexOf(selected) >= Math.floor((keys.length - 1) / 25) * 25)))
   return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }
 }
@@ -84,7 +85,7 @@ async function checkResources(access, field, value) {
         continue
       }
       const resource = await access.guild.roles.fetch(id)
-      if (!resource || resource.guild.id !== access.guild.id || resource.id === access.guild.id || (!field.permissionOnly && (resource.managed || !access.bot.permissions.has(F.ManageRoles) || resource.comparePositionTo(access.bot.roles.highest) >= 0 || (field.noAdmin && resource.permissions.has(F.Administrator))))) throw new Error('setup_resource')
+      if (!resource || resource.guild.id !== access.guild.id || resource.id === access.guild.id && !field.allowEveryone || (!field.permissionOnly && (resource.managed || !access.bot.permissions.has(F.ManageRoles) || resource.comparePositionTo(access.bot.roles.highest) >= 0 || (field.noAdmin && resource.permissions.has(F.Administrator))))) throw new Error('setup_resource')
     }
   }
 }
@@ -115,6 +116,18 @@ async function openFormSetup(client, origin, definition) {
       let input
       try { input = parseFieldInput(field(), interaction.fields.getTextInputValue('value'), current()[selected], removing) } catch { input = undefined }
       await change(interaction, input)
+    } })
+    const publish = removing => ({ async run(i, session) {
+      if (Object.keys(draft).length) { await i.followUp({ content: copy(locale, 'saveFirst'), ephemeral: true, allowedMentions: { parse: [] } }); return }
+      const action = removing ? definition.unpublish : definition.publish
+      if (!action) throw new Error('invalid_setup_definition')
+      let status = removing ? 'unpublished' : 'published'
+      try { await action(client, { ...context, isActive: session.active }) } catch (error) { status = error.code === 'publication_uncertain' ? 'publicationUncertain' : 'publishFailed' }
+      if (!session.active() || client._shuttingDown) return
+      await checkAccess()
+      value = await service.read(context.guildId)
+      await i.editReply(render())
+      await i.followUp({ content: copy(locale, status), ephemeral: true, allowedMentions: { parse: [] } })
     } })
     message = await origin.reply(render())
     return attachSetupSession(client, message, context, { notice, authorize: definition.authorize, controls: {
@@ -151,6 +164,7 @@ async function openFormSetup(client, origin, definition) {
         catch (error) { if (error.code !== 'setup_conflict') throw error; await checkAccess(); value = await service.read(context.guildId); status = 'conflict' }
         await i.editReply(render(status))
       } },
+      form_publish: publish(false), form_unpublish: publish(true),
       form_preview: { async run(i, session) {
         if (!definition.previewAction) throw new Error('invalid_field')
         let payload

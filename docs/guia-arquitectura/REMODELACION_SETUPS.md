@@ -73,4 +73,8 @@ Fuentes primarias comprobadas: [Message 14.27.0](https://discord.js.org/docs/pac
 
 ## Segunda entrega local · idioma
 
-[Idioma: comportamiento, datos y evidencia](IDIOMA_SETUP.md), commit `f4163778677b3b893bde2308c1a328e8d24111e5`. Un mensaje con estado actual, selección pendiente, Guardar/Usar inglés/Cerrar; es/en, cuatro idiomas realmente cargados, permisos por acción y persistencia confirmada/CAS del mismo campo legacy. Pasan 21 escenarios Mongo/SDK, 100 ciclos y los 25 originales. Dos de 63 archivos de comandos remodelados localmente; quedan 61. Siguiente setup-embed. Sin despliegue.
+[Idioma: comportamiento, datos y evidencia](IDIOMA_SETUP.md), commit `f4163778677b3b893bde2308c1a328e8d24111e5`. Un mensaje con estado actual, selección pendiente, Guardar/Usar inglés/Cerrar; es/en, cuatro idiomas realmente cargados, permisos por acción y persistencia confirmada/CAS del mismo campo legacy. Pasan 21 escenarios Mongo/SDK, 100 ciclos y los 25 originales. Estado histórico de esa entrega: dos de 63 archivos remodelados; siguiente entonces setup-embed. Sin despliegue.
+
+## Avance acumulado local
+
+49/63 archivos de comandos remodelados. Se completaron apariencia, categorías, canales/opciones, protecciones simples, administración/rangos, comunidad, automatizaciones, entradas de voz, bienvenida/despedida, feeds y [recursos de roles/contadores](RECURSOS_ROLES_SETUP.md). Quedan 14 archivos de soporte, Owner, protección y música. Este conteo acredita implementación y verificaciones locales; la integración con Discord real y el despliegue siguen pendientes.

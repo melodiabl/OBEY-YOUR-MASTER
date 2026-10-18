@@ -1260,7 +1260,14 @@
       "previous": "Previous",
       "next": "Next",
       "preview": "Example message",
-      "previewFailed": "Preview could not be generated. Your changes are still pending."
+      "previewFailed": "Preview could not be generated. Your changes are still pending.",
+      "publish": "Publish / update",
+      "unpublish": "Unpublish",
+      "saveFirst": "Save or discard your changes before publishing.",
+      "published": "Publication updated.",
+      "unpublished": "Publication removed or binding disabled.",
+      "publishFailed": "The full publication was not confirmed. Check the channel, permissions and emojis before retrying.",
+      "publicationUncertain": "Creation was not confirmed. Check Discord and select the message or channel that was created before publishing again."
     },
     "records": {
       "description": "Select an entry to edit or create a new one. Save to apply; removals also remain pending.",
@@ -1281,7 +1288,14 @@
       "unsaved": "Unsaved changes",
       "saved": "Changes saved",
       "conflict": "Changed in another panel. Your draft is kept; discard and reload to avoid overwriting other entries.",
-      "invalid": "Check the format, duplicate names and channel or role permissions."
+      "invalid": "Check the format, duplicate names and channel or role permissions.",
+      "publish": "Publish / update",
+      "unpublish": "Unpublish",
+      "saveFirst": "Save or discard your changes before publishing.",
+      "published": "Publication updated.",
+      "unpublished": "Publication removed or binding disabled.",
+      "publishFailed": "The full publication was not confirmed. Check the channel, permissions and emojis before retrying.",
+      "publicationUncertain": "Creation was not confirmed. Check Discord and select the message or channel that was created before publishing again."
     }
   }
 }

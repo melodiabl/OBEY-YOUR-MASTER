@@ -11,10 +11,11 @@ function buildRecordsSetup(definition, records, selected, page, dirty, blocked, 
     .setFooter({ text: copy(locale, status || (blocked ? 'conflict' : dirty ? 'unsaved' : 'current')) })
   if (records[selected]) embed.addFields({ name: copy(locale, 'selected'), value: escapeMarkdown(String(definition.describe(records[selected], locale))).slice(0, 1024) || copy(locale, 'empty') })
   const row = new ActionRowBuilder(), components = [], pages = Math.max(1, Math.ceil(records.length / 25))
-  if (records.length) components.push(new ActionRowBuilder().addComponents(new StringSelectMenuBuilder().setCustomId('records_select').setPlaceholder(copy(locale, 'choose')).addOptions(records.slice(page * 25, page * 25 + 25).map((entry, index) => ({ value: String(page * 25 + index), label: String(definition.key(entry)).slice(0, 100) || '?', default: selected === page * 25 + index })))))
+  if (records.length) components.push(new ActionRowBuilder().addComponents(new StringSelectMenuBuilder().setCustomId('records_select').setPlaceholder(copy(locale, 'choose')).addOptions(records.slice(page * 25, page * 25 + 25).map((entry, index) => ({ value: String(page * 25 + index), label: String(definition.label ? definition.label(entry) : definition.key(entry)).slice(0, 100) || '?', default: selected === page * 25 + index })))))
   const button = (id, key, disabled = false, style = ButtonStyle.Secondary) => new ButtonBuilder().setCustomId(id).setLabel(copy(locale, key)).setStyle(style).setDisabled(disabled)
   row.addComponents(button('records_new', 'add', blocked), button('records_edit', 'edit', blocked || !records[selected]), button('records_remove', 'remove', blocked || !records[selected]), button('records_save', 'save', blocked || !dirty, ButtonStyle.Primary))
-  components.push(row, new ActionRowBuilder().addComponents(button('records_previous', 'previous', page === 0), button('records_next', 'next', page >= pages - 1), button('records_discard', blocked ? 'reload' : 'discard', !dirty && !blocked), button('records_close', 'close')))
+  if (definition.publish) row.addComponents(button('records_publish', 'publish', blocked || dirty || !records[selected], ButtonStyle.Primary))
+  components.push(row, new ActionRowBuilder().addComponents(button('records_previous', 'previous', page === 0), button('records_next', 'next', page >= pages - 1), button('records_discard', blocked ? 'reload' : 'discard', !dirty && !blocked), button('records_close', 'close'), ...(definition.unpublish ? [button('records_unpublish', 'unpublish', blocked || dirty || !records[selected])] : [])))
   return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }
 }
 function recordModal(definition, record, locale) {
@@ -56,8 +57,23 @@ async function openRecordsSetup(client, origin, definition) {
       page = Math.floor(selected / 25); dirty = true
       await i.editReply(render())
     } })
+    const publish = removing => ({ async run(i, session) {
+      if (dirty || blocked || !records[selected]) return invalid(i)
+      const key = definition.key(records[selected]), action = removing ? definition.unpublish : definition.publish
+      if (!action) throw new Error('invalid_setup_definition')
+      let status = removing ? 'unpublished' : 'published'
+      try { await action(client, { ...context, isActive: session.active }, key) } catch (error) { status = error.code === 'publication_uncertain' ? 'publicationUncertain' : 'publishFailed' }
+      if (!session.active() || client._shuttingDown) return
+      await requireSetupAccess(client, context)
+      value = await service.read(context.guildId); records = structuredClone(value.values.records)
+      const index = records.findIndex(entry => definition.key(entry) === key)
+      selected = index < 0 ? Math.max(0, Math.min(selected, records.length - 1)) : index; page = Math.floor(selected / 25)
+      await i.editReply(render())
+      await i.followUp({ content: copy(locale, status), ephemeral: true, allowedMentions: { parse: [] } })
+    } })
     message = await origin.reply(render())
     return attachSetupSession(client, message, context, { notice, controls: {
+      records_publish: publish(false), records_unpublish: publish(true),
       records_new: edit(true), records_edit: edit(false),
       records_select: { accept: i => i.isStringSelectMenu(), async run(i) { const index = Number(i.values?.[0]); if (i.values.length !== 1 || !Number.isInteger(index) || index < page * 25 || index >= page * 25 + 25 || !records[index]) throw new Error('setup_invalid'); selected = index; await i.editReply(render()) } },
       records_remove: { async run(i) { if (blocked || !records[selected]) return invalid(i); records.splice(selected, 1); selected = Math.min(selected, records.length - 1); page = Math.max(0, Math.min(page, Math.ceil(records.length / 25) - 1)); dirty = true; await i.editReply(render()) } },

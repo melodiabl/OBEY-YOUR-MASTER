@@ -116,9 +116,9 @@
     "sourceLinesAtInventory": 40107,
     "navigationCommit": "eadc547b0684ded2c9cca65cc685362c518ab660",
     "navigationEvidence": "docs/platform/evidence/setup-navigation.json",
-    "localCommandFilesRemodeled": 45,
-    "remainingCommandFiles": 18,
-    "next": "commands/Setup/setup-roster.js",
+    "localCommandFilesRemodeled": 49,
+    "remainingCommandFiles": 14,
+    "next": "commands/Setup/setup-autosupport.js",
     "pushed": false,
     "deployed": false,
     "languageCommit": "f4163778677b3b893bde2308c1a328e8d24111e5",
@@ -138,7 +138,9 @@
     "voiceCommit": "3e0fce7",
     "membershipEvidence": "docs/guia-arquitectura/BIENVENIDA_DESPEDIDA_SETUP.md",
     "membershipCommit": "e2c692b",
-    "feedsEvidence": "docs/guia-arquitectura/FEEDS_SETUP.md"
+    "feedsEvidence": "docs/guia-arquitectura/FEEDS_SETUP.md",
+    "feedsCommit": "d27f58f",
+    "roleResourcesEvidence": "docs/guia-arquitectura/RECURSOS_ROLES_SETUP.md"
   },
   "latestCandidateCheck": {
     "date": "2026-10-18",

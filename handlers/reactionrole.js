@@ -1,303 +1,58 @@
-const obeyUi = require("./assets/system")
-/*
- **** EXAMPLE DB STRUCTURE:
-    //Create the database:
-    const { default: Enmap } = await import("enmap");
-    // ... create the bot client
-    client.reactionrole = new Enmap({
-        name: "reactionrole-db",
-        dataDir: "./databases/reactionroleDB", // OPTIONAL, define where the db should be saved (create folders first)
-    })
-
-
-    const guildId = message.guild.id; // key in the database
-
-    //how to "ensure the db" for each guild
-    client.reactionrole.ensure(guildId, {
-        reactionroles: []
-    });
-
-
-    // Example data of a reactionrole
-    const ReactionRoleData = {
-        MESSAGE_ID: '871019011452850276',
-        remove_others: false, // if true, it means that only 1 reaction role can be used at once
-        Parameters: [ // Technically you could add infnite parameters (emojis), but discord just allows 20 at once on 1 message ...
-            { Emoji: '🛑', Emojimsg: '🛑', Role: '831972743280590848' }, // Unicode emoji
-            { Emoji: '866089513654419466', Emojimsg: '<:Builder:866089513654419466>', Role: '845952370889981952' }, // Discord Custom Emoji
-            { Emoji: '🔥', Emojimsg: '🔥', Role: '844512850395398155' },
-        ]
-    }
-
-    // Add the data to the db
-    client.reactionrole.push(guildId, ReactionRoleData, "reactionrole");
-    // You do not need to remove the data from the db as it's only available as long as the message exists
-
-
-    //EDITING:  const messageId = "The ReactionRole Message to edit:"
-
-    const data = client.reactionrole.get(guildId, "reactionrole");
-    const index = data.findIndex(r => r.MESSAGE_ID == messageId);
-    if(index > -1) {
-        data[index] = newReactionRoleData;
-        client.reactionrole.set(guildId, data, "reactionrole")
+const { PermissionFlagsBits: F, Events } = require('discord.js')
+const obeyUi = require('./assets/system')
+const { runSetupOperation } = require('./setup-operations')
+const { serialize } = require('./setup-publications')
+const emojiKey = emoji => emoji?.id || emoji?.name
+const selections = new WeakMap()
+const matches = (emoji, value) => obeyUi.matchesReaction(emoji, value)
+async function applyReactionRole(client, reaction, user, adding) {
+  if (user?.bot || !user?.id || client._shuttingDown || client._dbReady === false || !reaction.message?.guild) return
+  const guild = reaction.message.guild
+  const configured = client.reactionrole.get(guild.id, 'reactionroles')
+  if (!Array.isArray(configured) || !configured.some(entry => entry.MESSAGE_ID === reaction.message.id && entry.Parameters?.some(pair => matches(reaction.emoji, pair.Emoji)))) return
+  if (!selections.has(client)) selections.set(client, new Map())
+  const pending = selections.get(client), selectionKey = `${guild.id}:${reaction.message.id}:${user.id}`, token = { emoji: emojiKey(reaction.emoji) }
+  if (adding) pending.set(selectionKey, token)
+  else if (pending.has(selectionKey) && matches(reaction.emoji, pending.get(selectionKey).emoji)) pending.delete(selectionKey)
+  const current = () => !adding || pending.get(selectionKey) === token
+  try { return await runSetupOperation(client, () => serialize(client, `${guild.id}:reaction-member:${user.id}`, async () => {
+    if (client._shuttingDown || !current()) return
+    if (reaction.partial) await reaction.fetch()
+    const message = reaction.message
+    if (message.partial) await message.fetch()
+    const [member, bot] = await Promise.all([guild.members.fetch({ user: user.id, force: true }), guild.members.fetchMe()])
+    if (!member || member.guild.id !== guild.id || !bot.permissions.has(F.ManageRoles) || client._shuttingDown || !current()) return
+    // Settings may have changed while member data was being fetched.
+    const entry = (client.reactionrole.get(guild.id, 'reactionroles') || []).find(entry => entry.MESSAGE_ID === message.id)
+    const pair = entry?.Parameters?.find(pair => matches(reaction.emoji, pair.Emoji))
+    if (!pair || !/^\d{17,20}$/.test(pair.Role)) return
+    const role = await guild.roles.fetch(pair.Role)
+    if (!current() || !role || role.managed || role.id === guild.id || role.comparePositionTo(bot.roles.highest) >= 0) return
+    if (adding) {
+      if (role.permissions.has(F.Administrator)) return
+      if (!member.roles.cache.has(role.id)) await member.roles.add(role.id)
+      if (!entry.remove_others || !current()) return
+      for (const id of new Set(entry.Parameters.map(pair => pair.Role))) {
+        if (!current()) return
+        if (id === role.id || !member.roles.cache.has(id)) continue
+        const other = await guild.roles.fetch(id).catch(error => { if (error.code === 10011) return null; throw error })
+        if (other && !other.managed && other.id !== guild.id && other.comparePositionTo(bot.roles.highest) < 0) await member.roles.remove(other.id)
+      }
+      if (message.channel.permissionsFor(bot)?.has(F.ManageMessages)) for (const other of message.reactions.cache.values()) {
+        if (!current()) return
+        if (other.users.cache.has(user.id) && !matches(other.emoji, emojiKey(reaction.emoji)) && entry.Parameters.some(pair => matches(other.emoji, pair.Emoji))) await other.users.remove(user.id)
+      }
     } else {
-        console.log("No reactionrole found")
+      // Removing another emoji for the same role must not undo the current choice.
+      const stillSelected = [...message.reactions.cache.values()].some(other => !matches(other.emoji, emojiKey(reaction.emoji)) && other.users.cache.has(user.id) && entry.Parameters.some(pair => pair.Role === role.id && matches(other.emoji, pair.Emoji)))
+      if (!stillSelected && member.roles.cache.has(role.id)) await member.roles.remove(role.id)
     }
-*/
-
+  })) } finally { if (adding && pending.get(selectionKey) === token) pending.delete(selectionKey) }
+}
 module.exports = client => {
-    //ADDING ROLES
-    client.on("messageReactionAdd", async (reaction, user) => {
-        try {
-            const { message } = reaction;
-            if (user.bot || !message.guild) return;
-            if (message && message.partial) await message.fetch().catch(() => {});
-            if (reaction.partial) await reaction.fetch().catch(() => {});
-            if (user.bot) return;
-            client.reactionrole.ensure(reaction.message.guild.id, {
-                reactionroles: [],
-            });
-            const reactionsetup = client.reactionrole.get(reaction.message.guild.id, "reactionroles");
-            if (!reactionsetup || reactionsetup == undefined || reactionsetup == null) return;
-            for (let k = 0; k < reactionsetup.length; k++) {
-                if (reaction.message.id === reactionsetup[k].MESSAGE_ID) {
-                    let messagereaction = await reaction.message.guild.members.fetch(user.id).catch(() => {});
-                    let rr = reactionsetup[k].Parameters;
-                    let currrole;
-                    for (let j = 0; j < rr.length; j++) {
-                        if (obeyUi.matchesReaction(reaction.emoji, rr[j].Emoji)) {
-                            try {
-                                currrole = rr[j].Role;
-                                let guildRole = messagereaction.guild.roles.cache.get(rr[j].Role);
-                                if (guildRole) {
-                                    if (messagereaction.guild.members.me.roles.highest.rawPosition > guildRole.rawPosition) {
-                                        if (!messagereaction.roles.cache.has(rr[j].Role))
-                                            await messagereaction.roles.add(rr[j].Role).catch(() => {});
-                                    } else {
-                                        reaction.message.channel
-                                            .send("The Role is above my highest Role, I can't give it to you!")
-                                            .then(msg => {
-                                                setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                            })
-                                            .catch(() => {});
-                                    }
-                                } else {
-                                    reaction.message.channel
-                                        .send("This Role got deleted, I can't give it to you!")
-                                        .then(msg => {
-                                            setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                        })
-                                        .catch(() => {});
-                                }
-                            } catch (error) {
-                                reaction.message.channel
-                                    .send({
-                                        content: `\`\`\`${error.message}\`\`\``,
-                                    })
-                                    .then(msg => {
-                                        setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                    })
-                                    .catch(() => {});
-                            }
-                        } else if (obeyUi.matchesReaction(reaction.emoji, rr[j].Emoji)) {
-                            try {
-                                currrole = rr[j].Role;
-                                let guildRole = messagereaction.guild.roles.cache.get(rr[j].Role);
-                                if (guildRole) {
-                                    if (messagereaction.guild.members.me.roles.highest.rawPosition > guildRole.rawPosition) {
-                                        if (!messagereaction.roles.cache.has(rr[j].Role))
-                                            await messagereaction.roles.add(rr[j].Role).catch(() => {});
-                                    } else {
-                                        reaction.message.channel
-                                            .send("The Role is above my highest Role, I can't give it to you!")
-                                            .then(msg => {
-                                                setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                            })
-                                            .catch(() => {});
-                                    }
-                                } else {
-                                    reaction.message.channel
-                                        .send("This Role got deleted, I can't give it to you!")
-                                        .then(msg => {
-                                            setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                        })
-                                        .catch(() => {});
-                                }
-                            } catch (error) {
-                                reaction.message.channel
-                                    .send({
-                                        content: `\`\`\`${error.message}\`\`\``,
-                                    })
-                                    .then(msg => {
-                                        setTimeout(() => {
-                                            msg.delete().catch(() => {});
-                                        }, 3000);
-                                    })
-                                    .catch(() => {});
-                            }
-                        } else {
-                            continue;
-                        }
-                    }
-
-                    if (reactionsetup[k].remove_others) {
-                        let rr2 = reactionsetup[k].Parameters;
-                        //REMOVE REACTIONS
-                        let oldreact = reaction;
-                        await reaction.message.fetch().catch(() => {});
-                        const userReactions = reaction.message.reactions.cache;
-                        try {
-                            for (const reaction of userReactions.values()) {
-                                if (reaction.users.cache.has(user.id) && !obeyUi.matchesReaction(oldreact.emoji, reaction.emoji?.name)) {
-                                    reaction.users.remove(user.id);
-                                }
-                            }
-                        } catch {}
-                        //REMOVE THE ROLE
-                        for (let z = 0; z < rr2.length; z++) {
-                            try {
-                                if (rr2[z].Role != currrole) {
-                                    let guildRole = messagereaction.guild.roles.cache.get(rr2[z].Role);
-                                    if (guildRole) {
-                                        if (messagereaction.guild.members.me.roles.highest.rawPosition > guildRole.rawPosition) {
-                                            if (!messagereaction.roles.cache.has(rr[z].Role))
-                                                await messagereaction.roles.remove(rr[z].Role).catch(() => {});
-                                        } else {
-                                            reaction.message.channel
-                                                .send("The Role is above my highest Role, I can't remove it to you!")
-                                                .then(msg => {
-                                                    setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                                })
-                                                .catch(() => {});
-                                        }
-                                    } else {
-                                        reaction.message.channel
-                                            .send("This Role got deleted, I can't remove it to you!")
-                                            .then(msg => {
-                                                setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                            })
-                                            .catch(() => {});
-                                    }
-                                }
-                            } catch (error) {
-                                reaction.message.channel
-                                    .send({
-                                        content: `\`\`\`${error.message}\`\`\``,
-                                    })
-                                    .then(msg => {
-                                        setTimeout(() => {
-                                            msg.delete().catch(() => {});
-                                        }, 3000);
-                                    })
-                                    .catch(() => {});
-                            }
-                        }
-                    }
-                } else {
-                    continue;
-                }
-            }
-        } catch (e) {
-            console.log(e.stack ? String(e.stack).grey : String(e).grey);
-        }
-    });
-
-    //REMOVING ROLES
-    client.on("messageReactionRemove", async (reaction, user) => {
-        try {
-            if (reaction.message && reaction.message.partial) await reaction.message.fetch().catch(() => {});
-            if (reaction.partial) await reaction.fetch().catch(() => {});
-            if (user.bot) return;
-            if (!reaction.message.guild) return;
-            client.reactionrole.ensure(reaction.message.guild.id, {
-                reactionroles: [],
-            });
-            const reactionsetup = client.reactionrole.get(reaction.message.guild.id, "reactionroles");
-
-            for (let k = 0; k < reactionsetup.length; k++) {
-                if (reaction.message.id === reactionsetup[k].MESSAGE_ID) {
-                    let messagereaction = await reaction.message.guild.members.fetch(user.id).catch(() => {});
-                    let rr = reactionsetup[k].Parameters;
-                    for (let j = 0; j < rr.length; j++) {
-                        if (obeyUi.matchesReaction(reaction.emoji, rr[j].Emoji)) {
-                            try {
-                                let guildRole = messagereaction.guild.roles.cache.get(rr[j].Role);
-                                if (guildRole) {
-                                    if (messagereaction.guild.members.me.roles.highest.rawPosition > guildRole.rawPosition) {
-                                        if (messagereaction.roles.cache.has(rr[j].Role))
-                                            await messagereaction.roles.remove(rr[j].Role).catch(() => {});
-                                    } else {
-                                        reaction.message.channel
-                                            .send("The Role is above my highest Role, I can't remove it to you!")
-                                            .then(msg => {
-                                                setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                            })
-                                            .catch(() => {});
-                                    }
-                                } else {
-                                    reaction.message.channel
-                                        .send("This Role got deleted, I can't remove it to you!")
-                                        .then(msg => {
-                                            setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                        })
-                                        .catch(() => {});
-                                }
-                            } catch (error) {
-                                reaction.message.channel
-                                    .send({
-                                        content: `\`\`\`${error.message}\`\`\``,
-                                    })
-                                    .then(msg => {
-                                        setTimeout(() => {
-                                            msg.delete().catch(() => {});
-                                        }, 3000);
-                                    })
-                                    .catch(() => {});
-                            }
-                        } else if (obeyUi.matchesReaction(reaction.emoji, rr[j].Emoji)) {
-                            try {
-                                let guildRole = messagereaction.guild.roles.cache.get(rr[j].Role);
-                                if (guildRole) {
-                                    if (messagereaction.guild.members.me.roles.highest.rawPosition > guildRole.rawPosition) {
-                                        if (messagereaction.roles.cache.has(rr[j].Role))
-                                            await messagereaction.roles.remove(rr[j].Role).catch(() => {});
-                                    } else {
-                                        reaction.message.channel
-                                            .send("The Role is above my highest Role, I can't remove it to you!")
-                                            .then(msg => {
-                                                setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                            })
-                                            .catch(() => {});
-                                    }
-                                } else {
-                                    reaction.message.channel
-                                        .send("This Role got deleted, I can't remove it to you!")
-                                        .then(msg => {
-                                            setTimeout(() => msg.delete().catch(() => {}), 3000);
-                                        })
-                                        .catch(() => {});
-                                }
-                            } catch (error) {
-                                reaction.message.channel
-                                    .send({
-                                        content: `\`\`\`${error.message}\`\`\``,
-                                    })
-                                    .then(msg => {
-                                        setTimeout(() => {
-                                            msg.delete().catch(() => {});
-                                        }, 3000);
-                                    })
-                                    .catch(() => {});
-                            }
-                        } else {
-                            continue;
-                        }
-                    }
-                }
-            }
-        } catch (e) {
-            console.log(e.stack ? String(e.stack).grey : String(e).grey);
-        }
-    });
-};
+  for (const [event, adding] of [[Events.MessageReactionAdd, true], [Events.MessageReactionRemove, false]]) client.on(event, (reaction, user) =>
+    applyReactionRole(client, reaction, user, adding).catch(error => {
+      if (!client._shuttingDown) console.error('[Reaction roles] Action failed:', Number.isInteger(error.code) ? error.code : 'unavailable')
+    }))
+}
+module.exports.applyReactionRole = applyReactionRole

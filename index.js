@@ -152,6 +152,7 @@ async function shutdown() {
     await client.stopJobs?.()
     // Include configuration requests still waiting for Discord authorization.
     await client.stopWelcomeConfiguration?.()
+    await require('./handlers/setup-operations').stopSetupOperations(client)
     await client.music?.flushSessions?.()
     await client.flushDatabase?.()
     await Promise.allSettled([...client.shoukaku.players.keys()].map(id => client.shoukaku.leaveVoiceChannel(id)))
