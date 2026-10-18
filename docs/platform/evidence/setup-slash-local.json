@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T22:11:38.254980+00:00",
+  "targetedGroupsPassed": 19,
+  "originalTestsPassed": 25,
+  "originalTestFiles": 3,
+  "welcomeTypecheck": true,
+  "dependencyViolations": 0,
+  "dependencyModules": 1065,
+  "dependencyEdges": 3244,
+  "gatewayOpenedByTests": false,
+  "audioPlayedByTests": false,
+  "fileHashes": {
+    "slashCommands/setup.js": "0d6cc8cb0b71bd99265479c5d195e21ed4f53e6eeb9b798ee3c0222eb66fad0a",
+    "handlers/setup-navigation.js": "a780691e9e7c87baec566cbe7630e863704c93c8eabaa997bd6711befb740498",
+    "locales/es.json": "17a2b4854c1b3485c670265bb59bc46210ba6c1d66b18972d7d1045c98f0f668",
+    "locales/en.json": "e238b1d6919c43f52f6f3970e1e71e4e4aac1ab97b76aa77ed0d21a5f1251048"
+  },
+  "temporaryVerifierSha256": "0c3ce416ee6ad98af38888c26b99ebccaf753955be166b20748247de12ae1272",
+  "temporaryVerifierRetained": false,
+  "deployed": false,
+  "globalCommandsLoaded": 20,
+  "privateDeferredReply": true,
+  "scope": "Central setup navigation only; no music engine changes",
+  "implementationCode": "4a0f08027c6e2d9bf037ffe66b2e49195e0fb64c"
+}
