@@ -46,6 +46,11 @@ module.exports = async client => {
   client.setups        = client.settings
   client.musicsettings = client.settings
   client.reactionrole  = client.settings
+  // Legacy support consumers use these aliases with distinct, existing slot roots.
+  client.apply        = client.settings
+  client.menuapply    = client.settings
+  client.menuticket   = client.settings
+  client.autosupport  = client.settings
   client.social_log    = client.settings
   client.keyword        = new SyncMap(KeywordSchema)
   client.customcommands = new SyncMap(CustomCommandSchema)

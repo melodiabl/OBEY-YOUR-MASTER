@@ -63,7 +63,7 @@ function publishSavedMessage(client, context, port, { automatic = false } = {}) 
         throw failure('publication_uncertain')
       }
     }
-    if (value.messageId !== message.id || value.nonce) value = await port.save(value, { messageId: message.id, nonce: '' })
+    value = await port.save(value, { messageId: message.id, nonce: '' })
     await port.after?.(access, value, message)
     return message
   }))

@@ -1610,11 +1610,11 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-SUPPORT · Tickets y solicitudes**
 
-- [ ] [commands/Setup/setup-apply.js](../commands/Setup/setup-apply.js).
-- [ ] [commands/Setup/setup-autosupport.js](../commands/Setup/setup-autosupport.js).
-- [ ] [commands/Setup/setup-menuapply.js](../commands/Setup/setup-menuapply.js).
-- [ ] [commands/Setup/setup-menuticket.js](../commands/Setup/setup-menuticket.js).
-- [ ] [commands/Setup/setup-ticket.js](../commands/Setup/setup-ticket.js).
+- [x] [commands/Setup/setup-apply.js](../commands/Setup/setup-apply.js).
+- [x] [commands/Setup/setup-autosupport.js](../commands/Setup/setup-autosupport.js).
+- [x] [commands/Setup/setup-menuapply.js](../commands/Setup/setup-menuapply.js).
+- [x] [commands/Setup/setup-menuticket.js](../commands/Setup/setup-menuticket.js).
+- [x] [commands/Setup/setup-ticket.js](../commands/Setup/setup-ticket.js).
 
 **SETUP-ROLES · Roles, niveles y contadores de miembros**
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 49/63 archivos, sin desplegar. Recursos de listas de roles, contadores y reacciones remodelados, con publicación confirmada y cierre de operaciones pendientes. Siguiente: soporte, Owner, protección y música; no cerrar el trabajo global por completar menús.
+Avance local: 54/63 archivos, sin desplegar. Soporte remodelado con publicación de paneles y conservación de accesos de tickets abiertos. Siguiente: Owner, protección y música; no cerrar el trabajo global por completar menús.

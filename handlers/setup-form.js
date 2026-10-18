@@ -72,7 +72,7 @@ async function checkResources(access, field, value) {
   if (!['channel', 'channels', 'role', 'roles', 'principals'].includes(field.type)) return
   const multiple = field.type.endsWith('s'), channels = field.type.startsWith('channel'), ids = multiple ? value : [value]
   for (const id of ids) {
-    if (!id || id === 'no' || id === 'nochannel') continue
+    if (!id || id === 'no' || id === 'nochannel' || id === field.clear) continue
     if (channels) {
       const resource = await access.guild.channels.fetch(id)
       if (!resource || resource.guildId !== access.guild.id || !(field.channelTypes || [0, 5, ...(multiple ? [4] : [])]).includes(resource.type) || !resource.permissionsFor(access.member)?.has(F.ViewChannel) || !resource.permissionsFor(access.bot)?.has(field.send === false || (multiple && field.send !== true) ? [F.ViewChannel] : [F.ViewChannel, F.SendMessages, F.EmbedLinks])) throw new Error('setup_resource')

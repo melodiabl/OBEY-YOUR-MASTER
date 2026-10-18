@@ -63,16 +63,12 @@ module.exports = client => {
         if (String(Ticketdata.type).includes("menu") && Ticketdata.menutickettype && Ticketdata.menutickettype > 0) {
             const theDB = client.menuticket;
             const settings = theDB.get(guild.id, `menuticket${Ticketdata.menutickettype}`);
-            let adminRoles = settings.access;
+            let adminRoles = settings?.access || [];
             if (Ticketdata.menuticketIndex !== undefined) {
-                const data = settings.data[Ticketdata.menuticketIndex];
-                if (data.access) {
-                    console.log("BEFORE:", adminRoles);
-                    adminRoles = [...adminRoles, ...data.access];
-                    console.log("AFTER:", adminRoles);
-                }
+                const optionAccess = Ticketdata.menuticketAccess || settings?.data?.[Ticketdata.menuticketIndex]?.access || [];
+                adminRoles = [...adminRoles, ...optionAccess];
             }
-            closedParent = settings.closedParent;
+            closedParent = settings?.closedParent;
             theadminroles = adminRoles;
         }
         if (cmdroles.length > 0) {
@@ -1554,7 +1550,7 @@ module.exports = client => {
                 });
             let messageClaim = "";
             if (String(Ticketdata.type).includes("menu")) {
-                messageClaim = client[`menuticket${Ticketdata.menutickettype}`].get(guild.id, "claim.messageClaim");
+                messageClaim = client.menuticket.get(guild.id, `menuticket${Ticketdata.menutickettype}.claim.messageClaim`);
             } else {
                 messageClaim = ticket?.claim.messageClaim;
             }
@@ -1821,6 +1817,7 @@ module.exports = client => {
                             guild: guild.id,
                             menutickettype: DBindex,
                             menuticketIndex: index,
+                            menuticketAccess: [...(data.access || [])],
                             type: tickettypepath,
                             state: "open",
                             date: Date.now(),

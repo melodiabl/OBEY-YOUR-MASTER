@@ -77,4 +77,4 @@ Fuentes primarias comprobadas: [Message 14.27.0](https://discord.js.org/docs/pac
 
 ## Avance acumulado local
 
-49/63 archivos de comandos remodelados. Se completaron apariencia, categorías, canales/opciones, protecciones simples, administración/rangos, comunidad, automatizaciones, entradas de voz, bienvenida/despedida, feeds y [recursos de roles/contadores](RECURSOS_ROLES_SETUP.md). Quedan 14 archivos de soporte, Owner, protección y música. Este conteo acredita implementación y verificaciones locales; la integración con Discord real y el despliegue siguen pendientes.
+54/63 archivos de comandos remodelados. Se completaron apariencia, categorías, canales/opciones, protecciones simples, administración/rangos, comunidad, automatizaciones, entradas de voz, bienvenida/despedida, feeds y [recursos de roles/contadores](RECURSOS_ROLES_SETUP.md) y [soporte](SOPORTE_SETUP.md). Quedan 9 archivos de Owner, protección y música. Este conteo acredita implementación y verificaciones locales; la integración con Discord real y el despliegue siguen pendientes.

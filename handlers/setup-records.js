@@ -32,10 +32,10 @@ async function openRecordsSetup(client, origin, definition) {
   const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id }
   const locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
   const notice = key => ({ content: t(locale, `setup.editor.${key}`), embeds: [], components: [], allowedMentions: { parse: [] } })
-  const service = createSetupSettings(client[definition.store], { records: { path: definition.path, default: [], schema: definition.schema } }, () => Boolean(client._shuttingDown), definition.defaults)
   let message
   try {
     await requireSetupAccess(client, context)
+    const service = definition.service ? definition.service(client, context) : createSetupSettings(client[definition.store], { records: { path: definition.path, default: [], schema: definition.schema } }, () => Boolean(client._shuttingDown), definition.defaults)
     let value = await service.read(context.guildId), records = structuredClone(value.values.records), selected = records.length ? 0 : -1, page = 0, dirty = false, blocked = false
     const render = status => buildRecordsSetup(definition, records, selected, page, dirty, blocked, locale, status)
     const invalid = i => i.followUp({ content: copy(locale, 'invalid'), ephemeral: true, allowedMentions: { parse: [] } })
