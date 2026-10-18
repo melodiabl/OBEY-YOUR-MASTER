@@ -1692,3 +1692,11 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Distinguir avisos de acceso, permisos del bot, almacenamiento e inicio/cierre; registrar fallos sin credenciales ni documentos. 23 grupos locales, 25 originales y tipos/dependencias pasan. [Alcance](../docs/guia-arquitectura/ERRORES_SETUP.md).
 - [x] Corrección desplegada en `ff94f31`: 10 hashes, Gateway/heartbeat, 20 slash globales, MongoDB y nodos públicos, salud local/pública 200. [Evidencia](../docs/platform/evidence/setup-errors-deployment-20261019.json).
 - [ ] Ubicar y reproducir el error original de acceso/guardado en el servidor/canal del usuario; no darlo por resuelto con las pruebas locales.
+
+
+### Continuación del plan · registros y avisos al propietario
+
+- [x] Primera entrega local de avisos de alta/baja: mensajes renovados es/en, preferencias del dueño, deduplicación, fallos observables y cierre. Retirada la eliminación automática de stores al salir. 16 grupos aislados y 25 originales pasan. [Alcance](../docs/guia-arquitectura/REGISTROS_Y_AVISOS_OWNER.md).
+- [ ] Remodelar el consumidor real de registros: destinos, permisos, privacidad, cobertura y entregas.
+- [ ] Verificar y desplegar las entregas terminadas; no emitir DMs de prueba ni simular entradas/salidas reales.
+- [ ] Continuar retención/consulta de T38 y los demás bloques abiertos del maestro; completar los setups no equivale a completar el plan.

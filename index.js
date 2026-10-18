@@ -104,7 +104,7 @@ require('./handlers/music/nodes-runtime').initializeNodes(client, config)
 
 const coreHandlers = [
   'clientvariables','command','loaddb','assets','configuration','events','slashCommands','cards-runtime','utilities','musichandler','jobs','architect',
-  'logger','anti_nuke','antidiscord','antilinks','anticaps','antispam',
+  'logger','owner-notifications','anti_nuke','antidiscord','antilinks','anticaps','antispam',
   'blacklist','keyword','antimention','autobackup','apply','ticket',
   'ticketevent','roster','joinvc','boostlog','welcome','leave',
   'ghost_ping_detector','antiselfbot','jointocreate','reactionrole',
@@ -116,7 +116,7 @@ const coreHandlers = [
 for (const name of coreHandlers) {
   try {
     const initialize = require('./handlers/' + name)
-    const core = ['clientvariables', 'command', 'loaddb', 'assets', 'configuration', 'events', 'slashCommands', 'cards-runtime', 'utilities', 'musichandler', 'jobs', 'architect', 'logger'].includes(name)
+    const core = ['clientvariables', 'command', 'loaddb', 'assets', 'configuration', 'events', 'slashCommands', 'cards-runtime', 'utilities', 'musichandler', 'jobs', 'architect', 'logger', 'owner-notifications'].includes(name)
     const initialized = core ? initialize(client) : require('./handlers/feature-registration').registerFeature(client, name, initialize)
     Promise.resolve(initialized).catch(error => console.error('[Handler] ' + name + ': ' + error.message))
   }
@@ -150,6 +150,7 @@ async function shutdown() {
   try {
     await client.stopCards?.()
     await client.stopJobs?.()
+    await client.stopOwnerNotifications?.()
     // Include configuration requests still waiting for Discord authorization.
     await client.stopWelcomeConfiguration?.()
     await require('./handlers/setup-operations').stopSetupOperations(client)

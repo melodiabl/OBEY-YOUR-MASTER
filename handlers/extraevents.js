@@ -1,9 +1,6 @@
-const obeyUi = require("./assets/system")
-const { EmbedBuilder, ActionRowBuilder,
+const { ActionRowBuilder,
     ChannelType
 } = require("discord.js");
-const config = require(`${process.cwd()}/botconfig/config.json`);
-const { simple_databasing } = require(`./functions`);
 module.exports = client => {
     client.disableComponentMessage = C => {
         if (C && C.message && C.message.components.length > 0) {
@@ -146,101 +143,5 @@ module.exports = client => {
         }
     });
 
-    client.on("guildCreate", async guild => {
-        if (!guild || guild.available === false) return;
-        let theowner = "NO OWNER DATA! ID: ";
-        await guild
-            .fetchOwner()
-            .then(({ user }) => {
-                theowner = user;
-            })
-            .catch(() => {});
-        simple_databasing(client, guild.id);
-        let ls = client.settings.get(guild.id, "language");
-        let embed = new EmbedBuilder()
-            .setColor("#57F287")
-            .setTitle(`${obeyUi.markup("icon.voice")} Se unió a New Servidor`)
-            .addFields({ name: "Guild Info", value: `>>> \`\`\`${guild.name} (${guild.id})\`\`\`` })
-            .addFields({ name: "Owner Info", value: `>>> \`\`\`${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`}\`\`\`` })
-            .addFields({ name: "Member Count", value: `>>> \`\`\`${guild.memberCount}\`\`\`` })
-            .addFields({ name: "Servers Bot is in", value: `>>> \`\`\`${client.guilds.cache.size}\`\`\`` })
-            .addFields({ name: "Leave Server:", value: `>>> \`\`\`${config.prefix}leaveserver ${guild.id}\`\`\`` })
-            .setThumbnail(guild.iconURL());
-        for (const owner of config.ownerIDS) {
-            client.users
-                .fetch(owner)
-                .then(user => {
-                    user.send({ embeds: [embed] }).catch(() => {});
-                })
-                .catch(() => {});
-        }
-    });
-
-    client.on("guildDelete", async guild => {
-        if (!guild || guild.available === false) return;
-        function clearDBData(key) {
-            function cleardb(db, theKey) {
-                if (db && db?.has(theKey)) {
-                    db?.delete(theKey);
-                }
-            }
-            cleardb(client.notes, key);
-            cleardb(client.economy, key);
-            cleardb(client.invitesdb, key);
-            cleardb(client.youtube_log, key);
-            cleardb(client.premium, key);
-            cleardb(client.snipes, key);
-            cleardb(client.afkDB, key);
-            // cleardb(client.stats, key) //dont clear stats
-            // cleardb(client.modActions, key) //dont clear modactions
-            // cleardb(client.userProfiles, key) //dont clear userprofiles
-            cleardb(client.musicsettings, key);
-            cleardb(client.settings, key);
-            for (let i = 0; i <= 100; i++) {
-                let index = i + 1;
-                cleardb(client[`jtcsettings${index != 1 ? index : ""}`], key);
-                cleardb(client[`roster${index != 1 ? index : ""}`], key);
-                cleardb(client[`autosupport${i}`], key);
-                cleardb(client[`menuticket${i}`], key);
-                cleardb(client[`menuapply${i}`], key);
-                cleardb(client[`apply${i}`], key);
-            }
-            cleardb(client.jointocreatemap, key);
-            cleardb(client.joinvc, key);
-            cleardb(client.setups, key);
-            cleardb(client.queuesaves, key);
-            cleardb(client.points, key);
-            cleardb(client.voicepoints, key);
-            cleardb(client.reactionrole, key);
-            cleardb(client.social_log, key);
-            cleardb(client.blacklist, key);
-            cleardb(client.customcommands, key);
-            cleardb(client.keyword, key);
-        }
-        clearDBData(guild.id);
-        let theowner = "NO OWNER DATA! ID: ";
-        await guild
-            .fetchOwner()
-            .then(({ user }) => {
-                theowner = user;
-            })
-            .catch(() => {});
-        let embed = new EmbedBuilder()
-            .setColor("#ED4245")
-            .setTitle(`${obeyUi.markup("icon.leaf")} Salió a Servidor`)
-            .addFields({ name: "Guild Info", value: `>>> \`\`\`${guild.name} (${guild.id})\`\`\`` })
-            .addFields({ name: "Owner Info", value: `>>> \`\`\`${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`}\`\`\`` })
-            .addFields({ name: "Member Count", value: `>>> \`\`\`${guild.memberCount}\`\`\`` })
-            .addFields({ name: "Servers Bot is in", value: `>>> \`\`\`${client.guilds.cache.size}\`\`\`` })
-            .setThumbnail(guild.iconURL());
-        for (const owner of config.ownerIDS) {
-            client.users
-                .fetch(owner)
-                .then(user => {
-                    user.send({ embeds: [embed] }).catch(() => {});
-                })
-                .catch(() => {});
-        }
-    });
     return;
 };
