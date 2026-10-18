@@ -37,7 +37,9 @@
     "privateEnabled": false,
     "evidence": "evidence/player-state-sync-runtime.json",
     "change": "Confirmed node playback clock, bounded panel publications and background backoff for observed Discord HTTP 429; panel delay remains under API limits",
-    "tag": "release-panel-backoff-20261017"
+    "tag": "release-panel-backoff-20261017",
+    "status": "stopped_after_host_shutdown",
+    "statusEvidence": "INCIDENTE-2026-10-18.md"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -149,7 +151,9 @@
     "ownerEvidence": "docs/guia-arquitectura/OWNER_SETUP.md",
     "ownerCommit": "9d08fd9",
     "musicVoiceEvidence": "docs/guia-arquitectura/MUSICA_VOZ_SETUP.md",
-    "completionEvidence": "docs/platform/evidence/setup-remodeling-local.json"
+    "completionEvidence": "docs/platform/evidence/setup-remodeling-local.json",
+    "musicVoiceCommit": "384dd4aca3c6162b9b2bba8b77d522a0b96235d2",
+    "localVerificationComplete": true
   },
   "latestCandidateCheck": {
     "date": "2026-10-18",
