@@ -6,16 +6,23 @@ module.exports = client => {
   const { assertWelcomeActor, assertWelcomeChannel } = require('./welcome-access')
   function guildFor({ guildId }) {
     const guild = client.guilds.cache.get(guildId)
-    if (!guild || guild.available === false || client._shuttingDown) throw new ConfigurationError('Bienvenida no disponible.', 'configuration_not_found')
+    if (!guild || guild.available === false) throw new ConfigurationError('Bienvenida no disponible.', 'configuration_not_found')
     return guild
   }
   client.welcomeConfiguration = require('./welcome/service').createWelcomeService({
     drafts: service, published: welcomeConfiguration(client.settings),
+    isStopping: () => Boolean(client._shuttingDown),
     policy: {
       authorize: async context => { await assertWelcomeActor(guildFor(context), context.actorId) },
       channel: async (context, channelId) => { await assertWelcomeChannel(guildFor(context), context.actorId, channelId) },
+      channels: async context => {
+        const guild = guildFor(context)
+        const [channels, actor] = await Promise.all([guild.channels.fetch(), assertWelcomeActor(guild, context.actorId)])
+        return [...channels.values()].filter(channel => channel.type === 0 && channel.permissionsFor(actor)?.has('ViewChannel')).map(({ id, name }) => ({ id, name }))
+      },
     },
   })
+  client.stopWelcomeConfiguration = client.welcomeConfiguration.drain
   client.modules ||= require('./feature-registry').createModuleRegistry()
   client.modules.register({
     id: 'welcome', version: '1.0.0', defaults: { channelId: null, message: '' },

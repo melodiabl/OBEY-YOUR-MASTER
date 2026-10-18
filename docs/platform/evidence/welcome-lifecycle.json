@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "scope": "Local welcome channel/message configuration lifecycle; partial TECH-05 / ARCH-04",
+  "sourceBase": "3e71648402cc720dc87b5919e5c5734ebeb9cea8",
+  "sourceSha256": {
+    "handlers/welcome/service.js": "df8825574f46ef2460166c694385446b88e2734dc1ff98b46cd3f66e92807407",
+    "handlers/configuration.js": "ade3da6c3a1f50684ba63ac93f3ffb16c3254359b18aa83e7fc53aa2671a7f18",
+    "dashboard/configuration-routes.js": "8c2e96e53c712ba142716cc85c09f6772bd07dd409443ae99578a606734ae220",
+    "index.js": "c6a6da4437a066e02659f309193275d65431df08d3728057a7925913d5733da7"
+  },
+  "report": "docs/guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md",
+  "verificationMethod": "Temporary Node programs via stdin; real isolated Mongo for persistence scenarios; shutdown source extracted by TypeScript AST and run in VM with injected dependencies",
+  "checks": [
+    {
+      "id": "prechange-reproduction",
+      "result": "Expected assertion failure: write occurred after simulated database flush while authorization was pending"
+    },
+    {
+      "id": "accepted-operation-shutdown-order",
+      "result": "pass",
+      "sequence": [
+        "nodes",
+        "assets",
+        "stop-db-initialization",
+        "cards",
+        "jobs",
+        "welcome-drain",
+        "write",
+        "music-flush",
+        "db-flush",
+        "discord-destroy",
+        "mongodb-disconnect"
+      ],
+      "newOperationsRejected": 6,
+      "sameDrainPromise": true
+    },
+    {
+      "id": "errors-and-idempotency",
+      "result": "pass",
+      "cases": [
+        "repository rejection preserves error and releases drain",
+        "synchronous policy throw releases drain",
+        "idle drain remains closed and reuses promise",
+        "external stop flag gates admission permanently after observation",
+        "reinitialization keeps the same service/hook/registry without listeners"
+      ]
+    },
+    {
+      "id": "mongo-shutdown-http",
+      "result": "pass",
+      "sequence": [
+        "flush-after-committed-write",
+        "discord-stub-closed",
+        "disconnect-after-flush"
+      ],
+      "preserved": [
+        "legacy aliases",
+        "DM flag",
+        "custom advanced setting"
+      ],
+      "closedHttpStatus": 503,
+      "closedHttpBody": {
+        "error": "configuration_unavailable"
+      }
+    },
+    {
+      "id": "resource-query-and-deadline",
+      "result": "pass",
+      "cases": [
+        "pending channels operation delays drain",
+        "visible text channel projection and one member fetch",
+        "20-second deadline callback simulated: exit 1, pending state remains draining"
+      ]
+    },
+    {
+      "id": "http-resource-policy",
+      "result": "pass",
+      "statuses": [
+        200,
+        403,
+        503
+      ],
+      "denialAccessRevoked": true,
+      "newProviderCallsAfterClose": 0
+    },
+    {
+      "id": "mongo-receipt-recovery",
+      "result": "pass",
+      "method": "New isolated client/service reads and replays a committed publication while original response remains held",
+      "revisionAfterReplay": 1,
+      "realProcessRestart": false
+    }
+  ],
+  "standardChecks": {
+    "originalTests": {
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typecheck:welcome": "pass",
+    "syntaxOfChangedJavaScript": "pass",
+    "gitDiffCheck": "pass"
+  },
+  "cleanup": {
+    "permanentTestFilesAdded": 0,
+    "permanentScriptsAdded": 0,
+    "isolatedMongoDatabasesDropped": 2,
+    "fixtureConnectionsAndHttpServersClosed": true
+  },
+  "limits": [
+    "Gateway and OAuth not exercised",
+    "No real process restart or production shutdown",
+    "Existing global 20-second timeout and fail-fast behavior retained",
+    "Only service operations tracked, not upstream HTTP middleware",
+    "Last publication receipt only; no unlimited operation ledger",
+    "No full welcome delivery/card/DM migration",
+    "ARCH-04 and global TECH-05 remain open"
+  ],
+  "runtimeChanged": false,
+  "pushed": false,
+  "deployed": false
+}

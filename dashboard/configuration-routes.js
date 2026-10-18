@@ -1,7 +1,6 @@
 const { ConfigurationError } = require('../handlers/welcome-configuration')
 const { welcomeSettingsForm } = require('../handlers/welcome/ui')
 const { localeFor, normalizeLocale } = require('../handlers/i18n')
-const { assertWelcomeActor } = require('../handlers/welcome-access')
 module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canManageGuild }) => {
   const access = (req, res, next) => {
     const guild = client.guilds.cache.get(req.params.guildId)
@@ -46,9 +45,7 @@ module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canM
   }))
   app.get('/api/guilds/:guildId/modules/:moduleId/config', ...guarded, wrap(async (req, res) => res.json(await service().read(context(req)))))
   app.get('/api/guilds/:guildId/modules/:moduleId/channels', ...guarded, wrap(async (req, res) => {
-    const guild = req.configurationGuild
-    const [channels, actor] = await Promise.all([guild.channels.fetch(), assertWelcomeActor(guild, req.session.user.id)])
-    res.json({ channels: [...channels.values()].filter(channel => channel.type === 0 && channel.permissionsFor(actor)?.has('ViewChannel')).map(({ id, name }) => ({ id, name })) })
+    res.json(await service().channels(context(req)))
   }))
   app.put('/api/guilds/:guildId/modules/:moduleId/draft', ...guarded, wrap(async (req, res) => {
     res.json(await service().saveDraft(context(req), req.body))
