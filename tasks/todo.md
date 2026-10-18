@@ -1581,21 +1581,21 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 **SETUP-SECURITY · Moderación y protección**
 
 - [ ] [commands/Setup/setup-admin.js](../commands/Setup/setup-admin.js).
-- [ ] [commands/Setup/setup-anticaps.js](../commands/Setup/setup-anticaps.js).
-- [ ] [commands/Setup/setup-antidiscord.js](../commands/Setup/setup-antidiscord.js).
-- [ ] [commands/Setup/setup-antilink.js](../commands/Setup/setup-antilink.js).
-- [ ] [commands/Setup/setup-antimassmention.js](../commands/Setup/setup-antimassmention.js).
-- [ ] [commands/Setup/setup-antimasspings.js](../commands/Setup/setup-antimasspings.js).
-- [ ] [commands/Setup/setup-antimention.js](../commands/Setup/setup-antimention.js).
-- [ ] [commands/Setup/setup-antinewaccount.js](../commands/Setup/setup-antinewaccount.js).
+- [x] [commands/Setup/setup-anticaps.js](../commands/Setup/setup-anticaps.js).
+- [x] [commands/Setup/setup-antidiscord.js](../commands/Setup/setup-antidiscord.js).
+- [x] [commands/Setup/setup-antilink.js](../commands/Setup/setup-antilink.js).
+- [x] [commands/Setup/setup-antimassmention.js](../commands/Setup/setup-antimassmention.js).
+- [x] [commands/Setup/setup-antimasspings.js](../commands/Setup/setup-antimasspings.js).
+- [x] [commands/Setup/setup-antimention.js](../commands/Setup/setup-antimention.js).
+- [x] [commands/Setup/setup-antinewaccount.js](../commands/Setup/setup-antinewaccount.js).
 - [ ] [commands/Setup/setup-antinuke.js](../commands/Setup/setup-antinuke.js).
-- [ ] [commands/Setup/setup-antipings.js](../commands/Setup/setup-antipings.js).
-- [ ] [commands/Setup/setup-antispam.js](../commands/Setup/setup-antispam.js).
+- [x] [commands/Setup/setup-antipings.js](../commands/Setup/setup-antipings.js).
+- [x] [commands/Setup/setup-antispam.js](../commands/Setup/setup-antispam.js).
 - [x] [commands/Setup/setup-autowarn.js](../commands/Setup/setup-autowarn.js).
-- [ ] [commands/Setup/setup-blacklist.js](../commands/Setup/setup-blacklist.js).
+- [x] [commands/Setup/setup-blacklist.js](../commands/Setup/setup-blacklist.js).
 - [ ] [commands/Setup/setup-epicgamesverify.js](../commands/Setup/setup-epicgamesverify.js).
-- [ ] [commands/Setup/setup-ghost-ping-detector.js](../commands/Setup/setup-ghost-ping-detector.js).
-- [ ] [commands/Setup/setup-mute.js](../commands/Setup/setup-mute.js).
+- [x] [commands/Setup/setup-ghost-ping-detector.js](../commands/Setup/setup-ghost-ping-detector.js).
+- [x] [commands/Setup/setup-mute.js](../commands/Setup/setup-mute.js).
 - [x] [commands/Setup/setup-validcode.js](../commands/Setup/setup-validcode.js).
 - [ ] [commands/Setup/setup-warn.js](../commands/Setup/setup-warn.js).
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 14/63 archivos, sin desplegar. Apariencia/categorías y seis selectores de canal, alias auditlog y tres grupos de opciones verificados. Siguiente: protecciones con límites y excepciones; conservar esquemas y reglas del consumidor.
+Avance local: 26/63 archivos, sin desplegar. Protecciones, alias de menciones, blacklist y mute añadidos a las entregas previas. Siguiente: reglas de avisos/roles y automatizaciones; conservar esquemas, permisos y efectos del consumidor.

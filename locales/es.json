@@ -1226,6 +1226,37 @@
           "antiselfbot": "Selfbots"
         }
       }
+    },
+    "form": {
+      "description": "Elige un ajuste, revisa el cambio y guarda para aplicarlo.",
+      "selected": "Ajuste seleccionado",
+      "current": "Valor guardado",
+      "pending": "Cambio pendiente",
+      "unchanged": "Sin cambios",
+      "enabled": "Activado",
+      "disabled": "Desactivado",
+      "empty": "Vacío",
+      "choose": "Elige un ajuste",
+      "value": "Selecciona el valor",
+      "chooseResource": "Selecciona un canal o rol",
+      "addResources": "Añade canales o roles",
+      "edit": "Editar",
+      "add": "Añadir",
+      "remove": "Quitar",
+      "clear": "Vaciar / desactivar",
+      "save": "Guardar",
+      "discard": "Descartar",
+      "close": "Cerrar",
+      "savedStatus": "Configuración guardada",
+      "unsaved": "Cambios pendientes de guardar",
+      "saved": "Cambios guardados",
+      "conflict": "Cambió desde otro panel. Revisa y guarda de nuevo.",
+      "inputHint": "Introduce el nuevo valor",
+      "durationHint": "Milisegundos, 10 minutes o 2 days + 6 hours",
+      "listHint": "Una entrada por línea; se conservan las anteriores",
+      "removeHint": "Una entrada o ID exacto por línea para quitar",
+      "invalid": "Valor no válido para {field}. Revisa el formato y los límites.",
+      "resource": "Revisa los valores, los canales y los roles. El bot necesita permisos y los roles deben estar por debajo del suyo."
     }
   }
 }

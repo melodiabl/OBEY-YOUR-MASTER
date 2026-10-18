@@ -1226,6 +1226,37 @@
           "antiselfbot": "Selfbots"
         }
       }
+    },
+    "form": {
+      "description": "Choose a setting, review the change, then save to apply.",
+      "selected": "Selected setting",
+      "current": "Saved value",
+      "pending": "Pending change",
+      "unchanged": "Unchanged",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "empty": "Empty",
+      "choose": "Choose a setting",
+      "value": "Select the value",
+      "chooseResource": "Select a channel or role",
+      "addResources": "Add channels or roles",
+      "edit": "Edit",
+      "add": "Add",
+      "remove": "Remove",
+      "clear": "Clear / disable",
+      "save": "Save",
+      "discard": "Discard",
+      "close": "Close",
+      "savedStatus": "Saved configuration",
+      "unsaved": "Unsaved changes",
+      "saved": "Changes saved",
+      "conflict": "Changed in another panel. Review and save again.",
+      "inputHint": "Enter the new value",
+      "durationHint": "Milliseconds, 10 minutes or 2 days + 6 hours",
+      "listHint": "One entry per line; previous entries are kept",
+      "removeHint": "One exact entry or ID per line to remove",
+      "invalid": "Invalid value for {field}. Check the format and limits.",
+      "resource": "Check the values, channels and roles. The bot needs permissions and roles must be below its highest role."
     }
   }
 }
