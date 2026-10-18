@@ -1,5 +1,5 @@
 const {PermissionFlagsBits:F,RESTJSONErrorCodes}=require('discord.js')
-const {ConfigurationError}=require('./welcome-configuration')
+const {ConfigurationError}=require('./welcome/index.js')
 function denyWelcomeAccess(){
  const error=new ConfigurationError('No se verificó el permiso de configuración.','configuration_permissions')
  error.accessRevoked=true

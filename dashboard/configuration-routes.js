@@ -1,5 +1,4 @@
-const { ConfigurationError } = require('../handlers/welcome-configuration')
-const { welcomeSettingsForm } = require('../handlers/welcome/ui')
+const { ConfigurationError, welcomeSettingsForm } = require('../handlers/welcome/index.js')
 const { localeFor, normalizeLocale } = require('../handlers/i18n')
 module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canManageGuild }) => {
   const access = (req, res, next) => {

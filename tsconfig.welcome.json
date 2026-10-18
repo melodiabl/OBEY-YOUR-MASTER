@@ -11,6 +11,7 @@
     "maxNodeModuleJsDepth": 0
   },
   "files": [
+    "handlers/welcome/index.js",
     "handlers/welcome/contract.js",
     "handlers/welcome/service.js",
     "handlers/welcome/ui.js"

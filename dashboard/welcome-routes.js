@@ -1,4 +1,4 @@
-const {ConfigurationError}=require('../handlers/welcome-configuration')
+const {ConfigurationError}=require('../handlers/welcome/index.js')
 module.exports=(app,client,{requireAuth,requireFreshGuildPermissions,canManageGuild})=>{
  const access=(req,res,next)=>{const guild=client.guilds.cache.get(req.params.guildId);if(!guild)return res.status(404).json({error:'guild_not_found'});if(!canManageGuild(req.session.user,guild.id))return res.status(403).json({error:'no_permission'});req.welcomeGuild=guild;res.set('Cache-Control','private, no-store');return next()}
  const guarded=[requireAuth,requireFreshGuildPermissions,access]

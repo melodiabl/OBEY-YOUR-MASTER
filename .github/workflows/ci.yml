@@ -28,6 +28,8 @@ jobs:
       - name: Install native Canvas build requirements
         run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev python3
       - run: npm ci
+      - run: npm run typecheck:welcome
+      - run: npm run dependencies:welcome
       - run: npm test
       - run: node scripts/obey-assets.js
       - name: Build runtime image without starting services

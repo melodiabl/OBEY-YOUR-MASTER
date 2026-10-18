@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js')
-const { configSchema, configJsonSchema } = require('../../handlers/welcome/contract')
+const { configSchema, configJsonSchema } = require('../../handlers/welcome/index.js')
 
 module.exports = {
   name: 'mensaje',

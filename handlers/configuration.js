@@ -2,14 +2,15 @@ const initialized = new WeakSet()
 module.exports = client => {
   if (initialized.has(client)) return client.welcomeConfiguration
   const service = require('./configuration-service').createModuleConfiguration(client.settings)
-  const { ConfigurationError, welcomeConfiguration } = require('./welcome-configuration')
+  const { welcomeConfiguration } = require('./welcome-configuration')
+  const { ConfigurationError, createWelcomeService, configJsonSchema } = require('./welcome/index.js')
   const { assertWelcomeActor, assertWelcomeChannel } = require('./welcome-access')
   function guildFor({ guildId }) {
     const guild = client.guilds.cache.get(guildId)
     if (!guild || guild.available === false) throw new ConfigurationError('Bienvenida no disponible.', 'configuration_not_found')
     return guild
   }
-  client.welcomeConfiguration = require('./welcome/service').createWelcomeService({
+  client.welcomeConfiguration = createWelcomeService({
     drafts: service, published: welcomeConfiguration(client.settings),
     isStopping: () => Boolean(client._shuttingDown),
     policy: {
@@ -29,9 +30,9 @@ module.exports = client => {
     permissions: { read: 'ManageGuild', configure: 'ManageGuild' },
     commands: { slash: ['welcome.canal', 'welcome.mensaje'], prefix: ['setup-welcome'] },
     interactions: [], events: { consumed: ['guildMemberAdd'], emitted: [] }, jobs: [],
-    api: ['GET /api/guilds/:guildId/modules/welcome/config', 'PUT /api/guilds/:guildId/modules/welcome/draft', 'POST /api/guilds/:guildId/modules/welcome/publish'],
+    api: ['GET /api/guilds/:guildId/modules/welcome/config', 'GET /api/guilds/:guildId/modules/welcome/channels', 'PUT /api/guilds/:guildId/modules/welcome/draft', 'POST /api/guilds/:guildId/modules/welcome/preview', 'POST /api/guilds/:guildId/modules/welcome/publish'],
     realtime: { consumed: [], emitted: [] }, dependencies: ['mongoose'],
-    configuration: { schemaVersion: 1, fields: ['channelId', 'message'], schema: require('./welcome/contract').configJsonSchema },
+    configuration: { schemaVersion: 1, fields: ['channelId', 'message'], schema: configJsonSchema },
     capabilities: { channelMessageConfiguration: 'available', draftPublication: 'available', deliveryDeduplication: 'pending', cards: 'pending' },
   }, client.welcomeConfiguration)
   initialized.add(client)

@@ -63,7 +63,8 @@
     "start": "node index.js",
     "dev": "node --watch index.js",
     "test": "node --test test/*.test.js",
-    "typecheck:welcome": "tsc --project tsconfig.welcome.json"
+    "typecheck:welcome": "tsc --project tsconfig.welcome.json",
+    "dependencies:welcome": "depcruise --config .dependency-cruiser.cjs --output-type err handlers dashboard slashCommands commands"
   },
   "author": "Tomato6966 (updated by OBEY team)",
   "license": "MIT",
@@ -75,6 +76,7 @@
     "serialize-javascript": "$serialize-javascript"
   },
   "devDependencies": {
+    "dependency-cruiser": "18.6.0",
     "typescript": "5.9.3"
   }
 }
