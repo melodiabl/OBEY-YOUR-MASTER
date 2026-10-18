@@ -3,7 +3,7 @@ services:
     build: ./image-service
     image: localhost/obey-images:release
     container_name: obey_images
-    restart: unless-stopped
+    restart: always
     network_mode: "host"
     mem_limit: 600m
     healthcheck:
@@ -44,7 +44,7 @@ services:
     build: .
     image: localhost/obey-your-master_bot:latest
     container_name: obey_bot
-    restart: unless-stopped
+    restart: always
     stop_grace_period: 30s
     depends_on:
       - images
