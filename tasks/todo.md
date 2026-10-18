@@ -1638,10 +1638,10 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-FEEDS · Publicaciones de plataformas**
 
-- [ ] [commands/Setup/setup-tiktok.js](../commands/Setup/setup-tiktok.js).
-- [ ] [commands/Setup/setup-twitch.js](../commands/Setup/setup-twitch.js).
-- [ ] [commands/Setup/setup-twitter.js](../commands/Setup/setup-twitter.js).
-- [ ] [commands/Setup/setup-youtube.js](../commands/Setup/setup-youtube.js).
+- [x] [commands/Setup/setup-tiktok.js](../commands/Setup/setup-tiktok.js).
+- [x] [commands/Setup/setup-twitch.js](../commands/Setup/setup-twitch.js).
+- [x] [commands/Setup/setup-twitter.js](../commands/Setup/setup-twitter.js).
+- [x] [commands/Setup/setup-youtube.js](../commands/Setup/setup-youtube.js).
 
 **SETUP-OWNER · Operación exclusiva del dueño**
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 41/63 archivos, sin desplegar. Bienvenida/despedida, vista previa de tarjetas y fondos guardados añadidos. Siguiente: feeds y recursos; conservar esquemas, permisos y efectos del consumidor.
+Avance local: 45/63 archivos, sin desplegar. Feeds remodelados con plantillas por guild y preferencias del publicador TikTok desactivado conservadas. Siguiente: recursos de roles/contadores, soporte, Owner, protección y música; no cerrar el trabajo global por completar menús.

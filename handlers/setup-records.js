@@ -6,7 +6,7 @@ const { createSetupSettings } = require('./setup-settings')
 const text = (value, locale) => typeof value === 'object' && value !== null ? value[locale] || value.en : value
 const copy = (locale, key) => t(locale, `setup.records.${key}`)
 function buildRecordsSetup(definition, records, selected, page, dirty, blocked, locale, status = '') {
-  const embed = new EmbedBuilder().setColor(0xFFD36F).setTitle(text(definition.title, locale)).setDescription(copy(locale, 'description'))
+  const embed = new EmbedBuilder().setColor(0xFFD36F).setTitle(text(definition.title, locale)).setDescription(text(definition.description, locale) || copy(locale, 'description'))
     .addFields({ name: copy(locale, 'count'), value: String(records.length) })
     .setFooter({ text: copy(locale, status || (blocked ? 'conflict' : dirty ? 'unsaved' : 'current')) })
   if (records[selected]) embed.addFields({ name: copy(locale, 'selected'), value: escapeMarkdown(String(definition.describe(records[selected], locale))).slice(0, 1024) || copy(locale, 'empty') })

@@ -1,3 +1,4 @@
+const { validDiscordId } = require('../handlers/feed-settings')
 const request = require("request"),
     Discord = require("discord.js"),
     CronJob = require("cron").CronJob,
@@ -72,7 +73,7 @@ module.exports = async client => {
                 ` [TWITCH] | ${moment().format("ddd DD-MM-YYYY HH:mm:ss.SSSS")} | ${guild.name} ::  NO TWITCH DATA (TW-CHANNELS)`
                     .magenta
             );
-        if (!tempData.channelId || tempData.channelId == undefined || tempData.channelId.length != 18)
+        if (!validDiscordId(tempData.channelId))
             return console.log(`NO TWITCH DATA (DCCHANNEL)`.magenta);
         tempData.channels.map(async function (chan, i) {
             if (!chan.ChannelName)

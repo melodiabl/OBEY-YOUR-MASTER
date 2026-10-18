@@ -134,8 +134,17 @@ async function openFormSetup(client, origin, definition) {
       form_save: { async run(i, session) {
         if (!Object.keys(draft).length) return
         const access = await checkAccess()
-        try { for (const id of Object.keys(draft)) await checkResources(access, definition.fields[id], draft[id]); await definition.validate?.(current(), access) }
-        catch { if (session.active()) await i.followUp({ content: copy(locale, 'resource'), ephemeral: true, allowedMentions: { parse: [] } }); return }
+        try {
+          if (definition.prepare) {
+            const prepared = await definition.prepare(current(), structuredClone(draft), access, client)
+            for (const [id, input] of Object.entries(prepared)) { if (!Object.hasOwn(definition.fields, id)) throw new Error('invalid_setup'); const parsed = definition.fields[id].schema.safeParse(input); if (!parsed.success) throw new Error('invalid_setup'); draft[id] = parsed.data }
+          }
+          if (!session.active()) return
+          for (const id of Object.keys(draft)) await checkResources(access, definition.fields[id], draft[id])
+          await definition.validate?.(current(), access)
+        }
+        catch { if (session.active()) await i.followUp({ content: text(definition.invalid, locale) || copy(locale, 'resource'), ephemeral: true, allowedMentions: { parse: [] } }); return }
+        await checkAccess()
         if (!session.active()) return
         let status = 'saved'
         try { value = await service.save(context.guildId, draft, value.revision); draft = {} }

@@ -1,3 +1,4 @@
+const { feedMessage } = require('../handlers/feed-settings')
 // ************* IMPORT MODULES *************  //
 const CronJob = require("cron").CronJob;
 // ************ IMPORT FILE DATA ************* //
@@ -122,8 +123,7 @@ module.exports = client => {
                         );
                     channel
                         .send({
-                            content: client.tiktok
-                                .get(tiktoker, `message`)
+                            content: feedMessage(client.social_log, guild.id, "tiktok", tiktoker, client.tiktok.get(tiktoker, `message`))
                                 .replace(`{videoURL}`, video.url)
                                 .replace(`{videoAuthorName}`, author.name)
                                 .replace(`{videoTitle}`, video.title)

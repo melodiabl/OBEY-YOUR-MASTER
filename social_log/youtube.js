@@ -1,3 +1,4 @@
+const { feedMessage } = require('../handlers/feed-settings')
 // ************* IMPORT MODULES *************  //
 const CronJob = require("cron").CronJob;
 // ************ IMPORT FILE DATA ************* //
@@ -79,8 +80,7 @@ module.exports = client => {
 
                         channel
                             .send({
-                                content: client.youtube_log
-                                    .get(youtuber, "message")
+                                content: feedMessage(client.social_log, guildid, "youtube", youtuber, client.youtube_log.get(youtuber, "message"))
                                     .replace(/{videoURL}/gi, video.link)
                                     .replace(/{videoAuthorName}/gi, video.author)
                                     .replace(/{videoTitle}/gi, video.title)
