@@ -34,9 +34,9 @@ Aceptación: API pública por módulo, imports permitidos, fuente de verdad y de
 
 ## ARCH 04 Separar composición y ciclo de vida
 
-- [ ] Estado pendiente de ejecución
-- Evidencia de cierre por completar
-- Commit de cierre por completar
+- [ ] Drenaje de configuración de bienvenida implementado localmente; composición/ciclo global pendiente.
+- Evidencia: [incremento TECH-05](CICLO_DE_VIDA_BIENVENIDA.md), cierre normal, errores y deadline comprobados en aislamiento.
+- Commit del incremento: `0771a47953a17cbac9f4d853554fd0ecb274d45f`; no cierra la tarea global.
 
 Dependencias: ARCH-03.
 
@@ -163,8 +163,12 @@ No marcar una tarea por existir el documento o la carpeta. Adjuntar capacidad, S
 
 ## Adopción tecnológica complementaria
 
-Leer [TECH-01 a TECH-08](tecnologia/06_PLAN_DE_ADOPCION.md). Son incrementos ligados a los ARCH existentes; todos permanecen pendientes de implementación. La conciliación estática ampliada está en [base real](tecnologia/08_BASE_REAL_Y_DIFERENCIAS.md); no se usa para cerrar pruebas conectadas o aceptar automáticamente el refactor local.
+Leer [TECH-01 a TECH-08](tecnologia/06_PLAN_DE_ADOPCION.md). Son incrementos ligados a los ARCH existentes; consultar el avance local al final del plan de adopción para distinguir el piloto implementado del alcance pendiente. La conciliación estática ampliada está en [base real](tecnologia/08_BASE_REAL_Y_DIFERENCIAS.md); no se usa para cerrar pruebas conectadas o aceptar automáticamente el refactor local.
 
 ## Último incremento local · TECH-04
 
-Formulario de canal/mensaje de bienvenida derivado del contrato, traducciones es/en, errores por campo y limpieza ante revocación. Commit `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`. [Evidencia y límites](FORMULARIO_BIENVENIDA.md). TECH-05/06 y recorridos reales de producción pendientes; no se habilitan otros dominios.
+Formulario de canal/mensaje de bienvenida derivado del contrato, traducciones es/en, errores por campo y limpieza ante revocación. Commit `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`. [Evidencia y límites](FORMULARIO_BIENVENIDA.md). El drenaje de configuración TECH-05 se implementó después en el incremento indicado a continuación. TECH-06, ciclo de vida global y recorridos reales de producción pendientes; no se habilitan otros dominios.
+
+## Último incremento local · TECH-05 parcial
+
+Drenaje idempotente de las siete operaciones del servicio de configuración de bienvenida, cierre de admisión y hook anterior al flush de Mongo. Commit `0771a47953a17cbac9f4d853554fd0ecb274d45f`. [Evidencia y límites](CICLO_DE_VIDA_BIENVENIDA.md). ARCH-04 y TECH-05 globales continúan abiertos; TECH-06 y OAuth/Gateway reales pendientes. Sin publicación remota o despliegue.

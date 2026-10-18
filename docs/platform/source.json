@@ -100,6 +100,8 @@
     "deployed": false,
     "formCommit": "c627d2f3a3ed5a6da76c65e58cb67739a13f7589",
     "formEvidence": "docs/guia-arquitectura/FORMULARIO_BIENVENIDA.md",
-    "latestLocalIncrement": "TECH-04 configuration editor"
+    "latestLocalIncrement": "TECH-05 partial: welcome configuration operation draining",
+    "lifecycleCommit": "0771a47953a17cbac9f4d853554fd0ecb274d45f",
+    "lifecycleEvidence": "docs/guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md"
   }
 }

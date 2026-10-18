@@ -4,11 +4,13 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 
 ## Reanudación local con la guía nueva · 18 de octubre de 2026
 
-Último incremento local `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`: [formulario declarativo de bienvenida](../guia-arquitectura/FORMULARIO_BIENVENIDA.md), textos es/en, máximo compartido con el slash, errores de campo y limpieza de datos tras revocación. 12 escenarios de navegador, 25/25 tests originales y tipos pasan. Temporales de prueba retirados; sin despliegue.
+Último incremento local `0771a47953a17cbac9f4d853554fd0ecb274d45f`: [drenaje de configuración de bienvenida](../guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md). Las operaciones aceptadas terminan antes del flush; las nuevas entradas reciben indisponibilidad. Mongo/HTTP aislados, errores, idempotencia y deadline simulado comprobados; 25/25 originales y tipos pasan. TECH-05 parcial, ARCH-04 global pendiente. Sin publicación/despliegue ni nuevos scripts/tests.
+
+Incremento anterior `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`: [formulario declarativo de bienvenida](../guia-arquitectura/FORMULARIO_BIENVENIDA.md), textos es/en, máximo compartido con el slash, errores de campo y limpieza de datos tras revocación. 12 escenarios de navegador, 25/25 tests originales y tipos pasan. Temporales de prueba retirados; sin despliegue.
 
 Paquete nuevo conciliado con c8ba6d3 y verificado antes de retirar el ZIP. Guía incorporada en a05036a. Piloto de canal/mensaje de bienvenida implementado en `3d63780c30da9fab6546d899af21fc2c072d3016`: servicio autorizado común para web, slash y opciones incluidas de setup-welcome; contratos Zod, comprobación JSDoc, escritor CAS y aliases conservados. 25/25 tests originales, 15 escenarios Mongo aislado, 16 peticiones HTTP y comprobaciones temporales de permisos/paridad. Sin nuevas herramientas de prueba permanentes.
 
-Estado y siguientes dependencias en [plan vigente](../guia-arquitectura/PLAN_POR_ETAPAS.md) y [evidencia del piloto](../guia-arquitectura/PILOTO_BIENVENIDA.md). Rama solo local; runtime musical anterior, sin despliegue ni cambios de nodo. OAuth/Discord reales, ciclo de vida y módulos restantes pendientes; UI declarativa implementada localmente en el incremento indicado arriba. El refactor bootstrap del paquete sigue separado.
+Estado y siguientes dependencias en [plan vigente](../guia-arquitectura/PLAN_POR_ETAPAS.md) y [evidencia del piloto](../guia-arquitectura/PILOTO_BIENVENIDA.md). Rama solo local; runtime musical anterior, sin despliegue ni cambios de nodo. OAuth/Discord reales, ciclo de vida global/otros recursos y módulos restantes pendientes; UI declarativa implementada localmente en el incremento indicado arriba. El refactor bootstrap del paquete sigue separado.
 
 ## Estado para planificación externa · 17 de octubre de 2026
 
