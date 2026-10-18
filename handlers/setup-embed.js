@@ -34,7 +34,7 @@ async function openEmbedSetup(client, origin) {
     const render = status => buildEmbedSetup(client, value, draft, locale, status)
     const change = patch => { draft = { ...draft, ...patch }; for (const key of Object.keys(draft)) if (draft[key] === value.values[key]) delete draft[key] }
     message = await origin.reply(render())
-    return attachSetupSession(client, message, context, { notice, controls: {
+    return attachSetupSession(client, message, context, { notice, hasUnsavedChanges: () => Object.keys(draft).length > 0, controls: {
       embed_edit: {
         modal() {
           const current = { ...value.values, ...draft }, modal = new ModalBuilder().setTitle(copy(locale, 'edit'))

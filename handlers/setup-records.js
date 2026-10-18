@@ -72,7 +72,7 @@ async function openRecordsSetup(client, origin, definition) {
       await i.followUp({ content: copy(locale, status), ephemeral: true, allowedMentions: { parse: [] } })
     } })
     message = await origin.reply(render())
-    return attachSetupSession(client, message, context, { notice, controls: {
+    return attachSetupSession(client, message, context, { notice, hasUnsavedChanges: () => dirty, controls: {
       records_publish: publish(false), records_unpublish: publish(true),
       records_new: edit(true), records_edit: edit(false),
       records_select: { accept: i => i.isStringSelectMenu(), async run(i) { const index = Number(i.values?.[0]); if (i.values.length !== 1 || !Number.isInteger(index) || index < page * 25 || index >= page * 25 + 25 || !records[index]) throw new Error('setup_invalid'); selected = index; await i.editReply(render()) } },

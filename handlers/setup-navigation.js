@@ -2,6 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, 
 const { availableCommands } = require('./help')
 const { t, catalogs, localeFor, normalizeLocale } = require('./i18n')
 const { requireSetupAccess } = require('./setup-access')
+const { setupOrigin } = require('./setup-flow')
 
 const PAGE_SIZE = 25
 const QUICK_COMMANDS = ['setup-welcome', 'setup-ticket', 'setupmusic', 'setup-language', 'setup-logger']
@@ -68,7 +69,7 @@ function buildSetupMessage(view, state = {}) {
   return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }
 }
 
-async function openSetup(client, origin) {
+async function openSetup(client, origin, initialState = {}) {
   const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id }
   let locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
   const notice = key => ({ content: copy(locale, key), embeds: [], components: [], allowedMentions: { parse: [] } })
@@ -76,7 +77,7 @@ async function openSetup(client, origin) {
   try {
     let view = await readSetupView(client, context)
     locale = view.locale
-    const state = { group: null, page: 0 }
+    const state = { group: initialState.group || null, page: initialState.page || 0 }
     message = await origin.reply(buildSetupMessage(view, state))
     const collector = message.createMessageComponentCollector({ time: 180000, idle: 90000 })
     const controls = new Set(['setup_group', 'setup_command', 'setup_prev', 'setup_next', 'setup_home', 'setup_close'])
@@ -122,7 +123,9 @@ async function openSetup(client, origin) {
           if (closed) return
           if (!launch.commands.some(entry => entry.name === selected) || client.commands.get(selected) !== command) throw new SetupError('denied')
           collector.stop('selected')
-          await command.run(client, origin, [], launch.member, '', launch.prefix)
+          const parentState = { ...state }
+          const back = () => openSetup(client, setupOrigin(origin, message, undefined, locale), parentState)
+          await command.run(client, setupOrigin(origin, message, back, locale), [], launch.member, '', launch.prefix)
           return
         }
         view = fresh
@@ -144,7 +147,7 @@ async function openSetup(client, origin) {
     collector.on('end', (_, reason) => {
       closed = true
       // Cleanup follows any edit already in flight so it cannot revive old controls.
-      queue = queue.then(() => message.edit(['time', 'idle'].includes(reason) ? notice('expired') : { components: [] })).catch(() => {})
+      if (reason !== 'selected') queue = queue.then(() => message.edit(['time', 'idle'].includes(reason) ? notice('expired') : { components: [] })).catch(() => {})
     })
     return collector
   } catch {

@@ -36,7 +36,7 @@ async function openToggleSetup(client, origin, id) {
     let value = await service.read(context.guildId), draft = {}
     const render = status => buildToggleSetup(id, value, draft, locale, status)
     message = await origin.reply(render())
-    return attachSetupSession(client, message, context, { notice, authorize, controls: {
+    return attachSetupSession(client, message, context, { notice, authorize, hasUnsavedChanges: () => Object.keys(draft).length > 0, controls: {
       categories_select: { accept: interaction => interaction.isStringSelectMenu(), async run(interaction) {
         if (!Array.isArray(interaction.values) || interaction.values.some(id => !flags.includes(id)) || new Set(interaction.values).size !== interaction.values.length) throw new Error('invalid_category')
         draft = Object.fromEntries(flags.map(key => [key, interaction.values.includes(key)]).filter(([id, enabled]) => enabled !== definition.enabled(value.values[id])))

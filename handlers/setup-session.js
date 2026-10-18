@@ -1,9 +1,22 @@
 const { randomBytes } = require('node:crypto')
 const { InteractionCollector, InteractionType } = require('discord.js')
 const { requireSetupAccess } = require('./setup-access')
+const { returnToSetup, setupInteraction } = require('./setup-flow')
+const { t, localeFor, normalizeLocale } = require('./i18n')
 
 // Owns only message/modal resources. Each setup owns its state, validation and writes.
-function attachSetupSession(client, message, context, { controls, notice, onError, authorize }) {
+function attachSetupSession(client, message, context, { controls, notice, onError, authorize, hasUnsavedChanges = () => false }) {
+  const back = returnToSetup(message)
+  const locale = () => normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
+  if (back) controls = { ...controls, setup_back: { async run(interaction, session) {
+    if (hasUnsavedChanges()) {
+      await interaction.followUp({ content: t(locale(), 'setup.form.saveBeforeBack'), ephemeral: true, allowedMentions: { parse: [] } })
+      return
+    }
+    await interaction.editReply({ content: '', embeds: [], components: [], attachments: [] })
+    session.close('back')
+    await back()
+  } } }
   const collector = message.createMessageComponentCollector({ time: 180000, idle: 90000 })
   const children = new Set()
   let closed = false, version = 0, queue = Promise.resolve()
@@ -20,7 +33,7 @@ function attachSetupSession(client, message, context, { controls, notice, onErro
       const access = await requireSetupAccess(client, context)
       await authorize?.(access, context)
       if (closed) return
-      await run(interaction, { active, close: reason => collector.stop(reason) })
+      await run(setupInteraction(interaction, back, locale()), { active, close: reason => collector.stop(reason) })
       version++
     }).catch(async error => {
       if (closed) return
@@ -41,7 +54,9 @@ function attachSetupSession(client, message, context, { controls, notice, onErro
       const formId = 'setup_form_' + randomBytes(12).toString('hex'), openedAt = version
       let child
       try {
-        const modal = control.modal().setCustomId(formId)
+        const modal = control.modal()
+        if (!modal) { enqueue(interaction, control.run); return }
+        modal.setCustomId(formId)
         child = new InteractionCollector(client, { interactionType: InteractionType.ModalSubmit, time: 90000, max: 1,
           filter: value => value.customId === formId && value.user.id === context.actorId && value.guildId === context.guildId && value.message?.id === message.id })
         children.add(child)
@@ -56,7 +71,7 @@ function attachSetupSession(client, message, context, { controls, notice, onErro
   collector.on('end', (_, reason) => {
     closed = true
     for (const child of children) child.stop('parentClosed')
-    queue = queue.then(() => message.edit(['idle', 'time'].includes(reason) ? notice('expired') : { components: [] })).catch(() => {})
+    if (!['selected', 'back'].includes(reason)) queue = queue.then(() => message.edit(['idle', 'time'].includes(reason) ? notice('expired') : { components: [] })).catch(() => {})
   })
   return collector
 }

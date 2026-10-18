@@ -15,3 +15,11 @@ Cada entrega debe registrar resultado y límites antes de marcarla terminada. La
 ## Primera entrega local · navegación
 
 El inicio ofrece bienvenida, tickets, reproductor, idioma y registros cuando están disponibles para el actor. Cada una de las 61 configuraciones prefix distintas tiene nombre y finalidad es/en; los IDs internos y nombres de comandos se conservan. Las categorías explican su contenido. 32 grupos de builders reales cubren ambos idiomas, opciones ausentes, contexto vacío y 60 entradas paginadas. La comprobación previa reprodujo la ausencia de accesos directos y las etiquetas técnicas. No se ha desplegado esta entrega.
+
+## Segunda entrega local · un panel y pasos guiados
+
+La entrada `!setup` mantiene el recorrido completo en el mismo mensaje: categoría, función, sección y regreso. El contexto de sesión conserva el actor/canal; cada interacción sigue reautorizándose. Volver con cambios pendientes requiere guardarlos o descartarlos primero. Los cierres por traspaso no borran los controles de la pantalla siguiente. Idioma conserva su ruta compatible y recibe el mismo regreso.
+
+Los formularios avanzan ajuste a ajuste, muestran canales/roles como referencias de Discord, resumen los cambios por guardar y permiten retirar recursos con selectores. Se conservan modales para listas de texto y guardado/publicación explícitos. Las definiciones pueden indicar una ruta básica sin eliminar campos avanzados.
+
+36 grupos temporales con InteractionCollector real: apertura desde el registro vivo, mismo mensaje, regreso anidado, cooldown, comando retirado, actor ajeno, permisos revocados, cambios pendientes, conflicto simulado, conservación de campos ocultos, selector de retirada, modal obsoleto y 100 ciclos sin listeners residuales. Builders reales verifican los límites de cinco filas y cinco botones en ambos idiomas. 25 tests originales, tipos y reglas de dependencias pasan. Estas comprobaciones no abren Gateway ni consultan datos o proveedores reales. El comprobador temporal se retirará al cerrar la entrega. Sin despliegue de esta revisión todavía.

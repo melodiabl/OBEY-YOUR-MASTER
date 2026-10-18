@@ -2,6 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, 
 const { requireSetupAccess } = require('./setup-access')
 const { LANGUAGES, createLanguageSettings } = require('./language-settings')
 const { t, localeFor, normalizeLocale } = require('./i18n')
+const { returnToSetup, withBackButton } = require('./setup-flow')
 
 const copy = (locale, key, variables) => t(locale, `setup.language.${key}`, variables)
 const languageName = code => LANGUAGES.find(language => language.code === (code === 'sp' ? 'es' : code))?.name
@@ -27,6 +28,7 @@ async function openLanguageSetup(client, origin) {
   const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id }
   const service = createLanguageSettings(client.settings, () => Boolean(client._shuttingDown))
   let locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es', message
+  const back = returnToSetup(origin)
   const notice = key => ({ content: copy(locale, key), embeds: [], components: [], allowedMentions: { parse: [] } })
   try {
     await requireSetupAccess(client, context)
@@ -36,7 +38,7 @@ async function openLanguageSetup(client, origin) {
     const collector = message.createMessageComponentCollector({ time: 180000, idle: 90000 })
     let closed = false, queue = Promise.resolve()
     collector.on('collect', interaction => {
-      const allowed = interaction.customId === 'language_select' ? interaction.isStringSelectMenu() : ['language_save', 'language_reset', 'language_close'].includes(interaction.customId) && interaction.isButton()
+      const allowed = interaction.customId === 'language_select' ? interaction.isStringSelectMenu() : ['language_save', 'language_reset', 'language_close', ...(back ? ['setup_back'] : [])].includes(interaction.customId) && interaction.isButton()
       if (closed || !allowed || interaction.user.id !== context.actorId || interaction.guildId !== context.guildId || interaction.message?.id !== message.id) {
         void interaction.reply({ content: copy(locale, 'notYours'), ephemeral: true, allowedMentions: { parse: [] } }).catch(() => {})
         return
@@ -52,6 +54,16 @@ async function openLanguageSetup(client, origin) {
         }
         await requireSetupAccess(client, context)
         if (closed) return
+        if (interaction.customId === 'setup_back') {
+          if (selected !== null && selected !== value.language) {
+            await interaction.followUp({ content: t(locale, 'setup.form.saveBeforeBack'), ephemeral: true, allowedMentions: { parse: [] } })
+            return
+          }
+          await interaction.editReply({ content: '', embeds: [], components: [] })
+          collector.stop('back')
+          await back()
+          return
+        }
         const languages = availableLanguages(client)
         let status = 'unsaved'
         if (interaction.customId === 'language_select' || interaction.customId === 'language_reset') {
@@ -70,7 +82,7 @@ async function openLanguageSetup(client, origin) {
           }
           locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
         }
-        if (!closed) await interaction.editReply(buildLanguageMessage(value, selected, languages, locale, status))
+        if (!closed) await interaction.editReply(withBackButton(buildLanguageMessage(value, selected, languages, locale, status), back, locale))
       }).catch(async () => {
         collector.stop('unavailable')
         await message.edit(notice('unavailable')).catch(() => {})
@@ -78,7 +90,7 @@ async function openLanguageSetup(client, origin) {
     })
     collector.on('end', (_, reason) => {
       closed = true
-      queue = queue.then(() => message.edit(['time', 'idle'].includes(reason) ? notice('expired') : { components: [] })).catch(() => {})
+      if (reason !== 'back') queue = queue.then(() => message.edit(['time', 'idle'].includes(reason) ? notice('expired') : { components: [] })).catch(() => {})
     })
     return collector
   } catch {

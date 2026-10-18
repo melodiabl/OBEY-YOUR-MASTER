@@ -31,7 +31,7 @@ async function openChannelSetup(client, origin, id) {
     let value = await service.read(context.guildId), selected
     const render = status => buildChannelSetup(id, value, selected, locale, status)
     message = await origin.reply(render())
-    return attachSetupSession(client, message, context, { notice, controls: {
+    return attachSetupSession(client, message, context, { notice, hasUnsavedChanges: () => selected !== undefined, controls: {
       channel_select: { accept: interaction => interaction.isChannelSelectMenu(), async run(interaction) {
         if (!Array.isArray(interaction.values) || interaction.values.length > 1) throw new Error('invalid_channel')
         selected = interaction.values[0] || 'no'
