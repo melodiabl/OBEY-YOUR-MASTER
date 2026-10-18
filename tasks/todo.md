@@ -1564,7 +1564,7 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 **SETUP-WELCOME · Bienvenida y despedidas**
 
-- [ ] [commands/Setup/setup-boost.js](../commands/Setup/setup-boost.js).
+- [x] [commands/Setup/setup-boost.js](../commands/Setup/setup-boost.js).
 - [ ] [commands/Setup/setup-joinlist.js](../commands/Setup/setup-joinlist.js).
 - [ ] [commands/Setup/setup-leave.js](../commands/Setup/setup-leave.js).
 - [ ] [commands/Setup/setup-welcome.js](../commands/Setup/setup-welcome.js).
@@ -1573,7 +1573,7 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 
 - [x] [commands/Setup/setup-admincmdlog.js](../commands/Setup/setup-admincmdlog.js).
 - [x] [commands/Setup/setup-auditlog.js](../commands/Setup/setup-auditlog.js).
-- [ ] [commands/Setup/setup-boostlog.js](../commands/Setup/setup-boostlog.js).
+- [x] [commands/Setup/setup-boostlog.js](../commands/Setup/setup-boostlog.js).
 - [x] [commands/Setup/setup-logger.js](../commands/Setup/setup-logger.js).
 - [x] [commands/Setup/setup-reportlog.js](../commands/Setup/setup-reportlog.js).
 - [ ] [commands/Setup/setup-serverstats.js](../commands/Setup/setup-serverstats.js).
@@ -1628,13 +1628,13 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] [commands/Setup/setup-aichat.js](../commands/Setup/setup-aichat.js).
 - [x] [commands/Setup/setup-autobackup.js](../commands/Setup/setup-autobackup.js).
 - [ ] [commands/Setup/setup-autodelete.js](../commands/Setup/setup-autodelete.js).
-- [ ] [commands/Setup/setup-autoembed.js](../commands/Setup/setup-autoembed.js).
+- [x] [commands/Setup/setup-autoembed.js](../commands/Setup/setup-autoembed.js).
 - [x] [commands/Setup/setup-automeme.js](../commands/Setup/setup-automeme.js).
-- [ ] [commands/Setup/setup-counter.js](../commands/Setup/setup-counter.js).
+- [x] [commands/Setup/setup-counter.js](../commands/Setup/setup-counter.js).
 - [ ] [commands/Setup/setup-customcommand.js](../commands/Setup/setup-customcommand.js).
 - [x] [commands/Setup/setup-dailyfact.js](../commands/Setup/setup-dailyfact.js).
 - [ ] [commands/Setup/setup-keyword.js](../commands/Setup/setup-keyword.js).
-- [ ] [commands/Setup/setup-suggestion.js](../commands/Setup/setup-suggestion.js).
+- [x] [commands/Setup/setup-suggestion.js](../commands/Setup/setup-suggestion.js).
 
 **SETUP-FEEDS · Publicaciones de plataformas**
 
@@ -1655,4 +1655,4 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
 - [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
 
-Avance local: 29/63 archivos, sin desplegar. Avisos, niveles y permisos generales/por comando añadidos. Siguiente: comunidad y automatizaciones; conservar esquemas, permisos y efectos del consumidor.
+Avance local: 34/63 archivos, sin desplegar. Contador, autoembed, boosts y sugerencias añadidos. Siguiente: editores de entradas y automatizaciones; conservar esquemas, permisos y efectos del consumidor.

@@ -116,9 +116,9 @@
     "sourceLinesAtInventory": 40107,
     "navigationCommit": "eadc547b0684ded2c9cca65cc685362c518ab660",
     "navigationEvidence": "docs/platform/evidence/setup-navigation.json",
-    "localCommandFilesRemodeled": 29,
-    "remainingCommandFiles": 34,
-    "next": "commands/Setup/setup-counter.js",
+    "localCommandFilesRemodeled": 34,
+    "remainingCommandFiles": 29,
+    "next": "commands/Setup/setup-customcommand.js",
     "pushed": false,
     "deployed": false,
     "languageCommit": "f4163778677b3b893bde2308c1a328e8d24111e5",
@@ -128,7 +128,9 @@
     "channelToggleCommit": "e999264",
     "securityEvidence": "docs/guia-arquitectura/PROTECCIONES_SETUP.md",
     "securityCommit": "ee35bc0",
-    "roleSettingsEvidence": "docs/guia-arquitectura/ROLES_AVISOS_SETUP.md"
+    "roleSettingsEvidence": "docs/guia-arquitectura/ROLES_AVISOS_SETUP.md",
+    "roleSettingsCommit": "d906674",
+    "communityEvidence": "docs/guia-arquitectura/COMUNIDAD_SETUP.md"
   },
   "latestCandidateCheck": {
     "date": "2026-10-18",

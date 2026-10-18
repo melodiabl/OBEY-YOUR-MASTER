@@ -71,7 +71,7 @@ async function checkResources(access, field, value) {
     if (!id || id === 'no' || id === 'nochannel') continue
     if (channels) {
       const resource = await access.guild.channels.fetch(id)
-      if (!resource || resource.guildId !== access.guild.id || !(field.channelTypes || [0, 5, ...(multiple ? [4] : [])]).includes(resource.type) || !resource.permissionsFor(access.member)?.has(F.ViewChannel) || !resource.permissionsFor(access.bot)?.has(field.send === false || multiple ? [F.ViewChannel] : [F.ViewChannel, F.SendMessages, F.EmbedLinks])) throw new Error('setup_resource')
+      if (!resource || resource.guildId !== access.guild.id || !(field.channelTypes || [0, 5, ...(multiple ? [4] : [])]).includes(resource.type) || !resource.permissionsFor(access.member)?.has(F.ViewChannel) || !resource.permissionsFor(access.bot)?.has(field.send === false || (multiple && field.send !== true) ? [F.ViewChannel] : [F.ViewChannel, F.SendMessages, F.EmbedLinks])) throw new Error('setup_resource')
     } else {
       if (field.type === 'principals') {
         const roles = await access.guild.roles.fetch()
