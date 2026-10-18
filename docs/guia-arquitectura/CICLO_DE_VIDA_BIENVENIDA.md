@@ -40,6 +40,6 @@ Se conserva el deadline global existente de 20 segundos y su salida por error. U
 
 El seguimiento empieza al entrar en el servicio: middleware HTTP de sesión/autorización previa, registro de manifests y caminos legacy externos a estas operaciones quedan fuera. No se cambian login, ready/dbReady ni el bootstrap recibido en el ZIP. Entrega de bienvenida, DM, tarjetas y handlers avanzados conservan sus propietarios actuales.
 
-Pendientes: ciclo de vida global ARCH-04, resto de recursos/políticas TECH-05, reglas persistentes de imports/API TECH-06, OAuth/Gateway reales y reinicio/cierre de producción. No se tocó el motor musical, el nodo privado ni datos de producción. No hubo publicación remota o despliegue.
+Pendientes: ciclo de vida global ARCH-04, resto de recursos/políticas TECH-05, resto de contratos/API legacy (ver [TECH-06 parcial posterior](API_BIENVENIDA.md)), OAuth/Gateway reales y reinicio/cierre de producción. No se tocó el motor musical, el nodo privado ni datos de producción. No hubo publicación remota o despliegue.
 
 Rollback: revertir el commit del incremento. No hay cambios de esquema, migraciones ni datos que borrar; vuelven las limitaciones previas del cierre. Los commits de configuración y formulario anteriores permanecen compatibles.

@@ -1,0 +1,736 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "OBEY · configuración de bienvenida",
+    "version": "1.0.0",
+    "description": "API existente del piloto de canal/mensaje, documentada localmente. Actor y guild autorizada se derivan de sesión/ruta; el body no puede elegir actor o permisos. Cookie de sesión establecida por OAuth existente, ManageGuild revalidado y CSRF por header en escrituras. Las cadenas se limitan en servidor por unidades UTF-16 (Zod); JSON Schema maxLength cuenta puntos Unicode y puede admitir emojis que el servidor rechace. Se excluyen endpoints legacy /api/config, formularios HTML y otras capacidades. No añade rutas ni cambia su compatibilidad."
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "security": [
+    {
+      "sessionCookie": []
+    }
+  ],
+  "paths": {
+    "/api/guilds/{guildId}/modules/welcome/config": {
+      "parameters": [
+        {
+          "name": "guildId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]{1,100}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "readWelcomeConfiguration",
+        "tags": [
+          "welcome"
+        ],
+        "summary": "Consultar publicación, borrador y último recibo",
+        "description": "Revalida ManageGuild para el actor de sesión. El borrador no activa entregas. enabled puede proceder de DM o segundo canal legacy y no equivale a channelId distinto de null.",
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado de la operación.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snapshot"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/api/guilds/{guildId}/modules/welcome/channels": {
+      "parameters": [
+        {
+          "name": "guildId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]{1,100}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "listWelcomeChannels",
+        "tags": [
+          "welcome"
+        ],
+        "summary": "Consultar canales de texto visibles",
+        "description": "Revalida ManageGuild y visibilidad del actor. No devuelve otros tipos de canal ni objetos Discord; esta lista no garantiza los permisos del bot, que se verifican al publicar.",
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado de la operación.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Channels"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/api/guilds/{guildId}/modules/welcome/draft": {
+      "parameters": [
+        {
+          "name": "guildId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]{1,100}$"
+          }
+        }
+      ],
+      "put": {
+        "operationId": "saveWelcomeDraft",
+        "tags": [
+          "welcome"
+        ],
+        "summary": "Guardar borrador con revisiones esperadas",
+        "description": "No cambia la configuración publicada. Usa CAS de revisión de borrador y publicación; repetir tras perder una respuesta puede producir conflicto. Consultar config y comparar antes de volver a guardar.",
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado de la operación.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snapshot"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "security": [
+          {
+            "sessionCookie": [],
+            "csrfToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/guilds/{guildId}/modules/welcome/preview": {
+      "parameters": [
+        {
+          "name": "guildId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]{1,100}$"
+          }
+        }
+      ],
+      "post": {
+        "operationId": "previewWelcomeConfiguration",
+        "tags": [
+          "welcome"
+        ],
+        "summary": "Previsualizar texto con datos sintéticos",
+        "description": "No envía mensajes ni guarda/publica. fixture siempre es true; se revalidan permisos del actor.",
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado de la operación.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preview"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "security": [
+          {
+            "sessionCookie": [],
+            "csrfToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreviewInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/guilds/{guildId}/modules/welcome/publish": {
+      "parameters": [
+        {
+          "name": "guildId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]{1,100}$"
+          }
+        }
+      ],
+      "post": {
+        "operationId": "publishWelcomeDraft",
+        "tags": [
+          "welcome"
+        ],
+        "summary": "Publicar un borrador revisado",
+        "description": "Revalida actor, canal y permisos del bot. operationId identifica una intención: el replay exige el mismo actor, borrador y revisión. Solo se conserva el último recibo; una escritura posterior puede sustituirlo. Tras timeout consultar config antes de reintentar; no se garantiza deduplicación ilimitada.",
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado de la operación.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snapshot"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "security": [
+          {
+            "sessionCookie": [],
+            "csrfToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishInput"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "connect.sid",
+        "description": "Cookie de sesión HttpOnly del dashboard existente; no es un token del bot."
+      },
+      "csrfToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-csrf-token",
+        "description": "Token CSRF de la sesión, obtenido al abrir el dashboard autenticado; Origin se valida si está presente."
+      }
+    },
+    "schemas": {
+      "WelcomeConfig": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9_:-]{1,100}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "channelId",
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "DraftInput": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "config": {
+            "$ref": "#/components/schemas/WelcomeConfig"
+          },
+          "expectedDraftRevision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "expectedPublishedRevision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "config",
+          "expectedDraftRevision",
+          "expectedPublishedRevision"
+        ],
+        "additionalProperties": false
+      },
+      "PublishInput": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "draftRevision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "expectedPublishedRevision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "operationId": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+          }
+        },
+        "required": [
+          "draftRevision",
+          "expectedPublishedRevision",
+          "operationId"
+        ],
+        "additionalProperties": false
+      },
+      "PreviewInput": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "config": {
+            "$ref": "#/components/schemas/WelcomeConfig"
+          }
+        },
+        "required": [
+          "config"
+        ],
+        "additionalProperties": false
+      },
+      "Published": {
+        "type": "object",
+        "properties": {
+          "guildId": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]{1,100}$"
+          },
+          "moduleId": {
+            "const": "welcome"
+          },
+          "schemaVersion": {
+            "const": 1
+          },
+          "revision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "config": {
+            "$ref": "#/components/schemas/WelcomeConfig"
+          },
+          "updatedBy": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "guildId",
+          "moduleId",
+          "schemaVersion",
+          "revision",
+          "enabled",
+          "config",
+          "updatedBy",
+          "updatedAt"
+        ],
+        "additionalProperties": false
+      },
+      "Draft": {
+        "type": "object",
+        "properties": {
+          "guildId": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]{1,100}$"
+          },
+          "moduleId": {
+            "const": "welcome"
+          },
+          "schemaVersion": {
+            "const": 1
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "baseRevision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "state": {
+            "const": "editing"
+          },
+          "config": {
+            "$ref": "#/components/schemas/WelcomeConfig"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "guildId",
+          "moduleId",
+          "schemaVersion",
+          "revision",
+          "baseRevision",
+          "state",
+          "config",
+          "updatedBy",
+          "updatedAt"
+        ],
+        "additionalProperties": false
+      },
+      "Receipt": {
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,100}$"
+          },
+          "actorId": {
+            "type": "string"
+          },
+          "draftRevision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "publishedRevision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "operationId",
+          "actorId",
+          "draftRevision",
+          "publishedRevision"
+        ],
+        "additionalProperties": false
+      },
+      "Snapshot": {
+        "type": "object",
+        "properties": {
+          "published": {
+            "$ref": "#/components/schemas/Published"
+          },
+          "draft": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Draft"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "draftRevision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "lastPublication": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Receipt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "published",
+          "draft",
+          "draftRevision",
+          "lastPublication"
+        ],
+        "additionalProperties": false
+      },
+      "Channels": {
+        "type": "object",
+        "properties": {
+          "channels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "channels"
+        ],
+        "additionalProperties": false
+      },
+      "Preview": {
+        "type": "object",
+        "properties": {
+          "fixture": {
+            "const": true
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fixture",
+          "content"
+        ],
+        "additionalProperties": false
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "accessRevoked": {
+            "const": true
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "channelId",
+                "message"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "ok": {
+            "const": false
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": false
+      },
+      "Conflict": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "const": "configuration_conflict"
+          },
+          "current": {
+            "$ref": "#/components/schemas/Snapshot"
+          }
+        },
+        "required": [
+          "error",
+          "current"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Cuerpo rechazado por el contrato. El parser JSON global también puede devolver errores de texto/HTML antes del adaptador.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthenticated": {
+        "description": "Sesión ausente o vencida: not_authenticated o session_expired.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "no_permission, csrf_invalid o configuration_permissions. Solo la revocación confirmada del actor lleva accessRevoked: true; un canal sin permisos conserva los cambios locales.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "guild_not_found o configuration_not_found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unavailable": {
+        "description": "configuration_unavailable durante el cierre, configuration_storage o fallo de comprobación de permisos. No implica revocación ni confirma si una escritura alcanzó Mongo.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Revisión o intención incompatible. current se vuelve a leer con autorización; si esa lectura falla se responde 403, 404 o 503 sin incluirla.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Conflict"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "sourceBase": "dc78d0199f3e4c0ac3724e6ca1d54ee4d0169534",
+  "codeCommit": "ddc4ec433252fefc68ce41e10329a7a64e47a80f",
+  "scope": "TECH-06 partial: welcome configuration public API, imports, CI and five documented HTTP routes",
+  "report": "docs/guia-arquitectura/API_BIENVENIDA.md",
+  "sourceSha256": {
+    ".dependency-cruiser.cjs": "abc9e267cb7725c2ff0db4a0fdde31a519ad8cf04d5ef2dee9126a83967d4520",
+    ".github/workflows/ci.yml": "253f8349e988984978e68a0197d0cdcb616d2ac73ed07719d265f819e3cc8aec",
+    "handlers/welcome/index.js": "9f5ac7a731de6e488f0b012bd78895a2ac9fe397e3c3a75d9a679b4670fb42d2",
+    "handlers/configuration.js": "432a6b6502fcb78caefaec3d5b5b75245ea29339ad35b68329de2722375822e2",
+    "handlers/welcome-access.js": "300717ada88a19c944ca8d42610a4d5f4c04f11deb0ad15b3702cb1110c799f7",
+    "dashboard/configuration-routes.js": "b9d4218e6388270b430e0425205f5638d240f935c7cbad5e4cf740e95375477b",
+    "dashboard/welcome-routes.js": "18f3c6c159f2e08d01b1cbfd1cabad2a44f9dcc3cd4ef4ef4b3c7494464c48e6",
+    "slashCommands/Welcome/mensaje.js": "b8b1feb02b4ab0a5e92496ea4974bc211462639d11fd12389b8122911e0f7a71",
+    "package.json": "3a3d0e0c6221effaa65115e407db2f9f3526bdb134716c60c876fb9764a9baf6",
+    "package-lock.json": "b220c3897e522bdd876d894e5037696d663d1c3338ae0d7611bb752bfdcac97a",
+    "tsconfig.welcome.json": "f157e1f1007acb1094fd00441b725493348416cdc028ca6a80ee522959a3e045"
+  },
+  "versions": {
+    "node": "22.23.2",
+    "dependencyCruiser": "18.6.0",
+    "typescript": "5.9.3",
+    "openapi": "3.1.1",
+    "responseValidator": "Python jsonschema 4.10.3 / Draft 2020-12"
+  },
+  "publicEntry": {
+    "path": "handlers/welcome/index.js",
+    "legacyNameCollision": "handlers/welcome.js",
+    "factoryErrorSchemaFormIdentity": "pass",
+    "httpPolicySlashLoad": "pass",
+    "explicitIndexPathUsed": true
+  },
+  "dependencies": {
+    "command": "npm run dependencies:welcome",
+    "modules": 1020,
+    "dependencies": 3197,
+    "violations": 0,
+    "negativeChecks": 10,
+    "negativeRules": [
+      "welcome-domain-dependencies (transport)",
+      "welcome-domain-dependencies (storage)",
+      "welcome-no-unresolved",
+      "welcome-no-cycles",
+      "welcome-domain-no-presentation",
+      "welcome-private-entry",
+      "welcome-adapters-no-repositories",
+      "welcome-repository-contract-only",
+      "welcome-ui-dependencies",
+      "welcome-public-entry-dependencies"
+    ],
+    "ciReporterErrorExit": 1,
+    "mutatedSourcesRestored": true,
+    "unrelatedLegacyNotValidated": true
+  },
+  "openapi": {
+    "path": "docs/api/welcome.openapi.json",
+    "officialSchema": "https://spec.openapis.org/oas/3.1/schema/2022-10-07",
+    "documentValidation": "pass",
+    "routeCount": 5,
+    "manifestAndExpressMatch": "pass",
+    "inputSchemaComparisonWithZod": "pass",
+    "responseSchemaValidation": "pass",
+    "httpResponses": 20,
+    "statusCounts": {
+      "200": 7,
+      "400": 2,
+      "401": 1,
+      "403": 2,
+      "404": 1,
+      "409": 2,
+      "503": 5
+    },
+    "publishedRevisionAfterReplay": 1,
+    "preserved": [
+      "DM flag",
+      "advanced setting"
+    ],
+    "realMongo": true,
+    "realHttp": true,
+    "discordAndSession": "fixtures",
+    "permanentDriftCheck": false,
+    "sha256": "11d8e8bbdfa35ac6168e71eece145ea91cfdd8f3f27481da5be2bd6c43f2c7c1"
+  },
+  "checks": {
+    "originalTests": {
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typecheck:welcome": "pass",
+    "dependencies:welcome": "pass",
+    "javascriptSyntax": "pass",
+    "gitDiffCheck": "pass"
+  },
+  "cleanInstallation": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "result": "pass",
+    "isolatedToolSmoke": "pass",
+    "preexistingLockedPackageRecordsUnchanged": true,
+    "newDevelopmentPackageEntries": 33,
+    "runtimeAcorn": "8.16.0",
+    "toolNestedAcorn": "8.19.0",
+    "nativeBuildVerified": false
+  },
+  "audit": {
+    "addedDevelopmentPackagesWithAdvisories": 0,
+    "remainingPreexistingModerateAdvisories": 36,
+    "high": 0,
+    "critical": 0
+  },
+  "cleanup": {
+    "permanentTestFilesAdded": 0,
+    "permanentHelperScriptsAdded": 0,
+    "isolatedMongoDatabasesDropped": 1,
+    "httpServerAndConnectionClosed": true,
+    "temporaryInstallDirectoriesRemoved": true
+  },
+  "limits": [
+    "No OAuth/Gateway, full startup, image build or production shutdown",
+    "CI changed locally, no remote Actions run",
+    "OpenAPI input schemas have documented UTF-16 versus Unicode-point length difference",
+    "Last publication receipt only, no unlimited replay guarantee",
+    "Static dependency rules do not prove dynamic imports, writes or global property access",
+    "Legacy API/form/advanced welcome contracts outside OpenAPI scope",
+    "Global TECH-05 and ARCH-04 remain open"
+  ],
+  "correctedIncompleteChecks": [
+    "Extensionless public import initially selected legacy welcome.js; now explicit index.js and actual loading checked",
+    "Package exports blocked direct nested parser lookup; isolated smoke corrected to read package files",
+    "Nested JSON Schema $schema annotation normalized before structural input comparison",
+    "JSON dependency reporter exit code is not the CI gate; err reporter separately verified to exit 1"
+  ],
+  "runtimeChanged": false,
+  "pushed": false,
+  "deployed": false
+}

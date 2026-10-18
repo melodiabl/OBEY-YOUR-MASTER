@@ -60,3 +60,5 @@ Abrir [LEER_PRIMERO.md](LEER_PRIMERO.md), [tecnologías](tecnologia/00_LEER_PRIM
 - FORMULARIO_BIENVENIDA.md: implementación TECH-04, traducciones, accesibilidad, revocación y evidencia de navegador.
 
 - CICLO_DE_VIDA_BIENVENIDA.md: TECH-05 parcial, drenaje idempotente de configuración, deadline y evidencia Mongo/HTTP local.
+
+- API_BIENVENIDA.md: entrada pública, reglas de imports/tipos en CI, OpenAPI, compatibilidad y evidencia TECH-06 parcial.

@@ -172,3 +172,7 @@ Formulario de canal/mensaje de bienvenida derivado del contrato, traducciones es
 ## Último incremento local · TECH-05 parcial
 
 Drenaje idempotente de las siete operaciones del servicio de configuración de bienvenida, cierre de admisión y hook anterior al flush de Mongo. Commit `0771a47953a17cbac9f4d853554fd0ecb274d45f`. [Evidencia y límites](CICLO_DE_VIDA_BIENVENIDA.md). ARCH-04 y TECH-05 globales continúan abiertos; TECH-06 y OAuth/Gateway reales pendientes. Sin publicación remota o despliegue.
+
+## Último incremento local · TECH-06 parcial
+
+Entrada pública explícita de configuración de bienvenida y reglas de imports/tipos en CI en `ddc4ec433252fefc68ce41e10329a7a64e47a80f`. [API, OpenAPI y evidencia](API_BIENVENIDA.md): cinco rutas existentes, 20 respuestas HTTP/Mongo aisladas y diez mutaciones de dependencias verificadas. TECH-05/ARCH-04 globales y resto de contratos/API legacy siguen abiertos. TECH-07 requiere conciliar una segunda capacidad; no se migra automáticamente todo welcome. Sin publicación remota o despliegue.

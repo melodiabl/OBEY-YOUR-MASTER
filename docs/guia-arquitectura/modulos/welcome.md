@@ -114,3 +114,5 @@ Canal y mensaje pasan por el servicio autorizado del [piloto](../PILOTO_BIENVENI
 Formulario TECH-04 disponible en `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`: [contrato, UI, revocación y evidencia](../FORMULARIO_BIENVENIDA.md). La ficha global continúa abierta; se comprobaron dos campos existentes con servicios reales aislados y permisos simulados.
 
 Incremento TECH-05 parcial en `0771a47953a17cbac9f4d853554fd0ecb274d45f`: [drenaje de configuración](../CICLO_DE_VIDA_BIENVENIDA.md), incluyendo consultas de canales, permisos y cierre anterior al flush de Mongo. Las siete operaciones incluidas se drenan; entrega, DM/tarjetas y ciclo global permanecen fuera de este incremento. No modifica la política por guild ni despliega código.
+
+Incremento TECH-06 parcial en `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [entrada pública, imports y cinco rutas HTTP documentadas](../API_BIENVENIDA.md). No cierra los cuatro casos generales de esta ficha ni la configuración avanzada. Evidencia local; producción sin cambios.

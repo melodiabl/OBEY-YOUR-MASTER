@@ -4,7 +4,9 @@ Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTE
 
 ## Reanudación · 18/10/2026
 
-TECH-05 parcial en `0771a47953a17cbac9f4d853554fd0ecb274d45f`: [cierre de configuración y evidencia](../guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md). Espera las operaciones aceptadas y conserva errores/permisos antes del flush de Mongo. Plazo global de 20 segundos vigente; cierre global y producción pendientes. Comprobaciones temporales sin restaurar scripts/tests; Mongo aislado eliminado y servidores de prueba cerrados.
+TECH-06 parcial en `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [API pública, reglas y evidencia](../guia-arquitectura/API_BIENVENIDA.md). Cinco rutas existentes documentadas y coincidentes con Express/manifest; imports y tipos incorporados a CI. Diez mutaciones y 20 respuestas HTTP locales comprobadas. No hay nuevos tests/helpers permanentes, publicación remota ni despliegue. TECH-05 y ARCH-04 globales siguen pendientes.
+
+Incremento previo TECH-05 parcial en `0771a47953a17cbac9f4d853554fd0ecb274d45f`: [cierre de configuración y evidencia](../guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md). Espera las operaciones aceptadas y conserva errores/permisos antes del flush de Mongo. Plazo global de 20 segundos vigente; cierre global y producción pendientes. Comprobaciones temporales sin restaurar scripts/tests; Mongo aislado eliminado y servidores de prueba cerrados.
 
 Incremento previo TECH-04 en `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`: [formulario y evidencia](../guia-arquitectura/FORMULARIO_BIENVENIDA.md). Verificado localmente; temporales retirados, sin publicación/despliegue.
 

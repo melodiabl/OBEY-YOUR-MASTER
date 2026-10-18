@@ -4,7 +4,9 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 
 ## Reanudación local con la guía nueva · 18 de octubre de 2026
 
-Último incremento local `0771a47953a17cbac9f4d853554fd0ecb274d45f`: [drenaje de configuración de bienvenida](../guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md). Las operaciones aceptadas terminan antes del flush; las nuevas entradas reciben indisponibilidad. Mongo/HTTP aislados, errores, idempotencia y deadline simulado comprobados; 25/25 originales y tipos pasan. TECH-05 parcial, ARCH-04 global pendiente. Sin publicación/despliegue ni nuevos scripts/tests.
+Último incremento local `ddc4ec433252fefc68ce41e10329a7a64e47a80f`: [API/imports de bienvenida](../guia-arquitectura/API_BIENVENIDA.md). Entrada pública explícita, reglas de dependencias y tipos en CI; OpenAPI para cinco rutas. Diez mutaciones rechazadas, 20 respuestas HTTP con Mongo aislado validadas y 25/25 tests originales. CLI y lockfile comprobados con instalación limpia aislada; sin scripts/tests permanentes nuevos ni despliegue. TECH-06 parcial, resto global pendiente.
+
+Incremento previo `0771a47953a17cbac9f4d853554fd0ecb274d45f`: [drenaje de configuración de bienvenida](../guia-arquitectura/CICLO_DE_VIDA_BIENVENIDA.md). Las operaciones aceptadas terminan antes del flush; las nuevas entradas reciben indisponibilidad. Mongo/HTTP aislados, errores, idempotencia y deadline simulado comprobados; 25/25 originales y tipos pasan. TECH-05 parcial, ARCH-04 global pendiente. Sin publicación/despliegue ni nuevos scripts/tests.
 
 Incremento anterior `c627d2f3a3ed5a6da76c65e58cb67739a13f7589`: [formulario declarativo de bienvenida](../guia-arquitectura/FORMULARIO_BIENVENIDA.md), textos es/en, máximo compartido con el slash, errores de campo y limpieza de datos tras revocación. 12 escenarios de navegador, 25/25 tests originales y tipos pasan. Temporales de prueba retirados; sin despliegue.
 
