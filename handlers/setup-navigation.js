@@ -7,6 +7,11 @@ const { setupOrigin } = require('./setup-flow')
 const PAGE_SIZE = 25
 const QUICK_COMMANDS = ['setup-welcome', 'setup-ticket', 'setupmusic', 'setup-language', 'setup-logger']
 const GROUP_ORDER = ['general', 'welcome', 'music', 'support', 'roles', 'security', 'logs', 'feeds', 'community']
+// These adapters share the same operation. Keep their commands, offer one entry.
+const EQUIVALENT_SETUPS = [
+  ['setup-antimention', 'setup-antimassmention', 'setup-antimasspings', 'setup-antipings'],
+  ['setup-logger', 'setup-auditlog'], ['setup-membercount', 'setup-serverstats'], ['setupmusic', 'setup-music'],
+]
 const groups = [
   ['welcome', /^setup-(welcome|leave|boost$|joinlist)/],
   ['logs', /^setup-.*(log|serverstats)/],
@@ -32,8 +37,10 @@ class SetupError extends Error { constructor(code) { super(code); this.code = co
 async function readSetupView(client, context) {
   const { guild, member, bot, channel } = await requireSetupAccess(client, context)
   const settings = client.settings.get(guild.id) || {}
-  const commands = availableCommands(client, { guild, member, bot, channel, settings, musicState: client.music?.getState(guild.id) })
+  const available = availableCommands(client, { guild, member, bot, channel, settings, musicState: client.music?.getState(guild.id) })
     .filter(entry => entry.transport === 'prefix' && entry.name !== 'setup' && /^setup(?:-|music$)/.test(entry.name))
+  const preferred = new Set(EQUIVALENT_SETUPS.map(names => names.find(name => available.some(entry => entry.name === name))))
+  const commands = available.filter(entry => !EQUIVALENT_SETUPS.some(names => names.includes(entry.name)) || preferred.has(entry.name))
     .map(entry => ({ name: entry.name, group: groupFor(entry.name) }))
   return { commands, member, prefix: String(settings.prefix || client.config?.prefix || '!').slice(0, 32),
     locale: normalizeLocale(localeFor(client, guild.id)) === 'en' ? 'en' : 'es' }

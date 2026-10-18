@@ -1673,4 +1673,4 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 
 - [x] Inicio con nombres comprensibles y finalidad para 61 configuraciones prefix, accesos habituales y categorías explicadas en es/en. 32 grupos de builders reales comprobados; registro y comprobación fresca conservados.
 - [x] Formularios con avance entre ajustes, valores legibles, resumen pendiente y regreso por el mismo mensaje. Selector para retirar recursos, bloqueo al volver con cambios y limpieza comprobada con SDK real; persistencia canónica conservada.
-- [ ] Ruta básica de bienvenida/tickets y acceso explícito a opciones avanzadas, conservando configuración existente.
+- [x] Bienvenida con canal/mensaje y ejemplos; tickets con cinco ajustes básicos y Más opciones. Solicitudes, menús y salas muestran Nuevo/existentes en lugar de 100 sistemas al entrar; acceso avanzado y configuración existente conservados.

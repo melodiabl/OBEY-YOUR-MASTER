@@ -1160,12 +1160,12 @@
           "description": "Configure allowed links and exceptions."
         },
         "setup-antimassmention": {
-          "title": "Limit mass mentions",
-          "description": "Protect against excessive mentions."
+          "title": "Mention protection",
+          "description": "Choose how to handle disallowed mentions."
         },
         "setup-antimasspings": {
-          "title": "Limit repeated pings",
-          "description": "Protect against repeated mass pings."
+          "title": "Mention protection",
+          "description": "Choose how to handle disallowed mentions."
         },
         "setup-antimention": {
           "title": "Mention protection",
@@ -1176,8 +1176,8 @@
           "description": "Set the minimum account age for new members."
         },
         "setup-antipings": {
-          "title": "Control pings",
-          "description": "Set limits and exceptions for pings."
+          "title": "Mention protection",
+          "description": "Choose how to handle disallowed mentions."
         },
         "setup-antispam": {
           "title": "Prevent spam",
@@ -1216,8 +1216,8 @@
           "description": "Choose where to record staff actions."
         },
         "setup-auditlog": {
-          "title": "Audit log",
-          "description": "Choose where to see server audit events."
+          "title": "Activity log",
+          "description": "Choose where activity logs are sent."
         },
         "setup-logger": {
           "title": "Activity log",
@@ -1232,16 +1232,16 @@
           "description": "Choose where to log server boosts."
         },
         "setup-serverstats": {
-          "title": "Server statistics",
-          "description": "Choose where to show available server statistics."
+          "title": "Member counters",
+          "description": "Configure channels that display member counts."
         },
         "setup-boost": {
           "title": "Thank server boosters",
           "description": "Prepare a message to thank server boosters."
         },
         "setup-joinlist": {
-          "title": "Join list",
-          "description": "Configure the list of server joins."
+          "title": "Member join filters",
+          "description": "Define rules for accounts joining the server."
         },
         "setup-membercount": {
           "title": "Member counters",
@@ -1260,8 +1260,8 @@
           "description": "Configure member lists by team or role."
         },
         "setup-music": {
-          "title": "Music permissions and settings",
-          "description": "Adjust music roles, permissions and options."
+          "title": "Music player",
+          "description": "Publish controls to request and play music."
         },
         "setup-radio": {
           "title": "Radio stations",
@@ -1272,8 +1272,8 @@
           "description": "Set up a channel that creates a room when joined."
         },
         "setup-joinvc": {
-          "title": "Automatic voice connection",
-          "description": "Choose which voice channels OBEY connects to."
+          "title": "Voice join messages and roles",
+          "description": "Assign roles or send notices when someone joins a voice channel."
         },
         "setup-menuticket": {
           "title": "Ticket menu",
@@ -1284,8 +1284,8 @@
           "description": "Group available applications in a menu."
         },
         "setup-autosupport": {
-          "title": "Voice support",
-          "description": "Configure channels and options for voice support."
+          "title": "Automatic help replies",
+          "description": "Set up a menu with answers to common questions."
         },
         "setup-suggestion": {
           "title": "Suggestions",
@@ -1537,7 +1537,7 @@
       "selectStep": "Choose the option you want from the selector below.",
       "editStep": "Press Write / edit to enter the content.",
       "saveSteps": "Use Previous and Next to browse settings. Changes only take effect when you press Save changes.",
-      "publishSteps": "Save the settings first. Then press Publish to perform the action described above.",
+      "publishSteps": "Save the settings first. Then press “{action}” to perform the action described above.",
       "chooseChannel": "Choose a server channel",
       "chooseRole": "Choose a server role",
       "removeResources": "Choose what to remove from the list",

@@ -2,6 +2,7 @@ const { z } = require('zod');
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, PermissionFlagsBits: F } = require('discord.js');
 const { label, snowflake, ids, field, channel, template } = require('./setup-fields');
 const { openSetupChoices } = require('./setup-choices');
+const { openSetupSlots } = require('./setup-slots');
 const { openFormSetup, checkResources } = require('./setup-form');
 const { openRecordsSetup } = require('./setup-records');
 const { createSetupSettings } = require('./setup-settings');
@@ -91,6 +92,15 @@ function settingsDefinition(kind, n) {
     };
     return { title: kinds[kind], store: kind, fields, description: label('Guarda los cambios y usa Publicar para actualizar el panel. Las opciones se editan en su sección. Retirar elimina solo el mensaje del panel.', 'Save changes, then Publish to update the panel. Edit options in their section. Unpublish deletes only the panel message.'), ...panelActions(panel) };
 }
-function openSupportMenus(client, origin, kind) { if (!Object.hasOwn(kinds, kind))
-    throw Error('invalid_setup_definition'); return openSetupChoices(client, origin, kinds[kind], Array.from({ length: 100 }, (_, i) => ({ id: String(i + 1), title: label(`Sistema ${i + 1}`, `System ${i + 1}`), open: (c, m) => openSetupChoices(c, m, kinds[kind], [{ id: 'settings', title: label('Panel y ajustes', 'Panel and settings'), open: (c, m) => openFormSetup(c, m, settingsDefinition(kind, i + 1)) }, { id: 'options', title: label('Opciones del menú', 'Menu options'), open: (c, m) => openRecordsSetup(c, m, optionsDefinition(kind, i + 1)) }]) }))); }
+function openSupportMenus(client, origin, kind) {
+    if (!Object.hasOwn(kinds, kind)) throw Error('invalid_setup_definition');
+    return openSetupSlots(client, origin, {
+        title: kinds[kind], store: kind, prefix: kind,
+        isUsed: entry => Boolean(entry.channelId || entry.messageId || entry.data?.length),
+        open: (c, m, n) => openSetupChoices(c, m, kinds[kind], [
+            { id: 'options', title: label('1. Añadir opciones al menú', '1. Add menu options'), description: label('Define las opciones que podrán elegir los miembros.', 'Define the options members can choose.'), open: (c, m) => openRecordsSetup(c, m, optionsDefinition(kind, n)) },
+            { id: 'settings', title: label('2. Canal y publicación', '2. Channel and publication'), description: label('Elige dónde mostrar el menú y revisa sus textos.', 'Choose where to show the menu and review its text.'), open: (c, m) => openFormSetup(c, m, settingsDefinition(kind, n)) },
+        ]),
+    });
+}
 module.exports = { openSupportMenus, settingsDefinition, optionsDefinition, menuSchema, yesNo, snapshotOpenTicketAccess };

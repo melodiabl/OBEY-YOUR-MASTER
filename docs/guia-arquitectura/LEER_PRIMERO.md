@@ -38,3 +38,7 @@ Continuación TECH-06 parcial: [API y límites comprobables de bienvenida](API_B
 Prioridad posterior indicada por el usuario: [remodelación de los 63 setups](REMODELACION_SETUPS.md), código y menús de Discord juntos. Navegación `setup` implementada y comprobada localmente en `eadc547b0684ded2c9cca65cc685362c518ab660`; los asistentes individuales conservan sus tareas pendientes.
 
 Continuación de setups: [idioma y guardado confirmado](IDIOMA_SETUP.md) en `f4163778677b3b893bde2308c1a328e8d24111e5`. Dos de 63 entradas remodeladas localmente; quedan 61 y sigue setup-embed. El candidato Lavalink aportado se comprobó aparte en [HeavenCloud](../platform/HEAVENCLOUD-2026-10-18.md) sin modificar el principal o respaldos.
+
+## Estado vigente después del despliegue
+
+Los 63 setups están remodelados y desplegados en `f4acfac` (18/10/2026). El usuario priorizó después su facilidad de uso: continuar por [FACILIDAD_SETUP.md](FACILIDAD_SETUP.md), con una sola entrada `!setup` y recorrido por el mismo mensaje. Los incrementos descritos arriba son históricos; no implican que sigan pendientes 61 comandos. El plan global de arquitectura conserva sus tareas abiertas.

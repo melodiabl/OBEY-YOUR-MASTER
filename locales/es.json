@@ -1160,12 +1160,12 @@
           "description": "Configura los enlaces permitidos y sus excepciones."
         },
         "setup-antimassmention": {
-          "title": "Limitar menciones masivas",
-          "description": "Configura protección contra demasiadas menciones."
+          "title": "Proteger de menciones",
+          "description": "Elige cómo actuar ante menciones no permitidas."
         },
         "setup-antimasspings": {
-          "title": "Limitar avisos repetidos",
-          "description": "Configura protección contra avisos masivos repetidos."
+          "title": "Proteger de menciones",
+          "description": "Elige cómo actuar ante menciones no permitidas."
         },
         "setup-antimention": {
           "title": "Proteger de menciones",
@@ -1176,8 +1176,8 @@
           "description": "Establece la antigüedad mínima de las cuentas que entran."
         },
         "setup-antipings": {
-          "title": "Controlar menciones",
-          "description": "Configura límites y excepciones de menciones."
+          "title": "Proteger de menciones",
+          "description": "Elige cómo actuar ante menciones no permitidas."
         },
         "setup-antispam": {
           "title": "Evitar mensajes repetidos",
@@ -1216,8 +1216,8 @@
           "description": "Elige dónde guardar las acciones de administración."
         },
         "setup-auditlog": {
-          "title": "Registro de auditoría",
-          "description": "Elige dónde ver los eventos de auditoría del servidor."
+          "title": "Registro de actividad",
+          "description": "Elige dónde recibir los registros de actividad."
         },
         "setup-logger": {
           "title": "Registro de actividad",
@@ -1232,16 +1232,16 @@
           "description": "Elige dónde registrar las mejoras del servidor."
         },
         "setup-serverstats": {
-          "title": "Estadísticas del servidor",
-          "description": "Elige dónde mostrar las estadísticas disponibles."
+          "title": "Contadores de miembros",
+          "description": "Configura canales que muestran el número de miembros."
         },
         "setup-boost": {
           "title": "Agradecer mejoras",
           "description": "Prepara el mensaje para agradecer una mejora del servidor."
         },
         "setup-joinlist": {
-          "title": "Lista de entradas",
-          "description": "Configura el seguimiento de entradas al servidor."
+          "title": "Filtros al entrar al servidor",
+          "description": "Define reglas para las cuentas que entran al servidor."
         },
         "setup-membercount": {
           "title": "Contadores de miembros",
@@ -1260,8 +1260,8 @@
           "description": "Configura las listas de miembros por equipo o rol."
         },
         "setup-music": {
-          "title": "Permisos y opciones de música",
-          "description": "Ajusta los roles, permisos y opciones musicales."
+          "title": "Reproductor de música",
+          "description": "Publica los controles para pedir y escuchar música."
         },
         "setup-radio": {
           "title": "Emisoras de radio",
@@ -1272,8 +1272,8 @@
           "description": "Prepara un canal que crea una sala al entrar."
         },
         "setup-joinvc": {
-          "title": "Conexión automática a voz",
-          "description": "Elige los canales a los que se conectará OBEY."
+          "title": "Mensajes y roles al entrar a voz",
+          "description": "Asigna roles o envía avisos cuando alguien entra a un canal de voz."
         },
         "setup-menuticket": {
           "title": "Menú de tickets",
@@ -1284,8 +1284,8 @@
           "description": "Agrupa las solicitudes disponibles en un menú."
         },
         "setup-autosupport": {
-          "title": "Ayuda por voz",
-          "description": "Configura los canales y opciones de atención por voz."
+          "title": "Respuestas de ayuda automáticas",
+          "description": "Prepara un menú con respuestas a las consultas habituales."
         },
         "setup-suggestion": {
           "title": "Recibir sugerencias",
@@ -1537,7 +1537,7 @@
       "selectStep": "Elige la opción que quieres en el selector de abajo.",
       "editStep": "Pulsa Escribir / editar para introducir el contenido.",
       "saveSteps": "Puedes recorrer los ajustes con Anterior y Siguiente. Los cambios solo se aplican al pulsar Guardar cambios.",
-      "publishSteps": "Primero guarda los ajustes. Después pulsa Publicar para realizar la acción descrita arriba.",
+      "publishSteps": "Primero guarda los ajustes. Después pulsa «{action}» para realizar la acción descrita arriba.",
       "chooseChannel": "Elige un canal del servidor",
       "chooseRole": "Elige un rol del servidor",
       "removeResources": "Elige qué quieres quitar de la lista",

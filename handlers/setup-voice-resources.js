@@ -1,7 +1,7 @@
 const { z } = require('zod');
 const { PermissionFlagsBits: F, ChannelType } = require('discord.js');
 const { field, channel, label } = require('./setup-fields');
-const { openSetupChoices } = require('./setup-choices');
+const { openSetupSlots } = require('./setup-slots');
 const { openFormSetup, checkResources } = require('./setup-form');
 const { createSetupSettings } = require('./setup-settings');
 const { createSetupChannel } = require('./setup-channel-creation');
@@ -31,7 +31,7 @@ function jtcDefinition(n) {
         }
     };
     return {
-        title: label(`Crear salas · ${n}`, `Create rooms · ${n}`), store: 'jtcsettings', fields, description: label('Selecciona un canal de voz existente y guarda, o guarda sin canal y usa Publicar para crear uno. Vaciar el canal y guardar desactiva ese acceso sin borrar salas abiertas. Si una creación queda incierta, selecciona el canal creado manualmente para resolverla.', 'Select an existing voice channel and save, or save without a channel and Publish to create one. Clearing the channel and saving disables that entry without deleting open rooms. If creation is uncertain, select the created channel manually to resolve it.'), validate,
+        title: label(`Crear salas · ${n}`, `Create rooms · ${n}`), store: 'jtcsettings', fields, publishLabel: label('Crear canal de entrada', 'Create entry channel'), description: label('Selecciona un canal de voz existente y guarda, o guarda sin canal y pulsa Crear canal de entrada para crear uno. Vaciar el canal y guardar desactiva ese acceso sin borrar salas abiertas. Si una creación queda incierta, selecciona el canal creado manualmente para resolverla.', 'Select an existing voice channel and save, or save without a channel and press Create entry channel to create one. Clearing the channel and saving disables that entry without deleting open rooms. If creation is uncertain, select the created channel manually to resolve it.'), validate,
         service(client, context) {
             const service = createSetupSettings(client.jtcsettings, {
                 ...fields, pending: {
@@ -86,11 +86,11 @@ function jtcDefinition(n) {
     };
 }
 function openJtcSetup(client, origin) {
-    return openSetupChoices(client, origin, label('Salas temporales', 'Temporary rooms'), Array.from({
-        length: 100
-    }, (_, i) => ({
-        id: String(i + 1), title: label(`Sistema ${i + 1}`, `System ${i + 1}`), open: (c, m) => openFormSetup(c, m, jtcDefinition(i + 1))
-    })));
+    return openSetupSlots(client, origin, {
+        title: label('Crear salas de voz al entrar', 'Join to create voice rooms'), store: 'jtcsettings', prefix: 'jtcsettings',
+        isUsed: entry => Boolean(entry.channel || entry.parent || entry.creationPending),
+        open: (c, m, n) => openFormSetup(c, m, jtcDefinition(n)),
+    });
 }
 module.exports = {
     jtcDefinition, jtcFields, openJtcSetup

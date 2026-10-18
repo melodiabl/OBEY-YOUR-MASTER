@@ -31,7 +31,7 @@ function buildFormSetup(definition, value, draft, selected, locale, status = '',
   const fieldLabel = id => text(fields[id].label, locale)
   const action = ui.removing ? 'removeResourceStep' : ['channel', 'channels', 'role', 'roles', 'principals', 'users'].includes(field.type) ? 'resourceStep' : ['boolean', 'enum'].includes(field.type) ? 'selectStep' : field.type === 'list' || field.removable ? 'addStep' : 'editStep'
   const embed = new EmbedBuilder().setColor(0xFFD36F).setTitle(text(definition.title, locale))
-    .setDescription([text(definition.description, locale), copy(locale, action), text(definition.publishHelp, locale) || copy(locale, definition.publish ? 'publishSteps' : 'saveSteps')].filter(Boolean).join('\n\n'))
+    .setDescription([text(definition.description, locale), copy(locale, action), text(definition.publishHelp, locale) || copy(locale, definition.publish ? 'publishSteps' : 'saveSteps', { action: text(definition.publishLabel, locale) || copy(locale, 'publish') })].filter(Boolean).join('\n\n'))
     .addFields({ name: copy(locale, 'step', { current: keys.indexOf(selected) + 1, total: keys.length }) + ' · ' + fieldLabel(selected), value: text(field.hint, locale) || copy(locale, 'selected') },
       { name: copy(locale, 'current'), value: display(field, value.values[selected], locale), inline: true },
       { name: copy(locale, 'pending'), value: Object.hasOwn(draft, selected) ? display(field, draft[selected], locale) : copy(locale, 'unchanged'), inline: true })
@@ -51,7 +51,10 @@ function buildFormSetup(definition, value, draft, selected, locale, status = '',
   if ((['channels', 'roles', 'principals', 'users', 'list'].includes(field.type) || field.removable)) edits.push(button('form_remove', ui.removing ? 'doneRemoving' : 'remove', ButtonStyle.Secondary, !ui.removing && (!current[selected] || !Object.keys(current[selected]).length)))
   if (field.clear !== undefined) edits.push(button('form_clear', 'clear'))
   if (edits.length) components.push(new ActionRowBuilder().addComponents(edits))
-  const publishButton = (id, key, label) => label ? button(id, key, ButtonStyle.Primary, Boolean(Object.keys(draft).length)).setLabel(text(label, locale)) : button(id, key, ButtonStyle.Primary, Boolean(Object.keys(draft).length))
+  const publishButton = (id, key, label) => {
+    const control = button(id, key, definition.publishStyle || ButtonStyle.Primary, Boolean(Object.keys(draft).length))
+    return label ? control.setLabel(text(label, locale)) : control
+  }
   components.push(new ActionRowBuilder().addComponents(button('form_save', 'save', ButtonStyle.Primary, !Object.keys(draft).length), button('form_discard', 'discard', ButtonStyle.Secondary, !Object.keys(draft).length), ...(definition.previewAction ? [button('form_preview', 'preview')] : []), ...(definition.publish ? [publishButton('form_publish', 'publish', definition.publishLabel)] : []), ...(definition.unpublish ? [publishButton('form_unpublish', 'unpublish', definition.unpublishLabel).setStyle(ButtonStyle.Secondary)] : [])))
   components.push(new ActionRowBuilder().addComponents(...(keys.length > 1 ? [button('form_previous', 'previous', ButtonStyle.Secondary, keys.indexOf(selected) === 0), button('form_next', 'next', ButtonStyle.Secondary, keys.indexOf(selected) === keys.length - 1)] : []), ...(definition.basicFields ? [button('form_advanced', ui.advanced ? 'basic' : 'advanced')] : []), button('form_close', 'close')))
   return { embeds: [embed], components, allowedMentions: { parse: [], repliedUser: false } }

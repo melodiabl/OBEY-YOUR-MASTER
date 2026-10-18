@@ -22,9 +22,9 @@ function imageFields(root, dm) {
   return fields
 }
 function primaryDefinition() {
-  return { title: label('Bienvenida: canal y mensaje', 'Welcome: channel and message'), fields: {
-    channel: channel('welcome.channel', 'nochannel', 'Canal principal', 'Main channel', { channelTypes: [0] }),
-    message: field('welcome.msg', 'text', '', z.string().max(500), 'Mensaje (hasta 500 caracteres)', 'Message (up to 500 characters)', { allowEmpty: true, maxInput: 500, clear: '' }),
+  return { title: label('Dar la bienvenida', 'Welcome new members'), description: label('OBEY enviará este mensaje cuando entre alguien al servidor. Solo necesitas elegir un canal y escribir el saludo.', 'OBEY will send this message when someone joins. Just choose a channel and write a greeting.'), fields: {
+    channel: channel('welcome.channel', 'nochannel', '¿Dónde damos la bienvenida?', 'Where should we greet new members?', { channelTypes: [0], hint: label('Elige un canal de texto donde los miembros puedan leer el saludo. Dejarlo sin configurar desactiva este mensaje.', 'Choose a text channel where members can read the greeting. Clearing it disables this message.') }),
+    message: field('welcome.msg', 'text', '', z.string().max(500), '¿Qué mensaje enviamos?', 'What message should we send?', { allowEmpty: true, maxInput: 500, clear: '', hint: label('Ejemplo: ¡Hola {user}! Bienvenido a {server}. {user} menciona al miembro y {server} muestra el nombre del servidor. Máximo: 500 caracteres.', 'Example: Hello {user}! Welcome to {server}. {user} mentions the member and {server} shows the server name. Maximum: 500 characters.') }),
   }, preview: values => preview(values.message), service(client, context) {
     const actor = { guildId: context.guildId, actorId: context.actorId }, port = client.welcomeConfiguration
     const snapshot = value => ({ values: { channel: value.channelId || 'nochannel', message: value.message }, revision: value.revision })
@@ -103,7 +103,11 @@ function assetDefinition(root, dm) {
   } }
 }
 function openMembershipSetup(client, message, root) {
-  const sections = { primary: label('Canal y mensaje', 'Channel and message'), image: label('Imagen del canal', 'Channel image'), dm: label('Mensaje por privado', 'Direct message'), dmImage: label('Imagen por privado', 'Direct message image'), assets: label('Fondos guardados del canal', 'Saved channel backgrounds'), dmAssets: label('Fondos guardados por privado', 'Saved direct message backgrounds'), ...(root === 'welcome' ? { general: label('Roles, captcha y segundo canal', 'Roles, captcha and second channel') } : {}) }
-  return openSetupChoices(client, message, root === 'welcome' ? label('Bienvenida', 'Welcome') : label('Despedida', 'Leave'), Object.entries(sections).map(([id, title]) => ({ id, title, open: (client, message) => openFormSetup(client, message, definition(root, id)) })))
+  const title = root === 'welcome' ? label('Dar la bienvenida', 'Welcome new members') : label('Despedir a miembros', 'Farewell messages')
+  const sections = { image: label('Personalizar la tarjeta del canal', 'Customize the channel card'), dm: label('Enviar mensajes por privado', 'Send direct messages'), dmImage: label('Personalizar la tarjeta por privado', 'Customize the direct message card'), assets: label('Elegir un fondo guardado del canal', 'Choose a saved channel background'), dmAssets: label('Elegir un fondo guardado por privado', 'Choose a saved direct message background'), ...(root === 'welcome' ? { general: label('Roles, captcha y segundo canal', 'Roles, captcha and second channel') } : {}) }
+  return openSetupChoices(client, message, title, [
+    { id: 'primary', title: label('Empezar: canal y mensaje', 'Start: channel and message'), description: label('Lo necesario para enviar el saludo. No necesitas copiar IDs.', 'Everything needed to send the greeting. No IDs to copy.'), open: (c, m) => openFormSetup(c, m, definition(root, 'primary')) },
+    { id: 'more', title: label('Personalizar más opciones', 'Customize more options'), description: label('Tarjetas, fondos y mensajes privados.', 'Cards, backgrounds and direct messages.'), open: (c, m) => openSetupChoices(c, m, title, Object.entries(sections).map(([id, title]) => ({ id, title, open: (c, m) => openFormSetup(c, m, definition(root, id)) }))) },
+  ], { description: root === 'welcome' ? label('Prepara un saludo automático para las personas que entren. Empieza por el canal y el mensaje; el resto es opcional.', 'Prepare an automatic greeting for new members. Start with the channel and message; everything else is optional.') : label('Prepara un aviso cuando alguien salga del servidor. Empieza por el canal y el mensaje; el resto es opcional.', 'Prepare a message when someone leaves. Start with the channel and message; everything else is optional.') })
 }
 module.exports = { openMembershipSetup, definition }

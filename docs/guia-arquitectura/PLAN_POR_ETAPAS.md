@@ -182,3 +182,7 @@ Entrada pública explícita de configuración de bienvenida y reglas de imports/
 Se extiende el plan existente con [63 comandos de setup](REMODELACION_SETUPS.md), código y menús de Discord juntos. Primera entrega local: navegación `setup` en `eadc547b0684ded2c9cca65cc685362c518ab660`, con registro vivo, permisos y sesiones acotadas. Las tareas por comando están en [tasks/todo](../../tasks/todo.md). No cierra TECH-07 ni una migración completa de los otros dominios; conserva los pendientes globales anteriores. Siguiente: setup-language.
 
 Segunda entrada de setups remodelada localmente: [setup-language](IDIOMA_SETUP.md), `f4163778677b3b893bde2308c1a328e8d24111e5`. Código y menú juntos; 21 escenarios/100 ciclos SDK/25 originales. Siguiente setup-embed; los otros dominios del plan y TECH-05 global continúan abiertos.
+
+## Continuación priorizada · facilidad de uso de setups
+
+Los 63 adaptadores de setups se desplegaron en `f4acfac` el 18/10/2026. Tras la revisión del usuario, [la mejora de uso](FACILIDAD_SETUP.md) continúa ARCH-10 con una entrada `!setup`, nombres comprensibles, navegación en el mismo mensaje, regreso y rutas básicas. No cierra ARCH-10 global ni TECH-07/08; las tareas de datos, ciclo de vida y otros dominios conservan su estado.
