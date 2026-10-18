@@ -19,7 +19,7 @@ function buildRecordsSetup(definition, records, selected, page, dirty, blocked, 
 }
 function recordModal(definition, record, locale) {
   return new ModalBuilder().setTitle(text(definition.title, locale).slice(0, 45)).addComponents(definition.inputs.map(input => {
-    const value = input.format ? input.format(record?.[input.id]) : record?.[input.id]
+    const value = input.format ? input.format(record?.[input.id], record) : record?.[input.id]
     const field = new TextInputBuilder().setCustomId(input.id).setLabel(text(input.label, locale).slice(0, 45)).setStyle(input.multiline ? TextInputStyle.Paragraph : TextInputStyle.Short)
       .setRequired(input.required !== false).setMaxLength(input.max || 2000)
     if (input.hint) field.setPlaceholder(text(input.hint, locale).slice(0, 100))
