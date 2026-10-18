@@ -32,6 +32,6 @@ Verificación local: 42 grupos de política/presentación/entrega/adaptadores, 2
 
 ## Registro de avance del bloque
 
-- Avisos al propietario y consumidor de registros: implementados y verificados localmente; consultar la evidencia de despliegue para su estado en producción.
+- Avisos al propietario y consumidor de registros: implementados, verificados y desplegados en `621366a`; [estado de producción](../platform/DESPLIEGUE-REGISTROS-OWNER-2026-10-19.md). Sin pruebas de envío artificiales en Discord.
 - Retención/consulta/historial general y otros bloques de T38: pendientes. Este incremento no archiva mensajes ni implementa LogEvent/Delivery persistidos, recuperación tras reinicios, alertas durables al gestor o reintentos persistentes. Colas y pausas se pierden al reiniciar. No se ofrece una opción de retención sin almacenamiento detrás.
 - Plan global y el caso original de error de setup: siguen pendientes según sus evidencias; no hay aceptación real del recorrido del usuario.

@@ -2,6 +2,12 @@
 
 Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTER`. El usuario entregó la planificación nueva y reanudó trabajo local el 18/10/2026; el estado del 17/10 que sigue se conserva como registro histórico.
 
+## Estado vigente · 19/10/2026
+
+Código desplegado `621366a`, imagen `release-logs-owner-20261019-621366a`: avisos privados al dueño por altas/bajas reales, sin borrar configuración al salir, y consumidor de registros con privacidad y configuración común Discord/web. 111 grupos temporales y 25 originales pasan; hashes, Gateway/heartbeat, Mongo y salud HTTPS comprobados. Temporales retirados, respaldo/reversión preservados, sin push. [Entrega y límites actuales](DESPLIEGUE-REGISTROS-OWNER-2026-10-19.md).
+
+Siguiente trabajo: historial/retención y entrega durable de T38; después seguir consumidores y dependencias abiertas del plan completo. No cerrar T38/MOD-LOGS, arquitectura global, Epic ni el caso original de acceso/guardado. Los menús remodelados no validan todos sus sistemas. GDjkhp y MilloHost disponibles, Serenetia configurado pero sin conectar en la verificación; privado apagado. Los estados siguientes son antecedentes.
+
 ## Estado vigente · despliegue del 18/10/2026
 
 Revisión posterior de facilidad de uso desplegada en `3673b478678d368ee5637e6562c3b6754b402574`, imagen `release-setup-ux-20261018-3673b47`: entrada `!setup`, navegación por el mismo mensaje, regreso protegido y rutas básicas de bienvenida/tickets/música. 58 grupos de SDK/Mongo aislado, 100 ciclos y 25 tests originales; temporales eliminados. Producción saludable, Gateway/heartbeat y HTTPS comprobados. [Despliegue vigente y reversión](DESPLIEGUE-SETUP-UX-2026-10-18.md). Sigue pendiente la validación de uso con el usuario en Discord y el plan global.

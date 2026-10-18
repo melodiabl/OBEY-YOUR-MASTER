@@ -27,19 +27,26 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "ff94f31d91f187310e1776cd794556772fdcbc10",
-    "image": "813394a62fe3d2ada32d54a4e97813cb35eb8436d7e8f2a2dc03ff42f73790b2",
+    "code": "621366a83d46d21d876300b5f6177eeb95f799b7",
+    "image": "72dd4b157fd2c33f3adc1d62a2910cfa548f47cf46edf298a79dbd557717fefa",
     "selectedPublicNode": "gdjkhp",
     "backupOrder": [
       "serenetia",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/setup-errors-deployment-20261019.json",
-    "change": "Language draft discard and scoped setup failure notices; original user access error still awaiting location/reproduction",
-    "tag": "release-setup-errors-20261019-ff94f31",
+    "evidence": "evidence/logs-owner-deployment-20261019.json",
+    "change": "Owner guild notices and privacy-aware guild logging with shared Discord/dashboard configuration; T38 remains partial",
+    "tag": "release-logs-owner-20261019-621366a",
     "status": "healthy",
-    "statusEvidence": "DESPLIEGUE-ERRORES-SETUP-2026-10-19.md"
+    "statusEvidence": "DESPLIEGUE-REGISTROS-OWNER-2026-10-19.md",
+    "connectedPublicNodes": [
+      "gdjkhp",
+      "millohost"
+    ],
+    "unconnectedConfiguredBackupNodes": [
+      "serenetia"
+    ]
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -212,5 +219,17 @@
     "originalReportedAccessFailureResolved": false,
     "remaining": "Identify user server/channel and reproduce the original generic access/save error on real data",
     "pushed": false
+  },
+  "logsAndOwnerNotices": {
+    "implementationCode": "621366a83d46d21d876300b5f6177eeb95f799b7",
+    "ownerCommit": "5e82099",
+    "logsConsumerCommit": "de2850c",
+    "report": "docs/guia-arquitectura/REGISTROS_Y_AVISOS_OWNER.md",
+    "localEvidence": "evidence/logs-owner-local-20261019.json",
+    "deploymentEvidence": "evidence/logs-owner-deployment-20261019.json",
+    "deployed": true,
+    "pushed": false,
+    "temporaryGroupsPassed": 111,
+    "remaining": "T38/MOD-LOGS persistent history, retention, delivery/outbox recovery and real Discord walkthrough; global plan and original setup incident remain open"
   }
 }

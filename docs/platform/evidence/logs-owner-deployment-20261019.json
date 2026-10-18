@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T23:33:49.361558+00:00",
+  "code": "621366a83d46d21d876300b5f6177eeb95f799b7",
+  "imageTag": "localhost/obey-your-master_bot:release-logs-owner-20261019-621366a",
+  "containers": {
+    "obey_bot": {
+      "id": "bff740147ffe15faf1e5790a2ede579a63ecba35790d63e5ad9039cdd67bbd12",
+      "image": "72dd4b157fd2c33f3adc1d62a2910cfa548f47cf46edf298a79dbd557717fefa",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "runtimeSourceHashesMatched": 22,
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "registeredGlobalSlashCommands": 20,
+  "connectedPublicNodes": [
+    "gdjkhp",
+    "millohost"
+  ],
+  "selectedPublicNode": "gdjkhp",
+  "registeredPublicNodes": [
+    "serenetia",
+    "gdjkhp",
+    "millohost"
+  ],
+  "privateEnabled": false,
+  "ownerNoticesEnabled": true,
+  "ownerRecipients": 1,
+  "ownerNoticeLocale": "es",
+  "health": {
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 100
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 100
+      }
+    }
+  },
+  "startupFailureMarkers": [],
+  "newLogCaptureFailures": 0,
+  "ownerNoticeRowsAtStartup": 0,
+  "localEvidence": "logs-owner-local-20261019.json",
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-18T23-30-40-223Z",
+    "mongoArchiveBytes": 59080218,
+    "privateSnapshotDirectory": ".runtime/deploy-logs-owner-20261019"
+  },
+  "rollback": {
+    "image": "813394a62fe3d2ada32d54a4e97813cb35eb8436d7e8f2a2dc03ff42f73790b2",
+    "imageName": "localhost/obey-your-master_bot:release-setup-errors-20261019-ff94f31",
+    "argumentsFile": ".runtime/deploy-logs-owner-20261019/rollback-arguments.json",
+    "testedDuringThisDeployment": false
+  },
+  "restartAlwaysContainers": [
+    "obey_bot",
+    "obey_images",
+    "obey_redis"
+  ],
+  "duplicateBotOnBootAvoided": true,
+  "temporaryVerifierRetained": false,
+  "testFixtureContainerRemoved": true,
+  "externalDiscordTestMessagesSent": false,
+  "productionGuildEventsArtificiallyTriggered": false,
+  "originalReportedAccessFailureResolved": false,
+  "pushed": false,
+  "limitations": [
+    "Serenetia is configured as backup but did not connect during this verification",
+    "No persistent log history, retention or delivery outbox",
+    "Real Discord event delivery and user setup incident not manually reproduced",
+    "Global architecture plan and T38 remain open"
+  ]
+}

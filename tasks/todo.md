@@ -1700,5 +1700,5 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 
 - [x] Primera entrega local de avisos de alta/baja: mensajes renovados es/en, preferencias del dueño, deduplicación, fallos observables y cierre. Retirada la eliminación automática de stores al salir. 16 grupos aislados y 25 originales pasan. [Alcance](../docs/guia-arquitectura/REGISTROS_Y_AVISOS_OWNER.md).
 - [x] Remodelar el consumidor real de registros: destinos, permisos, privacidad, cobertura y entregas; configuración canónica Discord/web con revisión y sin escritor alternativo.
-- [ ] Verificar y desplegar las entregas terminadas; no emitir DMs de prueba ni simular entradas/salidas reales.
+- [x] Verificar y desplegar `621366a`: 111 grupos temporales, 25 originales, 22 hashes, Gateway/heartbeat y salud local/pública 200. No se emitieron DMs de prueba ni se simularon entradas/salidas. [Evidencia](../docs/platform/evidence/logs-owner-deployment-20261019.json).
 - [ ] Continuar retención/consulta de T38 y los demás bloques abiertos del maestro; completar los setups no equivale a completar el plan.

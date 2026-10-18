@@ -2,6 +2,14 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Estado vigente · 19 de octubre de 2026
+
+Desplegado `621366a`: avisos privados owner renovados y consumidor real de registros, con configuración compartida en `/setup`, `/config logs` y web, autorización/revisión y privacidad. Se retiró el borrado de stores al salir del servidor. 111 grupos temporales y 25 originales pasan; 22 hashes, Gateway/heartbeat, servicios saludables y salud local/pública 200 comprobados. [Despliegue y límites](DESPLIEGUE-REGISTROS-OWNER-2026-10-19.md). Scripts, fixture Mongo y contexto temporal retirados. Sin push.
+
+La fuente abarca 32 capacidades y 140 tareas base. Los 63 menús de setups ya remodelados y este incremento no cierran ese alcance. T38 sigue parcial: próximo trabajo, historial/retención y entrega durable. Continúan pendientes consumidores restantes, arquitectura transversal, proveedor Epic, audio/recorrido real y el error original de setup sin ubicación. GDjkhp y MilloHost conectados; Serenetia configurado sin conexión confirmada en esta revisión. Privado apagado.
+
+Las secciones siguientes conservan checkpoints históricos; sus revisiones y conteos describen el momento indicado, no el runtime vigente.
+
 ## Reanudación local con la guía nueva · 18 de octubre de 2026
 
 Último incremento local `f4163778677b3b893bde2308c1a328e8d24111e5`: [idioma remodelado](../guia-arquitectura/IDIOMA_SETUP.md). Un mensaje con idioma actual/selección, Guardar/Usar inglés/Cerrar. Escritor del mismo campo language con cola/CAS, permisos compartidos, conflicto conservando selección y resultado desconocido sin falso éxito. 21 escenarios Mongo/SDK, 100 ciclos sin listeners restantes, 25 originales y checks de bienvenida/sintaxis pasan. Temporales retirados. Dos de 63 entradas locales, 61 pendientes; siguiente setup-embed. Sin publicación/despliegue.
