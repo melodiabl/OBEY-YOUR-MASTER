@@ -10,3 +10,7 @@ Comprobación de solo lectura del 18 de octubre de 2026, solicitada porque el bo
 La desconexión está explicada por el apagado del servidor y la falta de recuperación automática de esos contenedores. Estos datos no identifican quién solicitó el apagado ni su motivo. Los cambios de setups son locales y no se han desplegado.
 
 No se iniciaron/recrearon contenedores de producción ni se modificaron políticas o unidades para este diagnóstico. Una recuperación posterior debe usar los contenedores/versiones existentes de bot y sus dependencias, y corregir su arranque de forma específica. No debe usar un arranque indiscriminado de todos los contenedores: el Lavalink privado debe conservarse apagado.
+
+## Resolución posterior autorizada
+
+Tras la petición «desplegar», se publicó la imagen de setups `release-setups-20261018-f4acfac` y se recuperaron únicamente bot, Redis e imágenes. Los tres quedaron saludables con política `always`, incluida por el servicio de arranque de Podman habilitado. Gateway, MongoDB y los tres nodos públicos conectaron; salud HTTPS pública 200. Lavalink privado continúa apagado. Se conservaron backup e imagen anterior. [Despliegue y reversión](DESPLIEGUE-SETUPS-2026-10-18.md); [evidencia](evidence/setup-deployment-20261018.json). El diagnóstico anterior describe el estado previo a esta intervención.

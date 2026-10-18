@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18T17:43:06.747617+00:00",
+  "code": "f4acfac5226022d68e458ef09cc24e216df69292",
+  "imageTag": "release-setups-20261018-f4acfac",
+  "containers": {
+    "obey_bot": {
+      "id": "dfc821eef510c1b4735cd79f735dc24f011f47127d8ab3493d955188048e683a",
+      "image": "f9cd56364741bab8f14d3b701b09b13b67d892fe7282c6e31a4c4efbf2fa79fe",
+      "status": "running",
+      "health": "healthy",
+      "restartPolicy": "always",
+      "restartCount": 0
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "status": "running",
+      "health": "healthy",
+      "restartPolicy": "always",
+      "restartCount": 0
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "status": "running",
+      "health": "healthy",
+      "restartPolicy": "always",
+      "restartCount": 0
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "status": "created",
+      "health": "",
+      "restartPolicy": "no",
+      "restartCount": 0
+    }
+  },
+  "setupFilesVerifiedBySHA256": 63,
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "globallyRegisteredSlashCommands": 19,
+  "health": {
+    "bot": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 99
+      }
+    },
+    "images": {
+      "http": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "publicDashboard": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 495
+      },
+      "userAgent": "Mozilla/5.0",
+      "note": "Cloudflare returns 403/1010 for the default Python urllib user agent; browser-style request succeeds"
+    },
+    "publicHomepage": {
+      "http": 200
+    }
+  },
+  "music": {
+    "selectedPublicNode": "gdjkhp",
+    "backupOrder": [
+      "serenetia",
+      "millohost"
+    ],
+    "connectedPublicNodes": [
+      "gdjkhp",
+      "serenetia",
+      "millohost"
+    ],
+    "privateEnabled": false
+  },
+  "automaticStartup": {
+    "service": "podman-restart.service",
+    "enabled": true,
+    "matchingContainers": [
+      "obey_redis",
+      "obey_images",
+      "obey_bot"
+    ],
+    "hostRebootTested": false
+  },
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-18T17-37-46-511Z",
+    "mongoArchiveBytes": 59072888,
+    "privateRuntimeSnapshots": ".runtime/deploy-setups-20261018/"
+  },
+  "rollback": {
+    "previousImage": "234ca907361e49e870ff0f7efb8b1c76e3119daab76d1803bf592866a7f24c8b",
+    "previousImageTag": "release-panel-backoff-20261017",
+    "retainedContainers": [
+      "obey_bot_previous_setups_20261018",
+      "obey_images_previous_setups_20261018",
+      "obey_redis_previous_setups_20261018"
+    ],
+    "retainedContainersStopped": true
+  },
+  "checks": {
+    "originalTestsPassed": 25,
+    "welcomeTypecheck": true,
+    "welcomeDependencyRules": true,
+    "buildSucceeded": true,
+    "npmCiProductionAudit": {
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "dependenciesChangedByDeployment": false
+    }
+  },
+  "limitations": [
+    "No interactive setup/menu walkthrough in Discord performed during this deployment",
+    "No listening or track-transition/failover test performed during this deployment",
+    "No host reboot performed to test automatic startup",
+    "Epic provider integration remains pending"
+  ],
+  "pushed": false
+}

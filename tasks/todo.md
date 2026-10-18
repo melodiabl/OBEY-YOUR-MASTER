@@ -1653,9 +1653,10 @@ Cada casilla hereda la aceptación/verificación del mapa y exige conciliar sus 
 - [x] Idioma actual y selección pendiente en un mensaje; guardar/restablecer/cerrar con es/en, opciones de catálogos cargados y aliases efectivos conservados.
 - [x] Escritor canónico del mismo campo con cola/CAS, confirmación Mongo, conflicto conservando selección, caché legacy y cierre antes del flush comprobados.
 - [x] 21 escenarios temporales, 100 ciclos SDK, 25 originales y comprobaciones de sintaxis/tipos/imports apropiadas. Commit `f4163778677b3b893bde2308c1a328e8d24111e5`. [Límites y reversión](../docs/guia-arquitectura/IDIOMA_SETUP.md).
-- [ ] Recorrido en Discord real y despliegue: pendientes, separados de esta verificación local.
+- [x] Despliegue con Gateway y salud confirmados el 18/10/2026.
+- [ ] Recorrido interactivo del menú en Discord real, separado de la verificación local.
 
-Avance local: 63/63 archivos de comandos remodelados y verificados localmente. [Música/voz](../docs/guia-arquitectura/MUSICA_VOZ_SETUP.md) unifica paneles y conserva adopción del mensaje antiguo; radio separada del destino de peticiones. [Evidencia acumulada](../docs/platform/evidence/setup-remodeling-local.json). Sin push ni despliegue. Continúan pendientes el recorrido Gateway/Discord, la integración del verificador Epic y las tareas globales ya abiertas del plan; completar estos menús no cierra toda la arquitectura.
+Avance local: 63/63 archivos de comandos remodelados y verificados localmente. [Música/voz](../docs/guia-arquitectura/MUSICA_VOZ_SETUP.md) unifica paneles y conserva adopción del mensaje antiguo; radio separada del destino de peticiones. [Evidencia acumulada](../docs/platform/evidence/setup-remodeling-local.json). Desplegado el 18/10/2026 con Gateway conectado; sin push. Continúan pendientes el recorrido interactivo de Discord, la integración del verificador Epic y las tareas globales ya abiertas del plan; completar estos menús no cierra toda la arquitectura.
 
 ### Cierre local del inventario de setups
 
@@ -1663,4 +1664,5 @@ Avance local: 63/63 archivos de comandos remodelados y verificados localmente. [
 - [x] Pruebas locales de formularios, escrituras, recursos, conflictos, permisos y cierre; scripts temporales retirados al terminar. Solo 3 archivos/25 tests originales permanecen en el repositorio.
 - [ ] Recorrido real de Discord y audio Lavalink de los cambios nuevos.
 - [ ] Integración/autenticación del proveedor Epic antes de habilitar su panel.
-- [ ] Publicación remota y despliegue de esta rama local, con verificación y reversión de la versión correspondiente.
+- [x] Despliegue de `f4acfac` con 63 hashes comprobados en el contenedor, Gateway/heartbeat, MongoDB, tres nodos públicos, servicios healthy y salud HTTPS 200; imagen anterior y backup conservados. [Evidencia](../docs/platform/evidence/setup-deployment-20261018.json).
+- [ ] Publicación remota de esta rama local (sin push durante el despliegue).

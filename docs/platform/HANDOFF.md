@@ -2,6 +2,12 @@
 
 Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTER`. El usuario entregó la planificación nueva y reanudó trabajo local el 18/10/2026; el estado del 17/10 que sigue se conserva como registro histórico.
 
+## Estado vigente · despliegue del 18/10/2026
+
+Los 63 comandos de setups están remodelados y desplegados en `f4acfac5226022d68e458ef09cc24e216df69292`, imagen `release-setups-20261018-f4acfac`. Bot, imágenes y Redis están saludables y con arranque automático configurado; Gateway/heartbeat, MongoDB y salud HTTPS pública comprobados. GDjkhp, Serenetia y MilloHost conectaron; el Lavalink privado permanece apagado. Backup e imagen anterior conservados. [Evidencia y reversión](DESPLIEGUE-SETUPS-2026-10-18.md).
+
+Los 25 tests originales, tipos y reglas de dependencias pasaron; no se añadieron verificadores permanentes. Pendientes: recorrido interactivo de Discord/audio, proveedor Epic y el plan global restante. No se hizo push. Los incrementos que siguen son registros históricos anteriores a este despliegue.
+
 ## Reanudación · 18/10/2026
 
 Última entrega local `f4163778677b3b893bde2308c1a328e8d24111e5`: [setup-language remodelado](../guia-arquitectura/IDIOMA_SETUP.md), con guardado confirmado, CAS y menú de un mensaje. 21 escenarios Mongo/SDK, 100 ciclos y 25 originales pasan; fixtures y script temporal retirados. Dos entradas de 63 remodeladas, 61 pendientes; siguiente setup-embed. Sin publicación o despliegue.
