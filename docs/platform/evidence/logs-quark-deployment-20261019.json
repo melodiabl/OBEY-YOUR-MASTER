@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-19T00:44:57.480408+00:00",
+  "code": "64ee0407a4226aa4923ba9b4f78fed77c52d39d1",
+  "imageTag": "localhost/obey-your-master_bot:release-logs-quark-20261019-64ee040",
+  "containers": {
+    "obey_bot": {
+      "id": "ea3a8cd6822677c35872d92493f48db896d2bdef3bfd1a8f9ccf0f0754028a92",
+      "image": "3ac2bba0b3de1cc5b9f63e9c7f03c6c832531921e39b27040cff4c75d4733b5a",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "runtimeSourceHashesMatched": 24,
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "registeredGlobalSlashCommands": 20,
+  "selectedPublicNode": "gdjkhp",
+  "registeredPublicNodes": [
+    "serenetia",
+    "gdjkhp",
+    "millohost"
+  ],
+  "privateEnabled": false,
+  "connectedPublicNodes": [
+    "gdjkhp",
+    "serenetia",
+    "millohost"
+  ],
+  "health": {
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 92
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 92
+      }
+    }
+  },
+  "startupFailureMarkers": [],
+  "logCaptureFailuresDuringVerification": 0,
+  "ownerNoticeRowsAtStartup": 0,
+  "localEvidence": "logs-quark-local-20261019.json",
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-19T00-37-18-788Z",
+    "mongoArchiveBytes": 59079380,
+    "privateSnapshotDirectory": ".runtime/deploy-logs-quark-20261019"
+  },
+  "rollback": {
+    "image": "72dd4b157fd2c33f3adc1d62a2910cfa548f47cf46edf298a79dbd557717fefa",
+    "imageName": "localhost/obey-your-master_bot:release-logs-owner-20261019-621366a",
+    "argumentsFile": ".runtime/deploy-logs-quark-20261019/rollback-arguments.json",
+    "testedDuringThisDeployment": false
+  },
+  "restartAlwaysContainers": [
+    "obey_bot",
+    "obey_images",
+    "obey_redis"
+  ],
+  "duplicateBotOnBootAvoided": true,
+  "temporaryVerifierRetained": false,
+  "temporaryBuildContextRemoved": true,
+  "unpublishedCandidateImagesRemoved": [
+    "localhost/obey-your-master_bot:release-logs-quark-20261019-fd09e33",
+    "localhost/obey-your-master_bot:release-logs-quark-20261019-c6c0a94"
+  ],
+  "externalDiscordTestMessagesSent": false,
+  "productionGuildEventsArtificiallyTriggered": false,
+  "originalReportedAccessFailureResolved": false,
+  "pushed": false,
+  "remaining": [
+    "Actual Discord client walkthrough and event delivery",
+    "Link confirmed OBEY moderation cases and reason history",
+    "Persistent history, retention, staff filters/export and durable delivery recovery",
+    "Original setup access incident and remaining global plan"
+  ]
+}

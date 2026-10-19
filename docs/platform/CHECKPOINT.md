@@ -4,6 +4,8 @@ Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementat
 
 ## Estado vigente · 19 de octubre de 2026
 
+Última corrección desplegada `64ee040`: [referencia Quark aplicada a presentación/contexto y diagnóstico](DESPLIEGUE-LOGS-QUARK-2026-10-19.md), con protección de motivos en destinos abiertos. 49 grupos SDK, seis visuales y 20 de audiencia, más 25 originales. 24 hashes, Gateway/heartbeat, 20 comandos, tres públicos y salud local/pública 200. Historial/retención, casos enlazables, explorador y entrega durable siguen pendientes. Scripts y candidatos temporales retirados; sin push. Las referencias a `621366a` que siguen describen la entrega técnica anterior.
+
 Desplegado `621366a`: avisos privados owner renovados y consumidor real de registros, con configuración compartida en `/setup`, `/config logs` y web, autorización/revisión y privacidad. Se retiró el borrado de stores al salir del servidor. 111 grupos temporales y 25 originales pasan; 22 hashes, Gateway/heartbeat, servicios saludables y salud local/pública 200 comprobados. [Despliegue y límites](DESPLIEGUE-REGISTROS-OWNER-2026-10-19.md). Scripts, fixture Mongo y contexto temporal retirados. Sin push.
 
 La fuente abarca 32 capacidades y 140 tareas base. Los 63 menús de setups ya remodelados y este incremento no cierran ese alcance. T38 sigue parcial: próximo trabajo, historial/retención y entrega durable. Continúan pendientes consumidores restantes, arquitectura transversal, proveedor Epic, audio/recorrido real y el error original de setup sin ubicación. GDjkhp y MilloHost conectados; Serenetia configurado sin conexión confirmada en esta revisión. Privado apagado.

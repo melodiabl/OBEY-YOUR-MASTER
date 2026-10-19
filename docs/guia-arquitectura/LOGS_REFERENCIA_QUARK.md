@@ -25,6 +25,8 @@ El ID mostrado como «Auditoría de Discord» es el de esa entrada. No se fabric
 
 ## Evidencia y límites
 
+Esta corrección está [desplegada en `64ee040`](../platform/DESPLIEGUE-LOGS-QUARK-2026-10-19.md), con 24 hashes, Gateway/heartbeat, 20 comandos y salud local/pública comprobados. El recorrido manual en Discord sigue pendiente.
+
 [Evidencia local](../platform/evidence/logs-quark-local-20261019.json): 49 grupos temporales del incremento de presentación cubren es/en, privacidad, límites, enlaces, fechas, auditoría real del SDK, fallback y deduplicación, diagnóstico y su botón con collector/interacción reales. Otros seis grupos comprueban una representación HTML del payload en Chromium, escritorio/móvil y cero errores JS. La revisión posterior añade 20 grupos de regresión de audiencia, entrega real del servicio con transporte aislado y diagnóstico es/en. Los 25 tests originales, tipos y reglas de dependencias pasan. Auditoría npm de producción: cero vulnerabilidades altas/críticas y 36 moderadas heredadas; dependencias y lockfile no cambian.
 
 Las imágenes de la evidencia son representaciones locales rotuladas con datos ficticios, no capturas del cliente Discord ni prueba de entrega real. El avatar dibujado en esa representación evita peticiones externas; el payload verificado sí contiene el avatar autorizado. No se inició Gateway ni se enviaron DMs/mensajes de prueba.

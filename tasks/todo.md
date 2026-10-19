@@ -1710,5 +1710,5 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Usar entradas de auditoría propias para vetos/aislamientos cuando se dispone de capacidad; fallback desconocido y deduplicación acotada, sin atribución por proximidad.
 - [x] Añadir diagnóstico privado al mismo setup: destinos, acceso, envío, intents y límites de captura; no guarda ni publica pruebas. 49 grupos SDK, seis visuales y 25 originales pasan. [Alcance](../docs/guia-arquitectura/LOGS_REFERENCIA_QUARK.md).
 - [x] Reproducir y corregir la visibilidad de motivos de auditoría en destinos abiertos; exigir audiencia staff y avisar en el diagnóstico. 20 grupos adicionales de regresión pasan.
-- [ ] Desplegar y comprobar esta corrección de presentación/diagnóstico.
+- [x] Desplegar `64ee040` y comprobar 24 hashes, Gateway/heartbeat, 20 comandos, tres nodos públicos y salud local/pública 200. [Evidencia](../docs/platform/evidence/logs-quark-deployment-20261019.json). Mensajes reales en el cliente Discord todavía pendientes.
 - [ ] Completar casos enlazables, historial/retención, explorador/filtros/exportación autorizada y recuperación durable; el contrato Quark completo sigue pendiente.

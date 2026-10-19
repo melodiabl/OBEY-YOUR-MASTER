@@ -4,6 +4,8 @@ Los IDs expresan dependencias técnicas, no fechas prometidas ni permiso de desp
 
 Checkpoint 19/10/2026: los 63 menús de setups ya remodelados no completan los consumidores de las 32 capacidades/140 tareas base de la fuente. [Registros y avisos owner](REGISTROS_Y_AVISOS_OWNER.md) implementados y desplegados en `621366a`; ajustes comunes Discord/web y entrega con privacidad verificados. T38/MOD-LOGS siguen parciales: historial/retención y recuperación durable son la siguiente entrega; continúan pendientes los demás consumidores y tareas transversales. [Runtime y evidencia](../platform/DESPLIEGUE-REGISTROS-OWNER-2026-10-19.md).
 
+Corrección posterior `64ee040`: [referencia Quark](LOGS_REFERENCIA_QUARK.md) aplicada a mensajes/contexto y diagnóstico, con audiencia staff para detalles de moderación. La referencia funcional completa sigue abierta: casos enlazables, historial/retención, filtros/exportación y entrega durable. [Runtime vigente](../platform/DESPLIEGUE-LOGS-QUARK-2026-10-19.md).
+
 ## ARCH 01 Fijar la base de trabajo
 
 - [x] Base local/remota conciliada el 18/10/2026

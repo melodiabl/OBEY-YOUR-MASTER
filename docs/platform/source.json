@@ -27,26 +27,25 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "621366a83d46d21d876300b5f6177eeb95f799b7",
-    "image": "72dd4b157fd2c33f3adc1d62a2910cfa548f47cf46edf298a79dbd557717fefa",
+    "code": "64ee0407a4226aa4923ba9b4f78fed77c52d39d1",
+    "image": "3ac2bba0b3de1cc5b9f63e9c7f03c6c832531921e39b27040cff4c75d4733b5a",
     "selectedPublicNode": "gdjkhp",
     "backupOrder": [
       "serenetia",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/logs-owner-deployment-20261019.json",
-    "change": "Owner guild notices and privacy-aware guild logging with shared Discord/dashboard configuration; T38 remains partial",
-    "tag": "release-logs-owner-20261019-621366a",
+    "evidence": "evidence/logs-quark-deployment-20261019.json",
+    "change": "Quark-reference log presentation/context and private diagnostics; staff audience required for moderation details; full history/retention remains pending",
+    "tag": "release-logs-quark-20261019-64ee040",
     "status": "healthy",
-    "statusEvidence": "DESPLIEGUE-REGISTROS-OWNER-2026-10-19.md",
+    "statusEvidence": "DESPLIEGUE-LOGS-QUARK-2026-10-19.md",
     "connectedPublicNodes": [
       "gdjkhp",
+      "serenetia",
       "millohost"
     ],
-    "unconnectedConfiguredBackupNodes": [
-      "serenetia"
-    ]
+    "unconnectedConfiguredBackupNodes": []
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -230,6 +229,25 @@
     "deployed": true,
     "pushed": false,
     "temporaryGroupsPassed": 111,
-    "remaining": "T38/MOD-LOGS persistent history, retention, delivery/outbox recovery and real Discord walkthrough; global plan and original setup incident remain open"
+    "remaining": "T38/MOD-LOGS persistent history, retention, delivery/outbox recovery and real Discord walkthrough; global plan and original setup incident remain open",
+    "latestImplementationCode": "64ee0407a4226aa4923ba9b4f78fed77c52d39d1",
+    "latestDeploymentEvidence": "evidence/logs-quark-deployment-20261019.json",
+    "quarkReference": {
+      "implementationCode": "64ee0407a4226aa4923ba9b4f78fed77c52d39d1",
+      "presentationCommit": "fd09e33",
+      "auditAudienceCommit": "c6c0a94",
+      "report": "docs/guia-arquitectura/LOGS_REFERENCIA_QUARK.md",
+      "localEvidence": "evidence/logs-quark-local-20261019.json",
+      "deploymentEvidence": "evidence/logs-quark-deployment-20261019.json",
+      "deployed": true,
+      "pushed": false,
+      "scope": "Compact native embeds, safe context links, direct audit attribution and private diagnostics; full log contract not complete",
+      "remaining": [
+        "Actual Discord client walkthrough and event delivery",
+        "Link confirmed OBEY moderation cases and reason history",
+        "Persistent history, retention, staff filters/export and durable delivery recovery",
+        "Original setup access incident and remaining global plan"
+      ]
+    }
   }
 }
