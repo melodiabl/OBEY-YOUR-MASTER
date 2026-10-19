@@ -1,0 +1,231 @@
+{
+  "fixtureOnly": true,
+  "liveDiscordScreenshot": false,
+  "payloads": [
+    {
+      "embeds": [
+        {
+          "color": 15774258,
+          "title": "🗑 Mensaje eliminado",
+          "footer": {
+            "text": "OBEY · servidor de ejemplo · Mensajes"
+          },
+          "timestamp": "2026-10-19T10:00:00.000Z",
+          "author": {
+            "name": "Luna · ejemplo",
+            "icon_url": "https://cdn.discordapp.com/avatars/100000000000000002/fixture.png"
+          },
+          "description": "Ensayo del viernes a las 19:00. ¡Nos vemos en el canal de música!",
+          "fields": [
+            {
+              "name": "Autor del mensaje",
+              "value": "<@100000000000000002>\n`100000000000000002`",
+              "inline": true
+            },
+            {
+              "name": "Canal",
+              "value": "<#100000000000000003>",
+              "inline": true
+            },
+            {
+              "name": "ID",
+              "value": "100000000000000004",
+              "inline": false
+            },
+            {
+              "name": "Mensaje enviado",
+              "value": "<t:1792403880:f>",
+              "inline": false
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "type": 1,
+          "components": [
+            {
+              "type": 2,
+              "emoji": {
+                "name": "📢"
+              },
+              "style": 5,
+              "label": "Abrir canal",
+              "url": "https://discord.com/channels/100000000000000001/100000000000000003"
+            }
+          ]
+        }
+      ],
+      "allowedMentions": {
+        "parse": [],
+        "repliedUser": false
+      }
+    },
+    {
+      "embeds": [
+        {
+          "color": 15774258,
+          "title": "📝 Mensaje editado",
+          "footer": {
+            "text": "OBEY · servidor de ejemplo · Mensajes"
+          },
+          "timestamp": "2026-10-19T10:00:00.000Z",
+          "author": {
+            "name": "Luna · ejemplo",
+            "icon_url": "https://cdn.discordapp.com/avatars/100000000000000002/fixture.png"
+          },
+          "fields": [
+            {
+              "name": "Contenido anterior",
+              "value": "Ensayo a las 18:00.",
+              "inline": false
+            },
+            {
+              "name": "Contenido nuevo",
+              "value": "Ensayo a las 19:00.",
+              "inline": false
+            },
+            {
+              "name": "Autor del mensaje",
+              "value": "<@100000000000000002>\n`100000000000000002`",
+              "inline": true
+            },
+            {
+              "name": "Canal",
+              "value": "<#100000000000000003>",
+              "inline": true
+            },
+            {
+              "name": "ID",
+              "value": "100000000000000004",
+              "inline": false
+            },
+            {
+              "name": "Mensaje enviado",
+              "value": "<t:1792403880:f>",
+              "inline": false
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "type": 1,
+          "components": [
+            {
+              "type": 2,
+              "emoji": {
+                "name": "📢"
+              },
+              "style": 5,
+              "label": "Ver mensaje",
+              "url": "https://discord.com/channels/100000000000000001/100000000000000003/100000000000000004"
+            }
+          ]
+        }
+      ],
+      "allowedMentions": {
+        "parse": [],
+        "repliedUser": false
+      }
+    },
+    {
+      "embeds": [
+        {
+          "color": 15774258,
+          "title": "📝 Aislamiento actualizado",
+          "footer": {
+            "text": "OBEY · servidor de ejemplo · Moderación"
+          },
+          "timestamp": "2026-10-19T10:00:00.000Z",
+          "author": {
+            "name": "Luna · ejemplo",
+            "icon_url": "https://cdn.discordapp.com/avatars/100000000000000002/fixture.png"
+          },
+          "fields": [
+            {
+              "name": "Usuario",
+              "value": "<@100000000000000002>\n`100000000000000002`",
+              "inline": true
+            },
+            {
+              "name": "Responsable",
+              "value": "<@100000000000000005>\n`100000000000000005`",
+              "inline": true
+            },
+            {
+              "name": "Motivo",
+              "value": "Interrupciones repetidas durante el evento.",
+              "inline": false
+            },
+            {
+              "name": "Fin del aislamiento",
+              "value": "<t:1792405800:f> · <t:1792405800:R>",
+              "inline": true
+            },
+            {
+              "name": "Auditoría de Discord",
+              "value": "`100000000000000006`",
+              "inline": false
+            }
+          ]
+        }
+      ],
+      "components": [],
+      "allowedMentions": {
+        "parse": [],
+        "repliedUser": false
+      }
+    },
+    {
+      "embeds": [
+        {
+          "color": 15774258,
+          "title": "🗑 Mensaje eliminado",
+          "footer": {
+            "text": "OBEY · servidor de ejemplo · Mensajes · Datos parciales"
+          },
+          "timestamp": "2026-10-19T10:00:00.000Z",
+          "description": "Contenido no disponible: OBEY no capturó este mensaje.",
+          "fields": [
+            {
+              "name": "Canal",
+              "value": "<#100000000000000003>",
+              "inline": true
+            },
+            {
+              "name": "ID",
+              "value": "100000000000000004",
+              "inline": false
+            },
+            {
+              "name": "Mensaje enviado",
+              "value": "<t:1792403880:f>",
+              "inline": false
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "type": 1,
+          "components": [
+            {
+              "type": 2,
+              "emoji": {
+                "name": "📢"
+              },
+              "style": 5,
+              "label": "Abrir canal",
+              "url": "https://discord.com/channels/100000000000000001/100000000000000003"
+            }
+          ]
+        }
+      ],
+      "allowedMentions": {
+        "parse": [],
+        "repliedUser": false
+      }
+    }
+  ]
+}

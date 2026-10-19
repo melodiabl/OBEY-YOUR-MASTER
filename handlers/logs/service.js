@@ -44,7 +44,7 @@ function createLogService(client, { write = row => console.info(JSON.stringify(r
       if (!bot || !target.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks])) return pause(record, destination.channelId, 'missing_permissions')
       const reveal = !sourceIds.length || sources.every(channel => mayRevealSource(channel, target, guild) && (!channel || channel.permissionsFor(bot)?.has(F.ViewChannel)))
       const locale = normalizeLocale(localeFor(client, guild.id)) === 'en' ? 'en' : 'es'
-      const payload = buildLogPayload(record, { guild, locale, reveal, content: includeMessageContent(current, source, target, guild) })
+      const payload = buildLogPayload(record, { guild, locale, reveal, sourceAvailable: Boolean(source), content: includeMessageContent(current, source, target, guild) })
       const sent = await target.send({ ...payload, nonce: record.requestId.replaceAll('-', '').slice(0, 25), enforceNonce: true })
       return result(record, 'sent', undefined, sent?.id)
     } catch (error) {

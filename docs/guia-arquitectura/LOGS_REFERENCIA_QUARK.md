@@ -1,0 +1,30 @@
+# Registros: referencia Quark y alcance real
+
+El usuario señaló que la primera entrega técnica no aplicaba la experiencia de las guías. Se contrastaron el contrato original, la profundización y ambas capturas del dossier; la ficha técnica resumida no sustituye esas fuentes.
+
+Fuentes del paquete vigente:
+
+- [Contrato de registros y referencia Quark](/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion/03_CONTRATOS/logs.md).
+- [Guía detallada](/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion/25_ESPECIFICACION_PROFUNDIZADA/modulos/logs.md), [experiencia](/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion/09_EXPERIENCIAS/logs.md) y [pantallas](/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion/11_INTERACCIONES_Y_PORTAL/pantallas/logs.md).
+- [Mensaje eliminado](/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion/01_INVESTIGACION/imagenes/quark-delete.png) y [aislamiento](/home/OBEY_Documentacion_actualizada_2026-10-17/OBEY_Documentacion/01_INVESTIGACION/imagenes/quark-timeout.png) del dossier. Son referencias promocionales guardadas en el paquete, no capturas de OBEY.
+- [Referencia oficial Quark](https://quark.bot/) y [contrato oficial de auditoría de Discord](https://docs.discord.com/developers/resources/audit-log), consultados al revisar la adaptación. Una entrada contiene su propio ID, objetivo, responsable y cambios; sus campos no están garantizados en todos los eventos.
+
+## Entrega de presentación, contexto y diagnóstico
+
+Los embeds ahora tienen avatar pequeño/nombre del usuario, título breve con material del registro, contenido capturado o antes/después, autor del mensaje/canal/ID y fechas. Moderación presenta usuario y responsable juntos, motivo y fin del aislamiento. Un fin nulo explícito se presenta como aislamiento retirado; una fecha relativa usa la etiqueta estable «Fin del aislamiento», sin afirmar que un vencimiento pasado ocurrirá en el futuro. No hay mascota grande, fondos ni botones decorativos. Las menciones no notifican y los avatares solo aceptan HTTPS del CDN de Discord.
+
+«Ver mensaje» enlaza una edición real. «Ver contexto» usa un mensaje anterior conocido de la caché del mismo canal; si no existe, se ofrece «Abrir canal». No se apunta a un mensaje eliminado como si siguiera disponible. Fuente eliminada, audiencia no demostrada o guild distinta retiran los enlaces; los detalles y avatares también se omiten cuando no corresponde revelarlos. El contenido no capturado se declara no disponible; el contenido capturado pero desactivado se declara omitido. No se busca ni recupera texto inexistente.
+
+Con permiso Ver registro de auditoría y el intent de moderación, vetos/retiradas y cambios de aislamiento usan sus propias entradas `GuildAuditLogsEntry`, como ya ocurría con expulsiones. El objetivo, responsable, motivo, fecha y cambio provienen de esa entrada. El stream Gateway equivalente no vuelve a emitir esos eventos en ese modo. Sin esa capacidad se conservan observaciones Gateway disponibles, con responsable desconocido. No se usa el último audit log ni coincidencia débil por hora. IDs repetidos de la misma entrada se deduplican en memoria, acotados a 2000 durante cinco minutos y retirados al cerrar/salir; no es deduplicación durable. Los cambios de permisos en curso pueden producir cobertura parcial, no una garantía de captura exhaustiva.
+
+El ID mostrado como «Auditoría de Discord» es el de esa entrada. No se fabrica un «Caso #» ni se convierte un requestId de transporte en un caso de moderación. Los casos existentes de `ModerationSchema` siguen en su sistema; unirlos y enlazarlos exige evidencia de una operación común, sin correlacionar objetivo/hora como si acreditaran identidad.
+
+«Ver diagnóstico», dentro de la configuración común de registros, revisa la selección actual sin guardarla ni publicar pruebas al canal. Informa por categoría de desactivación, destino ausente/inválido, acceso y permisos de envío; explica cobertura de auditoría, miembros, mensajes, voz y contenido. La respuesta es privada, con reautorización del gestor antes y después del trabajo en el flujo compartido. Un permiso correcto se presenta como «entrega sin probar». No crea comandos ni un segundo escritor.
+
+## Evidencia y límites
+
+[Evidencia local](../platform/evidence/logs-quark-local-20261019.json): 49 grupos temporales cubren presentación es/en, privacidad, límites, enlaces, fechas, auditoría real del SDK, fallback y deduplicación, diagnóstico y su botón con collector/interacción reales. Otros seis grupos comprueban una representación HTML del payload en Chromium, escritorio/móvil y cero errores JS. Los 25 tests originales, tipos y reglas de dependencias pasan. Auditoría npm de producción: cero vulnerabilidades altas/críticas y 36 moderadas heredadas; dependencias y lockfile no cambian.
+
+Las imágenes de la evidencia son representaciones locales rotuladas con datos ficticios, no capturas del cliente Discord ni prueba de entrega real. El avatar dibujado en esa representación evita peticiones externas; el payload verificado sí contiene el avatar autorizado. No se inició Gateway ni se enviaron DMs/mensajes de prueba.
+
+Este incremento corrige una parte de la experiencia Quark; no acredita el contrato completo. Siguen pendientes casos enlazables de OBEY, historial persistente y de motivos, filtros/explorador staff, exportación autorizada, retención, recuperación durable y prueba de envío explícita al destino. El diagnóstico actual verifica permisos, no una entrega. T38 y LOGS-A/B/C/D siguen abiertos según estas diferencias. La separación persistente entre evento y entrega es el siguiente trabajo de datos, no una promesa de la cola actual.

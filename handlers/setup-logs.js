@@ -19,6 +19,8 @@ function logSetupDefinition() {
     hint: label('Desactivado por defecto. El texto solo se reenvía si se confirma la visibilidad del origen; no se archiva en la base de datos.', 'Off by default. Text is forwarded only when source visibility is confirmed; it is not archived in the database.'),
   })
   return { title: label('Registros del servidor', 'Server logs'), actorPermission: F.ManageGuild, fields, basicFields: ['defaultChannel', 'messages', 'members', 'moderation', 'voice', 'server'],
+    previewLabel: label('Ver diagnóstico', 'View diagnostics'),
+    previewAction: (client, context, values) => require('./logs/diagnostics').diagnoseLogs(client, context, values),
     service: (client, context) => require('./logs/configuration').createLogConfiguration(client, context, fields),
     description: label('Empieza por el canal general y guarda. Las categorías pueden heredar ese canal, tener otro o estar desactivadas. En Más opciones están las exclusiones y el texto de mensajes.', 'Start with the default channel and save. Categories can inherit it, use another channel or be disabled. More options contains exclusions and message text.') }
 }

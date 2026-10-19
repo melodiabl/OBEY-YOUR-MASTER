@@ -2,6 +2,8 @@
 
 Continuación de T38/MOD-LOGS y de la remodelación del código anterior. Los setups ya remodelados no acreditaban la sustitución de sus consumidores. El plan completo sigue abierto.
 
+Corrección posterior solicitada por el usuario: [presentación, contexto y diagnóstico según Quark](LOGS_REFERENCIA_QUARK.md). La primera entrega descrita abajo no aplicaba íntegramente las capturas y el contrato original. No confundir permisos/entregas técnicos con aceptación de toda la experiencia.
+
 ## Ciclo de servidores y mensajes privados
 
 `handlers/owner-notifications.js` es la única composición de avisos privados de entrada/salida. Se retiraron los dos listeners antiguos de `extraevents.js`. Sus mensajes mezclaban idiomas, usaban datos de propietario inexistentes después de salir y ocultaban fallos de entrega. El listener de salida también borraba configuración, economía y otros stores: esa eliminación automática se retiró. Salir del servidor no constituye una orden de borrar sus ajustes.

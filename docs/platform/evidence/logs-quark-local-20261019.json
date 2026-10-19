@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-19T00:36:30.159157+00:00",
+  "baseCode": "621366a83d46d21d876300b5f6177eeb95f799b7",
+  "guidesReport": "../../guia-arquitectura/LOGS_REFERENCIA_QUARK.md",
+  "sdkBehaviorGroupsPassed": 49,
+  "visualRepresentationGroupsPassed": 6,
+  "originalTestsPassed": 25,
+  "originalTestFiles": 3,
+  "welcomeTypecheck": "passed",
+  "dependencyRules": {
+    "result": "passed",
+    "modules": 1077,
+    "dependencies": 3287
+  },
+  "npmProductionAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 36,
+    "high": 0,
+    "critical": 0,
+    "total": 36
+  },
+  "dependenciesChanged": false,
+  "sourceHashes": {
+    "handlers/logs/diagnostics.js": "58b4b18ab19d39cc67c9482b2a1dbe809a37888c0eef972e0dd6bc0c617d81ea",
+    "handlers/logs/events.js": "ac3f11210ee52ae7581d774e1778839f25ddf0b57d8fedbc1bab3663e5c2cf93",
+    "handlers/logs/presentation.js": "d14b3004aadbf4221b66d5f9c3e21e4613d68f4191d51885fe50b4c293438ac5",
+    "handlers/logs/service.js": "9eec59a467ab5a504c70fa786d215438537318c0bc86efcdbf29cb4ee8477411",
+    "handlers/logs/snapshots.js": "1d0a91b8c2b7403f090a9b42ab32cc456940cf411e7dfd570c8f621b9e8d8f33",
+    "handlers/setup-form.js": "4c86057a23c11ef6d3b1249ba1fee2f33d0cfba1ad13574264a5631b5b32bf7b",
+    "handlers/setup-logs.js": "e3935ce57b137038dc7c08785b8d31507c5327164bede02dffd8b52b4e6c7fab",
+    "locales/en.json": "49ca5840577d353f42e0990ab46652d689222f75149a18fee078eb2010f3bdba",
+    "locales/es.json": "94f20314a84a94264455afb804501bfa81cf9797d92bcce3aaf6aa8717cba673"
+  },
+  "temporaryVerifierHashes": {
+    "verify-logs-quark-20261019.cjs": "c31dd88a28eff576e51058a2b2b597e7fa02feeedbe7d107c38879d39f6a2035",
+    "preview-logs-quark-20261019.cjs": "a5684faa77e2702937cc9adbfc29b82c9a09e80a1da27a4b64d13e28489b8035"
+  },
+  "screenshots": [
+    "screenshots/logs-quark-desktop-fixture-20261019.png",
+    "screenshots/logs-quark-mobile-fixture-20261019.png"
+  ],
+  "payloads": "logs-quark-payloads-20261019.json",
+  "visualEvidence": "Local HTML representation of SDK payloads with labelled fictitious data; not an actual Discord client screenshot",
+  "actualSdkAuditEntry": true,
+  "actualSdkDiagnosticInteraction": true,
+  "gatewayOpenedByTests": false,
+  "externalDiscordMessagesSentByTests": false,
+  "productionDataChangedByTests": false,
+  "temporaryVerifierRetained": false,
+  "remaining": [
+    "Real Discord client walkthrough and event delivery",
+    "Link actual OBEY moderation cases using confirmed operation identity",
+    "Persistent log history, reason revisions, retention, staff filters/export",
+    "Durable delivery/recovery and explicit send test"
+  ]
+}

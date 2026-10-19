@@ -1662,7 +1662,42 @@
       "details": "Details",
       "color": "Color",
       "permissions": "Permissions",
-      "emoji": "Emoji"
+      "emoji": "Emoji",
+      "messageAuthor": "Message author",
+      "previousTimeoutEnd": "Previous end",
+      "timeoutEnd": "Timeout end",
+      "auditEntry": "Discord audit entry",
+      "messageCreated": "Message sent"
+    },
+    "openChannel": "Open channel",
+    "viewContext": "View context",
+    "viewMessage": "View message",
+    "contentUnavailable": "Content unavailable: OBEY did not capture this message.",
+    "unknownUser": "User unavailable",
+    "timeoutRemoved": "Timeout removed",
+    "noTimeout": "No timeout",
+    "diagnostics": {
+      "title": "Log diagnostics",
+      "description": "Checks the current selection without saving it or posting to the channel. Valid permissions do not confirm an actual delivery.",
+      "disabled": "Disabled",
+      "unset": "No default channel; this category is not delivered.",
+      "missing": "Destination missing or unavailable.",
+      "denied": "You cannot access this destination.",
+      "botPermissions": "The bot needs View Channel, Send Messages and Embed Links.",
+      "ready": "Send permissions available; delivery not tested.",
+      "coverage": "Coverage and privacy",
+      "auditReady": "Audit coverage enabled: bans, kicks and timeouts use their own audit entry.",
+      "auditLimited": "Limited audit coverage: View Audit Log and the moderation intent are required. Some actors and kicks may be unavailable.",
+      "membersReady": "Members: intent enabled.",
+      "membersLimited": "Members: required intent missing.",
+      "messagesReady": "Messages: intent enabled; content depends on capture and permissions.",
+      "messagesLimited": "Messages: required intent missing.",
+      "voiceReady": "Voice: intent enabled.",
+      "voiceLimited": "Voice: required intent missing.",
+      "contentOptIn": "Text requested: only captured text is forwarded when its audience is preserved. It is not archived.",
+      "contentOff": "Message text disabled.",
+      "contentLimited": "Text requested, but Message Content intent is missing. Never-captured text cannot be recovered.",
+      "invalid": "The saved destination is invalid; review the selection."
     }
   }
 }

@@ -1662,7 +1662,42 @@
       "details": "Detalles",
       "color": "Color",
       "permissions": "Permisos",
-      "emoji": "Emoji"
+      "emoji": "Emoji",
+      "messageAuthor": "Autor del mensaje",
+      "previousTimeoutEnd": "Fin anterior",
+      "timeoutEnd": "Fin del aislamiento",
+      "auditEntry": "Auditoría de Discord",
+      "messageCreated": "Mensaje enviado"
+    },
+    "openChannel": "Abrir canal",
+    "viewContext": "Ver contexto",
+    "viewMessage": "Ver mensaje",
+    "contentUnavailable": "Contenido no disponible: OBEY no capturó este mensaje.",
+    "unknownUser": "Usuario no disponible",
+    "timeoutRemoved": "Aislamiento retirado",
+    "noTimeout": "Sin aislamiento",
+    "diagnostics": {
+      "title": "Diagnóstico de registros",
+      "description": "Comprueba la selección actual sin guardarla ni enviar mensajes al canal. Un permiso correcto no confirma una entrega real.",
+      "disabled": "Desactivado",
+      "unset": "Sin canal general; esta categoría no se envía.",
+      "missing": "El destino no existe o no está disponible.",
+      "denied": "No tienes acceso al destino.",
+      "botPermissions": "Falta al bot ver el canal, enviar mensajes o insertar enlaces.",
+      "ready": "Permisos de envío disponibles; entrega sin probar.",
+      "coverage": "Cobertura y privacidad",
+      "auditReady": "Auditoría habilitada: vetos, expulsiones y aislamientos usan su propia entrada.",
+      "auditLimited": "Auditoría limitada: hace falta Ver registro de auditoría y el intent de moderación. Algunos responsables y expulsiones pueden no estar disponibles.",
+      "membersReady": "Miembros: intent habilitado.",
+      "membersLimited": "Miembros: falta el intent requerido.",
+      "messagesReady": "Mensajes: intent habilitado; el contenido depende de captura y permisos.",
+      "messagesLimited": "Mensajes: falta el intent requerido.",
+      "voiceReady": "Voz: intent habilitado.",
+      "voiceLimited": "Voz: falta el intent requerido.",
+      "contentOptIn": "Texto solicitado: solo se reenvía lo capturado si se conserva la audiencia. No se archiva.",
+      "contentOff": "Texto de mensajes desactivado.",
+      "contentLimited": "Texto solicitado, pero falta el intent de contenido. No se puede recuperar texto nunca capturado.",
+      "invalid": "El destino guardado no es válido; revisa la selección."
     }
   }
 }

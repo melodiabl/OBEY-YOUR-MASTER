@@ -1702,3 +1702,12 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Remodelar el consumidor real de registros: destinos, permisos, privacidad, cobertura y entregas; configuración canónica Discord/web con revisión y sin escritor alternativo.
 - [x] Verificar y desplegar `621366a`: 111 grupos temporales, 25 originales, 22 hashes, Gateway/heartbeat y salud local/pública 200. No se emitieron DMs de prueba ni se simularon entradas/salidas. [Evidencia](../docs/platform/evidence/logs-owner-deployment-20261019.json).
 - [ ] Continuar retención/consulta de T38 y los demás bloques abiertos del maestro; completar los setups no equivale a completar el plan.
+
+### Corrección a partir de las guías de Quark
+
+- [x] Contrastar contrato, profundización, experiencia/pantallas y capturas originales; registrar lo omitido por la primera entrega técnica.
+- [x] Implementar mensajes compactos con usuario, motivo, fechas, antes/después y contexto disponible; contenido no observado explícito, sin casos inventados ni filtraciones.
+- [x] Usar entradas de auditoría propias para vetos/aislamientos cuando se dispone de capacidad; fallback desconocido y deduplicación acotada, sin atribución por proximidad.
+- [x] Añadir diagnóstico privado al mismo setup: destinos, acceso, envío, intents y límites de captura; no guarda ni publica pruebas. 49 grupos SDK, seis visuales y 25 originales pasan. [Alcance](../docs/guia-arquitectura/LOGS_REFERENCIA_QUARK.md).
+- [ ] Desplegar y comprobar esta corrección de presentación/diagnóstico.
+- [ ] Completar casos enlazables, historial/retención, explorador/filtros/exportación autorizada y recuperación durable; el contrato Quark completo sigue pendiente.
