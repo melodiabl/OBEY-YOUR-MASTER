@@ -11,7 +11,9 @@ function logSetupDefinition() {
     hint: label('Elige un canal para recibir todas las categorías que usan el canal general. Puedes guardar solo este ajuste.', 'Choose a channel for all categories using the default. You can save just this setting.'),
   }) }
   for (const category of CATEGORIES) fields[category] = field('logChannels.' + category, 'channel', null, z.union([snowflake, z.literal(null), z.literal('no')]), ...names[category], {
-    inherit: null, clear: 'no', hint: label('Elige otro canal para esta categoría, usa el canal general o déjala desactivada.', 'Choose a different channel for this category, use the default, or disable it.'),
+    inherit: null, clear: 'no', hint: category === 'moderation'
+      ? label('Elige un canal restringido a personal con Ver registro de auditoría. En un canal abierto se omiten los detalles. También puedes desactivar la categoría.', 'Choose a channel restricted to staff with View Audit Log. Details are omitted in an open channel. You can also disable this category.')
+      : label('Elige otro canal para esta categoría, usa el canal general o déjala desactivada.', 'Choose a different channel for this category, use the default, or disable it.'),
     format: (value, locale) => value == null || value === 'inherit' ? t(locale, 'setup.form.inherited') : value === 'no' ? t(locale, 'setup.form.disabled') : `<#${value}>`,
   })
   fields.excludedChannelIds = field('logger.excludedChannelIds', 'channels', [], ids.max(100), 'Canales excluidos', 'Excluded channels', { channelTypes: [0, 2, 4, 5, 13, 15, 16], hint: label('Se omiten los eventos originados en estos canales. No cambia los avisos privados al dueño.', 'Events originating in these channels are omitted. Bot owner notices are unaffected.') })

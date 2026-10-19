@@ -29,10 +29,11 @@
     "handlers/logs/service.js": "07276579e603eda6644b51efa420c89a84bdbeee30a7ca34dc0dda10ed25f628",
     "handlers/logs/snapshots.js": "1d0a91b8c2b7403f090a9b42ab32cc456940cf411e7dfd570c8f621b9e8d8f33",
     "handlers/setup-form.js": "4c86057a23c11ef6d3b1249ba1fee2f33d0cfba1ad13574264a5631b5b32bf7b",
-    "handlers/setup-logs.js": "e3935ce57b137038dc7c08785b8d31507c5327164bede02dffd8b52b4e6c7fab",
+    "handlers/setup-logs.js": "430e8490537d24c395fccef9b8c01b1684f2de972c694a9df0dbbb3b3f8de708",
     "locales/en.json": "ea411e8afc8bdb3394934f21730ce54e240af1d266cacc54b24fc35b7c073b06",
     "locales/es.json": "359f84ea6b2e40741103a21b314a49ed242a0ffbc344cc2c29b9a21248ff2251",
-    "handlers/logs/policy.js": "ed051d15c1fcf97e1adbaca9a326a2bb37e675718c33b0d65573fd7ee7fac68e"
+    "handlers/logs/policy.js": "ed051d15c1fcf97e1adbaca9a326a2bb37e675718c33b0d65573fd7ee7fac68e",
+    "dashboard/views/pages/guild.ejs": "0947bc6177dd2c0a6188439d774509291d33c7939509096c61e45d016a476a9f"
   },
   "temporaryVerifierHashes": {
     "verify-logs-quark-20261019.cjs": "c31dd88a28eff576e51058a2b2b597e7fa02feeedbe7d107c38879d39f6a2035",

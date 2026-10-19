@@ -371,7 +371,7 @@
             </select>
           </div>
           <div class="form-row">
-          <% [['messages','Mensajes','Ediciones y eliminaciones; texto omitido por defecto.'],['members','Miembros','Entradas, salidas, apodos y roles.'],['moderation','Moderación','Vetos, expulsiones y aislamiento observables.'],['voice','Voz','Entradas, salidas y cambios de canal.'],['server','Servidor','Canales, roles, emojis, webhooks e invitaciones.']].forEach(([key,title,hint]) => { %>
+          <% [['messages','Mensajes','Ediciones y eliminaciones; texto omitido por defecto.'],['members','Miembros','Entradas, salidas, apodos y roles.'],['moderation','Moderación','Vetos, expulsiones y aislamiento. El destino debe estar restringido a personal con acceso a auditoría; en canales abiertos se omiten los detalles.'],['voice','Voz','Entradas, salidas y cambios de canal.'],['server','Servidor','Canales, roles, emojis, webhooks e invitaciones.']].forEach(([key,title,hint]) => { %>
             <div class="form-group">
               <label class="form-label" for="logs-<%= key %>"><%= title %></label>
               <span class="form-help" id="logs-help-<%= key %>"><%= hint %></span>
