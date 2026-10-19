@@ -1,7 +1,7 @@
 const { randomUUID, createHash } = require('node:crypto')
 const { PermissionFlagsBits: F } = require('discord.js')
 const { localeFor, normalizeLocale } = require('../i18n')
-const { resolveLogDestination, mayRevealSource, includeMessageContent, CATEGORIES } = require('./policy')
+const { resolveLogDestination, mayRevealSource, mayRevealAudit, includeMessageContent, CATEGORIES } = require('./policy')
 const { buildLogPayload } = require('./presentation')
 
 function createLogService(client, { write = row => console.info(JSON.stringify(row)), now = Date.now } = {}) {
@@ -42,7 +42,8 @@ function createLogService(client, { write = row => console.info(JSON.stringify(r
         Array.isArray(current.logger?.excludedChannelIds) && sourceIds.some(id => current.logger.excludedChannelIds.includes(id))) return result(record, 'skipped', 'configuration_changed')
       const bot = guild.members.me
       if (!bot || !target.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks])) return pause(record, destination.channelId, 'missing_permissions')
-      const reveal = !sourceIds.length || sources.every(channel => mayRevealSource(channel, target, guild) && (!channel || channel.permissionsFor(bot)?.has(F.ViewChannel)))
+      const reveal = (record.category !== 'moderation' || mayRevealAudit(target, guild)) &&
+        (!sourceIds.length || sources.every(channel => mayRevealSource(channel, target, guild) && (!channel || channel.permissionsFor(bot)?.has(F.ViewChannel))))
       const locale = normalizeLocale(localeFor(client, guild.id)) === 'en' ? 'en' : 'es'
       const payload = buildLogPayload(record, { guild, locale, reveal, sourceAvailable: Boolean(source), content: includeMessageContent(current, source, target, guild) })
       const sent = await target.send({ ...payload, nonce: record.requestId.replaceAll('-', '').slice(0, 25), enforceNonce: true })

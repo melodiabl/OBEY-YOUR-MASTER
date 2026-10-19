@@ -1697,7 +1697,9 @@
       "contentOptIn": "Text requested: only captured text is forwarded when its audience is preserved. It is not archived.",
       "contentOff": "Message text disabled.",
       "contentLimited": "Text requested, but Message Content intent is missing. Never-captured text cannot be recovered.",
-      "invalid": "The saved destination is invalid; review the selection."
-    }
+      "invalid": "The saved destination is invalid; review the selection.",
+      "auditAudience": "Moderation details will be omitted: restrict the channel to roles or members with View Audit Log."
+    },
+    "auditRestricted": "Moderation details omitted: the destination must be restricted to staff with audit log access."
   }
 }

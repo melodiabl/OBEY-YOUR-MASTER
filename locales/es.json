@@ -1697,7 +1697,9 @@
       "contentOptIn": "Texto solicitado: solo se reenvía lo capturado si se conserva la audiencia. No se archiva.",
       "contentOff": "Texto de mensajes desactivado.",
       "contentLimited": "Texto solicitado, pero falta el intent de contenido. No se puede recuperar texto nunca capturado.",
-      "invalid": "El destino guardado no es válido; revisa la selección."
-    }
+      "invalid": "El destino guardado no es válido; revisa la selección.",
+      "auditAudience": "Los detalles de moderación se omitirán: restringe el canal a roles o miembros con Ver registro de auditoría."
+    },
+    "auditRestricted": "Detalles de moderación omitidos: el destino debe estar restringido a personal con acceso al registro de auditoría."
   }
 }

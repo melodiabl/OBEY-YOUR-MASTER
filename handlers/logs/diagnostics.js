@@ -1,7 +1,7 @@
 const { EmbedBuilder, PermissionFlagsBits: F, GatewayIntentBits: I } = require('discord.js')
 const { requireSetupAccess } = require('../setup-access')
 const { t, localeFor } = require('../i18n')
-const { CATEGORIES, resolveLogDestination } = require('./policy')
+const { CATEGORIES, resolveLogDestination, mayRevealAudit } = require('./policy')
 const { registry } = require('../assets/registry')
 
 async function diagnoseLogs(client, context, values) {
@@ -20,6 +20,7 @@ async function diagnoseLogs(client, context, values) {
         : !channel.permissionsFor(member)?.has(F.ViewChannel) ? copy('denied')
           : !channel.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks]) ? copy('botPermissions')
             : `<#${channel.id}> · ${copy('ready')}`
+      if (category === 'moderation' && channel?.guildId === guild.id && channel.permissionsFor(member)?.has(F.ViewChannel) && !mayRevealAudit(channel, guild)) status += '\n' + copy('auditAudience')
     }
     embed.addFields({ name: t(locale, 'logs.categories.' + category), value: status, inline: true })
   }

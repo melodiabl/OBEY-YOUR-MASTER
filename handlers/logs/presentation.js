@@ -30,7 +30,7 @@ function buildLogPayload(record, { guild, locale, reveal, content, sourceAvailab
     .setTitle(`${registry.markup(icon)} ${title}`.slice(0, 256))
     .setFooter(asFooter({ text: `${String(guild.name || '').slice(0, 80)} · ${copy('categories.' + record.category)}${record.partial ? ' · ' + copy('partial') : ''}` }))
     .setTimestamp(record.occurredAt || record.observedAt)
-  if (!reveal) return { embeds: [embed.setDescription(copy('restricted'))], components: [], allowedMentions: { parse: [], repliedUser: false } }
+  if (!reveal) return { embeds: [embed.setDescription(copy(record.category === 'moderation' ? 'auditRestricted' : 'restricted'))], components: [], allowedMentions: { parse: [], repliedUser: false } }
   if (validId(record.subject?.id)) embed.setAuthor(asAuthor({ name: record.subject.name || copy('unknownUser'), iconURL: avatarURL(record.subject.avatarURL) }))
   const fields = []
   const messageText = value => typeof value === 'string' ? escapeMarkdown(value).slice(0, 1000) || copy('emptyMessage') : copy('contentUnavailable')
