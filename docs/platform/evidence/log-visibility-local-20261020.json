@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-20",
+  "problem": "Role-based access was rejected when @everyone lacked ViewChannel",
+  "fix": "Symbolic destination-audience inclusion across base permissions, role and member overwrites; no member-list enumeration",
+  "visibilityGroupsPassed": 380,
+  "randomProfiles": 350,
+  "uniqueProfiles": 350,
+  "sdkPermissionAssignments": 16800,
+  "readOnlyGuildSnapshotsReplayed": 2,
+  "voiceChannelsPerSnapshot": 5,
+  "newlyAcceptedPerSnapshot": 3,
+  "stillRestrictedPerSnapshot": 2,
+  "exactReportedSourceConfirmed": false,
+  "originalTestsPassed": 25,
+  "typecheckWelcome": "passed",
+  "dependenciesWelcome": "passed",
+  "dependencyGraph": {
+    "modules": 1078,
+    "dependencies": 3289
+  },
+  "productionAudit": {
+    "high": 0,
+    "critical": 0,
+    "moderate": 36,
+    "dependenciesChanged": false
+  },
+  "externalDiscordTestMessagesSent": false,
+  "productionDataChangedByVerification": false,
+  "temporaryVerifierSha256": "57423f2ed69b37abf8e7642892b67df173e74ded76cebd05ec017b260ad804d1",
+  "temporaryVerifierRetained": false,
+  "sourceHashes": {
+    "handlers/logs/audience.js": "88e7cc8df7afbd9dc13d419b34f38dc449d2d8a2b2efc22135bc5233b04b4e6c",
+    "handlers/logs/policy.js": "20b9fbd3980cfd04b016c2c4ce7cab701371e368b7eb0dfbcdbc2574dd5a7a11"
+  },
+  "limits": [
+    "Exact 22:03 source absent from redacted event; no claim of exact event replay",
+    "No artificial live Discord messages or voice events",
+    "Threads and unknown/deleted sources remain conservative",
+    "Staff audit reasons retain separate authorization",
+    "History/retention/durable delivery and full plan remain open"
+  ]
+}

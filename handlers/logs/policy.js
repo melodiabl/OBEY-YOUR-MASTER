@@ -1,4 +1,5 @@
 const { PermissionFlagsBits: F } = require('discord.js')
+const { audienceFits } = require('./audience')
 const CATEGORIES = Object.freeze(['server', 'members', 'moderation', 'messages', 'voice'])
 const validId = value => typeof value === 'string' && /^\d{17,20}$/.test(value)
 const read = (map, key) => map instanceof Map ? map.get(key) : map?.[key]
@@ -27,14 +28,12 @@ const adminOnly = (destination, guild) => restrictedTo(destination, guild, F.Adm
 // Audit reasons are staff data even when there is no source channel to compare.
 const mayRevealAudit = (destination, guild) => restrictedTo(destination, guild, F.ViewAuditLog)
 
-// Conservative proof: same source, an administrator-only destination, or a source
-// visible to everyone without any per-role/member ViewChannel denial.
+// Preserve the source audience, including access through roles and members.
 function mayRevealSource(source, destination, guild) {
   if (destination.guildId !== guild.id || source && source.guildId !== guild.id) return false
   if (source?.id === destination.id || adminOnly(destination, guild)) return true
-  if (!source || source.isThread?.() || !source.permissionsFor(guild.roles.everyone)?.has(F.ViewChannel)) return false
-  const overwrites = source.permissionOverwrites?.cache
-  return Boolean(overwrites && ![...overwrites.values()].some(overwrite => overwrite.deny?.has(F.ViewChannel, false)))
+  if (!source || source.isThread?.()) return false
+  return audienceFits(source, destination, guild)
 }
 
 function includeMessageContent(settings, source, destination, guild) {

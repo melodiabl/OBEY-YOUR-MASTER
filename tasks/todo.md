@@ -1712,3 +1712,9 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Reproducir y corregir la visibilidad de motivos de auditoría en destinos abiertos; exigir audiencia staff y avisar en el diagnóstico. 20 grupos adicionales de regresión pasan.
 - [x] Desplegar `64ee040` y comprobar 24 hashes, Gateway/heartbeat, 20 comandos, tres nodos públicos y salud local/pública 200. [Evidencia](../docs/platform/evidence/logs-quark-deployment-20261019.json). Mensajes reales en el cliente Discord todavía pendientes.
 - [ ] Completar casos enlazables, historial/retención, explorador/filtros/exportación autorizada y recuperación durable; el contrato Quark completo sigue pendiente.
+
+### Visibilidad de logs de voz · 20/10/2026
+
+- [x] Reproducir el rechazo de acceso por roles y comparar audiencias, incluidas excepciones personales, sin exponer canales privados. 380 grupos/16.800 asignaciones SDK y dos capturas de solo lectura. [Alcance](../docs/guia-arquitectura/VISIBILIDAD_REGISTROS.md).
+- [ ] Desplegar y comprobar la corrección de audiencia; conservar respaldo y reversión.
+- [ ] Confirmar el canal de origen del aviso de las 22:03; no cerrar el caso exacto sin ese dato.
