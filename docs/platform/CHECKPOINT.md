@@ -2,6 +2,12 @@
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
+## Estado vigente · 20/10/2026
+
+Desplegado `0be39f3`: corrección de falsos detalles omitidos en logs de voz por acceso mediante roles. Comparación de audiencias con excepciones personales, conservando privacidad y auditoría staff. 380 grupos/16.800 asignaciones SDK, 25 originales y 25 hashes comprobados. General, indicado por el usuario, tiene audiencia compatible; observar la siguiente salida real. Bot/imágenes/Redis saludables, Gateway/heartbeat y salud local/pública 200. GDjkhp sigue seleccionado, sin conectar y REST 403; Serenetia/MilloHost disponibles como respaldos, privado apagado. Sin audio real de prueba ni cambio de prioridades. Backup/reversión conservados, temporales retirados, sin push. [Entrega vigente](DESPLIEGUE-VISIBILIDAD-LOGS-2026-10-20.md). Historial/retención, entrega durable, caso original de setup y resto del maestro siguen abiertos.
+
+Las entradas siguientes conservan verificaciones históricas.
+
 ## Estado vigente · 19 de octubre de 2026
 
 Última corrección desplegada `64ee040`: [referencia Quark aplicada a presentación/contexto y diagnóstico](DESPLIEGUE-LOGS-QUARK-2026-10-19.md), con protección de motivos en destinos abiertos. 49 grupos SDK, seis visuales y 20 de audiencia, más 25 originales. 24 hashes, Gateway/heartbeat, 20 comandos, tres públicos y salud local/pública 200. Historial/retención, casos enlazables, explorador y entrega durable siguen pendientes. Scripts y candidatos temporales retirados; sin push. Las referencias a `621366a` que siguen describen la entrega técnica anterior.

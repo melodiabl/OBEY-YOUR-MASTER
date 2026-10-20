@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-20T02:22:53.396702+00:00",
+  "code": "0be39f31008519de4cda3c46e41d08c664a794c2",
+  "imageTag": "localhost/obey-your-master_bot:release-log-visibility-20261020-0be39f3",
+  "containers": {
+    "obey_bot": {
+      "id": "1e384c987f87ca065e7cd3ce9f7a51d4c26bcfa05e85a012aaf21e83a9ca3d08",
+      "image": "e806ccb03c04dd41e4741d315b73d56ecc3ee8cebfaedef4102de98b6020a635",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "runtimeSourceHashesMatched": 25,
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "registeredGlobalSlashCommands": 20,
+  "selectedPublicNode": "gdjkhp",
+  "registeredPublicNodes": [
+    "serenetia",
+    "gdjkhp",
+    "millohost"
+  ],
+  "privateEnabled": false,
+  "connectedPublicNodes": [
+    "serenetia",
+    "millohost"
+  ],
+  "health": {
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 49
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 49
+      }
+    }
+  },
+  "startupFailureMarkers": [],
+  "logCaptureFailuresDuringVerification": 0,
+  "ownerNoticeRowsAtStartup": 0,
+  "restartAlwaysContainers": [
+    "obey_bot",
+    "obey_images",
+    "obey_redis"
+  ],
+  "reportedSourceCheck": {
+    "reportedChannel": "general 1",
+    "currentChannelLabel": "General",
+    "freshRestChannelRead": true,
+    "currentAudienceCompatible": true,
+    "historicalEventReplayed": false,
+    "externalDiscordMessagesSent": false
+  },
+  "verificationPassed": true,
+  "configuredPublicNodes": [
+    "serenetia",
+    "gdjkhp",
+    "millohost",
+    "nazha",
+    "trinium"
+  ],
+  "unconnectedConfiguredBackupNodes": [],
+  "selectedNodeConnected": false,
+  "selectedNodeRestProbe": {
+    "http": 403,
+    "audioTested": false
+  },
+  "nodeSelectionChanged": false,
+  "verificationScope": "Log policy release and healthy runtime; connected public backups, selected provider REST 403 recorded separately",
+  "localEvidence": "log-visibility-local-20261020.json",
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-20T02-19-16-993Z",
+    "mongoArchiveBytes": 59217007,
+    "privateSnapshotDirectory": ".runtime/deploy-log-visibility-20261020"
+  },
+  "rollback": {
+    "image": "3ac2bba0b3de1cc5b9f63e9c7f03c6c832531921e39b27040cff4c75d4733b5a",
+    "imageName": "localhost/obey-your-master_bot:release-logs-quark-20261019-64ee040",
+    "argumentsFile": ".runtime/deploy-log-visibility-20261020/rollback-arguments.json",
+    "testedDuringThisDeployment": false
+  },
+  "temporaryVerifierRetained": false,
+  "temporaryBuildContextRemoved": true,
+  "privateGuildSnapshotsRemoved": true,
+  "externalDiscordTestMessagesSent": false,
+  "productionGuildEventsArtificiallyTriggered": false,
+  "pushed": false,
+  "remaining": [
+    "Observe actual next General voice departure in Discord; historical 22:03 event not replayed",
+    "Selected public node GDjkhp REST returns 403; backups connected, no audio test or priorities changed",
+    "History, retention, linked cases, staff explorer/export and durable delivery",
+    "Original setup access incident and remaining global plan"
+  ]
+}

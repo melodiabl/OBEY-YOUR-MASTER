@@ -27,25 +27,26 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "64ee0407a4226aa4923ba9b4f78fed77c52d39d1",
-    "image": "3ac2bba0b3de1cc5b9f63e9c7f03c6c832531921e39b27040cff4c75d4733b5a",
+    "code": "0be39f31008519de4cda3c46e41d08c664a794c2",
+    "image": "e806ccb03c04dd41e4741d315b73d56ecc3ee8cebfaedef4102de98b6020a635",
     "selectedPublicNode": "gdjkhp",
     "backupOrder": [
       "serenetia",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/logs-quark-deployment-20261019.json",
-    "change": "Quark-reference log presentation/context and private diagnostics; staff audience required for moderation details; full history/retention remains pending",
-    "tag": "release-logs-quark-20261019-64ee040",
-    "status": "healthy",
-    "statusEvidence": "DESPLIEGUE-LOGS-QUARK-2026-10-19.md",
+    "evidence": "evidence/log-visibility-deployment-20261020.json",
+    "change": "Fix false redaction for equivalent role/member channel audiences; private sources remain protected",
+    "tag": "release-log-visibility-20261020-0be39f3",
+    "status": "healthy_with_public_primary_unavailable",
+    "statusEvidence": "DESPLIEGUE-VISIBILIDAD-LOGS-2026-10-20.md",
     "connectedPublicNodes": [
-      "gdjkhp",
       "serenetia",
       "millohost"
     ],
-    "unconnectedConfiguredBackupNodes": []
+    "unconnectedConfiguredBackupNodes": [],
+    "selectedNodeConnected": false,
+    "selectedNodeRestHttp": 403
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",

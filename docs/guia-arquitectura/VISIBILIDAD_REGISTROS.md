@@ -8,6 +8,6 @@ Se aplica el [orden oficial de permisos de Discord](https://docs.discord.com/dev
 
 Verificación temporal: 380 grupos, 350 perfiles distintos y 16.800 asignaciones contrastadas con `permissionsFor` del SDK; servicio real con transporte aislado, canales privados y movimientos mixtos. Dos capturas de solo lectura del servidor afectado reproducen cinco canales de voz: tres compatibles y dos privados que continúan restringidos. Los 25 tests originales, tipos y reglas de dependencias pasan. Sin dependencias nuevas; auditoría: cero high/critical y 36 moderate preexistentes.
 
-El aviso de las 22:03 no incluye el canal de origen; esta entrega corrige el fallo demostrado, sin afirmar haber identificado ese evento exacto. No se enviaron mensajes ni provocaron eventos de prueba en Discord. El verificador y las capturas privadas temporales se retiran después de conservar evidencia agregada. Historial, retención, casos enlazables y entrega durable permanecen pendientes.
+El usuario identificó «general 1» como origen. Una lectura REST fresca del canal actualmente llamado General confirma audiencia compatible con el destino de logs. El evento histórico de las 22:03 no se reprodujo; queda observar la siguiente salida real. No se enviaron mensajes ni provocaron eventos de prueba en Discord. El verificador y las capturas privadas temporales se retiran después de conservar evidencia agregada. Historial, retención, casos enlazables y entrega durable permanecen pendientes.
 
 [Evidencia local](../platform/evidence/log-visibility-local-20261020.json).

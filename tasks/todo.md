@@ -1716,5 +1716,7 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 ### Visibilidad de logs de voz · 20/10/2026
 
 - [x] Reproducir el rechazo de acceso por roles y comparar audiencias, incluidas excepciones personales, sin exponer canales privados. 380 grupos/16.800 asignaciones SDK y dos capturas de solo lectura. [Alcance](../docs/guia-arquitectura/VISIBILIDAD_REGISTROS.md).
-- [ ] Desplegar y comprobar la corrección de audiencia; conservar respaldo y reversión.
-- [ ] Confirmar el canal de origen del aviso de las 22:03; no cerrar el caso exacto sin ese dato.
+- [x] Desplegar `0be39f3`: 25 hashes, Gateway/heartbeat, salud local/pública 200 y respaldo/reversión conservados. [Evidencia](../docs/platform/evidence/log-visibility-deployment-20261020.json).
+- [x] El usuario identifica general 1; lectura fresca de General y permisos compatibles comprobados.
+- [ ] Observar la siguiente salida real en Discord; evento histórico de las 22:03 no reproducido.
+- [ ] Revisar disponibilidad de GDjkhp (REST 403, sin conectar); respaldos Serenetia/MilloHost conectados, sin cambios de prioridad ni prueba auditiva.

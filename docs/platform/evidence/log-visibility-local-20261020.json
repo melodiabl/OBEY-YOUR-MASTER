@@ -39,5 +39,15 @@
     "Threads and unknown/deleted sources remain conservative",
     "Staff audit reasons retain separate authorization",
     "History/retention/durable delivery and full plan remain open"
-  ]
+  ],
+  "reportedSourceProvidedByUser": true,
+  "currentReportedSourceCheck": {
+    "reportedChannel": "general 1",
+    "currentChannelLabel": "General",
+    "freshRestChannelRead": true,
+    "currentAudienceCompatible": true,
+    "historicalEventReplayed": false,
+    "externalDiscordMessagesSent": false
+  },
+  "exactReportedSourceConfirmedMeaning": "Historical 22:03 event is not replayed; user identifies general 1, current General channel verified"
 }

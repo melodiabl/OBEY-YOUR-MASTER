@@ -2,6 +2,12 @@
 
 Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTER`. El usuario entregó la planificación nueva y reanudó trabajo local el 18/10/2026; el estado del 17/10 que sigue se conserva como registro histórico.
 
+## Estado vigente · 20/10/2026
+
+Desplegado `0be39f3`: corrección de falsos detalles omitidos en logs de voz por acceso mediante roles. Comparación de audiencias con excepciones personales, conservando privacidad y auditoría staff. 380 grupos/16.800 asignaciones SDK, 25 originales y 25 hashes comprobados. General, indicado por el usuario, tiene audiencia compatible; observar la siguiente salida real. Bot/imágenes/Redis saludables, Gateway/heartbeat y salud local/pública 200. GDjkhp sigue seleccionado, sin conectar y REST 403; Serenetia/MilloHost disponibles como respaldos, privado apagado. Sin audio real de prueba ni cambio de prioridades. Backup/reversión conservados, temporales retirados, sin push. [Entrega vigente](DESPLIEGUE-VISIBILIDAD-LOGS-2026-10-20.md). Historial/retención, entrega durable, caso original de setup y resto del maestro siguen abiertos.
+
+Las entradas siguientes conservan verificaciones históricas.
+
 ## Estado vigente · 19/10/2026
 
 Último runtime `64ee040`, imagen `release-logs-quark-20261019-64ee040`: [presentación/contexto y diagnóstico según Quark](DESPLIEGUE-LOGS-QUARK-2026-10-19.md). Se corrigió además la divulgación potencial de motivos en canales abiertos, reproducida solo en una prueba aislada. Permisos staff para detalles, diagnóstico privado, auditoría propia y fallback desconocido. 75 grupos acumulados del incremento y 25 originales; 24 hashes y salud operativa comprobados. GDjkhp, Serenetia y MilloHost disponibles, privado apagado. No se provocaron eventos ni mensajes de prueba reales. Sin push. Siguiente: historial/retención, explorador autorizado y entrega durable; no cerrar el contrato completo de logs ni el caso original de setup. El párrafo siguiente conserva la entrega técnica anterior.
