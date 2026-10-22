@@ -26,6 +26,7 @@ module.exports = client => {
   const confirmedVolumes = new Map()
   const panels = require('./action-queue').createActionQueue()
   const panelPublications = new Map()
+  const recovery = require('./recovery-policy').createRecoveryPolicy()
 
   function anchorFromNode(state, response, fallback, requestedPosition = null) {
     let position = clock.nodePosition(state, response?.state)
@@ -269,23 +270,39 @@ module.exports = client => {
 
     // ── Join voice channel ─────────────────────────────────────────────────
     async joinChannel(guildId, voiceChannelId, textChannelId) {
+      const current = getState(guildId)
       const existing = client.shoukaku?.players?.get(guildId)
+      if (existing && current.voiceChannelId && current.voiceChannelId !== voiceChannelId) throw new Error('El bot ya está en otro canal de voz. Detén la sesión antes de cambiar de canal.')
+      if (!current.nodeTransition) recovery.retry(guildId)
       if (existing && existing.node?.ws?.readyState === 1 && !getState(guildId).reconnectVoice) {
-        const current = getState(guildId)
-        if (current.voiceChannelId && current.voiceChannelId !== voiceChannelId) throw new Error('El bot ya está en otro canal de voz. Detén la sesión antes de cambiar de canal.')
         if (textChannelId) current.textChannelId = textChannelId
         return existing
       }
       const node = getNode(guildId)
       if (!node) throw new Error('No hay nodos Lavalink disponibles.')
+      const connection = client.shoukaku.connections?.get(guildId)
+      if (existing && connection?.state === 1 && connection.channelId === voiceChannelId && connection.sessionId && connection.serverUpdate?.endpoint) {
+        const previousNode = existing.node
+        if (previousNode !== node) {
+          try { await existing.destroy() }
+          catch (error) { if (previousNode.state === 1 && error.status !== 404 && !/not found/i.test(error.message || '')) throw error }
+          existing.node = node
+        }
+        try { await existing.sendServerUpdate(connection) }
+        catch (error) { existing.node = previousNode; throw error }
+        current.reconnectVoice = false
+        if (textChannelId) current.textChannelId = textChannelId
+        return existing
+      }
       if (existing) {
         try { await client.shoukaku.leaveVoiceChannel(guildId) } catch {}
         const s = getState(guildId)
-        s.currentTrack = null; s.startedAt = null; s.paused = false
+        if (!s.nodeTransition) { s.currentTrack = null; s.startedAt = null; s.paused = false }
         stopLiveUpdate(guildId)
       }
       getState(guildId).status = 'connecting'
-      const player = await client.shoukaku.joinVoiceChannel({ guildId, channelId: voiceChannelId, shardId: 0 })
+      const guild = client.guilds?.cache?.get(guildId)
+      const player = await client.shoukaku.joinVoiceChannel({ guildId, channelId: voiceChannelId, shardId: guild?.shardId ?? guild?.shard?.id ?? 0 })
       const state  = getState(guildId)
       state.status = 'idle'
       state.locale = require('../i18n').localeFor(client, guildId)
@@ -825,6 +842,7 @@ module.exports = client => {
     client.music[name] = function (guildId, ...args) {
       const state = getState(guildId)
       if (name === 'stop') {
+        recovery.cancel(guildId)
         state.autoplayLookup?.abort()
         state.requestEpoch = (state.requestEpoch || 0) + 1
         state.stopRequestEpoch = (state.stopRequestEpoch || 0) + 1
@@ -851,10 +869,14 @@ module.exports = client => {
     return publication.promise
   }
 
-  let restoring = false, restoreRetry = null, preferencesLoaded = false
-  function scheduleRestore() {
-    if (restoreRetry || client._shuttingDown) return
-    restoreRetry = setTimeout(() => { restoreRetry = null; restoreSessions() }, 5000)
+  let restoring = false, restoreRetry = null, restoreRetryAt = 0, preferencesLoaded = false
+  function scheduleRestore(delayMs = 5000) {
+    if (client._shuttingDown) return
+    const dueAt = Date.now() + Math.max(100, delayMs)
+    if (restoreRetry && restoreRetryAt <= dueAt) return
+    clearTimeout(restoreRetry)
+    restoreRetryAt = dueAt
+    restoreRetry = setTimeout(() => { restoreRetry = null; restoreRetryAt = 0; restoreSessions() }, Math.max(100, delayMs))
     restoreRetry.unref?.()
   }
   async function restoreSessions() {
@@ -872,22 +894,31 @@ module.exports = client => {
       }
       const rows = await sessions.list()
       for (const saved of rows) {
+        if (!recovery.eligible(saved.guildId)) {
+          const delay = recovery.delay(saved.guildId)
+          if (delay !== null) scheduleRestore(delay)
+          continue
+        }
         if (!client.guilds?.cache?.has(saved.guildId) || !client.channels.cache.has(saved.voiceChannelId)) continue
         const existing = client.shoukaku.players.get(saved.guildId)
-        if (existing && existing.node === getNode(saved.guildId) && ['playing', 'paused'].includes(getState(saved.guildId).status) && !getState(saved.guildId).reconnectVoice) continue
+        if (existing && existing.node === getNode(saved.guildId) && ['playing', 'paused', 'loading'].includes(getState(saved.guildId).status) && !getState(saved.guildId).reconnectVoice) continue
+        const generation = recovery.generation(saved.guildId)
+        const isCurrent = () => !client._shuttingDown && recovery.generation(saved.guildId) === generation
+        const assertCurrent = () => { if (!isCurrent()) throw new Error('restore_cancelled') }
+        let restoreNode, stage = 'voice'
         try {
           await actions.run(saved.guildId, async () => {
+            assertCurrent()
             const state = getState(saved.guildId)
             state.nodeTransition = true
             state.status = 'recovering'
             state.sessionId = saved.sessionId || state.sessionId
             state.revision = Math.max(state.revision, saved.revision || 0)
+            state.reconnectVoice = true
+            restoreNode = getNode(saved.guildId)
             const player = await client.music.joinChannel(saved.guildId, saved.voiceChannelId, saved.textChannelId)
-            if (existing === player) {
-              // A fresh Lavalink process also needs Discord's voice handshake, even when
-              // the Shoukaku websocket has reconnected successfully.
-              await player.update({ voice: player.data.playerOptions.voice })
-            }
+            assertCurrent()
+            stage = 'settings'
             Object.assign(state, {
               sessionId: state.sessionId, revision: state.revision,
               currentTrack: saved.currentTrack, customFilters: saved.customFilters,
@@ -895,6 +926,7 @@ module.exports = client => {
               loop: saved.loop || 'none', autoplay: Boolean(saved.autoplay), shuffle: Boolean(saved.shuffle), radioMode: Boolean(saved.radioMode),
             })
             await player.setGlobalVolume(state.volume)
+            assertCurrent()
             const restoreEffects = async () => {
               if (saved.filter === 'custom' && saved.customFilters) { await player.setFilters(saved.customFilters); state.filter = 'custom' }
               else if (saved.filter && !['none', 'off'].includes(saved.filter)) await client.music.setFilter(saved.guildId, saved.filter)
@@ -909,34 +941,40 @@ module.exports = client => {
               emitState(saved.guildId)
               return
             }
-            const result = await client.music.search(saved.currentTrack.info?.uri || saved.currentTrack.uri, 'Recuperación', { guildId: saved.guildId })
-            const track = result?.tracks?.find(track => track.encoded && sameRecording(saved.currentTrack, track))
+            stage = 'track'
+            const track = await trackOnNode(saved.currentTrack, player.node)
+            assertCurrent()
             if (!track) throw new Error('La pista guardada no está disponible')
             const savedInfo = saved.currentTrack.info || saved.currentTrack
             track.info.requester = savedInfo.requester
             track.info.requesterId = savedInfo.requesterId
             state.currentTrack = track
             state.status = 'loading'
+            stage = 'play'
             await playTrack(player, state, track.encoded, { position: saved.position || 0, paused: Boolean(saved.paused), recoverOnFailure: false })
-            if (state.confirmedPlaybackId !== state.playbackId) {
-              state.paused = Boolean(saved.paused)
-              clock.anchor(state, saved.position || 0)
-              state.status = state.paused ? 'paused' : 'playing'
-            }
+            assertCurrent()
             state.reconnectVoice = false
             await restoreEffects()
-            await client.music.sendNowPlaying(saved.guildId, track)
+            assertCurrent()
+            await client.music.sendNowPlaying(saved.guildId, track).catch(() => console.warn('[Music] Recovery panel unavailable; audio session preserved'))
+            assertCurrent()
             state.nodeTransition = false
+            recovery.succeeded(saved.guildId)
             emitState(saved.guildId)
-            console.log(`[Music] Session restored: status=${state.status} volume=${state.volume} queue=${state.queue.length} position=${state.lastPosition}`)
+            console.log(`[Music] Session restored: node=${player.node.name} status=${state.status} volume=${state.volume} queue=${state.queue.length} position=${state.lastPosition}`)
           })
         } catch (error) {
-          console.warn(`[Music] Session restore failed (${saved.guildId}):`, error.message)
+          if (!isCurrent()) continue
+          const failure = recovery.failed(saved.guildId)
+          const missing = /(?:player|session).*not found/i.test(error.message || '')
+          if (missing && restoreNode) client.nodePool?.fail(restoreNode.name)
+          console.warn('[Music] Session recovery:', JSON.stringify({ event: 'music_session_recovery', guild: require('node:crypto').createHash('sha256').update(saved.guildId).digest('hex').slice(0, 12),
+            node: restoreNode?.name || null, stage, reason: missing ? 'remote_player_missing' : 'restore_request_failed', ...failure }))
           const state = getState(saved.guildId)
           state.nodeTransition = false
-          Object.assign(state, { currentTrack: saved.currentTrack, queue: saved.queue || [], history: saved.history || [], volume: saved.volume ?? 100, paused: Boolean(saved.paused), lastPosition: saved.position || 0, startedAt: null, voiceChannelId: saved.voiceChannelId, textChannelId: saved.textChannelId, status: 'recovering' })
+          Object.assign(state, { currentTrack: saved.currentTrack, queue: saved.queue || [], history: saved.history || [], volume: saved.volume ?? 100, paused: Boolean(saved.paused), lastPosition: saved.position || 0, startedAt: null, voiceChannelId: saved.voiceChannelId, textChannelId: saved.textChannelId, status: 'recovering', reconnectVoice: true })
           emitState(saved.guildId)
-          scheduleRestore()
+          if (!failure.exhausted) scheduleRestore(failure.delayMs)
         }
       }
     } catch (error) { console.error('[Music] Restore:', error.message) }

@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-23",
+  "planStage": "P1 continuity before client cutover",
+  "incident": {
+    "processHealthy": true,
+    "containerRestarts": 0,
+    "restoreFailuresObserved": 16,
+    "remotePlayerMissingObserved": 16,
+    "botVoiceDisconnectPacketsObserved": 17
+  },
+  "rootCause": "Unbounded snapshot retries forced Discord leave/rejoin when reconnectVoice signaled remote audio recovery; remote Player not found was not cooled down. Late retired-player events and panel errors could request more recovery.",
+  "changes": [
+    "Reuse valid Discord voice connection for remote player rebuild/handoff",
+    "Five automatic attempts with 5/10/20/40 second backoff; manual retry resets budget",
+    "Cool down missing remote player/session node, allow public backup",
+    "Stop revokes recovery generation and late results cannot resurrect snapshots",
+    "Retired player events ignored; panel failure preserves audio",
+    "Use actual guild shard; preserve snapshot queue/position/volume/filters and require playback confirmation"
+  ],
+  "tests": {
+    "temporaryCases": 10,
+    "pass": 10,
+    "regressionsReproducedBefore": 6,
+    "originalCases": 25,
+    "originalPass": 25,
+    "originalCasesRemoved": 0
+  },
+  "deployed": false,
+  "musicClient": "Shoukaku 4.3.0 still active; lavalink-client migration remains open",
+  "voiceTestMessagesSent": false,
+  "newVoiceChannelsJoinedForTesting": false,
+  "temporaryVerifiersRetained": false,
+  "sources": [
+    "https://lavalink.dev/api/rest",
+    "node_modules/shoukaku/dist/index.js (installed 4.3.0)"
+  ]
+}

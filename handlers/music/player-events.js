@@ -4,7 +4,7 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
   const observeHealth = require('./playback-health').createPlaybackHealth(guildId, player)
   let events = Promise.resolve()
   const isCurrent = data => {
-    if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return false
+    if (client.shoukaku?.players?.get(guildId) !== player) return false
     const eventId = data?.track?.userData?.obeyPlaybackId
     // Nodes may return a new encoding for the same playback (e.g. after resume).
     // Our per-play UUID identifies it; encoding is only a fallback for legacy events.
@@ -46,7 +46,7 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
       .catch(error => console.error(`[Music] Panel update failed (${guildId}):`, error.message))
   })
   player.on('update', data => {
-    if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return
+    if (client.shoukaku?.players?.get(guildId) !== player) return
     const state    = playerStates.get(guildId)
     const position = Number(data?.state?.position)
     if (!state?.currentTrack || !Number.isFinite(position) || !['playing', 'paused'].includes(state.status)) return
@@ -74,8 +74,8 @@ module.exports = function bindPlayerEvents(client, player, guildId, { emitState,
     enqueueEvent(data, () => client.music._recoverFailedTrack(guildId, player, 'trackStuck'))
   })
   player.on('closed', () => {
+    if (client.shoukaku?.players?.get(guildId) !== player) return
     if (getState(guildId).nodeTransition) return
-    if (client.shoukaku?.players?.get(guildId) && client.shoukaku.players.get(guildId) !== player) return
     stopLiveUpdate(guildId)
     const state = getState(guildId)
     state.lastPosition = elapsedForState(guildId, state)
