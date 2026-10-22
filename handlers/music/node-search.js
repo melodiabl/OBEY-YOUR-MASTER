@@ -8,7 +8,7 @@ async function searchNodes(client, raw, requester, { guildId, signal, multiple =
   if (!nodes.length) throw new Error('No hay conexiones de música disponibles.')
   const name = typeof requester === 'string' ? requester : requester?.username || requester?.tag || 'Unknown'
   const url = /^https?:\/\//i.test(query)
-  const identifiers = url || /^(?:ytsearch|ytmsearch|spsearch|scsearch|jssearch|amsearch|dzsearch):/i.test(query) ? [query] : ['spsearch:' + query, 'ytsearch:' + query]
+  const identifiers = url || /^(?:ytsearch|ytmsearch|spsearch|amsearch):/i.test(query) ? [query] : ['spsearch:' + query, 'ytmsearch:' + query, 'ytsearch:' + query, 'amsearch:' + query]
   let failed = false
   let sparse = null
   for (const node of nodes) {
@@ -17,7 +17,9 @@ async function searchNodes(client, raw, requester, { guildId, signal, multiple =
       try {
         const response = await resolveWithTimeout(node, identifier, 8000, signal)
         if (response?.loadType === 'error') { failed = true; nodeFailed = true; continue }
-        const tracks = tracksFromResolve(response).filter(allowedMusicTrack).map(track => ({ ...track, _resolvedNode: node.name,
+        const collection = ['playlist', 'album'].includes(response?.loadType)
+        const resolved = tracksFromResolve(response).filter(allowedMusicTrack)
+        const tracks = (url || collection ? resolved : rankMusicTracks(resolved, query)).map(track => ({ ...track, _resolvedNode: node.name,
           info: { ...track.info, requester: name, requesterId: typeof requester === 'object' ? requester.id : track.info?.requesterId || null } }))
         if (!tracks.length) continue
         // A search result containing one item is still sparse. Pickers need a
@@ -27,7 +29,6 @@ async function searchNodes(client, raw, requester, { guildId, signal, multiple =
         }
         if (response.loadType === 'track' && !url) { single = { loadType: response.loadType, tracks, playlistName: null }; continue }
         if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
-        const collection = ['playlist', 'album'].includes(response.loadType)
         const combined = single && !collection ? [...tracks, single.tracks[0]] : tracks
         return { loadType: response.loadType === 'album' ? 'playlist' : response.loadType, tracks: url || ['playlist', 'album'].includes(response.loadType) ? combined : rankMusicTracks(combined, query), playlistName: response.data?.info?.name || null }
       } catch (error) { if (signal?.aborted) throw error; failed = true; nodeFailed = true }

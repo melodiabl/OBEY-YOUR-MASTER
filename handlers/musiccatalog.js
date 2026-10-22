@@ -1,16 +1,12 @@
 const axios = require('axios')
 const { isYouTubeShort, recordingPreference } = require('./music/recordings')
+const { allowedMusicTrack } = require('./music/nodes-config')
 
 const SOURCE_DEFINITIONS = {
   youtube:    { prefix: 'ytsearch',  label: 'YouTube' },
   ytmusic:    { prefix: 'ytmsearch', label: 'YouTube Music' },
   spotify:    { prefix: 'spsearch',  label: 'Spotify' },
-  deezer:     { prefix: 'dzsearch',  label: 'Deezer' },
   applemusic: { prefix: 'amsearch',  label: 'Apple Music' },
-  tidal:      { prefix: 'tdsearch',  label: 'Tidal' },
-  qobuz:      { prefix: 'qbsearch',  label: 'Qobuz' },
-  jiosaavn:   { prefix: 'jssearch',  label: 'JioSaavn' },
-  yandex:     { prefix: 'ymsearch',  label: 'Yandex Music' },
 }
 
 const DEFAULT_SOURCE_ORDER = ['spotify', 'ytmusic', 'youtube', 'applemusic']
@@ -93,7 +89,7 @@ function rankResults(items, query, keyFn) {
     if (key) counts.set(key, (counts.get(key) || 0) + 1)
   }
   return uniqueBy(
-    items.filter(item => !isYouTubeShort(item))
+    items.filter(item => !isYouTubeShort(item) && allowedMusicTrack(item))
       .map((item, index) => ({
         item,
         index,
@@ -445,7 +441,7 @@ function createMusicCatalog(client, options = {}) {
     try {
       const info = await node.rest.getLavalinkInfo()
       const sources = Array.isArray(info?.sourceManagers)
-        ? info.sourceManagers.map(source => String(source).toLowerCase())
+        ? info.sourceManagers.map(source => String(source).toLowerCase()).filter(source => ['youtube', 'ytmusic', 'youtubemusic', 'spotify', 'applemusic', 'apple music'].includes(source))
         : []
       const plugins = Array.isArray(info?.plugins)
         ? info.plugins.map(plugin => String(plugin?.name || '').toLowerCase())
@@ -461,6 +457,7 @@ function createMusicCatalog(client, options = {}) {
   }
 
   function requestedSources(source, capabilities) {
+    if (source && source !== 'all' && !SOURCE_DEFINITIONS[source]) return []
     if (source && source !== 'all' && SOURCE_DEFINITIONS[source]) {
       return sourceIsConfigured(source) ? [source] : []
     }
@@ -719,7 +716,7 @@ function createMusicCatalog(client, options = {}) {
       }
     }
     const rawTracks = result.loadType === 'track' ? [result.data] : Array.isArray(result.data) ? result.data : []
-    return { tracks: rawTracks.map(normalizeTrack).filter(track => !track.isShort), albums: [], playlists: [] }
+    return { tracks: rawTracks.map(normalizeTrack).filter(allowedMusicTrack), albums: [], playlists: [] }
   }
 
   async function resolveCollection(identifier) {

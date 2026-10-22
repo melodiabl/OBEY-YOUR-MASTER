@@ -422,11 +422,10 @@ module.exports = client => {
       }
       try {
         const node = getNode(guildId)
-        // JioSaavn ofrece audio directo cuando YouTube bloquea la carga del vídeo.
-        // Solo se usa si título y artista coinciden para evitar otra grabación.
+        // Keep recovery within the configured music providers and recording.
         if (info.sourceName === 'youtube' || info.sourceName === 'spotify') {
-          const direct = await node.rest.resolve(`jssearch:${info.title || ''} ${info.author || ''}`).catch(() => null)
-          const replacement = tracksFromResolve(direct).find(t => allowedMusicTrack(t) && t.encoded && t.info?.sourceName === 'jiosaavn' && sameRecording(failed, t))
+          const direct = await node.rest.resolve(`amsearch:${info.title || ''} ${info.author || ''}`).catch(() => null)
+          const replacement = tracksFromResolve(direct).find(t => allowedMusicTrack(t) && t.encoded && t.info?.sourceName === 'applemusic' && sameRecording(failed, t))
           if (replacement) {
             replacement.info.requester = info.requester || 'Fallback'
             replacement.info.requesterId = info.requesterId

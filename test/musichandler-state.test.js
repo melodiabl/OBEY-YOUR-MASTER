@@ -64,7 +64,7 @@ test('plain text searches try spsearch first and return its list result', async 
           data: [{
             encoded: 'track',
             info: {
-              title: 'Spotify song',
+              title: 'Test song',
               author: 'Artist',
               uri: 'https://open.spotify.com/track/1',
               sourceName: 'spotify',
@@ -85,11 +85,11 @@ test('plain text searches try spsearch first and return its list result', async 
   const result = await client.music.search('test song', 'Tester')
 
   assert.deepEqual(identifiers, ['spsearch:test song'])
-  assert.equal(result.tracks[0].info.title, 'Spotify song')
+  assert.equal(result.tracks[0].info.title, 'Test song')
   assert.equal(result.tracks[0].info.requester, 'Tester')
 })
 
-test('a single spsearch track is kept as fallback while ytsearch provides the list', async () => {
+test('a single spsearch track is kept as fallback while ytmsearch provides the list', async () => {
   const client = new EventEmitter()
   const identifiers = []
   const node = {
@@ -102,7 +102,7 @@ test('a single spsearch track is kept as fallback while ytsearch provides the li
             data: {
               encoded: 'sp-track',
               info: {
-                title: 'Spotify single',
+                title: 'Test song (Single)',
                 author: 'Artist',
                 uri: 'https://open.spotify.com/track/1',
                 sourceName: 'spotify',
@@ -115,7 +115,7 @@ test('a single spsearch track is kept as fallback while ytsearch provides the li
           data: [{
             encoded: 'yt-track',
             info: {
-              title: 'YTM song',
+              title: 'Test song',
               author: 'Artist',
               uri: 'https://music.youtube.com/watch?v=1',
               sourceName: 'youtube',
@@ -135,9 +135,9 @@ test('a single spsearch track is kept as fallback while ytsearch provides the li
   require('../handlers/musichandler')(client)
   const result = await client.music.search('test song', 'Tester')
 
-  assert.deepEqual(identifiers, ['spsearch:test song', 'ytsearch:test song'])
+  assert.deepEqual(identifiers, ['spsearch:test song', 'ytmsearch:test song'])
   assert.equal(result.loadType, 'search')
-  assert.equal(result.tracks[0].info.title, 'YTM song')
+  assert.equal(result.tracks[0].info.title, 'Test song')
 })
 
 test('search falls back to the single spsearch track when no list source has results', async () => {
@@ -151,7 +151,7 @@ test('search falls back to the single spsearch track when no list source has res
             data: {
               encoded: 'sp-track',
               info: {
-                title: 'Spotify single',
+                title: 'Test song (Single)',
                 author: 'Artist',
                 uri: 'https://open.spotify.com/track/1',
                 sourceName: 'spotify',
@@ -174,7 +174,7 @@ test('search falls back to the single spsearch track when no list source has res
   const result = await client.music.search('test song', 'Tester')
 
   assert.equal(result.loadType, 'track')
-  assert.equal(result.tracks[0].info.title, 'Spotify single')
+  assert.equal(result.tracks[0].info.title, 'Test song (Single)')
 })
 
 test('spotify album URIs resolve directly and return album tracks', async () => {
@@ -290,7 +290,7 @@ test('skip advances the queue even when the player is paused', async () => {
   assert.equal(state.queue.length, 0)
 })
 
-test('a blocked YouTube track falls back only to the matching JioSaavn recording', async () => {
+test('a blocked YouTube track falls back only to the matching Apple Music recording', async () => {
   const client = new EventEmitter()
   const played = []
   const queries = []
@@ -298,8 +298,8 @@ test('a blocked YouTube track falls back only to the matching JioSaavn recording
   const node = { rest: { resolve: async query => {
     queries.push(query)
     return { loadType: 'search', data: [
-      { encoded: 'remix', info: { title: 'Shape of You (Remix)', author: 'Ed Sheeran', sourceName: 'jiosaavn' } },
-      { encoded: 'match', info: { title: 'Shape of You', author: 'Ed Sheeran', sourceName: 'jiosaavn' } },
+      { encoded: 'remix', info: { title: 'Shape of You (Remix)', author: 'Ed Sheeran', sourceName: 'applemusic' } },
+      { encoded: 'match', info: { title: 'Shape of You', author: 'Ed Sheeran', sourceName: 'applemusic' } },
     ] }
   } } }
   client.shoukaku = {
@@ -316,9 +316,9 @@ test('a blocked YouTube track falls back only to the matching JioSaavn recording
 
   await client.music._recoverFailedTrack('guild-fallback', player, 'Sign in to confirm')
 
-  assert.deepEqual(queries, ['jssearch:Shape of You (Official Video) Ed Sheeran'])
+  assert.deepEqual(queries, ['amsearch:Shape of You (Official Video) Ed Sheeran'])
   assert.deepEqual(played, ['match'])
-  assert.equal(state.currentTrack.info.sourceName, 'jiosaavn')
+  assert.equal(state.currentTrack.info.sourceName, 'applemusic')
 })
 
 function volumeClient(id, player) {
