@@ -185,6 +185,7 @@ module.exports = client => {
 
     // ── Search via Lavalink: Spotify fallback, then yt-dlp/YouTube ───────
     async search(query, requester, context) { return searchNodes(client, query, requester, context) },
+    async recommend(seed, requester, context) { return require('./recommendations').recommendTracks(client, seed, requester, context) },
 
     getNodes(guildId) { return client.nodePool?.view(guildId) },
     async setNodePreference(guildId, nodeId) {

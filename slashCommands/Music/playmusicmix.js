@@ -17,8 +17,7 @@ module.exports = {
       if (!base?.tracks?.length) return interaction.editReply({ embeds: [err('❌ Sin resultados para la canción base.')] })
       const seed = base.tracks[0]
       const seedInfo = seed.info || seed
-      const mixQuery = `ytsearch:${seedInfo.author || seedInfo.title} mix playlist`
-      const mix = await client.music.search(mixQuery, interaction.user, { guildId: interaction.guildId })
+      const mix = await client.music.recommend(seed, interaction.user, { guildId: interaction.guildId })
       const tracks = mix?.tracks?.slice(0, 10) || []
       if (!tracks.length) return interaction.editReply({ embeds: [err(obeyUi.owned('❌ No se pudo generar la mezcla.'))] })
       const vc = interaction.member.voice.channel

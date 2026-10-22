@@ -581,7 +581,7 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
           </div>
 
           <div class="section-hd">
-            <div class="section-copy"><span>Descubre para tu servidor</span><small id="server-mix-copy">Preparando recomendaciones según lo que escuchan aquí</small></div>
+            <div class="section-copy"><span>Afines a lo que escuchas</span><small id="server-mix-copy">Preparando canciones según tus gustos</small></div>
           </div>
           <div class="h-row" id="section-pop">
             <% for(let i=0;i<4;i++) { %><div class="hcard-skel"><div class="hcard-skel-art"></div><div class="hcard-skel-line" style="width:75%"></div><div class="hcard-skel-line" style="width:50%"></div></div><% } %>
@@ -1411,23 +1411,35 @@ async function loadMultiSection(id, queries, kind = 'tracks', source = 'all', ex
 
 async function loadServerDiscovery(seeds = serverSeedTracks) {
   const copy = document.getElementById('server-mix-copy')
+  const row = document.getElementById('section-pop')
+  try {
+    const response = await fetch(`/api/music/recommendations/${GID}`)
+    if (!response.ok) throw new Error('recommendations_unavailable')
+    const payload = await response.json()
+    if (payload.data?.tracks?.length) {
+      serverMixItems = payload.data.tracks
+      renderHcards(row, serverMixItems)
+      if (copy) copy.textContent = payload.data.basis === 'likes'
+        ? 'Canciones relacionadas con tus Me gusta'
+        : 'Canciones relacionadas con lo que escuchan en este servidor'
+      return
+    }
+  } catch {}
   const knownUris = new Set((seeds || []).map(track => track.uri).filter(Boolean))
   const artists = [...new Set((seeds || []).map(track => track.author).filter(Boolean))].slice(0, 6)
-  const queries = artists.length
-    ? artists.map(artist => `${artist} radio canciones similares`)
-    : [
-        'urbano latino novedades',
-        'pop alternativo novedades',
-        'reggaeton viral',
-        'electrónica nuevos lanzamientos',
-        'rock alternativo actual',
-        'r&b nuevos artistas',
-      ]
+  const queries = artists
+
+  if (!queries.length) {
+    serverMixItems = []
+    if (copy) copy.textContent = 'Marca canciones con el corazón para descubrir música afín'
+    if (row) row.textContent = 'Tus recomendaciones aparecerán al guardar favoritos o escuchar música.'
+    return
+  }
 
   if (copy) {
     copy.textContent = artists.length
       ? `Basado en ${artists.slice(0, 3).join(', ')} y el historial de este servidor`
-      : 'Primeras recomendaciones variadas mientras el servidor crea su historial'
+      : 'Escucha música para crear tus recomendaciones'
   }
   serverMixItems = await loadMultiSection('section-pop', queries, 'tracks', 'all', knownUris) || []
 }
@@ -1435,10 +1447,10 @@ async function loadServerDiscovery(seeds = serverSeedTracks) {
 function playServerMix() {
   const seed = serverSeedTracks[0] || serverMixItems[0]
   if (seed?.author) {
-    discoverSearch(`${seed.author} radio canciones similares`)
+    discoverSearch(seed.author)
     return
   }
-  discoverSearch('urbano pop alternativo novedades mix')
+  document.getElementById('s-inp').focus()
 }
 
 async function loadTopTracks() {

@@ -15,14 +15,21 @@ async function findAutoplayTrack(music, guildId, seed, history, isCurrent, signa
   const recent = [seed, ...history].map(track => track.info || track)
   const uris = new Set(recent.map(track => track.uri).filter(Boolean))
   const titles = new Set(recent.map(track => titleKey(track.title)).filter(Boolean))
-  const queries = [...new Set([artist, `${info.title || ''} ${artist} mix`.trim()].filter(Boolean))]
+  const eligible = tracks => tracks.filter(track => allowedMusicTrack(track) && !hasUnrequestedVersion(track, `${info.title || ''} ${artist}`) && track.encoded && track.info?.uri &&
+    !encoded.has(track.encoded) && !uris.has(track.info.uri) && !titles.has(titleKey(track.info.title)))
+  if (music.recommend && isCurrent()) {
+    const related = await lookupWithTimeout(() => music.recommend(seed, 'Autoplay', { guildId, signal }), 10000, signal).catch(() => null)
+    if (!isCurrent()) return null
+    const candidates = eligible(related?.tracks || [])
+    if (candidates.length) return candidates[0]
+  }
+  const queries = [...new Set([artist, ...recent.slice(0, 3).map(track => track.author)].filter(Boolean))]
   for (const query of queries) {
     if (!isCurrent()) return null
     const result = await lookupWithTimeout(() => music.search(query, 'Autoplay', { guildId, signal }), 12000, signal).catch(() => null)
     if (!isCurrent()) return null
-    const candidates = (result?.tracks || []).filter(track => allowedMusicTrack(track) && !hasUnrequestedVersion(track, query) && track.encoded && track.info?.uri &&
-      !encoded.has(track.encoded) && !uris.has(track.info.uri) && !titles.has(titleKey(track.info.title)))
-    if (candidates.length) return candidates[Math.floor(Math.random() * Math.min(8, candidates.length))]
+    const candidates = eligible(result?.tracks || [])
+    if (candidates.length) return candidates[0]
   }
   return null
 }

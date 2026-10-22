@@ -66,6 +66,34 @@ module.exports = (app, client, {
     res.set('Cache-Control', 'private, no-store')
     ok(res, await repository.getLikedSongs(uid(req)))
   }))
+  app.get('/api/music/recommendations/:guildId', apiAuth, requireFreshGuildPermissions, guildAccess, wrap(async (req, res) => {
+    const { allowedMusicTrack } = require('./nodes-config')
+    const state = music()?.getState?.(req.params.guildId)
+    const liked = await repository.getLikedSongs(uid(req), 20)
+    const usable = tracks => tracks.filter(track => allowedMusicTrack(track) && !(track.info || track).isStream)
+    const likes = usable(liked)
+    const recent = usable([state?.currentTrack, ...(state?.history || [])].filter(Boolean))
+    const seeds = [], artists = new Set()
+    for (const track of likes.length ? likes : recent) {
+      const author = String((track.info || track).author || '').toLowerCase()
+      if (!author || artists.has(author)) continue
+      artists.add(author); seeds.push(track)
+      if (seeds.length === 2) break
+    }
+    const signal = AbortSignal.timeout(10000)
+    const pools = await Promise.all(seeds.map(seed => music()?.recommend?.(seed, req.session.user, { guildId: req.params.guildId, signal })
+      .then(result => result?.tracks || []).catch(() => []) || []))
+    const seen = new Set(), tracks = []
+    for (let index = 0; index < 20 && tracks.length < 10; index++) {
+      for (const pool of pools) {
+        const track = pool[index], key = track?.info?.uri
+        if (!key || seen.has(key)) continue
+        seen.add(key); tracks.push(require('./utils').normalizePublicTrack(track))
+        if (tracks.length === 10) break
+      }
+    }
+    ok(res, { basis: likes.length ? 'likes' : seeds.length ? 'guild_history' : 'none', tracks })
+  }))
   app.get('/api/music/recent', apiAuth, wrap(async (req, res) => ok(res, await database.getRecentlyPlayed(uid(req), Math.max(1, Math.min(100, Number(req.query.limit) || 20))))))
 
   app.post('/api/music/like', apiAuth, wrap(async (req, res) => {

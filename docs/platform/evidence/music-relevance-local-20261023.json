@@ -1,0 +1,279 @@
+{
+  "date": "2026-10-23",
+  "searchFixCommit": "3843e7c",
+  "allowedSearchProviders": [
+    "spotify",
+    "youtube",
+    "ytmusic",
+    "applemusic"
+  ],
+  "transportExceptions": [
+    "http radio",
+    "ytdlp YouTube adapter"
+  ],
+  "removedExplicitJioSaavnFallback": true,
+  "noLanguageOrCountryFilter": true,
+  "temporaryChecks": {
+    "searchAndProviders": {
+      "tests": 11,
+      "pass": 11,
+      "initialRegressionFailures": 8
+    },
+    "recommendationsAndPrivateRoute": {
+      "tests": 9,
+      "pass": 9,
+      "recommendationFailuresBefore": 5,
+      "routeFailuresBefore": 3
+    }
+  },
+  "originalTests": {
+    "files": 3,
+    "tests": 25,
+    "pass": 25,
+    "skipped": 0,
+    "updatedFixtures": "Queries now match metadata; blocked recording recovery verifies Apple Music instead of the removed JioSaavn source"
+  },
+  "liveCandidateProbe": {
+    "searches": [
+      {
+        "query": "adela",
+        "tracks": [
+          {
+            "title": "Ain't In LA",
+            "author": "ADÉLA",
+            "source": "spotify"
+          },
+          {
+            "title": "Nicole Kidman",
+            "author": "ADÉLA",
+            "source": "ytmusic"
+          },
+          {
+            "title": "Homewrecked",
+            "author": "ADÉLA",
+            "source": "ytmusic"
+          }
+        ]
+      },
+      {
+        "query": "Adele",
+        "tracks": [
+          {
+            "title": "Someone Like You",
+            "author": "Adele",
+            "source": "spotify"
+          },
+          {
+            "title": "Sweetest Devotion",
+            "author": "Adele",
+            "source": "ytmusic"
+          },
+          {
+            "title": "Set Fire to the Rain",
+            "author": "Adele",
+            "source": "ytmusic"
+          },
+          {
+            "title": "I'll Be Waiting",
+            "author": "Adele",
+            "source": "ytmusic"
+          },
+          {
+            "title": "My Same",
+            "author": "Adele",
+            "source": "ytmusic"
+          },
+          {
+            "title": "Love In The Dark",
+            "author": "Adele",
+            "source": "ytmusic"
+          },
+          {
+            "title": "Love Is A Game",
+            "author": "Adele",
+            "source": "ytmusic"
+          },
+          {
+            "title": "Cold Shoulder (Basement Jaxx Classic Remix)",
+            "author": "Adele",
+            "source": "ytmusic"
+          }
+        ]
+      }
+    ],
+    "seed": {
+      "title": "Someone Like You",
+      "author": "Adele"
+    },
+    "related": [
+      {
+        "title": "Set Fire to the Rain",
+        "author": "Adele",
+        "source": "youtube"
+      },
+      {
+        "title": "Rolling in the Deep",
+        "author": "Adele",
+        "source": "youtube"
+      },
+      {
+        "title": "Adele - Skyfall (Official Lyric Video)",
+        "author": "Adele",
+        "source": "youtube"
+      },
+      {
+        "title": "Love In The Dark",
+        "author": "Adele",
+        "source": "youtube"
+      },
+      {
+        "title": "Easy On Me",
+        "author": "Adele",
+        "source": "youtube"
+      },
+      {
+        "title": "John Legend - All of Me (Official Video)",
+        "author": "John Legend",
+        "source": "youtube"
+      },
+      {
+        "title": "Lewis Capaldi - Someone You Loved",
+        "author": "Lewis Capaldi",
+        "source": "youtube"
+      },
+      {
+        "title": "Perfect",
+        "author": "Ed Sheeran",
+        "source": "youtube"
+      },
+      {
+        "title": "When I Was Your Man",
+        "author": "Bruno Mars",
+        "source": "youtube"
+      },
+      {
+        "title": "I'm Not The Only One",
+        "author": "SAM SMITH",
+        "source": "youtube"
+      },
+      {
+        "title": "Sam Smith - Stay With Me (Official Music Video)",
+        "author": "SAM SMITH",
+        "source": "youtube"
+      },
+      {
+        "title": "Passenger | Let Her Go (Official Video)",
+        "author": "Passenger",
+        "source": "youtube"
+      },
+      {
+        "title": "A Great Big World, Christina Aguilera - Say Something (Official Video)",
+        "author": "A Great Big World",
+        "source": "youtube"
+      },
+      {
+        "title": "When We Were Young",
+        "author": "Adele",
+        "source": "youtube"
+      },
+      {
+        "title": "Alicia Keys - No One (Official Music Video)",
+        "author": "Alicia Keys",
+        "source": "youtube"
+      },
+      {
+        "title": "Beyoncé - Halo",
+        "author": "Beyoncé",
+        "source": "youtube"
+      },
+      {
+        "title": "P!nk - Just Give Me a Reason (Official Video) ft. Nate Ruess",
+        "author": "P!NK",
+        "source": "youtube"
+      },
+      {
+        "title": "Hello",
+        "author": "Adele",
+        "source": "youtube"
+      },
+      {
+        "title": "Harry Styles - Sign of the Times (Official Video)",
+        "author": "Harry Styles",
+        "source": "youtube"
+      },
+      {
+        "title": "The Cinematic Orchestra - 'To Build A Home' (Official Video)",
+        "author": "Ninja Tune and The Cinematic Orchestra",
+        "source": "youtube"
+      }
+    ],
+    "calls": [
+      {
+        "query": "spsearch:adela",
+        "ms": 1378,
+        "type": "search"
+      },
+      {
+        "query": "ytmsearch:adela",
+        "ms": 819,
+        "type": "search"
+      },
+      {
+        "query": "spsearch:Adele",
+        "ms": 1086,
+        "type": "search"
+      },
+      {
+        "query": "ytmsearch:Adele",
+        "ms": 857,
+        "type": "search"
+      },
+      {
+        "query": "ytmsearch:Someone Like You Adele",
+        "ms": 877,
+        "type": "search"
+      },
+      {
+        "query": "https://www.youtube.com/watch?v=UQ8cXH7qbVU&list=RDUQ8cXH7qbVU",
+        "ms": 1762,
+        "type": "playlist"
+      }
+    ],
+    "discordMessagesSent": false,
+    "voiceJoined": false
+  },
+  "browserPreview": {
+    "copy": "Canciones relacionadas con tus Me gusta",
+    "artists": "Halo\nBeyoncé",
+    "cards": 1,
+    "runtimeExceptions": [],
+    "networkFailures": [],
+    "browser": "Chromium 151 via local CDP; isolated preview with fixtures",
+    "passed": true
+  },
+  "providerNativeRecommendations": {
+    "ytrec": "8-9 second timeouts in this sample; not selected",
+    "sprec": "9 second timeout in this sample; not selected",
+    "youtubeRD": "50 tracks resolved; candidate service caps/filter results at 20"
+  },
+  "personalRoute": {
+    "method": "GET",
+    "path": "/api/music/recommendations/:guildId",
+    "authentication": "dashboard OAuth session + fresh guild permissions + guild access",
+    "identity": "session user only",
+    "cache": "private, no-store",
+    "seeds": "up to two artists from 20 own likes, else current/recent tracks in authorized guild",
+    "maxResults": 10,
+    "readOnly": true,
+    "genres": "provider mix affinity; no inferred demographic classifier or guaranteed genre labels"
+  },
+  "deployed": false,
+  "temporaryVerifiersRetained": false,
+  "voiceJoined": false,
+  "discordTestMessagesSent": false,
+  "musicClientMigrated": false,
+  "sources": [
+    "https://nodelink.js.org/docs/api",
+    "https://github.com/lavalink-devs/youtube-source"
+  ]
+}

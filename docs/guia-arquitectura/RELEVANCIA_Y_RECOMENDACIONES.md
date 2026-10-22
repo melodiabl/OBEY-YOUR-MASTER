@@ -10,4 +10,16 @@ Verificación local: 11 casos temporales pasan (ocho fallos reproducidos antes d
 
 Consultas reales guardadas durante el diagnóstico: ADÉLA y Adele revelaron homónimos en YouTube Music; YouTube devolvió un canal como primera pista. El mix RD de Someone Like You devuelve 50 pistas con Adele, P!nk y Beyoncé. Los prefijos nativos ytrec/sprec agotaron 8–9 segundos; no se consideran funcionales en este nodo. Contrato de referencia: [NodeLink API](https://nodelink.js.org/docs/api), [youtube-source](https://github.com/lavalink-devs/youtube-source).
 
-Estado: corrección de búsqueda verificada localmente; recomendaciones por gustos y despliegue pendientes en esta unidad. No acredita escucha real en Discord ni migración a lavalink-client.
+## Recomendaciones conectadas
+
+La búsqueda mantiene coincidencia con la consulta. Las recomendaciones usan el mix RD de YouTube de una grabación confirmada: si la semilla es Spotify/Apple, primero se comprueba la misma grabación en YouTube Music. No se infiere género por nacionalidad, idioma o nombre; la afinidad estilística procede de esa mezcla, sin garantizar un clasificador de géneros. Fuentes no permitidas, canales, Shorts, versiones no pedidas, semilla y duplicados quedan fuera. No se usan ytrec/sprec en este nodo porque agotaron el tiempo del diagnóstico.
+
+Autoplay y /music playmusicmix consumen este servicio. Autoplay conserva historial, comprobaciones de cancelación y prioridad de la cola manual; si no existe mezcla, busca entre los artistas recientes. Las recomendaciones no crean una segunda cola ni cambian el cliente musical.
+
+GET /api/music/recommendations/:guildId requiere sesión OAuth, permisos recientes y acceso al servidor; responde {success:true,data:{basis,tracks}} con máximo diez pistas. basis es likes, guild_history o none. El userId se deriva de la sesión; no se acepta desde body/query. Se eligen hasta dos artistas entre veinte Me gusta; sin favoritos disponibles, se utiliza canción actual/historial de esa guild. Sin datos no se inventan gustos. El endpoint es de lectura, usa respuesta private/no-store y consultas acotadas. Panel: «Afines a lo que escuchas», con indicación de favoritos/historial; retira búsquedas genéricas presentadas como personalizadas. Radar global sigue identificado como descubrimiento general.
+
+Verificación de esta parte: nueve casos temporales, incluyendo rechazo de acceso, identidad de sesión, fallback sin favoritos, exclusión de semilla/versiones/fuentes, otras autorías relacionadas y cancelación. Cinco fallos de recomendaciones y tres del endpoint reproducidos antes de implementar. Los 25 casos originales pasan. Consulta real con código candidato en proceso aislado: ADÉLA tres pistas correctas, Adele ocho y veinte relacionadas de otros artistas, sin Gateway, mensajes o voz. Esos números son observaciones del proveedor en esa muestra, no cantidades garantizadas.
+
+Navegador Chromium 151 por CDP en preview aislada con fixtures: sección, tarjeta relacionada y texto de Me gusta renderizados; cero excepciones/runtime o fallos de red. Chrome DevTools MCP no pudo iniciar como root; la comprobación se realizó con un perfil local separado. No sustituye un recorrido con sesión real.
+
+[Evidencia local](../platform/evidence/music-relevance-local-20261023.json). Estado: verificado localmente y contra proveedor; despliegue pendiente. No acredita escucha real en Discord ni migración a lavalink-client.
