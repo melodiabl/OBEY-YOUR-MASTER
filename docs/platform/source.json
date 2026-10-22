@@ -74,11 +74,11 @@
     "changedBySourceAdoption": false
   },
   "latestNodeResearch": {
-    "date": "2026-10-17",
-    "report": "PUBLIC-NODE-RESEARCH.md",
-    "evidence": "evidence/public-node-research.json",
+    "date": "2026-10-22",
+    "report": "TRINIUM-2026-10-22.md",
+    "evidence": "evidence/trinium-review-20261022.json",
     "runtimeChanged": false,
-    "conclusion": "Retain GDjkhp; no tested public node meets all requested latency/audio/plugin requirements"
+    "conclusion": "Trinium NodeLink 02 is the best Trinium candidate in two bounded samples: 6/6 searches, lyrics and PCM, control RTT medians 142.6–145.3 ms; native lyrics/capability adaptation and actual voice validation remain pending"
   },
   "handoff": {
     "report": "HANDOFF.md",

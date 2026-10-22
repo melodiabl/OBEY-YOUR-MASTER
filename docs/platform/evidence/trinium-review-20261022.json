@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-22T21:29:45.892Z",
+  "source": "https://lavalink.triniumhost.com/",
+  "publishedConfigEndpoint": "https://lavalink-api-status.triniumhost.indevs.in/config/nodes",
+  "initial": [
+    {
+      "id": "v4ssl",
+      "host": "lavalink-v4.triniumhost.indevs.in",
+      "info": {
+        "http": 502,
+        "ms": 508,
+        "plugins": []
+      }
+    },
+    {
+      "id": "nodelink",
+      "host": "nodelink.triniumhost.indevs.in",
+      "info": {
+        "http": 200,
+        "ms": 479,
+        "version": "3.8.0",
+        "plugins": [],
+        "sourceCount": 45,
+        "filterCount": 14
+      },
+      "websocket": {
+        "ready": true,
+        "connectedMs": 461,
+        "pings": [
+          141,
+          140.9,
+          143.5,
+          143,
+          145.9
+        ],
+        "medianRttMs": 143,
+        "jitterMs": 5
+      },
+      "searches": [
+        {
+          "query": "ytsearch:Daft Punk One More Time",
+          "http": null,
+          "ms": 9012,
+          "tracks": 0
+        },
+        {
+          "query": "spsearch:Coldplay Viva La Vida",
+          "http": 200,
+          "ms": 1350,
+          "loadType": "search",
+          "tracks": 1
+        },
+        {
+          "query": "scsearch:Daft Punk One More Time",
+          "http": null,
+          "ms": 9003,
+          "tracks": 0
+        }
+      ],
+      "lyrics": {
+        "http": 200,
+        "ms": 2113,
+        "loadType": "lyrics",
+        "lineCount": 48
+      },
+      "audio": {
+        "http": 200,
+        "mime": "audio/l16;rate=48000;channels=2",
+        "bytes": 193456,
+        "nonZeroBytes": 177136,
+        "ms": 1794
+      }
+    },
+    {
+      "id": "nodelink_canary",
+      "host": "nodelink-02.triniumhost.indevs.in",
+      "info": {
+        "http": 200,
+        "ms": 487,
+        "version": "3.8.0",
+        "plugins": [],
+        "sourceCount": 45,
+        "filterCount": 14
+      },
+      "websocket": {
+        "ready": true,
+        "connectedMs": 447,
+        "pings": [
+          142.6,
+          142,
+          143.5,
+          143.2,
+          141.8
+        ],
+        "medianRttMs": 142.6,
+        "jitterMs": 1.7
+      },
+      "searches": [
+        {
+          "query": "ytsearch:Daft Punk One More Time",
+          "http": 200,
+          "ms": 1328,
+          "loadType": "search",
+          "tracks": 10
+        },
+        {
+          "query": "spsearch:Coldplay Viva La Vida",
+          "http": 200,
+          "ms": 2314,
+          "loadType": "search",
+          "tracks": 1
+        },
+        {
+          "query": "scsearch:Daft Punk One More Time",
+          "http": 200,
+          "ms": 729,
+          "loadType": "search",
+          "tracks": 10
+        }
+      ],
+      "lyrics": {
+        "http": 200,
+        "ms": 5732,
+        "loadType": "lyrics",
+        "lineCount": 107
+      },
+      "audio": {
+        "http": 200,
+        "mime": "audio/l16;rate=48000;channels=2",
+        "bytes": 193648,
+        "nonZeroBytes": 155593,
+        "ms": 875
+      }
+    }
+  ],
+  "repeat": [
+    {
+      "id": "nodelink_canary",
+      "host": "nodelink-02.triniumhost.indevs.in",
+      "info": {
+        "http": 200,
+        "ms": 532,
+        "version": "3.8.0",
+        "plugins": [],
+        "sourceCount": 45,
+        "filterCount": 14
+      },
+      "websocket": {
+        "ready": true,
+        "connectedMs": 447,
+        "pings": [
+          144,
+          151.6,
+          148.3,
+          145.3,
+          142.8
+        ],
+        "medianRttMs": 145.3,
+        "jitterMs": 8.8
+      },
+      "searches": [
+        {
+          "query": "ytsearch:Coldplay Viva La Vida",
+          "http": 200,
+          "ms": 1127,
+          "loadType": "search",
+          "tracks": 10
+        },
+        {
+          "query": "spsearch:Daft Punk One More Time",
+          "http": 200,
+          "ms": 1290,
+          "loadType": "search",
+          "tracks": 1
+        },
+        {
+          "query": "scsearch:Coldplay Yellow",
+          "http": 200,
+          "ms": 620,
+          "loadType": "search",
+          "tracks": 10
+        }
+      ],
+      "lyrics": {
+        "http": 200,
+        "ms": 1993,
+        "loadType": "lyrics",
+        "lineCount": 65
+      },
+      "audio": {
+        "http": 200,
+        "mime": "audio/l16;rate=48000;channels=2",
+        "bytes": 192424,
+        "nonZeroBytes": 44239,
+        "ms": 801
+      },
+      "mutedAudio": {
+        "http": 200,
+        "mime": "audio/l16;rate=48000;channels=2",
+        "bytes": 192016,
+        "nonZeroBytes": 0,
+        "ms": 1276
+      }
+    }
+  ],
+  "recommendedCandidateWithinTrinium": "nodelink_canary",
+  "successfulNode02Searches": 6,
+  "node02TotalSearches": 6,
+  "node02PingSamples": 10,
+  "node02SampleMedianRangeMs": [
+    142.6,
+    145.3
+  ],
+  "node02LyricsTracksWithLines": 2,
+  "node02AudioSamplesWithNonzeroPCM": 2,
+  "node02MuteSampleAllZero": true,
+  "temporaryVerifierHashes": {
+    "probe.cjs": "e3b20242ca98963e56a8c9bc74e9a9b2650bcfcc264cf573636550e345c5b65a",
+    "repeat.cjs": "f00679bd4f746c6f2a72676ee4b5986e04ddcf285aa223eebcfa813ca8d6ca6e"
+  },
+  "compatibilityRemaining": [
+    "NodeLink 3.8 uses Lavalink API v4; OBEY info cache still only accepts software major 4",
+    "OBEY native NodeLink /loadlyrics adapter is not implemented; current path uses LavaLyrics and LRClib",
+    "Every filter/source/plugin and actual Discord voice continuity were not verified"
+  ],
+  "production": {
+    "code": "0be39f31008519de4cda3c46e41d08c664a794c2",
+    "healthy": true,
+    "restarts": 0,
+    "configurationChanged": false,
+    "botRestarted": false,
+    "privateNodeStarted": false
+  },
+  "discordTokenUsed": false,
+  "discordVoiceJoined": false,
+  "externalDiscordMessagesSent": false,
+  "audioStored": false,
+  "rawLyricsStored": false,
+  "temporaryProbesRetained": false
+}

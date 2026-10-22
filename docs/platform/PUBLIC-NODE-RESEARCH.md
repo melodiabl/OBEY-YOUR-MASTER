@@ -1,5 +1,7 @@
 # Búsqueda ampliada de Lavalink/NodeLink · 17/10/2026
 
+Actualización: [Trinium comprobado de nuevo el 22/10](TRINIUM-2026-10-22.md). NodeLink 02 respondió con búsquedas, letras y PCM en dos rondas; producción sin cambios. Los resultados y la elección del principal que siguen describen la muestra histórica del 17/10.
+
 La petición exige bajo ping, buen rendimiento, audio y todos los plugins musicales funcionando. Ninguno de los públicos comprobados cumplió esas cuatro condiciones. Se conserva GDjkhp; esta investigación no cambia configuración, imagen, sesiones ni nodos de producción.
 
 ## Método
