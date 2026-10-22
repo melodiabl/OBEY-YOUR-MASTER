@@ -29,24 +29,28 @@
   "currentRuntime": {
     "code": "0be39f31008519de4cda3c46e41d08c664a794c2",
     "image": "e806ccb03c04dd41e4741d315b73d56ecc3ee8cebfaedef4102de98b6020a635",
-    "selectedPublicNode": "gdjkhp",
+    "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
+      "gdjkhp",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/log-visibility-deployment-20261020.json",
-    "change": "Fix false redaction for equivalent role/member channel audiences; private sources remain protected",
+    "evidence": "evidence/trinium-deployment-20261022.json",
+    "change": "Configuration-only: Trinium NodeLink 02 principal; existing engine, public backups and private-off policy retained",
     "tag": "release-log-visibility-20261020-0be39f3",
-    "status": "healthy_with_public_primary_unavailable",
-    "statusEvidence": "DESPLIEGUE-VISIBILIDAD-LOGS-2026-10-20.md",
+    "status": "healthy",
+    "statusEvidence": "DESPLIEGUE-TRINIUM-2026-10-22.md",
     "connectedPublicNodes": [
+      "trinium-02",
       "serenetia",
       "millohost"
     ],
-    "unconnectedConfiguredBackupNodes": [],
-    "selectedNodeConnected": false,
-    "selectedNodeRestHttp": 403
+    "unconnectedConfiguredBackupNodes": [
+      "gdjkhp"
+    ],
+    "selectedNodeConnected": true,
+    "deploymentKind": "configuration_only"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",

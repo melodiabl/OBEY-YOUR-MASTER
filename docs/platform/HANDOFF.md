@@ -2,6 +2,10 @@
 
 Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTER`. El usuario entregó la planificación nueva y reanudó trabajo local el 18/10/2026; el estado del 17/10 que sigue se conserva como registro histórico.
 
+## Estado vigente · Trinium activado el 22/10/2026
+
+Por instrucción del usuario, `trinium-02` es el principal predeterminado y está conectado. Serenetia/MilloHost conectados como respaldos; GDjkhp configurado sin conexión confirmada. Cambio solo de configuración, mismo código `0be39f3` e imagen `e806ccb`; privado apagado. Ocho escenarios del selector, 25 originales y tres Compose pasan. Gateway/heartbeat, Mongo, 20 slash, 25 hashes y salud local/pública 200; bot/imágenes/Redis saludables, cero reinicios y solo tres servicios always. Snapshots y reversión preservados, sin push. [Entrega vigente](DESPLIEGUE-TRINIUM-2026-10-22.md). Sin reproducción activa observada: escucha/conmutación real, adaptador de letras NodeLink y pendientes globales siguen abiertos.
+
 ## Estado vigente · 20/10/2026
 
 Desplegado `0be39f3`: corrección de falsos detalles omitidos en logs de voz por acceso mediante roles. Comparación de audiencias con excepciones personales, conservando privacidad y auditoría staff. 380 grupos/16.800 asignaciones SDK, 25 originales y 25 hashes comprobados. General, indicado por el usuario, tiene audiencia compatible; observar la siguiente salida real. Bot/imágenes/Redis saludables, Gateway/heartbeat y salud local/pública 200. GDjkhp sigue seleccionado, sin conectar y REST 403; Serenetia/MilloHost disponibles como respaldos, privado apagado. Sin audio real de prueba ni cambio de prioridades. Backup/reversión conservados, temporales retirados, sin push. [Entrega vigente](DESPLIEGUE-VISIBILIDAD-LOGS-2026-10-20.md). Historial/retención, entrega durable, caso original de setup y resto del maestro siguen abiertos.

@@ -1720,3 +1720,9 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] El usuario identifica general 1; lectura fresca de General y permisos compatibles comprobados.
 - [ ] Observar la siguiente salida real en Discord; evento histórico de las 22:03 no reproducido.
 - [ ] Revisar disponibilidad de GDjkhp (REST 403, sin conectar); respaldos Serenetia/MilloHost conectados, sin cambios de prioridad ni prueba auditiva.
+
+### Trinium NodeLink 02 · activación solicitada
+
+- [x] Seleccionar y conectar `trinium-02` como principal; conservar Serenetia/GDjkhp/MilloHost y nodo privado apagado. Ocho comprobaciones de pool, 25 originales, tres Compose y salud operativa pasan. [Entrega](../docs/platform/DESPLIEGUE-TRINIUM-2026-10-22.md).
+- [ ] Escucha y conmutación de voz reales; no había reproducción observada al verificar el arranque.
+- [ ] Adaptar letras/capacidades nativas de NodeLink, sin confundir versión del motor y API v4; pendientes globales conservados.

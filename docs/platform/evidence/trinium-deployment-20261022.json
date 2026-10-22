@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-22T21:35:26.012884+00:00",
+  "kind": "configuration_only",
+  "code": "0be39f31008519de4cda3c46e41d08c664a794c2",
+  "imageTag": "localhost/obey-your-master_bot:release-log-visibility-20261020-0be39f3",
+  "containers": {
+    "obey_bot": {
+      "id": "502221b7bfba1e41393dbe5aff1c13da5cac146436ec5da974f26c71a0cd2429",
+      "image": "e806ccb03c04dd41e4741d315b73d56ecc3ee8cebfaedef4102de98b6020a635",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "runtimeSourceHashesMatched": 25,
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "registeredGlobalSlashCommands": 20,
+  "selected": "trinium-02",
+  "privateEnabled": false,
+  "enabledPublicNodes": [
+    "trinium-02",
+    "serenetia",
+    "gdjkhp",
+    "millohost"
+  ],
+  "connectedPublicNodes": [
+    "trinium-02",
+    "serenetia",
+    "millohost"
+  ],
+  "health": {
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 72
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 72
+      }
+    }
+  },
+  "startupFailureMarkers": [],
+  "logCaptureFailuresDuringVerification": 0,
+  "ownerNoticeRowsAtStartup": 0,
+  "restartAlwaysContainers": [
+    "obey_bot",
+    "obey_images",
+    "obey_redis"
+  ],
+  "sessionRestoreCount": 0,
+  "sessionRestoreFailures": 0,
+  "observedPlayback": [],
+  "verificationPassed": true,
+  "localChecks": {
+    "configurationAndBackupGroupsPassed": 8,
+    "privateNodeExcluded": true,
+    "originalTestsPassed": 25,
+    "originalTestFiles": 3,
+    "candidateConfigurationMatched": true,
+    "engineCodeChanged": false,
+    "composeFilesValidated": 3
+  },
+  "previousSelectedPublicNode": "gdjkhp",
+  "backupOrder": [
+    "serenetia",
+    "gdjkhp",
+    "millohost"
+  ],
+  "unconnectedConfiguredBackups": [
+    "gdjkhp"
+  ],
+  "registry": [
+    {
+      "id": "serenetia",
+      "label": "Serenetia",
+      "visibility": "public",
+      "priority": 10,
+      "enabled": true,
+      "secure": true
+    },
+    {
+      "id": "gdjkhp",
+      "label": "GDjkhp",
+      "visibility": "public",
+      "priority": 20,
+      "enabled": true,
+      "secure": true
+    },
+    {
+      "id": "millohost",
+      "label": "MilloHost",
+      "visibility": "public",
+      "priority": 30,
+      "enabled": true,
+      "secure": true
+    },
+    {
+      "id": "nazha",
+      "label": "Nazha",
+      "visibility": "public",
+      "priority": 40,
+      "enabled": false,
+      "secure": true
+    },
+    {
+      "id": "trinium",
+      "label": "TriniumHost",
+      "visibility": "public",
+      "priority": 50,
+      "enabled": false,
+      "secure": true
+    },
+    {
+      "id": "trinium-02",
+      "label": "Trinium NodeLink 02",
+      "visibility": "public",
+      "priority": 5,
+      "enabled": true,
+      "secure": true
+    }
+  ],
+  "engineChanged": false,
+  "privateSnapshotDirectory": ".runtime/deploy-trinium-20261022",
+  "rollback": {
+    "argumentsFile": ".runtime/deploy-trinium-20261022/rollback-arguments.json",
+    "restorePreviousRegistryAndSettingsBeforeStart": true,
+    "image": "e806ccb03c04dd41e4741d315b73d56ecc3ee8cebfaedef4102de98b6020a635",
+    "testedDuringThisDeployment": false
+  },
+  "earlierProviderTests": "trinium-review-20261022.json",
+  "externalDiscordTestMessagesSent": false,
+  "artificialGuildEventsTriggered": false,
+  "discordVoiceJoinedForTesting": false,
+  "temporaryTestScriptsAdded": false,
+  "pushed": false,
+  "remaining": [
+    "Actual voice listening and live failover acceptance in Discord; no playback observed in this window",
+    "Native NodeLink lyrics adapter and software/API version capability distinction",
+    "Existing setup incident and remaining global plan"
+  ]
+}
